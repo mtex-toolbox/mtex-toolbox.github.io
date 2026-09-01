@@ -1,5 +1,5 @@
 ---
-title: "Vectors"
+title: 'Vectors'
 
 sidebar: documentation_sidebar
 permalink: Vectors.html
@@ -23,36 +23,65 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Almost everything in texture analysis is eventually a direction. A crystal axis, the normal of a lattice plane, the direction a rolling mill pushed the metal, the direction a diffracted beam left the sample - all of them are answers to the question "which way?", and none of them cares how long the arrow is.</p>
-<p>This is why directions here live on a sphere. Fix the length at one and a direction becomes a point on the unit sphere, so a collection of directions becomes a cloud of points. A spherical projection brings that cloud onto the page; pole figures use the same geometry for crystal directions.</p>
+<p>Directions occur throughout texture analysis. A lattice-plane normal, the rolling direction of a sheet, and the direction of a diffracted beam all answer "which way?" A force or a displacement also has a length, so it is a vector rather than only a direction.</p>
+<p>MTEX represents both with <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>. One variable can hold a whole list, and MTEX operations act on that list without a loop. When only direction matters, normalization divides out the length. Each unit direction is then a point on the sphere.</p>
+<p>This page assumes basic MATLAB lists and indexing. Read <a href="ListsAndIndexing.html">Lists and Indexing</a> if those are new. The angle and plotting conventions used throughout MTEX are collected in <a href="NotationAndConventions.html">Notation and Conventions</a>.</p>
 {% highlight matlab %}
-% a hundred random directions and the three specimen axes
-v = vector3d.rand(100);
+plottingConvention.default('y↑→x');
 
-plot(v,'upper','grid','MarkerSize',4)
-hold on
-plot([vector3d.X,vector3d.Y,vector3d.Z],'labeled','backgroundColor','w')
-hold off
+% one hundred random directions and the three Cartesian basis directions
+v = vector3d.rand(100)
+
+plot(v,'upper','grid','MarkerSize',4);
+hold on;
+plot([vector3d.X,vector3d.Y,vector3d.Z],...
+  'labeled','backgroundColor','w');
+hold off;
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+v = vector3d (y↑→x)
+ size: 100 × 1
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="Vectors_01.png" %}
 </center>
-<p>The option <code class="language-plaintext highlighter-rouge">'upper'</code> shows only the upper hemisphere. That is a viewing choice for these directed vectors. When the data represents axes, the lower hemisphere is genuinely redundant, as the next section explains.</p>
-<h2 id="3">Directions and axes are not the same thing</h2>
-<p>A <b>direction</b> distinguishes its two ends: north is not south. An <b>axis</b> does not. The normal of a lattice plane is an axis, because the plane has no preferred side, and so is the direction of a twofold rotation. In MTEX this distinction is the <code class="language-plaintext highlighter-rouge">antipodal</code> flag, and setting it changes real answers: the angle between two axes is never obtuse, the mean of a set of axes is not the mean of the same set read as directions, and a density estimated from axes is symmetric under inversion by construction.</p>
-<p>Forgetting the flag is one of the more common ways to get a plausible wrong number, because nothing complains. When a quantity is an axis, say so.</p>
-<h2 id="4">Where to start</h2>
+<p>The summary reports a 100 by 1 <code class="language-plaintext highlighter-rouge">vector3d</code> array. This is the first point to notice: one MTEX variable stores the whole list.</p>
+<p>In the upper-hemisphere spherical plot, X lies at the right rim, Y at the top rim, and Z at the centre. The plotting convention states that layout; it changes the drawing, not the directions. The random points on the lower hemisphere are hidden. Their stored lengths would not affect their positions in this plot. <a href="SphericalProjections.html">Spherical Projections</a> explains how the sphere is mapped to the circular page.</p>
+<h2 id="3">Directions, Reference Frames, and Plots</h2>
+<p>A reference frame is the coordinate system in which data are expressed. It has an identity, a basis, and a default convention for drawing it. The random directions above are frame-free, so they use the session default when rendered. Data tied to a specimen or crystal frame use the convention carried by that frame. <a href="AxesAlignment.html">Axes Alignment</a> develops reference frames, plotting conventions, and frame changes.</p>
+<p>A spherical plot uses direction only. Use <a href="vector3d.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a> when length is part of the quantity, and <a href="vector3d.normalize.html"><code class="language-plaintext highlighter-rouge">normalize</code></a> when it is not. Do not infer a vector's length from a marker's distance from the centre of a spherical plot.</p>
+<h2 id="4">Directions and Axes Are Not the Same</h2>
+<p>A <b>direction</b> distinguishes its two ends: north is not south. An <b>axis</b> does not. The axis of a twofold rotation is one example. Conventional pole figures usually treat a plane normal as an axis because <a href="https://dictionary.iucr.org/Friedel%27s_law">Friedel's law</a> makes opposite reflection intensities equal under its stated conditions.</p>
+<p>MTEX records this distinction with the <code class="language-plaintext highlighter-rouge">antipodal</code> property. It changes calculations as well as plots. The angle between two axes is never obtuse, an axial mean does not let opposite endpoints cancel, and an axial density satisfies \(f(v)=f(-v)\).</p>
+<p>The plot option <code class="language-plaintext highlighter-rouge">'upper'</code> only hides the lower hemisphere. It does not set <code class="language-plaintext highlighter-rouge">antipodal</code> or identify a direction with its negative. Forgetting that distinction can produce a plausible result without an error message. <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a> treats the consequences in detail.</p>
+<h2 id="5">Follow the Chapter</h2>
 <p>
-<a href="VectorDefinition.html">Definition</a> shows the ways of building a direction - from Cartesian components, from spherical angles, from the specimen axes - and how to move between them.</p>
+<a href="VectorDefinition.html">Definition</a> constructs vectors from Cartesian components, spherical angles, and the specimen basis directions. It also explains how to inspect components, angles, and lengths.</p>
 <p>
-<a href="VectorsOperations.html">Operations</a> covers the arithmetic: angles, dot and cross products, rotations, projections. Read it before writing loops, since a <code class="language-plaintext highlighter-rouge">vector3d</code> variable holds a whole cloud of directions and the operations work on all of them at once.</p>
-<p>Then two pages about looking at many directions rather than one. <a href="VectorsAxes.html">Axes</a> is where the antipodal distinction above is treated properly, and <a href="VectorsDensityEstimation.html">Density Estimation</a> turns a cloud of directions into a smooth function on the sphere, which is the step from data to distribution.</p>
+<a href="VectorsImport.html">Import</a> and <a href="VectorsExport.html">Export</a> exchange lists with text files. Read them after the definition when data exchange is your immediate task.</p>
 <p>
-<a href="VectorGrids.html">Spherical Grids</a> matters when you need directions spread evenly over the sphere - for numerical integration, or for sampling a function. There is no perfectly even arrangement of points on a sphere, which is why several constructions exist and why they differ.</p>
+<a href="VectorsOperations.html">Operations</a> covers angles, dot and cross products, rotations, projections, normalization, and vectorized list operations. Read <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a> before analysing data whose two signs are physically equivalent.</p>
 <p>
-<a href="VectorsImport.html">Import</a> and <a href="VectorsExport.html">Export</a> handle files.</p>
-<h2 id="5">Next</h2>
-<p>Directions attached to a crystal lattice, written as Miller indices, are the subject of <a href="CrystalGeometry.html">Crystal Geometry</a>. Functions defined on the sphere rather than points on it are <a href="SphericalFunctions.html">Spherical Functions</a>. Rotating a direction, and the objects that do the rotating, are <a href="Rotations.html">Rotations</a>.</p>
+<a href="VectorsDensityEstimation.html">Density Estimation</a> turns a measured list into a smooth function on the sphere. <a href="VectorGrids.html">Spherical Grids</a> instead constructs finite sets of directions for sampling, integration, or numerical representation.</p>
+<h2 id="6">How Vectors Connect to MTEX</h2>
+<p>Directions attached to a crystal lattice carry crystal symmetry and are written as Miller indices. They are introduced in <a href="CrystalGeometry.html">Crystal Geometry</a>. <a href="Rotations.html">Rotations</a> act on vectors without changing their lengths. <a href="SphericalFunctions.html">Spherical Functions</a> attach a value to every direction rather than storing a finite list of points.</p>
+<p>The worked <a href="Tutorials.html">Tutorials</a> use these foundations inside larger analyses. EBSD orientations map crystal directions into specimen directions, pole figures place diffraction intensity over specimen directions, and ODF calculations connect the two through orientations.</p>
+<h2 id="7">Further Reading</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher, and H. Schaeben, <a href="https://doi.org/10.4028/www.scientific.net/SSP.160.63">Texture Analysis with MTEX - Free and Open Source Software Toolbox</a>, <i>Solid State Phenomena</i> 160, 63-68, 2010, connects the toolbox's vector-based geometry to EBSD, pole figures, and orientation distributions.</li>
+<li>N. I. Fisher, T. Lewis, and B. J. J. Embleton, <a href="https://doi.org/10.1017/CBO9780511623059">Statistical Analysis of Spherical Data</a>, Cambridge University Press, 1987. Chapters 2, 5, and 6 distinguish spherical coordinates, unit vectors, and undirected lines.</li>
+<li>K. V. Mardia and P. E. Jupp, <a href="https://doi.org/10.1002/9780470316979">Directional Statistics</a>, Wiley, 1999, develops statistical methods for both directional and axial data.</li>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, 1982, connects specimen and crystal directions to pole figures and orientation distributions.</li>
+<li>
+<a href="https://dictionary.iucr.org/Friedel%27s_law">IUCr Online Dictionary of Crystallography: Friedel's law</a> states when opposite reflections have equal intensity.</li>
+<li>
+<a href="https://www.iso.org/standard/64973.html">ISO 80000-2:2019, Quantities and units - Part 2: Mathematics</a> specifies mathematical symbols and their meanings, including vector notation.</li>
+</ul>
+</div>
+<h2 id="8">Next</h2>
+<p>Begin with <a href="VectorDefinition.html">Defining Three-Dimensional Vectors</a>. Readers who already construct vectors comfortably can continue with <a href="VectorsOperations.html">Vector Operations</a> or go directly to <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a> for unoriented data.</p>
 </div>
 </body>
 </html>

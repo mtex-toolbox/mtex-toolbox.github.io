@@ -1,5 +1,5 @@
 ---
-title: "MTEX vs. Bunge Convention"
+title: 'MTEX vs. Bunge Convention'
 
 sidebar: documentation_sidebar
 permalink: MTEXvsBungeConvention.html
@@ -23,147 +23,228 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>For historical reasons MTEX defines orientations in a slightly different way than they have been defined by Bunge. As explained in topic <a href="CrystalOrientations.html">orientations</a> MTEX defines them as coordinate transformations from the crystal reference frame into the specimen reference frame. In contrast to this Bunge orientations are coordinate transformations from the specimen reference frame into the crystal reference frame. Lets demonstrate this by a simple example:</p>
+<p>MTEX defines an orientation as the coordinate map from the crystal frame into the specimen frame. Bunge, and much of the literature following him, defines it in the opposite direction: from the specimen frame into the crystal frame.</p>
+<p>A <b>reference frame</b> is the coordinate system in which data are expressed. The <b>crystal frame</b> is fixed to the lattice, while the <b>specimen frame</b> is fixed to the sample. Their definitions are developed in <a href="DefinitionAsCoordinateTransform.html">Crystal Orientation as Coordinate Transformation</a>.</p>
+<p>This page assumes the Miller indices introduced in <a href="CrystalDirections.html">Crystal Directions</a> and the Euler angles from <a href="RotationDefinition.html">Defining Rotations</a>. Its purpose is practical: translating orientation data and formulas between MTEX and sources that use Bunge's map direction.</p>
+<p>The two maps are inverses. This single fact explains the vector, matrix, and misorientation formulas below.</p>
 {% highlight matlab %}
-% consider cubic symmetry
-cs = crystalSymmetry('cubic')
+plottingConvention.default('y↑→x');
 
-% and a random orientation
-ori = orientation.rand(cs)
+cs = crystalSymmetry('m-3m');
+reportedEuler = [10,50,20] * degree;
+ori = orientation.byEuler(reportedEuler,'Bunge',cs);
+h = Miller(1,0,0,cs,'uvw');
+{% endhighlight %}
+<h2 id="2">Which Way the Coordinates Travel</h2>
+<p>An MTEX orientation takes a crystal direction, here \([100]\), into specimen coordinates.</p>
+{% highlight matlab %}
+r = ori * h
 {% endhighlight %}
 
 {% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  symmetry: m3̅m   
-  elements: 48     
-  a, b, c : 1, 1, 1
- 
- 
-ori = orientation (m3̅m → y↓→x)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  156.958 161.468 197.878
+r = vector3d (y↑→x)
+      x     y     z
+  0.887  0.38 0.262
 {% endhighlight %}
-<p>This is now an MTEX orientation and can be used to translate crystal coordinates, i.e., Miller indices into specimen coordinates,</p>
+<p> <a href="Miller.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> performs the same operation. The zero angular residual confirms that the two forms agree.</p>
 {% highlight matlab %}
-% either by multiplying from the left
-r = ori * Miller({1,0,0},cs)
-
-% or using the command rotate
-rotate(Miller({1,0,0},cs),ori)
+rotateResidual = angle(r,rotate(h,ori)) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-r = vector3d (y↓→x)
-      x       y       z
-  0.762   -0.64 -0.0976
- 
-ans = vector3d (y↓→x)
-      x       y       z
-  0.762   -0.64 -0.0976
+rotateResidual =
+     0
 {% endhighlight %}
-<p>A Bunge orientation is exactly the inverse of an MTEX orientation, i.e.,</p>
+<p>The Bunge map for the same physical orientation is the inverse map.</p>
 {% highlight matlab %}
-ori_Bunge = inv(ori)
+ori_Bunge = inv(ori);
+{% endhighlight %}
+<p>It takes the specimen direction <code class="language-plaintext highlighter-rouge">r</code> back into crystal coordinates.</p>
+{% highlight matlab %}
+hBack = ori_Bunge * r;
+hBack.dispStyle = 'uvw';
+hBack
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori_Bunge = orientation (y↓→x → m3̅m)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  342.122 161.468 23.0418
-{% endhighlight %}
-<p>The difference is not a matter of bookkeeping. Applied to a crystal, the two put it in different places - the blue crystal is where the MTEX orientation says it is, the orange one where the same three Euler angles read as a Bunge orientation would put it.</p>
-{% highlight matlab %}
-cS = crystalShape.cube(cs);
-
-plot(ori * cS,'faceColor',[0.35 0.6 0.85])
-nextAxis
-plot(ori_Bunge * cS,'faceColor',[0.85 0.45 0.3])
-{% endhighlight %}
-<center>
-{% include inline_image.html file="MTEXvsBungeConvention_01.png" %}
-</center>
-<p>and translates specimen coordinates into Miller indices</p>
-{% highlight matlab %}
-ori_Bunge * r
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = Miller (m3̅m)
-  h k l
+hBack = Miller (m3̅m)
+  u v w
   1 0 0
 {% endhighlight %}
-<h2 id="6">Euler angles</h2>
-<p>Since the Euler angles are the most common way to describe orientations MTEX implements them such that the Euler angles of an MTEX orientation coincide with the Euler angles of a Bunge orientation. Thus the Euler angles of orientations in MTEX agree with the Euler angles reported by all common EBSD devices, simulation software, text books and paper.</p>
-<h2 id="7">Matrix notation</h2>
-<p>Due to the above explained inverse relationship of orientations defined in MTEX and in Bunge convention, a matrix generated from an orientation in MTEX is the inverse, or equivalently, the transpose of the matrix in Bunge notation.</p>
+<h2 id="6">A Visible Consequence of Using the Wrong Direction</h2>
+<p>Applying the inverse as though it were a crystal-to-specimen map places the crystal differently. The red arrow marks the same crystal direction \([100]\) in both panels.</p>
 {% highlight matlab %}
-ori.matrix
-ori_Bunge.matrix^(-1)
-ori_Bunge.matrix'
+cS = crystalShape.cube(cs);
+bungeRotation = rotation(ori_Bunge);
+rBunge = bungeRotation * vector3d(h);
+
+mtexFig = newMtexFigure('layout',[1,2],'figSize','large');
+plot(ori * cS,'faceColor',[0.35 0.6 0.85]);
+hold on;
+arrow3d(0.9 * normalize(r),'faceColor',[0.8 0.15 0.1]);
+hold off;
+text(-0.45,0.45,0.45,'MTEX map','FontWeight','bold');
+
+nextAxis;
+plot(bungeRotation * cS,'faceColor',[0.85 0.45 0.3]);
+hold on;
+arrow3d(0.9 * normalize(rBunge),'faceColor',[0.8 0.15 0.1]);
+hold off;
+text(-0.45,0.45,0.45,'Inverse map used forward','FontWeight','bold');
+
+% plot(crystalShape) sets the camera and the layout only for a figure it created itself
+for ax = mtexFig.children(:).'
+  view(ax,3);
+  axis(ax,'equal','vis3d','off');
+end
+drawNow(mtexFig,'figSize','large');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="MTEXvsBungeConvention_01.png" %}
+</center>
+<h2 id="7">The Reported Euler Angles Stay the Same</h2>
+<p>The word "Bunge" is used for two related choices. One is the direction of the coordinate map compared on this page. The other is the Bunge Euler-angle sequence. MTEX uses that Euler-angle sequence by default.</p>
+<p>For the same physical orientation and the same crystal and specimen frames, copy a reported Bunge Euler triple directly into MTEX. The MTEX angles of <code class="language-plaintext highlighter-rouge">ori</code> therefore reproduce the input triple.</p>
+{% highlight matlab %}
+mtexEuler = [ori.phi1,ori.Phi,ori.phi2] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.7619   -0.6357    0.1244
-   -0.6404   -0.7102    0.2925
-   -0.0976   -0.3025   -0.9481
-ans =
-    0.7619   -0.6357    0.1244
-   -0.6404   -0.7102    0.2925
-   -0.0976   -0.3025   -0.9481
-ans =
-    0.7619   -0.6357    0.1244
-   -0.6404   -0.7102    0.2925
-   -0.0976   -0.3025   -0.9481
+mtexEuler =
+   10.0000   50.0000   20.0000
 {% endhighlight %}
-<h2 id="8">Misorientations</h2>
-<p>Since, MTEX orientations translates crystal to specimen coordinates misorientations are defined by the formula</p>
+<p>Do not instead ask MTEX for the angles of <code class="language-plaintext highlighter-rouge">ori_Bunge</code>. MTEX interprets that inverse as another MTEX rotation and reports the inverse rotation's own Euler triple.</p>
 {% highlight matlab %}
-ori1 = orientation.rand(cs);
-ori2 = orientation.rand(cs);
-
-mori = inv(ori1) * ori2
+inverseAsMtexEuler = ...
+  [ori_Bunge.phi1,ori_Bunge.Phi,ori_Bunge.phi2] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori = misorientation (m3̅m → m3̅m)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  136.305 85.5182 208.464
+inverseAsMtexEuler =
+  160.0000   50.0000  170.0000
 {% endhighlight %}
-<p>as they are commonly defined coordinate transformations from crystal to crystal coordinates. This formula is different to the misorientation formula for Bunge orientations</p>
+<p>Thus the orientation object is inverted, but the three numbers used to describe the same physical orientation are not. This design keeps MTEX Euler angles consistent with common EBSD systems, simulation packages, textbooks, and papers.</p>
+<h2 id="10">The Orientation Matrix Is Transposed</h2>
+<p>Let \(\mathbf{G}_{\mathrm{M}}\) be the MTEX matrix and \(\mathbf{G}_{\mathrm{B}}\) the Bunge matrix for the same physical orientation. Since they represent inverse rotations,</p>
+<p>\[ \mathbf{G}_{\mathrm{M}} = \mathbf{G}_{\mathrm{B}}^{-1} = \mathbf{G}_{\mathrm{B}}^{\mathrm{T}}. \]</p>
+<p>The transpose equality holds because a rotation matrix is orthogonal. The MTEX matrix is</p>
+{% highlight matlab %}
+mtexMatrix = ori.matrix
+{% endhighlight %}
+
+{% highlight plaintext %}
+mtexMatrix =
+    0.8872   -0.4417    0.1330
+    0.3797    0.5355   -0.7544
+    0.2620    0.7198    0.6428
+{% endhighlight %}
+<p>and the difference from the transpose of the Bunge matrix is zero.</p>
+{% highlight matlab %}
+bungeMatrix = ori_Bunge.matrix;
+matrixResidual = max(max(abs(mtexMatrix - bungeMatrix.')))
+{% endhighlight %}
+
+{% highlight plaintext %}
+matrixResidual =
+     0
+{% endhighlight %}
+<h2 id="12">Misorientations Come Out the Same</h2>
+<p>A misorientation is a coordinate map from one crystal frame into another. With MTEX orientations the formula is</p>
+{% highlight matlab %}
+ori1 = ori;
+ori2 = orientation.byEuler(70*degree,40*degree,35*degree,'Bunge',cs);
+
+mori = inv(ori1) * ori2;
+{% endhighlight %}
+<p>With Bunge orientations the product has the opposite-looking formula.</p>
 {% highlight matlab %}
 ori1_Bunge = inv(ori1);
 ori2_Bunge = inv(ori2);
 
-mori = ori1_Bunge * inv(ori2_Bunge)
+mori_Bunge = ori1_Bunge * inv(ori2_Bunge);
+{% endhighlight %}
+<p>Substitution shows that the two inversions cancel. The comparison below deliberately ignores crystal symmetry, so a symmetry-equivalent but different rotation could not masquerade as equality.</p>
+{% highlight matlab %}
+misorientationResidual = ...
+  angle(mori,mori_Bunge,'noSymmetry') ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori = misorientation (m3̅m → m3̅m)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  136.305 85.5182 208.464
+misorientationResidual =
+   1.7075e-06
 {% endhighlight %}
-<p>However, both formula result in exactly the same misorientation.</p>
-<h2 id="11">Summary</h2>
-<p>This list summarizes the differences between MTEX orientations and Bunge orientations.</p>
+<p>The tiny residual is floating-point roundoff. The misorientation map is therefore unchanged. Its reported Euler angles are a separate convention: when converting a Bunge misorientation triple, use the Euler angles of the inverse misorientation.</p>
+<h2 id="16">A Practical Check</h2>
+<p>Before trusting imported orientations, establish all four convention choices: the Euler-angle sequence, the map direction, the crystal frame, and the specimen frame. A wrong choice still produces valid rotations and plausible plots.</p>
+<p>The safest check is a known direction. Verify that one indexed crystal direction maps to the specimen direction seen in the experiment. For file options, see <a href="OrientationImport.html">Importing Crystal Orientations</a>. For the independent choice of Cartesian crystal frame, see <a href="CrystalReferenceSystem.html">The Crystal Reference System</a>.</p>
+<h2 id="17">Summary</h2>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>quantity</p>
+         </td>
+         <td>
+               <p>conversion from Bunge to MTEX</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>orientation Euler angles</p>
+         </td>
+         <td>
+               <p>unchanged</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>orientation matrix</p>
+         </td>
+         <td>
+               <p>transpose the matrix</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>any formula involving an orientation</p>
+         </td>
+         <td>
+               <p>invert each orientation</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>misorientation map</p>
+         </td>
+         <td>
+               <p>unchanged</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>misorientation Euler angles</p>
+         </td>
+         <td>
+               <p>use those of the inverse misorientation</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>The practical consequence is precise. Euler angles may be copied when the source uses the Bunge convention and the same crystal and specimen frames. A formula written for the opposite coordinate-map direction still has to be translated.</p>
+<h2 id="18">References</h2>
 <div>
 <ul>
-<li>formulas involving orientations - invert orientation</li>
-<li>orientation Euler angles - unchanged</li>
-<li>orientation matrix - transpose matrix</li>
-<li>misorientations - unchanged</li>
-<li>misorientation Euler angles - take Euler angles of inverse misorientation</li>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, establishes the orientation and Euler-angle conventions used in texture analysis.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops coordinate maps, rotation representations, and symmetry.</li>
+<li>D. Rowenhorst et al., <a href="https://doi.org/10.1088/0965-0393/23/8/083501">Consistent representations of and conversions between 3D rotations</a>, <i>Modelling and Simulation in Materials Science and Engineering</i> 23, 083501, 2015, gives reproducible conversion rules for common rotation representations.</li>
+<li>T. B. Britton et al., <a href="https://doi.org/10.1016/j.matchar.2016.04.008">Tutorial: Crystal orientations and EBSD -- Or which way is up?</a>, <i>Materials Characterization</i> 117, 113--126, 2016, shows how to validate EBSD coordinate frames with known crystallographic features.</li>
+<li>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, <i>Microbeam analysis -- Guidelines for orientation measurement using electron backscatter diffraction</i>, gives guidance for reliable and reproducible EBSD orientation measurements.</li>
 </ul>
 </div>
+<h2 id="19">Next</h2>
+<p>
+<a href="MisorientationTheory.html">Theory of Misorientations</a> develops the crystal-to-crystal map used above and its symmetry. The next page in this chapter, <a href="OrientationPoleFigure.html">Pole Figures</a>, applies orientations to crystal directions. <a href="OrientationImport.html">Importing Crystal Orientations</a> handles orientation files and their convention options.</p>
 </div>
 </body>
 </html>

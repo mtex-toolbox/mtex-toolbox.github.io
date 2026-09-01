@@ -1,5 +1,5 @@
 ---
-title: "Denoising Orientation Maps"
+title: 'Denoising Orientation Maps'
 
 sidebar: documentation_sidebar
 permalink: EBSDDenoising.html
@@ -22,14 +22,16 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>Orientation maps determined by EBSD or any other technique are, as all experimental data, effected by measurement errors. Those measurement errors can be divided into systematic errors and random errors. Systematic errors mostly occur due to a bad calibration of the EBSD system and require additional knowledge to be corrected. Deviations from the true orientation due to noisy Kikuchi pattern or tolerances of the indexing algorithm can be modeled as random errors. In this section we demonstrate how random errors can be significantly reduced using denoising techniques.</p>
-<p>Denoising orientation maps may also include filling not indexed pixels. This is explained in the section <a href="EBSDFilling.html">Fill Missing Data</a>.</p>
 <!--/introduction-->
-<p>We shall demonstrate the denoising capabilities of MTEX at the hand of an orientation map of deformed Magnesium.</p>
+<p>Every measured orientation has uncertainty. Some errors are systematic: an incorrect pattern centre or reference frame can bias a whole map in a related way. A filter cannot discover that bias from the map alone. Check the setup as described in <a href="EBSDReferenceFrame.html">Reference Frames</a> before treating point-to-point variation as noise.</p>
+<p>Random errors appear instead as scatter between nearby measurements. This page reduces that scatter while trying to preserve real orientation gradients and abrupt changes inside grains. Filling measurements whose phase is <code class="language-plaintext highlighter-rouge">notIndexed</code> is a different operation; see <a href="EBSDFilling.html">Filling Missing Data</a>.</p>
+<p>The examples assume that you can reconstruct grains and read an orientation map. Those steps are introduced in <a href="GrainReconstruction.html">Grain Reconstruction</a> and <a href="EBSDIPFMap.html">IPF Maps</a>. A quantitative comparison of the filters and their effect on KAM and GND calculations is given by <a href="https://doi.org/10.1107/S1600576719009075">Hielscher et al. (2019)</a>.</p>
+<h2 id="2">Making the noise visible</h2>
+<p>The example is a map of deformed magnesium. Its plotting convention is set explicitly so that the specimen frame does not depend on the current MTEX session.</p>
 {% highlight matlab %}
 % import the data
 plottingConvention.default('y↑→x');
-mtexdata twins
+mtexdata twins silent
 
 % reconstruct the grain structure
 [grains,ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',5);
@@ -49,44 +51,44 @@ hold on
 plot(grains.boundary,'linewidth',2,'linecolor','white')
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↑→x, row↑→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed          none                                   
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId
- Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :137 x 167
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDDenoising_01.png" %}
 </center>
-<p>At the first glance, the orientation data look not noisy at all. However, if we look at orientation changes within the grains the noise becomes clearly visible. To do so we colorize the orientation data with respect to their misorientation to the grain mean orientation</p>
+<p>The grains appear almost uniformly coloured. This does not show that the measurements are noise-free: the IPF key displays absolute orientation, and sub-degree differences produce only small colour changes.</p>
+<p>A more sensitive view compares every orientation with the original mean orientation of its grain. Hue represents the misorientation axis and saturation represents its angle. This colour scheme follows <a href="https://doi.org/10.1016/j.ultramic.2017.06.021">Thomsen et al. (2017)</a>.</p>
 {% highlight matlab %}
-% the axisAngleColorKey colorizes misorientation according to their axis and angle
+% use the original grain means as reference orientations
+grainMean = grains(ebsd.grainId).meanOrientation;
 colorKey = axisAngleColorKey;
+colorKey.oriRef = grainMean;
 
-% we set the reference orientations as the mean orientation of each grain
-colorKey.oriRef = grains(ebsd.grainId).meanOrientation;
+% keep one colour scale for every comparison on this page
+rawDeviation = angle(ebsd.orientations,grainMean);
+colorKey.maxAngle = quantile(rawDeviation,0.8);
 
-% lets plot the result
 plot(ebsd,colorKey.orientation2color(ebsd.orientations))
 hold on
 plot(grains.boundary,'linewidth',2)
 hold off
+
+fprintf('Raw mean deviation from the grain mean: %.2f degree\n', ...
+  mean(rawDeviation,'omitnan')./degree);
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+Raw mean deviation from the grain mean: 0.70 degree
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDDenoising_02.png" %}
 </center>
-<p>We clearly observe some deformation gradients within the grains which are superposed by random noise. MTEX comes with a whole collection of filters to remove this noise. All of them are applied by the command <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>. For practical work we recommend only the two filters described next - the <a href="halfQuadraticFilter.html">halfQuadraticFilter</a> and the <a href="splineFilter.html">splineFilter</a>. All remaining filters are described at the end of this page and are mainly of technical interest.</p>
-<h2 id="4">The Total Variation Filter</h2>
-<p>The <a href="halfQuadraticFilter.html">halfQuadraticFilter</a> is the by far best filter for orientation maps. It belongs to the class of variational filters which determine the denoised orientation map as the solution of a minimization problem that is simultaneously close to the original map and "smooth". The resulting orientation map heavily depends on the specific definition of "smooth" and on the regularization parameter which controls the trade off between fitting the original data and forcing the resulting map to be smooth.</p>
-<p>In its default setting the <a href="halfQuadraticFilter.html">halfQuadraticFilter</a> uses as definition of smoothness the <a href="https://en.wikipedia.org/wiki/Total_variation_denoising">total variation</a> functional. This functional was developed to preserve subgrain boundaries. Similarly as the <a href="medianFilter.html">medianFilter</a> it tends to cartoon like images and staircasing.</p>
+<p>Two patterns now separate. Smooth colour gradients across the larger grains record lattice bending in the deformed crystal. Pixel-to-pixel speckle superposed on those gradients is the signature to reduce. The printed mean contains both effects, so its decrease is a diagnostic of smoothing rather than a direct measurement of the noise amplitude.</p>
+<h2 id="5">How <code class="language-plaintext highlighter-rouge">smooth</code> uses the grain structure</h2>
+<p>Every filter on this page is applied with <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>. Because <code class="language-plaintext highlighter-rouge">calcGrains</code> assigned <code class="language-plaintext highlighter-rouge">ebsd.grainId</code>, <code class="language-plaintext highlighter-rouge">smooth</code> treats each grain separately. It therefore does not average orientations across a reconstructed grain boundary. An abrupt change inside one reconstructed grain is a subgrain boundary, and whether it survives depends on the filter.</p>
+<p>Denoising changes the orientations in the returned map. It does not reconstruct the grains or move their boundaries, which is why the same original boundaries are overlaid throughout. Reconstruct the grains again only if the denoised orientations should define a new segmentation.</p>
+<p>Two variational filters are useful in practice. The total variation filter favours sharp internal changes; the smoothing spline favours a continuously curved map and chooses its own smoothing parameter.</p>
+<h2 id="6">The total variation filter</h2>
+<p>The <a href="halfQuadraticFilter.html">halfQuadraticFilter</a> balances fidelity to the measured orientations against first-order smoothness over the map. Its default total variation model permits jumps, so it can preserve a subgrain boundary instead of averaging across it. This method for rotation-valued images is described by <a href="https://doi.org/10.3934/ipi.2016001">Bergmann et al. (2016)</a> and builds on the total variation model of <a href="https://doi.org/10.1016/0167-2789(92)90242-F">Rudin et al. (1992)</a>.</p>
+<p>The property <code class="language-plaintext highlighter-rouge">F.alpha</code> controls the trade-off; larger values smooth more. The property <code class="language-plaintext highlighter-rouge">F.threshold</code> prevents smoothing across neighbour differences above its value. The default settings are used here. Their price is a tendency towards cartoon-like patches and staircases.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
 
@@ -94,27 +96,7 @@ F = halfQuadraticFilter;
 ebsdS = smooth(ebsd,F);
 ebsdS = ebsdS('indexed');
 
-% plot the smoothed data
-colorKey.oriRef = grains(ebsdS.grainId).meanOrientation;
-plot(ebsdS,colorKey.orientation2color(ebsdS.orientations))
-
-hold on
-plot(grains.boundary,'linewidth',2)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDDenoising_03.png" %}
-</center>
-<h2 id="5">The Smoothing Spline Filter</h2>
-<p>The <a href="splineFilter.html">splineFilter</a> is the filter that is used by the command <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a> if no filter is specified. It is a variational filter as well, but uses as definition of smoothness the curvature of the orientation map. As a consequence, the denoised images are very "round" and subgrain boundaries will be smoothed away. On the positive side the <a href="splineFilter.html">splineFilter</a> is up to now the only filter that automatically calibrates the regularization parameter.</p>
-{% highlight matlab %}
-F = splineFilter;
-
-% smooth the data
-ebsdS = smooth(ebsd,F);
-ebsdS = ebsdS('indexed');
-
-% plot the smoothed data
+% plot the smoothed data on the fixed colour scale
 colorKey.oriRef = grains(ebsdS.grainId).meanOrientation;
 plot(ebsdS,colorKey.orientation2color(ebsdS.orientations))
 
@@ -122,24 +104,56 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 
-% the smoothing parameter determined during smoothing is
-F.alpha
+hqDeviation = angle(ebsdS.orientations,colorKey.oriRef);
+fprintf('Total variation mean deviation: %.2f degree\n', ...
+  mean(hqDeviation,'omitnan')./degree);
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    4.6123
+Total variation mean deviation: 0.58 degree
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDDenoising_03.png" %}
+</center>
+<p>The isolated colour changes are largely gone, while extended gradients and sharp internal changes remain. Read the printed reduction together with the map: the remaining deviation includes real deformation and should not be driven to zero.</p>
+<h2 id="8">The smoothing spline filter</h2>
+<p>The <a href="splineFilter.html">splineFilter</a> is the filter that <code class="language-plaintext highlighter-rouge">smooth</code> uses when none is supplied. It penalizes curvature rather than first-order variation. The result is rounder than the total variation result, but fine subgrain boundaries are smoothed with the noise.</p>
+<p>Of the filters on this page, it is the only one that selects its own regularization parameter. It does so by generalized cross-validation and uses robust smoothing by default, following <a href="https://doi.org/10.1016/j.csda.2009.09.020">Garcia (2010)</a>. This automatic mode is not yet fully supported on hexagonal grids; MTEX emits a warning there, and the <a href="halfQuadraticFilter.html">halfQuadraticFilter</a> is the safer choice.</p>
+{% highlight matlab %}
+F = splineFilter;
+
+% smooth the data and retain the selected parameter
+[ebsdS,F] = smooth(ebsd,F);
+ebsdS = ebsdS('indexed');
+
+% plot the smoothed data on the fixed colour scale
+colorKey.oriRef = grains(ebsdS.grainId).meanOrientation;
+plot(ebsdS,colorKey.orientation2color(ebsdS.orientations))
+
+hold on
+plot(grains.boundary,'linewidth',2)
+hold off
+
+splineDeviation = angle(ebsdS.orientations,colorKey.oriRef);
+fprintf('Spline smoothing parameter alpha: %.2f\n',F.alpha);
+fprintf('Spline mean deviation: %.2f degree\n', ...
+  mean(splineDeviation,'omitnan')./degree);
+{% endhighlight %}
+
+{% highlight plaintext %}
+Spline smoothing parameter alpha: 4.61
+Spline mean deviation: 0.59 degree
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDDenoising_04.png" %}
 </center>
-<h2 id="6">Technical Details - Further Filters</h2>
-<p>The remaining filters are included in MTEX mainly for completeness and for comparison. In practical applications they are usually inferior to the two filters described above.</p>
-<p>The next three filters, the <a href="meanFilter.html">meanFilter</a>, the <a href="medianFilter.html">medianFilter</a> and the <a href="KuwaharaFilter.html">KuwaharaFilter</a>, are so called sliding window filters which consider for the denoising operation only neighboring orientations within a certain window.</p>
-<h2 id="7">The Mean Filter</h2>
-<p>The simplest filter to apply to orientation data is the <a href="meanFilter.html">meanFilter</a> which replaces all orientations by the mean of all neighboring orientations.</p>
+<p>For this map the selected value is about 4.6. The printed mean deviation is close to the total variation result, but the spatial result is not the same: the spline makes the colour fields rounder and removes more of the fine internal structure.</p>
+<h2 id="10">Technical details - further filters</h2>
+<p>The filters below are retained for comparison and completeness. In practice they are inferior to the two above for this map. The first three are sliding-window filters: each orientation is replaced by a value computed only from a local neighbourhood.</p>
+<p>The median and Kuwahara filters are not yet fully supported on hexagonal grids. The infimal convolution filter has the same limitation.</p>
+<h2 id="11">The mean filter</h2>
+<p>The <a href="meanFilter.html">meanFilter</a> replaces each orientation by a local mean. A radius of one gives the smallest neighbourhood.</p>
 {% highlight matlab %}
-% define the meanFilter
 F = meanFilter;
 F.numNeighbours = 1;
 
@@ -147,18 +161,19 @@ F.numNeighbours = 1;
 ebsdS = smooth(ebsd,F);
 ebsdS = ebsdS('indexed');
 
-% plot the smoothed data
+% plot the smoothed data on the fixed colour scale
 colorKey.oriRef = grains(ebsdS.grainId).meanOrientation;
-plot(ebsdS, colorKey.orientation2color(ebsdS.orientations))
+plot(ebsdS,colorKey.orientation2color(ebsdS.orientations))
 
 hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDDenoising_05.png" %}
 </center>
-<p>We clearly see how the noise has been reduces. In order to further reduce the noise we may increase the number of neighbors that are taken into account.</p>
+<p>The isolated speckle is weaker, but the extended colour fields have also spread. A local mean has no criterion for distinguishing a noisy jump from a real one inside the grain.</p>
+<p>Increasing <code class="language-plaintext highlighter-rouge">F.numNeighbours</code> broadens the spatial support. More noise is removed, at the cost of blurring every internal feature further.</p>
 {% highlight matlab %}
 F.numNeighbours = 3;
 
@@ -166,7 +181,7 @@ F.numNeighbours = 3;
 ebsdS = smooth(ebsd,F);
 ebsdS = ebsdS('indexed');
 
-% plot the smoothed data
+% plot the smoothed data on the fixed colour scale
 colorKey.oriRef = grains(ebsdS.grainId).meanOrientation;
 plot(ebsdS,colorKey.orientation2color(ebsdS.orientations))
 
@@ -174,22 +189,23 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDDenoising_06.png" %}
 </center>
-<h2 id="9">The Median Filter</h2>
-<p>The disadvantage of the mean filter is that is smoothes away all subgrain boundaries and is quite sensitive against outliers. A more robust filter which also preserves subgrain boundaries is the median filter</p>
+<p>Compared with the preceding map, the broader patches and weaker narrow features show the cost of increasing the neighbourhood.</p>
+<h2 id="14">The median filter</h2>
+<p>A mean is pulled towards one bad measurement and averages across every internal step. The <a href="medianFilter.html">medianFilter</a> selects the neighbouring orientation with the smallest mean distance to the others. It is therefore more robust to isolated outliers and more likely to preserve a subgrain boundary.</p>
 {% highlight matlab %}
 F = medianFilter;
 
-% define the size of the window to be used for finding the median
-F.numNeighbours = 3; % this corresponds to a 7x7 window
+% use a 7-by-7 window
+F.numNeighbours = 3;
 
 % smooth the data
 ebsdS = smooth(ebsd,F);
 ebsdS = ebsdS('indexed');
 
-% plot the smoothed data
+% plot the smoothed data on the fixed colour scale
 colorKey.oriRef = grains(ebsdS.grainId).meanOrientation;
 plot(ebsdS,colorKey.orientation2color(ebsdS.orientations))
 
@@ -197,12 +213,12 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDDenoising_07.png" %}
 </center>
-<p>The disadvantage of the median filter is that it leads to cartoon like images which suffer from the staircase effect.</p>
-<h2 id="11">The Kuwahara Filter</h2>
-<p>Another filter that was designed to be robust against outliers and does not smooth away subgrain boundaries is the Kuwahara filter. However, in practical applications the results are often not satisfactory.</p>
+<p>The map breaks into cartoon-like patches with visible steps. This staircase effect is what the median does to a gentle orientation gradient.</p>
+<h2 id="16">The Kuwahara filter</h2>
+<p>The <a href="KuwaharaFilter.html">KuwaharaFilter</a> is also designed to survive outliers and preserve subgrain boundaries. It divides the neighbourhood into four overlapping quadrants and uses the mean of the most uniform one. The block structure in the result shows why it is rarely satisfactory in practice.</p>
 {% highlight matlab %}
 F = KuwaharaFilter;
 F.numNeighbours = 5;
@@ -211,7 +227,7 @@ F.numNeighbours = 5;
 ebsdS = smooth(ebsd,F);
 ebsdS = ebsdS('indexed');
 
-% plot the smoothed data
+% plot the smoothed data on the fixed colour scale
 colorKey.oriRef = grains(ebsdS.grainId).meanOrientation;
 plot(ebsdS,colorKey.orientation2color(ebsdS.orientations))
 
@@ -219,21 +235,22 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDDenoising_08.png" %}
 </center>
-<h2 id="12">The Infimal Convolution Filter</h2>
-<p>The infimal convolution filter was designed as a compromise between the <a href="splineFilter.html">splineFilter</a> and the <a href="halfQuadraticFilter.html">halfQuadraticFilter</a>. It is still under development and its use is not recommended.</p>
+<p>Large rectangular colour patches follow the selected subwindows rather than the smooth gradients visible in the raw map.</p>
+<h2 id="18">The infimal convolution filter</h2>
+<p>The <a href="infimalConvolutionFilter.html">infimalConvolutionFilter</a> combines first- and second-order penalties. A linear gradient can then survive where plain total variation tends to create a staircase, while a sharp internal boundary can remain. The model is described by <a href="https://doi.org/10.1007/978-3-319-58771-4_36">Bergmann et al. (2017)</a>. This MTEX implementation is still under development and is not recommended for routine use.</p>
 {% highlight matlab %}
 F = infimalConvolutionFilter;
-F.lambda = 0.01; % smoothing parameter for the gradient
-F.mu = 0.005;    % smoothing parameter for the hessian
+F.lambda = 0.01; % first-order regularization parameter
+F.mu = 0.005;    % second-order regularization parameter
 
 % smooth the data
 ebsdS = smooth(ebsd,F);
 ebsdS = ebsdS('indexed');
 
-% plot the smoothed data
+% plot the smoothed data on the fixed colour scale
 colorKey.oriRef = grains(ebsdS.grainId).meanOrientation;
 plot(ebsdS,colorKey.orientation2color(ebsdS.orientations))
 
@@ -241,9 +258,13 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDDenoising_09.png" %}
 </center>
+<p>The result is smoother within gradients than the total variation map and sharper at internal steps than the spline map. It offers no practical advantage here that outweighs its experimental status.</p>
+<h2 id="20">Choosing a filter</h2>
+<p>Use the <a href="halfQuadraticFilter.html">halfQuadraticFilter</a> when preserving subgrain boundaries matters. Use the <a href="splineFilter.html">splineFilter</a> on a square grid when smooth gradients and automatic parameter selection matter more. In either case, vary the smoothing strength and check that persistent spatial features remain; a lower mean deviation alone does not prove that the result is better.</p>
+<p>Denoising is usually preparation for a noise-sensitive calculation. <a href="EBSDKAM.html">Kernel Average Misorientation</a> and <a href="EBSDGROD.html">Grain Reference Orientation Deviation</a> continue with the same distinction between point-to-point scatter and real lattice bending.</p>
 </div>
 </body>
 </html>

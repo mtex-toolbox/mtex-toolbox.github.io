@@ -1,5 +1,5 @@
 ---
-title: "Lists and Indexing"
+title: 'Lists and Indexing'
 
 sidebar: documentation_sidebar
 permalink: ListsAndIndexing.html
@@ -22,13 +22,25 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Almost every MTEX variable is a list of objects of one kind. An <a href="EBSD.EBSD.html">EBSD</a> variable is a list of measurements, an <a href="grain2d.grain2d.html">grain2d</a> variable is a list of grains, and <code class="language-plaintext highlighter-rouge">grains.boundary</code> is a list of grain boundary segments. An <a href="orientation.orientation.html">orientation</a> variable commonly stores a list of orientations.</p>
+<p>There is no separate type for one grain. A single grain is an <a href="grain2d.grain2d.html">grain2d</a> list with length one.</p>
+<p>Two consequences account for most list operations in MTEX.</p>
+<div>
+<ul>
+<li>An elementwise function or property acts on every list element. It usually returns one result per element: <code class="language-plaintext highlighter-rouge">grains.area</code> gives one area per grain, and <code class="language-plaintext highlighter-rouge">ori.angle</code> gives one angle per orientation. Reduction functions such as <code class="language-plaintext highlighter-rouge">mean</code> are exceptions because they combine several elements into one result. Loops are therefore almost never needed for elementwise calculations.</li>
+<li>Ordinary parentheses indexing selects elements as it does for a MATLAB array. The result is a list of the same kind, so an operation that accepts the complete list also accepts the selection.</li>
+</ul>
+</div>
+<p>The diagram compares the two main forms of indexing. Position indices pick specified list entries in the requested order. A logical condition keeps the entries whose mask value is true.</p>
+<p>
+<center>
+{% include inline_image.html file="list-indexing.svg" %}
+</center>
+</p>
+<p>The sections that follow show the indexing itself on plain numbers, for clarity. The same two forms then apply unchanged to any MTEX list.</p>
 <!--/introduction-->
-<p>One key idea of MTEX is that variables may represent list of multiple objects of the same kind. To name just a few: a variable of type <a href="EBSD.EBSD.html">EBSD</a> represents a list of EBSD measurements, a variable of type <a href="grain2d.grain2d.html">grain2d</a> represents a list of grains and <code class="language-plaintext highlighter-rouge">grains.boundary</code> represents the list of all boundary segments of these grains. The next key idea is that a function applied to a list of something operates on each element individually and returns a list of results with the same size as the input list, e.g.</p>
-{% highlight matlab %}
-grains.area
-{% endhighlight %}
-<p>will return a list of grain areas for each grain in the list <code class="language-plaintext highlighter-rouge">grains</code>. In this section we will briefly explain the general syntax of working with lists or arrays as they are called by Matlab. For more details have a look at the <a href="https://de.mathworks.com/help/matlab/learn_matlab/matrices-and-arrays.html">Matlab documentation</a>.</p>
-<h2 id="2">Setting up a list</h2>
+<h2 id="1">Make a list</h2>
+<p>Square brackets create a list by placing values next to one another.</p>
 {% highlight matlab %}
 x = [1,2,3,4,5,6]
 {% endhighlight %}
@@ -37,7 +49,7 @@ x = [1,2,3,4,5,6]
 x =
      1     2     3     4     5     6
 {% endhighlight %}
-
+<p>The colon operator is shorthand for a regularly spaced range. With no step specified, it uses a step of one.</p>
 {% highlight matlab %}
 x = 1:10
 {% endhighlight %}
@@ -46,7 +58,8 @@ x = 1:10
 x =
      1     2     3     4     5     6     7     8     9    10
 {% endhighlight %}
-
+<h2 id="3">Apply an operation to every element</h2>
+<p>MATLAB applies many arithmetic operations elementwise. The dot in <code class="language-plaintext highlighter-rouge">.^</code> means that every element of <code class="language-plaintext highlighter-rouge">x</code> is squared independently, rather than computing a matrix power.</p>
 {% highlight matlab %}
 y = x.^2
 {% endhighlight %}
@@ -55,7 +68,8 @@ y = x.^2
 y =
      1     4     9    16    25    36    49    64    81   100
 {% endhighlight %}
-<h2 id="5">Direct Indexing</h2>
+<h2 id="4">Select by position</h2>
+<p>A list of positions selects those elements in the given order. Here, <code class="language-plaintext highlighter-rouge">ind</code> selects the first, third, and fifth squared values.</p>
 {% highlight matlab %}
 ind = [1,3,5]
 y(ind)
@@ -67,12 +81,10 @@ ind =
 ans =
      1     9    25
 {% endhighlight %}
-<h2 id="6">Logical Indexing</h2>
+<h2 id="5">Select by condition</h2>
+<p>A condition evaluated for the complete list returns one logical value per element. A logical value is either true or false. It can be used as an index to retain only the corresponding true entries.</p>
 {% highlight matlab %}
-% set up a condition that checks every element of x whether it is even or not
 cond = iseven(x)
-
-% extract on the elements of x that satisfy this condition
 y(cond)
 {% endhighlight %}
 
@@ -83,6 +95,19 @@ cond =
 ans =
      4    16    36    64   100
 {% endhighlight %}
+<p>The condition tests which values in <code class="language-plaintext highlighter-rouge">x</code> are even. Using the same mask to index <code class="language-plaintext highlighter-rouge">y</code> returns their squares. This works because <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> have the same length and order.</p>
+<h2 id="7">Use the same pattern with MTEX objects</h2>
+<p>Nearly every MTEX selection has the same form. For example, <code class="language-plaintext highlighter-rouge">grains(grains.area &gt; 100)</code> selects grains with area greater than 100, <code class="language-plaintext highlighter-rouge">ebsd(ebsd.mad &lt; 1)</code> selects measurements with a mean angular deviation below 1, and <code class="language-plaintext highlighter-rouge">gB(gB.misorientation.angle &gt; 10*degree)</code> selects grain boundary segments with a misorientation angle greater than 10 degrees.</p>
+<p>In each expression, MTEX computes one property value per object. The comparison turns those values into a logical mask, and parentheses apply the mask to the original list.</p>
+<p>MTEX also provides two domain-specific selectors. A phase name selects all measurements of that phase, as in <code class="language-plaintext highlighter-rouge">ebsd('Forsterite')</code>. For spatial data, a position selects the object found there, as in <code class="language-plaintext highlighter-rouge">grains(x,y)</code>. See <a href="SelectingGrains.html">Selecting Grains</a> for spatial grain selections.</p>
+<h2 id="8">References</h2>
+<div>
+<ul>
+<li>MathWorks, <a href="https://www.mathworks.com/help/matlab/math/array-indexing.html">Array Indexing</a>, <i>MATLAB documentation</i>. It defines positional and logical indexing and describes the array rules used on this page.</li>
+</ul>
+</div>
+<h2 id="9">Next</h2>
+<p>Continue with <a href="GeneralConceptsConfiguration.html">Configuration</a> to learn how session preferences control display, computation, and plotting defaults.</p>
 </div>
 </body>
 </html>

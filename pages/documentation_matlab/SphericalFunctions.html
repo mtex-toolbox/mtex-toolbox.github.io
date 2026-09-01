@@ -1,5 +1,5 @@
 ---
-title: "Spherical Functions"
+title: 'Spherical Functions'
 
 sidebar: documentation_sidebar
 permalink: SphericalFunctions.html
@@ -22,43 +22,96 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A great deal of texture analysis attaches one value to every direction. A pole figure assigns an intensity to each specimen direction. Wave speed through a crystal, the density of measured axes, and the Schmid factor of a slip system under a rotating load are further examples. Each is a <b>function on the sphere</b>.</p>
+<p>Treating these as one kind of object gives them a common set of operations. You can add two functions, take a maximum, integrate, rotate, smooth, or find peaks. Each operation means the same thing whether the function came from a diffractometer or an elastic tensor.</p>
 <!--/introduction-->
-<p>A great deal of texture analysis is a number attached to every direction. A pole figure is one: an intensity for each specimen direction. So is the speed of a wave through a crystal, the density of measured axes, the Schmid factor of a slip system under a rotating load. Each is a <b>function on the sphere</b>.</p>
-<p>Treating these as one kind of object pays off immediately. Add two of them, take a maximum, integrate one, rotate one, smooth one, find its peaks - the operation means the same thing whether the function came from a diffractometer or from an elastic tensor, so it can be written once.</p>
-<p>Below is such a function, drawn on the sphere it lives on.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-
+close all
+{% endhighlight %}
+<h2 id="2">A function, not a grid of values</h2>
+<p>The built-in smiley is one scalar-valued spherical function.</p>
+{% highlight matlab %}
 sF = S2Fun.smiley;
-
+{% endhighlight %}
+<p>Below the function is drawn on the sphere on which it is defined.</p>
+{% highlight matlab %}
 plot(sF,'upper')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SphericalFunctions_01.png" %}
 </center>
-<p>The picture is a <b>representation</b> of the function, sampled densely enough to look continuous. The function itself is not a grid of values.</p>
-<h2 id="3">Several representations, one interface</h2>
-<p>There is more than one way to store a function on a sphere, and the choices are genuinely different rather than a matter of taste.</p>
-<p>A <b>harmonic</b> representation keeps a list of coefficients in the spherical harmonic basis, the sphere's equivalent of a Fourier series. It is exact for smooth functions, it makes rotation and convolution cheap, and it needs many coefficients to represent anything sharp. A <b>kernel</b> or radial representation stores a sum of bumps at chosen positions, which is the natural fit for a density estimated from scattered measurements. A <b>triangulated</b> representation stores values at nodes and interpolates between them, which handles data that is neither smooth nor bump-like.</p>
-<p>MTEX puts these behind one interface, so a function can be built one way and used another without the code that uses it knowing which. The place it does matter is cost and sharpness, and choosing badly shows up as a slow computation or a peak that will not stay sharp.</p>
-<h2 id="4">Bandwidth is the parameter that matters</h2>
-<p>A harmonic representation is cut off at some <b>bandwidth</b> - the highest harmonic degree kept - and that single number decides both how fine a detail can be represented and how expensive everything is. Too low and sharp peaks are smeared and ringing appears around them; too high and the representation faithfully reproduces noise.</p>
-<p>This is the same trade-off as the halfwidth in density estimation, seen from the other side, and it recurs unchanged for functions on rotations in <a href="SO3Functions.html">Orientation Functions</a>.</p>
-<h2 id="5">Where to start</h2>
+<p>Notice the two eyes and the curved mouth in the upper hemisphere. The plot is a representation sampled densely enough to look continuous. The function itself is not a grid of stored values.</p>
+<h2 id="5">Evaluate selected directions</h2>
+<p>An <a href="S2Fun.S2Fun.html">S2Fun</a> can be evaluated at any direction, whether or not that direction appeared in a plot. Here <a href="S2FunHarmonic.eval.html"><code class="language-plaintext highlighter-rouge">eval</code></a> returns one value for each Cartesian axis.</p>
+{% highlight matlab %}
+directions = [vector3d.X,vector3d.Y,vector3d.Z];
+values = eval(sF,directions)
+{% endhighlight %}
+
+{% highlight plaintext %}
+values =
+    0.0000
+    0.5000
+    0.3998
+{% endhighlight %}
+<p>This distinction matters in later calculations. An extremum search or an integral acts on the spherical function rather than on the pixels of its current display.</p>
+<h2 id="7">Several representations, one interface</h2>
+<p>There is more than one way to store a function on a sphere. The choices are genuinely different rather than a matter of taste.</p>
+<p>A <b>harmonic</b> representation keeps coefficients in the spherical harmonic basis, the sphere's equivalent of a Fourier series. It is exact for smooth functions, makes rotation and convolution cheap, and needs many coefficients for sharp features. A <b>kernel</b> or radial representation stores a sum of bumps at chosen positions. This is the natural fit for a density estimated from scattered measurements. A <b>triangulated</b> representation stores values at nodes and interpolates between them. It handles data that are neither smooth nor bump-like.</p>
+<p>MTEX puts these representations behind one interface. A function can be built one way and used another without the calling code knowing which representation is stored. Representation still affects cost and sharpness. A poor choice appears as a slow computation or a peak that will not stay sharp.</p>
+{% highlight matlab %}
+class(sF)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    'S2FunHarmonic'
+{% endhighlight %}
+<p>The smiley is stored as an <a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a>, yet the same <code class="language-plaintext highlighter-rouge">plot</code> and <code class="language-plaintext highlighter-rouge">eval</code> calls also work for the other representations. The <a href="S2FunConcept.html">Concept</a> page compares their MTEX classes and their strengths in more detail.</p>
+<h2 id="9">Bandwidth is the parameter that matters</h2>
+<p>A harmonic representation ends at a finite <b>bandwidth</b>. This is the highest harmonic degree retained. It determines both the finest detail that can be represented and the cost of harmonic calculations.</p>
+<p>Too low a bandwidth smears sharp peaks and creates ringing around them. Too high a bandwidth can faithfully reproduce noise. The next plot truncates a copy of the smiley while leaving the original unchanged.</p>
+{% highlight matlab %}
+sFLow = sF;
+sFLow.bandwidth = 8;
+
+newMtexFigure('layout',[1,2]);
+plot(sF,'upper')
+mtexTitle(['bandwidth ' num2str(sF.bandwidth)])
+nextAxis
+plot(sFLow,'upper')
+mtexTitle(['bandwidth ' num2str(sFLow.bandwidth)])
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SphericalFunctions_02.png" %}
+</center>
+<p>The low-bandwidth plot retains the broad layout of the face but rounds its narrow features. Oscillations also appear beside sharp transitions. Raising bandwidth improves angular detail at the cost of more coefficients.</p>
+<p>This is the same trade-off as the halfwidth in density estimation, seen from the other side. It recurs for functions on rotations in <a href="SO3Functions.html">Orientation Functions</a>. The earlier <a href="S2FunQuadrature.html">Quadrature</a> page explains how bandwidth controls the coefficients computed from a callable function.</p>
+<h2 id="11">Where to start</h2>
 <p>
-<a href="S2FunConcept.html">Concept</a> is the overview of the representations above. <a href="S2FunOperations.html">Operations</a> covers the arithmetic - sums, products, integrals, rotations, minima and maxima - and <a href="S2FunPlotting.html">Plotting</a> the ways of drawing a sphere on a page.</p>
-<p>Getting a function from data is <a href="S2FunApproximationInterpolation.html">Approximation and Interpolation</a>; going the other way, choosing where to evaluate it, is <a href="S2FunSampling.html">Sampling</a>. The second matters more than it sounds whenever an integral has to be computed from a finite number of evaluations.</p>
+<a href="S2FunConcept.html">Concept</a> surveys the representations above. <a href="S2FunOperations.html">Operations</a> covers sums, products, integrals, rotations, minima, and maxima. <a href="S2FunPlotting.html">Plotting</a> explains the ways to draw a sphere on a page.</p>
+<p>Getting a function from data is covered by <a href="S2FunApproximationInterpolation.html">Approximation and Interpolation</a>. Going the other way, choosing where to evaluate it, is covered by <a href="S2FunSampling.html">Sampling</a>. Sampling matters whenever an integral must be computed from a finite number of evaluations.</p>
 <p>
-<a href="SphericalHarmonics.html">Spherical Harmonics</a> and <a href="S2FunHarmonicRepresentation.html">Harmonic Representation</a> develop the basis and the bandwidth above. <a href="S2Kernels.html">Spherical Kernel Functions</a> covers the bumps of the kernel representation, and <a href="SO3FunConvolution.html">Convolution</a> the operation that smooths one function with another - which is what density estimation is.</p>
+<a href="SphericalHarmonics.html">Spherical Harmonics</a> and <a href="S2FunHarmonicRepresentation.html">Harmonic Representation</a> develop the basis and bandwidth used above. <a href="S2Kernels.html">Spherical Kernel Functions</a> covers the bumps in a kernel representation. <a href="SO3FunConvolution.html">Convolution</a> explains the smoothing operation used in density estimation.</p>
 <p>
-<a href="S2FunSym.html">Symmetric Function</a> handles functions invariant under a symmetry, as any function of crystal directions must be, and <a href="S2Bingham.html">Bingham Distribution</a> is a specific statistical model for directions.</p>
+<a href="S2FunSym.html">Symmetric Function</a> handles functions that are invariant under symmetry, as a function of crystal directions must be. <a href="S2Bingham.html">Bingham Distribution</a> introduces a specific statistical model for directions.</p>
 <p>
-<a href="S2FunRadon.html">Radon Transform</a> is the operation that turns an orientation density into a pole figure, and so the mathematical heart of <a href="PoleFigureAnalysis.html">pole figure inversion</a>.</p>
-<p>Functions whose values are not numbers have their own pages: <a href="S2FunVectorValued.html">Vector Valued Spherical Functions</a>, <a href="S2FunVectorField.html">Vector Field</a> and <a href="S2FunAxisField.html">Axis Field</a> - the last being for fields of axes, where direction has no sign, exactly as in <a href="Vectors.html">Vectors</a>.</p>
+<a href="S2FunRadon.html">Radon Transform</a> turns an orientation density into a pole figure. It is therefore the mathematical heart of <a href="PoleFigureAnalysis.html">pole figure inversion</a>.</p>
+<p>Functions whose values are not numbers have their own pages: <a href="S2FunVectorValued.html">Vector Valued Spherical Functions</a>, <a href="S2FunVectorField.html">Vector Field</a>, and <a href="S2FunAxisField.html">Axis Field</a>. The last describes fields of axes, where direction has no sign, exactly as in <a href="Vectors.html">Vectors</a>.</p>
 <p>
-<a href="S1FunHarmonics.html">Fourier Series</a> is the one-dimensional relative, for functions of a single angle.</p>
-<h2 id="6">Next</h2>
-<p>The same ideas for functions on rotations rather than directions are <a href="SO3Functions.html">Orientation Functions</a>, and the most important such function is the <a href="ODFAnalysis.html">ODF</a>. The directions these functions are defined over are <a href="Vectors.html">Vectors</a>.</p>
+<a href="S1FunHarmonics.html">Fourier Series</a> is the one-dimensional relative for functions of a single angle. The corresponding objects for functions on rotations are introduced in <a href="SO3Functions.html">Orientation Functions</a>. Their most important texture-analysis example is the <a href="ODFAnalysis.html">ODF</a>.</p>
+{% highlight matlab %}
+close all
+{% endhighlight %}
+<h2 id="12">References</h2>
+<div>
+<ul>
+<li>J. R. Driscoll and D. M. Healy, <a href="https://doi.org/10.1006/aama.1994.1008">Computing Fourier transforms and convolutions on the 2-sphere</a>, <i>Advances in Applied Mathematics</i> 15 (1994), 202--250, develops the spherical harmonic framework behind bandwidth-limited representation and convolution.</li>
+</ul>
+</div>
+<h2 id="13">Next</h2>
+<p>Continue with <a href="S2FunConcept.html">Concept</a> to compare the concrete MTEX representations that share the <a href="S2Fun.S2Fun.html">S2Fun</a> interface.</p>
 </div>
 </body>
 </html>

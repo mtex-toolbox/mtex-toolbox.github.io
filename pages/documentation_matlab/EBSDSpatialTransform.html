@@ -1,5 +1,5 @@
 ---
-title: "Spatial Transforms"
+title: 'Spatial Transforms'
 
 sidebar: documentation_sidebar
 permalink: EBSDSpatialTransform.html
@@ -23,16 +23,17 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A spatial transform is a map from position to position, as an object. It is what relates two coordinate frames of one physical piece of specimen - the distortion between an EBSD map and an SEM image of the same area, the drift a stage accumulates during a scan, the foreshortening of a tilted surface.</p>
-<p>A bare function handle does that much too. A <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> also composes, inverts, displays itself, fits itself to measured data, and can be stored and applied to a second data set - which is what turns a one-off correction into something reusable.</p>
+<p>A spatial transform maps positions in one coordinate system to positions in another. It can describe the distortion between an EBSD map and an SEM image, stage drift during a scan, or the foreshortening of a tilted surface.</p>
+<p>This is different from a <b>reference frame</b>, the coordinate system in which specimen or crystal data are expressed. A spatial transform moves map positions but does not correct the orientations stored at those positions. Use <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> when the map coordinates and Euler angles do not refer to the same specimen frame.</p>
+<p>A function handle can move positions too. A <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> also composes, inverts, displays itself, fits measured point pairs, and can be stored for another data set. <a href="EBSDMapsAndImages.html">Maps and Images</a> explains how two images first come to share a specimen coordinate system and array layout.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata twins silent
 {% endhighlight %}
 <h2 id="2">Direction Is the Contract</h2>
-<p>One rule fixes everything else: <code class="language-plaintext highlighter-rouge">T</code> maps a position in frame A to the position of the same physical point in frame B.</p>
-<p>From that follows the order in a product - <code class="language-plaintext highlighter-rouge">T2 * T1</code> reads in matrix order, so <code class="language-plaintext highlighter-rouge">T1</code> is applied first - and the fact that filling an output grid always uses <code class="language-plaintext highlighter-rouge">inv(T)</code> rather than <code class="language-plaintext highlighter-rouge">T</code>: for each target pixel you have to ask where it came from, not where it goes.</p>
-<p>Transforms are two dimensional. They act on x and y and leave z alone.</p>
+<p>One rule fixes everything else: <code class="language-plaintext highlighter-rouge">T</code> maps a position in coordinate system A to the position of the same physical point in coordinate system B.</p>
+<p>The product <code class="language-plaintext highlighter-rouge">T2 * T1</code> reads in matrix order, so <code class="language-plaintext highlighter-rouge">T1</code> is applied first. Filling a regular output grid uses <code class="language-plaintext highlighter-rouge">inv(T)</code> rather than <code class="language-plaintext highlighter-rouge">T</code>. For each target pixel, the resampler has to ask where it came from, not where it goes.</p>
+<p>Spatial transforms are two dimensional. They act on \(x\) and \(y\) and leave \(z\) unchanged.</p>
 {% highlight matlab %}
 T = spatialTransformRigid(vector3d(5,-2,0))
 {% endhighlight %}
@@ -43,7 +44,7 @@ T = spatialTransformRigid
  model  stage  parameters  
  rigid  ·      move (5, -2)
 {% endhighlight %}
-<p>Applying one to positions is <code class="language-plaintext highlighter-rouge">*</code>, or <code class="language-plaintext highlighter-rouge">eval</code> written out</p>
+<p>Apply a transform to positions with <code class="language-plaintext highlighter-rouge">*</code>, or call <code class="language-plaintext highlighter-rouge">eval</code> explicitly.</p>
 {% highlight matlab %}
 pos = ebsd.pos(1,1:3);
 posMoved = T * pos;
@@ -57,36 +58,40 @@ ans =
     0.3000    5.3000
     0.6000    5.6000
 {% endhighlight %}
-<h2 id="4">The Classes</h2>
-<p>Each class is named for the distortion it models, from the most rigid to the most free:</p>
+<h2 id="4">Choose the Smallest Model That Describes the Distortion</h2>
+<p>Each class represents a different amount and pattern of spatial freedom. The names are historical, so read their meanings rather than guessing from them:</p>
 <div>
 <ul>
-<li> <a href="spatialTransformId.html"><code class="language-plaintext highlighter-rouge">spatialTransformId</code></a> - nothing separates the two frames</li>
-<li> <a href="spatialTransformRigid.html"><code class="language-plaintext highlighter-rouge">spatialTransformRigid</code></a> - one displacement, the same everywhere</li>
-<li> <a href="spatialTransformShift.html"><code class="language-plaintext highlighter-rouge">spatialTransformShift</code></a> - a 2D affine as a homogeneous matrix, i.e. translation, rotation, scale and shear together</li>
-<li> <a href="spatialTransformProjective.html"><code class="language-plaintext highlighter-rouge">spatialTransformProjective</code></a> - a homography, what a tilted specimen does</li>
-<li> <a href="spatialTransformPoly.html"><code class="language-plaintext highlighter-rouge">spatialTransformPoly</code></a> - a displacement varying polynomially across the frame</li>
-<li> <a href="spatialTransformDrift.html"><code class="language-plaintext highlighter-rouge">spatialTransformDrift</code></a> - a displacement varying only along the slow scan direction, a rolling shutter rather than a smooth field</li>
-<li> <a href="spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a> - no model at all, just where things moved, interpolated between the points it was measured at</li>
-<li> <a href="spatialTransformHandle.html"><code class="language-plaintext highlighter-rouge">spatialTransformHandle</code></a> - the escape hatch, a function handle</li>
+<li> <a href="spatialTransformId.html"><code class="language-plaintext highlighter-rouge">spatialTransformId</code></a> means that nothing separates the two coordinate systems.</li>
+<li> <a href="spatialTransformRigid.html"><code class="language-plaintext highlighter-rouge">spatialTransformRigid</code></a> is one translation, the same everywhere. It does not include a rotation.</li>
+<li> <a href="spatialTransformShift.html"><code class="language-plaintext highlighter-rouge">spatialTransformShift</code></a> is a full 2D affine map: translation, rotation, scale, and shear in one homogeneous matrix.</li>
+<li> <a href="spatialTransformProjective.html"><code class="language-plaintext highlighter-rouge">spatialTransformProjective</code></a> is a homography. It keeps lines straight, but parallel lines need not remain parallel, as in a perspective view of a tilted plane.</li>
+<li> <a href="spatialTransformTilt.html"><code class="language-plaintext highlighter-rouge">spatialTransformTilt</code></a> is the staged model used to recover specimen tilt from repeatedly correlated image pairs.</li>
+<li> <a href="spatialTransformPoly.html"><code class="language-plaintext highlighter-rouge">spatialTransformPoly</code></a> describes a displacement that varies polynomially across the coordinate system.</li>
+<li> <a href="spatialTransformDrift.html"><code class="language-plaintext highlighter-rouge">spatialTransformDrift</code></a> varies only along the slow scan direction. It models rolling-shutter-like scan drift rather than an arbitrary smooth field.</li>
+<li> <a href="spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a> stores measured displacements and interpolates between their positions without imposing a parametric model.</li>
+<li> <a href="spatialTransformHandle.html"><code class="language-plaintext highlighter-rouge">spatialTransformHandle</code></a> wraps a function handle when none of the fitted models applies.</li>
 </ul>
 </div>
-<p>They share a base, so differently modelled hops may sit in one array rather than a cell array</p>
+<p>Start with the least flexible model that has a physical reason to be present. A flexible model can follow noise and may extrapolate badly beyond the point pairs. Correspondences should span the area that will be transformed, and residuals should also be checked at withheld landmarks.</p>
+<p>Differently modelled hops can be stored in one heterogeneous array rather than a cell array. Such an array is an ordered sequence of hops, not a set of alternatives. It is primarily a container: combine the required hops or process them one at a time before calling methods such as <code class="language-plaintext highlighter-rouge">inv</code> on them.</p>
 {% highlight matlab %}
-[spatialTransformRigid(vector3d(1,0,0)), spatialTransformPoly(zeros(3,2),1)]
+[spatialTransformRigid(vector3d(1,0,0)), ...
+  spatialTransformPoly(zeros(3,2),1)]
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = spatialTransform
- size: 1 x 2
+ size: 1 × 2
  
     model   stage  parameters 
  1  rigid   ·      move (1, 0)
  2  poly11  ·      |c| = 0
 {% endhighlight %}
-<h2 id="5">Fitting One From Two Point Sets</h2>
-<p>A transform is rarely written down. It is measured: the same features are located in both frames, and the class is asked for the member of its family that best takes one set onto the other. Every class does this through the same static <code class="language-plaintext highlighter-rouge">fit</code>.</p>
-<p>To have something with a known answer, take a projective distortion, push the map positions through it, and ask for it back</p>
+<h2 id="5">Fit a Transform From Two Point Sets</h2>
+<p>A transform is usually measured rather than written down. Locate the same features in both coordinate systems, then ask the chosen class for the member of its family that maps the first set onto the second. The two sets must use the same length unit and point order.</p>
+<p>The geometric minimum is not enough for a reliable fit. An affine needs at least three non-collinear pairs, a homography at least four well-spread pairs, and a degree-two polynomial at least six. More pairs let a fit expose noise and mismatches.</p>
+<p>For an example with a known answer, apply a projective distortion to map positions and fit the homography back from the resulting pairs.</p>
 {% highlight matlab %}
 T0 = spatialTransformProjective([1 0.02 3; -0.01 1.05 -2; 1e-4 2e-4 1]);
 
@@ -102,7 +107,7 @@ T = spatialTransformProjective
  model       stage  parameters                  
  projective  ·      perspective (0.0001, 0.0002)
 {% endhighlight %}
-<p>and it is recovered to rounding</p>
+<p>The maximum error is at rounding level.</p>
 {% highlight matlab %}
 max(norm(T*posA - posB))
 {% endhighlight %}
@@ -111,7 +116,7 @@ max(norm(T*posA - posB))
 ans =
    2.8422e-14
 {% endhighlight %}
-<p>Real measurements are not that clean. All fits go through one weighted bisquare solver, so a point that disagrees with the rest is outvoted rather than dragging the answer - here a tenth of the points are moved somewhere else entirely</p>
+<p>Real correspondences are not this clean. Projective and polynomial fits use Tukey bisquare reweighting, so points that disagree with the consensus lose influence. Here every tenth target point is moved somewhere else.</p>
 {% highlight matlab %}
 posBad = posB;
 posBad(1:10:end) = posBad(1:10:end) + vector3d(30,-40,0);
@@ -125,11 +130,12 @@ max(norm(TBad*posA - posB))
 ans =
    2.1335e-14
 {% endhighlight %}
-<p>Where a confidence per point is available it should be passed as <code class="language-plaintext highlighter-rouge">'weights'</code> instead of being left to the solver to discover. Cross correlation returns exactly that - see <a href="xcfShift.html"><code class="language-plaintext highlighter-rouge">xcfShift</code></a>.</p>
-<h2 id="9">Declaring a Model With + and Composing With *</h2>
-<p>There are two ways to put transforms together and they are <b>not</b> the same operation.</p>
+<p>Other classes match their physical model: a rigid fit takes a weighted mean displacement, an affine uses weighted least squares, drift uses a median displacement per scan line, and a field keeps the samples exactly.</p>
+<p>Where a confidence per pair is available, pass it with <code class="language-plaintext highlighter-rouge">'weights'</code> instead of asking the fit to infer every bad match. Cross-correlation supplies such weights; see <a href="xcfShift.html"><code class="language-plaintext highlighter-rouge">xcfShift</code></a>.</p>
+<h2 id="9">Declare a Model With + and Compose Fitted Transforms With *</h2>
+<p>There are two ways to put transforms together, and they are not the same operation.</p>
 <p>
-<code class="language-plaintext highlighter-rouge">*</code> composes and simplifies where it can. It decides by value: an operand that reports <code class="language-plaintext highlighter-rouge">isid</code> disappears. An unfitted prototype has zero coefficients and so reports exactly that, which makes the product below a bare drift with the shift silently gone</p>
+<code class="language-plaintext highlighter-rouge">*</code> composes fitted transforms and simplifies where it can. It decides by value, so an operand that reports <code class="language-plaintext highlighter-rouge">isid</code> disappears. An unfitted prototype has zero coefficients and therefore reports itself as the identity. In the product below, the shift silently disappears and only the drift remains.</p>
 {% highlight matlab %}
 spatialTransformShift * spatialTransformDrift
 {% endhighlight %}
@@ -141,7 +147,7 @@ ans = spatialTransformDrift
  drift  ·      (no knots)
 {% endhighlight %}
 <p>
-<code class="language-plaintext highlighter-rouge">+</code> declares a model. It reads left to right in the order the stages are applied and keeps both, dropping only a literal <code class="language-plaintext highlighter-rouge">spatialTransformId</code> - the one class that <b>means</b> nothing separates the two frames</p>
+<code class="language-plaintext highlighter-rouge">+</code> declares a model. It reads left to right in the order the stages are applied and keeps both. Only a literal <code class="language-plaintext highlighter-rouge">spatialTransformId</code> is dropped, because that class means that nothing separates the two coordinate systems.</p>
 {% highlight matlab %}
 spatialTransformShift + spatialTransformDrift
 {% endhighlight %}
@@ -150,11 +156,11 @@ spatialTransformShift + spatialTransformDrift
 ans = spatialTransformComposite
  
  model        stage  parameters                                   
- shift-drift  shift  scale 1 x 1, rotate 0°, shear 0°, move (0, 0)
+ shift-drift  shift  scale 1 × 1, rotate 0°, shear 0°, move (0, 0)
               drift  (no knots)
 {% endhighlight %}
-<p>So <code class="language-plaintext highlighter-rouge">+</code> writes down a distortion that is about to be fitted, and <code class="language-plaintext highlighter-rouge">*</code> composes ones that already are. Note that <code class="language-plaintext highlighter-rouge">+</code> chains the maps, it does not add the displacements the way <code class="language-plaintext highlighter-rouge">+</code> on a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> would.</p>
-<p>Either way the order is the same, and both flatten rather than nest</p>
+<p>Use <code class="language-plaintext highlighter-rouge">+</code> for a distortion model that is about to be fitted, and <code class="language-plaintext highlighter-rouge">*</code> for transforms whose coefficients are already known. Here <code class="language-plaintext highlighter-rouge">+</code> chains maps; it does not add displacements as <code class="language-plaintext highlighter-rouge">+</code> on a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> would.</p>
+<p>Both operations flatten composites rather than nesting them, and their application order is consistent.</p>
 {% highlight matlab %}
 R = spatialTransformRigid(vector3d(1,-2,0));
 S = spatialTransformShift([1 0.1 0; 0 1 0; 0 0 1]);
@@ -167,7 +173,7 @@ ans =
      0
 {% endhighlight %}
 <h2 id="12">Inverting</h2>
-<p>An affine and a homography have exact inverses, and <code class="language-plaintext highlighter-rouge">inv</code> returns one of the same kind</p>
+<p>Rigid, affine, projective, and degree-one polynomial transforms have exact inverses. Their <code class="language-plaintext highlighter-rouge">inv</code> returns another closed-form transform.</p>
 {% highlight matlab %}
 inv(T)
 {% endhighlight %}
@@ -178,7 +184,7 @@ ans = spatialTransformProjective
  model       stage  parameters                        
  projective  ·      perspective (-0.000102, -0.000189)
 {% endhighlight %}
-<p>A polynomial, a spline or a scattered field maps positions perfectly well but cannot be solved backwards in closed form. Their inverse is a <a href="spatialTransformInverse.html"><code class="language-plaintext highlighter-rouge">spatialTransformInverse</code></a>, which iterates - and converges as long as the displacement field does not fold</p>
+<p>A degree-two polynomial, drift spline, or scattered field has no general closed-form inverse. Its inverse is a <a href="spatialTransformInverse.html"><code class="language-plaintext highlighter-rouge">spatialTransformInverse</code></a>, which solves for each source position iteratively.</p>
 {% highlight matlab %}
 P = spatialTransformPoly.fit(posA,posB,'degree',2);
 
@@ -191,7 +197,7 @@ Pinv = spatialTransformInverse
  model       stage  parameters 
  inv-poly22  ·      |c| = 3.606
 {% endhighlight %}
-
+<p>The round trip returns the sampled positions to rounding level.</p>
 {% highlight matlab %}
 max(norm(eval(Pinv,P*posA) - posA))
 {% endhighlight %}
@@ -200,9 +206,9 @@ max(norm(eval(Pinv,P*posA) - posA))
 ans =
    6.5286e-11
 {% endhighlight %}
-<p>A field that does fold has no inverse to find, and the iteration says so rather than returning a wrong answer.</p>
-<h2 id="16">Collapsing a Chain</h2>
-<p>A composite evaluates every stage in turn, which is wasted work if it is about to be applied to a million pixels many times over. <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">discretize</code></a> samples a chain of any length at given positions and returns the single <a href="spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a> that reproduces it</p>
+<p>Iteration converges while the displacement gradient remains below one in the queried region. A field that folds has no unique inverse. Asking far outside the region used for fitting can also fail, and the inverse reports either failure rather than returning a wrong position.</p>
+<h2 id="16">Collapse a Chain at Chosen Positions</h2>
+<p>Evaluating every stage repeatedly is wasted work when the chain will be applied to many pixels. <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">discretize</code></a> samples a chain at chosen positions and returns one <a href="spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a>.</p>
 {% highlight matlab %}
 F = discretize(R + S, posA)
 {% endhighlight %}
@@ -213,7 +219,7 @@ F = spatialTransformField
  model  stage  parameters              
  field  ·      458 points, |u| <= 5.274
 {% endhighlight %}
-
+<p>The field agrees with the chain at the sample positions. Between them it uses scattered interpolation, so the sampling density controls fidelity.</p>
 {% highlight matlab %}
 max(norm(F*posA - (R + S)*posA))
 {% endhighlight %}
@@ -222,8 +228,9 @@ max(norm(F*posA - (R + S)*posA))
 ans =
      0
 {% endhighlight %}
-<h2 id="18">Applying One to a Map</h2>
-<p> <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">EBSD/transform</code></a> moves every pixel of a map, and the unit cell with it, leaving orientations, phase and every other property untouched. It takes a <code class="language-plaintext highlighter-rouge">spatialTransform</code> or a plain function handle</p>
+<h2 id="18">Apply a Transform to an EBSD Map</h2>
+<p> <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">EBSD/transform</code></a> moves every pixel and carries its unit cell with it. Orientations, phase labels, and all per-pixel properties remain untouched. A spatial transform therefore corrects map geometry, not an orientation or specimen-reference-frame error.</p>
+<p>Carrying the unit cell is exact for an affine transform. For a nonlinear transform, one global unit cell can only represent the local transform at the map centre. The second argument may be a <code class="language-plaintext highlighter-rouge">spatialTransform</code> or a plain function handle.</p>
 {% highlight matlab %}
 ebsdT = transform(ebsd,S);
 
@@ -233,11 +240,12 @@ nextAxis
 plot(ebsdT,ebsdT.bc,'micronbar','off'), mtexColorMap gray
 title('sheared')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDSpatialTransform_01.png" %}
 </center>
-<p> <a href="grain2d.transform.html"><code class="language-plaintext highlighter-rouge">grain2d/transform</code></a> does the same to a grain map, by moving its vertices, so a map and the grains reconstructed from it can be put through one and the same distortion.</p>
-<p>Since the transform inverts, the distortion comes back out again</p>
+<p>The right map has a sheared footprint, while the band-contrast values keep the same spatial order. The transform changed geometry, not the property.</p>
+<p> <a href="grain2d.transform.html"><code class="language-plaintext highlighter-rouge">grain2d/transform</code></a> applies the same idea to a grain map by moving its vertices. This lets a map and grains reconstructed from it pass through the same known distortion.</p>
+<p>Because this affine transform has an exact inverse, the original pixel positions are recovered.</p>
 {% highlight matlab %}
 ebsdBack = transform(ebsdT,inv(S));
 
@@ -249,12 +257,28 @@ ans =
    7.1054e-15
 {% endhighlight %}
 <h2 id="20">Where the Point Pairs Come From</h2>
-<p>Nothing above measured anything - <code class="language-plaintext highlighter-rouge">posA</code> and <code class="language-plaintext highlighter-rouge">posB</code> were manufactured. In practice the pairs come from correlating two pictures of the same area: <a href="xcfShift.html"><code class="language-plaintext highlighter-rouge">xcfShift</code></a> divides the region they share into tiles, phase correlates each against its counterpart, and returns a displacement per tile together with the height of the correlation peak that produced it. That height is the fit weight, not a diagnostic - a tile that landed on featureless background must not get an equal vote:</p>
+<p>Nothing above measured a distortion: <code class="language-plaintext highlighter-rouge">posA</code> and <code class="language-plaintext highlighter-rouge">posB</code> were manufactured. In practice, pairs often come from correlating two images of the same area. <a href="xcfShift.html"><code class="language-plaintext highlighter-rouge">xcfShift</code></a> divides their shared region into tiles, phase correlates each tile with its counterpart, and returns a displacement and correlation-peak height for every tile.</p>
+<p>The images must first share a pixel grid, and their stored order must refer to the same specimen directions. With <code class="language-plaintext highlighter-rouge">mapImage</code> inputs, <code class="language-plaintext highlighter-rouge">xcfShift</code> returns positions and displacements in specimen units rather than pixels.</p>
+<p>The peak height is a fit weight, not a registration diagnostic. A tile on featureless background must not receive an equal vote:</p>
 {% highlight matlab %}
 [u,peak,pos] = xcfShift(imRef,imTest);
 T = spatialTransformShift.fit(pos, pos + u, 'weights', peak);
 {% endhighlight %}
-<p>For that to mean anything the two pictures have to agree about where on the specimen they sit and about the order they are stored in, which is what <a href="EBSDMapsAndImages.html">Maps and Images</a> is about. The whole chain run on real data is <a href="example_WCCoSmall_2.html">what TrueEBSD does</a>.</p>
+<p>
+<a href="EBSDMapsAndImages.html">Maps and Images</a> prepares that common geometry. <a href="example_WCCoSmall_2.html">The TrueEBSD example</a> runs the complete chain on real data and checks the residual after correction.</p>
+<h2 id="21">References</h2>
+<div>
+<ul>
+<li>G. Nolze, <a href="https://doi.org/10.1016/j.ultramic.2006.07.003">Image distortions in SEM and their influences on EBSD measurements</a>, <i>Ultramicroscopy</i> 107, 172--183, 2007, relates specimen tilt, scan geometry, and orientation error.</li>
+<li>V. S. Tong and T. B. Britton, <a href="https://doi.org/10.1016/j.ultramic.2020.113130">TrueEBSD: Correcting spatial distortions in electron backscatter diffraction maps</a>, <i>Ultramicroscopy</i> 221, 113130, 2021, develops the physically staged correction used by TrueEBSD.</li>
+<li>M. Guizar-Sicairos, S. T. Thurman, and J. R. Fienup, <a href="https://doi.org/10.1364/OL.33.000156">Efficient subpixel image registration algorithms</a>, <i>Optics Letters</i> 33, 156--158, 2008, gives the Fourier-domain subpixel registration method used by <code class="language-plaintext highlighter-rouge">xcfShift</code>.</li>
+<li>B. Zitova and J. Flusser, <a href="https://doi.org/10.1016/S0262-8856(03)00137-9">Image registration methods: a survey</a>, <i>Image and Vision Computing</i> 21, 977--1000, 2003, organizes registration into feature detection, matching, transform choice, and resampling.</li>
+<li>R. Hartley and A. Zisserman, <a href="https://www.robots.ox.ac.uk/~vgg/hzbook/">Multiple View Geometry in Computer Vision</a>, second edition, Cambridge University Press, 2004, develops homogeneous coordinates, homographies, and the direct linear transform.</li>
+</ul>
+</div>
+<h2 id="22">Next</h2>
+<p>Continue with <a href="EBSDTrueEbsd.html">TrueEBSD Distortion Correction</a> to fit a sequence of physical distortion models to real EBSD and SEM images. See <a href="EBSDGrid.html">Square and Hex Grids</a> when the transformed map must recover or preserve its lattice structure.</p>
+<p>Correct the geometry before <a href="GrainReconstruction.html">grain reconstruction</a> when grain shape, boundary length, or correlative overlap matters. If grains already exist, transform both the map and its grain map.</p>
 </div>
 </body>
 </html>

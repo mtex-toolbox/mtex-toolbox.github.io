@@ -1,5 +1,5 @@
 ---
-title: "Bingham Distribution"
+title: 'Bingham ODFs'
 
 sidebar: documentation_sidebar
 permalink: BinghamODFs.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Bingham Distribution</title>
+<title>Bingham ODFs</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_BinghamODFs.m">
 </head>
@@ -23,28 +23,19 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<p>A Bingham orientation distribution function (ODF) is one compact model for a texture with different spreads in different directions. It uses one quadratic form. This form can describe a round or elongated peak, a peak spread along a fibre, or a surface-like distribution in orientation space. <a href="DensityEstimation.html">Kernel density estimation</a> instead places one kernel at every measured orientation.</p>
+<p>This page assumes the normalization introduced in <a href="ODFTheory.html">ODF Theory</a> and the model families compared in <a href="ODFModeling.html">ODF Modeling</a>. It also uses the <a href="RotationRepresentations.html">unit-quaternion representation</a> of a rotation. Quaternions \(g\) and \(-g\) represent the same rotation. A Bingham density has the same value at both. Its antipodal symmetry is therefore exactly what a density on rotations requires.</p>
+<p>MTEX represents the result as an <a href="SO3FunBingham.SO3FunBingham.html">SO3FunBingham</a>. It therefore supports the same evaluation, plotting, and sampling interface as other <a href="SO3FunConcept.html">orientation functions</a>.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<h2 id="2">Theory</h2>
-<p>The Bingham distribution has the density function</p>
-<p>\[ f(g;K,U) = _1\!F_1 \left(\frac{1}{2},2,K \right)^{-1} \exp \left\{ g^T UKU g \right\},\qquad g\in S^3, \]</p>
-<p>where \(U\) is an \(4 \times 4\) orthogonal matrix with unit quaternions \(u_{1,..,4}\in S^3\) in the columns and \(K\) is a \(4 \times 4\) diagonal matrix with the entries \(k_1,..,k_4\) describing the shape of the distribution. \(_1F_1(\cdot,\cdot,\cdot)\) is the hypergeometric function with matrix argument normalizing the density.</p>
-<p>The shape parameters \(k_1 \ge k_2 \ge k_3 \ge k_4\) give</p>
-<div>
-<ul>
-<li>a <i>bipolar</i> distribution, if \(k_1 + k_4 &gt; k_2 + k_3\),</li>
-<li>a <i>circular</i> distribution, if \(k_1 + k_4 = k_2 + k_3\),</li>
-<li>a <i>spherical</i> distribution, if \(k_1 + k_4 &lt; k_2 + k_3\),</li>
-<li>a <i>uniform</i> distribution, if \(k_1 = k_2 = k_3 = k_4\),</li>
-</ul>
-</div>
-<p>The general setup of the Bingham distribution in MTEX is done as follows</p>
+<h2 id="2">Constructing a General Bingham ODF</h2>
+<p>A Bingham model needs four mutually orthogonal quaternion axes and four shape parameters. The axes are orthogonal in four-dimensional quaternion space; they are not four physical specimen directions. The example uses the identity quaternion basis as the axes.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('1');
 
-kappa = [100 90 80 0];   % shape parameters
-U     = orientation.eye(cs);  % principle axes as orthogonal orientations
+kappa = [100 90 80 0];
+U = orientation.eye(cs);
 
 odf = BinghamODF(kappa,U)
 {% endhighlight %}
@@ -55,47 +46,49 @@ odf = SO3FunBingham (1 → y↑→x)
   kappa: 100 90 80 0
   weight: 1
 {% endhighlight %}
-<p>Lets visualize the ODF as pole figures</p>
+<p>The printed summary identifies a Bingham component and reports its four shape parameters. <a href="BinghamODF.html"><code class="language-plaintext highlighter-rouge">BinghamODF</code></a> normalizes the component, so its mean is 1 multiple of a random distribution (mrd).</p>
+<p>Pole figures project the ODF onto specimen directions. The unequal shape parameters make the pole-density features anisotropic rather than round.</p>
 {% highlight matlab %}
 h = Miller({0,0,1},{1,0,0},{1,1,1},cs);
 plotPDF(odf,h,'antipodal','silent','layout',[1 3]);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BinghamODFs_01.png" %}
 </center>
-<p>and in Euler angle space</p>
+<p>The same anisotropy appears in sections through orientation space. The peak changes position between the six panels. Each panel cuts a different part of the three-dimensional ODF.</p>
 {% highlight matlab %}
-plot(odf,'sections',6)
+plot(odf,'sections',6);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BinghamODFs_02.png" %}
 </center>
-<h2 id="6">Estimating the parameters of a Bingham distribution</h2>
-<p>The importance of the Bingham distribution is that it is a quite low dimensional model for an orientation distribution function that still is flexible enough to represent different kinds of textures like fibers and unimodal distributions. Furthermore, we may estimate Bingham distribution from a set of individual orientations, coming e.g. from an EBSD measurement or a plasticity simulation. In contrast to <a href="DensityEstimation.html">kernel density estimation</a> estimating the parameters of the Bingham distributions requires much less data. Lets demonstrate the process of fitting a Bingham ODF to experimental data. To this end we start with a randomly aligned fibre ODF</p>
+<h2 id="5">Estimating the Parameters</h2>
+<p> <a href="orientation.calcBinghamODF.html"><code class="language-plaintext highlighter-rouge">calcBinghamODF</code></a> estimates a Bingham model from individual orientations. Those orientations may come from EBSD or from a simulation. This compact fit can work with far fewer measurements than a kernel estimate. It also assumes that one Bingham component is adequate.</p>
+<p>Start with a fibre ODF about a randomly chosen fibre.</p>
 {% highlight matlab %}
 odfTrue = fibreODF(fibre.rand(cs));
 
-plotPDF(odfTrue,h,'antipodal','silent')
+plotPDF(odfTrue,h,'antipodal','silent');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BinghamODFs_03.png" %}
 </center>
-<p>Next we use this fibre ODF to simulate only 2000 random orientations using the command <a href="SO3Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a>
-</p>
+<p>Each pole figure contains the ring expected from a fibre texture. The ring position differs between crystal directions, but it belongs to the same orientation-space fibre.</p>
+<p>Draw 2000 orientations from that ODF and add their pole points to all three panels with <a href="SO3Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a>.</p>
 {% highlight matlab %}
 ori = discreteSample(odfTrue,2000);
 plot(ori,'add2all','MarkerEdgeColor','k',...
-  'MarkerSize',5,'MarkerFaceColor','none','MarkerEdgeAlpha',0.2)
+  'MarkerSize',5,'MarkerFaceColor','none','MarkerEdgeAlpha',0.2);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BinghamODFs_04.png" %}
 </center>
-<p>To those simulated orientation data we can now fit a Bingham distribution using the command <a href="orientation.calcBinghamODF.html"><code class="language-plaintext highlighter-rouge">calcBinghamODF</code></a>
-</p>
+<p>The black points fluctuate about the pole-density rings. They are a finite random sample, not a second texture component.</p>
+<p>Fit a Bingham distribution to the simulated orientations.</p>
 {% highlight matlab %}
 odf = calcBinghamODF(ori)
 
-plotPDF(odf,h,'antipodal','silent')
+plotPDF(odf,h,'antipodal','silent');
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -104,23 +97,22 @@ odf = SO3FunBingham (1 → y↑→x)
   kappa: 0 2 182 182
   weight: 1
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BinghamODFs_05.png" %}
 </center>
-<p>We observe an almost perfect fit between the original fibre ODF and the Bingham distribution estimated from only 2000 randomly drawn orientations. Internally the estimate is read off the orientation tensor of the data - <code class="language-plaintext highlighter-rouge">odf.A</code> is its matrix of eigenvectors and <code class="language-plaintext highlighter-rouge">odf.kappa</code> holds the shape parameters associated with them.</p>
-<h2 id="10">Specific Bingham distributions</h2>
-<p>In the following we present the three corner cases of the Bingham distribution: the unimodal distribution, the fibre distribution, and the spherical distribution.</p>
-<p>
-<b>The unimodal case</b> A unimodal Bingham distribution with reference orientation <code class="language-plaintext highlighter-rouge">oriRef</code> and <code class="language-plaintext highlighter-rouge">kappa=40</code> is constructed by</p>
+<p>The fitted pole figures recover the rings of the original fibre ODF from the 2000 sampled orientations. Small irregularities in the point overlay are sampling variation; the fitted Bingham model itself is smooth.</p>
+<p>Internally, MTEX obtains the four axes from the sample orientation tensor. They are its eigenvectors. MTEX derives <code class="language-plaintext highlighter-rouge">odf.kappa</code> from the corresponding eigenvalues with a large-concentration approximation. Thus <code class="language-plaintext highlighter-rouge">calcBinghamODF</code> is a moment-based approximate fit. It is not a general maximum-likelihood optimizer. Reach for this model when one compact shape is plausible. Compare the fitted plots with the data before treating its parameters as a complete description.</p>
+<h2 id="9">Three Non-Uniform Cases</h2>
+<p>The general quaternion Bingham distribution is classified as bipolar, circular, or spherical. For texture work these correspond to a localized orientation peak, a fibre-like peak, and a surface-like distribution. Here "spherical" describes the set of maxima on the quaternion sphere; it does not mean a uniform ODF.</p>
+<h2 id="10">A Bipolar or Unimodal Distribution</h2>
+<p>A scalar shape parameter and a reference orientation define a unimodal Bingham distribution. <a href="BinghamODF.html"><code class="language-plaintext highlighter-rouge">BinghamODF</code></a> expands the scalar <code class="language-plaintext highlighter-rouge">20</code> to <code class="language-plaintext highlighter-rouge">[20 0 0 0]</code>. The reference orientation is the unique maximum, apart from its antipode and symmetry-equivalent descriptions.</p>
 {% highlight matlab %}
-% a modal orientation
 cs = crystalSymmetry('321');
 oriRef = orientation.byEuler(45*degree,0*degree,0*degree,cs);
 
-% the corresponding Bingham ODF
 odf = BinghamODF(20,oriRef)
 
-plot(odf,'sections',6,'silent','contourf','sigma')
+plot(odf,'sections',6,'silent','contourf','sigma');
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -129,16 +121,17 @@ odf = SO3FunBingham (321 → y↑→x)
   kappa: 20 0 0 0
   weight: 1
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BinghamODFs_06.png" %}
 </center>
-<p>
-<b>The fibre case</b> For a fibre symmetric Bingham distribution we simply specify the fibre and the first kappa parameter. The first two kappa parameters are always equal while the third and fourth are zero.</p>
+<p>The filled contours form localized patches. Crystal symmetry repeats the same physical peak; those repeated patches are not additional components.</p>
+<h2 id="12">A Circular or Fibre Distribution</h2>
+<p>Passing a <a href="fibre.fibre.html">fibre</a> with one shape parameter expands <code class="language-plaintext highlighter-rouge">20</code> to <code class="language-plaintext highlighter-rouge">[20 20 0 0]</code>. The two equal leading parameters make the density constant along the fibre, while the two zeros control its transverse decay.</p>
 {% highlight matlab %}
 f = fibre(Miller(0,0,1,cs),vector3d(1,2,3));
 odf = BinghamODF(20,f)
 
-plot(odf,'sections',6,'silent','sigma')
+plot(odf,'sections',6,'silent','sigma');
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -147,13 +140,14 @@ odf = SO3FunBingham (321 → y↑→x)
   kappa: 20 20 0 0
   weight: 1
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BinghamODFs_07.png" %}
 </center>
-<p>
-<b>The spherical case</b> The spherical case is characterized by the fact that we have 3 equal non zero kappa coefficients.</p>
+<p>The high-density feature now continues through successive section panels instead of closing around one orientation. That continuity is the visual signature of the fibre.</p>
+<h2 id="14">A Spherical or Surface-Like Distribution</h2>
+<p>Three equal nonzero parameters give the spherical case. The omitted fourth value is padded with zero, so this call uses <code class="language-plaintext highlighter-rouge">[10 10 10 0]</code>.</p>
 {% highlight matlab %}
-odf = BinghamODF([10,10,10],quaternion.eye,cs)
+odf = BinghamODF([10 10 10],quaternion.eye,cs)
 
 plot(odf,'sections',6,'silent','sigma');
 {% endhighlight %}
@@ -164,11 +158,13 @@ odf = SO3FunBingham (321 → y↑→x)
   kappa: 10 10 10 0
   weight: 1
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BinghamODFs_08.png" %}
 </center>
-<h2 id="13">Reading the estimated parameters</h2>
-<p>Whichever way the parameters were obtained, <code class="language-plaintext highlighter-rouge">odf.A</code> holds the four principal axes as orientations and <code class="language-plaintext highlighter-rouge">odf.kappa</code> the shape parameters belonging to them - <code class="language-plaintext highlighter-rouge">A</code> is the matrix of eigenvectors of the orientation tensor of the data and <code class="language-plaintext highlighter-rouge">kappa</code> is derived from its eigenvalues.</p>
+<p>This plot is not uniform: the density avoids the fourth quaternion axis and spreads its maxima over a two-dimensional set. A uniform distribution requires all four parameters to be equal. Because a common offset is irrelevant, MTEX can represent that case with <code class="language-plaintext highlighter-rouge">[0 0 0 0]</code>.</p>
+<h2 id="16">Reading the Parameters</h2>
+<p>Whichever constructor produced the model, <code class="language-plaintext highlighter-rouge">odf.A</code> holds its four principal quaternion axes as orientations. <code class="language-plaintext highlighter-rouge">odf.kappa</code> holds the shape parameter belonging to each axis. For a fitted model, these axes are the eigenvectors of the orientation tensor and the shape parameters are derived from its eigenvalues.</p>
+<p>Reconstruct the general example so the following output has deliberately unequal parameters.</p>
 {% highlight matlab %}
 odf = BinghamODF([100 90 80 0],orientation.eye(cs));
 
@@ -177,7 +173,7 @@ odf.A
 
 {% highlight plaintext %}
 ans = orientation (321 → y↑→x)
-  size: 4 x 1
+  size: 4 × 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2
@@ -186,7 +182,7 @@ ans = orientation (321 → y↑→x)
     90  180  270
    180    0    0
 {% endhighlight %}
-
+<p>The four displayed orientations are one orthogonal basis of quaternion space. Their row order matches the order of the following parameters.</p>
 {% highlight matlab %}
 odf.kappa.'
 {% endhighlight %}
@@ -195,7 +191,37 @@ odf.kappa.'
 ans =
    100    90    80     0
 {% endhighlight %}
-<p>The classification into the bipolar, circular and spherical case listed at the top of this page is stated for the parameters in this order. Note that it applies to the distribution on the quaternion sphere - once a nontrivial crystal symmetry is imposed, the estimated parameters describe the symmetrised distribution and the three cases are no longer cleanly separated by the sums \(k_1+k_4\) and \(k_2+k_3\).</p>
+<p>The constructor preserves the supplied axis order. A fitted model keeps the eigenvector order returned by the orientation tensor calculation. Do not sort <code class="language-plaintext highlighter-rouge">odf.kappa</code> without applying the same permutation to <code class="language-plaintext highlighter-rouge">odf.A</code>. The classification below instead labels the parameters in descending order.</p>
+<p>The bipolar, circular, and spherical classification applies to the distribution on the quaternion sphere. With nontrivial crystal symmetry, MTEX averages over symmetry-equivalent copies. The resulting ODF may not look like one of the three unsymmetrised cases. The sums \(k_1+k_4\) and \(k_2+k_3\) no longer cleanly separate the visible shapes.</p>
+<h2 id="19">The Maths Behind the Model</h2>
+<p>The Bingham density on the unit-quaternion sphere is</p>
+<p>\[f(\mathbf{g};\mathbf{K},\mathbf{U}) = C(\mathbf{K})^{-1} \exp\!\left\{\mathbf{g}^{\mathrm{T}}\mathbf{U}\mathbf{K} \mathbf{U}^{\mathrm{T}}\mathbf{g}\right\},\qquad \mathbf{g}\in S^3,\]</p>
+<p>where \(\mathbf{U}\) is a \(4\times4\) orthogonal matrix. Its columns \(u_{1},\ldots,u_{4}\in S^3\) are the principal quaternion axes. \(\mathbf{K}\) is diagonal, with ordered entries \(k_1\geq k_2\geq k_3\geq k_4\). The normalizing constant is \(C(\mathbf{K})\). It is a confluent hypergeometric function with matrix argument.</p>
+<p>Adding the same constant to all four \(k_i\) changes the exponential and its normalizing constant by the same factor. Only three concentration differences are therefore identifiable. The matrix \(\mathbf{U}\) must also be estimated. This is a low-dimensional model, but it does not have only four fitted numbers.</p>
+<p>For ordered parameters, the three non-uniform cases satisfy</p>
+<div>
+<ul>
+<li>bipolar if \(k_1+k_4 &gt; k_2+k_3\),</li>
+<li>circular if \(k_1+k_4 = k_2+k_3\),</li>
+<li>spherical if \(k_1+k_4 &lt; k_2+k_3\).</li>
+</ul>
+</div>
+<p>The distribution is uniform if \(k_1=k_2=k_3=k_4\).</p>
+<h2 id="20">Further Reading</h2>
+<div>
+<ul>
+<li>
+<a href="https://doi.org/10.1214/aos/1176342874">Bingham (1974)</a> introduces the antipodally symmetric distribution and its statistical inference.</li>
+<li>
+<a href="https://doi.org/10.1023/B:MATG.0000048799.56445.59">Kunze and Schaeben (2004)</a> develop the quaternion classification and its interpretation for crystallographic textures and pole figures.</li>
+<li>
+<a href="https://doi.org/10.1107/S002188981003027X">Bachmann et al. (2010)</a> derive orientation-tensor statistics and the high-concentration approximation used for EBSD orientation data.</li>
+<li>
+<a href="https://doi.org/10.1002/9780470316979">Mardia and Jupp, Directional Statistics</a> provides the broader theory of axial and directional data.</li>
+</ul>
+</div>
+<h2 id="21">Next</h2>
+<p>The other model ODFs are <a href="RadialODFs.html">Radial ODFs</a> and <a href="FibreODFs.html">Fibre ODFs</a>. A nonparametric alternative does not assume one Bingham shape; see <a href="DensityEstimation.html">Density Estimation</a>. The shared plotting tools are introduced in <a href="ODFPlot.html">Plotting an ODF</a>.</p>
 </div>
 </body>
 </html>

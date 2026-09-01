@@ -1,5 +1,5 @@
 ---
-title: "Contour Plots"
+title: 'Contour Plots'
 
 sidebar: documentation_sidebar
 permalink: ContourPlots.html
@@ -22,15 +22,17 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>How to customize contour plots in MTEX</p>
+<p>A contour line joins points with the same value. It lets a reader take a number from a figure instead of guessing it from a colour. Add contours when a value will be quoted in the text. Label them when more than one level matters.</p>
+<p>
+<a href="ColorMaps.html">Color Mapping</a> defines a contour level and explains why separate plots need the same explicit levels. This page shows how to draw, overlay, and label those levels. <a href="PlotTypes.html">Plot Types</a> compares contour plots with scatter and smooth plots.</p>
 <!--/introduction-->
-<p>Lets consider an arbitrary spherical function which has no practical meaning at all but serves as a prototype for pole figures, inverse pole figures, Schmidt or Taylor factor maps, etc.</p>
+<h2 id="1">Start with a smooth spherical function</h2>
+<p>The function used here has no physical meaning. It stands in for a pole figure, an inverse pole figure, a Schmid factor map, a Taylor factor map, or any other <a href="SphericalFunctions.html">function defined on the sphere</a>.</p>
 {% highlight matlab %}
-% define the spherical function
 plottingConvention.default('y↑→x');
 sF = 0.01 + 10*S2Fun.smiley
+levels = -4:5;
 
-% and plot it as a smooth function
 plot(sF,'upper')
 mtexColorMap blue2red
 mtexColorbar
@@ -40,26 +42,40 @@ mtexColorbar
 sF = S2FunHarmonic (y↑→x)
   bandwidth: 128
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ContourPlots_01.png" %}
 </center>
-<p>Passing the option <code class="language-plaintext highlighter-rouge">contour</code> to the plot command we may add contours at specific levels on top of the smooth plot</p>
+<p>The smooth colours make the face easy to recognize, and the colour bar gives the approximate values. They do not mark the exact positions where the function reaches an integer level.</p>
+<h2 id="3">Choose filled bands or lines</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">'contourf'</code> replaces smooth shading by filled bands. Every value between two neighboring levels receives one colour. The bands are easy to scan, but they deliberately hide variation within each interval.</p>
 {% highlight matlab %}
-% enable on top plotting
+plot(sF,'contourf',levels,'upper')
+mtexColorMap blue2red
+mtexColorbar
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ContourPlots_02.png" %}
+</center>
+<p>The face is now quantized into one-unit bands from -4 to 5. Use <code class="language-plaintext highlighter-rouge">'contour'</code> instead when only the boundaries are needed. The explicit <code class="language-plaintext highlighter-rouge">levels</code> vector also makes this plot comparable with another figure using the same vector.</p>
+<h2 id="5">Overlay contour lines on smooth colours</h2>
+<p>Contour lines can be laid over a smooth plot instead of replacing it. This keeps the continuous colour variation while making exact levels visible.</p>
+{% highlight matlab %}
+close all
+plot(sF,'upper')
+mtexColorMap blue2red
+mtexColorbar
+
 hold on
 
-% specify the contour levels
-levels = -4:5;
+hContour = plot(sF,'contour',levels,...
+  'lineWidth',2,'lineColor','k')
 
-% plot the contours
-h = plot(sF,'contour',levels,'linewidth',2,'linecolor','k')
-
-% disable on top plotting
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-h = 
+hContour = 
   Contour with properties:
 
     EdgeColor: [0 0 0]
@@ -73,35 +89,48 @@ h =
 
   Use GET to show all properties
 {% endhighlight %}
-<center>
-{% include inline_image.html file="ContourPlots_02.png" %}
-</center>
-<p>The plotting command return a handle <code class="language-plaintext highlighter-rouge">h</code> to the plotted contours. This handle can be used to customize the contour lines. In particular, one can use the Matlab command <a href="matlab:doc('clabel')">clabel</a> to add labels to specific contour levels.</p>
-{% highlight matlab %}
-levels2label = [-2,0:5];
-clabel(h.ContourMatrix,h,levels2label,'FontSize',15)
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ContourPlots_03.png" %}
 </center>
-<h2 id="4">A practical example</h2>
-<p>The situation becomes a little bit more involved if contour lines should be added to multiple plot. Let us consider the pole figures of the following ODF</p>
+<p>The black curves outline the same integer bands without covering the smooth field. The red and blue regions remain visible between the lines.</p>
+<h2 id="7">Label selected contours</h2>
+<p>A single-axis contour plot returns a MATLAB contour handle. Its <code class="language-plaintext highlighter-rouge">ContourMatrix</code> and the handle itself can be passed to MATLAB's <a href="matlab:doc('clabel')"><code class="language-plaintext highlighter-rouge">clabel</code></a> command. Label the levels needed for the reading instead of every line, because repeated labels quickly obscure the map.</p>
+{% highlight matlab %}
+levels2label = [-2,0:5];
+clabel(hContour.ContourMatrix,hContour,levels2label,'FontSize',15)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ContourPlots_04.png" %}
+</center>
+<p>The labels now make the sign and size of the main features readable. The unlabelled contours still show their shapes without adding more text.</p>
+<h2 id="9">Label contours on several axes</h2>
+<p>The same method applies to real pole figures. A multi-axis plotting command returns several contour handles, so there is no single handle to pass to <code class="language-plaintext highlighter-rouge">clabel</code>. <code class="language-plaintext highlighter-rouge">'ShowText','on'</code> labels the drawn levels on every axis without requiring a loop over those handles.</p>
 {% highlight matlab %}
 mtexdata dubna
 odf = calcODF(pf,'silent')
+
+h = pf{4:5}.h;
+plotPDF(odf,h)
+mtexColorMap LaboTeX
+mtexColorbar
+
+hold on
+plotPDF(odf,h,'contour',1:2:15,...
+  'lineColor','black','lineWidth',2,'ShowText','on')
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
 pf = PoleFigure (y↑→x)
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
  
-  h = (022̅1), r = 72 x 19 points
-  h = (101̅0), r = 72 x 19 points
-  h = (101̅1)(011̅1), r = 72 x 19 points
-  h = (101̅2), r = 72 x 19 points
-  h = (112̅0), r = 72 x 19 points
-  h = (112̅1), r = 72 x 19 points
-  h = (112̅2), r = 72 x 19 points
+  h = (022̅1), r = 72 × 19 points
+  h = (101̅0), r = 72 × 19 points
+  h = (101̅1)(011̅1), r = 72 × 19 points
+  h = (101̅2), r = 72 × 19 points
+  h = (112̅0), r = 72 × 19 points
+  h = (112̅1), r = 72 × 19 points
+  h = (112̅2), r = 72 × 19 points
  
 odf = SO3FunRBF (Quartz → y↑→x)
  
@@ -110,20 +139,18 @@ odf = SO3FunRBF (Quartz → y↑→x)
   center: 19848 orientations, resolution: 5°
   weight: 1
 {% endhighlight %}
-<p>Then we may use the option <code class="language-plaintext highlighter-rouge">'ShowText','on'</code> to display contour labels.</p>
-{% highlight matlab %}
-h = pf{4:5}.h;
-plotPDF(odf,h)
-mtexColorMap LaboTeX
-mtexColorbar
-
-hold on
-plotPDF(odf,h,'contour',1:2:15,'linecolor','black','linewidth',2,'ShowText','on')
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ContourPlots_04.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="ContourPlots_05.png" %}
 </center>
+<p>The two requested pole-figure entries expand under crystal symmetry to three plotted panels. Every panel carries the same levels from 1 to 15 in steps of 2, so the fields can be compared line by line. Explicit levels prevent each panel from choosing a different numerical scale.</p>
+<h2 id="11">References</h2>
+<div>
+<ul>
+<li>S. R. Midway, <a href="https://doi.org/10.1016/j.patter.2020.100141">Principles of Effective Data Visualization</a>, <i>Patterns</i> 1 (2020), 100141, explains how direct labels and consistent visual scales support comparisons between plots.</li>
+</ul>
+</div>
+<h2 id="12">Next</h2>
+<p>Continue with <a href="TransparencyDemo.html">Transparency</a> to reveal overlapping markers and superposed maps without hiding either layer.</p>
 </div>
 </body>
 </html>

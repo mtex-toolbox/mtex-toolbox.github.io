@@ -1,5 +1,5 @@
 ---
-title: "Visualizing ODFs"
+title: 'Visualizing ODFs'
 
 sidebar: documentation_sidebar
 permalink: ODFPlot.html
@@ -23,17 +23,24 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<h2 id="1">Choosing a View</h2>
+<p>An orientation distribution function (ODF) is a density on the three-dimensional curved space of rotations. No flat picture can preserve all of that geometry, so every ODF plot answers a particular question.</p>
+<p>This page assumes the normalization in <a href="ODFTheory.html">ODF Theory</a> and the model components in <a href="ODFModeling.html">ODF Modeling</a>. The rotation coordinates themselves are introduced in <a href="RotationRepresentations.html">Rotation Representations</a>.</p>
+<p>There are two direct ways to draw an ODF:</p>
+<div>
+<ol>
+<li>parametrize orientation space by three coordinates and draw an isodensity surface in three dimensions;</li>
+<li>cut orientation space into two-dimensional sections and draw the ODF value on each section.</li>
+</ol>
+</div>
+<p>Sections are the usual choice for a printed ODF because no feature can be hidden behind another panel. Which sections are cut matters more than it looks.</p>
+<p>Pole figures and inverse pole figures are different. They are projections that integrate the ODF along a curve, whereas a section evaluates the ODF on a slice. The color in every plot below represents density in multiples of a random distribution (mrd), not a volume fraction at one orientation.</p>
+<p>A <b>plotting convention</b> states how the specimen reference frame is laid out on screen. The convention below draws Y upward and X to the right. It does not rotate the ODF or change its reference frame.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>Since an orientation density function (ODF) is a function on the three dimensional, non Euclidean orientation space its proper visualization is a challenging task. In general one distinguishes two approaches</p>
-<div>
-<ol>
-<li>Choose a parametrization of the orientation space by three variables, e.g., by the Euler angles \(\varphi_1\), \(\Phi\), \(\varphi_2\) and make a three dimensional half translucent contour plot of the function</li>
-<li>Choose a series of two dimensional sections through the orientation space and plot the ODF only at the sections.</li>
-</ol>
-</div>
-<p>In order to demonstrate the different visualization techniques let us first define a model ODF.</p>
+<h2 id="2">A Model with Known Features</h2>
+<p>The same normalized model is used in every view. It contains two localized components and one fibre component, with mixture fractions 0.1, 0.2, and 0.7.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
 mod1 = orientation.byEuler(90*degree,40*degree,110*degree,'ZYZ',cs);
@@ -41,21 +48,73 @@ mod2 = orientation.byEuler(50*degree,30*degree,-30*degree,'ZYZ',cs);
 
 odf = 0.1*unimodalODF(mod1) ...
   + 0.2*unimodalODF(mod2) ...
-  + 0.7*fibreODF(Miller(0,0,1,cs),vector3d(1,0,0),'halfwidth',10*degree);
+  + 0.7*fibreODF(Miller(0,0,1,cs),vector3d.X,...
+  'halfwidth',10*degree);
 {% endhighlight %}
-<p>and lets switch to the LaboTex colormap</p>
+<h2 id="3">Three-Dimensional Bunge Plot</h2>
+<p> <a href="SO3Fun.plot3d.html"><code class="language-plaintext highlighter-rouge">plot3d</code></a> with <code class="language-plaintext highlighter-rouge">'Bunge'</code> uses the Euler angles \((\varphi_1,\Phi,\varphi_2)\) as Cartesian plot coordinates.</p>
 {% highlight matlab %}
-setMTEXpref('defaultColorMap',LaboTeXColorMap);
+plot3d(odf,'Bunge','figSize','large');
+mtexColorMap('LaboTeX');
+mtexColorbar('title','mrd');
 {% endhighlight %}
-<h2 id="5">Three Dimensional Plots</h2>
-<p>Visualizing an ODF in three dimensions is done by the command <a href="SO3Fun.plot3d.html"><code class="language-plaintext highlighter-rouge">plot3d</code></a>.</p>
-{% highlight matlab %}
-plot3d(odf)
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFPlot_01.png" %}
 </center>
-<p>By default this command represents the ODF in the Bunge Euler angle space \(\varphi_1\), \(\Phi\), \(\varphi_2\). The range of the Euler angles depends on the crystal symmetry according to the following table</p>
+<p>The fibre forms extended tubes, while the localized components form compact blobs. Several symmetry-equivalent appearances can lie in the rectangular Euler plotting box; they are not additional components. Rotate this figure interactively to see features hidden behind one another. That need for interaction is the main weakness of a 3-D plot on a page. Euler coordinates also stretch some regions and squeeze others, so an apparent volume in this box may be a parametrization artefact.</p>
+<h2 id="5">Three-Dimensional Axis--Angle Plot</h2>
+<p>The <code class="language-plaintext highlighter-rouge">'axisAngle'</code> flag plots the scaled-axis vector</p>
+<p>\[ \mathbf{r}=\omega\mathbf{n}, \]</p>
+<p>where \(\mathbf{n}\) is the rotation axis and \(\omega\) is the rotation angle of a symmetry-reduced representative.</p>
+{% highlight matlab %}
+plot3d(odf,'axisAngle','figSize','large');
+mtexColorMap('LaboTeX');
+mtexColorbar('title','mrd');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ODFPlot_02.png" %}
+</center>
+<p>The same tube and blobs now occupy a compact, curved fundamental region. Radial distance has the useful meaning of rotation angle, but apparent volume is still distorted. Axis--angle coordinates are not an equal-volume map. They are often easier to interpret for misorientations; <a href="OrientationVisualization3d.html">3D Orientation Visualizations</a> also compares Rodrigues, homochoric, and cubochoric coordinates.</p>
+<h2 id="7">Classical Euler Sections</h2>
+<p> <a href="SO3Fun.plotSection.html"><code class="language-plaintext highlighter-rouge">plotSection</code></a> evaluates the ODF on a stack of two-dimensional slices. The explicit <code class="language-plaintext highlighter-rouge">'phi2'</code> flag selects the classical sections of constant third Bunge Euler angle \(\varphi_2\). By default the sections are at constant angles of \(\varphi_2\).</p>
+{% highlight matlab %}
+plotSection(odf,'phi2','figSize','large');
+mtexColorMap('LaboTeX');
+mtexColorbar('title','mrd');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ODFPlot_03.png" %}
+</center>
+<p>The six panels are successive slices, not six projections. Following the fibre from panel to panel traces a line through orientation space, while each localized component occupies only nearby slices. This splitting is why a component can be difficult to recognize from one panel alone.</p>
+<p>
+<a href="EulerAngleSections.html">Euler Angle Sections</a> explains how to choose the panel values and layout. MTEX also supports sections of constant \(\varphi_1\) or \(\Phi\) in the Bunge convention, and constant \(\alpha\) or \(\gamma\) in the Matthies convention.</p>
+<h2 id="9">Sigma Sections</h2>
+<p>Sigma sections reorganize the same three orientation coordinates around a selected crystal axis. MTEX uses the Matthies coordinate \(\sigma=\alpha+\gamma\). Do not identify it with the informal Bunge-angle expression \(\varphi_1-\varphi_2\) sometimes attached to these plots.</p>
+{% highlight matlab %}
+plotSection(odf,'sigma','figSize','large');
+mtexColorMap('LaboTeX');
+mtexColorbar('title','mrd');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ODFPlot_04.png" %}
+</center>
+<p>The localized components occupy compact regions, while the model fibre reaches the rim in successive panels. Sigma sections are not a universally superior replacement for the classical view. They are often especially compact for trigonal, tetragonal, and hexagonal symmetry, where one crystal axis is distinguished. A component spread over several \(\varphi_2\) sections may then be easier to follow in one sigma section. <a href="SigmaSections.html">Sigma Sections</a> develops this geometric reading.</p>
+<h2 id="11">Along a Fibre</h2>
+<p>A section need not be a plane. Evaluating the ODF along a curve returns the density itself rather than a projection. This is the sharpest view when the chosen fibre expresses the physical question.</p>
+{% highlight matlab %}
+close all;
+
+% select a fibre of interest
+f = fibre(Miller(1,2,-3,2,cs),vector3d(2,1,1));
+
+plot(odf,f,'LineWidth',2);
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ODFPlot_05.png" %}
+</center>
+<p>The curve contains two pronounced peaks separated by low-density intervals. The vertical axis is the ODF value in mrd, so this trace can compare densities along the chosen fibre directly. It does not collect density from neighbouring orientations as a pole-figure projection does.</p>
+<h2 id="13">Euler Plotting Bounds and Symmetry</h2>
+<p>The Bunge plot uses a rectangular bounding box whose angle ranges depend on crystal and specimen symmetry. The bounds used by MTEX are</p>
 <p>
    <table class="usertable">
       <tr>
@@ -212,94 +271,41 @@ plot3d(odf)
       </tr>
    </table>
 </p>
-<p>Note that for the last to symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a>
-</p>
+<p>With identity specimen symmetry, the first Euler angle remains \(360^{\circ}\); crystal symmetry alone does not reduce it. Specimen symmetry can restrict this angle, with the final bound depending on the symmetry pair. For point groups 23 and 432, this box does not account for the threefold axis. Each orientation can therefore appear three times within the box. <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a> returns these plotting bounds.</p>
 {% highlight matlab %}
-[maxphi1,maxPhi,maxphi2] = fundamentalRegionEuler(crystalSymmetry('432'),specimenSymmetry('222'))
+csCubic = crystalSymmetry('432');
+ssOrtho = specimenSymmetry('222');
+[maxPhi1,maxPhi,maxPhi2] = fundamentalRegionEuler(csCubic,ssOrtho);
+eulerBounds = [maxPhi1,maxPhi,maxPhi2] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-maxphi1 =
-    1.5708
-maxPhi =
-    1.5708
-maxphi2 =
-    1.5708
+eulerBounds =
+    90    90    90
 {% endhighlight %}
-<p>This return the common \(90^{\circ} \times 90^{\circ} \times 90^{\circ}\) cube for cubic crystal and orthorhombic specimen symmetry. For an arbitrary orientation</p>
+<p>The displayed result is the familiar cube with bounds \(90^{\circ}\) by \(90^{\circ}\) by \(90^{\circ}\) for cubic crystal and orthorhombic specimen symmetry. It is a bounding box, not the fundamental region itself. For cubic symmetry the box has about three times the volume needed for one representative, which explains the repeated appearances in the first figure.</p>
+<p>Given an arbitrary orientation, <a href="orientation.project2EulerFR.html"><code class="language-plaintext highlighter-rouge">project2EulerFR</code></a> selects a symmetry-equivalent representative inside this Euler box.</p>
 {% highlight matlab %}
-ori = orientation.rand(crystalSymmetry('432'),specimenSymmetry('222'))
-{% endhighlight %}
-
-{% highlight plaintext %}
-ori = orientation (432 → y↑→x (222))
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  156.958 161.468 197.878
-{% endhighlight %}
-<p>the symmetrically equivalent orientation within the fundamental region can be computed using the command <a href="orientation.project2EulerFR.html">project2EulerFR</a>
-</p>
-{% highlight matlab %}
+ori = orientation.rand(csCubic,ssOrtho);
 [phi1,Phi,phi2] = ori.project2EulerFR;
-[phi1,Phi,phi2] ./degree
+projectedEuler = [phi1,Phi,phi2] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+projectedEuler =
    23.0418   18.5318   17.8785
 {% endhighlight %}
-<p>A big disadvantage of the Euler angle representation of the orientation space is that it very badly follows the curved geometry of the space.</p>
-<p>Especially for misorientation distribution functions a better alternative is the three dimensional axis angle space. To visualize an ODF with respect to this parametrization simply add the option <code class="language-plaintext highlighter-rouge">'axisAngle'</code>
-</p>
-{% highlight matlab %}
-plot3d(odf,'axisAngle','figSize','large')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFPlot_02.png" %}
-</center>
-<h2 id="10">ODF Sections</h2>
-<p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="SO3Fun.plotSection.html">plotSection</a>. By default the sections are at constant angles of \(\varphi_2\).</p>
-{% highlight matlab %}
-plotSection(odf)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFPlot_03.png" %}
-</center>
-<p>More information how to customize such plots can be found in the chapter <a href="EulerAngleSections.html">Euler angle sections</a>. Beside the standard \(\varphi_2\) sections MTEX supports also sections according to all other Euler angles.</p>
+<p>All three displayed coordinates lie between \(0^{\circ}\) and \(90^{\circ}\). This representative is suitable for the Euler plotting box, but the box still contains symmetry-related duplicates elsewhere. <a href="OrientationFundamentalRegion.html">Fundamental Regions</a> constructs the compact symmetry-reduced region used by the axis--angle plot.</p>
+<h2 id="16">References</h2>
 <div>
 <ul>
-<li>\(\varphi_2\) (default)</li>
-<li>\(\varphi_1\)</li>
-<li>\(\alpha\) (Matthies Euler angles)</li>
-<li>\(\gamma\) (Matthies Euler angles)</li>
-<li>\(\sigma = \alpha + \gamma\) (recommended)</li>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops ODFs, Bunge Euler space, and classical section plots.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, treats rotation parametrizations, symmetry, and asymmetric domains.</li>
+<li>S. Matthies, K. Helming, and K. Kunze, <a href="https://doi.org/10.1002/pssb.2221570105">On the Representation of Orientation Distributions in Texture Analysis by Sigma-Sections. I</a>, <i>physica status solidi (b)</i> 157 (1990), 71--83, introduces sigma sections. <a href="https://doi.org/10.1002/pssb.2221570202">Part II</a>, 489--507, develops crystal and specimen symmetry and worked examples.</li>
 </ul>
 </div>
-<p>In fact MTEX highly recommends the so called sigma sections as they provide a much less distorted representation of the orientation space. A detailed description of the sigma sections can be found in the chapter <a href="SigmaSections.html">sigma sections</a>.</p>
-{% highlight matlab %}
-plotSection(odf,'sigma')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFPlot_04.png" %}
-</center>
-<h2 id="12">Plotting the ODF along a fibre</h2>
-<p>For plotting the ODF along a certain fibre we have the command</p>
-{% highlight matlab %}
-close all
-
-% select a fibre of interest
-f = fibre(Miller(1,2,-3,2,cs),vector3d(2,1,1));
-
-plot(odf,f,'LineWidth',2);
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFPlot_05.png" %}
-</center>
-<p>Finally, lets set back the default colormap.</p>
-{% highlight matlab %}
-setMTEXpref('defaultColorMap',WhiteJetColorMap);
-{% endhighlight %}
+<h2 id="17">Next</h2>
+<p>The section families have detailed pages, <a href="EulerAngleSections.html">Euler Angle Sections</a> and <a href="SigmaSections.html">Sigma Sections</a>. The projections onto the sphere are <a href="ODFPoleFigure.html">Pole Figures</a> and <a href="ODFInversePoleFigure.html">Inverse Pole Figures</a>. Use <a href="ODFCharacteristics.html">Properties</a> when the result should be a number rather than another view.</p>
 </div>
 </body>
 </html>

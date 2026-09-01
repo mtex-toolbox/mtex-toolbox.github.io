@@ -1,5 +1,5 @@
 ---
-title: "Advanced Color Keys"
+title: 'Advanced Color Keys'
 
 sidebar: documentation_sidebar
 permalink: EBSDAdvancedMaps.html
@@ -23,77 +23,66 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In order to visualize orientation maps one has to assign a color to each possible orientation. As an example, one may think of representing an orientation by its Euler angles <code class="language-plaintext highlighter-rouge">phi1</code>, <code class="language-plaintext highlighter-rouge">Phi</code>, <code class="language-plaintext highlighter-rouge">phi2</code> and taking these as the RGB values of a color. Of course, there are many other ways to do this. Before presenting all the possibilities MTEX offers to assign a color to each orientation let us shortly summarize what properties we expect from such an assignment.</p>
+<p>An orientation colour key maps orientation space to RGB colour space. Ideally, that map would have five properties:</p>
 <div>
 <ol>
-<li>crystallographic equivalent orientations should have the same color</li>
-<li>similar orientations should have similar colors</li>
-<li>different orientations should have different colors</li>
-<li>the whole colorspace should be used for full contrast</li>
-<li>if the orientations are concentrated in a small region of the orientation space, the colorspace should be exhaust by this region</li>
+<li>symmetrically equivalent orientations have the same colour</li>
+<li>similar orientations have similar colours</li>
+<li>different orientations have different colours</li>
+<li>the whole colour space is used, for full contrast</li>
+<li>if the data occupies only a small part of orientation space, the whole colour space is spent on that part</li>
 </ol>
 </div>
-<p>It should be noted that it is impossible to have all the 4 points mentioned above be satisfied by a single color coding. Hence, some compromises have to be accepted and some assumptions have to be made. While the traditional <a href="EBSDAdvancedMaps.html#2">Euler angle coloring</a> will assign different colors to similar orientations, i.e. will introduce color jumps and break with the first requirement the default <a href="ipfHSVKey.html">MTEX color key</a> will assign the same color to different orientations.</p>
-<p>Hence, there is no perfect color key, but it should be chosen depending on the information one want to extract from the orientation data. To do so MTEX offers the following possibilities:</p>
+<p>No key has all five. Orientation space is curved and contains symmetry, whereas RGB colour space is a box, so continuity, uniqueness, and contrast cannot all be preserved. A colour edge may therefore come from the key rather than from the specimen.</p>
+<p>The right compromise depends on the question. MTEX provides</p>
 <div>
 <ul>
-<li>
-<code class="language-plaintext highlighter-rouge"><a href="ipfHSVKey.html">ipfHSVKey</a></code> the default color key</li>
-<li>
-<code class="language-plaintext highlighter-rouge"><a href="ipfTSLKey.html">ipfTSLKey</a></code>
+<li> <a href="ipfHSVKey.html"><code class="language-plaintext highlighter-rouge">ipfHSVKey</code></a>, the default MTEX inverse pole figure key</li>
+<li> <a href="ipfTSLKey.html"><code class="language-plaintext highlighter-rouge">ipfTSLKey</code></a> and <a href="ipfHKLKey.html"><code class="language-plaintext highlighter-rouge">ipfHKLKey</code></a>, for maps compatible with other EBSD systems</li>
+<li> <a href="BungeColorKey.html"><code class="language-plaintext highlighter-rouge">BungeColorKey</code></a>, which maps Euler angles to RGB</li>
+<li> <a href="PatalaColorKey.PatalaColorKey.html"><code class="language-plaintext highlighter-rouge">PatalaColorKey</code></a>, for the grain-boundary misorientations demonstrated in <a href="BoundaryPlots.html">Grain Boundary Plots</a>
 </li>
-<li>
-<code class="language-plaintext highlighter-rouge"><a href="ipfHKLKey.html">ipfHKLKey</a></code>
-</li>
-<li>
-<code class="language-plaintext highlighter-rouge"><a href="BungeColorKey.html">BungeColorKey</a></code>
-</li>
-<li>
-<code class="language-plaintext highlighter-rouge"><a href="PatalaColorKey.PatalaColorKey.html">PatalaColorKey</a></code>
-</li>
-<li>
-<code class="language-plaintext highlighter-rouge"><a href="axisAngleColorKey.html">axisAngleColorKey</a></code>
-</li>
-<li>
-<code class="language-plaintext highlighter-rouge"><a href="spotColorKey.html">spotColorKey</a></code>
-</li>
-<li>
-<code class="language-plaintext highlighter-rouge"><a href="ipfSpotKey.html">ipfSpotKey</a></code>
-</li>
+<li> <a href="axisAngleColorKey.html"><code class="language-plaintext highlighter-rouge">axisAngleColorKey</code></a>, for deviations from a reference orientation</li>
+<li> <a href="spotColorKey.html"><code class="language-plaintext highlighter-rouge">spotColorKey</code></a> and <a href="ipfSpotKey.html"><code class="language-plaintext highlighter-rouge">ipfSpotKey</code></a>, for highlighting chosen orientations or fibres</li>
 </ul>
 </div>
-<p>In order to demonstrate these color keys we first import some toy data set.</p>
+<p>
+<a href="EBSDIPFMap.html">IPF Maps</a> develops the first three keys. <a href="EBSDSharpPlot.html">Sharp Color Keys</a> covers <code class="language-plaintext highlighter-rouge">axisAngleColorKey</code> and the fifth property above. This page compares Euler colouring with spot keys.</p>
+<p>The examples assume that the data has been <a href="EBSDImport.html">imported</a>, its <a href="EBSDReferenceFrame.html">specimen reference frame</a> has been checked, and basic <a href="EBSDPlotting.html">EBSD plotting</a> is familiar.</p>
 {% highlight matlab %}
 close all;
 plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 csFo = ebsd('Forsterite').CS;
 {% endhighlight %}
-<h2 id="2">Euler Angle Coloring</h2>
-<p>The oldest way to colorize orientations is to simply map the three Euler angles into the RGB values. This can be done by</p>
+<h2 id="2">Euler angle colouring</h2>
+<p>The Bunge key scales the three Euler angles over their fundamental ranges and uses them as the red, green, and blue channels. It retains a three-parameter description of orientation, but Euler-angle wrapping makes nearby orientations jump between distant colours.</p>
 {% highlight matlab %}
 colorKey = BungeColorKey(ebsd('Fo'));
 
 plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_01.png" %}
 </center>
+<p>Individual grains appear as flat, well-separated colours. This makes the map look decisive, but it does not reveal where the colour scale wraps. Plotting the key in its default sections also looks deceptively smooth.</p>
 {% highlight matlab %}
 plot(colorKey)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_02.png" %}
 </center>
-<p>Although this visualization looks very smooth, the orientation map using Euler angles introduces many of color jumps. This becomes obvious when plotting the colors as <a href="SigmaSections.html">sigma sections</a>, i.e., for fixed differences \(\phi_1 - \phi_2\)</p>
+<p>
+<a href="SigmaSections.html">Sigma sections</a> cut orientation space at constant \(\sigma = \varphi_1-\varphi_2\). They expose the seams hidden by the default view.</p>
 {% highlight matlab %}
 plot(colorKey,'sections',6,'sigma')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_03.png" %}
 </center>
-<h2 id="5">Coloring certain orientations</h2>
-<p>We might be interested in locating some special orientation in our orientation map. The definition of colors for certain orientations is carried out similarly as in the case of fibers</p>
+<p>Along several section edges the colour changes abruptly although the orientations remain close. Two nearly identical grains can therefore be drawn in unrelated colours. Treat such a colour edge as a property of the key until another measurement or map confirms a physical boundary.</p>
+<h2 id="6">Marking one orientation</h2>
+<p>A different question is where the map lies near one chosen orientation. A <code class="language-plaintext highlighter-rouge">spotColorKey</code> gives the centre its chosen colour and fades towards white with increasing disorientation.</p>
 {% highlight matlab %}
 colorKey = spotColorKey(ebsd('Fo'));
 colorKey.center = mean(ebsd('Forsterite').orientations,'robust');
@@ -102,42 +91,46 @@ colorKey.psi = SO3DeLaValleePoussinKernel('halfwidth',20*degree);
 
 plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
 
-% and the corresponding color-map
+% plot the corresponding key in orientation space
 figure(2)
 plot(colorKey,'sections',9,'sigma')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_04.png" %}
 </center>
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_05.png" %}
 </center>
-<p>the area of the colored EBSD data in the map corresponds to the volume portion (in percent)</p>
+<p>Blue marks orientations near the robust mean, and white marks orientations far from it. The corresponding key shows that this is a three-dimensional neighbourhood in orientation space, not a range on a single Euler angle.</p>
+<p>The 20&deg; halfwidth is where the kernel, and hence the blue saturation, falls to half its value at the centre. The fade has no hard edge. To count a specified neighbourhood, use <a href="orientation.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a> with an explicit radius.</p>
 {% highlight matlab %}
-vol = 100 * volume(ebsd('fo').orientations,colorKey.center,20*degree)
+spotPercent = 100 * volume(ebsd('fo').orientations,...
+  colorKey.center,20*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-vol =
+spotPercent =
    12.1409
 {% endhighlight %}
-<p>actually, the colored measurements stress a peak in the ODF</p>
+<p>12.1% of the indexed forsterite measurements lie within 20&deg; of the robust mean. Because this equally spaced map gives every measurement the same weight, the result is an area-weighted measurement fraction, not a bulk specimen volume fraction.</p>
+<p>A density estimate asks a related but different question. It replaces each measurement by a kernel and adds the kernels, so the result depends on the chosen 10&deg; halfwidth.</p>
 {% highlight matlab %}
-close all
+close all;
 odf = calcDensity(ebsd('fo').orientations,'halfwidth',10*degree,'silent');
 plot(odf,'sections',9,'silent','sigma')
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_06.png" %}
 </center>
-<h2 id="8">Coloring fibers</h2>
-<p>To color a fibre, one has to specify the crystal direction <code class="language-plaintext highlighter-rouge">h</code> together with its RGB color and the specimen direction <code class="language-plaintext highlighter-rouge">r</code>, which should be marked.</p>
+<p>The density plot contains a pronounced maximum in the same part of orientation space as the blue spot. It corroborates the concentration, but its peak height is a density rather than the percentage printed above. <a href="EBSD2ODF.html">ODF Estimation</a> explains the weighting and bandwidth choices.</p>
+<h2 id="10">Marking a fibre</h2>
+<p>An <a href="OrientationFibre.html">orientation fibre</a> is the set of all orientations that map one crystal direction <code class="language-plaintext highlighter-rouge">h</code> onto one specimen direction <code class="language-plaintext highlighter-rouge">r</code>. Rotation about <code class="language-plaintext highlighter-rouge">r</code> remains free, so a fibre is a one-dimensional family rather than one orientation.</p>
 {% highlight matlab %}
-% define a fibre
+% define the fibre with the crystal (111) pole parallel to the specimen normal
 f = fibre(Miller(1,1,1,csFo),zvector);
 
-% set up coloring
+% colour directions near the fibre
 colorKey = ipfSpotKey(csFo);
 colorKey.ipfDirection = f.r;
 colorKey.center = f.h;
@@ -146,64 +139,71 @@ colorKey.psi = S2DeLaValleePoussinKernel('halfwidth',7.5*degree);
 
 plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_07.png" %}
 </center>
-<p>the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code> controls half of the intensity of the color at a given distance. Here we have chosen the (111)[001] fibre to be drawn in blue, and at 7.5 degrees, where the blue should be only lighter.</p>
+<p>The blue grains have their crystal \((111)\) pole near the specimen normal. This key measures angular distance in the inverse pole figure, so it ignores the free rotation about the normal exactly as the fibre does.</p>
 {% highlight matlab %}
 plot(colorKey)
-hold on
+
 circle(f.h.project2FundamentalRegion,15*degree,'linewidth',2)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_08.png" %}
 </center>
-<p>the percentage of blue colored area in the map is equivalent to the fibre volume</p>
+<p>The kernel halfwidth is 7.5&deg;, where the blue saturation has fallen by half. The circle is deliberately larger: it marks the 15&deg; radius used for the hard count below. The colour continues to fade outside the circle.</p>
 {% highlight matlab %}
-vol = volume(ebsd('fo').orientations,f,15*degree)
-
-plotIPDF(ebsd('fo').orientations,zvector,'markercolor','k','marker','x','points',200)
+fibrePercent = 100 * volume(ebsd('fo').orientations,f,15*degree)
+hold on
+plot(ebsd('fo').orientations,'markercolor','k',...
+  'MarkerSize',10,'points',1000,'MarkerAlpha',0.2)
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-vol =
-    0.2480
-  I'm plotting 200 random orientations out of 152345 given orientations
+fibrePercent =
+   24.8009
+  I'm plotting 1000 random orientations out of 152345 given orientations
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_09.png" %}
 </center>
-<p>we can easily extend the color-coding</p>
+<p>24.8% of the indexed forsterite measurements have their \((111)\) pole within 15&deg; of the specimen normal. The black dots are a random sample of the measured inverse pole figure directions.</p>
+<p>The circle covers 13.5% of the fundamental sector, so 24.8% of the measurements inside it is an enrichment of 1.8 times. That enrichment is what the count reports. Smoothed with the same 7.5&deg; kernel the blue centre reaches 1.8 mrd, while the maximum of the sector, 3.4 mrd, lies about 20&deg; away and outside the circle. A fibre count therefore answers how much of the map lies near the chosen direction, and leaves the question of which direction is preferred to a density.</p>
+<h2 id="14">Marking several fibres</h2>
+<p>Several crystal directions can be highlighted at once. Each centre needs one RGB row in <code class="language-plaintext highlighter-rouge">colorKey.color</code>.</p>
 {% highlight matlab %}
-% the centers in the inverse pole figure
-colorKey.center = Miller({0 0 1},{0 1 1},{1 1 1},{11 4 4},{5 0 2},{5 5 2},csFo);
+% centres in the inverse pole figure
+colorKey.center = Miller({0 0 1},{0 1 1},{1 1 1},{11 4 4},{5 0 2},...
+  {5 5 2},csFo);
 
-% the corresponding colors
+% one colour for each centre
 colorKey.color = [[1 0 0];[0 1 0];[0 0 1];[1 0 1];[1 1 0];[0 1 1]];
 
-% plot the key
 plot(colorKey)
 hold on
-plot(ebsd('fo').orientations,'MarkerFaceColor','none','MarkerEdgeColor','k','MarkerSize',3,'points',1000)
+plot(ebsd('fo').orientations,'MarkerFaceColor','none',...
+  'MarkerEdgeColor','k','MarkerSize',5,'points',5000,'MarkerAlpha',0.2)
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 1000 random orientations out of 152345 given orientations
+I'm plotting 5000 random orientations out of 152345 given orientations
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_10.png" %}
 </center>
+<p>The key contains six coloured lobes, and the black measurements show which lobes the data occupies. This is not a nearest-centre classification. Every centre contributes its fading kernel, so nearby lobes blend where they overlap and orientations far from all centres remain pale.</p>
 {% highlight matlab %}
 close all;
 plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_11.png" %}
 </center>
-<h2 id="13">Combining different plots</h2>
-<p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code>. Note that the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> requires the renderer of the figure to be set to <code class="language-plaintext highlighter-rouge">'opengl'</code>.</p>
+<p>The map now locates six fibre components at once. Compare a pixel with the key to identify the contributing crystal direction; do not read the colour as a complete orientation.</p>
+<h2 id="17">Combining two maps in one figure</h2>
+<p>A highlighted component is easier to place when the microstructure remains visible underneath it. Draw band contrast first, then add the spot colours with the <a href="EBSD.plot.html"><code class="language-plaintext highlighter-rouge">FaceAlpha</code></a> option.</p>
 {% highlight matlab %}
 close all;
 plot(ebsd,ebsd.bc,'micronbar','off')
@@ -216,12 +216,25 @@ colorKey.color = [0 0 1];
 colorKey.psi = S2DeLaValleePoussinKernel('halfwidth',7.5*degree);
 
 hold on
-plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations),'FaceAlpha',0.5)
+plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations),...
+  'FaceAlpha',0.5)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAdvancedMaps_12.png" %}
 </center>
+<p>Blue locates the forsterite measurements near the selected fibre. The grey band-contrast layer keeps boundaries and pattern-quality structure visible. Transparency changes only the rendering; it does not change the EBSD data or the angular selection.</p>
+<h2 id="19">Choosing the key</h2>
+<p>Use a Bunge key only when retaining all three Euler parameters matters, and check its seams before interpreting a colour edge. Use a spot key to locate one orientation and an IPF spot key to locate a fibre. Use <code class="language-plaintext highlighter-rouge">volume</code> for a hard angular count and an ODF for a smoothed density estimate.</p>
+<p>Small intragranular changes need a reference-based key rather than a global one; <a href="EBSDSharpPlot.html">Sharp Color Keys</a> develops that case. The following pages turn from display to measurements of local lattice rotation: <a href="EBSDKAM.html">KAM</a> compares neighbouring pixels, while <a href="EBSDGROD.html">Mis2Mean / GROD</a> compares each pixel with its grain reference orientation.</p>
+<h2 id="20">Further reading</h2>
+<div>
+<ul>
+<li>G. Nolze and R. Hielscher, <a href="https://doi.org/10.1107/S1600576716012942">Orientations - perfectly colored</a>, <i>Journal of Applied Crystallography</i> 49, 1786-1802, 2016, explains continuity, uniqueness, and symmetry trade-offs in IPF keys.</li>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, 1982, develops Euler-angle orientation space, orientation fibres, and texture components.</li>
+<li>S. Patala, J. K. Mason, and C. A. Schuh, <a href="https://doi.org/10.1016/j.pmatsci.2012.04.002">Improved representations of misorientation information for grain boundary science and engineering</a>, <i>Progress in Materials Science</i> 57, 1383-1425, 2012, develops the misorientation colouring implemented by <code class="language-plaintext highlighter-rouge">PatalaColorKey</code>.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

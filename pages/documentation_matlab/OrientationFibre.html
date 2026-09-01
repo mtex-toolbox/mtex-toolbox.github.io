@@ -1,5 +1,5 @@
 ---
-title: "Fibres of Orientations"
+title: 'Fibres of Orientations'
 
 sidebar: documentation_sidebar
 permalink: OrientationFibre.html
@@ -23,215 +23,277 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A fibre is a curve through orientation space, stored as a single variable of type <a href="fibre.fibre.html"><code class="language-plaintext highlighter-rouge">&lt;fibre.fibre.html fibre&gt;</code></a>. Fibres matter because many real textures are not a point but a line: all orientations that put one crystal direction along one specimen direction, with the rotation about it left free. The rolling textures of cubic metals are described almost entirely in these terms.</p>
-<p>To see how one is built, take the <code class="language-plaintext highlighter-rouge">cube</code> and the <code class="language-plaintext highlighter-rouge">goss</code> orientation</p>
+<p>A <b>fibre</b> is a one-dimensional curve through orientation space. Every orientation on a full fibre maps one fixed crystal direction <code class="language-plaintext highlighter-rouge">h</code> onto one fixed specimen direction <code class="language-plaintext highlighter-rouge">r</code> while leaving rotation about that direction free. MTEX stores the curve as a <a href="fibre.fibre.html"><code class="language-plaintext highlighter-rouge">&lt;fibre.fibre.html fibre&gt;</code></a> variable.</p>
+<p>Many real textures concentrate around a line rather than one ideal orientation. Rolling textures of cubic metals are therefore commonly described by named fibres. A real texture has a finite spread around the curve; the curve itself is the ideal centreline.</p>
+<p>This page assumes <a href="OrientationDefinition.html">orientation construction</a>, <a href="OrientationSymmetry.html">symmetry-equivalent orientations</a>, and <a href="OrientationFundamentalRegion.html">the fundamental region</a>. The Cube and Goss components below are introduced in <a href="OrientationStandard.html">Standard Orientations</a>.</p>
+<p>A <b>reference frame</b> is the coordinate system in which data are expressed. The plotting convention below lays specimen Y upward and specimen X to the right. It changes only the screen layout, not the orientations.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
+
 % define crystal and specimen symmetry
 cs = crystalSymmetry('432');
 ss = specimenSymmetry('1');
 
-% and two orientations
+% define two ideal orientations
 ori1 = orientation.cube(cs,ss);
 ori2 = orientation.goss(cs,ss);
+
+% select the representative of Goss nearest to Cube
+ori2 = ori2.project2FundamentalRegion(ori1);
 {% endhighlight %}
-<p>and then the fibre connecting both orientations</p>
+<h2 id="2">A Fibre Segment Between Two Orientations</h2>
+<p>The endpoint constructor joins two orientation representatives by their shortest angular path. The result is a finite segment, not yet the full closed fibre.</p>
 {% highlight matlab %}
-f = fibre(ori1,ori2)
+segmentFibre = fibre(ori1,ori2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = fibre (432 → y↓→x)
+segmentFibre = fibre (432 → y↑→x)
  
   h || r: (100) || (1,0,0)
  o1 → o2: (0°,0°,0°) → (0°,45°,0°)
 {% endhighlight %}
-<p>Finally we plot everything into the Euler space</p>
+<p>The summary identifies the aligned directions in its <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">r</code> row. Its endpoint row runs from Cube at \((0^\circ,0^\circ,0^\circ)\) to Goss at \((0^\circ,45^\circ,0^\circ)\) in Bunge Euler angles. Both endpoints, and every orientation <code class="language-plaintext highlighter-rouge">ori</code> between them, satisfy</p>
+<p>\[ \mathtt{ori} * h = r. \]</p>
+<p>The two directions belong to different reference frames: <code class="language-plaintext highlighter-rouge">h</code> is in the crystal frame and <code class="language-plaintext highlighter-rouge">r</code> is in the specimen frame.</p>
+<h2 id="4">The Segment in Euler Space</h2>
+<p>The default three-dimensional orientation plot uses Bunge Euler coordinates.</p>
 {% highlight matlab %}
-% plot the fibre
-plot(f,'DisplayName','Fibre','linewidth',4,'linecolor','green')
-
-% and on top of it the orientations
+plot(segmentFibre,'DisplayName','Fibre segment',...
+  'lineWidth',4,'lineColor','green');
 hold on
-plot(ori1,'DisplayName','CUBE','MarkerSize',12,'MarkerFaceColor','darkred','MarkerEdgeColor','k')
-plot(ori2,'DisplayName','GOSS','MarkerSize',12,'MarkerFaceColor','blue','MarkerEdgeColor','k')
+plot(ori1,'DisplayName','Cube','MarkerSize',12,...
+  'MarkerFaceColor','darkred','MarkerEdgeColor','k');
+plot(ori2,'DisplayName','Goss','MarkerSize',12,...
+  'MarkerFaceColor','blue','MarkerEdgeColor','k');
 hold off
-legend('Location','northwest')
+legend('Location','northwest');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFibre_01.png" %}
 </center>
-<p>The green line runs from the one orientation to the other - it is the shortest path between them, the orientation space equivalent of a straight line. The same fibre in axis angle space:</p>
+<p>The green line runs from the dark-red Cube marker to the blue Goss marker. It looks straight because only \(\Phi\) changes for this pair. In general, a shortest angular path need not look straight in Euler coordinates.</p>
+<h2 id="6">The Same Segment in Axis--Angle Space</h2>
 {% highlight matlab %}
-% plot the fibre
-plot(f,'linecolor','green','linewidth',6,'axisAngle')
-
-% and on top of it the orientations
+plot(segmentFibre,'lineColor','green','lineWidth',6,'axisAngle');
 hold on
-plot(ori1,'MarkerFaceColor','darkred','MarkerSize',15,'axisAngle')
-plot(ori2,'MarkerFaceColor','blue','MarkerSize',15)
+plot(ori1,'MarkerFaceColor','darkred','MarkerSize',15,'axisAngle');
+plot(ori2,'MarkerFaceColor','blue','MarkerSize',15,'axisAngle');
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFibre_02.png" %}
 </center>
-<p>What is drawn so far is only the segment between the two orientations. Orientation space has no boundary, so continuing along the curve brings it back to where it started: a full fibre is a circle through the two orientations. That is the option <code class="language-plaintext highlighter-rouge">'full'</code>.</p>
+<p>This is the same orientation-space segment in different coordinates. The endpoints and angular distances have not changed. Only the coordinate map used to draw them has changed.</p>
+<h2 id="8">Extending the Segment to a Full Fibre</h2>
+<p>The option <code class="language-plaintext highlighter-rouge">'full'</code> discards the finite endpoint and continues through every rotation about the aligned direction.</p>
 {% highlight matlab %}
-f = fibre(ori1,ori2,'full')
-
-hold on
-plot(f,'linecolor','gold','linewidth',3,'project2FundamentalRegion')
-hold off
+fullFibre = fibre(ori1,ori2,'full')
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = fibre (432 → y↓→x)
+fullFibre = fibre (432 → y↑→x)
  
   h || r: (100) || (1,0,0)
 {% endhighlight %}
-<center>
+<p>The <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">r</code> row is unchanged, while the endpoint row has disappeared. Orientation space itself has no boundary, so the full fibre closes into a circle. Coordinate domains and symmetry-reduced fundamental regions do have seams and boundaries, however, and can cut that circle into arcs.</p>
+{% highlight matlab %}
+hold on
+plot(fullFibre,'lineColor','gold','lineWidth',3,...
+  'project2FundamentalRegion','axisAngle');
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFibre_03.png" %}
 </center>
-<h2 id="6">Fibres in Pole Figures and Inverse Pole Figures</h2>
-<p>Everything that can be plotted for orientations can be plotted for fibres, <a href="OrientationPoleFigure.html">pole figures</a> and <a href="OrientationInversePoleFigure.html">inverse pole figures</a> included, through <a href="fibre.plotPDF.html"><code class="language-plaintext highlighter-rouge">plotPDF</code></a> and <a href="fibre.plotIPDF.html"><code class="language-plaintext highlighter-rouge">plotIPDF</code></a>. A fibre becomes a curve rather than a point in each of them.</p>
+<p>The gold curve continues the green segment to the faces of the cubic fundamental region. Its boundary points reconnect through symmetry-equivalent faces, so this boundary-to-boundary line represents one closed fibre.</p>
+<h2 id="11">Fibres in Pole Figures</h2>
+<p>Everything that can be plotted for orientations can also be plotted for fibres. <a href="fibre.plotPDF.html"><code class="language-plaintext highlighter-rouge">plotPDF</code></a> maps the fibre into <a href="OrientationPoleFigure.html">pole figures</a>, where one orientation becomes a point and a fibre becomes a curve.</p>
 {% highlight matlab %}
-plotPDF(f,Miller({1,1,0},{1,1,1},cs),'linewidth',3,'lineColor','orange')
+h = Miller({1,1,0},{1,1,1},cs);
+plotPDF(fullFibre,h,'lineWidth',3,'lineColor','orange');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFibre_04.png" %}
 </center>
-<p>One difference to orientation plots matters: a fibre is <b>not</b> automatically symmetrised, so the plot above shows one curve where a symmetrised orientation would have shown all its equivalents. Asking for them is <a href="fibre.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a>.</p>
+<p>Each panel contains one trace from the representative fibre. A trace may meet a projection boundary, but it still represents one continuous set of orientations.</p>
+<h2 id="13">Symmetrising a Fibre</h2>
+<p>Unlike an orientation pole-figure plot, a fibre is not automatically symmetrised. <a href="fibre.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a> generates the crystallographically equivalent fibres. The <code class="language-plaintext highlighter-rouge">'unique'</code> option removes repeated copies.</p>
 {% highlight matlab %}
-plotPDF(f.symmetrise,Miller({1,1,0},{2,1,0},{1,1,1},cs),'linewidth',3,'lineColor','orange')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="OrientationFibre_05.png" %}
-</center>
-<p>Inverse pole figures are by default restricted to the fundamental sector. You may use the option <code class="language-plaintext highlighter-rouge">'complete'</code> to plot the entire sphere.</p>
-{% highlight matlab %}
-% an inverse pole figure plot
-r = [vector3d(1,1,0),vector3d(2,1,0),vector3d(1,1,1)];
-plotIPDF(f.symmetrise,r,'linewidth',3,'lineColor','orange')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="OrientationFibre_06.png" %}
-</center>
-<h2 id="9">Defining a Fibre by Directions</h2>
-<p>Alternatively, a fibre can also be defined by a pair of a crystal and a specimen direction. In this case it consists of all orientations that align the crystal direction with the specimen direction. As an example, the following fibre contains all orientations for which the c-axis \([001]\) is parallel to the specimen Z axis.</p>
-{% highlight matlab %}
-f = fibre(Miller(0,0,1,cs,'uvw'),vector3d.Z)
-
-plot(f,'linecolor','gold','linewidth',4,'project2FundamentalRegion','axisAngle')
+symFibre = fullFibre.symmetrise('unique');
+symmetryCopyCount = length(symFibre)
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = fibre (432 → y↓→x)
+symmetryCopyCount =
+     6
+{% endhighlight %}
+<p>The six copies correspond to the six cubic equivalents of the aligned crystal direction. Plotting them adds the orange traces that were absent from the representative-only pole figures.</p>
+{% highlight matlab %}
+plotPDF(symFibre,Miller({1,1,0},{2,1,0},{1,1,1},cs),...
+  'lineWidth',3,'lineColor','orange');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationFibre_05.png" %}
+</center>
+<h2 id="15">Fibres in Inverse Pole Figures</h2>
+<p> <a href="fibre.plotIPDF.html"><code class="language-plaintext highlighter-rouge">plotIPDF</code></a> maps the fibre into <a href="OrientationInversePoleFigure.html">inverse pole figures</a>. It fixes specimen directions and draws the crystal directions found along the fibre. By default it restricts them to the fundamental sector.</p>
+{% highlight matlab %}
+r = [vector3d(1,1,0),vector3d(2,1,0),vector3d(1,1,1)];
+plotIPDF(symFibre,r,'lineWidth',3,'lineColor','orange');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationFibre_06.png" %}
+</center>
+<p>Each panel folds the symmetry copies into one fundamental sector. The orange curve is therefore the family of crystal directions that can lie along the specimen direction named above that panel.</p>
+<h2 id="17">The Complete Inverse Pole Figure</h2>
+<p>The option <code class="language-plaintext highlighter-rouge">'complete'</code> removes the fundamental-sector restriction.</p>
+{% highlight matlab %}
+plotIPDF(symFibre,vector3d.Z,'complete',...
+  'lineWidth',3,'lineColor','orange');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationFibre_07.png" %}
+</center>
+<p>The complete plot repeats the curve across the full crystal-direction sphere. Those repeated traces are symmetry equivalents, not additional input fibres.</p>
+<h2 id="19">Defining a Fibre by Directions</h2>
+<p>A <a href="Miller.Miller.html"><code class="language-plaintext highlighter-rouge">Miller</code></a> direction and a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> specimen direction define the full fibre directly. The next fibre contains every orientation that makes the crystal c-axis \([001]\) parallel to specimen Z.</p>
+{% highlight matlab %}
+cAxisFibre = fibre(Miller(0,0,1,cs,'uvw'),vector3d.Z)
+{% endhighlight %}
+
+{% highlight plaintext %}
+cAxisFibre = fibre (432 → y↑→x)
  
   h || r: [001] || (0,0,1)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="OrientationFibre_07.png" %}
-</center>
-<p>If both directions are <code class="language-plaintext highlighter-rouge">Miller</code> variables, the fibre contains all misorientations that bring the two crystal directions into alignment.</p>
-<p>Finally, a fibre can be defined by an initial orientation <code class="language-plaintext highlighter-rouge">ori1</code> and a direction <code class="language-plaintext highlighter-rouge">h</code>, i.e., all orientations <code class="language-plaintext highlighter-rouge">ori</code> of this fibre satisfy</p>
+<p>The summary states that [001] is parallel to (0,0,1). The directions are shown in crystal and specimen coordinates, respectively.</p>
 {% highlight matlab %}
-ori * h = ori1 * h
+plot(cAxisFibre,'lineColor','gold','lineWidth',4,...
+  'project2FundamentalRegion','axisAngle');
 {% endhighlight %}
-<p>The following code defines a fibre that passes through the cube orientation and rotates about the \([111]\) axis.</p>
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationFibre_08.png" %}
+</center>
+<p>The gold line is the symmetry-reduced image of every possible rotation about the aligned c-axis. Its two boundary ends continue into one another, so it represents one full fibre rather than one finite segment.</p>
+<p>If both constructor directions are <code class="language-plaintext highlighter-rouge">Miller</code> variables, the fibre instead contains all misorientations that bring one crystal direction into alignment with the other.</p>
+<h2 id="22">A Fibre Through One Orientation</h2>
+<p>An initial orientation <code class="language-plaintext highlighter-rouge">ori1</code> and a crystal direction <code class="language-plaintext highlighter-rouge">h</code> define all orientations that preserve the mapped direction of <code class="language-plaintext highlighter-rouge">ori1</code>:</p>
+<p>\[ \mathtt{ori} * h = \mathtt{ori1} * h. \]</p>
+<p>The following full fibre passes through Cube and rotates about its \([111]\) axis.</p>
 {% highlight matlab %}
-f = fibre(ori1,Miller(1,1,1,cs,'uvw'))
-
-plot(f,'linecolor','darkred','linewidth',4,'project2FundamentalRegion','axisAngle')
+cube111Fibre = fibre(ori1,Miller(1,1,1,cs,'uvw'))
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = fibre (432 → y↓→x)
+cube111Fibre = fibre (432 → y↑→x)
  
   h || r: [111] || (1,1,1)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="OrientationFibre_08.png" %}
-</center>
-<h2 id="11">Predefined Fibres</h2>
-<p>The fibres of rolling texture have names, as the components do - alpha, beta, gamma, epsilon, eta, tau and theta - and MTEX has them built in.</p>
+<p>Its summary reports that [111] is parallel to (1,1,1). Cube maps this crystal direction onto the same specimen direction.</p>
 {% highlight matlab %}
-ss = specimenSymmetry('orthorhombic');
-beta = fibre.beta(cs,ss,'full')
+plot(cube111Fibre,'lineColor','darkred','lineWidth',4,...
+  'project2FundamentalRegion','axisAngle');
 {% endhighlight %}
-
-{% highlight plaintext %}
-beta = fibre (432 → y↓→x (mmm))
- 
-  h || r: (12 6 11) || (-1,-1,4)
-{% endhighlight %}
-<p>An overview of all of them, for cubic crystal and orthorhombic specimen symmetry:</p>
-{% highlight matlab %}
-plot(fibre.alpha(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(1),'DisplayName','alpha')
-hold on
-plot(fibre.beta(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(2),'DisplayName','beta')
-plot(fibre.gamma(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(3),'DisplayName','gamma')
-plot(fibre.epsilon(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(4),'DisplayName','epsilon')
-plot(fibre.eta(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(5),'DisplayName','eta')
-plot(fibre.tau(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(6),'DisplayName','tau')
-plot(fibre.theta(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(7),'DisplayName','theta')
-hold off
-legend('Location','best')
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFibre_09.png" %}
 </center>
-<h2 id="13">Fibre ODFs</h2>
-<p>A fibre is a curve of zero volume, and a real texture is a spread around one. <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a> turns the curve into a density with a given halfwidth, which is what a measurement is fitted against.</p>
+<p>The dark-red curve passes through the Cube orientation at zero angle. Its ends meet the boundary at symmetry-equivalent continuations of the curve.</p>
+<p> <a href="fibre.orientation.html"><code class="language-plaintext highlighter-rouge">orientation</code></a> samples a fibre for numerical work. <a href="fibre.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> measures the angular distance from an orientation to its nearest point on a fibre. Their geometric use without crystal symmetry is developed in <a href="RotationFibre.html">Fibres in Rotation Space</a>.</p>
+<h2 id="25">Predefined Rolling Fibres</h2>
+<p>Cubic rolling textures have named segments, as their ideal components do: alpha, beta, gamma, epsilon, eta, tau, and theta. MTEX provides each as a static <code class="language-plaintext highlighter-rouge">fibre</code> constructor. These names assume the conventional rolling frame and orthorhombic specimen symmetry.</p>
 {% highlight matlab %}
-odf = fibreODF(beta,'halfwidth',10*degree)
-
-% and plot it in 3d
-plot3d(odf)
-
-% this adds the fibre to the plots
+ss = specimenSymmetry('orthorhombic');
+beta = fibre.beta(cs,ss);
+{% endhighlight %}
+<p>Plot the conventional endpoint segment returned by each constructor. Passing <code class="language-plaintext highlighter-rouge">'full'</code> would extend that segment around its entire direction-pair circle.</p>
+{% highlight matlab %}
+plot(fibre.alpha(cs,ss),'lineWidth',3,...
+  'lineColor',ind2color(1),'DisplayName','alpha');
 hold on
-plot(beta.symmetrise,'lineColor','b','linewidth',4)
+plot(fibre.beta(cs,ss),'lineWidth',3,...
+  'lineColor',ind2color(2),'DisplayName','beta');
+plot(fibre.gamma(cs,ss),'lineWidth',3,...
+  'lineColor',ind2color(3),'DisplayName','gamma');
+plot(fibre.epsilon(cs,ss),'lineWidth',3,...
+  'lineColor',ind2color(4),'DisplayName','epsilon');
+plot(fibre.eta(cs,ss),'lineWidth',3,...
+  'lineColor',ind2color(5),'DisplayName','eta');
+plot(fibre.tau(cs,ss),'lineWidth',3,...
+  'lineColor',ind2color(6),'DisplayName','tau');
+plot(fibre.theta(cs,ss),'lineWidth',3,...
+  'lineColor',ind2color(7),'DisplayName','theta');
 hold off
+legend('Location','best');
 {% endhighlight %}
-
-{% highlight plaintext %}
-odf = SO3FunCBF (432 → y↓→x (mmm))
- 
-  kernel: de la Vallee Poussin, halfwidth 10°
-  fibre : (12 6 11) || -1,-1,4
-  weight: 1
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFibre_10.png" %}
 </center>
-<h2 id="14">An ODF Along a Fibre</h2>
-<p>An ODF can also be evaluated along a fibre and plotted as a curve, here the beta fibre ODF read along the eta fibre.</p>
+<p>The coloured curves occupy different routes through Euler space and meet at some shared ideal components. Each colour marks only the conventional named segment, not every point on its full direction-pair circle.</p>
+<h2 id="28">Fibre ODFs</h2>
+<p>A fibre is a curve of zero orientation-space volume, while a real texture has a spread around one. <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a> turns the full curve into a density with a given halfwidth. This is the model fitted against a measurement.</p>
 {% highlight matlab %}
-plot(odf,fibre.eta(cs,ss),'linewidth',2)
+betaFull = fibre.beta(cs,ss,'full');
+odf = fibreODF(betaFull,'halfwidth',10*degree);
 {% endhighlight %}
-<center>
+<p>The result is an <code class="language-plaintext highlighter-rouge">SO3FunCBF</code> with a de la Vall&eacute;e Poussin kernel. Its \(10^\circ\) halfwidth is the distance where the density has fallen to half its peak, not a cutoff radius. The density is constant along the ideal fibre and decays away from it.</p>
+{% highlight matlab %}
+plot3d(odf);
+hold on
+plot(betaFull.symmetrise,...
+  'lineColor','blue','lineWidth',4);
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFibre_11.png" %}
 </center>
-<h2 id="15">The Volume Around a Fibre</h2>
-<p> <a href="SO3Fun.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a> measures how much of an ODF lies within a tube of given radius about a fibre - the number quoted when a texture is reported as "so many percent beta fibre".</p>
+<p>The blue curves are the ideal centrelines. The surrounding surface is the finite-width density, so it forms a tube rather than a line.</p>
+<h2 id="31">Evaluating an ODF Along a Fibre</h2>
+<p> <a href="SO3Fun.plotFibre.html"><code class="language-plaintext highlighter-rouge">plotFibre</code></a> evaluates an ODF along a chosen curve. Here the beta-fibre ODF is read along the eta fibre.</p>
 {% highlight matlab %}
-100 * volume(odf,beta,5*degree)
+plotFibre(odf,fibre.eta(cs,ss),'lineWidth',2);
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationFibre_12.png" %}
+</center>
+<p>The vertical axis is density in multiples of a random distribution. The broad maximum marks the part of the eta segment closest to the beta-fibre ridge.</p>
+<h2 id="33">The Volume Around a Fibre</h2>
+<p> <a href="SO3Fun.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a> integrates the ODF inside a tube of a given angular radius about a fibre. This is the quantity meant when a texture is reported as "so many percent beta fibre".</p>
+{% highlight matlab %}
+volume5Percent = 100 * volume(odf,betaFull,5*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+volume5Percent =
    58.0557
 {% endhighlight %}
-<p>58 percent of this ODF lies within 5 degree of the fibre it was built on, and within 10 degree it is the whole of it, to the precision printed.</p>
+<p>The result is about 58 percent within \(5^\circ\) of the fibre it was built on. At the \(10^\circ\) kernel halfwidth, the numerical tube integral reaches unity.</p>
 {% highlight matlab %}
-100 * volume(odf,beta,10*degree)
+volume10Percent = 100 * volume(odf,betaFull,10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+volume10Percent =
    100
 {% endhighlight %}
-<h2 id="17">Next</h2>
-<p>Fibres of plain rotations, without a crystal symmetry, are <a href="RotationFibre.html">Fibres</a>. Fibre ODFs and the rest of the model textures are <a href="FibreODFs.html">Fibre ODFs</a>.</p>
+<p>The second result is 100 percent to the precision printed. It does not mean the ODF is a zero-width line or vanishes at \(10^\circ\). <a href="SO3Fun.fibreVolume.html"><code class="language-plaintext highlighter-rouge">fibreVolume</code></a> discretises the tube and clips its numerical estimate at 1, so the displayed percentage can be exactly 100.</p>
+<h2 id="36">The Maths Behind Pole Figures</h2>
+<p>Let \(f(g)\) be an ODF, \(h\) a crystal direction, and \(r\) a specimen direction. The pole density at \(r\) is</p>
+<p>\[ P_h(r) = \int_{\{g:\,g h=r\}} f(g)\,\mathrm{d}g. \]</p>
+<p>The integration set is exactly the full orientation fibre defined by <code class="language-plaintext highlighter-rouge">g * h = r</code>. This crystallographic Radon transform connects the geometry on this page to measured pole figures and ODF reconstruction; see the <a href="PoleFigureTutorial.html">pole figure tutorial</a>.</p>
+<h2 id="37">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, 1982. Chapter 5 develops fibre textures and their orientation distributions.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004. This book develops rotation-space geometry and symmetry-reduced regions.</li>
+<li>O. Engler and V. Randle, <a href="https://doi.org/10.1201/9781420063660">Introduction to Texture Analysis</a>, CRC Press, 2nd ed., 2010. It connects ideal components and fibres to measured macrotexture and microtexture.</li>
+<li>L. A. I. Kestens and H. Pirgazi, <a href="https://doi.org/10.1080/02670836.2016.1231746">Texture formation in metal alloys with cubic crystal structures</a>, <i>Materials Science and Technology</i> 32 (2016). This review discusses the named rolling fibres of cubic alloys.</li>
+<li>
+<a href="https://www.iso.org/standard/82165.html">ISO 3785:2023</a>, <i>Metallic materials -- Designation of test specimen axes in relation to product texture</i>, standardises the specimen-axis language used for rolled products.</li>
+</ul>
+</div>
+<h2 id="38">Next</h2>
+<p>Fibres of plain rotations, without crystal symmetry, are <a href="RotationFibre.html">Fibres in Rotation Space</a>. Density models, halfwidth, and fitting are developed in <a href="FibreODFs.html">Fibre ODFs</a>. Pole-figure integration over fibres continues in <a href="ODFPoleFigure.html">Pole Figures of an ODF</a>.</p>
 </div>
 </body>
 </html>

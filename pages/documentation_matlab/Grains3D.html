@@ -1,5 +1,5 @@
 ---
-title: "3D Grains"
+title: 'Three-Dimensional Grains'
 
 sidebar: documentation_sidebar
 permalink: Grains3D.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>3D Grains</title>
+<title>Three-Dimensional Grains</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_Grains3D.m">
 </head>
@@ -22,32 +22,47 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>In EBSD grain segmentation, a grain is a phase-homogeneous, spatially connected region of pixels produced by segmentation. In three dimensions, MTEX represents its counterpart by the faces of a closed polyhedron and stores a collection as a <a href="grain3d.grain3d.html">grain3d</a> object. The faces provide the geometry; phase and mean orientation describe the material inside each polyhedron.</p>
+<p>This page follows one collection from import through selection, sectioning, and inspection of its boundary normals. The following pages explain the <a href="NeperInterface.html">Neper workflow</a>, <a href="Grains3DProperties.html">geometric properties</a>, and <a href="Grains3DOperations.html">operations on three-dimensional grains</a> in detail.</p>
 <!--/introduction-->
-<p>Grains as three dimensional objects are stored in MTEX as variables of type <code class="language-plaintext highlighter-rouge"><a href="grain3d.grain3d.html">grain3d</a></code>. Basic properties and operations are described in the sections <a href="Grains3DProperties.html">Properties of Three-Dimensional Grains</a> and <a href="Grains3DOperations.html">Operations with Three-Dimensional Grains</a>.</p>
-<p>In this section we discuss how to import three dimensional grains from Dream3d and Neper.</p>
-<h2 id="2">Import Grains from Dream3d</h2>
-<p>In order to import grain data we use the command <a href="grain3d.load.html"><code class="language-plaintext highlighter-rouge">grain3d.load</code></a>
-</p>
 {% highlight matlab %}
-% specify the file name
-fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
-grains = grain3d.load(fname);
-
-% for triangulated data sets it may be useful to plot them without lines
-plot(grains,grains.meanOrientation,'LineStyle','none','micronbar','off')
-
-% use a nice plotting convention
+plottingConvention.default('y↑→x');
 how2plot = plottingConvention.default3D;
+{% endhighlight %}
+<h2 id="2">Import a DREAM.3D surface mesh</h2>
+<p> <a href="grain3d.load.html"><code class="language-plaintext highlighter-rouge">grain3d.load</code></a> reads a DREAM.3D triangle mesh into a <a href="grain3d.grain3d.html">grain3d</a> collection. A voxel-only file does not contain the boundary faces needed for this representation.</p>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
+grains = grain3d.load(fname)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain3d (y↑→x)
+ 
+ Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
+     2     794   15625  unknown       432                         
+ 
+ boundary faces: 757564
+ 
+ Properties: meanRotation
+{% endhighlight %}
+<h2 id="3">Read the imported microstructure</h2>
+<p>The command-window summary reports the phases, number of grains, total volume, boundary faces, and attached properties. The example contains 794 grains. Plotting the mean orientation assigns one orientation colour to each polyhedron; it does not display pointwise orientation variation.</p>
+{% highlight matlab %}
+plot(grains,grains.meanOrientation,'LineStyle','none','micronbar','off')
 setCamera(how2plot)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3D_01.png" %}
 </center>
-<p>Dream3d stores the boundary faces with an arbitrary winding, i.e., the normal computed from the vertex order points randomly into or out of the grain. MTEX therefore runs <a href="grain3d.orientFaces.html"><code class="language-plaintext highlighter-rouge">orientFaces</code></a> as part of the import, so that face normals, grain volumes and <code class="language-plaintext highlighter-rouge">boundary.grainId</code> are directly usable. Should you need the raw winding as stored in the file, switch this off with</p>
+<p>The colour changes sharply at grain faces, while suppressing mesh lines makes the outer shape of the reconstructed volume easier to see.</p>
+<h2 id="5">Why face winding matters</h2>
+<p>A face normal is perpendicular to one boundary face. Its sign follows from the order of the face vertices, called the face winding. DREAM.3D stores faces with arbitrary winding, so the stored normal may point into or out of a grain.</p>
+<p>By default, the importer calls <a href="grain3d.orientFaces.html"><code class="language-plaintext highlighter-rouge">orientFaces</code></a>. MTEX then uses <code class="language-plaintext highlighter-rouge">I_GF</code> to record which direction is outward for each grain. This makes signed volumes and <code class="language-plaintext highlighter-rouge">boundary.grainId</code> directly usable. Request the raw DREAM.3D winding only when that order is itself needed.</p>
 {% highlight matlab %}
 grainsRaw = grain3d.load(fname,'noOrientFaces');
 {% endhighlight %}
-<p>Without oriented faces, more than half of the grains of this data set come out with a negative volume, since their normals point inwards</p>
+<p>The first value below counts negative raw volumes; the second checks the oriented import. Before orientation, 419 of the 794 grains have negative volume because their corresponding normals point inwards.</p>
 {% highlight matlab %}
 [nnz(grainsRaw.volume < 0), nnz(grains.volume < 0)]
 {% endhighlight %}
@@ -56,9 +71,9 @@ grainsRaw = grain3d.load(fname,'noOrientFaces');
 ans =
    419     0
 {% endhighlight %}
-<p>Similarly as with two dimensional grains we can select individual grains by arbitrary constraints. For instance we can find the largest grain by</p>
+<h2 id="7">Select a grain</h2>
+<p>A collection can be indexed by any logical condition. The following code finds the array position of the largest grain and then plots that grain. Grain IDs and array positions can differ after subsetting, so use an ID query when the persistent identity matters.</p>
 {% highlight matlab %}
-% index of the grain with the largest volume
 [~,id] = max(grains.volume)
 
 plot(grains(id),'edgeAlpha',0.15,'micronBar','off')
@@ -69,25 +84,22 @@ setCamera(how2plot)
 id =
    623
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3D_02.png" %}
 </center>
-<p>Slicing the 3d grains by a <a href="plane3d.plane3d.html"><code class="language-plaintext highlighter-rouge">plane</code></a> using the command <a href="grain3d.slice.html"><code class="language-plaintext highlighter-rouge">slice</code></a> results in 2d grains comparable to what can be reconstructed from 2d EBSD maps.</p>
+<p>The translucent edges expose the triangular boundary mesh of the selected polyhedron. The result is one three-dimensional grain, not a planar section.</p>
+<h2 id="9">Cut a planar section</h2>
+<p>A <a href="plane3d.plane3d.html"><code class="language-plaintext highlighter-rouge">plane3d</code></a> is defined by a normal direction and a point in the plane. <a href="grain3d.slice.html"><code class="language-plaintext highlighter-rouge">slice</code></a> intersects that plane with every grain and returns the resulting polygons as a <a href="grain2d.grain2d.html">grain2d</a> collection, comparable to what can be reconstructed from a two-dimensional EBSD map.</p>
 {% highlight matlab %}
-% define the plane by a normal direction and a point
 plane = plane3d(vector3d(1,1,1),vector3d(-20,20,-15));
-
-% compute the sliced grains
 grains2 = slice(grains,plane)
 
-% plot them
 plot(grains2,grains2.meanOrientation,'micronbar','off')
-
 setCamera(how2plot)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains2 = grain2d (y↓→x)
+grains2 = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry         Color
      2     187     187  unknown       432  LightSkyBlue
@@ -98,36 +110,54 @@ grains2 = grain2d (y↓→x)
  
  Properties: meanRotation, Id3d
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3D_03.png" %}
 </center>
-<p>It might be reasonable to adjust the plotting convention such that the normal direction <code class="language-plaintext highlighter-rouge">grains2.N</code> points out of screen.</p>
+<p>The plot contains only grains crossed by the plane. Each polygon inherits the mean orientation of its parent three-dimensional grain.</p>
+<p>For a face-on view, use a plotting convention whose out-of-screen direction is the section normal. The east direction fixes the remaining in-plane freedom.</p>
 {% highlight matlab %}
 how2plot2 = plottingConvention;
 how2plot2.outOfScreen = grains2.N;
 how2plot2.east = vector3d(1,-1,0);
-
-setCamera(how2plot2), axis off, xlabel('') , ylabel('')
+setCamera(how2plot2), axis off, xlabel(''), ylabel('')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3D_04.png" %}
 </center>
-<h2 id="8">Import Grains from Neper</h2>
+<h2 id="11">Generate a synthetic collection with Neper</h2>
 <p>
-<a href="https://neper.info">Neper</a> is a software package for the simulation of three dimensional microstructures. After installation it can be directly called by MTEX. The general workflow is explained <a href="NeperInterface.html">here</a>. Here we use it to quickly generate a copper microstructure with specific texture and specific distribution of boundary normals.</p>
+<a href="https://neper.info">Neper</a> is a package for simulating three-dimensional microstructures. After Neper is installed, MTEX can call it directly. <a href="NeperInterface.html">The next page</a> explains setup, tessellation, and importing an existing <code class="language-plaintext highlighter-rouge">.tess</code> file.</p>
+<p>This example has previously been described as copper with a specified boundary-normal distribution. The commands instead assign quartz symmetry and a fibre orientation distribution; they do not pass a boundary-normal distribution to Neper. If Neper is unavailable, the code loads the bundled quartz tessellation explicitly rather than reusing an old output file.</p>
 {% highlight matlab %}
-% set up the communication with Neper
-neper.init;
-neper.geometry = "cube(2,2,1)";
+if ispc
+  [neperStatus,~] = system('wsl neper --version');
+else
+  [neperStatus,~] = system('neper --version');
+end
+hasNeper = neperStatus == 0;
 
-% define a texture
 cs = crystalSymmetry.load('quartz.cif','color','lightblue');
 odf = fibreODF(cs.cAxis,vector3d(1,1,1));
 
 numGrains = 300;
-grains = neper.simulateGrains(numGrains,odf,'silent')
-% or you can load an existing tessellation file
-%grains = grain3d.load('allgrains.tess','CS',cs)
+
+if hasNeper
+  neper.init;
+  neper.filePath = fullfile(tempdir,'mtex-neper-doc-intro');
+  neper.geometry = "cube(2,2,1)";
+  grains = neper.simulateGrains(numGrains,odf,'silent');
+else
+  tessFile = fullfile(mtexDataPath,'Neper','my100grains.tess');
+  grains = grain3d.load(tessFile,'CS',cs);
+end
+grains
+
+% Alternatively, import an existing Neper tessellation.
+% grains = grain3d.load('allgrains.tess','CS',cs)
+
+plot(grains,grains.meanOrientation,'micronbar','off', ...
+  'faceAlpha',0.5)
+setCamera(how2plot)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -141,7 +171,7 @@ Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
 ========================================================================
 
  
-grains = grain3d (y↓→x)
+grains = grain3d (y↑→x)
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
      2     300       4   Quartz       321        X||a*, Y||b, Z||c
@@ -150,32 +180,24 @@ grains = grain3d (y↓→x)
  
  Properties: meanRotation
 {% endhighlight %}
-
-{% highlight matlab %}
-% colorize by mean orientation
-plot(grains,grains.meanOrientation,'micronbar','off','faceAlpha',0.5)
-setCamera(how2plot)
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3D_05.png" %}
 </center>
-<h2 id="10">Slicing</h2>
-<p>Let us slice this 3d data set as well</p>
+<p>The semi-transparent plot reveals grains inside the cuboid. When Neper ran, their colours follow mean orientations drawn from the fibre distribution. The bundled fallback retains the orientations stored in its file.</p>
+<h2 id="13">Slice the synthetic microstructure</h2>
+<p>The two-argument form of <code class="language-plaintext highlighter-rouge">slice</code> accepts a normal and a point directly. Here the plane is horizontal and passes through the centre of the cuboid.</p>
 {% highlight matlab %}
-% make all slices passing through the center point of the cube
-P0 = vector3d(0.5,0.5,0.5);
-
-% with normal (0,0,1)
+P0 = grains.midPoint;
 N = vector3d(0,0,1);
-
 grains_2d = grains.slice(N,P0)
 
-plot(grains_2d,grains_2d.meanOrientation,'micronbar','off','linewidth',3)
+plot(grains_2d,grains_2d.meanOrientation,'micronbar','off', ...
+  'linewidth',3)
 setCamera(how2plot)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains_2d = grain2d (y↓→x)
+grains_2d = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry         Color
      2      99      99   Quartz       321  LightSkyBlue
@@ -186,56 +208,54 @@ grains_2d = grain2d (y↓→x)
  
  Properties: meanRotation, Id3d
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3D_06.png" %}
 </center>
-<h2 id="11">Grains intersecting a slice</h2>
-<p>Using the function <a href="grain3d.intersected"><code class="language-plaintext highlighter-rouge">intersected</code></a> we can identify all grains that intersect a given plane. Lets simply add 3d the shapes of all grains intersecting the plane.</p>
+<p>The thick outlines show the polygons produced where the horizontal plane crosses the synthetic grains.</p>
+<h2 id="15">Find the grains crossed by a plane</h2>
+<p> <a href="grain3d.intersected.html"><code class="language-plaintext highlighter-rouge">intersected</code></a> returns one logical value per three-dimensional grain. Use that mask when the full polyhedra crossing a section are needed rather than only their section polygons.</p>
 {% highlight matlab %}
 isInter = grains.intersected(N,P0);
 
 hold on
-plot(grains(isInter),grains(isInter).meanOrientation,'faceAlpha',0.6,'linewidth',0.5)
-
-%[a,b,c] = grains(isInter).principalComponents;
-%plotEllipsoid(grains(isInter).centroid,a,b,c,'faceAlpha',0.5)
+plot(grains(isInter),grains(isInter).meanOrientation, ...
+  'faceAlpha',0.6,'linewidth',0.5)
 hold off
-
 setCamera(plottingConvention.default3D)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3D_07.png" %}
 </center>
-<h2 id="12">Plot the normal directions of a single grain</h2>
-<p>The following code shows how to visualize the face normals</p>
+<p>The overlaid translucent polyhedra are precisely the parents of the planar polygons. They extend above and below the slice, which distinguishes this selection from the <a href="grain2d.grain2d.html">grain2d</a> result returned by <code class="language-plaintext highlighter-rouge">slice</code>.</p>
+<p>Principal-component ellipsoids can be added when a shape summary is useful:</p>
 {% highlight matlab %}
-% multiplication with I_GF flips the boundary normals to point out of the
-% grain
+[a,b,c] = grains(isInter).principalComponents;
+plotEllipsoid(grains(isInter).centroid,a,b,c,'faceAlpha',0.5)
+{% endhighlight %}
+<h2 id="17">Plot outward normals for one grain</h2>
+<p>A shared face has only one stored normal, so that normal cannot point outwards from both adjacent grains. The corresponding row of <code class="language-plaintext highlighter-rouge">I_GF</code> contains the sign needed for the selected grain. Multiplying by that sign produces outward directions.</p>
+{% highlight matlab %}
 id = 3;
-dir = full(grains(id).I_GF(1,:)).' .* grains(id).boundary.N
+dir = full(grains(id).I_GF(1,:)).' .* grains(id).boundary.N;
 
 plot(grains(id))
 hold on
 quiver(grains(id).boundary,dir)
 hold off
+setCamera(plottingConvention.default3D)
 {% endhighlight %}
-
-{% highlight plaintext %}
-dir = vector3d (y↓→x)
- size: 8 x 1
-       x       y       z
-       1       0       0
-       0       0       1
-   -0.12   0.993 0.00632
-  -0.705  -0.128  -0.697
-  0.0244  -0.988  -0.155
-  -0.908  -0.289  -0.303
-  -0.912   0.304  -0.277
-   0.106   0.129  -0.986
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3D_08.png" %}
 </center>
+<p>The arrows point away from the selected polyhedron. They represent face normals, not the misorientation between neighbouring grain orientations.</p>
+<h2 id="19">References</h2>
+<div>
+<ul>
+<li>M. A. Groeber and M. A. Jackson, <a href="https://doi.org/10.1186/2193-9772-3-5">DREAM.3D: A Digital Representation Environment for the Analysis of Microstructure in 3D</a>, <i>Integrating Materials and Manufacturing Innovation</i> 3 (2014), 56--72, describes the data environment and surface-mesh representation used by the importer.</li>
+</ul>
+</div>
+<h2 id="20">Next</h2>
+<p>Continue with <a href="NeperInterface.html">Neper Interface</a> to configure Neper and control a synthetic tessellation. Then use <a href="Grains3DProperties.html">Properties of Three-Dimensional Grains</a> to measure the faces and polyhedra introduced here.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Defining Rotations"
+title: 'Defining Rotations'
 
 sidebar: documentation_sidebar
 permalink: RotationDefinition.html
@@ -23,211 +23,85 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A rotation is built from whichever description is at hand - three Euler angles, an axis and an angle, a matrix, a pair of directions - and MTEX converts. Whatever the input, the result is a <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">&lt;rotation.rotation.html rotation&gt;</code></a>, a list of rotations stored internally as <a href="quaternion.quaternion.html">quaternions</a>.</p>
-<p>
-   <table class="usertable">
-      <tr>
-         <td>
-               <p>
-                  <a href="rotation.byEuler.html">
-                     <tt>rotation.byEuler</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="rotation.byAxisAngle.html">
-                     <tt>rotation.byAxisAngle</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="rotation.byMatrix.html">
-                     <tt>rotation.byMatrix</tt>
-                  </a>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="rotation.byRodrigues.html">
-                     <tt>rotation.byRodrigues</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="rotation.byHomochoric.html">
-                     <tt>rotation.byHomochoric</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="rotation.rotation.html">
-                     <tt>rotation(quat)</tt>
-                  </a>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="rotation.id.html">
-                     <tt>rotation.id</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="rotation.map.html">
-                     <tt>rotation.map</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="rotation.fit.html">
-                     <tt>rotation.fit</tt>
-                  </a>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="rotation.rand.html">
-                     <tt>rotation.rand</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="SO3Fun.discreteSample.html">
-                     <tt>odf.discreteSample</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="rotation.nan.html">
-                     <tt>rotation.nan</tt>
-                  </a>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="rotation.load.html">
-                     <tt>rotation.load</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="rotation.inversion.html">
-                     <tt>rotation.inversion</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>
-                  <a href="reflection.html">
-                     <tt>reflection</tt>
-                  </a>
-               </p>
-         </td>
-      </tr>
-   </table>
-</p>
-<p>How the descriptions relate to one another, and which of them distorts distances in which way, is the subject of <a href="RotationRepresentations.html">Representations</a>.</p>
+<p>A reference frame is the coordinate system in which data are expressed. A rotation moves a geometric object within a fixed reference frame. In MTEX, <code class="language-plaintext highlighter-rouge">rot * v</code> is the active rotation that moves the direction <code class="language-plaintext highlighter-rouge">v</code>. This is different from a frame change, which describes the same object in another reference frame without moving it. Orientations use rotations as coordinate mappings, as explained in <a href="DefinitionAsCoordinateTransform.html">Crystal Orientation as Coordinate Transformation</a>.</p>
+<p>This page assumes the three-dimensional directions introduced in <a href="VectorDefinition.html">Defining Three-Dimensional Vectors</a> and basic matrix algebra.</p>
+<p>MTEX can build a rotation from Euler angles, an axis and angle, a matrix, or the action on directions. Every constructor returns a <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> array. MTEX stores its proper part internally as a <a href="quaternion.quaternion.html">unit quaternion</a>.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <h2 id="2">Euler Angles</h2>
-<p>The most common description of a rotation is as three consecutive rotations about fixed axes - first about the z axis, then about the x axis, then about z again. The three angles are the <b>Euler angles</b>.</p>
-<p>Three angles alone do not define a rotation. Which axes they turn about, and in which order, is a convention, and several are in use. Sorted by popularity in the texture analysis community they are</p>
+<p>Euler angles describe a rotation by three successive angular steps. The axes, their order, and the direction of the mapping belong to the convention. Three numbers without that convention are therefore ambiguous.</p>
+<p>Texture analysis commonly uses the following names:</p>
 <div>
 <ul>
-<li>Bunge (phi1,Phi,phi2) - ZXZ</li>
-<li>Matthies (alpha,beta,gamma) - ZYZ</li>
-<li>Roe (Psi,Theta,Phi)</li>
-<li>Kocks (Psi,Theta,phi)</li>
-<li>Canova (omega,Theta,phi)</li>
+<li>Bunge \((\varphi_1,\Phi,\varphi_2)\), with the ZXZ axis sequence</li>
+<li>Matthies \((\alpha,\beta,\gamma)\), with the ZYZ axis sequence</li>
+<li>Roe \((\Psi,\Theta,\Phi)\)</li>
+<li>Kocks \((\Psi,\Theta,\varphi)\)</li>
+<li>Canova \((\omega,\Theta,\varphi)\)</li>
 </ul>
 </div>
-<p>MTEX uses the Bunge convention by default.</p>
+<p>A new MTEX installation uses Bunge as its preference. Reusable code should name the convention so that a user's preference cannot change the input.</p>
 {% highlight matlab %}
-rot = rotation.byEuler(30*degree,50*degree,10*degree)
+rotBunge = rotation.byEuler(30*degree,50*degree,10*degree,'Bunge');
+rotRoe = rotation.byEuler(30*degree,50*degree,10*degree,'Roe');
+
+angle(rotBunge,rotRoe) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-    30   50   10
+ans =
+   69.5509
 {% endhighlight %}
-<p>Angles are radians throughout MTEX, which is why each of them is written as a multiple of <code class="language-plaintext highlighter-rouge">degree</code>. The first and the third angle are interchanged with respect to the usual notation, for the reason given in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>.</p>
-<p>A different convention is named as an additional argument. The following rotation is a different one, although the three numbers are the same.</p>
+<p>The nonzero angle confirms that equal triplets in different conventions need not describe the same rotation. Angles are radians throughout MTEX, which is why values in degrees are multiplied by <code class="language-plaintext highlighter-rouge">degree</code>.</p>
+<p>The convention used to display an existing rotation can also be named. The rotation constructed with the Roe triplet above reads</p>
 {% highlight matlab %}
-rot = rotation.byEuler(30*degree,50*degree,10*degree,'Roe')
+Euler(rotRoe,'Roe')
 {% endhighlight %}
 
 {% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-   120   50  280
-{% endhighlight %}
-<p>What convention the angles are <b>displayed</b> in is a separate question, set by <a href="setMTEXpref.html"><code class="language-plaintext highlighter-rouge">setMTEXpref</code></a> and stored permanently in <code class="language-plaintext highlighter-rouge">mtex_settings.m</code>. The same rotation reads</p>
-{% highlight matlab %}
-setMTEXpref('EulerAngleConvention','Roe')
-rot
-{% endhighlight %}
-
-{% highlight plaintext %}
-rot = rotation
- 
-  Roe Euler angles in degree
+Roe Euler angles in degree
   Psi Theta   Phi
    30    50    10
 {% endhighlight %}
 
 {% highlight matlab %}
-setMTEXpref('EulerAngleConvention','Bunge')
-rot
+Euler(rotRoe,'Bunge')
 {% endhighlight %}
 
 {% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
+Bunge Euler angles in degree
   phi1  Phi phi2
    120   50  280
 {% endhighlight %}
-<p>Same rotation, different numbers. When Euler angles are quoted without their convention, they are ambiguous - this is the single most common source of orientations that are wrong by a fixed transformation.</p>
-<h2 id="7">Axis and Angle</h2>
-<p>Every rotation turns the sphere about one axis, so an axis and an angle describe it completely.</p>
+<p>These are two descriptions of the same rotation. The separate question of which way an orientation maps coordinates is covered in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>.</p>
+<p>For interactive work, <a href="setMTEXpref.html"><code class="language-plaintext highlighter-rouge">setMTEXpref</code></a> changes the session's default Euler convention. Explicit conventions remain safer in files that must be reproducible.</p>
+<h2 id="6">Euler Angles Are Not Unique</h2>
+<p>Even after the convention is fixed, Euler angles are not always unique. In the Bunge convention, when the middle angle \(\Phi\) is zero, only the sum of the first and third angles is determined. These two triplets therefore describe the same rotation.</p>
 {% highlight matlab %}
-rot = rotation.byAxisAngle(vector3d.X,30*degree)
+rotA = rotation.byEuler(10*degree,0,20*degree,'Bunge');
+rotB = rotation.byEuler(15*degree,0,15*degree,'Bunge');
+
+angle(rotA,rotB) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-     0   30    0
+ans =
+     0
 {% endhighlight %}
-<p>Both are read back off any rotation, however it was defined.</p>
+<p>The zero angular difference is the Euler-angle singularity. It is a property of the representation, not an additional physical freedom of the rotation.</p>
+<h2 id="8">Axis and Angle</h2>
+<p>Every non-identity proper rotation in three dimensions turns about an axis. MTEX reports an angle between \(0\) and \(180^\circ\). The identity has no unique axis. At \(180^\circ\), the two signs of the axis describe the same rotation.</p>
+{% highlight matlab %}
+rot = rotation.byAxisAngle(vector3d.X,30*degree);
+{% endhighlight %}
+<p>The axis and angle can be read from any rotation, however it was defined.</p>
 {% highlight matlab %}
 rot.axis
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d (y↓→x)
+ans = vector3d (y↑→x)
   x y z
   1 0 0
 {% endhighlight %}
@@ -240,7 +114,7 @@ rot.angle ./ degree
 ans =
    30.0000
 {% endhighlight %}
-<p>Drawn, that is all a rotation is: an axis, and everything else swung about it. The blue arrow is the axis, the grey arrow a direction before the rotation and the red arrow the same direction afterwards.</p>
+<p>The following figure draws the axis in blue, a direction before the rotation in grey, and the rotated direction in red.</p>
 {% highlight matlab %}
 v = normalize(vector3d(0.2,0.3,1));
 
@@ -251,21 +125,22 @@ arrow3d(1.2*(rot*v),'faceColor','red')
 hold off
 axis off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RotationDefinition_01.png" %}
 </center>
-<h2 id="11">Rodrigues Frank Vector</h2>
-<p>The Rodrigues Frank vector packs axis and angle into a single vector: the rotational axis, scaled by \(\tan \omega/2\).</p>
+<p>Notice that the blue axis stays fixed while the red direction has turned around it. This fixed direction is the defining axis of the rotation.</p>
+<h2 id="13">Rodrigues--Frank Vector</h2>
+<p>The Rodrigues--Frank vector packs axis and angle into one vector. It is the rotation axis scaled by \(\tan(\omega/2)\).</p>
 {% highlight matlab %}
 R = rot.Rodrigues
 {% endhighlight %}
 
 {% highlight plaintext %}
-R = vector3d (y↓→x)
+R = vector3d (y↑→x)
       x     y     z
   0.268     0     0
 {% endhighlight %}
-<p>The angle is recovered from its length,</p>
+<p>Its length recovers the rotation angle.</p>
 {% highlight matlab %}
 2 * atan(norm(R)) ./ degree
 {% endhighlight %}
@@ -274,20 +149,18 @@ R = vector3d (y↓→x)
 ans =
    30.0000
 {% endhighlight %}
-<p>and the rotation from the vector.</p>
+<p>Constructing a rotation from the vector returns the original rotation, as shown by their zero angular difference.</p>
 {% highlight matlab %}
-rotation.byRodrigues(R)
+rotFromR = rotation.byRodrigues(R);
+angle(rot,rotFromR) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-     0   30    0
+ans =
+     0
 {% endhighlight %}
-<h2 id="14">Rotation Matrix</h2>
-<p>A rotation is equally a \(3 \times 3\) matrix.</p>
+<h2 id="16">Rotation Matrix</h2>
+<p>A proper rotation is also represented by an orthogonal \(3 \times 3\) matrix with determinant \(+1\).</p>
 {% highlight matlab %}
 M = rot.matrix
 {% endhighlight %}
@@ -298,111 +171,290 @@ M =
          0    0.8660   -0.5000
          0    0.5000    0.8660
 {% endhighlight %}
-<p>Its columns are where the specimen axes X, Y and Z end up after the rotation. Rotating X gives the first column of <code class="language-plaintext highlighter-rouge">M</code> back.</p>
+<p>Its columns are the rotated basis directions X, Y, and Z. Rotating Y gives the second column of <code class="language-plaintext highlighter-rouge">M</code>.</p>
 {% highlight matlab %}
-rot * vector3d.X
+rot * vector3d.Y
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d (y↓→x)
-  x y z
-  1 0 0
+ans = vector3d (y↑→x)
+  x     y     z
+  0 0.866   0.5
 {% endhighlight %}
-<p>Conversely a matrix defines a rotation.</p>
+<p> <a href="rotation.byMatrix.html"><code class="language-plaintext highlighter-rouge">rotation.byMatrix</code></a> reconstructs the rotation.</p>
 {% highlight matlab %}
-rot = rotation.byMatrix(M)
+rotFromM = rotation.byMatrix(M);
+angle(rot,rotFromM) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-     0   30    0
+ans =
+     0
 {% endhighlight %}
-<h2 id="17">Defined by What it Does</h2>
-<p>Often the rotation is not known in any parametrisation, only by what it has to achieve. Given two non-collinear pairs of directions there is exactly one rotation taking <code class="language-plaintext highlighter-rouge">u1</code> to <code class="language-plaintext highlighter-rouge">v1</code> and <code class="language-plaintext highlighter-rouge">u2</code> to <code class="language-plaintext highlighter-rouge">v2</code>.</p>
+<p>The constructor assumes that its input is orthogonal; it does not validate a matrix imported from another program. A matrix with determinant \(-1\) is accepted and stored as an improper rotation, as discussed in <a href="RotationImproper.html">Improper Rotations</a>.</p>
+<h2 id="20">Defined by What It Does</h2>
+<p>Often the rotation is known only through the directions it must map. Two non-collinear pairs determine exactly one rotation when the angle within the first pair equals the angle within the second pair.</p>
 {% highlight matlab %}
 u1 = vector3d.X; v1 = vector3d.Y;
 u2 = vector3d.Z; v2 = vector3d.Z;
 
-rot = rotation.map(u1,v1,u2,v2)
+rot = rotation.map(u1,v1,u2,v2);
+[rot*u1,rot*u2]
 {% endhighlight %}
 
 {% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-    90    0    0
+ans = vector3d (y↑→x)
+ size: 1 × 2
+  x y z
+  0 1 0
+  0 0 1
 {% endhighlight %}
-<p>This asks the impossible unless the angle between <code class="language-plaintext highlighter-rouge">u1</code> and <code class="language-plaintext highlighter-rouge">u2</code> equals the angle between <code class="language-plaintext highlighter-rouge">v1</code> and <code class="language-plaintext highlighter-rouge">v2</code>, and MTEX raises an error if it does not. Given only one pair, the rotation with the smallest angle taking the first direction to the second is returned.</p>
+<p>The output reproduces the two target directions Y and Z. MTEX raises an error if the angles within the pairs disagree or if the input directions are collinear.</p>
+<p>One pair leaves a rotation about the target direction undetermined. <a href="rotation.map.html"><code class="language-plaintext highlighter-rouge">rotation.map</code></a> then returns the smallest-angle rotation taking the first direction to the second.</p>
 {% highlight matlab %}
-rot = rotation.map(vector3d.Z,vector3d.Y)
+rot = rotation.map(vector3d.Z,vector3d.Y);
+rot * vector3d.Z
 {% endhighlight %}
 
 {% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-   180   90  180
+ans = vector3d (y↑→x)
+  x y z
+  0 1 0
 {% endhighlight %}
-<p>With more directions than a rotation can satisfy exactly - measurements, say - <a href="rotation.fit.html"><code class="language-plaintext highlighter-rouge">rotation.fit</code></a> returns the rotation for which <code class="language-plaintext highlighter-rouge">rot * left</code> is closest to <code class="language-plaintext highlighter-rouge">right</code>.</p>
+<p>For opposite directions this smallest angle is \(180^\circ\), but its axis is not unique. Supply a second pair when the particular half turn matters.</p>
+<h2 id="23">Fitting Measured Directions</h2>
+<p>More than two measured pairs will usually not agree exactly. The least-squares solution from <a href="rotation.fit.html"><code class="language-plaintext highlighter-rouge">rotation.fit</code></a> makes <code class="language-plaintext highlighter-rouge">rotFit * left</code> as close as possible to <code class="language-plaintext highlighter-rouge">right</code>.</p>
 {% highlight matlab %}
-% five random directions
 left = vector3d.rand(5);
-
-% rotate them and perturb them a little
 right = rot * left + 0.1 * vector3d.rand(1,5);
 
-rotation.fit(left,right)
+rotFit = rotation.fit(left,right);
+angle(rot,rotFit) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = rotation
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  182.717 92.0857 177.089
+ans =
+    4.5269
 {% endhighlight %}
-<p>The recovered rotation is the one used above, up to the perturbation.</p>
-<h2 id="21">Random Rotations</h2>
-<p> <a href="rotation.rand.html"><code class="language-plaintext highlighter-rouge">rotation.rand</code></a> draws rotations uniformly, which is the quickest way to try something out on data that has no structure.</p>
+<p>The nonzero error comes from the added perturbations. By default, <code class="language-plaintext highlighter-rouge">rotation.fit</code> uses Horn's unit-quaternion method. The option <code class="language-plaintext highlighter-rouge">'method','kabsch'</code> selects the Kabsch matrix method.</p>
+<h2 id="25">Random Rotations</h2>
+<p> <a href="rotation.rand.html"><code class="language-plaintext highlighter-rouge">rotation.rand</code></a> samples the uniform, or Haar, distribution on the rotation group. Its size arguments create an array of rotations, just as size arguments do for MATLAB numeric arrays.</p>
 {% highlight matlab %}
-rot = rotation.rand(100);
-
-length(rot)
+rotations = rotation.rand(100);
+length(rotations)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
    100
 {% endhighlight %}
-<p>Rotations following a given distribution rather than a uniform one are the subject of <a href="RandomSampling.html">Random Sampling</a>.</p>
-<h2 id="23">Quaternions</h2>
-<p>Finally a rotation is defined by the four quaternion coordinates it is stored in.</p>
+<p>The output confirms that the array contains 100 rotations. The <code class="language-plaintext highlighter-rouge">'maxAngle'</code> option restricts samples to a ball around the identity. Sampling from a nonuniform distribution is covered in <a href="RandomSampling.html">Random Sampling</a>.</p>
+<h2 id="27">Quaternions</h2>
+<p>A proper rotation is defined by the four coordinates of a unit quaternion. The quaternion and its negative encode the same rotation.</p>
 {% highlight matlab %}
-q = quaternion(1,0,0,0)
-
-rot = rotation(q)
+q = quaternion(0.5,0.5,0.5,0.5);
+norm(q)
 {% endhighlight %}
 
 {% highlight plaintext %}
-q = quaternion
-  a b c d
-  1 0 0 0
- 
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-     0    0    0
+ans =
+     1
 {% endhighlight %}
-<p>This one is the identity, the rotation by an angle of zero, which is also written <code class="language-plaintext highlighter-rouge">rotation.id</code>.</p>
-<h2 id="25">Next</h2>
+<p>The norm is one, so <code class="language-plaintext highlighter-rouge">q</code> can be passed to the rotation constructor.</p>
+{% highlight matlab %}
+rotQ = rotation(q);
+rotMinusQ = rotation(-q);
+
+angle(rotQ,rotMinusQ) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     0
+{% endhighlight %}
+<p>The zero difference demonstrates the double representation directly. <a href="RotationRepresentations.html">Rotation Representations</a> explains the geometry and numerical trade-offs of quaternions and rotation vectors.</p>
+<h2 id="30">Constructor Index</h2>
+<p>The constructors above cover the usual inputs. The complete set also includes generated, imported, and improper rotations.</p>
 <p>
-<a href="RotationOperations.html">Operations</a> composes, inverts and applies rotations. Rotations that turn a crystal into a mirror image of itself are <a href="RotationImproper.html">Improper Rotations</a>, and a rotation that carries a crystal symmetry is an <a href="OrientationDefinition.html">orientation</a>.</p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <b>input</b>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <b>constructor</b>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>Euler angles</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.byEuler.html">
+                     <tt>rotation.byEuler</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>axis and angle</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.byAxisAngle.html">
+                     <tt>rotation.byAxisAngle</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>matrix</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.byMatrix.html">
+                     <tt>rotation.byMatrix</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>Rodrigues--Frank vector</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.byRodrigues.html">
+                     <tt>rotation.byRodrigues</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>homochoric vector</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.byHomochoric.html">
+                     <tt>rotation.byHomochoric</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>unit quaternion</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.rotation.html">
+                     <tt>rotation(q)</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>exact direction pairs</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.map.html">
+                     <tt>rotation.map</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>noisy direction pairs</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.fit.html">
+                     <tt>rotation.fit</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>identity, random, or missing</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.id.html">
+                     <tt>rotation.id</tt>
+                  </a>, <a href="rotation.rand.html">
+                     <tt>rotation.rand</tt>
+                  </a>, <a href="rotation.nan.html">
+                     <tt>rotation.nan</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>file</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.load.html">
+                     <tt>rotation.load</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>distribution</p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3Fun.discreteSample.html">
+                     <tt>odf.discreteSample</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>inversion or reflection</p>
+         </td>
+         <td>
+               <p>
+                  <a href="rotation.inversion.html">
+                     <tt>rotation.inversion</tt>
+                  </a>, <a href="reflection.html">
+                     <tt>reflection</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="31">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, establishes the Euler-angle convention used in texture analysis.</li>
+<li>S. I. Wright and M. De Graef, <a href="https://doi.org/10.1107/S1574870722004554">Electron backscatter diffraction</a>, International Tables for Crystallography C, ch. 1.6, 2022, records the Bunge convention and the main rotation representations used for EBSD.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops the geometry and parametrisations of rotation space.</li>
+<li>D. Rowenhorst et al., <a href="https://doi.org/10.1088/0965-0393/23/8/083501">Consistent representations of and conversions between 3D rotations</a>, Modelling and Simulation in Materials Science and Engineering 23 (2015) 083501, compares conventions and conversion formulas.</li>
+<li>W. Kabsch, <a href="https://doi.org/10.1107/S0567739476001873">A solution for the best rotation to relate two sets of vectors</a>, Acta Crystallographica A32 (1976) 922--923, gives the matrix fitting method available through <code class="language-plaintext highlighter-rouge">'method','kabsch'</code>.</li>
+<li>B. K. P. Horn, <a href="https://doi.org/10.1364/JOSAA.4.000629">Closed-form solution of absolute orientation using unit quaternions</a>, Journal of the Optical Society of America A 4 (1987) 629--642, gives the default quaternion method.</li>
+</ul>
+</div>
+<h2 id="32">Next</h2>
+<p>
+<a href="RotationRepresentations.html">Representations</a> compares the coordinate descriptions of rotation space. <a href="RotationImproper.html">Improper Rotations</a> then treats inversion and reflection, and <a href="RotationOperations.html">Operations</a> composes, inverts, and applies rotations. A rotation carrying crystal and specimen symmetry becomes an <a href="OrientationDefinition.html">orientation</a>.</p>
 </div>
 </body>
 </html>

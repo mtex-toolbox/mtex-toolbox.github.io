@@ -1,5 +1,5 @@
 ---
-title: "Approximation of Orientation Dependent Functions"
+title: 'Quadrature of Orientation-Dependent Functions'
 
 sidebar: documentation_sidebar
 permalink: SO3FunQuadrature.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Approximation of Orientation Dependent Functions</title>
+<title>Quadrature of Orientation-Dependent Functions</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_SO3FunQuadrature.m">
 </head>
@@ -22,311 +22,173 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>The preceding interpolation pages start from observations at fixed orientations. Quadrature addresses a different problem: the function can be evaluated at orientations chosen by MTEX. Those evaluations may come from an <a href="SO3Fun.SO3Fun.html">SO3Fun</a>, a <code class="language-plaintext highlighter-rouge">@function_handle</code>, a simulation, or a physical experiment that can be queried at prescribed orientations.</p>
+<p>MTEX chooses a grid of orientations and matching integration weights. It then converts the evaluated values into the Fourier coefficients of an <a href="SO3FunHarmonicRepresentation.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>. This page shows the one-command route and the explicit grid--evaluate--quadrature sequence.</p>
 <!--/introduction-->
-<p>Assume we have given some evaluation routine \(f\) that maps orientations to numbers. This could be an rotational function of class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>, a <code class="language-plaintext highlighter-rouge">@function_handle</code>, a more complex Matlab function or a physical experiment.</p>
-<p>On this page we will explain how to compute the corresponding <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> and <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> that approximates \(f\) reasonable well.</p>
-<p>This approximation process is similarly to <a href="SO3FunApproximationTheory.html">Approximating Orientation Dependent Functions from Discrete Data</a>. where the given data are a set of orientations with function values.</p>
-<p>Lets load an orientation dependent function as <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-mtexdata dubna
-odf = calcODF(pf,'resolution',5*degree,'zero_Range')
+{% endhighlight %}
+<h2 id="2">Approximate a known function</h2>
+<p>Use the Dubna orientation distribution function (ODF) as the evaluator. An ODF is a nonnegative orientation-dependent density with mean 1.</p>
+<p>The <a href="SO3FunHarmonic.SO3FunHarmonic.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> constructor falls back on <a href="SO3FunHarmonic.quadrature.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.quadrature</code></a> only when its input has no faster route of its own. The Dubna ODF is an <a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a>, which builds its coefficients from its centres and kernel, so no quadrature grid is used in the call below. The explicit sequence later on this page takes the quadrature route.</p>
+<p>The bandwidth is the largest harmonic degree retained in the result. Bandwidth 14 is deliberately lower than the bandwidth of the supplied ODF, so this first conversion is an approximation rather than exact recovery.</p>
+{% highlight matlab %}
+odf = SO3Fun.dubna
+odfHarmonic = SO3FunHarmonic(odf,'bandwidth',14)
+relativeApproximationError = calcError(odf,odfHarmonic)
+
 plot(odf,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-pf = PoleFigure (y↑→x)
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
- 
-  h = (022̅1), r = 72 x 19 points
-  h = (101̅0), r = 72 x 19 points
-  h = (101̅1)(011̅1), r = 72 x 19 points
-  h = (101̅2), r = 72 x 19 points
-  h = (112̅0), r = 72 x 19 points
-  h = (112̅1), r = 72 x 19 points
-  h = (112̅2), r = 72 x 19 points
- 
 odf = SO3FunRBF (Quartz → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°
   center: 19848 orientations, resolution: 5°
   weight: 1
+ 
+ 
+odfHarmonic = SO3FunHarmonic (Quartz → y↑→x)
+  bandwidth: 14
+  weight: 1
+ 
+relativeApproximationError =
+    0.1996
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SO3FunQuadrature_01.png" %}
 </center>
-<p>In the following we will differentiate whether we approximate \(f\) by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> or by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
-<h2 id="5">Harmonic Approximation</h2>
-<p>The basic strategy is to approximate the data by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> (Harmonic series), i.e. a series of <a href="WignerFunctions.html">Wigner-D functions</a>, see <a href="SO3FunHarmonicRepresentation.html">SO3FunHarmonicSeries Basics of rotational harmonics</a>.</p>
-<p>For that, we compute the so-called Fourier coefficients \({\bf \hat f} = (\hat f^{0,0}_0,\dots,\hat f^{N,N}_N)^T\) of</p>
-<p>\[ f({\bf R}) = \sum_{n=0}^N\sum_{k,l=-n}^n \hat{f}^{k,l}_n \, D_n^{k,l}({\bf R}). \]</p>
-<p>The Fourier coefficients are defined by</p>
-<p>\[ \hat f^{k,l}_n = \int_{SO(3)} f({\bf R}) \cdot \overline{D_n^{k,l}({\bf R})} \,\mathrm{d}\mu({\bf R}) \]</p>
-<p>and we compute this integral by numerical integration, which is also called quadrature, i.e.</p>
-<p>\[ \hat f^{k,l}_n \approx \sum_{m=1}^M \omega_m \, f({\bf R}_m) \, \overline{D_n^{k,l}({\bf R}_m)} \]</p>
-<p>with suitable quadrature weights \(\omega_m\) and quadrature nodes \(\bf{R}_m\), \(m=1,\dots,M\).</p>
-<p>In MTEX there are two quadrature schemes predefined:</p>
-<div>
-<ul>
-<li>Clenshaw-Curtis quadrature scheme (default)</li>
-<li>Gauss-Legendre quadrature scheme</li>
-</ul>
-</div>
-<p>Both of them are defined with respect to some bandwidth \(N\) and they are exact for all band-limited functions of this specific bandwidth. That means, if we perform quadrature on any <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> of bandwidth N with one of this schemes, then we will get exactly this function back.</p>
-<p>In MTEX we use the command <a href="SO3FunHarmonic.SO3FunHarmonic.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> to expand any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> into an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>.</p>
+<p>The original section plot contains narrow maxima as well as broad regions of high density. Compare it with the bandwidth-limited result.</p>
 {% highlight matlab %}
-SO3F = SO3FunHarmonic(odf)
-plot(SO3F,'sigma')
+plot(odfHarmonic,'sigma')
 {% endhighlight %}
-
-{% highlight plaintext %}
-SO3F = SO3FunHarmonic (Quartz → y↑→x)
-  bandwidth: 48
-  weight: 1
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SO3FunQuadrature_02.png" %}
 </center>
-<p>Internally MTEX calls <a href="SO3FunHarmonic.approximate.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.approximate</code></a>. We can specify the bandwidth of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> with the option <code class="language-plaintext highlighter-rouge">'bandwidth'</code> and we can tell MTEX to use the other quadrature scheme.</p>
+<p>The main maxima stay in the same sections, but their sharpest structure is smoothed. The printed error is truncation alone, since this route carries no quadrature step. Raising the bandwidth represents finer angular detail but requires more evaluations.</p>
+<p>Clenshaw--Curtis is the default quadrature scheme. Add the <code class="language-plaintext highlighter-rouge">'GaussLegendre'</code> flag to select the other predefined scheme.</p>
 {% highlight matlab %}
-SO3F2 = SO3FunHarmonic(odf,'bandwidth',10,'GaussLegendre')
-plot(SO3F2,'sigma')
+odfGauss = SO3FunHarmonic(odf,'bandwidth',14,'GaussLegendre')
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F2 = SO3FunHarmonic (Quartz → y↑→x)
-  bandwidth: 10
+odfGauss = SO3FunHarmonic (Quartz → y↑→x)
+  bandwidth: 14
   weight: 1
 {% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunQuadrature_03.png" %}
-</center>
-<p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we proceed as follows.</p>
-<p>One idea could be to perform the experiment for random orientations and <a href="SO3FunApproximationTheory">interpolate this discrete data</a> in a second step.</p>
-<p>But, if we can choose the orientations by our own, we should better choose an optimal/minimal orientation grid, perform the experiment on this grid and compute the Fourier coefficients of the harmonic expansion by quadrature.</p>
-<p>This is exactly what happens internally when we call the <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code>-command. In fact this is a special case of approximation of discrete data for a very specific grid.</p>
-<p>In the following, the <code class="language-plaintext highlighter-rouge">EXPERIMENT</code>-method is something, where we put in orientations and obtain corresponding values. That could be a physical experiment or maybe also some computational routine.</p>
+<h2 id="5">Choose and evaluate the quadrature nodes</h2>
+<p>When evaluations come from an external routine, construct the quadrature grid explicitly. The next function handle stands in for a simulation or experiment. Replace only its body in an application; the remaining sequence stays the same.</p>
+<p>Exactness can only be tested against a band-limited function. Truncate the known ODF at bandwidth 14 to create such a reference for this controlled example.</p>
 {% highlight matlab %}
-% Specify the bandwidth and symmetries of the desired harmonic odf
-bw = 50;
-cs = crystalSymmetry('321');
-ss = specimenSymmetry;
+bw = 14;
+reference = SO3FunHarmonic(odf);
+reference.bandwidth = bw;
+experiment = @(ori) reference.eval(ori);
+cs = reference.CS;
+ss = reference.SS;
 
-% Compute the quadrature grid and weights
 CC_grid = quadratureSO3Grid(bw,'ClenshawCurtis',cs,ss);
-
-% Because of symmetries there are symmetric equivalent nodes in the
-% quadrature grid. Hence we perform our experiment on a smaller unique
-% grid.
-ori = CC_grid(:)
-v = EXPERIMENT(ori);
-
-% At the end we do quadrature
-E1 = SO3FunHarmonic.quadrature(CC_grid,v)
-% E1 = SO3FunHarmonic.interpolate(CC_grid,v) % does the same
+CC_orientations = CC_grid(:);
+CC_values = experiment(CC_orientations);
+CC_result = SO3FunHarmonic.quadrature(CC_grid,CC_values)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (321 → y↑→x)
-  size: 176868 x 1
+CC_result = SO3FunHarmonic (Quartz → y↑→x)
+  bandwidth: 14
+  weight: 1
 {% endhighlight %}
-<p>Furthermore, if the experimental step is very expansive it might be a good idea to use the smaller Gauss-Legendre quadrature grid. The Gauss-Legendre quadrature lattice has half as many points as the default Clenshaw-Curtis quadrature lattice. But the quadrature method is slightly more time consuming.</p>
+<p>The symmetry of the crystal and specimen makes many nodes equivalent. <code class="language-plaintext highlighter-rouge">CC_grid(:)</code> contains the smaller unique set on which the expensive evaluator is called. The grid object retains the mapping and weights needed to integrate over the complete orientation space.</p>
+<p> <a href="SO3FunHarmonic.interpolate.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.interpolate</code></a> recognizes a <code class="language-plaintext highlighter-rouge">quadratureSO3Grid</code> and performs the same calculation. For example, <code class="language-plaintext highlighter-rouge">SO3FunHarmonic.interpolate(CC_grid,CC_values)</code> is equivalent here.</p>
 {% highlight matlab %}
-% Compute the Gauss-Legendre quadrature grid and weights
+numberOfCCEvaluations = numel(CC_grid)
+numberOfCCFullGridNodes = numel(CC_grid.fullGrid)
+CCRecoveryError = calcError(reference,CC_result)
+{% endhighlight %}
+
+{% highlight plaintext %}
+numberOfCCEvaluations =
+        4500
+numberOfCCFullGridNodes =
+        8700
+CCRecoveryError =
+   3.8991e-08
+{% endhighlight %}
+<h2 id="7">Compare the two schemes</h2>
+<p>Gauss--Legendre uses fewer nodes in the second Euler angle. It therefore needs about half as many function evaluations as Clenshaw--Curtis at the same bandwidth. The transform itself is slightly more time-consuming, so Gauss--Legendre is most attractive when each external evaluation is expensive.</p>
+{% highlight matlab %}
 GL_grid = quadratureSO3Grid(bw,'GaussLegendre',cs,ss);
+GL_orientations = GL_grid(:);
+GL_values = experiment(GL_orientations);
+GL_result = SO3FunHarmonic.quadrature(GL_grid,GL_values)
 
-% Perform the experiment on that quadrature grid
-ori = GL_grid(:)
-v = EXPERIMENT(ori);
-
-% Do quadrature
-E2 = SO3FunHarmonic.quadrature(GL_grid,v)
+numberOfGLEvaluations = numel(GL_grid)
+numberOfGLFullGridNodes = numel(GL_grid.fullGrid)
+GLRecoveryError = calcError(reference,GL_result)
+schemeDifference = calcError(CC_result,GL_result)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (321 → y↑→x)
-  size: 90168 x 1
- 
-E2 = SO3FunHarmonic (321 → y↑→x)
-  bandwidth: 50
+GL_result = SO3FunHarmonic (Quartz → y↑→x)
+  bandwidth: 14
   weight: 1
-{% endhighlight %}
-<p>Both of this quadrature schemes yield exactly the same <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>.</p>
-{% highlight matlab %}
-calcError(E1,E2)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-   5.8169e-05
-{% endhighlight %}
-<h2 id="11">RBF-Kernel Approximation</h2>
-<p>The basic strategy is to approximate the given function \(f\) by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>, see <a href="RadialODFs.html">Radial Basis Functions on SO(3)</a>.</p>
-<p>Hence we determine rotations \({\bf{R}}_1,\dots,{\bf{R}}_N\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) such that</p>
-<p>\[ g({\bf{x}}) = \sum_{n=1}^N c_n \, \Psi(\cos\frac{\omega({\bf{x}},{\bf{R}}_n)}{2}) \]</p>
-<p>approximates \(f\) reasonable well, i.e. \(f\approx g\). In this formula, \(\Psi\) describes a <a href="SO3Kernels.html">SO(3)-Kernel Function</a>. Hence, \(f\) is a superposition of one rotational kernel function centered on the orientations \({\bf{R}}_1,\dots,{\bf{R}}_N\) and weighted by the coefficients \(c_1,\dots,c_N\).</p>
-<p>A basic strategy is to apply least squares approximation, where we compute the coefficients \(c_n\) by minimizing the functional</p>
-<p>\[ \sum_{m=1}^M|f({\bf{x}}_m)-g({\bf{x}}_m)|^2 \]</p>
-<p>for some specific orientations \({\bf{x}}_1,\dots,{\bf{x}}_M\).</p>
-<p>This least squares problem can also be written in matrix vector notation \( \mathrm{argmin}_{c} \| K \cdot c - v \|, \) where \(x=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega({\bf{x}}_m,{\bf{R}}_n)}{2})]_{m,n}\).</p>
-<p>This least squares problem can be solved by the <code class="language-plaintext highlighter-rouge">lsqr</code> method from MATLAB, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation).</p>
-<p>Alternatively there is also a modified least square method <code class="language-plaintext highlighter-rouge">mlsq</code>, which search for a solution \(c_1,\dots,c_N\) that satisfies \(c&gt;0\) and \(\sum_{n=1}^N c_n = 1\). This method can be used if the underlying function is a density, i.e. it is nonnegative and has mean 1, which can be applied if we try to approximate a density function.</p>
-<p>In MTEX we use the command <a href="SO3FunRBF.SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> to represent any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
-<p>In the following we want to use this to transform a given <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> back into a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
-{% highlight matlab %}
-SO3F3 = SO3FunRBF(SO3F,'density')
-% SO3F2 = SO3FunRBF.approximate(SO3F,'density')
-plot(SO3F3,'sigma')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Maximum number of iterations reached, result may not have
-converged to the optimum yet. 
  
-SO3F3 = SO3FunRBF (Quartz → y↑→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19848 orientations, resolution: 5°
-  weight: 1
+numberOfGLEvaluations =
+        2400
+numberOfGLFullGridNodes =
+        4500
+GLRecoveryError =
+   6.8018e-08
+schemeDifference =
+   4.4563e-08
 {% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunQuadrature_04.png" %}
-</center>
-<p>Here MTEX internally calls the <a href="SO3FunRBF.approximate.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF.approximate</code></a> method.</p>
-<p>The flag <code class="language-plaintext highlighter-rouge">'density'</code> tells MTEX to use the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which ensures that the resulting function is nonnegative and normalized to mean \(1\).</p>
+<p>For this bandwidth and symmetry, the printed unique-node counts are 4500 for Clenshaw--Curtis and 2400 for Gauss--Legendre. Thus Gauss--Legendre uses 53 percent as many external evaluations. Both recover the reference to the numerical accuracy of the transforms, and their difference is of the same small order.</p>
+<p>Both rules are exact, up to numerical transform accuracy, for rotational harmonic functions whose bandwidth does not exceed the grid bandwidth. They need not return the same truncation of a function containing higher degrees. This distinction is why the example tests exactness with <code class="language-plaintext highlighter-rouge">reference</code> rather than directly with the bandwidth-48 <code class="language-plaintext highlighter-rouge">odf</code>.</p>
+<h2 id="9">When the orientations cannot be chosen</h2>
+<p>Quadrature is not appropriate when an instrument has already fixed the sample orientations. Random orientations do not become a quadrature rule merely because there are many of them. Use <a href="SO3FunApproximationTheory.html">interpolation from discrete data</a> in that case.</p>
+<p>If an external experiment can be run at arbitrary orientations, the quadrature grid is the optimal structured choice for a harmonic result. If an RBF result is required instead, evaluate an <a href="equispacedSO3Grid.html"><code class="language-plaintext highlighter-rouge">equispacedSO3Grid</code></a> and pass the resulting orientation--value pairs to <a href="SO3FunRBF.interpolate.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF.interpolate</code></a>.</p>
+<h2 id="10">Quadrature is not RBF fitting</h2>
+<p>
+<a href="RBFApproximationTheory.html">RBF-Kernel Interpolation</a> develops the RBF workflow in full. An <a href="SO3FunRBF.SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> represents a function as a weighted sum of rotational kernels centred at chosen orientations. Its spatial method chooses the coefficients by minimizing pointwise error at an evaluation grid. MATLAB's <code class="language-plaintext highlighter-rouge">lsqr</code> is the default unconstrained solver. Although stationarity can be expressed through the normal equations, LSQR does not form those equations explicitly.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'density'</code> flag selects modified least squares, <code class="language-plaintext highlighter-rouge">'mlsq'</code>. It constrains the weights to be nonnegative, and MTEX normalizes the result to mean 1. The commands <code class="language-plaintext highlighter-rouge">min(F)</code> and <code class="language-plaintext highlighter-rouge">mean(F)</code> check these two density properties after a fit.</p>
+<p>These constructor forms summarize the choices described on the RBF page:</p>
 {% highlight matlab %}
-minValue = min(SO3F3)
-
-meanValue = mean(SO3F3)
-{% endhighlight %}
-
-{% highlight plaintext %}
-minValue =
-    0.0014
-meanValue =
-    1.0000
-{% endhighlight %}
-<p>We can specify the kernel of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> with the option <code class="language-plaintext highlighter-rouge">'kernel'</code> or <code class="language-plaintext highlighter-rouge">'halfwidth'</code> and we can use the options <code class="language-plaintext highlighter-rouge">'SO3Grid'</code> and <code class="language-plaintext highlighter-rouge">'resolution'</code> to choose some specific set of rotations as centers \({\bf{R}}_1,\dots,{\bf{R}}_N\) of the approximation \(g\).</p>
-{% highlight matlab %}
-SO3F4 = SO3FunRBF(SO3F,'halfwidth',5*degree,'resolution',10*degree)
-plot(SO3F4,'sigma')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Maximum number of iterations reached, result may not have
-converged to the optimum yet. 
- 
-SO3F4 = SO3FunRBF (Quartz → y↑→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 5°
-  center: 2472 orientations, resolution: 10°
-  weight: 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunQuadrature_05.png" %}
-</center>
-{% highlight matlab %}
-S3G = orientation.rand(1000,SO3F.CS);
+F = SO3FunRBF(odfHarmonic,'density');
+F = SO3FunRBF(odfHarmonic,'halfwidth',5*degree, ...
+  'resolution',10*degree);
 psi = SO3AbelPoissonKernel('halfwidth',5*degree);
-SO3F5 = SO3FunRBF(SO3F,'kernel',psi,'SO3Grid',S3G)
-plot(SO3F5,'sigma')
+centres = orientation.rand(1000,odfHarmonic.CS);
+F = SO3FunRBF(odfHarmonic,'kernel',psi,'SO3Grid',centres);
+F = SO3FunRBF(odfHarmonic,'halfwidth',5*degree, ...
+  'approxresolution',5*degree);
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Maximum number of iterations reached, result may not have
-converged to the optimum yet. 
- 
-SO3F5 = SO3FunRBF (Quartz → y↑→x)
- 
-  multimodal components
-  kernel: Abel Poisson, halfwidth 5°
-  center: 1000 orientations
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunQuadrature_06.png" %}
-</center>
-{% highlight matlab %}
-SO3F6 = SO3FunRBF(SO3F,'halfwidth',5*degree,'approxresolution',5*degree)
-plot(SO3F6,'sigma')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Maximum number of iterations reached, result may not have
-converged to the optimum yet. 
- 
-SO3F6 = SO3FunRBF (Quartz → y↑→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19848 orientations, resolution: 5°
-  weight: 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunQuadrature_07.png" %}
-</center>
-<p>The errors are</p>
-{% highlight matlab %}
-calcError(SO3F,SO3F3)
-calcError(SO3F,SO3F4)
-calcError(SO3F,SO3F5)
-calcError(SO3F,SO3F6)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-    0.0082
-ans =
-    0.0694
-ans =
-    0.2753
-ans =
-    0.0081
-{% endhighlight %}
-<p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we should perform the experiment for all orientations of an <code class="language-plaintext highlighter-rouge"><a href="equispacedSO3Grid.html">equispacedSO3Grid</a></code> and <a href="SO3Fun.Approximation">approximate this discrete data</a> in a second step.</p>
-<h2 id="20">RBF-Kernel Approximation by minimizing the harmonic Error</h2>
-<p>The basic idea is the same as in the previous section. We determine rotations \({\bf{R}}_1,\dots,{\bf{R}}_M\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) of</p>
-<p>\[ g({\bf{x}}) = \sum_{m=1}^M c_m \, \Psi(\cos\frac{\omega({\bf{x}},{\bf{R}}_m)}{2}), \]</p>
-<p>such that \(g\) approximates \(f\) in a certain sense. But in what sense exactly?</p>
-<p>In the previous section, we minimized the pointwise error (in spatial domain) between \(f\) and \(g\) on some grid, i.e. we minimized \( \sum\limits_{m=1}^M|f({\bf{x}}_m)-g({\bf{x}}_m)|^2 \) in \(M\) points.</p>
-<p>Now we will minimize the error in frequency domain. Hence, the Fourier coefficients of \(f\) are supposed to be nearly the same as the Fourier coefficients of \(g\).</p>
-<p>So, we will try to determine the coefficients \(c_1,\dots,c_M\) such that</p>
-<p>\[ \sum\limits_{n=0}^N \sum\limits_{k,l=-n}^n | \hat{f}_n^{k,l} - \hat{g}_n^{k,l} |^2 \]</p>
-<p>is minimized.</p>
-<p>In MTEX we call this by adding the option <code class="language-plaintext highlighter-rouge">'harmonic'</code> to the <a href="SO3FunRBF.SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>-command.</p>
-{% highlight matlab %}
-SO3F7 = SO3FunRBF(SO3F,'harmonic')
-plot(SO3F7,'sigma')
-{% endhighlight %}
-
-{% highlight plaintext %}
-SO3F7 = SO3FunRBF (Quartz → y↑→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19848 orientations, resolution: 5°
-  weight: 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunQuadrature_08.png" %}
-</center>
-<h2 id="22">LSQR-Parameters</h2>
-<p>The <code class="language-plaintext highlighter-rouge">lsqr</code> solver and the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which are used to minimize the least squares problem from above has some predefined termination conditions. We can specify the method tolerance with the option <code class="language-plaintext highlighter-rouge">'tol'</code> (default 1e-3) and the maximum number of iterations by the option <code class="language-plaintext highlighter-rouge">'maxit'</code> (default 30/100).</p>
-<p>Thus we are able to control the precision of the result and computational time of the least squares methods in the approximation process.</p>
-<p>This is a black box function which is used above. Just ignore it.</p>
-{% highlight matlab %}
-function v = EXPERIMENT(ori)
-  v = SO3Fun.dubna.eval(ori);
-end
-{% endhighlight %}
-
-{% highlight plaintext %}
-E1 = SO3FunHarmonic (321 → y↑→x)
-  bandwidth: 50
-  weight: 1
-{% endhighlight %}
+<p>
+<code class="language-plaintext highlighter-rouge">'kernel'</code> or <code class="language-plaintext highlighter-rouge">'halfwidth'</code> chooses the radial kernel. <code class="language-plaintext highlighter-rouge">'SO3Grid'</code> supplies its centres, while <code class="language-plaintext highlighter-rouge">'resolution'</code> constructs a centre grid. <code class="language-plaintext highlighter-rouge">'approxresolution'</code> controls the separate grid on which the input function is evaluated. Use <code class="language-plaintext highlighter-rouge">calcError(odfHarmonic,F)</code> to compare a fitted representation with its source.</p>
+<h2 id="11">Spatial and harmonic RBF errors</h2>
+<p>The default RBF method minimizes pointwise error between the source \(f\) and the RBF model \(g\) at evaluation orientations \(x_m\):</p>
+<p>\[ \sum_{m=1}^M \lvert f(x_m)-g(x_m)\rvert^2. \]</p>
+<p>The <code class="language-plaintext highlighter-rouge">'harmonic'</code> flag instead chooses the kernel weights so that the Fourier coefficients of \(f\) and \(g\) are close. It minimizes</p>
+<p>\[ \sum_{n=0}^N\sum_{k,l=-n}^n \lvert\hat f_n^{k,l}-\hat g_n^{k,l}\rvert^2. \]</p>
+<p>The spatial method is usually better suited to sharp, high-bandwidth functions. The harmonic system is better suited to low bandwidth because its matrix grows quickly with the number of Fourier coefficients. Select it with <code class="language-plaintext highlighter-rouge">SO3FunRBF(odfHarmonic,'harmonic')</code>.</p>
+<p>Both <code class="language-plaintext highlighter-rouge">lsqr</code> and <code class="language-plaintext highlighter-rouge">mlsq</code> stop according to <code class="language-plaintext highlighter-rouge">'tol'</code> and <code class="language-plaintext highlighter-rouge">'maxit'</code>. Their default tolerance is <code class="language-plaintext highlighter-rouge">1e-3</code>. Unconstrained <code class="language-plaintext highlighter-rouge">lsqr</code> uses at most 30 iterations, whereas <code class="language-plaintext highlighter-rouge">mlsq</code> uses at most 100. Tighten these settings only when a validation error or a physical conclusion requires it.</p>
+<h2 id="12">The maths behind quadrature</h2>
+<p>A band-limited rotational function is a finite series of <a href="WignerFunctions.html">Wigner-D functions</a>:</p>
+<p>\[ f&reg;=\sum_{n=0}^N\sum_{k,l=-n}^n \hat f_n^{k,l}D_n^{k,l}(R). \]</p>
+<p>Its Fourier coefficients are integrals over orientation space with the normalized Haar measure \(\mu\):</p>
+<p>\[ \hat f_n^{k,l}=\int_{\mathrm{SO}(3)} f&reg;\, \overline{D_n^{k,l}(R)}\,\mathrm{d}\mu&reg;. \]</p>
+<p>A quadrature rule replaces each integral by values at nodes \(R_m\) and prescribed weights \(\omega_m\):</p>
+<p>\[ \hat f_n^{k,l}\approx\sum_{m=1}^M \omega_m f(R_m) \overline{D_n^{k,l}(R_m)}. \]</p>
+<p>The weights are part of the rule. Treating all structured nodes equally, or substituting arbitrary random orientations, changes the integral. MTEX combines periodic quadrature in the first and third Euler angles with either Clenshaw--Curtis or Gauss--Legendre nodes in the second angle.</p>
+<h2 id="13">References</h2>
+<div>
+<ul>
+<li>P. J. Kostelec and D. N. Rockmore, <a href="https://doi.org/10.1007/s00041-008-9013-5">FFTs on the rotation group</a>, <i>Journal of Fourier Analysis and Applications</i> 14 (2008), 145--179, develops fast Fourier transforms for band-limited functions on \(\mathrm{SO}(3)\).</li>
+<li>H. Schaeben, F. Bachmann, and J.-J. Fundenberger, <a href="https://doi.org/10.1007/s10853-016-0496-1">Construction of weighted crystallographic orientations capturing a given orientation density function</a>, <i>Journal of Materials Science</i> 52 (2017), 2077--2090, develops the positive normalized RBF approximation summarized above.</li>
+</ul>
+</div>
+<h2 id="14">Next</h2>
+<p>Continue with <a href="SO3FunHarmonicRepresentation.html">Harmonic Representation</a> to inspect and manipulate the Fourier coefficients produced by quadrature. Then use <a href="RadialODFs.html">Radial Basis Functions</a> to study the kernel representation contrasted with quadrature on this page.</p>
 </div>
 </body>
 </html>

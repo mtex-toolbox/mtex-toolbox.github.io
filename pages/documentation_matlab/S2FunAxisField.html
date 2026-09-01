@@ -1,5 +1,5 @@
 ---
-title: "S2AxisFieldHarmonic"
+title: 'Spherical axis fields'
 
 sidebar: documentation_sidebar
 permalink: S2FunAxisField.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>S2AxisFieldHarmonic</title>
+<title>Spherical axis fields</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_S2FunAxisField.m">
 </head>
@@ -22,64 +22,73 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A spherical axis field assigns an axis in three-dimensional space to every direction on the sphere. An axis has no sense: the vectors \(\vec v\) and \(-\vec v\) represent the same value. Polarization directions and principal stress or strain directions are typical examples.</p>
+<p>
+<a href="S2AxisField.S2AxisField.html">S2AxisField</a> is therefore not a vector field with an arbitrary sign convention. It represents a function</p>
+<p>\[ f\colon \mathrm{S}^2\to\mathbb{R}^3/\{\vec v\sim-\vec v\}. \]</p>
+<p>The class <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic.html"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a> stores such a field as a spherical harmonic expansion. This page constructs that representation from sampled values and from a function handle.</p>
 <!--/introduction-->
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>The class <a href="S2AxisFieldharmonic.html">S2AxisFieldharmonic</a> handles axis fields on the sphere, i.e. spherical functions</p>
-<p>\[ f\colon {\bf S}^2\to{\bf R}^3_{/&lt;\pm \mathrm{Id}&gt;}. \]</p>
-<p>that associates to each point \(\xi\) on the sphere a three dimensional vector \(\vec v = f(\xi)\) where we do not distinguish between \(-\vec v\) and \(\vec v\). A typical example would be the polarization direction.</p>
-<h2 id="3">Defining a S2AxisFieldHarmonic</h2>
-<p>
-<b>Definition via function values</b>
-</p>
-<p>At first you need some vertices</p>
+<h2 id="2">Interpolate sampled axes</h2>
+<p>Begin with directions at which the field has been sampled. Turn the grid into a column so that each row of the values below belongs to one node.</p>
 {% highlight matlab %}
-nodes = equispacedS2Grid('points', 1e5);
+nodes = equispacedS2Grid('points',600);
 nodes = nodes(:);
 {% endhighlight %}
-<p>Next you define function values for the vertices</p>
+<p>Define one axis at every node. The <code class="language-plaintext highlighter-rouge">'antipodal'</code> flag tells <a href="vector3d.vector3d.html">vector3d</a> to identify each value with its negative.</p>
 {% highlight matlab %}
-y = vector3d(sin(5*nodes.x), 1, nodes.y, 'antipodal');
+values = vector3d(sin(5*nodes.x),1,nodes.y,'antipodal');
 {% endhighlight %}
-<p>Now the actual command to get <code class="language-plaintext highlighter-rouge">sAF1</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a>
-</p>
+<p> <a href="S2AxisFieldHarmonic.interpolate.html"><code class="language-plaintext highlighter-rouge">interpolate</code></a> fits the six components of the sign-independent dyadic product described below. Limiting the bandwidth keeps only spherical harmonic degrees up to 6. Equal weights are appropriate for this uniformly spaced example grid.</p>
 {% highlight matlab %}
-sAF1 = S2AxisFieldHarmonic.interpolate(nodes, y)
+sAF1 = S2AxisFieldHarmonic.interpolate(nodes,values,'bandwidth',6, ...
+  'weights','equal');
 
-plot(sAF1)
+plot(sAF1,'resolution',20*degree);
 {% endhighlight %}
-
-{% highlight plaintext %}
-sAF1 = S2AxisFieldHarmonic
- bandwidth: 224
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunAxisField_01.png" %}
 </center>
-<p>
-<b>Definition via function handle</b>
-</p>
-<p>If you have a function handle for the function you could create a <code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns antipodal <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p>
+<p>Each short black line shows the fitted axis at one plotting direction. The lines have no arrowheads because reversing any one of them would not change the field. Their gradual change across the sphere shows what the harmonic interpolation has smoothed between the sampled nodes.</p>
+<h2 id="6">Construct an axis field from a function</h2>
+<p>Use a function handle when the axis is known at every input direction. The handle must accept a <a href="vector3d.vector3d.html">vector3d</a> array and return an equally sized antipodal <a href="vector3d.vector3d.html">vector3d</a> array. This example makes the axes circulate around the vertical direction while a nonzero vertical component keeps the axis defined at the poles.</p>
 {% highlight matlab %}
-f = @(v) vector3d(-v.y, v.x, 0*v.x, 'antipodal');
+axisFun = @(v) vector3d(-v.y,v.x,0.35+0*v.x,'antipodal');
 {% endhighlight %}
-<p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sAF2</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a>
-</p>
+<p>Passing the handle to the constructor applies spherical quadrature. The explicit equivalent is <code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic.quadrature(axisFun,'bandwidth',6)</code>.</p>
 {% highlight matlab %}
-sAF2 = S2AxisFieldHarmonic(@(v) f(v))
-% sAF2 = S2AxisFieldHarmonic.quadrature(@(v) f(v))
+sAF2 = S2AxisFieldHarmonic(axisFun,'bandwidth',6);
 
-quiver(sAF2);
+clf;
+quiver(sAF2,'resolution',20*degree);
 {% endhighlight %}
-
-{% highlight plaintext %}
-sAF2 = S2AxisFieldHarmonic
- bandwidth: 128
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunAxisField_02.png" %}
 </center>
+<p>The axes now turn around the centre of the projection. Near the centre, the visible vertical component shortens their in-plane projection; this is a projection effect, not a loss of axis length. The <code class="language-plaintext highlighter-rouge">quiver</code> command is an alias for the default two-dimensional <code class="language-plaintext highlighter-rouge">plot</code> of an axis field.</p>
+<h2 id="9">Evaluate the field</h2>
+<p>Use <a href="S2AxisFieldHarmonic.eval.html"><code class="language-plaintext highlighter-rouge">eval</code></a> to obtain the fitted axis at any direction. The result remains antipodal, so code that consumes it must not attach meaning to its displayed sign.</p>
+{% highlight matlab %}
+queryDirection = vector3d.byPolar(50*degree,35*degree);
+axisAtQuery = sAF2.eval(queryDirection);
+{% endhighlight %}
+<h2 id="10">Why the sign disappears</h2>
+<p>A harmonic axis field does not expand the three components of \(\vec v\) directly. It expands the six independent entries of the symmetric dyadic product \(\vec v\vec v^{\mathrm T}\). Reversing the representative leaves this matrix unchanged because</p>
+<p>\[(-\vec v)(-\vec v)^{\mathrm T}=\vec v\vec v^{\mathrm T}. \]</p>
+<p>Evaluation recovers the axis as the leading eigenvector of the fitted matrix. This construction is the reason a harmonic axis field can interpolate axes without first choosing consistent signs for the input values.</p>
+{% highlight matlab %}
+close all
+{% endhighlight %}
+<h2 id="11">References</h2>
+<div>
+<ul>
+<li>K. V. Mardia and P. E. Jupp, <a href="https://doi.org/10.1002/9780470316979"><i>Directional Statistics</i></a>, Wiley, 2000, develops the distinction between directed and axial data used by the sign-independent representation on this page.</li>
+</ul>
+</div>
+<h2 id="12">Next</h2>
+<p>Continue with <a href="S2FunSym.html">Symmetric spherical functions</a> to build a scalar spherical function whose values repeat under a chosen symmetry.</p>
 </div>
 </body>
 </html>

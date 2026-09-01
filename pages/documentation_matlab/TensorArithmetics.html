@@ -1,5 +1,5 @@
 ---
-title: "Tensor Arithmetic"
+title: 'Tensor Arithmetic'
 
 sidebar: documentation_sidebar
 permalink: TensorArithmetics.html
@@ -23,42 +23,30 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<p>This page assumes the tensor ranks and physical classes introduced in <a href="TensorDefinition.html">Defining Tensorial Properties</a>. It shows how MTEX applies arithmetic to one tensor or a list without loops. The central operation is a <b>contraction</b>: a sum over selected component indices.</p>
+<p>The rotation examples also assume the active rotations introduced in <a href="RotationDefinition.html">Defining Rotations</a>.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p>
-<h2 id="3">Basic algebra</h2>
-<p>First of all, all basic operations like <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.*</code>, <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">.^</code> known from linear algebra work also on lists of tensors.</p>
+<h2 id="2">Basic algebra</h2>
+<p>Addition, scalar multiplication, and elementwise operations follow MATLAB array notation. These variables each contain three random rank 2 tensors, so every line below acts on all three at once.</p>
 {% highlight matlab %}
-T1 = tensor.rand('rank',2);
-T2 = tensor.rand('rank',2);
+T1 = tensor.rand(3,'rank',2);
+T2 = tensor.rand(3,'rank',2);
 
-% addition and multiplication
+% addition and scalar multiplication
 T = T1 + 2 * T2;
 
-% point-wise product
+% componentwise multiplication
 T = T1 .* T2;
 {% endhighlight %}
-<h2 id="4">Tensor Products</h2>
-<p>Tensor product are the canonical way how tensors interact with each other. As an example consider a rank 4 stiffness tensor</p>
+<p>The operator <code class="language-plaintext highlighter-rouge">.*</code> multiplies corresponding components. It is not an outer product and does not change the rank. The random tensors are algebraic examples rather than tensors with the symmetries of a physical property.</p>
+<h2 id="4">Contractions with EinsteinSum</h2>
+<p>Hooke's law is a useful model for reading a contraction. The following rank 4 stiffness tensor contains room-temperature measurements for San Carlos olivine from <a href="https://doi.org/10.1029/97JB00682">Abramson et al. (1997)</a>. <a href="TensorImport.html">Importing Tensor Data</a> explains the loading step and the reference-frame information that must accompany published components.</p>
 {% highlight matlab %}
-C = stiffnessTensor.load(fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa'))
+C = stiffnessTensor.load(fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa'));
 {% endhighlight %}
-
-{% highlight plaintext %}
-C = stiffnessTensor (y↑→x)
-  unit: GPa              
-  rank: 4 (3 x 3 x 3 x 3)
- 
-  tensor in Voigt matrix representation:
- 320.5  68.2  71.6     0     0     0
-  68.2 196.5  76.8     0     0     0
-  71.6  76.8 233.5     0     0     0
-     0     0     0    64     0     0
-     0     0     0     0    77     0
-     0     0     0     0     0  78.7
-{% endhighlight %}
-<p>Then by Hooks law the stiffness tensor acts on a strain tensor, e.g.,</p>
+<p>The data are in GPa. Apply a strain that stretches along x and compresses along z.</p>
 {% highlight matlab %}
 eps = strainTensor(diag([1 0 -1]))
 {% endhighlight %}
@@ -66,175 +54,195 @@ eps = strainTensor(diag([1 0 -1]))
 {% highlight plaintext %}
 eps = strainTensor (y↑→x)
   type: Lagrange 
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
   1  0  0
   0  0  0
   0  0 -1
 {% endhighlight %}
-<p>according to the formula</p>
-<p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p>
-<p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its most general form by the command <a href="EinsteinSum.html"><code class="language-plaintext highlighter-rouge">EinsteinSum</code></a>.</p>
+<p>Hooke's law contracts the last two indices of the stiffness with the two indices of the strain,</p>
+<p>\[\sigma_{ij} = \sum_{k,l} C_{ijkl} \epsilon_{kl}.\]</p>
+<p> <a href="EinsteinSum.html"><code class="language-plaintext highlighter-rouge">EinsteinSum</code></a> takes each tensor followed by one label for each of its indices. Equal negative labels mark indices to sum over. Positive labels survive, and their values set the index order in the result. The signs are MTEX syntax; the physical indices are not negative.</p>
 {% highlight matlab %}
 sigma = EinsteinSum(C,[1 2 -1 -2],eps,[-1 -2])
 {% endhighlight %}
 
 {% highlight plaintext %}
 sigma = tensor (y↑→x)
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
   248.9      0      0
       0  -8.65      0
       0      0 -161.9
 {% endhighlight %}
-<p>here the negative numbers indicate the indices which are summed up. Each pair of equal negative numbers corresponds to one sum. The positive numbers indicate the order of the dimensions of the resulting tensor. Accordingly we can compute the outer product</p>
+<p>Labels 1 and 2 leave a rank 2 result. Its diagonal normal stresses are 248.9, -8.65, and -161.9 GPa; all shear components are zero.</p>
+<p>The same notation describes elementary products. The outer product</p>
 <p>\[ (a \otimes b)_{ij} = a_i b_j \]</p>
-<p>between two rank one tensors</p>
+<p>has two free indices and no summation.</p>
 {% highlight matlab %}
 a = tensor([1;2;3],'rank',1);
 b = tensor([0;2;1],'rank',1);
 {% endhighlight %}
-<p>by the command</p>
+
 {% highlight matlab %}
-EinsteinSum(a,1,b,2)
+ab = EinsteinSum(a,1,b,2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = tensor (y↑→x)
-  rank: 2 (3 x 3)
+ab = tensor (y↑→x)
+  rank: 2 (3 × 3)
  
  0 2 1
  0 4 2
  0 6 3
 {% endhighlight %}
-<p>and the inner product</p>
-<p>\[ a \cdot b = \sum_i a_i b_i \]</p>
-<p>by</p>
+<p>The inner product</p>
+<p>\[ a \mathbin{\cdot} b = \sum_i a_i b_i \]</p>
+<p>instead repeats one negative label and leaves no free index. Its result is the scalar 7.</p>
 {% highlight matlab %}
-EinsteinSum(a,-1,b,-1)
+aDotB = EinsteinSum(a,-1,b,-1)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+aDotB =
      7
 {% endhighlight %}
-<p>As a final example we consider the linear compressibility in a certain direction <code class="language-plaintext highlighter-rouge">v</code> which can be computed by the formula</p>
-<p>\[ c = \sum_{i,j,k} S_{ijkk} v_i v_j \]</p>
-<p>where \(C = S^{-1}\) is the inverse of the compliance tensor, i.e. the stiffness tensor</p>
+<h2 id="10">Stiffness is not compliance</h2>
+<p>Linear compressibility is the relative shortening along a direction <code class="language-plaintext highlighter-rouge">v</code> under unit hydrostatic pressure. It is a contraction of the <b>compliance</b> \(S=C^{-1}\),</p>
+<p>\[ \beta(v) = \sum_{i,j,k} S_{ijkk} v_i v_j.\]</p>
+<p> <a href="tensor.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a> turns the stiffness into a compliance tensor. The data file identifies x with [100], the crystallographic a direction.</p>
 {% highlight matlab %}
 v = xvector;
-S = inv(C)
-c = EinsteinSum(C,[-1 -2 -3 -3],v,-1,v,-2)
+S = inv(C);
+beta = EinsteinSum(S,[-1 -2 -3 -3],v,-1,v,-2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-S = complianceTensor (y↑→x)
-  unit            : 1/GPa            
-  rank            : 4 (3 x 3 x 3 x 3)
-  doubleConvention: true             
- 
-  tensor in Voigt matrix representation: *10^-4
-  34.85  -9.08   -7.7      0      0      0
-  -9.08  60.76  -17.2      0      0      0
-   -7.7  -17.2  50.85      0      0      0
-      0      0      0 156.25      0      0
-      0      0      0      0 129.87      0
-      0      0      0      0      0 127.06
-c =
+beta =
+    0.0018
+{% endhighlight %}
+<p>The result is 0.0018 GPa\(^{-1}\). It is the same contraction used by <a href="stiffnessTensor.linearCompressibility.html"><code class="language-plaintext highlighter-rouge">linearCompressibility</code></a>.</p>
+{% highlight matlab %}
+betaDirect = C.linearCompressibility(v);
+{% endhighlight %}
+<p>Contracting the stiffness in the same way is dimensionally wrong. The result is 460.25 GPa, not a compressibility.</p>
+{% highlight matlab %}
+wrongUnits = EinsteinSum(C,[-1 -2 -3 -3],v,-1,v,-2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+wrongUnits =
   460.2500
 {% endhighlight %}
-<p>Here we used the command <a href="tensor.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a> to compute the inverse of any rank 2 or rank 4 tensor. There are shortcuts in MTEX for specific tensor products. E.g. the relation between stress and strain can be more compactly written as a <a href="tensor.colon.html">double dot product</a>
-</p>
+<h2 id="13">Named contractions</h2>
+<p>Frequently used contractions have operators. For a stiffness and a strain, both <code class="language-plaintext highlighter-rouge">*</code> and <code class="language-plaintext highlighter-rouge">:</code> apply Hooke's law. They also preserve the physical result class, so the first command displays a <code class="language-plaintext highlighter-rouge">stressTensor</code> rather than the generic <code class="language-plaintext highlighter-rouge">tensor</code> returned by <code class="language-plaintext highlighter-rouge">EinsteinSum</code>.</p>
 {% highlight matlab %}
-C * eps
-C : eps
+sigmaTimes = C * eps
+sigmaColon = C : eps;
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = stressTensor (y↑→x)
-  rank: 2 (3 x 3)
- 
-  248.9      0      0
-      0  -8.65      0
-      0      0 -161.9
- 
-ans = stressTensor (y↑→x)
-  rank: 2 (3 x 3)
+sigmaTimes = stressTensor (y↑→x)
+  rank: 2 (3 × 3)
  
   248.9      0      0
       0  -8.65      0
       0      0 -161.9
 {% endhighlight %}
-<p>The double dot product between two rank two tensors is essentially their inner product and can be equivalently computed from the <a href="tensor.trace.html"><code class="language-plaintext highlighter-rouge">trace</code></a> of their matrix product</p>
+<p>Between two rank 2 tensors, the double dot product is their inner product. It is also the trace of either matrix product below. Each result here is a list of three scalars because <code class="language-plaintext highlighter-rouge">T1</code> and <code class="language-plaintext highlighter-rouge">T2</code> are lists.</p>
 {% highlight matlab %}
-T1 : T2
-trace(T1 * T2')
-trace(T1' * T2)
+inner = T1 : T2
+innerFromLeftTrace = trace(T1 * T2');
+innerFromRightTrace = trace(T1' * T2);
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    1.5964
-ans =
-    1.5964
-ans =
-    1.5964
+inner =
+    1.2723
+    2.6104
+    1.7063
 {% endhighlight %}
-<h2 id="13">Determinant</h2>
-<p>For rank two tensors we can compute the determinant of the tensor by the command <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a>
-</p>
+<h2 id="15">Rank 2 matrix operations</h2>
+<p> <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a> returns one determinant for each rank 2 tensor in the list. The same function also supports rank 4 tensors.</p>
 {% highlight matlab %}
-det(T1)
+d = det(T1)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+d =
     0.0650
+   -0.0782
+    0.0251
 {% endhighlight %}
-<h2 id="14">Rotating a tensor</h2>
-<p>Rotation a tensor is done by the command <a href="tensor.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>. Let's define a rotation</p>
+<h2 id="16">Rotating a tensor</h2>
+<p> <a href="tensor.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> actively rotates a physical property. The workshop example below starts with a second-rank thermal-conductivity tensor whose largest value, 10.5 W m\(^{-1}\) K\(^{-1}\), is along x. The rotation moves that preferred direction 45 degrees about z.</p>
 {% highlight matlab %}
-r = rotation.byEuler(45*degree,0*degree,0*degree);
+K = tensor(diag([10.5 6.2 6.2]),'rank',2,...
+  'propertyname','thermal conductivity','unit','W m^-1 K^-1');
+r = rotation.byAxisAngle(zvector,45*degree);
+Krot = rotate(K,r);
+
+newMtexFigure('layout',[1 2]);
+plot(K,'complete','upper')
+mtexTitle('before rotation')
+
+nextAxis
+plot(Krot,'complete','upper')
+mtexTitle('after rotation')
+
+setColorRange('equal')
+mtexColorbar('title','thermal conductivity (W m^{-1} K^{-1})')
 {% endhighlight %}
-<p>Then the rotated tensor is given by</p>
-{% highlight matlab %}
-Trot = rotate(T1,r);
-plot(Trot)
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TensorArithmetics_01.png" %}
 </center>
-<p>Here is another example from Nye (Physical Properties of Crystals, p.120-121) for a third-rank tensor</p>
+<p>The high-conductivity region turns in the right plot, while its maximum stays 10.5. A rank 2 tensor receives one rotation matrix per index,</p>
+<p>\[ K'_{ij} = \sum_{p,q} R_{ip} R_{jq} K_{pq}. \]</p>
+<p>Rotating the property is not a <b>frame change</b>. A frame change re-expresses the same physical object in another reference frame. Use <a href="tensor.transformReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transformReferenceFrame</code></a> for that operation; <a href="SymmetryAlignment.html">Reference Frame Alignment</a> shows why the distinction matters for published crystal properties.</p>
+<h2 id="18">A third-rank example</h2>
+<p>Nye gives the following piezoelectric modulus for a crystal with one threefold axis. The two printed component tables show the same property before and after an active rotation of -45 degrees about z.</p>
 {% highlight matlab %}
 P = [ 0 0 0 .17 0   0;
       0 0 0 0   .17 0;
       0 0 0 0   0   5.17]*10^-11;
 
-T = tensor(P,'rank',3,'propertyname','piezoelectric modulus')
+P0 = tensor(P,'rank',3,'propertyname','piezoelectric modulus')
 
-r = rotation.byAxisAngle(zvector,-45*degree);
-T = rotate(T,r)
+rPiezo = rotation.byAxisAngle(zvector,-45*degree);
+P45 = rotate(P0,rPiezo)
 {% endhighlight %}
 
 {% highlight plaintext %}
-T = tensor (y↑→x)
+P0 = tensor (y↑→x)
   propertyname: piezoelectric modulus
-  rank        : 3 (3 x 3 x 3)        
+  rank        : 3 (3 × 3 × 3)        
  
   tensor in compact matrix form: *10^-12
     0    0    0  1.7    0    0
     0    0    0    0  1.7    0
     0    0    0    0    0 51.7
  
-T = tensor (y↑→x)
+P45 = tensor (y↑→x)
   propertyname: piezoelectric modulus
-  rank        : 3 (3 x 3 x 3)        
+  rank        : 3 (3 × 3 × 3)        
  
   tensor in compact matrix form: *10^-12
      0     0     0     0   1.7     0
      0     0     0  -1.7     0     0
   51.7 -51.7     0     0     0     0
 {% endhighlight %}
+<p>Components that were zero before the rotation are nonzero afterwards. Nothing about the crystal changed internally: the component table changed because the property now points in different specimen directions.</p>
+<h2 id="20">Next</h2>
+<p>
+<a href="TensorVisualisation.html">Tensor Visualization</a> explains the directional plot used above and the specialized plots for physical tensor classes. <a href="AnisotropicTheory.html">Anisotropic Elasticity</a> applies these contractions to elastic moduli, energy, and wave propagation. The polycrystal step is <a href="TensorAverage.html">Tensor Averages</a>.</p>
+<h2 id="21">Further reading</h2>
+<div>
+<ul>
+<li>J. F. Nye, <a href="https://search.worldcat.org/title/11114089">Physical Properties of Crystals: Their Representation by Tensors and Matrices</a>, Oxford University Press, 1985. Pages 120-121 contain the third-rank rotation example above.</li>
+<li>C. Hammond, <a href="https://doi.org/10.1093/acprof:oso/9780198738671.003.0014">The physical properties of crystals and their description by tensors</a>, in <i>The Basics of Crystallography and Diffraction</i>, 4th edition, 2015.</li>
+<li>E. H. Abramson, J. M. Brown, L. J. Slutsky, and J. Zaug, <a href="https://doi.org/10.1029/97JB00682">The elastic constants of San Carlos olivine to 17 GPa</a>, <i>Journal of Geophysical Research</i> 102(B6), 12253-12263, 1997.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

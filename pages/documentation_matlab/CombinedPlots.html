@@ -1,5 +1,5 @@
 ---
-title: "Combined Plots"
+title: 'Combined Plots'
 
 sidebar: documentation_sidebar
 permalink: CombinedPlots.html
@@ -23,12 +23,14 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<p>Many scientific figures put related information together. Examples include measurements over a fitted function, two data sets in one projection, or crystal directions on an inverse pole figure.</p>
+<p>MTEX offers three ways to combine plots. The right choice depends on whether the figure has one axis, several managed axes, or independent panels.</p>
+<p>This page assumes the plot types from <a href="PlotTypes.html">Plot Types</a> and the screen frame from <a href="AxesAlignment.html">Axes Alignment</a>. The examples also use pole figures, inverse pole figures, and three-dimensional orientation plots. Follow the links where each first appears if these are unfamiliar.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>Explains how to combine several plots, e.g. plotting on the top of an inverse pole figure some important crystal directions.</p>
-<h2 id="3">General Principle</h2>
-<p>In order to tell MATLAB to plot one plot right on the top of an older plot one has to use the commands <a href="matlab:doc('hold')">hold on</a> and <a href="matlab:doc('hold')">hold off</a>. Let's demonstrate this using a simple example.</p>
+<h2 id="2">Holding a Plot</h2>
+<p>The MATLAB way is <a href="matlab:doc('hold')"><code class="language-plaintext highlighter-rouge">hold on</code></a>. It keeps what is drawn, so the next command adds to it rather than replacing it. The command <code class="language-plaintext highlighter-rouge">hold off</code> ends that state.</p>
 {% highlight matlab %}
 close all
 plot([2 2],'LineWidth',2)
@@ -39,68 +41,76 @@ plot([1 3],'LineWidth',2)
 
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CombinedPlots_01.png" %}
 </center>
-<h2 id="4">Combine Different EBSD Data</h2>
-<p>First, we want to show up two different orientation data sets in one plot</p>
+<p>The sloping line is added without erasing the horizontal one. After <code class="language-plaintext highlighter-rouge">hold off</code>, the next high-level plotting command may replace both.</p>
+<h2 id="4">Two Data Sets in One Projection</h2>
+<p>Start with a compact set of orientations and rotate a copy of its parent distribution.</p>
 {% highlight matlab %}
-% let's simulate some orientation data
 cs = crystalSymmetry('-3m');
 odf = unimodalODF(orientation.byEuler(0,0,0,cs));
 ori = discreteSample(odf,100);
-ori_rotated = discreteSample(rotate(odf,rotation.byEuler(60*degree,60*degree,0*degree)),100);
+oriRotated = discreteSample(...
+  rotate(odf,rotation.byEuler(60*degree,60*degree,0*degree)),100);
 {% endhighlight %}
-<p>plot them as a scatter plot in axis/angle space</p>
+<p>Draw both sets in axis--angle space. Each orientation becomes a point whose direction is its rotation axis. Its distance from the origin is the rotation angle. See <a href="OrientationVisualization3d.html">3D Orientation Visualizations</a> for this representation.</p>
 {% highlight matlab %}
 scatter(ori,'axisAngle')
 hold on % keep plot
-scatter(ori_rotated);
+scatter(oriRotated);
 hold off % next plot command deletes all plots
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CombinedPlots_02.png" %}
 </center>
-<p>a second way would be to superpose the pole figures of both sets of orientations.</p>
+<p>The figure holds three clouds. The original set is a single compact blob near the origin. The rotated set is one cluster too, but it appears as two lobes in opposite corners of the region: once a cluster sits far from the identity, its symmetrically equivalent representatives no longer all fall in the same corner.</p>
+<p>Either way the rotated points occupy different ground from the original ones, which shows that the rotation changed the orientations rather than only their plotted description.</p>
+<h2 id="7">The Same Data in Pole Figures</h2>
+<p>Project the same comparison along two crystal directions. The second <code class="language-plaintext highlighter-rouge">plotPDF</code> does not repeat the <code class="language-plaintext highlighter-rouge">'antipodal'</code> flag. The existing axes already define that symmetry. Added data must conform to those axes.</p>
 {% highlight matlab %}
 h = [Miller(0,0,0,1,cs),Miller(1,0,-1,0,cs)];
 plotPDF(ori,h,'antipodal','MarkerSize',4)
 hold on
-plotPDF(ori_rotated,h,'MarkerSize',4);
+plotPDF(oriRotated,h,'MarkerSize',4);
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CombinedPlots_03.png" %}
 </center>
-<h2 id="7">Overlaying contour and scatter plots</h2>
-<p>A more robust way to overlay multiple plots is to use the options <code class="language-plaintext highlighter-rouge">'add2all'</code> instead of <code class="language-plaintext highlighter-rouge">'hold on'</code>. This works for pole figure plots</p>
+<p>Both pole-figure panels contain the two orientation sets. Here <code class="language-plaintext highlighter-rouge">plotPDF</code> sees the two crystal directions. It adds the second set to both matching axes. That multi-axis behaviour belongs to <code class="language-plaintext highlighter-rouge">plotPDF</code>, not to MATLAB's <code class="language-plaintext highlighter-rouge">hold on</code> itself.</p>
+<h2 id="9">Adding to Every Axis at Once</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">hold on</code> changes only the <b>current</b> axis. A pole-figure figure has one axis per crystal direction. The general way to add one data set to every MTEX axis is the <code class="language-plaintext highlighter-rouge">'add2all'</code> flag.</p>
 {% highlight matlab %}
 plotPDF(odf,h,'antipodal','contourf','grid')
 mtexColorMap white2black
 
-plot(ori,'DisplayName','EBSD 1',...
+plot(ori,'DisplayName','original',...
   'MarkerSize',5,'MarkerColor','b','MarkerEdgeColor','w','add2all')
 
-plot(ori_rotated,'DisplayName','EBSD 2',...
+plot(oriRotated,'DisplayName','rotated',...
   'MarkerSize',5,'MarkerColor','r','MarkerEdgeColor','k','add2all');
 
 legend('show','location','northeast')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CombinedPlots_04.png" %}
 </center>
-<p>as well as with ODF section</p>
+<p>Each orientation set appears in both pole figures after one command. MTEX reprojects the orientations according to the crystal direction stored on each axis. Plain <code class="language-plaintext highlighter-rouge">hold on</code> neither selects all axes nor performs that dispatch.</p>
+<p>ODF sections work the same way, and here it matters more: there are eight axes, and every orientation belongs in the section closest to it.</p>
 {% highlight matlab %}
 plot(odf,'sections',8,'contourf','sigma')
 mtexColorMap white2black
 plot(ori,'MarkerSize',6,'MarkerColor','b','MarkerEdgeColor','w','add2all')
-plot(ori_rotated,'MarkerSize',6,'MarkerColor','r','MarkerEdgeColor','k','add2all');
+plot(oriRotated,'MarkerSize',6,'MarkerColor','r','MarkerEdgeColor','k','add2all');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CombinedPlots_05.png" %}
 </center>
-<h2 id="9">Add Miller Indices to an Inverse Pole Figure Plot</h2>
-<p>Next, we are going to add some Miller indices to an inverse pole figure plot.</p>
+<p>Both sets place markers in every section, so the section a marker lands in does not by itself separate the two. What distinguishes them is where they sit within a section: the original markers follow the contours of the ODF, and the rotated ones do not.</p>
+<h2 id="12">Marking Crystal Directions</h2>
+<p>An inverse pole figure fixes a specimen direction and maps the crystal directions parallel to it. See <a href="ODFInversePoleFigure.html">Inverse Pole Figures</a> for the construction. Marking important crystal directions makes the plot readable. The <code class="language-plaintext highlighter-rouge">'symmetrised'</code> flag draws every symmetrically equivalent direction, while <code class="language-plaintext highlighter-rouge">'labeled'</code> writes the indices beside them.</p>
 {% highlight matlab %}
 plotIPDF(odf,xvector,'noLabel');
 mtexColorMap white2black
@@ -112,42 +122,20 @@ plot(Miller(0,1,-1,0,cs),'symmetrised','labeled','backgroundColor','w')
 plot(Miller(0,1,-1,1,cs),'symmetrised','labeled','backgroundColor','w')
 hold off % next plot command deletes all plots
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CombinedPlots_06.png" %}
 </center>
-<h2 id="10">Combining different plots in one figure</h2>
-<p>The next example demonstrates how to arrange arbitrary plots into one figure</p>
+<p>The labels expose an important correction: the maximum is not at (0001). This ODF is centred on the identity orientation, so specimen X corresponds to a crystal direction in the basal plane. A c-axis maximum would instead appear in the inverse pole figure for specimen Z.</p>
+<h2 id="14">Different Plots Side by Side</h2>
+<p>The third case arranges several independent plots rather than overlaying them. The MTEX commands used below accept a <code class="language-plaintext highlighter-rouge">'parent'</code> axes, so MATLAB's own <a href="matlab:doc('subplot')"><code class="language-plaintext highlighter-rouge">subplot</code></a> can do the arranging.</p>
 {% highlight matlab %}
-% let us import some pole figure data
-mtexdata dubna
+mtexdata dubna silent
 {% endhighlight %}
 
-{% highlight plaintext %}
-pf = PoleFigure (y↑→x)
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
- 
-  h = (022̅1), r = 72 x 19 points
-  h = (101̅0), r = 72 x 19 points
-  h = (101̅1)(011̅1), r = 72 x 19 points
-  h = (101̅2), r = 72 x 19 points
-  h = (112̅0), r = 72 x 19 points
-  h = (112̅1), r = 72 x 19 points
-  h = (112̅2), r = 72 x 19 points
-{% endhighlight %}
-<p>next, we compute an ODF out of them</p>
 {% highlight matlab %}
-odf = calcODF(pf)
+odf = calcODF(pf,'silent');
 {% endhighlight %}
-
-{% highlight plaintext %}
-odf = SO3FunRBF (Quartz → y↑→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19848 orientations, resolution: 5°
-  weight: 1
-{% endhighlight %}
-<p>now we want to plot the original data alongside with the recalculated pole figures and with a difference plot</p>
+<p>A measured, a recalculated, and a difference pole figure form the standard comparison for judging a reconstruction. See <a href="PoleFigure2ODF.html">ODF Estimation</a> for the reconstruction workflow.</p>
 {% highlight matlab %}
 figure('position',[50 50 1200 500])
 
@@ -169,9 +157,14 @@ axesPos = subplot(1,3,3);
 % plot the difference pole figure at this position
 plotDiff(odf,pf({1}),'parent',axesPos)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CombinedPlots_07.png" %}
 </center>
+<p>From left to right, the panels show the measured intensity, the smoother intensity recalculated from the ODF, and their relative difference. The last panel locates mismatches that the first two panels make hard to judge. Compare colour values only when the relevant panels use the same range.</p>
+<h2 id="18">Further reading</h2>
+<p>S. R. Midway, <a href="https://doi.org/10.1016/j.patter.2020.100141">Principles of Effective Data Visualization</a>, <i>Patterns</i> 1 (2020), 100141. It discusses overlays of data and models as well as aligned panels for comparison.</p>
+<h2 id="19">Next</h2>
+<p>For a grid of related MTEX plots, continue with <a href="Multiplot.html">Multiplot</a>. It keeps axes aligned and can share one colorbar and one colour range across the figure.</p>
 </div>
 </body>
 </html>

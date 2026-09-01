@@ -1,5 +1,5 @@
 ---
-title: "ODF Tutorial"
+title: 'ODF Tutorial'
 
 sidebar: documentation_sidebar
 permalink: ODFTutorial.html
@@ -23,124 +23,192 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="1">Theory</h2>
-<p>The orientation distribution function (ODF) is a function in orientation space that associates each orientation \(g\) with the volume fraction of crystals in a polycrystalline specimen that are in this specific orientation, i.e.,</p>
-<p>\[\mathrm{odf}(g) = \frac{1}{V} \frac{\mathrm{d}V(g)}{\mathrm{d}g}.\]</p>
-<p>In MTEX a perfectly random texture will have an ODF equal to one for all orientations. In other words the values of ODFs in MTEX can be interpreted as multiples of the random distribution (mrd).</p>
-<h2 id="2">Computing an ODF from Individual Orientations</h2>
-<p>Individual orientation data may be obtained experimentally by EBSD (orientation mapping in a SEM), ACOM (orientation mapping in a TEM) or 3d X-ray imaging; or from simulations, like VPSC. In the following we consider an EBSD map of a Titanium alloy. Note that this data set is measured on a hexagonal grid rather than the more common square grid.</p>
+<p>An orientation distribution function (ODF) describes the texture of a specimen as a continuous density over all crystal orientations. It is the common result of two different experiments: orientation maps measure orientations individually, while diffraction measures pole figures.</p>
+<p>Read <a href="GeneralConcepts.html">General Concepts</a> first if MTEX objects and selections are new to you. The <a href="EBSDTutorial.html">EBSD tutorial</a> introduces orientation maps, and the <a href="PoleFigureTutorial.html">pole figure tutorial</a> develops diffraction data.</p>
+<p>MTEX reports ODF values in multiples of a random distribution, mrd. A random texture has value 1 everywhere. A value of 10 means ten times the random density near that orientation; it is not the volume fraction at one exact orientation.</p>
+<p>This tutorial follows three routes to an ODF: estimate one from individual orientations, reconstruct one from pole figures, and define a model ODF.</p>
+<h2 id="2">From individual orientations</h2>
+<p>The titanium map contains 8148 measurement points, but 48 could not be indexed and therefore have no orientation. Select the indexed titanium phase before estimating its density.</p>
 {% highlight matlab %}
-% import the titanium data
-mtexdata titanium
+% load the titanium example without displaying the EBSD summary
+mtexdata titanium silent
 
-% plot an orientation map
-plot(ebsd, ebsd.orientations)
+% select the indexed orientations
+titanium = ebsd('Titanium (Alpha)');
+ori = titanium.orientations;
+
+% display the number of orientations used in the estimate
+numOrientations = length(ori)
+
+% colour the map with one explicit inverse pole figure key
+ipfKey = ipfColorKey(ori);
+plot(titanium,ipfKey.orientation2color(ori))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSDhex (y↓→x)
- 
- Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
-     0    8100 (99%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
- 
- Properties: ci, grainid, iq, sem_signal, oldId
- Scan unit : um
- X x Y x Z : [0 → 996] x [0 → 998] x [0 → 0]
- Normal vector: (0,0,1)
- Hex grid     :97 x 84
+numOrientations =
+        8100
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFTutorial_01.png" %}
 </center>
-<p>Computing an ODF from individual orientations is done by <a href="DensityEstimation.html">kernel density estimation</a> using the command <a href="rotation.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
+<h2 id="3">Reading the orientation map</h2>
+<p>The map contains broad regions of similar colour rather than 8100 independent colour speckles. Neighbouring EBSD pixels are spatially correlated because many sample the same crystal.</p>
+<p> <a href="rotation.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a> uses kernel density estimation. It places a smooth kernel at every orientation and adds the kernels. The halfwidth controls how far each measurement is spread in orientation space; here it is set explicitly to 10 degrees.</p>
 {% highlight matlab %}
-% extract the orientations
-ori = ebsd.orientations;
-
-% compute the ODF
-odf = calcDensity(ori)
+halfwidth = 10*degree;
+odfFromOrientations = calcDensity(ori,'halfwidth',halfwidth)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunHarmonic (Titanium (Alpha) → y↓→x)
+odfFromOrientations = SO3FunHarmonic (Titanium (Alpha) → y↓→x)
   bandwidth: 25
   weight: 1
 {% endhighlight %}
-<p>There are many different ways to visualize an ODF: <a href="EulerAngleSections.html">Euler</a> or <a href="SigmaSections.html">sigma sections</a>, <a href="ODFPlot.html">three dimensional plots</a>, <a href="ODFPoleFigure.html">pole figures</a> and <a href="ODFInversePoleFigure.html">inverse pole figures</a>. The most common but not recommended way are sections with respect to the third Euler angle \(\varphi_2\)</p>
+<h2 id="4">Reading the ODF summary</h2>
+<p>The summary identifies an <a href="SO3FunHarmonic.SO3FunHarmonic.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> with bandwidth 25 and weight 1. Harmonic coefficients are its numerical representation, while the weight confirms that the ODF is normalized as one complete texture.</p>
+<p>Compute the maximum instead of estimating it from a colour scale.</p>
 {% highlight matlab %}
-plot(odf)
+orientationODFMaximum = max(odfFromOrientations,'numLocal',1)
+
+% plot sigma sections for the hexagonal titanium phase
+plot(odfFromOrientations,'sigma')
+mtexColorbar('title','orientation density (mrd)')
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+orientationODFMaximum =
+    9.0003
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="ODFTutorial_02.png" %}
 </center>
-<h2 id="5">Computing an ODF from Pole Figure Data</h2>
-<p>Pole figure data arises when textured materials are measured via x-ray, neutron or synchrotron radiation. Generally, for \(3\) to \(10\) diffraction planes specified by Miller indices \((hk\ell)\) diffraction intensities are measured at a spherical grid of specimen directions. In the example below each dot corresponds to one diffraction intensity at the plane indicated at the top of the spherical plots measured from the direction corresponding to the pixel position.</p>
+<h2 id="5">Reading the estimated ODF</h2>
+<p>The maximum is 9.0 mrd. In the sigma sections, the high-density region extends through neighbouring sections because the estimate is a continuous function rather than a list.</p>
+<p>The 10 degree halfwidth is an analysis choice, not a property of titanium. A smaller value resolves finer structure and usually raises the maximum, while a larger value merges nearby features. Neither change is automatically more accurate.</p>
+<p>The sampling weights matter as well. Pixel orientations weight mapped area, while grain mean orientations give every reconstructed grain one vote unless grain area is supplied as a weight. <a href="EBSD2ODF.html">ODF Estimation</a> develops halfwidth selection and weighting.</p>
+<h2 id="6">From pole figures</h2>
+<p>Diffraction does not measure individual orientations. For each lattice plane, it measures intensity over specimen directions. Load three orthorhombic pole figures and display their input summary.</p>
 {% highlight matlab %}
-% import pole figure data
 plottingConvention.default('y↑→x');
-mtexdata ptx
 
-% plot the data
+% load the pole figure example
+mtexdata ptx silent
+pf
+
+% plot the measured intensities
 plot(pf)
-
-% show the colour bar - note that the maximum intensity is different for
-% each pole figure
-mtexColorbar
+mtexColorbar('title','measured intensity')
 {% endhighlight %}
 
 {% highlight plaintext %}
 pf = PoleFigure (y↑→x)
   crystal symmetry : mmm
  
-  h = (104), r = 72 x 17 points
-  h = (110), r = 72 x 17 points
-  h = (202), r = 72 x 17 points
+  h = (104), r = 72 × 17 points
+  h = (110), r = 72 × 17 points
+  h = (202), r = 72 × 17 points
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFTutorial_03.png" %}
 </center>
-<p>The <a href="PoleFigure2ODF.html">reconstuction</a> of an ODF from pole figure data requires the solution of an <b>ill posed inverse problem</b>. This means the reconstruction problem has in general <a href="PoleFigure2ODFAmbiguity.html">not a unique solution</a>, but there are several ODFs that correspond to the same set of pole figure data. MTEX applies <a href="PoleFigure2ODFGhostCorrection.html">some heuristics</a> to identify among all solutions the physically most reasonable.</p>
+<h2 id="7">Reading the measured pole figures</h2>
+<p>The summary reports three grids of 72 by 17 specimen directions, for 3672 intensity values in total. The three plots have distinct spot patterns because each reflection places a different constraint on the unknown ODF.</p>
+<p> <a href="PoleFigure.calcODF.html"><code class="language-plaintext highlighter-rouge">calcODF</code></a> finds an ODF whose recalculated pole figures fit those measurements. The <code class="language-plaintext highlighter-rouge">'silent'</code> flag hides the solver iteration table but leaves the returned ODF summary visible.</p>
 {% highlight matlab %}
-% compute an ODF with default settings
-odf = calcODF(pf)
+odfFromPoleFigures = calcODF(pf,'silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunRBF (mmm → y↑→x)
+odfFromPoleFigures = SO3FunRBF (mmm → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°
   center: 29772 orientations, resolution: 5°
   weight: 1
 {% endhighlight %}
-<p>Once an ODF is reconstructed we can check how well its pole figures fit the measured pole figures</p>
+<h2 id="8">Reading the reconstructed ODF summary</h2>
+<p>This result is an <a href="SO3FunRBF.SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>, represented as a weighted sum of kernels on an orientation grid. It is the same scientific quantity as the harmonic ODF above despite the different representation.</p>
 {% highlight matlab %}
-% plot the recalculated pole figures
-plotPDF(odf,pf.h)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFTutorial_04.png" %}
-</center>
-<h2 id="8">ODF Modeling</h2>
-<p>Aside from experimental data MTEX also allows the definition of model ODFs of different types. These include <a href="RadialODFs.html#2">unimodal ODFs</a>, <a href="FibreODFs.html">fibre ODFs</a>, <a href="BinghamODFs.html">Bingham Distributed ODFs</a> and any <a href="ODFModeling.html">combination of such ODFs</a>.</p>
-{% highlight matlab %}
-% define a gamma fibre ODF
-odf = fibreODF(fibre.gamma(odf.CS))
-
-% plot it in sigma sections
-plot(odf,'sigma')
+poleFigureODFMaximum = max(odfFromPoleFigures,'numLocal',1)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunCBF (mmm → y↑→x)
+poleFigureODFMaximum =
+   17.7768
+{% endhighlight %}
+<p>The maximum is 17.8 mrd, so this reconstructed texture is sharper than the titanium estimate under their respective smoothing choices. Peak height alone should not be used to compare specimens unless the estimation and reconstruction settings are also comparable.</p>
+<p>The first validation is to recalculate the measured reflections.</p>
+{% highlight matlab %}
+% plot pole figures recalculated from the ODF
+plotPDF(odfFromPoleFigures,pf.h)
+mtexColorbar('title','recalculated intensity')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ODFTutorial_04.png" %}
+</center>
+<h2 id="10">Reading the recalculated pole figures</h2>
+<p>The broad maxima occupy the same regions as in the measured plots above. The recalculated fields are smooth and do not reproduce every measured point-to-point fluctuation. A systematic shift or a missing maximum would instead indicate a problem with the input, reference frame, corrections, or reconstruction settings.</p>
+<p>Agreement does not prove that the ODF is unique. Pole-figure inversion cannot recover every part of an ODF, even from noiseless measurements. <a href="PoleFigure2ODFAmbiguity.html">The Ghost Effect</a> explains the missing information, and <a href="PoleFigure2ODFGhostCorrection.html">Ghost Correction</a> explains the additional assumption used by MTEX by default. Continue with <a href="PoleFigure2ODF.html">ODF Reconstruction</a> for solver choices and quantitative fit measures.</p>
+<h2 id="11">Model ODFs</h2>
+<p>An ODF need not come from measurements. A model ODF provides a known reference texture for interpretation, simulation, or comparison with an estimate.</p>
+<p>The gamma fibre is a standard cubic rolling-texture component. Every orientation on its ideal curve places a crystal {111} plane normal parallel to the specimen normal direction. Define both symmetries explicitly so this model does not inherit anything from the orthorhombic diffraction example.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('cubic');
+ss = specimenSymmetry('orthorhombic');
+gammaFibre = fibre.gamma(cs,ss);
+
+% spread density by 10 degrees around the ideal gamma fibre
+modelODF = fibreODF(gammaFibre,'halfwidth',10*degree)
+
+modelODFMaximum = max(modelODF,'numLocal',1)
+
+% use conventional Euler sections for this cubic rolling texture
+plot(modelODF)
+mtexColorbar('title','orientation density (mrd)')
+{% endhighlight %}
+
+{% highlight plaintext %}
+modelODF = SO3FunCBF (m3̅m → y↑→x (mmm))
  
   kernel: de la Vallee Poussin, halfwidth 10°
   fibre : (111) || 0,0,1
   weight: 1
+ 
+modelODFMaximum =
+   11.4878
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFTutorial_05.png" %}
 </center>
+<h2 id="12">Reading the model ODF</h2>
+<p>The maximum is 11.5 mrd. The fibre shows up as a band running across the whole width of the \(\varphi_2 = 45^\circ\) section, not as an isolated peak. It is weaker in the neighbouring sections at 30 and 60 degrees and absent from the remaining three, so most of the density sits in a narrow range of \(\varphi_2\). The 10 degree kernel gives the band finite width, so this is a smooth model around an ideal fibre rather than density confined to a line.</p>
+<p>
+<a href="ODFModeling.html">Model ODFs</a> combines uniform, unimodal, fibre, and Bingham components. <a href="FibreODFs.html">Fibre ODFs</a> develops the role of the halfwidth and the pole figures produced by a fibre.</p>
+<h2 id="13">One ODF interface</h2>
+<p>The three displays above report <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code>, <code class="language-plaintext highlighter-rouge">SO3FunRBF</code>, and <code class="language-plaintext highlighter-rouge">SO3FunCBF</code>. These class names describe storage and approximation strategies, not three definitions of texture. All implement the <a href="SO3Fun.SO3Fun.html">SO3Fun</a> interface for evaluation, plotting, integration, extrema, rotation, arithmetic, and random sampling.</p>
+<p>This common interface is how MTEX connects EBSD, pole figures, texture models, crystal-plasticity input, and anisotropic material properties. <a href="ODFAnalysis.html">ODF Analysis</a> develops plots, components, and scalar texture measures. <a href="RandomSampling.html">Random Sampling</a> turns any ODF back into discrete orientations, while <a href="Tensors.html">Tensors</a> uses an ODF to average direction-dependent crystal properties.</p>
+<h2 id="14">The maths behind the two data routes</h2>
+<p>For an orientation \(g\), the ODF is the normalized material-volume density</p>
+<p>\[f(g) = \frac{1}{V}\frac{\mathrm{d}V(g)}{\mathrm{d}g}.\]</p>
+<p>Its integral over orientation space is 1. With the uniform probability measure used by MTEX, the random ODF is therefore the constant function 1 and ODF values have units of mrd.</p>
+<p>For measured orientations \(g_1,\ldots,g_N\) and a normalized kernel \(\psi\), kernel density estimation gives</p>
+<p>\[f_N(g) = \frac{1}{N}\sum_{n=1}^{N}\psi(g g_n^{-1}).\]</p>
+<p>The kernel halfwidth controls the smoothing described above. Crystal and specimen symmetries identify equivalent orientations in both the kernel and the domain.</p>
+<p>A pole figure is instead a projection of the ODF. For a crystal direction \(h\) and specimen direction \(r\), its pole density integrates over the orientation fibre that maps \(h\) to \(r\):</p>
+<p>\[P_h(r) = \int_{\{g:\,g h=r\}} f(g)\,\mathrm{d}g.\]</p>
+<p>Reconstructing an ODF from these projections is the inverse problem used by <code class="language-plaintext highlighter-rouge">calcODF</code>.</p>
+<h2 id="15">Further reading</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops classical ODF, pole-figure, and harmonic theory.</li>
+<li>H. Schaeben, <a href="https://doi.org/10.1002/1521-3951%28199704%29200%3A2%3C367%3A%3AAID-PSSB367%3E3.0.CO%3B2-I">A simple standard orientation density function: the hyperspherical de la Vallee Poussin kernel</a>, Phys. Status Solidi B 200 (1997), 367-376.</li>
+<li>R. Hielscher and H. Schaeben, <a href="https://doi.org/10.1107/S0021889808030112">A novel pole figure inversion method: specification of the MTEX algorithm</a>, J. Appl. Cryst. 41 (2008), 1024-1037.</li>
+<li>F. Bachmann, R. Hielscher and H. Schaeben, <a href="https://doi.org/10.4028/www.scientific.net/SSP.160.63">Texture Analysis with MTEX - Free and Open Source Software Toolbox</a>, Solid State Phenomena 160 (2010), 63-68.</li>
+<li>
+<a href="https://doi.org/10.1520/E0081-96R24">ASTM E81-96(2024)</a> covers X-ray acquisition of quantitative pole figures; it does not specify ODF inversion.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

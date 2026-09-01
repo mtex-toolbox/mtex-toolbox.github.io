@@ -1,5 +1,5 @@
 ---
-title: "S2VectorField"
+title: 'Spherical Vector Fields'
 
 sidebar: documentation_sidebar
 permalink: S2FunVectorField.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>S2VectorField</title>
+<title>Spherical Vector Fields</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_S2FunVectorField.m">
 </head>
@@ -22,135 +22,169 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>
-<a href="S2VectorField.S2VectorField">S2VectorField</a> handles three-dimensional functions on the sphere. For instance the gradient of an univariate <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> can return a <a href="S2VectorFieldHarmonic.S2VectorFieldHarmonic">S2VectorFieldHarmonic</a>.</p>
+<p>A spherical vector field assigns a three-dimensional vector to every direction on the sphere. The input direction is a point in the field's domain; the output vector is the value stored there.</p>
+<p>The output need not lie in the plane tangent to the sphere. For example, a general field may have radial and tangential parts. The gradient of a scalar <a href="S2Fun.S2Fun.html">S2Fun</a> is a special case whose values are tangential.</p>
+<p>MTEX represents this mapping with <a href="S2VectorField.S2VectorField.html"><code class="language-plaintext highlighter-rouge">S2VectorField</code></a>. This page constructs a harmonic representation, evaluates it, combines fields, and reads its two- and three-dimensional plots.</p>
 <!--/introduction-->
-<h2 id="1">Defining a S2VectorFieldHarmonic</h2>
-<p>
-<b>Definition via function values</b>
-</p>
-<p>At first we need some example vertices</p>
+<h2 id="1">Constructing a field from a function</h2>
+<p>Define a function that keeps the \(x\) and \(y\) components of its input and sets the \(z\) component to zero. It accepts <a href="vector3d.vector3d.html">vector3d</a> directions and returns <a href="vector3d.vector3d.html">vector3d</a> values.</p>
 {% highlight matlab %}
-nodes = equispacedS2Grid('points', 1e5);
-nodes = nodes(:);
+f = @(v) vector3d(v.x,v.y,0*v.x);
 {% endhighlight %}
-<p>Next, we define function values for the vertices</p>
+<p>Passing the handle to the constructor computes a harmonic approximation. The result is an <a href="S2VectorFieldHarmonic.S2VectorFieldHarmonic.html">S2VectorFieldHarmonic</a>.</p>
 {% highlight matlab %}
-y = vector3d.byPolar(sin(3*nodes.theta), nodes.rho+pi/2);
-{% endhighlight %}
-<p>Now the actual command to get <code class="language-plaintext highlighter-rouge">sVF1</code> of type <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code>
-</p>
-{% highlight matlab %}
-sVF1 = S2VectorFieldHarmonic.interpolate(nodes, y)
-{% endhighlight %}
-
-{% highlight plaintext %}
-sVF1 = S2VectorFieldHarmonic
- bandwidth: 224
-{% endhighlight %}
-<p>
-<b>Definition via function handle</b>
-</p>
-<p>If we have a function handle for the function we could create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns again <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p>
-{% highlight matlab %}
-f = @(v) vector3d(v.x, v.y, 0*v.x);
-{% endhighlight %}
-<p>Now we can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sVF2</code> of type <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code>
-</p>
-{% highlight matlab %}
-sVF2 = S2VectorFieldHarmonic(@(v) f(v))
-% sVF2 = S2VectorFieldHarmonic.quadrature(@(v) f(v))
+sVF2 = S2VectorFieldHarmonic(f,'bandwidth',4)
 {% endhighlight %}
 
 {% highlight plaintext %}
 sVF2 = S2VectorFieldHarmonic
- bandwidth: 128
+ bandwidth: 4
 {% endhighlight %}
-<p>
-<b>Definition via <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a></b>
-</p>
-<p>If we directly call the constructor with a <a href="S2FunVectorValued.html">vector valued <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> with two or three entries it will create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> with <code class="language-plaintext highlighter-rouge">sF(1)</code> the polar angle and <code class="language-plaintext highlighter-rouge">sF(2)</code> the azimuth or <code class="language-plaintext highlighter-rouge">sF(1)</code>, <code class="language-plaintext highlighter-rouge">sF(2)</code>, and <code class="language-plaintext highlighter-rouge">sF(3)</code> the \(x\), \(y\), and \(z\) component.</p>
+<p>The explicit <a href="S2VectorFieldHarmonic.quadrature.html"><code class="language-plaintext highlighter-rouge">quadrature</code></a> call is equivalent.</p>
 {% highlight matlab %}
-sF = S2FunHarmonic(rand(10, 2));
-sVF3 = S2VectorFieldHarmonic(sF)
+sVF2q = S2VectorFieldHarmonic.quadrature(f,'bandwidth',4);
+{% endhighlight %}
+<p>Evaluate the field as one would evaluate a scalar spherical function. At specimen X the value is specimen X, whereas at specimen Z it vanishes.</p>
+{% highlight matlab %}
+[sVF2.eval(xvector),sVF2.eval(zvector)]
+{% endhighlight %}
 
-sF = S2FunHarmonic(rand(10, 3));
-sVF4 = S2VectorFieldHarmonic(sF)
+{% highlight plaintext %}
+ans = vector3d (y↓→x)
+ size: 1 × 2
+  x y z
+  1 0 0
+  0 0 0
+{% endhighlight %}
+<h2 id="5">Constructing a field from sampled values</h2>
+<p>If directions and their vector values are already available, use <a href="S2VectorFieldHarmonic.interpolate.html"><code class="language-plaintext highlighter-rouge">interpolate</code></a>. Here the samples come from the same function so that the two construction routes can be compared.</p>
+{% highlight matlab %}
+nodes = equispacedS2Grid('points',2000);
+nodes = nodes(:);
+values = f(nodes);
+
+sVF1 = S2VectorFieldHarmonic.interpolate(nodes,values,'bandwidth',4)
+{% endhighlight %}
+
+{% highlight plaintext %}
+sVF1 = S2VectorFieldHarmonic
+ bandwidth: 4
+{% endhighlight %}
+<p>The small maximum discrepancy on an independent grid comes from fitting the finite harmonic representation to sampled values.</p>
+{% highlight matlab %}
+probe = equispacedS2Grid('resolution',15*degree);
+
+max(norm(sVF1.eval(probe) - sVF2.eval(probe)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   2.5572e-08
+{% endhighlight %}
+<h2 id="7">Constructing a field from scalar components</h2>
+<p>A harmonic vector field stores its Cartesian components as an array of scalar <a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a> objects. Three entries supply the \(x\), \(y\), and \(z\) components directly.</p>
+{% highlight matlab %}
+xyzComponents = [sVF2.x,sVF2.y,sVF2.z];
+sVF4 = S2VectorFieldHarmonic(xyzComponents)
+{% endhighlight %}
+
+{% highlight plaintext %}
+sVF4 = S2VectorFieldHarmonic
+ bandwidth: 4
+{% endhighlight %}
+<p>Two entries supply \(x\) and \(y\), and the evaluator sets \(z\) to zero. Earlier documentation described the two entries as polar angle and azimuth; that is not the behaviour of the current constructor.</p>
+{% highlight matlab %}
+xyComponents = [sVF2.x,sVF2.y];
+sVF3 = S2VectorFieldHarmonic(xyComponents)
 {% endhighlight %}
 
 {% highlight plaintext %}
 sVF3 = S2VectorFieldHarmonic
- bandwidth: 3
- 
-sVF4 = S2VectorFieldHarmonic
- bandwidth: 3
+ bandwidth: 4
 {% endhighlight %}
-<h2 id="8">Operations</h2>
+<p>Evaluating the two-component field makes the zero \(z\) component explicit.</p>
 {% highlight matlab %}
-plottingConvention.default('y↑→x');
-{% endhighlight %}
-<p>
-<b>Basic arithmetic operations</b>
-</p>
-<p>Again the basic mathematical operations are supported:</p>
-<p>addition/subtraction of a vector field and a vector or addition/subtraction of two vector fields</p>
-{% highlight matlab %}
-sVF1+sVF2; sVF1+vector3d(1, 0, 0);
-sVF1-sVF2; sVF2-vector3d(sqrt(2)/2, sqrt(2)/2, 0);
-{% endhighlight %}
-<p>multiplication/division by a scalar or a <code class="language-plaintext highlighter-rouge">S2Fun</code>
-</p>
-{% highlight matlab %}
-2.*sVF1; sVF1./4;
-S2Fun.smiley .* sVF1;
+sVF3.eval(xvector)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: M is too large for useing an precomputed optimal quadrature grid.
-Instead we use GaussLegendre quadrature.
+ans = vector3d (y↓→x)
+  x y z
+  1 0 0
 {% endhighlight %}
-<p>dot product with a vector or another vector field</p>
+<h2 id="10">Arithmetic and derived quantities</h2>
+<p>Addition and subtraction act pointwise. The second operand may be another vector field or one fixed <a href="vector3d.vector3d.html">vector3d</a>.</p>
 {% highlight matlab %}
-dot(sVF1, sVF2); dot(sVF1, vector3d(0, 0, 1));
+sumField = sVF1 + sVF2;
+shiftedField = sVF1 + vector3d(1,0,0);
+differenceField = sVF1 - sVF2;
+shiftedDifference = sVF2 - vector3d(sqrt(2)/2,sqrt(2)/2,0);
 {% endhighlight %}
-<p>cross product with a vector or another vector field</p>
+<p>Multiplication and division by a scalar change every vector. Multiplying by an <a href="S2Fun.S2Fun.html">S2Fun</a> gives each direction its own scalar weight.</p>
 {% highlight matlab %}
-cross(sVF1, sVF2); cross(sVF1, vector3d(0, 0, 1));
+scaledField = 2 .* sVF1;
+reducedField = sVF1 ./ 4;
+weight = S2FunHarmonic.quadrature(@(v) 1+0.2*v.z,'bandwidth',2);
+weightedField = sVF1 .* weight;
 {% endhighlight %}
-<p>mean vector of the vector field</p>
+<p>A pointwise dot product returns a scalar <a href="S2Fun.S2Fun.html">S2Fun</a>. Its second operand may be a vector field or one fixed vector.</p>
 {% highlight matlab %}
-mean(sVF1);
+fieldDot = dot(sVF1,sVF2);
+verticalComponent = dot(sVF1,vector3d(0,0,1));
 {% endhighlight %}
-<p>rotation of the vector field</p>
+<p>A pointwise cross product returns another vector field and accepts the same two kinds of second operand.</p>
 {% highlight matlab %}
-r = rotation.byEuler( [pi/4 0 0]);
-rotate(sVF1, r);
+fieldCross = cross(sVF1,sVF2);
+crossWithZ = cross(sVF1,vector3d(0,0,1));
 {% endhighlight %}
-<p>pointwise norm of the vectors</p>
+<p> <a href="S2VectorFieldHarmonic.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> returns one mean <a href="vector3d.vector3d.html">vector3d</a>. <a href="S2VectorFieldHarmonic.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a> returns the scalar function of pointwise vector lengths.</p>
 {% highlight matlab %}
-norm(sVF1);
+meanVector = mean(sVF1)
+lengthFunction = norm(sVF1)
 {% endhighlight %}
-<h2 id="18">Visualization</h2>
-<p>One can use the default <code class="language-plaintext highlighter-rouge">plot</code>-command</p>
+
+{% highlight plaintext %}
+meanVector = vector3d (y↓→x)
+          x         y         z
+  -3.27e-08         0         0
+ 
+lengthFunction = S2FunHarmonic (y↓→x)
+  bandwidth: 128
+  antipodal: true
+{% endhighlight %}
+<p>Rotating a field moves both its argument directions and its vector values.</p>
 {% highlight matlab %}
-plot(sVF1);
+r = rotation.byEuler([pi/4 0 0]);
+rotatedField = rotate(sVF1,r);
 {% endhighlight %}
-<center>
+<h2 id="16">Visualizing direction and magnitude</h2>
+<p>Fix the plotting convention so specimen X points right and specimen Y points up. The default <a href="S2VectorField.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> command draws a projected quiver plot; <a href="S2VectorField.quiver.html"><code class="language-plaintext highlighter-rouge">quiver</code></a> is an alias.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+plot(sVF2,'upper','resolution',15*degree)
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunVectorField_01.png" %}
 </center>
-<div>
-<ul>
-<li>same as quiver(sVF1)</li>
-</ul>
-</div>
-<p>or the 3D plot of a sphere with the vectors on itself</p>
+<p>Arrows are shortest near specimen Z and lengthen towards the equator. Their length shows the field magnitude, while their arrowhead shows the sense of each vector.</p>
+<p> <a href="S2VectorField.quiver3.html"><code class="language-plaintext highlighter-rouge">quiver3</code></a> attaches the same arrows to a three-dimensional sphere.</p>
 {% highlight matlab %}
-clf;
-quiver3(sVF2);
+clf
+quiver3(sVF2,'resolution',15*degree)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunVectorField_02.png" %}
 </center>
+<p>The sphere shows the input directions, not a surface that constrains the output. Arrows can therefore point away from the tangent plane. This is the visual distinction between a general vector field and a tangential field such as a gradient.</p>
+<h2 id="19">References</h2>
+<div>
+<ul>
+<li>W. Freeden and M. Schreiner, <a href="https://doi.org/10.1007/978-3-540-85112-7">Spherical Functions of Mathematical Geosciences: A Scalar, Vectorial, and Tensorial Setup</a>, Springer, 2009, develops harmonic representations of vector fields on the sphere.</li>
+</ul>
+</div>
+<h2 id="20">Next</h2>
+<p>
+<a href="S2FunAxisField.html">Spherical Axis Fields</a> treats values without a sense, for which a vector and its negative represent the same axis.</p>
 </div>
 </body>
 </html>

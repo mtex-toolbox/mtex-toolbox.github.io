@@ -1,5 +1,5 @@
 ---
-title: "ODF Reconstruction - Dubna Example"
+title: 'Reconstructing the Dubna Quartz ODF'
 
 sidebar: documentation_sidebar
 permalink: PoleFigureDubna.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>ODF Reconstruction - Dubna Example</title>
+<title>Reconstructing the Dubna Quartz ODF</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_PoleFigureDubna.m">
 </head>
@@ -23,235 +23,193 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>This example demonstrates the most important MTEX tools for analysing Pole Figure Data.</p>
+<p>This page follows a three-file subset of the seven bundled Dubna pole figures from their files to a reconstructed orientation distribution function (ODF), then checks its fit. Florian Wobbe measured the quartz specimen at Dubna in 2005 using neutron diffraction, as recorded in the <a href="https://mtex-toolbox.github.io/HomepageOld/files/doc/dubna_demo.html">original MTEX Dubna example</a>.</p>
+<p>The example brings together the import, inspection, reconstruction, and validation steps developed earlier in this chapter. It assumes the pole-figure idea from <a href="PoleFigureAnalysis.html">Pole Figures</a>, the import model from <a href="PoleFigureImport.html">Import</a>, and the inversion workflow from <a href="PoleFigure2ODF.html">ODF Reconstruction</a>. The origin of the ghost effect is explained in <a href="PoleFigure2ODFAmbiguity.html">The Ghost Effect</a>.</p>
+<p>A plotting convention states how the specimen reference frame is drawn. This data set uses Y upward and X to the right. The convention does not rotate the specimen directions or change their intensities.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-
-% specify crystal and specimen symmetry
+{% endhighlight %}
+<h2 id="2">Import the three measurements</h2>
+<p>Quartz is trigonal. The lattice parameters below define its crystal frame as well as the metric used to interpret the four-index notation introduced in <a href="CrystalDirections.html">Miller Indices</a>.</p>
+{% highlight matlab %}
 CS = crystalSymmetry('-3m',[4.9 4.9 5.4]);
 
-% specify file names
 fname = {...
   fullfile(mtexDataPath,'PoleFigure','dubna','Q(10-10)_amp.cnv'),...
   fullfile(mtexDataPath,'PoleFigure','dubna','Q(10-11)(01-11)_amp.cnv'),...
   fullfile(mtexDataPath,'PoleFigure','dubna','Q(11-22)_amp.cnv')};
 
-% specify crystal directions
+% crystal-plane normals, one cell per measured file
 h = {Miller(1,0,-1,0,CS),...
-     [Miller(0,1,-1,1,CS),Miller(1,0,-1,1,CS)],... % superposed pole figures
-     Miller(1,1,-2,2,CS)};
+  [Miller(0,1,-1,1,CS),Miller(1,0,-1,1,CS)],...
+  Miller(1,1,-2,2,CS)};
 
-% specify structure coefficients
-c = {1,[0.52 ,1.23],1};
-
-% import data
-pf = PoleFigure.load(fname,h,CS,'interface','dubna','superposition',c);
-
-plot(pf)
-mtexColorbar
+% relative structure coefficients, in the same order as h
+c = {1,[0.52,1.23],1};
 {% endhighlight %}
-<center>
+<p>The second diffraction peak contains the unresolved \((01\bar{1}1)\) and \((10\bar{1}1)\) reflections. Its measured intensity is therefore a weighted superposition of two pole figures, not a fourth measurement. Passing <code class="language-plaintext highlighter-rouge">c</code> at import makes that same weighted sum part of the forward model used during reconstruction. See <a href="PoleFigureImport.html">Import</a> for how the structure coefficients are found.</p>
+{% highlight matlab %}
+pf = PoleFigure.load(fname,h,CS,'interface','dubna','superposition',c)
+{% endhighlight %}
+
+{% highlight plaintext %}
+pf = PoleFigure (y↑→x)
+  crystal symmetry : -3m1, X||a*, Y||b, Z||c
+ 
+  h = (101̅0), r = 72 × 19 points
+  h = (011̅1)(101̅1), r = 72 × 19 points
+  h = (112̅2), r = 72 × 19 points
+{% endhighlight %}
+<p>The summary reports three entries on identical \(72 \times 19\) direction grids. The double Miller label on the second entry confirms that its two reflections have not been mistaken for separate measurements.</p>
+{% highlight matlab %}
+plot(pf)
+mtexColorbar('title','intensity')
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigureDubna_01.png" %}
 </center>
-<h2 id="2">Extract information from imported pole figure data</h2>
-<p>
-<b>Get raw data</b>
-</p>
-<p>Data stored in a <a href="PoleFigure.PoleFigure.html">PoleFigure</a> variable can be extracted by</p>
+<p>The three panels contain sharp maxima in different specimen directions. The second panel has a much larger raw intensity range, which is why the solver estimates one scale factor per pole figure. These counts are not yet pole densities in multiples of a random distribution (mrd); see <a href="ODFTheory.html">ODF Theory</a>.</p>
+<h2 id="6">Inspect the stored data</h2>
+<p>The object exposes the measured intensities, crystal-plane normals, and specimen directions as ordinary arrays. Different pole figures can use different direction grids, so <a href="PoleFigure.PoleFigure.html"><code class="language-plaintext highlighter-rouge">PoleFigure</code></a> also provides the cell-valued properties <code class="language-plaintext highlighter-rouge">allI</code>, <code class="language-plaintext highlighter-rouge">allH</code>, and <code class="language-plaintext highlighter-rouge">allR</code>.</p>
 {% highlight matlab %}
-I = pf.intensities; % intensities
-h = pf.h;           % Miller indices
-r = pf.r;           % specimen directions
+I = pf.intensities;
+latticeDirections = pf.h;
+specimenDirections = pf.r;
 {% endhighlight %}
-<p>
-<b>Basic Statistics</b>
-</p>
-<p>There are also some basic statics on pole figure intensities</p>
+<p>Minimum and maximum intensities give a first scale check. The rows follow the three entries in the object summary above.</p>
 {% highlight matlab %}
-min(pf)
-max(pf)
-isOutlier(pf);
+poleFigureLabel = {'(10-10)';'(01-11)+(10-11)';'(11-22)'};
+intensitySummary = table(min(pf).',max(pf).',...
+  'VariableNames',{'minimum','maximum'},'RowNames',poleFigureLabel)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-     0     0     0
-ans =
-   1.0e+03 *
-    0.0898    1.3600    0.9620
+intensitySummary =
+  3×2 table
+                       minimum    maximum
+                       _______    _______
+    (10-10)               0        89.8  
+    (01-11)+(10-11)       0        1360  
+    (11-22)               0         962
 {% endhighlight %}
-<h2 id="4">Manipulate pole figure data</h2>
+<p> <a href="PoleFigure.isOutlier.html"><code class="language-plaintext highlighter-rouge">isOutlier</code></a> compares every measurement with its neighbourhood. Use it to create a mask for inspection:</p>
 {% highlight matlab %}
-pf_modified = pf(pf.r.theta < 70*degree | pf.r.theta > 75*degree)
+outlierMask = isOutlier(pf);
+{% endhighlight %}
+<p>A flag is a prompt to inspect the experiment, not permission to delete a value automatically. Background, defocusing, normalization, and an executable outlier example are in <a href="PoleFigureCorrection.html">Data Correction</a>.</p>
+<h2 id="9">Select a diagnostic band</h2>
+<p>High-tilt measurements are especially vulnerable to defocusing. The next condition demonstrates indexed selection by removing only the two rings from 70 through 75 degrees. It deliberately retains directions above 75 degrees, so it is not a recommended high-tilt correction.</p>
+{% highlight matlab %}
+keep = pf.r.theta < 70*degree | pf.r.theta > 75*degree;
+pf_bandRemoved = pf(keep)
 
-plot(pf_modified)
+plot(pf_bandRemoved)
+mtexColorbar('title','intensity')
 {% endhighlight %}
 
 {% highlight plaintext %}
-pf_modified = PoleFigure (y↑→x)
+pf_bandRemoved = PoleFigure (y↑→x)
   crystal symmetry : -3m1, X||a*, Y||b, Z||c
  
-  h = (101̅0), r = 1 x 1224 points
-  h = (011̅1)(101̅1), r = 1 x 1224 points
-  h = (112̅2), r = 1 x 1224 points
+  h = (101̅0), r = 1 × 1224 points
+  h = (011̅1)(101̅1), r = 1 × 1224 points
+  h = (112̅2), r = 1 × 1224 points
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigureDubna_02.png" %}
 </center>
+<p>The blank band is the direct visual consequence of the selection. Each entry now contains 1224 of its original 1368 specimen directions.</p>
+<h2 id="11">Rotate the measured directions</h2>
+<p> <a href="PoleFigure.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> actively moves every measured specimen direction while leaving its intensity unchanged. This is not a frame change and not a plotting convention. If import assigned the wrong specimen reference frame, correct the import whenever possible.</p>
 {% highlight matlab %}
 rot = rotation.byAxisAngle(xvector-yvector,25*degree);
-pf_modified = rotate(pf,rot)
+pf_rotated = rotate(pf,rot);
 
-plot(pf_modified)
+plot(pf_rotated)
+mtexColorbar('title','intensity')
 {% endhighlight %}
-
-{% highlight plaintext %}
-pf_modified = PoleFigure (y↑→x)
-  crystal symmetry : -3m1, X||a*, Y||b, Z||c
- 
-  h = (101̅0), r = 72 x 19 points
-  h = (011̅1)(101̅1), r = 72 x 19 points
-  h = (112̅2), r = 72 x 19 points
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigureDubna_03.png" %}
 </center>
-<h2 id="7">PDF - to - ODF Reconstruction</h2>
+<p>All three intensity patterns turn together relative to the plotted axes. Their values and the number of sampled directions do not change.</p>
+<h2 id="13">Make a coarse reconstruction</h2>
+<p>A 10 degree orientation grid and at most six solver iterations provide a quick consistency check.</p>
 {% highlight matlab %}
-rec = calcODF(pf,'RESOLUTION',10*degree,'iter_max',6)
-
-plotPDF(rec,h)
-mtexColorbar
+recCoarse = calcODF(pf,'resolution',10*degree,'iterMax',6)
 {% endhighlight %}
 
 {% highlight plaintext %}
-rec = SO3FunRBF (3̅m1 → y↑→x)
+recCoarse = SO3FunRBF (3̅m1 → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 10°
   center: 2472 orientations, resolution: 10°
   weight: 1
 {% endhighlight %}
-<center>
+<p>The first check is always the recalculated pole figures against the measured ones above. Recalculate exactly the three measured entities. The <code class="language-plaintext highlighter-rouge">'superposition'</code> option combines the two unresolved reflections with their imported structure coefficients instead of drawing them as separate pole figures.</p>
+{% highlight matlab %}
+plotPDF(recCoarse,pf.allH,'antipodal','silent',...
+  'superposition',pf.c)
+mtexColorbar('title','mrd')
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigureDubna_04.png" %}
 </center>
+<p>The broad maxima occupy the same regions as in the measured panels and have the same relative order. At this coarse resolution that agreement is only a screening result, not evidence that the recovered ODF is unique. <a href="PoleFigure2ODF.html">ODF Reconstruction</a> explains the cost of resolution and iteration count. <a href="PoleFigureRefinement.html">Iterative ODF Reconstruction</a> shows what successively narrowing the kernel can gain.</p>
+<h2 id="16">Reconstruct at the default resolution</h2>
+<p>The final reconstruction uses the default orientation grid and kernel. Its iteration trace is suppressed because <a href="PoleFigure2ODF.html">ODF Reconstruction</a> explains that output in detail.</p>
 {% highlight matlab %}
-odf = SantaFe
-
-% define specimen directions
-r = regularS2Grid('antipodal')
+rec = calcODF(pf,'silent');
 {% endhighlight %}
-
-{% highlight plaintext %}
-odf = SO3FunRBF (m3̅m → y↑→x (222))
- 
-  uniform component
-  weight: 0.73
- 
-  unimodal component
-  kernel: van Mises Fisher, halfwidth 10°
-  center: 1 orientations
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2  weight
-  296.565 48.1897 26.5651    0.27
- 
- 
-r = S2Grid
- size: 72 x 19
- antipodal: true
-{% endhighlight %}
-<p>define crystal directions</p>
+<p> <a href="PoleFigure.calcError.html"><code class="language-plaintext highlighter-rouge">calcError</code></a> returns one regularised relative residual per measured pole figure. Label the values so the superposed measurement remains identifiable.</p>
 {% highlight matlab %}
-h = [Miller(1,0,0,odf.CS),Miller(1,1,0,odf.CS),Miller(1,1,1,odf.CS)];
-{% endhighlight %}
-<p>simulate pole figure data</p>
-{% highlight matlab %}
-pf_SantaFe = calcPoleFigure(odf,h,r);
-{% endhighlight %}
-<p>estimate an ODF with ghost correction</p>
-{% highlight matlab %}
-rec = calcODF(pf_SantaFe,'RESOLUTION',10*degree,'background',10)
-
-plot(rec,'sections',6)
+regularisedRelativeResidual = calcError(pf,rec,'silent').';
+fitSummary = table(regularisedRelativeResidual,...
+  'RowNames',poleFigureLabel)
 {% endhighlight %}
 
 {% highlight plaintext %}
-rec = SO3FunRBF (m3̅m → y↑→x (222))
- 
-  uniform component
-  weight: 0.73
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 150 orientations, resolution: 10°
-  weight: 0.27
+fitSummary =
+  3×1 table
+                       regularisedRelativeResidual
+                       ___________________________
+    (10-10)                      0.42687          
+    (01-11)+(10-11)              0.18203          
+    (11-22)                      0.35339
 {% endhighlight %}
-<center>
+<p>The superposed measurement in the middle fits best, at 0.18, and the \((10\bar{1}0)\) measurement fits worst, at 0.43. A smaller residual means a better match to the measured projection. It does not prove that the ODF itself is unique or true.</p>
+<h2 id="19">Locate the remaining mismatch</h2>
+<p> <a href="PoleFigure.plotDiff.html"><code class="language-plaintext highlighter-rouge">plotDiff</code></a> shows the same regularised relative residual at every measured direction.</p>
+{% highlight matlab %}
+plotDiff(pf,rec,'silent')
+mtexColorbar('title','relative residual')
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigureDubna_05.png" %}
 </center>
-<p>without ghost correction</p>
-{% highlight matlab %}
-rec_ng = calcODF(pf_SantaFe,'RESOLUTION',10*degree,'background',10,'NoGhostCorrection')
-
-plot(rec_ng,'sections',6)
-{% endhighlight %}
-
-{% highlight plaintext %}
-rec_ng = SO3FunRBF (m3̅m → y↑→x (222))
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 150 orientations, resolution: 10°
-  weight: 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureDubna_06.png" %}
-</center>
-<h2 id="13">Error Analysis</h2>
-{% highlight matlab %}
-calcError(pf_SantaFe,rec)
-calcError(pf_SantaFe,rec_ng)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-    0.0202    0.0261    0.0240
-ans =
-    0.0358    0.0283    0.0252
-{% endhighlight %}
+<p>The mismatch is scattered rather than concentrated in one patch, which is consistent with measurement noise. It also grows towards the rim, where the high specimen tilt makes defocusing correction least reliable. Both patterns are diagnostic clues, not proof of a single cause.</p>
+<h2 id="21">Exercises</h2>
+<p>Working through these on the same data set covers the rest of the chapter:</p>
+<div>
+<ol>
+<li>inspect the raw pole figures and identify measurements you would not trust;</li>
+<li>remove only values for which you have a physical reason, reconstruct the ODF, and compare the <a href="PoleFigure.calcError.html"><code class="language-plaintext highlighter-rouge">calcError</code></a> values;</li>
+<li>reconstruct from fewer pole figures and find the smallest set that still gives a recognisable texture; and</li>
+<li>compare reconstructions with and without <a href="PoleFigure2ODFGhostCorrection.html">ghost correction</a>. Which fits the pole figures better, and why does that comparison not identify the true ODF?</li>
+</ol>
+</div>
+<h2 id="22">Further reading</h2>
+<div>
+<ul>
+<li>R. Hielscher and H. Schaeben, <a href="https://doi.org/10.1107/S0021889808030112">A novel pole figure inversion method: specification of the MTEX algorithm</a>, <i>Journal of Applied Crystallography</i> 41, 1024--1037, 2008. This specifies the estimator and numerical reconstruction used here.</li>
+<li>S. Matthies, H.-R. Wenk and G. W. Vinel, <a href="https://doi.org/10.1107/S0021889888000275">Some basic concepts of texture analysis and comparison of three methods to calculate orientation distributions from pole figures</a>, <i>Journal of Applied Crystallography</i> 21, 285--304, 1988. It motivates using both integral errors and difference pole figures to assess an inversion.</li>
+<li>K. Ullemeyer et al., <a href="https://doi.org/10.23689/fidgeo-1862">Neutron time-of-flight texture measurements in Dubna: status and developments</a>, in <i>11. Symposium Tektonik, Struktur- und Kristallgeologie</i>, 2006. It describes the SKAT instrument and why time-of-flight diffraction records several pole figures from bulk geological samples.</li>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982. This is the standard textbook treatment of pole figures and ODF reconstruction.</li>
+</ul>
+</div>
+<h2 id="23">Next</h2>
 <p>
-<b>Difference plot</b>
-</p>
-{% highlight matlab %}
-plotDiff(pf_SantaFe,rec)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureDubna_07.png" %}
-</center>
-<p>
-<b>ODF error</b>
-</p>
-{% highlight matlab %}
-calcError(odf,rec)
-calcError(odf,rec_ng)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-    0.0312
-ans =
-    0.0893
-{% endhighlight %}
-<h2 id="16">Exercises</h2>
-<p>a) Load the pole figure data of a quartz specimen from: data/dubna!</p>
-<p>b) Inspect the raw data. Are there noticeable problems?</p>
-<p>c) Compute an ODF from the pole figure data.</p>
-<p>d) Plot some pole figures of that ODF and compare them to the measured pole figures.</p>
-<p>e) Compute the RP errors for each pole figure.</p>
-<p>f) Plot the difference between the raw data and the calculated pole figures. What do you observe?</p>
-<p>g) Remove the erroneous values from the pole figure data and repeat the ODF calculation. How do the RP error change?</p>
-<p>h) Vary the number of pole figures used for the ODF calculation. What is the minimum set of pole figures needed to obtain a meaningful ODF?</p>
+<a href="PoleFigureExport.html">Export</a> shows how to write measured and recalculated pole figures. Continue to <a href="ODFAnalysis.html">ODF Analysis</a> to quantify the assessed ODF and derive texture characteristics from it.</p>
 </div>
 </body>
 </html>

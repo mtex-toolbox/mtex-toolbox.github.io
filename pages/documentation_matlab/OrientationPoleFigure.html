@@ -1,5 +1,5 @@
 ---
-title: "Pole Figures"
+title: 'Pole Figures'
 
 sidebar: documentation_sidebar
 permalink: OrientationPoleFigure.html
@@ -23,84 +23,85 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A pole figure answers one question: given a crystal direction, where in the specimen does it point? It is the standard two dimensional view of orientation data, and it is built from the coordinate transform of <a href="DefinitionAsCoordinateTransform.html">Theory</a> in three steps.</p>
+<p>A pole figure answers one question: given a crystal direction, where in the specimen does it point? A pole is a direction fixed in the lattice, commonly the normal to a lattice plane. The plot therefore turns a population of orientations into a two dimensional view in the specimen reference frame.</p>
+<p>This page assumes the coordinate map from <a href="DefinitionAsCoordinateTransform.html">Theory</a>, the equivalent directions from <a href="OrientationSymmetry.html">Symmetry</a>, and the Miller notation from <a href="CrystalDirections.html">Crystal Directions</a>. The choice of hemisphere and projection is developed in <a href="SphericalProjections.html">Spherical Projections</a>. MTEX uses an equal-area projection by default.</p>
+<p>A <b>reference frame</b> is the coordinate system in which data are expressed. The plotting convention below lays specimen Y upward and specimen X to the right. It changes only the screen layout; it does not rotate the specimen or re-express the data.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
-cs = crystalSymmetry('321')
-{% endhighlight %}
+cs = crystalSymmetry('321');
 
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  symmetry       : 321              
-  elements       : 6                
-  a, b, c        : 1, 1, 1          
-  reference frame: X||a*, Y||b, Z||c
+ori = orientation.rand(cs);
 {% endhighlight %}
-
+<h2 id="2">Building One by Hand</h2>
+<p>Fix the normal to the \((100)\) lattice plane in the crystal frame. Parentheses denote plane-normal <code class="language-plaintext highlighter-rouge">hkl</code> notation; square brackets would denote a lattice direction in <code class="language-plaintext highlighter-rouge">uvw</code> notation.</p>
 {% highlight matlab %}
-ori = orientation.rand(cs)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ori = orientation (321 → y↑→x)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  156.958 161.468 197.878
-{% endhighlight %}
-<h2 id="3">Building One by Hand</h2>
-<p>Fix a crystal direction.</p>
-{% highlight matlab %}
-% the fixed crystal direction (100)
 h = Miller({1,0,0},cs);
 {% endhighlight %}
-<p>Apply the orientation to every direction symmetrically equivalent to it, which gives the specimen directions the crystal sends them to.</p>
+<p> <a href="Miller.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a> applies the crystal point group to the pole. The orientation then maps every returned pole into the specimen frame.</p>
 {% highlight matlab %}
-r = ori * h.symmetrise
+r = ori * h.symmetrise;
+
+poleCount = length(r)
 {% endhighlight %}
 
 {% highlight plaintext %}
-r = vector3d (y↑→x)
- size: 1 × 6
-       x      y      z
-    0.88 -0.739 -0.113
-    1.08   0.34  0.246
-   -1.08  -0.34 -0.246
-   -0.88  0.739  0.113
-   0.196   1.08  0.359
-  -0.196  -1.08 -0.359
+poleCount =
+     6
 {% endhighlight %}
-<p>Plot the result in a spherical projection.</p>
+<p>The count is six. Point group 321 has six operations, and all six produce distinct directions for this pole. A pole on a symmetry axis can have fewer distinct directions because several operations may coincide.</p>
+<p>Plot the specimen directions in a spherical projection.</p>
 {% highlight matlab %}
-plot(r)
+plot(r);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationPoleFigure_01.png" %}
 </center>
-<p>Six points, because the trigonal group 321 has six symmetry elements and each contributes one crystallographically equivalent direction, see <a href="OrientationSymmetry.html">Symmetry</a>. They are distinct specimen directions belonging to the same crystal-direction family.</p>
-<h2 id="7">The Shortcut</h2>
-<p> <a href="orientation.plotPDF.html"><code class="language-plaintext highlighter-rouge">plotPDF</code></a> does all of that, for several crystal directions at once.</p>
+<p>Notice three points on each hemisphere. Together they are the six crystallographically equivalent positions of the \((100)\) pole for one orientation; they are not six different orientations.</p>
+<h2 id="6">The Shortcut</h2>
+<p> <a href="orientation.plotPDF.html"><code class="language-plaintext highlighter-rouge">plotPDF</code></a> performs the symmetrisation, coordinate map, and projection for several poles at once.</p>
 {% highlight matlab %}
-plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS))
+plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS));
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationPoleFigure_02.png" %}
 </center>
-<p>Some of the three pole figures show one hemisphere, others show both. The rule is symmetry: where <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">-h</code> are symmetrically equivalent, the two hemispheres carry the same information and MTEX draws only the upper one. In 321 that holds for \((10\bar10)\) and for \((0001)\), since the twofold axes in the basal plane turn c into -c. It does not hold for \((11\bar21)\), so that pole figure needs both hemispheres. Imposing the reduced view regardless is what the <code class="language-plaintext highlighter-rouge">'antipodal'</code> flag does, see <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a>.</p>
+<p>The first two pole figures need only one hemisphere, while the third needs both. MTEX makes that decision from symmetry. It uses one hemisphere when <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">-h</code> are crystallographically equivalent, because the other half then repeats the same information.</p>
+<p>In 321 this holds for \((10\bar{1}0)\) and \((0001)\). The twofold axes in the basal plane turn the c-axis pole into its opposite. It does not hold for \((11\bar{2}1)\), so that pole figure retains both hemispheres.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'antipodal'</code> flag identifies opposite poles even when crystal symmetry does not. This is a modelling choice, not another point-group operation. It is conventional for kinematic diffraction under Friedel's law, but resonant scattering can distinguish a Friedel pair. See <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a>.</p>
+<p>This orientation has the default identity specimen symmetry. If an orientation carries a nontrivial specimen symmetry, <code class="language-plaintext highlighter-rouge">plotPDF</code> also repeats the poles by that symmetry in the specimen frame. Crystal symmetry acts before the orientation map; specimen symmetry acts after it. See <a href="SpecimenSymmetry.html">Specimen Symmetry</a>.</p>
+<h2 id="8">What One Pole Figure Leaves Out</h2>
+<p>A pole position fixes where one crystal direction points, but not the rotation of the crystal about that direction. All orientations that put <code class="language-plaintext highlighter-rouge">h</code> at one specimen direction form an <a href="OrientationFibre.html">orientation fibre</a>. One pole figure therefore cannot determine a complete orientation or ODF by itself.</p>
+<p>Combining pole figures for several lattice planes constrains the missing information. That is the inverse problem treated in <a href="PoleFigureAnalysis.html">Pole Figure Analysis</a>.</p>
 <h2 id="9">Contour Plots</h2>
-<p>The option <code class="language-plaintext highlighter-rouge">'contourf'</code> replaces the markers by filled contours.</p>
+<p>The option <code class="language-plaintext highlighter-rouge">'contourf'</code> replaces the discrete markers with a kernel density estimate on the sphere.</p>
 {% highlight matlab %}
-plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS),'contourf')
-mtexColorbar
+plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS),...
+  'contourf');
+mtexColorbar;
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationPoleFigure_03.png" %}
 </center>
-<p>For a single orientation this only smears six points, but it is how pole figures of a whole population are read - measured ones, or ones computed from an ODF, where the contours are a density and the colorbar counts multiples of a random distribution. See <a href="ODFPoleFigure.html">Pole Figures of an ODF</a> and <a href="PoleFigureAnalysis.html">Pole Figure Analysis</a>.</p>
-<h2 id="11">Next</h2>
-<p>The opposite question - given a specimen direction, which crystal direction points along it - is the <a href="OrientationInversePoleFigure.html">Inverse Pole Figure</a>. Both are projections and both discard information; the full picture is <a href="OrientationVisualization3d.html">3D Plots</a> and <a href="OrientationVisualizationSections.html">Section Plots</a>.</p>
+<p>For this single orientation the contours merely spread each discrete pole into a small spot; the first family still represents only six poles. For a population of measured or simulated orientations, the contours instead show where poles concentrate.</p>
+<p>The colour scale is in multiples of a random distribution (m.r.d.). A value of 1 is the pole density of an untextured population, while 2 means twice that density. Pole densities computed directly from an ODF are developed in <a href="ODFPoleFigure.html">Pole Figures of an ODF</a>.</p>
+<h2 id="11">The Maths Behind a Pole Figure</h2>
+<p>Let \(\mathbf{O}\) map crystal coordinates to specimen coordinates. Let \(\mathbf{C}\) be a crystal-symmetry operation and \(\mathbf{P}\) a specimen-symmetry operation. Every pole drawn by <code class="language-plaintext highlighter-rouge">plotPDF</code> has the form</p>
+<p>\[ \mathbf{r} = \mathbf{P}\,\mathbf{O}\,\mathbf{C}\,\mathbf{h}, \qquad \mathbf{C} \in \mathrm{S}_{\mathrm{c}}, \quad \mathbf{P} \in \mathrm{S}_{\mathrm{s}}. \]</p>
+<p>In this example the specimen group contains only the identity, so the hand construction reduces to \(\mathbf{r}=\mathbf{O}\mathbf{C}\mathbf{h}\).</p>
+<h2 id="12">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops pole figures and their relation to orientation densities.</li>
+<li>U. F. Kocks, C. N. Tom&eacute; and H.-R. Wenk, <a href="https://assets.cambridge.org/97805217/94206/excerpt/9780521794206_excerpt.pdf">Texture and Anisotropy</a>, Cambridge University Press, 1998, connects pole figures, texture, and anisotropic material properties.</li>
+<li>R.-J. Roe, <a href="https://doi.org/10.1063/1.1714396">Description of Crystallite Orientation in Polycrystalline Materials. III. General Solution to Pole Figure Inversion</a>, <i>Journal of Applied Physics</i> 36 (1965), 2024-2031, gives the classical harmonic relation between pole figures and an ODF.</li>
+<li>The International Union of Crystallography, <a href="https://dictionary.iucr.org/Friedel%27s_law">Friedel's law</a>, states when opposite reflections have equal intensities and when they may differ.</li>
+<li>
+<a href="https://doi.org/10.1520/E0081-96R24">ASTM E81-96(2024)</a>, <i>Standard Test Method for Preparing Quantitative Pole Figures</i>, covers quantitative X-ray pole-figure measurement by reflection and transmission methods.</li>
+</ul>
+</div>
+<h2 id="13">Next</h2>
+<p>The opposite question - given a specimen direction, which crystal direction points along it - is the <a href="OrientationInversePoleFigure.html">Inverse Pole Figure</a>. Both are projections and both discard information. The full orientation space is shown in <a href="OrientationVisualization3d.html">3D Plots</a> and <a href="OrientationVisualizationSections.html">Section Plots</a>.</p>
 </div>
 </body>
 </html>

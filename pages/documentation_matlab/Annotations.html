@@ -1,5 +1,5 @@
 ---
-title: "Annotations"
+title: 'Annotations'
 
 sidebar: documentation_sidebar
 permalink: Annotations.html
@@ -22,58 +22,60 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A colour-coded pole figure needs a colour scale before its values can be read. Markers, labels, legends, and grids then make particular features identifiable. Together these annotations turn a finished plot into a figure that another reader can interpret and compare. Without marked directions, only a reader who already knows the figure's contents can identify them.</p>
+<p>This page starts with numerical colour scales. It then marks known directions and orientations, identifies plotted objects, and adds an angular grid. Each operation modifies an existing figure.</p>
 <!--/introduction-->
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<h2 id="2">Colorbars</h2>
-<p>Unlike the common MATLAB command <code class="language-plaintext highlighter-rouge">colorbar</code> the MTEX command <a href="mtexColorbar.html"><code class="language-plaintext highlighter-rouge">mtexColorbar</code></a> allows you to add a colorbar to all subplots in a figure.</p>
+<h2 id="2">Colour scales for numerical data</h2>
+<p> <a href="mtexColorbar.html"><code class="language-plaintext highlighter-rouge">mtexColorbar</code></a> differs from MATLAB's <code class="language-plaintext highlighter-rouge">colorbar</code> in that it addresses the whole MTEX figure. Every axis in a multi-plot gets a colourbar. The example uses two model components so that the plotted pole densities have recognisable maxima.</p>
 {% highlight matlab %}
-% this defines some model ODFs
+% define a two-component model ODF
 cs = crystalSymmetry('-3m');
 
 mod1 = orientation.byEuler(110*degree,30*degree,80*degree,cs);
 mod2 = orientation.byEuler(310*degree,70*degree,40*degree,cs);
 odf = 0.7*unimodalODF(mod1) + 0.3*unimodalODF(mod2);
 
-% plot some pole figures
+% plot two pole figures
 plotPDF(odf,Miller({1,0,0},{1,1,1},cs))
 
-% and add a colorbar to each pole figure
+% add a colourbar to each pole figure
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_01.png" %}
 </center>
-<p>Executing the command <a href="mtexColorbar.html"><code class="language-plaintext highlighter-rouge">mtexColorbar</code></a> twice deletes the colorbar. You can also have a horizontal colorbar at the bottom of the figure by setting the option <code class="language-plaintext highlighter-rouge">'location'</code> to <code class="language-plaintext highlighter-rouge">'southOutside'</code>. Further, we can set a title to the colorbar to describe the unit.</p>
+<p>Notice that the two colourbars have different ranges. Equal colours do not yet represent equal pole densities in the two panels. Calling <code class="language-plaintext highlighter-rouge">mtexColorbar</code> again removes the colourbars. The <code class="language-plaintext highlighter-rouge">'location'</code> option places the replacements below the panels, while <code class="language-plaintext highlighter-rouge">'title'</code> names their unit. Pole density is measured in multiples of a random distribution, abbreviated mrd.</p>
 {% highlight matlab %}
-% delete vertical colorbar
+% remove the vertical colourbars
 mtexColorbar
 
-% add horizontal colorbars
-mtexColorbar('location','southOutSide','title','mrd')
+% add horizontal colourbars
+mtexColorbar('location','southoutside','title','mrd')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_02.png" %}
 </center>
-<p>If color range is set to equal in an MTEX figure only one colorbar is added (see. <a href="ColorMaps.html">Color Coding</a>).</p>
+<p>For a direct comparison, first give every axis the same colour range. One colourbar can then describe the entire figure. The same colour now means the same pole density in both panels. See <a href="ColorMaps.html">Colour Coding</a> for choosing the colours themselves.</p>
 {% highlight matlab %}
-mtexColorbar       % delete colorbar
-setColorRange('equal'); % set equal color range to all plots
-mtexColorbar       % create a new colorbar
+mtexColorbar             % remove the colourbars
+setColorRange('equal');  % use one colour range for all panels
+mtexColorbar             % create one colourbar for the figure
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_03.png" %}
 </center>
-<h2 id="5">Annotating Directions, Orientations, Fibers</h2>
-<p>Pole figures or inverse pole figures are much better readable if they include specimen or crystal directions. Using the MTEX command <a href="annotate.html"><code class="language-plaintext highlighter-rouge">annotate</code></a> one can easily add <a href="vector3d.vector3d.html">specimen coordinate axes</a> to a pole figure plot.</p>
+<h2 id="5">Marking directions and orientations</h2>
+<p> <a href="annotate.html"><code class="language-plaintext highlighter-rouge">annotate</code></a> adds to an existing figure without disturbing it. It needs no <code class="language-plaintext highlighter-rouge">hold on</code> and does not change the colour range. First mark a specimen direction on both pole figures above. A specimen direction is a direction expressed in the specimen frame. The text passed through <code class="language-plaintext highlighter-rouge">'label'</code> is arbitrary; here it names the vector drawn at \((1,1,1)\).</p>
 {% highlight matlab %}
 annotate(vector3d(1,1,1),'label',{'(111)'},'BackgroundColor','w')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_04.png" %}
 </center>
-<p>The command <a href="annotate.html"><code class="language-plaintext highlighter-rouge">annotate</code></a> allows also to mark <a href="Miller.Miller.html">crystal directions</a> in inverse pole figures.</p>
+<p>In an inverse pole figure, a crystal direction is the natural annotation. It is a direction expressed in the crystal frame. The <code class="language-plaintext highlighter-rouge">'all'</code> option draws every symmetrically equivalent direction. The <code class="language-plaintext highlighter-rouge">'labeled'</code> option writes the Miller indices beside those markers.</p>
 {% highlight matlab %}
 plotIPDF(odf,[xvector,zvector],'antipodal','marginx',10)
 mtexColorMap white2black
@@ -81,10 +83,11 @@ mtexColorMap white2black
 annotate(Miller({2,-1,-1,0},{2,-1,-1,1},cs), ...
   'all','labeled','BackgroundColor','yellow')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_05.png" %}
 </center>
-<p>One can also mark specific orientations in pole figures or in inverse pole figures.</p>
+<p>The axes of an inverse pole figure are the fundamental sector of the crystal symmetry, so most symmetrically equivalent copies of a direction fall outside them. Each supplied index is labelled where it lands inside the sector.</p>
+<p>A whole orientation can also be marked. MTEX draws it wherever that orientation appears. It places one marker per pole in every axis. The next figure marks the two components used to construct the model ODF.</p>
 {% highlight matlab %}
 plotIPDF(odf,[xvector,zvector],'antipodal')
 mtexColorMap white2black
@@ -98,10 +101,11 @@ annotate(mod2,...
 
 drawNow(gcm,'figSize','normal')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_06.png" %}
 </center>
-<p>as well as in ODF plots</p>
+<p>The red squares sit on the maxima, while the green ones mark the weaker component. These known orientations provide a direct check on the plot.</p>
+<p>The same annotation works on ODF sections. In a section, an orientation is represented by one point rather than by one pole in every axis.</p>
 {% highlight matlab %}
 plot(odf,'sigma')
 mtexColorMap white2black
@@ -111,10 +115,10 @@ annotate(mod1,'label','A','textColor','r',...
 annotate(mod2,'label','B','textColor','b',...
   'MarkerSize',15,'MarkerEdgeColor','b','MarkerFaceColor','none')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_07.png" %}
 </center>
-<p>or orientation scatter plots</p>
+<p>The outlined labels identify the two component positions without covering the density underneath. The same annotation also works on a scatter plot of individual orientations. It shows which model components the sampled point cloud lies around.</p>
 {% highlight matlab %}
 ori = odf.discreteSample(200);
 scatter(ori);
@@ -123,11 +127,11 @@ annotate(mod1,...
 annotate(mod2,...
   'MarkerSize',10,'MarkerEdgeColor','g','MarkerFaceColor','g')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_08.png" %}
 </center>
 <h2 id="10">Legends</h2>
-<p>If you have multiple data in one plot then it makes sense to add a legend saying which color / symbol correspond to which data set. The key is to use the option <code class="language-plaintext highlighter-rouge">'DisplayName'</code> available for all plotting commands to include the resulting graphical object into the legend and give it a name.</p>
+<p>A colourbar explains numerical values encoded by colour. A legend instead identifies plotted objects by a label and symbol. Anything plotted with a <code class="language-plaintext highlighter-rouge">'DisplayName'</code> enters the legend, while everything else stays out. In a multi-plot figure, combine <code class="language-plaintext highlighter-rouge">'DisplayName'</code> with <code class="language-plaintext highlighter-rouge">'add2all'</code>. The object and its legend entry then appear on every panel.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller({1,0,0},{1,1,1},cs))
 plot(ori,'MarkerFaceColor','k','MarkerEdgeColor','black','add2all',...
@@ -138,31 +142,43 @@ plot(f,'color','red','linewidth',2,'add2all','DisplayName','fibre')
 
 legend show
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_09.png" %}
 </center>
-<p>The following example compares the Fourier coefficients of the fibre ODF with the Fourier coefficients of an unimodal ODF.</p>
+<p>The black points and red curve now have the same names in both pole figures. See <a href="Legends.html">Legends</a> for legend placement and formatting.</p>
+<p>A line plot also needs a legend when several curves share one axis. Here the harmonic coefficients of the two-component ODF are compared with those of a fibre ODF through their power at each harmonic degree.</p>
 {% highlight matlab %}
 close all
-plotSpektra(FourierODF(odf,32),'DisplayName','Unimodal ODF')
+plotSpektra(FourierODF(odf,32),'DisplayName','Two-component ODF')
 hold on
 fodf = fibreODF(Miller(1,0,0,cs),zvector);
 plotSpektra(FourierODF(fodf,32),'DisplayName','Fibre ODF');
 hold off
 legend show
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_10.png" %}
 </center>
-<p>Adding a Spherical Grid</p>
-<p>Sometimes it is useful to have a spherical grid in your plot to make the projection easier to understand or if you need to know some angular relationships. For this reason, there is the option <code class="language-plaintext highlighter-rouge">'grid'</code>, which enables the grid and the option <code class="language-plaintext highlighter-rouge">'grid_res'</code>, which allows to specify the spacing of the grid lines.</p>
+<p>The fibre ODF decays faster, as a function with a rotational symmetry must. It has fewer degrees of freedom to spend at each harmonic degree. The legend makes it possible to assign that decay to the correct curve.</p>
+<h2 id="13">A spherical grid</h2>
+<p>A grid of latitude and longitude lines makes the projection legible and lets angles be read from the figure. The <code class="language-plaintext highlighter-rouge">'grid'</code> flag switches it on, and <code class="language-plaintext highlighter-rouge">'grid_res'</code> sets the angular spacing.</p>
 {% highlight matlab %}
-plotPDF(odf,[Miller(1,0,0,cs),Miller(0,0,1,cs)],'grid','grid_res',15*degree,'antipodal');
+plotPDF(odf,[Miller(1,0,0,cs),Miller(0,0,1,cs)],...
+  'grid','grid_res',15*degree,'antipodal');
 mtexColorMap white2black
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Annotations_11.png" %}
 </center>
+<p>At 15 degrees the lines are close enough for approximate measurements and far enough apart not to compete with the pole-density pattern. The grid is part of the spherical projection; it does not change the sampled data.</p>
+<h2 id="15">References</h2>
+<div>
+<ul>
+<li>S. R. Midway, <a href="https://doi.org/10.1016/j.patter.2020.100141">Principles of Effective Data Visualization</a>, <i>Patterns</i> 1 (2020), 100141, explains how labels, legends, and consistent visual scales support comparisons between plots.</li>
+</ul>
+</div>
+<h2 id="16">Next</h2>
+<p>Once the figure carries the information needed to read it, continue with <a href="PlottingExport.html">Exporting Figures</a>. It explains how figure size, renderer, and file format affect the exported result.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Multiplot"
+title: 'Align Plots in a Grid'
 
 sidebar: documentation_sidebar
 permalink: Multiplot.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Multiplot</title>
+<title>Align Plots in a Grid</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_Multiplot.m">
 </head>
@@ -23,30 +23,78 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<p>MTEX manages multiple axes through <a href="mtexFigure.mtexFigure.html"><code class="language-plaintext highlighter-rouge">mtexFigure</code></a>. It keeps their sizes and spacing consistent. It also coordinates figure-wide tools such as colour ranges and colorbars.</p>
+<p>Commands such as <code class="language-plaintext highlighter-rouge">plotPDF</code> over several lattice planes, or <code class="language-plaintext highlighter-rouge">plot</code> of an ODF in sections, create this kind of figure automatically. To build one by hand, <code class="language-plaintext highlighter-rouge">newMtexFigure</code> creates the figure and its layout. The two entries of <code class="language-plaintext highlighter-rouge">'layout'</code> are the number of rows and columns.</p>
 {% highlight matlab %}
-mtexFig = newMtexFigure('layout',[2,3]);
-
-plot(xvector,'upper')
-
+mtexFig = newMtexFigure('layout',[2,3],'figSize','normal');
+plottingConvention.default('y↑→x');
+plot(vector3d(1,1,1),'upper','MarkerSize',8)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Multiplot_01.png" %}
+</center>
+<p>The first direction occupies the upper-left position of the fixed grid.</p>
+<h2 id="3">Fill the axes in sequence</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">nextAxis</code> without an argument selects the next free axis. The fixed layout fills from left to right and then from top to bottom.</p>
+{% highlight matlab %}
 nextAxis
 
-plot(zvector,'upper')
-
+plot(vector3d(-1,1,1),'upper','MarkerSize',8)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Multiplot_02.png" %}
+</center>
+<p>The second direction appears beside the first one in the upper row.</p>
+<h2 id="5">Select an axis by row and column</h2>
+<p>Two arguments select a particular row and column. This makes it possible to fill the layout in any order and to leave positions empty.</p>
+{% highlight matlab %}
 nextAxis(2,3)
 
 plot(vector3d.rand(200),'upper')
-
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Multiplot_03.png" %}
+</center>
+<p>The cloud appears in the lower-right position. The unused upper-right and lower-middle positions remain empty.</p>
+<h2 id="7">Return to an occupied axis</h2>
+<p>Calling <code class="language-plaintext highlighter-rouge">nextAxis</code> for an occupied position selects that axis again, but selecting is not the same as overlaying. With the hold state off, the next plot command starts a fresh layout and discards the whole gallery rather than repainting one cell. Use <a href="matlab:doc('hold')"><code class="language-plaintext highlighter-rouge">hold on</code></a> to draw into the selected axis and keep the arrangement.</p>
+{% highlight matlab %}
 nextAxis(2,3)
 
-plot(xvector)
-
+hold on
+plot(vector3d(1,-1,1),'upper','MarkerSize',8)
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Multiplot_04.png" %}
+</center>
+<p>The single direction now sits on top of the random cloud, and the 2-by-3 arrangement is unchanged. Keep <code class="language-plaintext highlighter-rouge">'upper'</code> when revisiting an upper-hemisphere axis. A full-sphere plot needs separate upper- and lower-hemisphere axes. It therefore changes the arrangement rather than converting this one axis in place.</p>
+<h2 id="9">Mix different kinds of plot</h2>
+<p>The axes need not contain the same kind of object. Here the lower-left axis shows the symmetry elements of a cubic crystal beside spherical plots of directions. It needs <code class="language-plaintext highlighter-rouge">hold on</code> for the same reason as above.</p>
+{% highlight matlab %}
 nextAxis(2,1)
 
+hold on
 plot(crystalSymmetry('432'))
+hold off
 {% endhighlight %}
-<center>
-{% include inline_image.html file="Multiplot_01.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="Multiplot_05.png" %}
 </center>
+<p>Across the staged figures, every occupied axis keeps the same size while the unused grid positions remain blank. The last addition also shows that a symmetry plot can use the same layout as spherical direction plots. See <a href="SphericalProjections.html">Spherical Projections</a> for the hemisphere and projection choices used by the spherical axes.</p>
+<h2 id="11">Figure-wide controls</h2>
+<p>An <code class="language-plaintext highlighter-rouge">mtexFigure</code> makes shared controls possible, but it does not make independent data ranges equal automatically. When coloured panels show comparable quantities, set one range after drawing all panels and then add the colorbar:</p>
+{% highlight matlab %}
+setColorRange('equal')
+mtexColorbar
+{% endhighlight %}
+<p>
+<a href="ColorMaps.html">Color Mapping</a> explains when a common range is required. <a href="Annotations.html">Annotations</a> covers colorbars and other figure-wide additions. The figure manager also preserves consistent axis sizes after a resize. It provides the cropping used by <a href="PlottingExport.html"><code class="language-plaintext highlighter-rouge">saveFigure</code></a>.</p>
+<p>Use <a href="CombinedPlots.html">Combined Plots</a> when the goal is to overlay data. For unrelated MATLAB axes, use <code class="language-plaintext highlighter-rouge">subplot</code> or a tiled chart layout instead of an <code class="language-plaintext highlighter-rouge">mtexFigure</code>.</p>
+<h2 id="12">Further reading</h2>
+<p>Wong, B. <a href="https://doi.org/10.1038/nmeth.1711">Layout</a>. Nature Methods 8, 783 (2011). This short article explains how grids and visual order guide a reader through a multi-panel figure.</p>
+<p>See the MathWorks <a href="https://www.mathworks.com/help/matlab/ref/tiledlayout.html">tiled chart layout documentation</a>. It describes MATLAB's general-purpose counterpart for arranging ordinary axes.</p>
 </div>
 </body>
 </html>

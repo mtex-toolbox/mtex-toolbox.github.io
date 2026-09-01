@@ -1,5 +1,5 @@
 ---
-title: "Importing Vectors"
+title: 'Importing Vectors'
 
 sidebar: documentation_sidebar
 permalink: VectorsImport.html
@@ -23,25 +23,39 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Directional data usually arrives as a text file with one direction per line - a table of coordinates, or of the two spherical angles. <a href="vector3d.load.html"><code class="language-plaintext highlighter-rouge">vector3d.load</code></a> reads such a file once it is told what the columns hold.</p>
+<p>A direction file is only a table of numbers until its coordinate columns are identified. <a href="vector3d.load.html"><code class="language-plaintext highlighter-rouge">vector3d.load</code></a> turns those columns into a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> array.</p>
+<p>This page assumes that polar angle and azimuth are familiar. See <a href="VectorDefinition.html">Defining Three-Dimensional Vectors</a> for their definitions and for the distinction between vectors and directions.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
 <h2 id="2">Reading a File</h2>
-<p>The example file below has two columns, the polar angle and the azimuth angle, both in degree, under a line of headings.</p>
+<p>The example file contains one direction per row. Its first numeric column is the polar angle, and its second is the azimuth, both in degrees.</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'vector3d','vectors.txt');
 
-v = vector3d.load(fname,'ColumnNames',{'polar angle','azimuth angle'})
+v = vector3d.load(fname,...
+  'ColumnNames',{'polar angle','azimuth angle'})
 {% endhighlight %}
 
 {% highlight plaintext %}
 v = vector3d (y↑→x)
  size: 1000 × 1
 {% endhighlight %}
-<p>The column names are what makes the file readable, and they are what decides how the numbers are interpreted. The recognised names are</p>
+<p>The displayed summary identifies a <code class="language-plaintext highlighter-rouge">vector3d</code> array with size 1000 by 1. Thus all 1000 numeric rows became directions.</p>
+<p>The file happens to use the same words in its heading. Nevertheless, <code class="language-plaintext highlighter-rouge">'ColumnNames'</code> is an explicit mapping supplied by the script. It does not ask MTEX to trust or guess the heading.</p>
+<h2 id="4">Coordinate Names and Angle Units</h2>
+<p>The importer recognizes these coordinate sets.</p>
 <p>
    <table class="usertable">
+      <tr>
+         <td>
+               <p>Names in <tt>'ColumnNames'</tt>
+               </p>
+         </td>
+         <td>
+               <p>Interpretation</p>
+         </td>
+      </tr>
       <tr>
          <td>
                <p>
@@ -49,7 +63,17 @@ v = vector3d (y↑→x)
                </p>
          </td>
          <td>
-               <p>Cartesian coordinates</p>
+               <p>Cartesian components; their lengths are preserved</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>polar</tt>, <tt>azimuth</tt>
+               </p>
+         </td>
+         <td>
+               <p>spherical angles</p>
          </td>
       </tr>
       <tr>
@@ -59,7 +83,17 @@ v = vector3d (y↑→x)
                </p>
          </td>
          <td>
-               <p>the two spherical angles</p>
+               <p>spherical angles</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>colatitude</tt>, <tt>longitude</tt>
+               </p>
+         </td>
+         <td>
+               <p>spherical angles</p>
          </td>
       </tr>
       <tr>
@@ -69,34 +103,57 @@ v = vector3d (y↑→x)
                </p>
          </td>
          <td>
-               <p>geographic coordinates</p>
+               <p>geographic angles</p>
          </td>
       </tr>
    </table>
 </p>
-<p>Angles are read as degree unless the option <code class="language-plaintext highlighter-rouge">'radians'</code> says otherwise. Columns in a different order, or extra columns that are not wanted, are handled by naming their positions.</p>
+<p>The polar angle is measured away from +Z. The azimuth turns in the XY plane from +X towards +Y. Latitude is instead measured from the XY plane towards +Z, so it is not another name for the polar angle.</p>
+<p>Spherical and geographic angles are read in degrees by default. Add the flag <code class="language-plaintext highlighter-rouge">'radians'</code> when the file stores radians. These imports create unit directions, while Cartesian import preserves the supplied lengths.</p>
+<h2 id="5">Selecting Columns by Position</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">'Columns'</code> maps each supplied name to a physical column. The next call deliberately lists the names in reverse order: azimuth is column 2 and polar angle is column 1.</p>
 {% highlight matlab %}
-v = vector3d.load(fname,'ColumnNames',{'polar angle','azimuth angle'},...
-  'columns',[1 2]);
+vByColumn = vector3d.load(fname,...
+  'ColumnNames',{'azimuth angle','polar angle'},...
+  'Columns',[2 1]);
 {% endhighlight %}
-<h2 id="4">Looking at the Result</h2>
-<p>A thousand directions are too many to read off a table, so the first thing to do with them is a plot. A scatter plot shows the individual directions,</p>
+<p>The result contains the same directions as <code class="language-plaintext highlighter-rouge">v</code>. This form can also select coordinate columns from a wider table. Unrelated columns do not take part in constructing the directions.</p>
+<p>Named columns that belong to each direction can be returned in a second output. <a href="S2FunApproximationInterpolation.html">Spherical Approximation and Interpolation</a> starts from a file with three coordinates and one value.</p>
+<h2 id="7">What the File Does Not Define</h2>
+<p>A reference frame is the coordinate system in which data are expressed. It has an identity, a basis and a default plotting convention. Numeric columns do not identify a measurement, rolling or geological frame.</p>
+<p>The imported <code class="language-plaintext highlighter-rouge">vector3d</code> is therefore frame-free. It is not tied to a named reference frame and resolves against the session default when rendered. Record the source frame before combining these directions with framed data. <a href="AxesAlignment.html">Axes Alignment</a> develops reference frames and frame changes.</p>
+<p>The file also does not say whether opposite signs are distinct. MTEX reads the rows as directions. For unoriented axes, read <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a> before calculating angles, means or densities.</p>
+<h2 id="8">Looking at the Result</h2>
+<p>A scatter plot shows every imported observation.</p>
 {% highlight matlab %}
-scatter(v,'upper')
+scatter(v,'upper');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="VectorsImport_01.png" %}
 </center>
-<p>and a contour plot shows where they accumulate.</p>
+<p>The directions form a narrow, branched band that passes to the left of Z, with smaller isolated clusters near the rim. All directions in this file lie on the upper hemisphere, so <code class="language-plaintext highlighter-rouge">'upper'</code> omits none of them. The option is only a hemisphere filter; it does not identify opposite directions.</p>
+<p>A filled contour plot replaces the individual markers with a smoothed estimate of their concentration.</p>
 {% highlight matlab %}
-contourf(v,'upper')
+contourf(v,'upper');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="VectorsImport_02.png" %}
 </center>
-<p>The two views answer different questions: the scatter plot says where a measurement exists, the contour plot says where the data is dense. Turning the list into a proper function on the sphere is the subject of <a href="VectorsDensityEstimation.html">Density Estimation</a>.</p>
-<h2 id="7">Next</h2>
-<p>Writing directions back to a file is <a href="VectorsExport.html">Export</a>. Crystal directions read from a file carry a crystal symmetry as well and are imported as <a href="CrystalDirections.html">Miller indices</a>.</p>
+<p>The contour plot separates several maxima within the band. The strongest concentration lies above and left of Z, while the isolated groups remain weaker peaks. These contours are an estimate, not additional measurements, and their shape depends on the smoothing choice.</p>
+<p>
+<a href="SphericalProjections.html">Spherical Projections</a> explains how the sphere is mapped into these plots. <a href="VectorsDensityEstimation.html">Density Estimation</a> develops the smoothing model and its parameters.</p>
+<h2 id="11">Further Reading</h2>
+<div>
+<ul>
+<li>N. I. Fisher, T. Lewis and B. J. J. Embleton, <a href="https://doi.org/10.1017/CBO9780511623059">Statistical Analysis of Spherical Data</a>, Cambridge University Press, 1987. Chapter 2 defines common spherical coordinate systems and distinguishes directed from undirected data.</li>
+<li>
+<a href="https://www.iso.org/standard/64973.html">ISO 80000-2:2019, Quantities and units - Part 2: Mathematics</a>. This standard defines mathematical symbols and notation for vectors and coordinates.</li>
+</ul>
+</div>
+<h2 id="12">Next</h2>
+<p>Write directions back to a text file with <a href="VectorsExport.html">Export</a>. Turn a long list of observations into a function on the sphere with <a href="VectorsDensityEstimation.html">Density Estimation</a>. Directions attached to a crystal lattice carry crystal symmetry and are represented by <a href="CrystalDirections.html">Miller indices</a>.</p>
+<p>Domain-specific measurements need more information than a vector table. Continue with <a href="EBSDImport.html">EBSD Import</a> or <a href="PoleFigureImport.html">Pole Figure Import</a> for those workflows.</p>
 </div>
 </body>
 </html>

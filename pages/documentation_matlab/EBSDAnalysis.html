@@ -1,5 +1,5 @@
 ---
-title: "EBSD"
+title: 'EBSD'
 
 sidebar: documentation_sidebar
 permalink: EBSDAnalysis.html
@@ -23,41 +23,87 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Electron backscatter diffraction measures one orientation at a time. The beam sits on a point of a polished surface, the pattern that comes back is indexed against a list of candidate phases, and the result is a phase and an orientation for that point. Step the beam across a grid and you have a map: hundreds of thousands of orientations, each with a position.</p>
-<p>That combination is what makes EBSD different from a diffraction experiment. A pole figure tells you which orientations are present in a volume; an EBSD map tells you which orientation is present <b>where</b>. Every question about microstructure - grain size, neighbourhood, gradients inside a grain, how a boundary is oriented - needs that "where", and this chapter is about getting it and trusting it.</p>
+<p>Electron backscatter diffraction (EBSD) measures crystal orientation at points on a polished specimen surface. The indexing algorithm compares the diffraction pattern with candidate phases. It assigns a phase and an orientation at each point. Moving the beam across a scan lattice produces a map: a list of orientations tied to positions on the specimen.</p>
+<p>This spatial link distinguishes an EBSD map from a bulk diffraction pole figure. A pole figure reports which orientations occur in a sampled volume. An EBSD map reports which orientation was assigned <b>where</b> on the measured surface. Grain size, neighbourhood, intragranular gradients, and boundary traces all depend on that where.</p>
+<p>The plotting convention below draws specimen Y upward and specimen X to the right. It changes the screen layout, not the measured data.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-mtexdata forsterite silent
-
-% colour every Forsterite measurement by its orientation
-plot(ebsd('Forsterite'),ebsd('Forsterite').orientations,'micronbar','off')
+mtexdata forsterite
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+ebsd = EBSDsquare (y↑→x, row↑→col)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed          none                                   
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, oldId
+ Scan unit : um
+ X × Y × Z : [0 → 36550] × [0 → 16750] × [0 → 0]
+ Normal vector: (0,0,1)
+ Square grid  :336 × 732
+{% endhighlight %}
+<p>Read the displayed <a href="EBSD.EBSD.html">EBSD</a> summary as an inventory. It identifies the scan lattice and extent. It also lists the phases, the <code class="language-plaintext highlighter-rouge">notIndexed</code> measurements, and the available per-pixel properties.</p>
+<p>An <a href="EBSD.EBSD.html">EBSD</a> variable is a list, not an image. Each entry carries a position, a phase, and an orientation. The entries form an image-like map only because their positions usually lie on a square or hexagonal scan lattice.</p>
+<h2 id="3">Seeing phase and orientation</h2>
+<p>The same measurements can answer different questions depending on what supplies the colour. The left panel colours every measurement by phase. The right panel retains the original orientation plot for Forsterite and colours it by the crystal direction parallel to specimen Z.</p>
+{% highlight matlab %}
+newMtexFigure('layout',[1,2],'figSize','large');
+plot(ebsd,'micronbar','off');
+mtexTitle('phases');
+
+nextAxis;
+fo = ebsd('Forsterite');
+plot(fo,fo.orientations,'ipfDirection',zvector,'micronbar','off');
+mtexTitle('Forsterite orientations');
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDAnalysis_01.png" %}
 </center>
-<p>The colour is not a measurement. It is a <b>colour key</b>, a choice of how to turn a three-parameter orientation into three numbers you can see, and different keys make the same map look quite different. Nothing here can be read quantitatively off the colours alone.</p>
-<h2 id="3">What the data actually is</h2>
-<p>A <code class="language-plaintext highlighter-rouge">ebsd</code> variable is a list, not an image. Each entry carries a position, a phase and an orientation, and the entries happen to sit on a grid because that is how they were measured. This matters more than it sounds: filtering the list to one phase leaves gaps rather than blanks, and any operation that needs neighbours has to reconstruct the grid first.</p>
-<p>Two kinds of entry are not ordinary measurements. Points whose pattern could not be indexed are given the <b>notIndexed</b> phase - they are recorded, not missing, and they matter, because a band of them along a boundary is information about the boundary rather than an inconvenience. Points outside the scanned region are not in the list at all.</p>
-<h2 id="4">The first thing to check is the reference frame</h2>
-<p>An EBSD file contains two coordinate systems that need not agree: the one the stage moved in, and the one the Euler angles were written in. Vendors differ, software versions differ, and nothing in the file forces them to be consistent.</p>
-<p>The failure mode is unkind. A map with the wrong convention still plots, still reconstructs into grains, and still produces pole figures - they are simply rotated or mirrored, and there is no way to tell from the numbers alone. <a href="EBSDReferenceFrame.html">Reference Frame</a> is therefore not an advanced topic to come back to later. Read it once, on your own data, before you trust anything downstream.</p>
-<h2 id="5">Where to start</h2>
+<p>In the phase map, contiguous areas of the same colour show where each indexed phase occurs, while the white speckle is <code class="language-plaintext highlighter-rouge">notIndexed</code>. The broad colour domains in the orientation map are spatially coherent orientations within Forsterite. White now also includes every other phase, because only the Forsterite selection was plotted.</p>
+<p>Orientation colour is not a measurement. An <b>orientation colour key</b> is a rule for turning a three-parameter orientation into three RGB values. Different keys can make the same orientations look different, and colour alone is not a quantitative orientation scale.</p>
+<h2 id="5">Recorded, missing, and derived data</h2>
+<p>A <code class="language-plaintext highlighter-rouge">notIndexed</code> entry is a recorded measurement whose diffraction pattern could not be indexed. It is a phase value, not an absent scan position. A band of <code class="language-plaintext highlighter-rouge">notIndexed</code> measurements along a boundary may therefore carry information about pattern overlap or specimen quality. Points outside the scanned region are absent from the list. So are lattice sites at which no measurement was retained.</p>
+<p>Selecting one phase removes the other entries from the list; it does not replace them with blank pixels. The remaining positions can therefore have gaps. An operation that needs neighbours must recover the scan lattice, either internally or through an explicit gridding step.</p>
+<p>Grains and orientation distributions are derived from this measurement list. A <b>grain</b> is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. Its outline depends on the segmentation rule; it is not a boundary measured directly by the detector. An <b>orientation distribution function</b> (ODF) discards position. It estimates a continuous density over orientation space.</p>
+<p>These distinctions determine what a number means. On an equally spaced map, a pixel fraction measures surface area. It is not automatically a bulk specimen volume fraction. Step size, phase selection, and indexing quality can change a downstream result. So can filling, denoising, and grain segmentation.</p>
+<h2 id="6">Check the reference frame before analysis</h2>
+<p>A <b>reference frame</b> is the coordinate system in which data are expressed. EBSD positions describe how the stage moved, while the Euler angles encode orientations in a specimen frame. The two frames need not arrive aligned. Vendors and software versions use different conventions, and a file may not record the relationship completely.</p>
+<p>The failure is quiet. A map with the wrong relationship still plots, reconstructs into grains, and produces pole figures. The results are rotated or mirrored. The numerical values alone do not expose the mistake. Read <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> for your own data before trusting any downstream result.</p>
+<h2 id="7">Recommended reading order</h2>
+<p>Begin with <a href="EBSDImport.html">Import</a>, then check <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a>. Also review <a href="OrientationDefinition.html">Orientations</a> if the crystal-to-specimen map is new to you.</p>
+<p>Continue with <a href="EBSDPlotting.html">Plotting EBSD Maps</a> and <a href="EBSDIPFMap.html">IPF Maps</a>. The first explains the <code class="language-plaintext highlighter-rouge">plot(where,what)</code> pattern; the second explains the colour key used above. Then read <a href="EBSDSelect.html">Select</a>, <a href="EBSDIndex.html">Select by Index</a>, and <a href="EBSDGrid.html">Square and Hex Grids</a>. The first two cut a map down - by phase, by region, by property, by condition - and most real analysis starts with one of these. Together the three pages establish phase, logical, positional, list, identifier, row-column, and lattice indexing. Learn those distinctions before using neighbour-based operations.</p>
 <p>
-<a href="EBSDImport.html">Import</a> then <a href="EBSDReferenceFrame.html">Reference Frame</a>, in that order and without skipping the second.</p>
+<a href="EBSDOrientationPlots.html">Orientation Plots</a> then shows pole figures, inverse pole figures, sections, and orientation-space views of a selection. <a href="GrainReconstruction.html">Grain Reconstruction</a> turns measurements into grains and is the gateway to <a href="Grains.html">Grains</a>.</p>
+<p>After that foundation, choose the branch that matches the question.</p>
+<div>
+<ul>
+<li>For data quality, use <a href="EBSDDenoising.html">Denoising</a>, <a href="EBSDFilling.html">Filling Missing Data</a>, and <a href="EBSDPseudoSymmetry.html">Pseudo Symmetry</a>. These pages treat random scatter, missing orientations, and indexed-but-wrong alternatives as separate problems.</li>
+<li>For map geometry, continue from the grid page to <a href="EBSDInter.html">Regridding and Interpolation</a>, <a href="EBSDMapsAndImages.html">Maps and Images</a>, <a href="EBSDSpatialTransform.html">Spatial Transforms</a>, and <a href="EBSDTrueEbsd.html">TrueEBSD Distortion Correction</a>.</li>
+<li>For orientation statistics, use <a href="EBSDOrientationAnalysis.html">Orientation Analysis</a> and <a href="EBSD2ODF.html">ODF Estimation</a>. The latter estimates a density over orientations rather than spatial regions.</li>
+<li>For intragranular orientation change, use <a href="EBSDKAM.html">KAM</a> for local neighbour comparisons. <a href="EBSDGROD.html">Mis2Mean / GROD</a> uses a grain reference, while <a href="EBSDProfile.html">Profiles</a> follows a line. These pages assume grain reconstruction and basic <a href="MisorientationTheory.html">misorientation geometry</a>.</li>
+<li>For specialised orientation colours, read <a href="EBSDSharpPlot.html">Sharp Color Keys</a> when a broad key hides small changes, then <a href="EBSDAdvancedMaps.html">Advanced Plotting</a> for keys tailored to a particular orientation population or question.</li>
+</ul>
+</div>
 <p>
-<a href="EBSDPlotting.html">Plot</a> covers displaying a map, and <a href="EBSDIPFMap.html">IPF Maps</a> the colour keys behind the picture above. <a href="EBSDOrientationPlots.html">Orientation Plots</a> leaves the map behind and shows the same orientations in pole figures instead. <a href="EBSDSharpPlot.html">Sharp Color Keys</a> and <a href="EBSDAdvancedMaps.html">Advanced Plotting</a> are for when the default colouring hides what you are looking for.</p>
+<a href="EBSDSimulation.html">Simulation</a> creates maps with known answers for testing a processing chain. <a href="EBSDInterfaceHDF5.html">HDF5 Interface</a> is a developer guide for vendor JSON configurations, while <a href="EBSDExport.html">Export</a> explains what different output formats preserve.</p>
+<h2 id="8">Further reading</h2>
+<div>
+<ul>
+<li>A. J. Schwartz, M. Kumar, B. L. Adams, and D. P. Field, editors, <a href="https://doi.org/10.1007/978-0-387-88136-2">Electron Backscatter Diffraction in Materials Science</a>, second edition, Springer, 2009.</li>
+<li>A. J. Wilkinson and T. B. Britton, <a href="https://doi.org/10.1016/S1369-7021(12)70163-3">Strains, planes, and EBSD in materials science</a>, Materials Today 15 (2012), 366-376.</li>
+<li>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, Microbeam analysis - Guidelines for orientation measurement using electron backscatter diffraction, covers specimen preparation, calibration, acquisition, and reproducibility.</li>
+</ul>
+</div>
+<h2 id="9">Next</h2>
 <p>
-<a href="EBSDSelect.html">Select</a> and <a href="EBSDIndex.html">Select by Index</a> cut a map down - by phase, by region, by property, by condition. Most real analysis starts with one of these.</p>
+<a href="Grains.html">Grains</a> and <a href="GrainBoundaries.html">Grain Boundaries</a> develop the regions and boundary network obtained by segmentation. A grain boundary in MTEX is a segment between neighbouring EBSD pixels assigned to different grains. It is derived from the map, not measured as a separate detector signal.</p>
 <p>
-<a href="GrainReconstruction.html">Grain Reconstruction</a> is the step from measurements to objects and the gateway to <a href="Grains.html">Grains</a>. <a href="EBSD2ODF.html">ODF Estimation</a> is the other way to summarise a map, as a density over orientations rather than as a set of regions.</p>
-<p>Real data is imperfect, and several pages address that. <a href="EBSDDenoising.html">Denoising</a> and <a href="EBSDFilling.html">Filling Missing Data</a> repair it; <a href="EBSDPseudoSymmetry.html">Pseudo Symmetry</a> deals with phases whose patterns are nearly indistinguishable under more than one orientation, which is an indexing failure rather than a noise problem. <a href="EBSDGrid.html">Square and Hex Grids</a>, <a href="EBSDInter.html">Regridding and Interpolation</a>, <a href="EBSDMapsAndImages.html">Maps and Images</a> and <a href="EBSDSpatialTransform.html">Spatial Transforms</a> concern the geometry of the grid itself, and <a href="EBSDTrueEbsd.html">TrueEBSD Distortion Correction</a> corrects the distortion that comes from measuring a tilted sample.</p>
-<p>Three pages measure orientation change within grains rather than between them: <a href="EBSDKAM.html">KAM</a> compares each point with its neighbours, <a href="EBSDGROD.html">Mis2Mean / GROD</a> compares it with its grain's mean, and <a href="EBSDProfile.html">Profiles</a> follows a line across the map. <a href="EBSDOrientationAnalysis.html">Orientation Analysis</a> collects the rest.</p>
-<p>
-<a href="EBSDSimulation.html">Simulation</a> generates maps with known answers, which is the honest way to test a processing chain. <a href="EBSDInterfaceHDF5.html">HDF5 Interface</a> and <a href="EBSDExport.html">Export</a> handle files.</p>
-<h2 id="6">Next</h2>
-<p>
-<a href="Grains.html">Grains</a> and <a href="GrainBoundaries.html">Grain Boundaries</a> are what a map becomes once its regions are found. <a href="EBSD3Analysis.html">3D - EBSD</a> extends all of this to volumes. The orientations themselves are <a href="CrystalOrientations.html">Orientations</a>, and their distribution is <a href="ODFAnalysis.html">ODF</a>.</p>
+<a href="EBSD3Analysis.html">3D EBSD</a> extends spatial analysis from a surface to a volume. <a href="CrystalOrientations.html">Orientations</a> develops the orientation geometry itself, and <a href="ODFAnalysis.html">ODF</a> develops continuous orientation distributions.</p>
 </div>
 </body>
 </html>

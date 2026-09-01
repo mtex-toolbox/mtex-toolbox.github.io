@@ -1,5 +1,5 @@
 ---
-title: "Symmetric Spherical Functions"
+title: 'Symmetric spherical functions'
 
 sidebar: documentation_sidebar
 permalink: S2FunSym.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Symmetric Spherical Functions</title>
+<title>Symmetric spherical functions</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_S2FunSym.m">
 </head>
@@ -22,70 +22,78 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>In several applications spherical functions are symmetric with respect to some symmetry group. Typically examples are inverse pole figures or properties of single crystals. In MTEX one can ensure symmetry properties of spherical functions by defining them as variables of type <code class="language-plaintext highlighter-rouge"><a href="S2FunHarmonicSym.S2FunHarmonicSym.html">S2FunHarmonicSym</a></code>.</p>
+<p>A symmetric spherical function has the same scalar value at directions related by a point group. Inverse pole figures and directional properties of a single crystal are common examples. MTEX represents a harmonic function with this constraint as <a href="S2FunHarmonicSym.S2FunHarmonicSym.html"><code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code></a>.</p>
+<p>Symmetry is the point group under which the data is invariant. It is attached to a reference frame rather than being a reference frame itself. Use a <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a> for directions in the specimen frame and a <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> for directions in a crystal frame.</p>
 <!--/introduction-->
-<h2 id="1">Defining a S2FunHarmonic</h2>
-<p>
-<b>Definition via symmetrisation</b>
-</p>
-<p>The simplest way to define a symmetric spherical function is through the symmetrisation of an ordinary <code class="language-plaintext highlighter-rouge"><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></code>.</p>
 {% highlight matlab %}
-% the original function
 plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">Attach and enforce a symmetry</h2>
+<p>Start with an ordinary harmonic spherical function. The asymmetric smiley makes the effect of symmetrisation easy to see.</p>
+{% highlight matlab %}
 sF = S2Fun.smiley;
-
-% the symmetry
+{% endhighlight %}
+<p>Choose orthorhombic specimen symmetry. Passing <code class="language-plaintext highlighter-rouge">sF.how2plot</code> preserves the plotting convention of the function when the symmetry creates its reference frame.</p>
+{% highlight matlab %}
 ss = specimenSymmetry('222',sF.how2plot);
-
-% attach the symmetry to the function
-sFs1 = S2FunHarmonicSym(sF, ss);
-
-% and enforce it
-sFs1 = sFs1.symmetrise
-
-plot(sFs1)
 {% endhighlight %}
-
-{% highlight plaintext %}
-sFs1 = S2FunHarmonicSym (y↑→x (222))
-  bandwidth: 128
-  antipodal: true
+<p>For an existing harmonic function, the constructor first attaches the symmetry and its frame. It does not yet change the coefficients. The subsequent <a href="S2FunHarmonic.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a> call averages symmetry-related directions and enforces the constraint.</p>
+{% highlight matlab %}
+sFs1 = S2FunHarmonicSym(sF,ss);
+sFs1 = sFs1.symmetrise;
 {% endhighlight %}
-<center>
+<h2 id="5">Plot the fundamental sector</h2>
+<p>A symmetric function is plotted only in a representative sector by default, as is usual for an inverse pole figure.</p>
+{% highlight matlab %}
+plot(sFs1);
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunSym_01.png" %}
 </center>
-<p>Note that symmetry function are by default only plotted within their representative sector, as it is typical for inverse pole figures. In order to visualize the full sphere we have to use the option <code class="language-plaintext highlighter-rouge">'complete'</code>.</p>
+<p>This sector contains one representative from each set of directions related by <code class="language-plaintext highlighter-rouge">222</code> symmetry. Its boundaries therefore remove repeated information; they do not crop the definition of the function.</p>
+<h2 id="7">Inspect the full symmetrised function</h2>
+<p>Use <code class="language-plaintext highlighter-rouge">'complete'</code> when the repetitions themselves matter. The <code class="language-plaintext highlighter-rouge">'upper'</code> option restricts the view to the upper hemisphere.</p>
 {% highlight matlab %}
-plot(sFs1,'complete','upper')
+clf;
+plot(sFs1,'complete','upper');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunSym_02.png" %}
 </center>
-<p>
-<b>Definition via function handle</b>
-</p>
-<p>If you have a function handle for the function you could create a <code class="language-plaintext highlighter-rouge"><a href="S2FunHarmonicSym.S2FunHarmonicSym.html">S2FunHarmonicSym</a></code> via quadrature. At first lets define a symmetry and a function handle which takes <code class="language-plaintext highlighter-rouge"><a href="vector3d.vector3d.html">vector3d</a></code> as an argument and returns double:</p>
+<p>The smiley motif now occurs in positions related by the half-turns of <code class="language-plaintext highlighter-rouge">222</code> symmetry. All copies have identical values, although their positions and orientations on the projection differ.</p>
+<h2 id="9">Construct from a function handle</h2>
+<p>A function handle is convenient when values can be computed for every direction. It must accept a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> array and return one real scalar per direction. Here the directions belong to the crystal frame, so the requested point group is crystal symmetry <code class="language-plaintext highlighter-rouge">6/m</code>.</p>
 {% highlight matlab %}
-f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
+valueFunction = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
 cs = crystalSymmetry('6/m');
 {% endhighlight %}
-<p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sFs2</code> of type <code class="language-plaintext highlighter-rouge"><a href="S2FunHarmonicSym.S2FunHarmonicSym.html">S2FunHarmonicSym</a></code>
-</p>
+<p> <a href="S2FunHarmonicSym.quadrature.html"><code class="language-plaintext highlighter-rouge">quadrature</code></a> computes the harmonic coefficients and enforces the supplied symmetry. The <code class="language-plaintext highlighter-rouge">'bandwidth'</code> option keeps spherical harmonic degrees through 16.</p>
 {% highlight matlab %}
-sFs2 = S2FunHarmonicSym.quadrature(f, cs)
+sFs2 = S2FunHarmonicSym.quadrature(valueFunction,cs,'bandwidth',16);
 
+clf;
 contour(sFs2,'linewidth',2);
 mtexColorMap parula
 {% endhighlight %}
-
-{% highlight plaintext %}
-sFs2 = S2FunHarmonicSym (6/m)
-  bandwidth: 128
-  antipodal: true
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunSym_03.png" %}
 </center>
+<p>Only the fundamental sector of <code class="language-plaintext highlighter-rouge">6/m</code> is drawn. The curved contour lines are the part of the scalar function that is not generated by symmetry; applying the point group reproduces them over the complete sphere.</p>
+<h2 id="12">The maths behind symmetrisation</h2>
+<p>For a point group \(G\), symmetrisation replaces a function \(f\) by the group average</p>
+<p>\[ f_G(\vec v)=\frac{1}{|G|}\sum_{g\in G}f(g\vec v). \]</p>
+<p>Applying any group element merely permutes the terms in this sum. The result therefore satisfies \(f_G(g\vec v)=f_G(\vec v)\) for every \(g\) in \(G\). The harmonic implementation performs this averaging while keeping a compact coefficient representation.</p>
+{% highlight matlab %}
+close all
+{% endhighlight %}
+<h2 id="13">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <i>Texture Analysis in Materials Science: Mathematical Methods</i>, Butterworths, 1982, develops the crystal and specimen symmetry operations that reduce directional texture information to a representative region.</li>
+</ul>
+</div>
+<h2 id="14">Next</h2>
+<p>Continue with <a href="SO3FunConvolution.html">Convolution</a> to see how a function on the rotation group acts on a spherical function.</p>
 </div>
 </body>
 </html>

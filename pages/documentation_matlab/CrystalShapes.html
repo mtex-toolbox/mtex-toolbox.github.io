@@ -1,5 +1,5 @@
 ---
-title: "Crystal Shapes"
+title: 'Crystal Shapes'
 
 sidebar: documentation_sidebar
 permalink: CrystalShapes.html
@@ -23,32 +23,18 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A crystal shape is the outer form of a crystal - a solid bounded by lattice planes - and MTEX draws it as an object in its own right. It is the most direct way to show an orientation: instead of three angles, the crystal itself, sitting the way the data says it sits. Twinning relationships, slip systems and lattice planes are shown the same way.</p>
+<p>A crystal shape is a polyhedron bounded by lattice planes. In MTEX it is both a model of crystal habit and a three-dimensional glyph for an orientation. Rotating the glyph makes the orientation visible without reducing it to three angles.</p>
+<p>This page assumes the distinction between lattice planes and directions from <a href="CrystalDirections.html">Miller Indices</a>. The use of an orientation as a map from the crystal frame into the specimen frame is introduced in <a href="OrientationDefinition.html">Orientations</a>.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<h2 id="2">Simple Crystal Shapes</h2>
-<p>Cubic and hexagonal materials are usually drawn as a cube or a hexagonal prism, the faces being \(\{100\}\) in the cubic case and \(\{10\bar10\}\), \(\{0001\}\) in the hexagonal one.</p>
+<h2 id="2">A Simple Crystal Shape</h2>
+<p>Cubic and hexagonal crystals are often represented by a cube and a hexagonal prism. Their faces belong to the \(\{100\}\) family for the cube, and to the \(\{10\bar{1}0\}\) and \(\{0001\}\) families for the prism.</p>
 {% highlight matlab %}
-% import some hexagonal data
-mtexdata titanium;
-{% endhighlight %}
+% load a hexagonal EBSD data set without displaying its map summary
+mtexdata titanium silent
 
-{% highlight plaintext %}
-ebsd = EBSDhex (y↑→x)
- 
- Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
-     0    8100 (99%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
- 
- Properties: ci, grainid, iq, sem_signal, oldId
- Scan unit : um
- X × Y × Z : [0 → 996] × [0 → 998] × [0 → 0]
- Normal vector: (0,0,1)
- Hex grid     :97 × 84
-{% endhighlight %}
-
-{% highlight matlab %}
-% define a simple hexagonal crystal shape
+% construct a hexagonal prism in the crystal frame
 cS = crystalShape.hex(ebsd.CS)
 {% endhighlight %}
 
@@ -61,13 +47,14 @@ cS = crystalShape
 
 {% highlight matlab %}
 close all
-plot(cS,'faceAlpha',0.2,'figSize','small')
+plot(cS,'FaceAlpha',0.2)
 drawNow(gcm,'final')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapes_01.png" %}
 </center>
-<p>Internally the shape is a list of faces, bounded by the vertices <code class="language-plaintext highlighter-rouge">cS.V</code> and the edges <code class="language-plaintext highlighter-rouge">cS.E</code>.</p>
+<p>The display reports 12 vertices and 8 faces. The translucent drawing shows the six prism faces between the two basal faces.</p>
+<p>A <a href="crystalShape.crystalShape.html"><code class="language-plaintext highlighter-rouge">crystalShape</code></a> stores the vertices in <code class="language-plaintext highlighter-rouge">cS.V</code>, face-to-vertex indices in <code class="language-plaintext highlighter-rouge">cS.F</code>, and edges in <code class="language-plaintext highlighter-rouge">cS.E</code>. The vertex coordinates printed below are expressed in the crystal frame.</p>
 {% highlight matlab %}
 cS.V
 {% endhighlight %}
@@ -89,8 +76,8 @@ ans = vector3d (y↑→x)
    0.394      0 -0.308
    0.394      0  0.308
 {% endhighlight %}
-<h2 id="6">Planes and Slip Systems Inside the Crystal</h2>
-<p> <a href="crystalShape.plotInnerFace.html"><code class="language-plaintext highlighter-rouge">plotInnerFace</code></a>, <a href="crystalShape.plotInnerDirection.html"><code class="language-plaintext highlighter-rouge">plotInnerDirection</code></a>, <a href="crystalShape.plotSlipSystem.html"><code class="language-plaintext highlighter-rouge">plot(cS,sS)</code></a> and <a href="vector3d.arrow3d.html"><code class="language-plaintext highlighter-rouge">arrow3d</code></a> draw lattice planes, directions and slip systems inside the shape, which is what makes a slip system readable at all - a plane and a direction in it.</p>
+<h2 id="5">Planes and Slip Systems Inside the Shape</h2>
+<p>A slip system combines a lattice plane with a lattice direction in that plane. <a href="crystalShape.plotInnerFace.html"><code class="language-plaintext highlighter-rouge">plotInnerFace</code></a> and <a href="crystalShape.plotInnerDirection.html"><code class="language-plaintext highlighter-rouge">plotInnerDirection</code></a> draw these parts separately. Passing a slip system directly to <code class="language-plaintext highlighter-rouge">plot</code> draws both.</p>
 {% highlight matlab %}
 sS = [slipSystem.pyramidal2CA(ebsd.CS), ...
   slipSystem.pyramidalA(ebsd.CS)]
@@ -106,311 +93,266 @@ sS = slipSystem (Titanium (Alpha))
 {% endhighlight %}
 
 {% highlight matlab %}
-plot(cS,'faceAlpha',0.2,'figSize','small')
+plot(cS,'FaceAlpha',0.2)
 hold on
-plot(cS,sS(2),'faceColor','blue')
-plot(cS,sS(1),'faceColor','red')
+plot(cS,sS(2),'FaceColor','blue')
+plot(cS,sS(1),'FaceColor','red')
 hold off
 drawNow(gcm,'final')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapes_02.png" %}
 </center>
-<p>Both slip planes are pyramidal, and the drawing shows how differently the two slip directions lie in them.</p>
-<h2 id="9">Calculating with Crystal Shapes</h2>
-<p>A crystal shape is defined in crystal coordinates, so an <a href="OrientationDefinition.html">orientation</a> applied to it turns it into specimen coordinates - exactly as it does for a crystal direction. That is how a shape ends up on a map at the orientation the measurement found.</p>
+<p>The blue and red patches are two different pyramidal planes. Their arrows make the distinct slip directions visible inside those planes. Their role in deformation is developed in <a href="SlipSystems.html">Slip Systems</a>.</p>
+<h2 id="8">Rotating, Scaling, and Shifting a Shape</h2>
+<p>The vertices of <code class="language-plaintext highlighter-rouge">cS</code> are in the crystal frame. Multiplication by an orientation expresses them in the specimen frame, just as it does for a crystal direction. Scaling changes the glyph size, while addition places the glyph at a specimen position.</p>
 {% highlight matlab %}
-% plot an EBSD map
+% compute colours explicitly to avoid an unrelated colour-key message
+ebsdKey = ipfColorKey(ebsd);
+ebsdColor = ebsdKey.orientation2color(ebsd.orientations);
+
+% plot the EBSD map in the specimen frame
 close all
-plot(ebsd,ebsd.orientations)
+plot(ebsd,ebsdColor)
 
+% select the orientation nearest the requested map position
+ori = ebsd('xy',500,500).orientations;
+
+% rotate, scale, and place one shape above that position
 hold on
-scaling = 100; % scale the crystal shape to have a nice size
-
-% plot at position (500,500) the orientation of the corresponding crystal.
-% we have to choose z = -50 such that the crystal shape becomes visible
-% above the map
-plot(500,500,-50, ebsd('xy',500,500).orientations * cS * scaling,...
-  'faceAlpha',0.5,'linewidth',2)
+plot(500,500,50,ori * cS * 100,'FaceAlpha',0.5,'LineWidth',2)
 hold off
 drawNow(gcm,'final')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapes_03.png" %}
 </center>
-<p>Three operations are available, and each of them accepts lists:</p>
+<p>The crystal at the centre of the map is the same prism as before. Only its size, position, and expression in the specimen frame have changed.</p>
+<p>The three operations also accept lists:</p>
 <div>
 <ul>
 <li>
-<code class="language-plaintext highlighter-rouge">factor * cS</code> scales the shape</li>
+<code class="language-plaintext highlighter-rouge">factor * cS</code> scales a shape.</li>
 <li>
-<code class="language-plaintext highlighter-rouge">ori * cS</code> rotates it into the given orientation</li>
+<code class="language-plaintext highlighter-rouge">ori * cS</code> rotates it into a specimen orientation.</li>
 <li>
-<code class="language-plaintext highlighter-rouge">[xy] + cS</code> or <code class="language-plaintext highlighter-rouge">[xyz] + cS</code> shifts it to the given position</li>
+<code class="language-plaintext highlighter-rouge">[xy] + cS</code> or <code class="language-plaintext highlighter-rouge">[xyz] + cS</code> shifts it to a specimen position.</li>
 </ul>
 </div>
-<p>Because lists are allowed, a whole map of grains is drawn in one call - one shape per grain, oriented like the grain and scaled by its size.</p>
+<p>This vectorization makes it possible to construct one glyph per grain. Grain reconstruction itself is taught in <a href="GrainReconstruction.html">Grain Reconstruction</a>.</p>
 {% highlight matlab %}
-% compute some grains
+% reconstruct grains and smooth only their boundary geometry
 grains = calcGrains(ebsd);
 grains = smoothBoundary(grains,5);
 
-% and plot them
+% colour grains by the specimen direction of the crystal c-axis
 cKey = ipfColorKey(grains);
 color = cKey.orientation2color(grains.meanOrientation);
-plot(grains,color,'FaceAlpha',0.5,'linewidth',2)
+plot(grains,color,'FaceAlpha',0.5,'LineWidth',2)
 
-% find the big ones
-isBig = grains.numPixel>50;
+% retain grains with more than 50 measurements
+isBig = grains.numPixel > 50;
 
-% define a list of crystal shape that is oriented as the grain mean
-% orientation and scaled according to the grain area
-cSGrains = grains(isBig).meanOrientation * cS * 0.7 * sqrt(grains(isBig).area);
+% rotate and scale one shape for each retained grain
+cSGrains = grains(isBig).meanOrientation * cS ...
+  * 0.7 * sqrt(grains(isBig).area);
 
-% now we can plot these crystal shapes at the grain centers
+% place the shapes at the grain centroids
 hold on
-plot(grains(isBig).centroid + cSGrains,'FaceColor',color(isBig,:),'FaceAlpha',0.7)
+plot(grains(isBig).centroid + cSGrains, ...
+  'FaceColor',color(isBig,:),'FaceAlpha',0.7)
 hold off
 drawNow(gcm,'final')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapes_04.png" %}
 </center>
-<p>Neighbouring grains with a similar colour have their c-axes pointing in a similar direction - that is what the IPF colour says. The shapes add the rotation about the c-axis, which a single IPF colour cannot show.</p>
-<h2 id="12">The Direct Route</h2>
-<p>Passing the grains and a shape to <code class="language-plaintext highlighter-rouge">plot</code> does the scaling and positioning by itself.</p>
+<p>Similar colours mean that the crystal c-axes point in similar specimen directions. The shapes additionally show rotation about the c-axis, which a single inverse-pole-figure colour cannot encode. The colour construction is explained in <a href="EBSDIPFMap.html">IPF Maps</a>.</p>
+<p>These are idealized orientation glyphs. They do not measure the three-dimensional habit of a grain, and their projected outlines are not the measured two-dimensional grain boundaries.</p>
+<h2 id="11">Plotting Grain Glyphs Directly</h2>
+<p>The <a href="grain2d.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> overload performs the rotation, scaling, and positioning from the previous section. It scales each glyph by the square root of grain area and places it at the grain centroid.</p>
 {% highlight matlab %}
-% plot a grain map
-plot(grains,grains.meanOrientation,'figSize','large','faceAlpha',0.5,'linewidth',2)
+% plot the grain map
+plot(grains,color,'FaceAlpha',0.5,'LineWidth',2)
 
-% and on top for each large grain a crystal shape colored according to the
-% grain orientation
+% overlay one oriented crystal shape on each retained grain
 hold on
-plot(grains(isBig), 0.7*cS, 'FaceColor', color(isBig,:), ...
-  'linewidth',2,'FaceAlpha',0.7 )
+plot(grains(isBig),0.7*cS,'FaceColor',color(isBig,:), ...
+  'LineWidth',2,'FaceAlpha',0.7)
 hold off
 drawNow(gcm,'final')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapes_05.png" %}
 </center>
-<p>The same works in a pole figure, where each shape sits at the pole of the orientation it belongs to.</p>
+<p>The result matches the explicit construction above. The direct call is shorter, while the explicit arithmetic remains useful when position or scale must follow another quantity.</p>
+<h2 id="13">A Twin Relationship</h2>
+<p>A twin law is a specific orientation relationship, not just a visually plausible rotation. Here two pairs of hexagonal lattice planes define an ideal extension-twin relationship. See <a href="Twinning.html">Twinning</a> for identifying that relationship in measured data.</p>
 {% highlight matlab %}
-plotPDF(grains(isBig).meanOrientation,Miller({1,0,-1,0},{0,0,0,1},ebsd.CS),'contour')
-plot(grains(isBig).meanOrientation,0.002*cSGrains,'add2all')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_06.png" %}
-</center>
-<p>and in ODF sections.</p>
-{% highlight matlab %}
-% compute the odf
-odf = calcDensity(ebsd.orientations);
+twinning = orientation.map( ...
+  Miller(0,1,-1,-2,ebsd.CS),Miller(0,-1,1,-2,ebsd.CS), ...
+  Miller(2,-1,-1,0,ebsd.CS),Miller(2,-1,-1,0,ebsd.CS));
 
-% plot the odf in sigma sections
-plotSection(odf,'sigma','contour')
-
-% and on top of it the crystal shapes
-plot(grains(isBig).meanOrientation,0.002*cSGrains,'add2all')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_07.png" %}
-</center>
-<h2 id="15">Twinning Relationships</h2>
-<p>Two crystals in a twin relationship share a lattice plane. Drawing the parent and the twin together makes the relationship visible in a way the misorientation angle does not.</p>
-{% highlight matlab %}
-% define some twinning misorientation
-mori = orientation.byAxisAngle(Miller({1 0 -1 0},ebsd.CS),34.9*degree)
-{% endhighlight %}
-
-{% highlight plaintext %}
-mori = misorientation (Titanium (Alpha) → Titanium (Alpha))
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-    30 34.9  330
-{% endhighlight %}
-
-{% highlight matlab %}
-% plot the crystal in ideal orientation
+% draw the parent and twin shapes together
 close all
 plot(cS,'FaceAlpha',0.5)
-
-% and on top of it in twinning orientation
 hold on
-plot(mori * cS *0.9,'FaceColor','orange')
+plot(twinning * cS * 0.9,'FaceColor','orange')
 hold off
 view(45,20)
 drawNow(gcm,'final')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="CrystalShapes_06.png" %}
+</center>
+<p>The parent and orange twin have the same faces and proportions. Their different placement makes the discrete orientation relationship visible.</p>
+<h2 id="15">Constructing a Shape from Face Normals</h2>
+<p>A cube or prism is often enough for an orientation glyph, but it is a poor model for many crystal habits. A more detailed shape starts from the normals of the faces that may bound it. Quartz provides a compact example.</p>
+{% highlight matlab %}
+cs = loadCIF('quartz');
+
+% define representative face normals of quartz
+m = Miller({1,0,-1,0},cs);   % hexagonal prism
+r = Miller({1,0,-1,1},cs);   % positive rhombohedron
+z = Miller({0,1,-1,1},cs);   % negative rhombohedron
+s1 = Miller({2,-1,-1,1},cs); % left trigonal bipyramid
+s2 = Miller({1,1,-2,1},cs);  % right trigonal bipyramid
+x1 = Miller({6,-1,-5,1},cs); % left positive trapezohedron
+x2 = Miller({5,1,-6,1},cs);  % right positive trapezohedron
+{% endhighlight %}
+<p>MTEX expands each supplied normal by crystal symmetry. For a normal \(\mathbf{n}\), it retains points \(\mathbf{x}\) in the half-space \(\mathbf{x}\cdot\mathbf{n}\leq 1\) and intersects all such half-spaces. The length of the normal therefore encodes inverse face distance: a longer normal moves its plane towards the origin. Only relative distances matter, because MTEX normalizes the finished polyhedron.</p>
+{% highlight matlab %}
+% start from the prism and two rhombohedral forms
+N = [m,r,z];
+cS = crystalShape(N);
+
+% report the geometry that actually bounds the polyhedron
+nVertices = length(cS.V)
+nActiveFaces = sum(isfinite(cS.faceArea) & cS.faceArea > 0)
+
+plot(cS)
+{% endhighlight %}
+
+{% highlight plaintext %}
+nVertices =
+     8
+nActiveFaces =
+    12
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="CrystalShapes_07.png" %}
+</center>
+<p>The polyhedron has eight vertices and twelve active rhombohedral faces. The six candidate prism faces do not appear because their planes lie beyond the intersections of the two rhombohedral forms.</p>
+{% highlight matlab %}
+% move the prism planes inwards
+N = [2*m,r,z];
+cS = crystalShape(N);
+plot(cS,'colored')
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapes_08.png" %}
 </center>
-<h2 id="17">Shapes That Look Like the Real Crystal</h2>
-<p>Outside the cubic and hexagonal cases a cube or a prism is a poor likeness. A realistic shape needs more faces, and each face has to be placed at the right distance from the origin - a face far away never reaches the solid and leaves no trace on it.</p>
-<p>Quartz makes the point.</p>
+<p>The prism now truncates the rhombohedra. Colour distinguishes the three face families and makes the new vertical faces easy to identify.</p>
 {% highlight matlab %}
-cs = loadCIF('quartz')
+% move the negative rhombohedron inwards relative to the positive one
+N = [2*m,r,0.9*z];
+cS = crystalShape(N);
+plot(cS,'colored')
 {% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  mineral        : Quartz           
-  symmetry       : 321              
-  elements       : 6                
-  a, b, c        : 4.9, 4.9, 5.4    
-  reference frame: X||a*, Y||b, Z||c
-{% endhighlight %}
-<p>Its habit is bounded mainly by these faces.</p>
-{% highlight matlab %}
-m = Miller({1,0,-1,0},cs);  % hexagonal prism
-r = Miller({1,0,-1,1},cs);  % positive rhombohedron, usually bigger than z
-z = Miller({0,1,-1,1},cs);  % negative rhombohedron
-s1 = Miller({2,-1,-1,1},cs);% left trigonal bipyramid
-s2 = Miller({1,1,-2,1},cs); % right trigonal bipyramid
-x1 = Miller({6,-1,-5,1},cs);% left positive trapezohedron
-x2 = Miller({5,1,-6,1},cs); % right positive trapezohedron
-{% endhighlight %}
-<p>Taking the first three gives</p>
-{% highlight matlab %}
-N = [m,r,z];
-cS = crystalShape(N)
-
-plot(cS,'figSize','small')
-{% endhighlight %}
-
-{% highlight plaintext %}
-cS = crystalShape
- mineral: Quartz (321, X||a*, Y||b, Z||c)
- vertices: 8
- faces: 18
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapes_09.png" %}
 </center>
-<p>Only the two rhombohedra show. The six prism faces are in the list, but they are so far from the origin that they never cut the solid - the shape has the same eight vertices it would have without them. Multiplying a normal by a factor larger than one moves its face inwards.</p>
+<p>The two rhombohedral forms now have unequal face areas. Their angles are unchanged because the crystal symmetry and lattice metric are unchanged.</p>
 {% highlight matlab %}
-N = [2*m,r,z];
-
+% add a bipyramid and a trapezohedron
+N = [2*m,r,0.9*z,0.7*s1,0.3*x1];
 cS = crystalShape(N);
-plot(cS,'colored','figSize','small')
+plot(cS,'colored')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapes_10.png" %}
 </center>
-<p>Now the prism is there. In a real quartz crystal the negative rhombohedron is somewhat smaller than the positive one, which is again a matter of distance.</p>
+<p>The small slanted faces break the apparent sixfold outline. The resulting form displays the trigonal symmetry of quartz rather than the symmetry of an ideal hexagonal prism.</p>
+<h2 id="21">Habitus and Extension Parameters</h2>
+<p>Individual face distances give direct control, but adjusting many of them is tedious. The constructor also implements the two-parameter heuristic of J. Enderlein, <a href="https://library.wolfram.com/infocenter/Articles/3279">A package for displaying crystal morphology, Mathematica Journal 7(1), 1997</a>. These parameters organize the distances; they are not measured growth rates or surface energies.</p>
 {% highlight matlab %}
-% collect the face normal with the right scaling
-N = [2*m,r,0.9*z];
-
-cS = crystalShape(N);
-plot(cS,'colored','figSize','small')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_11.png" %}
-</center>
-<p>Adding the trigonal bipyramid and the positive trapezohedron gives the small slanted faces that make quartz recognisable, and that break its apparent hexagonal symmetry down to the trigonal one it really has.</p>
-{% highlight matlab %}
-% collect the face normal with the right scaling
-N = [2*m,r,0.9*z,0.7*s1,0.3*x1];
-
-cS = crystalShape(N);
-plot(cS,'colored','figSize','small')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_12.png" %}
-</center>
-<h2 id="23">Habitus and Extension</h2>
-<p>Placing every face by hand is tedious. The alternative is to model the distances by two parameters, following J. Enderlein, <a href="https://library.wolfram.com/infocenter/Articles/3279">A package for displaying crystal morphology. Mathematica Journal, 7(1), 1997</a>. With both set to one, the faces are taken as they are.</p>
-{% highlight matlab %}
-% take the face normals unscaled
+% take the face normals without individual scaling
 N = [m,r,z,s2,x2];
 
 habitus = 1;
 extension = [1 1 1];
 cS = crystalShape(N,habitus,extension);
-plot(cS,'colored','figSize','small')
+plot(cS,'colored')
 {% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_13.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="CrystalShapes_11.png" %}
 </center>
+<p>With unit parameters, the constructor derives all relative face distances from the indices alone.</p>
 <p>
-<b>extension</b> controls the relative extent along the three lattice axes. Raising its second and third entries moves the corresponding limiting faces outward and changes the crystal proportions as shown below.</p>
+<code class="language-plaintext highlighter-rouge">extension</code> controls the relative extent along the three lattice axes. Raising its second and third entries moves the corresponding limiting faces outwards.</p>
 {% highlight matlab %}
 extension = [1 1.2 1.1];
 cS = crystalShape(N,habitus,extension);
-plot(cS,'colored','figSize','small')
+plot(cS,'colored')
 {% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_14.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="CrystalShapes_12.png" %}
 </center>
+<p>The changed axial proportions are visible in both the prism and the end faces. The legend still lists five input families, but at this <code class="language-plaintext highlighter-rouge">habitus</code> only the prism and the two rhombohedra bound the shape.</p>
 <p>
-<b>habitus</b> controls how close the faces with mixed indices come to the origin. Raising it lets the trapezohedron and the bipyramid grow at the expense of the prism.</p>
+<code class="language-plaintext highlighter-rouge">habitus</code> controls how close faces with mixed indices come to the origin. The following sequence changes only that parameter.</p>
 {% highlight matlab %}
 habitus = 1.1;
 cS = crystalShape(N,habitus,extension);
-plot(cS,'colored','figSize','small'), snapnow
+plot(cS,'colored'), snapnow
 
 habitus = 1.2;
 cS = crystalShape(N,habitus,extension);
-plot(cS,'colored','figSize','small'), snapnow
+plot(cS,'colored'), snapnow
 
 habitus = 1.3;
 cS = crystalShape(N,habitus,extension);
-plot(cS,'colored','figSize','small')
+plot(cS,'colored')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="CrystalShapes_13.png" %}
+</center>
+<center class="mtex-figure">
+{% include inline_image.html file="CrystalShapes_14.png" %}
+</center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapes_15.png" %}
 </center>
-<center>
-{% include inline_image.html file="CrystalShapes_16.png" %}
-</center>
-<center>
-{% include inline_image.html file="CrystalShapes_17.png" %}
-</center>
-<h2 id="26">Selecting a Face</h2>
-<p>A single face is picked out by its normal, which is how one face is highlighted or measured.</p>
+<p>As <code class="language-plaintext highlighter-rouge">habitus</code> increases, the trapezohedral and bipyramidal faces grow at the expense of the prism. This sequence is a parameter study, not a simulated growth history.</p>
+<h2 id="25">Selecting a Face</h2>
+<p>Indexing a shape with a face normal selects the face with that outward normal. This is useful for highlighting one face or inspecting its <code class="language-plaintext highlighter-rouge">faceArea</code>. Supply a symmetrised list of normals to select a whole form.</p>
 {% highlight matlab %}
-plot(cS,'figSize','small')
+plot(cS)
 hold on
 plot(cS(Miller(0,-1,1,0,cs)),'FaceColor','DarkRed')
 hold off
-
-% zoom a bit out to fit the screen
 camzoom(0.7)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_18.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="CrystalShapes_16.png" %}
 </center>
-<h2 id="27">A Gallery of Predefined Shapes</h2>
-<p>Several minerals come ready made, with the face distances already tuned.</p>
+<p>The dark-red patch isolates one prism face while the rest of the habit remains available for context.</p>
+<h2 id="27">Predefined Shapes</h2>
+<p>MTEX includes tuned shapes for common minerals. For example, <code class="language-plaintext highlighter-rouge">crystalShape.olivine</code> supplies the face families and their relative distances in one call.</p>
 {% highlight matlab %}
-plot(crystalShape.olivine,'colored','figSize','small')
+plot(crystalShape.olivine,'colored')
 {% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_19.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="CrystalShapes_17.png" %}
 </center>
-{% highlight matlab %}
-plot(crystalShape.garnet,'colored','figSize','small')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_20.png" %}
-</center>
-{% highlight matlab %}
-plot(crystalShape.topaz,'colored','figSize','small')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_21.png" %}
-</center>
-{% highlight matlab %}
-plot(crystalShape.plagioclase,'colored','figSize','small')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_22.png" %}
-</center>
-<h2 id="31">Next</h2>
-<p>Shapes taken from the crystallographic database of the Smorf project are <a href="CrystalShapeSmorf.html">Advanced Crystal Shapes</a>. The planes the faces stand for are <a href="CrystalDirections.html">Miller Indices</a>.</p>
+<p>The large paired faces make the olivine model tabular. Other predefined models include <code class="language-plaintext highlighter-rouge">crystalShape.garnet</code>, <code class="language-plaintext highlighter-rouge">crystalShape.topaz</code>, and <code class="language-plaintext highlighter-rouge">crystalShape.plagioclase</code>.</p>
+<h2 id="29">Physical Meaning and Limits</h2>
+<p>A <code class="language-plaintext highlighter-rouge">crystalShape</code> constructs geometry from face normals and relative distances supplied by the user. It does not infer a habit from symmetry or crystal structure. Real habit also depends on growth conditions, so one mineral can develop different shapes.</p>
+<p>If the supplied distances are proportional to orientation-dependent surface free energy, the same half-space intersection is the equilibrium <a href="https://doi.org/10.1524/zkri.1901.34.1.449">Wulff construction</a>. A growth shape instead requires relative face-growth rates. The distinction and the terminology of habit are summarized by the <a href="https://onlinelibrary.wiley.com/iucr/itc/Fa/ch5o1v0001/sec5o1o1o1o1/">International Tables for Crystallography</a>.</p>
+<p>For broader physical background, see I. Sunagawa, <a href="https://doi.org/10.1017/CBO9780511610349.005">Crystals: Growth, Morphology, and Perfection, Chapter 2</a>, and P. Hartman and W. G. Perdok, <a href="https://doi.org/10.1107/S0365110X55000121">On the relations between structure and morphology of crystals I</a>.</p>
+<h2 id="30">Next</h2>
+<p>
+<a href="CrystalShapeSmorf.html">Advanced Crystal Shapes</a> shows how to transfer face distances from the Smorf drawing tool. Return to <a href="CrystalDirections.html">Miller Indices</a> for the planes represented by the faces, or continue to <a href="FundamentalSector.html">Fundamental Sector</a> to see how crystal symmetry reduces direction space.</p>
 </div>
 </body>
 </html>

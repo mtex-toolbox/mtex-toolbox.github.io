@@ -1,5 +1,5 @@
 ---
-title: "Fundamental Sector"
+title: 'Fundamental Sector'
 
 sidebar: documentation_sidebar
 permalink: FundamentalSector.html
@@ -22,30 +22,27 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Crystal symmetry makes many crystal directions equivalent. A <b>fundamental sector</b> is a patch of the unit sphere that contains a representative of every symmetry-equivalent family. Its interior contains exactly one representative from each general family; directions on the boundary need a qualification discussed below.</p>
+<p>This page assumes the Miller notation from <a href="CrystalDirections.html">Miller Indices</a> and the equivalent-direction families from <a href="CrystalOperations.html">Operations</a>. The sector is the domain of an <a href="OrientationInversePoleFigure.html">inverse pole figure</a>. It is also the region into which <code class="language-plaintext highlighter-rouge">project2FundamentalRegion</code> maps crystal directions.</p>
 <!--/introduction-->
-<p>Crystal symmetry makes many directions equivalent. The <b>fundamental sector</b> is a choice of one representative for each class of symmetrically equivalent directions - a patch of the sphere that tiles the whole sphere when the symmetry elements are applied to it. It is what an inverse pole figure is plotted on, and it is the region in which <a href="VectorsAxes.html">directions</a> are placed by <code class="language-plaintext highlighter-rouge">project2FundamentalRegion</code>.</p>
-<p>For cubic symmetry it is the familiar triangle spanned by the \(\left&lt;100\right&gt;\), \(\left&lt;110\right&gt;\) and \(\left&lt;111\right&gt;\) poles.</p>
+<h2 id="1">A Cubic Example</h2>
+<p>For the cubic Laue group <code class="language-plaintext highlighter-rouge">m-3m</code>, the sector is the familiar spherical triangle with corners at \([001]\), \([101]\), and \([111]\).</p>
 {% highlight matlab %}
-cs = crystalSymmetry('m-3m')
+cs = crystalSymmetry('m-3m');
+corners = Miller({0,0,1},{1,0,1},{1,1,1},cs,'uvw');
 
 plot(cs)
 hold on
-plot(cs.fundamentalSector,'color','Red')
+plot(cs.fundamentalSector,'color','red')
+plot(corners,'labeled','MarkerFaceColor','white','backgroundColor','w')
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  symmetry: m3̅m   
-  elements: 48     
-  a, b, c : 1, 1, 1
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="FundamentalSector_01.png" %}
 </center>
-<p>The sector itself is a <a href="sphericalRegion.sphericalRegion.html">sphericalRegion</a>
-</p>
+<p>The black symbols and lines show the symmetry elements. The red boundary encloses the sector, and the three labelled directions identify its corners.</p>
+<h2 id="3">How MTEX Stores the Sector</h2>
+<p> <a href="sphericalRegion.sphericalRegion.html"><code class="language-plaintext highlighter-rouge">&lt;sphericalRegion.sphericalRegion.html sphericalRegion&gt;</code></a> represents the sector as an intersection of spherical half-spaces.</p>
 {% highlight matlab %}
 sR = cs.fundamentalSector
 {% endhighlight %}
@@ -55,7 +52,7 @@ sR = sphericalRegion
  
  edge normales: 3
 {% endhighlight %}
-<p>It is stored as an intersection of half spaces - a direction belongs to the sector if it has a non negative inner product with each of the normal vectors <code class="language-plaintext highlighter-rouge">sR.N</code>. For the cubic group there are three of them, one per edge of the triangle.</p>
+<p>The summary reports three edge normals, one for each side of the cubic triangle. They are stored in <code class="language-plaintext highlighter-rouge">sR.N</code>.</p>
 {% highlight matlab %}
 sR.N
 {% endhighlight %}
@@ -68,68 +65,81 @@ ans = vector3d (crystal)
   -0.707      0  0.707
        0      1      0
 {% endhighlight %}
-<h2 id="4">Testing and Projecting</h2>
-<p>Take an arbitrary crystal direction.</p>
+<p>For this sector, a direction \(\mathbf{v}\) lies inside when every normal \(\mathbf{n}_i\) satisfies \(\mathbf{n}_i \cdot \mathbf{v} \geq 0\). The rows printed above are those inward-pointing unit normals in the crystal reference frame.</p>
+<h2 id="6">Testing and Projecting</h2>
+<p>Consider the Miller direction \((231)\).</p>
 {% highlight matlab %}
-v = Miller(2,3,1,cs)
+v = Miller(2,3,1,cs);
+{% endhighlight %}
+<p> <a href="sphericalRegion.checkInside.html"><code class="language-plaintext highlighter-rouge">checkInside</code></a> tests it against all three half-spaces.</p>
+{% highlight matlab %}
+isInside = sR.checkInside(v)
 {% endhighlight %}
 
 {% highlight plaintext %}
-v = Miller (m3̅m)
-  h k l
-  2 3 1
-{% endhighlight %}
-<p> <a href="sphericalRegion.checkInside.html"><code class="language-plaintext highlighter-rouge">checkInside</code></a> answers whether it is inside the sector.</p>
-{% highlight matlab %}
-sR.checkInside(v)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
+isInside =
   logical
    0
 {% endhighlight %}
-<p>It is not.</p>
-<p>The equivalent direction that is inside comes from <a href="Miller.project2FundamentalRegion.html"><code class="language-plaintext highlighter-rouge">project2FundamentalRegion</code></a>.</p>
+<p>The false result means that \((231)\) is outside the chosen sector. It does not mean that its symmetry-equivalent family is absent.</p>
+<p> <a href="Miller.project2FundamentalRegion.html"><code class="language-plaintext highlighter-rouge">project2FundamentalRegion</code></a> selects an equivalent representative inside the sector.</p>
 {% highlight matlab %}
-v.project2FundamentalRegion
+vFundamental = v.project2FundamentalRegion
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = Miller (m3̅m)
+vFundamental = Miller (m3̅m)
   h k l
   2 1 3
 {% endhighlight %}
-<p>\((213)\) - a symmetry-equivalent permutation of the indices. For the cubic Laue group, both belong to the same \(\{123\}\) form; the sector selects one representative from that family.</p>
+<p>The result is \((213)\), a symmetry-equivalent permutation of the indices. Both directions belong to the same \(\{123\}\) form; the sector selects one representative from that family.</p>
 {% highlight matlab %}
 hold on
 plot(v)
-plot(v.project2FundamentalRegion,'MarkerFaceColor','Red')
+plot(vFundamental,'MarkerFaceColor','red')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="FundamentalSector_02.png" %}
 </center>
-<h2 id="10">Other Symmetries</h2>
-<p>The shape of the sector follows from the point group, and the fewer elements the group has the larger the sector is. Only the point group 1 leaves the whole sphere; the triclinic Laue group \(\bar 1\) already halves it, since the inversion identifies every direction with its opposite. The remaining ten Laue groups are shown below:</p>
+<p>The original marker lies outside the red triangle, while the filled red marker lies inside it. Their different positions do not make them crystallographically distinct.</p>
+<h2 id="12">Other Laue Groups</h2>
+<p>The exact point group determines the shape of the sector. Lower symmetry means fewer equivalent copies and therefore a larger sector. Only point group <code class="language-plaintext highlighter-rouge">1</code> leaves the whole sphere. The triclinic Laue group \(\bar{1}\) already halves it because inversion identifies every direction with its opposite. The other ten Laue groups are shown below.</p>
 {% highlight matlab %}
-newMtexFigure('layout',[2 5],'figSize','medium');
+mtexFig = newMtexFigure('layout',[2 5],'figSize','medium');
 for lId = 2:11
-  nextAxis(lId-1);
+  ax = mtexFig.nextAxis(lId-1);
   cs = crystalSymmetry('LaueId',lId);
-  plot(cs,'doNotDraw')
-  hold on
-  plot(cs.fundamentalSector,'color','red','doNotDraw','LineWidth',3)
-  hold off
-  mtexTitle(cs.LaueName)
+  plot(cs,'parent',ax,'doNotDraw')
+  hold(ax,'on')
+  plot(cs.fundamentalSector,'parent',ax,'color','red',...
+    'doNotDraw','LineWidth',3)
+  hold(ax,'off')
+  mtexTitle(ax,cs.LaueName,'doNotDraw')
 end
+mtexFig.drawNow;
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="FundamentalSector_03.png" %}
 </center>
-<p>Each plot shows the symmetry elements of the group with its sector drawn in red. Going from <code class="language-plaintext highlighter-rouge">6/mmm</code> to <code class="language-plaintext highlighter-rouge">2/m</code> the red patch grows by exactly the factor by which the number of symmetry elements drops.</p>
-<h2 id="12">Next</h2>
+<p>Each panel shows the symmetry elements of one Laue group and outlines its sector in red. Within this gallery, the sector area is inversely proportional to the number of symmetry operations. Moving from <code class="language-plaintext highlighter-rouge">6/mmm</code> to <code class="language-plaintext highlighter-rouge">2/m</code> enlarges the red patch by exactly the factor by which the number of symmetry operations falls.</p>
+<h2 id="14">Point Groups, Laue Groups, and Boundaries</h2>
+<p>A fundamental sector follows the point group supplied to MTEX. Adding the <code class="language-plaintext highlighter-rouge">'antipodal'</code> option identifies \(\mathbf{v}\) with \(-\mathbf{v}\) and is equivalent to using the corresponding Laue group. This distinction matters for a non-centrosymmetric crystal: its point-group sector may be larger than its Laue-group sector.</p>
+<p>The gallery uses Laue groups because conventional diffraction commonly identifies Friedel pairs. MTEX does not impose that antipodal identification when a point group is used without <code class="language-plaintext highlighter-rouge">'antipodal'</code>.</p>
+<p>For a point group \(G\), a general direction has \(\mathrm{ord}(G)\) symmetry-equivalent copies. The sector therefore covers the fraction \(1/\mathrm{ord}(G)\) of the sphere, or spherical area \(4\pi/\mathrm{ord}(G)\). A direction fixed by a nonidentity operation has fewer distinct copies and often lies on an edge or vertex.</p>
+<p>Not every edge is a symmetry element. A closed sector can contain two equivalent representatives on paired seam edges. Consequently, projection is unique in the interior but a boundary tie may be resolved by either representative. Both answers are crystallographically equivalent.</p>
+<h2 id="15">References</h2>
+<div>
+<ul>
+<li>Th. Hahn, H. Klapper, U. M&uuml;ller, and M. I. Aroyo, <a href="https://doi.org/10.1107/97809553602060000930">Point groups and crystal classes</a>, <i>International Tables for Crystallography A</i>, ch. 3.2, 2016, tabulates point-group stereograms, general orbits, and special directions.</li>
+<li>D. Chateigner, L. Lutterotti, and M. Morales, <a href="https://onlinelibrary.wiley.com/iucr/itc/Ha/ch5o3v0001/">Quantitative texture analysis and combined analysis</a>, <i>International Tables for Crystallography H</i>, ch. 5.3, shows the nonredundant inverse-pole-figure sectors for the crystal systems.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops symmetry reduction for directions and orientations.</li>
+<li>G. Nolze and R. Hielscher, <a href="https://doi.org/10.1107/S1600576716012942">Orientations - perfectly colored</a>, <i>Journal of Applied Crystallography</i> 49, 1786-1802, 2016, explains how fundamental-sector topology constrains inverse-pole-figure colour keys.</li>
+</ul>
+</div>
+<h2 id="16">Next</h2>
 <p>A sector is a purely geometric object and carries no orientation information. Its counterpart for orientations is the <a href="OrientationFundamentalRegion.html">Fundamental Region</a>, represented by an <a href="orientationRegion.orientationRegion.html"><code class="language-plaintext highlighter-rouge">&lt;orientationRegion.orientationRegion.html orientationRegion&gt;</code></a>. The sector is also what an <a href="OrientationInversePoleFigure.html">inverse pole figure</a> is drawn on.</p>
+<p>Continue in this chapter with <a href="QuasiCrystals.html">Quasi Symmetries</a>, where the same construction reduces directions under non-crystallographic point groups.</p>
 </div>
 </body>
 </html>

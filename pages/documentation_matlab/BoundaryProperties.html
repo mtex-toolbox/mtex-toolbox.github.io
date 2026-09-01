@@ -1,5 +1,5 @@
 ---
-title: "Grain Boundary Properties"
+title: 'Grain Boundary Properties'
 
 sidebar: documentation_sidebar
 permalink: BoundaryProperties.html
@@ -23,38 +23,24 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we discus geometric properties that can be derived from grain boundaries. Lets start by importing some EBSD data and computing grain boundaries.</p>
-{% highlight matlab %}
-% load some example data
-plottingConvention.default('y↑→x');
-mtexdata twins silent
-ebsd.prop = rmfield(ebsd.prop,{'error','bands'});
-
-% detect grains
-[grains,ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',3);
-
-% smooth them - this page reads ebsdId per segment, which only means something
-% as long as every segment still runs between one pair of pixels, so the
-% coarsening and resampling steps are switched off
-grains = grains.smoothBoundary(5,'noSimplify','noRefine');
-
-% visualize the grains
-plot(grains,grains.meanOrientation)
-
-% extract all grain boundaries
-gB = grains.boundary;
-
-hold on
-plot(gB,'LineWidth',2)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="BoundaryProperties_01.png" %}
-</center>
-<h2 id="2">Property overview</h2>
-<p>A variable of type <a href="grainBoundary.grainBoundary.html">grainBoundary</a> contains the following properties</p>
+<p>A grain boundary is stored as short segments between neighbouring EBSD measurements that belong to different grains. Most properties come in pairs: two pixels, grains, phases, and the misorientation between them. The remaining properties describe the segment's geometry and its place in the boundary network.</p>
+<p>This page assumes that the map has already been divided into grains as in <a href="GrainReconstruction.html">Grain Reconstruction</a>. <a href="BoundarySelect.html">Select Grain Boundaries</a> covers phase and grain selection. <a href="GrainBoundaries.html">Grain Boundaries</a> explains the physical meaning of a boundary trace in a two-dimensional section.</p>
 <p>
    <table class="usertable">
+      <tr>
+         <td>
+               <p>property</p>
+         </td>
+         <td>
+               <p>meaning</p>
+         </td>
+         <td>
+               <p>property</p>
+         </td>
+         <td>
+               <p>meaning</p>
+         </td>
+      </tr>
       <tr>
          <td>
                <p>
@@ -62,45 +48,43 @@ hold off
                </p>
          </td>
          <td>
-               <p>neighboring pixel ids</p>
+               <p>neighbouring pixel IDs</p>
          </td>
-         <td>
-               <p>
-                  <tt>phaseId</tt>
-               </p>
-         </td>
-         <td>
-               <p>neighboring phase ids</p>
-         </td>
-      </tr>
-      <tr>
          <td>
                <p>
                   <tt>grainId</tt>
                </p>
          </td>
          <td>
-               <p>neighboring grain ids</p>
+               <p>neighbouring grain IDs</p>
          </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>phaseId</tt>
+               </p>
+         </td>
+         <td>
+               <p>neighbouring phase IDs</p>
+         </td>
+         <td>
+               <p>
+                  <tt>misorientation</tt>
+               </p>
+         </td>
+         <td>
+               <p>rotation across the segment</p>
+         </td>
+      </tr>
+      <tr>
          <td>
                <p>
                   <tt>F</tt>
                </p>
          </td>
          <td>
-               <p>vertices ids of the segments</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grainBoundary.segLength.html">
-                     <tt>segLength</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>length of each segment</p>
+               <p>endpoint vertex IDs</p>
          </td>
          <td>
                <p>
@@ -108,7 +92,7 @@ hold off
                </p>
          </td>
          <td>
-               <p>direction of each segment</p>
+               <p>segment direction</p>
          </td>
       </tr>
       <tr>
@@ -118,8 +102,20 @@ hold off
                </p>
          </td>
          <td>
-               <p>mid point of the segment</p>
+               <p>segment midpoint</p>
          </td>
+         <td>
+               <p>
+                  <a href="grainBoundary.segLength.html">
+                     <tt>segLength</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>segment length</p>
+         </td>
+      </tr>
+      <tr>
          <td>
                <p>
                   <a href="grainBoundary.curvature.html">
@@ -128,18 +124,7 @@ hold off
                </p>
          </td>
          <td>
-               <p>curvature of each segment</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <tt>misorientation</tt>
-               </p>
-         </td>
-         <td>
-               <p>between <tt>ebsdId(:,1)</tt> and  <tt>ebsdId(:,2)</tt>
-               </p>
+               <p>signed segment curvature</p>
          </td>
          <td>
                <p>
@@ -147,7 +132,61 @@ hold off
                </p>
          </td>
          <td>
-               <p>list of all triple points</p>
+               <p>triple-point list</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>chainId</tt>
+               </p>
+         </td>
+         <td>
+               <p>chain label</p>
+         </td>
+         <td>
+               <p>
+                  <tt>chainSize</tt>
+               </p>
+         </td>
+         <td>
+               <p>number of segments in the chain</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>arcLength</tt>
+               </p>
+         </td>
+         <td>
+               <p>distance along the chain</p>
+         </td>
+         <td>
+               <p>
+                  <tt>chainLength</tt>
+               </p>
+         </td>
+         <td>
+               <p>total chain length</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>isClosed</tt>
+               </p>
+         </td>
+         <td>
+               <p>whether the chain closes</p>
+         </td>
+         <td>
+               <p>
+                  <tt>junctionId</tt>
+               </p>
+         </td>
+         <td>
+               <p>junction vertex IDs</p>
          </td>
       </tr>
       <tr>
@@ -157,7 +196,7 @@ hold off
                </p>
          </td>
          <td>
-               <p>connected component id</p>
+               <p>connected-component label</p>
          </td>
          <td>
                <p>
@@ -165,12 +204,41 @@ hold off
                </p>
          </td>
          <td>
-               <p>connected component size</p>
+               <p>number of segments in the component</p>
          </td>
       </tr>
    </table>
 </p>
-<p>The first three properties refer to \(N \times 2\) matrices where \(N\) is the number of boundary segments. Each row of these matrices contains the information about the EBSD data, and grain data on both sides of the grain boundary. To illustrate this consider the grain boundary of one specific grain</p>
+{% highlight matlab %}
+close all;
+
+% load the example map in its specimen plotting frame
+plottingConvention.default('y↑→x');
+mtexdata twins silent;
+ebsd.prop = rmfield(ebsd.prop,{'error','bands'});
+
+% reconstruct the grains
+[grains,ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',3);
+{% endhighlight %}
+<h2 id="2">Preserve the segment-to-pixel relation</h2>
+<p>This page uses <code class="language-plaintext highlighter-rouge">ebsdId</code> to inspect the pixel pair beside each segment. Boundary simplification and refinement change the segment count, and a resampled segment no longer lies between one specific pixel pair. The <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> options <code class="language-plaintext highlighter-rouge">'noSimplify'</code> and <code class="language-plaintext highlighter-rouge">'noRefine'</code> preserve that relation while smoothing.</p>
+{% highlight matlab %}
+grains = grains.smoothBoundary(5,'noSimplify','noRefine');
+
+% draw the grains and overlay the complete boundary network
+plot(grains,'FaceColor',[0.9 0.9 0.9],'micronbar','off');
+gB = grains.boundary;
+hold on;
+plot(gB,'lineWidth',2);
+hold off;
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="BoundaryProperties_01.png" %}
+</center>
+<p>The thick black lines show that the boundary is a network of individual segments. Each segment separates one pair of neighbouring measurements.</p>
+<h2 id="4">The two sides of a segment</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">ebsdId</code>, <code class="language-plaintext highlighter-rouge">grainId</code>, and <code class="language-plaintext highlighter-rouge">phaseId</code> are \(N \times 2\) matrices. Each row records what lies on the two sides of one segment. Consider the boundary of one small grain:</p>
 {% highlight matlab %}
 gB4 = grains(4).boundary
 {% endhighlight %}
@@ -181,7 +249,7 @@ gB4 = grainBoundary (y↑→x)
  Segments  length  mineral 1  mineral 2
         8  1.3 µm  Magnesium  Magnesium
 {% endhighlight %}
-<p>This boundary consists of 8 segments and hence ebsdId forms a 8x2 matrix</p>
+<p>The object summary reports eight segments. Its <code class="language-plaintext highlighter-rouge">ebsdId</code> property is therefore an 8 by 2 matrix.</p>
 {% highlight matlab %}
 gB4.ebsdId
 {% endhighlight %}
@@ -197,7 +265,7 @@ ans =
         1103        1102
         1103        1240
 {% endhighlight %}
-<p>It is important to understand that the <b>id</b> is not necessarily the same as the index in the list. In order to index an variable of type EBSD by id and not by index the following syntax has to be used</p>
+<p>These values are measurement IDs, not positions in the current list. IDs and list positions differ as soon as measurements have been removed from the map. Indexing by ID must say so explicitly.</p>
 {% highlight matlab %}
 ebsd('id',gB4.ebsdId)
 {% endhighlight %}
@@ -226,11 +294,11 @@ ans = EBSDsquare (y↑→x, row←col↑)
  1102       1     (4.4°,80.5°,195.1°)   174   197   0.3     844        42
  1240       1     (4.4°,80.5°,195.2°)   176   168   0.4    1012        42
  Scan unit : um
- X x Y x Z : [1.8 → 2.7] x [1.2 → 2.1] x [0 → 0]
+ X × Y × Z : [1.8 → 2.7] × [1.2 → 2.1] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :8 x 2
+ Square grid  :8 × 2
 {% endhighlight %}
-<p>Similarly</p>
+<p>The grain IDs on the two sides reveal the local grain arrangement.</p>
 {% highlight matlab %}
 gB4.grainId
 {% endhighlight %}
@@ -246,22 +314,42 @@ ans =
      4    42
      4    42
 {% endhighlight %}
-<p>results in 8x2 matrix indicating that grain 4 is a tiny inclusion of grain 42.</p>
+<p>Grain 4 has grain 42 on the far side of all eight segments. Grain 4 is therefore an inclusion: it is entirely surrounded by one other grain.</p>
 {% highlight matlab %}
-plot(grains(4),'FaceColor','DarkBlue','micronbar','off')
-hold on
-plot(grains(42),'FaceColor','LightCoral')
-hold off
+plot(grains(4),'FaceColor','DarkBlue','micronbar','off');
+hold on;
+plot(grains(42),'FaceColor','LightCoral');
+hold off;
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryProperties_02.png" %}
 </center>
-<h2 id="7">Grain boundary misorientations</h2>
-<p>The grain boundary misorientation defined as the misorientation between the orientations corresponding to ids in first and second column of ebsdId, i.e. following two commands should give the same result</p>
+<p>The dark-blue inclusion sits wholly inside the coral grain. The plot is the spatial counterpart of the repeated pair <code class="language-plaintext highlighter-rouge">[4 42]</code> above.</p>
+<h2 id="10">From segments to chains</h2>
+<p>A <b>chain</b> is a maximal run of segments laid end to end. It runs from one junction to the next and never passes through a junction. Every segment belongs to exactly one chain. The same two grains lie on its two sides along the entire chain.</p>
+<p>A <b>junction</b> is a vertex where the number of meeting segments is not two. It need not be a triple point. For example, the end of a boundary at the map rim is a junction but not a point where three real grains meet.</p>
+<p>The inclusion boundary reaches no junction and closes onto itself. Its eight segments consequently form one closed chain.</p>
+{% highlight matlab %}
+chainSummary = table(gB4.chainId(1),gB4.chainSize(1),gB4.isClosed(1),...
+  'VariableNames',{'chainId','chainSize','isClosed'})
+{% endhighlight %}
+
+{% highlight plaintext %}
+chainSummary =
+  1×3 table
+    chainId    chainSize    isClosed
+    _______    _________    ________
+       1           8         true
+{% endhighlight %}
+<p>
+<code class="language-plaintext highlighter-rouge">arcLength</code> is the cumulative length from the start of a chain to the end of each segment. <code class="language-plaintext highlighter-rouge">chainLength</code> repeats the total length on every segment, so either property remains aligned with the boundary list during indexing.</p>
+<h2 id="12">The misorientation across a segment</h2>
+<p>A segment's misorientation is the rotation from the orientation of its second pixel to that of its first. It follows the column order of <code class="language-plaintext highlighter-rouge">ebsdId</code> and can be reproduced from the two pixel orientations.</p>
 {% highlight matlab %}
 gB4(1).misorientation
 
-inv(ebsd('id',gB4.ebsdId(1,2)).orientations) .* ebsd('id',gB4.ebsdId(1,1)).orientations
+inv(ebsd('id',gB4.ebsdId(1,2)).orientations) .* ...
+  ebsd('id',gB4.ebsdId(1,1)).orientations
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -279,134 +367,210 @@ ans = misorientation (Magnesium → Magnesium)
      phi1     Phi    phi2
   329.875  86.401 150.169
 {% endhighlight %}
-<p>Note that in the first result the antipodal flag is true while it is false in the second result.</p>
-<p>Obviously, misorientations of a list of grain boundaries can only be extracted if all of them have the same type of phase transition. Let us consider only Magnesium to Magnesium grain boundaries, i.e., omit all grain boundaries to an not indexed region.</p>
+<p>The two rotations agree, but only the stored one has its <code class="language-plaintext highlighter-rouge">antipodal</code> flag set. A boundary has no preferred side, so MTEX treats that rotation and its inverse as the same boundary misorientation. The rotation computed directly from two ordered orientations retains its direction.</p>
+<p>A list of misorientations is meaningful only when every segment relates the same two phases. Select the phase pair before analysing angles or axes.</p>
 {% highlight matlab %}
-gB_Mg = gB('Magnesium','Magnesium')
+gB_Mg = gB('Magnesium','Magnesium');
+
+% plot the misorientation angle on each magnesium boundary segment
+moriAngle = gB_Mg.misorientation.angle ./ degree;
+plot(gB_Mg,moriAngle,'lineWidth',4,'micronbar','off');
+mtexColorbar('title','misorientation angle (°)');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="BoundaryProperties_03.png" %}
+</center>
+<p>Long runs share nearly the same colour, as expected for segments along one twin boundary. Most non-twin boundaries form the contrasting shorter runs.</p>
+<p>The dominant magnesium twin has a misorientation angle of 86.3 degrees. In this map, 52.8 percent of the magnesium segments are within 3 degrees of that angle, and the median angle is 84.3 degrees.</p>
+{% highlight matlab %}
+fractionNearTwin = mean(abs(moriAngle - 86.3) < 3)
+medianMoriAngle = median(moriAngle)
 {% endhighlight %}
 
 {% highlight plaintext %}
-gB_Mg = grainBoundary (y↑→x)
- 
- Segments  length  mineral 1  mineral 2
-     3161  722 µm  Magnesium  Magnesium
+fractionNearTwin =
+    0.5280
+medianMoriAngle =
+   84.2547
 {% endhighlight %}
-<p>Then the misorientation angles can be plotted by</p>
-{% highlight matlab %}
-plot(gB_Mg,gB_Mg.misorientation.angle./degree,'linewidth',4,'micronbar','off')
-mtexColorbar('title','misorientation angle (°)')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="BoundaryProperties_03.png" %}
-</center>
-<h2 id="10">Geometric properties</h2>
-<p>The <code class="language-plaintext highlighter-rouge">direction</code> property of the boundary segments is useful when checking for tilt and twist boundaries, i.e., when we want to compare the misorientation axis with the interface between the grains</p>
+<p>The high fraction confirms that this specimen is dominated by twin boundaries. <a href="TwinningBoundaries.html">Twinning</a> develops that selection.</p>
+<h2 id="16">Which way a segment runs</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">direction</code> is the direction of the segment trace. Its angle to the misorientation axis is used when classifying tilt and twist boundaries. See <a href="TiltAndTwistBoundaries.html">Twist and Tilt</a>. Compute the axis in specimen coordinates from the two pixel orientations. The stored misorientation alone no longer retains that specimen-frame information.</p>
 {% highlight matlab %}
 % compute misorientation axes in specimen coordinates
 ori = ebsd('id',gB_Mg.ebsdId).orientations;
-axes = axis(ori(:,1),ori(:,2),'antipodal')
+axes = axis(ori(:,1),ori(:,2),'antipodal');
 
-% plot the angle between the misorientation axis and the boundary direction
-plot(gB_Mg,angle(gB_Mg.direction,axes),'linewidth',4,'micronbar','off')
+% plot the angle between each axis and its raw segment direction
+rawAxisTraceAngle = angle(gB_Mg.direction,axes) ./ degree;
+plot(gB_Mg,rawAxisTraceAngle,'lineWidth',4,'micronbar','off');
+mtexColorbar('title','axis-to-trace angle (°)');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="BoundaryProperties_04.png" %}
+</center>
+<p>The colour flickers along boundaries that are straight on the scale of several pixels. This is the pixel staircase: one segment has only a few possible grid directions, regardless of the direction of the underlying boundary.</p>
+<p> <a href="grainBoundary.calcMeanDirection.html"><code class="language-plaintext highlighter-rouge">calcMeanDirection</code></a> uses a window along each chain and never crosses a junction. An argument of 4 includes four neighbouring segments on each side of the segment.</p>
+{% highlight matlab %}
+meanDirection = gB_Mg.calcMeanDirection(4);
+meanAxisTraceAngle = angle(meanDirection,axes) ./ degree;
+plot(gB_Mg,meanAxisTraceAngle,'lineWidth',4,'micronbar','off');
+mtexColorbar('title','axis-to-mean-trace angle (°)');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="BoundaryProperties_05.png" %}
+</center>
+<p>The flicker is suppressed, so nearby segments on one boundary now carry similar colours. The values differ from boundary to boundary, which is the information the flicker was hiding. The median angle is 43.2 degrees, and 10.5 percent of the segments lie below 20 degrees. The misorientation axes are therefore mostly not aligned with the traces in this section.</p>
+{% highlight matlab %}
+medianAxisTraceAngle = median(meanAxisTraceAngle)
+fractionBelow20 = mean(meanAxisTraceAngle < 20)
 {% endhighlight %}
 
 {% highlight plaintext %}
-axes = vector3d (y↑→x)
- size: 3161 x 1
- antipodal: true
+medianAxisTraceAngle =
+   43.2434
+fractionBelow20 =
+    0.1053
 {% endhighlight %}
-<center>
-{% include inline_image.html file="BoundaryProperties_04.png" %}
-</center>
-<p>We observe that the angle is quite oscillatory. This is because of the stair casing effect when reconstructing grains from gridded EBSD data. The weaken this effect we may average the segment directions using the command <a href="grainBoundary.calcMeanDirection.html"><code class="language-plaintext highlighter-rouge">calcMeanDirection</code></a>
-</p>
+<p>Be careful with what follows from that comparison. A trace is not a plane. It is the one direction of the boundary plane revealed by the section, while the inclination remains unknown. An axis parallel to the trace lies in the boundary plane and identifies a tilt boundary. A large angle to the trace settles nothing on its own. <a href="TiltAndTwistBoundaries.html">Twist and Tilt</a> takes this further.</p>
+<h2 id="20">Where a segment is</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">midPoint</code> gives the segment position as a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>. It supplies the anchor for quantities drawn at a segment, such as the misorientation axes computed above.</p>
 {% highlight matlab %}
-% plot the angle between the misorientation axis and the boundary direction
-plot(gB_Mg,angle(gB_Mg.calcMeanDirection(4),axes),'linewidth',4,'micronbar','off')
+plot(grains,'FaceColor',[0.9 0.9 0.9],...
+  'faceAlpha',0.3,'micronbar','off');
+hold on;
+quiver(gB_Mg(1:3:end),axes(1:3:end),...
+  'color','black','autoScaleFactor',0.6);
+hold off;
 {% endhighlight %}
-<center>
-{% include inline_image.html file="BoundaryProperties_05.png" %}
-</center>
-<p>The <b>midPoint</b> property gives the position of each segment as a <a href="vector3d.vector3d.html">vector3d</a>. It is what one needs whenever something has to be drawn at, or selected by, the location of a segment - the misorientation axes above, for instance, are best shown as arrows sitting on their segments</p>
-{% highlight matlab %}
-plot(grains,grains.meanOrientation,'faceAlpha',0.3,'micronbar','off')
-hold on
-quiver(gB_Mg(1:3:end),axes(1:3:end),'color','black','autoScaleFactor',0.6)
-hold off
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryProperties_06.png" %}
 </center>
-<p>and it is equally the natural handle for a spatial selection</p>
+<p>The black arrows are anchored at every third magnesium boundary midpoint. Their positions come from the boundary segments, while their directions come from the two neighbouring pixel orientations.</p>
+<p>The same midpoint property supports spatial selection.</p>
 {% highlight matlab %}
 pos = gB_Mg.midPoint;
 isTop = pos.y > 30;
 
-plot(grains,'faceAlpha',0.3,'micronbar','off')
-hold on
-plot(gB_Mg(isTop),'linewidth',3,'lineColor','red')
-plot(gB_Mg(~isTop),'linewidth',3,'lineColor','blue')
-hold off
+plot(grains,'FaceColor',[0.9 0.9 0.9],...
+  'faceAlpha',0.3,'micronbar','off');
+hold on;
+plot(gB_Mg(isTop),'lineWidth',3,'lineColor','red');
+plot(gB_Mg(~isTop),'lineWidth',3,'lineColor','blue');
+hold off;
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryProperties_07.png" %}
 </center>
-<p>While the command <a href="grainBoundary.length.html"><code class="language-plaintext highlighter-rouge">length(gB_Mg)</code></a> gives the total number of all Magnesium to Magnesium grain boundary segments the command <a href="grainBoundary.segLength.html"><code class="language-plaintext highlighter-rouge">segLength(gB_Mg)</code></a> gives the length of each segment in &micro;m. The total length of all Magnesium to Magnesium grain boundary segments is hence</p>
+<p>Red marks segments above \(y = 30\) micrometres, and blue marks the rest. <a href="BoundarySelect.html">Select Grain Boundaries</a> develops this indexing pattern for other per-segment properties.</p>
+<p>Two lengths are easy to confuse. <code class="language-plaintext highlighter-rouge">length(gB_Mg)</code> is the number of segments, whereas <a href="grainBoundary.segLength.html"><code class="language-plaintext highlighter-rouge">segLength(gB_Mg)</code></a> contains the length of each segment in &micro;m. Their sum is the total length of the selected boundary list.</p>
 {% highlight matlab %}
-sum(gB_Mg.segLength)
+totalBoundaryLength = sum(gB_Mg.segLength)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+totalBoundaryLength =
   722.2508
 {% endhighlight %}
-<h2 id="15">Connected components</h2>
-<p>When analyzing the topology of boundary networks connected components of certain subsets of boundaries are of interest. Using the commands|gB.componentId| and <code class="language-plaintext highlighter-rouge">gB.componentSize</code> we are able to separate the boundary network into groups of connected components and analyze them separately. We do so below at the example of twin boundaries which we first colorize according to length.</p>
+<h2 id="23">Chains and connected components</h2>
+<p>A chain stops at a junction. A <b>connected component</b> does not: it contains every segment reachable through touching segments, including branches through junctions. One component can therefore contain several chains.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">componentId</code> labels each connected group. <code class="language-plaintext highlighter-rouge">componentSize</code> repeats the number of segments in that component on every row. It is a segment count, not a geometric length.</p>
+<p>The next example first selects segments close to the magnesium twin relation, then colours each segment by the size of its component.</p>
 {% highlight matlab %}
 CS = ebsd.CS;
 twinning = orientation.map(Miller(1,-1,0,1,CS),Miller(1,0,-1,-1,CS),...
-  Miller(0,1,-1,1,CS,'uvw'),Miller(1,-1,0,1,CS,'uvw'))
+  Miller(0,1,-1,1,CS,'uvw'),Miller(1,-1,0,1,CS,'uvw'));
 
 gBTwin = gB(gB.isTwinning(twinning));
 
-plot(grains,grains.meanOrientation,'faceAlpha',0.25,'micronbar','off')
-
-hold on
-plot(gBTwin,gBTwin.componentSize,'lineWidth',4)
-hold off
-mtexColorbar
+plot(grains,'FaceColor',[0.9 0.9 0.9],...
+  'faceAlpha',0.25,'micronbar','off');
+hold on;
+plot(gBTwin,gBTwin.componentSize,'lineWidth',4);
+hold off;
+mtexColorbar('title','segments per component');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="BoundaryProperties_08.png" %}
+</center>
+<p>Long twin lamellae appear as large connected components. Short isolated matches appear in the low end of the colour scale and may be accidental.</p>
+{% highlight matlab %}
+numTwinComponents = max(gBTwin.componentId);
+componentSummary = table(length(gBTwin),numTwinComponents,...
+  'VariableNames',{'twinSegments','components'})
 {% endhighlight %}
 
 {% highlight plaintext %}
-twinning = misorientation (Magnesium → Magnesium)
- 
- (101̅1̅) || (011̅1)   [011̅1] || [11̅01]
+componentSummary =
+  1×2 table
+    twinSegments    components
+    ____________    __________
+        1648            54
 {% endhighlight %}
-<center>
-{% include inline_image.html file="BoundaryProperties_08.png" %}
-</center>
-<p>Next we compute how curvy each twin boundary component is, by dividing it spatial extension by its total length. This measure has proven to be useful to tell apart misindexing due to pseudosymmetries and true twin boundaries.</p>
+<p>The 1648 selected segments form 54 components. A twin lamella crossing a grain is one long component. A few isolated segments that happen to meet the twin criterion form a short component, which is why component labels are useful.</p>
+<h2 id="26">A component-scale straightness descriptor</h2>
+<p>A simple straightness descriptor divides the maximum distance between two component midpoints by the component's total segment length. Its value approaches 1 for one straight lamella. It decreases when a component meanders or branches. This is a user-defined descriptor, not a built-in MTEX property.</p>
 {% highlight matlab %}
-numComponents = max(gBTwin.componentId);
-xmax = accumarray(gBTwin.componentId,gBTwin.midPoint.x,[numComponents,1],@max);
-ymax = accumarray(gBTwin.componentId,gBTwin.midPoint.y,[numComponents,1],@max);
-xmin = accumarray(gBTwin.componentId,gBTwin.midPoint.x,[numComponents,1],@min);
-ymin = accumarray(gBTwin.componentId,gBTwin.midPoint.y,[numComponents,1],@min);
+componentId = gBTwin.componentId;
+numComponents = max(componentId);
+span = zeros(numComponents,1);
 
-ext = sqrt((xmax-xmin).^2+(ymax-ymin).^2);
-len = accumarray(gBTwin.componentId,gBTwin.segLength,[numComponents,1],@sum);
-value = ext ./ len;
+for k = 1:numComponents
+  x = gBTwin.midPoint.x(componentId == k);
+  y = gBTwin.midPoint.y(componentId == k);
+  distanceSquared = (x-x.').^2 + (y-y.').^2;
+  span(k) = sqrt(max(distanceSquared(:)));
+end
 
-plot(grains,grains.meanOrientation,'faceAlpha',0.25)
-hold on
-plot(gBTwin,value(gBTwin.componentId),'lineWidth',4)
-hold off
-mtexColorbar
-mtexColorMap blue2red
+componentLength = accumarray(componentId,gBTwin.segLength,...
+  [numComponents,1],@sum);
+straightness = span ./ componentLength;
+
+plot(grains,'FaceColor',[0.9 0.9 0.9],...
+  'faceAlpha',0.25,'micronbar','off');
+hold on;
+plot(gBTwin,straightness(componentId),'lineWidth',4);
+hold off;
+mtexColorMap blue2red;
+mtexColorbar('title','component straightness');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryProperties_09.png" %}
 </center>
+<p>Straight components are red, while meandering or branched components are blue. The values reach 0.97 and have a median of 0.66.</p>
+<p>Define a large component here as one containing more than 50 segments. The 13 large components have a median of 0.48, compared with 0.67 for the rest. A large component in this map is often several lamellae meeting inside one grain, rather than one long straight lamella.</p>
+{% highlight matlab %}
+componentSegmentCount = accumarray(componentId,1);
+isLarge = componentSegmentCount > 50;
+straightnessSummary = table(max(straightness),median(straightness),...
+  sum(isLarge),median(straightness(isLarge)),...
+  median(straightness(~isLarge)),...
+  'VariableNames',{'maximum','median','largeComponents',...
+  'largeMedian','otherMedian'})
+{% endhighlight %}
+
+{% highlight plaintext %}
+straightnessSummary =
+  1×5 table
+    maximum    median     largeComponents    largeMedian    otherMedian
+    _______    _______    _______________    ___________    ___________
+    0.96667    0.65528          13             0.48004        0.66692
+{% endhighlight %}
+<p>This descriptor separates single straight lamellae from branched networks, rather than twins from misindexing. It is still worth checking for the latter. A few segments selected by accident, for example because of pseudosymmetry, form neither a lamella nor a branched twin network.</p>
+<h2 id="29">Next</h2>
+<p>
+<a href="BoundaryMisorientations.html">Misorientations at Grain Boundaries</a> develops the angle and axis on each side of a boundary. <a href="BoundaryCurvature.html">Curvature</a> uses chain order for signed curvature, and <a href="TriplePoints.html">Triple Points</a> develops the junctions where three real grains meet.</p>
+<h2 id="30">Further reading</h2>
+<div>
+<ul>
+<li>V. Randle, <a href="https://www.routledge.com/The-Measurement-of-Grain-Boundary-Geometry/Randle/p/book/9780367402358"><i>The Measurement of Grain Boundary Geometry</i></a>, Institute of Physics, 1993. This monograph connects measurable interface geometry with material properties.</li>
+<li>A. P. Sutton, E. P. Banks, and A. R. Warwick, <a href="https://doi.org/10.1098/rspa.2015.0442">The five-dimensional parameter space of grain boundaries</a>, <i>Proceedings of the Royal Society A</i> 471 (2015), 20150442. It formalises the three misorientation and two boundary- plane degrees of freedom.</li>
+<li>G. S. Rohrer, <a href="https://doi.org/10.1111/j.1551-2916.2011.04384.x">Measuring and Interpreting the Structure of Grain-Boundary Networks</a>, <i>Journal of the American Ceramic Society</i> 94 (2011), 633-646. This review connects two-dimensional boundary maps with three-dimensional interface networks.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

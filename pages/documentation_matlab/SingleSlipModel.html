@@ -1,5 +1,5 @@
 ---
-title: "Single Slip Model"
+title: 'Single Slip Model'
 
 sidebar: documentation_sidebar
 permalink: SingleSlipModel.html
@@ -22,117 +22,51 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>Details to this model can be found in</p>
-<div>
-<ul>
-<li>
-<a href="https://doi.org/10.1093/gji/ggy442">An analytical finite-strain parametrization for texture evolution in deforming olivine polycrystals</a>, Geoph. J. Intern. 216, 2019.</li>
-</ul>
-</div>
 <!--/introduction-->
-<h2 id="1">The Continuity Equation</h2>
-<p>The evolution of the orientation distribution function (ODF) \(f(g)\) with respect to a crystallographic spin \(\Omega(g)\) is governed by the continuity equation</p>
-<p>\[\frac{\partial}{\partial t} f + \nabla f \cdot \Omega + f \text{ div } \Omega = 0\]</p>
-<p>The solution of this equation depends on the initial texture \(f_0(g)\) at time zero and the crystallographic spin \(\Omega(g)\). In this model we assume the initial texture to be isotropic, i.e., \(f_0 = 1\) and the crystallographic spin be associated with a single slip system. The full ODF will be later modeled as a superposition of the single slip models.</p>
-<p>In this example we consider Olivine with has orthorhombic symmetry</p>
+<p>The <a href="SachsModel.html">Sachs Model</a> selects one slip system in each grain but describes only a strength bound. A <b>single-slip texture model</b> follows the next consequence: slip rotates every crystal, so the population of orientations changes during deformation.</p>
+<p>This page starts from an isotropic texture, which assigns equal density to every orientation. One prescribed slip system supplies the entire lattice spin. The worked sequence predicts the resulting orientation distribution function (ODF), reads its pole figures, and checks the analytical result against numerical time stepping.</p>
+<h2 id="2">Choose the crystal, slip system, and strain</h2>
+<p>Use olivine with its three orthorhombic basis slip systems. A slip system is a lattice plane together with a direction in that plane along which the crystal shears plastically.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-csOli = crystalSymmetry('222',[4.779 10.277 5.995],'mineral','olivine');
-csOrtho = crystalSymmetry('222',[18.384, 8.878, 5.226],'mineral','orthopyroxene');
-{% endhighlight %}
-<p>and the basic slip systems in olivine and orthopyroxene</p>
-{% highlight matlab %}
-sSOli = slipSystem(Miller({1,0,0},{1,0,0},{0,0,1},csOli,'uvw'),...
-  Miller({0,1,0},{0,0,1},{0,1,0},csOli,'hkl'))
+csOli = crystalSymmetry('222',[4.779 10.277 5.995], ...
+  'mineral','olivine');
 
-sSOrtho = slipSystem(Miller({0,0,1},csOrtho,'uvw'),...
-  Miller({1,0,0},csOrtho,'hkl'))
+sSOli = slipSystem( ...
+  Miller({1,0,0},{1,0,0},{0,0,1},csOli,'uvw'), ...
+  Miller({0,1,0},{0,0,1},{0,1,0},csOli,'hkl'))
 {% endhighlight %}
 
 {% highlight plaintext %}
 sSOli = slipSystem (olivine)
- size: 1 x 3
+ size: 1 × 3
  
   u    v    w  | h    k    l CRSS
   1    0    0    0    1    0    1
   1    0    0    0    0    1    1
   0    0    1    0    1    0    1
- 
-sSOrtho = slipSystem (orthopyroxene)
- 
-  u    v    w  | h    k    l CRSS
-  0    0    1    1    0    0    1
 {% endhighlight %}
-<p>To each of the slip systems we can associate an orientation dependent Schmid or deformation tensor \(S(g)\)</p>
-{% highlight matlab %}
-S = sSOli.deformationTensor
-{% endhighlight %}
-
-{% highlight plaintext %}
-S = tensor (olivine)
-  size: 1 x 3    
-  rank: 2 (3 x 3)
-{% endhighlight %}
-<p>and make for the orientation dependent strain rate tensor \(e(g)\) the ansatz \(e_{ij}(g) = \gamma(g) S_{ij}(g)\). Fitting this ansatz to a given a macroscopic strain tensor</p>
+<p>Rows of the display pair each slip direction \(\mathbf b\) with its plane normal \(\mathbf n\). The example below follows the second system, \([100](001)\).</p>
+<p>Impose extension along specimen \(x\), no strain along \(y\), and equal shortening along \(z\). The factor 0.3 is the finite strain magnitude.</p>
 {% highlight matlab %}
 E = 0.3 * strainRateTensor([1 0 0; 0 0 0; 0 0 -1])
 {% endhighlight %}
 
 {% highlight plaintext %}
 E = strainRateTensor (y↑→x)
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  *10^-2
   30   0   0
    0   0   0
    0   0 -30
 {% endhighlight %}
-<p>via minimizing the square difference</p>
-<p>\[\int_{SO(3)} \sum_{i,j} (e_{i,j}(g) - E_{i,j})^2 dg \to \text{min}\]</p>
-<p>the orientation dependent strain rate tensor is identified as</p>
-<p>\[e(g) = 2 \left&lt; S(g), E \right&gt; S(g)\]</p>
-<p>and the corresponding crystallographic spin tensor as</p>
-<p>\[\Omega_i(g) = \epsilon_{ijk} e_{jk}(g)\]</p>
-<p>This can be modeled in MTEX via</p>
-{% highlight matlab %}
-% this is in crystal coordinates
-% Omega = @(ori) SO3TangentVector(spinTensor(((ori * S(2)) : E) .* S(2)),ori);
-% Omega = @(ori) 0.5 * EinsteinSum(tensor.leviCivita,[1 -1 -2],(ori * S(1) : E) .* (S(2)),[-1 -2])
-
-% this is in specimen coordinates
-Omega = @(ori) -SO3TangentVector(spinTensor(((ori * S(2)) : E) .* (ori * S(2))),ori);
-
-% turn in into a harmonic function
-Omega = SO3VectorFieldHarmonic.quadrature(Omega,csOli)
-{% endhighlight %}
-
-{% highlight plaintext %}
-Omega = SO3VectorFieldHarmonic (olivine → y↑→x)
-  bandwidth: 3
-  tangent space: leftVector
-{% endhighlight %}
-<p>We may visualize the orientation dependence of the spin tensor by plotting its divergence in sigma sections and on top of it the spin tensors as a quiver plot</p>
-{% highlight matlab %}
-plotSection(div(Omega),'sigma','noGrid')
-mtexColorMap blue2red
-mtexColorbar
-
-hold on
-plot(Omega,'add2all','linewidth',1,'color','k')
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SingleSlipModel_01.png" %}
-</center>
-<p>The divergence plots can be read as follows. Negative (blue) regions indicate orientations that increase in volume, whereas positive regions indicate orientations that decrease in volume. Accordingly, we expect the texture to become more and more concentrated within the blue regions. In the example example illustrated above with only the second slip system being active, we would expect the c-axis to align more and more with the the z-direction.</p>
-<h2 id="9">Solutions of the Continuity Equation</h2>
-<p>The solutions of the continuity equation can be analytically computed and are available via the command <a href="SO3FunSBF.SO3FunSBF.html"><code class="language-plaintext highlighter-rouge">SO3FunSBF</code></a>. This command takes as input the specific slips system <code class="language-plaintext highlighter-rouge">sS</code> and the macroscopic strain tensor <code class="language-plaintext highlighter-rouge">E</code>
-</p>
+<h2 id="4">Compute the analytical texture</h2>
+<p> <a href="SO3FunSBF.SO3FunSBF.html"><code class="language-plaintext highlighter-rouge">SO3FunSBF</code></a> evaluates the analytical ODF for one slip system and the imposed strain. Compute one structural basis function for each of the three olivine systems.</p>
 {% highlight matlab %}
 odf1 = SO3FunSBF(sSOli(1),E)
 odf2 = SO3FunSBF(sSOli(2),E)
 odf3 = SO3FunSBF(sSOli(3),E)
-odf4 = SO3FunSBF(sSOrtho,E)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -150,96 +84,164 @@ odf3 = SO3FunSBF (olivine → y↑→x)
  
     slip system: (010)[001]
     strain:      0.3 0 -0.3
- 
-odf4 = SO3FunSBF (orthopyroxene → y↑→x)
- 
-    slip system: (100)[001]
-    strain:      0.3 0 -0.3
 {% endhighlight %}
-<p>Lets check our expectation from the last paragraph by visualizing the odf corresponding to the second slip system in sigma sections</p>
+<p>Sigma sections expose the full three-dimensional orientation dependence of the second basis function.</p>
 {% highlight matlab %}
-figure(1)
 plotSection(odf2,'sigma')
 mtexColorbar
 {% endhighlight %}
-<center>
-{% include inline_image.html file="SingleSlipModel_02.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="SingleSlipModel_01.png" %}
 </center>
-<p>We observe exactly the concentration of the c-axis around z as predicted by the model. This can be seen even more clear when looking a the pole figures</p>
+<p>High density is concentrated at orientations that align the olivine \(c\)-axis with specimen \(z\). This is the preferred orientation predicted for \([100](001)\) slip under the imposed extension and shortening.</p>
+<h2 id="7">Read the same result in pole figures</h2>
+<p>Pole figures show which crystal axes develop preferred specimen directions. Plot the \(a\)-, \(b\)-, and \(c\)-axis distributions together.</p>
 {% highlight matlab %}
 h = Miller({1,0,0},{0,1,0},{0,0,1},csOli);
 
 plotPDF(odf2,h,'resolution',2*degree,'colorRange','equal')
 mtexColorbar
 {% endhighlight %}
-<center>
-{% include inline_image.html file="SingleSlipModel_03.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="SingleSlipModel_02.png" %}
 </center>
-<p>We could also have computed the solution of the continuity equation numerically. To this end we utilize the command <a href="doEulerStep.html"><code class="language-plaintext highlighter-rouge">doEulerStep</code></a> which takes as input the crystallographic spin tensor <code class="language-plaintext highlighter-rouge">Omega</code>, the initial odf <code class="language-plaintext highlighter-rouge">odf0</code> and the number of iterations to be performed.</p>
-{% highlight matlab %}
-% the starting ODF
-odf0 = uniformODF(csOli);
-
-% the transformed ODF
-odf = doEulerStep(2*Omega,odf0,40)
-
-figure(2)
-plot(odf,'sigma')
-mtexColorbar
-{% endhighlight %}
-
-{% highlight plaintext %}
-odf = SO3FunHarmonic (olivine → y↑→x)
-  bandwidth: 28
-  weight: 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SingleSlipModel_04.png" %}
-</center>
-<p>Indeed the error between the numerical solution and the theoretical solution is negligible small. We may quantify the difference by</p>
-{% highlight matlab %}
-mean(abs(odf - odf2))
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-    0.0011
-{% endhighlight %}
-<p>For completeness the pole figures of the other two basis functions.</p>
+<p>The \(c\)-axis pole figure has its strongest maximum at specimen \(z\), as anticipated from the sigma sections. The \(a\)-axis panel shows how that axis is arranged around the preferred direction. The \(b\)-axis panel is flat and featureless: this single system leaves the \(b\)-axis with no preferred specimen direction at all.</p>
+<h2 id="9">Compare the other basis functions</h2>
+<p>Each active system produces its own basis texture. The first and third systems provide the two remaining olivine end members.</p>
 {% highlight matlab %}
 plotPDF(odf1,h,'resolution',2*degree,'colorRange','equal')
 mtexColorbar
 {% endhighlight %}
-<center>
-{% include inline_image.html file="SingleSlipModel_05.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="SingleSlipModel_03.png" %}
 </center>
+<p>This is the texture generated by the first system, \([100](010)\).</p>
 {% highlight matlab %}
 plotPDF(odf3,h,'resolution',2*degree,'colorRange','equal')
 mtexColorbar
 {% endhighlight %}
-<center>
-{% include inline_image.html file="SingleSlipModel_06.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="SingleSlipModel_04.png" %}
 </center>
-<p>We observe that the pole figure with respect to \(n \times b\) is always uniform, where \(n\) is the slip normal and \(b\) is the slip direction.</p>
-<p>Since in practice all three slip systems are active we can model the resulting ODF as a linear combination of the different basis functions</p>
+<p>This is the texture generated by the third system, \([001](010)\). In each single-slip solution, the pole figure for \(\mathbf n\times\mathbf b\) is uniform. That direction is unchanged by shear on the chosen system.</p>
+<h2 id="12">Combine active systems</h2>
+<p>A practical model can represent simultaneous activity as a linear combination of the single-slip basis functions. Convert each analytical function to the same harmonic representation before combining it. Equal weights give the normalized mixture below; measured or modelled activities may be used instead.</p>
 {% highlight matlab %}
-plotPDF(odf1 + odf2 + odf3,h,'resolution',2*degree,'colorRange','equal')
+odfMix = (SO3FunHarmonic(odf1,'bandwidth',24) + ...
+  SO3FunHarmonic(odf2,'bandwidth',24) + ...
+  SO3FunHarmonic(odf3,'bandwidth',24)) ./ 3;
+plotPDF(odfMix,h,'resolution',2*degree,'colorRange','equal')
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="SingleSlipModel_05.png" %}
+</center>
+<p>The mixed pole figures retain features from all three end members and are less concentrated than any one-system prediction. This superposition is how the analytical model builds a full ODF from its basis textures.</p>
+<h2 id="14">Apply the construction to another phase</h2>
+<p>The same constructor accepts a phase-specific system. For example, orthopyroxene \([001](100)\) slip under the same strain gives another basis function without changing the workflow.</p>
+{% highlight matlab %}
+csOrtho = crystalSymmetry('222',[18.384,8.878,5.226], ...
+  'mineral','orthopyroxene');
+sSOrtho = slipSystem(Miller(0,0,1,csOrtho,'uvw'), ...
+  Miller(1,0,0,csOrtho,'hkl'));
+odfOrtho = SO3FunSBF(sSOrtho,E)
+{% endhighlight %}
+
+{% highlight plaintext %}
+odfOrtho = SO3FunSBF (orthopyroxene → y↑→x)
+ 
+    slip system: (100)[001]
+    strain:      0.3 0 -0.3
+{% endhighlight %}
+<h2 id="15">Construct the orientation-dependent spin</h2>
+<p>The deformation tensor describes the shear generated by each olivine slip system. Select the second tensor to match <code class="language-plaintext highlighter-rouge">odf2</code>.</p>
+{% highlight matlab %}
+S = sSOli.deformationTensor;
+{% endhighlight %}
+<p>The function below rotates that tensor into the specimen frame, fits its activity to <code class="language-plaintext highlighter-rouge">E</code>, and converts the result into crystallographic spin. The minus sign follows the tangent-vector convention used for ODF transport.</p>
+{% highlight matlab %}
+spinFun = @(ori) -2 * SO3TangentVector(spinTensor( ...
+  ((ori * S(2)) : E) .* (ori * S(2))),ori);
+
+Omega = SO3VectorFieldHarmonic.quadrature(spinFun,csOli)
+{% endhighlight %}
+
+{% highlight plaintext %}
+Omega = SO3VectorFieldHarmonic (olivine → y↑→x)
+  bandwidth: 3
+  tangent space: leftVector
+{% endhighlight %}
+<h2 id="17">See where orientation density moves</h2>
+<p>The divergence of \(\Omega\) measures whether the orientation flow expands or contracts locally. Arrows show the direction of that flow.</p>
+{% highlight matlab %}
+plotSection(div(Omega),'sigma','noGrid')
+mtexColorMap blue2red
+mtexColorbar
+hold on
+plot(Omega,'add2all','linewidth',1,'color','k')
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SingleSlipModel_06.png" %}
+</center>
+<p>Negative blue regions gain orientation density, while positive red regions lose it. The arrows feed the blue regions whose orientations place the \(c\)-axis near specimen \(z\), predicting the concentration already seen in <code class="language-plaintext highlighter-rouge">odf2</code>.</p>
+<h2 id="19">Check the analytical result numerically</h2>
+<p> <a href="doEulerStep.html"><code class="language-plaintext highlighter-rouge">doEulerStep</code></a> transports an initial ODF through an orientation-dependent spin field. Start from the uniform ODF and use 40 explicit steps over the same total deformation.</p>
+{% highlight matlab %}
+odf0 = uniformODF(csOli);
+odfNumeric = doEulerStep(Omega,odf0,40)
+
+plotSection(odfNumeric,'sigma')
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+odfNumeric = SO3FunHarmonic (olivine → y↑→x)
+  bandwidth: 28
+  weight: 1
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="SingleSlipModel_07.png" %}
 </center>
-<h2 id="18">Checking the for steady state</h2>
-<p>We may also check for which orientations an ODF is already in a steady state of the continuity equation, i.e., the time derivative \(\text{div}(f \Omega) = 0\) is zero.</p>
+<p>The numerical sections reproduce the analytical concentration. Their mean absolute difference is 0.0011. This small value quantifies the remaining discretization error.</p>
+{% highlight matlab %}
+meanError = mean(abs(odfNumeric - odf2))
+{% endhighlight %}
+
+{% highlight plaintext %}
+meanError =
+    0.0011
+{% endhighlight %}
+<h2 id="21">Check for steady state</h2>
+<p>An ODF is stationary under this spin when the divergence of its density flux, \(\mathrm{div}(f\Omega)\), is zero. Plot that residual for the analytical solution.</p>
 {% highlight matlab %}
 plotSection(div(odf2 .* Omega),'sigma')
 mtexColorMap blue2red
 mtexColorbar
 setColorRange(max(abs(clim))*[-1,1])
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SingleSlipModel_08.png" %}
 </center>
+<p>Values near zero show where <code class="language-plaintext highlighter-rouge">odf2</code> is already stationary. Positive and negative lobes identify orientations at which the chosen spin would still remove or add density.</p>
+<h2 id="23">The maths behind the model</h2>
+<p>Let \(f(g,t)\) be the ODF at orientation \(g\) and time \(t\), and let \(\Omega(g)\) be the crystallographic spin. Conservation of orientation density gives the continuity equation</p>
+<p>\[\frac{\partial f}{\partial t} + \nabla f\cdot\Omega + f\,\mathrm{div}\,\Omega = 0.\]</p>
+<p>The initial isotropic texture is \(f(g,0)=1\). For deformation tensor \(S(g)\) and scalar slip activity \(\gamma(g)\), the single-slip ansatz is</p>
+<p>\[e(g)=\gamma(g)S(g).\]</p>
+<p>Fitting this local strain rate to the macroscopic tensor \(E\) minimizes</p>
+<p>\[\int_{SO(3)}\sum_{i,j}\left(e_{ij}(g)-E_{ij}\right)^2\,dg.\]</p>
+<p>The minimizing field and its crystallographic spin are</p>
+<p>\[e(g)=2\langle S(g),E\rangle S(g), \qquad \Omega_i(g)=\epsilon_{ijk}e_{jk}(g).\]</p>
+<p>These equations are the specimen-coordinate construction implemented by <code class="language-plaintext highlighter-rouge">spinFun</code> above. An equivalent implementation can map the spin into each crystal frame instead. <code class="language-plaintext highlighter-rouge">SO3FunSBF</code> supplies the finite-strain analytical solution, while <code class="language-plaintext highlighter-rouge">doEulerStep</code> integrates the same continuity equation.</p>
+<h2 id="24">References</h2>
+<div>
+<ul>
+<li>N. M. Ribe, R. Hielscher and O. Castelnau, <a href="https://doi.org/10.1093/gji/ggy442">An Analytical Finite-Strain Parametrization for Texture Evolution in Deforming Olivine Polycrystals</a>, <i>Geophysical Journal International</i> 216 (2019), 486--514, derives the single-slip structural basis functions and their analytical finite-strain ODFs.</li>
+</ul>
+</div>
+<h2 id="25">Next</h2>
+<p>This page treats orientation evolution inside independently slipping crystals. Continue with <a href="SlipTransmission.html">Slip Transmission</a> to ask whether a slip system can transfer deformation across a grain boundary.</p>
 </div>
 </body>
 </html>

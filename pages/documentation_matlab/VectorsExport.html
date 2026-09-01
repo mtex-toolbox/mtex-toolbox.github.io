@@ -1,5 +1,5 @@
 ---
-title: "Exporting Vectors"
+title: 'Exporting Vectors'
 
 sidebar: documentation_sidebar
 permalink: VectorsExport.html
@@ -23,82 +23,111 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p> <a href="vector3d.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> writes a list of directions to a text file, one direction per line, with a line of column headings on top. The file it produces is one that <a href="vector3d.load.html"><code class="language-plaintext highlighter-rouge">vector3d.load</code></a> reads back, so this is the way to hand directions to another program or to a later session.</p>
+<p> <a href="vector3d.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> writes a <code class="language-plaintext highlighter-rouge">vector3d</code> array as a whitespace-separated text table. Each vector occupies one row, and the first row names the columns. <a href="vector3d.load.html"><code class="language-plaintext highlighter-rouge">vector3d.load</code></a> can read the table back, so the format is useful for another program or a later MTEX session.</p>
+<p>This page assumes that Cartesian components, polar angle, and azimuth are familiar. See <a href="VectorDefinition.html">Defining Three-Dimensional Vectors</a> for their definitions.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
-v = vector3d.rand(5);
+% five unit directions with distinct polar angles and azimuths
+v = vector3d.byPolar((10:20:90)*degree,(-80:40:80)*degree);
+v = v(:);
 
-fname = fullfile(tempdir,'vectors.txt');
+% The examples deliberately reuse the same temporary filename. Each call to
+% |export| replaces the file instead of appending rows.
+fname = [tempname,'.txt'];
 {% endhighlight %}
 <h2 id="2">Cartesian Coordinates</h2>
-<p>By default the three coordinates are written.</p>
+<p>By default, <code class="language-plaintext highlighter-rouge">export</code> writes the stored \(x\), \(y\), and \(z\) components. Cartesian export retains vector-length information.</p>
 {% highlight matlab %}
-export(v,fname)
+export(v,fname);
 
 type(fname)
 {% endhighlight %}
 
 {% highlight plaintext %}
-x         y         z
--0.479618   0.86809  -0.12801
-0.0893455  0.305014 -0.948148
--0.728476 -0.677832  0.099325
--0.304374  0.943729 -0.129355
--0.104185  0.981723 -0.159264
+x           y           z
+0.0301537    -0.17101    0.984808
+ 0.383022   -0.321394    0.866025
+ 0.766044           0    0.642788
+ 0.719846    0.604023     0.34202
+ 0.173648    0.984808 6.12323e-17
 {% endhighlight %}
-<h2 id="3">Spherical Angles</h2>
-<p>The option <code class="language-plaintext highlighter-rouge">'polar'</code> writes the polar and the azimuth angle instead, in degree, or in radians with the additional option <code class="language-plaintext highlighter-rouge">'radians'</code>.</p>
+<p>The heading identifies the three coordinate columns. The next five rows are the five vectors in array order.</p>
+<h2 id="4">Spherical Angles</h2>
+<p>The option <code class="language-plaintext highlighter-rouge">'polar'</code> writes polar angle and azimuth instead. Angles are in degrees by default; add <code class="language-plaintext highlighter-rouge">'radians'</code> to write radians.</p>
+<p>This representation contains directions only. It does not include vector length, so use Cartesian coordinates when magnitudes matter.</p>
 {% highlight matlab %}
-export(v,fname,'polar')
+export(v,fname,'polar');
 
 type(fname)
 {% endhighlight %}
 
 {% highlight plaintext %}
 polar angle azimuth angle
-    97.3546       118.921
-    161.468       73.6735
-    84.2997      -137.062
-    97.4323       107.876
-    99.1642       96.0578
+         10           -80
+         30           -40
+         50             0
+         70            40
+         90            80
 {% endhighlight %}
-<h2 id="4">Additional Columns</h2>
-<p>Values that belong to the directions - a measured intensity, a weight, a density - are written alongside them by passing a struct. Each field becomes one further column, named after the field.</p>
+<p>The two headings remain <code class="language-plaintext highlighter-rouge">polar angle</code> and <code class="language-plaintext highlighter-rouge">azimuth angle</code> for either angular unit. Record the unit with the file because the table does not.</p>
+<h2 id="6">Additional Columns</h2>
+<p>Values that belong to the vectors, such as an intensity, weight, or density, can travel in the same table. Pass them in a struct with one value per vector. Each field becomes a column with the field name as its heading.</p>
 {% highlight matlab %}
 S.weight = (1:5).'/15;
 
-export(v,fname,S)
+export(v,fname,S);
 
 type(fname)
 {% endhighlight %}
 
 {% highlight plaintext %}
-x         y         z    weight
--0.479618   0.86809  -0.12801 0.0666667
-0.0893455  0.305014 -0.948148  0.133333
--0.728476 -0.677832  0.099325       0.2
--0.304374  0.943729 -0.129355  0.266667
--0.104185  0.981723 -0.159264  0.333333
+x           y           z      weight
+0.0301537    -0.17101    0.984808   0.0666667
+ 0.383022   -0.321394    0.866025    0.133333
+ 0.766044           0    0.642788         0.2
+ 0.719846    0.604023     0.34202    0.266667
+ 0.173648    0.984808 6.12323e-17    0.333333
 {% endhighlight %}
-<h2 id="5">Reading the File Back</h2>
-<p> <a href="vector3d.load.html"><code class="language-plaintext highlighter-rouge">vector3d.load</code></a> takes the coordinate columns by name and ignores the rest.</p>
+<p>The <code class="language-plaintext highlighter-rouge">weight</code> column is fourth, and its row order remains aligned with the Cartesian coordinates.</p>
+<h2 id="8">Reading the File Back</h2>
+<p>Supply every column name to recover both the vectors and their associated values. <code class="language-plaintext highlighter-rouge">vector3d.load</code> returns columns that are not coordinates in its second output.</p>
 {% highlight matlab %}
-vNew = vector3d.load(fname,'ColumnNames',{'x','y','z'});
+[vNew,SNew] = vector3d.load(fname,...
+  'ColumnNames',{'x','y','z','weight'});
 
-max(angle(v,vNew)) ./ degree
+maxAngleError = max(angle(v,vNew)) ./ degree
+
+maxWeightError = max(abs(S.weight-SNew.weight))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-   2.9919e-05
+maxAngleError =
+   3.3461e-05
+maxWeightError =
+   3.3333e-07
 {% endhighlight %}
-<p>The directions come back to within a few \(10^{-5}\) degree. What limits the roundtrip is the six digits written to the file, not the export itself.</p>
+<p>The maximum angular error is \(3.3461 \times 10^{-5}\) degrees, and the maximum weight error is \(3.3333 \times 10^{-7}\). Both come from the six significant digits written by the default <code class="language-plaintext highlighter-rouge">%g</code> numeric format rather than from the in-memory values.</p>
 {% highlight matlab %}
-delete(fname)
+% remove the temporary file
+delete(fname);
 {% endhighlight %}
-<h2 id="7">Next</h2>
-<p>Reading directions from a file is <a href="VectorsImport.html">Import</a>. A whole figure, rather than the data behind it, is saved as described in <a href="PlottingExport.html">Exporting Figures</a>.</p>
+<h2 id="10">What the Table Does Not Record</h2>
+<p>A reference frame is the coordinate system in which data are expressed. It has an identity, a basis, and a default convention for drawing it. The text table records none of these, and it does not say whether opposite directions represent the same physical axis. Keep that information with the exported file before exchanging or archiving it.</p>
+<p>For a higher-precision text representation, extract the coordinate arrays and use a writer with an explicit numeric format.</p>
+<h2 id="11">Further Reading</h2>
+<div>
+<ul>
+<li>N. I. Fisher, T. Lewis, and B. J. J. Embleton, <a href="https://doi.org/10.1017/CBO9780511623059">Statistical Analysis of Spherical Data</a>, Cambridge University Press, 1987. Chapter 2 defines spherical coordinate systems and distinguishes directed from undirected data.</li>
+<li>D. Goldberg, <a href="https://doi.org/10.1145/103162.103163">What Every Computer Scientist Should Know About Floating-Point Arithmetic</a>, <i>ACM Computing Surveys</i> 23(1), 1991, explains rounding and conversion between binary floating-point values and decimal text.</li>
+<li>
+<a href="https://standards.ieee.org/ieee/754/6210/">IEEE 754-2019, Standard for Floating-Point Arithmetic</a> specifies binary and decimal floating-point formats and their interchange.</li>
+<li>M. D. Wilkinson et al., <a href="https://doi.org/10.1038/sdata.2016.18">The FAIR Guiding Principles for scientific data management and stewardship</a>, <i>Scientific Data</i> 3, 160018, 2016, explains why reusable data need machine-readable context as well as numeric values.</li>
+</ul>
+</div>
+<h2 id="12">Next</h2>
+<p>
+<a href="VectorsImport.html">Import</a> develops column mappings and associated data in more detail. Continue through this chapter with <a href="VectorsOperations.html">Vector Operations</a>. To save a whole figure rather than its underlying data, read <a href="PlottingExport.html">Exporting Figures</a>.</p>
 </div>
 </body>
 </html>

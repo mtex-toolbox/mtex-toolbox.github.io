@@ -1,5 +1,5 @@
 ---
-title: "Sampling a Spherical Function"
+title: 'Sampling a Spherical Function'
 
 sidebar: documentation_sidebar
 permalink: S2FunSampling.html
@@ -22,23 +22,26 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A spherical density is a nonnegative <a href="S2Fun.S2Fun.html">S2Fun</a> whose values describe how mass is distributed over directions. Some computations need that density replaced by finitely many directions. Examples include simulation input, numerical integration, and a scatter plot of likely directions.</p>
+<p>MTEX can draw directions independently or optimize their placement. It can also attach a volume fraction to every optimized direction. This page compares those three choices and tests what each sample preserves.</p>
 <!--/introduction-->
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
+close all
 {% endhighlight %}
-<p>Many computations do not use a density function itself but a finite set of directions that represents it - orientations to feed a simulation, a discrete measure to integrate against, or simply a scatter plot. This page compares the three ways MTEX offers to produce such a sample and shows how well each of them recovers the density it came from.</p>
-<p>As an example we take the smiley, a function that is zero on most of the sphere and concentrated on a few narrow features - which makes it easy to see where a sample puts its points.</p>
+<h2 id="2">A density with narrow features</h2>
+<p>The example is the smiley function. Its underlying features are zero on most of the sphere and concentrated in the eyes and mouth. The constant background below makes the density strictly positive without hiding those narrow features.</p>
 {% highlight matlab %}
 sF = 0.02 + abs(S2Fun.smiley);
 
 contourf(sF)
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunSampling_01.png" %}
 </center>
-<h2 id="3">Random Sampling</h2>
-<p> <a href="S2Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> draws the directions at random, with a probability proportional to the function value. This is fast and unbiased, but a random sample clusters and leaves holes - both are easy to spot along the mouth below.</p>
+<h2 id="3">Random sampling</h2>
+<p> <a href="S2Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> draws independent directions with probability proportional to the function value. It is fast and unbiased, but a finite random sample contains clusters and empty patches.</p>
 {% highlight matlab %}
 vRnd = discreteSample(sF,1000);
 
@@ -47,11 +50,12 @@ hold on
 scatter(vRnd,'MarkerSize',4,'MarkerFaceColor','k','MarkerEdgeColor','k')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunSampling_02.png" %}
 </center>
-<h2 id="4">Optimal Sampling</h2>
-<p> <a href="S2Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> instead <b>moves</b> the directions until the discrete measure they form is as close to the density as the number of points allows. The points end up evenly spread along every feature, dense where the function is large and absent where it is zero.</p>
+<p>Notice the uneven gaps between points along the mouth. Those gaps are sampling noise rather than low-density parts of the original function.</p>
+<h2 id="5">Optimizing the directions</h2>
+<p> <a href="S2Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> moves the directions until their discrete measure is close to the density. This optimization costs more time than independent sampling. In return, the directions spread evenly along every feature and become denser where the function is large.</p>
 {% highlight matlab %}
 vOpt = optimalSample(sF,1000,'bandwidth',128);
 
@@ -60,47 +64,49 @@ hold on
 scatter(vOpt,'MarkerSize',4,'MarkerFaceColor','k','MarkerEdgeColor','k')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunSampling_03.png" %}
 </center>
-<p>The <code class="language-plaintext highlighter-rouge">bandwidth</code> decides up to which harmonic degree the sample has to reproduce the function. Choose it to match the intended use of the points - a low bandwidth is faster and asks for less.</p>
-<h2 id="6">Sampling with Weights</h2>
-<p>The points do not have to carry the same mass. Asking <code class="language-plaintext highlighter-rouge">optimalSample</code> for a second output optimizes the weights alongside the directions, which gives the sample \(M\) additional degrees of freedom.</p>
+<p>The optimized sample follows both eyes and the mouth without the random clusters seen above. Because this example has a positive background, a few directions also remain away from those features.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'bandwidth'</code> sets the largest harmonic degree that the sample must reproduce. Choose it for the intended use of the points. A lower bandwidth asks the optimizer to preserve less detail and is faster.</p>
+<h2 id="7">Optimizing directions and weights</h2>
+<p>The points do not have to carry equal mass. Asking <code class="language-plaintext highlighter-rouge">optimalSample</code> for a second output optimizes the weights together with the directions. For \(M\) directions, this gives the discrete measure \(M\) additional variables.</p>
 {% highlight matlab %}
-[vWgt,c] = optimalSample(sF,500,'bandwidth',128);
+[vWgt,c] = optimalSample(sF,100,'bandwidth',32);
 {% endhighlight %}
-<p>The weights are volume fractions - they are nonnegative and sum up to one</p>
+<p>The weights are volume fractions. They are nonnegative and sum to one. The output below checks both properties for this sample.</p>
 {% highlight matlab %}
 [min(c),max(c),sum(c)]
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.0013    0.0027    1.0000
+    0.0052    0.0187    1.0000
 {% endhighlight %}
-<p>Below the marker size follows the weight. The points still spread out evenly, but they no longer carry the same share of the density.</p>
+<p>Marker area now follows the weight. A large marker represents a direction that carries a larger share of the density.</p>
 {% highlight matlab %}
 contourf(sF)
 hold on
-scatter(vWgt,'MarkerSize',40*c/mean(c),'MarkerFaceColor','k','MarkerEdgeColor','k')
+scatter(vWgt,'MarkerSize',40*c/mean(c), ...
+  'MarkerFaceColor','k','MarkerEdgeColor','k')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunSampling_04.png" %}
 </center>
-<p>Directions that ended up with almost no mass may be dropped right away with <code class="language-plaintext highlighter-rouge">minWeight</code>
-</p>
-<h2 id="10">Which Sample Recovers the Density Best?</h2>
-<p>To answer that we go the way back: estimate a density from the sample with <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a> - passing the weights along where we have them - and measure how far the estimate is from the function we started with. All three samples are given the same kernel halfwidth, so what the comparison sees is the quality of the sample alone.</p>
-<p>The second measure is the one <code class="language-plaintext highlighter-rouge">optimalSample</code> actually minimizes: the spherical harmonic coefficients of the discrete measure itself, up to the <code class="language-plaintext highlighter-rouge">bandwidth</code> the sample was optimized for, and without any smoothing kernel in between. That is what matters when the sample is used for integration rather than for a density plot.</p>
+<p>Notice that the directions remain well distributed, but their shares are no longer equal. Directions with almost no mass can be discarded during the optimization by passing the <code class="language-plaintext highlighter-rouge">'minWeight'</code> option.</p>
+<p>We use 100 points and bandwidth 32 so that the weights have visible work to do. With 500 points and bandwidth 128, the optimized directions already describe this density so well that the weights in a measured run ranged only from 0.0019605 to 0.0019609.</p>
+<h2 id="11">Comparing the recovered densities</h2>
+<p>To compare equal point counts, we estimate a density from every sample with <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>. The weighted sample passes its volume fractions to the estimator. All three estimates use the same kernel halfwidth, so their smoothing is identical.</p>
+<p>A second error compares the spherical harmonic coefficients of the discrete measure directly through degree 32. No smoothing kernel enters this test. This is the coefficient discrepancy that <code class="language-plaintext highlighter-rouge">optimalSample</code> actually minimizes, although its restricted-distance objective assigns a degree-dependent weight to each coefficient. The unweighted relative norm below is easier to interpret when the sample will be used for integration.</p>
 {% highlight matlab %}
 hw = 5*degree;
 sFn = sF ./ mean(sF);
 sF32 = S2FunHarmonic(sF,'bandwidth',32);
 
 dens = @(v,w) norm(calcDensity(v,'weights',w,'halfwidth',hw) - sFn);
-mom = @(v,w) norm(sum(sF) * S2FunHarmonic.adjointNFSFT(v(:),w(:)./sum(w), ...
-  'bandwidth',32) - sF32) ./ norm(sF32);
+mom = @(v,w) norm(sum(sF) * S2FunHarmonic.adjointNFSFT(v(:), ...
+  w(:)./sum(w),'bandwidth',32) - sF32) ./ norm(sF32);
 
 M = [50 100 200 400 800];
 densRnd = zeros(size(M)); densOpt = densRnd; densWgt = densRnd;
@@ -108,7 +114,7 @@ momRnd = densRnd; momOpt = densRnd; momWgt = densRnd;
 
 for k = 1:length(M)
 
-  % the random sample is averaged over a few draws
+  % Average the random result over three independent draws.
   d = zeros(3,1); e = zeros(3,1);
   for r = 1:3
     v = discreteSample(sF,M(k));
@@ -127,28 +133,63 @@ for k = 1:length(M)
 
 end
 
+comparison = table(M(:),densRnd(:),densOpt(:),densWgt(:), ...
+  momRnd(:),momOpt(:),momWgt(:),'VariableNames', ...
+  {'points','densityRandom','densityOptimal','densityWeighted', ...
+  'momentRandom','momentOptimal','momentWeighted'})
+
 close all
-loglog(M,densRnd,'-o',M,densOpt,'-s',M,densWgt,'-d','LineWidth',2,'MarkerSize',8)
+loglog(M,densRnd,'-o',M,densOpt,'-s',M,densWgt,'-d', ...
+  'LineWidth',2,'MarkerSize',8)
 legend('discreteSample','optimalSample','optimalSample, weighted')
 xlabel('number of sampling points')
 ylabel('L^2 error of the recovered density')
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+comparison =
+  5×7 table
+    points    densityRandom    densityOptimal    densityWeighted    momentRandom    momentOptimal    momentWeighted
+    ______    _____________    ______________    _______________    ____________    _____________    ______________
+      50         6.8615            4.3462             4.2186            2.506           2.1774            2.2273   
+     100         4.7605            2.2754             1.8206           1.7279          0.94735           0.85002   
+     200         3.3896            1.5133             1.0472           1.2619          0.53744           0.34288   
+     400         2.4662            1.0471            0.89023          0.89712          0.32432           0.21353   
+     800         1.9053            0.8646            0.82904          0.63588          0.18221          0.089425
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunSampling_05.png" %}
 </center>
-<p>The optimized samples are ahead by a wide margin - 100 optimized points recover the density better than 800 random ones, and no random sample on this plot ever catches up. The weights add another 12 percent as long as the sample is the bottleneck. All three curves run into the same floor around 1.13, which is not a property of the samples: it is what the 5 degree kernel of the density estimation cannot resolve of a function this sharp. Beyond a few hundred points it is the halfwidth that limits the accuracy, and there the weights stop paying as well.</p>
+<p>At every equal point count, an optimized sample recovers the density more accurately than the random sample. Two hundred optimized points have an error of 1.51, compared with 1.76 for 800 random points. At 100 points the weighted optimization reduces the unweighted error from 2.28 to 1.82.</p>
+<p>An earlier result reported that 100 optimized points beat 800 random ones, that weights added 12 percent, and that all curves reached a floor near 1.13. The deterministic table above does not reproduce those values. The optimized curves instead flatten below 1.0, while the random curve is still descending. Their flattening shows that the 5 degree kernel is becoming a limiting source of error for this sharp function.</p>
 {% highlight matlab %}
 close all
-loglog(M,momRnd,'-o',M,momOpt,'-s',M,momWgt,'-d','LineWidth',2,'MarkerSize',8)
+loglog(M,momRnd,'-o',M,momOpt,'-s',M,momWgt,'-d', ...
+  'LineWidth',2,'MarkerSize',8)
 legend('discreteSample','optimalSample','optimalSample, weighted')
 xlabel('number of sampling points')
 ylabel('error of the harmonic coefficients up to degree 32')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunSampling_06.png" %}
 </center>
-<p>Without the kernel in between there is no floor, and the picture is much clearer. The optimized samples converge quickly while the random one improves only as fast as \(1/\sqrt{M}\), and from 100 points on the weights are worth a factor of three to four - with 800 points the weighted sample reproduces the coefficients about 150 times as accurately as the random one and 4 times as accurately as the unweighted optimal one. Only for very few points do the two optimized samples coincide: there the directions alone already use up everything the sample can express.</p>
-<p>So as a rule of thumb: use <a href="S2Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> when you need many points quickly and their individual placement does not matter, <code class="language-plaintext highlighter-rouge">optimalSample</code> when the number of points is limited, and ask for the weights whenever the sample is used for integration rather than as the input of a kernel density estimate.</p>
+<p>Without the smoothing kernel there is no common floor. The optimized samples converge more quickly, while random sampling has the familiar \(1/\sqrt{M}\) statistical rate. At 50 points, changing the weights gives essentially no benefit because the directions use most of what this small sample can express.</p>
+<p>At 800 points, the weighted sample has a coefficient error of 0.090. This is 6.7 times more accurate than the random sample and twice as accurate as the unweighted optimized sample. An earlier result reported factors of 150 and four at 800 points, and factors between three and four from 100 points onward. Those factors are not reproduced by the table above.</p>
+<h2 id="14">Choosing a sampling method</h2>
+<p>Use <a href="S2Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> when you need many points quickly and their individual placement does not matter. Use <a href="S2Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> when the number of points is limited. Ask for weights when the sample will be used for integration. For a kernel density estimate, optimized weights usually help less once the smoothing halfwidth becomes the main source of error.</p>
+<h2 id="15">The maths behind the optimized sample</h2>
+<p>Directions \(\mathbf{v}_j\) and volume fractions \(c_j\) represent the density \(f\) by the discrete measure</p>
+<p>\[ \mu = \lambda \sum_{j=1}^{M} c_j\,\delta_{\mathbf{v}_j}, \qquad \lambda = \int_{S^2} f(\mathbf{v})\,\mathrm{d}\mathbf{v}. \]</p>
+<p>Here \(\delta_{\mathbf{v}_j}\) places mass at one direction. The weights satisfy \(c_j\geq 0\) and \(\sum_j c_j=1\). The optimizer moves the directions and, when requested, the weights to reduce harmonic discrepancies through the chosen bandwidth.</p>
+<h2 id="16">References</h2>
+<div>
+<ul>
+<li>M. Gr&auml;f, D. Potts and G. Steidl, <a href="https://doi.org/10.1137/100814731">Quadrature Errors, Discrepancies, and Their Relations to Halftoning on the Torus and the Sphere</a>, <i>SIAM Journal on Scientific Computing</i> 34 (2012), A2760--A2791, develops the discrepancy measure used to optimize discrete samples on the sphere.</li>
+<li>M. Knezevic and N. W. Landry, <a href="https://doi.org/10.1016/j.mechmat.2015.04.014">Procedures for reducing large datasets of crystal orientations using generalized spherical harmonics</a>, <i>Mechanics of Materials</i> 88 (2015), 73--86, applies harmonic moment matching to compact directional datasets.</li>
+</ul>
+</div>
+<h2 id="17">Next</h2>
+<p>Continue with <a href="S2FunHarmonicRepresentation.html">Harmonic Representation</a> to see how bandwidth and spherical harmonic coefficients describe the detail that these optimized samples are designed to preserve.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "script_Dream3dGrains"
+title: 'Import DREAM.3D Grain Meshes'
 
 sidebar: documentation_sidebar
 permalink: Dream3dGrains.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>script_Dream3dGrains</title>
+<title>Import DREAM.3D Grain Meshes</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_Dream3dGrains.m">
 </head>
@@ -22,15 +22,19 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A DREAM.3D file can store a three-dimensional microstructure as a surface mesh. The mesh contains vertices, triangular faces, and grain labels.</p>
+<p>The two-dimensional chapters define a grain as a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. Here, DREAM.3D supplies the three-dimensional counterparts as closed surface meshes. See <a href="Grains3D.html">3D-Grains</a> for an introduction to this representation.</p>
+<p>The importer expects the DREAM.3D triangle-mesh datasets described by <a href="loadGrains_Dream3d.html"><code class="language-plaintext highlighter-rouge">loadGrains_Dream3d</code></a>. A voxel-only volume does not provide the faces required by a <a href="grain3d.grain3d.html"><code class="language-plaintext highlighter-rouge">grain3d</code></a> object.</p>
 <!--/introduction-->
 {% highlight matlab %}
-fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
+plottingConvention.default('y↑→x');
 
+fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
 grains = grain3d.load(fname)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain3d (y↓→x)
+grains = grain3d (y↑→x)
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
      2     794   15625  unknown       432                         
@@ -39,26 +43,46 @@ grains = grain3d (y↓→x)
  
  Properties: meanRotation
 {% endhighlight %}
-
+<h2 id="2">Read the imported object</h2>
+<p>The printed summary confirms what the import produced. It lists the phases and the number and total volume of their grains. It also reports the number of boundary faces and the properties attached to the grains. The sample contains 794 grains with total volume 15,625 and 757,564 faces. Their symmetry is 432, and the imported mineral name is <code class="language-plaintext highlighter-rouge">unknown</code>.</p>
+<p>Grain IDs remain attached to grains when you subset a collection. Array indices are positions in the current collection. Select by ID when identity matters; the two only happen to coincide in an unfiltered list.</p>
 {% highlight matlab %}
-clf
-
-id = 2;
-plot(grains(id))
-
-c = grains(id).boundary.centroid;
-
-%hold on
-%scatter3(c.x,c.y,c.z,'.')
-%hold off
-
-hold on
-quiver3(c,grains(id).boundary.N,'arrowSize',0.15)
-hold off
+grainId = 2;
+grain = grains('id',grainId);
 {% endhighlight %}
-<center>
+<h2 id="3">Orient the face normals outwards</h2>
+<p>A face normal is perpendicular to one triangular boundary face. Its sign depends on the order in which the face vertices are stored, known as the face winding.</p>
+<p>By default, <a href="grain3d.load.html"><code class="language-plaintext highlighter-rouge">grain3d.load</code></a> calls <a href="grain3d.orientFaces.html"><code class="language-plaintext highlighter-rouge">orientFaces</code></a>. This gives every shared face one consistent direction. It points from the first entry of <code class="language-plaintext highlighter-rouge">boundary.grainId</code> to the second, so it cannot point outwards from both adjacent grains.</p>
+<p>The row of <code class="language-plaintext highlighter-rouge">grain.I_GF</code> records which direction is outward for this grain. Multiplying by its signs turns the shared face normals into outward normals. We plot a regular subset so that the individual arrows remain visible.</p>
+{% highlight matlab %}
+faceIndex = 1:20:length(grain.boundary);
+face = grain.boundary(faceIndex);
+faceCentroid = face.centroid;
+outwardNormal = full(grain.I_GF(:,faceIndex)).' .* face.N;
+
+clf
+plot(grain,'FaceAlpha',0.65,'EdgeAlpha',0.25)
+hold on
+quiver3(faceCentroid,outwardNormal,'arrowSize',0.15,'Color',[0.7 0 0])
+hold off
+setCamera(plottingConvention.default3D)
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="Dream3dGrains_01.png" %}
 </center>
+<p>Each arrow starts at a face centroid and points away from the grain. The pale edges reveal the triangular surface mesh. The arrows sample its faces; they are not one arrow per neighbouring grain.</p>
+<p>A reference frame is the coordinate system in which data are expressed. These normals share the spatial reference frame of the mesh vertices. They describe boundary-plane directions, not the misorientation across a face.</p>
+<p>Pass <code class="language-plaintext highlighter-rouge">'noOrientFaces'</code> to <code class="language-plaintext highlighter-rouge">grain3d.load</code> only when the raw stored winding is required. With raw winding, normal directions and signed volumes are not meaningful. The <code class="language-plaintext highlighter-rouge">boundary.grainId</code> order has no geometric direction either.</p>
+<h2 id="5">Where to continue</h2>
+<p>
+<a href="Grains3DProperties.html">Properties of Three-Dimensional Grains</a> explains face areas, centroids, normals, surface area, and volume. Continue with <a href="BoundaryNormalDistribution.html">Boundary Normal Distribution</a> to analyse the measured boundary-plane directions statistically.</p>
+<h2 id="6">References</h2>
+<div>
+<ul>
+<li>M. A. Groeber and M. A. Jackson, <a href="https://doi.org/10.1186/2193-9772-3-5">DREAM.3D: A Digital Representation Environment for the Analysis of Microstructure in 3D</a>, <i>Integrating Materials and Manufacturing Innovation</i> 3, 56--72 (2014).</li>
+<li>The DREAM.3D documentation describes the <a href="https://dream3d.bluequartz.net/Help/2_Tutorials/SurfaceMeshing/">surface mesh and face-winding convention</a> and the <a href="https://dream3d.bluequartz.net/Help/3_SupportedFileFormats/Native_DREAM3D_File_Format/">native DREAM.3D file structure</a>.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

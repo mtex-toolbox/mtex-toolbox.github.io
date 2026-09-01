@@ -1,5 +1,5 @@
 ---
-title: "Defining Orientations"
+title: 'Defining Orientations'
 
 sidebar: documentation_sidebar
 permalink: OrientationDefinition.html
@@ -23,27 +23,20 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>An <a href="orientation.orientation.html"><code class="language-plaintext highlighter-rouge">&lt;orientation.orientation.html orientation&gt;</code></a> is a <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">&lt;rotation.rotation.html rotation&gt;</code></a> that knows which crystal it belongs to. Everything on <a href="RotationDefinition.html">Defining Rotations</a> therefore applies here as well - the same constructors, with a <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a> handed in as an extra argument.</p>
-<p>What the rotation <b>means</b> is a separate question, answered in <a href="DefinitionAsCoordinateTransform.html">Theory</a> and in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>. This page is about building one.</p>
+<p>An <a href="orientation.orientation.html"><code class="language-plaintext highlighter-rouge">orientation</code></a> answers one question: how is this crystal placed in this specimen? In MTEX it is a <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> that maps coordinates from the crystal reference frame into the specimen reference frame. It also carries the symmetry attached to each frame.</p>
+<p>This page assumes the three-dimensional directions introduced in <a href="VectorDefinition.html">Defining Three-Dimensional Vectors</a>, the plane and direction notation from <a href="CrystalDirections.html">Miller Indices</a>, and basic matrix algebra. The constructors are the same as on <a href="RotationDefinition.html">Defining Rotations</a>, with a <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a> supplied as an extra argument.</p>
+<p>What this mapping means is developed in <a href="DefinitionAsCoordinateTransform.html">Theory</a> and compared with other conventions in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>. This page concentrates on building orientations.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
-% load copper cif file
-cs = crystalSymmetry.load('Cu-Copper.cif')
-{% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  mineral : Copper       
-  symmetry: m3̅m         
-  elements: 48           
-  a, b, c : 3.6, 3.6, 3.6
+% load the crystal symmetry and reference frame from a CIF file
+cs = crystalSymmetry.load('Cu-Copper.cif');
 {% endhighlight %}
 <h2 id="2">Euler Angles</h2>
-<p>The most common input, and the one that needs its convention stated - MTEX reads and writes Bunge angles by default.</p>
+<p>Euler angles are the most common input and the one most easily misinterpreted. Their axes, order, and mapping direction belong to the convention. Equal angle triplets in different conventions need not describe the same orientation.</p>
+<p>MTEX uses the Bunge convention by default. Naming it explicitly keeps a reusable script independent of the current session preference. Angles are in radians, so values stated in degrees are multiplied by <code class="language-plaintext highlighter-rouge">degree</code>.</p>
 {% highlight matlab %}
-ori = orientation.byEuler(30*degree,50*degree,10*degree,cs)
+ori = orientation.byEuler(30*degree,50*degree,10*degree,'Bunge',cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -53,18 +46,11 @@ ori = orientation (Copper → y↑→x)
   phi1  Phi phi2
     30   50   10
 {% endhighlight %}
-<p>The display names the crystal symmetry alongside the angles. An orientation without a symmetry is just a rotation, and MTEX keeps the two apart for that reason.</p>
+<p>The display gives the three Bunge angles and names the copper crystal symmetry alongside them. This attached crystal frame and symmetry are what distinguish an orientation from a bare rotation.</p>
 <h2 id="4">Rotation Matrix</h2>
-<p>A \(3 \times 3\) matrix defines an orientation just as it defines a rotation.</p>
+<p>A \(3 \times 3\) matrix can define the same mapping. Its convention must be checked when it comes from another program: this matrix maps crystal-frame coordinates into specimen-frame coordinates.</p>
 {% highlight matlab %}
-M = eye(3)
-{% endhighlight %}
-
-{% highlight plaintext %}
-M =
-     1     0     0
-     0     1     0
-     0     0     1
+M = eye(3);
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -78,9 +64,10 @@ ori = orientation (Copper → y↑→x)
   phi1  Phi phi2
      0    0    0
 {% endhighlight %}
-<p>The identity matrix gives the orientation in which the Cartesian crystal frame is aligned with the specimen frame - the reference setting from which the Euler angles of every other orientation are counted.</p>
+<p>The identity matrix gives the orientation in which the Cartesian crystal frame is aligned with the specimen frame. It is the reference setting from which the Euler angles of every other orientation are counted.</p>
+<p>The point group does not by itself determine how the Cartesian crystal frame is inscribed into the lattice axes. A statement such as X || a*, Z || c belongs to the crystal reference frame, not to the symmetry. Changing that alignment changes the coordinate description without moving the crystal; see <a href="CrystalReferenceSystem.html">The Crystal Reference System</a>.</p>
 <h2 id="7">Miller Indices</h2>
-<p>Metallurgy usually names an orientation by two crystal directions: the lattice plane facing the specimen Z axis and the lattice direction pointing along X. That is what <a href="orientation.byMiller.html"><code class="language-plaintext highlighter-rouge">orientation.byMiller</code></a> takes, here for the Goss orientation \((011)[100]\).</p>
+<p>Metallurgy often names an orientation by two crystal quantities: the lattice plane facing the specimen Z axis and the lattice direction pointing along specimen X. The inputs must describe an orthogonal plane normal and direction. That is what <a href="orientation.byMiller.html"><code class="language-plaintext highlighter-rouge">orientation.byMiller</code></a> takes, here for the Goss orientation \((011)[100]\).</p>
 {% highlight matlab %}
 ori = orientation.byMiller([0 1 1],[1 0 0],cs)
 {% endhighlight %}
@@ -92,21 +79,19 @@ ori = orientation (Copper → y↑→x)
   phi1  Phi phi2
      0   45    0
 {% endhighlight %}
-<p>A spherical plot confirms the reading: the \((011)\) pole sits at the centre, where Z is, and the \([100]\) direction on the X axis at the rim.</p>
+<p>Apply the orientation to the plane normal and the lattice direction to check where they point in the specimen frame.</p>
 {% highlight matlab %}
-rPlane = ori * Miller(0,1,1,cs);
+rPlane = ori * Miller(0,1,1,cs,'hkl');
 rDirection = ori * Miller(1,0,0,cs,'uvw');
 
 plot([rPlane,rDirection],'upper','grid','MarkerSize',10,...
   'label',{'(011)','[100]'},'backgroundColor','w','figSize','small')
-hold on
-annotate([vector3d.X,vector3d.Z],'label',{'X','Z'},'backgroundColor','w')
-hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationDefinition_01.png" %}
 </center>
-<p>Goss and the other named textures are predefined, so this one is also <code class="language-plaintext highlighter-rouge">orientation.goss(cs)</code> - see <a href="OrientationStandard.html">Standard Orientations</a>.</p>
+<p>Notice that the \((011)\) pole is at the centre, the specimen Z direction, while \([100]\) is on the specimen X axis at the rim.</p>
+<p>Goss and the other named texture components are predefined. The zero angular difference confirms that this result is also <code class="language-plaintext highlighter-rouge">orientation.goss(cs)</code>; see <a href="OrientationStandard.html">Standard Orientations</a>.</p>
 {% highlight matlab %}
 angle(ori,orientation.goss(cs)) ./ degree
 {% endhighlight %}
@@ -116,7 +101,7 @@ ans =
      0
 {% endhighlight %}
 <h2 id="10">Random Orientations</h2>
-<p>As for rotations, uniformly distributed orientations come from <code class="language-plaintext highlighter-rouge">rand</code>, which needs the symmetry as well.</p>
+<p>As for rotations, <code class="language-plaintext highlighter-rouge">rand</code> generates uniformly distributed orientations and needs the crystal symmetry as well. MTEX stores the 100 results in one vectorized orientation array.</p>
 {% highlight matlab %}
 ori = orientation.rand(100,cs);
 
@@ -128,9 +113,9 @@ ans =
    100
 {% endhighlight %}
 <h2 id="11">Symmetrically Equivalent Orientations</h2>
-<p>A crystal cannot distinguish its symmetrically equivalent settings, so every orientation stands for a whole set of them. <a href="orientation.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a> lists that set.</p>
+<p>A crystal cannot distinguish its symmetrically equivalent settings, so an orientation represents a whole class of rotations. <a href="orientation.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a> lists that class.</p>
 {% highlight matlab %}
-ori = orientation.byEuler(30*degree,50*degree,10*degree,cs);
+ori = orientation.byEuler(30*degree,50*degree,10*degree,'Bunge',cs);
 
 length(ori.symmetrise)
 {% endhighlight %}
@@ -139,29 +124,25 @@ length(ori.symmetrise)
 ans =
     48
 {% endhighlight %}
-<p>Copper is m-3m, which has 48 elements, and 24 of them are improper.</p>
+<p>Copper has point group m-3m with 48 elements. Only the 24 proper elements describe settings into which the crystal can be physically turned.</p>
 {% highlight matlab %}
-nnz(ori.symmetrise.isImproper)
+length(ori.symmetrise('proper'))
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
     24
 {% endhighlight %}
-<p>Only the 24 proper ones are settings a crystal can be physically turned into. The improper ones remain symmetries of the lattice and matter when a calculation treats opposite plane normals as equivalent, as conventional diffraction does under Friedel's law. This is why "the angle between two orientations" is always taken as the smallest over all equivalent pairs, see <a href="OrientationSymmetry.html">Symmetry</a>.</p>
+<p>The other 24 are improper lattice symmetries. They still matter when a calculation treats opposite plane normals as equivalent, as conventional diffraction does under Friedel's law.</p>
+<p>This equivalence is why the angle between two orientations is the smallest angle over all equivalent pairs. The dedicated <a href="OrientationSymmetry.html">Symmetry</a> page develops this rule and explains when to use the <code class="language-plaintext highlighter-rouge">'noSymmetry'</code> option.</p>
 <h2 id="14">Specimen Symmetry</h2>
-<p>The specimen may have symmetry of its own - rolling, for instance, makes the sheet look the same under three mirror planes. It is given as a <a href="specimenSymmetry.specimenSymmetry.html"><code class="language-plaintext highlighter-rouge">specimenSymmetry</code></a> and passed alongside the crystal symmetry.</p>
+<p>A specimen may have symmetry of its own. A rolled sheet, for example, is commonly modelled with orthorhombic symmetry: three mutually perpendicular twofold axes, or equivalently three mirror planes in the full point group. It is represented by a <a href="specimenSymmetry.specimenSymmetry.html"><code class="language-plaintext highlighter-rouge">specimenSymmetry</code></a> and passed alongside the crystal symmetry.</p>
 {% highlight matlab %}
-% define orthotropic specimen symmetry
-ss = specimenSymmetry('orthorhombic')
-{% endhighlight %}
-
-{% highlight plaintext %}
-ss = orthorhombic specimenSymmetry (y↑→x)
+ss = specimenSymmetry('orthorhombic');
 {% endhighlight %}
 
 {% highlight matlab %}
-ori = orientation.byEuler(30*degree,50*degree,10*degree,cs,ss)
+ori = orientation.byEuler(30*degree,50*degree,10*degree,'Bunge',cs,ss)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -171,7 +152,7 @@ ori = orientation (Copper → y↑→x (mmm))
   phi1  Phi phi2
     30   50   10
 {% endhighlight %}
-<p>Both symmetries now act, one from each side, and the set of equivalent orientations grows accordingly - the 48 crystal elements times the 8 specimen ones.</p>
+<p>Crystal symmetry acts in the crystal frame and specimen symmetry in the specimen frame. With the full point groups, the class contains the 48 copper elements times the 8 orthorhombic elements.</p>
 {% highlight matlab %}
 length(ori.symmetrise)
 {% endhighlight %}
@@ -180,10 +161,28 @@ length(ori.symmetrise)
 ans =
    384
 {% endhighlight %}
-<p>Specimen symmetry is a statement about the sample, not about the measurement, and imposing one that is not there hides real texture components. <a href="SpecimenSymmetry.html">Specimen Symmetry</a> says when to use it.</p>
-<h2 id="18">Next</h2>
+<p>Restricting both groups to proper operations leaves the 24 crystal rotations times the 4 specimen rotations.</p>
+{% highlight matlab %}
+length(ori.symmetrise('proper'))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    96
+{% endhighlight %}
+<p>Specimen symmetry is a statement about the sample, not about the measurement. Its axes must match the physical specimen frame, and imposing a symmetry that is not present hides real texture components. <a href="SpecimenSymmetry.html">Specimen Symmetry</a> explains when to use it.</p>
+<h2 id="19">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, establishes the Euler-angle convention used in texture analysis.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops orientations as rotations modulo crystallographic symmetry.</li>
+<li>D. Rowenhorst et al., <a href="https://doi.org/10.1088/0965-0393/23/8/083501">Consistent representations of and conversions between 3D rotations</a>, Modelling and Simulation in Materials Science and Engineering 23 (2015) 083501, compares conventions and conversion formulas.</li>
+<li>The International Union of Crystallography, <a href="https://dictionary.iucr.org/Friedel%27s_law">Friedel's law</a>, states the diffraction equivalence and its exception for resonant scattering.</li>
+</ul>
+</div>
+<h2 id="20">Next</h2>
 <p>
-<a href="DefinitionAsCoordinateTransform.html">Theory</a> explains what an orientation does to coordinates, which is the definition the rest of MTEX rests on. <a href="OrientationPoleFigure.html">Pole Figures</a> and <a href="OrientationInversePoleFigure.html">Inverse Pole Figures</a> are the two ways of looking at one.</p>
+<a href="DefinitionAsCoordinateTransform.html">Theory</a> explains how an orientation maps coordinates, which is the definition the rest of MTEX rests on. <a href="OrientationPoleFigure.html">Pole Figures</a> and <a href="OrientationInversePoleFigure.html">Inverse Pole Figures</a> are the two ways of looking at one. Existing orientation files are handled by <a href="OrientationImport.html">Import</a>.</p>
 </div>
 </body>
 </html>

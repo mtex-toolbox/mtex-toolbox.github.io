@@ -1,5 +1,5 @@
 ---
-title: "Subgrain Boundaries"
+title: 'Subgrain Boundaries'
 
 sidebar: documentation_sidebar
 permalink: SubGrainBoundaries.html
@@ -23,108 +23,149 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Low-angle grain boundaries (LAGB) or subgrain boundaries are those with a misorientation less than about 15 degrees. Generally speaking they are composed of an array of dislocations and their properties and structure are a function of the misorientation. In contrast the properties of high-angle grain boundaries, whose misorientation is greater than about 15 degrees, are normally found to be independent of the misorientation. However, there are special boundaries at particular orientations whose interfacial energies are markedly lower than those of general high-angle grain boundaries.</p>
-<p>In order to demonstrate the analysis of subgrain boundaries in MTEX we start by importing an sample EBSD data set</p>
+<p>A grain is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. A <b>subgrain boundary</b> lies inside such a grain. A <b>low-angle boundary</b> is instead defined by its misorientation angle. The two ideas usually overlap, but they are not synonyms.</p>
+<p>Low-angle boundaries can be described as arrays of dislocations. Their energy and structure change with misorientation until the dislocation cores begin to overlap. The conventional transition to high-angle boundaries lies between about 5 and 15 degrees, depending on the material. Above it, the energy depends less strongly on angle apart from <a href="CSLBoundaries.html">special orientations</a> with lower energy.</p>
+<p>Deformation stores dislocations inside grains. During recovery, some of them organize into walls that divide a grain into subgrains. This page shows how MTEX records, draws, and measures those walls.</p>
+<p>The page assumes that the EBSD map has already been segmented in principle. See <a href="GrainReconstruction.html">Grain Reconstruction</a> for that step. <a href="BoundaryProperties.html">Grain Boundary Properties</a> introduces boundary segments and connected components. See <a href="BoundaryMisorientations.html">Misorientations at Grain Boundaries</a> for the distinction between crystal-frame and specimen-frame axes.</p>
 {% highlight matlab %}
-% load some test data
+close all;
+
+% use the rolling-direction frame carried by the ferrite specimen
+plottingConvention.default('y↑→x');
+
+% load a deformed ferrite map
 mtexdata ferrite silent
 {% endhighlight %}
-<p>For the computation of low-angle boundaries we specify two thresholds during grain reconstruction: the first value controls the low-angle grain boundaries whereas the second is used for the high-angle grain boundaries.</p>
+<h2 id="2">Reconstruct grains and their internal boundaries</h2>
+<p>A single segmentation threshold has to choose between grain scale and subgrain scale. At 10 degrees the low-angle walls are missed. At 1 degree the same walls divide the map into many separate grains.</p>
+<p> <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> accepts both thresholds at once. The first value separates grains, while the second records boundaries whose two pixels remain in the same grain as <code class="language-plaintext highlighter-rouge">innerBoundary</code>.</p>
 {% highlight matlab %}
-[grains,ebsd] = calcGrains(ebsd,'threshold',[1*degree, 10*degree],'minPixel',5);
+highAngle = 10*degree;
+lowAngle = 1*degree;
+[grains,ebsd] = calcGrains(ebsd,'angle',[highAngle lowAngle],...
+  'minPixel',5);
 
-% lets smooth the grain boundaries a bit
-grains = smoothBoundary(grains,5)
+% remove the pixel staircase before measuring boundary lengths
+grains = smoothBoundary(grains,5);
+{% endhighlight %}
+<h2 id="3">What <code class="language-plaintext highlighter-rouge">innerBoundary</code> means</h2>
+<p>An inner boundary is a topological result, not a second angle filter. MTEX marks a pixel pair as a boundary and then reconstructs connected grains. Two pixels can remain in the same grain through another path even when their direct misorientation exceeds the high-angle threshold.</p>
+<p>The strict low-angle selection therefore applies the angle criterion explicitly. The printed table keeps the distinction visible.</p>
+{% highlight matlab %}
+innerAngle = grains.innerBoundary.misorientation.angle;
+isLowAngle = innerAngle <= highAngle;
+subGB = grains.innerBoundary(isLowAngle);
+
+boundaryCounts = table(length(grains.boundary),...
+  length(grains.innerBoundary),length(subGB),nnz(~isLowAngle),...
+  'VariableNames',{'grainBoundarySegments','innerBoundarySegments',...
+  'strictLowAngleSegments','innerSegmentsAboveHighAngle'})
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d (y↓→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-    -1       1      37  notIndexed                    none
-     0     253   58921     Ferrite      m-3m  LightSkyBlue
- 
- boundary segments: 15738 (2529 µm)
- inner boundary segments: 31037 (4868 µm)
- triple points: 424
- 
- Properties: meanRotation, GOS
+boundaryCounts =
+  1×4 table
+    grainBoundarySegments    innerBoundarySegments    strictLowAngleSegments    innerSegmentsAboveHighAngle
+    _____________________    _____________________    ______________________    ___________________________
+            15738                    31037                    30577                         460
 {% endhighlight %}
-<p>We observe that we have 12314 high-angle boundary segments and 28501 low-angle boundary segments. In order to visualize the the subgrain boundaries we first plot the ebsd data colorized by orientation. On top we plot with solid lines the grain boundaries and with thinner lines the subgrain boundaries. We even make the misorientation angle at the subgrain boundaries visible by setting it as the transparency value of the segments.</p>
+<h2 id="4">Draw the subgrain-boundary network</h2>
+<p>The table reports 15,738 boundary segments between grains and 31,037 inner boundary segments. Of the latter, 30,577 satisfy the strict low-angle selection and 460 exceed 10 degrees for the topological reason above. Default boundary smoothing simplifies and resamples the network, so these are post-smoothing segment counts rather than physical lengths.</p>
+<p>Drawing the inner boundaries with a transparency that follows their misorientation angle keeps the strongest walls visible and lets the weakest fade out.</p>
+<p>Compute the IPF colours explicitly so that the map does not print an unrelated automatic-colour-key message.</p>
 {% highlight matlab %}
-% plot the ebsd data
-plot(ebsd('indexed'),ebsd('indexed').orientations,'faceAlpha',0.5,'figSize','large')
+ebsdIndexed = ebsd('indexed');
+ipfKey = ipfColorKey(ebsdIndexed.CS);
+ipfColor = ipfKey.orientation2color(ebsdIndexed.orientations);
 
-% init override mode
+% make stronger low-angle boundaries more opaque
+alpha = min(subGB.misorientation.angle ./ (5*degree),1);
+
+plot(ebsdIndexed,ipfColor,'faceAlpha',0.5,'figSize','large')
 hold on
-
-% plot grain boundaries
-plot(grains.boundary,'linewidth',2)
-
-% compute transparency from misorientation angle
-alpha = grains.innerBoundary.misorientation.angle / (5*degree);
-
-% plot the subgrain boundaries
-plot(grains.innerBoundary,'linewidth',1.5,'edgeAlpha',alpha,'linecolor','b');
-
-% stop override mode
+plot(grains.boundary,'lineWidth',2)
+plot(subGB,'lineWidth',1.5,'edgeAlpha',alpha,'lineColor','blue')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SubGrainBoundaries_01.png" %}
 </center>
-<h2 id="4">Subgrain Boundary Density</h2>
-<p>The number of low-angle boundary segments inside each grain can be computed by the command <a href="grain2d.subBoundarySize.html"><code class="language-plaintext highlighter-rouge">subBoundarySize</code></a>. In the following figure we use it to visualize the density of subgrain boundaries per grain pixel.</p>
+<p>Black lines separate grains. Blue lines are the strictly selected low-angle boundaries within them. Strong walls cross some grain interiors, while other grains contain almost none. The contrast may reflect heterogeneous deformation, but short isolated lines may also be noise.</p>
+<h2 id="6">Normalize the amount within each grain</h2>
+<p> <a href="grain2d.subBoundarySize.html"><code class="language-plaintext highlighter-rouge">subBoundarySize</code></a> counts inner-boundary segments belonging to each grain. Its optional logical selection keeps only the strict low-angle population. Dividing by the number of pixels removes most of the effect of grain size within this one map.</p>
 {% highlight matlab %}
-plot(grains, grains.subBoundarySize ./ grains.numPixel)
-mtexColorbar
+segmentDensity = grains.subBoundarySize(isLowAngle) ./ grains.numPixel;
+plot(grains,segmentDensity)
+mtexColorbar('title','segments per pixel')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SubGrainBoundaries_02.png" %}
 </center>
-<p>We may compute also the density of low-angle boundaries per grain as the length of the subgrain boundaries divided by the grain area. This can be done using the commands <a href="grain2d.subBoundaryLength.html"><code class="language-plaintext highlighter-rouge">subBoundaryLength</code></a> and <a href="grain2d.area.html"><code class="language-plaintext highlighter-rouge">area</code></a>
-</p>
+<p>Grains crossed by many blue walls have the largest segment-per-pixel values. This ratio is useful within one regular grid, but it changes with pixel spacing and should not be compared between acquisitions.</p>
+<p>The physical-unit alternative uses <a href="grain2d.subBoundaryLength.html"><code class="language-plaintext highlighter-rouge">subBoundaryLength</code></a>. Dividing the selected length by <a href="grain2d.area.html"><code class="language-plaintext highlighter-rouge">area</code></a> gives boundary length per area, here in inverse micrometres.</p>
 {% highlight matlab %}
-plot(grains, grains.subBoundaryLength ./ grains.area)
-mtexColorbar
+lengthDensity = grains.subBoundaryLength(isLowAngle) ./ grains.area;
+plot(grains,lengthDensity)
+mtexColorbar('title','boundary length / area (1/µm)')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SubGrainBoundaries_03.png" %}
 </center>
-<h2 id="6">Misorientation at Subgrain Boundaries</h2>
-<p>Apart from the spatial distribution of the subgrain boundaries we may also analyze the distribution of their misorientations.</p>
+<p>The length-density map singles out the same grains as the count-density map. The two measures are nearly proportional on this regular grid. Length per area is the quantity to report because it has physical units. It removes the direct segment-count dependence, but detection still depends on step size, angular precision, thresholds, and smoothing.</p>
+<h2 id="9">Misorientation axes of the low-angle boundaries</h2>
+<p>The misorientation axis describes the rotation across a wall. Its relation to the boundary plane distinguishes tilt, twist, and mixed character. It is not generally the line direction of every dislocation in the wall.</p>
+<p>The density estimate below is weighted by segment length, so resampling a long wall into more segments does not give it extra influence. A 5 degree kernel smooths the discrete axes into a distribution.</p>
 {% highlight matlab %}
-% extract all subgrain boundary misorientation
-mori = grains.innerBoundary.misorientation;
-
-% and visualize the distribution of the misorientation axes
-plot(mori.axis,'fundamentalRegion','contourf','figSize','small')
-
-mtexColorbar
+axisDensity = calcDensity(subGB.misorientation.axis,...
+  'weights',subGB.segLength,'halfwidth',5*degree);
+plot(axisDensity,'fundamentalRegion','contourf','figSize','small')
+mtexColorbar('title','mrd')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SubGrainBoundaries_04.png" %}
 </center>
-<p>A more detailed analysis of the misorientation axes at subgrain boundaries can be found in the chapter <a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a>.</p>
-<h2 id="8">Connected Components</h2>
-<p>Sometimes one would like to distinguish between large connected networks of low-angle boundaries and singular disconnected segments. This can be done using the property <code class="language-plaintext highlighter-rouge">componentSize</code>. It returns for each segment the total number of segments it is connected with. In the following figure we use this to plot all low-angle grain boundary networks with more than 50 segments in blue and all remaining segments in red.</p>
+<p>The colour scale spans about 0.83 to 1.20 multiples of random distribution (mrd), where 1 is uniform. This ferrite analysis therefore resolves no strong preferred crystal-frame rotation axis. Compare the two clear maxima in the forsterite example of <a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a>. That page also computes the axes in specimen coordinates and compares them with traces.</p>
+<p>A nearly uniform result is not proof that the physical axes are random. Most boundaries here are only a few degrees across, where small EBSD orientation errors can cause large axis errors. Interpret low-angle axes as a population and check the acquisition precision.</p>
+<h2 id="11">Networks and isolated segments</h2>
+<p>A wall crossing a grain and a few isolated segments above 1 degree have different physical meanings. <code class="language-plaintext highlighter-rouge">componentSize</code> gives each segment the number of segments in its connected group. Here a dataset-specific cutoff of 50 segments separates larger networks from shorter features.</p>
 {% highlight matlab %}
-% plot the ebsd data
-plot(ebsd('indexed'),ebsd('indexed').orientations,'faceAlpha',0.5,'figSize','large')
+isNetwork = subGB.componentSize > 50;
+allInnerIsNetwork = grains.innerBoundary.componentSize > 50;
+fprintf(['Segments in components above 50: %.1f%% of the strict ',...
+  'low-angle set; %.1f%% of all inner boundaries\n'],...
+  100*mean(isNetwork),100*mean(allInnerIsNetwork));
 
-% distinguish between large connected networks and single segments
-ind = grains.innerBoundary.componentSize > 50;
-
-% plot the boundaries
+plot(ebsdIndexed,ipfColor,'faceAlpha',0.5,'figSize','large')
 hold on
-plot(grains.boundary,'linewidth',2)
-plot(grains.innerBoundary(ind),'linewidth',1.5,'edgeAlpha',alpha(ind),'edgeColor','b');
-plot(grains.innerBoundary(~ind),'linewidth',1.5,'edgeAlpha',alpha(~ind),'edgeColor','r');
+plot(grains.boundary,'lineWidth',2)
+plot(subGB(isNetwork),'lineWidth',1.5,...
+  'edgeAlpha',alpha(isNetwork),'lineColor','blue')
+plot(subGB(~isNetwork),'lineWidth',1.5,...
+  'edgeAlpha',alpha(~isNetwork),'lineColor','red')
 hold off
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+Segments in components above 50: 29.1% of the strict low-angle set; 30.8% of all inner boundaries
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="SubGrainBoundaries_05.png" %}
 </center>
+<p>Blue marks continuous structures, often running across a grain and meeting its boundary at both ends. Red marks short components. Many are likely orientation noise crossing the 1 degree threshold, although a short component is not proof of noise.</p>
+<p>The strict selection puts 29.1 percent of its segments in components above 50. Counting every inner boundary gives 30.8 percent, or about the 31 percent obtained without the explicit angle filter. Both populations are counted by the density maps above, and that is worth remembering before reading much into a small difference between two grains. The 50-segment cutoff itself changes with resampling and step size, so choose it again for a new map.</p>
+<h2 id="13">References</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher, and H. Schaeben, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain Detection from 2d and 3d EBSD Data---Specification of the MTEX Algorithm</a>, <i>Ultramicroscopy</i> 111 (2011), 1720--1733. This paper defines the spatial reconstruction on which <code class="language-plaintext highlighter-rouge">calcGrains</code> is based.</li>
+<li>W. T. Read and W. Shockley, <a href="https://doi.org/10.1103/PhysRev.78.275">Dislocation Models of Crystal Grain Boundaries</a>, <i>Physical Review</i> 78 (1950), 275--289. This is the classical dislocation model for low-angle boundary energy.</li>
+<li>F. J. Humphreys and M. Hatherly, <a href="https://doi.org/10.1016/C2009-0-07986-0"><i>Recrystallization and Related Annealing Phenomena</i></a>, 2nd ed., Pergamon, 2004. Chapters on the deformed state and recovery place subgrains in their microstructural context.</li>
+<li>D. J. Prior, <a href="https://doi.org/10.1046/j.1365-2818.1999.00572.x">Problems in Determining the Misorientation Axes, for Small Angular Misorientations, Using EBSD</a>, <i>Journal of Microscopy</i> 195 (1999), 217--225. This paper quantifies the loss of axis precision at small angles.</li>
+<li>J. Wheeler <i>et al.</i>, <a href="https://doi.org/10.1016/j.tecto.2003.08.007">From Geometry to Dynamics of Microstructure: Using Boundary Lengths to Quantify Boundary Misorientations and Anisotropy</a>, <i>Tectonophysics</i> 376 (2003), 19--35. It motivates length-weighted boundary statistics.</li>
+<li>S. Demouchy, <a href="https://doi.org/10.5194/ejm-33-249-2021">Defects in Olivine</a>, <i>European Journal of Mineralogy</i> 33 (2021), 249--282. Section 5.2.1 and Figure 8 review low-angle walls and illustrate tilt and twist boundaries.</li>
+</ul>
+</div>
+<h2 id="14">Next</h2>
+<p>Continue with <a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a> to compare the misorientation axis with the boundary trace. For deformation measured at every EBSD point rather than only at detected walls, see <a href="EBSDKAM.html">Kernel Average Misorientation</a> and <a href="EBSDGROD.html">Grain Reference Orientation Deviation</a>.</p>
 </div>
 </body>
 </html>

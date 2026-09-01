@@ -1,5 +1,5 @@
 ---
-title: "The Spherical Radon Transform"
+title: 'The Spherical Radon Transform'
 
 sidebar: documentation_sidebar
 permalink: S2FunRadon.html
@@ -22,12 +22,11 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>The spherical Radon transform replaces every function value by an average around a great circle. It therefore turns a localized peak into a ring. This geometric change is the key to recognizing the transform in a plot.</p>
+<p>In texture analysis, the corresponding operation turns an ODF into a <a href="PoleFigureSimulation.html">pole figure</a>. This page first develops the transform for an ordinary spherical function. See <a href="SO3Fun.calcPDF.html"><code class="language-plaintext highlighter-rouge">calcPDF</code></a> for the orientation-space version.</p>
 <!--/introduction-->
-<p>The spherical Radon transform \(\mathcal R\) replaces the value of a function at a point by its mean value along the great circle perpendicular to that point,</p>
-<p>\[ \mathcal R f(\vec x) = \frac{1}{2\pi}\int_{\vec v \perp \vec x} f(\vec v)\,\mathrm{d}\vec v. \]</p>
-<p>It is the spherical analogue of the classical Radon transform behind computer tomography, and in texture analysis it is the operation that turns an ODF into a <a href="PoleFigureSimulation.html">pole figure</a>. This page treats it for ordinary spherical functions; see <a href="SO3Fun.calcPDF.html"><code class="language-plaintext highlighter-rouge">calcPDF</code></a> for the orientation space version.</p>
-<h2 id="2">Computing the transform</h2>
-<p>Let us start with a simple unimodal function on the sphere</p>
+<h2 id="1">From a peak to a ring</h2>
+<p>Start with a smooth peak centred on the direction \((1,1,1)\).</p>
 {% highlight matlab %}
 f = @(v) exp(-4 * angle(v,vector3d(1,1,1)).^2);
 
@@ -43,11 +42,11 @@ sF = S2FunHarmonic (y↓→x)
 plot(sF,'upper')
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunRadon_01.png" %}
 </center>
-<p>Its Radon transform is computed by <a href="S2FunHarmonic.radon.html"><code class="language-plaintext highlighter-rouge">radon</code></a>
-</p>
+<p>The warm colours are confined to one neighbourhood on the upper hemisphere. This localized maximum is the feature to follow through the transform.</p>
+<p>Compute the spherical Radon transform with <a href="S2FunHarmonic.radon.html"><code class="language-plaintext highlighter-rouge">radon</code></a>.</p>
 {% highlight matlab %}
 rF = radon(sF)
 {% endhighlight %}
@@ -62,11 +61,14 @@ rF = S2FunHarmonic (y↓→x)
 plot(rF,'upper')
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunRadon_02.png" %}
 </center>
-<p>The single maximum has become a ring - the great circles that pass through the peak are exactly those whose pole lies 90 degree away from it.</p>
-<p>We can check the definition directly. Take an arbitrary direction, walk around the great circle perpendicular to it and average.</p>
+<p>The single maximum has become a ring. Every pole on that ring identifies a great circle that passes through the original peak. Such poles lie \(90\) degree from the peak direction.</p>
+<h2 id="6">Checking one transformed value</h2>
+<p>Let \(\vec x\) be the pole of a great circle. The transform at \(\vec x\) is the mean of the function along the circle perpendicular to \(\vec x\),</p>
+<p>\[ \mathcal R f(\vec x) = \frac{1}{2\pi}\int_{\vec v \perp \vec x} f(\vec v)\,\mathrm{d}\vec v. \]</p>
+<p>Check this definition at an arbitrary direction. The vectors <code class="language-plaintext highlighter-rouge">u1</code> and <code class="language-plaintext highlighter-rouge">u2</code> span the plane perpendicular to <code class="language-plaintext highlighter-rouge">x</code>, while <code class="language-plaintext highlighter-rouge">v</code> samples its unit circle.</p>
 {% highlight matlab %}
 x = normalize(vector3d(0.3,-0.7,0.5));
 
@@ -81,10 +83,10 @@ v = cos(t) .* u1 + sin(t) .* u2;
 ans =
     0.1389    0.1389
 {% endhighlight %}
-<h2 id="7">Why it is a convolution</h2>
-<p>Averaging over great circles is rotationally invariant, hence \(\mathcal R\) is a convolution and acts diagonally on the harmonic expansion. Its Legendre coefficients are</p>
-<p>\[ A_n = (-1)^{n/2}\,\frac{(n-1)!!}{n!!} \quad\text{for even } n, \qquad A_n = 0 \quad\text{for odd } n. \]</p>
-<p>The vanishing odd coefficients are the essential point: <b>the Radon transform destroys the odd part of a function</b>. Applying it to a purely odd function gives zero up to numerical noise</p>
+<p>The direct mean and the value returned by <code class="language-plaintext highlighter-rouge">radon</code> agree to the displayed precision. The spherical transform is the analogue of the classical Radon transform used in computed tomography.</p>
+<h2 id="8">What information is lost</h2>
+<p>A great circle contains every direction together with its antipode. Averaging along that circle cannot distinguish \(f(\vec v)\) from \(f(-\vec v)\). The great-circle Radon transform therefore destroys the odd part of a function and is always <a href="VectorsAxes.html">antipodally symmetric</a>.</p>
+<p>Apply the transform to the purely odd function \(f(\vec v)=v_z\). The result is zero up to numerical noise.</p>
 {% highlight matlab %}
 sFodd = S2FunHarmonic.quadrature(@(v) v.z,'bandwidth',8);
 
@@ -95,15 +97,15 @@ max(abs(radon(sFodd)))
 ans =
    4.8646e-12
 {% endhighlight %}
-<p>This is unavoidable, not a shortcoming of the implementation - a great circle contains a direction together with its antipode, so no averaging over great circles can ever distinguish \(f(\vec v)\) from \(f(-\vec v)\). Every Radon transform is <a href="VectorsAxes.html">antipodally symmetric</a>.</p>
 <h2 id="9">Mean values along small circles</h2>
-<p>Passing a second argument \(\delta\) replaces the great circle by the small circle at angular distance \(\pi/2 + \delta\) from \(\vec x\)</p>
+<p>A second argument \(\delta\) asks <code class="language-plaintext highlighter-rouge">radon</code> to average along a small circle. Its angular distance from \(\vec x\) is \(\pi/2+\delta\), instead of \(\pi/2\) for a great circle.</p>
 {% highlight matlab %}
 delta = 20*degree;
 
 rD = radon(sF,delta);
 
-w = cos(pi/2+delta) * x + sin(pi/2+delta) * (cos(t) .* u1 + sin(t) .* u2);
+w = cos(pi/2+delta) * x + sin(pi/2+delta) * ...
+  (cos(t) .* u1 + sin(t) .* u2);
 
 [mean(sF.eval(w)), rD.eval(x)]
 {% endhighlight %}
@@ -112,28 +114,20 @@ w = cos(pi/2+delta) * x + sin(pi/2+delta) * (cos(t) .* u1 + sin(t) .* u2);
 ans =
     0.0727    0.0727
 {% endhighlight %}
-
+<p>Again, the sampled mean and the transformed value agree to the displayed precision.</p>
 {% highlight matlab %}
 plot(rD,'upper')
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunRadon_03.png" %}
 </center>
-<h2 id="11">Inverting the transform</h2>
-<p>Since \(\mathcal R\) is diagonal in the harmonic basis, inverting it is a matter of dividing by the coefficients \(A_n\). This is what <a href="S2FunHarmonic.invRadon.html"><code class="language-plaintext highlighter-rouge">invRadon</code></a> does.</p>
+<p>The high-value band is displaced from the great-circle ring because the sampled circles are now offset by <code class="language-plaintext highlighter-rouge">delta</code>. For nonzero <code class="language-plaintext highlighter-rouge">delta</code>, opposite poles generally describe different small circles, so <code class="language-plaintext highlighter-rouge">rD</code> need not be antipodally symmetric.</p>
+<h2 id="12">Inverting the transform</h2>
+<p> <a href="S2FunHarmonic.invRadon.html"><code class="language-plaintext highlighter-rouge">invRadon</code></a> reverses the transform in the spherical harmonic basis. A round trip recovers an antipodally symmetric function exactly within its harmonic representation, up to floating-point error.</p>
 {% highlight matlab %}
-backF = invRadon(rF)
-{% endhighlight %}
-
-{% highlight plaintext %}
-backF = S2FunHarmonic (y↓→x)
-  bandwidth: 48
-  antipodal: true
-{% endhighlight %}
-<p>For a function that is already antipodally symmetric the round trip is exact</p>
-{% highlight matlab %}
-sFeven = S2FunHarmonic.quadrature(@(v) 0.5*(f(v) + f(-v)),'bandwidth',48);
+sFeven = S2FunHarmonic.quadrature(@(v) 0.5*(f(v) + f(-v)), ...
+  'bandwidth',48);
 
 nodes = equispacedS2Grid('resolution',5*degree);
 
@@ -144,16 +138,22 @@ mean(abs(invRadon(radon(sFeven)).eval(nodes) - sFeven.eval(nodes)))
 ans =
    2.9619e-12
 {% endhighlight %}
-<p>For a general function it is not - what comes back is precisely the even part, and the odd part is gone for good</p>
+<p>A general function cannot be recovered because its odd part has already been lost. Inverting <code class="language-plaintext highlighter-rouge">rF</code> returns precisely the even part of <code class="language-plaintext highlighter-rouge">sF</code>.</p>
 {% highlight matlab %}
+backF = invRadon(rF)
+
 mean(abs(backF.eval(nodes) - sF.eval(nodes)))
 {% endhighlight %}
 
 {% highlight plaintext %}
+backF = S2FunHarmonic (y↓→x)
+  bandwidth: 48
+  antipodal: true
+ 
 ans =
     0.0599
 {% endhighlight %}
-
+<p>The nonzero first error measures the missing odd part. Comparing with <code class="language-plaintext highlighter-rouge">sFeven</code> instead confirms that the even part was recovered.</p>
 {% highlight matlab %}
 mean(abs(backF.eval(nodes) - sFeven.eval(nodes)))
 {% endhighlight %}
@@ -162,7 +162,20 @@ mean(abs(backF.eval(nodes) - sFeven.eval(nodes)))
 ans =
    3.7083e-12
 {% endhighlight %}
-<p>Note also that \(A_n\) decays like \(n^{-1/2}\), so the inverse multiplies high harmonics by a growing factor and amplifies noise. On measured data one should therefore not invert the transform directly but solve a regularized problem - which is exactly what <a href="PoleFigure2ODF.html">ODF reconstruction from pole figures</a> does. The lost odd part is what reappears there as the <a href="PoleFigure2ODFAmbiguity.html">ghost effect</a>.</p>
+<h2 id="15">The maths behind this</h2>
+<p>Great-circle averaging is unchanged by rotation. The spherical Radon transform is therefore a convolution and acts diagonally on the harmonic expansion. Its Legendre coefficients are</p>
+<p>\[ A_n = (-1)^{n/2}\,\frac{(n-1)!!}{n!!} \quad\text{for even } n, \qquad A_n = 0 \quad\text{for odd } n. \]</p>
+<p>The zero odd coefficients explain the permanent loss demonstrated above. For the even degrees, <code class="language-plaintext highlighter-rouge">invRadon</code> divides by \(A_n\).</p>
+<p>The magnitude of \(A_n\) decays like \(n^{-1/2}\). Its inverse consequently amplifies high-degree noise. Measured data should not be inverted directly; instead, solve a regularized problem as in <a href="PoleFigure2ODF.html">ODF reconstruction from pole figures</a>. The missing odd part reappears there as the <a href="PoleFigure2ODFAmbiguity.html">ghost effect</a>.</p>
+<h2 id="16">References</h2>
+<div>
+<ul>
+<li>J. D. McEwen and M. A. Price, <a href="https://doi.org/10.23919/EUSIPCO.2019.8903034">Scale-discretised ridgelet transform on the sphere</a>, <i>27th European Signal Processing Conference</i> (2019), 1-5, derives the convolution and harmonic representations and the exact inverse for antipodally symmetric functions.</li>
+</ul>
+</div>
+<h2 id="17">Next</h2>
+<p>
+<a href="S2FunVectorField.html">Spherical Vector Fields</a> moves from scalar values on the sphere to vectors and shows how to visualize their direction and magnitude.</p>
 </div>
 </body>
 </html>

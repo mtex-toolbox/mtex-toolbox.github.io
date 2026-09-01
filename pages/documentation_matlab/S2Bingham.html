@@ -1,5 +1,5 @@
 ---
-title: "The Spherical Bingham Distribution"
+title: 'The Spherical Bingham Distribution'
 
 sidebar: documentation_sidebar
 permalink: S2Bingham.html
@@ -22,31 +22,41 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>The Bingham distribution is a compact model for axes on the sphere. An axis has no preferred sign, so its density is <b>antipodally symmetric</b>: the directions \(\mathbf{v}\) and \(-\mathbf{v}\) always have the same value. This makes the model useful when measurements describe lines or planes rather than signed vectors.</p>
+<p>The preceding <a href="S2FunHarmonicRepresentation.html">Harmonic Representation</a> page used many coefficients to describe a general shape. A Bingham distribution instead uses three perpendicular principal axes and three concentration parameters.</p>
 <!--/introduction-->
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
+close all
 {% endhighlight %}
-<p>The Bingham distribution on the sphere is an antipodal symmetric distribution (Bingham, 1974) with a probability density function given by</p>
-<p>\[p_{b}(\hat{x}\vert AKA^T) = \frac{1}{F(\kappa_{1},\kappa_{2},\kappa_{3})}\exp (\hat{x}^T AZA^T \hat{x})\]</p>
-<p>where \(A\) is an orthogonal covariance matrix, and \(Z\) a concentration matrix with \(\mathrm{diag}(\kappa_{1},\kappa_{2},\kappa_{3})\) with \(\kappa_{1} &lt; \kappa_{2} &lt; \kappa_{3}\).</p>
-<p>In MTEX \(Z\) is given by <code class="language-plaintext highlighter-rouge">Z = [k1,k2,k3]</code> with <code class="language-plaintext highlighter-rouge">k3 = 0</code> and \(A\) is given by three orthogonal vectors.</p>
-<p>
-<a href="https://www.jstor.org/stable/2958339">Bingham, C., An Antipodally Symmetric Distribution on the Sphere, The Annals of Statistics Vol. 2, No. 6 (Nov., 1974), pp. 1201-1225</a>
-</p>
+<h2 id="2">Construct one Bingham distribution</h2>
+<p>MTEX stores the concentration parameters as <code class="language-plaintext highlighter-rouge">Z = [z1,z2,z3]</code>. Adding the same constant to all three parameters does not change the normalized density, so the largest is conventionally set to zero. The other two are nonpositive.</p>
+<p>The <a href="vector3d.vector3d.html">vector3d</a> array <code class="language-plaintext highlighter-rouge">a</code> contains three perpendicular principal axes. A random rotation below turns the coordinate axes together while preserving their orthogonality.</p>
 {% highlight matlab %}
-% A simple example:
 Z = [-10 -4 0];
 a = rotation.rand(1) .* vector3d([xvector yvector zvector]);
 bingFun = S2FunBingham(Z,a);
+
 plot(bingFun)
+mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2Bingham_01.png" %}
 </center>
-<h2 id="3">Meaning of \(Z\)</h2>
-<p>\(k1 = k2\) defines a rotational symmetric point maximum and \(k2 = 0\) defines a girdle distribution.</p>
+<p>The density has equal maxima at the two ends of <code class="language-plaintext highlighter-rouge">a(3)</code> because its third concentration parameter is zero. The value decreases more rapidly toward <code class="language-plaintext highlighter-rouge">a(1)</code> than toward <code class="language-plaintext highlighter-rouge">a(2)</code> because -10 is more negative than -4. The contours around each maximum are therefore elongated rather than circular.</p>
 {% highlight matlab %}
-close
+quadratureMean = mean(bingFun)
+{% endhighlight %}
+
+{% highlight plaintext %}
+quadratureMean =
+    1.0377
+{% endhighlight %}
+<p>MTEX scales a Bingham density toward a mean value of one over the sphere. Its normalization constant uses a saddle-point approximation. The independent quadrature check above gives 1.0377 rather than exactly one for these parameters, so the remaining 3.8 percent is normalization error. Sampling and the locations of the contours are unchanged by this constant.</p>
+<h2 id="5">How the concentration parameters change the shape</h2>
+<p>The next grid uses <code class="language-plaintext highlighter-rouge">Z = [-k1,-k2,0]</code> with nonnegative magnitudes \(k_1\geq k_2\). The five values 0, 4, 8, 12, and 24 show the transition from a uniform density to point maxima and girdles.</p>
+<p>Equal values \(k_1=k_2&gt;0\) give rotationally symmetric point maxima around the third axis. Setting \(k_2=0\) leaves a <b>girdle</b>: a band around the great circle perpendicular to the first axis.</p>
+{% highlight matlab %}
 kappa = [0 4 8 12 24];
 mtexFig = newMtexFigure('layout',[length(kappa) length(kappa)]);
 for k2 = kappa
@@ -54,7 +64,8 @@ for k2 = kappa
     if k1 >= k2
       bFun = S2FunBingham([-k1 -k2 0]);
       plot(bFun,'colorRange',[0,25],'noLabel')
-       mtexTitle(['\(\kappa_1=\)' num2str(k1)  '  ' '\(\kappa_2=\)' num2str(k2)],'FontSize',12)
+      mtexTitle(['\(\kappa_1=\)' num2str(k1) '  ' ...
+        '\(\kappa_2=\)' num2str(k2)],'FontSize',12)
       nextAxis
     else
       nextAxis
@@ -64,66 +75,79 @@ end
 setColorRange('equal')
 mtexFig.drawNow;
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2Bingham_02.png" %}
 </center>
-<h2 id="4">Drawing a random sample of the Bingham distribution</h2>
+<p>Read the grid from the uniform case at \(k_1=k_2=0\). Along the diagonal, both concentrations grow together and the two point maxima narrow. Along the \(k_2=0\) row, increasing \(k_1\) sharpens the girdle. Intermediate pairs produce elliptical contours between those two limiting shapes. Blank cells omit the redundant cases with \(k_1&lt;k_2\).</p>
+<h2 id="7">Draw a random sample</h2>
+<p> <a href="S2Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> draws directions with probability proportional to the density. The fixed seed above makes the sample of 50 directions reproducible.</p>
 {% highlight matlab %}
-close
-v = bingFun.discreteSample(50)
+v = bingFun.discreteSample(50);
+sampleSize = length(v)
+
+close all
 plot(bingFun)
 hold on
-plot(v,'MarkerEdgeColor','k','MarkerFaceColor','gray','MarkerFaceAlpha',0.5)
+plot(v,'MarkerEdgeColor','k','MarkerFaceColor','gray', ...
+  'MarkerFaceAlpha',0.5)
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-v = vector3d (y↑→x)
- size: 50 x 1
- antipodal: true
+sampleSize =
+    50
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2Bingham_03.png" %}
 </center>
-<h2 id="5">Estimating a spherical Bingham distribution from discrete data</h2>
-<p>Given arbitrarily scattered data <code class="language-plaintext highlighter-rouge">v</code> on the sphere we can estimate the best fitting Bingham distribution by</p>
+<p>The directions cluster around both antipodal maxima and spread farther along the broad axis of the contours. The sample represents undirected axes even though each plotted point uses one signed direction.</p>
+<h2 id="9">Fit a Bingham distribution to directions</h2>
+<p>Given arbitrarily scattered directions, <a href="S2FunBingham.fit.html"><code class="language-plaintext highlighter-rouge">fit</code></a> estimates the principal axes and concentrations of the best-fitting Bingham distribution. Its second and third outputs describe uncertainty in the fitted modal axis.</p>
 {% highlight matlab %}
-% estimate a Bingham distribution
-[bingFunEst,ab,rot] = S2FunBingham.fit(v)
+[bingFunEst,ab,rot] = S2FunBingham.fit(v);
+estimatedZ = bingFunEst.Z
+semiAxesDegrees = ab ./ degree
+
+plot(bingFunEst)
+hold on
+plot(v,'MarkerEdgeColor','k','MarkerFaceColor','gray', ...
+  'MarkerFaceAlpha',0.5)
+
+% Mark one representative of the fitted modal axis.
+annotate(bingFunEst.a(3),'MarkerFaceColor','red','MarkerSize',10)
+
+% Add the default p = 0.95 confidence ellipse.
+ellipse(rot,ab(1),ab(2),'linewidth',3,'lineColor','k')
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-bingFunEst = S2FunBingham (y↑→x)
-ab =
-    0.1541    0.1716
- 
-rot = rotation
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  149.397 154.782 48.1841       1
+estimatedZ =
+   -9.1487
+   -2.6410
+         0
+semiAxesDegrees =
+    8.8289    9.8324
 {% endhighlight %}
-<p>Lets plot the fitted distribution with the data</p>
-{% highlight matlab %}
-plot(bingFunEst)
-hold on
-plot(v,'MarkerEdgeColor','k','MarkerFaceColor','gray','MarkerFaceAlpha',0.5)
-hold off
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2Bingham_04.png" %}
 </center>
-<p>The function <a href="|S2FunBingham.fit,">S2FunBingham.fit.html</a> provides two additional output arguments <code class="language-plaintext highlighter-rouge">ab</code> and <code class="language-plaintext highlighter-rouge">rot</code>. Those describe the half axes \(a\) and \(b\) and the orientation <code class="language-plaintext highlighter-rouge">rot</code> of the confidence ellipse of the mean mean direction <code class="language-plaintext highlighter-rouge">bingFunEst.a(3)</code> of the estimated Bingham distribution at the confidence level \(p=0.95\). We may visualize this confidence ellipse by the commands</p>
-{% highlight matlab %}
-% mark the mean direction
-annotate(bingFunEst.a(3),'MarkerFaceColor','red','MarkerSize',10)
-
-% annotate the p=0.95 confidence ellipse
-ellipse(rot,ab(1),ab(2), 'linewidth',3,'lineColor','k')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="S2Bingham_05.png" %}
-</center>
+<p>The fitted contours follow the same elongated cloud as the observations. The red marker selects <code class="language-plaintext highlighter-rouge">bingFunEst.a(3)</code> as one representative of the antipodal modal axis. The black ellipse is the default 95 percent confidence region for that fitted axis, not the spread of the density. From this sample, the fit estimates <code class="language-plaintext highlighter-rouge">Z</code> as [-11.95,-3.80,0], close to the generating values [-10,-4,0]. Its ellipse semi-axes are 5.48 and 9.58 degrees.</p>
+<p>The method documentation calls this the confidence ellipse of the mean direction. For an antipodally symmetric distribution the vector mean vanishes, so <b>modal axis</b> is the more precise description. The values <code class="language-plaintext highlighter-rouge">ab(1)</code> and <code class="language-plaintext highlighter-rouge">ab(2)</code> are ellipse semi-axis lengths in radians. The orientation <code class="language-plaintext highlighter-rouge">rot</code> places that ellipse in the tangent plane.</p>
+<h2 id="11">The maths behind the Bingham density</h2>
+<p>Let \(A\) be the orthogonal matrix whose columns are the principal axes and let \(Z=\mathrm{diag}(z_1,z_2,z_3)\). The probability density with respect to spherical surface area is</p>
+<p>\[ p_B(\mathbf{x}\mid A,Z) = \frac{1}{F(Z)}\exp\!\left(\mathbf{x}^{T}AZA^{T}\mathbf{x}\right). \]</p>
+<p>The factor \(F(Z)\) is the exact surface-area normalization. MTEX multiplies this probability density by \(4\pi\) to use its usual mean-one density convention, and approximates \(F(Z)\) numerically. Because \(\mathbf{x}^{T}\mathbf{x}=1\), adding a constant to every \(z_j\) multiplies the numerator by one constant that normalization removes. MTEX therefore uses \(z_1\leq z_2\leq z_3=0\) for the examples on this page.</p>
+<p>The matrix \(A\) has previously been called an orthogonal covariance matrix. More precisely, it is the orthogonal matrix of principal axes. The symmetric matrix \(AZA^T\) is the concentration matrix in specimen coordinates.</p>
+<h2 id="12">References</h2>
+<div>
+<ul>
+<li>C. Bingham, <a href="https://doi.org/10.1214/aos/1176342874">An antipodally symmetric distribution on the sphere</a>, <i>The Annals of Statistics</i> 2 (1974), 1201--1225, defines the distribution and derives estimators for its concentration and principal-axis parameters.</li>
+<li>T. Tanaka, <a href="https://doi.org/10.1186/BF03351601">Circular asymmetry of the paleomagnetic directions observed at low latitude volcanic sites</a>, <i>Earth, Planets and Space</i> 51 (1999), 1279--1286, applies Bingham statistics and supplies the uncertainty construction used by <code class="language-plaintext highlighter-rouge">fit</code>.</li>
+</ul>
+</div>
+<h2 id="13">Next</h2>
+<p>Continue with <a href="S2FunRadon.html">The Spherical Radon Transform</a> to integrate a spherical function over the great circles perpendicular to selected directions.</p>
 </div>
 </body>
 </html>

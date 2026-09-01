@@ -1,5 +1,5 @@
 ---
-title: "Ghost Effect Analysis"
+title: 'Ghost Correction'
 
 sidebar: documentation_sidebar
 permalink: PoleFigure2ODFGhostCorrection.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Ghost Effect Analysis</title>
+<title>Ghost Correction</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_PoleFigure2ODFGhostCorrection.m">
 </head>
@@ -23,31 +23,20 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A general problem in estimating an ODF from pole figure data is the fact that the odd order Fourier coefficients of the ODF are not present anymore in the pole figure data and therefore it is difficult to estimate them. Artifacts in the estimated ODF that are due to underestimated odd order Fourier coefficients are called <b>ghost effects</b>. It is known that for sharp textures the ghost effect is relatively small due to the strict non-negativity condition. For weak textures, however, the ghost effect might be remarkable. For those cases, <b>MTEX</b> provides the option <b>ghost_correction</b> which tries to determine the uniform portion of the unknown ODF and to transform the unknown weak ODF into a sharp ODF by subtracting this uniform portion. This is almost the approach Matthies proposed in his book (He called the uniform portion <b>phon</b>). In this section, we are going to demonstrate the power of ghost correction at a simple, synthetic example.</p>
-<h2 id="2">Construct Model ODF</h2>
-<p>A unimodal ODF with a high uniform portion.</p>
+<p>Pole figures do not contain the odd-order harmonic coefficients of an orientation distribution function (ODF). A reconstruction must therefore choose those coefficients without help from the measurements. See <a href="PoleFigure2ODFAmbiguity.html">Ambiguity of Pole Figure Inversion</a> for the demonstration and <a href="SO3FunHarmonicRepresentation.html">Harmonic Representation</a> for the coefficient description.</p>
+<p>Setting the unknown odd-order coefficients to zero is a safe mathematical choice, but it has a visible cost. Real texture components become too weak and sit on a uniform background that is too high. Spurious components may also appear beside them. These inversion artefacts are called <b>ghosts</b>; they are not measurement noise.</p>
+<p>Matthies' remedy is to estimate the uniform portion of the ODF first. He called this portion the <b>phon</b>. MTEX estimates it from the low-intensity tail of the pole figures, subtracts it, and reconstructs the sharper remainder. Non-negativity then constrains the missing odd-order coefficients more strongly. <a href="PoleFigure.calcODF.html"><code class="language-plaintext highlighter-rouge">calcODF</code></a> applies this correction by default.</p>
+<p>Ghost correction adds a physical preference; it does not recover information that diffraction measured. It matters most for weak textures with a substantial uniform portion. Sharp textures have less to gain because non-negativity already constrains them strongly.</p>
+<p>This page isolates the effect with a known model that is nine tenths uniform. It assumes the reconstruction workflow from <a href="PoleFigure2ODF.html">ODF Reconstruction</a> and the ODF normalization from <a href="ODFTheory.html">ODF Theory</a>.</p>
+<h2 id="2">Build a deliberately weak ODF</h2>
 {% highlight matlab %}
 cs = crystalSymmetry('222');
 mod1 = orientation.byEuler(0,0,0,cs);
 odf = 0.9*uniformODF(cs) + ...
-  0.1*unimodalODF(mod1,'halfwidth',10*degree)
+  0.1*unimodalODF(mod1,'halfwidth',10*degree);
 {% endhighlight %}
-
-{% highlight plaintext %}
-odf = SO3FunRBF (222 → y↓→x)
- 
-  uniform component
-  weight: 0.9
- 
-  unimodal component
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 1 orientations
- 
-  Bunge Euler angles in degree
-  phi1    Phi   phi2 weight
-     0      0      0    0.1
-{% endhighlight %}
-<h2 id="3">Simulate pole figures</h2>
+<h2 id="3">Simulate the pole figures</h2>
+<p>The experiment samples three lattice-plane normals on an antipodal specimen-direction grid with 5 degree spacing. These synthetic pole figures now stand in for measurements, while the true ODF remains known.</p>
 {% highlight matlab %}
 % specimen directions
 r = equispacedS2Grid('resolution',5*degree,'antipodal');
@@ -58,175 +47,191 @@ h = Miller({1,0,0},{0,1,0},{0,0,1},cs);
 % compute pole figures
 pf = calcPoleFigure(odf,h,r);
 
-plot(pf)
+plot(pf);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFGhostCorrection_01.png" %}
 </center>
-<h2 id="4">ODF Estimation</h2>
-<p>without ghost correction:</p>
+<p>Each pole figure has one broad maximum on a nearly uniform background. The weak contrast is exactly the situation in which the uniform portion can hide missing odd-order information.</p>
+<h2 id="5">Reconstruct with and without correction</h2>
+<p>The <code class="language-plaintext highlighter-rouge">'noGhostCorrection'</code> flag disables the default correction.</p>
 {% highlight matlab %}
 rec = calcODF(pf,'noGhostCorrection','silent');
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigure2ODFGhostCorrection_02.png" %}
-</center>
-<p>with ghost correction:</p>
+<p>Omitting that flag gives the corrected reconstruction.</p>
 {% highlight matlab %}
-rec_cor = calcODF(pf,'silent');
+recCor = calcODF(pf,'silent');
 {% endhighlight %}
-<h2 id="6">Compare RP Errors</h2>
-<p>without ghost correction:</p>
+<h2 id="7">Compare the fits to the pole figures</h2>
+<p> <a href="PoleFigure.calcError.html"><code class="language-plaintext highlighter-rouge">calcError</code></a> returns one RP error per pole figure. First evaluate the reconstruction without correction.</p>
 {% highlight matlab %}
-calcError(pf,rec,'RP')
+rpUncorrected = calcError(pf,rec,'RP','silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+rpUncorrected =
     0.0089    0.0088    0.0109
 {% endhighlight %}
-<p>with ghost correction:</p>
+<p>Now evaluate the corrected reconstruction with the same measure.</p>
 {% highlight matlab %}
-calcError(pf,rec_cor,'RP')
+rpCorrected = calcError(pf,recCor,'RP','silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+rpCorrected =
     0.0256    0.0246    0.0264
 {% endhighlight %}
-<h2 id="9">Compare Reconstruction Errors</h2>
-<p>without ghost correction:</p>
+<p>The uncorrected RP values range from 0.0088 to 0.0109, compared with 0.0246 to 0.0264 after correction. This is neither surprising nor a defect. Ghost correction adds an assumption about the uniform portion, and that assumption can only cost fit. Judged on the pole figures alone, the uncorrected reconstruction wins.</p>
+<h2 id="10">Compare the reconstructions with the truth</h2>
+<p>A measured texture has no known true ODF. This synthetic example does, so <a href="SO3Fun.calcError.html"><code class="language-plaintext highlighter-rouge">calcError</code></a> can compare the functions directly. First compute the L1 error without correction.</p>
 {% highlight matlab %}
-calcError(rec,odf)
+l1Uncorrected = calcError(rec,odf,'L1')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+l1Uncorrected =
     0.1255
 {% endhighlight %}
-<p>with ghost correction:</p>
+<p>Then compute the same error with correction.</p>
 {% highlight matlab %}
-calcError(rec_cor,odf)
+l1Corrected = calcError(recCor,odf,'L1')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+l1Corrected =
     0.0054
 {% endhighlight %}
-<h2 id="12">Plot the ODFs</h2>
-<p>without ghost correction:</p>
+<p>Here the uncorrected result loses by a factor of 23.2: 0.1255 against 0.0054. This is the argument for ghost correction in two pairs of numbers. The reconstruction that fits the pole figures roughly two to three times better is more than twenty times farther from the true ODF.</p>
+<h2 id="13">Inspect the ODF sections</h2>
+<p>Without ghost correction:</p>
 {% highlight matlab %}
-plot(rec,'sections',9,'silent','sigma')
+plot(rec,'sections',9,'silent','sigma');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="PoleFigure2ODFGhostCorrection_02.png" %}
+</center>
+<p>The component is broad and weak, and the surrounding density is raised. Now plot the corrected reconstruction on the same type of sections.</p>
+{% highlight matlab %}
+plot(recCor,'sections',9,'silent','sigma');
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFGhostCorrection_03.png" %}
 </center>
-<p>with ghost correction:</p>
+<p>The corrected sections concentrate more density at the component and return the surrounding background towards its true level.</p>
+<h2 id="16">Read a profile through the component</h2>
+<p>A fibre is the one-dimensional set of orientations that maps a crystal direction onto a specimen direction. The following fibre passes through the model component. Plot the true ODF first.</p>
 {% highlight matlab %}
-plot(rec_cor,'sections',9,'silent','sigma')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigure2ODFGhostCorrection_04.png" %}
-</center>
-<p>radial plot of the true ODF</p>
-{% highlight matlab %}
-close all
+close all;
 f = fibre(Miller(0,1,0,cs),yvector);
 plot(odf,f,'linewidth',2);
-hold on
+hold on;
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigure2ODFGhostCorrection_05.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="PoleFigure2ODFGhostCorrection_04.png" %}
 </center>
-<p>radial plot without ghost correction:</p>
+<p>Add the reconstruction without correction.</p>
 {% highlight matlab %}
 plot(rec,f,'linewidth',2);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="PoleFigure2ODFGhostCorrection_05.png" %}
+</center>
+<p>Finally add the corrected reconstruction as a dashed curve.</p>
+{% highlight matlab %}
+plot(recCor,f,'linestyle','--','linewidth',2);
+hold off;
+legend({'true ODF','without ghost correction','with ghost correction'});
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFGhostCorrection_06.png" %}
 </center>
-<p>radial plot with ghost correction:</p>
+<p>The printed rows follow the legend order. The columns report the maximum and the values at 45, 90, and 270 degrees along the fibre.</p>
 {% highlight matlab %}
-plot(rec_cor,f,'linestyle','--','linewidth',2);
-hold off
-legend({'true ODF','without ghost correction','with ghost correction'})
-{% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigure2ODFGhostCorrection_07.png" %}
-</center>
-<h2 id="18">Calculate Fourier coefficients</h2>
-<p>Next, we want to analyze the fit of the Fourier coefficients of the reconstructed ODFs. To this end, we first compute Fourier representations for each ODF</p>
-{% highlight matlab %}
-odf = FourierODF(odf,25)
-rec = FourierODF(rec,25)
-rec_cor = FourierODF(rec_cor,25)
+profileOri = orientation(f,'points',361);
+profileValues = [eval(odf,profileOri),eval(rec,profileOri),...
+  eval(recCor,profileOri)].';
+profileCheck = [max(profileValues,[],2),profileValues(:,46),...
+  profileValues(:,91),profileValues(:,271)];
+fprintf(['                    peak   at 45   at 90  at 270\n' ...
+  'true ODF          %6.2f  %6.2f  %6.2f  %6.2f\n' ...
+  'without correction%6.2f  %6.2f  %6.2f  %6.2f\n' ...
+  'with correction   %6.2f  %6.2f  %6.2f  %6.2f\n'],profileCheck.');
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunHarmonic (222 → y↓→x)
-  bandwidth: 25
-  weight: 1
- 
- 
-rec = SO3FunHarmonic (222 → y↓→x)
-  bandwidth: 48
-  weight: 1
- 
- 
-rec_cor = SO3FunHarmonic (222 → y↓→x)
-  bandwidth: 48
-  weight: 1
+peak   at 45   at 90  at 270
+true ODF           39.78    0.90    0.90    0.90
+without correction 25.23    2.82    3.71    3.71
+with correction    37.38    1.06    1.05    1.05
 {% endhighlight %}
-<h2 id="19">Calculate Reconstruction Errors from Fourier Coefficients</h2>
-<p>without ghost correction:</p>
+<p>The uncorrected curve has three defects. Its peak reaches 25.23 mrd where the true peak reaches 39.78 mrd. At 45 degrees it is 2.82 mrd instead of 0.90 mrd, so the density missing from the peak has entered the background. Small bumps at 90 and 270 degrees are components conjured out of nothing.</p>
+<p>The dashed corrected curve follows the true curve closely. Its peak is 37.38 mrd and its value at 45 degrees is 1.06 mrd. The two extra bumps in the uncorrected curve are the ghosts that give the effect its name.</p>
+<h2 id="21">Inspect the harmonic coefficients</h2>
+<p>The effect lives in the odd-order coefficients, where it is clearest. First express all three functions as harmonic series through degree 25.</p>
 {% highlight matlab %}
-calcError(rec,odf,'L2')
+odf = FourierODF(odf,25);
+rec = FourierODF(rec,25);
+recCor = FourierODF(recCor,25);
+{% endhighlight %}
+<p>The L2 error without ghost correction is:</p>
+{% highlight matlab %}
+l2Uncorrected = calcError(rec,odf,'L2')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+l2Uncorrected =
     0.3621
 {% endhighlight %}
-<p>with ghost correction:</p>
+<p>With ghost correction it is:</p>
 {% highlight matlab %}
-calcError(rec_cor,odf,'L2')
+l2Corrected = calcError(recCor,odf,'L2')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+l2Corrected =
     0.0312
 {% endhighlight %}
-<h2 id="22">Plot Fourier Coefficients</h2>
-<p>Plotting the Fourier coefficients of the recalculated ODFs shows that the Fourier coefficients without ghost correction oscillates much more than the Fourier coefficients with ghost correction</p>
-<p>true ODF</p>
+<p>The values are 0.3621 and 0.0312. Like the L1 comparison, this puts the two reconstructions an order of magnitude apart.</p>
+<h2 id="25">Plot the harmonic spectrum</h2>
+<p>A harmonic spectrum groups coefficient magnitudes by degree. Plot the true ODF first.</p>
 {% highlight matlab %}
 close all;
-plotSpektra(odf,'linewidth',2)
+plotSpektra(odf,'linewidth',2);
+hold on;
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="PoleFigure2ODFGhostCorrection_07.png" %}
+</center>
+<p>Add the uncorrected reconstruction. Its zig-zag is the key feature: odd degrees are pulled towards zero while the even degrees remain close to the truth.</p>
+{% highlight matlab %}
+plotSpektra(rec,'linewidth',2);
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFGhostCorrection_08.png" %}
 </center>
-<p>keep plotting windows and add next plots</p>
+<p>The corrected reconstruction follows the true spectrum smoothly.</p>
 {% highlight matlab %}
-hold on
+plotSpektra(recCor,'linewidth',2);
+legend({'true ODF','without ghost correction','with ghost correction'});
+% next plot command overwrites plot window
+hold off;
 {% endhighlight %}
-<p>Without ghost correction:</p>
-{% highlight matlab %}
-plotSpektra(rec,'linewidth',2)
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFGhostCorrection_09.png" %}
 </center>
-<p>with ghost correction</p>
-{% highlight matlab %}
-plotSpektra(rec_cor,'linewidth',2)
-legend({'true ODF','without ghost correction','with ghost correction'})
-% next plot command overwrites plot window
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigure2ODFGhostCorrection_10.png" %}
-</center>
+<p>A systematic odd-even zig-zag is the diagnostic to look for. It shows that the reconstruction had to guess odd-order information that the pole figures did not measure. The pattern diagnoses this inversion ambiguity; it is not by itself evidence that every feature in a measured ODF is correct after correction.</p>
+<h2 id="29">Further reading</h2>
+<div>
+<ul>
+<li>S. Matthies, <a href="https://doi.org/10.1002/pssb.2220920254">On the reproducibility of the orientation distribution function of texture samples from pole figures (ghost phenomena)</a>, <i>physica status solidi (b)</i> 92, K135--K138, 1979. This paper introduced the ghost phenomenon.</li>
+<li>S. Matthies and G. W. Vinel, <a href="https://doi.org/10.1002/pssb.2221120254">On the reproduction of the orientation distribution function of texturized samples from reduced pole figures using the conception of a conditional ghost correction</a>, <i>physica status solidi (b)</i> 112, K111--K114, 1982. This paper introduced the conditional correction used here.</li>
+<li>R.-J. Roe, <a href="https://doi.org/10.1063/1.1714396">Description of crystallite orientation in polycrystalline materials. III. General solution to pole figure inversion</a>, <i>Journal of Applied Physics</i> 36, 2024--2031, 1965. This is the classical harmonic treatment of pole figure inversion.</li>
+<li>R. Hielscher and H. Schaeben, <a href="https://doi.org/10.1107/S0021889808030112">A novel pole figure inversion method: specification of the MTEX algorithm</a>, <i>Journal of Applied Crystallography</i> 41, 1024--1037, 2008. This specifies the estimator and numerical method implemented by MTEX.</li>
+</ul>
+</div>
+<h2 id="30">Next</h2>
+<p>
+<a href="PoleFigureSantaFe.html">The Santa Fe Example</a> repeats the comparison on a standard model ODF with simulated counting noise. Then continue to <a href="PoleFigureDubna.html">The Dubna Example</a> for measured neutron-diffraction pole figures, where the true ODF is no longer available for comparison.</p>
 </div>
 </body>
 </html>

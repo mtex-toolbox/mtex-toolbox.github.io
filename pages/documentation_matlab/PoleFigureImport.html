@@ -1,5 +1,5 @@
 ---
-title: "Import Pole Figure Data"
+title: 'Import Pole Figure Data'
 
 sidebar: documentation_sidebar
 permalink: PoleFigureImport.html
@@ -23,267 +23,40 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Importing pole figure data in MTEX means to create a <a href="PoleFigure.PoleFigure.html">PoleFigure</a> object from data files containing diffraction data. Once such an object has been created the data can be <a href="PoleFigureCorrection.html">analyzed and processed</a> in many ways. Furthermore, such a PoleFigure object is the starting point for <a href="PoleFigure2ODF.html">PoleFigure to ODF estimation</a>.</p>
-<h2 id="2">Importing pole figure data using the import wizard</h2>
-<p>The <a href="import_wizard.html">import wizard</a> can be started either by typing into the command line</p>
+<p>A pole-figure file brings three pieces of information into one object. They are the measured specimen directions, the intensity at each direction and the lattice plane whose diffraction peak was measured. Importing is therefore more than reading a numeric table. The crystal symmetry, Miller indices and angular units have to be stated correctly. So does the specimen frame, before an ODF can be reconstructed.</p>
+<p>MTEX stores the result in a <a href="PoleFigure.PoleFigure.html"><code class="language-plaintext highlighter-rouge">PoleFigure</code></a> object. Its entries are one or more measured pole figures, not pixels or individual orientations. The imported values are diffraction intensities. They are not yet normalized pole densities in multiples of a random distribution (mrd).</p>
+<p>This page assumes the pole-figure idea from <a href="PoleFigureAnalysis.html">Pole Figures</a>. Miller-index notation is introduced in <a href="CrystalDirections.html">Miller Indices</a>. Review it if unfamiliar.</p>
+<h2 id="2">Start with the import wizard</h2>
+<p>For an unfamiliar format, start the graphical wizard by entering</p>
 {% highlight matlab %}
-import_wizard_old
+import_wizard
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureImport_01.png" %}
-</center>
-<p>or by using the start menu item <b>Start/Toolboxes/MTEX/Import Wizard</b>. Pole figure data can be also imported via the <a href="matlab:filebrowser">file browser</a> by choosing <b>Import Data</b> from the context menu of the selected file if its file extension was previously registered with the <a href="matlab:opentoline(fullfile(mtex_path,'mtex_settings.m'),25,1)"><code class="language-plaintext highlighter-rouge">mtex_settings.m</code></a>
-</p>
-<p>The import wizard guides through the correct setup of:</p>
-<div>
-<ul>
-<li>
-<a href="CrystalSymmetries.html">crystal symmetries</a> associated with phases</li>
-<li>specimen symmetry and plotting conventions</li>
-<li>
-<a href="Miller.Miller.html">Miller indices</a> of pole figures.</li>
-</ul>
-</div>
-<p>In the end, the imported wizard creates a workspace variable or generates a m-file loading the data automatically. Furthermore appending a template script allows radip data processing.</p>
-<h2 id="5">Supported Data Formats</h2>
-<p>The import wizard currently supports following pole figure formats:</p>
-<p>
-   <table class="usertable">
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_ana.html">.ana*</a>
-               </p>
-         </td>
-         <td>
-               <p>EMSE ASCII pole figure format</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_dubna.html">.cns*</a>
-               </p>
-         </td>
-         <td>
-               <p>Dubna ASCII pole figure format, regular grid</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_dubna.html">.cnv*</a>
-               </p>
-         </td>
-         <td>
-               <p>Dubna ASCII pole figure format, experimental grid</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_geesthacht.html">.dat*</a>
-               </p>
-         </td>
-         <td>
-               <p>Geesthacht ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_popla.html">.epf*,.gpf*</a>
-               </p>
-         </td>
-         <td>
-               <p>Popla ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_labotex.html">.epf*,.ppf*,.pow</a>
-               </p>
-         </td>
-         <td>
-               <p>LaboTEX ASCII pole figure format</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_aachen_exp.html">.exp*</a>
-               </p>
-         </td>
-         <td>
-               <p>Aachen ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_ibm.html">.ibm*</a>
-               </p>
-         </td>
-         <td>
-               <p>IBM ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_juelich.html">.jul*</a>
-               </p>
-         </td>
-         <td>
-               <p>Juelich ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_nja.html">.nja*</a>
-               </p>
-         </td>
-         <td>
-               <p>Seifert ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_out1.html">.out*</a>
-               </p>
-         </td>
-         <td>
-               <p>Graz ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_plf.html">.plf*</a>
-               </p>
-         </td>
-         <td>
-               <p>Queens Univ. ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_siemens.html">.ptx, <b>.rpf</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>Siemens ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_philips.html">.txt*</a>
-               </p>
-         </td>
-         <td>
-               <p>Philips ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_beartex.html">.xpe, <b>.xpf</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>BearTex ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_slc.html">.slc*</a>
-               </p>
-         </td>
-         <td>
-               <p>SLC ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_uxd.html">.uxd*</a>
-               </p>
-         </td>
-         <td>
-               <p>Bruker UXD ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_xrd.html">.xrd, <b>.ras</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>Bruker XRD ASCII pole figure format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_xrdml.html">.xrdml*</a>
-               </p>
-         </td>
-         <td>
-               <p>PANalytical XML data format.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadPoleFigure_aachen.html">.**</a>
-               </p>
-         </td>
-         <td>
-               <p>Aachen ASCII pole figure format.</p>
-         </td>
-      </tr>
-   </table>
-</p>
-<p>See <a href="PoleFigure.load.html">PoleFigure.load</a> for further information or follow the hyperlinks of the table above for an example.</p>
-<p>If the interface is not automatically recognized, but the data has the form of an ASCII list:</p>
-<pre>polar_1 azimuthal_1 intensity_1
-polar_2 azimuthal_2 intensity_2
-polar_3 azimuthal_3 intensity_3
-.       .           .
-.       .           .
-.       .           .
-polar_n azimuthal_n intensity_n</pre>
-<p>an additional tool asks you to associate the columns with the corresponding property. See also <a href="loadPoleFigure_generic.html">loadPoleFigure_generic</a>, which provides an easy way to import diffraction data from such an ASCII list. The list may contain an arbitrary number of header lines, columns or comments and the actual order of the columns may be specified by options.</p>
-<p>If you have any comments, remarks or request on interfaces please contact us.</p>
-<h2 id="6">The Import Script</h2>
-<p>Diffraction data stored in one of the formats above can also be imported using the command <a href="PoleFigure.load.html">PoleFigure.load</a>. It automatically detects the data format and imports the data. In dependency of the data format, it might be necessary to specify the Miller indices and the structure coefficients. The general syntax is</p>
-<p>An import script generated by the <code class="language-plaintext highlighter-rouge">import wizard</code> has the following form:</p>
+<p>and select <b>Pole Figure Data</b>. The preview makes it possible to identify columns, angular units and the specimen axes before importing. The wizard can put the result in the workspace. Its more valuable output is an import script. Save that script with the analysis so the choices can be checked and the import repeated.</p>
+<p>The wizard asks for the <a href="CrystalSymmetries.html">crystal symmetry</a>, the Miller index of every measured reflection, and the specimen convention. These are scientific inputs, not display preferences. A plotting convention changes only where a direction is drawn. Correcting a wrong specimen frame changes what the data mean. The same distinction is explained in <a href="EBSDReferenceFrame.html">Reference Frames</a> for EBSD.</p>
+<h2 id="3">A reproducible import script</h2>
+<p>The following is the essential script for the bundled Dubna quartz data. Declare the plotting convention before loading so the specimen directions enter the intended frame.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-cs = crystalSymmetry('32',[1.4,1.4,1.5]); % crystal symmetry
 
-% location of the data files
+cs = crystalSymmetry('32',[1.4,1.4,1.5]);
+{% endhighlight %}
+<p>The <code class="language-plaintext highlighter-rouge">cs</code> definition pairs trigonal symmetry with a crystal frame. That frame holds the relative lattice parameters and interprets Miller indices. Both must describe the measured phase. The default frame is X||a*, Z||c.</p>
+{% highlight matlab %}
 fnames = {...
   fullfile(mtexDataPath,'PoleFigure','dubna','Q(10-10)_amp.cnv'),...
   fullfile(mtexDataPath,'PoleFigure','dubna','Q(10-11)(01-11)_amp.cnv')};
-
-% crystal directions
-h = {Miller(1,0,-1,0,cs),[Miller(0,1,-1,1,cs),Miller(1,0,-1,1,cs)]};
-
-% structure coefficients
-c = {1,[0.52 ,1.23]};
-
-% load data
+{% endhighlight %}
+<p>The two cells below correspond one for one to the two filenames. The first file measures one reflection, \((10\bar{1}0)\). The peak in the second file contains two reflections. The instrument could not resolve them, so its cell contains two Miller indices.</p>
+{% highlight matlab %}
+h = {Miller(1,0,-1,0,cs),...
+  [Miller(0,1,-1,1,cs),Miller(1,0,-1,1,cs)]};
+{% endhighlight %}
+<p>A combined peak is a weighted sum. Its relative structure coefficients must be supplied in the same order as its Miller indices. The first pole figure has only one contribution and therefore weight 1.</p>
+{% highlight matlab %}
+c = {1,[0.52,1.23]};
+{% endhighlight %}
+<p> <a href="PoleFigure.load.html"><code class="language-plaintext highlighter-rouge">PoleFigure.load</code></a> detects the file format and joins the files, reflections and weights into one object.</p>
+{% highlight matlab %}
 pf = PoleFigure.load(fnames,h,cs,'superposition',c)
 {% endhighlight %}
 
@@ -291,20 +64,82 @@ pf = PoleFigure.load(fnames,h,cs,'superposition',c)
 pf = PoleFigure (y↑→x)
   crystal symmetry : 321, X||a*, Y||b, Z||c
  
-  h = (101̅0), r = 72 x 19 points
-  h = (011̅1)(101̅1), r = 72 x 19 points
+  h = (101̅0), r = 72 × 19 points
+  h = (011̅1)(101̅1), r = 72 × 19 points
 {% endhighlight %}
-<p>Once such a import script for pole figure data has been created, it can be easily modified and extend, e.g.:</p>
+<h2 id="8">What was imported</h2>
+<p>The display reports the crystal symmetry and one line per measured pole figure. Here both files contain a \(72 \times 19\) grid of specimen directions. The double Miller label on the second line is deliberate. It records the superposed peak rather than pretending it was one reflection.</p>
+<p>The four parts of the object can be inspected directly:</p>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">pf.allH</code> contains the crystal plane normals;</li>
+<li>
+<code class="language-plaintext highlighter-rouge">pf.allR</code> contains the specimen directions at which intensities were measured;</li>
+<li>
+<code class="language-plaintext highlighter-rouge">pf.allI</code> contains those intensities; and</li>
+<li>
+<code class="language-plaintext highlighter-rouge">pf.c</code> contains the structure coefficients.</li>
+</ul>
+</div>
+<p>The cell structure matters because different pole figures may have different grids and different numbers of contributing reflections.</p>
 {% highlight matlab %}
-% plot the data
-plot(pf)
+pf.allH
+pf.c
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureImport_02.png" %}
+
+{% highlight plaintext %}
+ans =
+  1×2 cell array
+    {1×1 Miller}    {1×2 Miller}
+ans =
+  1×2 cell array
+    {[1]}    {[0.5200 1.2300]}
+{% endhighlight %}
+<p>Plot the raw measurements immediately. This catches transposed polar and azimuth columns or degrees read as radians. A flipped specimen axis and missing values are also visible. So are implausible intensity ranges, before any of them is mistaken for an ODF problem.</p>
+{% highlight matlab %}
+plot(pf)
+mtexColorbar
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="PoleFigureImport_01.png" %}
 </center>
-<h2 id="9">Writing your own interface</h2>
-<p>MTEX also provides a way to import data from formats currently not supported directly. Therefore you can to use all standard MATLAB input and output commands to read the pole figure information, e.g. intensities, specimen directions, crystal directions directly from the data files. Then you have to call the constructor <a href="PoleFigure.PoleFigure.html">PoleFigure</a> with these data to generate a PoleFigure object.</p>
-<p>Once you have written an interface that reads data from certain data files and generates a PoleFigure object you can integrate this method into MTEX by copying it into the folder <code class="language-plaintext highlighter-rouge">MTEX/qta/interfaces</code>. Then it will be automatically called by the methods <a href="PoleFigure.load.html">PoleFigure.load</a> and import_wizard_old. Examples how to write such an interface can be found in the directory <code class="language-plaintext highlighter-rouge">MTEX/qta/interfaces</code>.</p>
+<p>Both panels use the same \(72 \times 19\) direction grid, but their strong spots occupy different regions. The title of the second panel contains two Miller indices because it is the unresolved peak. Notice also that its raw intensity scale is much larger than the first. Raw scales must not be compared as mrd before correction and normalization.</p>
+<h2 id="11">Superposed reflections are part of the measurement model</h2>
+<p>The coefficients in <code class="language-plaintext highlighter-rouge">pf.c</code> are not optional cosmetic weights. For the second file the forward model used during reconstruction is the sum</p>
+<p>\[I(r) = 0.52\,P_{(01\bar{1}1)}(r) + 1.23\,P_{(10\bar{1}1)}(r).\]</p>
+<p>Replacing that pair by one Miller index asks the inversion to explain a measured sum as a single pole figure. This generally biases the recovered ODF. If peaks overlap, record every contributing reflection. Use relative coefficients appropriate to the radiation and measured phase.</p>
+<h2 id="12">Generic text files</h2>
+<p>When no dedicated reader matches, MTEX falls back to the <a href="loadPoleFigure_generic.html">generic ASCII reader</a>. A common file is one row per measurement,</p>
+{% highlight matlab %}
+polar_angle  azimuth_angle  intensity
+{% endhighlight %}
+<p>with any number of header or unused columns. State the column meanings and positions explicitly when they cannot be inferred safely. State the angular unit as well. For example:</p>
+{% highlight matlab %}
+pf = PoleFigure.load(fname,Miller(1,1,1,cs),cs,...
+  'interface','generic','ColumnNames',...
+  {'polar angle','azimuth angle','intensity'},...
+  'Columns',[1 2 3],'degree','Header',21);
+{% endhighlight %}
+<p>Supplying the Miller index is safer than relying on a filename. A name with an unrelated number can otherwise be mistaken for a reflection. If auto-detection chooses the wrong reader, select one with <code class="language-plaintext highlighter-rouge">'interface'</code>. For example, use <code class="language-plaintext highlighter-rouge">'interface','dubna'</code> for this format.</p>
+<h2 id="13">Supported formats and custom readers</h2>
+<p>MTEX ships readers for common text and vendor formats. Interface names include <code class="language-plaintext highlighter-rouge">dubna</code>, <code class="language-plaintext highlighter-rouge">popla</code>, <code class="language-plaintext highlighter-rouge">labotex</code>, <code class="language-plaintext highlighter-rouge">beartex</code> and <code class="language-plaintext highlighter-rouge">siemens</code>. Others include <code class="language-plaintext highlighter-rouge">philips</code>, <code class="language-plaintext highlighter-rouge">rigaku</code>, <code class="language-plaintext highlighter-rouge">nja</code>, <code class="language-plaintext highlighter-rouge">juelich</code>, <code class="language-plaintext highlighter-rouge">uxd</code> and <code class="language-plaintext highlighter-rouge">xrdml</code>. Together they cover Dubna, PopLA, LaboTEX, BearTex, Siemens and Philips data. Rigaku, Seifert, Juelich, Bruker and PANalytical data are covered too.</p>
+<p> <a href="PoleFigure.load.html"><code class="language-plaintext highlighter-rouge">PoleFigure.load</code></a> tries the installed <code class="language-plaintext highlighter-rouge">loadPoleFigure_*</code> readers and then the generic reader. Its reference page is version-specific. So are the reader files in the repository's <code class="language-plaintext highlighter-rouge">interfaces</code> directory.</p>
+<p>A format-specific reader is an ordinary function named <code class="language-plaintext highlighter-rouge">loadPoleFigure_name</code> that returns a <code class="language-plaintext highlighter-rouge">PoleFigure</code> object. Put it on the MATLAB path and call</p>
+{% highlight matlab %}
+pf = PoleFigure.load(fname,...,'interface','name');
+{% endhighlight %}
+<p>during development. Install it in MTEX's <code class="language-plaintext highlighter-rouge">interfaces</code> directory only when it should participate in automatic format detection. The <a href="loadPoleFigure_dubna.html"><code class="language-plaintext highlighter-rouge">loadPoleFigure_dubna</code></a> reader is a compact format-specific template. The <a href="loadPoleFigure_generic.html"><code class="language-plaintext highlighter-rouge">loadPoleFigure_generic</code></a> reader is the corresponding generic template.</p>
+<h2 id="14">Before reconstructing an ODF</h2>
+<p>Confirm the phase, lattice parameters and reflection assigned to every file. Confirm all superposition coefficients, the angular unit, specimen axes, intensity range and angular coverage. Apply only justified background, defocusing and normalization corrections. They are explained in <a href="PoleFigureCorrection.html">Modify Pole Figures</a>. Continue afterwards to <a href="PoleFigure2ODF.html">ODF Reconstruction</a>.</p>
+<h2 id="15">Further reading</h2>
+<div>
+<ul>
+<li>ASTM International, <a href="https://doi.org/10.1520/E0081-96R24">ASTM E81-96(2024): Standard Test Method for Preparing Quantitative Pole Figures</a>. It distinguishes complete, partial and calculated X-ray pole figures and describes their preparation.</li>
+<li>D. Chateigner, L. Lutterotti and M. Morales, <a href="https://doi.org/10.1107/97809553602060000968">Quantitative texture analysis and combined analysis</a>, <i>International Tables for Crystallography</i>, Volume H, chapter 5.3, 2019. It connects measured intensity, experimental corrections, normalized pole density and overlapping reflections.</li>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982. It gives the classical treatment of pole figures and ODF reconstruction.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Exporting Crystal Orientations"
+title: 'Exporting Crystal Orientations'
 
 sidebar: documentation_sidebar
 permalink: OrientationExport.html
@@ -23,28 +23,33 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Orientations are exported as plain ASCII files, which keeps them readable by any other software. This page is the counterpart of <a href="OrientationImport.html">Importing Crystal Orientations</a>.</p>
-<p>As an example we take a random sample from a model ODF.</p>
+<p>Exporting an orientation means choosing a numerical representation that the receiving program understands. MTEX writes plain ASCII tables, so any program can read the numbers once their columns and conventions are known. This page is the counterpart of <a href="OrientationImport.html">Importing Crystal Orientations</a>.</p>
+<p>The table does not contain the complete MTEX <code class="language-plaintext highlighter-rouge">orientation</code> object. In particular, it does not store crystal symmetry or the crystal and specimen reference frames. A reference frame is the coordinate system in which data are expressed. The direction of the orientation map is also not stored.</p>
+<p>Record those choices beside the file. Their meaning is introduced in <a href="DefinitionAsCoordinateTransform.html">Crystal Orientation as Coordinate Transformation</a> and compared with Bunge's map direction in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>.</p>
+<h2 id="2">Define an Orientation Sample</h2>
+<p>We use a random sample of 100 orientations from a model orientation distribution function (ODF).</p>
 {% highlight matlab %}
 cs = crystalSymmetry.load('quartz.cif');
 
 odf = unimodalODF(orientation.byEuler(30*degree,50*degree,10*degree,cs), ...
   'halfwidth',10*degree);
 
-ori = odf.discreteSample(100)
+ori = odf.discreteSample(100);
+numOrientations = length(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (Quartz → y↓→x)
-  size: 100 x 1
+numOrientations =
+   100
 {% endhighlight %}
-<h2 id="2">Exporting Euler Angles</h2>
-<p>The command <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> writes the orientations into an ASCII file. By default the three Bunge Euler angles are written in degree, preceded by a header line naming the columns.</p>
+<p>The output confirms that the list has 100 entries. The record count in a VPSC header later on must agree with this value.</p>
+<h2 id="4">Exporting Euler Angles</h2>
+<p> <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> writes one orientation per row. Here we name the Bunge convention explicitly, so a session preference cannot change the file. The angles are written in degree unless <code class="language-plaintext highlighter-rouge">'radians'</code> is passed.</p>
 {% highlight matlab %}
 fname = fullfile(tempdir,'orientations.txt');
-export(ori,fname)
+export(ori,fname,'Bunge')
 {% endhighlight %}
-<p>Let us look at the beginning of the resulting file</p>
+<p>The first line names the three columns. The following lines contain the Bunge Euler angles \((\varphi_1,\Phi,\varphi_2)\) in degree.</p>
 {% highlight matlab %}
 fid = fopen(fname);
 for k = 1:4, disp(fgetl(fid)); end
@@ -57,8 +62,8 @@ phi1      Phi     phi2
 220.818  139.367  237.496
 217.929  121.963  241.686
 {% endhighlight %}
-<h2 id="4">Other Conventions and Units</h2>
-<p>Any of the Euler angle conventions described in <a href="RotationDefinition.html">Defining Rotations</a> may be used instead, and the angles may be written in radians rather than in degree.</p>
+<h2 id="6">Other Conventions and Units</h2>
+<p>Without an explicit convention, <code class="language-plaintext highlighter-rouge">export</code> follows the session's Euler-angle preference. Any convention described in <a href="RotationDefinition.html">Defining Rotations</a> may be named instead. The next file uses Matthies angles in radians.</p>
 {% highlight matlab %}
 export(ori,fname,'Matthies','radians')
 
@@ -73,7 +78,9 @@ alpha      beta     gamma
 2.28321   2.43241   5.71589
 2.23279   2.12866   5.78901
 {% endhighlight %}
-<p>Passing the option <code class="language-plaintext highlighter-rouge">quaternion</code> writes the four quaternion components instead of Euler angles. This is the only one of the formats on this page that involves no angle conversion at all.</p>
+<p>The new header and values describe the same orientations in a different convention and unit. The file does not label the unit, so it must be recorded separately for the receiver.</p>
+<h2 id="8">Exporting Quaternions</h2>
+<p>Passing <code class="language-plaintext highlighter-rouge">'quaternion'</code> writes the four quaternion components instead of Euler angles. This is the only format on this page that performs no angle conversion.</p>
 {% highlight matlab %}
 export(ori,fname,'quaternion')
 
@@ -87,13 +94,14 @@ a          b          c          d
   0.388809  -0.825764    0.12209   0.389917
   0.227067  -0.927874   0.136008   0.262664
 {% endhighlight %}
-<h2 id="6">Exporting Additional Properties</h2>
-<p>Often one wants to store more than the orientations alone - weights, grain sizes, or any other per orientation quantity. A struct passed to <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> is appended as additional columns, one per field, using the field names as column headers.</p>
+<p>MTEX writes the scalar component first, in the order <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code>, <code class="language-plaintext highlighter-rouge">c</code>, <code class="language-plaintext highlighter-rouge">d</code>. Other programs may use another order or sign convention, and a unit quaternion and its negative describe the same rotation. Check the receiver's contract before exchanging quaternion columns.</p>
+<h2 id="10">Exporting Additional Columns</h2>
+<p>Often an orientation needs an associated weight, grain size, or another quantity. A struct passed to <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> appends one column per field and uses the field names as column headers. Every field must supply one value per orientation.</p>
 {% highlight matlab %}
 S.angle = ori.angle ./ degree;
 S.weight = ones(size(ori)) ./ length(ori);
 
-export(ori,fname,S)
+export(ori,fname,S,'Bunge')
 
 fid = fopen(fname);
 for k = 1:3, disp(fgetl(fid)); end
@@ -105,30 +113,68 @@ phi1      Phi     phi2    angle   weight
 216.671  113.178  233.492  78.1761     0.01
 220.818  139.367  237.496  58.7177     0.01
 {% endhighlight %}
-<h2 id="7">The VPSC Format</h2>
-<p>Individual orientations are exported to the format expected by the VPSC code with <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a>. It always writes Euler angles together with a weight column, normalised to sum up to one.</p>
+<p>The preview shows that <code class="language-plaintext highlighter-rouge">angle</code> and <code class="language-plaintext highlighter-rouge">weight</code> remain aligned with the Euler angles on each row.</p>
+<h2 id="12">The VPSC Format</h2>
+<p> <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a> writes individual orientations in the texture format expected by the VPSC crystal plasticity code. It writes three Euler angles and one relative volume fraction per row.</p>
+<p>VPSC supports the Bunge, Kocks, and Roe conventions. MTEX defaults to Bunge for this format regardless of the session preference. The fourth header line records <code class="language-plaintext highlighter-rouge">B</code>, <code class="language-plaintext highlighter-rouge">K</code>, or <code class="language-plaintext highlighter-rouge">R</code> together with the number of rows.</p>
 {% highlight matlab %}
 fnameVPSC = fullfile(tempdir,'orientations_vpsc.txt');
 export_VPSC(ori,fnameVPSC)
 
 fid = fopen(fnameVPSC);
-for k = 1:4, disp(fgetl(fid)); end
+for k = 1:6, disp(fgetl(fid)); end
 fclose(fid);
 {% endhighlight %}
 
 {% highlight plaintext %}
 texture exported by MTEX
 B 100
+ 216.67  113.18  233.49   0.0100000
+ 220.82  139.37  237.50   0.0100000
 {% endhighlight %}
-<p>Weights differing from orientation to orientation are passed with the option <code class="language-plaintext highlighter-rouge">weights</code>.</p>
+<p>The line <code class="language-plaintext highlighter-rouge">B 100</code> identifies Bunge angles and the 100 orientations. The following rows contain three angles in degree and a uniform weight.</p>
+<h2 id="14">Unequal VPSC Weights</h2>
+<p>Pass weights that differ between orientations with the <code class="language-plaintext highlighter-rouge">'weights'</code> option. VPSC interprets them as relative volume fractions, so use nonnegative values with a positive sum. MTEX divides the supplied values by their sum before writing them.</p>
 {% highlight matlab %}
-export_VPSC(ori,fnameVPSC,'weights',rand(size(ori)))
+weights = reshape(1:numOrientations,size(ori));
+export_VPSC(ori,fnameVPSC,'weights',weights)
+
+fid = fopen(fnameVPSC);
+for k = 1:6, disp(fgetl(fid)); end
+fclose(fid);
+
+vpscData = readmatrix(fnameVPSC,'NumHeaderLines',4);
+writtenWeightSum = sum(vpscData(:,4))
 {% endhighlight %}
-<p>Note that a whole ODF, rather than a list of individual orientations, is exported by the commands discussed in <a href="ODFExport.html">ODF Export</a>.</p>
+
+{% highlight plaintext %}
+texture exported by MTEX
+B 100
+ 216.67  113.18  233.49   0.0001980
+ 220.82  139.37  237.50   0.0003960
+writtenWeightSum =
+     1
+{% endhighlight %}
+<p>The first two written weights now differ. The final output checks their sum after the values have been rounded for the text file.</p>
+<h2 id="16">Choosing a Format</h2>
+<p>Use Euler angles when the receiver specifies a convention and unit. Use quaternions when both programs agree on component order and signs. Use the VPSC format only when a polycrystal code expects its weighted texture table.</p>
+<p>If the data will stay in MTEX, MATLAB's <code class="language-plaintext highlighter-rouge">save</code> preserves the orientation object more completely than a numeric table. A whole ODF, rather than a list of individual orientations, is exported by the commands in <a href="ODFExport.html">ODF Export</a>.</p>
+<p>Remove the temporary files.</p>
 {% highlight matlab %}
-% clean up the temporary files
 delete(fname); delete(fnameVPSC);
 {% endhighlight %}
+<h2 id="18">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, establishes the Euler-angle convention used in texture analysis.</li>
+<li>D. Rowenhorst et al., <a href="https://doi.org/10.1088/0965-0393/23/8/083501">Consistent representations of and conversions between 3D rotations</a>, <i>Modelling and Simulation in Materials Science and Engineering</i> 23, 083501, 2015, compares Euler, matrix, axis--angle, and quaternion conventions.</li>
+<li>R. A. Lebensohn and C. N. Tom&eacute;, <a href="https://doi.org/10.1016/0956-7151(93)90130-K">A self-consistent anisotropic approach for the simulation of plastic deformation and texture development of polycrystals</a>, <i>Acta Metallurgica et Materialia</i> 41, 2611--2624, 1993, introduces the VPSC formulation.</li>
+<li>The <a href="https://public.lanl.gov/lebenso/">VPSC project and manual</a> describe the weighted orientation input used by the code.</li>
+</ul>
+</div>
+<h2 id="19">Next</h2>
+<p>
+<a href="OrientationEmbeddings.html">Embeddings of Orientations</a> is the next page in this chapter. It replaces coordinate representations with tensors for statistics and machine learning. For a continuous orientation density, continue with <a href="ODFExport.html">ODF Export</a>.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Operations on Spherical Functions"
+title: 'Operations on Spherical Functions'
 
 sidebar: documentation_sidebar
 permalink: S2FunOperations.html
@@ -22,175 +22,189 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A spherical function can be evaluated, combined, searched, integrated, differentiated and rotated. The <a href="S2FunConcept.html">Concept</a> page introduces their common <a href="S2Fun.S2Fun.html">S2Fun</a> interface and evaluates one function at a chosen direction. This page builds on that step with two functions.</p>
 <!--/introduction-->
+<h2 id="1">Two functions to compare</h2>
+<p>The examples use one patterned function and one narrow peak. Both are harmonic spherical functions and therefore support the same operations.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-{% endhighlight %}
-<p>Spherical functions offers a wide range of analysis methods. You can perform almost arbitrary computations with them: add, multiply, detect local extrema, integrate and much more. Here we give a basic overview about what is possible. We start by defining the following two spherical functions</p>
-{% highlight matlab %}
-sF1 = S2Fun.smiley;
-sF2 = S2FunHarmonic.unimodal('halfwidth',10*degree,sF1.how2plot)
 
+% a patterned function and one narrow peak
+sF1 = S2Fun.smiley;
+sF2 = S2FunHarmonic.unimodal('halfwidth',10*degree,sF1.how2plot);
+
+newMtexFigure('layout',[1,2]);
 plot(sF1,'upper')
+mtexTitle('Patterned function')
 nextAxis
 plot(sF2,'upper')
+mtexTitle('Narrow peak')
 {% endhighlight %}
-
-{% highlight plaintext %}
-sF2 = S2FunHarmonic (y↑→x)
-  bandwidth: 50
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunOperations_01.png" %}
 </center>
-<h2 id="3">Basic arithmetic operations</h2>
-<p>Now the sum of these two spherical functions is again a spherical function</p>
+<p>The first function has several broad features. The second concentrates its values around one direction. This contrast makes the effect of each operation visible.</p>
+<h2 id="3">Basic arithmetic</h2>
+<p>Adding functions or multiplying them by scalars produces another spherical function. Adding the constant one shifts every value equally.</p>
 {% highlight matlab %}
-1 + 15 * sF1 + sF2
+combined = 15 * sF1 + sF2;
+shifted = 1 + combined;
 
-plot(15 * sF1 + sF2,'upper')
+% check the shift at one direction
+shiftAtX = shifted.eval(xvector) - combined.eval(xvector);
+fprintf('Shift at specimen X: %.1f\n',shiftAtX)
+
+plot(combined,'upper')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = S2FunHarmonic (y↑→x)
-  bandwidth: 128
+Shift at specimen X: 1.0
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunOperations_02.png" %}
 </center>
-<p>Accordingly, one can use all basic operations like <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.^</code>, <code class="language-plaintext highlighter-rouge">/</code>, <a href="S2Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a>, <a href="S2Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a>, <a href="S2Fun.abs.html"><code class="language-plaintext highlighter-rouge">abs</code></a>, <a href="S2FunHarmonic.sqrt.html"><code class="language-plaintext highlighter-rouge">sqrt</code></a> to calculate with variables of type <a href="S2Fun.S2Fun.html">S2Fun</a>.</p>
+<p>The combined plot retains the pattern of the first function and adds the sharp peak of the second. The scalar factor makes the broad pattern visible on the same colour scale as that peak. The printed difference of 1.0 confirms that adding one shifts the value without changing the pattern.</p>
+<h2 id="5">Pointwise operations</h2>
+<p>The basic operations <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.^</code> and <code class="language-plaintext highlighter-rouge">/</code> also work with <a href="S2Fun.S2Fun.html">S2Fun</a> objects. Functions such as <a href="S2Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a>, <a href="S2Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a>, <a href="S2Fun.abs.html"><code class="language-plaintext highlighter-rouge">abs</code></a> and <a href="S2Fun.sqrt.html"><code class="language-plaintext highlighter-rouge">sqrt</code></a> likewise return spherical functions when used pointwise.</p>
+<p>For two functions, pointwise multiplication and division use <code class="language-plaintext highlighter-rouge">.*</code> and <code class="language-plaintext highlighter-rouge">./</code>. Plain <code class="language-plaintext highlighter-rouge">*</code> scales a function, while <code class="language-plaintext highlighter-rouge">sF / a</code> divides it by a scalar.</p>
 {% highlight matlab %}
+newMtexFigure('layout',[1,2]);
+
 % the maximum between two functions
-plot(max(15*sF1,sF2),'upper');
+plot(max(15*sF1,sF2),'upper')
+mtexTitle('Pointwise maximum')
 
 nextAxis
+
 % the minimum between two functions
-plot(min(15*sF1,sF2),'upper');
+plot(min(15*sF1,sF2),'upper')
+mtexTitle('Pointwise minimum')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunOperations_03.png" %}
 </center>
-<h2 id="5">Local Extrema</h2>
-<p>The above mentioned functions <a href="S2Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a> and <a href="S2Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> have very different use cases</p>
+<p>The pointwise maximum keeps whichever surface is higher at each direction. The pointwise minimum keeps the lower surface. The two plots therefore partition the same pair of functions in complementary ways.</p>
+<h2 id="7">Global and local extrema</h2>
+<p> <a href="S2Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a> and <a href="S2Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> select their behaviour from their inputs:</p>
 <div>
 <ul>
-<li>if two spherical functions are passed as arguments a spherical function defined as the pointwise min/max between these two functions is computed</li>
-<li>if a spherical function and a single number are passed as arguments a spherical function defined as the pointwise min/max between the function and the value is computed</li>
-<li>if only a single spherical function is provided the global maximum / minimum of the function is returned</li>
-<li>if additionally the option 'numLocal' is provided the certain number of local minima / maxima is computed</li>
+<li>Two spherical functions produce their pointwise minimum or maximum.</li>
+<li>A spherical function and one number produce its pointwise minimum or maximum with that value.</li>
+<li>One spherical function returns its global minimum or maximum.</li>
+<li>The additional <code class="language-plaintext highlighter-rouge">'numLocal'</code> option requests several local extrema.</li>
 </ul>
 </div>
+<p>As the <a href="S2FunConcept.html">Concept example</a> shows, <code class="language-plaintext highlighter-rouge">'numLocal'</code> is an upper limit rather than a promise that the requested number exists.</p>
 {% highlight matlab %}
-plot(15 * sF1 + sF2,'upper')
+newMtexFigure;
+plot(combined,'upper')
 
 % compute and mark the global maximum
-[maxvalue, maxnodes] = max(15 * sF1 + sF2);
-annotate(maxnodes)
+[maxValue,maxNodes] = max(combined);
+annotate(maxNodes)
 
-% compute and mark the local minimum
-[minvalue, minnodes] = min(15 * sF1 + sF2,'numLocal',2);
-annotate(minnodes)
+% compute and mark up to two local minima
+[minValue,minNodes] = min(combined,'numLocal',2);
+annotate(minNodes)
+
+fprintf('Global maximum: %.3f; local minima: %.3f and %.3f\n',...
+  maxValue,minValue(1),minValue(2))
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+Global maximum: 15.716; local minima: -7.204 and -7.204
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunOperations_04.png" %}
 </center>
-<h2 id="6">Integration</h2>
-<p>The surface integral of a spherical function can be computed by either <a href="S2Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> or <a href="S2Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a>. The difference between both commands is that <a href="S2Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> normalizes the integral of the identical function on the sphere to \(4 \pi\), the command <a href="S2Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> normalizes it to one. Compare</p>
+<p>The maximum marker sits on the highest feature of the combined function. The minimum markers identify separate basins instead of merely the lowest sampled pixels in the plot. The maximum is 15.716, while the two basins have nearly equal minima of -7.204.</p>
+<h2 id="9">Integration and norms</h2>
+<p> <a href="S2Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> returns the surface integral over the sphere. Thus the constant function one integrates to \(4\pi\). <a href="S2Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> divides that integral by \(4\pi\), so the constant function one has mean value one. These two normalisations therefore give the same result for any function.</p>
 {% highlight matlab %}
-mean(sF1)
+meanValue = mean(sF1);
+normalisedIntegral = sum(sF1) / (4*pi);
 
-sum(sF1) / ( 4 * pi )
+fprintf('Mean: %.4f; integral/(4*pi): %.4f\n',...
+  meanValue,normalisedIntegral)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.0064
-ans =
-    0.0064
+Mean: 0.0064; integral/(4*pi): 0.0064
 {% endhighlight %}
-<p>A practical application of integration is the computation of the \(L^2\)-norm which is defined for a spherical function \(f\) by</p>
-<p>\[ \| f \|_2 = \left(\int_{\mathrm{sphere}} \lvert f(\xi)\rvert^2 \,\mathrm d\xi\right)^{1/2} \]</p>
-<p>accordingly we can compute it by</p>
+<p>Both values are 0.0064. This agreement checks the \(4\pi\) normalisation rather than asserting that <code class="language-plaintext highlighter-rouge">sF1</code> itself is normalized to mean one.</p>
+<p>Integration also defines the \(L^2\) norm of a spherical function \(f\):</p>
+<p>\[\Vert f\Vert_2 = \left(\int_{\mathrm{sphere}} \vert f(\xi)\vert^2\,\mathrm d\xi\right)^{1/2}.\]</p>
+<p>It can be assembled directly from the surface integral.</p>
 {% highlight matlab %}
-sqrt(sum(sF1.^2))
+normFromIntegral = sqrt(sum(sF1.^2));
+{% endhighlight %}
+<p> <a href="S2Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a> computes the same quantity more efficiently.</p>
+{% highlight matlab %}
+directNorm = norm(sF1);
+fprintf('From integral: %.4f; norm: %.4f\n',...
+  normFromIntegral,directNorm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.4229
+From integral: 0.4229; norm: 0.4229
 {% endhighlight %}
-<p>or more efficiently by the command <a href="S2Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a>
-</p>
+<p>Both routes give 0.4229. The result is a single measure of the function's overall magnitude, not its maximum value.</p>
+<h2 id="13">Differentiation</h2>
+<p>The differential at one direction is the tangential gradient. MTEX returns it as a <a href="vector3d.vector3d.html">three-dimensional vector</a> with <a href="S2Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a>.</p>
 {% highlight matlab %}
-norm(sF1)
+gradientAtX = grad(sF1,xvector)
+gradientMagnitude = norm(gradientAtX)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.4229
-{% endhighlight %}
-<h2 id="9">Differentiation</h2>
-<p>The differential of a spherical function in a specific point is a gradient, i.e., a <a href="vector3d.vector3d.html">three-dimensional vector</a> which can be computed by the command <a href="S2Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a>
-</p>
-{% highlight matlab %}
-grad(sF1,xvector)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = vector3d (y↑→x)
+gradientAtX = vector3d (y↑→x)
   x        y        z
   0 -0.00023 -0.00119
+gradientMagnitude =
+    0.0012
 {% endhighlight %}
-<p>The gradients of a spherical function in all points form a spherical vector field and are returned by the function <a href="S2Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a> as a variable of type <a href="S2VectorFieldHarmonic.S2VectorFieldHarmonic.html">S2VectorFieldHarmonic</a>.</p>
+<p>At specimen X the gradient magnitude is 0.0012. Its vector lies in the plane tangent to the sphere at X, so its X component is zero.</p>
+<p>Gradients at all directions form a spherical vector field. Calling <a href="S2Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a> without an evaluation direction returns an <a href="S2VectorFieldHarmonic.S2VectorFieldHarmonic.html">S2VectorFieldHarmonic</a>.</p>
 {% highlight matlab %}
 % compute the gradient as a vector field
-G = grad(sF1)
+G = grad(sF1);
 
 % plot the gradient on top of the function
+newMtexFigure;
 plot(sF1,'upper')
 hold on
 plot(G)
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-G = S2VectorFieldHarmonic
- bandwidth: 129
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunOperations_05.png" %}
 </center>
-<p>We observe long arrows at the positions of big changes in intensity and almost invisible arrows in regions of constant intensity.</p>
-<h2 id="12">Rotating spherical functions</h2>
-<p>Rotating a spherical function works with the command <a href="S2Fun.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>
-</p>
+<p>Long arrows mark large changes in intensity. Arrows become almost invisible where the function is nearly constant.</p>
+<h2 id="17">Rotate a function</h2>
+<p> <a href="S2Fun.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> moves a spherical function by a specified rotation.</p>
 {% highlight matlab %}
 % define a rotation
-rot = rotation.byAxisAngle(yvector,-30*degree)
+rot = rotation.byAxisAngle(yvector,-30*degree);
 
 % plot the rotated spherical function
-plot(rotate(15 * sF1 + sF2,rot),'upper')
+newMtexFigure;
+plot(rotate(combined,rot),'upper')
 {% endhighlight %}
-
-{% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-   270   30   90
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunOperations_06.png" %}
 </center>
-<p>A special case of rotation is symmetrising it with respect to some symmetry. The following example symmetrises our smiley with respect to a two fold axis in \(z\)-direction</p>
+<p>The entire pattern, including its maxima and minima, moves together by \(-30\) degrees about the \(y\) axis.</p>
+<h2 id="19">Symmetrise a function</h2>
+<p>A special case of rotation is symmetrising it with respect to some symmetry. The next example symmetrises the smiley with respect to a twofold axis in the \(z\) direction.</p>
 {% highlight matlab %}
 % define the symmetry
 cs = crystalSymmetry('112');
 
 % compute the symmetrised function
-sFs = symmetrise(sF1, cs)
+sFs = symmetrise(sF1,cs)
 
 % plot it
+newMtexFigure;
 plot(sFs,'upper','complete')
 {% endhighlight %}
 
@@ -198,10 +212,21 @@ plot(sFs,'upper','complete')
 sFs = S2FunHarmonic (y↑→x)
   bandwidth: 128
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunOperations_07.png" %}
 </center>
-<p>The resulting function is of type <code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code> and knows about its symmetry.</p>
+<p>The result is an <a href="S2FunHarmonicSym.S2FunHarmonicSym.html">S2FunHarmonicSym</a> and carries its symmetry. The complete plot shows that the original pattern has been repeated by the twofold symmetry operation.</p>
+{% highlight matlab %}
+close all
+{% endhighlight %}
+<h2 id="21">References</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher and H. Schaeben, <a href="https://doi.org/10.4028/www.scientific.net/SSP.160.63">Texture Analysis with MTEX - Free and Open Source Software Toolbox</a>, <i>Solid State Phenomena</i> 160, 63--68, 2010. This article connects MTEX spherical calculations to pole figures and orientation distributions.</li>
+</ul>
+</div>
+<h2 id="22">Next</h2>
+<p>Continue with <a href="S2FunPlotting.html">Plotting</a> to choose a spherical projection, plot style, hemisphere and colour scale for these functions.</p>
 </div>
 </body>
 </html>

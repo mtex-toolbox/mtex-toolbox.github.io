@@ -1,5 +1,5 @@
 ---
-title: "Configuration"
+title: 'Configuration'
 
 sidebar: documentation_sidebar
 permalink: GeneralConceptsConfiguration.html
@@ -22,35 +22,116 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>An <a href="GeneralConceptsOptions.html">option</a> changes one command. A preference supplies a default for the whole MTEX session. The central file that sets preferences is <code class="language-plaintext highlighter-rouge">mtex_settings.m</code>.</p>
+<p>The diagram separates the three scopes. An option is local to one command, while <code class="language-plaintext highlighter-rouge">setMTEXpref</code> changes the current session. Editing <code class="language-plaintext highlighter-rouge">mtex_settings.m</code> makes that setting take effect when MTEX starts in future sessions.</p>
+<p>
+<center>
+{% include inline_image.html file="configuration-scope.svg" %}
+</center>
+</p>
 <!--/introduction-->
-<p>MTEX is highly customizable. On a local level this can be done by passing <a href="GeneralConceptsOptions">options</a> to MTEX functions. On a global level this is achieved by editing the file <a href="matlab:edit('mtex_settings.m')">mtex_settings.m</a> via the command</p>
-{% highlight matlab %}
-edit mtex_settings
-{% endhighlight %}
-<p>There the following behaviour can be customized</p>
-<div>
-<ul>
-<li>the orientation of the x and y spatial coordinate axes</li>
-<li>the alignment of the a and b crystallographic unit cell axes</li>
-<li>default font size</li>
-<li>default figure size</li>
-<li>show or hide coordinates / micronbar on EBSD maps</li>
-<li>default pole figure annotations</li>
-<li>default Euler angle convention</li>
-<li>default color map</li>
-<li>file extensions associated with EBSD and pole figure files</li>
-<li>path to CIF (Crystallographic Information Framework) and other files</li>
-<li>the default maximum iteration depth of the function <a href="PoleFigure.calcODF.html">calcODF</a>
-</li>
-<li>the amount of available memory</li>
-</ul>
-</div>
-<p>and many more.</p>
-<p>You can use</p>
+<h2 id="1">Inspect the current preferences</h2>
+<p>Pass a preference name to <code class="language-plaintext highlighter-rouge">getMTEXpref</code> to read its current value. With no input, the function returns a structure containing all current preferences. The available fields can depend on the installation.</p>
 {% highlight matlab %}
 getMTEXpref
 {% endhighlight %}
-<p>to display all mtex_settings.</p>
+
+{% highlight plaintext %}
+ans = 
+  struct with fields:
+
+                   mtexPath: '/home/hielscher/mtex/master'
+                   DataPath: '/home/hielscher/mtex/master/data'
+                    version: 'mtex-7.0.0'
+         generatingHelpMode: 1
+                   FontSize: 13
+           innerPlotSpacing: 19.5000
+                 UTF8Output: 1
+                    figSize: 0.5000
+                 screenSize: [1920 1200]
+        sphericalAxisHeight: 370
+              showMicronBar: 'on'
+            showCoordinates: 'off'
+               showRefFrame: 'off'
+              pfAnnotations: [function_handle]
+           outerPlotSpacing: 10
+              voronoiMethod: 'jcvoronoi'
+                 markerSize: 10.5000
+            annotationStyle: {1×8 cell}
+       EulerAngleConvention: 'Bunge'
+       poleFigureExtensions: {1×30 cell}
+             EBSDExtensions: [".osc"    ".ctf"    …    ] (1×13 string)
+                     colors: [24×3 double]
+                 SaveToFile: 0
+                    CIFPath: '/home/hielscher/mtex/master/data/cif'
+                   EBSDPath: '/home/hielscher/mtex/master/data/EBSD'
+             PoleFigurePath: '/home/hielscher/mtex/master/data/PoleFigure'
+                    ODFPath: '/home/hielscher/mtex/master/data/ODF'
+                 TensorPath: '/home/hielscher/mtex/master/data/tensor'
+                ExamplePath: '/home/hielscher/mtex/master/../examples'
+           ImportWizardPath: 'workpath'
+            defaultColorMap: [100×3 double]
+               colorPalette: 'CSS'
+            PhaseColorOrder: {1×17 cell}
+    stopOnSymmetryMissmatch: 1
+          mtexMethodsAdvise: 1
+                      mosek: 0
+                 insidepoly: 1
+            gridifyOnImport: 1
+            textInterpreter: 'LaTeX'
+                     memory: 512000
+                FFTAccuracy: 0.0100
+             maxS1Bandwidth: 1024
+             maxS2Bandwidth: 512
+            maxSO3Bandwidth: 64
+                 degreeChar: '°'
+                  arrowChar: '→'
+                    axisBox: [1690 740]
+                   axisArea: 875000
+{% endhighlight %}
+<h2 id="2">Change one preference temporarily</h2>
+<p>For example, <code class="language-plaintext highlighter-rouge">getMTEXpref('FontSize')</code> reads the current default font size, while <code class="language-plaintext highlighter-rouge">setMTEXpref('FontSize',14)</code> would change it to 14 for this session. Documentation scripts should not change global figure preferences, so the executable example instead uses the preference for UTF-8 Command Window output.</p>
+<p>The sequence saves the current value, changes it, reads the changed value, and restores the original. Keeping the restoration in the same section makes the example safe to run repeatedly.</p>
+{% highlight matlab %}
+oldUTF8Output = getMTEXpref('UTF8Output');
+setMTEXpref('UTF8Output',false);
+getMTEXpref('UTF8Output')
+setMTEXpref('UTF8Output',oldUTF8Output);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+  logical
+   0
+{% endhighlight %}
+<h2 id="3">Make a preference persistent</h2>
+<p>Use the command <code class="language-plaintext highlighter-rouge">edit mtex_settings</code> to open the settings file. MTEX runs this file at startup, so an active setting there applies to every later session. The file groups related settings and documents the accepted values.</p>
+<p>Settings in <code class="language-plaintext highlighter-rouge">mtex_settings.m</code> include:</p>
+<div>
+<ul>
+<li>the font size, figure size, and marker size of every plot;</li>
+<li>whether an EBSD map shows a micron bar, coordinates, or a reference-frame indicator;</li>
+<li>the annotations drawn on spherical plots;</li>
+<li>the default colormap and the color palette used for phases;</li>
+<li>the Euler-angle convention, which is Bunge by default;</li>
+<li>which file extensions are offered for EBSD and pole figure files, and the initial location used by the import wizard;</li>
+<li>the paths to bundled CIF files, data sets, and examples;</li>
+<li>whether an imported map is <a href="EBSDGrid.html">gridified</a> on import;</li>
+<li>whether a symmetry mismatch stops with an error or issues only a warning;</li>
+<li>which optional third-party solvers MTEX uses.</li>
+</ul>
+</div>
+<p>The file contains additional preferences beyond this summary.</p>
+<h2 id="4">Keep scripts reproducible</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">setMTEXpref</code> changes only the running session. A permanent change must be placed in <code class="language-plaintext highlighter-rouge">mtex_settings.m</code>, but then the same <a href="MTEXScripts.html">MTEX script</a> can behave differently on another computer. A script shared or published for others should therefore pass important settings as command options where possible instead of assuming a local configuration.</p>
+<h2 id="5">Plot alignment is not an ordinary preference</h2>
+<p>The alignment of plots is no longer an ordinary preference. It belongs to the <a href="referenceFrame.referenceFrame.html">reference frame</a> in which the data is expressed. A reference frame identifies the coordinate system and basis of the data; it is distinct from the symmetry attached to that frame.</p>
+<p>The frame supplies a plotting convention that determines how its axes are laid out on screen. See <a href="AxesAlignment.html">On-Screen Coordinate System Alignment</a> to set that convention explicitly instead of relying on a legacy axis-direction preference.</p>
+<h2 id="6">References</h2>
+<p>This page documents MTEX configuration behavior and does not rely on an external method reference.</p>
+<h2 id="7">Next</h2>
+<p>Continue with <a href="VectorDefinition.html">Vectors</a> to create the basic geometric objects used for directions, axes, and positions throughout MTEX.</p>
 </div>
 </body>
 </html>

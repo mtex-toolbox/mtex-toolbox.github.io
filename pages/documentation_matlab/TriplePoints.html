@@ -1,5 +1,5 @@
 ---
-title: "Triple points"
+title: 'Triple Points'
 
 sidebar: documentation_sidebar
 permalink: TriplePoints.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Triple points</title>
+<title>Triple Points</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_TriplePoints.m">
 </head>
@@ -23,34 +23,51 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Triple points are automatically computed during grain reconstruction. They are accessible similarly to <a href="GrainBoundaries.html">grain boundaries</a> as the property <a href="triplePointList.triplePointList.html">triplePoints</a> of the grain list. When analyzing triple points it is a good idea to use the option <a href="QuadruplePoints.html"><code class="language-plaintext highlighter-rouge">removeQuadruplePoints</code></a> in <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> to convert all quadruple points into triple points.</p>
+<p>A <b>triple point</b> is a junction where exactly three grain boundary segments meet and separate three distinct real grains. It is therefore a strict subset of the junctions in a boundary network. An endpoint at the scan rim is a junction, for example, but it is not a triple point.</p>
+<p>MTEX computes triple points automatically during <a href="GrainReconstruction.html">grain reconstruction</a>. They are available from a grain list through <code class="language-plaintext highlighter-rouge">grains.triplePoints</code>, just as the boundary segments are available through <a href="GrainBoundaries.html"><code class="language-plaintext highlighter-rouge">grains.boundary</code></a>. The result is a <a href="triplePointList.triplePointList.html"><code class="language-plaintext highlighter-rouge">triplePointList</code></a>.</p>
+<p>A square measurement grid can also produce vertices where four boundary segments meet. When analysing triple points, it is a good idea to pass <code class="language-plaintext highlighter-rouge">'removeQuadruplePoints'</code> to <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a>. This converts each ambiguous quadruple point into two triple points. <a href="QuadruplePoints.html">Quadruple Points</a> explains the resulting topology.</p>
+<p>This page assumes that the map has already been divided into grains as in <a href="GrainReconstruction.html">Grain Reconstruction</a>. <a href="BoundarySelect.html">Select Grain Boundaries</a> introduces boundary-list indexing, and <a href="BoundaryMisorientations.html">Boundary Misorientations</a> explains the disorientations used below.</p>
 {% highlight matlab %}
-% import some EBSD data set
+close all;
+
+% load the example map in its specimen plotting frame
 plottingConvention.default('y↑→x');
 mtexdata small silent
 
-% compute grains
+% reconstruct the grains and resolve quadruple points
 grains = calcGrains(ebsd,'removeQuadruplePoints','alpha',5);
 
-% smooth the grains a bit
+% smooth the pixel staircase while keeping junctions fixed
 grains = smoothBoundary(grains,2);
 
-% plot the grains
+% draw the grains and overlay all triple points
 plot(grains);
-
-% extract all triple points
-tP = grains.triplePoints;
-
-% and plot the on top
+tP = grains.triplePoints
 hold on
 plot(tP,'color','b','linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+tP = triplePointList (y↑→x)
+ 
+ points   mineral 1   mineral 2   mineral 3
+     14  Forsterite  Forsterite  Forsterite
+      7  Forsterite  Forsterite   Enstatite
+      4  Forsterite   Enstatite   Enstatite
+      9  Forsterite  Forsterite    Diopside
+     18  Forsterite   Enstatite    Diopside
+      4  Forsterite    Diopside    Diopside
+      2   Enstatite   Enstatite    Diopside
+      1   Enstatite    Diopside    Diopside
+     11    Diopside    Diopside    Diopside
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="TriplePoints_01.png" %}
 </center>
-<h2 id="2">Index triple points by phase</h2>
-<p>You may index triple points by the adjacent phases. The following command gives you all triple points with at least one phase being Forsterite</p>
+<p>The blue circles lie only where three real grains meet. They do not mark loose ends at the map rim or every crossing in the boundary network.</p>
+<h2 id="3">Select by phase</h2>
+<p>Phase names select triple points by the phases of their three adjacent grains. Repeating a name requests that multiplicity; the names do not assign an order to the three sides. One name therefore means at least one adjacent forsterite grain.</p>
 {% highlight matlab %}
 tP('Forsterite')
 {% endhighlight %}
@@ -66,7 +83,7 @@ ans = triplePointList (y↑→x)
      18  Forsterite   Enstatite    Diopside
       4  Forsterite    Diopside    Diopside
 {% endhighlight %}
-<p>The following command gives you all triple points with at least two phases being Forsterite</p>
+<p>Repeating the name selects points with at least two adjacent forsterite grains.</p>
 {% highlight matlab %}
 tP('Forsterite','Forsterite')
 {% endhighlight %}
@@ -79,44 +96,46 @@ ans = triplePointList (y↑→x)
       7  Forsterite  Forsterite   Enstatite
       9  Forsterite  Forsterite    Diopside
 {% endhighlight %}
-<p>Finally, we may mark all inner Diopside triple points</p>
+<p>Three repeated names restrict the selection to inner diopside triple points, where all three adjacent grains are diopside.</p>
 {% highlight matlab %}
 hold on
-plot(tP('Diopside','Diopside','Diopside'),'displayName','Di-Di-Di','color','darkred','linewidth',2)
+plot(tP('Diopside','Diopside','Diopside'),...
+  'displayName','Di-Di-Di','color','darkred','linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TriplePoints_02.png" %}
 </center>
-<h2 id="5">Index triple points by grains</h2>
-<p>Since, triple points are associated to grains we may single out triple points that belong to a specific grain or some subset of grains.</p>
+<p>The dark-red circles are a subset of the blue points. Their locations show where the diopside boundary network branches entirely within that phase.</p>
+<h2 id="7">Select by grain</h2>
+<p>A triple point also belongs to each of its three adjacent grains. A grain selection therefore returns the points on the boundary of that grain.</p>
 {% highlight matlab %}
-% find the index of the largest grain
-[~,id] = max(grains.area);
+% find the list position of the largest grain
+[~,largestIndex] = max(grains.area);
 
-% the triple points that belong to the largest grain
-tP = grains(id).triplePoints;
-
-% plot these triple points
-plot(grains(id),'FaceColor',[0.2 0.8 0.8],'displayName','largest grains');
+% extract and plot the triple points of that grain
+tP_largest = grains(largestIndex).triplePoints;
+plot(grains(largestIndex),'FaceColor',[0.2 0.8 0.8],...
+  'displayName','largest grain');
 hold on
 plot(grains.boundary)
-plot(tP,'color','r','linewidth',2)
+plot(tP_largest,'color','r','linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TriplePoints_03.png" %}
 </center>
-<h2 id="6">Index triple points by grain boundary</h2>
-<p>Triple points are not only a property of grains but also of grain boundaries. Thus we may ask for all triple points that belong to Forsterite - Forsterite boundaries with misorientation angle larger then 60 degree</p>
+<p>The red circles occur only where the cyan grain meets two other grains. The black network supplies the surrounding context that a grain outline alone would hide.</p>
+<h2 id="9">Select through grain boundaries</h2>
+<p>Triple points are also stored with a <a href="grainBoundary.grainBoundary.html">grainBoundary</a> selection. Here the eligible segments are first restricted to forsterite--forsterite boundaries, so every disorientation has one consistent phase pair.</p>
 {% highlight matlab %}
-% all Forsterite - Forsterite boundary segments
+% all forsterite--forsterite boundary segments
 gB_Fo = grains.boundary('Forsterite','Forsterite')
 
-% Fo - Fo segments with misorientation angle larger 60 degree
-gB_large = gB_Fo(gB_Fo.misorientation.angle>60*degree)
+% retain segments whose disorientation angle is larger than 60 degrees
+gB_large = gB_Fo(gB_Fo.misorientation.angle > 60*degree)
 
-% plot the triple points
+% plot those segments and every triple point incident to at least one of them
 plot(grains)
 hold on
 plot(gB_large,'linewidth',2,'linecolor','w')
@@ -135,28 +154,31 @@ gB_large = grainBoundary (y↑→x)
  Segments   length   mineral 1   mineral 2
        49  2228 µm  Forsterite  Forsterite
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TriplePoints_04.png" %}
 </center>
-<h2 id="7">Boundary segments from triple points</h2>
-<p>On the other hand we may also ask for the boundary segments that build up a triple point. These are stored as the property boundaryId for each triple points.</p>
+<p>White marks the selected high-angle segments. A magenta circle means that at least one selected segment reaches that point; it does not mean that all three incident segments exceed 60 degrees.</p>
+<h2 id="11">Boundary segments at a triple point</h2>
+<p>The <code class="language-plaintext highlighter-rouge">boundaryId</code> property has one row per triple point and three columns for its incident segments. These values index the complete boundary list from which the triple points came. Here all three neighbouring grains are first restricted to forsterite.</p>
 {% highlight matlab %}
-% lets take Forsterite triple points
-tP = grains.triplePoints('Fo','Fo','Fo');
+% select forsterite--forsterite--forsterite triple points
+tP_Fo = grains.triplePoints('Fo','Fo','Fo');
 
-% the boundary segments which form the triple points
-gB = grains.boundary(tP.boundaryId);
+% extract the three incident boundary segments for every selected point
+gB = grains.boundary(tP_Fo.boundaryId);
 
-% plot the triple point boundary segments
+% plot the incident segments
 plot(grains)
 hold on
 plot(gB,'lineColor','w','linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TriplePoints_05.png" %}
 </center>
-<p>Once we have extracted the boundary segments adjacent to a triple point we may also extract the corresponding misorientations. The following command gives a n &times; 3 list of misorientations where n is the number of triple points</p>
+<p>The white three-armed groups are the local boundary neighbourhoods of the selected points. Use <code class="language-plaintext highlighter-rouge">tP_Fo.boundaryId(:)</code> when a single list of segments is wanted instead of this point-by-segment arrangement.</p>
+<h2 id="13">Disorientations around the point</h2>
+<p>The same indexing extracts the disorientation across each incident segment. The displayed object has size \(n \times 3\), where \(n\) is the number of selected triple points.</p>
 {% highlight matlab %}
 mori = gB.misorientation
 {% endhighlight %}
@@ -166,38 +188,53 @@ mori = misorientation (Forsterite → Forsterite)
   size: 14 × 3
   antipodal: true
 {% endhighlight %}
-<p>Hence, we can compute for each triple point the sum of misorientation angles by</p>
+<p>A simple scalar summary is the sum of the three disorientation angles at each point.</p>
 {% highlight matlab %}
 sumMisAngle = sum(mori.angle,2);
-{% endhighlight %}
-<p>and my visualize it by</p>
-{% highlight matlab %}
+
 plot(grains,'figSize','large')
 hold on
-plot(tP,sumMisAngle ./ degree,'markerEdgeColor','w','MarkerSize',8)
+plot(tP_Fo,sumMisAngle ./ degree,...
+  'markerEdgeColor','w','MarkerSize',8)
 hold off
 mtexColorMap(blue2redColorMap)
 setColorRange([80,180])
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TriplePoints_06.png" %}
 </center>
-<h2 id="11">Angles at triple points</h2>
-<p>The angles at the triplepoints can be accessed by <code class="language-plaintext highlighter-rouge">tP.angles</code>. This is a 3 column matrix with one column for each of the three angles enclosed by the boundary segments of a triple point. Obviously, the sum of each row is always <code class="language-plaintext highlighter-rouge">2*pi</code>. More interestingly is the difference between the largest and the smallest angle. Lets plot this for our test data set.</p>
+<p>Colour records that angle sum in degrees. The fixed colour range saturates any sum above 180 degrees at its upper colour. This scalar is descriptive, not a crystallographic closure condition. The underlying ordered rotations close around the three grains, but their three minimum disorientation angles do not generally add to a fixed value.</p>
+<h2 id="16">Section angles at triple points</h2>
+<p>The property <code class="language-plaintext highlighter-rouge">tP.angles</code> returns the three angles enclosed by the incident boundary segments. It is an \(n \times 3\) matrix, and each row sums to \(2\pi\). The spread between the largest and smallest angle measures how unequal the three arms appear in this two-dimensional section.</p>
 {% highlight matlab %}
+tP = grains.triplePoints;
+angleSpread = (max(tP.angles,[],2) - min(tP.angles,[],2)) ./ degree;
+
 plot(grains,'figSize','large')
 hold on
-tP = grains.triplePoints;
-plot(tP,(max(tP.angles,[],2)-min(tP.angles,[],2))./degree,'markerEdgeColor','w','MarkerSize',8)
+plot(tP,angleSpread,'markerEdgeColor','w','MarkerSize',8)
 hold off
 mtexColorMap LaboTeX
 setColorRange([0,180])
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TriplePoints_07.png" %}
 </center>
+<p>Pale points have three more nearly equal section angles, while dark-red points have a larger angular spread. These are angles between smoothed traces in the section, not the full dihedral angles of three boundary planes in three dimensions.</p>
+<p>In a section perpendicular to the three-dimensional junction line, equal, orientation-independent boundary energies at local equilibrium would give three 120 degree angles. Unequal energies, anisotropy, drag, non-equilibrium microstructure, sectioning, and segmentation can all move the observed values away from that ideal. The angle spread must therefore not be read directly as a boundary-energy measurement.</p>
+<h2 id="18">Further reading</h2>
+<div>
+<ul>
+<li>C. Herring, <a href="https://doi.org/10.1007/978-3-642-59938-5_2">Surface Tension as a Motivation for Sintering</a>, in <i>The Physics of Powder Metallurgy</i> (1951), 143--179, develops the capillary balance at interface junctions.</li>
+<li>G. Gottstein and L. S. Shvindlerman, <a href="https://www.routledge.com/9780429147388">Grain Boundary Migration in Metals</a>, second edition, CRC Press, 2010, treats triple-junction mobility and drag.</li>
+<li>O. K. Johnson and C. A. Schuh, <a href="https://doi.org/10.1016/j.jmps.2014.04.005">The triple junction hull: Tools for grain boundary network design</a>, <i>Journal of the Mechanics and Physics of Solids</i> 69 (2014), 2--13, connects local junction states to network topology and states the crystallographic closure constraint.</li>
+<li>G. S. Rohrer et al., <a href="https://doi.org/10.1179/026708309X12468927349370">Deriving grain boundary character distributions and relative grain boundary energies from three-dimensional EBSD data</a>, <i>Materials Science and Technology</i> 26 (2010), 661--669, shows why three-dimensional geometry is needed for boundary-plane and energy analysis.</li>
+</ul>
+</div>
+<h2 id="19">Next</h2>
+<p>Continue with <a href="QuadruplePoints.html">Quadruple Points</a> for the grid ambiguity resolved at reconstruction. <a href="CSLBoundaries.html">CSL Boundaries</a> classifies triple points by the character of their incident boundaries. <a href="GrainMerge.html">Merging Grains</a> then shows how selected boundaries alter the grains and their junction network. For full boundary-plane geometry, continue to <a href="EBSD3Analysis.html">3D EBSD</a>. Triple points also supply local orientation evidence in <a href="TriplePointBasedReconstruction.html">Triple Point Based Reconstruction</a> of parent grains.</p>
 </div>
 </body>
 </html>

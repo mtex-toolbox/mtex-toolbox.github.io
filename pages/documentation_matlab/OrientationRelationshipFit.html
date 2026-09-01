@@ -1,5 +1,5 @@
 ---
-title: "Fitting the Orientation Relationship"
+title: 'Fitting the Orientation Relationship'
 
 sidebar: documentation_sidebar
 permalink: OrientationRelationshipFit.html
@@ -22,12 +22,14 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>An orientation relationship (OR) is the rotation that relates the parent crystal frame to the child crystal frame during a phase transition. <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> estimates this rotation when only the child phase remains in an EBSD map.</p>
+<p>The fit uses misorientations between neighbouring child grains. It assumes that most retained pairs are variants from a common parent grain. This page first fits and checks an OR, then explains the objective and the convergence of the algorithm. The full derivation and implementation decisions are recorded in <code class="language-plaintext highlighter-rouge">docs/adr/0005-parent-to-child-fit.md</code>.</p>
 <!--/introduction-->
-<p>The command <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> estimates a parent to child orientation relationship from the misorientations between neighbouring child grains. This page explains what it computes, why the iteration converges, and what the damping factor of the classical algorithm actually does. The complete derivation is in <code class="language-plaintext highlighter-rouge">docs/adr/0005-parent-to-child-fit.md</code>.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>Throughout we use the martensite sample data and the child to child misorientations between neighbouring grains.</p>
+<h2 id="2">Prepare the child-grain pairs</h2>
+<p>Load the martensite map and segment its bcc measurements into grains. A grain is a phase-homogeneous, spatially connected region of EBSD pixels.</p>
 {% highlight matlab %}
 mtexdata martensite
 
@@ -36,13 +38,6 @@ mtexdata martensite
 job = parentGrainReconstructor(ebsd,grains);
 csParent = job.csParent;
 csChild = job.csChild;
-
-grainPairs = neighbors(job.grains(csChild));
-oriChild = job.grains(grainPairs).meanOrientation;
-mori = inv(oriChild(:,1)) .* oriChild(:,2);
-mori(mori.angle < 5*degree) = [];
-
-p2c = orientation.KurdjumovSachs(csParent,csChild)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -54,27 +49,89 @@ ebsd = EBSDsquare (y↑→x, row↑→col)
  
  Properties: bands, bc, bs, error, mad, reliabilityindex, oldId
  Scan unit : um
- X x Y x Z : [0 → 353] x [0 → 242] x [0 → 0]
+ X × Y × Z : [0 → 353] × [0 → 242] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :486 x 707
- 
- 
-p2c = misorientation (Iron fcc → Iron bcc (old))
+ Square grid  :486 × 707
+{% endhighlight %}
+<p> <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">neighbors</code></a> returns pairs of child grains that share a boundary. The mean orientations of each pair give one child-to-child misorientation.</p>
+{% highlight matlab %}
+grainPairs = neighbors(job.grains(csChild));
+oriChild = job.grains(grainPairs).meanOrientation;
+mori = inv(oriChild(:,1)) .* oriChild(:,2);
+{% endhighlight %}
+<p>Pairs below 5 degrees are usually subgrain boundaries or the same variant. They cannot constrain the OR and are removed before fitting.</p>
+{% highlight matlab %}
+mori(mori.angle < 5*degree) = [];
+{% endhighlight %}
+<h2 id="5">Fit from all possible starting regions</h2>
+<p>An ideal Kurdjumov-Sachs (KS) relationship is a useful initial candidate. By default, <code class="language-plaintext highlighter-rouge">calcParent2Child</code> also scans the complete fundamental region. It refines the best candidates and returns the one with the lowest misfit.</p>
+{% highlight matlab %}
+p2cKS = orientation.KurdjumovSachs(csParent,csChild)
+[p2cGlobal,fitGlobal] = calcParent2Child(mori,p2cKS);
+p2cGlobal
+{% endhighlight %}
+
+{% highlight plaintext %}
+p2cKS = misorientation (Iron fcc → Iron bcc (old))
  
  (111) || (011)   [101̅] || [111̅]
+ 
+ 
+p2cGlobal = misorientation (Iron fcc → Iron bcc (old))
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  96.5525 45.6916 272.976
 {% endhighlight %}
-<h2 id="3">The model: child to child misorientations are a conjugated point group</h2>
-<p>A parent grain of orientation <code class="language-plaintext highlighter-rouge">oriParent</code> may transform into any of the variants <code class="language-plaintext highlighter-rouge">p2c * S</code>, where <code class="language-plaintext highlighter-rouge">S</code> runs through the rotations of the parent point group. Two child grains grown from the same parent, in variants <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">j</code>, are therefore related by</p>
+<h2 id="6">Inspect the residuals</h2>
+<p>The second output contains one residual for every input misorientation. A residual is the disorientation to the closest predicted child-to-child variant, excluding the identity variant.</p>
 {% highlight matlab %}
-p2cVariants = reshape(p2c.variants,[],1);
-c2c = p2c * inv(p2cVariants)
+close all
+histogram(fitGlobal./degree)
+hold on
+xline(quantile(fitGlobal,0.9)./degree,'--k','90% cutoff')
+hold off
+xlabel('disorientation to the closest variant in degrees')
+ylabel('number of neighbouring grain pairs')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationRelationshipFit_01.png" %}
+</center>
+<p>Notice the main population at small residuals and the longer tail. Not every neighbouring pair belongs to one former parent grain. The default fit therefore uses the best 90 percent rather than allowing the tail to pull an ordinary mean away from the main population.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'quantile'</code> option changes that retained fraction. The <code class="language-plaintext highlighter-rouge">'threshold'</code> option caps the loss of larger residuals. Use a threshold in degrees only when the experiment supplies a defensible angular tolerance; otherwise the default quantile needs no new scale.</p>
+<h2 id="8">Compare local and global fits</h2>
+<p>The <code class="language-plaintext highlighter-rouge">'local'</code> option skips the scan and starts the fixed-point iteration at the supplied relationship. It is useful when the starting OR is already trusted.</p>
+{% highlight matlab %}
+p2cLocal = calcParent2Child(mori,p2cKS,'local')
+localToGlobal = angle(p2cLocal,p2cGlobal)./degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+p2cLocal = misorientation (Iron fcc → Iron bcc (old))
+ 
+  Bunge Euler angles in degree
+    phi1     Phi    phi2
+  348.14 10.2947 55.8811
+ 
+localToGlobal =
+    1.4594
+{% endhighlight %}
+<p>The printed value is the angular separation of the two fitted ORs. The global solution is a good degree away from the KS-started local result and gives the lower objective value. That difference is not negligible when habit planes are computed from the fitted relationship.</p>
+<p>Nishiyama-Wassermann, Pitsch, and Greninger-Trojano starting relationships all reach the better basin on this map; Kurdjumov-Sachs does not. The complete scan is therefore the default. The supplied starting OR remains one candidate, so scanning cannot discard a better local result. It costs about two and a half times one local fit on this data.</p>
+<p>The scan is deterministic. Its subsamples stride through an angle-sorted list instead of drawing at random, so repeated fits to the same data return the same result. A local fit reaches a stationary point rather than a guaranteed best fit, so its starting relationship can decide the answer. Use <code class="language-plaintext highlighter-rouge">'local'</code> when refining a trusted OR or fitting many small data sets in a loop, where the fixed cost of the scan dominates.</p>
+<h2 id="10">The model: child variants determine the observed misorientations</h2>
+<p>A <a href="ParentChildVariants.html">variant</a> is one crystallographically equivalent child orientation predicted from a single parent orientation by a known OR. For a parent orientation <code class="language-plaintext highlighter-rouge">oriParent</code>, the possible child variants have the form <code class="language-plaintext highlighter-rouge">p2c * S</code>, where <code class="language-plaintext highlighter-rouge">S</code> runs through the parent point group.</p>
+<p>Two child grains from one parent may select different variants. Their possible child-to-child misorientations are the following set.</p>
+{% highlight matlab %}
+p2cVariants = reshape(p2cGlobal.variants,[],1);
+c2c = p2cGlobal * inv(p2cVariants)
 {% endhighlight %}
 
 {% highlight plaintext %}
 c2c = misorientation (Iron bcc (old) → Iron bcc (old))
-  size: 1 x 24
+  size: 1 × 24
 {% endhighlight %}
-<p>Writing this out, the misorientation between two child variants is <code class="language-plaintext highlighter-rouge">p2c * inv(S) * inv(p2c)</code> &mdash; the parent point group <b>conjugated by</b> <code class="language-plaintext highlighter-rouge">p2c</code>. That single formula is the whole model, and it has a consequence which is easy to miss: conjugation does not change a rotation angle. The child to child variants always carry the angles of the parent point group,</p>
+<p>In symbols, each member is <code class="language-plaintext highlighter-rouge">p2c * inv(S) * inv(p2c)</code>. This is the parent point group conjugated by <code class="language-plaintext highlighter-rouge">p2c</code>. Conjugation leaves the rotation angles unchanged. Without child symmetry reduction, a cubic parent supplies only 0, 90, 120, and 180 degree rotations.</p>
 {% highlight matlab %}
 unique(round(angle(c2c,'noSymmetry')./degree))
 {% endhighlight %}
@@ -83,7 +140,7 @@ unique(round(angle(c2c,'noSymmetry')./degree))
 ans =
      0    90   120   180
 {% endhighlight %}
-<p>which for a cubic parent are 0, 90, 120 and 180 degree. Only their <b>axes</b> depend on <code class="language-plaintext highlighter-rouge">p2c</code>. The familiar Kurdjumov-Sachs angles appear only after the child symmetry has been used to reduce each misorientation to its disorientation,</p>
+<p>Only the rotation axes depend on the OR. Child symmetry reduces each misorientation to its disorientation, which spreads those four angles into the longer list below. The list belongs to the fitted relationship, not to ideal KS, whose disorientation angles are 10.53, 14.88, 20.61, 21.06, 47.11, 49.47, 50.51, 51.73, 57.21, and 60 degrees.</p>
 {% highlight matlab %}
 unique(round(angle(c2c)./degree,2)).'
 {% endhighlight %}
@@ -91,36 +148,48 @@ unique(round(angle(c2c)./degree,2)).'
 {% highlight plaintext %}
 ans =
          0
-   10.5300
-   14.8800
-   20.6100
-   21.0600
-   47.1100
-   49.4700
-   50.5100
-   51.7300
-   57.2100
-   60.0000
+    4.4500
+    9.4200
+   12.5600
+   15.2400
+   17.3600
+   17.7800
+   50.9800
+   51.4600
+   52.1200
+   52.5100
+   52.8500
+   55.8400
+   56.5400
+   57.0200
+   59.6700
+   60.3100
 {% endhighlight %}
-<p>Fitting an orientation relationship is thus a problem about axes: rotate the parent's symmetry axes until the resulting variants line up with the observed misorientations.</p>
-<p>Note the first entry, zero. The variant <code class="language-plaintext highlighter-rouge">S = identity</code> gives <code class="language-plaintext highlighter-rouge">c2c = identity</code> for <b>every</b> <code class="language-plaintext highlighter-rouge">p2c</code>, so it carries no information about the orientation relationship at all. <code class="language-plaintext highlighter-rouge">calcParent2Child</code> excludes it.</p>
-<h2 id="7">The objective function</h2>
-<p>For a candidate <code class="language-plaintext highlighter-rouge">p2c</code> each observed misorientation gets the residual</p>
+<h2 id="13">See the axis fit</h2>
+<p>The coloured density shows axes of the measured child-to-child misorientations. Black squares mark axes predicted by the fitted OR.</p>
 {% highlight matlab %}
-omega = min(angle_outer(mori,c2c(angle(c2c) > 1e-3*degree)),[],2);
+plot(mori.axis,'contourf','fundamentalRegion','halfwidth',5*degree)
+hold on
+isInformative = angle(c2c) > 1e-3*degree;
+plot(c2c(isInformative).axis,'Marker','s','MarkerFaceColor','none',...
+  'MarkerEdgeColor','k','MarkerSize',8)
+hold off
 {% endhighlight %}
-<p>i.e. the disorientation to the closest child to child variant. Not every neighbouring pair comes from a common parent, so a plain mean would be pulled around by the pairs that do not fit. <code class="language-plaintext highlighter-rouge">calcParent2Child</code> therefore minimises a <b>trimmed</b> misfit: the mean of <code class="language-plaintext highlighter-rouge">1 - cos(omega)</code> over the best <code class="language-plaintext highlighter-rouge">quantile</code> fraction of the observations, 90 percent by default.</p>
-{% highlight matlab %}
-close all
-histogram(omega./degree)
-xlabel('disorientation to the closest variant')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="OrientationRelationshipFit_01.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationRelationshipFit_02.png" %}
 </center>
-<p>The search domain is small. The misfit is unchanged when <code class="language-plaintext highlighter-rouge">p2c</code> is multiplied by a child symmetry on the left or a parent symmetry on the right, so it really lives on the misorientation fundamental zone of the phase pair, of volume <code class="language-plaintext highlighter-rouge">8*pi^2/(24*24)</code> for cubic to cubic &mdash; three dimensions, and about 0.137 in units of radian cubed.</p>
-<h2 id="10">The algorithm</h2>
-<p>Each observation, <b>together with an assumed variant</b>, is a direct measurement of <code class="language-plaintext highlighter-rouge">p2c</code>. If <code class="language-plaintext highlighter-rouge">mori</code> were exactly the variant <code class="language-plaintext highlighter-rouge">c2c(k)</code>, then</p>
+<p>Notice that the black squares lie on the main measured axis clusters. Fitting an OR is therefore mainly an axis-alignment problem: it rotates the parent's symmetry axes onto those observed clusters.</p>
+<p>The predicted set also contains the identity rotation at zero degrees. It is produced by <code class="language-plaintext highlighter-rouge">S = identity</code> for every possible OR and carries no information about the fit. <code class="language-plaintext highlighter-rouge">calcParent2Child</code> excludes this identity variant.</p>
+<h2 id="15">The objective function</h2>
+<p>For a candidate OR, the residual of each observation is its disorientation to the closest informative child-to-child variant.</p>
+{% highlight matlab %}
+omega = min(angle_outer(mori,c2c(isInformative)),[],2);
+{% endhighlight %}
+<p>
+<code class="language-plaintext highlighter-rouge">calcParent2Child</code> minimises a trimmed chordal misfit. It averages <code class="language-plaintext highlighter-rouge">1 - cos(omega)</code> over the best <code class="language-plaintext highlighter-rouge">quantile</code> fraction of the observations, which is 90 percent by default. This robust objective limits the influence of pairs from different parents.</p>
+<p>The misfit is unchanged when <code class="language-plaintext highlighter-rouge">p2c</code> is multiplied by child symmetry on the left or parent symmetry on the right. Its search domain is therefore the misorientation fundamental region of the phase pair. For cubic-to-cubic symmetry its volume is <code class="language-plaintext highlighter-rouge">8*pi^2/(24*24)</code>, or about 0.137 radians cubed. The domain is only three-dimensional, which makes a complete scan practical.</p>
+<h2 id="17">The fixed-point algorithm</h2>
+<p>Each observation becomes a direct measurement of the OR once a variant has been assigned. If <code class="language-plaintext highlighter-rouge">mori</code> exactly equals the variant <code class="language-plaintext highlighter-rouge">c2c(k)</code>, the following product returns <code class="language-plaintext highlighter-rouge">p2cGlobal</code> itself.</p>
 {% highlight matlab %}
 k = 5;
 c2c(k) * p2cVariants(k)
@@ -129,90 +198,130 @@ c2c(k) * p2cVariants(k)
 {% highlight plaintext %}
 ans = misorientation (Iron fcc → Iron bcc (old))
  
- (111) || (011)   [101̅] || [111̅]
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  96.5525 45.6916 272.976
 {% endhighlight %}
-<p>returns <code class="language-plaintext highlighter-rouge">p2c</code> itself, because <code class="language-plaintext highlighter-rouge">c2c(k) = p2c * inv(p2cVariants(k))</code> by construction. A noisy observation therefore votes for a <code class="language-plaintext highlighter-rouge">p2c</code> close to the true one, and averaging the votes averages the noise away. So the iteration is</p>
+<p>A noisy observation therefore votes for an OR near the true one. Averaging many such votes averages away part of the noise. One iteration performs four operations:</p>
 <div>
-<ol>
-<li>assign every misorientation to its closest variant,</li>
-<li>keep the best <code class="language-plaintext highlighter-rouge">quantile</code> fraction of them,</li>
-<li>form the vote <code class="language-plaintext highlighter-rouge">mori * p2cVariants(k)</code> for each,</li>
+<ul>
+<li>assign every misorientation to its closest variant;</li>
+<li>keep the best <code class="language-plaintext highlighter-rouge">quantile</code> fraction;</li>
+<li>form the vote <code class="language-plaintext highlighter-rouge">mori * p2cVariants(k)</code> for each retained pair; and</li>
 <li>replace <code class="language-plaintext highlighter-rouge">p2c</code> by the mean of the votes.</li>
-</ol>
+</ul>
 </div>
-<p>This is a fixed point iteration, not a descent step, because the vote itself depends on the current <code class="language-plaintext highlighter-rouge">p2c</code>. That distinction matters: the misfit is not guaranteed to fall at every step, which is why the implementation keeps a backtracking safeguard.</p>
-<h2 id="12">Why it converges</h2>
-<p>Write <code class="language-plaintext highlighter-rouge">p2c = pStar * exp(xi)</code> for a small error <code class="language-plaintext highlighter-rouge">xi</code> about the solution. A short calculation turns the vote into <code class="language-plaintext highlighter-rouge">pStar * exp(R_k' * xi)</code>, with <code class="language-plaintext highlighter-rouge">R_k</code> the matrix of the parent symmetry operation <code class="language-plaintext highlighter-rouge">S_k</code>. Averaging over the assigned observations, one iteration maps the error by the matrix</p>
-{% highlight matlab %}
-A = sum_k w_k * R_k'
-{% endhighlight %}
-<p>where <code class="language-plaintext highlighter-rouge">w_k</code> is the fraction of observations assigned to variant <code class="language-plaintext highlighter-rouge">k</code>. Every property of the iteration follows from <code class="language-plaintext highlighter-rouge">A</code>.</p>
-<p>First, <code class="language-plaintext highlighter-rouge">A</code> is an average of rotation matrices, so its norm never exceeds one: the iteration cannot diverge. Second, and this is why the method works at all, for evenly populated variants <code class="language-plaintext highlighter-rouge">A</code> vanishes <b>exactly</b>:</p>
+<p>The vote depends on the current <code class="language-plaintext highlighter-rouge">p2c</code>, so this is a fixed-point iteration rather than a descent step. The misfit need not decrease at every step. The implementation therefore backtracks whenever a full step does not lower the objective.</p>
+<h2 id="19">Why the iteration converges</h2>
+<p>Write <code class="language-plaintext highlighter-rouge">p2c = pStar * exp(xi)</code> for a small error <code class="language-plaintext highlighter-rouge">xi</code> around the solution. A vote from variant <code class="language-plaintext highlighter-rouge">k</code> has error <code class="language-plaintext highlighter-rouge">R_k' * xi</code>, where <code class="language-plaintext highlighter-rouge">R_k</code> is the matrix of the corresponding parent symmetry operation. One iteration maps the error with</p>
+<p>\[A = \sum_k w_k R_k^{\prime},\]</p>
+<p>where <code class="language-plaintext highlighter-rouge">w_k</code> is the fraction assigned to variant <code class="language-plaintext highlighter-rouge">k</code>. The matrix <code class="language-plaintext highlighter-rouge">A</code> is an average of rotation matrices, so its norm cannot exceed one and the local iteration cannot diverge.</p>
+<p>For evenly populated variants, the parent-group matrices sum to zero.</p>
 {% highlight matlab %}
 R = csParent.properGroup.rot;
-A = zeros(3);
-for j = 1:length(R), A = A + matrix(R(j)); end
-norm(A)
+Aeven = zeros(3);
+for j = 1:length(R)
+  Aeven = Aeven + matrix(R(j));
+end
+norm(Aeven)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
    1.9307e-15
 {% endhighlight %}
-<p>The reason is group theory rather than luck: the three dimensional vector representation of the cubic rotation group contains no copy of the trivial representation, so its elements sum to zero. A martensitic microstructure populates many variants, so <code class="language-plaintext highlighter-rouge">A</code> is small and the error collapses in a handful of steps.</p>
-<p>Excluding the identity variant leaves <code class="language-plaintext highlighter-rouge">A = -I/23</code> for even occupancy, a convergence rate of <code class="language-plaintext highlighter-rouge">1/23</code> per step. On real data the occupancies are far from even &mdash; they range from 1.5 to 12 percent here &mdash; and the measured rate is about 0.24 per step, still fast.</p>
-<p>The iteration only stalls when <code class="language-plaintext highlighter-rouge">A</code> has an eigenvalue of modulus one, which requires every populated variant to share a common rotation axis. Two populated variants with non parallel axes are enough to rule that out.</p>
-<h2 id="14">The damping factor</h2>
-<p>Classical implementations replace the new estimate by a weighted mean of the old and the new one, with a weight <code class="language-plaintext highlighter-rouge">alpha</code> on the old. In the error map this is not a heuristic at all, it is a relaxation parameter:</p>
-{% highlight matlab %}
-A  ->  (alpha*I + A) / (1 + alpha)
-{% endhighlight %}
-<p>An eigenvalue <code class="language-plaintext highlighter-rouge">lambda</code> of <code class="language-plaintext highlighter-rouge">A</code> becomes <code class="language-plaintext highlighter-rouge">(alpha + lambda)/(1 + alpha)</code>, so <code class="language-plaintext highlighter-rouge">alpha</code> is exactly the shift that annihilates a <b>negative real</b> eigenvalue. This explains the traditional default <code class="language-plaintext highlighter-rouge">alpha = 1/numSym(csParent)</code>: for evenly populated variants the eigenvalue is <code class="language-plaintext highlighter-rouge">-1/23</code>, and <code class="language-plaintext highlighter-rouge">1/24</code> very nearly cancels it. The folklore value was the right one.</p>
-<p>Whether damping is worth anything depends entirely on the spectrum of <code class="language-plaintext highlighter-rouge">A</code>:</p>
-<pre>occupancy                    rho(0)    best alpha    rho(alpha)
-even over all 23 variants    0.0435    0.043         0.0000
-only the 180 degree ones     0.3333    0.334         0.0001
-only the 120 degree ones     0.0000    0.000         0.0000
-only the  90 degree ones     0.3333    0.000         0.3333</pre>
-<p>The last row is the interesting one. Concentrating on the fourfold operations gives <code class="language-plaintext highlighter-rouge">A</code> <b>complex</b> eigenvalues, and a real shift cannot move a conjugate pair towards zero &mdash; no <code class="language-plaintext highlighter-rouge">alpha</code> helps. Damping is a cure for oscillation along a direction, not for rotation between directions.</p>
-<p>On this dataset the eigenvalues are <code class="language-plaintext highlighter-rouge">-0.238</code>, <code class="language-plaintext highlighter-rouge">-0.099</code> and <code class="language-plaintext highlighter-rouge">0.021</code>, so theory predicts that <code class="language-plaintext highlighter-rouge">alpha = 0.11</code> would roughly halve the asymptotic rate. Measured against iteration counts, it does not: from several starting points, undamped needs 12, 23 and 18 iterations, <code class="language-plaintext highlighter-rouge">alpha = 1/24</code> needs 13, 24 and 19, and <code class="language-plaintext highlighter-rouge">alpha = 1/4</code> needs 15, 22 and at least 25 &mdash; the middle case had not converged when the iteration cap was reached. All of them stop at the same misfit.</p>
-<p>The explanation is that the asymptotic rate governs only the last digits. The iteration count is dominated by the early phase, in which the variant assignment and the trimmed set are still changing, and there damping is nothing but a shorter step. MTEX therefore does not damp by default, and relies on the backtracking safeguard for the steps that do not descend.</p>
-<h2 id="15">Local and global fits</h2>
-<p>The iteration itself is local. It converges to a stationary point of the misfit, not to the best one, and on real data the starting point decides which. The <code class="language-plaintext highlighter-rouge">'local'</code> option runs exactly that, starting from the given guess.</p>
-{% highlight matlab %}
-p2cKS = calcParent2Child(mori,orientation.KurdjumovSachs(csParent,csChild),'local')
-{% endhighlight %}
-
-{% highlight plaintext %}
-p2cKS = misorientation (Iron fcc → Iron bcc (old))
- 
-  Bunge Euler angles in degree
-    phi1     Phi    phi2
-  348.14 10.2947 55.8811
-{% endhighlight %}
-<p>Scanning the entire fundamental zone finds a relationship a good degree away from this one, and fitting it better. That scan is what <code class="language-plaintext highlighter-rouge">calcParent2Child</code> does by default, so the initial guess becomes one candidate among many rather than the thing that decides the answer.</p>
-{% highlight matlab %}
-p2cGlobal = calcParent2Child(mori,p2c)
-{% endhighlight %}
-
-{% highlight plaintext %}
-p2cGlobal = misorientation (Iron fcc → Iron bcc (old))
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  96.5525 45.6916 272.976
-{% endhighlight %}
-<p>The two differ by</p>
-{% highlight matlab %}
-angle(p2cKS,p2cGlobal)./degree
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-    1.4594
-{% endhighlight %}
-<p>degree, which is far from negligible once habit planes are computed from the result. Nishiyama-Wassermann, Pitsch and Greninger-Trojano all reach the better basin from the start; Kurdjumov-Sachs does not. That is why the scan is the default. It costs about two and a half times a single fit, and it is deterministic: the subsamples it uses are strided through an angle sorted list rather than drawn at random, so the same data always gives the same answer.</p>
-<p>Reach for <code class="language-plaintext highlighter-rouge">'local'</code> when you are refining a relationship you already trust, or when fitting many small data sets in a loop, where the fixed cost of the scan dominates.</p>
+<p>This cancellation follows from group theory. The three-dimensional vector representation of the cubic rotation group has no copy of the trivial representation. A martensitic microstructure usually populates many variants, so the error contracts in only a handful of iterations.</p>
+<p>Removing the identity operation gives <code class="language-plaintext highlighter-rouge">A = -I/23</code> for even occupancy. Its convergence rate is therefore <code class="language-plaintext highlighter-rouge">1/23</code> per iteration. On this map the variant occupancies range from 1.5 to 12 percent, and the measured local rate is about 0.24 per iteration.</p>
+<p>The iteration stalls only if <code class="language-plaintext highlighter-rouge">A</code> has an eigenvalue with modulus one. That requires every populated variant to share a common rotation axis. Two populated variants with non-parallel axes are enough to rule this out.</p>
+<h2 id="21">What the classical damping factor does</h2>
+<p>Classical implementations average the old and new estimates, using a weight <code class="language-plaintext highlighter-rouge">alpha</code> on the old estimate. In the linearised error map this replaces <code class="language-plaintext highlighter-rouge">A</code> by</p>
+<p>\[(\alpha I + A)/(1 + \alpha).\]</p>
+<p>An eigenvalue <code class="language-plaintext highlighter-rouge">lambda</code> becomes <code class="language-plaintext highlighter-rouge">(alpha + lambda)/(1 + alpha)</code>. The damping factor can therefore cancel a negative real eigenvalue exactly. This explains the traditional <code class="language-plaintext highlighter-rouge">alpha = 1/numSym(csParent)</code> default. For even occupancy the eigenvalue is <code class="language-plaintext highlighter-rouge">-1/23</code>, and <code class="language-plaintext highlighter-rouge">1/24</code> nearly cancels it.</p>
+<p>Its benefit depends on the spectrum of <code class="language-plaintext highlighter-rouge">A</code>:</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>occupancy</p>
+         </td>
+         <td>
+               <p>rho(0)</p>
+         </td>
+         <td>
+               <p>best alpha</p>
+         </td>
+         <td>
+               <p>rho(alpha)</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>even over all 23 variants</p>
+         </td>
+         <td>
+               <p>0.0435</p>
+         </td>
+         <td>
+               <p>0.043</p>
+         </td>
+         <td>
+               <p>0.0000</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>only the 180 degree variants</p>
+         </td>
+         <td>
+               <p>0.3333</p>
+         </td>
+         <td>
+               <p>0.334</p>
+         </td>
+         <td>
+               <p>0.0001</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>only the 120 degree variants</p>
+         </td>
+         <td>
+               <p>0.0000</p>
+         </td>
+         <td>
+               <p>0.000</p>
+         </td>
+         <td>
+               <p>0.0000</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>only the 90 degree variants</p>
+         </td>
+         <td>
+               <p>0.3333</p>
+         </td>
+         <td>
+               <p>0.000</p>
+         </td>
+         <td>
+               <p>0.3333</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>The last row is the important counterexample. Fourfold operations give <code class="language-plaintext highlighter-rouge">A</code> complex eigenvalues, and a real shift cannot move that conjugate pair towards zero. Damping treats oscillation along a direction, not rotation between directions.</p>
+<p>On this map the eigenvalues are <code class="language-plaintext highlighter-rouge">-0.238</code>, <code class="language-plaintext highlighter-rouge">-0.099</code>, and <code class="language-plaintext highlighter-rouge">0.021</code>. Theory predicts that <code class="language-plaintext highlighter-rouge">alpha = 0.11</code> would roughly halve the asymptotic rate. Measured from several starting points, however, no tested damping shortened the fit. Undamped fits needed 12, 23, and 18 iterations. With <code class="language-plaintext highlighter-rouge">alpha = 1/24</code> they needed 13, 24, and 19 iterations. With <code class="language-plaintext highlighter-rouge">alpha = 1/4</code> they needed 15, 22, and at least 25 iterations. The middle <code class="language-plaintext highlighter-rouge">alpha = 1/4</code> fit had not converged at the iteration cap. All runs stopped at the same misfit.</p>
+<p>The asymptotic rate governs only the final digits. Early iterations are dominated by changing variant assignments and changing membership of the trimmed set. Damping merely shortens those early steps. MTEX therefore leaves the iteration undamped and uses backtracking for steps that do not descend.</p>
+<h2 id="22">References</h2>
+<div>
+<ul>
+<li>T. Nyyss&ouml;nen, M. Isakov, P. Peura, and V.-T. Kuokkala, <a href="https://doi.org/10.1007/s11661-016-3462-2">Iterative determination of the orientation relationship between austenite and martensite from a large amount of grain pair misorientations</a>, <i>Metallurgical and Materials Transactions A</i> 47 (2016), 2587-2590, gives the iterative OR-fitting method.</li>
+<li>T. Nyyss&ouml;nen, P. Peura, and V.-T. Kuokkala, <a href="https://doi.org/10.1007/s11661-018-4904-9">Crystallography, morphology, and martensite transformation of prior austenite in intercritically annealed high-aluminum steel</a>, <i>Metallurgical and Materials Transactions A</i> 49 (2018), 6426-6441, provides the reconstruction setting used by the example.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

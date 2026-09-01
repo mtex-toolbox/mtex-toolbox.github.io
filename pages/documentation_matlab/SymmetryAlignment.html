@@ -1,5 +1,5 @@
 ---
-title: "Alignment of the Crystal Axes"
+title: 'Changing Crystal-Axis Settings'
 
 sidebar: documentation_sidebar
 permalink: SymmetryAlignment.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Alignment of the Crystal Axes</title>
+<title>Changing Crystal-Axis Settings</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_SymmetryAlignment.m">
 </head>
@@ -24,71 +24,66 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 {% highlight matlab %}
-plottingConvention.default("y↑→x");
+plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>A crystal lattice is described by its lattice parameters \(a\), \(b\), \(c\) and the angles \(\alpha\), \(\beta\), \(\gamma\) between the axes. These fix the lattice, but they do not say how it is placed inside the Cartesian coordinate system that MTEX computes in - and for anything but the cubic case there is more than one common choice.</p>
-<p>Unless told otherwise, MTEX uses</p>
-<div>
-<ul>
-<li>\(\vec z \parallel \vec c\) - the \(\vec c\) axis, i.e. the axis of highest symmetry, points along \(\vec z\)</li>
-<li>\(\vec x \parallel \vec a^*\) - the \(\vec x\) direction is aligned with the reciprocal axis \(\vec a^*\)</li>
-</ul>
-</div>
-<p>The reference frame is printed with every crystal symmetry</p>
+<p>A crystal-axis setting assigns the names \(\vec a\), \(\vec b\) and \(\vec c\) to physical lattice vectors. A <b>crystal frame</b> is the Cartesian reference frame glued to that labelled lattice basis. It is distinct from the point group attached to it and from the plotting convention used to draw it.</p>
+<p>This page assumes the direct and reciprocal axes introduced in <a href="CrystalDirections.html">Miller Indices</a>. Read <a href="CrystalReferenceSystem.html">The Crystal Reference System</a> first if the Cartesian embedding of a non-orthogonal lattice is new to you.</p>
+<p>Two kinds of convention occur in published data. One source may keep the same lattice labels but embed them in a different Cartesian crystal frame. Another may rename or permute the lattice axes themselves. Both change numerical coordinates, so both require an explicit frame change in MTEX.</p>
+<h2 id="3">Read the Crystal Frame from the Summary</h2>
+<p> <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a> stores the point group, lattice metric and crystal frame together. Its printed summary is therefore the first place to check a convention. For this monoclinic example, MTEX uses \(\vec x\parallel\vec a^*\) and \(\vec z\parallel\vec c\) by default.</p>
 {% highlight matlab %}
-cs = crystalSymmetry('12/m1',[4 5 6],[90 100 90]*degree,'mineral','test')
+cs = crystalSymmetry('12/m1',[4 5 6],[90 100 90]*degree,...
+  'mineral','example')
 {% endhighlight %}
 
 {% highlight plaintext %}
 cs = crystalSymmetry (⊙c*→b)
  
-  mineral           : test             
+  mineral           : example          
   symmetry          : 12/m1            
   elements          : 4                
   a, b, c           : 4, 5, 6          
   alpha, beta, gamma: 90°, 100°, 90°   
   reference frame   : X||a*, Y||b, Z||c
 {% endhighlight %}
-<p>Note that \(\vec a^*\), not \(\vec a\), is the direction placed along \(\vec x\). For a monoclinic lattice with \(\beta = 100^\circ\) the two differ by exactly the deviation of \(\beta\) from a right angle - ten degrees here, which is how far the direct axis \(\vec a\) sits from \(\vec x\) while \(\vec a^*\) sits on it.</p>
+<p>The summary reports <code class="language-plaintext highlighter-rouge">X||a*, Y||b, Z||c</code>. The direct axis \(\vec a\) is \(10^\circ\) from \(\vec x\), while the reciprocal axis \(\vec a^*\) is parallel to it. The <code class="language-plaintext highlighter-rouge">'noSymmetry'</code> option asks for these geometric angles without replacing either direction by a symmetry-equivalent one.</p>
 {% highlight matlab %}
-[angle(cs.aAxis,vector3d.X), angle(cs.aAxisRec,vector3d.X)] ./ degree
+axisAngles = [angle(cs.aAxis,vector3d.X,'noSymmetry'),...
+  angle(cs.aAxisRec,vector3d.X,'noSymmetry')] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+axisAngles =
    10.0000         0
 {% endhighlight %}
-<p>For orthogonal lattices - orthorhombic, tetragonal and cubic - the direct and the reciprocal axes coincide and the distinction is immaterial. It matters for triclinic, monoclinic, trigonal and hexagonal symmetries. Separately, different sources may rename or permute lattice axes even when those axes are orthogonal; the olivine example below shows that case.</p>
-<p>A different alignment is requested by naming it in the constructor, e.g.</p>
+<p>A different Cartesian embedding is requested by naming the parallel axes in the constructor.</p>
 {% highlight matlab %}
-cs2 = crystalSymmetry('12/m1',[4 5 6],[90 100 90]*degree,'X||a','mineral','test')
+csAlternative = crystalSymmetry('12/m1',[4 5 6],...
+  [90 100 90]*degree,'X||a','mineral','example')
 {% endhighlight %}
 
 {% highlight plaintext %}
-cs2 = crystalSymmetry (⊙c*→b)
+csAlternative = crystalSymmetry (⊙c*→b)
  
-  mineral           : test             
+  mineral           : example          
   symmetry          : 12/m1            
   elements          : 4                
   a, b, c           : 4, 5, 6          
   alpha, beta, gamma: 90°, 100°, 90°   
   reference frame   : X||a, Y||b, Z||c*
 {% endhighlight %}
-<p>The two describe the same crystal, but Miller indices, Euler angles and tensor components refer to different Cartesian frames and are therefore <b>not</b> interchangeable between them.</p>
-<h2 id="6">Switching Between Alignments</h2>
-<p>Data published under one convention has to be transformed before it can be used under another, and <a href="tensor.transformReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transformReferenceFrame</code></a> is what does it - for tensors as for <a href="orientation.transformReferenceFrame.html">orientations</a>. Take a published stiffness tensor of olivine, given for the standard setup</p>
+<p>The second summary reports <code class="language-plaintext highlighter-rouge">X||a, Y||b, Z||c*</code>. The point group and lattice metric have not changed, but Miller indices, Euler angles and tensor components now refer to a different crystal frame. This is the embedding convention developed on <a href="CrystalReferenceSystem.html">the preceding page</a>.</p>
+<h2 id="7">A Published Axis Permutation</h2>
+<p>A separate problem arises when two sources assign the labels \(\vec a\), \(\vec b\) and \(\vec c\) to different physical lattice vectors. The bundled data file contains the room-pressure stiffness tensor of San Carlos olivine measured by Abramson et al. (1997). Its source setting has lattice lengths \(a=4.7646\), \(b=10.2296\) and \(c=5.9942\), with tensor axes \(X_1\parallel[100]\) and \(X_3\parallel[001]\).</p>
 {% highlight matlab %}
-cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivin');
-
-% import some stiffness tensor
+csSource = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],...
+  'mineral','Olivine');
 fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
-C = stiffnessTensor.load(fname,cs)
-
-plot(C)
+C = stiffnessTensor.load(fname,csSource)
 {% endhighlight %}
 
 {% highlight plaintext %}
-C = stiffnessTensor (Olivin)
+C = stiffnessTensor (Olivine)
   unit: GPa              
   rank: 4 (3 × 3 × 3 × 3)
  
@@ -100,32 +95,38 @@ C = stiffnessTensor (Olivin)
      0     0     0     0    77     0
      0     0     0     0     0  78.7
 {% endhighlight %}
-<center>
+<p>The printed Voigt matrix is useful here because its components are the quantities that a frame change must rewrite. The plot below shows the <a href="tensor.directionalMagnitude.html">directional magnitude</a> \(C_{ijkl}n_i n_j n_k n_l\). It is a compact view of the component permutation, not Young's modulus or a complete elastic response.</p>
+{% highlight matlab %}
+plot(C)
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="SymmetryAlignment_01.png" %}
 </center>
-<p>The plot is the directional stiffness: the crystal is stiffest along the short \(\vec a\) axis. Another setup of the same mineral names the axes the other way round, with \(\vec a\) the longest and \(\vec c\) the shortest.</p>
+<p>Suppose the target convention cyclically renames the axes: old \(\vec b\) becomes new \(\vec a\), old \(\vec c\) becomes new \(\vec b\), and old \(\vec a\) becomes new \(\vec c\). The reordered lattice lengths state that mapping.</p>
 {% highlight matlab %}
-cs_new = crystalSymmetry('mmm',[10.2296 5.9942 4.7646],'mineral','Olivin')
+csTarget = crystalSymmetry('mmm',[10.2296 5.9942 4.7646],...
+  'mineral','Olivine')
 {% endhighlight %}
 
 {% highlight plaintext %}
-cs_new = crystalSymmetry (⊙c→a)
+csTarget = crystalSymmetry (⊙c→a)
  
-  mineral : Olivin    
+  mineral : Olivine   
   symmetry: mmm       
   elements: 8         
   a, b, c : 10, 6, 4.8
 {% endhighlight %}
-<p>Expressing the same tensor in that setup permutes its components.</p>
+<h2 id="10">Change the Frame, Do Not Rotate the Tensor</h2>
+<p>A <b>frame change</b> re-expresses the same physical object in another reference frame. It does not move the object. For a tensor, <a href="tensor.transformReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transformReferenceFrame</code></a> applies the required basis change to every component and attaches the target crystal frame.</p>
 {% highlight matlab %}
-C_new = C.transformReferenceFrame(cs_new)
+CTarget = C.transformReferenceFrame(csTarget)
 
 nextAxis
-plot(C_new)
+plot(CTarget)
 {% endhighlight %}
 
 {% highlight plaintext %}
-C_new = stiffnessTensor (Olivin)
+CTarget = stiffnessTensor (Olivine)
   unit: GPa              
   rank: 4 (3 × 3 × 3 × 3)
  
@@ -137,12 +138,38 @@ C_new = stiffnessTensor (Olivin)
      0     0     0     0  78.7     0
      0     0     0     0     0    64
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SymmetryAlignment_02.png" %}
 </center>
-<p>The two plots show the same physical crystal - the stiff direction has not moved in the material, only the axis it is called. What would be wrong is to use the published numbers unchanged with <code class="language-plaintext highlighter-rouge">cs_new</code>: that describes a crystal whose stiff direction points somewhere else.</p>
-<h2 id="10">Next</h2>
-<p>How the Cartesian frame is inscribed into the crystal axes, and what depends on it, is <a href="CrystalReferenceSystem.html">The Crystal Reference System</a>. Directions written in the crystal frame are <a href="CrystalDirections.html">Miller Indices</a>.</p>
+<p>In the left panel, the red maximum is labelled \([100]\). In the right panel, the same feature is labelled \([001]\) because old \(\vec a\) is new \(\vec c\). The feature has not rotated in the material; only its coordinates and crystallographic label have changed.</p>
+<p>The directional value along that physical axis is unchanged. The source direction \([100]\) and the target direction \([001]\) both give 320.5 GPa.</p>
+{% highlight matlab %}
+sourceA = Miller(1,0,0,csSource,'uvw');
+targetC = Miller(0,0,1,csTarget,'uvw');
+sameDirectionalValue = [C.directionalMagnitude(sourceA),...
+  CTarget.directionalMagnitude(targetC)]
+{% endhighlight %}
+
+{% highlight plaintext %}
+sameDirectionalValue =
+  320.5000  320.5000
+{% endhighlight %}
+<h2 id="12">Avoid Three Common Mistakes</h2>
+<p>Do not attach <code class="language-plaintext highlighter-rouge">csTarget</code> to the unmodified component matrix. That would describe a different physical tensor. Use <a href="tensor.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> only when the material property itself moves; use <code class="language-plaintext highlighter-rouge">transformReferenceFrame</code> when only its coordinates change.</p>
+<p>Do not infer an axis mapping by sorting lattice lengths. Record the old and new basis relation from the data source, including axis signs and handedness. Some point groups also have setting-specific symbols, such as <code class="language-plaintext highlighter-rouge">2mm</code>, <code class="language-plaintext highlighter-rouge">m2m</code> and <code class="language-plaintext highlighter-rouge">mm2</code>; see <a href="CrystalSymmetries.html">Crystal Symmetries</a>.</p>
+<p>Finally, a plotting convention only lays a reference frame out on screen. Changing it cannot repair a wrong crystal frame. When importing a tensor, also record its units and compact-matrix convention; the complete audit is developed in <a href="TensorImport.html">Importing Tensor Data</a>. Orientations use the analogous <a href="orientation.transformReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transformReferenceFrame</code></a> method.</p>
+<h2 id="13">Further Reading</h2>
+<div>
+<ul>
+<li>H. Arnold, <a href="https://doi.org/10.1107/97809553602060000510">Transformations of the coordinate system (unit-cell transformations)</a>, <i>International Tables for Crystallography A</i>, ch. 5.1, 2006, gives basis-change matrices for conventional crystallographic settings.</li>
+<li>J. F. Nye, <a href="https://search.worldcat.org/title/11114089">Physical Properties of Crystals: Their Representation by Tensors and Matrices</a>, Oxford University Press, 1985, develops tensor components and changes of Cartesian axes.</li>
+<li>D. Rowenhorst et al., <a href="https://doi.org/10.1088/0965-0393/23/8/083501">Consistent representations of and conversions between 3D rotations</a>, <i>Modelling and Simulation in Materials Science and Engineering</i> 23, 083501, 2015, explains why crystal and specimen frame conventions must be stated explicitly.</li>
+<li>E. H. Abramson, J. M. Brown, L. J. Slutsky and J. Zaug, <a href="https://doi.org/10.1029/97JB00682">The elastic constants of San Carlos olivine to 17 GPa</a>, <i>Journal of Geophysical Research</i> 102(B6), 12253-12263, 1997, is the source of the stiffness tensor used above.</li>
+</ul>
+</div>
+<h2 id="14">Next</h2>
+<p>
+<a href="CrystalShapes.html">Crystal Shapes</a> continues the chapter by drawing indexed crystal faces. <a href="TensorImport.html">Importing Tensor Data</a> applies this frame audit to component tables, and <a href="OrientationImport.html">Importing Orientations</a> applies it to orientation files.</p>
 </div>
 </body>
 </html>

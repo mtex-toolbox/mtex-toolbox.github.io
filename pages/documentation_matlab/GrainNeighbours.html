@@ -1,5 +1,5 @@
 ---
-title: "Grain Neighbors"
+title: 'Grain Neighbors'
 
 sidebar: documentation_sidebar
 permalink: GrainNeighbours.html
@@ -23,106 +23,188 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we discuss how to analyze the neighboring relationships between grains. While most of this can be done also on the level of grain boundaries an local misorientations it is for large data sets sometimes useful to consider misorientations between the mean-orientations of grains. We shall use the following Magnesium data set of our explanations.</p>
+<p>Once a map has been divided into grains, it is also a network. Each grain touches a few others, and those connections carry information that a list of grains alone does not. Twins come in touching pairs, recrystallised grains are surrounded by their parent, and a second phase may sit at the corners between three grains of the first.</p>
+<p>A grain is a phase-homogeneous, spatially connected region of EBSD measurements produced by segmentation. See <a href="GrainReconstruction.html">Grain Reconstruction</a> for that step and <a href="SelectingGrains.html">Selecting Grains</a> for the distinction between a grain ID and its position in a list.</p>
+<p>The same relationships are represented measurement by measurement by the <a href="GrainBoundaries.html">grain-boundary network</a>. Working with the mean orientations of whole grains is coarser, but much cheaper on a large map. <a href="MisorientationTheory.html">Misorientation Theory</a> introduces the symmetry used when two mean orientations are compared below.</p>
 {% highlight matlab %}
-% load sample EBSD data set
+close all;
+
+% load the sample in its specimen plotting frame
 plottingConvention.default('y↑→x');
 mtexdata twins silent
 CS = ebsd.CS;
 
-% reconstruct grains
-[grains, ebsd] = calcGrains(ebsd,'angle',5*degree);
-
+% reconstruct and smooth the grain outlines
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree);
 grains = smoothBoundary(grains,5);
 
-% plot the grains
-plot(grains,grains.meanOrientation)
+% compute the mean-orientation colours without printing a colour-key notice
+colorKey = ipfColorKey(grains);
+grainColor = colorKey.orientation2color(grains.meanOrientation);
+
+% colour each grain by its mean orientation
+plot(grains,grainColor)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainNeighbours_01.png" %}
 </center>
-<p>Central for the analysis of grain to grain relationships is the function <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">grains.neighbours</code></a>. It return a list of pairs of neighboring grain ids. Each row of the list contains the ids of two neighboring grains. In the following lines choose the row number 188 and outline the corresponding grains</p>
+<p>Each coloured region is one reconstructed grain. The narrow regions with colours unlike their surroundings are the twin candidates examined below. Smoothing changes the drawn outlines, but not which grains are neighbours.</p>
+<h2 id="3">Which grain touches which</h2>
+<p> <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">neighbors</code></a> returns an \(N \times 2\) array of grain IDs. Each row is one pair of grains that share at least one grain boundary segment. The graph is undirected, so a pair appears only once.</p>
+<p>Calling the method on the indexed grains keeps pairs for which both grains are indexed. The outer map rim has a zero on its missing side and therefore does not create a neighbouring-grain pair.</p>
 {% highlight matlab %}
-pairs = grains('indexed').neighbors;
+indexedGrains = grains('indexed');
+pairs = indexedGrains.neighbors;
+pairCount = size(pairs,1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+pairCount =
+   251
+{% endhighlight %}
+<p>The printed count is the number of unique indexed grain pairs, not the number of boundary segments. A long shared boundary and a short shared boundary each contribute one row.</p>
+<p>The values in <code class="language-plaintext highlighter-rouge">pairs</code> are persistent IDs rather than positions in <code class="language-plaintext highlighter-rouge">indexedGrains</code>. Use an explicit <code class="language-plaintext highlighter-rouge">'id'</code> lookup whenever they select grains. Row 188, for example, identifies the following touching pair.</p>
+{% highlight matlab %}
+pairIds = pairs(188,:);
+pairGrains = grains('id',pairIds);
 
 hold on
-plot(grains(pairs(188,:)).boundary,'LineWidth',4,'linecolor','b')
+plot(pairGrains.boundary,'LineWidth',4,'lineColor','b')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainNeighbours_02.png" %}
 </center>
-<p>In order to compute the misorientation between these two grains we can do</p>
+<p>The thick blue outlines enclose the two grains selected by row 188. Their outlines meet along the shared trace that makes them neighbours.</p>
+<h2 id="6">Counting neighbours</h2>
+<p> <a href="grain2d.numNeighbors.html"><code class="language-plaintext highlighter-rouge">numNeighbors</code></a> counts the distinct grains that touch each grain. It includes neighbours of any phase but does not count the outside of the scanned area as a grain.</p>
+<p>The option <code class="language-plaintext highlighter-rouge">'matrix'</code> gives the same complete network as a sparse adjacency matrix. Its row and column numbers are persistent grain IDs. For the full grain list it is symmetric because the network is undirected.</p>
 {% highlight matlab %}
-mori = inv(grains(pairs(188,1)).meanOrientation) * grains(pairs(188,2)).meanOrientation
+adjacency = grains.neighbors('matrix');
+
+neighborCount = grains.numNeighbors;
+plot(grains,neighborCount,'micronbar','off')
+mtexColorbar('title','number of neighboring grains')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainNeighbours_03.png" %}
+</center>
+<p>On this map the grains cut by the map edge have the higher counts: they average five neighbours against three and a half for the interior grains. Either count describes only the measured part of the microstructure, just as an observed area or shape does.</p>
+<h2 id="8">One misorientation per neighbouring pair</h2>
+<p>Two grains that share a boundary have a misorientation. For their mean orientations it is one relationship per pair, rather than one relationship per boundary segment.</p>
+<p>A neighbouring pair has no intrinsic first grain. Setting <code class="language-plaintext highlighter-rouge">antipodal</code> to true gives its misorientation grain-exchange symmetry, so the relationship and its inverse are equivalent.</p>
+{% highlight matlab %}
+mori = inv(pairGrains(1).meanOrientation) * pairGrains(2).meanOrientation;
+mori.antipodal = true;
+mori
 {% endhighlight %}
 
 {% highlight plaintext %}
 mori = misorientation (Magnesium → Magnesium)
+  antipodal: true
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   149.583 94.2717 150.165
 {% endhighlight %}
-<p>This can be generalized to compute the misorientations between neighboring grains using</p>
+<p>Since the pairs form an array, the same calculation handles every pair at once. Explicit ID lookup keeps the operation correct if the grain list has previously been filtered or reordered.</p>
 {% highlight matlab %}
-mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation
+mori = inv(grains('id',pairs(:,1)).meanOrientation) .* ...
+  grains('id',pairs(:,2)).meanOrientation;
+mori.antipodal = true;
+mori
 
-close all
-histogram(mori.angle./degree)
-xlabel('misorientation angle')
+close all;
+histogram(mori.angle./degree,0:5:95)
+xlabel('misorientation angle in degrees')
 {% endhighlight %}
 
 {% highlight plaintext %}
 mori = misorientation (Magnesium → Magnesium)
-  size: 251 x 1
+  size: 251 × 1
+  antipodal: true
 {% endhighlight %}
-<center>
-{% include inline_image.html file="GrainNeighbours_03.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainNeighbours_04.png" %}
 </center>
-<p>We observe a high peak at about 85 degree. This angle corresponds to twinning. In Magnesium the twinning orientation relationship is given by</p>
+<p>This is a grain-pair-weighted histogram: every neighbouring pair counts once, regardless of its shared trace length or number of segments. A boundary-segment histogram answers a different question.</p>
+<p>The result is not the smooth curve expected for a random misorientation distribution. It has a sharp peak in the 85 to 90 degree bin, which in magnesium is the signature of extension twinning.</p>
+<h2 id="11">Finding the twins</h2>
+<p>A twin relationship is a specific orientation relationship. Here <a href="orientation.map.html"><code class="language-plaintext highlighter-rouge">orientation.map</code></a> constructs it from two pairs of crystallographic vectors that the relationship maps onto each other.</p>
 {% highlight matlab %}
-twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
-  Miller(2,-1,-1,0,CS),Miller(2,-1,-1,0,CS))
+twinning = orientation.map(Miller(0,1,-1,-2,CS),...
+  Miller(0,-1,1,-2,CS),Miller(2,-1,-1,0,CS),...
+  Miller(2,-1,-1,0,CS))
+twinAngle = twinning.angle ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
 twinning = misorientation (Magnesium → Magnesium)
  
  (11̅01) || (101̅1)   [011̅1] || [011̅1̅]
+ 
+twinAngle =
+   86.2992
 {% endhighlight %}
-<p>In order to determine the percentage of twining pairs we do</p>
+<p>Its disorientation angle is 86.3 degrees, where the peak sits. Angle alone does not identify a twin: unrelated relationships can have the same angle. The comparison below measures distance from the complete crystallographic relationship and uses a 3 degree tolerance.</p>
 {% highlight matlab %}
-% which of the pairs are twinning
 isTwinning = angle(mori,twinning) < 3*degree;
+isPeakBin = mori.angle >= 85*degree & mori.angle < 90*degree;
 
-% percentage of twinning pairs
-100 * sum(isTwinning) / length(isTwinning)
+numPairs = length(mori);
+numTwinPairs = nnz(isTwinning);
+numPairsInPeak = nnz(isPeakBin);
+numTwinsInPeak = nnz(isTwinning & isPeakBin);
+numOtherPairsInPeak = nnz(~isTwinning & isPeakBin);
+
+twinSummary = table(numPairs,numTwinPairs,...
+  100*numTwinPairs/numPairs,numPairsInPeak,numTwinsInPeak,...
+  numOtherPairsInPeak,...
+  'VariableNames',{'pairs','twinPairs','twinPercent',...
+  'pairsIn85to90Bin','twinsIn85to90Bin','otherPairsIn85to90Bin'})
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-   37.0518
+twinSummary =
+  1×6 table
+    pairs    twinPairs    twinPercent    pairsIn85to90Bin    twinsIn85to90Bin    otherPairsIn85to90Bin
+    _____    _________    ___________    ________________    ________________    _____________________
+     251        93          37.052              93                  83                    10
 {% endhighlight %}
-<p>It is important to understand that the list returned by <code class="language-plaintext highlighter-rouge">grains.neighbours</code> contains only pairs such that both grains are contained in <code class="language-plaintext highlighter-rouge">grains</code>. This allows the syntax <code class="language-plaintext highlighter-rouge">grains('phaseName')</code> to extract only neighbor relation ships within one phase.</p>
-<p>In some case, e.g. if we ask for all neighboring grains to a given grains, it is useful to replace this constraint by the condition that at least one grain should by part of <code class="language-plaintext highlighter-rouge">grains</code>. This can be accomplished by the option <code class="language-plaintext highlighter-rouge">'full'</code>.</p>
+<p>Of the 251 neighbouring pairs in this map, 93 are within 3 degrees of the twin relationship, or 37 percent. The 85 to 90 degree bin also contains 93 pairs, but the two groups are not identical: 83 are twin matches and 10 are other relationships. The peak is dominated by twins, but angle alone does not select them. <a href="TwinningBoundaries.html">Twinning</a> pursues the complete relationship along the boundary segments themselves.</p>
+<h2 id="14">Pairs, and what counts as one</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">neighbors</code> normally returns a pair only when <b>both</b> grains belong to the list on which it was called. This is why <code class="language-plaintext highlighter-rouge">grains('phaseName').neighbors</code> returns relationships within one phase and nothing else.</p>
+<p>Sometimes the required rule is every pair in which at least one grain belongs to the list. That is how to ask for all neighbours of one grain. The option <code class="language-plaintext highlighter-rouge">'full'</code> switches to this rule.</p>
 {% highlight matlab %}
-% get all pairs containing grain 92
-pairs = grains(92).neighbors('full');
+centralId = 92;
 
-% remove center grain 83 from this list
-pairs(pairs == 92) = [];
+% get all pairs containing grain ID 92
+centralPairs = grains('id',centralId).neighbors('full');
 
-plot(grains,grains.meanOrientation,'micronbar','off')
+% remove the centre ID from the array, leaving its neighbour IDs
+neighborIds = centralPairs(centralPairs ~= centralId);
+
+plot(grains,grainColor,'micronbar','off')
 hold on
-plot(grains(pairs),'FaceColor','black','FaceAlpha',0.5)
-hold on
-plot(grains(92).boundary,'lineColor','white','lineWidth',3)
+plot(grains('id',neighborIds),'FaceColor','black','FaceAlpha',0.5)
+plot(grains('id',centralId).boundary,'lineColor','white','lineWidth',3)
 hold off
 {% endhighlight %}
-<center>
-{% include inline_image.html file="GrainNeighbours_04.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainNeighbours_05.png" %}
 </center>
+<p>The grain outlined in white has ID 92, and the darkened grains are the grains it touches. Without <code class="language-plaintext highlighter-rouge">'full'</code> this list would be empty because no pair has both grains inside a list containing only one grain.</p>
+<h2 id="16">References</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher, and H. Schaeben, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain Detection from 2d and 3d EBSD Data--Specification of the MTEX Algorithm</a>, <i>Ultramicroscopy</i> 111 (2011), 1720--1733. This paper derives the reconstructed grain and boundary network on which the neighbour graph is based.</li>
+<li>J. K. Mason, E. A. Lazar, R. D. MacPherson, and D. J. Srolovitz, <a href="https://doi.org/10.1103/PhysRevE.86.051128">Statistical Topology of Cellular Networks in Two and Three Dimensions</a>, <i>Physical Review E</i> 86 (2012), 051128. This paper develops grain-neighbour statistics as a description of cellular microstructures.</li>
+<li>J. W. Christian and S. Mahajan, <a href="https://doi.org/10.1016/0079-6425(94)00007-7">Deformation Twinning</a>, <i>Progress in Materials Science</i> 39 (1995), 1--157. This review develops deformation-twin crystallography and mechanisms.</li>
+</ul>
+</div>
+<h2 id="17">Next</h2>
+<p>Continue with <a href="GrainMerge.html">Merging Grains</a> to combine twins with their parent grains. For segment-weighted analysis, continue instead with <a href="BoundaryMisorientations.html">Misorientations at Grain Boundaries</a>.</p>
 </div>
 </body>
 </html>

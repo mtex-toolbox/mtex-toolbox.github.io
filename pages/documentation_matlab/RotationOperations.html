@@ -1,5 +1,5 @@
 ---
-title: "Calculating with Rotations"
+title: 'Calculating with Rotations'
 
 sidebar: documentation_sidebar
 permalink: RotationOperations.html
@@ -23,22 +23,16 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A rotation is applied to a direction, composed with another rotation, or inverted, and each of these is a single operator that works on whole lists at once.</p>
+<p>This page assumes the directions introduced in <a href="VectorDefinition.html">Defining Three-Dimensional Vectors</a> and the active rotations introduced in <a href="RotationDefinition.html">Defining Rotations</a>.</p>
+<p>A reference frame is the coordinate system in which data are expressed. The rotations below move objects within one reference frame. They do not perform a frame change, which re-expresses the same physical object in a different reference frame without moving it.</p>
+<p>The examples use proper rotations. Reflections and inversions are covered in <a href="RotationImproper.html">Improper Rotations</a>.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
 <h2 id="2">Rotating a Direction</h2>
-<p>The product <code class="language-plaintext highlighter-rouge">rot * v</code> turns the direction <code class="language-plaintext highlighter-rouge">v</code> by the rotation <code class="language-plaintext highlighter-rouge">rot</code>.</p>
+<p>The product <code class="language-plaintext highlighter-rouge">rot * v</code> actively turns the direction <code class="language-plaintext highlighter-rouge">v</code> by <code class="language-plaintext highlighter-rouge">rot</code>.</p>
 {% highlight matlab %}
-rot = rotation.byEuler(90*degree,90*degree,0*degree)
-{% endhighlight %}
-
-{% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-    90   90    0
+rot = rotation.byEuler(90*degree,90*degree,0*degree,'Bunge');
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -50,19 +44,20 @@ v = vector3d (y↑→x)
   x y z
   0 1 0
 {% endhighlight %}
-<p>The grey arrows are the specimen axes, the black arrow the direction we started from and the red arrow where the rotation sent it.</p>
+<p>The grey arrows are the specimen axes. The black arrow is X before the rotation, and the red arrow is its image.</p>
 {% highlight matlab %}
-arrow3d(1.2*[vector3d.X,vector3d.Y,vector3d.Z],'faceColor',[.75 .75 .75])
+arrow3d(1.2*[vector3d.X,vector3d.Y,vector3d.Z],...
+  'faceColor',[.75 .75 .75])
 hold on
 arrow3d(1.05*vector3d.X,'faceColor','black')
 arrow3d(1.05*v,'faceColor','red')
 hold off
 axis off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RotationOperations_01.png" %}
 </center>
-<p>X has landed on Y. Undoing a rotation is the backslash operator <a href="rotation.mldivide.html"><code class="language-plaintext highlighter-rouge">\\</code></a>, which takes the direction back where it came from.</p>
+<p>The red arrow coincides with Y, so this rotation sends X to Y. <a href="rotation.mldivide.html"><code class="language-plaintext highlighter-rouge">\\</code></a> applies the inverse rotation and returns the direction to X.</p>
 {% highlight matlab %}
 rot \ v
 {% endhighlight %}
@@ -73,22 +68,14 @@ ans = vector3d (y↑→x)
   1 0 0
 {% endhighlight %}
 <h2 id="6">Composing Rotations</h2>
-<p>Rotations are composed by multiplication, and the one applied first stands on the right - as with matrices.</p>
+<p>Multiplication composes rotations. The rotation on the right acts first, just as it does in matrix multiplication.</p>
 {% highlight matlab %}
-rot1 = rotation.byEuler(90*degree,0,0);
-rot2 = rotation.byEuler(0,60*degree,0);
+rot1 = rotation.byEuler(90*degree,0,0,'Bunge');
+rot2 = rotation.byEuler(0,60*degree,0,'Bunge');
 
-rot = rot2 * rot1
+rot = rot2 * rot1;
 {% endhighlight %}
-
-{% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-     0   60   90
-{% endhighlight %}
-<p>The order is not a detail. Swapping the two gives a different rotation,</p>
+<p>The order matters. <a href="quaternion.eq.html"><code class="language-plaintext highlighter-rouge">==</code></a> tests rotation equality within an angular tolerance, rather than comparing printed Euler angles. Reversing these two rotations does not give the same result.</p>
 {% highlight matlab %}
 rot2 * rot1 == rot1 * rot2
 {% endhighlight %}
@@ -98,19 +85,39 @@ ans =
   logical
    0
 {% endhighlight %}
-<p>and the two results are this far apart.</p>
+<p>Their angular separation is 82.8192 degrees.</p>
 {% highlight matlab %}
-angle(rot2*rot1, rot1*rot2) ./ degree
+angle(rot2*rot1,rot1*rot2) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
    82.8192
 {% endhighlight %}
-<h2 id="9">Axis and Angle</h2>
-<p> <a href="quaternion.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> and <a href="quaternion.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a> read the axis-angle description off any rotation, however it was built.</p>
+<p>The black arrow below is one starting direction. The red arrow results from <code class="language-plaintext highlighter-rouge">rot1</code> followed by <code class="language-plaintext highlighter-rouge">rot2</code>, while the blue arrow shows the reverse order.</p>
 {% highlight matlab %}
-rot.angle / degree
+startDirection = normalize(vector3d(1,1,1));
+forwardDirection = rot2 * (rot1 * startDirection);
+reverseDirection = rot1 * (rot2 * startDirection);
+
+figure;
+arrow3d(1.2*[vector3d.X,vector3d.Y,vector3d.Z],...
+  'faceColor',[.75 .75 .75])
+hold on
+arrow3d(1.05*startDirection,'faceColor','black')
+arrow3d(1.05*forwardDirection,'faceColor','red')
+arrow3d(1.05*reverseDirection,'faceColor','blue')
+hold off
+axis off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="RotationOperations_02.png" %}
+</center>
+<p>The separated red and blue arrows make the noncommutativity visible. Parentheses are useful whenever the intended order might otherwise be misread.</p>
+<h2 id="11">Axis and Angle</h2>
+<p> <a href="quaternion.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> and <a href="quaternion.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a> read the axis--angle description from the composed rotation, however it was built.</p>
+{% highlight matlab %}
+rot.angle ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -127,33 +134,34 @@ ans = vector3d (y↑→x)
       x      y      z
   0.447 -0.447  0.775
 {% endhighlight %}
-<h2 id="11">The Angle Between Two Rotations</h2>
-<p>Given two rotations, <code class="language-plaintext highlighter-rouge">angle</code> measures how far apart they are - the angle of the rotation that turns one into the other. The composed rotation <code class="language-plaintext highlighter-rouge">rot</code> is <code class="language-plaintext highlighter-rouge">rot1</code> followed by <code class="language-plaintext highlighter-rouge">rot2</code>, so it sits exactly the angle of <code class="language-plaintext highlighter-rouge">rot2</code> away from <code class="language-plaintext highlighter-rouge">rot1</code>.</p>
+<p>The composite is a 104.4775 degree turn about the displayed axis. This is not the sum of the two input angles because rotations about different axes do not add like vectors.</p>
+<h2 id="14">The Inverse Rotation</h2>
+<p> <a href="quaternion.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a> reverses a rotation. For a nonzero turn below 180 degrees, the inverse has the opposite axis and the same canonical, nonnegative angle.</p>
 {% highlight matlab %}
-angle(rot,rot1) / degree
+invRot = inv(rot);
+
+[rot.axis,invRot.axis]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = vector3d (y↑→x)
+ size: 1 × 2
+       x      y      z
+   0.447 -0.447  0.775
+  -0.447  0.447 -0.775
+{% endhighlight %}
+
+{% highlight matlab %}
+[rot.angle,invRot.angle] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-   60.0000
+  104.4775  104.4775
 {% endhighlight %}
-<p>This number is the distance used throughout MTEX: how well a fit reproduces a measurement, how much orientation varies within a grain, how far a misorientation is from an ideal one. For orientations it additionally respects crystal symmetry, see <a href="MisorientationTheory.html">Misorientations</a>.</p>
-<h2 id="13">The Inverse Rotation</h2>
-<p> <a href="quaternion.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a> turns a rotation around: the axis stays, the angle changes sign.</p>
+<p>A rotation multiplied by its inverse is the identity. This is why <code class="language-plaintext highlighter-rouge">rot \ v</code> is the same operation as <code class="language-plaintext highlighter-rouge">inv(rot) * v</code>.</p>
 {% highlight matlab %}
-inv(rot)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-    90   60  180
-{% endhighlight %}
-<p>A rotation multiplied by its inverse is the identity, which is what makes <code class="language-plaintext highlighter-rouge">rot \ v</code> above the same as <code class="language-plaintext highlighter-rouge">inv(rot) * v</code>.</p>
-{% highlight matlab %}
-rot * inv(rot)
+rot * invRot
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -163,8 +171,45 @@ ans = rotation
   phi1  Phi phi2
      0    0    0
 {% endhighlight %}
-<h2 id="15">Reading off Other Parametrisations</h2>
-<p>Any parametrisation is available as a property or a command, whichever description the rotation was defined by.</p>
+<h2 id="17">The Angle Between Two Rotations</h2>
+<p>The relative rotation below acts after <code class="language-plaintext highlighter-rouge">rot1</code> and carries its result to the result of <code class="language-plaintext highlighter-rouge">rot</code>. Its principal angle is the angular distance between the two rotations.</p>
+{% highlight matlab %}
+relativeRot = rot * inv(rot1);
+
+[relativeRot.angle,angle(rot,rot1)] ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   60.0000   60.0000
+{% endhighlight %}
+<p>Both entries are 60 degrees. The second is the direct <a href="quaternion.angle.html"><code class="language-plaintext highlighter-rouge">angle(rot,rot1)</code></a> call, so there is usually no need to construct the relative rotation explicitly.</p>
+<p>This angular distance is used throughout MTEX to compare a fit with a measurement and to quantify orientation variation. For orientations it additionally minimizes over symmetry-equivalent descriptions, as explained in <a href="OrientationSymmetry.html">Orientation Symmetry</a>.</p>
+<h2 id="19">Lists of Rotations</h2>
+<p>MTEX objects are vectorized. If both operands are non-scalar, <code class="language-plaintext highlighter-rouge">.*</code> pairs corresponding entries while <code class="language-plaintext highlighter-rouge">*</code> forms every combination. A scalar operand is applied to the whole list with either operator.</p>
+{% highlight matlab %}
+rotations = rotation.byAxisAngle(vector3d.Z,[0 30 60]*degree);
+directions = [vector3d.X,vector3d.Y,vector3d.Z];
+
+size(rotations .* directions)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     1     3
+{% endhighlight %}
+<p>The elementwise result has size 1-by-3: one output for each pair.</p>
+{% highlight matlab %}
+size(rotations * directions)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     3     3
+{% endhighlight %}
+<p>The outer result has size 3-by-3: every rotation was applied to every direction. The same distinction applies when two rotation lists are composed.</p>
+<h2 id="22">Reading Other Parametrisations</h2>
+<p>A rotation can be inspected in any representation, regardless of how it was constructed.</p>
 <p>
    <table class="usertable">
       <tr>
@@ -184,7 +229,7 @@ ans = rotation
                </p>
          </td>
          <td>
-               <p>the Rodrigues Frank vector</p>
+               <p>the Rodrigues--Frank vector</p>
          </td>
       </tr>
       <tr>
@@ -210,6 +255,16 @@ ans = rotation
       <tr>
          <td>
                <p>
+                  <a href="quaternion.cubochoric.html">cubochoric(rot)</a>
+               </p>
+         </td>
+         <td>
+               <p>the cubochoric vector</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
                   <a href="quaternion.axis.html">axis(rot)</a>, <a href="quaternion.angle.html">angle(rot)</a>
                </p>
          </td>
@@ -219,7 +274,7 @@ ans = rotation
       </tr>
    </table>
 </p>
-<p>Euler angles come in whichever convention is asked for, and the answer differs between conventions - the numbers below are not the ones the display shows, which uses Bunge.</p>
+<p>Euler angles depend on a convention. Naming Matthies here makes the result independent of the user's display preference.</p>
 {% highlight matlab %}
 [alpha,beta,gamma] = Euler(rot,'Matthies');
 
@@ -230,8 +285,20 @@ ans = rotation
 ans =
   270.0000   60.0000  180.0000
 {% endhighlight %}
-<h2 id="16">Next</h2>
-<p>Sets of rotations rather than single ones are drawn in <a href="RotationPlotting.html">Plotting</a>, and a rotation carrying a crystal symmetry is an <a href="OrientationDefinition.html">orientation</a>, where composing in the right order becomes a question with a physical answer.</p>
+<p>The displayed 270, 60, 180 degree triplet is the Matthies description of the same composite rotation. See <a href="RotationRepresentations.html">Rotation Representations</a> before comparing coordinates produced by different programs.</p>
+<h2 id="24">The Maths Behind the Angular Distance</h2>
+<p>For rotations \(r_1\) and \(r_2\), MTEX uses the principal angle of a relative rotation:</p>
+<p>\[ d(r_1,r_2) = \mathop{\rm angle}(r_2 r_1^{-1}) = \mathop{\rm angle}(r_1^{-1}r_2). \]</p>
+<p>The two relative rotations generally have different axes, but they have the same angle. The distance is unchanged if the same rotation is composed onto both inputs from the left or from the right. This invariance is why the 60 degree result above does not depend on the starting orientation <code class="language-plaintext highlighter-rouge">rot1</code>.</p>
+<h2 id="25">References</h2>
+<div>
+<ul>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops composition and the geometry of rotation space for texture analysis.</li>
+<li>D. Rowenhorst et al., <a href="https://doi.org/10.1088/0965-0393/23/8/083501">Consistent representations of and conversions between 3D rotations</a>, Modelling and Simulation in Materials Science and Engineering 23 (2015) 083501, documents the convention choices behind common parametrisations.</li>
+</ul>
+</div>
+<h2 id="26">Next</h2>
+<p>Sets of rotations are drawn in <a href="RotationPlotting.html">Plotting</a>. A rotation that maps crystal coordinates into specimen coordinates and carries crystal symmetry is an <a href="OrientationDefinition.html">orientation</a>.</p>
 </div>
 </body>
 </html>

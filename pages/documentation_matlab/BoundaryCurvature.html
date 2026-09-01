@@ -1,5 +1,5 @@
 ---
-title: "Boundary Curvature"
+title: 'Boundary Curvature'
 
 sidebar: documentation_sidebar
 permalink: BoundaryCurvature.html
@@ -23,147 +23,182 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>The curvature of a curve is defined by fitting locally a circle and taking one over its radius. Hence, a straight line will have curvature 0 and a circle of radius \(2\) will have constant curvature \(1/2\) everywhere. Hence, the unit of the curvature computed in MTEX is one over the unit of the EBSD coordinates which is usually 1/&micro;m. Let us demonstrate boundary curvature using some artificial grain shapes</p>
+<p>Curvature measures how sharply a boundary trace bends. A straight stretch has zero curvature, while a tightly rounded stretch has a large magnitude. The sign records the direction of the bend and therefore needs an oriented walk along the boundary.</p>
+<p>MTEX stores a grain boundary as short segments between neighbouring EBSD measurements that belong to different grains. A <b>chain</b> is a maximal run of these segments laid end to end, from one junction to the next.</p>
+<p>This page assumes that grains have already been reconstructed as in <a href="GrainReconstruction.html">Grain Reconstruction</a>. <a href="BoundaryProperties.html">Grain Boundary Properties</a> introduces segments, chains, and the two grain IDs stored beside each segment.</p>
+<p>The <a href="grainBoundary.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a> is the reciprocal of a local circle radius. Its unit is therefore the inverse of the EBSD coordinate unit, usually 1/&micro;m. A circle of radius 2 has constant curvature magnitude 1/2. The closing maths section gives the precise three-point definition.</p>
 {% highlight matlab %}
-% import the artificial grain shapes
+close all;
+
+% import artificial grain shapes
 mtexdata testgrains silent
 
-% select and smooth a few interesting grains
+% select and smooth a range of convex, concave, and enclosing grains
 grains = smoothBoundary(grains('id',[2 3 9 11 15 16 18 23 31 33 38 40]),10);
 {% endhighlight %}
-<p>Therefore, we first extract all boundary segments and colorize them according to their <a href="grainBoundary.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a>.</p>
+<h2 id="2">Colour a Boundary by Curvature</h2>
+<p>Extract the boundary segments and plot them first as a dark background.</p>
 {% highlight matlab %}
-% extract boundary segments
 gB = grains.boundary;
+plot(gB,'lineWidth',10,'micronbar','off');
 
-% plot some dark background
-plot(gB,'linewidth',10,'micronbar','off');
-
-% colorize boundaries by curvature
+% overlay the same segments coloured by signed curvature
 hold on
-plot(gB,gB.curvature,'linewidth',6);
+plot(gB,gB.curvature,'lineWidth',6);
 hold off
 
-% set a specific colormap
 mtexColorMap('blue2red')
 setColorRange(0.25*[-1,1])
-mtexColorbar
+mtexColorbar('title',['signed curvature in 1/' gB.scanUnit])
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryCurvature_01.png" %}
 </center>
-<h2 id="3">The Sign of the Curvature</h2>
-<p>The curvature is signed, and the sign tells which of the two adjacent grains the boundary bulges into. Boundary segments are stored in walk order with the grain in the first column of <code class="language-plaintext highlighter-rouge">gB.grainId</code> lying to the left of the walk direction - see <a href="BoundaryMisorientations.html">boundary misorientations</a>. Accordingly a <b>positive</b> curvature means the boundary bulges into the grain in the <b>second</b> column, a negative one that it bulges into the grain in the <b>first</b> column.</p>
-<p>Every grain plotted above is an island inside one large surrounding grain, grain 44, and along their outer boundaries that surrounding grain is the one stored in the first column</p>
+<p>Blue and red mark opposite bending directions. The nearly straight sides fade towards white, while sharp notches reach the ends of the colour scale. The fixed range clips magnitudes above 0.25, so saturated colour means at least that magnitude rather than exactly 0.25.</p>
+<h2 id="4">The Sign of the Curvature</h2>
+<p>Boundary segments are stored in walk order. The grain in the first column of <code class="language-plaintext highlighter-rouge">gB.grainId</code> lies to the left of the walk direction; see <a href="BoundaryMisorientations.html">Boundary Misorientations</a>.</p>
+<p>Positive curvature means that the boundary bulges into the grain in the second column. Negative curvature means that it bulges into the grain in the first column. The first five segments of grain 2 show the column order.</p>
 {% highlight matlab %}
-grains('id',2).boundary.grainId(1:5,:)
+grainIdPairs = grains('id',2).boundary.grainId(1:5,:)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+grainIdPairs =
     44     2
     44     2
     44     2
     44     2
     44     2
 {% endhighlight %}
-<p>Grain 2 is a convex blob, so its boundary bulges into grain 44 everywhere - into the <b>first</b> column - and its curvature is negative throughout. Across the whole map this is why the convex parts come out blue while only the notches and the enclosed grains come out red. The enclosed grains are stored the other way round, with the enclosed grain in the first column, and being convex they bulge into the ring shaped grains 23 and 31 that surround them.</p>
-<p>Which grain sits in which column is not a property of the boundary as a set of segments, it is a property of the direction each segment is walked in. The command <a href="grainBoundary.flip.html"><code class="language-plaintext highlighter-rouge">flip</code></a> reverses that direction and swaps the two columns with it, so the curvature simply changes sign. Integrating it along a closed boundary gives the total turning of the curve, which is \(\pm 2\pi\) depending on the direction it is walked in</p>
+<p>Every row is <code class="language-plaintext highlighter-rouge">[44 2]</code>. All selected shapes sit inside the large surrounding grain 44, which occupies the first column along each outer boundary. Grain 2 is convex, so its outer boundary bulges into grain 44, the grain in the <b>first</b> column. Its curvature is therefore negative throughout.</p>
+<p>This storage convention explains why most convex parts in the first figure are blue, while notches and enclosed grains are red. The enclosed grains are stored the other way around, with the enclosed grain in the first column. Their convex boundaries bulge into the ring-shaped grains 23 and 31.</p>
+<p>The column order is not an intrinsic property of an unoriented boundary. It follows from the direction in which each chain is walked. The <a href="grainBoundary.flip.html"><code class="language-plaintext highlighter-rouge">flip</code></a> command reverses the walk, swaps the two columns, and changes the sign of the curvature.</p>
 {% highlight matlab %}
 gB2 = grains('id',2).boundary;
-gB2flipped = flip(gB2);
+gB2Flipped = flip(gB2);
 
-[sum(gB2.curvature .* gB2.segLength), ...
-  sum(gB2flipped.curvature .* gB2flipped.segLength)] ./ (2*pi)
+turnsBeforeAfterFlip = [sum(gB2.curvature .* gB2.segLength), ...
+  sum(gB2Flipped.curvature .* gB2Flipped.segLength)] ./ (2*pi)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+turnsBeforeAfterFlip =
    -1.0199    1.0199
 {% endhighlight %}
-<h2 id="5">Curvature With Respect to a Specific Grain</h2>
-<p>Selecting a single grain does not change the storage order - the segments of <code class="language-plaintext highlighter-rouge">grains(k).boundary</code> come as they are stored, and the grain we asked for may sit in either column. In order to read the curvature as convex or concave with respect to one specific grain we flip exactly those segments that have it in the second column. Then that grain lies to the left everywhere, a positive curvature marks a convex piece of it and a negative one a notch.</p>
+<p>The normalized sums are about -1.02 and 1.02. Reversing the walk changes only the sign. A smooth simple closed curve has a total turning of \(\pm 2\pi\); the small offset here comes from the discrete approximation.</p>
+<h2 id="7">Curvature With Respect to a Specific Grain</h2>
+<p>Selecting one grain does not change the storage order of its boundary. The requested grain may still occupy either column of <code class="language-plaintext highlighter-rouge">grainId</code>.</p>
+<p>To read convexity relative to one grain, put that grain in the first column for every segment. Flip exactly the segments on which it is currently in the second column. That grain then lies to the left of the walk everywhere. Positive curvature then marks a convex part of that grain, while negative curvature marks a notch.</p>
 {% highlight matlab %}
 for k = 1:length(grains)
 
   gB = grains(k).boundary;
 
-  % put the grain itself into the first column
-  gB = flip(gB, gB.grainId(:,2) == grains(k).id);
+  % put the selected grain into the first column
+  gB = flip(gB,gB.grainId(:,2) == grains(k).id);
 
-  plot(gB,'linewidth',10,'micronbar','off');
+  plot(gB,'lineWidth',10,'micronbar','off');
   hold on
-  plot(gB,gB.curvature,'linewidth',6);
+  plot(gB,gB.curvature,'lineWidth',6);
 
 end
 hold off
 
 mtexColorMap('blue2red')
 setColorRange(0.25*[-1,1])
+mtexColorbar('title',['grain-relative curvature in 1/' gB.scanUnit])
 drawNow(gcm,'figSize',getMTEXpref('figSize'))
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryCurvature_02.png" %}
 </center>
-<p>The outer boundaries are now predominantly red, i.e. convex with respect to the grain they belong to, and the boundaries of the enclosed grains have turned blue - seen from the ring shaped grains 23 and 31 they are concave.</p>
-<h2 id="7">Undefined Segments and Smoothing</h2>
-<p>The curvature of a segment is computed from the circle through its own midpoint and the midpoints of its two neighbours within the same chain. A segment at the end of an open chain has a neighbour on one side only and therefore no curvature - those segments come out <code class="language-plaintext highlighter-rouge">NaN</code>. All chains above are closed, so nothing is undefined there, but an arbitrary subset of segments is in general no longer closed</p>
+<p>The outer boundaries are now predominantly red because they are convex relative to their own grains. The enclosed boundaries have turned blue. Seen from ring-shaped grains 23 and 31, those boundaries are concave.</p>
+<h2 id="9">Undefined Segments and the Two Smoothing Steps</h2>
+<p>MTEX computes a segment's curvature from its midpoint and the midpoints of its two neighbours in the same chain. An end segment of an open chain has a neighbour on only one side, so its curvature is <code class="language-plaintext highlighter-rouge">NaN</code>. Closed chains wrap around and have curvature at every segment.</p>
+<p>All complete chains above are closed. An arbitrary subset of segments is generally open, however. The first 100 segments have two undefined ends.</p>
 {% highlight matlab %}
 gB = grains.boundary;
-sum(isnan(gB(1:100).curvature))
+numberUndefined = sum(isnan(gB(1:100).curvature))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+numberUndefined =
      2
 {% endhighlight %}
-<p>These raw values are then smoothed along the chain. The number of smoothing passes is the second argument and defaults to 50. Without any smoothing the curvature follows the individual segment midpoints and is correspondingly noisy</p>
+<p>Two different operations are called smoothing here. The earlier <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> call changed the boundary geometry to suppress its pixel staircase. That step matters because local curvature amplifies small geometric irregularities.</p>
+<p>The argument to <code class="language-plaintext highlighter-rouge">gB.curvature(n)</code> instead smooths the computed scalar values along each chain without moving the boundary. It defaults to 50 passes. Zero requests the unsmoothed three-point values.</p>
 {% highlight matlab %}
 gB = grains('id',15).boundary;
 
-plot(gB.arcLength,gB.curvature(0),'linewidth',1)
+% a new figure, so the line plot does not inherit the wide map layout
+figure
+plot(gB.arcLength,gB.curvature(0),'lineWidth',1)
 hold on
-plot(gB.arcLength,gB.curvature,'linewidth',2)
+plot(gB.arcLength,gB.curvature,'lineWidth',2)
 hold off
 
-legend('no smoothing','50 smoothing passes')
+legend('no scalar smoothing','50 scalar-smoothing passes')
 xlabel(['arc length in ' gB.scanUnit])
 ylabel(['curvature in 1/' gB.scanUnit])
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryCurvature_03.png" %}
 </center>
-<h2 id="9">Curvature of a Real EBSD Map</h2>
-<p>Finally we illustrate the usage of the <a href="grainBoundary.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a> command at a real EBSD map.</p>
+<p>The thin curve follows individual midpoint triples and contains sharp spikes. Fifty passes retain the broad changes of sign while suppressing segment-scale fluctuations. Smoothing therefore changes the local peaks; compare data sets only after choosing the same geometry and scalar filters. <a href="GrainSmoothing.html">Grain Boundary Smoothing</a> develops the first choice.</p>
+<h2 id="12">Curvature of a Real EBSD Map</h2>
+<p>The same procedure applies to a reconstructed EBSD map. First reconstruct and smooth the grains, then orient the chosen boundary relative to its grain. An <a href="EBSDIPFMap.html">inverse pole figure map</a> supplies the orientation-coloured background.</p>
 {% highlight matlab %}
-% import data and reconstruct grains
 mtexdata titanium silent
 [grains,ebsd] = calcGrains(ebsd);
 grains = smoothBoundary(grains,5);
 
-% plot an ipf map
-plot(ebsd('indexed'),ebsd('indexed').orientations)
+% compute the IPF colours explicitly to keep the published output quiet
+indexed = ebsd('indexed');
+colorKey = ipfColorKey(indexed);
+ipfColors = colorKey.orientation2color(indexed.orientations);
+plot(indexed,ipfColors)
 
 hold on
+plot(grains.boundary,'lineWidth',4)
 
-% plot grain boundaries
-plot(grains.boundary,'linewidth',4)
-
-% colorize the grain boundary of the grain at position 596,466 according to
-% curvature, with the grain itself on the left so that convex is positive
+% select the grain containing this position and put it in the first column
 grain = grains(596,466);
-gB = flip(grain.boundary, grain.boundary.grainId(:,2) == grain.id);
+gB = flip(grain.boundary,grain.boundary.grainId(:,2) == grain.id);
 
-plot(gB,gB.curvature(5),'linewidth',6)
+% use five scalar-smoothing passes for the highlighted boundary
+plot(gB,gB.curvature(5),'lineWidth',6)
 hold off
 
 mtexColorMap('blue2red')
 setColorRange(0.05*[-1,1])
-mtexColorbar
+mtexColorbar('title',['grain-relative curvature in 1/' gB.scanUnit])
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryCurvature_04.png" %}
 </center>
+<p>The thick coloured outline marks the grain near the centre of the map. Its broad convex stretches are red, while local inward notches are blue. The black lines show the complete boundary network, and the IPF colours are only a background for locating the selected grain.</p>
+<h2 id="14">What This Curvature Does Not Measure</h2>
+<p>This is the curvature of a boundary <b>trace in a two-dimensional section</b>. It is not the mean curvature of the boundary surface in three dimensions. A single section does not reveal the surface away from that plane.</p>
+<p>The result also inherits the spatial resolution and segmentation of the EBSD map. Boundary smoothing suppresses the grid staircase but moves and resamples the trace, so the smoothing choice is part of the measurement rather than a cosmetic plotting choice.</p>
+<h2 id="15">The Maths Behind the Three-Point Curvature</h2>
+<p>For consecutive segment midpoints \(\mathbf{p}_{-}\), \(\mathbf{p}_0\), and \(\mathbf{p}_{+}\), MTEX uses signed Menger curvature</p>
+<p>\[\kappa = \frac{4 A_s}{a b c} = \frac{1}{R}.\]</p>
+<p>Here \(a\), \(b\), and \(c\) are the triangle's side lengths. \(A_s\) is its signed area, and \(R\) is the radius of its circumcircle. Collinear points give zero. Reversing the walk changes the sign of \(A_s\) and leaves the radius unchanged.</p>
+<p>For a smooth simple closed curve, integrating signed curvature over arc length gives its total turning,</p>
+<p>\[\oint_C \kappa\,\mathrm{d}s = \pm 2\pi.\]</p>
+<p>The sign is set by the walk direction, as the numerical check above showed.</p>
+<h2 id="16">Further Reading</h2>
+<div>
+<ul>
+<li>K. Menger, <a href="https://doi.org/10.4064/fm-10-1-96-115">Zur allgemeinen Kurventheorie</a>, Fundamenta Mathematicae 10, 96-115, 1927, introduces the three-point curvature used here.</li>
+<li>W.W. Mullins, <a href="https://doi.org/10.1063/1.1722511">Two-Dimensional Motion of Idealized Grain Boundaries</a>, Journal of Applied Physics 27, 900-904, 1956, relates curvature to idealized grain-boundary motion.</li>
+<li>D.T. Fullwood et al., <a href="https://doi.org/10.1017/S1431927621013611">Determining Grain Boundary Position and Geometry from EBSD Data: Limits of Accuracy</a>, Microscopy and Microanalysis 28, 96-108, 2022, discusses the experimental limits on boundary position.</li>
+<li>X. Zhong et al., <a href="https://doi.org/10.1016/j.actamat.2016.10.030">The Five-Parameter Grain Boundary Curvature Distribution in an Austenitic and Ferritic Steel</a>, Acta Materialia 123, 136-145, 2017, treats curvature of three-dimensional grain-boundary surfaces.</li>
+<li>G. Gottstein and L.S. Shvindlerman, <a href="https://www.routledge.com/9780429147388">Grain Boundary Migration in Metals</a>, second edition, CRC Press, 2010, develops the thermodynamics and kinetics of curvature-driven migration.</li>
+</ul>
+</div>
+<h2 id="17">Next</h2>
+<p>Continue with <a href="GrainSmoothing.html">Grain Boundary Smoothing</a> to choose how the reconstructed pixel staircase is simplified, resampled, and smoothed.</p>
 </div>
 </body>
 </html>

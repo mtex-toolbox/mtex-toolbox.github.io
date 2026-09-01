@@ -1,5 +1,5 @@
 ---
-title: "Misorientations"
+title: 'Misorientations'
 
 sidebar: documentation_sidebar
 permalink: Misorientations.html
@@ -23,38 +23,89 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>An orientation says how one crystal sits in the specimen. A <b>misorientation</b> says how two crystals sit relative to each other - it is the rotation that carries the lattice of the first onto the lattice of the second. The specimen has dropped out of the question entirely: turn the sample on the stage and every orientation changes, but no misorientation does.</p>
-<p>That independence is why misorientations carry so much of the physics. Whether two grains meet across a twin boundary, whether a lath of martensite grew from a particular parent grain, how much a grain has bent internally - none of these depend on how the sample happened to be mounted, so all of them are naturally expressed as misorientations.</p>
-<p>The picture below is a magnesium map whose grain borders are coloured by the misorientation angle across them. Two populations stand out at once: a scatter of small angles, and a set of borders sharing one particular large angle.</p>
+<p>An <a href="OrientationDefinition.html">orientation</a> maps one crystal frame into the specimen frame. A <b>misorientation</b> maps one crystal frame into another. The specimen frame therefore cancels from the relative relationship.</p>
+<p>Changing the specimen frame changes both orientation descriptions together, but it does not change their misorientation. Turn the sample on the stage and every orientation changes, but no misorientation does. This independence is why misorientations carry so much of the physics.</p>
+<p>Misorientations describe neighbouring pixels, a pixel relative to its grain mean, crystals across a grain boundary, and crystals in different phases. They quantify orientation gradients and internal grain bending, identify twin relationships, and connect martensite to a possible parent grain.</p>
+<p>The example below is a magnesium EBSD map containing extension twins. The grains are reconstructed at a \(5^\circ\) threshold. Their boundaries are coloured by the misorientation angle across them.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata twins silent
 
-grains = calcGrains(ebsd('indexed'),'threshold',5*degree);
+grains = calcGrains(ebsd('indexed'),'angle',5*degree);
 grains = smoothBoundary(grains,5);
+gB = grains.boundary('Magnesium','Magnesium');
 
-plot(ebsd('indexed'),ebsd('indexed').orientations,'micronbar','off')
+plot(grains,'FaceColor',[0.92 0.92 0.92],'micronbar','off')
 hold on
-plot(grains.boundary,grains.boundary.misorientation.angle./degree,'linewidth',3)
+plot(gB,gB.misorientation.angle./degree,'linewidth',3)
 mtexColorbar('title','misorientation angle in degree')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Misorientations_01.png" %}
 </center>
-<p>The sharp population near 86 degrees is not a coincidence: it is the signature of a twin, one specific misorientation repeated at many independent borders. Finding such populations is most of what this chapter is for.</p>
-<h2 id="3">Two words that are easy to confuse</h2>
-<p>A crystal has symmetry, so a misorientation is never a single rotation. For a cubic crystal there are 24 ways of labelling the lattice axes of the first crystal and 24 of the second, which gives up to 576 rotations that all describe the same physical relationship. They are called symmetrically equivalent.</p>
+<p>The yellow traces share an angle near \(86^\circ\), while the cooler traces span lower angles. The neutral grain interiors keep orientation colour from being confused with the boundary-angle scale.</p>
+<p>This map shows only the angle. It does not yet establish that the yellow boundaries share the same rotation axis or arise from the same mechanism.</p>
+<h2 id="3">From Individual Boundaries to a Population</h2>
+<p>Plotting the same segment angles as a histogram reveals the repeated relationship directly.</p>
+{% highlight matlab %}
+close all
+plotAngleDistribution(gB.misorientation)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Misorientations_02.png" %}
+</center>
+<p>The sharp population near \(86^\circ\) is the signature of the extension twin in this map. A broader population occupies the lower angles.</p>
+<p>Each boundary segment contributes one sample, not each neighbouring grain pair. Long boundaries usually have more segments, so the histogram depends on boundary sampling. Interpreting such populations is central to this chapter.</p>
+<h2 id="5">Misorientation, Disorientation, and Symmetry</h2>
+<p>A crystal has symmetry, so one physical misorientation has many equivalent rotation descriptions. For a cubic crystal there are 24 ways to label the lattice axes on each side, giving up to \(24 \times 24 = 576\) rotations.</p>
+<p>Each rotation is a symmetrically equivalent representative of the same misorientation. A <b>disorientation</b> is the particular representative with the smallest rotation angle and an axis in a fundamental sector. A fundamental region is the part of rotation space that keeps exactly one representative of each physical relationship.</p>
+<p>When a boundary is called a "60 degree boundary", the quoted value is its disorientation angle. The angle is not the complete misorientation because it says nothing about the rotation axis.</p>
+<p>The symmetries on both sides determine the equivalent rotations. The same numerical angle must therefore be compared across phases with care.</p>
+<p>A further ambiguity occurs at a same-phase grain boundary. Neither side is intrinsically first. Reversing their order replaces the misorientation by its inverse.</p>
 <p>
-<b>Misorientation</b> means any one of them. <b>Disorientation</b> means the particular one with the smallest rotation angle, chosen so that a single number can be quoted. When a boundary is described as "a 60 degree boundary", that 60 degrees is a disorientation angle.</p>
-<p>This is also why a misorientation angle can never be compared across phases without care: the set of equivalent rotations depends on the symmetry of both crystals involved.</p>
-<p>One further ambiguity is easy to miss. A misorientation has a direction - from the first crystal to the second - and reversing it gives the inverse rotation. Between two grains of the same phase there is nothing that makes either of them first, so the physically meaningful object is the rotation and its inverse taken together. This is called grain exchange symmetry, and it has to be included when misorientations are counted into a distribution, or the same boundary is recorded as two different relationships.</p>
-<h2 id="4">Where to start</h2>
-<p>
-<a href="MisorientationTheory.html">Theory</a> is the page to read first. It builds the misorientation from two orientations, shows what symmetry does to it, and introduces the fundamental region - the piece of rotation space in which each physical relationship appears exactly once.</p>
-<p>Once misorientations exist as data, the question becomes how they are distributed. The misorientation distribution function, or MDF, plays the same role for misorientations that the ODF plays for orientations, and <a href="MisorientationDistributionFunction.html">the MDF page</a> covers it. Its two projections are often more readable than the full function, and each has a page: <a href="AngleDistributionFunction.html">the angle distribution</a> answers "how far apart are neighbouring crystals", and <a href="AxisDistributionFunction.html">the axis distribution</a> answers "about which crystal direction do they turn". Comparing either against the distribution expected from randomly oriented crystals is the standard way to show that a population is real.</p>
-<h2 id="5">Next</h2>
-<p>Misorientations between neighbouring grains are the subject of <a href="GrainBoundaries.html">Grain Boundaries</a>, which is where the CSL and twinning analyses live. Misorientations between a parent phase and its products drive <a href="PhaseTransitions.html">Phase Transitions</a>. The orientations these are all built from are described in <a href="CrystalOrientations.html">Orientations</a>.</p>
+<b>Grain exchange symmetry</b> identifies those two descriptions. Include it when boundary misorientations are counted into a distribution. Otherwise one boundary can appear as two different relationships.</p>
+<h2 id="6">Angle, Axis, and Boundary Plane</h2>
+<p>A rotation needs an angle and an axis. Different misorientations can have the same angle, so the histogram above cannot identify a twin law by itself. The complete relationship must be compared before a mechanism is assigned.</p>
+<p>An axis also needs a reference frame. It may be expressed as a direction in either crystal frame or in the specimen frame, and those questions are not interchangeable.</p>
+<p>A misorientation is still not a complete grain-boundary description. It supplies three rotational degrees of freedom; the interface-plane normal supplies two more. The <a href="GrainBoundaries.html">Grain Boundaries</a> chapter adds that spatial information.</p>
+<h2 id="7">Where to Start</h2>
+<p>Begin with <a href="DefinitionAsCoordinateTransform.html">Orientations as Coordinate Transforms</a> if composition order is unfamiliar. The EBSD examples also use <a href="GrainReconstruction.html">grain reconstruction</a>. The distribution pages assume <a href="DensityEstimation.html">kernel density estimation</a>.</p>
+<p>The recommended reading order follows the chapter contents:</p>
+<div>
+<ol>
+<li>
+<a href="MisorientationTheory.html">Theory</a> constructs a misorientation from two orientations and introduces symmetry, angle, axis, and the fundamental region.</li>
+<li>
+<a href="MisorientationGrainExchangeSym.html">Grain Exchange Symmetry</a> explains why a same-phase boundary identifies a misorientation with its inverse.</li>
+<li>
+<a href="Twinning.html">Twinning</a> builds an ideal twin law and compares the complete relationship with measured boundaries.</li>
+<li>
+<a href="MisorientationDistributionFunction.html">Misorientation Distribution Function</a> turns a population into a density in misorientation space.</li>
+<li>
+<a href="AxisDistributionFunction.html">Axis Distribution</a> integrates out the angle and distinguishes crystal-coordinate axes from specimen-coordinate axes.</li>
+<li>
+<a href="AngleDistributionFunction.html">Angle Distribution</a> integrates out the axis and compares correlated, uncorrelated, and random populations.</li>
+</ol>
+</div>
+<p>The misorientation distribution function, or MDF, plays the same role for misorientations that the ODF plays for orientations. Its angle and axis distributions are often easier to read, but neither retains their coupling.</p>
+<p>Compare a measured boundary distribution with its texture-dependent uncorrelated distribution. Also compare it with the symmetry-only random baseline. These tests ask whether texture or rotation-space geometry explains a population. A difference does not prove a physical mechanism.</p>
+<h2 id="8">References</h2>
+<div>
+<ul>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004. This book develops rotation space, symmetry, and misorientation distributions.</li>
+<li>J.K. Mackenzie, <a href="https://doi.org/10.1093/biomet/45.1-2.229">Second Paper on Statistics Associated with the Random Disorientation of Cubes</a>, <i>Biometrika</i> 45 (1958), 229--240. This paper derives the cubic random baseline.</li>
+<li>J.W. Christian and S. Mahajan, <a href="https://doi.org/10.1016/0079-6425(94)00007-7">Deformation Twinning</a>, <i>Progress in Materials Science</i> 39 (1995), 1--157. This review covers twin modes and their crystallography.</li>
+<li>A.P. Sutton, E.P. Banks, and A.R. Warwick, <a href="https://doi.org/10.1098/rspa.2015.0442">The Five-Dimensional Parameter Space of Grain Boundaries</a>, <i>Proceedings of the Royal Society A</i> 471 (2015), 20150442. This paper separates misorientation from boundary-plane orientation.</li>
+<li>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, <i>Microbeam analysis -- Guidelines for orientation measurement using electron backscatter diffraction</i>. This standard addresses reproducible EBSD measurements.</li>
+</ul>
+</div>
+<h2 id="9">Next</h2>
+<p>The next documentation chapter introduces <a href="ODFAnalysis.html">orientation distribution functions</a>. They provide the texture-dependent reference used later in this chapter.</p>
+<p>For spatial applications, continue to <a href="GrainBoundaries.html">Grain Boundaries</a>. Its <a href="CSLBoundaries.html">CSL</a> and <a href="TwinningBoundaries.html">detailed twinning</a> analyses add boundary geometry to the relative rotations introduced here. Parent-to-child misorientations drive <a href="PhaseTransitions.html">Phase Transitions</a>.</p>
+<p>Pixel-to-pixel and pixel-to-grain mean misorientations continue in <a href="EBSDKAM.html">Kernel Average Misorientation</a> and <a href="GrainOrientationParameters.html">Grain Orientation Parameters</a>.</p>
+<p>Return to <a href="CrystalOrientations.html">Orientations</a> when the underlying crystal-to-specimen maps or their reference frames need review.</p>
 </div>
 </body>
 </html>

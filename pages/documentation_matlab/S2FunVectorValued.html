@@ -1,5 +1,5 @@
 ---
-title: "Vector Valued S2Fun"
+title: 'Vector-valued spherical functions'
 
 sidebar: documentation_sidebar
 permalink: S2FunVectorValued.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Vector Valued S2Fun</title>
+<title>Vector-valued spherical functions</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_S2FunVectorValued.m">
 </head>
@@ -22,127 +22,119 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A vector-valued spherical function collects several scalar functions on the sphere in one MATLAB array,</p>
+<p>\[ f\colon \mathrm{S}^2\to\mathbb{R}^n. \]</p>
+<p>Its output components are numerical values. This differs from a <a href="S2FunVectorField.html">spherical vector field</a>, whose output is a geometric vector, and from a <a href="S2FunAxisField.html">spherical axis field</a>, whose output is unchanged when its representative is reversed. Use a vector-valued <a href="S2Fun.S2Fun.html">S2Fun</a> when the components should support MATLAB array indexing, concatenation and reduction. Component shape is independent of point-group invariance. Use <a href="S2FunSym.html">symmetric spherical functions</a> when all components share one symmetry.</p>
 <!--/introduction-->
-<h2 id="1">Structural conventions of the input and output of vector valued S2FunHarmonic</h2>
-<p>In this part we deal with vector valued functions of the form</p>
-<p>\[ f\colon \bf{S}^2\to \bf{R}^n \].</p>
-<div>
-<ul>
-<li>the structure of the nodes is always interpreted as a column vector</li>
-<li>the node index is the first dimension</li>
-<li>the dimensions of the <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> itself is counted from the second dimension</li>
-</ul>
-</div>
-<p>For example we got four nodes \(v_1, v_2, v_3\) and \(v_4\) and six functions \(f_1, f_2, f_3, f_4, f_5\) and \(f_6\), which we want to store in a 3x2 array, then the following scheme applies to function evaluations:</p>
-<p>\[ F(:, :, 1) = \pmatrix{f_1(v_1) &amp; f_2(v_1) &amp; f_3(v_1) \cr f_1(v_2) &amp; f_2(v_2) &amp; f_3(v_2) \cr f_1(v_3) &amp; f_2(v_3) &amp; f_3(v_3) \cr f_1(v_4) &amp; f_2(v_4) &amp; f_3(v_4)} \quad\mathrm{and}\quad F(:, :, 2) = \pmatrix{f_4(v_1) &amp; f_5(v_1) &amp; f_6(v_1) \cr f_4(v_2) &amp; f_5(v_2) &amp; f_6(v_2) \cr f_4(v_3) &amp; f_5(v_3) &amp; f_6(v_3) \cr f_4(v_4) &amp; f_5(v_4) &amp; f_6(v_4)}. \]</p>
-<p>For the intern Fourier-coefficient matrix the first dimension is reserved for the Fourier-coefficients of a single function; the dimension of the functions itself begins again with the second dimension.</p>
-<p>If \(\bf{\hat f}_1, \bf{\hat f}_2, \bf{\hat f}_3, \bf{\hat f}_4, \bf{\hat f}_5\) and \(\bf{\hat f}_6\) would be the column vectors of the Fourier-coefficients of the functions above, internally they would be stored in \(\hat F\) as follows. \[ \hat F(:, :, 1) = \pmatrix{\bf{\hat f}_1 &amp; \bf{\hat f}_2 &amp; \bf{\hat f}_3} \quad\mathrm{and}\quad \hat F(:, :, 2) = \pmatrix{\bf{\hat f}_4 &amp; \bf{\hat f}_5 &amp; \bf{\hat f}_6}. \]</p>
-<h2 id="2">Defining a vector valued S2FunHarmonic</h2>
-<p>
-<b>Definition via function values</b>
-</p>
-<p>At first we need some vertices</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-nodes = equispacedS2Grid('points', 1e5);
+{% endhighlight %}
+<h2 id="2">How component arrays are laid out</h2>
+<p>MTEX always interprets the evaluation nodes as a column. The node index is the first dimension of the returned values. The dimensions of the spherical-function array begin with the second dimension.</p>
+<p>For example, suppose four nodes \(v_1,\ldots,v_4\) are evaluated by six scalar functions stored as a \(3\times2\) spherical-function array. The returned array <code class="language-plaintext highlighter-rouge">F</code> has size \(4\times3\times2\), with</p>
+<p>\[ F(i,:,1)=[f_1(v_i),f_2(v_i),f_3(v_i)] \]</p>
+<p>and</p>
+<p>\[ F(i,:,2)=[f_4(v_i),f_5(v_i),f_6(v_i)]. \]</p>
+{% highlight matlab %}
+fourNodes = [xvector;yvector;zvector; ...
+  vector3d.byPolar(60*degree,45*degree)];
+sixValueFunction = @(v) reshape([v.x,v.y,v.z,v.x.^2,v.y.^2,v.z.^2], ...
+  length(v),3,2);
+F = sixValueFunction(fourNodes);
+valueArraySize = size(F);
+{% endhighlight %}
+<p>Accordingly, <code class="language-plaintext highlighter-rouge">valueArraySize</code> is <code class="language-plaintext highlighter-rouge">[4 3 2]</code>. Index <code class="language-plaintext highlighter-rouge">F(i,j,k)</code> is the value at node <code class="language-plaintext highlighter-rouge">i</code> of component <code class="language-plaintext highlighter-rouge">(j,k)</code>. This rule lets one evaluation retain both the node layout and the component-array layout.</p>
+<h2 id="4">Interpolate sampled component values</h2>
+<p>The same convention applies when fitting a harmonic representation. Here the two columns of <code class="language-plaintext highlighter-rouge">sampleValues</code> define two scalar functions at every node.</p>
+{% highlight matlab %}
+nodes = equispacedS2Grid('points',800);
 nodes = nodes(:);
+sampleValues = [S2Fun.smiley(nodes),nodes.x.*nodes.y];
 {% endhighlight %}
-<p>Next we define function values for the vertices</p>
+<p> <a href="S2FunHarmonic.interpolate.html"><code class="language-plaintext highlighter-rouge">interpolate</code></a> places the two component dimensions after its hidden coefficient dimension. The resulting <code class="language-plaintext highlighter-rouge">sF1</code> has size \(2\times1\).</p>
 {% highlight matlab %}
-y = [S2Fun.smiley(nodes), (nodes.x.*nodes.y).^(1/4)];
+sF1 = S2FunHarmonic.interpolate(nodes,sampleValues,'bandwidth',12, ...
+  'weights','equal');
+componentArraySize = size(sF1);
 {% endhighlight %}
-<p>Now the actual command to get a 2x1 <code class="language-plaintext highlighter-rouge">sF1</code> of type <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a>
-</p>
+<h2 id="6">Plot the components</h2>
+<p>The scalar plotting commands also accept a vector-valued function. MTEX draws one panel per component rather than combining their values.</p>
 {% highlight matlab %}
-sF1 = S2FunHarmonic.interpolate(nodes, y)
+plot(sF1,'upper');
 {% endhighlight %}
-
-{% highlight plaintext %}
-sF1 = S2FunHarmonic (y↑→x)
-  size: 2 x 1
-  bandwidth: 224
-  isReal: false
+<center class="mtex-figure">
+{% include inline_image.html file="S2FunVectorValued_01.png" %}
+</center>
+<p>The first panel contains the smiley. The second has four lobes because the sign of \(xy\) alternates between neighboring quadrants. Separate panels are essential here: the two values are components, not the coordinates of arrows.</p>
+<h2 id="8">Construct from a function handle</h2>
+<p>A handle must return one row per input direction and one column per component. This example retains the original peaked scalar component and appends the Cartesian coordinate functions \(x\), \(y\) and \(z\).</p>
+{% highlight matlab %}
+fourComponentFunction = @(v) [exp(v.x+v.y+v.z) + ...
+  50*(v.y-cos(pi/3)).^3.*(v.y-cos(pi/3)>0),v.x,v.y,v.z];
+{% endhighlight %}
+<p>Passing the handle to the constructor applies quadrature. The harmonic cutoff is degree 50, and the resulting <code class="language-plaintext highlighter-rouge">sF2</code> has size \(4\times1\).</p>
+{% highlight matlab %}
+sF2 = S2FunHarmonic(fourComponentFunction,'bandwidth',50);
+handleArraySize = size(sF2);
+{% endhighlight %}
+<h2 id="10">Construct from harmonic coefficients</h2>
+<p>If the coefficients are already known, pass them directly to the <a href="S2FunHarmonic.S2FunHarmonic.html"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> constructor. The first dimension of <code class="language-plaintext highlighter-rouge">fhat</code> is reserved for the coefficients of one scalar function. Component-array dimensions begin with its second dimension.</p>
+<p>Thus, if \(\widehat f_1,\ldots,\widehat f_6\) are coefficient columns for the \(3\times2\) example above, their internal arrangement is</p>
+<p>\[ \widehat F(:,:,1)=[\widehat f_1,\widehat f_2,\widehat f_3] \]</p>
+<p>and</p>
+<p>\[ \widehat F(:,:,2)=[\widehat f_4,\widehat f_5,\widehat f_6]. \]</p>
+{% highlight matlab %}
+sF3 = S2FunHarmonic(eye(9));
+{% endhighlight %}
+<p>Each column of the identity selects one coefficient. Consequently, <code class="language-plaintext highlighter-rouge">sF3</code> stores the first nine spherical harmonics as nine component functions. Most applications construct functions from values and never need to access this coefficient layout directly.</p>
+<h2 id="12">Index, concatenate and reshape components</h2>
+<p>Component arrays follow ordinary MATLAB indexing. Vertical concatenation combines the two functions in <code class="language-plaintext highlighter-rouge">sF1</code> with the four in <code class="language-plaintext highlighter-rouge">sF2</code>, while indexing selects components.</p>
+{% highlight matlab %}
+sF4 = [sF1;sF2];
+selectedFunctions = sF4(2:3);
+{% endhighlight %}
+<p>Conjugation acts on the coefficients. Transpose and conjugate transpose rearrange the component dimensions in the usual MATLAB way.</p>
+{% highlight matlab %}
+conjugatedFunctions = conj(sF1);
+transposedFunctions = sF1.';
+conjugateTransposedFunctions = sF1';
 {% endhighlight %}
 <p>
-<b>Definition via function handle</b>
-</p>
-<p>If we have a function handle for the function we could create a <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> via quadrature. At first let us define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns double:</p>
+<code class="language-plaintext highlighter-rouge">length</code> and <code class="language-plaintext highlighter-rouge">size</code> inspect the component array rather than the hidden coefficient dimension. Reshaping the nine functions in <code class="language-plaintext highlighter-rouge">sF3</code> produces a \(3\times3\) spherical-function array.</p>
 {% highlight matlab %}
-f = @(v) [exp(v.x+v.y+v.z)+50*(v.y-cos(pi/3)).^3.*(v.y-cos(pi/3) > 0), v.x, v.y, v.z];
+numberOfFunctions = length(sF1);
+shapeOfHandleFunctions = size(sF2);
+sF3 = reshape(sF3,3,[]);
 {% endhighlight %}
-<p>Next we convert this function handle into a <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> of size \(4 \times 1\)</p>
+<h2 id="15">Integrate or reduce components</h2>
+<p>With no dimension argument, <code class="language-plaintext highlighter-rouge">sum</code> integrates every component over the sphere and <code class="language-plaintext highlighter-rouge">mean</code> returns the spherical mean of every component. Their outputs are numerical arrays with <code class="language-plaintext highlighter-rouge">size(sF)</code>.</p>
 {% highlight matlab %}
-sF2 = S2FunHarmonic(f, 'bandwidth', 50)
+componentIntegrals = sum(sF1);
+componentMeans = mean(sF1);
 {% endhighlight %}
-
-{% highlight plaintext %}
-sF2 = S2FunHarmonic (y↑→x)
-  size: 4 x 1
-  bandwidth: 50
-{% endhighlight %}
-<p>
-<b>Definition via Fourier-coefficients</b>
-</p>
-<p>If we already know the Fourier-coefficients, we can simply hand them in the format above to the constructor of <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code>.</p>
+<p>With a dimension argument, the same commands perform pointwise array reductions and return another spherical function.</p>
 {% highlight matlab %}
-sF3 = S2FunHarmonic(eye(9))
+rowSums = sum(sF3,2);
+columnMeans = mean(sF3,1);
 {% endhighlight %}
-
-{% highlight plaintext %}
-sF3 = S2FunHarmonic (y↑→x)
-  size: 9 x 1
-  bandwidth: 2
-  isReal: false
+<h2 id="17">Pointwise minima and maxima</h2>
+<p>For a vector-valued function, pass an empty second argument and the component dimension as the third argument. The result is the pointwise minimum or maximum along that component dimension.</p>
+{% highlight matlab %}
+columnMinima = min(sF3,[],1);
 {% endhighlight %}
+<h2 id="18">A note on products</h2>
+<p>An older implementation note states that the matrix product is implemented per element and not as the usual matrix product. In the current implementation, a product between two <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> arrays is not implemented. Use <code class="language-plaintext highlighter-rouge">.*</code> for pointwise multiplication. Multiplication by a compatible numerical matrix uses the overloaded <code class="language-plaintext highlighter-rouge">*</code> operator.</p>
+{% highlight matlab %}
+close all
+{% endhighlight %}
+<h2 id="19">References</h2>
 <div>
 <ul>
-<li>This command stores the nine first spherical harmonics in <code class="language-plaintext highlighter-rouge">sF3</code>
-</li>
+<li>J. R. Driscoll and D. M. Healy, <a href="https://doi.org/10.1006/aama.1994.1008">Computing Fourier transforms and convolutions on the 2-sphere</a>, <i>Advances in Applied Mathematics</i> 15 (1994), 202--250, gives the spherical Fourier framework applied component by component in a vector-valued harmonic function.</li>
 </ul>
 </div>
-<h2 id="10">Operations which differ from an univariate S2FunHarmonic</h2>
-<p>
-<b>Some default matrix and vector operations</b>
-</p>
-<p>You can concatenate and refer to functions as MATLAB does with vectors and matrices</p>
-{% highlight matlab %}
-sF4 = [sF1; sF2];
-sF4(2:3);
-{% endhighlight %}
-<p>You can conjugate the Fourier-coefficients and transpose/ctranspose the vector valued <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a>.</p>
-{% highlight matlab %}
-conj(sF1);
-sF1.';
-sF1';
-{% endhighlight %}
-<p>Some other operations</p>
-{% highlight matlab %}
-length(sF1);
-size(sF2);
-sF3 = reshape(sF3, 3, []);
-{% endhighlight %}
-<p>
-<b><code class="language-plaintext highlighter-rouge">sum</code> and <code class="language-plaintext highlighter-rouge">mean</code></b>
-</p>
-<p>If we do not specify further options to <code class="language-plaintext highlighter-rouge">sum</code> or <code class="language-plaintext highlighter-rouge">mean</code> they give we the integral or the mean value back for each function. You could also calculate the conventional sum or the mean value over a dimension of a vector valued <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code>.</p>
-{% highlight matlab %}
-sum(sF1, 1);
-sum(sF3, 2);
-{% endhighlight %}
-<p>
-<b>min/max</b>
-</p>
-<p>If the <code class="language-plaintext highlighter-rouge">min</code> or <code class="language-plaintext highlighter-rouge">max</code> command gets a vector valued <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> the pointwise minimum or maximum can calculated along the dimension specified as third argument.</p>
-{% highlight matlab %}
-% this computes the minimum along the first dimension
-min(sF3,[],1);
-{% endhighlight %}
-<p>
-<b>Remark on the matrix product</b>
-</p>
-<p>At this point the matrix product is implemented per element and not as the usual matrix product.</p>
-<h2 id="17">Visualization of vector valued S2FunHarmonic</h2>
-<p>The same plot commands as for univariate <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> work on vector valued as well. The difference is that, now, each component is plotted next to one another.</p>
+<h2 id="20">Next</h2>
+<p>Continue with <a href="S2Kernels.html">Spherical kernel functions</a> to construct radially symmetric building blocks for spherical functions.</p>
 </div>
 </body>
 </html>

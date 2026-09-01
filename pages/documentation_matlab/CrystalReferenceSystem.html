@@ -1,5 +1,5 @@
 ---
-title: "The Crystal Reference System"
+title: 'The Crystal Reference Frame'
 
 sidebar: documentation_sidebar
 permalink: CrystalReferenceSystem.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>The Crystal Reference System</title>
+<title>The Crystal Reference Frame</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_CrystalReferenceSystem.m">
 </head>
@@ -23,11 +23,14 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A crystal is described by its crystallographic axes \(\vec a\), \(\vec b\), \(\vec c\) - their lengths and the angles between them. That is what <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a> is given.</p>
+<p>A <b>reference frame</b> is the coordinate system in which data are expressed. A <b>crystal frame</b> is the Cartesian reference frame fixed to the lattice basis of a phase. Its basis and default plotting convention are distinct from the point-group symmetry attached to it.</p>
+<p>This page explains how the non-orthogonal lattice axes \(\vec a\), \(\vec b\) and \(\vec c\) are embedded in an orthonormal crystal frame \(\vec x\), \(\vec y\), \(\vec z\). Read <a href="CrystalDirections.html">Miller Indices</a> and <a href="LatticeMetric.html">Lattice Metric and Plane Geometry</a> first if direct and reciprocal lattice axes are new to you.</p>
+<p>A <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a> stores the point symmetry and lattice metric of a phase and carries its crystal frame. The display below therefore reports both the metric and the frame alignment.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
-cs = crystalSymmetry('triclinic',[1,2.2,3.1],[80*degree,85*degree,95*degree])
+cs = crystalSymmetry('triclinic',[1,2.2,3.1],...
+  [80*degree,85*degree,95*degree])
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -39,131 +42,130 @@ cs = crystalSymmetry (⊙c*→b)
   alpha, beta, gamma: 80°, 85°, 95°
   reference frame   : X||a*, Z||c
 {% endhighlight %}
-<h2 id="2">Why a Cartesian Frame is Needed as Well</h2>
-<p>Those axes are in general neither perpendicular nor of equal length, and most of what MTEX computes needs a Cartesian frame: Euler angles are rotations about \(\vec z\), \(\vec x\) and \(\vec z\), and a tensor is a table of numbers in an orthonormal basis. So a Cartesian frame \(\vec x\), \(\vec y\), \(\vec z\) has to be inscribed into the crystal frame \(\vec a\), \(\vec b\), \(\vec c\) - and how that is done is a convention.</p>
-<p>This page is about that inscription. Which lattice vectors are called \(\vec a\), \(\vec b\) and \(\vec c\) in the first place is a second convention, treated in <a href="SymmetryAlignment.html">Crystal Axes Alignment</a>.</p>
-<h2 id="3">Cubic, Tetragonal and Orthorhombic Symmetry</h2>
-<p>Here the crystal axes are already perpendicular, so \(\vec x \parallel \vec a\), \(\vec y \parallel \vec b\), \(\vec z \parallel \vec c\) is the obvious choice. It is the MTEX default and needs no further specification.</p>
-<h2 id="4">Trigonal and Hexagonal Symmetry</h2>
-<p>Now \(\vec a\) and \(\vec b\) enclose \(120^\circ\), so at most one of them can be a Cartesian axis. Convention puts \(\vec z\) along \(\vec c\) and then has a choice: \(\vec x\) along \(\vec a\), or \(\vec y\) along \(\vec a\). Both are in use, and they differ by \(30^\circ\).</p>
+<h2 id="2">Why an Orthonormal Frame Is Needed</h2>
+<p>The direct lattice axes are generally neither perpendicular nor of equal length. Orientations and tensor components, however, use orthonormal Cartesian components. The lattice basis must therefore be embedded in a Cartesian crystal frame, and that embedding is a convention.</p>
+<p>An <a href="OrientationDefinition.html">orientation</a> maps the crystal frame to a specimen frame. A specimen frame describes the sample, such as a measurement or rolling frame; it is not the crystal frame discussed here. See <a href="EBSDReferenceFrame.html">EBSD Reference Frame</a> for specimen-frame calibration.</p>
+<p>A second convention decides which physical lattice vectors are called \(\vec a\), \(\vec b\) and \(\vec c\). That choice is treated in <a href="SymmetryAlignment.html">Crystal Axes Alignment</a>.</p>
+<h2 id="3">Orthogonal Crystal Systems</h2>
+<p>In orthorhombic, tetragonal and cubic lattices, each direct axis is parallel to its reciprocal counterpart. Once the lattice-axis names are fixed, the normalized direct axes supply the Cartesian axes: \(\vec x\parallel\vec a\), \(\vec y\parallel\vec b\) and \(\vec z\parallel\vec c\).</p>
+<p>MTEX's general defaults are \(X\parallel a^*\) and \(Z\parallel c\). For these orthogonal lattices they reduce to the same alignment, so no special alignment appears in the <code class="language-plaintext highlighter-rouge">crystalSymmetry</code> display.</p>
+<h2 id="4">Trigonal and Hexagonal Crystal Frames</h2>
+<p>In the conventional hexagonal basis, \(\vec a\) and \(\vec b\) enclose \(120^\circ\). At most one can coincide with a Cartesian axis. Two common choices put \(\vec z\) along \(\vec c\) and then put either \(\vec x\) or \(\vec y\) along \(\vec a\).</p>
 {% highlight matlab %}
 cs_x2a = crystalSymmetry('321',[1.7,1.7,1.4],'X||a','Z||c');
 
-% visualize the results
-plot(cs_x2a,'figSize','small')
-annotate(cs_x2a.aAxis,'MarkerFaceColor','r','label','a','backgroundColor','w')
-annotate(cs_x2a.bAxis,'MarkerFaceColor','r','label','b','backgroundColor','w')
-annotate(-vector3d.Y,'MarkerFaceColor','green','label','-y','backgroundColor','w')
-annotate(-vector3d.X,'MarkerFaceColor','green','label','-x','backgroundColor','w')
+plot(cs_x2a)
+annotate(cs_x2a.aAxis,'MarkerFaceColor','r','label','a',...
+  'backgroundColor','w')
+annotate(cs_x2a.bAxis,'MarkerFaceColor','r','label','b',...
+  'backgroundColor','w')
+annotate(-vector3d.Y,'MarkerFaceColor','green','label','-y',...
+  'backgroundColor','w')
+annotate(-vector3d.X,'MarkerFaceColor','green','label','-x',...
+  'backgroundColor','w')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalReferenceSystem_01.png" %}
 </center>
-<p>The other setup, with \(\vec y\) along \(\vec a\):</p>
+<p>In this first plot, the red \(\vec a\) marker lies at the right, opposite the green \(-\vec x\) marker at the left. This is the \(X\parallel a\) alignment.</p>
 {% highlight matlab %}
-cs_y2a = crystalSymmetry('321',[1.7,1.7,1.4],'y||a','Z||c');
+cs_y2a = crystalSymmetry('321',[1.7,1.7,1.4],'Y||a','Z||c');
 
-plot(cs_y2a,'figSize','small')
-annotate(cs_y2a.aAxis,'MarkerFaceColor','r','label','a','backgroundColor','w')
-annotate(cs_y2a.bAxis,'MarkerFaceColor','r','label','b','backgroundColor','w')
-annotate(-vector3d.Y,'MarkerFaceColor','green','label','-y','backgroundColor','w')
-annotate(-vector3d.X,'MarkerFaceColor','green','label','-x','backgroundColor','w')
+plot(cs_y2a)
+annotate(cs_y2a.aAxis,'MarkerFaceColor','r','label','a',...
+  'backgroundColor','w')
+annotate(cs_y2a.bAxis,'MarkerFaceColor','r','label','b',...
+  'backgroundColor','w')
+annotate(-vector3d.Y,'MarkerFaceColor','green','label','-y',...
+  'backgroundColor','w')
+annotate(-vector3d.X,'MarkerFaceColor','green','label','-x',...
+  'backgroundColor','w')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalReferenceSystem_02.png" %}
 </center>
-<p>The two plots differ only in where the green \(\vec x\) and \(\vec y\) markers sit - the a-axis stays put. That is because a plot in crystal coordinates, an inverse pole figure for instance, is aligned on screen by the a- or b-axis, not by \(\vec x\).</p>
-<p>That on-screen alignment belongs to the crystal frame and is changed there.</p>
+<p>The red lattice-axis markers stay in the same screen positions, but the green Cartesian markers move. Each crystal frame supplies a plotting convention that lays out a crystal plot by its lattice axes.</p>
+<p>The <a href="crystalSymmetry.transformationMatrix.html"><code class="language-plaintext highlighter-rouge">transformationMatrix</code></a> between the two frames exposes the Cartesian offset.</p>
 {% highlight matlab %}
-% change on screen alignment
-cs_y2a.frame.how2plot.east = cs_y2a.bAxis
+frameOffset = angle(rotation.byMatrix(...
+  transformationMatrix(cs_x2a,cs_y2a))) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-cs_y2a = crystalSymmetry (⊙c→b)
- 
-  symmetry       : 321              
-  elements       : 6                
-  a, b, c        : 1.7, 1.7, 1.4    
-  reference frame: X||b*, Y||a, Z||c
+frameOffset =
+    90
 {% endhighlight %}
-
+<p>The measured offset is \(90^\circ\). This is a relation between the two Cartesian crystal frames, not a crystal-symmetry operation.</p>
+<h2 id="8">A Plotting Convention Does Not Change the Frame</h2>
+<p>A <b>plotting convention</b> states how a reference frame is laid out on screen. Changing it moves the markers on the page, but does not change the frame basis, the lattice, or any orientation.</p>
 {% highlight matlab %}
-plot(cs_y2a,'figSize','small')
-annotate(cs_y2a.aAxis,'MarkerFaceColor','r','label','a','backgroundColor','w')
-annotate(cs_y2a.bAxis,'MarkerFaceColor','r','label','b','backgroundColor','w')
-annotate(-vector3d.Y,'MarkerFaceColor','green','label','-y','backgroundColor','w')
-annotate(-vector3d.X,'MarkerFaceColor','green','label','-x','backgroundColor','w')
+cs_y2a.frame.how2plot.east = cs_y2a.bAxis;
+
+plot(cs_y2a)
+annotate(cs_y2a.aAxis,'MarkerFaceColor','r','label','a',...
+  'backgroundColor','w')
+annotate(cs_y2a.bAxis,'MarkerFaceColor','r','label','b',...
+  'backgroundColor','w')
+annotate(-vector3d.Y,'MarkerFaceColor','green','label','-y',...
+  'backgroundColor','w')
+annotate(-vector3d.X,'MarkerFaceColor','green','label','-x',...
+  'backgroundColor','w')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalReferenceSystem_03.png" %}
 </center>
-<h2 id="8">What the Choice Changes</h2>
-<p>Nothing about the crystal - everything about the numbers describing it. Drawn in the Cartesian frame, the same quartz crystal sits differently in the two setups.</p>
+<p>The \(\vec b\) marker now points east and the \(\vec a\) marker has moved. Only the screen layout changed; the \(90^\circ\) frame offset above remains the same.</p>
+<h2 id="10">What the Crystal-Frame Choice Changes</h2>
+<p>The lattice and its indexed geometry do not change, but their Cartesian coordinates do. Against fixed Cartesian axes, the same indexed quartz shape is therefore expressed differently in the two frames.</p>
 {% highlight matlab %}
 cS_x2a = crystalShape.quartz(cs_x2a);
 
 close all
 figure(1)
-plot(cS_x2a,'figSize','small','colored')
+plot(cS_x2a,'colored')
 hold on
 arrow3d(0.6*[vector3d.X,vector3d.Y,vector3d.Z],'labeled')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalReferenceSystem_04.png" %}
 </center>
+<p>In the \(X\parallel a\) frame, compare the coloured faces with the fixed black \(\vec x\), \(\vec y\), \(\vec z\) arrows.</p>
 {% highlight matlab %}
 cS_y2a = crystalShape.quartz(cs_y2a);
 
 figure(2)
-plot(cS_y2a,'figSize','small','colored')
+plot(cS_y2a,'colored')
 hold on
 arrow3d(0.6*[vector3d.X,vector3d.Y,vector3d.Z],'labeled')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalReferenceSystem_05.png" %}
 </center>
-<p>The consequence is sharpest for Euler angles, which are angles about the Cartesian axes. The same three numbers describe two different physical orientations in the two setups.</p>
+<p>In the \(Y\parallel a\) frame, the same indexed faces occupy different Cartesian positions. The crystal morphology has not changed; only its numerical description relative to the black arrows has changed.</p>
+<h2 id="13">Euler Angles Depend on the Crystal Frame</h2>
+<p>Euler angles parameterize the map between Cartesian crystal and specimen frames. The same three numbers therefore describe different physical orientations when the crystal frame changes. The two calls below state the Bunge convention explicitly.</p>
 {% highlight matlab %}
-ori_x2a = orientation.byEuler(0,0,0,cs_x2a)
-{% endhighlight %}
+ori_x2a = orientation.byEuler(0,0,0,'Bunge',cs_x2a);
+ori_y2a = orientation.byEuler(0,0,0,'Bunge',cs_y2a);
 
-{% highlight plaintext %}
-ori_x2a = orientation (321 → y↑→x)
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-     0    0    0
-{% endhighlight %}
-
-{% highlight matlab %}
-ori_y2a = orientation.byEuler(0,0,0,cs_y2a)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ori_y2a = orientation (321 → y↑→x)
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-     0    0    0
-{% endhighlight %}
-
-{% highlight matlab %}
-newMtexFigure('innerPlotSpacing',20,'figSize','small')
+newMtexFigure('innerPlotSpacing',20)
 plotPDF(ori_x2a,Miller(1,0,0,cs_x2a),'MarkerSize',20)
-annotate([vector3d.X,vector3d.Y],'label',{'x','y'},'backgroundColor','w')
+annotate([vector3d.X,vector3d.Y],'label',{'x','y'},...
+  'backgroundColor','w')
 nextAxis
 plotPDF(ori_y2a,Miller(1,0,0,cs_y2a),'MarkerSize',20)
-annotate([vector3d.X,vector3d.Y],'label',{'x','y'},'backgroundColor','w')
+annotate([vector3d.X,vector3d.Y],'label',{'x','y'},...
+  'backgroundColor','w')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalReferenceSystem_06.png" %}
 </center>
-<p>The two pole figures are the same pattern turned by \(30^\circ\), and that is what the misorientation angle between the two orientations says.</p>
+<p>The same indexed pole produces a pattern turned by \(30^\circ\). This is the crystallographic consequence of assigning the same Euler triplet in two different crystal frames.</p>
+<p>When the orientations are compared, MTEX reports that it reconciles the differing frames. The returned value is the smallest difference after applying the <code class="language-plaintext highlighter-rouge">321</code> crystal symmetry, not the raw frame offset.</p>
 {% highlight matlab %}
-angle(ori_x2a,ori_y2a) ./ degree
+symmetryReducedDifference = angle(ori_x2a,ori_y2a) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -172,33 +174,48 @@ The involved symmetries have different reference systems
   2: 321, X||a, Y||b*, Z||c
   I'm going to transform the data from the first one to the second one
  
-ans =
+symmetryReducedDifference =
    30.0000
 {% endhighlight %}
-<p>A whole data set imported under the wrong assumption is wrong by exactly this angle - a rotation that is easy to miss and hard to explain later.</p>
-<h2 id="15">Converting Between Setups</h2>
-<p>MTEX recognises differing setups in many places and corrects for them. To do it explicitly, <a href="orientation.transformReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transformReferenceFrame</code></a> rewrites an orientation in another frame <b>without</b> changing the orientation it describes. Here <code class="language-plaintext highlighter-rouge">ori_x2a</code> is expressed in the <code class="language-plaintext highlighter-rouge">y</code><code class="language-plaintext highlighter-rouge">a</code> setup.</p>
+<p>The symmetry-reduced difference is \(30^\circ\), while the underlying frame offset is \(90^\circ\). Inspecting only symmetry-reduced angles can therefore hide which convention caused an error.</p>
+<h2 id="16">Re-expressing Data in Another Frame</h2>
+<p>A <b>frame change</b> re-expresses the same physical object in another reference frame. It leaves the object itself untouched and is distinct from rotating it. For orientations, <a href="orientation.transformReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transformReferenceFrame</code></a> performs that change explicitly.</p>
 {% highlight matlab %}
-ori_x2a.transformReferenceFrame(cs_y2a)
+oriConverted = ori_x2a.transformReferenceFrame(cs_y2a)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (321 → y↑→x)
+oriConverted = orientation (321 → y↑→x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
    270    0    0
 {% endhighlight %}
-<p>The Euler angles came out different, as they must - the same physical orientation read in a frame turned by \(30^\circ\). What has not changed is where the crystal points, so this is not the same orientation as <code class="language-plaintext highlighter-rouge">ori_y2a</code>, which carries the same Euler angles as <code class="language-plaintext highlighter-rouge">ori_x2a</code> instead.</p>
-<h2 id="17">Triclinic and Monoclinic Symmetry</h2>
-<p>Now no two crystal axes are perpendicular, so a Cartesian axis is aligned with one direct axis and one <b>reciprocal</b> axis, which is perpendicular to the other two direct ones by construction. Both of the following setups are found in the wild for the same mineral.</p>
+<p>The converted Bunge angles are \((270^\circ,0^\circ,0^\circ)\). They differ from the input because the same physical orientation is now expressed in a crystal frame offset by \(90^\circ\).</p>
+<p>The indexed direction must nevertheless point to the same specimen direction before and after the frame change.</p>
 {% highlight matlab %}
-cs = crystalSymmetry('-1', [8.290 12.966 7.151], [91.18 116.31 90.14]*degree,...
-  'x||a*','y||b', 'mineral','An0 Albite 2016')
+sameSpecimenDirection = angle(...
+  ori_x2a * Miller(1,0,0,cs_x2a,'uvw'),...
+  oriConverted * Miller(1,0,0,cs_y2a,'uvw')) < 1e-5*degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-cs = crystalSymmetry (⊙c*→b)
+sameSpecimenDirection =
+  logical
+   1
+{% endhighlight %}
+<p>The logical result is true. The numerical description changed, but the physical direction did not.</p>
+<h2 id="19">Triclinic and Monoclinic Crystal Frames</h2>
+<p>A general triclinic or monoclinic lattice has no complete orthogonal triad of direct axes. A Cartesian frame is commonly fixed by aligning one axis with a direct-lattice direction and another with a reciprocal axis. The reciprocal axis is perpendicular to the other two direct axes.</p>
+<p>The following two alignments use the same lattice metric. Their displays make the convention part of the audit trail.</p>
+{% highlight matlab %}
+cs_aStar2x = crystalSymmetry('-1',[8.290 12.966 7.151],...
+  [91.18 116.31 90.14]*degree,'X||a*','Y||b',...
+  'mineral','An0 Albite 2016')
+{% endhighlight %}
+
+{% highlight plaintext %}
+cs_aStar2x = crystalSymmetry (⊙c*→b)
  
   mineral           : An0 Albite 2016        
   symmetry          : 1̅                     
@@ -207,14 +224,15 @@ cs = crystalSymmetry (⊙c*→b)
   alpha, beta, gamma: 91.18°, 116.31°, 90.14°
   reference frame   : X||a*, Y||b
 {% endhighlight %}
-
+<p>The first summary reports \(X\parallel a^*\) and \(Y\parallel b\).</p>
 {% highlight matlab %}
-cs = crystalSymmetry('-1', [8.290 12.966 7.151], [91.18 116.31 90.14]*degree,...
-  'x||a','c||c*', 'mineral','An0 Albite 2016')
+cs_a2x = crystalSymmetry('-1',[8.290 12.966 7.151],...
+  [91.18 116.31 90.14]*degree,'X||a','Z||c*',...
+  'mineral','An0 Albite 2016')
 {% endhighlight %}
 
 {% highlight plaintext %}
-cs = crystalSymmetry (⊙c*→b)
+cs_a2x = crystalSymmetry (⊙c*→b)
  
   mineral           : An0 Albite 2016        
   symmetry          : 1̅                     
@@ -223,9 +241,20 @@ cs = crystalSymmetry (⊙c*→b)
   alpha, beta, gamma: 91.18°, 116.31°, 90.14°
   reference frame   : X||a, Z||c*
 {% endhighlight %}
-<p>The display of a <code class="language-plaintext highlighter-rouge">crystalSymmetry</code> always states which setup it uses, so the answer to "which convention is this data in?" is in the printout of the symmetry itself.</p>
-<h2 id="20">Next</h2>
-<p>Which lattice vector is called \(\vec a\) at all, and the conventions different laboratories use, is <a href="SymmetryAlignment.html">Crystal Axes Alignment</a>. Directions written in the resulting crystal frame are <a href="CrystalDirections.html">Miller Indices</a>.</p>
+<p>The second summary reports \(X\parallel a\) and \(Z\parallel c^*\). Whenever orientations or tensor components come from another source, record this alignment with the values. A matching point group alone is not enough.</p>
+<h2 id="22">References</h2>
+<div>
+<ul>
+<li>U. Shmueli, <a href="https://doi.org/10.1107/97809553602060000549">Reciprocal space in crystallography</a>, <i>International Tables for Crystallography B</i>, ch. 1.1, 2006, constructs Cartesian bases from direct and reciprocal lattice vectors.</li>
+<li>D. Rowenhorst et al., <a href="https://doi.org/10.1088/0965-0393/23/8/083501">Consistent representations of and conversions between 3D rotations</a>, <i>Modelling and Simulation in Materials Science and Engineering</i> 23, 083501, 2015, explains why frame and rotation conventions must be stated explicitly.</li>
+<li>J. F. Nye, <a href="https://search.worldcat.org/title/11114089">Physical Properties of Crystals: Their Representation by Tensors and Matrices</a>, corrected paperback ed., Oxford University Press, 1985, develops Cartesian tensor components and crystallographic symmetry.</li>
+<li>
+<a href="https://doi.org/10.1520/E0082_E0082M-14R19">ASTM E82/E82M-14(2019)</a> defines a measured crystal orientation relative to specimen geometry.</li>
+</ul>
+</div>
+<h2 id="23">Next</h2>
+<p>
+<a href="SymmetryAlignment.html">Crystal Axes Alignment</a> shows how published data are converted when sources name or permute lattice axes differently. <a href="DefinitionAsCoordinateTransform.html">Orientations as Coordinate Transforms</a> then develops the map from a crystal frame to a specimen frame. <a href="TensorImport.html">Importing Tensor Data</a> applies the same audit to published component tables.</p>
 </div>
 </body>
 </html>

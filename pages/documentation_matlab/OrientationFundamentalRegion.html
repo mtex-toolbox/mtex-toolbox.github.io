@@ -1,5 +1,5 @@
 ---
-title: "Fundamental Regions"
+title: 'Fundamental Regions'
 
 sidebar: documentation_sidebar
 permalink: OrientationFundamentalRegion.html
@@ -23,50 +23,39 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Symmetry makes an orientation a set of equivalent rotations, see <a href="OrientationSymmetry.html">Symmetry</a>. A <b>fundamental region</b> is the part of rotation space that contains exactly one member of every such set. It is what makes a plot of orientations unambiguous, and it is the domain on which ODFs, axis distributions and angle distributions are computed.</p>
+<p>Symmetry makes one physical orientation a set of equivalent rotations, see <a href="OrientationSymmetry.html">Symmetry</a>. A <b>fundamental region</b> keeps one representative of each set so orientations can be plotted and analysed without symmetry-related copies.</p>
+<p>A fundamental region is not unique. MTEX normally chooses the compact region around the identity rotation. Points on its boundary can be tied between equivalent representatives, so "one representative" includes a consistent boundary convention.</p>
+<p>This page assumes the crystal-to-specimen map from <a href="DefinitionAsCoordinateTransform.html">Theory</a> and the axis--angle coordinates from <a href="RotationRepresentations.html">Rotation Representations</a>. These regions are also the domains used for ODFs, rotation-axis distributions and rotation-angle distributions.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
 <h2 id="2">The Space of All Rotations</h2>
-<p>Without symmetry, rotation space is a ball of radius \(180^\circ\): the direction of a point is the rotation axis, its distance from the centre the rotation angle.</p>
+<p>Without rotational symmetry, axis--angle space is a ball of radius \(180^\circ\). The direction of a point is the rotation axis, and its distance from the centre is the rotation angle.</p>
 {% highlight matlab %}
 % triclinic crystal symmetry
-cs = crystalSymmetry('triclinic')
-{% endhighlight %}
+cs = crystalSymmetry('triclinic');
 
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→b)
- 
-  symmetry          : 1̅           
-  elements          : 2            
-  a, b, c           : 1, 1, 1      
-  alpha, beta, gamma: 90°, 90°, 90°
-  reference frame   :
-{% endhighlight %}
-
-{% highlight matlab %}
 % the corresponding orientation space
 oR_all = fundamentalRegion(cs);
 
 plot(oR_all)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_01.png" %}
 </center>
-<p>Rotations placed into it: one by \(180^\circ\) about the z axis, and two families about the x and y axes.</p>
+<p>Place one half turn about the z axis into the ball.</p>
 {% highlight matlab %}
-% rotation about the z-axis about 180 degree
 rotZ = orientation.byAxisAngle(vector3d.Z,180*degree,cs);
 
 hold on
 plot(rotZ,'MarkerColor','b','MarkerSize',10)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_02.png" %}
 </center>
+<p>Add families about the x and y axes in steps of \(30^\circ\).</p>
 {% highlight matlab %}
-% rotations about the x- and y-axis about 30,60,90 ... degree
 rotX = orientation.byAxisAngle(vector3d.X,(-180:30:180)*degree,cs);
 rotY = orientation.byAxisAngle(vector3d.Y,(-180:30:180)*degree,cs);
 
@@ -75,11 +64,11 @@ plot(rotX,'MarkerColor','r','MarkerSize',10)
 plot(rotY,'MarkerColor','g','MarkerSize',10)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_03.png" %}
 </center>
-<p>Each family lies on a straight line through the centre, because all its rotations share an axis and differ only in angle. The \(\pm180^\circ\) ends of a line are the same rotation, so the surface of the ball is glued to itself - which is why rotation space is not simply a ball.</p>
-<p>Sections of constant rotational angle are the flat way of looking at the same thing.</p>
+<p>Each family lies on a straight line through the centre because its rotations share an axis and differ only in angle. The \(-180^\circ\) and \(180^\circ\) ends of a line are the same rotation. Opposite points on the surface are therefore identified, which is why rotation space is not an ordinary solid ball.</p>
+<p>Sections of constant rotation angle are a flat view of the same geometry.</p>
 {% highlight matlab %}
 plotSection(rotZ,'MarkerColor','b','axisAngle',(30:30:180)*degree)
 hold on
@@ -87,24 +76,16 @@ plot(rotX,'MarkerColor','g','add2all')
 plot(rotY,'MarkerColor','r','add2all')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_04.png" %}
 </center>
+<p>Notice that each x- and y-axis family passes through the same point at zero angle. At \(180^\circ\), its two opposite axis directions again describe one rotation.</p>
 <h2 id="7">What Crystal Symmetry Does</h2>
-<p>Each proper symmetry operation folds the ball onto itself, so a group with \(n\) proper elements cuts it into \(n\) equal pieces. Orthorhombic symmetry has four, and the region MTEX picks is the central one.</p>
+<p>Each proper symmetry operation folds the ball onto itself. A group with \(n\) proper operations therefore cuts it into \(n\) equal-volume regions. Orthorhombic <code class="language-plaintext highlighter-rouge">222</code> symmetry has four such operations.</p>
+<p>Crystal point groups can also contain reflections or inversion. Those improper operations do not create additional rotations, so <a href="fundamentalRegion.html"><code class="language-plaintext highlighter-rouge">fundamentalRegion</code></a> uses the proper rotation group by default.</p>
 {% highlight matlab %}
-cs = crystalSymmetry('222')
-{% endhighlight %}
+cs = crystalSymmetry('222');
 
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  symmetry: 222    
-  elements: 4      
-  a, b, c : 1, 1, 1
-{% endhighlight %}
-
-{% highlight matlab %}
 oR = fundamentalRegion(cs);
 
 close all
@@ -114,114 +95,79 @@ hold on
 plot(oR,'color','r')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_05.png" %}
 </center>
+<p>The red region is one of four equivalent parts of the complete grey ball. MTEX chooses the central representative shown here.</p>
+<p>An orientation with specimen symmetry is reduced from the other side as well. Pass both symmetries as <code class="language-plaintext highlighter-rouge">fundamentalRegion(ori.CS,ori.SS)</code>; the role of the second group is developed in <a href="SpecimenSymmetry.html">Specimen Symmetry</a>.</p>
 <h2 id="9">Real Data Lands Inside It</h2>
-<p>Measured orientations are drawn in the fundamental region without being asked to.</p>
+<p>MTEX plots measured orientations in their fundamental region by default.</p>
 {% highlight matlab %}
-mtexdata forsterite
-{% endhighlight %}
+mtexdata forsterite silent
 
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↑→x, row↑→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed          none                                   
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId
- Scan unit : um
- X × Y × Z : [0 → 36550] × [0 → 16750] × [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :336 × 732
-{% endhighlight %}
-
-{% highlight matlab %}
 plot(ebsd('Fo').orientations,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
 plot 2000 random orientations out of 152345 given orientations
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_06.png" %}
 </center>
-<p>Nothing sticks out of the region, because every orientation was replaced by its equivalent inside. Doing that explicitly, rather than only for the plot, is <a href="orientation.project2FundamentalRegion.html"><code class="language-plaintext highlighter-rouge">project2FundamentalRegion</code></a>.</p>
+<p>No point crosses the boundary because the plotting code selects an equivalent representative inside it. This selection does not change the orientations stored in <code class="language-plaintext highlighter-rouge">ebsd</code>. MTEX reports that it samples 2,000 points for this dense plot. The sample changes only the figure, not the data or the fundamental region.</p>
+<p>Apply the same selection explicitly with <a href="orientation.project2FundamentalRegion.html"><code class="language-plaintext highlighter-rouge">project2FundamentalRegion</code></a>. The method returns a new orientation array.</p>
 {% highlight matlab %}
-ori = ebsd('Fo').orientations.project2FundamentalRegion
+ori = ebsd('Fo').orientations.project2FundamentalRegion;
 {% endhighlight %}
-
-{% highlight plaintext %}
-ori = orientation (Forsterite → y↑→x)
-  size: 152345 × 1
-{% endhighlight %}
-<h2 id="12">Recentring the Region</h2>
-<p>The region need not sit at the origin. Centred on the mean orientation of a grain, it is the natural frame for looking at the spread within that grain - orientations that would otherwise be split across the boundary of the region stay together.</p>
+<h2 id="11">Recentring the Region</h2>
+<p>The region need not be centred on the identity rotation. Centring it on a grain mean keeps a tight orientation cloud together when the standard region would split equivalent representatives across a boundary.</p>
+<p>
+<a href="GrainReconstruction.html">Grain reconstruction</a> is only supporting setup here. It supplies the mean orientation of the largest grain.</p>
 {% highlight matlab %}
-% segment data into grains
 [grains,ebsd] = calcGrains(ebsd);
 
-% take the orientations of the largest one
 [~,id] = max(grains.area);
-largeGrain = grains(id)
-{% endhighlight %}
+largeGrain = grains(id);
 
-{% highlight plaintext %}
-largeGrain = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1       1    2683  Forsterite       mmm  LightSkyBlue
- 
- boundary segments: 714 (32005 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 44
- 
-   Id   Phase   Pixels      meanRotation         GOS
- 1650       1     2683   (171°,55°,261°)   0.0441053
-{% endhighlight %}
-
-{% highlight matlab %}
+% keep the indexed orientations inside the grain footprint
 ori = ebsd(largeGrain).orientations;
+ori = ori(~isnan(ori));
 
-% recenter the fundamental zone to the mean orientation
 center = largeGrain.meanOrientation;
 
-ori = ori.project2FundamentalRegion(center)
-{% endhighlight %}
+% select representatives nearest to the grain mean
+ori = ori.project2FundamentalRegion(center);
 
-{% highlight plaintext %}
-ori = orientation (Forsterite → y↑→x)
-  size: 3089 × 1
-{% endhighlight %}
-
-{% highlight matlab %}
-plot(ori,'axisAngle')
+% retain those explicit representatives when plotting
+plot(ori,'axisAngle','ignoreFundamentalRegion','all')
 hold on
 plot(center,'MarkerFaceColor','r','MarkerSize',20)
 hold off
+
+% maximum angular distance from the mean, in degrees
+maxSpread = max(angle(ori,center)) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 3089 given orientations
+maxSpread =
+    6.0553
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_07.png" %}
 </center>
-<p>The cloud is a small blob around the red marker - no orientation in this grain is more than about \(6^\circ\) from the mean - rather than a set of points spread over the whole region.</p>
-<h2 id="16">Fundamental Regions of Misorientations</h2>
-<p>A misorientation carries two symmetries, one from each crystal, so its region is cut by both and is correspondingly smaller.</p>
+<p>The points remain in a compact neighbourhood of the red mean orientation. The displayed maximum is just over \(6^\circ\), rather than a spread over the whole region. The red marker need not be the Euclidean centre of the drawn coordinates; <code class="language-plaintext highlighter-rouge">angle</code> supplies the rotational distance.</p>
+<p>Recentring selected equivalent representatives. It did not rotate or otherwise change the measured orientations.</p>
+<h2 id="13">Fundamental Regions of Misorientations</h2>
+<p>A <a href="MisorientationTheory.html">misorientation</a> carries one crystal symmetry from each crystal. Its fundamental region is reduced by both groups and is correspondingly smaller.</p>
 {% highlight matlab %}
 oR = fundamentalRegion(ebsd('Fo').CS,ebsd('En').CS);
 
 plot(oR)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_08.png" %}
 </center>
-<p>Boundary misorientations between the two phases, drawn in it:</p>
+<p>Boundary misorientations between forsterite and enstatite lie inside this two-symmetry region.</p>
 {% highlight matlab %}
 plot(grains.boundary('Fo','En').misorientation)
 {% endhighlight %}
@@ -229,20 +175,21 @@ plot(grains.boundary('Fo','En').misorientation)
 {% highlight plaintext %}
 plot 2000 random orientations out of 11751 given orientations
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_09.png" %}
 </center>
-<h2 id="18">Antipodal Symmetry Between Grains of One Phase</h2>
-<p>Between two grains of the <b>same</b> phase there is no way to say which grain is first, so a misorientation and its inverse are indistinguishable. In axis-angle terms the inverse has the same angle and the opposite axis, which is the <code class="language-plaintext highlighter-rouge">'antipodal'</code> flag of <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a> applied to orientation space.</p>
+<p>The points stay inside the outline even though the region is much smaller than the full ball. The phase order remains meaningful for a two-phase boundary, so MTEX does not identify these misorientations with their inverses.</p>
+<h2 id="16">Antipodal Symmetry Between Grains of One Phase</h2>
+<p>Between two grains of the <b>same</b> phase there is no way to say which grain is first. A misorientation and its inverse are therefore indistinguishable. In axis--angle coordinates the inverse has the same angle and the opposite axis. MTEX records this grain-exchange symmetry with the <code class="language-plaintext highlighter-rouge">'antipodal'</code> flag described for directions in <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a>.</p>
 {% highlight matlab %}
 oR = fundamentalRegion(ebsd('Fo').CS,ebsd('Fo').CS,'antipodal');
 
 plot(oR)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_10.png" %}
 </center>
-<p>Half the size of the region without the flag. MTEX sets the flag on same-phase boundary misorientations by itself.</p>
+<p>The antipodal region has half the volume of the corresponding region without grain-exchange symmetry. MTEX sets the flag on same-phase boundary misorientations by itself, as the following object summary shows.</p>
 {% highlight matlab %}
 mori = grains.boundary('Fo','Fo').misorientation
 {% endhighlight %}
@@ -260,10 +207,11 @@ plot(mori)
 {% highlight plaintext %}
 plot 2000 random orientations out of 15872 given orientations
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_11.png" %}
 </center>
-<p>Removing it draws the same data in the larger region, with each misorientation and its inverse now counted as different.</p>
+<p>Each boundary now contributes one representative from the pair consisting of a misorientation and its inverse. No point needs the other half of the non-antipodal region.</p>
+<p>Removing the flag from this local variable draws the same rotations in the larger region, where the two orders count as different.</p>
 {% highlight matlab %}
 mori.antipodal = false;
 
@@ -273,11 +221,12 @@ plot(mori)
 {% highlight plaintext %}
 plot 2000 random orientations out of 15872 given orientations
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_12.png" %}
 </center>
-<h2 id="22">Axis Angle Sections</h2>
-<p>As for the full ball, sections of constant rotational angle flatten the region.</p>
+<p>The cloud now occupies the larger outline. These are not additional grain boundaries; only the choice of representative has changed.</p>
+<h2 id="21">Axis--Angle Sections</h2>
+<p>Sections of constant rotation angle flatten the larger region. The panel outline at each angle shows which rotation axes are allowed there.</p>
 {% highlight matlab %}
 plotSection(mori,'axisAngle')
 {% endhighlight %}
@@ -285,10 +234,11 @@ plotSection(mori,'axisAngle')
 {% highlight plaintext %}
 plotting 2000 random orientations out of 15872 given orientations
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_13.png" %}
 </center>
-<p>With antipodal symmetry, each pair of opposite axes collapses onto one point and the sections shrink accordingly.</p>
+<p>Opposite axes remain separate in these panels because <code class="language-plaintext highlighter-rouge">mori.antipodal</code> is currently false.</p>
+<p>Supplying <code class="language-plaintext highlighter-rouge">'antipodal'</code> to the plot identifies every pair of opposite axes.</p>
 {% highlight matlab %}
 plotSection(mori,'axisAngle','antipodal')
 {% endhighlight %}
@@ -296,11 +246,25 @@ plotSection(mori,'axisAngle','antipodal')
 {% highlight plaintext %}
 plotting 2000 random orientations out of 15872 given orientations
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationFundamentalRegion_14.png" %}
 </center>
-<h2 id="24">Next</h2>
-<p>The counterpart for directions rather than orientations is the <a href="FundamentalSector.html">Fundamental Sector</a>. What misorientations are, and how they are analysed, is <a href="Misorientations.html">Misorientations</a>.</p>
+<p>The second gallery contains the same boundary data in smaller panel outlines. Its paired axes have collapsed onto one representative.</p>
+<h2 id="24">How MTEX Chooses a Region</h2>
+<p>MTEX chooses representatives by rotational distance. For a selected centre, it keeps the rotations that are at least as close to that centre as any of their symmetry equivalents. This nearest-representative cell is a Voronoi cell in rotation space.</p>
+<p>Midplanes between the centre and its symmetry equivalents bound the cell. A different centre gives a different, equally valid fundamental region. A point exactly on a midplane has two equally near representatives, which is the boundary tie noted at the start of the page.</p>
+<p>The figures on this page use axis--angle coordinates, where radial distance is the rotation angle. In Rodrigues--Frank coordinates the same bisectors are Euclidean planes, so fundamental regions appear as plane-faced polyhedra. <a href="RotationRepresentations.html">Rotation Representations</a> compares these coordinate choices.</p>
+<h2 id="25">References</h2>
+<div>
+<ul>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops the geometry of rotation space, symmetry and misorientation distributions.</li>
+<li>A. Morawiec and D. P. Field, <a href="https://doi.org/10.1080/01418619608243708">Rodrigues Parameterization for Orientation and Misorientation Distributions</a>, <i>Philosophical Magazine A</i> 73 (1996), 1113-1130, derives asymmetric domains for all crystal symmetries in Rodrigues space.</li>
+<li>R. Krakow <i>et al.</i>, <a href="https://doi.org/10.1098/rspa.2017.0274">On Three-Dimensional Misorientation Spaces</a>, <i>Proceedings of the Royal Society A</i> 473 (2017), 20170274, gives a practical guide to symmetry-reduced axis--angle spaces for orientation-relationship analysis.</li>
+</ul>
+</div>
+<h2 id="26">Next</h2>
+<p>Continue with <a href="SpecimenSymmetry.html">Specimen Symmetry</a> for a second symmetry acting on orientations. The counterpart for directions is the <a href="FundamentalSector.html">Fundamental Sector</a>.</p>
+<p>The next chapter begins with <a href="Misorientations.html">Misorientations</a>. <a href="MisorientationGrainExchangeSym.html">Grain Exchange Symmetry</a> develops the same-phase distinction used above.</p>
 </div>
 </body>
 </html>

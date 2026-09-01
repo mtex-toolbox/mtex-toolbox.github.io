@@ -1,5 +1,5 @@
 ---
-title: "Importing Tensor Data"
+title: 'Importing Tensor Data'
 
 sidebar: documentation_sidebar
 permalink: TensorImport.html
@@ -22,46 +22,65 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Importing a coefficient table is only the first step in defining a tensor. The physical property, unit, compact-matrix convention, crystal symmetry, and crystal frame must agree with the source that published the values. MTEX cannot infer that scientific context from plausible-looking numbers.</p>
+<p>This page assumes the ranks and physical classes introduced in <a href="TensorDefinition.html">Defining Tensorial Properties</a>. Read <a href="CrystalReferenceSystem.html">Crystal Reference System</a> first if the alignment between lattice axes and Cartesian axes is new to you.</p>
+<p>A reference frame is the coordinate system in which data are expressed. It is distinct from crystal symmetry, which states the point group under which the property is invariant.</p>
 <!--/introduction-->
-<p>Single crystal tensor are imported using the command <a href="tensor.load.html">tensor.load</a>. This function automatically detect the file format and imports the data. In dependency of the specific format it might be necessary to specify the crystal symmetry separately</p>
+<h2 id="1">Load a generic tensor</h2>
+<p> <a href="tensor.load.html"><code class="language-plaintext highlighter-rouge">tensor.load</code></a> selects a file interface automatically. Interface detection identifies how to read the coefficient table; it does not establish what the coefficients mean.</p>
+<p>The bundled quartz file contains descriptive header lines, but its <code class="language-plaintext highlighter-rouge">.P</code> interface imports only the compact \(3\times6\) coefficient table. The point group and alignment options below attach the crystal frame used by the source. The alignment belongs to the frame, not to point group <code class="language-plaintext highlighter-rouge">32</code>.</p>
 {% highlight matlab %}
-% define crystal symmetry
-CS = crystalSymmetry('32', [4.916 4.916 5.4054],...
-  'X||a*', 'Z||c', 'mineral', 'Quartz');
+% define the quartz crystal symmetry and frame
+csQuartz = crystalSymmetry('32',[4.916 4.916 5.4054],...
+  'X||a*','Z||c','mineral','Quartz');
 
 % define the file name
-fname = fullfile(mtexDataPath,'tensor', 'Single_RH_quartz_poly.P');
+quartzFile = fullfile(mtexDataPath,'tensor','Single_RH_quartz_poly.P');
 
-% import the single crystal tensor
-P = tensor.load(fname,CS,'propertyname','piecoelectricity','unit','C/N','DoubleConvention')
+% import and display the piezoelectric strain tensor
+P = tensor.load(quartzFile,csQuartz,...
+  'propertyname','piezoelectric strain','unit','pC/N',...
+  'doubleConvention')
 {% endhighlight %}
 
 {% highlight plaintext %}
 P = tensor (Quartz)
-  propertyname    : piecoelectricity
-  unit            : C/N             
-  rank            : 3 (3 x 3 x 3)   
-  doubleConvention: true            
+  propertyname    : piezoelectric strain
+  unit            : pC/N                
+  rank            : 3 (3 × 3 × 3)       
+  doubleConvention: true                
  
   tensor in compact matrix form:
      0     0     0 -0.67     0   4.6
    2.3  -2.3     0     0  0.67     0
      0     0     0     0     0     0
 {% endhighlight %}
-<p>For specific types of tensors, e.g. stiffness tensors there exist dedicated import functions that have the form <b>tensorName.load</b>
-</p>
+<h2 id="2">Read the import summary</h2>
+<p>The display is an import audit. It identifies a rank 3 tensor in the quartz crystal frame, labels its values in pC/N, and reports <code class="language-plaintext highlighter-rouge">doubleConvention: true</code> before printing the compact coefficient table.</p>
+<p>The <code class="language-plaintext highlighter-rouge">propertyname</code> and <code class="language-plaintext highlighter-rouge">unit</code> options are labels stored with <code class="language-plaintext highlighter-rouge">P</code>. They do not convert the numbers, so the file values must already be in pC/N. These labels are the imported object's record of the physical meaning and unit; retain the publication itself as the record of provenance.</p>
+<h2 id="3">Check the compact-matrix convention</h2>
+<p>The six compact columns represent the index pairs \((11,22,33,23,13,12)\). With <code class="language-plaintext highlighter-rouge">doubleConvention</code>, columns 4 to 6 contain twice the corresponding off-diagonal tensor components. MTEX divides those entries by two when expanding the table to \(3\times3\times3\).</p>
+<p>This is the engineering-shear convention used by the quartz file. Do not infer it from the shape of a table: omitting the option for this source would silently double part of the tensor.</p>
+<h2 id="4">Load a physically specific tensor</h2>
+<p>Common physical tensors have dedicated loaders. The <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor.load</code></a> method returns the physically typed class, fixes rank 4, uses the stiffness form of the Voigt convention, and supplies GPa as the default unit label.</p>
+<p>Those defaults are correct for this olivine file, but they are still assumptions rather than unit conversion or validation. The file also gives a density of 3355 kg/m\(^3\). The numeric interface does not attach it, so it is converted to 3.355 g/cm\(^3\) and supplied explicitly.</p>
 {% highlight matlab %}
-fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
+% define the file name
+olivineFile = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
 
-cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivin');
+% define the olivine crystal symmetry and frame
+csOlivine = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],...
+  'mineral','Olivine');
 
-C = stiffnessTensor.load(fname,cs)
+% import and display the elastic stiffness tensor
+C = stiffnessTensor.load(olivineFile,csOlivine,'density',3.355)
 {% endhighlight %}
 
 {% highlight plaintext %}
-C = stiffnessTensor (Olivin)
-  unit: GPa              
-  rank: 4 (3 x 3 x 3 x 3)
+C = stiffnessTensor (Olivine)
+  density: 3.355            
+  unit   : GPa              
+  rank   : 4 (3 × 3 × 3 × 3)
  
   tensor in Voigt matrix representation:
  320.5  68.2  71.6     0     0     0
@@ -71,6 +90,33 @@ C = stiffnessTensor (Olivin)
      0     0     0     0    77     0
      0     0     0     0     0  78.7
 {% endhighlight %}
+<h2 id="5">Read the typed result</h2>
+<p>The display now reports a rank 4 <code class="language-plaintext highlighter-rouge">stiffnessTensor</code> in GPa, the attached density, and the \(6\times6\) Voigt matrix. The typed result provides elastic moduli and wave-velocity operations that a generic <code class="language-plaintext highlighter-rouge">tensor</code> does not. <a href="WaveVelocities.html">Wave Velocities</a> explains why density is required for seismic velocities.</p>
+<h2 id="6">Check compatibility with crystal symmetry</h2>
+<p> <a href="tensor.checkSymmetry.html"><code class="language-plaintext highlighter-rouge">checkSymmetry</code></a> tests whether each imported tensor is invariant under its attached crystal point group. The two logical values below correspond to quartz and olivine.</p>
+{% highlight matlab %}
+symmetryMatches = [checkSymmetry(P),checkSymmetry(C)]
+{% endhighlight %}
+
+{% highlight plaintext %}
+symmetryMatches =
+  1×2 logical array
+   1   1
+{% endhighlight %}
+<p>Both values are true for these files. This check can detect an incompatible point group, and for the quartz file it also catches a missing <code class="language-plaintext highlighter-rouge">'doubleConvention'</code>. It cannot verify units, axis sense, handedness, or whether the correct physical property was selected. Compare those items with the source publication before using the tensor.</p>
+<h2 id="8">Next</h2>
+<p>Continue with <a href="TensorArithmetics.html">Tensor Arithmetic</a> to rotate and contract imported tensors. <a href="TensorVisualisation.html">Tensor Visualization</a> shows how to inspect their directional dependence, and <a href="TensorAverage.html">Tensor Averages</a> combines a single-crystal property with orientations or an ODF.</p>
+<p>The quartz example continues in <a href="PiezoElectricity.html">Piezoelectricity</a>. The olivine example continues in <a href="AnisotropicTheory.html">Anisotropic Elasticity</a> and <a href="WaveVelocities.html">Wave Velocities</a>.</p>
+<h2 id="9">Further reading</h2>
+<div>
+<ul>
+<li>J. F. Nye, <a href="https://search.worldcat.org/title/11114089">Physical Properties of Crystals: Their Representation by Tensors and Matrices</a>, Oxford University Press, 1985, develops crystal axes, tensor components, and contracted matrix notation.</li>
+<li>A. Authier, editor, <a href="https://doi.org/10.1107/97809553602060000113">International Tables for Crystallography, Volume D: Physical Properties of Crystals</a>, 2nd ed., IUCr, 2014, tabulates crystal tensor symmetries and Voigt notation.</li>
+<li>
+<a href="https://standards.ieee.org/ieee/176/356/">IEEE Std 176-1987</a>, <i>IEEE Standard on Piezoelectricity</i>, specifies historical quartz axis, sign, and compact-matrix conventions. The standard was withdrawn in 2000.</li>
+<li>E. H. Abramson, J. M. Brown, L. J. Slutsky, and J. Zaug, <a href="https://doi.org/10.1029/97JB00682">The elastic constants of San Carlos olivine to 17 GPa</a>, <i>Journal of Geophysical Research</i> 102 (1997), 12253-12263, is the source of the olivine stiffness example.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

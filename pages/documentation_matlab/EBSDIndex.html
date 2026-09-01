@@ -1,5 +1,5 @@
 ---
-title: "The Index of EBSD data"
+title: 'Indexing EBSD Data'
 
 sidebar: documentation_sidebar
 permalink: EBSDIndex.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>The Index of EBSD data</title>
+<title>Indexing EBSD Data</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_EBSDIndex.m">
 </head>
@@ -23,7 +23,8 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In previous chapters we have discussed how to select EBSD data by properties. In this chapter we discus the ordering of EBSD pixels within MTEX. Lets start by importing some sample data</p>
+<p>A single EBSD measurement has several addresses. It has a position in a list, an <code class="language-plaintext highlighter-rouge">id</code> inherited from its parent map, and a position on the specimen. On a gridded map it also has a row and column. A hexagonal grid offers cube coordinates as a fifth address. They simplify neighbour-based algorithms.</p>
+<p>These addresses answer different questions and stop agreeing as soon as measurements are selected or rearranged. This page keeps them apart. See <a href="EBSDSelect.html">Selecting EBSD Data</a> for phase, property, and region selections. <a href="EBSDGrid.html">Square and Hex Grids</a> gives the complete gridding model.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata twins
@@ -38,16 +39,15 @@ ebsd = EBSDsquare (y↑→x, row↑→col)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
+ X × Y × Z : [0 → 50] × [0 → 41] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :137 x 167
+ Square grid  :137 × 167
 {% endhighlight %}
-<p>The imported map is an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, i.e. it is already stored as a matrix - see <a href="EBSDGrid.html">Square and Hex Grids</a>. Restricting it to a very small rectangular subset gives back a plain list of pixels, since the selection is in general not a rectangle</p>
+<h2 id="2">List position</h2>
+<p>The summary above identifies the imported map as an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>. It is already stored as a matrix. Restricting it to a small rectangle returns a plain <a href="EBSD.EBSD.html">EBSD</a> list. An arbitrary selection is not generally rectangular.</p>
 {% highlight matlab %}
 poly = [44 0 4 2];
 ebsd = ebsd(inpolygon(ebsd,poly))
-
-plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k','backend','patch')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -58,50 +58,53 @@ ebsd = EBSD (y↑→x)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [44 → 48] x [0 → 1.8] x [0 → 0]
+ X × Y × Z : [44 → 48] × [0 → 1.8] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_01.png" %}
-</center>
-<p>In the above plot each square corresponds to one entry in the variable <code class="language-plaintext highlighter-rouge">ebsd</code> which as an index from 1 to 98. Let us visualize this index</p>
+<p>The summary reports 98 measurements. Each coloured square below is one entry in that list. Writing the list position into every square reveals the order in which the entries are stored.</p>
 {% highlight matlab %}
+plot(ebsd,ebsd.orientations,'ipfDirection',zvector,'micronbar','off',...
+  'edgecolor','k','backend','patch')
 text(ebsd,1:length(ebsd))
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_02.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDIndex_01.png" %}
 </center>
-<p>We may easily select specific pixels by specifying their indices</p>
+<p>A single numeric subscript selects by list position. The red outline marks entries 16 to 18.</p>
 {% highlight matlab %}
 hold on
 plot(ebsd(16:18),'edgeColor','red','facecolor','none','linewidth',4,'backend','patch')
 legend off
 hold off
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_03.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDIndex_02.png" %}
 </center>
-<p>Whether lines or columns run first is inherited from the order of the data the subset was taken from. Here that is the gridded map, whose linear index runs down a matrix column, i.e. along y - which is why the numbers above count downwards rather than across. Had the map been imported as a plain list, they would follow the order of the lines in the file instead.</p>
-<p>Since we have restricted our large EBSD map to the small subset, the indices of the restricted data do not coincide with the indices of the imported data anymore. However, the original indices are still stored in <code class="language-plaintext highlighter-rouge">ebsd.id</code>. Lets visualize those</p>
+<p>This crop came from a gridded map and inherited its linear order. MATLAB advances through every row of one matrix column before moving to the next column. Here that means visiting all y positions at one x position before moving to the next x position. A list imported without gridding instead follows the order in which its measurements were loaded.</p>
+<h2 id="6">Measurement id</h2>
+<p>Cropping changed every measurement's position in the list. Entry 16 of the crop was not entry 16 of the full map. Its identifier in that parent map is stored in <code class="language-plaintext highlighter-rouge">ebsd.id</code>.</p>
 {% highlight matlab %}
-plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k','backend','patch')
+plot(ebsd,ebsd.orientations,'ipfDirection',zvector,'micronbar','off',...
+  'edgecolor','k','backend','patch')
 text(ebsd,ebsd.id)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_04.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDIndex_03.png" %}
 </center>
-<p>In order to select EBSD data according to their original <code class="language-plaintext highlighter-rouge">id</code> use the option <code class="language-plaintext highlighter-rouge">'id'</code>, i.e., the three pixels highlighted above are</p>
+<p>The option <code class="language-plaintext highlighter-rouge">'id'</code> selects by those identifiers. It therefore highlights the same three measurements as the list-position selection above.</p>
 {% highlight matlab %}
 hold on
-plot(ebsd('id',ebsd.id(16:18)),'edgeColor','red','facecolor','none','linewidth',4,'backend','patch')
+plot(ebsd('id',ebsd.id(16:18)),'edgeColor','red','facecolor','none',...
+  'linewidth',4,'backend','patch')
 legend off
 hold off
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_05.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDIndex_04.png" %}
 </center>
-<p>A pixel may also be addressed by where it sits in the map, using the option <code class="language-plaintext highlighter-rouge">'xy'</code>
-</p>
+<p>Keep an <code class="language-plaintext highlighter-rouge">id</code> when a result from one selection must be matched to another selection from the same parent map. Selection preserves it. Gridding is a different operation. It may assign identifiers for the new raster and stores the input identifiers in <code class="language-plaintext highlighter-rouge">oldId</code>. An <code class="language-plaintext highlighter-rouge">id</code> is therefore not necessarily a line number in the imported file. See <a href="EBSDGrid.html">Square and Hex Grids</a>.</p>
+<h2 id="9">Position on the specimen</h2>
+<p>The option <code class="language-plaintext highlighter-rouge">'xy'</code> returns the measurement closest to a specimen position. Its output shows both the selected <code class="language-plaintext highlighter-rouge">id</code> and the actual coordinates.</p>
 {% highlight matlab %}
 ebsd('xy',44.5,1)
 {% endhighlight %}
@@ -115,44 +118,47 @@ ans = EBSD (y↑→x)
     Id   Phase              orientation   bands    bc    bs   error   mad   oldId
  20280       1   (176.5°,104.1°,182.9°)      10   139   245       0   0.5     650
  Scan unit : um
- X x Y x Z : [44 → 44] x [0.9 → 0.9] x [0 → 0]
+ X × Y × Z : [44 → 44] × [0.9 → 0.9] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>Note that <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> does NOT do this - it is an error. On a gridded map the very same expression is the pixel in row x and column y, see below, so one and the same line would mean two different pixels depending on whether the map happens to be stored as a matrix or as a list. <code class="language-plaintext highlighter-rouge">'xy'</code> means the same in both cases.</p>
-<h2 id="9">Square Grids</h2>
-<p>Our subset is a list, but the pixels in it do sit on a grid, so we may put it back into matrix form with <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>.</p>
+<p>The expression <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> does <b>not</b> perform that lookup on a plain list; it is an error. On a gridded map the same expression means the pixel in row <code class="language-plaintext highlighter-rouge">x</code> and column <code class="language-plaintext highlighter-rouge">y</code>. Requiring <code class="language-plaintext highlighter-rouge">'xy'</code> prevents one line from changing meaning when a map changes between list and matrix storage.</p>
+<h2 id="11">Square-grid subscripts</h2>
+<p>Although the crop is a list, its measurements lie on a regular grid. <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> restores the matrix shape. The output of <code class="language-plaintext highlighter-rouge">size</code> confirms that this crop has 7 rows and 14 columns.</p>
 {% highlight matlab %}
 ebsd = ebsd.gridify;
+size(ebsd)
+{% endhighlight %}
 
-plot(ebsd,ebsd.orientations,'micronbar','off','edgeColor','black','backend','patch')
+{% highlight plaintext %}
+ans =
+     7    14
+{% endhighlight %}
+<p>The labels now show <code class="language-plaintext highlighter-rouge">(row,column)</code> rather than a single linear index.</p>
+{% highlight matlab %}
+plot(ebsd,ebsd.orientations,'ipfDirection',zvector,'micronbar','off',...
+  'edgeColor','black','backend','patch')
 
 [i,j] = ndgrid(1:size(ebsd,1),1:size(ebsd,2));
-str = arrayfun(@(a,b) ['(' int2str(a) ',' int2str(b) ')'],i,j,'UniformOutput',false);
+str = arrayfun(@(a,b) ['(' int2str(a) ',' int2str(b) ')'],i,j,...
+  'UniformOutput',false);
 text(ebsd,str)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_06.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDIndex_05.png" %}
 </center>
-<p>This allows to select EBSD data simply by their coordinates within the grid, e.g., by</p>
+<p>Two subscripts select by row and column. Ranges select a whole row or a rectangular block; the red outline marks columns 2 to 4 of row 2.</p>
 {% highlight matlab %}
 hold on
 plot(ebsd(2,2:4),'edgeColor','red','facecolor','none','linewidth',4,'backend','patch')
 legend off
 hold off
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_07.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDIndex_06.png" %}
 </center>
-<p>Note that the <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> command changes the order of measurements. They are now sorted such that rows run first and columns second, as this is the default convention how Matlab indexes matrices. This is unavoidable and the reason why an imported map is put on its grid right away - see <a href="EBSDGrid.html">Square and Hex Grids</a>.</p>
-{% highlight matlab %}
-plot(ebsd,ebsd.orientations,'micronbar','off','edgeColor','black','backend','patch')
-text(ebsd,1:length(ebsd))
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_08.png" %}
-</center>
-<h2 id="12">Hexagonal Grid</h2>
-<p>Everything above applies to EBSD data measured on a hexagonal grid as well. Such data is imported as an <a href="EBSDhex.EBSDhex.html">EBSDhex</a>, i.e. it already is in matrix form</p>
+<p> <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> is allowed to reorder a plain list so that dimension 1 follows increasing specimen y and dimension 2 increasing x. This crop is a special case: it already inherited that order from the full gridded map, so its sequence does not change. For a general list, use the second output of <code class="language-plaintext highlighter-rouge">gridify</code> or <code class="language-plaintext highlighter-rouge">oldId</code>. They relate input order to raster order. <a href="EBSDGrid.html">Square and Hex Grids</a> works through that translation.</p>
+<h2 id="15">Hexagonal grids</h2>
+<p>The same distinction between linear index, <code class="language-plaintext highlighter-rouge">id</code>, specimen position, and matrix subscripts applies to a hexagonal measurement grid. The summary below identifies this map as an <a href="EBSDhex.EBSDhex.html">EBSDhex</a>. It is stored as a matrix from the start.</p>
 {% highlight matlab %}
 plottingConvention.default('y↓→x');
 mtexdata titanium
@@ -166,40 +172,50 @@ ebsd = EBSDhex (y↓→x)
  
  Properties: ci, grainid, iq, sem_signal, oldId
  Scan unit : um
- X x Y x Z : [0 → 996] x [0 → 998] x [0 → 0]
+ X × Y × Z : [0 → 996] × [0 → 998] × [0 → 0]
  Normal vector: (0,0,1)
- Hex grid     :97 x 84
+ Hex grid     :97 × 84
 {% endhighlight %}
-<p>and can be indexed similarly as in the square case.</p>
+<p>Row and column indexing works as in the square case. We retain a small block so that its subscripts remain legible.</p>
 {% highlight matlab %}
 ebsd = ebsd(10:16,68:79);
-{% endhighlight %}
-<p>Lets visualize the matrix coordinates for the hexagonal grid</p>
-{% highlight matlab %}
-plot(ebsd,ebsd.orientations,'edgeColor','k','micronbar','off','unitcell')
+
+plot(ebsd,ebsd.orientations,'ipfDirection',zvector,'edgeColor','k',...
+  'micronbar','off','unitcell')
 axis off
 
 [i,j] = ndgrid(1:size(ebsd,1),1:size(ebsd,2));
-str = arrayfun(@(a,b) ['(' int2str(a) ',' int2str(b) ')'],i,j,'UniformOutput',false);
+str = arrayfun(@(a,b) ['(' int2str(a) ',' int2str(b) ')'],i,j,...
+  'UniformOutput',false);
 text(ebsd,str)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_09.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDIndex_07.png" %}
 </center>
-<h2 id="15">Cube Coordinates</h2>
-<p>In hexagonal grids it is sometimes advantageous to use three digit cube coordinates to index the cell. This can be done using the commands <a href="EBSDhex.hex2cube.html"><code class="language-plaintext highlighter-rouge">hex2cube</code></a> and <a href="EBSDhex.cube2hex.html"><code class="language-plaintext highlighter-rouge">cube2hex</code></a>. Much more details on indexing hex grids can be found at <a href="https://www.redblobgames.com/grids/hexagons/">here</a>.</p>
+<p>The labels show that rows are horizontal lines of cells. Because alternate rows are offset, a matrix column follows a zigzag rather than a straight line on the specimen.</p>
+<h2 id="18">Cube coordinates</h2>
+<p>Offset rows make a neighbour step depend on whether the row is even or odd. Cube coordinates replace row and column by three redundant indices, making the six neighbour steps identical everywhere on the grid. They are cell addresses for algorithms, not specimen coordinates.</p>
+<p> <a href="EBSDhex.hex2cube.html"><code class="language-plaintext highlighter-rouge">hex2cube</code></a> and <a href="EBSDhex.cube2hex.html"><code class="language-plaintext highlighter-rouge">cube2hex</code></a> convert between the two systems. <a href="https://www.redblobgames.com/grids/hexagons/">Hexagonal Grids</a> explains the geometric construction and further algorithms.</p>
 {% highlight matlab %}
-plot(ebsd,ebsd.orientations,'edgeColor','k','micronbar','off','unitcell')
+plot(ebsd,ebsd.orientations,'ipfDirection',zvector,'edgeColor','k',...
+  'micronbar','off','unitcell')
 axis off
 
 [i,j] = ndgrid(1:size(ebsd,1),1:size(ebsd,2));
 [x,y,z] = ebsd.hex2cube(i,j);
-str = arrayfun(@(a,b,c) ['(' int2str(a) ',' int2str(b) ',' int2str(c) ')'],x,y,z,'UniformOutput',false);
+str = arrayfun(@(a,b,c) ['(' int2str(a) ',' int2str(b) ',' int2str(c) ')'],...
+  x,y,z,'UniformOutput',false);
 text(ebsd,str)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDIndex_10.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDIndex_08.png" %}
 </center>
+<p>Every displayed triple satisfies <code class="language-plaintext highlighter-rouge">x + y + z = 0</code>. A step to any of the six neighbours adds one to one coordinate and subtracts one from another, leaving the third unchanged.</p>
+<h2 id="20">Further reading</h2>
+<p>
+<a href="https://www.mathworks.com/help/matlab/math/array-indexing.html">Array Indexing</a> in the MATLAB documentation explains linear and row-column indexing, including the column-major order used above.</p>
+<p>I. Her, <a href="https://doi.org/10.1109/83.413166"><i>Geometric transformations on the hexagonal grid</i></a>, IEEE Transactions on Image Processing 4(9), 1213--1222 (1995). The paper develops the symmetrical frame behind cube coordinates.</p>
+<p>After grain reconstruction, <a href="SelectingGrains.html">Selecting Grains</a> separates grain list positions, grain <code class="language-plaintext highlighter-rouge">id</code> values, and <code class="language-plaintext highlighter-rouge">ebsd.grainId</code>.</p>
 </div>
 </body>
 </html>

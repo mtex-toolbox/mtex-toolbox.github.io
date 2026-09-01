@@ -1,5 +1,5 @@
 ---
-title: "Convolution of Orientational Dependent and Spherical Functions"
+title: 'Convolution of Rotational and Spherical Functions'
 
 sidebar: documentation_sidebar
 permalink: SO3FunConvolution.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Convolution of Orientational Dependent and Spherical Functions</title>
+<title>Convolution of Rotational and Spherical Functions</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_SO3FunConvolution.m">
 </head>
@@ -22,300 +22,403 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Convolution combines two functions by averaging their overlap while one argument is rotated. It is used to smooth a function, transfer an orientation distribution to directions, and construct rotation-dependent similarities. A cross-correlation uses the same machinery but may also require inversion or complex conjugation, depending on its convention.</p>
+<p>Four combinations occur in MTEX:</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>first input</p>
+         </td>
+         <td>
+               <p>second input</p>
+         </td>
+         <td>
+               <p>result</p>
+         </td>
+         <td>
+               <p>compatibility</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="SO3Fun.SO3Fun.html">SO3Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3Fun.SO3Fun.html">SO3Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3Fun.SO3Fun.html">SO3Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>first right = second left</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="S2Fun.S2Fun.html">S2Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <a href="S2Fun.S2Fun.html">S2Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3Fun.SO3Fun.html">SO3Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>spherical frames must agree</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="SO3Fun.SO3Fun.html">SO3Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <a href="S2Fun.S2Fun.html">S2Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <a href="S2Fun.S2Fun.html">S2Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>rotational left = spherical symmetry</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="SO3Fun.SO3Fun.html">SO3Fun</a> or <a href="S2Fun.S2Fun.html">S2Fun</a>
+               </p>
+         </td>
+         <td>
+               <p>matching radial kernel</p>
+         </td>
+         <td>
+               <p>same domain as function</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>The left and right sides are defined on <a href="SO3FunSymmetricFunctions.html">Symmetry of Orientation-Dependent Functions</a>. Matching means the same point group in the same reference frame, not merely point groups with the same printed name.</p>
 <!--/introduction-->
-<p>On this page we will show how the convolution of <a href="SO3Fun.SO3Fun.html">ODFs, SO3Fun's</a>, <a href="S2Fun.S2Fun.html"><code class="language-plaintext highlighter-rouge">Spherical functions (S2Fun's)</code></a>, <a href="SO3Kernels.html"><code class="language-plaintext highlighter-rouge">SO3Kernel's</code></a> and <a href="S2Kernels.html"><code class="language-plaintext highlighter-rouge">S2Kernel's</code></a> is defined.</p>
-<p>The convolution is an integral operator which is often used to smooth functions or compute their cross correlation.</p>
-<p>We have to distinguish which objects are convoluted.</p>
-<div>
-<ul>
-<li>
-<a href="SO3FunConvolution.html#3">Convolution of two SO3Fun's</a>
-</li>
-<li>
-<a href="SO3FunConvolution.html#7">Convolution of two S2Fun's</a>
-</li>
-<li>
-<a href="SO3FunConvolution.html#9">Convolution of a SO3Fun and a S2Fun</a>
-</li>
-<li>
-<a href="SO3FunConvolution.html#12">Convolution with SO3Kernel's and SO2Kernel's</a>
-</li>
-</ul>
-</div>
-<h2 id="3">Convolution of two rotational functions</h2>
-<p>Let two <code class="language-plaintext highlighter-rouge">SO3Fun's</code> \(f \colon {}_{S_L } \backslash SO(3) /_{S_x} \to \mathbb{C}\) where \(S_L\) is the left symmetry and \(S_x\) is the right symmetry and \(g: {}_{S_x} \backslash SO(3) /_{S_R} \to \mathbb C\) where \(S_x\) is the left symmetry and \(S_R\) is the right symmetry be given.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-g = SO3FunHarmonic.example
+{% endhighlight %}
+<h2 id="2">Convolve two rotational functions</h2>
+<p>The inner sides are integrated out. Consequently, the right symmetry of the first function must match the left symmetry of the second. The result inherits its left symmetry from the first function and its right symmetry from the second.</p>
+{% highlight matlab %}
+g = SO3FunHarmonic.example;
 
 ss1 = specimenSymmetry;
 ss2 = specimenSymmetry('222');
-f = SO3FunRBF(orientation.rand(ss1,ss2))
-{% endhighlight %}
+centre = orientation.rand(1,ss1,ss2);
+kernel = SO3DeLaValleePoussinKernel('halfwidth',15*degree);
+f = SO3FunRBF(centre,kernel);
 
-{% highlight plaintext %}
-g = SO3FunHarmonic (Quartz → y↑→x)
-  bandwidth: 48
-  weight: 1
- 
- 
-f = SO3FunRBF (y↑→x → y↑→x (222))
- 
-  unimodal component
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 1 orientations
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2  weight
-  156.958 161.468 197.878       1
-{% endhighlight %}
-<p>Then the convolution \(f {*} g \colon {}_{S_L} \backslash SO(3) /_{S_R} \to \mathbb C\) is defined by</p>
-<p>\[ (f {*} g)(R) = \frac{1}{8\pi^2} \int_{SO(3)} f(q) \cdot g(q^{-1}\,R) \, dq \]</p>
-<p>where the right symmetry of \(f\) have to coincide with the left symmetry of \(g\). The normalization factor of the integral reads as \(vol(SO(3)) = \int_{SO(3)} 1 \, dR = 8\pi^2\).</p>
-{% highlight matlab %}
 c = conv(f,g)
-
-% Test
-r = orientation.rand(c.CS,c.SS);
-c.eval(r)
-mean(SO3FunHandle(@(q) f.eval(q).*g.eval(inv(q).*r)))
+resultLeftSymmetry = c.SLeft
+resultRightSymmetry = c.SRight
 {% endhighlight %}
 
 {% highlight plaintext %}
 c = SO3FunHarmonic (Quartz → y↑→x (222))
-  bandwidth: 25
+  bandwidth: 17
   weight: 1
  
-ans =
-    0.2368
-ans =
-    0.2366
+ 
+resultLeftSymmetry = orthorhombic specimenSymmetry (y↑→x)
+ 
+ 
+resultRightSymmetry = crystalSymmetry (⊙c→a)
+ 
+  mineral        : Quartz           
+  color          : lightblue        
+  symmetry       : 321              
+  elements       : 6                
+  a, b, c        : 4.9, 4.9, 5.4    
+  reference frame: X||a*, Y||b, Z||c
 {% endhighlight %}
-<p>Note that the left sided convolution from the above definition is used as default in MTEX.</p>
-<p>The right sided convolution coincides with the commutation</p>
-<p>\[ (g {*} f)(R) = \frac1{8\pi^2} \int_{SO(3)} f(q) \cdot g(R\,q^{-1}) \, dq \]</p>
-<p>where the left symmetry of \(f\) have to coincide with the right symmetry of \(g\).</p>
+<p>Here <code class="language-plaintext highlighter-rouge">f.SRight</code> and <code class="language-plaintext highlighter-rouge">g.SLeft</code> are both the identity specimen symmetry. The result therefore keeps the <code class="language-plaintext highlighter-rouge">222</code> left symmetry of <code class="language-plaintext highlighter-rouge">f</code> and the quartz right symmetry of <code class="language-plaintext highlighter-rouge">g</code>.</p>
+<p>Check one value against direct numerical integration. The <a href="SO3Fun.SO3Fun.html">SO3Fun</a> mean uses normalized orientation-space measure, so it implements the factor \(1/(8\pi^2)\) in the integral stated below.</p>
 {% highlight matlab %}
-f = SO3FunRBF(orientation.rand(g.CS,g.CS))
-
-c = conv(g,f)
-
-% Test
 r = orientation.rand(c.CS,c.SS);
-c.eval(r)
-mean(SO3FunHandle(@(q) f.eval(q).*g.eval(r.*inv(q)),c.CS))
+convolutionValue = c.eval(r)
+integrand = SO3FunHandle(@(q) ...
+  f.eval(q) .* g.eval(inv(q).*r));
+integralValue = mean(integrand,'resolution',5*degree)
+SO3CheckDifference = abs(convolutionValue - integralValue)
+
+plot(c,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = SO3FunRBF (Quartz → Quartz)
- 
-  unimodal component
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 1 orientations
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2  weight
-  73.6735 76.1995 107.876       1
- 
- 
-c = SO3FunHarmonic (Quartz → y↑→x)
-  bandwidth: 25
+convolutionValue =
+    0.2350
+integralValue =
+    0.2361
+SO3CheckDifference =
+    0.0011
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SO3FunConvolution_01.png" %}
+</center>
+<p>The strongest regions are shifted and broadened copies of the input ODF. The maximum drops from about 94 to about 10, the bandwidth from 48 to 17, and the peak moves.</p>
+<p>The plot covers the fundamental region of the inherited <code class="language-plaintext highlighter-rouge">222</code> and quartz symmetries, so symmetrically equivalent copies are folded into it rather than drawn beside one another. The printed difference measures the accuracy of the independent, coarser numerical integration used for the check.</p>
+<h2 id="5">Swap the argument order</h2>
+<p>Convolution on the rotation group is not commutative in general. A right-sided form can be evaluated by swapping the function order, provided the new inner symmetry pair is compatible.</p>
+{% highlight matlab %}
+rng(3)
+fRight = SO3FunRBF(orientation.rand(1,g.CS,g.CS),kernel);
+cRight = conv(g,fRight)
+
+rRight = orientation.rand(cRight.CS,cRight.SS);
+rightConvolutionValue = cRight.eval(rRight)
+qRight = orientation.rand(100000,stripSym(fRight.SRight), ...
+  stripSym(fRight.SLeft));
+rightSamples = fRight.eval(qRight) .* g.eval(rRight.*inv(qRight));
+rightIntegralEstimate = mean(rightSamples)
+rightStandardError = std(rightSamples) / sqrt(numel(rightSamples))
+rightCheckDifference = abs(rightConvolutionValue - ...
+  rightIntegralEstimate)
+{% endhighlight %}
+
+{% highlight plaintext %}
+cRight = SO3FunHarmonic (Quartz → y↑→x)
+  bandwidth: 17
   weight: 1
  
-ans =
-    0.4555
-ans =
-    0.4555
+rightConvolutionValue =
+    0.3147
+rightIntegralEstimate =
+    0.3193
+rightStandardError =
+    0.0043
+rightCheckDifference =
+    0.0046
 {% endhighlight %}
-<p>The convolution of matrices of SO3FunHarmonic's with matrices of SO3 Functions works elementwise, see at <a href="SO3FunVectorValued.html">vector valued SO3Fun's</a> for there definition.</p>
-<h2 id="7">Convolution of two spherical functions</h2>
-<p>Consider there are two <code class="language-plaintext highlighter-rouge">S2Fun's</code> \(f: \mathbb S^2 /_{S_R} \to \mathbb{C}\) \(g: \mathbb S^2 /_{S_L} \to \mathbb{C}\) given, where \(S_R\) and \(S_L\) denotes the symmetries.</p>
+<p>This Monte Carlo estimate checks the right-sided integral written in the maths section. Compare its difference with the printed standard error. It is not a claim that <code class="language-plaintext highlighter-rouge">conv(f,g)</code> and <code class="language-plaintext highlighter-rouge">conv(g,f)</code> are generally equal.</p>
+<p>Arrays of <a href="SO3Fun.SO3Fun.html">SO3Fun</a> objects may also be convolved. Two arrays are combined element by element, as described for <a href="SO3FunVectorValued.html">vector-valued rotational functions</a>.</p>
+<h2 id="7">Convolve two spherical functions</h2>
+<p>Rotating one spherical function against another produces a function of the rotation, not another spherical function. The output measures their overlap for every relative orientation. Its right symmetry comes from the first spherical function and its left symmetry from the second.</p>
 {% highlight matlab %}
 cs = crystalSymmetry;
-f = S2FunHarmonicSym(S2Fun.smiley,cs)
-g = S2FunHarmonic(S2DeLaValleePoussinKernel)
+sphereF = S2FunHarmonicSym(S2Fun.smiley,cs);
+sphereG = S2FunHarmonic(S2DeLaValleePoussinKernel);
+sphereCorrelation = conv(sphereF,sphereG)
+
+rSphere = orientation.rand(sphereCorrelation.CS, ...
+  sphereCorrelation.SS);
+sphereConvolutionValue = sphereCorrelation.eval(rSphere)
+sphereIntegrand = S2FunHandle(@(v) ...
+  sphereF.eval(inv(rSphere)*v) .* sphereG.eval(v));
+sphereGrid = equispacedS2Grid('resolution',1*degree);
+sphereIntegralValue = mean(sphereIntegrand.eval(sphereGrid))
+sphereCheckDifference = ...
+  abs(sphereConvolutionValue - sphereIntegralValue)
+
+plot(sphereCorrelation,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = S2FunHarmonicSym (1)
-  bandwidth: 128
- 
- 
-g = S2FunHarmonic (y↑→x)
-  bandwidth: 25
-{% endhighlight %}
-<p>Then the spherical convolution yields a orientation dependent function \(f*g: {}_{S_L} \backslash SO(3) /_{S_R} \to \mathbb{C}\) with right symmetry \(S_R\) and left symmetry \(S_L\). The convolution is defined by</p>
-<p>\[ (f * g)(R) = \frac1{4\pi} \int_{S^2} f(R^{-1}\xi) \cdot g(\xi) \, d\xi. \]</p>
-<p>The normalization factor of the integral reads as \(vol(S^2) = \int_{S^2} 1 \, d\xi = 4\pi\).</p>
-{% highlight matlab %}
-c = conv(f,g)
-
-% Test
-r = orientation.rand(c.CS,c.SS);
-c.eval(r)
-c2 = S2FunHandle(@(v) f.eval(inv(r)*v).*g.eval(v));
-v = equispacedS2Grid('resolution',0.2*degree);
-mean(c2.eval(v))
-{% endhighlight %}
-
-{% highlight plaintext %}
-c = SO3FunHarmonic (1 → y↑→x)
+sphereCorrelation = SO3FunHarmonic (1 → y↑→x)
   bandwidth: 25
   weight: 0.0064
  
-ans =
-   5.8489e-05
-ans =
-   5.8489e-05
+sphereConvolutionValue =
+   7.4991e-08
+sphereIntegralValue =
+   7.0573e-08
+sphereCheckDifference =
+   4.4181e-09
 {% endhighlight %}
-<h2 id="9">Convolution of a rotational function with a spherical function</h2>
-<p>We consider a <code class="language-plaintext highlighter-rouge">SO3Fun</code> \(f: {}_{S_h} \backslash SO(3) /_{S_R} \to \mathbb{C}\) with left symmetry \(S_h\) and right symmetry \(S_R\), and a <code class="language-plaintext highlighter-rouge">S2Fun</code> \(h \colon \mathbb S^2 /_{S_h} \to \mathbb C\) with symmetry group \(S_h\).</p>
+<center class="mtex-figure">
+{% include inline_image.html file="SO3FunConvolution_02.png" %}
+</center>
+<p>The section plot changes as the smiley pattern moves into and out of alignment with the zonal second function. This is why two inputs on the sphere produce an output on the rotation group.</p>
+<h2 id="9">Convolve a rotational and a spherical function</h2>
+<p>A rotational function can transport a spherical function through all orientations and average the result. The output is spherical. The spherical symmetry must match the left symmetry of the rotational function, and the output inherits the rotational function's right symmetry.</p>
 {% highlight matlab %}
-f = SO3FunHarmonic.example
-h = S2FunHarmonicSym(S2Fun.smiley,ss1)
+rotF = SO3FunHarmonic.example;
+sphereH = S2FunHarmonicSym(S2Fun.smiley,rotF.SLeft);
+directionF = conv(rotF,sphereH)
+
+vCrystal = Miller(1,0,0,directionF.CS);
+directionValue = directionF.eval(vCrystal)
+
+rng(7)
+qDirection = orientation.rand(100000,stripSym(rotF.CS), ...
+  rotF.SLeft);
+directionSamples = rotF.eval(qDirection) .* ...
+  sphereH.eval(qDirection*vCrystal);
+directionIntegralEstimate = mean(directionSamples)
+directionStandardError = ...
+  std(directionSamples) / sqrt(numel(directionSamples))
+directionCheckDifference = ...
+  abs(directionValue - directionIntegralEstimate)
+
+plot(directionF)
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = SO3FunHarmonic (Quartz → y↑→x)
+directionF = S2FunHarmonicSym (Quartz)
   bandwidth: 48
-  weight: 1
  
- 
-h = S2FunHarmonicSym (y↑→x)
-  bandwidth: 128
+directionValue =
+    0.0328
+directionIntegralEstimate =
+    0.0345
+directionStandardError =
+    0.0013
+directionCheckDifference =
+    0.0017
 {% endhighlight %}
-<p>The convolution yields a <code class="language-plaintext highlighter-rouge">S2Fun</code> \(f*h \colon \mathbb S^2/_{S_R} \to \mathbb C\). In MTEX it is defined by</p>
-<p>\[ (f * h)(\xi) = \frac1{8\pi^2} \int_{SO(3)} f(q) \cdot h(q\,\xi) \, dq. \]</p>
+<center class="mtex-figure">
+{% include inline_image.html file="SO3FunConvolution_03.png" %}
+</center>
+<p>Bright directions receive large contributions from many orientations where both input functions are large. Unlike the preceding section plot, this result needs only a direction on the sphere for evaluation.</p>
+<p>The Monte Carlo orientations cover the full rotation group. <code class="language-plaintext highlighter-rouge">stripSym</code> removes the quartz point group while retaining its crystal frame. Using a symmetry-reduced fundamental region would be invalid for this check, because a fixed Miller representative makes the integrand nonsymmetric. The check difference should be interpreted against its sampling standard error, not as deterministic quadrature error.</p>
+<h2 id="11">Use the inverse-action variant</h2>
+<p>A second convention acts on the spherical argument with the inverse rotation. It applies when the rotational function has trivial left symmetry and its right symmetry matches the spherical symmetry. Add <code class="language-plaintext highlighter-rouge">'inv'</code>, or equivalently invert the rotational function before calling <code class="language-plaintext highlighter-rouge">conv</code>.</p>
 {% highlight matlab %}
-c = conv(f,h)
+sphereHInv = S2FunHarmonicSym(S2Fun.smiley,rotF.CS);
+directionInv = conv(rotF,sphereHInv,'inv');
+directionInvEquivalent = conv(inv(rotF),sphereHInv);
 
-% Test
-v = Miller.rand(c.CS);
-c.eval(v)
-mean(SO3FunHandle(@(q) f.eval(q).*h.eval(q*v),c.CS))
+vSpecimen = xvector;
+inverseActionValue = directionInv.eval(vSpecimen)
+
+rng(5)
+qInverse = orientation.rand(100000,stripSym(rotF.CS),rotF.SLeft);
+inverseSamples = rotF.eval(qInverse) .* ...
+  sphereHInv.eval(inv(qInverse)*vSpecimen);
+inverseIntegralEstimate = mean(inverseSamples)
+inverseStandardError = ...
+  std(inverseSamples) / sqrt(numel(inverseSamples))
+inverseActionCheckDifference = ...
+  abs(inverseActionValue - inverseIntegralEstimate)
+
+comparisonGrid = equispacedS2Grid('resolution',5*degree);
+inverseFlagDifference = max(abs(directionInv.eval(comparisonGrid) - ...
+  directionInvEquivalent.eval(comparisonGrid)))
 {% endhighlight %}
 
 {% highlight plaintext %}
-c = S2FunHarmonicSym (Quartz)
-  bandwidth: 48
- 
-ans =
-   -0.0036
-ans =
-   -0.0433
+inverseActionValue =
+    0.0152
+inverseIntegralEstimate =
+    0.0151
+inverseStandardError =
+   5.4795e-04
+inverseActionCheckDifference =
+   7.2037e-05
+inverseFlagDifference =
+     0
 {% endhighlight %}
-<p>Alternatively, we may consider the convolution of \(f: {}_{'1'} \backslash SO(3) /_{S_R} \to \mathbb{C}\)and \(h \colon \mathbb S^2 /_{S_R} \to \mathbb C\), which yields the spherical function \(f*h \colon \mathbb S^2/_{'1'} \to \mathbb C\) defined by</p>
-<p>\[ (f * h)(\xi) = \frac1{8\pi^2} \int_{SO(3)} f(q) \cdot h(q^{-1}\,\xi) \, dq, \]</p>
-<p>In MTEX this variant can be computed by adding the flag <code class="language-plaintext highlighter-rouge">'inv'</code>, or equivalently by evaluating <code class="language-plaintext highlighter-rouge">conv(inv(f),h)</code>.</p>
+<p>The small final difference verifies that <code class="language-plaintext highlighter-rouge">'inv'</code> and <code class="language-plaintext highlighter-rouge">conv(inv(rotF),sphereHInv)</code> implement the same variant. The two action conventions should not be mixed: \(qv\) and \(q^{-1}v\) generally produce different averages.</p>
+<h2 id="13">Smooth with a rotational kernel</h2>
+<p>An <a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a> is a radial rotational function: it depends only on the rotation angle. Convolution with it attenuates harmonic degrees according to the kernel coefficients. Radiality also makes this particular convolution commutative, even though convolution of two general rotational functions is not.</p>
 {% highlight matlab %}
-f = SO3FunHarmonic.example
-h = S2FunHarmonicSym(S2Fun.smiley,f.CS)
+psi = SO3DeLaValleePoussinKernel('halfwidth',10*degree);
+smoothSource = rotF;
+smoothSource.bandwidth = min(rotF.bandwidth,psi.bandwidth);
+smoothF = conv(smoothSource,psi);
+smoothFReverse = conv(psi,smoothSource);
+kernelCommutationError = calcError(smoothF,smoothFReverse)
 
-c = conv(f,h,'inv')
+plotSpektra([smoothSource,smoothF])
+legend('before convolution','after convolution')
+{% endhighlight %}
 
-% Test
+{% highlight plaintext %}
+kernelCommutationError =
+     0
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SO3FunConvolution_04.png" %}
+</center>
+<p>The convolved spectrum lies below the original at higher harmonic degrees. Those degrees encode rapid angular variation, so their attenuation is the spectral signature of smoothing.</p>
+<h2 id="15">Smooth with a spherical kernel</h2>
+<p>An <a href="S2Kernel.S2Kernel.html">S2Kernel</a> is a zonal spherical function. Convolving an <a href="S2Fun.S2Fun.html">S2Fun</a> with it produces another <a href="S2Fun.S2Fun.html">S2Fun</a> and smooths angular variation around every direction.</p>
+{% highlight matlab %}
+sphericalSource = S2Fun.smiley;
+phi = S2DeLaValleePoussinKernel('halfwidth',10*degree);
+sphericalSmooth = conv(sphericalSource,phi)
+
+plot(sphericalSmooth)
+{% endhighlight %}
+
+{% highlight plaintext %}
+sphericalSmooth = S2FunHarmonic (y↑→x)
+  bandwidth: 25
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SO3FunConvolution_05.png" %}
+</center>
+<p>The face remains recognizable, while the sharp boundaries of its features are softened by the 10 degree kernel.</p>
+<p>The same kernel can be regarded as a spherical function and convolved with <code class="language-plaintext highlighter-rouge">sphericalSource</code> to produce an <a href="SO3Fun.SO3Fun.html">SO3Fun</a>. The two results agree when the direction \(v\) and rotation \(R\) satisfy \(v=R^{-1}e_3\).</p>
+{% highlight matlab %}
 v = vector3d.rand;
-c.eval(v)
-mean(SO3FunHandle(@(q) f.eval(q).*h.eval(inv(q)*v)))
+rKernel = rotation.map(v,zvector);
+kernelAsFunction = S2FunHarmonic(phi);
+sphericalOnSO3 = conv(sphericalSource,kernelAsFunction);
+kernelFormDifference = abs(sphericalSmooth.eval(v) - ...
+  sphericalOnSO3.eval(rKernel))
+
+xi = equispacedS2Grid('resolution',1*degree);
+sphericalKernelIntegral = ...
+  mean(sphericalSource.eval(xi) .* ...
+  phi.eval(cos(angle(xi,v).')))
+sphericalKernelCheckDifference = ...
+  abs(sphericalSmooth.eval(v) - sphericalKernelIntegral)
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = SO3FunHarmonic (Quartz → y↑→x)
-  bandwidth: 48
-  weight: 1
- 
- 
-h = S2FunHarmonicSym (Quartz)
-  bandwidth: 128
- 
- 
-c = S2FunHarmonicSym (y↑→x)
-  bandwidth: 48
- 
-ans =
-    0.0567
-ans =
-    0.0567
+kernelFormDifference =
+   1.5299e-13
+sphericalKernelIntegral =
+    0.3874
+sphericalKernelCheckDifference =
+   1.4987e-05
 {% endhighlight %}
-<h2 id="12">Convolution with kernel function</h2>
-<p>
-<b>Rotational kernel functions</b>
-</p>
-<p>Since <a href="SO3Kernels.html"><code class="language-plaintext highlighter-rouge">SO3Kernel's</code></a> are special orientation dependent functions we can easily describe them as <code class="language-plaintext highlighter-rouge">SO3Fun's</code>. Hence the convolution with <a href="SO3Kernels.html"><code class="language-plaintext highlighter-rouge">SO3Kernel's</code></a> is exactly the same as above.</p>
-<p>Note that <a href="SO3Kernels.html"><code class="language-plaintext highlighter-rouge">SO3Kernel's</code></a> are radial basis functions which only depends on the rotation angle \(\omega\). Since the rotation angle of two matrices satisfies \(\omega(q^{-1}\,R)=\omega(R\,q^{-1})\), the convolution with <code class="language-plaintext highlighter-rouge">SO3Kernels</code> is commutative.</p>
-{% highlight matlab %}
-f = SO3FunHarmonic.example
-psi = SO3DeLaValleePoussinKernel
-
-c = conv(f,psi)
-{% endhighlight %}
-
-{% highlight plaintext %}
-f = SO3FunHarmonic (Quartz → y↑→x)
-  bandwidth: 48
-  weight: 1
- 
- 
-psi = SO3DeLaValleePoussinKernel
-  bandwidth: 25
-  halfwidth: 10°
- 
- 
-c = SO3FunHarmonic (Quartz → y↑→x)
-  bandwidth: 25
-  weight: 1
-{% endhighlight %}
-<p>
-<b>Spherical kernel functions</b>
-</p>
-<p>Let a spherical kernel function \(\psi(\vec v \cdot \vec e_3)\) be defined as in <a href="S2Kernels.html"><code class="language-plaintext highlighter-rouge">S2Kernel's</code></a>. Then the convolution with a <a href="S2Fun.S2Fun.html">S2Fun</a> \(f\) reads as</p>
-<p>\[ (f * \psi) (\vec v) = \frac1{4\pi} \int_{S^2} f(\xi) \, \psi(\xi \cdot \vec v) \, d\xi. \]</p>
-<p>Note that <a href="S2Kernels.html"><code class="language-plaintext highlighter-rouge">S2Kernel's</code></a> are special spherical functions. Hence we can easily describe them as <code class="language-plaintext highlighter-rouge">S2Fun's</code> and convoluted them as described above for convolution of two spherical functions</p>
-<p>\[ (f * \psi) (R) = \frac1{4\pi} \int_{S^2} f(R^{-1}\,\xi) \, \psi(\xi \cdot \vec e_3) \, d\xi. \]</p>
-<p>The first formula yields a <a href="S2Fun.S2Fun.html">S2Fun</a> while the second formula yields a <a href="SO3Fun.SO3Fun.html">SO3Fun</a>. They are equal for \(\vec v = R^{-1} \vec e_3\).</p>
-{% highlight matlab %}
-% Test
-f = S2Fun.smiley
-psi = S2DeLaValleePoussinKernel
-
-c1 = conv(f,psi)
-
-% Test
-v = vector3d.rand;
-c1.eval(v)
-xi = equispacedS2Grid('resolution',0.2*degree);
-mean(f.eval(xi).*psi.eval(cos(angle(xi,v).')))
-
-% compare with spherical convolution
-r = rotation.map(v,zvector);
-h = S2FunHarmonic(psi);
-c2 = conv(f,h);
-c2.eval(r)
-mean(f.eval(inv(r)*xi).*h.eval(xi))
-{% endhighlight %}
-
-{% highlight plaintext %}
-f = S2FunHarmonic (y↑→x)
-  bandwidth: 128
- 
- 
-psi = S2DeLaValleePoussinKernel
-  bandwidth: 25
-  halfwidth: 10°
- 
- 
-c1 = S2FunHarmonic (y↑→x)
-  bandwidth: 25
- 
-ans =
-  -5.7581e-07
-ans =
-   6.8548e-11
-ans =
-  -5.7581e-07
-ans =
-  -5.7662e-07
-{% endhighlight %}
+<h2 id="17">The maths behind convolution</h2>
+<p>MTEX uses normalized Haar measure. If \(\mathrm{d}q\) denotes the usual unnormalized measure with volume \(8\pi^2\), convolution of compatible rotational functions is</p>
+<p>\[ (f*g)(R)=\frac{1}{8\pi^2}\int_{\mathrm{SO}(3)} f(q)g(q^{-1}R)\,\mathrm{d}q. \]</p>
+<p>If \(f\) has left symmetry \(S_L\) and right symmetry \(S_x\), while \(g\) has left symmetry \(S_x\) and right symmetry \(S_R\), the result has left symmetry \(S_L\) and right symmetry \(S_R\). Swapping the order gives the right-sided form</p>
+<p>\[ (g*f)(R)=\frac{1}{8\pi^2}\int_{\mathrm{SO}(3)} f(q)g(Rq^{-1})\,\mathrm{d}q. \]</p>
+<p>The sphere has volume \(4\pi\). For two spherical functions, MTEX uses</p>
+<p>\[ (f*g)(R)=\frac{1}{4\pi}\int_{\mathbb S^2} f(R^{-1}\xi)g(\xi)\,\mathrm{d}\xi. \]</p>
+<p>The two rotational--spherical actions are</p>
+<p>\[ (f*h)(\xi)=\frac{1}{8\pi^2}\int_{\mathrm{SO}(3)} f(q)h(q\xi)\,\mathrm{d}q \]</p>
+<p>and, with <code class="language-plaintext highlighter-rouge">'inv'</code>,</p>
+<p>\[ (f*h)(\xi)=\frac{1}{8\pi^2}\int_{\mathrm{SO}(3)} f(q)h(q^{-1}\xi)\,\mathrm{d}q. \]</p>
+<p>Finally, a zonal spherical kernel \(\psi\) satisfies</p>
+<p>\[ (f*\psi)(v)=\frac{1}{4\pi}\int_{\mathbb S^2} f(\xi)\psi(\xi\mathbin{\cdot}v)\,\mathrm{d}\xi. \]</p>
+<p>Regarding the kernel as the spherical function \(\psi(\xi\mathbin{\cdot}e_3)\) instead gives an <a href="SO3Fun.SO3Fun.html">SO3Fun</a>. Its value at \(R\) equals the spherical result at \(v=R^{-1}e_3\). For an <a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a>, \(\omega(q^{-1}R)=\omega(Rq^{-1})\) explains the special commutativity.</p>
+<h2 id="18">References</h2>
+<div>
+<ul>
+<li>P. J. Kostelec and D. N. Rockmore, <a href="https://doi.org/10.1007/s00041-008-9013-5">FFTs on the rotation group</a>, <i>Journal of Fourier Analysis and Applications</i> 14 (2008), 145--179, develops the Fourier transform on \(\mathrm{SO}(3)\) that turns convolution into multiplication of Wigner coefficient matrices.</li>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths (1982), gives the harmonic framework for ODFs, pole figures, and their rotational integral operators.</li>
+</ul>
+</div>
+<h2 id="19">Next</h2>
+<p>Continue with <a href="SO3FunVectorValued.html">Vector-Valued Functions</a> to apply the elementwise array behaviour introduced above. The following <a href="SO3FunVectorField.html">Rotational Vector Fields</a> page extends the domain to vector-valued fields with a rotating tangent space.</p>
 </div>
 </body>
 </html>

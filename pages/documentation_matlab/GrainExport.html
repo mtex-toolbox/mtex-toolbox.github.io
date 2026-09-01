@@ -1,5 +1,5 @@
 ---
-title: "Exporting Grains"
+title: 'Exporting Grains'
 
 sidebar: documentation_sidebar
 permalink: GrainExport.html
@@ -23,207 +23,272 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Grains are geometry and data at the same time, and consequently there is no single file format that captures all of them. What one wants to export is usually one of three things - the grain wise table of properties, the mean orientations, or the polygons that make up the grain boundaries. This page shows all three. Exporting the picture rather than the numbers is covered in <a href="PlottingExport.html">Exporting Plots</a>.</p>
-<p>Throughout this page we work with the Forsterite data set.</p>
+<p>A grain combines several kinds of information: an identity, scalar properties, a mean orientation, an outline, and a place in the boundary network. No single exchange format on this page preserves all of them. Choose the representation that the receiving program needs, and record the information required to interpret it.</p>
+<p>This page assumes that grains have already been reconstructed as in <a href="GrainReconstruction.html">Grain Reconstruction</a>. The examples use the Forsterite data set. Exporting a picture instead of the underlying data is covered in <a href="PlottingExport.html">Exporting Plots</a>.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 
-grains = calcGrains(ebsd('indexed'),'angle',10*degree);
-grains = smoothBoundary(grains,5);
+grainsRaw = calcGrains(ebsd('indexed'),'angle',10*degree);
 
-% remove the very small grains
-grains = grains(grains.numPixel > 10)
+% remove grains with ten or fewer measurements
+grainsRaw = grainsRaw(grainsRaw.numPixel > 10)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d (y↑→x)
+grainsRaw = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1     443  151150  Forsterite       mmm  LightSkyBlue
      2     184   25465   Enstatite       mmm  DarkSeaGreen
      3     107    6962    Diopside     12/m1     Goldenrod
  
- boundary segments: 38616 (1.6e+06 µm)
- inner boundary segments: 156 (7018 µm)
+ boundary segments: 43600 (2.1e+06 µm)
+ inner boundary segments: 173 (8052 µm)
  triple points: 3370
  
  Properties: meanRotation, GOS
 {% endhighlight %}
-<h2 id="2">The grain table</h2>
-<p>Every scalar grain property can be collected into a MATLAB <a href="matlab:doc('table')"><code class="language-plaintext highlighter-rouge">table</code></a> and written by <code class="language-plaintext highlighter-rouge">writetable</code> to a spreadsheet or a csv file. This is the most useful format for further statistical analysis outside of MTEX.</p>
+<h2 id="2">Record how the grains were made</h2>
+<p>The displayed summary identifies the phases and the number of grains that will be exported. The cutoff above and the 10 degree reconstruction threshold are also part of the result. Record them with the source map, the MTEX version, and any other processing choices.</p>
+<p>Smoothing changes polygon coordinates, areas, perimeters, and segment lengths. It does not change grain IDs, pixel counts, or mean orientations. We therefore keep <code class="language-plaintext highlighter-rouge">grainsRaw</code> for measurement-level boundary data and use a smoothed copy for shape data.</p>
 {% highlight matlab %}
-T = table(grains.id, grains.phase, grains.numPixel, grains.area, ...
-  grains.perimeter, grains.equivalentRadius, grains.GOS./degree, ...
-  'VariableNames',{'id','phase','numPixel','area','perimeter',...
-  'equivalentRadius','GOS'});
+grains = smoothBoundary(grainsRaw,5);
+{% endhighlight %}
+<h2 id="3">Export a grain table</h2>
+<p>A MATLAB <a href="matlab:doc('table')"><code class="language-plaintext highlighter-rouge">table</code></a> collects one row per grain. <a href="matlab:doc('writetable')"><code class="language-plaintext highlighter-rouge">writetable</code></a> can then write the rows to CSV for a spreadsheet or a statistics package.</p>
+<p>A grain ID is a persistent label, not the row number in a subset. The distinction is demonstrated in <a href="SelectingGrains.html">Selecting Grains</a>. The <code class="language-plaintext highlighter-rouge">phase</code> property is the numeric phase value imported with the map, so the readable mineral name is exported as a separate column. A grain with no data on one side of it has truncated geometry. The <code class="language-plaintext highlighter-rouge">isBoundary</code> column lets the receiver identify those grains instead of silently treating their visible area and perimeter as complete. Called with one argument, <code class="language-plaintext highlighter-rouge">isBoundary</code> flags every grain that owns a segment with no grain on the other side. That covers the grains at the map edge and the grains around an unindexed region inside the map. Passing the map as a second argument flags only the grains at its extent.</p>
+<p>Lengths are in the map's measurement unit and areas in its square. This map uses micrometres, so the unit is included in each relevant column name. <a href="ShapeParameters.html">Shape Parameters</a> defines these quantities. Any other scalar grain property can be appended in the same way.</p>
+{% highlight matlab %}
+mineralList = grains.mineralList;
+mineral = reshape(string(mineralList(grains.phaseId)),[],1);
+
+T = table(grains.id, grains.phase, mineral, grains.isBoundary, ...
+  grains.numPixel, grains.area, grains.perimeter, ...
+  grains.equivalentRadius, grains.GOS./degree, ...
+  'VariableNames',{'id','phase','mineral','isBoundary','numPixel',...
+  'area_um2','perimeter_um','equivalentRadius_um','GOS_degree'});
 
 head(T)
 {% endhighlight %}
 
 {% highlight plaintext %}
-id    phase    numPixel       area       perimeter    equivalentRadius      GOS  
-    __    _____    ________    __________    _________    ________________    _______
-    19      1         34            91250     1462.3           170.43         0.24256
-    21      2         16            51473     1099.2              128         0.62956
-    22      1         15            50640     996.04           126.96         0.42433
-    27      1         19            55714       1056           133.17         0.17977
-    30      1         26            72940     1156.8           152.37         0.28391
-    44      1         51       2.0553e+05     2204.5           255.78         0.19108
-    53      1         49       1.4694e+05     1605.6           216.27         0.48932
-    54      1         23            66472     1081.2           145.46          0.4652
+id    phase      mineral       isBoundary    numPixel     area_um2     perimeter_um    equivalentRadius_um    GOS_degree
+    __    _____    ____________    __________    ________    __________    ____________    ___________________    __________
+    19      1      "Forsterite"      true           34            91250       1462.3             170.43            0.24256  
+    21      2      "Enstatite"       true           16            51473       1099.2                128            0.62956  
+    22      1      "Forsterite"      true           15            50640       996.04             126.96            0.42433  
+    27      1      "Forsterite"      true           19            55714         1056             133.17            0.17977  
+    30      1      "Forsterite"      true           26            72940       1156.8             152.37            0.28391  
+    44      1      "Forsterite"      true           51       2.0553e+05       2204.5             255.78            0.19108  
+    53      1      "Forsterite"      false          49       1.4646e+05       1600.2             215.92            0.48932  
+    54      1      "Forsterite"      false          23            65193       1081.5             144.05             0.4652
 {% endhighlight %}
-<p>Adding the mean orientation as three Euler angle columns makes the table self contained. Since Euler angles only make sense within one crystal symmetry we restrict ourselves to the Forsterite grains from here on.</p>
+<h2 id="4">Add mean orientations</h2>
+<p>An orientation row needs one crystal symmetry. We therefore restrict the table and both grain lists to Forsterite before adding Euler angles. Naming the Bunge convention and degree in the headings removes two common ambiguities.</p>
 {% highlight matlab %}
 grains = grains('Forsterite');
-T = T(T.phase == grains.phase(1),:);
+grainsRaw = grainsRaw('Forsterite');
+T = T(T.mineral == "Forsterite",:);
 
-[phi1,Phi,phi2] = grains.meanOrientation.Euler;
+[phi1,Phi,phi2] = grains.meanOrientation.Euler('Bunge');
 
-T.phi1 = phi1./degree;
-T.Phi  = Phi./degree;
-T.phi2 = phi2./degree;
+T.phi1_Bunge_degree = phi1./degree;
+T.Phi_Bunge_degree = Phi./degree;
+T.phi2_Bunge_degree = phi2./degree;
 
-% we write into the temporary folder to not pollute the MTEX folder
-fname = fullfile(tempdir,'grains.csv');
-writetable(T,fname)
-{% endhighlight %}
-<p>and reading it back is a one liner</p>
-{% highlight matlab %}
-head(readtable(fname))
+csvFile = fullfile(tempdir,'grains.csv');
+writetable(T,csvFile);
+
+head(readtable(csvFile))
 {% endhighlight %}
 
 {% highlight plaintext %}
-id    phase    numPixel       area       perimeter    equivalentRadius      GOS       phi1      Phi       phi2 
-    __    _____    ________    __________    _________    ________________    _______    ______    ______    ______
-    19      1         34            91250     1462.3           170.43         0.24256    2.5813    161.36    269.26
-    22      1         15            50640     996.04           126.96         0.42433    133.37    168.62    247.12
-    27      1         19            55714       1056           133.17         0.17977    138.49    91.149    267.06
-    30      1         26            72940     1156.8           152.37         0.28391    33.863    82.646    349.95
-    44      1         51       2.0553e+05     2204.5           255.78         0.19108    123.16    80.504    260.91
-    53      1         49       1.4694e+05     1605.6           216.27         0.48932    165.83    107.25    260.95
-    54      1         23            66472     1081.2           145.46          0.4652    166.09    111.76    264.03
-    55      1         44       1.3889e+05     1615.5           210.26         0.62373    139.92    82.051    260.12
+id    phase       mineral        isBoundary    numPixel     area_um2     perimeter_um    equivalentRadius_um    GOS_degree    phi1_Bunge_degree    Phi_Bunge_degree    phi2_Bunge_degree
+    __    _____    ______________    __________    ________    __________    ____________    ___________________    __________    _________________    ________________    _________________
+    19      1      {'Forsterite'}        1            34            91250       1462.3             170.43            0.24256           2.5813               161.36              269.26      
+    22      1      {'Forsterite'}        1            15            50640       996.04             126.96            0.42433           133.37               168.62              247.12      
+    27      1      {'Forsterite'}        1            19            55714         1056             133.17            0.17977           138.49               91.149              267.06      
+    30      1      {'Forsterite'}        1            26            72940       1156.8             152.37            0.28391           33.863               82.646              349.95      
+    44      1      {'Forsterite'}        1            51       2.0553e+05       2204.5             255.78            0.19108           123.16               80.504              260.91      
+    53      1      {'Forsterite'}        0            49       1.4646e+05       1600.2             215.92            0.48932           165.83               107.25              260.95      
+    54      1      {'Forsterite'}        0            23            65193       1081.5             144.05             0.4652           166.09               111.76              264.03      
+    55      1      {'Forsterite'}        1            44       1.3889e+05       1615.5             210.26            0.62373           139.92               82.051              260.12
 {% endhighlight %}
-<h2 id="5">Mean orientations</h2>
-<p>If only the orientations are of interest, the command <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> is more convenient, since it knows about the Euler angle conventions. It is described in detail in <a href="OrientationExport.html">Exporting Crystal Orientations</a>.</p>
+<p>The reloaded rows retain their values and descriptive headings. Adding the orientation columns makes the table self-contained only when the receiving program also knows the Forsterite crystal symmetry and the crystal and specimen reference frames. A reference frame is the frame in which the data are expressed.</p>
+<p>A CSV file has no standard place for this context. Accompany it with a README or structured metadata that records the source, phase symmetries, spatial and angular units, Euler convention, reference frames, reconstruction threshold, size cutoff, and boundary smoothing.</p>
+<h2 id="6">Export mean orientations</h2>
+<p>When only the orientations are needed, <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> writes a compact ASCII table. Its conventions and limitations are described in <a href="OrientationExport.html">Exporting Crystal Orientations</a>.</p>
 {% highlight matlab %}
-export(grains.meanOrientation,fullfile(tempdir,'grainOri.txt'))
-{% endhighlight %}
-<p>
-<code class="language-plaintext highlighter-rouge">export</code> also takes a struct of additional columns, which is the natural place for the grain properties that belong to each orientation</p>
-{% highlight matlab %}
-S.area = grains.area;
-S.GOS = grains.GOS ./ degree;
+orientationFile = fullfile(tempdir,'grainOrientations.txt');
+export(grains.meanOrientation,orientationFile,'Bunge');
 
-export(grains.meanOrientation,fullfile(tempdir,'grainOri.txt'),S)
-
-fid = fopen(fullfile(tempdir,'grainOri.txt'));
+fid = fopen(orientationFile);
 for k = 1:3, disp(fgetl(fid)); end
 fclose(fid);
 {% endhighlight %}
 
 {% highlight plaintext %}
-phi1         Phi        phi2        area         GOS
+phi1      Phi     phi2
+ 2.58129   161.36  269.258
+ 133.373  168.617  247.116
+{% endhighlight %}
+<p>The first line identifies the three Euler columns, and the following rows contain Bunge angles in degree. Crystal symmetry and reference frames are not stored in this file.</p>
+<p>A struct appends one column per field. Every field must have one value per orientation, so grain properties remain aligned with their mean orientations.</p>
+{% highlight matlab %}
+S.area_um2 = grains.area;
+S.GOS_degree = grains.GOS ./ degree;
+
+export(grains.meanOrientation,orientationFile,S,'Bunge');
+
+fid = fopen(orientationFile);
+for k = 1:3, disp(fgetl(fid)); end
+fclose(fid);
+{% endhighlight %}
+
+{% highlight plaintext %}
+phi1         Phi        phi2    area_um2  GOS_degree
  2.58129      161.36     269.258       91250    0.242557
  133.373     168.617     247.116     50640.4    0.424334
 {% endhighlight %}
-<p>For crystal plasticity codes the command <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a> writes the VPSC texture format, with the grain areas as weights</p>
+<h2 id="8">Export a VPSC texture</h2>
+<p> <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a> writes the weighted texture format used by the VPSC crystal-plasticity code. It accepts Bunge, Kocks, or Roe Euler angles and normalises the supplied weights to sum to one.</p>
+<p>Here the weights are observed areas on a two-dimensional section. Treating those area fractions as three-dimensional volume fractions is a modelling assumption, not a conversion performed by MTEX.</p>
 {% highlight matlab %}
-export_VPSC(grains.meanOrientation,...
-  fullfile(tempdir,'grains.tex'),'weights',grains.area)
+vpscFile = fullfile(tempdir,'grains.tex');
+export_VPSC(grains.meanOrientation,vpscFile,'Bunge',...
+  'weights',grains.area);
+
+vpscData = readmatrix(vpscFile,'FileType','text','NumHeaderLines',4);
+writtenWeightSum = sum(vpscData(:,4))
 {% endhighlight %}
-<h2 id="8">The grain geometry</h2>
-<p>The outline of a grain is a closed polygon. The property <code class="language-plaintext highlighter-rouge">grains.poly</code> holds, for each grain, the list of vertex indices that walks around it. These indices refer to <code class="language-plaintext highlighter-rouge">grains.allV</code>, the complete vertex list - not to <code class="language-plaintext highlighter-rouge">grains.V</code>, which is the shorter list of vertices actually in use.</p>
+
+{% highlight plaintext %}
+writtenWeightSum =
+    1.0000
+{% endhighlight %}
+<p>The printed sum is one to the precision stored in the text file. The VPSC header also records the Euler convention and number of orientations, but the phase symmetry and reference frames still need companion metadata.</p>
+<h2 id="10">Export polygon geometry</h2>
+<p>Each grain outline is stored as one or more closed loops. The property <code class="language-plaintext highlighter-rouge">grains.poly</code> contains vertex indices in walk order. These indices refer to <code class="language-plaintext highlighter-rouge">grains.allV</code>, the complete vertex list. They do not index <code class="language-plaintext highlighter-rouge">grains.V</code>, which is a shorter list containing only the vertices used by the current grain subset.</p>
+<p>A grain that encloses another grain has an outer loop followed by one or more inner loops. This is the same enclosure described from the outside as a hole and from the inside as an inclusion. Each loop repeats its first vertex at the end.</p>
 {% highlight matlab %}
 V = grains.allV;
+firstInterior = find(~grains.isBoundary,1);
+poly = grains(firstInterior).poly{1};
+polyVertexCount = numel(poly)
 
-poly = grains(1).poly{1};
-
-size(poly)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-     1    31
-{% endhighlight %}
-<p>Hence the coordinates of the first grain are</p>
-{% highlight matlab %}
 xy = [V(poly).x, V(poly).y];
-
 xy(1:5,:)
+
+newMtexFigure('figSize','small');
+plot(grains(firstInterior),'FaceColor','LightSkyBlue','micronbar','off');
+hold on
+plot(xy(:,1),xy(:,2),'k.','MarkerSize',12);
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
+polyVertexCount =
+    33
 ans =
-   1.0e+04 *
-    0.0100    1.1800
-    0.0058    1.1808
-    0.0017    1.1817
-   -0.0025    1.1825
-   -0.0025    1.1775
+   1.0e+03 *
+    0.3875    9.9000
+    0.3250    9.9000
+    0.2905    9.8809
+    0.2500    9.8500
+    0.2125    9.8125
 {% endhighlight %}
-<p>Writing all of them into one text file, one grain after the other, is a short loop. We use the grain id as a separator so that the file can be split up again.</p>
+<center class="mtex-figure">
+{% include inline_image.html file="GrainExport_01.png" %}
+</center>
+<p>The blue area is the first grain that does not touch the map edge. The black markers trace the vertex walk that will be written, including the repeated endpoint that closes the loop. These are smoothed coordinates, not the original pixel staircase.</p>
+<p>The following file contains every loop of every Forsterite grain. Both <code class="language-plaintext highlighter-rouge">grainId</code> and <code class="language-plaintext highlighter-rouge">loopId</code> are needed: a grain ID groups loops into grains, while a loop ID keeps an outer outline separate from enclosure outlines.</p>
 {% highlight matlab %}
-fname = fullfile(tempdir,'grainPolygons.txt');
-fid = fopen(fname,'w');
-fprintf(fid,'%% grainId x y\n');
-for k = 1:min(length(grains),50)
+polygonFile = fullfile(tempdir,'grainPolygons.txt');
+fid = fopen(polygonFile,'w');
+fprintf(fid,'%% grainId loopId x_um y_um\n');
+for k = 1:length(grains)
   p = grains(k).poly{1};
-  fprintf(fid,'%d %f %f\n',[repmat(double(grains.id(k)),1,numel(p)); ...
-    V(p).x.'; V(p).y.']);
+  loopStart = 1;
+  loopId = 1;
+  while loopStart < numel(p)
+    loopEnd = loopStart + find(p(loopStart+1:end) == p(loopStart),1);
+    q = p(loopStart:loopEnd);
+    fprintf(fid,'%d %d %.17g %.17g\n',...
+      [repmat(double(grains.id(k)),1,numel(q)); ...
+      repmat(loopId,1,numel(q)); V(q).x.'; V(q).y.']);
+    loopStart = loopEnd + 1;
+    loopId = loopId + 1;
+  end
 end
 fclose(fid);
 
-fid = fopen(fname);
+fid = fopen(polygonFile);
 for k = 1:4, disp(fgetl(fid)); end
 fclose(fid);
 {% endhighlight %}
 
 {% highlight plaintext %}
-% grainId x y
-19 100.000000 11800.000000
-19 58.333333 11808.333333
-19 16.666667 11816.666667
+% grainId loopId x_um y_um
+19 1 100 11799.999999999998
+19 1 58.333333333401242 11808.333333333336
+19 1 16.666666666813388 11816.666666666672
 {% endhighlight %}
-<p>The individual boundary segments, together with the ids of the two grains they separate and their misorientation, are reached through <a href="grainBoundary.grainBoundary.html"><code class="language-plaintext highlighter-rouge">grains.boundary</code></a>
-</p>
+<h2 id="12">Export the boundary network</h2>
+<p>A grain boundary is a segment between two neighbouring EBSD measurements that belong to different grains. The boundary table below uses the unsmoothed network so each row retains that measurement-level meaning. It excludes segments next to grains removed by the size cutoff.</p>
 {% highlight matlab %}
-gB = grains.boundary('Forsterite','Forsterite');
+gB = grainsRaw.boundary('Forsterite','Forsterite');
+gB = gB(all(ismember(gB.grainId,grainsRaw.id),2));
 
-TB = table(gB.grainId(:,1), gB.grainId(:,2), gB.segLength, ...
-  gB.misorientation.angle./degree, ...
-  'VariableNames',{'grainA','grainB','segLength','misAngle'});
+TB = table(gB.grainId(:,1),gB.grainId(:,2),gB.segLength,...
+  gB.misorientation.angle./degree,...
+  'VariableNames',{'grainA','grainB','segLength_um',...
+  'segmentDisorientation_degree'});
 
 head(TB)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grainA    grainB    segLength    misAngle
-    ______    ______    _________    ________
-     2675      2691          50       60.549 
-     2159      2170          50       70.835 
-     2450      2507      70.711       90.587 
-     2453      2507      55.902       59.531 
-     1768      1810      53.033       60.026 
-     1768      1810      53.033       60.026 
-     1599      1670      39.278       60.336 
-     1599      1670      32.044       60.336
+grainA    grainB    segLength_um    segmentDisorientation_degree
+    ______    ______    ____________    ____________________________
+      936       971        35.355                  26.131           
+      936       971            50                  26.086           
+     2640      2691        46.585                  24.156           
+     2640      2691        27.951                  23.605           
+     2640      2691            25                  23.571           
+     2640      2691        35.355                  23.823           
+     2640      2691            50                  23.646           
+     2640      2691        35.355                  23.976
 {% endhighlight %}
-<h2 id="12">Saving in MTEX' own format</h2>
-<p>Finally, if the data is only meant to be read back by MTEX, the ordinary MATLAB <code class="language-plaintext highlighter-rouge">save</code> is both lossless and by far the simplest option</p>
+<p> <a href="grainBoundary.grainBoundary.html"><code class="language-plaintext highlighter-rouge">gB</code></a> stores one row per boundary segment. The two IDs identify its neighbouring grains. The angle is the disorientation between the adjacent measurements across that segment, not the disorientation between the two grain mean orientations. Continue with <a href="BoundaryProperties.html">Grain Boundary Properties</a> before exporting further segment quantities.</p>
+<h2 id="14">Save MTEX objects</h2>
+<p>If the data will be read by the same MTEX installation, MATLAB <code class="language-plaintext highlighter-rouge">save</code> preserves the complete objects more conveniently than separate text tables. Saving the source map with both grain lists keeps the measurements available for later checks; the processing history still belongs in the companion metadata.</p>
 {% highlight matlab %}
-save(fullfile(tempdir,'grains.mat'),'grains','ebsd')
+matFile = fullfile(tempdir,'grains.mat');
+save(matFile,'grains','grainsRaw','ebsd');
 {% endhighlight %}
-<p>Note that a <code class="language-plaintext highlighter-rouge">.mat</code> file is not readable by other software and is not guaranteed to load in a future MTEX version - for archiving, prefer one of the ASCII formats above.</p>
+<p>The MTEX objects inside a <code class="language-plaintext highlighter-rouge">.mat</code> file are not readable by general non-MATLAB software, and they are not guaranteed to load in a future MTEX version. For long-term archiving, prefer documented ASCII tables such as those above together with the source data and companion metadata. No one of these tables replaces the complete MTEX objects.</p>
+<p>Remove the temporary files created by this page.</p>
 {% highlight matlab %}
-% clean up
-delete(fullfile(tempdir,'grains.csv'))
-delete(fullfile(tempdir,'grainOri.txt'))
-delete(fullfile(tempdir,'grains.tex'))
-delete(fullfile(tempdir,'grainPolygons.txt'))
-delete(fullfile(tempdir,'grains.mat'))
+delete(csvFile);
+delete(orientationFile);
+delete(vpscFile);
+delete(polygonFile);
+delete(matFile);
 {% endhighlight %}
+<h2 id="17">Further reading</h2>
+<div>
+<ul>
+<li>
+<a href="https://www.iso.org/standard/74309.html">ISO 13067:2020</a>, <i>Microbeam analysis - Electron backscatter diffraction - Measurement of average grain size</i>, distinguishes measurements on a two-dimensional section from inferences about three-dimensional grain size.</li>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, establishes the Euler-angle convention used in texture analysis.</li>
+<li>R. A. Lebensohn and C. N. Tom&eacute;, <a href="https://doi.org/10.1016/0956-7151(93)90130-K">A self-consistent anisotropic approach for the simulation of plastic deformation and texture development of polycrystals</a>, <i>Acta Metallurgica et Materialia</i> 41 (1993), 2611-2624, introduces the VPSC formulation.</li>
+<li>M. D. Wilkinson et al., <a href="https://doi.org/10.1038/sdata.2016.18">The FAIR Guiding Principles for scientific data management and stewardship</a>, <i>Scientific Data</i> 3 (2016), 160018, explains why reusable data need rich metadata and provenance.</li>
+</ul>
+</div>
+<h2 id="18">Next</h2>
+<p>
+<a href="NeperInterface.html">Neper Interface</a> follows this page in the chapter and constructs synthetic polycrystals for simulation. For measured grain boundaries, continue with <a href="GrainBoundaries.html">Grain Boundaries</a>.</p>
 </div>
 </body>
 </html>

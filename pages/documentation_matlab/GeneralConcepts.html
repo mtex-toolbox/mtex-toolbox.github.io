@@ -1,5 +1,5 @@
 ---
-title: "General Concepts"
+title: 'General Concepts'
 
 sidebar: documentation_sidebar
 permalink: GeneralConcepts.html
@@ -22,45 +22,56 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A few habits recur in almost every MTEX analysis. The first is to think of a variable as holding many things, not one. MTEX operations usually act on the complete collection at once.</p>
+<p>The usual workflow is short. First calculate one value per element and compare those values with a condition. The result is a logical mask: one true or false value per element. Use that mask to select the elements of interest without changing their class.</p>
 <!--/introduction-->
-<p>MTEX has a small number of habits that run through everything in it. Learning them once saves a great deal of confusion later, because they are assumed everywhere and explained almost nowhere else.</p>
-<p>The first and most important: <b>a variable holds many things, not one</b>. A <code class="language-plaintext highlighter-rouge">vector3d</code> is not a direction, it is a list of directions. An <code class="language-plaintext highlighter-rouge">EBSD</code> variable is a whole scan. A <code class="language-plaintext highlighter-rouge">grain2d</code> is every grain in a map. Operations apply to the whole list at once and return a whole list, so the loop you were about to write is almost always unnecessary and much slower than the expression that replaces it.</p>
-<p>The second follows from the first: <b>selecting a subset is how you narrow a question</b>. Indexing a list with a condition gives a shorter list of the same kind, which every later operation then accepts unchanged.</p>
+<h2 id="1">Work with collections</h2>
+<p>In MATLAB, a variable is a name for stored data. Its class determines which operations are available. An MTEX variable can contain one object or many objects of the same class.</p>
+<p>For example, a <code class="language-plaintext highlighter-rouge">vector3d</code> variable may hold one direction or a list of directions. An <a href="EBSD.EBSD.html">EBSD</a> variable represents a scan as a list of measurements. An <a href="grain2d.grain2d.html">grain2d</a> variable may contain every grain in a map or a selected subset.</p>
+<p>Most elementwise operations apply to the complete list. They return one result per element. This is called vectorization. It usually makes an explicit loop unnecessary and is much faster than processing elements one by one.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
 % one variable, five hundred directions
 v = vector3d.rand(500);
 
-% one condition, applied to all of them at once
+% one condition, applied to all directions at once
 isSteep = angle(v,vector3d.Z) < 30*degree;
 
-plot(v(~isSteep),'upper','grid','MarkerSize',4,'MarkerFaceColor','gray')
+plot(v(~isSteep),'upper','grid','MarkerSize',4, ...
+  'MarkerFaceColor','gray')
 hold on
 plot(v(isSteep),'upper','MarkerSize',5,'MarkerFaceColor','red')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GeneralConcepts_01.png" %}
 </center>
-<p>No loop appears anywhere in that. <code class="language-plaintext highlighter-rouge">angle</code> compared five hundred directions with one, and <code class="language-plaintext highlighter-rouge">v(isSteep)</code> kept the ones that passed. The same two steps select grains above a size, pixels of one phase, or boundaries above a misorientation.</p>
-<h2 id="3">Options, flags, and a trap</h2>
-<p>Most MTEX commands take extra arguments in two forms. A <b>flag</b> is a bare word - <code class="language-plaintext highlighter-rouge">'silent'</code>, <code class="language-plaintext highlighter-rouge">'antipodal'</code>, <code class="language-plaintext highlighter-rouge">'contourf'</code> - and an <b>option</b> is a name followed by a value, as in <code class="language-plaintext highlighter-rouge">'halfwidth',10*degree</code>. They may be given in any order, after the required arguments.</p>
-<p>The trap is that a repeated option is not an error. If the same name appears twice, the <b>last</b> one wins, and nothing is reported. Building an argument list programmatically and appending a default at the end will therefore silently override what the caller asked for.</p>
-<p>A related and more common trap: a misspelt option name is simply not recognised, so it is ignored rather than rejected. The command then runs with its default and produces a plausible result. Copy option names rather than typing them.</p>
-<h2 id="4">Two kinds of extra data</h2>
-<p>Objects carry additional data in two places that are easy to confuse, and the difference is about size rather than importance.</p>
-<p>A <b>property</b> has one value per element, so it is indexed and cut down alongside the object - the <code class="language-plaintext highlighter-rouge">mad</code> of each EBSD measurement, the <code class="language-plaintext highlighter-rouge">GOS</code> of each grain. An <b>option</b> is data about the whole object that does not have one value per element, such as the header a file was imported with, and it survives subsetting untouched.</p>
-<p>Putting scan-level information where per-element data belongs is a recurring mistake, and it shows up as a length mismatch the first time anyone takes a subset.</p>
-<h2 id="5">Where to start</h2>
+<h2 id="2">Read the selection</h2>
+<p>The red directions lie within 30 degrees of the positive \(z\) axis. The gray directions shown in the upper hemisphere lie outside that angular cap.</p>
+<p>No loop appears in the calculation. <code class="language-plaintext highlighter-rouge">angle</code> compares all five hundred directions with <code class="language-plaintext highlighter-rouge">vector3d.Z</code>. The comparison returns one true or false value per direction. The expression <code class="language-plaintext highlighter-rouge">v(isSteep)</code> keeps the true entries. It returns another <code class="language-plaintext highlighter-rouge">vector3d</code> list, so any later vector operation accepts it.</p>
+<p>The same two steps select grains above a chosen size, pixels of one phase, or boundaries above a chosen <a href="Misorientations.html">misorientation</a> angle. <a href="ListsAndIndexing.html">Lists and Indexing</a> develops this pattern with positional and logical selections.</p>
+<h2 id="3">Control one command with optional inputs</h2>
+<p>Most MTEX commands take required arguments followed by optional inputs. A <b>flag</b> is a bare word such as <code class="language-plaintext highlighter-rouge">'silent'</code>, <code class="language-plaintext highlighter-rouge">'antipodal'</code>, or <code class="language-plaintext highlighter-rouge">'contourf'</code>. An <b>option</b> is a name followed by a value. For example, <code class="language-plaintext highlighter-rouge">'halfwidth',10*degree</code> sets a smoothing halfwidth of 10 degrees. Flags and options may be given in any order after the required arguments.</p>
+<p>If an option name appears twice, the last value wins and MTEX reports no error. A program that appends a default argument at the end can therefore override a value that its caller supplied.</p>
+<p>A misspelt option name is also silently ignored. The command then uses its default and can produce a plausible result. Copy option names from the command's documentation rather than typing them from memory. <a href="GeneralConceptsOptions.html">Options</a> gives a worked example and shows how to find the names a command accepts.</p>
+<h2 id="4">Do not confuse command options with stored scan options</h2>
+<p>MTEX also uses the word <b>option</b> for whole-scan data stored in <code class="language-plaintext highlighter-rouge">ebsd.opt</code>. This scan option is not an optional input to a command. The distinction from a property is determined by how many values the data contains.</p>
+<p>A <b>property</b> has one value per list element. For an EBSD map, per-pixel data such as <code class="language-plaintext highlighter-rouge">mad</code> belongs in <code class="language-plaintext highlighter-rouge">ebsd.prop</code>. MTEX subsets it in lockstep with the map. Grain orientation spread, <code class="language-plaintext highlighter-rouge">GOS</code>, likewise has one value per grain.</p>
+<p>A <b>scan option</b> describes the complete EBSD object. It does not have one value per measurement point. An imported file header containing instrument and acquisition settings is one example. Scan options remain unchanged when <code class="language-plaintext highlighter-rouge">ebsd(ind)</code> selects part of the map.</p>
+<p>Putting scan-level information in <code class="language-plaintext highlighter-rouge">prop</code> creates a length mismatch when the map is subset. <a href="Properties.html">Properties</a> shows how to inspect, add, select, and plot per-element data.</p>
+<h2 id="5">Follow the chapter in order</h2>
 <p>
-<a href="MTEXScripts.html">MTEX Scripts</a> and <a href="ListsAndIndexing.html">Lists and Indexing</a> cover everything above in detail, and are the two pages worth reading before writing any script of your own. <a href="Properties.html">Properties</a> covers the distinction just made.</p>
+<a href="MTEXScripts.html">MTEX Scripts</a> starts with a complete import, inspection, grain reconstruction, and plotting sequence. <a href="ListsAndIndexing.html">Lists and Indexing</a> then explains the collection operations used in that sequence.</p>
 <p>
-<a href="GeneralConceptsOptions.html">Options</a> is the full account of flags and options, and <a href="GeneralConceptsConfiguration.html">Configuration</a> covers the settings that persist across a session - default fonts, figure sizes, and the plotting convention that decides which specimen direction points where on screen. That last one changes every plot you make, so it is worth knowing where it is set.</p>
-<p>Two pages are for looking things up rather than reading through. <a href="Glossary.html">Glossary</a> defines the vocabulary used across the whole documentation, with the pairs that are easy to confuse placed side by side - misorientation and disorientation, halfwidth and bandwidth, hole and inclusion. <a href="NotationAndConventions.html">Notation and Conventions</a> states the choices MTEX makes that a result depends on: radians, the Bunge Euler convention, the direction an orientation acts in, planes against directions, and the crystal axis alignment. When a figure comes out mirrored or a number is wrong by a factor nobody can place, that page is where to look first.</p>
-<p>Two further pages are methods rather than mechanics. <a href="DensityEstimation.html">Density Estimation</a> is the step from a list of measurements to a smooth distribution, and <a href="OptimalKernel.html">Optimal Kernel</a> is about choosing how much to smooth - the halfwidth question that recurs in every density in MTEX. <a href="ClusterDemo.html">Clustering</a> groups orientations that lie close together, which is a different way of summarising a population from fitting a density to it.</p>
-<h2 id="6">Next</h2>
-<p>With the habits above in place, <a href="Tutorials.html">Tutorials</a> is the fastest route into real work. <a href="Plotting.html">Plotting</a> covers how figures are put together, and the object types themselves begin at <a href="Vectors.html">Vectors</a>.</p>
+<a href="GeneralConceptsConfiguration.html">Configuration</a> distinguishes a setting for one session from an option for one command. It also explains persistent defaults for fonts, figure sizes, and plotting conventions. <a href="GeneralConceptsOptions.html">Options</a> gives the full account of flags and options. <a href="Properties.html">Properties</a> covers per-element and whole-scan data.</p>
+<p>Two pages are intended mainly for lookup. <a href="Glossary.html">Glossary</a> defines vocabulary used across the documentation. It places easily confused terms side by side. These include misorientation and disorientation, halfwidth and bandwidth, and hole and inclusion. <a href="NotationAndConventions.html">Notation and Conventions</a> records choices that affect results. These include radians, Bunge Euler angles, the direction in which an orientation acts, planes versus directions, and crystal-axis alignment. Consult it first when a figure is mirrored or a number differs by an unexplained factor.</p>
+<p>The final pages introduce ways to summarize a population. <a href="DensityEstimation.html">Density Estimation</a> turns discrete measurements into a smooth distribution. <a href="OptimalKernel.html">Optimal Kernel</a> explains how to choose the amount of smoothing. This is the recurring halfwidth question in MTEX density estimates. <a href="ClusterDemo.html">Clustering</a> instead groups nearby orientations without fitting a density.</p>
+<p>After these foundations, <a href="Tutorials.html">Tutorials</a> is the fastest route into a complete application. <a href="Plotting.html">Plotting</a> explains how MTEX figures are assembled. <a href="Vectors.html">Vectors</a> begins the reference material for the basic object types.</p>
+<h2 id="6">References</h2>
+<p>This overview documents MTEX collection and calling conventions. It does not rely on an external method or definition.</p>
+<h2 id="7">Next</h2>
+<p>Continue with <a href="MTEXScripts.html">MTEX Scripts</a> to build and inspect a short, reproducible analysis from import through grain-boundary plotting.</p>
 </div>
 </body>
 </html>
