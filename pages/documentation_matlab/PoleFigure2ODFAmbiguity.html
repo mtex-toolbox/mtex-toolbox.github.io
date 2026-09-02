@@ -39,6 +39,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>What that costs is best seen on two ODFs built to be different. The first has three components, rotations by 90 degrees about the three coordinate axes:</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
+setMTEXpref('defaultColorMap','LaboTeX')
 cs = crystalSymmetry('mmm');
 
 orix = orientation.byAxisAngle(xvector,90*degree,cs);
@@ -54,17 +55,14 @@ odf2 = unimodalODF(ori);
 {% endhighlight %}
 <p>The two share no component. Their sigma sections make the different peak positions visible.</p>
 {% highlight matlab %}
-figure(1)
 plot(odf1,'sigma')
-mtexColorMap LaboTeX
-
-figure(2)
-plot(odf2,'sigma')
-mtexColorMap LaboTeX
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_01.png" %}
 </center>
+{% highlight matlab %}
+plot(odf2,'sigma')
+{% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_02.png" %}
 </center>
@@ -74,11 +72,10 @@ mtexColorMap LaboTeX
 figure(1)
 h = Miller({1,0,0},{0,1,0},{0,0,1},{1,1,0},{1,0,1},{0,1,1},{1,1,1},{1,2,0},cs);
 plotPDF(odf1,h,'contourf')
-mtexColorMap LaboTeX
+
 
 figure(2)
 plotPDF(odf2,h,'contourf')
-mtexColorMap LaboTeX
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_03.png" %}
@@ -142,7 +139,7 @@ densityAtModes12 =
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_07.png" %}
 </center>
 <p>The four values are the reconstructed densities at the <code class="language-plaintext highlighter-rouge">odf1</code> and <code class="language-plaintext highlighter-rouge">odf2</code> modes, followed by the two true densities. The unwanted modes fall from 66.1665 to 5.3985 mrd, while the wanted modes rise from 66.1665 to 128.4721 mrd. The true values are 129.6016 and 0 mrd. Five more lattice planes have nearly resolved this ambiguity. This is the one ambiguity that more measurement can cure.</p>
-<h2 id="10">Friedel's law</h2>
+<h2 id="11">Friedel's law</h2>
 <p>Under Friedel's law, a diffraction peak is the same for a lattice plane and its opposite. An ordinary diffraction pole figure is therefore antipodally symmetric whether the crystal point group is or not.</p>
 <p>Consider point group -43m, which has no fourfold axis, and two orientations that differ by 90 degrees about the third Euler axis.</p>
 {% highlight matlab %}
@@ -192,7 +189,7 @@ hold off
 <p>The marker pairs still coincide, confirming the equivalence between antipodal pole figures and Laue symmetry.</p>
 <p>So an ODF reconstructed from diffraction pole figures is always centrosymmetric: its point group is a Laue group, and the noncentrosymmetric part of the texture is not lost by the algorithm but was never measured. No amount of additional ordinary pole figures recovers it. If the crystal point group is already a Laue group, as it is for most materials measured this way, this symmetry step costs nothing.</p>
 <p>This statement assumes ordinary kinematic diffraction. Anomalous or resonant scattering can distinguish opposite directions and has been used to determine the odd part of a texture.</p>
-<h2 id="15">The odd order harmonics</h2>
+<h2 id="16">The odd order harmonics</h2>
 <p>The third ambiguity survives even a complete set of pole figures and a centrosymmetric crystal. Consider triclinic symmetry and a weak unimodal ODF at the identity:</p>
 {% highlight matlab %}
 cs = crystalSymmetry('-1');
@@ -282,7 +279,7 @@ xlim([-180,180])
 </center>
 <p>One ODF has a single preferred orientation at the identity; the other has preferred orientations at every 180 degree rotation. They have the same pole figures. No reconstruction method can prefer one over the other on the evidence.</p>
 <p>Matthies' way out is a physical prior, not additional information in the data. A real texture is usually a uniform background plus a few components. Among the ODFs that fit the data, ghost correction therefore prefers the one with the largest uniform portion. MTEX applies this correction by default.</p>
-<h2 id="23">Ghost correction at work</h2>
+<h2 id="24">Ghost correction at work</h2>
 <p>Simulate seven distinct pole figures from the peaked ODF above.</p>
 {% highlight matlab %}
 h = Miller({1,0,0},{0,1,0},{0,0,1},{1,1,0},{0,1,1},{1,0,1}, ...
@@ -330,12 +327,11 @@ legend('odf1','odf2','odf rec1','odf rec2')
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_20.png" %}
 </center>
-<h2 id="28">The Santa Fe example</h2>
+<h2 id="29">The Santa Fe example</h2>
 <p>Historically, the ghost effect is tied to the Santa Fe model ODF. This standard texture gives different inversion programs the same known truth to reconstruct.</p>
 {% highlight matlab %}
 odf = SantaFe;
 plot(odf,'contourf')
-mtexColorMap white2black
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_21.png" %}
@@ -368,7 +364,6 @@ rec2 = calcODF(pf,'noGhostCorrection','silent');
 {% highlight matlab %}
 figure(1)
 plotPDF(rec,pf.h,'antipodal','complete','upper')
-mtexColorMap parula
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_23.png" %}
@@ -376,7 +371,6 @@ mtexColorMap parula
 {% highlight matlab %}
 figure(2)
 plotPDF(rec2,pf.h,'antipodal','complete','upper')
-mtexColorMap parula
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_24.png" %}
@@ -387,7 +381,6 @@ mtexColorMap parula
 close all
 figure(1)
 plot(rec,'gray','contourf','figSize','small')
-mtexColorMap white2black
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_25.png" %}
@@ -395,7 +388,6 @@ mtexColorMap white2black
 {% highlight matlab %}
 figure(2)
 plot(rec2,'gray','contourf','figSize','small')
-mtexColorMap white2black
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_26.png" %}
@@ -418,12 +410,13 @@ plotSpektra(rec2,'bandwidth',32,'linewidth',2,'MarkerSize',10)
 legend({'true ODF','with ghost correction','without ghost correction'})
 % next plot command overwrites plot
 hold off
+setMTEXpref('defaultColorMap','WhiteJet')
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_27.png" %}
 </center>
 <p>Cubic crystal and orthorhombic sample symmetry leave degree 9 as the only odd degree with weight here, and that is where the three curves part: the true value 0.29 is met by the corrected reconstruction and missed by the uncorrected one, which reaches 0.10. Every even degree is reproduced either way. Ghost correction has selected a physically plausible member of the solution family; it has not created new measured information.</p>
-<h2 id="37">Further reading</h2>
+<h2 id="38">Further reading</h2>
 <div>
 <ul>
 <li>R.-J. Roe, <a href="https://doi.org/10.1063/1.1714396">Description of crystallite orientation in polycrystalline materials. III. General solution to pole figure inversion</a>, <i>Journal of Applied Physics</i> 36, 2024-2031, 1965. This is the classical harmonic solution and its ambiguity.</li>
@@ -432,7 +425,7 @@ hold off
 <li>H.-J. Bunge and C. Esling, <a href="https://doi.org/10.1107/S0021889881009308">Determination of the odd part of the texture function by anomalous scattering</a>, <i>Journal of Applied Crystallography</i> 14, 253-255, 1981. This explains the experimental exception to the ordinary Friedel limitation.</li>
 </ul>
 </div>
-<h2 id="38">Next</h2>
+<h2 id="39">Next</h2>
 <p>
 <a href="PoleFigure2ODFGhostCorrection.html">Ghost Effect Analysis</a> quantifies what the correction buys on a deliberately weak texture. <a href="PoleFigureSantaFe.html">The Santa Fe Example</a> then adds counting noise and compares both reconstructions with the known model.</p>
 </div>
