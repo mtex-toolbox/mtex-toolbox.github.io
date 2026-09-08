@@ -59,17 +59,6 @@ of material scientists, geologists and mathematicians.
 							Bainite From Two-Dimensional Orientation Maps" pdf=true%}
                     </li>
 					<li>
-                        03/26 &minus; addon 
-						{% include reference.html link="https://www.github.com/vtvivian/mtex-trueEbsd" content="TrueEBSD" %}
-						for aligning EBSD and SEM images
-                    </li> 
-					<li>
-                        03/26 &minus;
-							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.1/mtex-6.1.1.zip" content="MTEX 6.1.1" download=true %}
-                        released:
-                        {% include reference.html link="changelog#3" content="Release Notes" %}
-                    </li>
-					<li>
 						03/26 &minus;
 						{% include reference.html link="workshop26?" content="MTEX Workshop 2026" %}:
 						<!--{% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/2249" content="Announcement" %}-->
