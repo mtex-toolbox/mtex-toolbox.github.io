@@ -38,7 +38,7 @@ plottingConvention.default('y↑→x');
 </center>
 </p>
 <p>The left-hand model retains measurement-scale variation inside a grain. The right-hand model replaces those measurements by a region and its boundary mesh. Choose the representation according to whether the question concerns local measurements or whole-grain geometry.</p>
-<p>This chapter works with precomputed grain meshes imported from DREAM.3D or Neper. Code written for two-dimensional pixel maps does not carry over unchanged to a surface mesh.</p>
+<p>A grain mesh comes either precomputed, imported from DREAM.3D or Neper, or from <a href="EBSD3square.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> applied to the measured voxels, see <a href="Grains3DReconstruction.html">Grain Reconstruction</a>. Code written for two-dimensional pixel maps does not carry over unchanged to a surface mesh.</p>
 <h2 id="4">Read a three-dimensional microstructure</h2>
 <p>The <a href="Grains3D.html">Three-Dimensional Grains</a> page explains the DREAM.3D importer and the contents of the returned collection. Here the same data provides a first view of the volume.</p>
 {% highlight matlab %}
@@ -64,7 +64,9 @@ setCamera(plottingConvention.default3D)
 <p>Faces are polygons bounded by edges, and the geometry is carried by vertices. The order of a face's vertices determines the sign of its normal, so face winding may need to be corrected during import. The <a href="Grains3D.html">Three-Dimensional Grains</a> page demonstrates that correction. The mesh is not a stack of pixels.</p>
 <p>Plotting also requires a decision about what to hide because exterior faces obscure interior grains. Meshes are larger than planar grain maps, so select a relevant subset before an expensive calculation. The <a href="Grains3DProperties.html">Properties</a> page lists which two-dimensional grain measures have three-dimensional counterparts and which do not.</p>
 <h2 id="8">Use this chapter in teaching order</h2>
-<p>Start with <a href="Grains3D.html">Three-Dimensional Grains</a> to import a DREAM.3D mesh, select grains, make a section, and inspect face normals.</p>
+<p>Start with <a href="EBSD3Plotting.html">Volume Data and Slices</a> to load a measured volume, look at it and cut a section. Then reconstruct its grains with <a href="Grains3DReconstruction.html">Grain Reconstruction</a>, take the voxel surface to a smooth one with <a href="Grains3DSmoothing.html">Smoothing</a>, and read the faces, triple lines and quadruple points in <a href="Grains3DBoundaries.html">Boundary Network</a>.</p>
+<p>
+<a href="Grains3D.html">Three-Dimensional Grains</a> imports a DREAM.3D mesh instead, selects grains, makes a section, and inspects face normals.</p>
 <p>Continue with <a href="NeperInterface.html">Neper Interface</a> to configure Neper, generate a synthetic polycrystal, or import an existing <code class="language-plaintext highlighter-rouge">.tess</code> file. A simulated microstructure has a known construction and can provide a known answer for a controlled test of whether an analysis behaves as intended.</p>
 <p>Use <a href="Grains3DProperties.html">Properties</a> to measure volume, surface area, shape, neighbourhood, and boundary-face properties. Then use <a href="Grains3DOperations.html">Operations</a> to trace planar sections back to their parent grains, triangulate polygonal faces, and rotate the collection.</p>
 <p>The two-dimensional foundations are developed in <a href="EBSDAnalysis.html">EBSD</a>, <a href="Grains.html">Grains</a>, and <a href="GrainBoundaries.html">Grain Boundaries</a>. The <a href="BoundaryNormalDistribution.html">Boundary Normal Distribution</a> page contrasts stereological estimates from boundary traces with normals measured directly from three-dimensional faces.</p>

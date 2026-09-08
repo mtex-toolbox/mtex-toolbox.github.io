@@ -1,0 +1,209 @@
+---
+title: 'Volume Data and Slices'
+
+sidebar: documentation_sidebar
+permalink: EBSD3Plotting.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Volume Data and Slices</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSD3Plotting.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSD3Analysis/EBSD3Plotting.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>An <a href="EBSD3.EBSD3.html">EBSD3</a> object stores one measurement per voxel: its position, phase, orientation, and whatever properties the file provides. It is the volume counterpart of a two-dimensional <a href="EBSD.EBSD.html">EBSD</a> map, and the representation to use while the question still concerns individual measurements rather than whole-grain geometry.</p>
+<p>This page imports such a volume, displays it, and cuts planar slices out of it. A slice is an ordinary two-dimensional EBSD map, so everything written for planar data applies to it unchanged. The polyhedral <a href="grain3d.grain3d.html">grain3d</a> representation is the subject of <a href="Grains3D.html">Three-Dimensional Grains</a>.</p>
+<!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">Import a volume</h2>
+<p> <a href="EBSD3.load.html"><code class="language-plaintext highlighter-rouge">EBSD3.load</code></a> detects the file format automatically. The sample data set is a simulated nine-phase volume written in the Xnovo GrainMapper3D format,</p>
+<pre>  ebsd = EBSD3.load(fullfile(mtexDataPath,'EBSD3','SimulatedMultiPhase.h5'))</pre>
+<p>which <code class="language-plaintext highlighter-rouge">mtexdata</code> resolves by name.</p>
+{% highlight matlab %}
+ebsd = mtexdata('xnovo')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD3square (y↑→x)
+ 
+ Phase  Orientations     Mineral          Color  Symmetry  Crystal reference frame
+     0   27950 (22%)  notIndexed           none                                   
+     1  11046 (8.8%)     Silicon        SkyBlue      m-3m                         
+     2  11876 (9.5%)     Diamond  PaleVioletRed      m-3m                         
+     3  10436 (8.3%)   Magnesium            Red     6/mmm        X||a, Y||b*, Z||c
+     4  10231 (8.2%)      Rutile            Red     4/mmm                         
+     5   9060 (7.2%)    Corundum    YellowGreen      -3m1        X||a, Y||b*, Z||c
+     6  11521 (9.2%)      Quartz    DeepSkyBlue      -3m1        X||a, Y||b*, Z||c
+     7  10961 (8.8%)    Pyroxene     SandyBrown       mmm                         
+     8  10578 (8.5%)  Hornblende         Orchid     12/m1        X||a, Y||b, Z||c*
+     9  11341 (9.1%)  Microcline           Gold        -1              X||a, Z||c*
+ 
+ Properties: Completeness, grainId
+ Scan unit : mm
+ X × Y × Z : [-0.24 0.24] × [-0.24 0.24] × [-0.24 0.24]
+ Grid size (square): 50 × 50 × 50
+{% endhighlight %}
+<p>The summary reports a 50 x 50 x 50 array rather than a list, i.e. the measurements are held in an <a href="EBSD3square.EBSD3square.html">EBSD3square</a> whose entries are addressed as <code class="language-plaintext highlighter-rouge">ebsd(i,j,k)</code>. The three array dimensions carry \(x\), \(y\) and \(z\). Each of the nine phases occupies roughly a twelfth of the voxels and the remaining fifth is not indexed.</p>
+<p>The voxel is 10 micron on a side and the volume spans about half a millimetre in each direction.</p>
+{% highlight matlab %}
+ebsd.extent
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   -0.2450    0.2450   -0.2450    0.2450   -0.2450    0.2450
+{% endhighlight %}
+<h2 id="4">Display the volume</h2>
+<p> <a href="EBSD3.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> hands the volume to the MATLAB volume viewer, which cuts three slice planes through the data and renders them on the graphics card. The planes are dragged with the mouse, and the volume is rotated, clipped and cropped interactively, so this is a live window rather than a figure:</p>
+<pre>  plot(ebsd)                          % colour by phase
+  plot(ebsd,ebsd.prop.grainId)        % colour by a property</pre>
+<p>Voxel colours are never interpolated, so a boundary stays where the measurement puts it, and voxels that are not indexed are painted in the background colour.</p>
+<p>Interaction is what that window is for. Anything that has to end up in a figure, a publication, or a further calculation goes through a slice.</p>
+<h2 id="5">Cut a slice</h2>
+<p> <a href="EBSD3.slice.html"><code class="language-plaintext highlighter-rouge">slice</code></a> resamples the volume onto a regular grid inside a <a href="plane3d.plane3d.html">plane3d</a> and returns a two-dimensional <a href="EBSD.EBSD.html">EBSD</a> map. The plane is given by its normal and one point on it.</p>
+{% highlight matlab %}
+ebsdZ = slice(ebsd,plane3d(vector3d.Z,vector3d(0,0,0)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsdZ = EBSDsquare (y↑→x, col←row↓)
+ 
+ Phase  Orientations     Mineral          Color  Symmetry  Crystal reference frame
+     0     763 (28%)  notIndexed           none                                   
+     1     376 (14%)     Silicon        SkyBlue      m-3m                         
+     2    122 (4.5%)     Diamond  PaleVioletRed      m-3m                         
+     3    179 (6.6%)   Magnesium            Red     6/mmm        X||a, Y||b*, Z||c
+     4    128 (4.7%)      Rutile            Red     4/mmm                         
+     5    193 (7.1%)    Corundum    YellowGreen      -3m1        X||a, Y||b*, Z||c
+     6     76 (2.8%)      Quartz    DeepSkyBlue      -3m1        X||a, Y||b*, Z||c
+     7    256 (9.5%)    Pyroxene     SandyBrown       mmm                         
+     8    236 (8.7%)  Hornblende         Orchid     12/m1        X||a, Y||b, Z||c*
+     9     375 (14%)  Microcline           Gold        -1              X||a, Z||c*
+ 
+ Properties: Completeness, grainId
+ Scan unit : mm
+ X × Y × Z : [-0.26 → 0.26] × [-0.26 → 0.26] × [0 → 0]
+ Normal vector: (0,0,1)
+ Square grid  :52 × 52
+{% endhighlight %}
+<p>The result is an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a> like any imported map, it carries all nine phases, and it plots like one.</p>
+{% highlight matlab %}
+plot(ebsdZ)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Plotting_01.png" %}
+</center>
+<p>The section is a disc, so the simulated specimen is round in the \(xy\) plane rather than filling its bounding box. The grains are equiaxed and the nine phases are mixed through the section without any layering.</p>
+<h2 id="8">Slices at several depths</h2>
+<p>Repeating the cut at different heights shows how the microstructure develops through the volume. Each panel is a full EBSD map.</p>
+{% highlight matlab %}
+newMtexFigure('layout',[1,3],'figSize','large');
+
+for z = [-0.15 0 0.15]
+  plot(slice(ebsd,plane3d(vector3d.Z,vector3d(0,0,z))),'micronbar','off')
+  mtexTitle(['z = ' num2str(z) ' mm'])
+  if z < 0.15, nextAxis; end
+end
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Plotting_02.png" %}
+</center>
+<p>The three discs have the same diameter, so the specimen is a cylinder standing along \(z\). The grain pattern is different in each panel because every section meets a different set of grains.</p>
+<h2 id="10">An arbitrary plane</h2>
+<p>The normal is unrestricted. The measurements of a section keep their position in the specimen, so a section that does not lie in the \(xy\) plane would be seen edge on from the default viewing direction. <code class="language-plaintext highlighter-rouge">slice</code> therefore gives the section a <a href="plottingConvention.html">plottingConvention</a> of its own that looks along the plane normal, and the map is drawn face on without moving any data.</p>
+{% highlight matlab %}
+newMtexFigure('layout',[1,2],'figSize','large');
+
+plot(slice(ebsd,plane3d(vector3d.X,vector3d(0,0,0))),'micronbar','off')
+mtexTitle('normal || x')
+nextAxis
+plot(slice(ebsd,plane3d(vector3d(1,1,1),vector3d(0,0,0))),'micronbar','off')
+mtexTitle('normal || (1,1,1)')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Plotting_03.png" %}
+</center>
+<p>The section normal to \(x\) is rectangular and shows the full height of the cylinder. The oblique section is the larger of the two because that plane crosses more of the specimen; its grid is regular within the plane, not in the specimen axes.</p>
+<p>A section normal to \(z\) needs no new convention and keeps the one the volume already carries, so it is drawn exactly as an imported map is.</p>
+<h2 id="12">Several sections at once</h2>
+<p>A section keeps the position its measurements have in the specimen, so drawing more than one into the same axes assembles them where they belong. Three orthogonal cuts seen from an angle give the picture the volume viewer shows, in a figure that can be published.</p>
+{% highlight matlab %}
+plot(slice(ebsd,plane3d(vector3d.Z,vector3d(0,0,0))),'micronbar','off')
+hold on
+plot(slice(ebsd,plane3d(vector3d.X,vector3d(0,0,0))),'micronbar','off')
+plot(slice(ebsd,plane3d(vector3d.Y,vector3d(0,0,0))),'micronbar','off')
+hold off
+
+setCamera(plottingConvention.default3D)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Plotting_04.png" %}
+</center>
+<p>The convention a single section carries decides how that section alone is seen. Once several are combined there is one camera for all of them, and <a href="plottingConvention.html"><code class="language-plaintext highlighter-rouge">plottingConvention.default3D</code></a> is the oblique view this chapter uses. The three planes meet at the centre of the specimen, so a grain crossed by two of them appears in both.</p>
+<h2 id="14">Colour a slice</h2>
+<p>A slice carries the orientations, phases and properties of the voxels it passes through, so it is coloured by exactly the same commands as an imported map. Orientation colouring needs a single phase at a time, which for a multi-phase section means one call per phase.</p>
+{% highlight matlab %}
+for p = ebsdZ.indexedPhasesId
+  ebsdP = ebsdZ(ebsdZ.CSList(p).mineral);
+  plot(ebsdP,ebsdP.orientations,'micronbar','off')
+  hold on
+end
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: The point group "-1" has no topologically correct
+color key: its
+         fundamental sector cannot be mapped smoothly and
+         one to one onto the
+         color space, so the colors jump somewhere.
+         Colorizing with the point
+         group "1" instead removes the jump, but that
+         identifies directions
+         differently, so symmetrically equivalent
+         directions no longer share a
+         color.
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Plotting_05.png" %}
+</center>
+<p>Each phase is coloured by its own inverse pole figure key, so colours are comparable within a phase but not between phases.</p>
+<h2 id="16">A slice is an ordinary EBSD map</h2>
+<p>Nothing distinguishes the result of <code class="language-plaintext highlighter-rouge">slice</code> from an imported map, so the planar toolchain applies to it directly. Here the section is segmented into grains and the boundaries drawn over the phase map.</p>
+{% highlight matlab %}
+grains = calcGrains(ebsdZ('indexed'));
+
+plot(ebsdZ,'micronbar','off')
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Plotting_06.png" %}
+</center>
+<p>These grains are the sections of the three-dimensional grains, not the grains themselves, and they inherit the bias any single section carries. This data set also ships the segmentation of the full volume as the voxel property <code class="language-plaintext highlighter-rouge">grainId</code>, which the slice carries along.</p>
+<p>Reconstructing grains in the volume as closed polyhedra is described in <a href="Grains3D.html">Three-Dimensional Grains</a>.</p>
+<h2 id="18">References</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher, and H. Schaeben, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain Detection from 2d and 3d EBSD Data - Specification of the MTEX Algorithm</a>, <i>Ultramicroscopy</i> 111 (2011), 1720--1733, specifies the segmentation that <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> applies to the section.</li>
+</ul>
+</div>
+<h2 id="19">Next</h2>
+<p>Continue with <a href="Grains3D.html">Three-Dimensional Grains</a> to turn a volume into polyhedra and to work with their faces and normals.</p>
+</div>
+</body>
+</html>

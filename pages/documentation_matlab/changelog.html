@@ -60,6 +60,27 @@ work = calcTaylor(eps,sS,'plasticWork')
 {% endhighlight %}
 <p>The Taylor factor it returns beside it is the total slip activity, which equals the work only when every critical resolved shear stress is one - so with slip systems of differing strengths, compare the work. <a href="calcLankford.html"><code class="language-plaintext highlighter-rouge">calcLankford</code></a> chooses the contraction path by minimising it for that reason, and reports Rbar and deltaR under their own names. See <a href="Plasticity.html">Plasticity</a>.</p>
 <p>
+<b>Three-Dimensional EBSD</b>
+</p>
+<p>A measured volume loads into an <code class="language-plaintext highlighter-rouge">EBSD3</code> object and is analysed with the commands of the two-dimensional case. DREAM.3D and Xnovo GrainMapper3D files are read, the grains they carry included:</p>
+{% highlight matlab %}
+ebsd = EBSD3.load('SmallIN100_MeshStats.dream3d')
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree)
+grainsStored = calcGrains(ebsd,'grainId')
+{% endhighlight %}
+<p> <a href="EBSD3square.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> reconstructs the grains from the voxels with the misorientation criteria of the planar case, <code class="language-plaintext highlighter-rouge">'minPixel'</code> included, and returns a <a href="grain3d.grain3d.html"><code class="language-plaintext highlighter-rouge">grain3d</code></a> whose boundary is a closed triangle surface with the voxel pair and the misorientation on every face. <code class="language-plaintext highlighter-rouge">'grainId'</code> connects voxels that carry the same stored grain id, in two and three dimensions alike, so the segmentation of a vendor file can be compared with one made in MTEX.</p>
+<p>The voxel surface is a staircase. <a href="grain3d.reduceBoundary.html"><code class="language-plaintext highlighter-rouge">reduceBoundary</code></a> coarsens it and <a href="grain3d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> smooths it with the filters of the planar case, keeping quadruple points, triple lines and the outer hull where they are:</p>
+{% highlight matlab %}
+grains = smoothBoundary(reduceBoundary(grains,2,'quadric'),taubinFilter(20))
+{% endhighlight %}
+<p> <a href="grain3Boundary.edges.html"><code class="language-plaintext highlighter-rouge">edges</code></a> and <a href="grain3Boundary.nodeType.html"><code class="language-plaintext highlighter-rouge">nodeType</code></a> give the triple lines and quadruple points of the boundary network, and <a href="grain3Boundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> its plane distribution.</p>
+<p>A volume is plotted with <a href="EBSD3.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> and cut with <a href="EBSD3.slice.html"><code class="language-plaintext highlighter-rouge">slice</code></a>; the section is an ordinary EBSD map seen along the normal of the plane it was cut with:</p>
+{% highlight matlab %}
+ebsd = mtexdata('xnovo')
+plot(slice(ebsd,plane3d(vector3d(1,1,1),vector3d(0,0,0))))
+{% endhighlight %}
+<p>See <a href="EBSD3Analysis.html">Three-Dimensional EBSD Analysis</a> for the chapter, and <a href="Grains3DReconstruction.html">Grain Reconstruction</a>, <a href="Grains3DSmoothing.html">Smoothing</a>, <a href="Grains3DBoundaries.html">Boundary Network</a> and <a href="EBSD3Plotting.html">Volume Data and Slices</a> for the pages.</p>
+<p>
 <b>Corrections Worth Knowing</b>
 </p>
 <div>
@@ -69,6 +90,11 @@ work = calcTaylor(eps,sS,'plasticWork')
 <li>the weights of an <a href="SO3FunRBF.SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> follow its symmetrised centers, where every center but the first was given another center's weight</li>
 <li>the <code class="language-plaintext highlighter-rouge">delta</code> of a <a href="Gaussian.html"><code class="language-plaintext highlighter-rouge">Gaussian</code></a> is the width of \(\exp(-(x-m)^2/\delta^2)\); the standard deviation is \(\delta/\sqrt{2}\)</li>
 <li>a not indexed phase can be given a colour - <code class="language-plaintext highlighter-rouge">ebsd('notIndexed').color = 'blue'</code> was refused with "There are no indexed data in this variable!"</li>
+<li>
+<code class="language-plaintext highlighter-rouge">slice</code> of a volume returned the plane through the origin whatever plane it was given, and a section that does not lie in the xy plane was plotted edge on</li>
+<li>the <a href="quaternion.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> of a rotation and its <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a> keep every digit of a small rotation. They were computed from the real quaternion component and floored at about 2e-6 degree, so a rotation by 1e-9 degree reported the angle zero</li>
+<li>the Siemens D5000 pole figure reader merged two neighbouring counts whenever a five digit count filled its field, and the Seifert <code class="language-plaintext highlighter-rouge">.nja</code> reader skipped the first measurement of every file</li>
+<li> <a href="embedding.double.html"><code class="language-plaintext highlighter-rouge">double</code></a> of an <a href="embedding.embedding.html"><code class="language-plaintext highlighter-rouge">embedding</code></a> takes its coordinates from an orthonormal basis of the space the embedding moves in, computed from the symmetry group. The dimension is unchanged for every Laue class but <code class="language-plaintext highlighter-rouge">mmm</code>, which has 10 coordinates instead of 15. <a href="embedding.embedding.html"><code class="language-plaintext highlighter-rouge">embedding(ori)</code></a> of a large list is about twice as fast for cubic and four times for hexagonal symmetry</li>
 </ul>
 </div>
 <h2 id="2">MTEX 7.0 08/2026</h2>

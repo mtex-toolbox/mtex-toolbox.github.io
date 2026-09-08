@@ -175,7 +175,7 @@ job.calcDistortion('fitErr');
   ● fsdT1
   │ tilt         projective       64 px 3.61 (+2.86,-2.19)
   │              poly11           64 px 0.27 (+0.06,-0.09)
-  │              poly22           64 px 0.27 (+0.06,-0.09)
+  │              poly22           64 px 0.27 (+0.05,-0.09)
   │              ↳ residual                                0.26 (+0.06,-0.10)
   ▼
   ● fsdT10
@@ -189,16 +189,16 @@ display(job.T,'variableName','job.T')
 job.T = spatialTransform
  size: 1 × 4
  
-    model        stage       parameters                                  
- 1  shift-drift  shift       scale 1.002 × 0.9614, rotate -0.0207°, shear
-                             -1.26°, move (3.9, 5.528)                   
-                 drift       10 knots over 51 .. 146, |u| <= 0.8568      
- 2  identity     ·           ·                                           
- 3  shift        ·           scale 1.002 × 0.9998, rotate 0.0479°, shear 
-                             -0.0349°, move (-2.848, -1.895)             
- 4  tilt         projective  perspective (-3.99e-06, 1.73e-05)           
-                 poly11      |c| = 0.1513                                
-                 poly22      |c| = 1.03
+    model        stage       parameters                                   
+ 1  shift-drift  shift       scale 1.002 × 0.9614, rotate -0.0207°, shear 
+                             -1.26°, move (0.175, 0.1398)                 
+                 drift       10 knots over -3.617 .. 3.935, |u| <= 0.06812
+ 2  identity     ·           ·                                            
+ 3  shift        ·           scale 1.002 × 0.9998, rotate 0.048°, shear   
+                             -0.0349°, move (-0.2142, -0.144)             
+ 4  tilt         projective  perspective (-5.27e-05, 0.000238)            
+                 poly11      |c| = 0.009417                               
+                 poly22      |c| = 0.01471
 {% endhighlight %}
 <h2 id="16">Correct It</h2>
 <p>Each map is now moved by the shifts of every step between it and the reference. The reference itself does not move.</p>
@@ -225,16 +225,18 @@ ebsdOut = job.undistortedList(1).ebsd
 ebsdOut = EBSDsquare (y↓→x, row↓→col)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   2393 (4.9%)  notIndexed          none                                   
-     1   42856 (87%)         W C  LightSkyBlue      -6m2        X||a*, Y||b, Z||c
-     2   3804 (7.7%)      Co-fcc  DarkSeaGreen      m-3m                         
-     3     99 (0.2%)      Co-hcp     Goldenrod     6/mmm        X||a*, Y||b, Z||c
+     0   1803 (3.7%)  notIndexed          none                                   
+     1   43403 (88%)         W C  LightSkyBlue      -6m2        X||a*, Y||b, Z||c
+     2   3840 (7.8%)      Co-fcc  DarkSeaGreen      m-3m                         
+     3   106 (0.22%)      Co-hcp     Goldenrod     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bc, bs, bands, MAD, quality, oldId, bcImg, fsdB3, fsdT3, fsdT1, fsdT10
  Scan unit : um
- X × Y × Z : [-20 → 0] × [-15 → 0] × [0 → 0]
+ X × Y × Z : [-10 → 10] × [-7.6 → 7.6] × [0 → 0]
  Normal vector: (0,0,1)
  Square grid  :192 × 256
+ source: trueEbsdWCCo, centre half of the field of view, coarsened 4x
+ madeBy: trueEBSD tools/makeWCCoSmall.m
 {% endhighlight %}
 <p>The summary lists <code class="language-plaintext highlighter-rouge">bcImg</code>, <code class="language-plaintext highlighter-rouge">fsdB3</code>, <code class="language-plaintext highlighter-rouge">fsdT3</code>, <code class="language-plaintext highlighter-rouge">fsdT1</code> and <code class="language-plaintext highlighter-rouge">fsdT10</code> with the other per-pixel properties. This is an ordinary <a href="EBSD.EBSD.html">EBSD</a> map rather than a separate registration result type.</p>
 <p>The orientation panel below is coloured by the inverse pole figure of <code class="language-plaintext highlighter-rouge">zvector</code>. This page draws y downwards, and that convention puts z into the screen, which the axes inset in each panel shows.</p>

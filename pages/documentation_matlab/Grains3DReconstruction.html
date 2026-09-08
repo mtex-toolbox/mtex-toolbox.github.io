@@ -1,0 +1,161 @@
+---
+title: 'Grain Reconstruction from Voxel Data'
+
+sidebar: documentation_sidebar
+permalink: Grains3DReconstruction.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Grain Reconstruction from Voxel Data</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_Grains3DReconstruction.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSD3Analysis/Grains3DReconstruction.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>A three-dimensional EBSD measurement arrives as voxels, whether it comes from serial sectioning or from a diffraction technique that probes the volume. Each voxel carries a position, a phase and an orientation. A grain is a phase-homogeneous, spatially connected region of such voxels. This page reconstructs the grains of a measured volume and looks at what comes out.</p>
+<!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+how2plot = plottingConvention.default3D;
+{% endhighlight %}
+<h2 id="2">Load the voxel data</h2>
+<p> <a href="EBSD3.load.html"><code class="language-plaintext highlighter-rouge">EBSD3.load</code></a> reads the cell data of a DREAM.3D file into an <a href="EBSD3square.EBSD3square.html">EBSD3square</a>, the voxel counterpart of a square grid EBSD map. The voxels form a three-dimensional array, so <code class="language-plaintext highlighter-rouge">ebsd(i,j,k)</code> addresses one of them. Every further scalar array of the file becomes a property.</p>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
+ebsd = EBSD3.load(fname)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD3square (y↑→x)
+ 
+ Phase    Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     1  1000000 (100%)  unknown  LightSkyBlue       432                         
+ 
+ Properties: ConfidenceIndex, grainId, FeatureReferenceMisorientations, Fit, GBManhattanDistances, ImageQuality, KernelAverageMisorientations, ParentIds, QPManhattanDistances, SEMSignal, TJManhattanDistances
+ Scan unit : um
+ X × Y × Z : [-37 -12] × [10 35] × [-29 -4]
+ Grid size (square): 100 × 100 × 100
+{% endhighlight %}
+<h2 id="3">Reconstruct the grains</h2>
+<p> <a href="EBSD3square.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> works as its two-dimensional counterpart: two neighbouring voxels belong to the same grain when their misorientation angle stays below the threshold. Voxels are 6-connected. The boundary between two grains consists of the voxel faces they share, each stored as two triangles, so every grain is a closed surface.</p>
+{% highlight matlab %}
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain3d (y↑→x)
+ 
+ Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
+     1     812   15625  unknown       432                         
+ 
+ boundary faces: 757562
+ 
+ Properties: meanRotation, GOS
+ 
+ 
+ebsd = EBSD3square (y↑→x)
+ 
+ Phase    Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     1  1000000 (100%)  unknown  LightSkyBlue       432                         
+ 
+ Properties: ConfidenceIndex, grainId, FeatureReferenceMisorientations, Fit, GBManhattanDistances, ImageQuality, KernelAverageMisorientations, ParentIds, QPManhattanDistances, SEMSignal, TJManhattanDistances
+ Scan unit : um
+ X × Y × Z : [-37 -12] × [10 35] × [-29 -4]
+ Grid size (square): 100 × 100 × 100
+{% endhighlight %}
+<p>The summary lists the grains with their volume and mean orientation. The second output is the same voxel data with a <code class="language-plaintext highlighter-rouge">grainId</code> per voxel. Plotting the mean orientation colours every face on the outside of the volume.</p>
+{% highlight matlab %}
+plot(grains,grains.meanOrientation,'LineStyle','none','micronbar','off')
+setCamera(how2plot)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DReconstruction_01.png" %}
+</center>
+<p>The colour is constant over each grain and changes sharply at the grain boundaries. The staircase texture of the outer faces is the voxel grid itself; the boundary follows the voxel faces exactly.</p>
+<h2 id="6">Volumes</h2>
+<p>Every grain is a closed surface, so its volume follows from the divergence theorem and equals the number of its voxels times the voxel volume. The volumes of all grains add up to the measured box.</p>
+{% highlight matlab %}
+[sum(grains.volume), prod(size(ebsd)) * ebsd.dx * ebsd.dy * ebsd.dz]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+       15625       15625
+{% endhighlight %}
+<p>Most grains are small. The largest grain is worth a look on its own.</p>
+{% highlight matlab %}
+histogram(grains.volume)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DReconstruction_02.png" %}
+</center>
+{% highlight matlab %}
+[~,id] = max(grains.volume);
+plot(grains(id),'micronbar','off')
+setCamera(how2plot)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DReconstruction_03.png" %}
+</center>
+<h2 id="9">Grains stored in the file</h2>
+<p>DREAM.3D and GrainMapper3D files carry the grain id the vendor software assigned to every voxel, which the importer stores as <code class="language-plaintext highlighter-rouge">ebsd.grainId</code>. The flag <code class="language-plaintext highlighter-rouge">'grainId'</code> builds the grains from these ids instead of the orientations, so the stored segmentation becomes a <a href="grain3d.grain3d.html">grain3d</a> with the same closed surfaces, volumes and boundary as a reconstruction of our own.</p>
+{% highlight matlab %}
+grainsStored = calcGrains(ebsd,'grainId')
+{% endhighlight %}
+
+{% highlight plaintext %}
+grainsStored = grain3d (y↑→x)
+ 
+ Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
+     1     812   15625  unknown       432                         
+ 
+ boundary faces: 757562
+ 
+ Properties: meanRotation, GOS
+{% endhighlight %}
+<p>The two segmentations agree on most voxels. Where they differ, the threshold decided about a low angle boundary that the stored ids either keep or drop.</p>
+<h2 id="11">Small grains</h2>
+<p>A handful of voxels with a stray orientation form a grain of their own. The option <code class="language-plaintext highlighter-rouge">minPixel</code> removes indexed grains below a number of voxels. Their voxels are marked notIndexed and form notIndexed grains, exactly as in two dimensions.</p>
+{% highlight matlab %}
+grains = calcGrains(ebsd,'angle',5*degree,'minPixel',10)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain3d (y↑→x)
+ 
+ Phase  Grains  Volume     Mineral  Symmetry  Crystal reference frame
+     0      60     3.9  notIndexed                                   
+     1     749   15621     unknown       432                         
+ 
+ boundary faces: 757554
+ 
+ Properties: meanRotation, GOS
+{% endhighlight %}
+<h2 id="12">The grain boundary</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">grains.boundary</code> is a <a href="grain3Boundary.grain3Boundary.html">grain3Boundary</a>. Each face records the two voxels it separates, <code class="language-plaintext highlighter-rouge">ebsdId</code>, the two grains, <code class="language-plaintext highlighter-rouge">grainId</code>, and the misorientation between the two voxels. Faces on the outside of the volume have a zero in the second column of <code class="language-plaintext highlighter-rouge">grainId</code>. The misorientation angle across the inner faces shows where the low angle boundaries are.</p>
+{% highlight matlab %}
+gB = grains.boundary;
+isInner = all(gB.grainId > 0,2);
+histogram(gB.misorientation(isInner).angle ./ degree)
+xlabel('misorientation angle in degree')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DReconstruction_04.png" %}
+</center>
+<h2 id="13">Next</h2>
+<p>
+<a href="Grains3DProperties.html">Properties</a> lists the geometric properties of the reconstructed grains, and <a href="Grains3DOperations.html">Operations</a> covers selection, slicing and the boundary normal distribution. The <a href="Grains3D.html">3D-Grains</a> page reads the same microstructure from the surface mesh DREAM.3D stored alongside the voxels.</p>
+</div>
+</body>
+</html>
