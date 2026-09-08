@@ -30,8 +30,10 @@ plottingConvention.default('y↑→x');
 {% endhighlight %}
 <h2 id="2">Load the example microstructure</h2>
 {% highlight matlab %}
+% Assign trigonal quartz symmetry, as on the Neper Interface page.
+cs = crystalSymmetry.load('quartz.cif');
 tessFile = fullfile(mtexDataPath,'Neper','my100grains.tess');
-grains = grain3d.load(tessFile)
+grains = grain3d.load(tessFile,'CS',cs)
 
 plot(grains,grains.meanOrientation,'micronbar','off','edgeAlpha',0.1)
 setCamera(plottingConvention.default3D)
@@ -41,23 +43,11 @@ setCamera(plottingConvention.default3D)
 grains = grain3d (y↑→x)
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
-     2    1000      32                 -1                         
+     2    1000      32   Quartz       321        X||a*, Y||b, Z||c
  
  boundary faces: 7131
  
  Properties: meanRotation
- 
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color.
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_01.png" %}
@@ -83,25 +73,13 @@ setCamera(plottingConvention.default3D)
 grainSlice = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry         Color
-     2     164     164                 -1  LightSkyBlue
+     2     164     164   Quartz       321  LightSkyBlue
  
  boundary segments: 495 (92 µm)
  inner boundary segments: 0 (0 µm)
  triple points: 281
  
  Properties: meanRotation, Id3d
- 
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color.
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_02.png" %}
@@ -131,31 +109,6 @@ nextAxis
 plot(parentGrains,parentGrains.meanOrientation,'micronbar','off','edgeAlpha',0.1)
 setCamera(plottingConvention.default3D)
 mtexTitle('Parent grains')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color. 
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color.
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_04.png" %}
@@ -198,64 +151,6 @@ end
 hold off
 setCamera(plottingConvention.default3D)
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color. 
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color. 
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color. 
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color. 
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color.
-{% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_06.png" %}
 </center>
@@ -276,7 +171,7 @@ setCamera(plottingConvention.default3D)
 grainsTri = grain3d (y↑→x)
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
-     2       2   0.081                 -1                         
+     2       2   0.081   Quartz       321        X||a*, Y||b, Z||c
  
  boundary faces: 88
  
@@ -286,17 +181,6 @@ grainsTri = grain3d (y↑→x)
  
 ans =
     28    88
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color.
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_07.png" %}
@@ -310,20 +194,6 @@ grainsRotated = rot * grains;
 
 plot(grainsRotated,grainsRotated.meanOrientation,'micronbar','off','edgeAlpha',0.1)
 setCamera(plottingConvention.default3D)
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color.
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_08.png" %}
@@ -383,7 +253,92 @@ geometryOnly = rotate(grains,rot,'keepEuler');
 orientationOnly = rotate(grains,rot,'keepXY');
 {% endhighlight %}
 <p>These flags are useful when geometry and orientation require separate corrections. They do not represent a rigid rotation of the whole specimen. The <code class="language-plaintext highlighter-rouge">'center'</code> option affects only a spatial rotation, so it has no effect when <code class="language-plaintext highlighter-rouge">'keepXY'</code> leaves the geometry unchanged.</p>
-<h2 id="18">References</h2>
+<h2 id="18">Function reference</h2>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>Function</p>
+         </td>
+         <td>
+               <p>Purpose</p>
+         </td>
+         <td>
+               <p>Function</p>
+         </td>
+         <td>
+               <p>Purpose</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain3d.slice.html">
+                     <tt>slice</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>cut planar grain polygons</p>
+         </td>
+         <td>
+               <p>
+                  <a href="grain3d.intersected.html">
+                     <tt>intersected</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>find grains crossed by a plane</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain3d.triangulate.html">
+                     <tt>triangulate</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>divide polygonal faces into triangles</p>
+         </td>
+         <td>
+               <p>
+                  <a href="grain3d.rotate.html">
+                     <tt>rotate</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>rotate geometry and orientations</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain3d.neighbors.html">
+                     <tt>neighbors</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>list adjacent grain IDs</p>
+         </td>
+         <td>
+               <p>
+                  <a href="grain3d.id2ind.html">
+                     <tt>id2ind</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>map persistent IDs to array positions</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="19">References</h2>
 <div>
 <ul>
 <li>R. Quey, P. R. Dawson and F. Barbe, <a href="https://doi.org/10.1016/j.cma.2011.01.002">Large-scale 3D random polycrystals for the finite element method: Generation, meshing and remeshing</a>, <i>Computer Methods in Applied Mechanics and Engineering</i> 200 (2011), 1729--1745, describes the synthetic polycrystal construction used for the example tessellation.</li>

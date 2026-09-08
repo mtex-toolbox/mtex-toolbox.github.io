@@ -32,8 +32,10 @@ plottingConvention.default('y↑→x');
 <h2 id="2">Load the example microstructure</h2>
 <p>The bundled data set is a Neper tessellation. The previous <a href="NeperInterface.html">Neper Interface</a> page explains how such a collection is generated or imported. Loading the existing file needs no Neper installation. Its lengths are expressed in the tessellation coordinate units; assign a physical scale before comparing with an experiment.</p>
 {% highlight matlab %}
+% Assign trigonal quartz symmetry, as on the Neper Interface page.
+cs = crystalSymmetry.load('quartz.cif');
 tessFile = fullfile(mtexDataPath,'Neper','my100grains.tess');
-grains = grain3d.load(tessFile)
+grains = grain3d.load(tessFile,'CS',cs)
 
 plot(grains,grains.meanOrientation,'micronbar','off','edgeAlpha',0.1)
 setCamera(plottingConvention.default3D)
@@ -43,23 +45,11 @@ setCamera(plottingConvention.default3D)
 grains = grain3d (y↑→x)
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
-     2    1000      32                 -1                         
+     2    1000      32   Quartz       321        X||a*, Y||b, Z||c
  
  boundary faces: 7131
  
  Properties: meanRotation
- 
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color.
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DProperties_01.png" %}
@@ -189,20 +179,6 @@ figure
 plotEllipsoid(grains.centroid,a,b,c,'faceColor',color);
 setCamera(plottingConvention.default3D)
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: The point group "-1" has no topologically correct
-color key: its
-         fundamental sector cannot be mapped smoothly and
-         one to one onto the
-         color space, so the colors jump somewhere.
-         Colorizing with the point
-         group "1" instead removes the jump, but that
-         identifies directions
-         differently, so symmetrically equivalent
-         directions no longer share a
-         color.
-{% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DProperties_05.png" %}
 </center>
@@ -250,27 +226,13 @@ setCamera(plottingConvention.default3D)
                <p>Property</p>
          </td>
          <td>
-               <p>Meaning</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <tt>numPixel</tt>
-               </p>
+               <p>Purpose</p>
          </td>
          <td>
-               <p>voxel count for grains reconstructed from voxel data</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <tt>numFaces</tt>
-               </p>
+               <p>Property</p>
          </td>
          <td>
-               <p>number of boundary faces belonging to the grain</p>
+               <p>Purpose</p>
          </td>
       </tr>
       <tr>
@@ -284,8 +246,6 @@ setCamera(plottingConvention.default3D)
          <td>
                <p>enclosed volume</p>
          </td>
-      </tr>
-      <tr>
          <td>
                <p>
                   <a href="grain3d.surface.html">
@@ -294,7 +254,7 @@ setCamera(plottingConvention.default3D)
                </p>
          </td>
          <td>
-               <p>total area of all boundary faces</p>
+               <p>enclosing surface area</p>
          </td>
       </tr>
       <tr>
@@ -306,10 +266,8 @@ setCamera(plottingConvention.default3D)
                </p>
          </td>
          <td>
-               <p>greatest distance between two grain vertices</p>
+               <p>largest vertex-to-vertex distance</p>
          </td>
-      </tr>
-      <tr>
          <td>
                <p>
                   <a href="grain3d.principalComponents.html">
@@ -318,7 +276,45 @@ setCamera(plottingConvention.default3D)
                </p>
          </td>
          <td>
-               <p>three principal half-axes of a volume-matched ellipsoid</p>
+               <p>volume-matched ellipsoid half-axes</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain3d.centroid.html">
+                     <tt>centroid</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>volume centroid</p>
+         </td>
+         <td>
+               <p>
+                  <tt>V</tt>
+               </p>
+         </td>
+         <td>
+               <p>grain vertices</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>numPixel</tt>
+               </p>
+         </td>
+         <td>
+               <p>voxel count after reconstruction</p>
+         </td>
+         <td>
+               <p>
+                  <tt>numFaces</tt>
+               </p>
+         </td>
+         <td>
+               <p>number of mesh faces</p>
          </td>
       </tr>
       <tr>
@@ -332,8 +328,6 @@ setCamera(plottingConvention.default3D)
          <td>
                <p>number of neighbouring grains</p>
          </td>
-      </tr>
-      <tr>
          <td>
                <p>
                   <a href="grain3Boundary.grain3Boundary.html">
@@ -342,29 +336,7 @@ setCamera(plottingConvention.default3D)
                </p>
          </td>
          <td>
-               <p>boundary faces of the grain</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <tt>V</tt>
-               </p>
-         </td>
-         <td>
-               <p>vertices used by the grain</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain3d.centroid.html">
-                     <tt>centroid</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>volume centroid of the grain</p>
+               <p>enclosing boundary faces</p>
          </td>
       </tr>
    </table>
@@ -379,43 +351,51 @@ setCamera(plottingConvention.default3D)
                <p>Property</p>
          </td>
          <td>
-               <p>Meaning</p>
+               <p>Purpose</p>
+         </td>
+         <td>
+               <p>Property</p>
+         </td>
+         <td>
+               <p>Purpose</p>
          </td>
       </tr>
       <tr>
          <td>
                <p>
-                  <tt>area</tt>
+                  <a href="grain3Boundary.area.html">
+                     <tt>area</tt>
+                  </a>
                </p>
          </td>
          <td>
-               <p>face area in squared coordinate units</p>
+               <p>face area (length squared)</p>
          </td>
-      </tr>
-      <tr>
          <td>
                <p>
                   <tt>N</tt>
                </p>
          </td>
          <td>
-               <p>stored face-normal direction</p>
+               <p>stored normal direction</p>
          </td>
       </tr>
       <tr>
          <td>
                <p>
-                  <tt>diameter</tt>
+                  <a href="grain3Boundary.diameter.html">
+                     <tt>diameter</tt>
+                  </a>
                </p>
          </td>
          <td>
-               <p>greatest distance between two face vertices</p>
+               <p>largest vertex-to-vertex distance</p>
          </td>
-      </tr>
-      <tr>
          <td>
                <p>
-                  <tt>perimeter</tt>
+                  <a href="grain3Boundary.perimeter.html">
+                     <tt>perimeter</tt>
+                  </a>
                </p>
          </td>
          <td>
@@ -425,21 +405,21 @@ setCamera(plottingConvention.default3D)
       <tr>
          <td>
                <p>
-                  <tt>centroid</tt>
+                  <a href="grain3Boundary.centroid.html">
+                     <tt>centroid</tt>
+                  </a>
                </p>
          </td>
          <td>
-               <p>area centroid of the face</p>
+               <p>area centroid</p>
          </td>
-      </tr>
-      <tr>
          <td>
                <p>
                   <tt>grainId</tt>
                </p>
          </td>
          <td>
-               <p>IDs of the neighbouring grains</p>
+               <p>IDs of adjacent grains</p>
          </td>
       </tr>
       <tr>
@@ -450,6 +430,14 @@ setCamera(plottingConvention.default3D)
          </td>
          <td>
                <p>orientation difference across the face</p>
+         </td>
+         <td>
+               <p>
+                  <tt>ebsdId</tt>
+               </p>
+         </td>
+         <td>
+               <p>adjacent voxel IDs after reconstruction</p>
          </td>
       </tr>
    </table>

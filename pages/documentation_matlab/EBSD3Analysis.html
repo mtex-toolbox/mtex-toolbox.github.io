@@ -114,13 +114,9 @@ hold off
 <a href="EBSD3Plotting.html">Volume Data and Slices</a> shows slices at several depths and how a section relates to the volume it was cut from.</p>
 <h2 id="10">Reconstruct the grains</h2>
 <p>A grain is a connected region of voxels of one phase whose orientations differ by less than a threshold. <a href="EBSD3square.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> segments the volume with the same misorientation criteria as the planar case and returns a <a href="grain3d.grain3d.html"><code class="language-plaintext highlighter-rouge">grain3d</code></a> object. Where an <a href="EBSD3.EBSD3.html">EBSD3</a> holds one measurement per voxel, a <a href="grain3d.grain3d.html">grain3d</a> holds each grain as a closed polyhedron: its faces carry the geometry, its phase and mean orientation describe the material inside. <code class="language-plaintext highlighter-rouge">'minPixel'</code> dissolves grains of fewer than ten voxels into their neighbours; a grain that small is all corners and no surface.</p>
-<p>
-<center>
-{% include inline_image.html file="ebsd3-data-models.svg" %}
-</center>
-</p>
 {% highlight matlab %}
-[grains,ebsd] = calcGrains(ebsd,'angle',2*degree,'minPixel',10)
+[grains,ebsd] = calcGrains(ebsd,'angle',2*degree,'minPixel',10);
+grains
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -141,49 +137,10 @@ grains = grain3d (y↑→x)
  boundary faces: 166738
  
  Properties: meanRotation, GOS
- 
- 
-ebsd = EBSD3square (y↑→x)
- 
- Phase  Orientations     Mineral          Color  Symmetry  Crystal reference frame
-     0   27962 (22%)  notIndexed           none                                   
-     1  11045 (8.8%)     Silicon        SkyBlue      m-3m                         
-     2  11874 (9.5%)     Diamond  PaleVioletRed      m-3m                         
-     3  10433 (8.3%)   Magnesium            Red     6/mmm        X||a, Y||b*, Z||c
-     4  10231 (8.2%)      Rutile            Red     4/mmm                         
-     5   9056 (7.2%)    Corundum    YellowGreen      -3m1        X||a, Y||b*, Z||c
-     6  11520 (9.2%)      Quartz    DeepSkyBlue      -3m1        X||a, Y||b*, Z||c
-     7  10961 (8.8%)    Pyroxene     SandyBrown       mmm                         
-     8  10577 (8.5%)  Hornblende         Orchid     12/m1        X||a, Y||b, Z||c*
-     9  11341 (9.1%)  Microcline           Gold        -1              X||a, Z||c*
- 
- Properties: Completeness, grainId
- Scan unit : mm
- X × Y × Z : [-0.24 0.24] × [-0.24 0.24] × [-0.24 0.24]
- Grid size (square): 50 × 50 × 50
 {% endhighlight %}
 <p>Voxels that are not indexed form regions of their own, which are listed as grains of the phase <code class="language-plaintext highlighter-rouge">notIndexed</code>. The indexed grains are selected the way a phase is selected on a map.</p>
 {% highlight matlab %}
-grains = grains('indexed')
-{% endhighlight %}
-
-{% highlight plaintext %}
-grains = grain3d (y↑→x)
- 
- Phase  Grains  Volume     Mineral  Symmetry  Crystal reference frame
-     1      54   0.011     Silicon      m-3m                         
-     2      58   0.012     Diamond      m-3m                         
-     3      51    0.01   Magnesium     6/mmm        X||a, Y||b*, Z||c
-     4      45    0.01      Rutile     4/mmm                         
-     5      48  0.0091    Corundum      -3m1        X||a, Y||b*, Z||c
-     6      52   0.012      Quartz      -3m1        X||a, Y||b*, Z||c
-     7      56   0.011    Pyroxene       mmm                         
-     8      49   0.011  Hornblende     12/m1        X||a, Y||b, Z||c*
-     9      54   0.011  Microcline        -1              X||a, Z||c*
- 
- boundary faces: 147102
- 
- Properties: meanRotation, GOS
+grains = grains('indexed');
 {% endhighlight %}
 <p>Plotting the whole collection shows the outer surface of the volume, one colour per phase. Every grain behind it is present in the collection.</p>
 {% highlight matlab %}
