@@ -22,7 +22,7 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>The boundary of a set of three-dimensional grains is one surface mesh for the whole volume. Every face separates two grains and, when the grains were reconstructed from voxels, knows the two voxels it separates. Along the edges where three grains meet run the triple lines, and where four grains meet sits a quadruple point. This page reads the network of a reconstructed volume face by face, edge by edge and vertex by vertex.</p>
+<p>The boundary of a set of three-dimensional grains is one surface mesh for the whole volume. Every face separates two grains and, when the grains were reconstructed from voxels, knows the two voxels it separates. Along the edges where three grains meet run the triple lines, and where four grains meet sits a quadruple point. These contacts constrain grain growth and provide possible paths for intergranular transport or damage. This page measures how much interface is present and shows how the junctions connect it, using the IN100 volume of the reconstruction page.</p>
 <!--/introduction-->
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
@@ -42,7 +42,7 @@ gB = grain3Boundary (y↑→x)
  637562    unknown     unknown   84%
 {% endhighlight %}
 <h2 id="2">One face, two grains, two voxels</h2>
-<p>A face is a triangle, two per voxel face. <code class="language-plaintext highlighter-rouge">grainId</code> holds the two grains it separates, with the face normal pointing from the first into the second. <code class="language-plaintext highlighter-rouge">ebsdId</code> holds the two voxels on either side, and <code class="language-plaintext highlighter-rouge">misorientation</code> the misorientation between their orientations, computed from the voxels rather than from the grain means. Faces on the outer hull of the volume have a zero in the second column of both.</p>
+<p>A face is a triangle, two per voxel face. <code class="language-plaintext highlighter-rouge">grainId</code> holds the two grains it separates, with the face normal pointing from the first into the second. <code class="language-plaintext highlighter-rouge">ebsdId</code> holds the two voxels on either side, and <code class="language-plaintext highlighter-rouge">misorientation</code> the misorientation between their orientations, computed from the voxels rather than from the grain means. Faces on the outer hull of this voxel reconstruction have a zero in the second column of both. In a general imported mesh the zero can occur on either side, so test both columns.</p>
 {% highlight matlab %}
 [gB.grainId(1:5,:), gB.ebsdId(1:5,:)]
 {% endhighlight %}
@@ -55,9 +55,12 @@ ans =
     56   137    26    27
    137    51    35    36
 {% endhighlight %}
-<p>The share of faces on the hull, and the share between indexed grains.</p>
+<p>Count area, not triangles: refining a face changes its mesh count without adding any physical interface. The following fractions distinguish the measurement hull from contacts between indexed grains.</p>
 {% highlight matlab %}
-[mean(any(gB.grainId == 0,2)), mean(all(gB.isIndexed,2))]
+faceArea = gB.area;
+isHull = any(gB.grainId == 0,2);
+isIndexed = all(gB.isIndexed,2) & ~isHull;
+[sum(faceArea(isHull)), sum(faceArea(isIndexed))] / sum(faceArea)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -67,7 +70,8 @@ ans =
 <h2 id="4">Select faces</h2>
 <p>A boundary is selected like a list: by the grains at its sides, by phase, or by any property of the faces. The faces of one grain, the faces between two grains, and the faces above a misorientation angle are three common selections.</p>
 {% highlight matlab %}
-[~,id] = max(grains.volume);
+[~,largestIndex] = max(grains.volume);
+id = grains(largestIndex).id;
 gBid = gB(any(gB.grainId == id,2));
 neighbours = setdiff(unique(gBid.grainId(:)),[0 id]).';
 gBpair = gB(any(gB.grainId == id,2) & any(gB.grainId == neighbours(1),2));
@@ -80,9 +84,9 @@ gBhigh = gB(gB.misorientation.angle > 30*degree & all(gB.grainId > 0,2));
 ans =
        16524         300      547682
 {% endhighlight %}
-<p>The largest grain, with its faces coloured by the misorientation angle across them. The angle is uniform on each face between two grains and changes where a neighbour changes, so the colour draws the faces of the polyhedron.</p>
+<p>The largest grain, with its faces coloured by the misorientation angle across them. Each triangle has one value, but the values may vary over a contact between the same two grains: they come from the local voxel orientations. Missing orientations and the measurement hull do not supply a meaningful misorientation angle.</p>
 {% highlight matlab %}
-plot(gBid,gBid.misorientation.angle./degree,'LineStyle','none','micronbar','off')
+plot(gBid,gBid.misorientation.angle./degree,'edgeAlpha',0.1,'micronbar','off')
 setCamera(how2plot)
 mtexColorbar('title','misorientation angle in degree')
 {% endhighlight %}
@@ -107,12 +111,14 @@ ans =
 {% highlight matlab %}
 V = gB.allV.xyz;
 onGrain = false(size(V,1),1); onGrain(gBid.F(:)) = true;
-Eid = E(isTripleLine & all(onGrain(E),2),:);
+onGrainEdge = false(size(E,1),1);
+onGrainEdge(F2E(any(gB.grainId == id,2),:)) = true;
+Eid = E(isTripleLine & onGrainEdge,:);
 X = [V(Eid(:,1),1), V(Eid(:,2),1), nan(size(Eid,1),1)].';
 Y = [V(Eid(:,1),2), V(Eid(:,2),2), nan(size(Eid,1),1)].';
 Z = [V(Eid(:,1),3), V(Eid(:,2),3), nan(size(Eid,1),1)].';
 
-plot(gBid,'FaceColor',[0.85 0.85 0.85],'LineStyle','none','micronbar','off')
+plot(gBid,'FaceColor',[0.85 0.85 0.85],'edgeAlpha',0.1,'micronbar','off')
 hold on
 line(X(:),Y(:),Z(:),'Color','r','LineWidth',1.5)
 isQuad = mod(t,10) >= 4 & onGrain;
@@ -123,7 +129,7 @@ setCamera(how2plot)
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DBoundaries_02.png" %}
 </center>
-<p>The node types say how much of the network is junction. Most vertices lie inside a face, one in eight on a triple line, and about one in a hundred at a quadruple point; the classes above 10 are the same on the hull.</p>
+<p>The counts describe mesh vertices, not numbers of physical junctions. A triple line has many vertices, and voxel corners can join more than four grains. Types above 10 identify junctions on the measurement hull.</p>
 {% highlight matlab %}
 n = accumarray(t(t>0),1);
 [find(n), n(n>0)]
@@ -153,16 +159,41 @@ mtexColorbar
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DBoundaries_03.png" %}
 </center>
-<h2 id="10">References</h2>
+<h2 id="10">How much internal boundary is there per unit volume?</h2>
+<p>Boundary area per specimen volume is a useful geometric input when comparing interfacial storage or transport between microstructures. Each shared face appears once in <code class="language-plaintext highlighter-rouge">grains.boundary</code>. Summing <code class="language-plaintext highlighter-rouge">grains.surface</code> instead would count an internal interface twice and include the hull.</p>
+{% highlight matlab %}
+internal = all(grainsS.boundary.grainId > 0,2);
+internalArea = sum(grainsS.boundary(internal).area);
+boundaryAreaDensity = internalArea / sum(grainsS.volume)
+{% endhighlight %}
+
+{% highlight plaintext %}
+boundaryAreaDensity =
+    0.8423
+{% endhighlight %}
+<p>The unit is inverse length. This value uses all internal contacts and the full reconstructed volume. To report only indexed grain boundaries, use <code class="language-plaintext highlighter-rouge">grainsS.boundary('indexed')</code> and state the corresponding volume denominator.</p>
+<h2 id="12">What fraction of indexed boundary area has a low angle?</h2>
+<p>Use a stated angle threshold and weight by face area. This describes the local misorientation stored on the reconstructed faces, rather than a count of low-angle grain pairs. After coarsening, the retained faces carry inherited misorientations; remeasure from the original data if local orientation gradients are the quantity of interest.</p>
+{% highlight matlab %}
+angleLimit = 15*degree;
+lowAngle = gBS.misorientation.angle < angleLimit;
+lowAngleAreaFraction = sum(gBS(lowAngle).area) / sum(gBS.area)
+{% endhighlight %}
+
+{% highlight plaintext %}
+lowAngleAreaFraction =
+    0.0292
+{% endhighlight %}
+<p>A low-angle fraction alone does not establish a connected boundary path. Connectivity also requires the grain pairs and junction network. Likewise, the specimen-frame normal distribution above describes preferred interface inclinations, not preferred crystallographic planes. For one selected phase, <code class="language-plaintext highlighter-rouge">calcGBND(gBS,grainsS('phase name'))</code> transforms normals into the crystal frame; see <a href="BoundaryNormalDistribution.html">Boundary Normal Distribution</a>.</p>
+<h2 id="14">References</h2>
 <div>
 <ul>
 <li>G. S. Rohrer, <a href="https://doi.org/10.1111/j.1551-2916.2011.04384.x">Measuring and interpreting the structure of grain-boundary networks</a>, <i>Journal of the American Ceramic Society</i> 94 (2011), 633-646, the five parameter description of a boundary and its distribution from a triangle mesh.</li>
 <li>M. A. Groeber, M. A. Jackson, <a href="https://doi.org/10.1186/2193-9772-3-5">DREAM.3D: a digital representation environment for the analysis of microstructure in 3D</a>, <i>Integrating Materials and Manufacturing Innovation</i> 3 (2014), the node types of the boundary network.</li>
 </ul>
 </div>
-<h2 id="11">Next</h2>
-<p>
-<a href="Grains3DSmoothing.html">Smoothing</a> turns the voxel surface into one whose normals mean something, and <a href="Grains3DProperties.html">Properties</a> measures the grains it bounds.</p>
+<h2 id="15">Next</h2>
+<p>Continue with <a href="NeperInterface.html">Neper Interface</a> to construct a synthetic comparison, or go to <a href="Grains3DProperties.html">Properties</a> to measure grain size and shape. <a href="Grains3DSmoothing.html">Smoothing</a> explains the geometric treatment used before the surface measurements above.</p>
 </div>
 </body>
 </html>

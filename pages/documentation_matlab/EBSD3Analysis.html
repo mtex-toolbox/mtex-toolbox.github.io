@@ -22,55 +22,278 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>Everything measured on a polished surface is a section through something three-dimensional, and a section is a biased witness. A section through a grain almost never passes through its widest part, so its apparent size is smaller than that grain's full extent. An elongated grain can also look equiaxed when it is cut across rather than along its long direction.</p>
-<p>A grain boundary is a physical interface between two grains. A polished section shows only the line where that interface meets the section, called its trace. The inclination of the interface away from the section is lost.</p>
-<p>Three-dimensional data removes these compromises. It can come from serial sectioning, where the specimen is polished and mapped repeatedly. It can also come from diffraction techniques that probe a volume, or from a simulated microstructure generated for modelling.</p>
+<p>Everything measured on a polished surface is a section through something three-dimensional, and a section is a biased witness. A section through a grain almost never passes through its widest part, so its apparent size is smaller than that grain's full extent. An elongated grain can look equiaxed when it is cut across rather than along its long direction, and the inclination of a grain boundary away from the section is lost altogether.</p>
+<p>Three-dimensional data removes these compromises. It can come from serial sectioning, from diffraction techniques that probe a volume, or from a simulated microstructure. This page walks through the whole analysis on one such data set: import the volume, look at it, cut sections, reconstruct the grains, measure them, and smooth their boundaries. Every step has a page of its own in this chapter that treats it in depth.</p>
 <!--/introduction-->
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
+how2plot = plottingConvention.default3D;
 {% endhighlight %}
-<h2 id="2">Measurements and grains are different representations</h2>
-<p>MTEX uses two data models for different stages of a three-dimensional analysis. An <a href="EBSD3.EBSD3.html"><code class="language-plaintext highlighter-rouge">EBSD3</code></a> object stores one row per volume measurement, including its \(x\), \(y\), and \(z\) position, phase, orientation, and optional properties. It is the volume counterpart of an <a href="EBSD.EBSD.html">EBSD</a> map.</p>
-<p>A grain is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. A <a href="grain3d.grain3d.html"><code class="language-plaintext highlighter-rouge">grain3d</code></a> object stores the resulting region as a closed polyhedron. Its faces provide the geometry, while phase and mean orientation describe the material inside.</p>
+<h2 id="2">Import a volume</h2>
+<p> <a href="EBSD3.load.html"><code class="language-plaintext highlighter-rouge">EBSD3.load</code></a> reads a volume from a DREAM.3D file or from the Xnovo GrainMapper3D format and detects which of the two it is given. The sample data set is a simulated nine-phase volume in the Xnovo format, which <code class="language-plaintext highlighter-rouge">mtexdata</code> fetches by name.</p>
+{% highlight matlab %}
+ebsd = mtexdata('xnovo')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD3square (y↑→x)
+ 
+ Phase  Orientations     Mineral          Color  Symmetry  Crystal reference frame
+     0   27950 (22%)  notIndexed           none                                   
+     1  11046 (8.8%)     Silicon        SkyBlue      m-3m                         
+     2  11876 (9.5%)     Diamond  PaleVioletRed      m-3m                         
+     3  10436 (8.3%)   Magnesium            Red     6/mmm        X||a, Y||b*, Z||c
+     4  10231 (8.2%)      Rutile            Red     4/mmm                         
+     5   9060 (7.2%)    Corundum    YellowGreen      -3m1        X||a, Y||b*, Z||c
+     6  11521 (9.2%)      Quartz    DeepSkyBlue      -3m1        X||a, Y||b*, Z||c
+     7  10961 (8.8%)    Pyroxene     SandyBrown       mmm                         
+     8  10578 (8.5%)  Hornblende         Orchid     12/m1        X||a, Y||b, Z||c*
+     9  11341 (9.1%)  Microcline           Gold        -1              X||a, Z||c*
+ 
+ Properties: Completeness, grainId
+ Scan unit : mm
+ X × Y × Z : [-0.24 0.24] × [-0.24 0.24] × [-0.24 0.24]
+ Grid size (square): 50 × 50 × 50
+{% endhighlight %}
+<p>The summary reports a 50 x 50 x 50 array rather than a list: the measurements are held in an <a href="EBSD3.EBSD3.html"><code class="language-plaintext highlighter-rouge">EBSD3</code></a> object whose entries are addressed as <code class="language-plaintext highlighter-rouge">ebsd(i,j,k)</code> along \(x\), \(y\) and \(z\). Each of the nine phases occupies about a twelfth of the voxels and the remaining fifth is not indexed. The voxel is 10 micron on a side and the volume spans half a millimetre in each direction.</p>
+{% highlight matlab %}
+[ebsd.dx, ebsd.dy, ebsd.dz]
+ebsd.extent
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.0100    0.0100    0.0100
+ans =
+   -0.2450    0.2450   -0.2450    0.2450   -0.2450    0.2450
+{% endhighlight %}
+<p>
+<a href="EBSD3Plotting.html">Volume Data and Slices</a> describes the object and its import in detail.</p>
+<h2 id="5">Display the volume</h2>
+<p> <a href="EBSD3.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> hands the volume to the MATLAB volume viewer, which cuts three slice planes through the data and lets you drag them, rotate, clip and crop with the mouse. It is a live window rather than a figure:</p>
+<pre>  plot(ebsd)</pre>
+<p>For a figure, cut the three central slices with <a href="EBSD3.slice.html"><code class="language-plaintext highlighter-rouge">slice</code></a> and draw them into one axes. Each slice is an ordinary two-dimensional EBSD map, coloured by phase.</p>
+{% highlight matlab %}
+plot(slice(ebsd,plane3d(vector3d.Z,vector3d(0,0,0))),'micronbar','off')
+hold on
+plot(slice(ebsd,plane3d(vector3d.X,vector3d(0,0,0))),'micronbar','off')
+plot(slice(ebsd,plane3d(vector3d.Y,vector3d(0,0,0))),'micronbar','off')
+hold off
+setCamera(how2plot)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Analysis_01.png" %}
+</center>
+<p>The specimen is a cylinder standing along \(z\): the horizontal section is a disc and the two vertical sections are rectangles that end at its rim. The nine phases are mixed through the volume without any layering.</p>
+<h2 id="7">Cut sections</h2>
+<p>A slice is taken through any plane, given by its normal and one point on it. The measurements of a section keep their position in the specimen, and the section is seen along the normal of the plane it was cut with, so an oblique cut displays like any other map.</p>
+{% highlight matlab %}
+newMtexFigure('layout',[1,2],'figSize','large');
+plot(slice(ebsd,plane3d(vector3d.Z,vector3d(0,0,0.15))),'micronbar','off')
+mtexTitle('normal || z, at z = 0.15 mm')
+nextAxis
+plot(slice(ebsd,plane3d(vector3d(1,1,1),vector3d(0,0,0))),'micronbar','off')
+mtexTitle('normal || (1,1,1)')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Analysis_02.png" %}
+</center>
+<p>Everything written for planar data applies to a section unchanged. The quartz orientations of the oblique cut, for instance, are coloured with the usual inverse pole figure key.</p>
+{% highlight matlab %}
+ebsdCut = slice(ebsd,plane3d(vector3d(1,1,1),vector3d(0,0,0)));
+plot(ebsdCut,ebsdCut.prop.Completeness,'facealpha',0.1)
+mtexColorMap white2black
+hold on
+plot(ebsdCut('Quartz'),ebsdCut('Quartz').orientations,'micronbar','off')
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Analysis_03.png" %}
+</center>
+<p>
+<a href="EBSD3Plotting.html">Volume Data and Slices</a> shows slices at several depths and how a section relates to the volume it was cut from.</p>
+<h2 id="10">Reconstruct the grains</h2>
+<p>A grain is a connected region of voxels of one phase whose orientations differ by less than a threshold. <a href="EBSD3square.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> segments the volume with the same misorientation criteria as the planar case and returns a <a href="grain3d.grain3d.html"><code class="language-plaintext highlighter-rouge">grain3d</code></a> object. Where an <a href="EBSD3.EBSD3.html">EBSD3</a> holds one measurement per voxel, a <a href="grain3d.grain3d.html">grain3d</a> holds each grain as a closed polyhedron: its faces carry the geometry, its phase and mean orientation describe the material inside. <code class="language-plaintext highlighter-rouge">'minPixel'</code> dissolves grains of fewer than ten voxels into their neighbours; a grain that small is all corners and no surface.</p>
 <p>
 <center>
 {% include inline_image.html file="ebsd3-data-models.svg" %}
 </center>
 </p>
-<p>The left-hand model retains measurement-scale variation inside a grain. The right-hand model replaces those measurements by a region and its boundary mesh. Choose the representation according to whether the question concerns local measurements or whole-grain geometry.</p>
-<p>A grain mesh comes either precomputed, imported from DREAM.3D or Neper, or from <a href="EBSD3square.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> applied to the measured voxels, see <a href="Grains3DReconstruction.html">Grain Reconstruction</a>. Code written for two-dimensional pixel maps does not carry over unchanged to a surface mesh.</p>
-<h2 id="4">Read a three-dimensional microstructure</h2>
-<p>The <a href="Grains3D.html">Three-Dimensional Grains</a> page explains the DREAM.3D importer and the contents of the returned collection. Here the same data provides a first view of the volume.</p>
 {% highlight matlab %}
-fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
-grains = grain3d.load(fname);
+[grains,ebsd] = calcGrains(ebsd,'angle',2*degree,'minPixel',10)
+{% endhighlight %}
 
-plot(grains,grains.meanOrientation,'LineStyle','none','micronbar','off')
-setCamera(plottingConvention.default3D)
+{% highlight plaintext %}
+grains = grain3d (y↑→x)
+ 
+ Phase  Grains  Volume     Mineral  Symmetry  Crystal reference frame
+     0       8   0.028  notIndexed                                   
+     1      54   0.011     Silicon      m-3m                         
+     2      58   0.012     Diamond      m-3m                         
+     3      51    0.01   Magnesium     6/mmm        X||a, Y||b*, Z||c
+     4      45    0.01      Rutile     4/mmm                         
+     5      48  0.0091    Corundum      -3m1        X||a, Y||b*, Z||c
+     6      52   0.012      Quartz      -3m1        X||a, Y||b*, Z||c
+     7      56   0.011    Pyroxene       mmm                         
+     8      49   0.011  Hornblende     12/m1        X||a, Y||b, Z||c*
+     9      54   0.011  Microcline        -1              X||a, Z||c*
+ 
+ boundary faces: 166738
+ 
+ Properties: meanRotation, GOS
+ 
+ 
+ebsd = EBSD3square (y↑→x)
+ 
+ Phase  Orientations     Mineral          Color  Symmetry  Crystal reference frame
+     0   27962 (22%)  notIndexed           none                                   
+     1  11045 (8.8%)     Silicon        SkyBlue      m-3m                         
+     2  11874 (9.5%)     Diamond  PaleVioletRed      m-3m                         
+     3  10433 (8.3%)   Magnesium            Red     6/mmm        X||a, Y||b*, Z||c
+     4  10231 (8.2%)      Rutile            Red     4/mmm                         
+     5   9056 (7.2%)    Corundum    YellowGreen      -3m1        X||a, Y||b*, Z||c
+     6  11520 (9.2%)      Quartz    DeepSkyBlue      -3m1        X||a, Y||b*, Z||c
+     7  10961 (8.8%)    Pyroxene     SandyBrown       mmm                         
+     8  10577 (8.5%)  Hornblende         Orchid     12/m1        X||a, Y||b, Z||c*
+     9  11341 (9.1%)  Microcline           Gold        -1              X||a, Z||c*
+ 
+ Properties: Completeness, grainId
+ Scan unit : mm
+ X × Y × Z : [-0.24 0.24] × [-0.24 0.24] × [-0.24 0.24]
+ Grid size (square): 50 × 50 × 50
+{% endhighlight %}
+<p>Voxels that are not indexed form regions of their own, which are listed as grains of the phase <code class="language-plaintext highlighter-rouge">notIndexed</code>. The indexed grains are selected the way a phase is selected on a map.</p>
+{% highlight matlab %}
+grains = grains('indexed')
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain3d (y↑→x)
+ 
+ Phase  Grains  Volume     Mineral  Symmetry  Crystal reference frame
+     1      54   0.011     Silicon      m-3m                         
+     2      58   0.012     Diamond      m-3m                         
+     3      51    0.01   Magnesium     6/mmm        X||a, Y||b*, Z||c
+     4      45    0.01      Rutile     4/mmm                         
+     5      48  0.0091    Corundum      -3m1        X||a, Y||b*, Z||c
+     6      52   0.012      Quartz      -3m1        X||a, Y||b*, Z||c
+     7      56   0.011    Pyroxene       mmm                         
+     8      49   0.011  Hornblende     12/m1        X||a, Y||b, Z||c*
+     9      54   0.011  Microcline        -1              X||a, Z||c*
+ 
+ boundary faces: 147102
+ 
+ Properties: meanRotation, GOS
+{% endhighlight %}
+<p>Plotting the whole collection shows the outer surface of the volume, one colour per phase. Every grain behind it is present in the collection.</p>
+{% highlight matlab %}
+plot(grains,'micronbar','off','edgeAlpha',0.1)
+setCamera(how2plot)
 {% endhighlight %}
 <center class="mtex-figure">
-{% include inline_image.html file="EBSD3Analysis_01.png" %}
+{% include inline_image.html file="EBSD3Analysis_04.png" %}
 </center>
-<p>The plot shows the outside of the reconstructed volume. Each colour is one grain mean orientation. Grains behind the visible surface are present in the collection, which is why a three-dimensional data set takes more care to inspect than a map.</p>
-<h2 id="6">What three dimensions add</h2>
-<p>Three gains should be separated because they answer different questions and require different parts of the data.</p>
+<p>Individual grains are addressed by their <code class="language-plaintext highlighter-rouge">id</code>. The five largest grains of the volume, drawn together, show the surface a reconstruction from voxels produces: every face is a voxel face, so the surface is a staircase whose normals all point along the axes.</p>
+{% highlight matlab %}
+[~,order] = sort(grains.volume,'descend');
+largest = grains(order(1:5))
+
+plot(largest,'micronbar','off','edgeAlpha',0.2)
+setCamera(how2plot)
+{% endhighlight %}
+
+{% highlight plaintext %}
+largest = grain3d (y↑→x)
+ 
+ Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
+     1       3  0.0017  Silicon      m-3m                         
+     4       2  0.0011   Rutile     4/mmm                         
+ 
+ boundary faces: 5496
+ 
+  Id   Phase   Pixels      meanRotation       GOS
+ 473       1      585   (133°,29°,229°)         0
+ 148       4      562    (323°,73°,44°)         0
+ 470       1      553   (169°,27°,202°)         0
+ 463       4      550   (264°,90°,112°)         0
+  48       1      550   (320°,20°,360°)   4.2e-08
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Analysis_05.png" %}
+</center>
 <p>
-<b>Volume instead of area.</b> A three-dimensional grain has a volume rather than only a section area. Its size distribution therefore needs no stereological correction or assumed grain shape when the full grain geometry has been measured.</p>
+<a href="Grains3DReconstruction.html">Grain Reconstruction</a> explains the criteria, the <code class="language-plaintext highlighter-rouge">'minPixel'</code> option and how to compare the result with the grain ids a file already carries. <a href="Grains3D.html">Three-Dimensional Grains</a> imports a mesh from DREAM.3D instead of reconstructing one.</p>
+<h2 id="15">Measure the grains</h2>
+<p>A three-dimensional grain has a <a href="grain3d.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a> and a <a href="grain3d.surface.html"><code class="language-plaintext highlighter-rouge">surface</code></a> area, and neither needs a stereological correction. Volumes are in cubic millimetres here, the unit of the coordinates.</p>
+{% highlight matlab %}
+[largest.volume, largest.surface]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.0006    0.0564
+    0.0006    0.0544
+    0.0006    0.0578
+    0.0006    0.0558
+    0.0006    0.0514
+{% endhighlight %}
+<p>The two combine into a dimensionless measure of compactness, the surface area divided by the volume to the power two thirds. A sphere gives the smallest possible value, \((36\pi)^{1/3} \approx 4.84\), a cube gives 6, and a grain with a rough or elongated surface gives more.</p>
+{% highlight matlab %}
+shapeQuotient = grains.surface ./ grains.volume.^(2/3);
+
+histogram(shapeQuotient)
+xlabel('surface / volume^{2/3}')
+ylabel('number of grains')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Analysis_06.png" %}
+</center>
+<p>Every grain lies well above the cube's 6, although the grains are equiaxed and convex. The staircase inflates the surface: a voxel surface has the area of the axis-aligned faces it is made of, whatever shape it encloses. Sizes are unaffected, since the volume of a voxel grain is exact.</p>
 <p>
-<b>The whole boundary.</b> The crystallographic character of a boundary has five parameters. Three describe the misorientation between the two crystals, and two describe the interface-plane normal. A section trace constrains the plane but leaves its inclination unknown. A measured three-dimensional face supplies the complete normal, so all five parameters are available for that boundary. For boundary analysis, this is the principal gain over a single section.</p>
+<a href="Grains3DProperties.html">Properties</a> covers diameters, principal axes, neighbours and the per-face properties of the boundary.</p>
+<h2 id="18">Smooth the boundaries</h2>
+<p>The staircase is removed in two steps. <a href="grain3d.reduceBoundary.html"><code class="language-plaintext highlighter-rouge">reduceBoundary</code></a> merges the vertices of each voxel-sized cell of a coarser lattice, which already averages the steps and leaves a mesh a quarter the size. <a href="grain3d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> then moves the vertices with one of the boundary filters of the planar case. Triple lines, quadruple points and the outer hull of the volume stay where they are, so the network keeps its topology.</p>
+{% highlight matlab %}
+grainsS = smoothBoundary(reduceBoundary(grains,2,'quadric'),taubinFilter(20));
+
+plot(grainsS('id',largest.id),'micronbar','off','edgeAlpha',0.2)
+setCamera(how2plot)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Analysis_07.png" %}
+</center>
+<p>The same five grains are now bounded by smooth surfaces. The volume of the whole specimen is conserved exactly, since its hull is fixed. Between the grains and the unindexed regions between them a fraction of a percent moves, and the volume of a single grain changes by a few percent.</p>
+{% highlight matlab %}
+[sum(grains.volume), sum(grainsS.volume)]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.0970    0.0962
+{% endhighlight %}
+<p>The compactness measure responds as it should: the surfaces lost their steps, and the histogram moves down towards the range between a sphere and a cube.</p>
+{% highlight matlab %}
+shapeQuotientS = grainsS.surface ./ grainsS.volume.^(2/3);
+
+edges = 5:0.25:10.5;
+histogram(shapeQuotient,edges,'DisplayName','voxel surface')
+hold on
+histogram(shapeQuotientS,edges,'DisplayName','smoothed')
+hold off
+legend('Location','northeast')
+xlabel('surface / volume^{2/3}')
+ylabel('number of grains')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD3Analysis_08.png" %}
+</center>
 <p>
-<b>The real neighbourhood.</b> Two grains that appear to touch in one section may not be neighbours in the volume. Two grains that do touch may also be absent from the same section. The three-dimensional face network records the actual contacts.</p>
-<h2 id="7">Practical consequences of a surface mesh</h2>
-<p>Faces are polygons bounded by edges, and the geometry is carried by vertices. The order of a face's vertices determines the sign of its normal, so face winding may need to be corrected during import. The <a href="Grains3D.html">Three-Dimensional Grains</a> page demonstrates that correction. The mesh is not a stack of pixels.</p>
-<p>Plotting also requires a decision about what to hide because exterior faces obscure interior grains. Meshes are larger than planar grain maps, so select a relevant subset before an expensive calculation. The <a href="Grains3DProperties.html">Properties</a> page lists which two-dimensional grain measures have three-dimensional counterparts and which do not.</p>
-<h2 id="8">Use this chapter in teaching order</h2>
-<p>Start with <a href="EBSD3Plotting.html">Volume Data and Slices</a> to load a measured volume, look at it and cut a section. Then reconstruct its grains with <a href="Grains3DReconstruction.html">Grain Reconstruction</a>, take the voxel surface to a smooth one with <a href="Grains3DSmoothing.html">Smoothing</a>, and read the faces, triple lines and quadruple points in <a href="Grains3DBoundaries.html">Boundary Network</a>.</p>
+<a href="Grains3DSmoothing.html">Smoothing</a> compares the filters and the placement rules of the coarsening, with the volume they cost per grain. <a href="Grains3DBoundaries.html">Boundary Network</a> reads the faces, triple lines and quadruple points of the smoothed mesh, and <a href="BoundaryNormalDistribution.html">Boundary Normal Distribution</a> contrasts boundary normals measured from the faces with stereological estimates from traces.</p>
+<h2 id="22">Where to read on</h2>
 <p>
-<a href="Grains3D.html">Three-Dimensional Grains</a> imports a DREAM.3D mesh instead, selects grains, makes a section, and inspects face normals.</p>
-<p>Continue with <a href="NeperInterface.html">Neper Interface</a> to configure Neper, generate a synthetic polycrystal, or import an existing <code class="language-plaintext highlighter-rouge">.tess</code> file. A simulated microstructure has a known construction and can provide a known answer for a controlled test of whether an analysis behaves as intended.</p>
-<p>Use <a href="Grains3DProperties.html">Properties</a> to measure volume, surface area, shape, neighbourhood, and boundary-face properties. Then use <a href="Grains3DOperations.html">Operations</a> to trace planar sections back to their parent grains, triangulate polygonal faces, and rotate the collection.</p>
-<p>The two-dimensional foundations are developed in <a href="EBSDAnalysis.html">EBSD</a>, <a href="Grains.html">Grains</a>, and <a href="GrainBoundaries.html">Grain Boundaries</a>. The <a href="BoundaryNormalDistribution.html">Boundary Normal Distribution</a> page contrasts stereological estimates from boundary traces with normals measured directly from three-dimensional faces.</p>
-<h2 id="9">References</h2>
+<a href="NeperInterface.html">Neper Interface</a> generates a synthetic polycrystal or imports an existing <code class="language-plaintext highlighter-rouge">.tess</code> file, which gives a microstructure of known construction to test an analysis against. <a href="Grains3DOperations.html">Operations</a> traces planar sections back to their parent grains, triangulates polygonal faces and rotates a collection.</p>
+<p>The two-dimensional foundations are developed in <a href="EBSDAnalysis.html">EBSD</a>, <a href="Grains.html">Grains</a> and <a href="GrainBoundaries.html">Grain Boundaries</a>.</p>
+<h2 id="23">References</h2>
 <div>
 <ul>
 <li>F. Bachmann, R. Hielscher, and H. Schaeben, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain Detection from 2d and 3d EBSD Data - Specification of the MTEX Algorithm</a>, <i>Ultramicroscopy</i> 111 (2011), 1720--1733, develops the spatial cells and connectivity used to define grains from two- and three-dimensional data.</li>
@@ -78,11 +301,16 @@ setCamera(plottingConvention.default3D)
 </div>
 <div>
 <ul>
-<li>M. A. Groeber and M. A. Jackson, <a href="https://doi.org/10.1186/2193-9772-3-5">DREAM.3D: A Digital Representation Environment for the Analysis of Microstructure in 3D</a>, <i>Integrating Materials and Manufacturing Innovation</i> 3 (2014), 56--72, describes the data environment and surface-mesh representation used by the example.</li>
+<li>S. Maddali, S. Ta'asan, R. M. Suter, <a href="https://doi.org/10.1016/j.commatsci.2016.08.021">Topology-faithful nonparametric estimation and tracking of bulk interface networks</a>, <i>Computational Materials Science</i> 125 (2016), 328--340, is the stratified smoothing scheme that keeps triple lines and quadruple points in place.</li>
 </ul>
 </div>
-<h2 id="10">Next</h2>
-<p>Continue with <a href="Grains3D.html">Three-Dimensional Grains</a> to import a volume mesh and connect its faces, grains, and planar sections.</p>
+<div>
+<ul>
+<li>M. A. Groeber and M. A. Jackson, <a href="https://doi.org/10.1186/2193-9772-3-5">DREAM.3D: A Digital Representation Environment for the Analysis of Microstructure in 3D</a>, <i>Integrating Materials and Manufacturing Innovation</i> 3 (2014), 56--72, describes the data environment and surface-mesh representation of the other importer.</li>
+</ul>
+</div>
+<h2 id="24">Next</h2>
+<p>Continue with <a href="EBSD3Plotting.html">Volume Data and Slices</a>, the first page of the chapter, and follow the sidebar from there.</p>
 </div>
 </body>
 </html>

@@ -23,7 +23,7 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <p>
-<a href="https://neper.info">Neper</a> is an open-source package developed by Romain Quey for generating and meshing polycrystals. MTEX can configure a Neper tessellation, run it, and load the result as a <a href="grain3d.grain3d.html">grain3d</a> collection. <a href="Grains3D.html">Three-Dimensional Grains</a> defines that representation and introduces selection and sectioning.</p>
+<a href="https://neper.info">Neper</a> is an open-source package developed by Romain Quey for generating and meshing polycrystals. MTEX can configure a Neper tessellation, run it, and load the result as a <a href="grain3d.grain3d.html">grain3d</a> collection. A synthetic volume lets us vary morphology and texture independently, test how sectioning changes a measured distribution, or prepare grain geometry for a simulation. <a href="Grains3D.html">Three-Dimensional Grains</a> defines that representation and introduces selection and sectioning.</p>
 <p>A planar section is useful when the three-dimensional microstructure must be compared with a two-dimensional map. It is not required for analysing the original <a href="grain3d.grain3d.html">grain3d</a> collection.</p>
 <!--/introduction-->
 {% highlight matlab %}
@@ -55,7 +55,7 @@ end
 {% highlight matlab %}
 neper.filePath = 'C:\Users\user\Documents\work\MtexWork\neper';
 {% endhighlight %}
-<p>The <code class="language-plaintext highlighter-rouge">geometry</code> property controls the outer domain. Its default is <code class="language-plaintext highlighter-rouge">"cube(1,1,1)"</code>. Cuboids use <code class="language-plaintext highlighter-rouge">"cube(x,y,z)"</code>; cylinders use <code class="language-plaintext highlighter-rouge">"cylinder(h,d,numFaces)"</code>; spheres use <code class="language-plaintext highlighter-rouge">"sphere(d,numFaces)"</code>.</p>
+<p>Neper coordinates set relative lengths; choose their physical scale for the intended material or simulation. The <code class="language-plaintext highlighter-rouge">geometry</code> property controls the outer domain. Its default is <code class="language-plaintext highlighter-rouge">"cube(1,1,1)"</code>. Cuboids use <code class="language-plaintext highlighter-rouge">"cube(x,y,z)"</code>; cylinders use <code class="language-plaintext highlighter-rouge">"cylinder(h,d,numFaces)"</code>; spheres use <code class="language-plaintext highlighter-rouge">"sphere(d,numFaces)"</code>.</p>
 {% highlight matlab %}
 if hasNeper
   neper.geometry = "cube(4,4,2)";
@@ -75,7 +75,7 @@ end
 <p> <a href="neper.simulateGrains.html"><code class="language-plaintext highlighter-rouge">simulateGrains</code></a> accepts either an orientation distribution function (<a href="ODFTheory.html">ODF</a>) and a grain count, or a list of orientations. For a list, its length determines the grain count. The <code class="language-plaintext highlighter-rouge">'silent'</code> option writes Neper's console output to <code class="language-plaintext highlighter-rouge">neper.log</code> in <code class="language-plaintext highlighter-rouge">filePath</code>.</p>
 {% highlight matlab %}
 odf = SO3Fun.dubna;
-numGrains = 1000;
+numGrains = 100;
 
 if hasNeper
   grains = neper.simulateGrains(numGrains,odf,'silent');
@@ -90,9 +90,9 @@ grains
 grains = grain3d (y↑→x)
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
-     2    1000      32   Quartz       321        X||a*, Y||b, Z||c
+     2     100      32   Quartz       321        X||a*, Y||b, Z||c
  
- boundary faces: 7131
+ boundary faces: 623
  
  Properties: meanRotation
 {% endhighlight %}
@@ -101,10 +101,10 @@ grains = grain3d (y↑→x)
 ori = odf.discreteSample(numGrains);
 grains = neper.simulateGrains(ori,'silent');
 {% endhighlight %}
-<p>The summary confirms that the result is a three-dimensional grain collection. When the bundled fallback is used, its stored orientations replace a newly sampled list.</p>
+<p>The summary confirms that the result is a three-dimensional grain collection. The fallback is an existing example, not a realization of the settings above: it retains its stored geometry and orientations. The ODF controls grain orientations, not a boundary-normal distribution or a constitutive law.</p>
 {% highlight matlab %}
 clf
-plot(grains,grains.meanOrientation,'micronbar','off')
+plot(grains,grains.meanOrientation,'micronbar','off','edgeAlpha',0.1)
 how2plot = plottingConvention.default3D;
 setCamera(how2plot)
 {% endhighlight %}
@@ -112,7 +112,20 @@ setCamera(how2plot)
 {% include inline_image.html file="NeperInterface_01.png" %}
 </center>
 <p>The colours encode one mean orientation per polyhedral grain. The outer envelope follows the cuboid selected by the simulation that created this tessellation.</p>
-<h2 id="9">Compare planar sections</h2>
+<h2 id="9">Check the generated size distribution</h2>
+<p>A morphology string specifies a target, not the measured outcome of a finite tessellation. Check the resulting equivalent-sphere diameters before treating the volume as a representative microstructure. Normalizing by the mean separates the spread from the chosen length scale.</p>
+{% highlight matlab %}
+diameter = (6*grains.volume/pi).^(1/3);
+figure
+histogram(diameter/mean(diameter),15)
+xlabel('equivalent-sphere diameter / mean diameter')
+ylabel('number of grains')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="NeperInterface_02.png" %}
+</center>
+<p>Use several seeds and, when needed, more grains to assess sampling variability. A prescribed list of orientations gives one orientation per grain; unequal grain volumes mean its volume-weighted texture can differ from the number-weighted orientation sample.</p>
+<h2 id="11">Compare planar sections</h2>
 <p>The earlier <a href="Grains3D.html">sectioning example</a> defines <a href="grain3d.slice.html"><code class="language-plaintext highlighter-rouge">slice</code></a>. A slice normal and either a point in the plane or its signed distance from the origin specify the cutting plane. Here all three sections pass through the centre of the collection.</p>
 {% highlight matlab %}
 N = [vector3d(0,0,1),vector3d(1,-1,0),vector3d(2,2,4)];
@@ -124,54 +137,55 @@ grains224 = grains.slice(N(3),A)
 
 newMtexFigure('layout',[1,3],'figSize','large');
 plot(grains001,grains001.meanOrientation,'micronbar','off');
-mtexTitle('(001) normal')
+mtexTitle('normal || specimen z')
 nextAxis
 plot(grains1_10,grains1_10.meanOrientation,'micronbar','off');
-mtexTitle('(1 -1 0) normal')
+mtexTitle('normal || (1,-1,0)')
 nextAxis
 plot(grains224,grains224.meanOrientation,'micronbar','off');
-mtexTitle('(2 2 4) normal')
+mtexTitle('normal || (2,2,4)')
 {% endhighlight %}
 
 {% highlight plaintext %}
 grains224 = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry      Color
-     2     222     222   Quartz       321  LightBlue
+     2      42      42   Quartz       321  LightBlue
  
- boundary segments: 669 (118 µm)
+ boundary segments: 129 (55 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 393
+ triple points: 61
  
  Properties: meanRotation, Id3d
 {% endhighlight %}
 <center class="mtex-figure">
-{% include inline_image.html file="NeperInterface_02.png" %}
+{% include inline_image.html file="NeperInterface_03.png" %}
 </center>
 <p>The three panels show differently oriented planes. Their unequal outlines show how the same cuboid and its grains are sampled by horizontal and oblique sections.</p>
 <p> <a href="neper.getSlice.html"><code class="language-plaintext highlighter-rouge">neper.getSlice</code></a> is a separate route that asks Neper to write a two-dimensional <code class="language-plaintext highlighter-rouge">.tess</code> file. Use <code class="language-plaintext highlighter-rouge">grain3d.slice</code> when the three-dimensional collection is already loaded and no external file is needed.</p>
-<h2 id="11">Relate a section to its parent grains</h2>
+<h2 id="13">Relate a section to its parent grains</h2>
 <p> <a href="grain3d.intersected.html"><code class="language-plaintext highlighter-rouge">intersected</code></a> selects the full polyhedra crossed by a plane. Overlaying those grains on the horizontal section connects each planar polygon to the three-dimensional material that produced it.</p>
 {% highlight matlab %}
 inPlane = grains.intersected(N(1),A);
 
 plot(grains001,grains001.meanOrientation,'micronbar','off');
 hold on
-plot(grains(inPlane),grains(inPlane).meanOrientation,'faceAlpha',0.55)
+plot(grains(inPlane),grains(inPlane).meanOrientation, ...
+  'faceAlpha',0.55,'edgeAlpha',0.1)
 hold off
 setCamera(how2plot)
 {% endhighlight %}
 <center class="mtex-figure">
-{% include inline_image.html file="NeperInterface_03.png" %}
+{% include inline_image.html file="NeperInterface_04.png" %}
 </center>
 <p>The opaque polygons are the section itself. The translucent polyhedra extend to both sides of the plane and are the corresponding parent grains.</p>
-<h2 id="13">References</h2>
+<h2 id="15">References</h2>
 <div>
 <ul>
 <li>R. Quey, P. R. Dawson and F. Barbe, <a href="https://doi.org/10.1016/j.cma.2011.01.002">Large-scale 3D random polycrystals for the finite element method: Generation, meshing and remeshing</a>, <i>Computer Methods in Applied Mechanics and Engineering</i> 200 (2011), 1729--1745, presents the generation and meshing methods implemented in Neper.</li>
 </ul>
 </div>
-<h2 id="14">Next</h2>
+<h2 id="16">Next</h2>
 <p>Continue with <a href="Grains3DProperties.html">Properties of Three-Dimensional Grains</a> to measure the faces, surface area, volume, and shape of the generated collection.</p>
 </div>
 </body>

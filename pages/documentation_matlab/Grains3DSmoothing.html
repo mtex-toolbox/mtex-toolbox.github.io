@@ -22,7 +22,7 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>Grains reconstructed from voxel data have a boundary that follows the voxel faces. Every face normal points along one of the three axes, so a boundary normal distribution or a curvature computed from it measures the grid, not the specimen. This page coarsens the voxel surface, smooths it, and looks at what stays fixed on the way.</p>
+<p>Grains reconstructed from voxel data have a boundary that follows the voxel faces. Every face normal points along one of the three axes, so a boundary normal distribution or a curvature computed from it measures the grid, not the specimen. This page coarsens the voxel surface, smooths it, and measures the price in grain volume. The aim is a surface suitable for quantitative analysis, not simply a smoother-looking picture.</p>
 <!--/introduction-->
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
@@ -44,7 +44,7 @@ grains = grain3d (y↑→x)
  Properties: meanRotation, GOS
 {% endhighlight %}
 <h2 id="2">The boundary network is stratified</h2>
-<p>A boundary face separates two grains. Along a triple line three grains meet, at a quadruple point four. <a href="grain3Boundary.nodeType.html"><code class="language-plaintext highlighter-rouge">nodeType</code></a> counts the grains at every vertex and adds 10 on the outer hull of the measured volume, where a vertex inside a single grain also occurs. The counts show how much of the network is junction: about one vertex in eight lies on a triple line.</p>
+<p>A boundary face separates two grains. Along a triple line three grains meet, at a quadruple point four. <a href="grain3Boundary.nodeType.html"><code class="language-plaintext highlighter-rouge">nodeType</code></a> counts the grains at every vertex and adds 10 on the outer hull of the measured volume, where a vertex inside a single grain also occurs. These are counts of mesh vertices, so they depend on resolution; they are not counts of complete triple lines or physical quadruple points.</p>
 {% highlight matlab %}
 t = nodeType(grains.boundary);
 n = accumarray(t(t>0),1);
@@ -65,7 +65,7 @@ ans =
 {% endhighlight %}
 <p>A junction must not be averaged with the interior of a face, which is why the smoothing below treats each stratum in turn.</p>
 <h2 id="4">Coarsen first</h2>
-<p> <a href="grain3d.reduceBoundary.html"><code class="language-plaintext highlighter-rouge">reduceBoundary</code></a> merges the vertices of each cell of twice the voxel size into one. Vertices that belong to different grains, or to different faces of the hull, never merge, so every triple line and quadruple point survives and the hull stays flat. The centroid of a cluster already averages the voxel steps; the flag <code class="language-plaintext highlighter-rouge">'quadric'</code> puts the vertex where the faces around it are best approximated instead, which keeps flat boundaries flat.</p>
+<p> <a href="grain3d.reduceBoundary.html"><code class="language-plaintext highlighter-rouge">reduceBoundary</code></a> merges the vertices of each cell of twice the voxel size into one. Clustering distinguishes the grains meeting at a vertex and the faces of the hull, preserving their junction structure where the coarsened mesh remains resolved. The centroid of a cluster already averages the voxel steps; the flag <code class="language-plaintext highlighter-rouge">'quadric'</code> puts the vertex where the faces around it are best approximated instead, which keeps flat boundaries flat.</p>
 {% highlight matlab %}
 grainsC = reduceBoundary(grains,2,'quadric')
 {% endhighlight %}
@@ -80,54 +80,98 @@ grainsC = grain3d (y↑→x)
  
  Properties: meanRotation, GOS
 {% endhighlight %}
-<p>The number of faces drops by a factor of 2.6 and the total volume is unchanged. The largest grain shows the effect.</p>
+<p>Check how many faces remain and whether very small grains have lost their enclosing surface. Coarsening can collapse a grain below its cell size; this matters when the fine-grain population is part of the question.</p>
+{% highlight matlab %}
+[length(grains.boundary), length(grainsC.boundary)]
+nnz(grainsC.volume <= 0)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+      757562      289348
+ans =
+     6
+{% endhighlight %}
+<p>The largest grain makes the geometric change easy to see.</p>
 {% highlight matlab %}
 [~,id] = max(grains.volume);
-plot(grains(id),'micronbar','off')
+plot(grains(id),'micronbar','off','edgeAlpha',0.2)
 setCamera(how2plot)
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DSmoothing_01.png" %}
 </center>
 {% highlight matlab %}
-plot(grainsC(id),'micronbar','off')
+plot(grainsC(id),'micronbar','off','edgeAlpha',0.2)
 setCamera(how2plot)
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DSmoothing_02.png" %}
 </center>
-<h2 id="7">Smooth</h2>
+<h2 id="8">Smooth</h2>
 <p> <a href="grain3d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> moves the vertices and nothing else. Quadruple points and the hull stay fixed, every triple line is smoothed as a curve between its quadruple points, and every boundary face as a surface between its triple lines. The filters are the ones of the two-dimensional <a href="GrainSmoothing.html">grain smoothing</a>: <code class="language-plaintext highlighter-rouge">laplaceFilter</code> shrinks each grain a little per iteration, <code class="language-plaintext highlighter-rouge">taubinFilter</code> keeps the volumes approximately, <code class="language-plaintext highlighter-rouge">curvatureFilter</code> solves for a smoothing length in one step.</p>
 {% highlight matlab %}
 grainsS = smoothBoundary(grainsC,taubinFilter(20));
-plot(grainsS(id),'micronbar','off')
+newMtexFigure('layout',[1,3],'figSize','large');
+plot(grains(id),'micronbar','off','edgeAlpha',0.2)
 setCamera(how2plot)
+mtexTitle('Voxel surface')
+nextAxis
+plot(grainsC(id),'micronbar','off','edgeAlpha',0.2)
+setCamera(how2plot)
+mtexTitle('Coarsened')
+nextAxis
+plot(grainsS(id),'micronbar','off','edgeAlpha',0.2)
+setCamera(how2plot)
+mtexTitle('Taubin smoothed')
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="Grains3DSmoothing_03.png" %}
 </center>
-<p>The staircase is gone and the triple lines are still where the three grains meet. Since the hull is fixed, the volumes of all grains together are conserved exactly. Per grain the Taubin filter changes the volume about half as much as the Laplace filter; the small grains lose most.</p>
+<p>Triple lines remain shared by the same grains, but their vertices may move. Add <code class="language-plaintext highlighter-rouge">'fixTripleLines'</code> to hold them fixed during smoothing. Keeping the outer hull fixed conserves the enclosed total volume for a valid mesh; it does not conserve each grain's volume.</p>
+<p>Compare Laplace and Taubin smoothing from the same coarsened mesh. Include the coarsened result separately so its contribution is visible.</p>
 {% highlight matlab %}
-vol = [grains.volume, smoothBoundary(grainsC,laplaceFilter(20)).volume, grainsS.volume];
+grainsL = smoothBoundary(grainsC,laplaceFilter(20));
+vol = [grains.volume, grainsC.volume, grainsL.volume, grainsS.volume];
 sum(vol)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
    1.0e+04 *
-    1.5625    1.5625    1.5625
+    1.5625    1.5625    1.5625    1.5625
 {% endhighlight %}
-<p>The median relative change of a grain volume, Laplace against Taubin.</p>
+<p>Relative volume change reveals whether the surface treatment affects the fine grains more strongly. The three columns below correspond to coarsening, coarsening plus Laplace, and coarsening plus Taubin.</p>
 {% highlight matlab %}
-median(abs(vol(:,2:3) - vol(:,1)) ./ vol(:,1))
+relativeChange = 100 * (vol(:,2:4) - vol(:,1)) ./ vol(:,1);
+median(abs(relativeChange),1)
+
+figure
+scatter(vol(:,1),relativeChange(:,2),12,'filled','DisplayName','Laplace')
+hold on
+scatter(vol(:,1),relativeChange(:,3),12,'filled','DisplayName','Taubin')
+yline(0,'k--')
+hold off
+set(gca,'XScale','log')
+xlabel('original grain volume (length units^3)')
+ylabel('volume change (%)')
+legend('Location','best')
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.1196    0.0331
+    0.6447   11.9610    3.3128
 {% endhighlight %}
-<p>The option <code class="language-plaintext highlighter-rouge">'maxDisplacement'</code> bounds how far the surface may travel, half a voxel keeps a single voxel grain in place. The scheme <code class="language-plaintext highlighter-rouge">'coupled'</code> smooths all vertices at once, which is what DREAM.3D does, and lets the triple lines drift with the faces.</p>
-<h2 id="11">What the smoothing changes downstream</h2>
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DSmoothing_04.png" %}
+</center>
+<p>The option <code class="language-plaintext highlighter-rouge">'maxDisplacement'</code> limits each coordinate change relative to the mesh entering the smoothing step. It does not undo displacement or a collapsed grain from coarsening. For example, half the smallest voxel spacing gives a bound tied to measurement resolution:</p>
+{% highlight matlab %}
+grainsBounded = smoothBoundary(grainsC,taubinFilter(20), ...
+  'maxDisplacement',0.5*min([ebsd.dx,ebsd.dy,ebsd.dz]));
+{% endhighlight %}
+<p>The scheme <code class="language-plaintext highlighter-rouge">'coupled'</code> smooths all movable vertices together instead of treating triple lines before face interiors. Compare its geometric effect if junction positions are central to the analysis.</p>
+<h2 id="12">What the smoothing changes downstream</h2>
 <p>The boundary normal distribution of the voxel surface has all its weight on the three axes. After smoothing the normals spread over the sphere.</p>
 {% highlight matlab %}
 gB = grains.boundary; gB = gB(all(gB.grainId > 0,2));
@@ -135,7 +179,7 @@ plot(calcGBND(gB),'upper','micronbar','off')
 mtexColorbar
 {% endhighlight %}
 <center class="mtex-figure">
-{% include inline_image.html file="Grains3DSmoothing_04.png" %}
+{% include inline_image.html file="Grains3DSmoothing_05.png" %}
 </center>
 {% highlight matlab %}
 gBS = grainsS.boundary; gBS = gBS(all(gBS.grainId > 0,2));
@@ -143,10 +187,10 @@ plot(calcGBND(gBS),'upper','micronbar','off')
 mtexColorbar
 {% endhighlight %}
 <center class="mtex-figure">
-{% include inline_image.html file="Grains3DSmoothing_05.png" %}
+{% include inline_image.html file="Grains3DSmoothing_06.png" %}
 </center>
-<h2 id="13">Refine</h2>
-<p> <a href="grain3d.refineBoundary.html"><code class="language-plaintext highlighter-rouge">refineBoundary</code></a> splits every edge at its midpoint and every face into four. No vertex moves, so volumes, areas and the grains a face separates are inherited exactly. It restores the resolution a coarsened mesh lost, for instance before a filter with a short smoothing length.</p>
+<h2 id="14">Refine</h2>
+<p> <a href="grain3d.refineBoundary.html"><code class="language-plaintext highlighter-rouge">refineBoundary</code></a> splits every edge at its midpoint and every face into four. No vertex moves, so volumes, areas and the grains a face separates are inherited exactly. Refinement increases mesh density, for instance before a filter with a short smoothing length. It adds no measurement information and cannot recover a feature removed by coarsening.</p>
 {% highlight matlab %}
 grainsR = refineBoundary(grainsS);
 [length(grainsS.boundary), length(grainsR.boundary)]
@@ -156,7 +200,20 @@ grainsR = refineBoundary(grainsS);
 ans =
       289348     1157392
 {% endhighlight %}
-<h2 id="14">References</h2>
+<h2 id="15">Choose the treatment for the quantity being measured</h2>
+<p>Volume, area and normal distributions need different levels of geometric fidelity. The area change below complements the volume comparison: a small change in volume can accompany a large decrease in staircase area.</p>
+{% highlight matlab %}
+surfaceArea = [sum(grains.surface), sum(grainsC.surface), ...
+  sum(grainsL.surface), sum(grainsS.surface)];
+100 * (surfaceArea / surfaceArea(1) - 1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+         0  -15.0252  -32.9219  -31.0261
+{% endhighlight %}
+<p>Here the sum counts shared interfaces twice, consistently for all four meshes. For a physical internal area per volume, count each interface once as on the <a href="Grains3DBoundaries.html">Boundary Network</a> page. Repeat the comparison with a smaller coarsening factor or fewer filter iterations: a conclusion about morphology should survive reasonable choices near the voxel resolution. A smooth mesh alone does not establish a resolved curvature or remove uncertainty from missing orientations.</p>
+<h2 id="17">References</h2>
 <div>
 <ul>
 <li>S. Maddali, S. Ta'asan, R. M. Suter, <a href="https://doi.org/10.1016/j.commatsci.2016.08.021">Topology-faithful nonparametric estimation and tracking of bulk interface networks</a>, <i>Computational Materials Science</i> 125 (2016), 328-340, the hierarchical treatment of quadruple points, triple lines and faces.</li>
@@ -168,9 +225,8 @@ ans =
 <li>M. A. Groeber, M. A. Jackson, <a href="https://doi.org/10.1186/2193-9772-3-5">DREAM.3D: a digital representation environment for the analysis of microstructure in 3D</a>, <i>Integrating Materials and Manufacturing Innovation</i> 3 (2014), the node types and the coupled scheme.</li>
 </ul>
 </div>
-<h2 id="15">Next</h2>
-<p>
-<a href="Grains3DProperties.html">Properties</a> lists what can be measured on the smoothed grains, and <a href="BoundaryNormalDistribution.html">Boundary Normal Distribution</a> the analysis the smoothing was made for.</p>
+<h2 id="18">Next</h2>
+<p>Continue with <a href="Grains3DBoundaries.html">Boundary Network</a> to measure interface area and inspect junctions. <a href="Grains3DProperties.html">Properties</a> measures the enclosed grains, and <a href="BoundaryNormalDistribution.html">Boundary Normal Distribution</a> develops the analysis of their surface normals.</p>
 </div>
 </body>
 </html>
