@@ -17,6 +17,10 @@
 #
 # So: stage only what a build writes, show what is about to go out, and ask.
 # Use --all if you really do want everything, and --dry-run to look first.
+#
+# The figures the documentation build renders live in figures/, the checkout of
+# mtex-toolbox/figures, and go out first through tools/deploy-figures.sh, so
+# that no published page points at a figure that is not there yet.
 
 set -eu
 
@@ -35,7 +39,7 @@ for arg in "$@"; do
     --all)     all=1 ;;
     --dry-run) dry=1 ;;
     -h|--help)
-      sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'
+      sed -n '2,26p' "$0" | sed 's/^# \{0,1\}//'
       exit 0 ;;
     *) echo "unknown option: $arg" >&2; exit 2 ;;
   esac
@@ -51,16 +55,31 @@ else
 fi
 staged=1
 
+figs=0
+if [ -d figures/.git ] && [ -n "$(git -C figures status --porcelain)" ]; then
+  figs=1
+fi
+
+pages=1
 if git diff --cached --quiet; then
-  echo "nothing staged - the build wrote nothing, or it wrote outside"
-  echo "$BUILD_PATHS"
-  exit 0
+  pages=0
+  if [ "$figs" -eq 0 ]; then
+    echo "nothing staged - the build wrote nothing, or it wrote outside"
+    echo "$BUILD_PATHS figures/"
+    exit 0
+  fi
 fi
 
 echo
-echo "about to publish:"
-git diff --cached --stat | tail -25
-echo
+if [ "$pages" -eq 1 ]; then
+  echo "about to publish:"
+  git diff --cached --stat | tail -25
+  echo
+fi
+if [ "$figs" -eq 1 ]; then
+  tools/deploy-figures.sh --dry-run
+  echo
+fi
 
 held=$(git status --porcelain | grep -v '^[MARCD]' | wc -l | tr -d ' ')
 if [ "$all" -eq 0 ] && [ "$held" -gt 0 ]; then
@@ -98,6 +117,12 @@ case "$reply" in
   *) echo "stopped, nothing committed"; exit 1 ;;
 esac
 
+if [ "$figs" -eq 1 ]; then
+  tools/deploy-figures.sh
+fi
+
 staged=0
-git commit -m "content update"
-git push
+if [ "$pages" -eq 1 ]; then
+  git commit -m "content update"
+  git push
+fi

@@ -78,7 +78,7 @@ setMTEXpref('sphericalAxisHeight',370)
 
 % figure sizes are a fraction of the screen, so without this every figure
 % would come out at whatever size the monitor of the machine running the
-% build happens to imply - and the whole of ../images would change as soon
+% build happens to imply - and the whole of ../figures would change as soon
 % as the documentation is rebuilt elsewhere.
 %
 % .mtex-figure in ../css/customstyles.css shows an image at half its pixel
@@ -122,7 +122,7 @@ set(0,'DefaultFigureColor','white');
 revertScript = fullfile(pwd,'..','tools','revert-unchanged-images.py');
 
 options.tmpDir = fullfile(pwd,'tmp');
-options.imageDir = fullfile(pwd,'..','images');
+options.imageDir = fullfile(pwd,'..','figures');
 options.logFile = fullfile(pwd,'publish_log.txt');
 options.LaTex = 'mathJax';
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
@@ -138,7 +138,7 @@ options.force = check_option(varargin,'force');
 % their source has not changed - such an image is normally the trace of an MTEX
 % bug that was found and fixed in between, and re-rendering re-tests it against
 % the current toolbox. The list is taken once, here, because publishing dirties
-% ../images itself and a later query would see this run's own output.
+% ../figures itself and a later query would see this run's own output.
 % See ../CLAUDE.md.
 if check_option(varargin,'skipDirtyImages')
   options.forceDoc = {};
@@ -314,7 +314,7 @@ end
 
 % publishing overwrites every figure it draws, but most re-renders show the
 % very same picture - see ../CLAUDE.md. Restoring those from git keeps the
-% change set of ../images meaningful as a test of what the toolbox does.
+% change set of ../figures meaningful as a test of what the toolbox does.
 if ~check_option(varargin,'keepImages')
 
   dispPerm('reverting images that did not really change ...')
@@ -442,7 +442,8 @@ function pages = dirtyImagePages
 %
 % The same predicate as tools/revert-unchanged-images.py, so that what that
 % script leaves modified is exactly what gets republished next time. git runs
-% against the parent directory because makeDoc runs from matlab/.
+% in ../figures, the checkout of mtex-toolbox/figures, because makeDoc runs
+% from matlab/.
 %
 % --no-pager is essential, not tidiness: MATLAB's system() leaves a terminal
 % attached to the child, so `git diff` starts `less` and then waits for it
@@ -450,7 +451,7 @@ function pages = dirtyImagePages
 % need this because subprocess gives git a pipe instead.
 
 pages = {};
-[status,out] = system('git --no-pager -C .. diff --name-only --diff-filter=M -- "images/*.png"');
+[status,out] = system('git --no-pager -C ../figures diff --name-only --diff-filter=M -- "*.png"');
 if status ~= 0
   warning('MTEX:makeDoc','could not determine which images are modified');
   return
@@ -461,9 +462,10 @@ files = files(~cellfun('isempty',files));
 if isempty(files), return; end
 
 % publish names every figure <docName>_NN.png, so the prefix is the doc name:
-% images/GND_04.png -> GND, images/EBSD.plot_02.png -> EBSD.plot. Anything the
-% pattern leaves unchanged is not a published figure and is dropped.
-pages = regexprep(files,'^images/(.*)_\d+\.png$','$1');
+% GND_04.png -> GND, EBSD.plot_02.png -> EBSD.plot. Anything the pattern leaves
+% unchanged - the Python figures in python/ among them - is not a published
+% MATLAB figure and is dropped.
+pages = regexprep(files,'^([^/]*)_\d+\.png$','$1');
 pages = unique(pages(~strcmp(pages,files)));
 
 end

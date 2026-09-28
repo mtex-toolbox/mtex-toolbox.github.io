@@ -32,10 +32,30 @@ committing. `_config.yml` also excludes `matlab/` from the build, so the doc
 toolchain sits in the repo without being published; `matlab/publish_log.txt`
 (the build log) is gitignored too.
 
-`./update.sh` is the deploy: `git add . && git commit -m "content update" &&
-git push` to `master`, which is what GitHub Pages serves. It commits
-*everything* in the tree, so review `git status` first — especially after a doc
-rebuild.
+`./update.sh` is the deploy. It stages only what a build writes (`pages`,
+`images`, `_data/sidebars`, `search.json`), shows it, asks, then commits and
+pushes `master`, which is what GitHub Pages serves; `--all` takes everything,
+`--dry-run` only looks. Changed figures go out first, through
+`tools/deploy-figures.sh` (see below).
+
+## Figures live in a repository of their own
+
+The figures the doc build renders are not in this repository. They are in
+`mtex-toolbox/figures`, checked out here as `figures/` (gitignored) and
+published as the GitHub Pages project site `/figures/`, so a page links them as
+`figures/GND_04.png` exactly as it links `images/…`, and `jekyll serve` finds
+them at the same URL locally. `_includes/inline_image.html` decides which: a
+`<Page>_NN.png` goes to `figures/`, anything else to `images/`.
+
+That repository keeps a single commit. `tools/deploy-figures.sh` replaces it on
+every deploy and force-pushes, so it holds one copy of the figures however
+often they are rebuilt — which is why the rendered figures are kept out of this
+repository's history. The image diff below is taken inside `figures/`, against
+that one commit. The Python figures go into `figures/python/`, written by
+pymtex's `docs/site.py`.
+
+To set up a checkout: `git clone git@github.com:mtex-toolbox/figures.git figures`
+in the site root.
 
 ## Generated vs. hand-written content
 
@@ -52,8 +72,9 @@ Generated — never hand-edit, changes belong in the MTEX `.m` sources:
   substitute the documentation of the built-in of the same name, and
   `S1FunHandle.numel` would get a page describing MATLAB's `numel`
 - `pages/examples_matlab/` — from `../examples/`
-- `images/*_NN.png` — figures rendered by MATLAB `publish` during the doc build,
-  one numbered file per figure per page (`GND_04.png`, `EBSD.plot_02.png`)
+- `figures/*_NN.png` — figures rendered by MATLAB `publish` during the doc build,
+  one numbered file per figure per page (`GND_04.png`, `EBSD.plot_02.png`), in
+  the `mtex-toolbox/figures` checkout
 - `_data/sidebars/documentation_sidebar.yml`, `function_reference_sidebar.yml`,
   `examples_sidebar.yml` — written by `matlab/xml2yml.m` from the `.xml` TOCs
 
@@ -62,14 +83,13 @@ Hand-written: `index.md`, `pages/{addons,download,people,publications,support,vi
 `css/theme-mtex.css`, `_includes/custom/`, `robots.txt`, `llms.txt`,
 `licenses/`.
 
-`images/` is **not** generated wholesale — only the numbered `<Page>_NN.png`
-figures are. Its subdirectories (`icons/`, `profiles/`, `thumbnails/`,
-`favicons/`, `workshop24/`, `workshop26/`) and any loose asset without the
-`_NN` suffix (sponsor logos, `nfft_logo.png`, the theme's `arrow_*.gif` used by
-the generated `docscripts.js`, …) are hand-maintained site assets that nothing
-regenerates. `revert-unchanged-images.py` only restores *modified* PNGs, so a
-deletion in `images/` is never undone by a rebuild — check `git status` for
-`D images/…` lines before committing after a doc build.
+`images/` holds only hand-maintained site assets that nothing regenerates: its
+subdirectories (`icons/`, `profiles/`, `thumbnails/`, `favicons/`,
+`workshop24/`, `workshop26/`) and the loose files (sponsor logos,
+`nfft_logo.png`, the theme's `arrow_*.gif` used by the generated
+`docscripts.js`, the hand-drawn `.svg` diagrams, …). `revert-unchanged-images.py`
+only restores *modified* figures, so a figure a rebuild deleted is never
+brought back — check `git -C figures status` for `D` lines before deploying.
 
 ## Running MATLAB
 
@@ -164,7 +184,7 @@ The figures pop up on screen for the whole run and cannot be suppressed:
 yields pages without images (see `../makeDoc/@DocFile/publish.m`). Build on a
 display-less MATLAB if the screen is needed for something else.
 
-`makeDoc.m` sets `options.outDir` per section, writes figures to `../images`,
+`makeDoc.m` sets `options.outDir` per section, writes figures to `../figures`,
 uses `matlab/web.xsl` (`examples.xsl` for examples) as the `publish`
 stylesheet, and emits Liquid-aware HTML: code blocks become
 `{% highlight matlab %}` and figures `{% include inline_image.html %}`.
@@ -182,7 +202,7 @@ toolbox.
 
 **Fixed figure sizes.** MTEX derives figure sizes from the screen, so the same
 figure comes out at a different pixel size on a different monitor and the whole
-of `images/` changes as soon as the docs are rebuilt elsewhere. `makeDoc.m` pins
+of `figures/` changes as soon as the docs are rebuilt elsewhere. `makeDoc.m` pins
 this with `setMTEXpref('screenSize',[1920 1200])` — the size the stored images
 were rendered at. Changing that number rewrites every image.
 
@@ -329,7 +349,7 @@ toc: false
   `web.xsl`/`examples.xsl` now emit the title quoted.
 - Internal links: `{% include reference.html link="people" content="Team" %}`
   (auto-targets `_blank` for `://` links). Images: `{% include inline_image.html file="Foo_01.png" %}`
-  — the path is resolved relative to `images/`.
+  — resolved into `figures/` for a `<Page>_NN.png`, into `images/` otherwise.
 - Callouts: `_includes/{note,tip,warning,important,callout}.html`.
 - `search.json` is a Liquid template iterating `site.pages`; add
   `search: exclude` to keep a page out of the client-side search index

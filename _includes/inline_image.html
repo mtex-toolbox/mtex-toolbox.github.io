@@ -1,1 +1,13 @@
-<img class="inline" src="images/{{include.file}}" alt="{{include.alt}}" />
+{%- comment -%}
+A figure the documentation build renders is named <Page>_NN.png and served from
+figures/, the mtex-toolbox/figures repository; every other image is a
+hand-made asset of this repository in images/.
+{%- endcomment -%}
+{%- assign stem = include.file | remove: ".png" | split: "_" | last -%}
+{%- assign digitsLeft = stem | remove: "0" | remove: "1" | remove: "2" | remove: "3" | remove: "4" | remove: "5" | remove: "6" | remove: "7" | remove: "8" | remove: "9" -%}
+{%- if include.file contains ".png" and include.file contains "_" and stem.size >= 2 and digitsLeft == "" -%}
+  {%- assign dir = "figures" -%}
+{%- else -%}
+  {%- assign dir = "images" -%}
+{%- endif -%}
+<img class="inline" src="{{ dir }}/{{include.file}}" alt="{{include.alt}}" />

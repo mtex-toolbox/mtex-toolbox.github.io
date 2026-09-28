@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Find files under images/ that nothing on the site references.
+"""Find files under images/ and figures/ that nothing on the site references.
+
+`images/` holds the hand-made assets of this repository, `figures/` is the
+checkout of `mtex-toolbox/figures`, the figures the documentation build renders.
+Both are served next to the pages, so a reference resolves into either.
 
 Every reference to an image on this site is a literal file name — an
 {% include inline_image.html file="Foo_01.png" %}, an <img src="images/...">,
@@ -29,9 +33,12 @@ import sys
 
 IMAGE_EXT = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico', '.bmp')
 
+# The two directories images are served from; see the docstring.
+ASSET_DIRS = ('images', 'figures')
+
 # Not part of the published site: build output, the doc toolchain, the images
 # themselves (an image never references another image).
-SKIP_DIRS = {'.git', '_site', 'images', 'node_modules', '.jekyll-cache'}
+SKIP_DIRS = {'.git', '_site', 'node_modules', '.jekyll-cache', *ASSET_DIRS}
 
 # Where a broken reference would actually break a page. Prose that merely spells
 # out an image path — CLAUDE.md, this script — is not a reference.
@@ -42,11 +49,11 @@ _EXT = '|'.join(e.replace('.', r'\.') for e in IMAGE_EXT)
 
 REF = re.compile(r'[\w][\w.@+-]*(?:' + _EXT + r')', re.IGNORECASE)
 
-# References that unambiguously resolve to a file under images/: a src=/href=
+# References that unambiguously resolve to a served image: a src=/href=
 # spelled out, or the file= of the inline_image.html / image.html includes,
-# whose path _includes/*.html prefixes with "images/".
+# which _includes/*.html resolve into images/ or figures/.
 INTO_IMAGES = re.compile(
-    r'(?:images/(?P<path>[\w./@+-]*(?:' + _EXT + r'))'
+    r'(?:(?:images|figures)/(?P<path>[\w./@+-]*(?:' + _EXT + r'))'
     r'|(?:inline_)?image\.html\s+file="(?P<inc>[^"]*(?:' + _EXT + r'))")',
     re.IGNORECASE)
 
@@ -67,7 +74,7 @@ def referenced_names(root, extra_skip):
     """Scan the text of the repo.
 
     Returns (names, targets): every image-looking file name that appears
-    anywhere, and every reference that resolves to a path under images/, as
+    anywhere, and every reference that resolves to a served image, as
     {path: [files it appears in]}.
     """
     names = set()
@@ -95,11 +102,16 @@ def referenced_names(root, extra_skip):
 
 
 def image_files(root):
-    for dirpath, dirnames, filenames in os.walk(os.path.join(root, 'images')):
-        dirnames[:] = [d for d in dirnames if d != '.git']
-        for fn in filenames:
-            if fn.lower().endswith(IMAGE_EXT):
-                yield os.path.relpath(os.path.join(dirpath, fn), root)
+    for top in ASSET_DIRS:
+        for dirpath, dirnames, filenames in os.walk(os.path.join(root, top)):
+            dirnames[:] = [d for d in dirnames if d != '.git']
+            for fn in filenames:
+                if fn.lower().endswith(IMAGE_EXT):
+                    yield os.path.relpath(os.path.join(dirpath, fn), root)
+
+
+def is_served(root, target):
+    return any(os.path.exists(os.path.join(root, top, target)) for top in ASSET_DIRS)
 
 
 def main():
@@ -116,17 +128,17 @@ def main():
     on_disk = sorted(image_files(root))
 
     missing = {t: sorted(where) for t, where in sorted(targets.items())
-               if not os.path.exists(os.path.join(root, 'images', t))}
+               if not is_served(root, t)}
     if missing:
-        print(f'referenced but not in images/ ({len(missing)}):')
+        print(f'referenced but in neither images/ nor figures/ ({len(missing)}):')
         for t, where in missing.items():
             shown = ', '.join(where[:3]) + (' …' if len(where) > 3 else '')
-            print(f'  images/{t}  <- {shown}')
+            print(f'  {t}  <- {shown}')
         print()
 
     unused = [p for p in on_disk if os.path.basename(p).lower() not in names]
 
-    print(f'in images/ but never referenced ({len(unused)}):')
+    print(f'in images/ or figures/ but never referenced ({len(unused)}):')
     total = 0
     for p in unused:
         if args.sizes:
@@ -139,8 +151,13 @@ def main():
     print(f'\n{len(unused)} of {len(on_disk)} files unreferenced'
           + (f', {total/1024/1024:.1f} MiB' if args.sizes else ''), file=sys.stderr)
 
-    if args.delete and unused:
-        subprocess.check_call(['git', 'rm', '--'] + unused, cwd=root)
+    # each directory is its own repository, so each is git rm'ed in its own
+    for top in ASSET_DIRS if args.delete else ():
+        mine = [os.path.relpath(p, top) for p in unused if p.split(os.sep)[0] == top]
+        if mine:
+            cwd = os.path.join(root, top) if top == 'figures' else root
+            subprocess.check_call(['git', 'rm', '--'] + (mine if top == 'figures' else
+                                  [os.path.join(top, p) for p in mine]), cwd=cwd)
 
 
 if __name__ == '__main__':

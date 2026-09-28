@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """Revert documentation images that a doc rebuild changed only cosmetically.
 
-Every `makeDoc` run re-renders all of `images/`, and most re-renders are not
+Every `makeDoc` run re-renders all of `figures/`, and most re-renders are not
 bit-identical while showing the very same figure: MATLAB rasterises at a
 slightly different size, `mogrify -trim` then crops to content so the canvas
 jitters too, and anti-aliasing lands on different pixels.  Since the change set
-of `images/` is used as a unit test for the toolbox, those cosmetic diffs bury
+of `figures/` is used as a unit test for the toolbox, those cosmetic diffs bury
 the real ones.
 
 This script scores each modified PNG against its committed version and restores
 the committed one when the two are visually the same, so that whatever is left
-in `git status` is the real change set.
+in `git status` is the real change set.  `figures/` is the checkout of the
+`mtex-toolbox/figures` repository, so the git commands run there.
 
     python3 tools/revert-unchanged-images.py --dry-run   # score only
     python3 tools/revert-unchanged-images.py             # score and revert
@@ -207,14 +208,16 @@ def main():
     )
     arguments = parser.parse_args()
 
-    # All paths below are relative to the site root, so that this works the
-    # same when called from elsewhere - makeDoc invokes it from matlab/.
-    os.chdir(Path(__file__).resolve().parent.parent)
+    # All paths below are relative to the figures checkout, so that this works
+    # the same when called from elsewhere - makeDoc invokes it from matlab/.
+    os.chdir(Path(__file__).resolve().parent.parent / "figures")
 
     # --diff-filter=M leaves out deletions, and untracked files never show up
     # in `git diff` at all - both are real changes to a page, not re-renders.
+    # The glob stays at the top level: the Python figures in python/ are kept
+    # stable by pymtex's own export.
     paths = git(
-        "diff", "--name-only", "--diff-filter=M", "--", "images/*.png"
+        "diff", "--name-only", "--diff-filter=M", "--", ":(glob)*.png"
     ).split()
     if not paths:
         print("no modified images")
