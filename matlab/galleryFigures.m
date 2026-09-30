@@ -15,7 +15,7 @@ close all                                                               % hide
 
 %% ipfmap
 %#page EBSDIPFMap
-%#title Coloring EBSD maps
+%#title Colouring EBSD maps
 %#labels EBSD, Grains
 mtexdata twins
 [grains,ebsd] = calcGrains(ebsd('indexed'),'angle',5*degree);
@@ -152,7 +152,7 @@ heroExport('fundamental',[],'dir','gallery')                            % hide
 
 %% ipfkey
 %#page EBSDIPFMap
-%#title Color keys
+%#title Colour keys
 %#labels Crystal geometry, EBSD
 plot(ipfColorKey(ebsd('Forsterite')))
 heroExport('ipfkey',[],'dir','gallery')                                 % hide
