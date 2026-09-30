@@ -71,10 +71,9 @@ heroExport('texture',2)                                                 % hide
 %#captions measured alpha titanium | reconstructed beta grains
 % prior beta grains from an alpha titanium map
 mtexdata alphaBetaTitanium
-[grains,ebsd] = calcGrains(ebsd,'threshold',1.5*degree);
 plot(ebsd('Ti (alpha)'),'ipfDirection',zvector)                         % hide
 heroExport('parent',1)                                                  % hide
-job = parentGrainReconstructor(ebsd,grains);
+job = parentGrainReconstructor(ebsd);
 job.p2c = orientation.Burgers(job.csParent,job.csChild);
 job.calcVariantGraph('threshold',1.5*degree);
 job.clusterVariantGraph('numIter',3);
