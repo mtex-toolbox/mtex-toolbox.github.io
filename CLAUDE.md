@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 The MTEX homepage and documentation website (`git@github.com:mtex-toolbox/mtex-toolbox.github.io`)
 — a Jekyll site served by GitHub Pages from `master`. It is built on the
 [Documentation Theme for Jekyll](https://idratherbewriting.com/documentation-theme-jekyll/index.html)
-(see `README`); most of `_layouts/`, `_includes/`, `css/` and `js/` is stock theme code.
+(see `README.md`, which also lists the update and deploy commands for the live site and the preview); most of `_layouts/`, `_includes/`, `css/` and `js/` is stock theme code.
 
 The bulk of the content is **not** written here: the documentation, function
 reference and examples pages are generated from MTEX's own `.m` sources by
