@@ -1,0 +1,55 @@
+---
+title: Download
+keywords: download, installation, all releases, compatibility, MATLAB version
+layout: home
+permalink: download
+---
+{% assign cur = site.data.releases | first %}
+{% capture zip %}https://github.com/mtex-toolbox/mtex/releases/download/mtex-{{ cur.version }}/mtex-{{ cur.version }}.zip{% endcapture %}
+<div class="mx-wrap">
+  <div class="mx-pagehead">
+    <div class="mx-eyebrow">Get started</div>
+    <h1>Download MTEX</h1>
+    <p>MTEX is free and open source under the GPL-2.0. It runs in MATLAB 2016b or newer and needs no further toolboxes.</p>
+  </div>
+
+  <div class="mx-dl">
+    <div class="mx-dl-main">
+      <div class="mx-eyebrow">Current release · {{ cur.date }}</div>
+      <h2>MTEX {{ cur.version }}</h2>
+      <p>{{ cur.notes }}. <a href="changelog.html">Release notes</a></p>
+      <a class="mx-btn mx-btn-primary mx-dl-btn" href="{{ zip }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg>mtex-{{ cur.version }}.zip</a>
+    </div>
+    <ol class="mx-dl-steps">
+      <li><b>Unzip</b> the file into any folder.</li>
+      <li><b>Start MATLAB</b> and change to that folder.</li>
+      <li><b>Run</b> <code>startup_mtex</code> in the command window.</li>
+      <li><b>Try</b> <code>mtexdata titanium</code> and <code>plot(ebsd)</code>, then follow the <a href="EBSDTutorial.html">EBSD tutorial</a>.</li>
+    </ol>
+  </div>
+
+  <div class="mx-dl-notes">
+    <div>
+      <h3>If it does not start</h3>
+      <p>macOS may block the precompiled binaries, and some systems need the mex files compiled anew. <a href="installation">Installation problems</a> covers both, and how to build a standalone application with the MATLAB Compiler.</p>
+    </div>
+    <div>
+      <h3>MATLAB versions</h3>
+      <p>Use a MATLAB version as recent as possible. MTEX works with the student version; only GND and Taylor computations need the Optimization Toolbox. Each release stays compatible with MATLAB versions a few years older, not ten.</p>
+    </div>
+    <div>
+      <h3>Development version</h3>
+      <p>The newest code is on the <a href="https://github.com/mtex-toolbox/mtex/tree/develop">develop branch</a> on GitHub. Clone it with git to follow the development and to contribute.</p>
+    </div>
+  </div>
+
+  <div class="mx-head" style="margin-top:44px"><h2>All releases</h2><p>Every release with its source on <a href="https://github.com/mtex-toolbox/mtex/releases">GitHub</a>.</p></div>
+  <table class="mx-releases">
+    <thead><tr><th>Version</th><th>Released</th><th>Highlights</th></tr></thead>
+    <tbody>
+    {% for r in site.data.releases %}
+      <tr{% if forloop.first %} class="mx-current"{% endif %}><td><a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-{{ r.version }}/mtex-{{ r.version }}.zip">mtex-{{ r.version }}.zip</a></td><td>{{ r.date }}</td><td>{{ r.notes }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

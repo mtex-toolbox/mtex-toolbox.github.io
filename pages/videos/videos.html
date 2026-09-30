@@ -1,0 +1,30 @@
+---
+title: Videos
+keywords: videos, tutorials, installation, parent grain reconstruction, chinese, workshop recordings
+layout: home
+permalink: videos.html
+---
+{% comment %}
+The videos come from _data/videos.yml. The tiles link to YouTube instead of
+embedding a player, so the page loads nothing from YouTube but the thumbnails.
+{% endcomment %}
+<div class="mx-wrap">
+  <div class="mx-pagehead">
+    <div class="mx-eyebrow">Community</div>
+    <h1>Videos</h1>
+    <p>Introductions and lectures on MTEX by developers and users. The recorded lectures and exercises of the 2022 workshop are on the <a href="workshop22">workshop page</a>.</p>
+  </div>
+  {% for g in site.data.videos %}
+  <div class="mx-head"><h2>{{ g.group }}</h2>{% if g.by %}<p>by {{ g.by }}</p>{% endif %}</div>
+  <div class="mx-videos">
+    {% for v in g.videos %}
+    <a class="mx-tile mx-video" href="https://www.youtube.com/watch?v={{ v.youtube }}">
+      <div class="mx-video-im"><img loading="lazy" src="https://i.ytimg.com/vi/{{ v.youtube }}/hqdefault.jpg" alt=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7l8 5-8 5z" /></svg></div>
+      <div class="mx-tile-cap"><h3>{{ v.title }}</h3><p>{{ v.by }}</p></div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  <div class="mx-head" style="margin-top:12px"><h2>Workshop lectures</h2></div>
+  <a class="mx-videos-ws" href="workshop22"><img src="images/workshop24/20240306_113809.jpg" alt=""><span><b>MTEX workshop 2022</b>Recordings of all lectures and exercises: EBSD, grains, boundaries, texture, tensors and parent grain reconstruction.</span></a>
+</div>

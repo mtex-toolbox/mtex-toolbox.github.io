@@ -1,25 +1,18 @@
 ---
-title: Installation and Compilation
+title: Installation problems
+eyebrow: Get started
+lead: What to do when MTEX does not start, when the mex files have to be compiled anew, and how to turn a script into a standalone application.
 keywords: installation issues, mac osx, mex, nfft, mcc, matlab compiler, standalone, deployment
-last_updated: August 20, 2026
-hide_sidebar: true
+layout: prose
 permalink: installation
-folder: download
-toc: false
 ---
-
-This page collects what to do when the binaries do not simply work: the macOS
-security measures that block them, recompiling the mex files, and building the
-nfft from source. The last section covers a different kind of compiling -
-turning your own script into a standalone application with the MATLAB
-Compiler.
 
 The first section and the nfft instructions are written for macOS: binaries
 are sometimes not compatible across different versions of macOS, and with the
 increasing security measures of Apple some extra work might be required to get
 MTEX running there.
 
-## library load disallowed by system policy
+## macOS: library load disallowed by system policy
 
 If you experience the following error message
 
@@ -45,7 +38,7 @@ or, if you have downloaded MTEX with a browser, type in Matlab
 !sudo xattr -r -d com.apple.quarantine /path/to/mtexfolder
 ```
 
-## Unable to compile mex files during startup_mtex
+## Unable to compile the mex files during startup_mtex
 
 If you (still) get the following error, you will need to recompile the mex files
 on your own. MTEX tries to perform the compilation automatically. However, in

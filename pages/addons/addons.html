@@ -1,0 +1,42 @@
+---
+title: Add-ons and scripts
+keywords: addons, toolboxes, scripts, gist, mtexScript, community scripts
+layout: home
+permalink: addons.html
+---
+{% comment %}
+The toolboxes come from _data/addons.yml. scripts.html forwards to the
+scripts section at the end.
+{% endcomment %}
+<div class="mx-wrap">
+  <div class="mx-pagehead">
+    <div class="mx-eyebrow">Community</div>
+    <h1>Add-ons and scripts</h1>
+    <p>Toolboxes that other groups have built on MTEX, and scripts that users share. They are maintained by their authors; questions about them go to the authors.</p>
+  </div>
+  <div class="mx-addons">
+    {% for a in site.data.addons %}
+    <div class="mx-tile mx-addon">
+      <a class="mx-tile-im" href="{{ a.url }}"><img loading="lazy" src="images/thumbnails/{{ a.image }}" alt=""></a>
+      <div class="mx-tile-cap">
+        <h3><a href="{{ a.url }}">{{ a.name }}</a></h3>
+        <p>{{ a.text }}</p>
+        <span class="mx-small">{% for p in a.authors %}<a href="{{ p.url }}">{{ p.name }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %} · <a href="{{ a.url }}">{{ a.where }}</a></span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <section class="mx-scripts" id="scripts">
+    <div>
+      <h2>Share a script</h2>
+      <p>Scripts shared by users are public GitHub gists tagged <code>#mtexScript</code>. To share one of yours:</p>
+      <ol>
+        <li>Sign in at <a href="https://gist.github.com/">gist.github.com</a> and upload the file.</li>
+        <li>End the description with <code>#mtexScript</code>.</li>
+        <li>Click <em>Create public gist</em>.</li>
+      </ol>
+    </div>
+    <a class="mx-btn mx-btn-primary" href="https://gist.github.com/search?q=%23mtexScript">Browse the shared scripts</a>
+  </section>
+</div>
