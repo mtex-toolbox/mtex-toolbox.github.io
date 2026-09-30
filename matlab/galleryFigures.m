@@ -232,8 +232,8 @@ galleryExport('ipf')                                    % hide
 %#page OrientationFundamentalRegion
 %#title Fundamental regions
 %#labels Crystal geometry, Texture
-plot(grains('Forsterite').meanOrientation,'axisAngle','markerSize',4)
-camzoom(1)                                                              % hide
+plot(grains('Forsterite').meanOrientation,'axisAngle','markerSize',12)
+camzoom(0.85)                                                           % hide
 galleryExport('fundamental')                            % hide
 
 %% ipfkey
