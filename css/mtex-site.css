@@ -167,11 +167,40 @@ body.mx-body { background: var(--mx-ground); color: var(--mx-ink); font: 17px/1.
 .mx-card-figs img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
 .mx-card-figs figcaption { font: 12.5px/1.3 var(--mx-mono); color: var(--mx-code-dim); margin: 8px 0 0; padding: 0; max-width: none; text-align: center; }
 
+/* a photo across the page with the heading on it: community and people */
+.mx-photohead { position: relative; height: clamp(300px, 38vw, 470px); overflow: hidden; background: var(--mx-bar); }
+.mx-photohead > img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+.mx-photohead-text { position: absolute; inset: 0; display: flex; align-items: flex-end; padding-bottom: 30px; background: linear-gradient(to top, rgba(6,30,26,.88), rgba(6,30,26,.35) 55%, rgba(6,30,26,0)); color: #fff; }
+.mx-photohead-text .mx-wrap { width: 100%; }
+.mx-page .mx-photohead h1 { color: #fff; font-size: clamp(30px, 4vw, 48px); font-weight: 800; margin: 8px 0 10px; max-width: 22ch; }
+.mx-page .mx-photohead p { color: #dcefea; font-size: 18.5px; max-width: 56ch; margin: 0; }
+.mx-photohead .mx-eyebrow { color: #9fe6d6; }
+
 /* community page: one card per way to take part */
 .mx-comm { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; padding-bottom: 30px; }
-.mx-page .mx-comm a { display: flex; flex-direction: column; gap: 4px; background: var(--mx-surface); border: 1px solid var(--mx-line); border-radius: 12px; padding: 16px 18px; color: var(--mx-ink-2); font-size: 15.5px; line-height: 1.45; }
+.mx-page .mx-comm a { display: flex; flex-direction: column; gap: 6px; background: var(--mx-surface); border: 1px solid var(--mx-line); border-radius: 12px; padding: 16px 18px; color: var(--mx-ink-2); font-size: 15.5px; line-height: 1.45; }
 .mx-page .mx-comm a:hover { text-decoration: none; border-color: var(--mx-accent); }
 .mx-comm b { color: var(--mx-ink); font: 700 19px var(--mx-display); font-stretch: 87.5%; }
+.mx-comm svg { width: 40px; height: 40px; padding: 8px; border-radius: 10px; background: var(--mx-accent-soft); color: var(--mx-accent-ink); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 4px; box-sizing: border-box; }
+.mx-page .mx-comm a:hover svg { background: var(--mx-accent); color: #fff; }
+.mx-photohead + .mx-wrap > .mx-head:first-child { margin-top: 40px; }
+.mx-ws-comm { margin: 40px 0 44px; }
+
+/* the people page and the contributor wall */
+.mx-people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; margin-top: 34px; }
+.mx-person { display: grid; grid-template-columns: 96px 1fr; gap: 16px; align-items: start; background: var(--mx-surface); border: 1px solid var(--mx-line); border-radius: 12px; padding: 16px 18px; }
+.mx-person > img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; background: var(--mx-sunk); }
+.mx-person h3 { font-size: 20px; }
+.mx-page .mx-person h3 a { color: var(--mx-ink); }
+.mx-person-role { font: 700 11.5px var(--mx-display); font-stretch: 87.5%; text-transform: uppercase; letter-spacing: .08em; color: var(--mx-accent-ink); margin: 3px 0 6px; }
+.mx-page .mx-person p { margin: 0 0 6px; font-size: 15.5px; color: var(--mx-ink-2); line-height: 1.5; }
+.mx-person-place { font-size: 14px; color: var(--mx-ink-3); }
+.mx-wall { list-style: none; margin: 0 0 40px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.mx-wall li { margin: 0; }
+.mx-wall img { width: 48px; height: 48px; border-radius: 50%; display: block; border: 2px solid var(--mx-surface); box-shadow: 0 0 0 1px var(--mx-line); transition: transform .12s; }
+.mx-wall a:hover img { transform: scale(1.12); box-shadow: 0 0 0 2px var(--mx-accent); }
+@media (prefers-reduced-motion: reduce) { .mx-wall img { transition: none; } }
+@media (max-width: 560px) { .mx-people-grid { grid-template-columns: 1fr; } .mx-person { grid-template-columns: 64px 1fr; } .mx-person > img { width: 64px; height: 64px; } }
 .mx-quick-wide { grid-template-columns: repeat(4, minmax(0, 1fr)); padding-bottom: 30px; }
 @media (max-width: 960px) { .mx-quick-wide { grid-template-columns: 1fr 1fr; } }
 

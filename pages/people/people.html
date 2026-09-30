@@ -1,0 +1,37 @@
+---
+title: People
+keywords: people, team, developers, contributors, MTEX
+layout: home
+permalink: people.html
+---
+{% comment %} people from _data/people.yml, contributors from _data/contributors.yml {% endcomment %}
+<div class="mx-photohead">
+  <img src="images/community/group2024.jpg" alt="Participants of the 2024 MTEX workshop in Freiberg">
+  <div class="mx-photohead-text"><div class="mx-wrap">
+    <div class="mx-eyebrow">People</div>
+    <h1>The people behind MTEX</h1>
+    <p>Mathematicians, materials scientists and geologists, many of whom started as users. The photo shows the 2024 workshop in Freiberg.</p>
+  </div></div>
+</div>
+
+<div class="mx-wrap">
+  <div class="mx-people-grid">
+    {% for p in site.data.people %}
+    <article class="mx-person">
+      <img src="images/profiles/{{ p.photo }}" alt="{{ p.name }}" loading="lazy">
+      <div>
+        <h3>{% if p.url %}<a href="{{ p.url }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h3>
+        <div class="mx-person-role">{{ p.role }}</div>
+        <p>{{ p.text }}</p>
+        {% if p.place %}<div class="mx-person-place">{{ p.place }}</div>{% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  <div class="mx-head" style="margin-top:44px">
+    <h2>Everyone who has contributed code</h2>
+    <p>{{ site.data.contributors.size }} people on GitHub. <a href="community">Join them →</a></p>
+  </div>
+  {% include contributor-wall.html %}
+</div>

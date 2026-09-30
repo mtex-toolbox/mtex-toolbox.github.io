@@ -233,6 +233,7 @@ galleryExport('ipf')                                    % hide
 %#title Fundamental regions
 %#labels Crystal geometry, Texture
 plot(grains('Forsterite').meanOrientation,'axisAngle','markerSize',4)
+camzoom(1)                                                              % hide
 galleryExport('fundamental')                            % hide
 
 %% ipfkey
@@ -248,7 +249,7 @@ galleryExport('ipfkey')                                 % hide
 %#labels Texture, Pole figures
 cs = crystalSymmetry('m-3m');
 odf = unimodalODF(orientation.goss(cs),'halfwidth',10*degree);
-plotPDF(odf,Miller({1,0,0},{1,1,0},{1,1,1},cs))
+plotPDF(odf,Miller({1,0,0},{1,1,0},{1,1,1},cs),'layout',[2 2])
 galleryExport('goss')                                   % hide
 
 %% miller
@@ -264,7 +265,8 @@ galleryExport('miller')                                 % hide
 %#title Crystal morphology
 %#labels Crystal geometry
 plot(crystalShape.quartz,'colored')
-galleryExport('quartz')                                 % hide
+legend off                                                             % hide
+galleryExport('quartz','fit3d')                                 % hide
 
 %% velocity
 %#page WaveVelocities
@@ -343,14 +345,14 @@ galleryExport('parents','crop',0.85)                                % hide
 %#labels Pole figures, Texture
 mtexdata dubna
 odf = calcODF(pf,'silent');
-plotPDF(odf,pf.allH(1:3),'antipodal','superposition',pf.c(1:3))
+plotPDF(odf,pf.allH(1:3),'antipodal','superposition',pf.c(1:3),'layout',[2 2])
 galleryExport('polefigures')                            % hide
 
 %% measured
 %#page PoleFigurePlot
 %#title Pole figure data
 %#labels Pole figures
-plot(pf(1:3))
+plot(pf{1},'contourf')
 galleryExport('measured')                               % hide
 
 %% reconstruction

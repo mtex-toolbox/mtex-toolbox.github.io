@@ -30,6 +30,13 @@ else
   set(fig,'Units','pixels','Position',[100 100 640 480]);
 end
 drawnow;
+if check_option(varargin,'fit3d')
+  for ax = reshape(axesList,1,[])
+    set(ax,'CameraViewAngleMode','auto','CameraTargetMode','auto','CameraPositionMode','auto');
+    drawnow;
+    axis(ax,'vis3d');
+  end
+end
 fig.ResizeFcn = [];
 set(fig,'PaperUnits','inches','PaperPositionMode','manual',...
   'PaperPosition',[0 0 6.4 4.8],'PaperSize',[6.4 4.8],'InvertHardcopy','off');
