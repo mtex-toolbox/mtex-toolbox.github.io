@@ -124,7 +124,14 @@ From `web-next/`:
 ```bash
 tools/deploy-next.sh --dry-run   # build into ../web-next-site, publish nothing
 tools/deploy-next.sh             # build, publish figures, push the pages
+tools/deploy-next.sh --full      # the same with every generated page
 ```
+
+While the new layout is being worked out, the preview holds only the generated
+pages named in `tools/preview-pages.txt`, plus every hand-written page:
+`tools/stage-preview.py` copies the site to `../web-next-stage`, drops the other
+generated pages and prunes the sidebars to what is left. A subset build takes a
+few seconds instead of a minute. `--full` builds from the checkout itself.
 
 The script builds the site locally with `_config.yml` and `_config_next.yml`,
 publishes changed figures to `mtex-playground/figures`, and force-pushes the

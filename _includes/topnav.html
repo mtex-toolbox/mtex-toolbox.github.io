@@ -1,40 +1,44 @@
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-static-top">
-    <div class="container topnavlinks">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="fa fa-lg navbar-brand" href="index"><img src="images/icons/MTEX_100x67px.png"></a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <br><br>
-            {% include search_box.html %}
-            <ul class="nav navbar-nav navbar-right">
-
-                <!-- topnav -->
-                {% assign topnav = site.data[page.topnav] %}
-                {% for entry in topnav.topnav %}
-                    {% for item in entry.items %}
-                        {% assign trurl = item.url | remove: "/" %}
-                        {% if item.external_url %}
-                            <li><a href="{{ item.external_url }}" target="_blank">{{ item.title }}</a></li>
-                        {% elsif page.url contains item.url or page.sidebar contains trurl %}
-                            <li class="active"><a href="{{ trurl }}">{{ item.title }}</a></li>
-                        {% else %}
-                            <li><a href="{{ trurl }}">{{item.title}}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-
-                {% if site.feedback_disable == null or site.feedback_disable == false %}
-                    {% include feedback.html %}
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-    <!-- /.container -->
-</nav>
+{% comment %}
+Announcement bar and top bar of every page, styled by css/mtex-site.css. The
+links come from _data/topnav.yml; an item with `pill: true` is drawn as the
+amber highlight. The announcement can be dismissed and stays hidden in that
+browser until its `id` in _data/announcement.yml changes.
+{% endcomment %}
+{% assign ann = site.data.announcement %}
+{% if ann and ann.show %}
+<div class="mx-announce" id="mx-announce" data-id="{{ ann.id }}">
+  <div class="mx-wrap">
+    <span class="mx-announce-date">{{ ann.date }}</span>
+    <span class="mx-announce-text">{{ ann.text }}</span>
+    <a class="mx-announce-go" href="{{ ann.url }}">{{ ann.link }} →</a>
+    <button type="button" class="mx-announce-x" aria-label="Hide this announcement">×</button>
+  </div>
+</div>
+<script>
+(function () {
+  var bar = document.getElementById('mx-announce'), key = 'mx-announce-hidden';
+  try { if (localStorage.getItem(key) === bar.getAttribute('data-id')) { bar.hidden = true; } } catch (e) {}
+  bar.querySelector('.mx-announce-x').addEventListener('click', function () {
+    bar.hidden = true;
+    try { localStorage.setItem(key, bar.getAttribute('data-id')); } catch (e) {}
+  });
+})();
+</script>
+{% endif %}
+<header class="mx-top">
+  <div class="mx-wrap mx-top-row">
+    <a class="mx-brand" href="index" aria-label="MTEX home"><img src="images/icons/MTEX_100x67px.png" alt="MTEX"></a>
+    <nav aria-label="Site">
+      <ul class="mx-links">
+        {% for item in site.data.topnav.topnav %}
+          {% assign target = item.url | split: "#" | first | remove: "/" %}
+          {% assign here = page.url | remove: "/" | remove: ".html" %}
+          {% assign classes = "" %}
+          {% if item.pill %}{% assign classes = "mx-pill" %}{% elsif item.url contains "#" %}{% elsif here == target or page.sidebar == item.sidebar and item.sidebar %}{% assign classes = "mx-current" %}{% endif %}
+          <li><a href="{{ item.url | remove_first: "/" }}"{% if classes != "" %} class="{{ classes }}"{% endif %}{% if classes == "mx-current" %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <div class="mx-search">{% include search_box.html %}</div>
+  </div>
+</header>

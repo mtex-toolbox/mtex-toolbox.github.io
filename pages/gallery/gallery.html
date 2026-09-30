@@ -1,0 +1,41 @@
+---
+title: Gallery
+keywords: gallery, figures, EBSD, texture, grains, pole figures, MTEX examples
+layout: home
+permalink: gallery
+search: exclude
+---
+{% assign g = site.data.gallery %}
+<div class="mx-wrap">
+  <div class="mx-pagehead">
+    <div class="mx-eyebrow">Gallery</div>
+    <h1>What MTEX can do</h1>
+    <p>Every figure here is drawn by a documentation page during the build. Open one for the script that made it.</p>
+  </div>
+  <div class="mx-chips" id="mx-chips" role="group" aria-label="Filter by topic">
+    <button type="button" data-tag="all" aria-pressed="true">All <small>{{ g.figures.size }}</small></button>
+    {% for t in g.tags %}{% assign n = 0 %}{% for f in g.figures %}{% if f.tags contains t[0] %}{% assign n = n | plus: 1 %}{% endif %}{% endfor %}
+    <button type="button" data-tag="{{ t[0] }}" aria-pressed="false">{{ t[1] }} <small>{{ n }}</small></button>
+    {% endfor %}
+  </div>
+  <div class="mx-gal" id="mx-gal">
+    {% for f in g.figures %}{% assign pg = f.figure | split: "_" | first %}
+    <a class="mx-tile" href="{{ pg }}.html" data-tags="{{ f.tags | join: ' ' }}">
+      <div class="mx-tile-im"><img loading="lazy" src="figures/{{ f.figure }}.png" alt="{{ f.title }}"></div>
+      <div class="mx-tile-cap"><h3>{{ f.title }}</h3><p>{{ f.text }}</p><code>{{ pg }}</code></div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+<script>
+(function () {
+  var chips = document.querySelectorAll('#mx-chips button'), tiles = document.querySelectorAll('#mx-gal .mx-tile');
+  chips.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var tag = b.getAttribute('data-tag');
+      chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      tiles.forEach(function (t) { t.hidden = tag !== 'all' && (' ' + t.getAttribute('data-tags') + ' ').indexOf(' ' + tag + ' ') < 0; });
+    });
+  });
+})();
+</script>

@@ -9,29 +9,42 @@
 # The figures go out first through tools/deploy-figures.sh. In this checkout
 # figures/ pushes to mtex-playground/figures, never to mtex-toolbox/figures.
 #
-#     tools/deploy-next.sh             build and publish
+# By default the preview holds only the generated pages listed in
+# tools/preview-pages.txt (see tools/stage-preview.py); --full builds them all.
+#
+#     tools/deploy-next.sh             build the subset and publish
+#     tools/deploy-next.sh --full      build every page and publish
 #     tools/deploy-next.sh --dry-run   build only, and show where it would go
 
 set -eu
 
 dry=0
-case "${1:-}" in
-  --dry-run) dry=1 ;;
-  "") ;;
-  *) echo "unknown option: $1" >&2; exit 2 ;;
-esac
+full=0
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) dry=1 ;;
+    --full)    full=1 ;;
+    *) echo "unknown option: $arg" >&2; exit 2 ;;
+  esac
+done
 
 cd "$(dirname "$0")/.."
 site=$(pwd)
 remote=git@github.com:mtex-playground/mtex-playground.github.io.git
-out=${NEXT_OUT:-$site/../web-next-site}
+out=${NEXT_OUT:-$(cd "$site/.." && pwd)/web-next-site}
 
 case "$(git -C figures remote get-url origin)" in
   *mtex-playground/*) ;;
   *) echo "figures/ does not push to mtex-playground - refusing" >&2; exit 1 ;;
 esac
 
-bundle exec jekyll build --config _config.yml,_config_next.yml -d "$out"
+if [ "$full" -eq 1 ]; then
+  src=$site
+else
+  src=$(cd "$site/.." && pwd)/web-next-stage
+  python3 tools/stage-preview.py "$src"
+fi
+(cd "$src" && BUNDLE_GEMFILE="$site/Gemfile" bundle exec jekyll build --config _config.yml,_config_next.yml -d "$out")
 touch "$out/.nojekyll"
 echo "built $(find "$out" -name '*.html' | wc -l | tr -d ' ') pages into $out"
 
