@@ -205,6 +205,11 @@ if doDoc
   docOut = fullfile(pwd,'..','pages','documentation_matlab');
   docFiles = select(mtexDocFiles,restrictTo{:});
 
+  % the sections of the documentation are hand-written pages of the site
+  % (pages/sections); their .m files only carry the .toc for the sidebar
+  docFiles = exclude(docFiles,fullfile('Chapters','Start.m'),...
+    fullfile('Chapters','Concepts.m'),fullfile('Chapters','Tasks.m'));
+
   parts = addPart(parts,'documentation',mtexDocFiles,docFiles,docOut);
 
 end

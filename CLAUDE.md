@@ -305,6 +305,13 @@ MTEX output — a broken snippet fails the build for that page). Inside comments
 `|text|` is inline code and `<EBSD.load.html EBSD.load>` is a cross-link to
 another generated page.
 
+The documentation has three sections, Start, Concepts and Tasks
+(`doc/Documentation.toc`). Each section is a file in `doc/Chapters/` whose
+`.toc` lists its chapters; each chapter's `.toc` lists its pages. The section
+pages themselves are hand-written in `pages/sections/` (cards from the sidebar
+and `_data/docmap.yml`), so `makeDoc` never publishes `Chapters/Start.m`,
+`Concepts.m` or `Tasks.m`; they only carry the `.toc` for the sidebar.
+
 Structure and sidebar order come from the `.toc` files, not from directory
 listings: each folder has a landing `<Folder>.m` and a `<Folder>.toc` whose
 lines are `basename` + optional display title (`EBSDTutorial  EBSD`). The
