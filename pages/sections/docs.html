@@ -5,26 +5,79 @@ layout: home
 sidebar: documentation_sidebar
 permalink: docs.html
 ---
+{% comment %}
+The map of the documentation: the tutorials with their gallery figures, then
+every chapter of Concepts and Tasks from the documentation sidebar with the
+figure of _data/docmap.yml, then the sections of the function reference.
+{% endcomment %}
 {% assign folders = site.data.sidebars.documentation_sidebar.entries[0].folders %}
-<div class="mx-wrap">
-  <div class="mx-pagehead">
+{% assign reference = site.data.sidebars.function_reference_sidebar.entries[0].folders %}
+{% assign ncases = 0 %}{% for c in site.data.docmap.case_studies %}{% assign ncases = ncases | plus: c[1].size %}{% endfor %}
+<div class="mx-dochead">
+  <div class="mx-wrap">
     <div class="mx-eyebrow">Documentation</div>
-    <h1>Learn MTEX, look things up, get things done</h1>
-    <p>The documentation is organised by the question you have. Newcomers start with a tutorial for their kind of data; experienced users go straight to a task, or search.</p>
+    <h1>What do you want to do?</h1>
+    <form class="mx-docsearch" method="get" action="search.html" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5L21 21" /></svg>
+      <input type="search" name="q" placeholder="Search tutorials, concepts, tasks and functions" aria-label="Search the documentation">
+    </form>
+    <div class="mx-docchips">
+      <span>Often looked for</span>
+      <a href="EBSDImport.html">Import EBSD data</a>
+      <a href="GrainReconstruction.html">Reconstruct grains</a>
+      <a href="EBSDIPFMap.html">Colour orientation maps</a>
+      <a href="EBSDKAM.html">Kernel average misorientation</a>
+      <a href="PoleFigure2ODF.html">ODF from pole figures</a>
+      <a href="MaParentGrainReconstruction.html">Parent grains</a>
+    </div>
+  </div>
+</div>
+
+<div class="mx-wrap">
+  <div class="mx-head">
+    <h2>Start with a tutorial</h2>
+    <p>Each follows one data set from the file to a result. New to MATLAB scripts? Read <a href="FirstSteps.html">First steps</a> before.</p>
+  </div>
+  <div class="mx-tuts">
+    <a class="mx-tile" href="EBSDTutorial.html"><div class="mx-tile-im"><img src="figures/gallery/ebsdtutorial.png" alt=""></div><div class="mx-tile-cap"><h3>EBSD</h3><p>Import, phase and orientation maps, pole figures</p></div></a>
+    <a class="mx-tile" href="GrainTutorial.html"><div class="mx-tile-im"><img src="figures/gallery/graintutorial.png" alt=""></div><div class="mx-tile-cap"><h3>Grains</h3><p>Reconstruct grains, their size, shape and orientation</p></div></a>
+    <a class="mx-tile" href="BoundaryTutorial.html"><div class="mx-tile-im"><img src="figures/gallery/boundarytutorial.png" alt=""></div><div class="mx-tile-cap"><h3>Grain boundaries</h3><p>Misorientations, twins and special boundaries</p></div></a>
+    <a class="mx-tile" href="PoleFigureTutorial.html"><div class="mx-tile-im"><img src="figures/gallery/pftutorial.png" alt=""></div><div class="mx-tile-cap"><h3>Pole figures</h3><p>From X-ray or neutron intensities to the ODF</p></div></a>
+    <a class="mx-tile" href="ODFTutorial.html"><div class="mx-tile-im"><img src="figures/gallery/odftutorial.png" alt=""></div><div class="mx-tile-cap"><h3>ODFs</h3><p>Model, plot and characterise textures</p></div></a>
   </div>
 
-  <div class="mx-head"><h2>New to MTEX? Pick your data</h2></div>
-  <div class="mx-routes">
-    <a class="mx-route" href="EBSDTutorial.html"><span class="mx-route-im"><img src="figures/EBSDTutorial_03.png" alt=""></span><span><b>I have EBSD maps</b>From the microscope file to grains, boundaries and texture: the EBSD, grain and grain boundary tutorials.</span></a>
-    <a class="mx-route" href="PoleFigureTutorial.html"><span class="mx-route-im"><img src="figures/PoleFigure2ODF_03.png" alt=""></span><span><b>I have pole figures</b>From X-ray or neutron intensities to the ODF and its components: the pole figure and ODF tutorials.</span></a>
-    <a class="mx-route" href="ODFTutorial.html"><span class="mx-route-im"><img src="figures/WaveVelocities_03.png" alt=""></span><span><b>I model textures or properties</b>Model textures, tensors and plasticity without measured data, starting from the ODF tutorial.</span></a>
+  <div class="mx-head">
+    <h2>All chapters</h2>
   </div>
-
-  <div class="mx-head"><h2>Four sections</h2></div>
-  <div class="mx-doors">
-    {% for folder in folders %}{% assign sec = site.data.docmap.sections[folder.title] %}{% assign n = 0 %}{% for c in folder.folderitems.subfolders %}{% assign n = n | plus: c.subfolderitems.size %}{% endfor %}
-    <a class="mx-door2" href="{{ folder.url | remove_first: "/" }}"><h3>{{ folder.title }} <small>{{ n }} pages</small></h3><span class="mx-q">{{ sec.question }}</span><p>{{ sec.text }}</p></a>
-    {% endfor %}
-    <a class="mx-door2" href="function_reference.html"><h3>Function reference</h3><span class="mx-q">What does it take?</span><p>Every class and function, generated from the help text in the MTEX source.</p></a>
+  <div class="mx-docmap">
+    {% for folder in folders %}{% if folder.title != "Start" %}{% assign sec = site.data.docmap.sections[folder.title] %}
+    <section class="mx-docpanel mx-docpanel-{{ folder.title | downcase }}">
+      <a class="mx-docpanel-head" href="{{ folder.url | remove_first: "/" }}">
+        <h3>{{ folder.title }}</h3><span class="mx-q">{{ sec.question }}</span>
+      </a>
+      <p>{{ sec.text }}</p>
+      <ul class="mx-chrows">
+        {% for c in folder.folderitems.subfolders %}{% assign key = c.url | remove: "/" | remove: ".html" %}{% unless sec.shelf contains key %}{% assign m = site.data.docmap.chapters[key] %}{% assign nc = site.data.docmap.case_studies[key].size %}
+        <li><a href="{{ c.url | remove_first: "/" }}"><span class="mx-chrow-im">{% if m.figure %}<img loading="lazy" src="figures/{{ m.figure }}.png" alt="">{% endif %}</span><b>{{ c.title }}</b><small>{{ c.subfolderitems.size }}{% if nc > 0 %} + {{ nc }}{% endif %}</small></a></li>
+        {% endunless %}{% endfor %}
+      </ul>
+      {% if sec.shelf %}
+      <div class="mx-chrows-label">Mathematics</div>
+      <ul class="mx-chrows">
+        {% for c in folder.folderitems.subfolders %}{% assign key = c.url | remove: "/" | remove: ".html" %}{% if sec.shelf contains key %}{% assign m = site.data.docmap.chapters[key] %}
+        <li><a href="{{ c.url | remove_first: "/" }}"><span class="mx-chrow-im">{% if m.figure %}<img loading="lazy" src="figures/{{ m.figure }}.png" alt="">{% endif %}</span><b>{{ c.title | remove: "Mathematics: " | capitalize }}</b><small>{{ c.subfolderitems.size }}</small></a></li>
+        {% endif %}{% endfor %}
+      </ul>
+      {% endif %}{% if folder.title == "Tasks" %}
+      <p class="mx-docmap-note">2 + 7: the pages of a chapter and the case studies on real data that close it, {{ ncases }} in all.</p>{% endif %}
+    </section>
+    {% endif %}{% endfor %}
+      <section class="mx-docref">
+        <a class="mx-docpanel-head" href="function_reference.html"><h3>Function reference</h3><span class="mx-q">What does it take?</span></a>
+        <p>Every class and function with its options, generated from the help text in the MTEX source. It is also the second tab in the sidebar of every documentation page.</p>
+        <div class="mx-docref-list">
+          {% for f in reference %}<a href="{{ f.url | remove_first: "/" }}">{{ f.title }}</a>{% endfor %}
+        </div>
+      </section>
   </div>
 </div>
