@@ -247,8 +247,12 @@ body.mx-body { background: var(--mx-ground); color: var(--mx-ink); font: 17px/1.
    still carries some theme markup (.post-header, center.mtex-figure, font). */
 
 /* the documentation pages are wider than the homepage; the bars follow */
-body.mx-docpage .mx-top .mx-wrap, body.mx-docpage .mx-announce .mx-wrap, body.mx-docpage .mx-footer .mx-wrap { max-width: 1400px; }
-.mx-doc { display: grid; grid-template-columns: 260px minmax(0, 1fr) 210px; gap: 40px; padding-top: 26px; padding-bottom: 20px; align-items: start; max-width: 1400px; }
+body.mx-docpage .mx-top .mx-wrap, body.mx-docpage .mx-announce .mx-wrap, body.mx-docpage .mx-footer .mx-wrap { max-width: none; padding-left: 24px; padding-right: 24px; }
+/* The layout uses the whole window: sidebar at the left edge, "On this page"
+   at the right. Only running text is held to a reading measure of about 78
+   characters (--mx-measure); code, output and figures start at that width and
+   grow with their content up to the full column. */
+.mx-doc { display: grid; grid-template-columns: 270px minmax(0, 1fr) 220px; gap: 44px; padding: 26px 24px 20px; align-items: start; max-width: none; }
 .mx-doc.mx-doc-nosb { grid-template-columns: minmax(0, 1fr) 210px; }
 .mx-doc > * { min-width: 0; }
 
@@ -291,7 +295,7 @@ body.mx-docpage .mx-top .mx-wrap, body.mx-docpage .mx-announce .mx-wrap, body.mx
 .mx-rail a.mx-on { color: var(--mx-accent-ink); border-left: 2px solid var(--mx-accent); margin-left: -1px; font-weight: 600; }
 
 /* the page */
-.mx-article { font: 17px/1.6 var(--mx-body); color: var(--mx-ink); }
+.mx-article { --mx-measure: 78ch; font: 17px/1.6 var(--mx-body); color: var(--mx-ink); }
 .mx-crumbs { font-size: 14.5px; color: var(--mx-ink-3); margin: 2px 0 6px; }
 .mx-crumbs a { color: var(--mx-ink-3); }
 .mx-article .post-header { margin: 0; padding: 0; border: 0; }
@@ -299,7 +303,7 @@ body.mx-docpage .mx-top .mx-wrap, body.mx-docpage .mx-announce .mx-wrap, body.mx
 .mx-article .page-subtitle { color: var(--mx-ink-2); font-size: 18px; margin: 0 0 8px; }
 .mx-article .post-content > font[size="2"], .mx-article font[size="2"] { font-size: 14px; }
 .mx-article font[size="2"] a { color: var(--mx-ink-3); }
-.mx-article p, .mx-article li { max-width: 78ch; }
+.mx-article p, .mx-article li { max-width: var(--mx-measure); }
 .mx-article p { margin: 10px 0; }
 .mx-article a { color: var(--mx-link); }
 .mx-article h2, .mx-article h3, .mx-article h4 { font-family: var(--mx-display); font-stretch: 87.5%; color: var(--mx-ink); letter-spacing: -.01em; line-height: 1.2; text-wrap: balance; }
@@ -313,7 +317,7 @@ body.mx-docpage .mx-top .mx-wrap, body.mx-docpage .mx-announce .mx-wrap, body.mx
 .mx-article a code, .mx-article a code.highlighter-rouge { color: var(--mx-link); }
 
 /* code blocks: MATLAB dark, program output light */
-.mx-article figure.highlight { margin: 12px 0; }
+.mx-article figure.highlight { margin: 12px 0; width: fit-content; min-width: min(100%, var(--mx-measure)); max-width: 100%; }
 .mx-article figure.highlight pre { background: var(--mx-code-bg); color: var(--mx-code-ink); border: 0; border-radius: 10px; padding: 12px 16px; margin: 0; font: 13.5px/1.6 var(--mx-mono); overflow-x: auto; white-space: pre; word-break: normal; word-wrap: normal; }
 .mx-article figure.highlight pre code { background: none; color: inherit; font: inherit; padding: 0; white-space: pre; }
 .mx-article figure.highlight .c, .mx-article figure.highlight .c1, .mx-article figure.highlight .cm { color: var(--mx-code-dim); font-style: italic; }
@@ -334,6 +338,11 @@ body.mx-docpage .mx-top .mx-wrap, body.mx-docpage .mx-announce .mx-wrap, body.mx
 .mx-nextprev a:hover { border-color: var(--mx-accent); text-decoration: none; }
 .mx-nextprev small { color: var(--mx-ink-3); font-size: 13.5px; }
 
+/* Figures are rendered at twice their display size and shown at half
+   (customstyles.css: zoom .5), so wide windows can show them larger and still
+   sharp. */
+@media (min-width: 1700px) { .mx-article { font-size: 18px; } .mx-article .mtex-figure img { zoom: .65; } }
+@media (min-width: 2200px) { .mx-article { font-size: 19px; } .mx-article .mtex-figure img { zoom: .8; } .mx-doc { grid-template-columns: 300px minmax(0, 1fr) 240px; } }
 @media (max-width: 1180px) {
   .mx-doc { grid-template-columns: 240px minmax(0, 1fr); }
   .mx-doc.mx-doc-nosb { grid-template-columns: minmax(0, 1fr); }
