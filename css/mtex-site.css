@@ -134,7 +134,7 @@ body.mx-body { background: var(--mx-ground); color: var(--mx-ink); font: 17px/1.
 .mx-page .mx-hero-text h1 { margin-bottom: 18px; }
 .mx-page .mx-hero-text .mx-btns { margin-top: 6px; }
 .mx-page .mx-people { margin: 24px 0 0; padding-top: 16px; border-top: 1px solid var(--mx-line); font-size: 16px; color: var(--mx-ink-2); }
-.mx-card { background: var(--mx-code-bg); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--mx-shadow); min-width: 0; align-self: center; }
+.mx-card { background: var(--mx-code-bg); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--mx-shadow); min-width: 0; }
 .mx-card-tabs { display: flex; gap: 2px; padding: 8px 8px 0; border-bottom: 1px solid rgba(255,255,255,.1); overflow-x: auto; scrollbar-width: none; }
 .mx-card-tabs::-webkit-scrollbar { display: none; }
 .mx-card-tabs button { font: 600 14px var(--mx-body); color: var(--mx-code-dim); background: none; border: 0; border-bottom: 2px solid transparent; padding: 9px 8px; cursor: pointer; white-space: nowrap; }
@@ -143,15 +143,16 @@ body.mx-body { background: var(--mx-ground); color: var(--mx-ink); font: 17px/1.
 .mx-card-tabs button:focus-visible { outline: 2px solid var(--mx-code-key); outline-offset: -2px; }
 .mx-card-pane { display: flex; flex-direction: column; flex: 1; }
 .mx-card-pane[hidden] { display: none; }
-.mx-page .mx-card pre { height: 14.7em; margin: 0; padding: 14px 18px 6px; font: 13.5px/1.65 var(--mx-mono); color: var(--mx-code-ink); background: none; border: 0; border-radius: 0; overflow: auto; white-space: pre; }
+.mx-page .mx-card pre { height: auto; flex: none; margin: 0; padding: 14px 18px 6px; font: 13.5px/1.65 var(--mx-mono); color: var(--mx-code-ink); background: none; border: 0; border-radius: 0; overflow: auto; white-space: pre; }
 .mx-page .mx-card pre { scrollbar-width: thin; scrollbar-color: #2f4a44 transparent; }
 .mx-card .c { color: var(--mx-code-dim); font-style: italic; }
 .mx-card .s { color: var(--mx-code-str); }
 .mx-card .k { color: var(--mx-code-key); }
-.mx-card-figs { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 12px; padding: 0 16px 8px; height: 256px; }
+.mx-card-pane { min-height: 0; }
+.mx-card-figs { flex: 1; min-height: 220px; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 12px; padding: 0 16px 14px; }
 .mx-card-figs figure { margin: 0; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
-.mx-card-figs figure > div { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
-.mx-card-figs img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 6px; }
+.mx-card-figs figure > div { flex: 1; min-height: 0; position: relative; }
+.mx-card-figs img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .mx-card-figs figcaption { font: 12.5px/1.3 var(--mx-mono); color: var(--mx-code-dim); margin-top: 8px; padding: 0; max-width: none; text-align: center; }
 
 /* quick links under the hero text */
@@ -277,7 +278,7 @@ body.mx-body { background: var(--mx-ground); color: var(--mx-ink); font: 17px/1.
 @media (max-width: 640px) {
   .mx-page .mx-card pre { height: auto; max-height: 18em; }
   .mx-card-figs { grid-template-columns: 1fr; }
-  .mx-card-figs { height: 240px; }
+  .mx-card-figs { min-height: 0; height: 240px; flex: none; }
   .mx-card-figs figure + figure { display: none; }
   .mx-start, .mx-foot3 { grid-template-columns: 1fr; }
   .mx-foot3 > :first-child { grid-column: auto; }
