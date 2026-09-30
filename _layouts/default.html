@@ -73,33 +73,34 @@
     </script>
     {% endif %}
 </head>
-<body>
+<body class="mx-body mx-docpage">
 {% include topnav.html %}
-<!-- Page Content -->
-<div class="container">
-  <div id="main">
-    <!-- Content Row -->
-    <div class="row">
-        {% assign content_col_size = "col-md-12" %}
-        {% unless page.hide_sidebar %}
-            <!-- Sidebar Column -->
-            <div class="col-md-3" id="tg-sb-sidebar">
-                {% include sidebar.html %}
-            </div>
-            {% assign content_col_size = "col-md-9" %}
-        {% endunless %}
-
-        <!-- Content Column -->
-        <div class="{{content_col_size}}" id="tg-sb-content">
-            {{content}}
+{% comment %}
+Three columns in the 2026 design: the sidebar of the page's section, the page,
+and an "On this page" list. The sidebar tree is fetched from
+/sidebars/<name>.html and built into chapters by js/mx-doc.js, which also adds
+the breadcrumbs, the previous/next links and the list of headings.
+{% endcomment %}
+{% assign sidebar_data = site.data.sidebars[page.sidebar] %}
+<div class="mx-wrap mx-doc{% if page.hide_sidebar or sidebar_data == nil %} mx-doc-nosb{% endif %}">
+    {% unless page.hide_sidebar or sidebar_data == nil %}
+    <aside class="mx-side" id="mx-side" aria-label="{{ page.folder | default: 'Section' | capitalize }} navigation"
+           data-sidebar-url="{{ "sidebars/" | append: page.sidebar | append: ".html" }}"
+           data-sidebar="{{ page.sidebar }}">
+        <button type="button" class="mx-side-toggle" aria-expanded="false">Contents</button>
+        <div class="mx-side-body">
+            <input type="search" class="mx-side-filter" id="mx-side-filter" placeholder="Filter this section" aria-label="Filter this section" autocomplete="off">
+            <div class="mx-side-tree" id="mx-side-tree"></div>
         </div>
-    <!-- /.row -->
+    </aside>
+    {% endunless %}
+    <article class="mx-article" id="mx-article">
+        {{content}}
+    </article>
+    <aside class="mx-rail" id="mx-rail" aria-label="On this page" hidden></aside>
 </div>
-<!-- /.container -->
-</div>
-<!-- /#main -->
-    </div>
 {% include mx-footer.html %}
+<script src="js/mx-doc.js" defer></script>
 </body>
 {% if site.google_analytics %}
 {% include google_analytics.html %}
