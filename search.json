@@ -6,7 +6,8 @@ permalink: /search.json
 {%- comment -%}
 Search index for js/mtex-search.js.
 
-One row per page: [title, url, folderIndex, description]. Arrays rather than
+One row per page: [title, url, folderIndex, description]; see FOLDERS in
+js/mtex-search.js for the indices. Arrays rather than
 objects because the key names would otherwise repeat ~2700 times (~34 KB).
 
 The description is the first paragraph after the <!--introduction--> marker that
@@ -22,6 +23,19 @@ page.content is rendered HTML on a clean build but raw source under
 {% raw %}{% highlight %}{% endraw %} fences all sit after the first paragraph.
 {%- endcomment -%}
 {%- assign folders = "function_reference,documentation,examples,workshops,other" | split: "," -%}
+{%- comment -%}
+A documentation page is indexed by its section instead (5 Start, 6 Concepts,
+7 Tasks), read once from the sidebar into ";url=index;" pairs.
+{%- endcomment -%}
+{%- assign secmap = ";" -%}
+{%- for sec in site.data.sidebars.documentation_sidebar.entries[0].folders -%}
+{%- if sec.title == "Start" -%}{%- assign si = 5 -%}{%- elsif sec.title == "Concepts" -%}{%- assign si = 6 -%}{%- elsif sec.title == "Tasks" -%}{%- assign si = 7 -%}{%- else -%}{%- continue -%}{%- endif -%}
+{%- assign secmap = secmap | append: sec.url | append: "=" | append: si | append: ";" -%}
+{%- for ch in sec.folderitems.subfolders -%}
+{%- assign secmap = secmap | append: ch.url | append: "=" | append: si | append: ";" -%}
+{%- for pg in ch.subfolderitems -%}{%- assign secmap = secmap | append: pg.url | append: "=" | append: si | append: ";" -%}{%- endfor -%}
+{%- endfor -%}
+{%- endfor -%}
 {%- assign sep = "" -%}
 [
 {%- for p in site.pages -%}
@@ -50,6 +64,8 @@ that still holds a tag makes the index byte-identical either way.
 {%- endif -%}
 {%- assign fi = 4 -%}
 {%- for f in folders -%}{%- if f == p.folder -%}{%- assign fi = forloop.index0 -%}{%- break -%}{%- endif -%}{%- endfor -%}
+{%- assign key = ";" | append: p.url | append: "=" -%}
+{%- if secmap contains key -%}{%- assign fi = secmap | split: key | last | split: ";" | first | plus: 0 -%}{%- endif -%}
 {{ sep }}[{{ p.title | strip | jsonify }},{{ p.url | jsonify }},{{ fi }},{{ desc | jsonify }}]
 {%- assign sep = "," -%}
 {%- endfor -%}

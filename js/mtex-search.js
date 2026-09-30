@@ -18,12 +18,15 @@
 
     var INDEX_URL = '/search.json';
 
-    var FOLDERS = ['function_reference', 'documentation', 'examples', 'workshops', 'other'];
-    var FOLDER_LABEL = ['Function reference', 'Documentation', 'Examples', 'Workshops', 'Other'];
+    // a documentation page is indexed by its section: Start, Concepts or Tasks
+    var FOLDERS = ['function_reference', 'documentation', 'examples', 'workshops', 'other', 'start', 'concepts', 'tasks'];
+    var FOLDER_LABEL = ['Function reference', 'Documentation', 'Examples', 'Workshops', 'Other', 'Start', 'Concepts', 'Tasks'];
     // Display order for grouped results; tutorials before the 2421 function pages.
-    var FOLDER_ORDER = [1, 2, 0, 3, 4];
+    var FOLDER_ORDER = [7, 6, 5, 1, 2, 0, 3, 4];
     // Nudge so a tutorial outranks a bare function page on an otherwise equal score.
-    var FOLDER_PRIOR = [0, 30, 30, 0, -10];
+    var FOLDER_PRIOR = [0, 30, 30, 0, -10, 30, 30, 30];
+    // the filters of the result list: a label and the kinds it keeps
+    var FILTERS = [['All', null], ['Tasks', [7]], ['Concepts', [6]], ['Start', [5, 1]], ['Functions', [0]], ['Examples', [2]]];
 
     var TITLE_EXACT = 1000, METHOD_EXACT = 500, TITLE_PREFIX = 400, TITLE_WORD = 250, TITLE_SUB = 100;
     var URL_WORD = 120, URL_SUB = 60;
@@ -266,7 +269,7 @@
         var dropdown = opts.mode === 'dropdown';
         var noResults = opts.noResultsText || 'No results found.';
         var onQuery = opts.onQuery || null;
-        var timer = null, active = -1, items = [], lastQuery = '';
+        var timer = null, active = -1, items = [], lastQuery = '', kinds = null;
 
         function close() {
             container.innerHTML = '';
@@ -289,8 +292,33 @@
             }
         }
 
+        // a row of filter chips above the results; a chip narrows the list
+        // to one kind of page and keeps the query
+        function chips(query) {
+            var li = document.createElement('li');
+            li.className = 'ms-filters';
+            FILTERS.forEach(function (f) {
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.textContent = f[0];
+                b.setAttribute('aria-pressed', String(kinds === f[1]));
+                b.addEventListener('mousedown', function (e) { e.preventDefault(); });
+                b.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    kinds = f[1];
+                    render(query);
+                    input.focus();
+                });
+                li.appendChild(b);
+            });
+            return li;
+        }
+
         function render(query) {
-            var hits = search(query, limit);
+            var hits = search(query, kinds ? 0 : limit).filter(function (h) {
+                return !kinds || kinds.indexOf(h.rec.f) >= 0;
+            });
+            if (kinds && limit) { hits = hits.slice(0, limit); }
             var terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
             var frag = document.createDocumentFragment();
             var n = 0;
@@ -306,6 +334,7 @@
             }
 
             if (!query) { close(); return; }
+            if (opts.filters !== false) { frag.appendChild(chips(query)); }
 
             if (!hits.length) {
                 var empty = document.createElement('li');
