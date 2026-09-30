@@ -27,6 +27,9 @@ def wanted():
             line = line.split("#", 1)[0].strip()
             if line:
                 names.add(line)
+    with open(os.path.join(SITE, "_data", "gallery.yml")) as f:
+        gallery = yaml.safe_load(f)
+    names.update(figure["page"] for figure in gallery["figures"])
     return names
 
 

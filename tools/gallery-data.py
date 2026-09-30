@@ -45,8 +45,7 @@ def main():
         while shown and not shown[-1]:
             shown.pop()
         if not os.path.exists(os.path.join(SITE, "figures", "gallery", name + ".png")):
-            print(f"  no figure for {name}, left out")
-            continue
+            raise FileNotFoundError(f"Render galleryFigures.m first: missing {name}.png")
         entries.append({"figure": f"figures/gallery/{name}.png", "page": meta["page"],
                         "title": meta["title"],
                         "labels": [l.strip() for l in meta.get("labels", "").split(",") if l.strip()],
