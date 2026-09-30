@@ -30,15 +30,14 @@ plot(grains,'ipfDirection',zvector)
 heroExport('grains',1)                                                  % hide
 
 %% Clean
-%#captions KAM measured | KAM denoised
+%#captions KAM 0-2°, measured | KAM 0-2°, denoised
 % total variation denoising of the orientations
 F = l1TVFilter;
 ebsdS = smooth(ebsd,F);
 plot(ebsd,ebsd.KAM./degree), setColorRange([0 2])                       % hide
-mtexColorbar('title','KAM in degree')                                   % hide
 heroExport('clean',1)                                                   % hide
 plot(ebsdS,ebsdS.KAM./degree)
-setColorRange([0 2]), mtexColorbar('title','KAM in degree')             % hide
+setColorRange([0 2])                                                    % hide
 heroExport('clean',2)                                                   % hide
 
 %% Twins
