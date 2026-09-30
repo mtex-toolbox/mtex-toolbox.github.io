@@ -5,25 +5,35 @@ layout: home
 permalink: gallery
 search: exclude
 ---
-{% assign g = site.data.gallery %}
+{% comment %}
+The figures and their code come from matlab/galleryFigures.m via
+tools/gallery-data.py (_data/gallery.yml); each links to its page.
+{% endcomment %}
+{% assign g = site.data.gallery.figures %}
+{% assign sections = g | map: "section" | uniq %}
 <div class="mx-wrap">
   <div class="mx-pagehead">
     <div class="mx-eyebrow">Gallery</div>
     <h1>What MTEX can do</h1>
-    <p>Every figure here is drawn by a documentation page during the build. Open one for the script that made it.</p>
+    <p>Each figure is drawn by the few lines of MTEX code beside it, on data that comes with MTEX. Open a figure's code, or go to the page that explains it.</p>
   </div>
-  <div class="mx-chips" id="mx-chips" role="group" aria-label="Filter by topic">
-    <button type="button" data-tag="all" aria-pressed="true">All <small>{{ g.figures.size }}</small></button>
-    {% for t in g.tags %}{% assign n = 0 %}{% for f in g.figures %}{% if f.tags contains t[0] %}{% assign n = n | plus: 1 %}{% endif %}{% endfor %}
-    <button type="button" data-tag="{{ t[0] }}" aria-pressed="false">{{ t[1] }} <small>{{ n }}</small></button>
+  <div class="mx-chips" id="mx-chips" role="group" aria-label="Filter by section">
+    <button type="button" data-ch="" aria-pressed="true">All <small>{{ g.size }}</small></button>
+    {% for c in sections %}{% assign n = g | where: "section", c | size %}
+    <button type="button" data-ch="{{ c }}" aria-pressed="false">{{ c }} <small>{{ n }}</small></button>
     {% endfor %}
   </div>
   <div class="mx-gal" id="mx-gal">
-    {% for f in g.figures %}{% assign pg = f.figure | split: "_" | first %}
-    <a class="mx-tile" href="{{ pg }}.html" data-tags="{{ f.tags | join: ' ' }}">
-      <div class="mx-tile-im"><img loading="lazy" src="figures/{{ f.figure }}.png" alt="{{ f.title }}"></div>
-      <div class="mx-tile-cap"><h3>{{ f.title }}</h3><p>{{ f.text }}</p><code>{{ pg }}</code></div>
-    </a>
+    {% for f in g %}
+    <figure class="mx-tile" data-ch="{{ f.section }}">
+      <a class="mx-tile-im" href="{{ f.page }}.html"><img loading="lazy" src="{{ f.figure }}" alt="{{ f.title }}"></a>
+      <figcaption class="mx-tile-cap">
+        <span class="mx-tile-where">{{ f.section }} · {{ f.chapter }}</span>
+        <h3><a href="{{ f.page }}.html">{{ f.title }}</a></h3>
+        <p>{{ f.text }}</p>
+        <details class="mx-tile-code"><summary>Code</summary><pre>{{ f.code }}</pre></details>
+      </figcaption>
+    </figure>
     {% endfor %}
   </div>
 </div>
@@ -32,9 +42,9 @@ search: exclude
   var chips = document.querySelectorAll('#mx-chips button'), tiles = document.querySelectorAll('#mx-gal .mx-tile');
   chips.forEach(function (b) {
     b.addEventListener('click', function () {
-      var tag = b.getAttribute('data-tag');
+      var ch = b.getAttribute('data-ch');
       chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-      tiles.forEach(function (t) { t.hidden = tag !== 'all' && (' ' + t.getAttribute('data-tags') + ' ').indexOf(' ' + tag + ' ') < 0; });
+      tiles.forEach(function (t) { t.hidden = ch !== '' && t.getAttribute('data-ch') !== ch; });
     });
   });
 })();

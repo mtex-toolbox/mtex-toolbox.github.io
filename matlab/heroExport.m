@@ -3,8 +3,9 @@ function heroExport(step,n,varargin)
 %
 % heroExport(step,n,'dark') draws it on the background of the card
 % heroExport(step,n,'noLabels') removes all text from the axes
+% heroExport(name,[],'dir','gallery') writes ../figures/gallery/<name>.png
 
-outDir = fullfile(fileparts(mfilename('fullpath')),'..','figures','hero');
+outDir = fullfile(fileparts(mfilename('fullpath')),'..','figures',get_option(varargin,'dir','hero'));
 if ~exist(outDir,'dir'), mkdir(outDir); end
 fig = gcf;
 fig.Units = 'pixels';
@@ -22,7 +23,8 @@ if check_option(varargin,'dark')
   set(t(~boxed),'Color',[0.86 0.92 0.9]);
 end
 drawnow
-exportgraphics(fig,fullfile(outDir,sprintf('%s_%d.png',step,n)),...
+if isempty(n), name = step; else, name = sprintf('%s_%d',step,n); end
+exportgraphics(fig,fullfile(outDir,[name '.png']),...
   'Resolution',144,'BackgroundColor',bg);
 close(fig)
 
