@@ -145,6 +145,39 @@
     return found;
   }
 
+  // documentation: sections (Start, Concepts, Tasks) hold chapters, which hold
+  // pages. Only the section of the current page is shown; a chapter page lists
+  // its pages.
+  function renderSection(sections, sec) {
+    var holds = function (c) { return strip(c.url) === here || (c.items || []).some(function (i) { return strip(i.url) === here; }); };
+    var section = sections.find(function (s) { return strip(s.url) === here || s.items.some(holds); });
+    if (!section) { renderChapters(sections); return; }
+    var chapters = section.items.map(function (c) { return { title: c.title, url: c.url, items: c.items || [] }; });
+    renderChapters(chapters);
+    var head = el('div', { class: 'mx-side-class' });
+    head.appendChild(link({ title: section.title, url: section.url }, 'mx-side-sectionname'));
+    tree.insertBefore(head, tree.firstChild);
+    document.getElementById('mx-side-filter').placeholder = 'Filter ' + section.title;
+    var ch = chapters.find(holds);
+    var trail = [{ title: sec[0], url: sec[1] }, { title: section.title, url: section.url }];
+    if (ch && strip(ch.url) !== here) { trail.push({ title: ch.title, url: ch.url }); }
+    crumbs(trail);
+    if (ch && strip(ch.url) === here) { listChapter(ch); } else if (ch) { nextPrev(ch.items); }
+  }
+
+  // the pages of a chapter, on the chapter's own page
+  function listChapter(ch) {
+    var box = el('ol', { class: 'mx-chapter-list' });
+    ch.items.forEach(function (p) {
+      var li = el('li');
+      li.appendChild(el('a', { href: p.url }, p.title));
+      box.appendChild(li);
+    });
+    var body = article.querySelector('.post-content') || article;
+    var cite = body.querySelector('.mtex-attribution');
+    body.insertBefore(box, cite || null);
+  }
+
   function filter(q) {
     q = q.trim().toLowerCase();
     tree.querySelectorAll('li').forEach(function (li) {
@@ -185,7 +218,7 @@
   }
 
   var SECTION = {
-    documentation_sidebar: ['Documentation', 'Documentation.html'],
+    documentation_sidebar: ['Documentation', 'docs.html'],
     function_reference_sidebar: ['Function reference', 'function_reference.html'],
     examples_sidebar: ['Examples', 'examples.html'],
     workshops_sidebar: ['Workshops', null]
@@ -203,6 +236,8 @@
           crumbs([{ title: sec[0], url: sec[1] }, { title: f.section.title, url: f.section.url }, { title: f.cls.title, url: f.cls.url }]);
           nextPrev(f.cls.items);
         }
+      } else if (name === 'documentation_sidebar') {
+        renderSection(chapters, sec);
       } else {
         renderChapters(chapters);
         var ch = chapters.find(function (c) { return strip(c.url) === here || c.items.some(function (i) { return strip(i.url) === here; }); });

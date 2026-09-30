@@ -1,0 +1,30 @@
+---
+title: Documentation
+keywords: MTEX documentation, tutorials, concepts, tasks, function reference
+layout: home
+sidebar: documentation_sidebar
+permalink: docs.html
+---
+{% assign folders = site.data.sidebars.documentation_sidebar.entries[0].folders %}
+<div class="mx-wrap">
+  <div class="mx-pagehead">
+    <div class="mx-eyebrow">Documentation</div>
+    <h1>Learn MTEX, look things up, get things done</h1>
+    <p>The documentation is organised by the question you have. Newcomers start with a tutorial for their kind of data; experienced users go straight to a task, or search.</p>
+  </div>
+
+  <div class="mx-head"><h2>New to MTEX? Pick your data</h2></div>
+  <div class="mx-routes">
+    <a class="mx-route" href="EBSDTutorial.html"><span class="mx-route-im"><img src="figures/EBSDTutorial_03.png" alt=""></span><span><b>I have EBSD maps</b>From the microscope file to grains, boundaries and texture: the EBSD, grain and grain boundary tutorials.</span></a>
+    <a class="mx-route" href="PoleFigureTutorial.html"><span class="mx-route-im"><img src="figures/PoleFigure2ODF_03.png" alt=""></span><span><b>I have pole figures</b>From X-ray or neutron intensities to the ODF and its components: the pole figure and ODF tutorials.</span></a>
+    <a class="mx-route" href="ODFTutorial.html"><span class="mx-route-im"><img src="figures/WaveVelocities_03.png" alt=""></span><span><b>I model textures or properties</b>Model textures, tensors and plasticity without measured data, starting from the ODF tutorial.</span></a>
+  </div>
+
+  <div class="mx-head"><h2>Four sections</h2></div>
+  <div class="mx-doors">
+    {% for folder in folders %}{% assign sec = site.data.docmap.sections[folder.title] %}{% assign n = 0 %}{% for c in folder.folderitems.subfolders %}{% assign n = n | plus: c.subfolderitems.size %}{% endfor %}
+    <a class="mx-door2" href="{{ folder.url | remove_first: "/" }}"><h3>{{ folder.title }} <small>{{ n }} pages</small></h3><span class="mx-q">{{ sec.question }}</span><p>{{ sec.text }}</p></a>
+    {% endfor %}
+    <a class="mx-door2" href="function_reference.html"><h3>Function reference</h3><span class="mx-q">What does it take?</span><p>Every class and function, generated from the help text in the MTEX source.</p></a>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+{% comment %}
+The cards of one documentation section (Start, Concepts, Tasks): its chapters
+from the documentation sidebar, each with the figure and sentence of
+_data/docmap.yml. include.section is the section title.
+{% endcomment %}
+{% assign sec = site.data.docmap.sections[include.section] %}
+{% assign folders = site.data.sidebars.documentation_sidebar.entries[0].folders %}
+{% for folder in folders %}{% if folder.title == include.section %}{% assign chapters = folder.folderitems.subfolders %}{% endif %}{% endfor %}
+<div class="mx-wrap">
+  <div class="mx-pagehead">
+    <div class="mx-eyebrow">Documentation · {{ include.section }}</div>
+    <h1>{{ sec.question }}</h1>
+    <p>{{ sec.text }}</p>
+  </div>
+  <div class="mx-chapters">
+    {% for c in chapters %}{% assign key = c.url | remove: "/" | remove: ".html" %}{% unless sec.shelf contains key %}{% assign m = site.data.docmap.chapters[key] %}
+    <a class="mx-tile" href="{{ c.url | remove_first: "/" }}">
+      <div class="mx-tile-im">{% if m.figure %}<img loading="lazy" src="figures/{{ m.figure }}.png" alt="">{% endif %}</div>
+      <div class="mx-tile-cap"><h3>{{ c.title }}</h3><p>{{ m.text }}</p><span class="mx-small">{{ c.subfolderitems.size }} pages</span></div>
+    </a>
+    {% endunless %}{% endfor %}
+  </div>
+  {% if sec.shelf %}
+  <div class="mx-shelf">
+    <div class="mx-head"><h2>Mathematics</h2><p>The functions and numerics underneath, for method developers.</p></div>
+    <div class="mx-chapters">
+      {% for c in chapters %}{% assign key = c.url | remove: "/" | remove: ".html" %}{% if sec.shelf contains key %}{% assign m = site.data.docmap.chapters[key] %}
+      <a class="mx-tile" href="{{ c.url | remove_first: "/" }}">
+        <div class="mx-tile-im">{% if m.figure %}<img loading="lazy" src="figures/{{ m.figure }}.png" alt="">{% endif %}</div>
+        <div class="mx-tile-cap"><h3>{{ c.title }}</h3><p>{{ m.text }}</p><span class="mx-small">{{ c.subfolderitems.size }} pages</span></div>
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
