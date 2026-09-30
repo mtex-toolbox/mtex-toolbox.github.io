@@ -81,12 +81,14 @@ and an "On this page" list. The sidebar tree is fetched from
 /sidebars/<name>.html and built into chapters by js/mx-doc.js, which also adds
 the breadcrumbs, the previous/next links and the list of headings.
 {% endcomment %}
-{% assign sidebar_data = site.data.sidebars[page.sidebar] %}
+{% comment %} the examples are case studies inside the Tasks section {% endcomment %}
+{% assign sb = page.sidebar %}{% if sb == "examples_sidebar" %}{% assign sb = "documentation_sidebar" %}{% endif %}
+{% assign sidebar_data = site.data.sidebars[sb] %}
 <div class="mx-wrap mx-doc{% if page.hide_sidebar or sidebar_data == nil %} mx-doc-nosb{% endif %}">
     {% unless page.hide_sidebar or sidebar_data == nil %}
     <aside class="mx-side" id="mx-side" aria-label="{{ page.folder | default: 'Section' | capitalize }} navigation"
-           data-sidebar-url="{{ "sidebars/" | append: page.sidebar | append: ".html" }}"
-           data-sidebar="{{ page.sidebar }}">
+           data-sidebar-url="{{ "sidebars/" | append: sb | append: ".html" }}"
+           data-sidebar="{{ sb }}">
         <button type="button" class="mx-side-toggle" aria-expanded="false">Contents</button>
         <div class="mx-side-body">
             <input type="search" class="mx-side-filter" id="mx-side-filter" placeholder="Filter this section" aria-label="Filter this section" autocomplete="off">
@@ -100,6 +102,7 @@ the breadcrumbs, the previous/next links and the list of headings.
     <aside class="mx-rail" id="mx-rail" aria-label="On this page" hidden></aside>
 </div>
 {% include mx-footer.html %}
+<script>window.MX_CASES = {{ site.data.docmap.case_studies | jsonify }};</script>
 <script src="js/mx-doc.js" defer></script>
 </body>
 {% if site.google_analytics %}

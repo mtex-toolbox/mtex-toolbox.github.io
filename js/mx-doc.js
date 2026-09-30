@@ -111,7 +111,7 @@
       if (ch.url && ch.url !== '#') {
         var li0 = el('li', { class: 'mx-side-over' }); li0.appendChild(link({ title: 'Overview', url: ch.url })); ul.appendChild(li0);
       }
-      ch.items.forEach(function (i) { var li = el('li'); li.appendChild(link(i)); ul.appendChild(li); });
+      ch.items.forEach(function (i) { var li = el('li', i.isCase ? { class: 'mx-side-case' } : null); li.appendChild(link(i)); ul.appendChild(li); });
       d.appendChild(ul);
       tree.appendChild(d);
     });
@@ -149,10 +149,19 @@
   // pages. Only the section of the current page is shown; a chapter page lists
   // its pages.
   function renderSection(sections, sec) {
-    var holds = function (c) { return strip(c.url) === here || (c.items || []).some(function (i) { return strip(i.url) === here; }); };
+    // case studies: the worked examples of a chapter, listed after its pages
+    var cases = window.MX_CASES || {};
+    sections.forEach(function (s) {
+      s.items.forEach(function (c) {
+        c.cases = (cases[strip(c.url)] || []).map(function (x) { return { title: x.title, url: x.page + '.html', isCase: true }; });
+      });
+    });
+    var holds = function (c) {
+      return strip(c.url) === here || (c.items || []).concat(c.cases || []).some(function (i) { return strip(i.url) === here; });
+    };
     var section = sections.find(function (s) { return strip(s.url) === here || s.items.some(holds); });
     if (!section) { renderChapters(sections); return; }
-    var chapters = section.items.map(function (c) { return { title: c.title, url: c.url, items: c.items || [] }; });
+    var chapters = section.items.map(function (c) { return { title: c.title, url: c.url, items: (c.items || []).concat(c.cases) }; });
     renderChapters(chapters);
     var head = el('div', { class: 'mx-side-class' });
     head.appendChild(link({ title: section.title, url: section.url }, 'mx-side-sectionname'));
@@ -167,15 +176,21 @@
 
   // the pages of a chapter, on the chapter's own page
   function listChapter(ch) {
-    var box = el('ol', { class: 'mx-chapter-list' });
-    ch.items.forEach(function (p) {
-      var li = el('li');
-      li.appendChild(el('a', { href: p.url }, p.title));
-      box.appendChild(li);
-    });
     var body = article.querySelector('.post-content') || article;
     var cite = body.querySelector('.mtex-attribution');
-    body.insertBefore(box, cite || null);
+    var add = function (list, cls, heading) {
+      if (!list.length) { return; }
+      if (heading) { body.insertBefore(el('h2', { class: 'mx-chapter-head' }, heading), cite || null); }
+      var box = el('ol', { class: cls });
+      list.forEach(function (p) {
+        var li = el('li');
+        li.appendChild(el('a', { href: p.url }, p.title));
+        box.appendChild(li);
+      });
+      body.insertBefore(box, cite || null);
+    };
+    add(ch.items.filter(function (p) { return !p.isCase; }), 'mx-chapter-list', null);
+    add(ch.items.filter(function (p) { return p.isCase; }), 'mx-chapter-list mx-chapter-cases', 'Case studies');
   }
 
   function filter(q) {

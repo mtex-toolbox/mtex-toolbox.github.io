@@ -20,13 +20,13 @@
 
     // a documentation page is indexed by its section: Start, Concepts or Tasks
     var FOLDERS = ['function_reference', 'documentation', 'examples', 'workshops', 'other', 'start', 'concepts', 'tasks'];
-    var FOLDER_LABEL = ['Function reference', 'Documentation', 'Examples', 'Workshops', 'Other', 'Start', 'Concepts', 'Tasks'];
+    var FOLDER_LABEL = ['Function reference', 'Documentation', 'Case studies', 'Workshops', 'Other', 'Start', 'Concepts', 'Tasks'];
     // Display order for grouped results; tutorials before the 2421 function pages.
     var FOLDER_ORDER = [7, 6, 5, 1, 2, 0, 3, 4];
     // Nudge so a tutorial outranks a bare function page on an otherwise equal score.
     var FOLDER_PRIOR = [0, 30, 30, 0, -10, 30, 30, 30];
     // the filters of the result list: a label and the kinds it keeps
-    var FILTERS = [['All', null], ['Tasks', [7]], ['Concepts', [6]], ['Start', [5, 1]], ['Functions', [0]], ['Examples', [2]]];
+    var FILTERS = [['All', null], ['Tasks', [7]], ['Concepts', [6]], ['Start', [5, 1]], ['Functions', [0]], ['Case studies', [2]]];
 
     var TITLE_EXACT = 1000, METHOD_EXACT = 500, TITLE_PREFIX = 400, TITLE_WORD = 250, TITLE_SUB = 100;
     var URL_WORD = 120, URL_SUB = 60;

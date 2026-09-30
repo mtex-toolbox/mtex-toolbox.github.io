@@ -33,8 +33,9 @@ browser until its `id` in _data/announcement.yml changes.
         {% for item in site.data.topnav.topnav %}
           {% assign target = item.url | split: "#" | first | remove: "/" %}
           {% assign here = page.url | remove: "/" | remove: ".html" %}
+          {% assign psb = page.sidebar %}{% if psb == "examples_sidebar" %}{% assign psb = "documentation_sidebar" %}{% endif %}
           {% assign classes = "" %}
-          {% if item.pill %}{% assign classes = "mx-pill" %}{% elsif item.url contains "#" %}{% elsif here == target or page.sidebar == item.sidebar and item.sidebar %}{% assign classes = "mx-current" %}{% endif %}
+          {% if item.pill %}{% assign classes = "mx-pill" %}{% elsif item.url contains "#" %}{% elsif here == target or psb == item.sidebar and item.sidebar %}{% assign classes = "mx-current" %}{% endif %}
           <li><a href="{{ item.url | remove_first: "/" }}"{% if classes != "" %} class="{{ classes }}"{% endif %}{% if classes == "mx-current" %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
         {% endfor %}
       </ul>

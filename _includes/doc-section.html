@@ -16,7 +16,7 @@ _data/docmap.yml. include.section is the section title.
     {% for c in chapters %}{% assign key = c.url | remove: "/" | remove: ".html" %}{% unless sec.shelf contains key %}{% assign m = site.data.docmap.chapters[key] %}
     <a class="mx-tile" href="{{ c.url | remove_first: "/" }}">
       <div class="mx-tile-im">{% if m.figure %}<img loading="lazy" src="figures/{{ m.figure }}.png" alt="">{% endif %}</div>
-      <div class="mx-tile-cap"><h3>{{ c.title }}</h3><p>{{ m.text }}</p><span class="mx-small">{{ c.subfolderitems.size }} pages</span></div>
+      <div class="mx-tile-cap"><h3>{{ c.title }}</h3><p>{{ m.text }}</p><span class="mx-small">{{ c.subfolderitems.size }} pages{% assign nc = site.data.docmap.case_studies[key].size %}{% if nc > 0 %} · {{ nc }} case {% if nc == 1 %}study{% else %}studies{% endif %}{% endif %}</span></div>
     </a>
     {% endunless %}{% endfor %}
   </div>
