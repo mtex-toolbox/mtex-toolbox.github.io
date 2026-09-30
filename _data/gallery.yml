@@ -59,6 +59,18 @@ figures:
     <span class="k">setColorRange</span>([0 2]), mtexColorMap LaboTeX
 
     hold on, <span class="k">plot</span>(grains.boundary,<span class="s">''lineWidth''</span>,1.5), hold off'
+- figure: figures/gallery/denoising.png
+  page: EBSDDenoising
+  title: Denoising
+  labels:
+  - EBSD
+  code: 'ebsdS = <span class="k">smooth</span>(ebsd(<span class="s">''indexed''</span>),l1TVFilter);
+
+    <span class="k">plot</span>(ebsdS,ebsdS.<span class="k">KAM</span>(<span class="s">''threshold''</span>,2.5*degree)./degree)
+
+    <span class="k">setColorRange</span>([0 2]), mtexColorMap LaboTeX
+
+    hold on, <span class="k">plot</span>(grains.boundary,<span class="s">''lineWidth''</span>,1.5), hold off'
 - figure: figures/gallery/gos.png
   page: GrainOrientationParameters
   title: Grain orientation parameters
@@ -123,9 +135,7 @@ figures:
   - Texture
   code: 'ori = ebsd(<span class="s">''Forsterite''</span>).orientations;
 
-    h = <span class="k">Miller</span>({1,0,0},{0,1,0},{0,0,1},ori.CS);
-
-    <span class="k">plotPDF</span>(ori,h,<span class="s">''points''</span>,5000,<span class="s">''markerSize''</span>,2)'
+    <span class="k">plotPDF</span>(ori,<span class="k">Miller</span>(0,0,1,ori.CS),<span class="s">''points''</span>,5000,<span class="s">''markerSize''</span>,3)'
 - figure: figures/gallery/sigma.png
   page: SigmaSections
   title: ODF sections
@@ -203,6 +213,46 @@ figures:
   code: '<span class="k">plot</span>(C.YoungsModulus,<span class="s">''complete''</span>,<span class="s">''upper''</span>)
 
     <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''GPa''</span>)'
+- figure: figures/gallery/frames.png
+  page: EBSDReferenceFrame
+  title: Reference frames
+  labels:
+  - EBSD
+  - Crystal geometry
+  code: 'ebsd = <span class="k">EBSD.load</span>(<span class="k">fullfile</span>(mtexEBSDPath,<span class="s">''olivineopticalmap.ang''</span>),<span class="s">''setting''</span>,2);
+
+    grains = <span class="k">calcGrains</span>(ebsd);
+
+    <span class="k">plot</span>(ebsd(<span class="s">''olivine''</span>),<span class="s">''ipfDirection''</span>,zvector,<span class="s">''refFrame''</span>,<span class="s">''on''</span>)
+
+    hold on, <span class="k">plot</span>(grains(grains.numPixel&gt;500),crystalShape.olivine,<span class="s">''colored''</span>), hold off'
+- figure: figures/gallery/clustering.png
+  page: ClusterDemo
+  title: Clustering
+  labels:
+  - Texture
+  code: "cs = <span class=\"k\">crystalSymmetry</span>(<span class=\"s\">'432'</span>);\nodf = 0.7*<span class=\"k\">fibreODF</span>(<span class=\"k\">fibre.gamma</span>(cs),<span class=\"s\">'halfwidth'</span>,10*degree) + ...\n  0.3*<span class=\"k\">unimodalODF</span>(<span class=\"k\">orientation.byEuler</span>(30*degree,10*degree,60*degree,cs));\nori = odf.<span class=\"k\">discreteSample</span>(10000);\n[cId,center] = <span class=\"k\">calcCluster</span>(ori,<span class=\"s\">'method'</span>,<span class=\"s\">'classix'</span>);\n<span class=\"k\">plotSection</span>(ori,<span class=\"k\">ind2color</span>(cId),<span class=\"s\">'markerSize'</span>,3,<span class=\"s\">'sigma'</span>,<span class=\"s\">'sections'</span>,6)"
+- figure: figures/gallery/martensite.png
+  page: GrainGraphBasedReconstruction
+  title: Martensite reconstruction
+  labels:
+  - Parent grains
+  - Grains
+  code: 'mtexdata martensite
+
+    job = <span class="k">parentGrainReconstructor</span>(ebsd);
+
+    job.p2c = <span class="k">orientation.KurdjumovSachs</span>(job.csParent,job.csChild);
+
+    job.calcParent2Child;
+
+    job.<span class="k">calcGraph</span>(<span class="s">''threshold''</span>,2.5*degree,<span class="s">''tolerance''</span>,2.5*degree);
+
+    job.clusterGraph;
+
+    job.calcParentFromGraph;
+
+    <span class="k">plot</span>(job.parentGrains,<span class="s">''ipfDirection''</span>,zvector)'
 - figure: figures/gallery/parents.png
   page: TiBetaReconstruction
   title: Parent grain reconstruction

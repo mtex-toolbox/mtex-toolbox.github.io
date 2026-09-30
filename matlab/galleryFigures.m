@@ -69,6 +69,16 @@ setColorRange([0 2]), mtexColorMap LaboTeX
 hold on, plot(grains.boundary,'lineWidth',1.5), hold off
 heroExport('kam',[],'dir','gallery')                                    % hide
 
+%% denoising
+%#page EBSDDenoising
+%#title Denoising
+%#labels EBSD
+ebsdS = smooth(ebsd('indexed'),l1TVFilter);
+plot(ebsdS,ebsdS.KAM('threshold',2.5*degree)./degree)
+setColorRange([0 2]), mtexColorMap LaboTeX
+hold on, plot(grains.boundary,'lineWidth',1.5), hold off
+heroExport('denoising',[],'dir','gallery')                              % hide
+
 %% gos
 %#page GrainOrientationParameters
 %#title Grain orientation parameters
@@ -123,8 +133,7 @@ heroExport('crystals',[],'dir','gallery')                               % hide
 %#title Pole figures
 %#labels EBSD, Texture
 ori = ebsd('Forsterite').orientations;
-h = Miller({1,0,0},{0,1,0},{0,0,1},ori.CS);
-plotPDF(ori,h,'points',5000,'markerSize',2)
+plotPDF(ori,Miller(0,0,1,ori.CS),'points',5000,'markerSize',3)
 heroExport('polefigure',[],'dir','gallery')                             % hide
 
 %% sigma
@@ -199,6 +208,45 @@ heroExport('velocity',[],'dir','gallery')                               % hide
 plot(C.YoungsModulus,'complete','upper')
 mtexColorbar('title','GPa')
 heroExport('youngs',[],'dir','gallery')                                 % hide
+
+%% frames
+%#page EBSDReferenceFrame
+%#title Reference frames
+%#labels EBSD, Crystal geometry
+plottingConvention.default('y↓→x');                                     % hide
+ebsd = EBSD.load(fullfile(mtexEBSDPath,'olivineopticalmap.ang'),'setting',2);
+grains = calcGrains(ebsd);
+plot(ebsd('olivine'),'ipfDirection',zvector,'refFrame','on')
+hold on, plot(grains(grains.numPixel>500),crystalShape.olivine,'colored'), hold off
+legend off                                                              % hide
+heroExport('frames',[],'dir','gallery')                                 % hide
+plottingConvention.default('y↑→x');                                     % hide
+
+%% clustering
+%#page ClusterDemo
+%#title Clustering
+%#labels Texture
+cs = crystalSymmetry('432');
+odf = 0.7*fibreODF(fibre.gamma(cs),'halfwidth',10*degree) + ...
+  0.3*unimodalODF(orientation.byEuler(30*degree,10*degree,60*degree,cs));
+ori = odf.discreteSample(10000);
+[cId,center] = calcCluster(ori,'method','classix');
+plotSection(ori,ind2color(cId),'markerSize',3,'sigma','sections',6)
+heroExport('clustering',[],'dir','gallery')                             % hide
+
+%% martensite
+%#page GrainGraphBasedReconstruction
+%#title Martensite reconstruction
+%#labels Parent grains, Grains
+mtexdata martensite
+job = parentGrainReconstructor(ebsd);
+job.p2c = orientation.KurdjumovSachs(job.csParent,job.csChild);
+job.calcParent2Child;
+job.calcGraph('threshold',2.5*degree,'tolerance',2.5*degree);
+job.clusterGraph;
+job.calcParentFromGraph;
+plot(job.parentGrains,'ipfDirection',zvector)
+heroExport('martensite',[],'dir','gallery')                             % hide
 
 %% parents
 %#page TiBetaReconstruction
