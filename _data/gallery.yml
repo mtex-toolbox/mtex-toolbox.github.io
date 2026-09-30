@@ -3,9 +3,9 @@ figures:
 - figure: figures/gallery/ipfmap.png
   page: EBSDIPFMap
   title: Orientation map with grain boundaries
-  text: Magnesium with many twins, coloured by the crystal direction along z.
-  section: Tasks
-  chapter: Orientation maps
+  labels:
+  - EBSD
+  - Grains
   code: 'mtexdata twins
 
     [grains,ebsd] = <span class="k">calcGrains</span>(ebsd(<span class="s">''indexed''</span>),<span class="s">''angle''</span>,5*degree);
@@ -13,23 +13,43 @@ figures:
     <span class="k">plot</span>(ebsd,<span class="s">''ipfDirection''</span>,zvector)
 
     hold on, <span class="k">plot</span>(grains.boundary,<span class="s">''lineWidth''</span>,1.5), hold off'
+- figure: figures/gallery/twins.png
+  page: TwinningBoundaries
+  title: Twin boundaries in magnesium
+  labels:
+  - Grains
+  - Boundaries
+  code: "twin = <span class=\"k\">orientation.map</span>(<span class=\"k\">Miller</span>(0,1,-1,-2,grains.CS),<span class=\"k\">Miller</span>(0,-1,1,-2,grains.CS),...\n  <span class=\"k\">Miller</span>(2,-1,-1,0,grains.CS),<span class=\"k\">Miller</span>(2,-1,-1,0,grains.CS));\ngB = grains.<span class=\"k\">boundary</span>(<span class=\"s\">'Magnesium'</span>,<span class=\"s\">'Magnesium'</span>);\ntwinB = gB(gB.<span class=\"k\">isTwinning</span>(twin,5*degree));\n<span class=\"k\">plot</span>(grains,<span class=\"s\">'ipfDirection'</span>,zvector), hold on\n<span class=\"k\">plot</span>(twinB,<span class=\"s\">'lineColor'</span>,<span class=\"s\">'w'</span>,<span class=\"s\">'lineWidth'</span>,3), hold off"
 - figure: figures/gallery/misorientation.png
   page: BoundaryMisorientations
   title: Boundary misorientation angles
-  text: Every grain boundary coloured by the angle between the grains on either side.
-  section: Tasks
-  chapter: Grain boundaries
-  code: 'gB = grains.<span class="k">boundary</span>(<span class="s">''indexed''</span>,<span class="s">''indexed''</span>);
-
-    <span class="k">plot</span>(gB,gB.misorientation.angle./degree,<span class="s">''lineWidth''</span>,2)
+  labels:
+  - Boundaries
+  code: '<span class="k">plot</span>(gB,gB.misorientation.angle./degree,<span class="s">''lineWidth''</span>,2)
 
     <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''degree''</span>)'
+- figure: figures/gallery/angledist.png
+  page: AngleDistributionFunction
+  title: Misorientation angle distribution
+  labels:
+  - Boundaries
+  - Texture
+  code: <span class="k">plotAngleDistribution</span>(gB.misorientation)
+- figure: figures/gallery/caxes.png
+  page: VectorsDensityEstimation
+  title: Density of c-axes
+  labels:
+  - EBSD
+  - Texture
+  code: 'c = ebsd(<span class="s">''Magnesium''</span>).orientations * <span class="k">Miller</span>(0,0,0,1,ebsd(<span class="s">''Magnesium''</span>).CS);
+
+    <span class="k">plot</span>(<span class="k">calcDensity</span>(c,<span class="s">''halfwidth''</span>,7.5*degree))'
 - figure: figures/gallery/kam.png
   page: EBSDKAM
   title: Kernel average misorientation
-  text: Local orientation changes inside the grains of a deformed ferrite map.
-  section: Tasks
-  chapter: Orientation spread and dislocations
+  labels:
+  - EBSD
+  - Deformation
   code: 'mtexdata ferrite
 
     [grains,ebsd] = <span class="k">calcGrains</span>(ebsd,<span class="s">''minPixel''</span>,8);
@@ -39,25 +59,53 @@ figures:
     <span class="k">setColorRange</span>([0 2]), mtexColorMap LaboTeX
 
     hold on, <span class="k">plot</span>(grains.boundary,<span class="s">''lineWidth''</span>,1.5), hold off'
+- figure: figures/gallery/gos.png
+  page: GrainOrientationParameters
+  title: Grain orientation spread
+  labels:
+  - Grains
+  - Deformation
+  code: 'mis2mean = <span class="k">calcGROD</span>(ebsd,grains);
+
+    GOS = ebsd.<span class="k">grainMean</span>(mis2mean.angle,grains);
+
+    <span class="k">plot</span>(grains,GOS./degree)
+
+    <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''degree''</span>)'
+- figure: figures/gallery/phases.png
+  page: EBSDPlotting
+  title: Phase map
+  labels:
+  - EBSD
+  code: 'mtexdata forsterite
+
+    <span class="k">plot</span>(ebsd)'
 - figure: figures/gallery/shape.png
   page: ShapeParameters
   title: Grain aspect ratio
-  text: Grains of a forsterite map coloured by the aspect ratio of their fitted ellipse.
-  section: Tasks
-  chapter: Grain size and shape
-  code: 'mtexdata forsterite
-
-    grains = <span class="k">calcGrains</span>(ebsd(<span class="s">''indexed''</span>),<span class="s">''minPixel''</span>,10);
+  labels:
+  - Grains
+  code: 'grains = <span class="k">calcGrains</span>(ebsd(<span class="s">''indexed''</span>),<span class="s">''minPixel''</span>,10);
 
     <span class="k">plot</span>(grains,grains.aspectRatio)
 
     <span class="k">setColorRange</span>([1 4]), <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''aspect ratio''</span>)'
+- figure: figures/gallery/ellipses.png
+  page: EllipseBasedParameters
+  title: Fitted ellipses
+  labels:
+  - Grains
+  code: '[c,a,b] = grains(grains.numPixel&gt;200).fitEllipse;
+
+    <span class="k">plot</span>(grains,<span class="s">''faceAlpha''</span>,0.3), hold on
+
+    <span class="k">plotEllipse</span>(c,a,b,<span class="s">''lineColor''</span>,<span class="s">''k''</span>,<span class="s">''lineWidth''</span>,1.5), hold off'
 - figure: figures/gallery/crystals.png
   page: CrystalShapes
   title: Grains drawn as crystals
-  text: Each large olivine grain shown as a crystal rotated to its mean orientation.
-  section: Tasks
-  chapter: Figures
+  labels:
+  - Grains
+  - Crystal geometry
   code: 'fo = grains(<span class="s">''Forsterite''</span>);
 
     [~,id] = <span class="k">sort</span>(fo.area,<span class="s">''descend''</span>);
@@ -67,39 +115,127 @@ figures:
     <span class="k">plot</span>(grains,<span class="s">''faceAlpha''</span>,0.3), hold on
 
     <span class="k">plot</span>(fo(id(1:40)),0.8*cS), hold off'
+- figure: figures/gallery/polefigure.png
+  page: EBSDOrientationPlots
+  title: Pole figures of individual orientations
+  labels:
+  - EBSD
+  - Texture
+  code: 'ori = ebsd(<span class="s">''Forsterite''</span>).orientations;
+
+    h = <span class="k">Miller</span>({1,0,0},{0,1,0},{0,0,1},ori.CS);
+
+    <span class="k">plotPDF</span>(ori,h,<span class="s">''points''</span>,5000,<span class="s">''markerSize''</span>,2)'
 - figure: figures/gallery/sigma.png
   page: SigmaSections
   title: ODF in sigma sections
-  text: The orientation distribution of the forsterite map in nine sigma sections.
-  section: Tasks
-  chapter: Describing and plotting textures
-  code: 'odf = <span class="k">calcDensity</span>(ebsd(<span class="s">''Forsterite''</span>).orientations);
+  labels:
+  - Texture
+  code: 'odf = <span class="k">calcDensity</span>(ori);
 
     <span class="k">plotSection</span>(odf,<span class="s">''sigma''</span>,<span class="s">''sections''</span>,9)'
-- figure: figures/gallery/fundamental.png
-  page: OrientationFundamentalRegion
-  title: Orientations in the fundamental region
-  text: Mean grain orientations of forsterite in axis-angle space.
-  section: Concepts
-  chapter: Rotations and orientations
-  code: <span class="k">plot</span>(grains(<span class="s">'Forsterite'</span>).meanOrientation,<span class="s">'axisAngle'</span>,<span class="s">'markerSize'</span>,4)
 - figure: figures/gallery/ipf.png
   page: OrientationInversePoleFigure
   title: Inverse pole figure density
-  text: Which crystal directions of forsterite align with the specimen z direction.
-  section: Concepts
-  chapter: Texture
+  labels:
+  - Texture
   code: '<span class="k">plotIPDF</span>(odf,zvector)
 
     mtexColorbar'
+- figure: figures/gallery/fundamental.png
+  page: OrientationFundamentalRegion
+  title: Orientations in the fundamental region
+  labels:
+  - Crystal geometry
+  - Texture
+  code: <span class="k">plot</span>(grains(<span class="s">'Forsterite'</span>).meanOrientation,<span class="s">'axisAngle'</span>,<span class="s">'markerSize'</span>,4)
+- figure: figures/gallery/ipfkey.png
+  page: EBSDIPFMap
+  title: Inverse pole figure colour key
+  labels:
+  - Crystal geometry
+  - EBSD
+  code: <span class="k">plot</span>(<span class="k">ipfColorKey</span>(ebsd(<span class="s">'Forsterite'</span>)))
+- figure: figures/gallery/goss.png
+  page: ODFModeling
+  title: Pole figures of a model texture
+  labels:
+  - Texture
+  - Pole figures
+  code: 'cs = <span class="k">crystalSymmetry</span>(<span class="s">''m-3m''</span>);
+
+    odf = <span class="k">unimodalODF</span>(<span class="k">orientation.goss</span>(cs),<span class="s">''halfwidth''</span>,10*degree);
+
+    <span class="k">plotPDF</span>(odf,<span class="k">Miller</span>({1,0,0},{1,1,0},{1,1,1},cs))'
+- figure: figures/gallery/miller.png
+  page: CrystalDirections
+  title: Crystal directions in a stereographic projection
+  labels:
+  - Crystal geometry
+  code: 'm = <span class="k">Miller</span>({1,0,0},{1,1,0},{1,1,1},{2,1,0},cs,<span class="s">''uvw''</span>);
+
+    <span class="k">plot</span>(m,<span class="s">''symmetrised''</span>,<span class="s">''labeled''</span>,<span class="s">''upper''</span>,<span class="s">''grid''</span>)'
+- figure: figures/gallery/quartz.png
+  page: CrystalShapes
+  title: A quartz crystal
+  labels:
+  - Crystal geometry
+  code: <span class="k">plot</span>(crystalShape.quartz,<span class="s">'colored'</span>)
+- figure: figures/gallery/velocity.png
+  page: WaveVelocities
+  title: P-wave velocity of olivine
+  labels:
+  - Properties
+  code: 'cs = <span class="k">crystalSymmetry</span>(<span class="s">''mmm''</span>,[4.7646 10.2296 5.9942],<span class="s">''mineral''</span>,<span class="s">''Olivine''</span>);
+
+    C = <span class="k">stiffnessTensor.load</span>(<span class="k">fullfile</span>(mtexDataPath,<span class="s">''tensor''</span>,<span class="s">''Olivine1997PC.GPa''</span>),cs);
+
+    C = <span class="k">addOption</span>(C,<span class="s">''density''</span>,3.355);
+
+    <span class="k">plot</span>(C.velocity,<span class="s">''complete''</span>,<span class="s">''upper''</span>)
+
+    <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''km/s''</span>)'
+- figure: figures/gallery/youngs.png
+  page: AnisotropicTheory
+  title: Young's modulus of olivine
+  labels:
+  - Properties
+  code: '<span class="k">plot</span>(C.YoungsModulus,<span class="s">''complete''</span>,<span class="s">''upper''</span>)
+
+    <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''GPa''</span>)'
+- figure: figures/gallery/parents.png
+  page: TiBetaReconstruction
+  title: Parent beta grains in titanium
+  labels:
+  - Parent grains
+  - Grains
+  code: 'mtexdata alphaBetaTitanium
+
+    job = <span class="k">parentGrainReconstructor</span>(ebsd);
+
+    job.p2c = <span class="k">orientation.Burgers</span>(job.csParent,job.csChild);
+
+    job.<span class="k">calcVariantGraph</span>(<span class="s">''threshold''</span>,1.5*degree);
+
+    job.<span class="k">clusterVariantGraph</span>(<span class="s">''numIter''</span>,3);
+
+    job.calcParentFromVote;
+
+    <span class="k">plot</span>(job.parentGrains,<span class="s">''ipfDirection''</span>,zvector)'
 - figure: figures/gallery/polefigures.png
   page: PoleFigure2ODF
   title: ODF from neutron pole figures
-  text: The ODF fitted to seven measured neutron pole figures of quartz, in the same pole figures.
-  section: Tasks
-  chapter: Texture from pole figures
+  labels:
+  - Pole figures
+  - Texture
   code: 'mtexdata dubna
 
     odf = <span class="k">calcODF</span>(pf,<span class="s">''silent''</span>);
 
     <span class="k">plotPDF</span>(odf,pf.allH,<span class="s">''antipodal''</span>,<span class="s">''superposition''</span>,pf.c)'
+- figure: figures/gallery/measured.png
+  page: PoleFigurePlot
+  title: Measured neutron pole figures
+  labels:
+  - Pole figures
+  code: <span class="k">plot</span>(pf)
