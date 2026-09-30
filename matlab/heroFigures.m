@@ -63,9 +63,9 @@ heroExport('twins',2)                                                   % hide
 % the ODF by kernel density estimation
 odf = calcDensity(ebsd('Magnesium').orientations);
 plotPDF(odf,Miller(0,0,0,1,odf.CS))
-heroExport('texture',1)                                                 % hide
+heroExport('texture',1,'dark')                                          % hide
 plotSection(odf,'sigma','sections',9)
-heroExport('texture',2)                                                 % hide
+heroExport('texture',2,'dark')                                          % hide
 
 %% Parent grains
 %#captions measured alpha titanium | reconstructed beta grains

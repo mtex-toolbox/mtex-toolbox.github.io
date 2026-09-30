@@ -15,10 +15,11 @@ if check_option(varargin,'dark')
   bg = [16 35 31]/255;
   fig.Color = bg;
   set(findall(fig,'type','axes'),'Color','none');
-  % light labels, except those on a box of their own
+  % light labels, and none of the boxed ones
   t = findall(fig,'type','text');
-  t = t(strcmp(get(t,'BackgroundColor'),'none'));
-  set(t,'Color',[0.86 0.92 0.9]);
+  boxed = ~strcmp(get(t,'BackgroundColor'),'none');
+  delete(t(boxed));
+  set(t(~boxed),'Color',[0.86 0.92 0.9]);
 end
 drawnow
 exportgraphics(fig,fullfile(outDir,sprintf('%s_%d.png',step,n)),...
