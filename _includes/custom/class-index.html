@@ -1,0 +1,44 @@
+{%- comment -%}
+The contents of a function reference index page (<Class>_index.html,
+<section>_index.html), included from _layouts/page.html. The generated pages
+themselves carry only a title, so the list comes from the function reference
+sidebar: a section lists its classes, a class its methods. The purpose line of each
+method is filled in from search.json, which holds it already: looking the
+method pages up here would triple the build time.
+{%- endcomment -%}
+{%- assign ref = site.data.sidebars.function_reference_sidebar.entries[0].folders -%}
+{%- assign section = nil -%}{%- assign klass = nil -%}
+{%- for f in ref -%}
+  {%- if f.url == page.url -%}{%- assign section = f -%}{%- break -%}{%- endif -%}
+  {%- for s in f.folderitems.subfolders -%}{%- if s.url == page.url -%}{%- assign klass = s -%}{%- endif -%}{%- endfor -%}
+  {%- if klass -%}{%- break -%}{%- endif -%}
+{%- endfor -%}
+{%- if section -%}
+<div class="mx-refindex">
+  <h2>Classes and functions</h2>
+  <ul class="mx-refclasses">
+  {%- for s in section.folderitems.subfolders %}
+    <li><a href="{{ s.url | remove_first: "/" }}"><code>{{ s.title }}</code><small>{{ s.subfolderitems.size }}</small></a></li>
+  {%- endfor %}
+  </ul>
+</div>
+{%- elsif klass -%}
+<div class="mx-refindex">
+  <h2>{{ klass.subfolderitems.size }} {% if klass.subfolderitems.size == 1 %}function{% else %}functions{% endif %}</h2>
+  <dl class="mx-refmethods">
+  {%- for m in klass.subfolderitems %}
+    <div><dt><a href="{{ m.url | remove_first: "/" }}"><code>{{ m.title }}</code></a></dt><dd data-url="{{ m.url }}"></dd></div>
+  {%- endfor %}
+  </dl>
+</div>
+<script>
+fetch('/search.json').then(function (r) { return r.json(); }).then(function (rows) {
+  var desc = {};
+  var text = document.createElement('textarea');
+  rows.forEach(function (r) { if (r[3]) { text.innerHTML = r[3]; desc[r[1]] = text.value; } });
+  document.querySelectorAll('.mx-refmethods dd[data-url]').forEach(function (dd) {
+    dd.textContent = desc[dd.getAttribute('data-url')] || '';
+  });
+}).catch(function () {});
+</script>
+{%- endif -%}

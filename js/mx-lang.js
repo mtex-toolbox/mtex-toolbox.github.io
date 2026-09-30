@@ -14,7 +14,8 @@
   var py = {};
   (window.MX_PY || []).forEach(function (n) { py[n] = true; });
 
-  function get() { try { return localStorage.getItem(KEY) === 'python' ? 'python' : 'matlab'; } catch (e) { return 'matlab'; } }
+  // the remembered choice, or null when the visitor has never chosen
+  function stored() { try { var v = localStorage.getItem(KEY); return v === 'python' || v === 'matlab' ? v : null; } catch (e) { return null; } }
   function set(l) { try { localStorage.setItem(KEY, l); } catch (e) {} }
 
   // "EBSDKAM" for EBSDKAM.html and EBSDKAM_py.html, null for anything else
@@ -25,7 +26,11 @@
   function target(p, lang) { return p.name + (lang === 'python' ? '_py' : '') + '.html' + p.hash; }
 
   var here = pageOf(location.pathname.split('/').pop() + location.hash);
-  var lang = get();
+  // Without a remembered choice, a Python page opened from a link (a search
+  // result, the pymtex docs) makes Python the choice; everything else is MATLAB.
+  var lang = stored();
+  if (!lang && here && here.python) { lang = 'python'; set(lang); }
+  lang = lang || 'matlab';
 
   // a remembered choice opens the matching version of this page
   if (here && here.python !== (lang === 'python')) {
