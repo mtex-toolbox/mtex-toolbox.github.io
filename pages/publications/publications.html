@@ -1,0 +1,65 @@
+---
+title: Publications
+keywords: MTEX publications, cite MTEX, papers, BibTeX
+layout: home
+permalink: publications.html
+---
+{% comment %}
+The papers come from _data/publications.yml, the general citation from the
+citation block of _config.yml, the same one the foot of every documentation
+page shows.
+{% endcomment %}
+{% assign bibauthors = site.citation.authors | split: ", " | join: " and " %}
+<div class="mx-wrap">
+  <div class="mx-pagehead">
+    <div class="mx-eyebrow">Publications</div>
+    <h1>The papers behind MTEX</h1>
+    <p>If MTEX was part of your research, please cite the paper that describes the method you used. Most of them come with the MTEX scripts that draw their figures.</p>
+  </div>
+
+  <div class="mx-citing">
+    <div class="mx-citing-main">
+      <h2>Citing MTEX in general</h2>
+      <p class="mx-citing-ref">{{ site.citation.authors }}: <i>{{ site.citation.title }}</i>. {{ site.citation.journal }} {{ site.citation.volume }}, {{ site.citation.pages }} ({{ site.citation.year }}). <a href="{{ site.citation.url }}">doi:{{ site.citation.doi }}</a></p>
+<pre class="mx-citing-bib"><code>@article{ {{- site.citation.bibkey -}},
+  author  = { {{- bibauthors -}} },
+  title   = { {{- site.citation.title -}} },
+  journal = { {{- site.citation.journal -}} },
+  volume  = { {{- site.citation.volume -}} },
+  pages   = { {{- site.citation.pages -}} },
+  year    = { {{- site.citation.year -}} },
+  doi     = { {{- site.citation.doi -}} }
+}</code></pre>
+    </div>
+    <div class="mx-citing-for">
+      <h2>Which paper for what</h2>
+      <ul>
+        {% for pass in (1..2) %}{% for p in site.data.publications %}{% if p.cite_for %}{% if pass == 1 and p.cite_for != "MTEX in general" %}{% continue %}{% endif %}{% if pass == 2 and p.cite_for == "MTEX in general" %}{% continue %}{% endif %}{% assign names = p.authors | split: ", " %}{% assign first = names | first | split: " " | last %}
+        <li><a href="#{{ p.title | strip_html | slugify }}"><span>{{ p.cite_for }}</span><small>{{ first }}{% if names.size == 2 %} &amp; {{ names | last | split: " " | last }}{% elsif names.size > 2 %} et al.{% endif %} {{ p.year }}</small></a></li>
+        {% endif %}{% endfor %}{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  {% assign years = site.data.publications | group_by: "year" %}
+  <div class="mx-pubs">
+    {% for y in years %}
+    <section class="mx-pubyear">
+      <h2>{{ y.name }}</h2>
+      <div>
+        {% for p in y.items %}
+        <article class="mx-pub" id="{{ p.title | strip_html | slugify }}">
+          <h3>{% if p.doi %}<a href="https://doi.org/{{ p.doi }}">{{ p.title }}</a>{% else %}<a href="https://arxiv.org/abs/{{ p.arxiv }}">{{ p.title }}</a>{% endif %}</h3>
+          <p>{{ p.authors }}<br><i>{{ p.venue }}</i></p>
+          <div class="mx-pub-links">
+            {% if p.doi %}<a href="https://doi.org/{{ p.doi }}">DOI</a>{% endif %}
+            {% if p.arxiv %}<a href="https://arxiv.org/abs/{{ p.arxiv }}">arXiv:{{ p.arxiv }}</a>{% endif %}
+            {% if p.scripts %}<a class="mx-pub-scripts" href="https://github.com/mtex-toolbox/mtex-paper/tree/master/{{ p.scripts }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6" /></svg>MTEX scripts</a>{% endif %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    {% endfor %}
+  </div>
+</div>
