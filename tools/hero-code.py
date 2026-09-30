@@ -20,7 +20,7 @@ SCRIPT = os.path.join(SITE, "matlab", "heroFigures.m")
 OUT = os.path.join(SITE, "_data", "hero.yml")
 
 # the export names of the cells, as heroExport is called in them
-EXPORT = re.compile(r"heroExport\('([^']+)',(\d+)\)")
+EXPORT = re.compile(r"heroExport\('([^']+)',(\d+)[,)]")
 TOKEN = re.compile(r"""
     (?P<comment>%.*$)
   | (?P<string>(?<![\w\)\]\}'.])'[^'\n]*')

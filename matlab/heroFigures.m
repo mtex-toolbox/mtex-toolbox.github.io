@@ -92,11 +92,9 @@ Cij = [59.7 26.2 21.7 0 0 0;  26.2 59.7 21.7 0 0 0;
 C = stiffnessTensor(Cij,ebsd('Magnesium').CS);
 [~,~,CHill] = calcTensor(ebsd('Magnesium'),C);
 plot(C.YoungsModulus,'complete','upper')
-mtexColorbar('title','GPa')                                             % hide
-heroExport('properties',1)                                              % hide
+heroExport('properties',1,'dark')                                       % hide
 plot(CHill.YoungsModulus,'complete','upper')
-mtexColorbar('title','GPa')                                             % hide
-heroExport('properties',2)                                              % hide
+heroExport('properties',2,'dark')                                       % hide
 
 %% 3D EBSD
 %#captions 3D grains | the largest grain
