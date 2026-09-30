@@ -20,7 +20,8 @@
   if (!article) { return; }
 
   function strip(path) { return (path || '').split('#')[0].split('/').pop().replace(/\.html$/, ''); }
-  var here = strip(location.pathname) || 'index';
+  // the Python version <Page>_py.html has the place of <Page>.html
+  var here = (strip(location.pathname) || 'index').replace(/_py$/, '');
 
   function el(tag, attrs, text) {
     var e = document.createElement(tag);

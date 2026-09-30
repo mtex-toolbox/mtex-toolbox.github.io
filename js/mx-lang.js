@@ -1,0 +1,72 @@
+/* The MATLAB | Python switch of the top bar.
+ *
+ * A documentation page <Page>.html has a Python version <Page>_py.html when
+ * pymtex docs/site.py exported one; window.MX_PY lists those pages (from
+ * _data/python_pages.yml). The choice is remembered in the browser. Switching
+ * opens the other version of the current page at the same section, and every
+ * link to a documentation page follows the chosen language from then on. A
+ * page without a Python version stays as it is.
+ */
+(function () {
+  'use strict';
+
+  var KEY = 'mx-lang';
+  var py = {};
+  (window.MX_PY || []).forEach(function (n) { py[n] = true; });
+
+  function get() { try { return localStorage.getItem(KEY) === 'python' ? 'python' : 'matlab'; } catch (e) { return 'matlab'; } }
+  function set(l) { try { localStorage.setItem(KEY, l); } catch (e) {} }
+
+  // "EBSDKAM" for EBSDKAM.html and EBSDKAM_py.html, null for anything else
+  function pageOf(href) {
+    var m = /^(?:\.?\/)?([^\/?#]+?)(_py)?\.html(#.*)?$/.exec(href || '');
+    return m && py[m[1]] ? { name: m[1], python: !!m[2], hash: m[3] || '' } : null;
+  }
+  function target(p, lang) { return p.name + (lang === 'python' ? '_py' : '') + '.html' + p.hash; }
+
+  var here = pageOf(location.pathname.split('/').pop() + location.hash);
+  var lang = get();
+
+  // a remembered choice opens the matching version of this page
+  if (here && here.python !== (lang === 'python')) {
+    location.replace(target(here, lang));
+    return;
+  }
+
+  // links to documentation pages follow the choice
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) { return; }
+    var p = pageOf(a.getAttribute('href'));
+    if (p && p.python !== (lang === 'python')) { a.setAttribute('href', target(p, lang)); }
+  }, true);
+
+  function mark() {
+    document.querySelectorAll('.mx-lang-switch button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang));
+    });
+    document.documentElement.setAttribute('data-lang', lang);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    mark();
+    // a documentation page that has no Python version yet says so
+    var side = document.getElementById('mx-side'), title = document.querySelector('.mx-article .post-header');
+    if (lang === 'python' && !here && title && side && side.getAttribute('data-sidebar') === 'documentation_sidebar') {
+      var note = document.createElement('p');
+      note.className = 'mx-langnote';
+      note.textContent = 'This page has no Python version yet.' +
+        (document.querySelector('.mx-article figure.highlight') ? ' Its code is MATLAB.' : '');
+      title.parentNode.insertBefore(note, title.nextSibling);
+    }
+    document.querySelectorAll('.mx-lang-switch button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        lang = b.getAttribute('data-lang');
+        set(lang);
+        mark();
+        if (here) { location.href = target({ name: here.name, python: false, hash: location.hash }, lang); }
+        document.dispatchEvent(new CustomEvent('mx-lang', { detail: lang }));
+      });
+    });
+  });
+})();

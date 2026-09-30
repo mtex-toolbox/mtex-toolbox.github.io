@@ -242,5 +242,9 @@ legend(<span class="s">'Oxford'</span>, <span class="s">'EDAX'</span>)</pre>
       document.getElementById('mx-code-name').textContent = names[lang];
     });
   });
+  // start in the language chosen in the top bar
+  function follow(l) { buttons.forEach(function (b) { if (b.getAttribute('data-lang') === l) { b.click(); } }); }
+  follow(document.documentElement.getAttribute('data-lang'));
+  document.addEventListener('mx-lang', function (e) { follow(e.detail); });
 })();
 </script>

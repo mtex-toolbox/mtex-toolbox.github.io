@@ -4,6 +4,8 @@ links come from _data/topnav.yml; an item with `pill: true` is drawn as the
 amber highlight. The announcement can be dismissed and stays hidden in that
 browser until its `id` in _data/announcement.yml changes.
 {% endcomment %}
+<script>window.MX_PY = [{% for p in site.data.python_pages %}"{{ p[0] }}"{% unless forloop.last %},{% endunless %}{% endfor %}];</script>
+<script src="js/mx-lang.js"></script>
 {% assign ann = site.data.announcement %}
 {% if ann and ann.show %}
 <div class="mx-announce" id="mx-announce" data-id="{{ ann.id }}">
@@ -40,6 +42,10 @@ browser until its `id` in _data/announcement.yml changes.
         {% endfor %}
       </ul>
     </nav>
+    <div class="mx-lang-switch" role="group" aria-label="Language of code and pages">
+      <button type="button" data-lang="matlab" aria-pressed="true">MATLAB</button>
+      <button type="button" data-lang="python" aria-pressed="false">Python</button>
+    </div>
     <div class="mx-search">{% include search_box.html %}</div>
   </div>
 </header>

@@ -1,0 +1,265 @@
+# %% [markdown]
+# # Triple Points
+#
+# A *triple point* is a junction where exactly three grain boundary segments meet and
+# separate three distinct real grains. It is therefore a strict subset of the junctions in
+# a boundary network. An endpoint at the scan rim is a junction, for example, but it is not
+# a triple point.
+#
+# MTEX computes triple points automatically during
+# [grain reconstruction](https://mtex-toolbox.github.io/GrainReconstruction_py.html). They are available from a grain list
+# through `grains.triplePoints`, just as the boundary segments are available through
+# [grains.boundary](https://mtex-toolbox.github.io/GrainBoundaries.html). The result is a
+# [triplePointList](https://mtex-toolbox.github.io/triplePointList.triplePointList.html).
+#
+# A square measurement grid can also produce vertices where four boundary segments meet.
+# When analysing triple points, it is a good idea to pass `removeQuadruplePoints` to
+# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html). This converts each ambiguous quadruple point into
+# two triple points. [Quadruple Points](https://mtex-toolbox.github.io/QuadruplePoints_py.html) explains the resulting
+# topology.
+#
+# This page assumes that the map has already been divided into grains as in
+# [Grain Reconstruction](https://mtex-toolbox.github.io/GrainReconstruction_py.html).
+# [Select Grain Boundaries](https://mtex-toolbox.github.io/BoundarySelect_py.html) introduces boundary-list indexing, and
+# [Boundary Misorientations](https://mtex-toolbox.github.io/BoundaryMisorientations_py.html) explains the disorientations
+# used below.
+
+# %%
+import numpy as np
+from mtex import *
+
+# %%
+# load the example map in its specimen plotting frame
+plottingConvention.default('y↑→x')
+ebsd = mtexdata('small')
+
+# reconstruct the grains and resolve quadruple points
+grains = calcGrains(ebsd, removeQuadruplePoints=True, alpha=5)
+
+# smooth the pixel staircase while keeping junctions fixed
+grains = smoothBoundary(grains, 2)
+
+# draw the grains and overlay all triple points
+plot(grains)
+tP = grains.triplePoints
+hold(True)
+plot(tP, color='b', lineWidth=2)
+hold(False)
+tP
+
+# %% [markdown]
+# The blue circles lie only where three real grains meet. They do not mark loose ends at
+# the map rim or every crossing in the boundary network.
+
+# %% [markdown]
+# ## Select by phase
+#
+# Phase names select triple points by the phases of their three adjacent grains. Repeating
+# a name requests that multiplicity; the names do not assign an order to the three sides.
+# One name therefore means at least one adjacent forsterite grain.
+
+# %%
+tP['Forsterite']
+
+# %% [markdown]
+# Repeating the name selects points with at least two adjacent forsterite grains.
+
+# %%
+tP['Forsterite', 'Forsterite']
+
+# %% [markdown]
+# Three repeated names restrict the selection to inner diopside triple points, where all
+# three adjacent grains are diopside.
+
+# %%
+hold(True)
+plot(tP['Diopside', 'Diopside', 'Diopside'], displayName='Di-Di-Di', color='darkred', lineWidth=2)
+hold(False)
+
+# %% [markdown]
+# The dark-red circles are a subset of the blue points. Their locations show where the
+# diopside boundary network branches entirely within that phase.
+
+# %% [markdown]
+# ## Select by grain
+#
+# A triple point also belongs to each of its three adjacent grains. A grain selection
+# therefore returns the points on the boundary of that grain.
+
+# %%
+# find the list position of the largest grain
+largestIndex = int(np.argmax(grains.area))
+
+# extract and plot the triple points of that grain
+tP_largest = grains[largestIndex].triplePoints
+plot(grains[largestIndex], faceColor=[0.2, 0.8, 0.8], displayName='largest grain')
+hold(True)
+plot(grains.boundary)
+plot(tP_largest, color='r', lineWidth=2)
+hold(False)
+
+# %% [markdown]
+# The red circles occur only where the cyan grain meets two other grains. The black
+# network supplies the surrounding context that a grain outline alone would hide.
+
+# %% [markdown]
+# ## Select through grain boundaries
+#
+# Triple points are also stored with a `grainBoundary` selection. Here the eligible
+# segments are first restricted to forsterite--forsterite boundaries, so every
+# disorientation has one consistent phase pair.
+
+# %%
+# all forsterite--forsterite boundary segments
+gB_Fo = grains.boundary['Forsterite', 'Forsterite']
+gB_Fo
+
+# %% [markdown]
+# ---
+
+# %%
+# retain segments whose disorientation angle is larger than 60 degrees
+gB_large = gB_Fo[gB_Fo.misorientation.angle() > 60 * degree]
+gB_large
+
+# %% [markdown]
+# ---
+
+# %%
+# plot those segments and every triple point incident to at least one of them
+plot(grains)
+hold(True)
+plot(gB_large, lineWidth=2, lineColor='w')
+plot(gB_large.triplePoints, color='m', lineWidth=2)
+hold(False)
+
+# %% [markdown]
+# White marks the selected high-angle segments. A magenta circle means that at least one
+# selected segment reaches that point; it does not mean that all three incident segments
+# exceed 60 degrees.
+
+# %% [markdown]
+# ## Boundary segments at a triple point
+#
+# The `boundaryId` property has one row per triple point and three columns for its
+# incident segments. These values index the complete boundary list from which the triple
+# points came. Here all three neighbouring grains are first restricted to forsterite.
+
+# %%
+# select forsterite--forsterite--forsterite triple points
+tP_Fo = grains.triplePoints['Fo', 'Fo', 'Fo']
+
+# extract the three incident boundary segments for every selected point
+gB = grains.boundary[tP_Fo.boundaryId]
+
+# plot the incident segments
+plot(grains)
+hold(True)
+plot(gB, lineColor='w', lineWidth=2)
+hold(False)
+
+# %% [markdown]
+# The white three-armed groups are the local boundary neighbourhoods of the selected
+# points. Use `tP_Fo.boundaryId.ravel()` when a single list of segments is wanted instead
+# of this point-by-segment arrangement.
+
+# %% [markdown]
+# ## Disorientations around the point
+#
+# The same indexing extracts the disorientation across each incident segment. The displayed
+# object has size $n \times 3$, where $n$ is the number of selected triple points.
+
+# %%
+mori = gB.misorientation
+mori
+
+# %% [markdown]
+# A simple scalar summary is the sum of the three disorientation angles at each point.
+
+# %%
+sumMisAngle = np.sum(mori.angle(), axis=1)
+
+plot(grains, figSize='large')
+hold(True)
+plot(tP_Fo, sumMisAngle / degree, markerEdgeColor='w', markerSize=8)
+hold(False)
+mtexColorMap('blue2red')
+setColorRange([80, 180])
+mtexColorbar()
+
+# %% [markdown]
+# Colour records that angle sum in degrees. The fixed colour range saturates any sum above
+# 180 degrees at its upper colour. This scalar is descriptive, not a crystallographic
+# closure condition. The underlying ordered rotations close around the three grains, but
+# their three minimum disorientation angles do not generally add to a fixed value.
+
+# %% [markdown]
+# ## Section angles at triple points
+#
+# The property `tP.angles` returns the three angles enclosed by the incident boundary
+# segments. It is an $n \times 3$ matrix, and each row sums to $2\pi$. The spread between
+# the largest and smallest angle measures how unequal the three arms appear in this
+# two-dimensional section.
+
+# %%
+tP = grains.triplePoints
+angleSpread = (np.max(tP.angles, axis=1) - np.min(tP.angles, axis=1)) / degree
+
+plot(grains, figSize='large')
+hold(True)
+plot(tP, angleSpread, markerEdgeColor='w', markerSize=8)
+hold(False)
+mtexColorMap('LaboTeX')
+setColorRange([0, 180])
+mtexColorbar()
+
+# %% [markdown]
+# Pale points have three more nearly equal section angles, while dark-red points have a
+# larger angular spread. These are angles between smoothed traces in the section, not the
+# full dihedral angles of three boundary planes in three dimensions.
+#
+# In a section perpendicular to the three-dimensional junction line, equal,
+# orientation-independent boundary energies at local equilibrium would give three 120
+# degree angles. Unequal energies, anisotropy, drag, non-equilibrium microstructure,
+# sectioning, and segmentation can all move the observed values away from that ideal. The
+# angle spread must therefore not be read directly as a boundary-energy measurement.
+
+# %% [markdown]
+# ## Further reading
+#
+# * C. Herring,
+#   [Surface Tension as a Motivation for Sintering](https://doi.org/10.1007/978-3-642-59938-5_2),
+#   in _The Physics of Powder Metallurgy_ (1951), 143--179, develops the capillary balance
+#   at interface junctions.
+# * G. Gottstein and L. S. Shvindlerman,
+#   [Grain Boundary Migration in Metals](https://www.routledge.com/9780429147388), second
+#   edition, CRC Press, 2010, treats triple-junction mobility and drag.
+# * O. K. Johnson and C. A. Schuh,
+#   [The triple junction hull: Tools for grain boundary network design](https://doi.org/10.1016/j.jmps.2014.04.005),
+#   _Journal of the Mechanics and Physics of Solids_ 69 (2014), 2--13, connects local
+#   junction states to network topology and states the crystallographic closure constraint.
+# * G. S. Rohrer et al.,
+#   [Deriving grain boundary character distributions and relative grain boundary energies from three-dimensional EBSD data](https://doi.org/10.1179/026708309X12468927349370),
+#   _Materials Science and Technology_ 26 (2010), 661--669, shows why three-dimensional
+#   geometry is needed for boundary-plane and energy analysis.
+
+# %% [markdown]
+# ## Next
+#
+# Continue with [Quadruple Points](https://mtex-toolbox.github.io/QuadruplePoints_py.html) for the grid ambiguity resolved
+# at reconstruction. [CSL Boundaries](https://mtex-toolbox.github.io/CSLBoundaries_py.html) classifies triple points by the
+# character of their incident boundaries. [Merging Grains](https://mtex-toolbox.github.io/GrainMerge_py.html) then shows how
+# selected boundaries alter the grains and their junction network. For full boundary-plane
+# geometry, continue to [3D EBSD](https://mtex-toolbox.github.io/EBSD3Analysis_py.html). Triple points also supply local
+# orientation evidence in [Triple Point Based Reconstruction](https://mtex-toolbox.github.io/TriplePointBasedReconstruction_py.html)
+# of parent grains.
+
+# %% [markdown]
+# ## Technical Details
+#
+# A tuple of phase names in brackets selects triple points, MATLAB's
+# `tP('Forsterite','Forsterite')`. The port finds 78 triple points where MATLAB finds 70,
+# 19 of them between three forsterite grains for MATLAB's 14, and 220 forsterite
+# boundary segments become 248: the not indexed third of this map is closed by the
+# neighbouring grains differently, and `alpha` does not change the closing here, as
+# [Grain Reconstruction](https://mtex-toolbox.github.io/GrainReconstruction_py.html) says.

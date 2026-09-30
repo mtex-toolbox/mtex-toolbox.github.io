@@ -1,0 +1,425 @@
+---
+title: 'Fibres of Orientations'
+sidebar: documentation_sidebar
+permalink: OrientationFibre_py.html
+folder: documentation
+toc: false
+search: exclude
+lang: python
+counterpart: OrientationFibre.html
+status: Checked
+---
+{% raw %}
+<font size="2"><a href="python_scripts/OrientationFibre.py" download>download as script</a> · <a href="https://github.com/mtex-toolbox/pymtex/blob/main/docs/pages/CrystalOrientations/OrientationFibre.py">edit page</a></font>
+
+<!--introduction-->
+
+A *fibre* is a one-dimensional curve through orientation space. Every orientation on a
+full fibre maps one fixed crystal direction `h` onto one fixed specimen direction `r`
+while leaving rotation about that direction free. MTEX stores the curve as a
+[fibre](fibre.fibre.html) variable.
+
+Many real textures concentrate around a line rather than one ideal orientation. Rolling
+textures of cubic metals are therefore commonly described by named fibres. A real
+texture has a finite spread around the curve; the curve itself is the ideal centreline.
+
+This page assumes [orientation construction](OrientationDefinition_py.html),
+[symmetry-equivalent orientations](OrientationSymmetry_py.html), and
+[the fundamental region](OrientationFundamentalRegion_py.html). The Cube and Goss components
+below are introduced in [Standard Orientations](OrientationStandard_py.html).
+
+A *reference frame* is the coordinate system in which data are expressed. The plotting
+convention below lays specimen Y upward and specimen X to the right. It changes only the
+screen layout, not the orientations.
+
+```python
+from mtex import *
+
+plottingConvention.default('y↑→x')
+
+# define crystal and specimen symmetry
+cs = crystalFrame('432')
+ss = specimenFrame('1')
+
+# define two ideal orientations
+ori1 = orientation.cube(cs, ss)
+ori2 = orientation.goss(cs, ss)
+
+# select the representative of Goss nearest to Cube
+ori2 = ori2.projectIntoFundamentalRegion(ori1)
+```
+
+## A Fibre Segment Between Two Orientations
+
+The endpoint constructor joins two orientation representatives by their shortest angular
+path. The result is a finite segment, not yet the full closed fibre.
+
+```python
+segmentFibre = fibre(ori1, ori2)
+segmentFibre
+```
+
+```text
+fibre (432 → y↑→x)
+  h || r : [100] || (1,0,0)
+  o1 → o2: (0°,0°,0°) → (0°,45°,0°)
+```
+
+The summary identifies the aligned directions in its `h` and `r` row. Its endpoint row
+runs from Cube at $$(0^\circ,0^\circ,0^\circ)$$ to Goss at $$(0^\circ,45^\circ,0^\circ)$$ in
+Bunge Euler angles. Both endpoints, and every orientation `ori` between them, satisfy
+
+$$ \mathtt{ori} * h = r. $$
+
+The two directions belong to different reference frames: `h` is in the crystal frame and
+`r` is in the specimen frame.
+
+## The Segment in Euler Space
+
+The default three-dimensional orientation plot uses Bunge Euler coordinates.
+
+```python
+plot(segmentFibre, displayName='Fibre segment', lineWidth=4, lineColor='green')
+hold(True)
+plot(ori1, displayName='Cube', markerSize=12, markerFaceColor='darkred', markerEdgeColor='k')
+plot(ori2, displayName='Goss', markerSize=12, markerFaceColor='blue', markerEdgeColor='k')
+hold(False)
+legend(location='northwest')
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-3.png"></center>
+
+The green line runs from the dark-red Cube marker to the blue Goss marker. It looks
+straight because only $$\Phi$$ changes for this pair. In general, a shortest angular path
+need not look straight in Euler coordinates.
+
+## The Same Segment in Axis--Angle Space
+
+```python
+plot(segmentFibre, 'axisAngle', lineColor='green', lineWidth=6)
+hold(True)
+plot(ori1, 'axisAngle', markerFaceColor='darkred', markerSize=15)
+plot(ori2, 'axisAngle', markerFaceColor='blue', markerSize=15)
+hold(False)
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-4.png"></center>
+
+This is the same orientation-space segment in different coordinates. The endpoints and
+angular distances have not changed. Only the coordinate map used to draw them has
+changed.
+
+## Extending the Segment to a Full Fibre
+
+The option `full` discards the finite endpoint and continues through every rotation
+about the aligned direction.
+
+```python
+fullFibre = fibre(ori1, ori2, full=True)
+fullFibre
+```
+
+```text
+fibre (432 → y↑→x)
+  h || r: [100] || (1,0,0)
+```
+
+The `h` and `r` row is unchanged, while the endpoint row has disappeared. Orientation
+space itself has no boundary, so the full fibre closes into a circle. Coordinate domains
+and symmetry-reduced fundamental regions do have seams and boundaries, however, and can
+cut that circle into arcs.
+
+```python
+hold(True)
+plot(fullFibre, 'axisAngle', lineColor='gold', lineWidth=3, fundamentalRegion=True)
+hold(False)
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-6.png"></center>
+
+The gold curve continues the green segment to the faces of the cubic fundamental region.
+Its boundary points reconnect through symmetry-equivalent faces, so this
+boundary-to-boundary line represents one closed fibre.
+
+## Fibres in Pole Figures
+
+Everything that can be plotted for orientations can also be plotted for fibres.
+[plotPF](fibre.plotPDF.html) maps the fibre into [pole figures](OrientationPoleFigure_py.html),
+where one orientation becomes a point and a fibre becomes a curve.
+
+```python
+h = Miller([[1, 1, 0], [1, 1, 1]], cs)
+plotPF(fullFibre, h, lineWidth=3, lineColor='orange')
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-7.png"></center>
+
+Each panel contains one trace from the representative fibre. A trace may meet a
+projection boundary, but it still represents one continuous set of orientations.
+
+## Symmetrising a Fibre
+
+Unlike an orientation pole-figure plot, a fibre is not automatically symmetrised.
+[symmetrise](fibre.symmetrise.html) generates the crystallographically equivalent
+fibres. The `unique` option removes repeated copies.
+
+```python
+symFibre = fullFibre.symmetrise(unique=True)
+symmetryCopyCount = len(symFibre)
+symmetryCopyCount
+```
+
+```text
+6
+```
+
+The six copies correspond to the six cubic equivalents of the aligned crystal direction.
+Plotting them adds the orange traces that were absent from the representative-only pole
+figures.
+
+```python
+plotPF(symFibre, Miller([[1, 1, 0], [2, 1, 0], [1, 1, 1]], cs), lineWidth=3, lineColor='orange')
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-9.png"></center>
+
+## Fibres in Inverse Pole Figures
+
+[plotIPF](fibre.plotIPDF.html) maps the fibre into
+[inverse pole figures](OrientationInversePoleFigure_py.html). It fixes specimen directions
+and draws the crystal directions found along the fibre. By default it restricts them to
+the fundamental sector.
+
+```python
+r = vector3d([[1, 1, 0], [2, 1, 0], [1, 1, 1]])
+plotIPF(symFibre, r, lineWidth=3, lineColor='orange')
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-10.png"></center>
+
+Each panel folds the symmetry copies into one fundamental sector. The orange curve is
+therefore the family of crystal directions that can lie along the specimen direction
+named above that panel.
+
+## The Complete Inverse Pole Figure
+
+The option `complete` removes the fundamental-sector restriction.
+
+```python
+plotIPF(symFibre, vector3d.Z, complete=True, lineWidth=3, lineColor='orange')
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-11.png"></center>
+
+The complete plot repeats the curve across the full crystal-direction sphere. Those
+repeated traces are symmetry equivalents, not additional input fibres.
+
+## Defining a Fibre by Directions
+
+A Miller direction and a [vector3d](vector3d.vector3d.html) specimen
+direction define the full fibre directly. The next fibre contains every orientation that
+makes the crystal c-axis $$[001]$$ parallel to specimen Z.
+
+```python
+cAxisFibre = fibre(Miller(0, 0, 1, cs, 'uvw'), vector3d.Z)
+cAxisFibre
+```
+
+```text
+fibre (432 → y↑→x)
+  h || r: [001] || (0,0,1)
+```
+
+The summary states that [001] is parallel to (0,0,1). The directions are shown in crystal
+and specimen coordinates, respectively.
+
+```python
+plot(cAxisFibre, 'axisAngle', lineColor='gold', lineWidth=4, fundamentalRegion=True)
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-13.png"></center>
+
+The gold line is the symmetry-reduced image of every possible rotation about the aligned
+c-axis. Its two boundary ends continue into one another, so it represents one full fibre
+rather than one finite segment.
+
+If both constructor directions are `Miller` variables, the fibre instead contains all
+misorientations that bring one crystal direction into alignment with the other.
+
+## A Fibre Through One Orientation
+
+An initial orientation `ori1` and a crystal direction `h` define all orientations that
+preserve the mapped direction of `ori1`:
+
+$$ \mathtt{ori} * h = \mathtt{ori1} * h. $$
+
+The following full fibre passes through Cube and rotates about its $$[111]$$ axis.
+
+```python
+cube111Fibre = fibre(ori1, Miller(1, 1, 1, cs, 'uvw'))
+cube111Fibre
+```
+
+```text
+fibre (432 → y↑→x)
+  h || r: [111] || (1,1,1)
+```
+
+Its summary reports that [111] is parallel to (1,1,1). Cube maps this crystal direction
+onto the same specimen direction.
+
+```python
+plot(cube111Fibre, 'axisAngle', lineColor='darkred', lineWidth=4, fundamentalRegion=True)
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-15.png"></center>
+
+The dark-red curve passes through the Cube orientation at zero angle. Its ends meet the
+boundary at symmetry-equivalent continuations of the curve.
+
+[orientation](fibre.orientation.html) samples a fibre for numerical work.
+[angle](fibre.angle.html) measures the angular distance from an orientation to its
+nearest point on a fibre. Their geometric use without crystal symmetry is developed in
+[Fibres in Rotation Space](RotationFibre_py.html).
+
+## Predefined Rolling Fibres
+
+Cubic rolling textures have named segments, as their ideal components do: alpha, beta,
+gamma, epsilon, eta, tau, and theta. MTEX provides each as a static `fibre` constructor.
+These names assume the conventional rolling frame and orthorhombic specimen symmetry.
+
+```python
+ss = specimenFrame('orthorhombic')
+beta = fibre.beta(cs, ss)
+```
+
+Plot the conventional endpoint segment returned by each constructor. Passing
+`full=True` would extend that segment around its entire direction-pair circle.
+
+```python
+plot(fibre.alpha(cs, ss), lineWidth=3, lineColor=ind2color(1), displayName='alpha')
+hold(True)
+plot(fibre.beta(cs, ss), lineWidth=3, lineColor=ind2color(2), displayName='beta')
+plot(fibre.gamma(cs, ss), lineWidth=3, lineColor=ind2color(3), displayName='gamma')
+plot(fibre.epsilon(cs, ss), lineWidth=3, lineColor=ind2color(4), displayName='epsilon')
+plot(fibre.eta(cs, ss), lineWidth=3, lineColor=ind2color(5), displayName='eta')
+plot(fibre.tau(cs, ss), lineWidth=3, lineColor=ind2color(6), displayName='tau')
+plot(fibre.theta(cs, ss), lineWidth=3, lineColor=ind2color(7), displayName='theta')
+hold(False)
+legend(location='best')
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-17.png"></center>
+
+The coloured curves occupy different routes through Euler space and meet at some shared
+ideal components. Each colour marks only the conventional named segment, not every point
+on its full direction-pair circle.
+
+## Fibre ODFs
+
+A fibre is a curve of zero orientation-space volume, while a real texture has a spread
+around one. [fibreODF](fibreODF.html) turns the full curve into a density with a given
+halfwidth. This is the model fitted against a measurement.
+
+```python
+betaFull = fibre.beta(cs, ss, full=True)
+odf = fibreODF(betaFull, halfwidth=10 * degree)
+```
+
+The result is an `SO3FunCBF` with a de la Vallée Poussin kernel. Its $$10^\circ$$
+halfwidth is the distance where the density has fallen to half its peak, not a cutoff
+radius. The density is constant along the ideal fibre and decays away from it.
+
+```python
+plot3d(odf)
+hold(True)
+plot(betaFull.symmetrise(), lineColor='blue', lineWidth=4)
+hold(False)
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-19.png"></center>
+
+The blue curves are the ideal centrelines. The surrounding surface is the finite-width
+density, so it forms a tube rather than a line.
+
+## Evaluating an ODF Along a Fibre
+
+[plotFibre](SO3Fun.plotFibre.html) evaluates an ODF along a chosen curve. Here the
+beta-fibre ODF is read along the eta fibre.
+
+```python
+plotFibre(odf, fibre.eta(cs, ss), lineWidth=2, figSize='small')
+```
+
+<center class="mtex-figure"><img class="inline" src="figures/python/OrientationFibre-20.png"></center>
+
+The vertical axis is density in multiples of a random distribution. The broad maximum
+marks the part of the eta segment closest to the beta-fibre ridge.
+
+## The Volume Around a Fibre
+
+[volume](SO3Fun.volume.html) integrates the ODF inside a tube of a given angular radius
+about a fibre. This is the quantity meant when a texture is reported as "so many percent
+beta fibre".
+
+```python
+volume5Percent = 100 * volume(odf, betaFull, 5 * degree)
+volume5Percent
+```
+
+```text
+7.2535
+```
+
+The result is about 58 percent within $$5^\circ$$ of the fibre it was built on. At the
+$$10^\circ$$ kernel halfwidth, the numerical tube integral reaches unity.
+
+```python
+volume10Percent = 100 * volume(odf, betaFull, 10 * degree)
+volume10Percent
+```
+
+```text
+25.9752
+```
+
+The second result is 100 percent to the precision printed. It does not mean the ODF is a
+zero-width line or vanishes at $$10^\circ$$. [fibreVolume](SO3Fun.fibreVolume.html)
+discretises the tube and clips its numerical estimate at 1, so the displayed percentage
+can be exactly 100.
+
+## The Maths Behind Pole Figures
+
+Let $$f(g)$$ be an ODF, $$h$$ a crystal direction, and $$r$$ a specimen direction. The pole
+density at $$r$$ is
+
+$$ P_h(r) = \int_{\{g:\,g h=r\}} f(g)\,\mathrm{d}g. $$
+
+The integration set is exactly the full orientation fibre defined by `g * h = r`. This
+crystallographic Radon transform connects the geometry on this page to measured pole
+figures and ODF reconstruction; see the [pole figure tutorial](PoleFigureTutorial_py.html).
+
+## References
+
+* H.-J. Bunge, [Texture Analysis in Materials Science: Mathematical Methods](https://doi.org/10.1016/C2013-0-11769-2),
+  Butterworths, 1982. Chapter 5 develops fibre textures and their orientation
+  distributions.
+* A. Morawiec, [Orientations and Rotations: Computations in Crystallographic Textures](https://doi.org/10.1007/978-3-662-09156-2),
+  Springer, 2004. This book develops rotation-space geometry and symmetry-reduced regions.
+* O. Engler and V. Randle, [Introduction to Texture Analysis](https://doi.org/10.1201/9781420063660),
+  CRC Press, 2nd ed., 2010. It connects ideal components and fibres to measured
+  macrotexture and microtexture.
+* L. A. I. Kestens and H. Pirgazi, [Texture formation in metal alloys with cubic crystal structures](https://doi.org/10.1080/02670836.2016.1231746),
+  _Materials Science and Technology_ 32 (2016). This review discusses the named rolling
+  fibres of cubic alloys.
+* [ISO 3785:2023](https://www.iso.org/standard/82165.html), _Metallic materials --
+  Designation of test specimen axes in relation to product texture_, standardises the
+  specimen-axis language used for rolled products.
+
+## Next
+
+Fibres of plain rotations, without crystal symmetry, are
+[Fibres in Rotation Space](RotationFibre_py.html). Density models, halfwidth, and fitting are
+developed in [Fibre ODFs](FibreODFs_py.html). Pole-figure integration over fibres continues
+in [Pole Figures of an ODF](ODFPoleFigure_py.html).
+{% endraw %}

@@ -64,6 +64,26 @@ def copy(stage):
                     SITE + "/", stage + "/"], check=True)
 
 
+def drop_python(stage, names):
+    """The Python pages of the named pages only, and their rows of python_pages.yml."""
+    folder = os.path.join(stage, "pages", "documentation_python")
+    if not os.path.isdir(folder):
+        return 0
+    kept = []
+    for f in os.listdir(folder):
+        if f[:-3] in names:
+            kept.append(f[:-3])
+        else:
+            os.remove(os.path.join(folder, f))
+    table = os.path.join(stage, "_data", "python_pages.yml")
+    if os.path.exists(table):
+        with open(table) as fh:
+            rows = [l for l in fh if l.startswith("#") or l.split(":", 1)[0] in kept]
+        with open(table, "w") as fh:
+            fh.writelines(rows)
+    return len(kept)
+
+
 def drop_generated(stage, names):
     kept = dropped = 0
     for d in GENERATED:
@@ -143,8 +163,9 @@ def main():
     names |= landing_pages(names)
     copy(stage)
     kept, dropped, missing = drop_generated(stage, names)
+    python = drop_python(stage, names)
     prune_sidebars(stage, permalinks(stage))
-    print(f"staged {kept} generated pages, left out {dropped}")
+    print(f"staged {kept} generated pages and {python} Python pages, left out {dropped}")
     for n in missing:
         print(f"  not found: {n}")
 
