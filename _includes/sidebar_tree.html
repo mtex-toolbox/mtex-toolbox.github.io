@@ -55,6 +55,30 @@ without a page still get "#" and still toggle.
         {% endfor %}
         {% endif %}
         {% endfor %}
+        {% comment %}
+        The function reference sidebar comes out of xml2yml.m with the classes
+        as a mapping, `folderitems: {subfolders: [...]}`, not as a list, so
+        the loop above finds nothing in it. The classes are listed here.
+        {% endcomment %}
+        {% for subfolders in folder.folderitems.subfolders %}
+        {% if subfolders.output contains "web" %}
+        <li class="subfolders">
+            <a class="no_icon" href="{% if subfolders.url %}{{ subfolders.url | remove: "/" }}{% else %}#{% endif %}">{{ subfolders.title }}</a>
+            <ul>
+                {% for subfolderitem in subfolders.subfolderitems %}
+                {% if subfolderitem.output contains "web" %}
+                <li><a class="no_icon" href="{{subfolderitem.url | remove: "/"}}">{{subfolderitem.title}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% for folderitem in folder.folderitems.folderitems %}
+        {% if folderitem.output contains "web" %}
+        <li><a class="no_icon" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
+        {% endif %}
+        {% endfor %}
     </ul>
  </li>
 {% endif %}
