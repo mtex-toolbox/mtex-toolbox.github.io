@@ -2,7 +2,7 @@
 figures:
 - figure: figures/gallery/ipfmap.png
   page: EBSDIPFMap
-  title: Orientation map with grain boundaries
+  title: Coloring EBSD maps
   labels:
   - EBSD
   - Grains
@@ -15,14 +15,14 @@ figures:
     hold on, <span class="k">plot</span>(grains.boundary,<span class="s">''lineWidth''</span>,1.5), hold off'
 - figure: figures/gallery/twins.png
   page: TwinningBoundaries
-  title: Twin boundaries in magnesium
+  title: Twin boundaries
   labels:
   - Grains
   - Boundaries
   code: "twin = <span class=\"k\">orientation.map</span>(<span class=\"k\">Miller</span>(0,1,-1,-2,grains.CS),<span class=\"k\">Miller</span>(0,-1,1,-2,grains.CS),...\n  <span class=\"k\">Miller</span>(2,-1,-1,0,grains.CS),<span class=\"k\">Miller</span>(2,-1,-1,0,grains.CS));\ngB = grains.<span class=\"k\">boundary</span>(<span class=\"s\">'Magnesium'</span>,<span class=\"s\">'Magnesium'</span>);\ntwinB = gB(gB.<span class=\"k\">isTwinning</span>(twin,5*degree));\n<span class=\"k\">plot</span>(grains,<span class=\"s\">'ipfDirection'</span>,zvector), hold on\n<span class=\"k\">plot</span>(twinB,<span class=\"s\">'lineColor'</span>,<span class=\"s\">'w'</span>,<span class=\"s\">'lineWidth'</span>,3), hold off"
 - figure: figures/gallery/misorientation.png
   page: BoundaryMisorientations
-  title: Boundary misorientation angles
+  title: Boundary misorientations
   labels:
   - Boundaries
   code: '<span class="k">plot</span>(gB,gB.misorientation.angle./degree,<span class="s">''lineWidth''</span>,2)
@@ -30,14 +30,14 @@ figures:
     <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''degree''</span>)'
 - figure: figures/gallery/angledist.png
   page: AngleDistributionFunction
-  title: Misorientation angle distribution
+  title: Misorientation distributions
   labels:
   - Boundaries
   - Texture
   code: <span class="k">plotAngleDistribution</span>(gB.misorientation)
 - figure: figures/gallery/caxes.png
   page: VectorsDensityEstimation
-  title: Density of c-axes
+  title: Density estimation
   labels:
   - EBSD
   - Texture
@@ -61,7 +61,7 @@ figures:
     hold on, <span class="k">plot</span>(grains.boundary,<span class="s">''lineWidth''</span>,1.5), hold off'
 - figure: figures/gallery/gos.png
   page: GrainOrientationParameters
-  title: Grain orientation spread
+  title: Grain orientation parameters
   labels:
   - Grains
   - Deformation
@@ -74,7 +74,7 @@ figures:
     <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''degree''</span>)'
 - figure: figures/gallery/phases.png
   page: EBSDPlotting
-  title: Phase map
+  title: Phase maps
   labels:
   - EBSD
   code: 'mtexdata forsterite
@@ -82,7 +82,7 @@ figures:
     <span class="k">plot</span>(ebsd)'
 - figure: figures/gallery/shape.png
   page: ShapeParameters
-  title: Grain aspect ratio
+  title: Grain shape parameters
   labels:
   - Grains
   code: 'grains = <span class="k">calcGrains</span>(ebsd(<span class="s">''indexed''</span>),<span class="s">''minPixel''</span>,10);
@@ -92,7 +92,7 @@ figures:
     <span class="k">setColorRange</span>([1 4]), <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''aspect ratio''</span>)'
 - figure: figures/gallery/ellipses.png
   page: EllipseBasedParameters
-  title: Fitted ellipses
+  title: Ellipse fitting
   labels:
   - Grains
   code: '[c,a,b] = grains(grains.numPixel&gt;200).fitEllipse;
@@ -102,7 +102,7 @@ figures:
     <span class="k">plotEllipse</span>(c,a,b,<span class="s">''lineColor''</span>,<span class="s">''k''</span>,<span class="s">''lineWidth''</span>,1.5), hold off'
 - figure: figures/gallery/crystals.png
   page: CrystalShapes
-  title: Grains drawn as crystals
+  title: Crystal shapes
   labels:
   - Grains
   - Crystal geometry
@@ -117,7 +117,7 @@ figures:
     <span class="k">plot</span>(fo(id(1:40)),0.8*cS), hold off'
 - figure: figures/gallery/polefigure.png
   page: EBSDOrientationPlots
-  title: Pole figures of individual orientations
+  title: Pole figures
   labels:
   - EBSD
   - Texture
@@ -128,7 +128,7 @@ figures:
     <span class="k">plotPDF</span>(ori,h,<span class="s">''points''</span>,5000,<span class="s">''markerSize''</span>,2)'
 - figure: figures/gallery/sigma.png
   page: SigmaSections
-  title: ODF in sigma sections
+  title: ODF sections
   labels:
   - Texture
   code: 'odf = <span class="k">calcDensity</span>(ori);
@@ -136,7 +136,7 @@ figures:
     <span class="k">plotSection</span>(odf,<span class="s">''sigma''</span>,<span class="s">''sections''</span>,9)'
 - figure: figures/gallery/ipf.png
   page: OrientationInversePoleFigure
-  title: Inverse pole figure density
+  title: Inverse pole figures
   labels:
   - Texture
   code: '<span class="k">plotIPDF</span>(odf,zvector)
@@ -144,21 +144,21 @@ figures:
     mtexColorbar'
 - figure: figures/gallery/fundamental.png
   page: OrientationFundamentalRegion
-  title: Orientations in the fundamental region
+  title: Fundamental regions
   labels:
   - Crystal geometry
   - Texture
   code: <span class="k">plot</span>(grains(<span class="s">'Forsterite'</span>).meanOrientation,<span class="s">'axisAngle'</span>,<span class="s">'markerSize'</span>,4)
 - figure: figures/gallery/ipfkey.png
   page: EBSDIPFMap
-  title: Inverse pole figure colour key
+  title: Color keys
   labels:
   - Crystal geometry
   - EBSD
   code: <span class="k">plot</span>(<span class="k">ipfColorKey</span>(ebsd(<span class="s">'Forsterite'</span>)))
 - figure: figures/gallery/goss.png
   page: ODFModeling
-  title: Pole figures of a model texture
+  title: Model textures
   labels:
   - Texture
   - Pole figures
@@ -169,7 +169,7 @@ figures:
     <span class="k">plotPDF</span>(odf,<span class="k">Miller</span>({1,0,0},{1,1,0},{1,1,1},cs))'
 - figure: figures/gallery/miller.png
   page: CrystalDirections
-  title: Crystal directions in a stereographic projection
+  title: Miller indices
   labels:
   - Crystal geometry
   code: 'm = <span class="k">Miller</span>({1,0,0},{1,1,0},{1,1,1},{2,1,0},cs,<span class="s">''uvw''</span>);
@@ -177,13 +177,13 @@ figures:
     <span class="k">plot</span>(m,<span class="s">''symmetrised''</span>,<span class="s">''labeled''</span>,<span class="s">''upper''</span>,<span class="s">''grid''</span>)'
 - figure: figures/gallery/quartz.png
   page: CrystalShapes
-  title: A quartz crystal
+  title: Crystal morphology
   labels:
   - Crystal geometry
   code: <span class="k">plot</span>(crystalShape.quartz,<span class="s">'colored'</span>)
 - figure: figures/gallery/velocity.png
   page: WaveVelocities
-  title: P-wave velocity of olivine
+  title: Wave velocities
   labels:
   - Properties
   code: 'cs = <span class="k">crystalSymmetry</span>(<span class="s">''mmm''</span>,[4.7646 10.2296 5.9942],<span class="s">''mineral''</span>,<span class="s">''Olivine''</span>);
@@ -197,7 +197,7 @@ figures:
     <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''km/s''</span>)'
 - figure: figures/gallery/youngs.png
   page: AnisotropicTheory
-  title: Young's modulus of olivine
+  title: Elastic anisotropy
   labels:
   - Properties
   code: '<span class="k">plot</span>(C.YoungsModulus,<span class="s">''complete''</span>,<span class="s">''upper''</span>)
@@ -205,7 +205,7 @@ figures:
     <span class="k">mtexColorbar</span>(<span class="s">''title''</span>,<span class="s">''GPa''</span>)'
 - figure: figures/gallery/parents.png
   page: TiBetaReconstruction
-  title: Parent beta grains in titanium
+  title: Parent grain reconstruction
   labels:
   - Parent grains
   - Grains
@@ -224,7 +224,7 @@ figures:
     <span class="k">plot</span>(job.parentGrains,<span class="s">''ipfDirection''</span>,zvector)'
 - figure: figures/gallery/polefigures.png
   page: PoleFigure2ODF
-  title: ODF from neutron pole figures
+  title: ODF reconstruction
   labels:
   - Pole figures
   - Texture
@@ -235,7 +235,7 @@ figures:
     <span class="k">plotPDF</span>(odf,pf.allH,<span class="s">''antipodal''</span>,<span class="s">''superposition''</span>,pf.c)'
 - figure: figures/gallery/measured.png
   page: PoleFigurePlot
-  title: Measured neutron pole figures
+  title: Pole figure data
   labels:
   - Pole figures
   code: <span class="k">plot</span>(pf)

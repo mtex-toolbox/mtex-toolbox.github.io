@@ -15,7 +15,7 @@ close all                                                               % hide
 
 %% ipfmap
 %#page EBSDIPFMap
-%#title Orientation map with grain boundaries
+%#title Coloring EBSD maps
 %#labels EBSD, Grains
 mtexdata twins
 [grains,ebsd] = calcGrains(ebsd('indexed'),'angle',5*degree);
@@ -25,7 +25,7 @@ heroExport('ipfmap',[],'dir','gallery')                                 % hide
 
 %% twins
 %#page TwinningBoundaries
-%#title Twin boundaries in magnesium
+%#title Twin boundaries
 %#labels Grains, Boundaries
 twin = orientation.map(Miller(0,1,-1,-2,grains.CS),Miller(0,-1,1,-2,grains.CS),...
   Miller(2,-1,-1,0,grains.CS),Miller(2,-1,-1,0,grains.CS));
@@ -37,7 +37,7 @@ heroExport('twins',[],'dir','gallery')                                  % hide
 
 %% misorientation
 %#page BoundaryMisorientations
-%#title Boundary misorientation angles
+%#title Boundary misorientations
 %#labels Boundaries
 plot(gB,gB.misorientation.angle./degree,'lineWidth',2)
 mtexColorbar('title','degree')
@@ -45,14 +45,14 @@ heroExport('misorientation',[],'dir','gallery')                         % hide
 
 %% angledist
 %#page AngleDistributionFunction
-%#title Misorientation angle distribution
+%#title Misorientation distributions
 %#labels Boundaries, Texture
 plotAngleDistribution(gB.misorientation)
 heroExport('angledist',[],'dir','gallery')                              % hide
 
 %% caxes
 %#page VectorsDensityEstimation
-%#title Density of c-axes
+%#title Density estimation
 %#labels EBSD, Texture
 c = ebsd('Magnesium').orientations * Miller(0,0,0,1,ebsd('Magnesium').CS);
 plot(calcDensity(c,'halfwidth',7.5*degree))
@@ -71,7 +71,7 @@ heroExport('kam',[],'dir','gallery')                                    % hide
 
 %% gos
 %#page GrainOrientationParameters
-%#title Grain orientation spread
+%#title Grain orientation parameters
 %#labels Grains, Deformation
 mis2mean = calcGROD(ebsd,grains);
 GOS = ebsd.grainMean(mis2mean.angle,grains);
@@ -81,7 +81,7 @@ heroExport('gos',[],'dir','gallery')                                    % hide
 
 %% phases
 %#page EBSDPlotting
-%#title Phase map
+%#title Phase maps
 %#labels EBSD
 mtexdata forsterite
 plot(ebsd)
@@ -89,7 +89,7 @@ heroExport('phases',[],'dir','gallery')                                 % hide
 
 %% shape
 %#page ShapeParameters
-%#title Grain aspect ratio
+%#title Grain shape parameters
 %#labels Grains
 grains = calcGrains(ebsd('indexed'),'minPixel',10);
 plot(grains,grains.aspectRatio)
@@ -98,7 +98,7 @@ heroExport('shape',[],'dir','gallery')                                  % hide
 
 %% ellipses
 %#page EllipseBasedParameters
-%#title Fitted ellipses
+%#title Ellipse fitting
 %#labels Grains
 [c,a,b] = grains(grains.numPixel>200).fitEllipse;
 plot(grains,'faceAlpha',0.3), hold on
@@ -108,7 +108,7 @@ heroExport('ellipses',[],'dir','gallery')                               % hide
 
 %% crystals
 %#page CrystalShapes
-%#title Grains drawn as crystals
+%#title Crystal shapes
 %#labels Grains, Crystal geometry
 fo = grains('Forsterite');
 [~,id] = sort(fo.area,'descend');
@@ -120,7 +120,7 @@ heroExport('crystals',[],'dir','gallery')                               % hide
 
 %% polefigure
 %#page EBSDOrientationPlots
-%#title Pole figures of individual orientations
+%#title Pole figures
 %#labels EBSD, Texture
 ori = ebsd('Forsterite').orientations;
 h = Miller({1,0,0},{0,1,0},{0,0,1},ori.CS);
@@ -129,7 +129,7 @@ heroExport('polefigure',[],'dir','gallery')                             % hide
 
 %% sigma
 %#page SigmaSections
-%#title ODF in sigma sections
+%#title ODF sections
 %#labels Texture
 odf = calcDensity(ori);
 plotSection(odf,'sigma','sections',9)
@@ -137,7 +137,7 @@ heroExport('sigma',[],'dir','gallery')                                  % hide
 
 %% ipf
 %#page OrientationInversePoleFigure
-%#title Inverse pole figure density
+%#title Inverse pole figures
 %#labels Texture
 plotIPDF(odf,zvector)
 mtexColorbar
@@ -145,21 +145,21 @@ heroExport('ipf',[],'dir','gallery')                                    % hide
 
 %% fundamental
 %#page OrientationFundamentalRegion
-%#title Orientations in the fundamental region
+%#title Fundamental regions
 %#labels Crystal geometry, Texture
 plot(grains('Forsterite').meanOrientation,'axisAngle','markerSize',4)
 heroExport('fundamental',[],'dir','gallery')                            % hide
 
 %% ipfkey
 %#page EBSDIPFMap
-%#title Inverse pole figure colour key
+%#title Color keys
 %#labels Crystal geometry, EBSD
 plot(ipfColorKey(ebsd('Forsterite')))
 heroExport('ipfkey',[],'dir','gallery')                                 % hide
 
 %% goss
 %#page ODFModeling
-%#title Pole figures of a model texture
+%#title Model textures
 %#labels Texture, Pole figures
 cs = crystalSymmetry('m-3m');
 odf = unimodalODF(orientation.goss(cs),'halfwidth',10*degree);
@@ -168,7 +168,7 @@ heroExport('goss',[],'dir','gallery')                                   % hide
 
 %% miller
 %#page CrystalDirections
-%#title Crystal directions in a stereographic projection
+%#title Miller indices
 %#labels Crystal geometry
 m = Miller({1,0,0},{1,1,0},{1,1,1},{2,1,0},cs,'uvw');
 plot(m,'symmetrised','labeled','upper','grid')
@@ -176,14 +176,14 @@ heroExport('miller',[],'dir','gallery')                                 % hide
 
 %% quartz
 %#page CrystalShapes
-%#title A quartz crystal
+%#title Crystal morphology
 %#labels Crystal geometry
 plot(crystalShape.quartz,'colored')
 heroExport('quartz',[],'dir','gallery')                                 % hide
 
 %% velocity
 %#page WaveVelocities
-%#title P-wave velocity of olivine
+%#title Wave velocities
 %#labels Properties
 cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivine');
 C = stiffnessTensor.load(fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa'),cs);
@@ -194,7 +194,7 @@ heroExport('velocity',[],'dir','gallery')                               % hide
 
 %% youngs
 %#page AnisotropicTheory
-%#title Young's modulus of olivine
+%#title Elastic anisotropy
 %#labels Properties
 plot(C.YoungsModulus,'complete','upper')
 mtexColorbar('title','GPa')
@@ -202,7 +202,7 @@ heroExport('youngs',[],'dir','gallery')                                 % hide
 
 %% parents
 %#page TiBetaReconstruction
-%#title Parent beta grains in titanium
+%#title Parent grain reconstruction
 %#labels Parent grains, Grains
 mtexdata alphaBetaTitanium
 job = parentGrainReconstructor(ebsd);
@@ -215,7 +215,7 @@ heroExport('parents',[],'dir','gallery')                                % hide
 
 %% polefigures
 %#page PoleFigure2ODF
-%#title ODF from neutron pole figures
+%#title ODF reconstruction
 %#labels Pole figures, Texture
 mtexdata dubna
 odf = calcODF(pf,'silent');
@@ -224,7 +224,7 @@ heroExport('polefigures',[],'dir','gallery')                            % hide
 
 %% measured
 %#page PoleFigurePlot
-%#title Measured neutron pole figures
+%#title Pole figure data
 %#labels Pole figures
 plot(pf)
 heroExport('measured',[],'dir','gallery')                               % hide
