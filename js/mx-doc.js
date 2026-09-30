@@ -175,6 +175,13 @@
     if (ch && strip(ch.url) === here) { listChapter(ch); } else if (ch) { nextPrev(ch.items); }
   }
 
+  function renderSectionTree(sections) {
+    var saveCrumbs = crumbs, saveList = listChapter, saveNP = nextPrev;
+    crumbs = function () {}; listChapter = function () {}; nextPrev = function () {};
+    renderSection(sections, [null, null]);
+    crumbs = saveCrumbs; listChapter = saveList; nextPrev = saveNP;
+  }
+
   // the pages of a chapter, on the chapter's own page
   function listChapter(ch) {
     var body = article.querySelector('.post-content') || article;
@@ -235,25 +242,57 @@
 
   var SECTION = {
     documentation_sidebar: ['Documentation', 'docs.html'],
-    function_reference_sidebar: ['Function reference', 'function_reference.html'],
+    function_reference_sidebar: ['Documentation', 'docs.html'],
     examples_sidebar: ['Examples', 'examples.html'],
     workshops_sidebar: ['Workshops', null]
   };
 
+  // the other tab of the documentation sidebar: the whole tree, collapsed
+  function showTab(name) {
+    side.querySelectorAll('.mx-side-tabs button').forEach(function (b) {
+      b.setAttribute('aria-selected', String(b.getAttribute('data-tab') === name));
+    });
+    var filterBox = document.getElementById('mx-side-filter');
+    filterBox.value = '';
+    if (name === side.getAttribute('data-sidebar')) { tree.textContent = ''; return build(true); }
+    fetch('sidebars/' + name + '.html').then(function (r) { return r.text(); }).then(function (html) {
+      var parts = parse(html);
+      if (name === 'function_reference_sidebar') {
+        renderChapters(parts);
+        filterBox.placeholder = 'Filter the classes';
+      } else {
+        renderChapters(parts.map(function (s) { return { title: s.title, url: s.url, items: s.items.map(function (c) { return { title: c.title, url: c.url }; }) }; }));
+        filterBox.placeholder = 'Filter the chapters';
+      }
+    });
+  }
+
   function buildSidebar() {
     if (!side || !tree) { return; }
+    build(false);
+    side.querySelectorAll('.mx-side-tabs button').forEach(function (b) {
+      b.addEventListener('click', function () { showTab(b.getAttribute('data-tab')); });
+    });
+    wire();
+  }
+
+  // the tree of the page's own sidebar; the first time also the breadcrumbs
+  // and the previous and next page
+  function build(again) {
     var name = side.getAttribute('data-sidebar');
-    fetch(side.getAttribute('data-sidebar-url')).then(function (r) { return r.text(); }).then(function (html) {
+    var crumbsOnce = again ? function () {} : crumbs;
+    var nextPrevOnce = again ? function () {} : nextPrev;
+    return fetch(side.getAttribute('data-sidebar-url')).then(function (r) { return r.text(); }).then(function (html) {
       var chapters = parse(html);
       var sec = SECTION[name] || [null, null];
       if (name === 'function_reference_sidebar') {
         var f = renderClass(chapters);
         if (f) {
-          crumbs([{ title: sec[0], url: sec[1] }, { title: f.section.title, url: f.section.url }, { title: f.cls.title, url: f.cls.url }]);
-          nextPrev(f.cls.items);
+          crumbsOnce([{ title: sec[0], url: sec[1] }, { title: 'Function reference', url: 'function_reference.html' }, { title: f.section.title, url: f.section.url }, { title: f.cls.title, url: f.cls.url }]);
+          nextPrevOnce(f.cls.items);
         }
       } else if (name === 'documentation_sidebar') {
-        renderSection(chapters, sec);
+        if (again) { renderSectionTree(chapters); } else { renderSection(chapters, sec); }
       } else {
         renderChapters(chapters);
         var ch = chapters.find(function (c) { return strip(c.url) === here || c.items.some(function (i) { return strip(i.url) === here; }); });
@@ -270,7 +309,9 @@
     }).catch(function () {
       tree.appendChild(el('p', { class: 'mx-side-none' }, 'The contents could not be loaded.'));
     });
+  }
 
+  function wire() {
     document.getElementById('mx-side-filter').addEventListener('input', function (e) { filter(e.target.value); });
     var toggle = side.querySelector('.mx-side-toggle');
     toggle.addEventListener('click', function () {

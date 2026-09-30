@@ -91,6 +91,12 @@ the breadcrumbs, the previous/next links and the list of headings.
            data-sidebar="{{ sb }}">
         <button type="button" class="mx-side-toggle" aria-expanded="false">Contents</button>
         <div class="mx-side-body">
+            {% if sb == "documentation_sidebar" or sb == "function_reference_sidebar" %}
+            <div class="mx-side-tabs" role="tablist" aria-label="Documentation">
+                <button type="button" role="tab" data-tab="documentation_sidebar" aria-selected="{% if sb == "documentation_sidebar" %}true{% else %}false{% endif %}">Guide</button>
+                <button type="button" role="tab" data-tab="function_reference_sidebar" aria-selected="{% if sb == "function_reference_sidebar" %}true{% else %}false{% endif %}">Function reference</button>
+            </div>
+            {% endif %}
             <input type="search" class="mx-side-filter" id="mx-side-filter" placeholder="Filter this section" aria-label="Filter this section" autocomplete="off">
             <div class="mx-side-tree" id="mx-side-tree"></div>
         </div>
