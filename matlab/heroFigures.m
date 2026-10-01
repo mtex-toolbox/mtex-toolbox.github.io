@@ -10,71 +10,79 @@
 
 setMTEXpref('FontSize',15);                                             % hide
 plottingConvention.default('y↑→x');                                     % hide
-cd(fullfile(mtexDataPath,'EBSD'));                                      % hide
+cd(fullfile(fileparts(mfilename('fullpath')),'..','data'));                                      % hide
 close all                                                               % hide
 
 %% Import
 %#captions orientation map
-% an EBSD map of magnesium with many twins
-ebsd = EBSD.load('twins.ctf',...
-  'EulerCorrection',rotation.byAxisAngle(xvector,180*degree));
+% load a magnesium EBSD map
+ebsd = EBSD.load('twins.h5');
+
 plot(ebsd('Magnesium'),'ipfDirection',zvector)
-heroExport('import',1)                                                  % hide
+heroExport('import',1,'fitMap')                                                  % hide
 
 %% Grains
 %#captions grains
-% reconstruct grains and smooth their boundaries
-[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',5*degree);
+% reconstruct grains and smooth boundaries
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree);
 grains = smoothBoundary(grains,5);
 plot(grains,'ipfDirection',zvector)
-heroExport('grains',1)                                                  % hide
+heroExport('grains',1,'fitMap')                                                  % hide
 
 %% Clean
-%#captions KAM 0-2°, measured | KAM 0-2°, denoised
-% total variation denoising of the orientations
-F = l1TVFilter;
-ebsdS = smooth(ebsd,F);
-plot(ebsd,ebsd.KAM./degree), setColorRange([0 2])                       % hide
+%#captions Measured KAM | Denoised KAM
+% denoise the orientations
+ebsdS = smooth(ebsd,l1TVFilter);
+
+% compare kernel average misorientation
+plot(ebsd,ebsd.KAM./degree)
+setColorRange([0 2])                                                    % hide
 heroExport('clean',1)                                                   % hide
 plot(ebsdS,ebsdS.KAM./degree)
 setColorRange([0 2])                                                    % hide
 heroExport('clean',2)                                                   % hide
 
 %% Twins
-%#captions twin boundaries | twins merged into their parents
-% the {10-12} extension twin is a near Sigma 17a boundary
+%#captions Twin boundaries | Merged parents
+% magnesium {10-12} extension twin
+twin = orientation.byAxisAngle(...
+  Miller(1,0,-1,2,grains.CS),180*degree);
 gB = grains.boundary('Magnesium','Magnesium');
-%show twin = CSL(17,grains.CS,'delta',0.02);
-twin = orientation.map(Miller(0,1,-1,-2,grains.CS),...                  % hide
-  Miller(0,-1,1,-2,grains.CS),Miller(2,-1,-1,0,grains.CS),...           % hide
-  Miller(2,-1,-1,0,grains.CS));                                         % hide
 twinB = gB(gB.isTwinning(twin,5*degree));
-plot(grains,'ipfDirection',zvector), hold on                            % hide
+plot(grains,'ipfDirection',zvector), hold on                             % hide
 plot(twinB,'lineColor','w','lineWidth',3)
-hold off                                                                % hide
+hold off                                                               % hide
 heroExport('twins',1)                                                   % hide
+
+% merge grains across twin boundaries
 parents = merge(grains,twinB);
-plot(grains,'ipfDirection',zvector), hold on                            % hide
-plot(parents.boundary,'lineWidth',3), hold off                          % hide
+plot(grains,'ipfDirection',zvector), hold on                             % hide
+plot(parents.boundary,'lineWidth',3)
+hold off                                                               % hide
 heroExport('twins',2)                                                   % hide
 
 %% Texture
-%#captions (0001) pole figure | sigma sections
-% the ODF by kernel density estimation
-odf = calcDensity(ebsd('Magnesium').orientations);
+%#captions (0001) pole figure | ODF sections
+% estimate the orientation distribution
+odf = calcDensity(ebsd('Magnesium').orientations,...
+  'halfwidth',10*degree);
+
+% show a pole figure and ODF sections
 plotPDF(odf,Miller(0,0,0,1,odf.CS))
 heroExport('texture',1,'dark')                                          % hide
 plotSection(odf,'sigma','sections',9)
 heroExport('texture',2,'dark')                                          % hide
 
 %% Parent grains
-%#captions measured alpha titanium | reconstructed beta grains
-% prior beta grains from an alpha titanium map
+%#captions Measured alpha | Reconstructed beta
+% reconstruct beta grains from alpha titanium
 mtexdata alphaBetaTitanium
 plot(ebsd('Ti (alpha)'),'ipfDirection',zvector)                         % hide
 heroExport('parent',1)                                                  % hide
 job = parentGrainReconstructor(ebsd);
 job.p2c = orientation.Burgers(job.csParent,job.csChild);
+
+% group variants and assign parent orientations
 job.calcVariantGraph('threshold',1.5*degree);
 job.clusterVariantGraph('numIter',3);
 job.calcParentFromVote;
@@ -82,14 +90,15 @@ plot(job.parentGrains,'ipfDirection',zvector)
 heroExport('parent',2)                                                  % hide
 
 %% Properties
-%#captions single crystal | textured polycrystal
-% Young's modulus of magnesium and of the textured map
-ebsd = EBSD.load('twins.ctf',...                                        % hide
-  'EulerCorrection',rotation.byAxisAngle(xvector,180*degree));          % hide
+%#captions Single crystal | Textured polycrystal
+% single-crystal stiffness of magnesium (GPa)
+ebsd = EBSD.load('twins.h5');                                          % hide
 Cij = [59.7 26.2 21.7 0 0 0;  26.2 59.7 21.7 0 0 0;
        21.7 21.7 61.7 0 0 0;  0 0 0 16.4 0 0;
        0 0 0 0 16.4 0;  0 0 0 0 0 16.75];
 C = stiffnessTensor(Cij,ebsd('Magnesium').CS);
+
+% average over the measured texture (Hill)
 [~,~,CHill] = calcTensor(ebsd('Magnesium'),C);
 plot(C.YoungsModulus,'complete','upper')
 heroExport('properties',1,'dark','noLabels')                            % hide
@@ -97,14 +106,21 @@ plot(CHill.YoungsModulus,'complete','upper')
 heroExport('properties',2,'dark','noLabels')                            % hide
 
 %% 3D EBSD
-%#captions 3D grains | the largest grain
+%#captions 3D grains | Largest grain
 % a 3D EBSD volume and its grains
-ebsd = EBSD3.load('SmallIN100_MeshStats.dream3d');
+fname = fullfile(mtexEBSDPath,'SmallIN100_MeshStats.dream3d');
+ebsd = EBSD3.load(fname);
 [grains,ebsd] = calcGrains(ebsd,'angle',5*degree);
 plot(grains,grains.meanOrientation,'edgeAlpha',0.1)
 setCamera(plottingConvention.default3D)                                 % hide
-heroExport('3d',1)                                                      % hide
+axis off                                                               % hide
+heroExport('3d',1,'fit3d')                                                      % hide
+
 [~,id] = max(grains.volume);
-plot(grains(id),grains(id).meanOrientation,'edgeAlpha',0.2)
+grains = reduceBoundary(grains,2,'quadric');
+grains = smoothBoundary(grains,taubinFilter(20));
+plot(grains(id),grains(id).meanOrientation,'edgeAlpha',0)
 setCamera(plottingConvention.default3D)                                 % hide
-heroExport('3d',2)                                                      % hide
+camlight; lighting gouraud
+axis off                                                               % hide
+heroExport('3d',2,'fit3d')                                                      % hide

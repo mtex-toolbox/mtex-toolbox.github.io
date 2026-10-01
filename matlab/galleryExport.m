@@ -1,6 +1,7 @@
 function galleryExport(name,varargin)
 % Export a gallery thumbnail on a 960 by 720 canvas.
 % 'crop',f selects a fraction of a map; 'center',[x y] sets its relative centre.
+% 'trim' crops the white margin instead of fitting the plot on the canvas.
 
 fig = gcf;
 fig.Color = 'white';
@@ -40,8 +41,10 @@ end
 fig.ResizeFcn = [];
 set(fig,'PaperUnits','inches','PaperPositionMode','manual',...
   'PaperPosition',[0 0 6.4 4.8],'PaperSize',[6.4 4.8],'InvertHardcopy','off');
-outDir = fullfile(fileparts(mfilename('fullpath')),'..','figures','gallery');
+outDir = fullfile(fileparts(mfilename('fullpath')),'..','figures',get_option(varargin,'dir','gallery'));
 if ~exist(outDir,'dir'), mkdir(outDir); end
-print(fig,fullfile(outDir,[name '.png']),'-dpng','-r150');
+file = fullfile(outDir,[name '.png']);
+print(fig,file,'-dpng','-r150');
+galleryFitImage(file,varargin{:});
 close(fig);
 end
