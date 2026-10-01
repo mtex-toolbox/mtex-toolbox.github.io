@@ -1,5 +1,5 @@
 ---
-title: "EBSD3.gridify"
+title: 'EBSD3.gridify'
 
 sidebar: function_reference_sidebar
 permalink: EBSD3.gridify.html
@@ -23,22 +23,13 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>extend EBSD data to an grid</p>
-<h2 id="3">Description</h2>
-<p>matrix shaped regular grid. No interpolation is done herby. Grid points in the regular grid that do not have a correspondence in the regular grid are set to NaN. Having the EBSD data in matrix form has several advantages:</p>
-<div>
-<ul>
-<li>required for <a href="OrientationGradient.html">gradient</a>, <a href="EBSD.curvature.html">curvature</a> and <a href="GND">GND</a> computation</li>
-<li>much faster visualisation of big maps</li>
-<li>much faster computation of the kernel average misorientation</li>
-</ul>
-</div>
-<h2 id="4">Syntax</h2>
+<p>put a list of voxels back onto its lattice</p>
+<p>A selection from a volume, <code class="language-plaintext highlighter-rouge">ebsd('Quartz')</code> or <code class="language-plaintext highlighter-rouge">ebsd(condition)</code>, is a list of voxels that still carries the unit cell of the grid it came from. This rebuilds that grid: every voxel goes to its lattice cell and the cells nobody occupies are padded as not indexed.</p>
+<h2 id="3">Syntax</h2>
 {% highlight matlab %}
 [ebsdGrid,newId] = gridify(ebsd)
-[ebsdGrid,newId] = gridify(ebsd,'unitCell',unitCell)
 {% endhighlight %}
-<h2 id="5">Input</h2>
+<h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -46,20 +37,20 @@ To make changes, update the MATLAB code and republish this document.
             <tt>ebsd</tt>
          </td>
          <td>
-            <tt>an <a href="EBSD.EBSD.html">EBSD</a> data set with a non regular grid</tt>
+            <tt><a href="EBSD3.EBSD3.html">EBSD3</a></tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="6">Output</h2>
+<h2 id="5">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>ebsd</tt>
+            <tt>ebsdGrid</tt>
          </td>
          <td>
-            <tt><a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, <a href="EBSDhex.EBSDhex.html">EBSDhex</a> data on a regular grid</tt>
+            <tt><a href="EBSD3square.EBSD3square.html">EBSD3square</a>, with |ebsdGrid.pos(newId) == ebsd.pos|</tt>
          </td>
       </tr>
       <tr>
@@ -67,67 +58,15 @@ To make changes, update the MATLAB code and republish this document.
             <tt>newId</tt>
          </td>
          <td>
-            <tt>closest regular grid point for every non regular grid point</tt>
+            <tt>lattice index of every voxel of the list</tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="7">Options</h2>
+<h2 id="6">See also</h2>
 <p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>extent</tt>
-         </td>
-         <td>
-            <tt>extend of gridded map</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>unitCell</tt>
-         </td>
-         <td>
-            <tt>unit cell of the gridded map</tt>
-         </td>
-      </tr>
-   </table>
+<a href="EBSD3square.EBSD3square.html">EBSD3square</a> <a href="EBSD.gridify.html">EBSD.gridify</a> <a href="EBSD3.calcGrains.html">EBSD3.calcGrains</a>
 </p>
-<h2 id="8">Example</h2>
-{% highlight matlab %}
-mtexdata twins
-ebsdMg = ebsd('Magnesium').gridify
-plot(ebsdMg, ebsdMg.orientations)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↓→x, row↓→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed          none                                   
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId
- Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :137 x 167
- 
- 
-ebsdMg = EBSDsquare (y↓→x, row↓→col)
- 
- Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId
- Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :137 x 167
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSD3.gridify_01.png" %}
-</center>
 </div>
 </body>
 </html>
