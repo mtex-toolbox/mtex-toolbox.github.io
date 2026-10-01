@@ -41,6 +41,12 @@ plot(ebsd('phaseName'),ebsd('phaseName').orientation)
 {% endhighlight %}
 
 {% highlight matlab %}
+% colorize every phase by its ipf key for the direction x, y or z
+plot(ebsd,'ipfx')
+plot(ebsd,'ipfDirection',vector3d(1,1,0))
+{% endhighlight %}
+
+{% highlight matlab %}
 % colorize according to custom color
 oM = ipfColorKey(ebsd('phaseName'))
 color = oM.orientation2color(ebsd('phaseName').orientations);
@@ -144,6 +150,14 @@ plot(ebsd,ebsd.orientation,'region',[xmin, xmax, ymin, ymax])
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
+            <tt>ipfx, ipfy, ipfz</tt>
+         </td>
+         <td>
+            <tt>colorize the orientations by the ipf key for this direction</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
             <tt>points</tt>
          </td>
          <td>
@@ -181,26 +195,17 @@ ebsd = EBSDsquare (y↓→x, row↓→col)
  Normal vector: (0,0,1)
  Square grid  :336 × 732
 {% endhighlight %}
-<center class="mtex-figure">
-{% include inline_image.html file="EBSD.plot_01.png" %}
-</center>
 <p>colorize according to orientations</p>
 {% highlight matlab %}
 plot(ebsd('Forsterite'),ebsd('Forsterite').orientations)
 {% endhighlight %}
-<center class="mtex-figure">
-{% include inline_image.html file="EBSD.plot_02.png" %}
-</center>
 <p>colorize according to MAD</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.mad,'micronbar','off')
 {% endhighlight %}
-<center class="mtex-figure">
-{% include inline_image.html file="EBSD.plot_03.png" %}
-</center>
 <h2 id="10">See also</h2>
 <p>
-<a href="EBSDSpatialPlots.html">EBSDSpatialPlots</a>
+<a href="EBSDPlotting.html">EBSDPlotting</a>
 </p>
 </div>
 </body>

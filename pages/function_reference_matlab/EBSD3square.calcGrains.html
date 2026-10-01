@@ -1,0 +1,149 @@
+---
+title: 'EBSD3square.calcGrains'
+
+sidebar: function_reference_sidebar
+permalink: EBSD3square.calcGrains.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>EBSD3square.calcGrains</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSD3square__calcGrains.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD3square/calcGrains.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>grain reconstruction from 3d EBSD data on a voxel grid</p>
+<h2 id="3">Description</h2>
+<p>Voxels are 6-connected. A boundary face separates two neighbouring voxels the criterion tells apart; together with the outer hull the faces close every grain, so volumes follow from the divergence theorem. notIndexed voxels form notIndexed grains.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+[grains, ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',5)
+{% endhighlight %}
+
+{% highlight matlab %}
+% reconstruction low and high angle grain boundaries
+lagb = 2*degree;
+hagb = 10*degree;
+grains = calcGrains(ebsd,'angle',[hagb lagb])
+{% endhighlight %}
+
+{% highlight matlab %}
+% grains from a grainId stored with the data, e.g. imported from a file
+grains = calcGrains(ebsd,'grainId')
+{% endhighlight %}
+
+{% highlight matlab %}
+% specify phase dependent thresholds
+% thresholds follow the same order as ebsd.CSList and should have the same length
+grains = calcGrains(ebsd,'angle',{angle_1 angle_2 angle_3})
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD3square.EBSD3square.html">EBSD3square</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a>, the boundary consists of triangles, two per voxel face</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD3square.EBSD3square.html">EBSD3square</a> with additional property grainId</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>angle</tt>
+         </td>
+         <td>
+            <tt>misorientation angle that indicates a grain boundary</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>minPixel</tt>
+         </td>
+         <td>
+            <tt>minimum number of voxels that form a grain. No indexed grain smaller than this is returned; the voxels of one that would be are marked notIndexed</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>soft</tt>
+         </td>
+         <td>
+            <tt>[angle delta] soft threshold instead of a hard one</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fmc</tt>
+         </td>
+         <td>
+            <tt>fast multiscale clustering method</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mcl</tt>
+         </td>
+         <td>
+            <tt>Markovian clustering algorithm</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grainId</tt>
+         </td>
+         <td>
+            <tt>connect voxels with the same ebsd.grainId instead of a criterion on the orientations</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">See also</h2>
+<p>
+<a href="EBSD.calcGrains.html">EBSD.calcGrains</a> <a href="grain3d.grain3d.html">grain3d</a> <a href="grain3Boundary.grain3Boundary.html">grain3Boundary</a>
+</p>
+</div>
+</body>
+</html>

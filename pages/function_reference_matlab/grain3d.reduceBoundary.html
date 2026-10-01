@@ -1,0 +1,109 @@
+---
+title: 'grain3d.reduceBoundary'
+
+sidebar: function_reference_sidebar
+permalink: grain3d.reduceBoundary.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>grain3d.reduceBoundary</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_grain3d__reduceBoundary.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain3d/reduceBoundary.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>coarsen the boundary surfaces by clustering the vertices</p>
+<h2 id="3">Description</h2>
+<p>The volume is divided into cells n times the voxel size, and the vertices of a cell become one. Vertices that belong to different sets of grains, or to different faces of the outer hull, never merge: a triple line stays a triple line between the same grains, a quadruple point stays where four grains meet, and the hull stays flat. Faces whose vertices fell together vanish, so a grain smaller than a cell keeps its voxels but loses its surface and its volume drops to zero.</p>
+<p>This is the blunt instrument: it thins a flat face and a curved one alike. The centroid of a cluster already averages the voxel steps, the <code class="language-plaintext highlighter-rouge">'quadric'</code> placement keeps flat faces flat and triple lines sharp.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+grains = reduceBoundary(grains)
+grains = reduceBoundary(grains,3)
+grains = reduceBoundary(grains,2,'quadric')
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a> with triangular faces</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>n</tt>
+         </td>
+         <td>
+            <tt>coarsening factor (default 2)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>cell</tt>
+         </td>
+         <td>
+            <tt>size of the clustering cell (default n times the shortest edge)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>quadric</tt>
+         </td>
+         <td>
+            <tt>place each vertex where the faces it stands for are best approximated, instead of at the centroid of its cluster</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">References</h2>
+<div>
+<ul>
+<li>J. Rossignac, P. Borrel, Multi-resolution 3D approximations for rendering complex scenes, Modeling in Computer Graphics, Springer 1993.</li>
+<li>P. Lindstrom, Out-of-core simplification of large polygonal models, SIGGRAPH 2000, the quadric placement.</li>
+</ul>
+</div>
+<h2 id="10">See also</h2>
+<p>
+<a href="grain2d.reduceBoundary.html">grain2d.reduceBoundary</a> <a href="grain3d.refineBoundary.html">grain3d.refineBoundary</a> <a href="grain3d.smoothBoundary.html">grain3d.smoothBoundary</a>
+</p>
+</div>
+</body>
+</html>

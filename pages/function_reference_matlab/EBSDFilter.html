@@ -1,5 +1,5 @@
 ---
-title: "EBSDFilter"
+title: 'EBSDFilter'
 
 sidebar: function_reference_sidebar
 permalink: EBSDFilter.html
@@ -24,7 +24,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>abstract class for denoising EBSD data</p>
-<p>A filter replaces the orientation of every pixel of a gridded <a href="EBSD.EBSD.html">EBSD</a> map by one computed from its neighbours. Deriving classes only implement smooth; which neighbours exist is told to them through isHex.</p>
+<p>A filter replaces the orientation of every pixel of a gridded <a href="EBSD.EBSD.html">EBSD</a> map by one computed from its neighbours. Deriving classes only implement smooth; which neighbours exist and how far apart they are is told to them through isHex and dx.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 ebsd = smooth(ebsd,F)
@@ -52,6 +52,14 @@ ebsd = smooth(ebsd,F,'fill',grains)
          </td>
          <td>
             <tt>is the map on a hexagonal grid</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>dx</tt>
+         </td>
+         <td>
+            <tt>the distance of neighbouring pixels</tt>
          </td>
       </tr>
    </table>
@@ -89,14 +97,6 @@ ebsd = smooth(ebsd,F,'fill',grains)
          </td>
          <td>
             <tt>mean of the most homogeneous subwindow</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt><a href="halfQuadraticFilter.html">halfQuadraticFilter</a></tt>
-         </td>
-         <td>
-            <tt>half quadratic minimization, keeps steps</tt>
          </td>
       </tr>
       <tr>

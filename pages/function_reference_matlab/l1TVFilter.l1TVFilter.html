@@ -1,5 +1,5 @@
 ---
-title: "l1TVFilter.l1TVFilter"
+title: 'l1TVFilter.l1TVFilter'
 
 sidebar: function_reference_sidebar
 permalink: l1TVFilter.l1TVFilter.html
@@ -23,12 +23,13 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>smoothes quaternions by projecting them into tangential space and performing there smoothing spline approximation</p>
-<p>The total variation penalty keeps sharp steps, so unlike a spline or halfquadratic filter this one does not smear a subgrain boundary out. The price is a cyclic proximal point iteration, which makes it the slowest of the <a href="EBSDFilter.html">EBSDFilter</a>.</p>
+<p>total variation denoising of orientation maps</p>
+<p>The filter minimises the distance to the measured orientations plus alpha times the total variation, the sum of the misorientations between neighbouring pixels. The absolute values keep sharp steps, so a subgrain boundary survives the smoothing instead of being blurred away. The default method is half-quadratic minimisation on manifolds: R. Bergmann, R. H. Chan, R. Hielscher, J. Persch, G. Steidl, Restoration of Manifold-Valued Images by Half-Quadratic Minimization, Inverse Problems and Imaging 10 (2016). The method 'proximal' is a cyclic proximal point algorithm for the same functional; it ignores the threshold and the quality of the pixels.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 F = l1TVFilter
-F = l1TVFilter(alpha)
+F = l1TVFilter(smoothingLength)
+F.method = 'proximal';
 ebsd = smooth(ebsd,F)
 {% endhighlight %}
 <h2 id="4">Input</h2>
@@ -36,44 +37,87 @@ ebsd = smooth(ebsd,F)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>alpha</tt>
+            <tt>smoothingLength</tt>
          </td>
          <td>
-            <tt>regularization parameter, larger means smoother</tt>
+            <tt>the wavelength damped to half its amplitude, in the units of the map; four pixel distances when empty</tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="5">Class Properties</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>F</tt>
+            <tt>smoothingLength</tt>
          </td>
          <td>
-            <tt><a href="l1TVFilter.l1TVFilter.html">l1TVFilter</a></tt>
+            <tt>the wavelength damped to half its amplitude</tt>
          </td>
       </tr>
-   </table>
-</p>
-<h2 id="6">Class Properties</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>alpha</tt>
          </td>
          <td>
-            <tt>regularization parameter</tt>
+            <tt>regularization parameter, larger means smoother; empty means the one of the smoothing length</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>maxit</tt>
+            <tt>method</tt>
+         </td>
+         <td>
+            <tt>'halfQuadratic' or 'proximal'</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>l1DataFit</tt>
+         </td>
+         <td>
+            <tt>use the l1 norm for data fitting, else the l2 norm</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>l1TV</tt>
+         </td>
+         <td>
+            <tt>use the l1 norm for regularization, else the l2 norm</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iterMax</tt>
          </td>
          <td>
             <tt>maximum number of iterations</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tol</tt>
+         </td>
+         <td>
+            <tt>stopping criterion of the half-quadratic iteration</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>eps</tt>
+         </td>
+         <td>
+            <tt>l1 relaxation parameter</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>threshold</tt>
+         </td>
+         <td>
+            <tt>threshold for subgrain boundaries</tt>
          </td>
       </tr>
       <tr>
@@ -84,11 +128,19 @@ ebsd = smooth(ebsd,F)
             <tt>step sizes of the proximal point iteration</tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>isHex</tt>
+         </td>
+         <td>
+            <tt>is the map on a hexagonal grid</tt>
+         </td>
+      </tr>
    </table>
 </p>
-<h2 id="7">See also</h2>
+<h2 id="6">See also</h2>
 <p>
-<a href="EBSDFilter.html">EBSDFilter</a> <a href="EBSD.smooth.html">EBSD.smooth</a>
+<a href="EBSDFilter.html">EBSDFilter</a> <a href="EBSD.smooth.html">EBSD.smooth</a> <a href="splineFilter.html">splineFilter</a> <a href="infimalConvolutionFilter.html">infimalConvolutionFilter</a>
 </p>
 </div>
 </body>

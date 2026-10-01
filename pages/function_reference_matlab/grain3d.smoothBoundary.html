@@ -1,0 +1,127 @@
+---
+title: 'grain3d.smoothBoundary'
+
+sidebar: function_reference_sidebar
+permalink: grain3d.smoothBoundary.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>grain3d.smoothBoundary</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_grain3d__smoothBoundary.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain3d/smoothBoundary.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>smooth the boundary surfaces of 3d grains</p>
+<h2 id="3">Description</h2>
+<p>The vertices move, nothing else: the faces, the grains they separate and the voxels they carry stay. The boundary network is a stratified complex. Quadruple points, where four grains meet, are kept fixed. The <code class="language-plaintext highlighter-rouge">'hierarchical'</code> scheme then smooths every triple line as a curve between its quadruple points and afterwards every boundary face as a surface between its triple lines, so that a junction is never averaged with the interior of a face. The <code class="language-plaintext highlighter-rouge">'coupled'</code> scheme smooths all vertices at once and lets a triple line drift with the faces around it.</p>
+<p>Which filter moves the vertices is a <a href="boundaryFilter.html"><code class="language-plaintext highlighter-rouge">boundaryFilter</code></a>, the same objects as in two dimensions: <code class="language-plaintext highlighter-rouge">laplaceFilter</code> shrinks every grain a little per iteration, <code class="language-plaintext highlighter-rouge">taubinFilter</code> keeps the volumes approximately, <code class="language-plaintext highlighter-rouge">curvatureFilter</code> and <code class="language-plaintext highlighter-rouge">huberFilter</code> solve for a smoothing length. The outer hull is fixed, so the volumes of all grains together are conserved exactly. <code class="language-plaintext highlighter-rouge">'maxDisplacement'</code> bounds how far the surface may travel, half a voxel keeps a one voxel grain in place.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+grains = smoothBoundary(grains)
+grains = smoothBoundary(grains,10)
+grains = smoothBoundary(grains,taubinFilter(20))
+grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
+grains = smoothBoundary(grains,10,'maxDisplacement',0.5)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a> with triangular faces</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iter</tt>
+         </td>
+         <td>
+            <tt>number of iterations (default 1)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>scheme</tt>
+         </td>
+         <td>
+            <tt>|'hierarchical'| (default) or |'coupled'|</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxDisplacement</tt>
+         </td>
+         <td>
+            <tt>no vertex moves further than this from where it was</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fixTripleLines</tt>
+         </td>
+         <td>
+            <tt>keep the triple lines where they are</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>moveOuterBoundary</tt>
+         </td>
+         <td>
+            <tt>let the vertices on the outer hull move</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">References</h2>
+<div>
+<ul>
+<li>S. Maddali, S. Ta'asan, R. M. Suter, Topology-faithful nonparametric estimation and tracking of bulk interface networks, Computational Materials Science 125 (2016), the hierarchical scheme.</li>
+<li>S. F. F. Gibson, Constrained elastic surface nets, MICCAI 1998, the bound on the displacement.</li>
+</ul>
+</div>
+<h2 id="10">See also</h2>
+<p>
+<a href="grain2d.smoothBoundary.html">grain2d.smoothBoundary</a> <a href="grain3d.reduceBoundary.html">grain3d.reduceBoundary</a> <a href="grain3d.refineBoundary.html">grain3d.refineBoundary</a> <a href="boundaryFilter.html">boundaryFilter</a>
+</p>
+</div>
+</body>
+</html>
