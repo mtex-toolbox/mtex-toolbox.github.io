@@ -138,6 +138,8 @@ makeDoc('markPublished')      % interactive: declare the pages current, publish 
 makeDoc('clear')              % interactive: wipe generated pages + reload mtexdata
 makeDoc('keepImages')         % skip the image revert pass at the end (see below)
 makeDoc('skipDirtyImages')    % do not republish pages with uncommitted images (see below)
+makeDoc('ref','plan')         % only print what would be published
+makeDoc('ref','yes')          % publish without asking back, for the engine or -batch
 makeDoc('file','EBSDTutorial')          % just this page
 makeDoc('doc','file','Plotting')        % just this folder
 makeDoc('file',{'Multiplot','Legends'}) % several

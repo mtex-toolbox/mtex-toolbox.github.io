@@ -22,6 +22,9 @@ function makeDoc(varargin)
 %  skipDirtyImages - do not republish pages with uncommitted images
 %  keepImages      - do not revert images that were only re-rendered
 %  checkLinks      - report dead links in the published html
+%  plan            - only announce what would be published, publish nothing
+%  yes             - do not ask back before a large run, for a MATLAB
+%                    session without a keyboard (engine, -batch)
 %
 % Description
 %
@@ -230,6 +233,8 @@ end
 
 nPages = dispPlan(parts,options,restrictTo,doSidebars,varargin{:});
 
+if check_option(varargin,'plan'), return; end
+
 %% declare the pages as published instead of publishing them
 
 % for a working copy whose timestamps have been scrambled by branch switches:
@@ -256,7 +261,7 @@ end
 % anything beyond a handful of pages is a run of hours - long enough that a
 % mistyped 'file' or a forgotten 'force' should be caught here and not when
 % the rebuilt pages show up in git status
-if nPages > 10 && ...
+if nPages > 10 && ~check_option(varargin,'yes') && ...
     ~strcmpi(input(sprintf('Really publish %d pages? Y/N [N]:',nPages),'s'),'Y')
   dispPerm('nothing published')
   return

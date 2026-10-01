@@ -38,7 +38,26 @@ layout: default
         {% include reference.html link=github_editme_link content=github_editme_content class="btn btn-default githubEditButton" attr='role="button"' %}
     {% endif %}
 
+    {% comment %}
+      The same sources build MATLAB's own help, where links of the form
+      matlab:doc('hold') open MATLAB's documentation. On the web they lead
+      nowhere, so they go to the MathWorks online reference instead. The
+      sequence ') followed by a quote occurs nowhere else in the generated pages.
+    {% endcomment %}
+    {% if content contains 'href="matlab:' %}
+    {% capture dq %}"{% endcapture %}
+    {% assign doc_from = 'href=' | append: dq | append: "matlab:doc('" %}
+    {% assign doc_to = 'href=' | append: dq | append: 'https://www.mathworks.com/help/matlab/ref/' %}
+    {% assign doc_end = "')" | append: dq %}
+    {% assign doc_end_to = '.html' | append: dq %}
+    {{ content
+       | replace: doc_from, doc_to
+       | replace: doc_end, doc_end_to
+       | replace: 'href="matlab:import_wizard"', 'href="import_wizard.html"'
+       | replace: 'href="matlab:edit"', 'href="https://github.com/mtex-toolbox/mtex/blob/develop/mtex_settings.m"' }}
+    {% else %}
     {{ content }}
+    {% endif %}
 
     {% if page.folder == "function_reference" and page.url contains "_index.html" %}
         {% include custom/class-index.html %}
