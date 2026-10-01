@@ -19,6 +19,8 @@ release, so most of them resolve themselves with it.
   - `pip install "mtex[all]"` and "1.0.0 · Python 3.12+" in the Python card of
     `index.html` and of `pages/getstarted/getstarted.html`
   - the news item "MTEX for Python 1.0" in `index.html`
+  - the "edit page" link of all 238 Python pages, which points into
+    `mtex-toolbox/pymtex` and is a 404 while that repository is private
 - [ ] **The Python pages are rebuilt from the released pymtex**
   (`pymtex/docs/site.py ../web-next`, about 3 minutes), so that their code
   matches what `pip` installs.
@@ -67,6 +69,10 @@ yet.
 
 Not blocking; most of it is content in the MTEX sources.
 
+- [ ] **Workshop material.** The 2022 slides and scripts lived on the retired
+  Chemnitz homepage (26 links in `workshop22.md`); 25 tuc.cloud shares of the
+  2023 and 2024 workshops return 404, and 62 more could not be checked because
+  tuc.cloud rate-limits scripted requests.
 - [ ] **Dead links in generated pages.** 144 on 86 pages, all in pages
   generated from MTEX (renamed functions, malformed links in help texts,
   `matlab:` links). `tools/check-links.py <built site> --all` lists them with
