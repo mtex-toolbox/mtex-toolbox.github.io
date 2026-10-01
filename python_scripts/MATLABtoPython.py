@@ -7,6 +7,29 @@
 # punctuation. This page lists what does change, the rules of the Python language first and
 # then the few places where MTEX itself behaves differently.
 #
+# ## At a glance
+#
+# | | MATLAB | Python |
+# |---|---|---|
+# | Start MTEX | `startup_mtex`, once per session | `from mtex import *`, in every script |
+# | Editor | the MATLAB desktop | VS Code with the Python and Jupyter extensions |
+# | Section of a script | `%%`, run with Ctrl+Enter | `# %%`, run with Shift+Enter |
+# | Comment | `% text` | `# text` |
+# | Suppress output | `;` at the end of a line | not needed, only the last line of a cell prints |
+# | Option with a value | `calcGrains(ebsd, 'angle', 10*degree)` | `calcGrains(ebsd, angle=10*degree)` |
+# | Flag | `'antipodal'` | `antipodal=True` |
+# | Select | `ebsd('indexed')` | `ebsd['indexed']` |
+# | First and last element | `x(1)`, `x(end)` | `x[0]`, `x[-1]` |
+# | Several outputs | `[grains, ebsd] = calcGrains(ebsd)` | `grains = calcGrains(ebsd)` |
+# | Copy | `ori2 = ori` | `ori2 = ori.copy()` |
+# | Join | `[ori1, ori2]` | `cat(ori1, ori2)` |
+# | Element-wise arithmetic | `a .* b`, `a .^ 2` | `a * b`, `a ** 2` |
+# | Overlay plots | `hold on` | `hold(True)` |
+# | Import wizard | `import_wizard` | `importWizard()` |
+# | Open a documentation page | `edit EBSDTutorial` | `openDoc('EBSDTutorial')` |
+#
+# The sections below explain each row.
+#
 # ## Starting MTEX
 #
 # MATLAB MTEX is started once per session with `startup_mtex`. In Python, every script
@@ -51,7 +74,7 @@ ebsd
 # indices `'uvw'`, an Euler convention `'ZYZ'`, an alignment `'X||a'`.
 
 # %%
-grains = calcGrains(ebsd['indexed'], angle=10 * degree, minPixel=5)
+grains = calcGrains(ebsd, angle=10 * degree, minPixel=5)
 cs = ebsd['Forsterite'].CS
 Miller(1, 0, 0, cs, 'uvw')
 
@@ -108,14 +131,13 @@ ori.angle() / degree
 # A command with several outputs returns them together, and they are unpacked by commas
 # instead of square brackets: MATLAB's `[ind, d] = find(...)` is `ind, d = find(...)`.
 #
-# `calcGrains` is the exception. In MATLAB it returns the grain ids of the pixels as a second
-# output, `[grains, ebsd.grainId] = calcGrains(ebsd)`. In Python it writes them into the map
-# it is given, so `grains = calcGrains(ebsd)` suffices:
+# `calcGrains` is the exception. MATLAB also returns the updated map,
+# `[grains, ebsd] = calcGrains(ebsd)`. Python writes the grain ids into the input map,
+# so `grains = calcGrains(ebsd)` suffices:
 
 # %%
-indexed = ebsd['indexed']
-grains = calcGrains(indexed, angle=10 * degree, minPixel=5)
-indexed.grainId[0:5]
+grains = calcGrains(ebsd, angle=10 * degree, minPixel=5)
+ebsd.grainId[0:5]
 
 # %% [markdown]
 # Because the map is changed, compare two reconstructions on copies:
@@ -243,7 +265,7 @@ hold(False)
 #   the plotting commands pass unknown ones on to matplotlib.
 
 # %%
-print(ebsd.shape, indexed.shape)
+print(ebsd.shape, ebsd['indexed'].shape)
 
 # %% [markdown]
 # ## Where to find help
