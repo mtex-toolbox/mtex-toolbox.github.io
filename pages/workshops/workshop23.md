@@ -712,7 +712,7 @@ The second week will consist of lectures by invited experts that explain in deta
 <!--
 ## Registration:
 
-- Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to
+- Please use our registration form to subscribe or write an email to
 - please write an email to {% include reference.html link="mailto:mtexworkshop@gmail.com"
  content="mtexworkshop@gmail.com" %} where you include name, address, whether
  you are student or not, which week you wish to attend and wether you want to
@@ -729,7 +729,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Organizers:
 
-{% include reference.html link="https://tu-freiberg.de/fakult1/ana/hielscher" content="Ralf Hielscher" %} (TU Bergakademie Freiberg),
+{% include reference.html link="https://tu-freiberg.de/fakultaet1/institute/angewandte-analysis/team/prof-dr-rer-nat-ralf-hielscher" content="Ralf Hielscher" %} (TU Bergakademie Freiberg),
 {% include reference.html link="https://geodynamics.geo.uni-halle.de/ruediger-kilian/" content="Rüdiger Kilian" %} (Universität Halle),
 {% include reference.html link="https://structuretectonics.org/people/luiz-morales/" content="Luiz Morales" %} (ETH Zürich),
 {% include reference.html link="https://www.researchgate.net/profile/Frank-Niessen-4" content="Frank Niessen" %} (DTU Dänemark)

@@ -235,7 +235,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 - **{% include reference.html link="http://merkel.texture.rocks/" content="S&#x00e9;bastien Merkel" %}** (Université de Lille, France): *Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments*
 - **{% include reference.html link="https://www.mek.dtu.dk/" content="Wolfgang Pantleon" %}** (DTU Dänemark)
-- **{% include reference.html link="https://www.tue.nl/en/research/researchers/tijmen-vermeij/" content="Tijmen Vermeij" %}** (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
+- **{% include reference.html link="https://github.com/Tijmenvermeij" content="Tijmen Vermeij" %}** (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
 - **{% include reference.html link="https://www.ntnu.edu/employees/bjorn.sorensen" content="Bj&#x00f8;rn Eske S&#x00f8;rensen" %}** (Norwegian University of Science and Technology): *MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research*
 - **{% include reference.html link="https://www.researchgate.net/profile/Omero-Orlandini" content="Omero Orlandini" %}** (University of Colorado Boulder): *Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems*
 
@@ -451,7 +451,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Registration:
 
-- Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to {% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
+- Please use our registration form to subscribe or write an email to {% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
 - Deadline for registration is 28th of February 2022
 - Registration fee first week: students - 100 Euro, other - 200 Euro
 - Registration for second week is free
@@ -459,7 +459,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Organizers:
 
-{% include reference.html link="https://tu-freiberg.de/fakult1/ana/hielscher" content="Ralf Hielscher" %} (TU Bergakademie Freiberg)
+{% include reference.html link="https://tu-freiberg.de/fakultaet1/institute/angewandte-analysis/team/prof-dr-rer-nat-ralf-hielscher" content="Ralf Hielscher" %} (TU Bergakademie Freiberg)
 , {% include reference.html link="https://geodynamics.geo.uni-halle.de/ruediger-kilian/" content="Rüdiger Kilian" %} (Universität Halle)
 , {% include reference.html link="https://structuretectonics.org/people/luiz-morales/" content="Luiz Morales" %} (ETH Zürich)
 , {% include reference.html link="https://www.researchgate.net/profile/Frank-Niessen-4" content="Frank Niessen" %} (DTU Dänemark)

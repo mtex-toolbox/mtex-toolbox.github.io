@@ -745,7 +745,7 @@ their talks as accessible as possible.
 
 ## Registration:
 
-- Please register at {% include reference.html link="https://acatrain.net/events/freiberg-mtex-workshop-2024/" content="https://acatrain.net/events/freiberg-mtex-workshop-2024" %}
+- Please register at https://acatrain.net/events/freiberg-mtex-workshop-2024
  - Deadline for registration is 28th of February 2024
 
 ## Registration Fee:
@@ -757,7 +757,7 @@ their talks as accessible as possible.
 
 ## Organizers:
 
-{% include reference.html link="https://tu-freiberg.de/fakult1/ana/hielscher" content="Ralf Hielscher" %} (TU Bergakademie Freiberg),
+{% include reference.html link="https://tu-freiberg.de/fakultaet1/institute/angewandte-analysis/team/prof-dr-rer-nat-ralf-hielscher" content="Ralf Hielscher" %} (TU Bergakademie Freiberg),
 {% include reference.html link="https://geodynamics.geo.uni-halle.de/ruediger-kilian/" content="Rüdiger Kilian" %} (Universität Halle),
 {% include reference.html link="https://structuretectonics.org/people/luiz-morales/" content="Luiz Morales" %} (ETH Zürich),
 {% include reference.html link="https://www.researchgate.net/profile/Frank-Niessen-4" content="Frank Niessen" %} (DTU Dänemark)
