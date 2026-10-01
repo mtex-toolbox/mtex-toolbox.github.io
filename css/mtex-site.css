@@ -148,11 +148,36 @@ body.mx-body { height: auto; min-height: 100vh; background: var(--mx-ground); co
 .mx-hero-grid { align-items: stretch; }
 .mx-hero-text { grid-area: intro; display: flex; flex-direction: column; justify-content: center; }
 .mx-hero-community { grid-area: community; align-self: end; }
-.mx-hero-community .mx-people { margin-top: 0; }
 .mx-page .mx-hero-text .mx-lede { margin: 0 0 16px; }
 .mx-page .mx-hero-text h1 { margin-bottom: 18px; }
 .mx-page .mx-hero-text .mx-btns { margin-top: 6px; }
-.mx-page .mx-people { margin: 24px 0 0; padding-top: 16px; border-top: 1px solid var(--mx-line); font-size: 16px; color: var(--mx-ink-2); }
+.mx-people { display: flex; align-items: center; gap: 16px; }
+.mx-faces { display: flex; flex: none; }
+.mx-faces img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--mx-ground); margin-left: -10px; background: var(--mx-sunk); }
+.mx-faces img:first-child { margin-left: 0; }
+.mx-page .mx-people p { margin: 0; font-size: 15.5px; color: var(--mx-ink-2); line-height: 1.45; }
+.mx-people b { color: var(--mx-ink); }
+@media (max-width: 640px) { .mx-people { flex-direction: column; align-items: flex-start; gap: 10px; } }
+
+/* content for one language only, following the MATLAB | Python switch */
+html:not([data-lang="python"]) [data-only="python"],
+html[data-lang="python"] [data-only="matlab"] { display: none !important; }
+
+/* the install box of the homepage */
+.mx-install { background: var(--mx-surface); border: 1px solid var(--mx-line); border-radius: 14px; padding: 18px 20px; box-shadow: var(--mx-shadow); }
+.mx-install-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+.mx-install-head b { font: 700 17px var(--mx-display); font-stretch: 87.5%; color: var(--mx-ink); }
+.mx-seg { display: inline-flex; background: var(--mx-sunk); border-radius: 8px; padding: 2px; }
+.mx-seg button { border: 0; background: transparent; font: 600 13px var(--mx-body); padding: 4px 10px; border-radius: 6px; color: var(--mx-ink-2); cursor: pointer; }
+html:not([data-lang="python"]) .mx-seg [data-lang="matlab"], html[data-lang="python"] .mx-seg [data-lang="python"] { background: var(--mx-surface); color: var(--mx-accent-ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+.mx-page a.mx-install-dl { display: inline-flex; align-items: center; gap: 10px; font-size: 17px; padding: 11px 18px; }
+.mx-install-dl svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.mx-pip { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--mx-code-bg); color: var(--mx-code-ink); border-radius: 10px; padding: 10px 10px 10px 16px; font: 15px var(--mx-mono); }
+.mx-pip button { border: 1px solid rgba(255,255,255,.25); background: transparent; color: var(--mx-code-ink); border-radius: 6px; font: 600 12.5px var(--mx-body); padding: 4px 10px; cursor: pointer; }
+.mx-page .mx-install p { margin: 12px 0 0; font-size: 15px; color: var(--mx-ink-2); }
+.mx-install code { font: .9em var(--mx-mono); background: var(--mx-sunk); border-radius: 4px; padding: 1px 4px; color: var(--mx-ink); }
+.mx-page .mx-install p.mx-install-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; }
+.mx-page a.mx-install-next { display: inline-block; margin-top: 14px; font-weight: 600; }
 .mx-card { grid-area: demo; height: 558px; background: var(--mx-code-bg); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--mx-shadow); min-width: 0; }
 .mx-card-tabrow { display: flex; flex: none; min-width: 0; }
 .mx-card-tabs { flex: 1; min-width: 0; display: flex; gap: 2px; padding: 8px 8px 0; border-bottom: 1px solid rgba(255,255,255,.1); overflow-x: auto; scrollbar-width: none; }
@@ -284,13 +309,6 @@ body.mx-body { height: auto; min-height: 100vh; background: var(--mx-ground); co
 .mx-door .mx-links2 { display: flex; gap: 16px; flex-wrap: wrap; font-weight: 600; margin-top: auto; padding-top: 6px; }
 
 /* news, community, cite */
-.mx-foot3 { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 32px; }
-.mx-foot3 h3 { font: 700 12.5px var(--mx-display); text-transform: uppercase; letter-spacing: .1em; color: var(--mx-ink-3); margin-bottom: 12px; }
-.mx-news, .mx-linklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.mx-news li { display: grid; grid-template-columns: 76px 1fr; gap: 10px; }
-.mx-news time { font: 500 13.5px var(--mx-mono); color: var(--mx-ink-3); padding-top: 3px; font-variant-numeric: tabular-nums; }
-.mx-cite { background: var(--mx-sunk); border: 1px solid var(--mx-line); border-radius: 10px; padding: 12px 14px; font-size: 15px; color: var(--mx-ink-2); }
-.mx-cite i { color: var(--mx-ink); }
 
 /* gallery */
 .mx-pagehead { padding-top: 38px; padding-bottom: 8px; }
@@ -424,8 +442,6 @@ figcaption.mx-tile-cap { font-style: normal; max-width: none; padding: 10px 14px
   .mx-col { grid-row: auto; grid-template-rows: none; }
   .mx-ws { grid-template-columns: 1fr; }
   .mx-ws > img { height: 220px; min-height: 0; }
-  .mx-foot3 { grid-template-columns: 1fr 1fr; }
-  .mx-foot3 > :first-child { grid-column: 1 / -1; }
 }
 @media (max-width: 640px) {
   .mx-card { height: 398px; }
@@ -433,8 +449,7 @@ figcaption.mx-tile-cap { font-style: normal; max-width: none; padding: 10px 14px
   .mx-card-figs { grid-template-columns: 1fr; }
   .mx-card-figs { min-height: 0; flex: 1; }
   .mx-card-views { display: flex; flex: none; gap: 4px; padding: 5px 12px; overflow-x: auto; }
-  .mx-start, .mx-foot3 { grid-template-columns: 1fr; }
-  .mx-foot3 > :first-child { grid-column: auto; }
+  .mx-start { grid-template-columns: 1fr; }
   .mx-ws-text { padding: 20px; }
 }
 

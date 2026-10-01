@@ -16,11 +16,11 @@ These make statements on the site true. The site goes live after the pymtex
 release, so most of them resolve themselves with it.
 
 - [ ] **pymtex is on PyPI as `mtex` 1.0.0.** Until then these are false:
-  - `pip install "mtex[all]"` and "1.0.0 · Python 3.12+" in the Python card of
-    `index.html` and of `pages/getstarted/getstarted.html`
-  - the news item "MTEX for Python 1.0" in `index.html`
-  - the "edit page" link of all 238 Python pages, which points into
-    `mtex-toolbox/pymtex` and is a 404 while that repository is private
+  - `pip install "mtex[all]"` and "MTEX for Python 1.0" in the install box of
+    `index.html`, and "1.0.0 · Python 3.12+" in `pages/getstarted/getstarted.html`
+  - the "edit page" link of all 238 Python pages and the "Source on GitHub"
+    link of the Python install box on the homepage, which point into
+    `mtex-toolbox/pymtex` and are a 404 while that repository is private
 - [ ] **The Python pages are rebuilt from the released pymtex**
   (`pymtex/docs/site.py ../web-next`, about 3 minutes), so that their code
   matches what `pip` installs.
