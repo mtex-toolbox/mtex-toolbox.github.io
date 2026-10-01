@@ -39,7 +39,7 @@ To make changes, update the MATLAB code and republish this document.
 <li>
 <b><code class="language-plaintext highlighter-rouge">value</code></b> says what path to match, while <b><code class="language-plaintext highlighter-rouge">mode</code></b> says where and how to search. The result is a path inside the HDF5 file.</li>
 <li>
-<b><code class="language-plaintext highlighter-rouge">type</code></b> selects what to do with the value. It dispatches to a formatter named <code class="language-plaintext highlighter-rouge"><a href="category">category</a>_<a href="type">type</a></code>, such as <code class="language-plaintext highlighter-rouge">position_direct</code>, <code class="language-plaintext highlighter-rouge">rotation_euler</code> or <code class="language-plaintext highlighter-rouge">cs_default</code>. The formatter returns the MTEX object or array required by the <a href="EBSD.EBSD.html">EBSD</a> constructor.</li>
+<b><code class="language-plaintext highlighter-rouge">type</code></b> selects what to do with the value. It dispatches to a formatter named after category and type, such as <code class="language-plaintext highlighter-rouge">position_direct</code>, <code class="language-plaintext highlighter-rouge">rotation_euler</code> or <code class="language-plaintext highlighter-rouge">cs_default</code>. The formatter returns the MTEX object or array required by the <a href="EBSD.EBSD.html">EBSD</a> constructor.</li>
 </ul>
 </div>
 <p>Nested objects mirror the constructor categories. A node may instead use <code class="language-plaintext highlighter-rouge">group</code> to collect the data sets of a group, <code class="language-plaintext highlighter-rouge">data</code> to inject a constant, or <code class="language-plaintext highlighter-rouge">load</code> to reuse a value cached earlier. Those forms do not perform the usual <code class="language-plaintext highlighter-rouge">mode</code> and <code class="language-plaintext highlighter-rouge">value</code> leaf search.</p>
@@ -159,10 +159,10 @@ To make changes, update the MATLAB code and republish this document.
 </ul>
 </div>
 <p>A <b>property</b> has one value per measurement and is subset with the map. <code class="language-plaintext highlighter-rouge">additions</code> turns every remaining per-measurement data set of a group into a property, descending into subgroups and prefixing their names. Its <code class="language-plaintext highlighter-rouge">group</code> may be a list, so a second analysis of the same site, such as the EDS element maps in an Oxford file, can be imported too. An <code class="language-plaintext highlighter-rouge">exclude</code> list keeps out values already read as coordinates or another core category.</p>
-<p>An <b>option</b> is scan-level data and is not resized when the map is subset. Every further top-level category is stored under <code class="language-plaintext highlighter-rouge">ebsd.opt.&lt;category&gt;</code>; <code class="language-plaintext highlighter-rouge">eds</code> and <code class="language-plaintext highlighter-rouge">electron_image</code> use this path. Mark such a category optional when the vendor does not write it in every file.</p>
+<p>An <b>option</b> is scan-level data and is not resized when the map is subset. Every further top-level category is stored in <code class="language-plaintext highlighter-rouge">ebsd.opt</code> under its name; <code class="language-plaintext highlighter-rouge">eds</code> and <code class="language-plaintext highlighter-rouge">electron_image</code> use this path. Mark such a category optional when the vendor does not write it in every file.</p>
 <p>A crystal <code class="language-plaintext highlighter-rouge">reference_frame</code> entry fixes the Cartesian frame attached to a phase's lattice. It is distinct from the phase's point-group symmetry and from the specimen-frame correction in <code class="language-plaintext highlighter-rouge">map_correction</code>. Reading the right Euler numbers with the wrong one of these frames still gives a plausible but physically misaligned map.</p>
 <h2 id="7">A minimal configuration</h2>
-<p>The ThermoFisher configuration is the smallest of the six. It uses literal paths for its rigid outer tree, builds positions from the grid dimensions, reads stacked phases and Euler angles, and repeats the crystal symmetry branch once per phase.</p>
+<p>The ThermoFisher configuration is the smallest of the six. It uses literal paths for its rigid outer tree, builds positions from the grid dimensions, reads stacked phases and Euler angles, and repeats the crystal symmetry branch once per phase. Its map correction is fixed: xTalView writes the map with its x axis opposite to the specimen x axis of the Euler angles, a half turn about y, given as Bunge angles in degree.</p>
 <pre>{
   "settings": {
     "name": "ThermoFisher",
@@ -182,6 +182,7 @@ To make changes, update the MATLAB code and republish this document.
         "first": { "data": "x" }
       }
     },
+    "map_correction": { "type": "rotation", "data": [90, 180, 270] },
     "phase": { "mode": "search_root", "value": "Phase", "type": "stack" },
     "rotation": {
       "type": "euler_stack",
@@ -241,7 +242,7 @@ ans =
      2
      3
 ans =
-  11×1 cell array
+  11x1 cell array
     {'GridType'       }
     {'Notes'          }
     {'Operator'       }

@@ -1,0 +1,245 @@
+---
+title: 'Data From Your Instrument'
+
+sidebar: documentation_sidebar
+permalink: EBSDVendors.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Data From Your Instrument</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDVendors.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDVendors.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>MTEX reads the files of every major EBSD vendor, of 3D diffraction and of microstructure simulation into one data model, and writes EBSD maps back out in the vendors' own formats. This page lists, vendor by vendor, which files that covers, how the Euler angles are aligned with the map, and the line that imports them.</p>
+<p>The alignment matters most. A vendor may describe the Euler angles and the map positions in two different specimen frames, and not every file states how the two are related. Where the file is silent, MTEX assumes the alignment the vendor uses by default and prints a note saying so. <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> shows how to check that assumption against a feature of the specimen.</p>
+<h2 id="2">Overview</h2>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <b>Vendor</b>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <b>Software</b>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <b>MTEX reads</b>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <b>MTEX writes</b>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>Oxford Instruments</p>
+         </td>
+         <td>
+               <p>AZtec, Channel 5</p>
+         </td>
+         <td>
+               <p>.ctf, .cpr/.crc, .h5oina</p>
+         </td>
+         <td>
+               <p>.ctf, .cpr/.crc, .h5oina</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>EDAX</p>
+         </td>
+         <td>
+               <p>OIM, APEX</p>
+         </td>
+         <td>
+               <p>.ang, .osc, .oh5, .h5, .edaxh5</p>
+         </td>
+         <td>
+               <p>.ang, .oh5, .h5, .edaxh5</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>Bruker</p>
+         </td>
+         <td>
+               <p>ESPRIT</p>
+         </td>
+         <td>
+               <p>.h5</p>
+         </td>
+         <td>
+               <p>.h5</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>Thermo Fisher</p>
+         </td>
+         <td>
+               <p>xTalView</p>
+         </td>
+         <td>
+               <p>.h5</p>
+         </td>
+         <td>
+               <p>.h5</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>NanoMegas (ACOM-TEM)</p>
+         </td>
+         <td>
+               <p>ASTAR</p>
+         </td>
+         <td>
+               <p>.ang</p>
+         </td>
+         <td>
+               <p>–</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>Xnovo</p>
+         </td>
+         <td>
+               <p>GrainMapper3D</p>
+         </td>
+         <td>
+               <p>.h5</p>
+         </td>
+         <td>
+               <p>–</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>BlueQuartz</p>
+         </td>
+         <td>
+               <p>DREAM.3D</p>
+         </td>
+         <td>
+               <p>.dream3d</p>
+         </td>
+         <td>
+               <p>–</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>Neper</p>
+         </td>
+         <td>
+               <p>Neper</p>
+         </td>
+         <td>
+               <p>.tess</p>
+         </td>
+         <td>
+               <p>–</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>open source</p>
+         </td>
+         <td>
+               <p>EMSphInx</p>
+         </td>
+         <td>
+               <p>.h5, .ang</p>
+         </td>
+         <td>
+               <p>.h5</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>An HDF5 file is written by updating a copy of the imported file, so it keeps the vendor's header and acquisition settings; see <a href="EBSDExport.html">Exporting EBSD Data</a>. A text file of columns from any other source is read by the <a href="loadEBSD_generic.html">generic loader</a>.</p>
+<h2 id="3">Oxford Instruments</h2>
+<p>AZtec writes <code class="language-plaintext highlighter-rouge">.h5oina</code> and, like Channel 5, the text format <code class="language-plaintext highlighter-rouge">.ctf</code> and the binary pair <code class="language-plaintext highlighter-rouge">.cpr</code> and <code class="language-plaintext highlighter-rouge">.crc</code>.</p>
+{% highlight matlab %}
+ebsd = EBSD.load('map.h5oina');
+ebsd = EBSD.load('map.ctf');
+ebsd = EBSD.load('map.cpr');
+{% endhighlight %}
+<p>An <code class="language-plaintext highlighter-rouge">.h5oina</code> file states its scan rotation, and MTEX applies it. For <code class="language-plaintext highlighter-rouge">.ctf</code> and <code class="language-plaintext highlighter-rouge">.cpr</code> MTEX assumes the Oxford default, Euler angles turned by 180&deg; about the z axis against the map. A file exported with another alignment is imported with that rotation stated explicitly:</p>
+{% highlight matlab %}
+ebsd = EBSD.load('map.ctf','EulerCorrection',rotation.id);
+{% endhighlight %}
+<p>An <code class="language-plaintext highlighter-rouge">.h5oina</code> file may hold the raw and the processed version of a map; <a href="EBSDImport.html">Importing EBSD Data</a> shows how to choose between them.</p>
+<h2 id="4">EDAX</h2>
+<p>OIM and APEX write the text format <code class="language-plaintext highlighter-rouge">.ang</code>, the binary <code class="language-plaintext highlighter-rouge">.osc</code> and HDF5.</p>
+{% highlight matlab %}
+ebsd = EBSD.load('map.ang');
+ebsd = EBSD.load('map.osc');
+ebsd = EBSD.load('map.oh5');
+ebsd = EBSD.load('map.edaxh5');
+{% endhighlight %}
+<p>EDAX chooses the alignment of Euler angles and map at export time, as one of four <i>settings</i>. An <code class="language-plaintext highlighter-rouge">.oh5</code> file states the setting. An <code class="language-plaintext highlighter-rouge">.ang</code>, <code class="language-plaintext highlighter-rouge">.osc</code> or <code class="language-plaintext highlighter-rouge">.edaxh5</code> file does not, and MTEX assumes setting 2, the most common one. Another setting is passed by number, and <code class="language-plaintext highlighter-rouge">'setting',0</code> switches the correction off:</p>
+{% highlight matlab %}
+ebsd = EBSD.load('map.ang','setting',3);
+{% endhighlight %}
+<h2 id="5">Bruker</h2>
+<p>ESPRIT writes HDF5.</p>
+{% highlight matlab %}
+ebsd = EBSD.load('map.h5');
+{% endhighlight %}
+<p>The file states its coordinate system, and MTEX applies the matching alignment.</p>
+<h2 id="6">Thermo Fisher</h2>
+<p>xTalView writes HDF5.</p>
+{% highlight matlab %}
+ebsd = EBSD.load('map.h5');
+{% endhighlight %}
+<p>xTalView writes the map with its x axis opposite to the specimen x axis the Euler angles refer to. MTEX applies the matching alignment, a half turn about the y axis.</p>
+<h2 id="7">NanoMegas ASTAR (ACOM-TEM)</h2>
+<p>ASTAR exports its orientation maps from the <code class="language-plaintext highlighter-rouge">.res</code> results as <code class="language-plaintext highlighter-rouge">.ang</code> files. MTEX recognises them by their first header line and reads the positions in nanometres.</p>
+{% highlight matlab %}
+ebsd = EBSD.load('map.ang');
+{% endhighlight %}
+<p>As for EDAX <code class="language-plaintext highlighter-rouge">.ang</code> files, the alignment of Euler angles and map is not stored; check the assumed setting 2 against the specimen before relying on directions in the map.</p>
+<h2 id="8">3D data: Xnovo, DREAM.3D and Neper</h2>
+<p>Volumes measured with Xnovo GrainMapper3D (LabDCT) and voxel data from DREAM.3D are imported as an <a href="EBSD3.EBSD3.html"><code class="language-plaintext highlighter-rouge">EBSD3</code></a> volume, grain meshes from DREAM.3D and tessellations from Neper as <a href="grain3d.grain3d.html"><code class="language-plaintext highlighter-rouge">grain3d</code></a> grains.</p>
+{% highlight matlab %}
+ebsd = EBSD3.load('volume.h5');
+ebsd = EBSD3.load('volume.dream3d');
+grains = grain3d.load('mesh.dream3d');
+grains = grain3d.load('tessellation.tess');
+{% endhighlight %}
+<p>Xnovo states positions in millimetres and DREAM.3D in micrometres, and MTEX keeps those units. <a href="EBSD3Analysis.html">3D EBSD Analysis</a>, <a href="Dream3dGrains.html">DREAM.3D Grain Meshes</a> and <a href="NeperInterface.html">Neper Interface</a> continue from here.</p>
+<h2 id="9">X-ray and neutron pole figures</h2>
+<p>Pole figures are read from the files of Malvern Panalytical (X'Pert, <code class="language-plaintext highlighter-rouge">.xrdml</code>), Rigaku (SmartLab), Bruker and Siemens (D5000), Seifert and Scintag diffractometers, from the neutron diffractometers at Dubna, Geesthacht and J&uuml;lich, and from the texture programs popLA, BEARTEX and LaboTex.</p>
+{% highlight matlab %}
+pf = PoleFigure.load('measurement.xrdml');
+{% endhighlight %}
+<p>
+<a href="PoleFigureImport.html">Importing Pole Figure Data</a> covers the formats and the crystal symmetry a pole figure file needs.</p>
+<h2 id="10">Next</h2>
+<p>
+<a href="EBSDImport.html">Importing EBSD Data</a> explains what an import produces and what it cannot guess, and <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> how to verify the alignment before trusting any specimen-relative result.</p>
+</div>
+</body>
+</html>
