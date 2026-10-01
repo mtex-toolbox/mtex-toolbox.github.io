@@ -1,0 +1,114 @@
+{% comment %}
+The middle of the homepage: what MTEX offers, the workshop, AI assistants.
+{% endcomment %}
+<section class="mx-section mx-band" aria-labelledby="mx-what">
+  <div class="mx-wrap">
+    <div class="mx-head"><h2 id="mx-what">What MTEX gives you</h2></div>
+    <div class="mx-cols">
+      <div class="mx-col">
+        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h13l-3-3M20 17H7l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Read and write common data formats</h3>
+        <p>EBSD from Oxford Instruments, EDAX and Bruker, 3D data from Xnovo and DREAM.3D, Neper tessellations and many pole figure formats, in one data model and back out to vendor files. Compare maps from different microscopes in one script.</p>
+        <ul class="mx-items">
+          <li><a href="EBSDImport.html">Supported file formats</a></li>
+          <li><a href="EBSDExport.html">Export to vendor formats</a></li>
+          <li><a href="EBSDReferenceFrame.html">Reference frames of each vendor</a></li>
+        </ul>
+      </div>
+      <div class="mx-col">
+        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Beyond the acquisition software</h3>
+        <p>MTEX also covers analyses that acquisition software leaves out, and it combines diffraction and EBSD data in one place.</p>
+        <ul class="mx-items">
+          <li><a href="PoleFigure2ODF.html">ODFs from X-ray and neutron pole figures</a></li>
+          <li><a href="MaParentGrainReconstruction.html">Parent grains for any orientation relationship</a></li>
+          <li><a href="TensorAverage.html">Elastic and other tensor properties from texture</a></li>
+          <li><a href="EBSDDenoising.html">Variational denoising of orientation maps</a></li>
+        </ul>
+      </div>
+      <div class="mx-col">
+        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Open, down to the algorithm</h3>
+        <p>Every function is source code you can open. The core algorithms are published in peer-reviewed papers. Scripts record your analysis choices, rerun on new maps and help you document your methods.</p>
+        <ul class="mx-items">
+          <li><a href="https://github.com/mtex-toolbox/mtex">Source code on GitHub</a></li>
+          <li><a href="publications.html">The papers behind the algorithms</a></li>
+          <li><a href="MTEXScripts.html">Working with scripts</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mx-section" aria-labelledby="mx-ws">
+  <div class="mx-wrap">
+    <div class="mx-ws">
+      <img src="images/workshop26/20260310_090511.jpg" alt="Workshop participants in miner's overalls and helmets on the 2026 mine excursion">
+      <div class="mx-ws-text">
+        <div class="mx-eyebrow">Annual workshop · Freiberg · March 2027</div>
+        <h2 id="mx-ws">Workshop on Quantitative Microstructure Analysis</h2>
+        <p>Two weeks with the MTEX developers. The first week teaches texture and microstructure analysis from the ground up. In the second you bring your own data and work on it with experts from metallurgy, geology and semiconductors.</p>
+        <div class="mx-tags"><span class="mx-new">New in 2027</span><span>AI-assisted analysis</span><span>MTEX for Python</span></div>
+        <a class="mx-btn mx-btn-primary" href="workshop27">Programme and registration</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mx-section mx-band" aria-labelledby="mx-ai">
+  <div class="mx-wrap mx-ai-grid">
+    <div class="mx-ai-text">
+      <div class="mx-eyebrow">Describe it, get a script</div>
+      <h2 id="mx-ai">AI assistants write MTEX scripts you can check</h2>
+      <p>Describe your analysis in plain words and an assistant drafts the script. The documentation is mapped for AI tools in <a href="llms.txt"><code>llms.txt</code></a>. The result is ordinary code, so you read it, run it and keep it with your data.</p>
+      <div class="mx-prompt">
+        <span class="mx-who">You</span>
+        <p>I have an Oxford map <code>A.ctf</code> and an EDAX map <code>B.ang</code> of the same single-phase steel. Compare the grain size distributions.</p>
+      </div>
+    </div>
+    <div class="mx-code" aria-label="Script written by an assistant">
+      <header>
+        <span id="mx-code-name">compareGrainSize.m</span>
+        <div class="mx-lang" role="group" aria-label="Code language">
+          <button type="button" data-lang="matlab" aria-pressed="true"><span class="mx-dot-m"></span>MATLAB</button>
+          <button type="button" data-lang="python" aria-pressed="false"><span class="mx-dot-p"></span>Python</button>
+        </div>
+      </header>
+<pre data-code="matlab"><span class="c">% two vendors, one grain definition</span>
+ebsdA = <span class="k">EBSD.load</span>(<span class="s">'A.ctf'</span>);
+ebsdB = <span class="k">EBSD.load</span>(<span class="s">'B.ang'</span>);
+grainsA = <span class="k">calcGrains</span>(ebsdA,<span class="s">'angle'</span>,10*degree);
+grainsB = <span class="k">calcGrains</span>(ebsdB,<span class="s">'angle'</span>,10*degree);
+
+<span class="c">% shared bins, normalized for different map sizes</span>
+rA = grainsA(<span class="s">'indexed'</span>).equivalentRadius;
+rB = grainsB(<span class="s">'indexed'</span>).equivalentRadius;
+edges = <span class="k">linspace</span>(0,<span class="k">max</span>([rA(:);rB(:)]),21);
+<span class="k">histogram</span>(rA,edges,<span class="s">'Normalization'</span>,<span class="s">'pdf'</span>,...
+  <span class="s">'DisplayStyle'</span>,<span class="s">'stairs'</span>)
+hold on
+<span class="k">histogram</span>(rB,edges,<span class="s">'Normalization'</span>,<span class="s">'pdf'</span>,...
+  <span class="s">'DisplayStyle'</span>,<span class="s">'stairs'</span>)
+hold off
+<span class="k">xlabel</span>(<span class="s">'Equivalent radius (map length units)'</span>)
+<span class="k">ylabel</span>(<span class="s">'Probability density'</span>)
+<span class="k">legend</span>(<span class="s">'Oxford'</span>,<span class="s">'EDAX'</span>)</pre>
+<pre data-code="python" hidden>import numpy as np
+<span class="c"># two vendors, one grain definition</span>
+ebsdA = <span class="k">EBSD.load</span>(<span class="s">'A.ctf'</span>)
+ebsdB = <span class="k">EBSD.load</span>(<span class="s">'B.ang'</span>)
+grainsA = <span class="k">calcGrains</span>(ebsdA,angle=10*degree)
+grainsB = <span class="k">calcGrains</span>(ebsdB,angle=10*degree)
+
+<span class="c"># shared bins, normalized for different map sizes</span>
+rA = grainsA[<span class="s">'indexed'</span>].equivalentRadius
+rB = grainsB[<span class="s">'indexed'</span>].equivalentRadius
+edges = <span class="k">np.linspace</span>(0,<span class="k">max</span>(<span class="k">rA.max</span>(),<span class="k">rB.max</span>()),21)
+<span class="k">histogram</span>(rA,edges,density=True,histtype=<span class="s">'step'</span>,label=<span class="s">'Oxford'</span>)
+<span class="k">hold</span>(True)
+<span class="k">histogram</span>(rB,edges,density=True,histtype=<span class="s">'step'</span>,label=<span class="s">'EDAX'</span>)
+<span class="k">hold</span>(False)
+<span class="k">xlabel</span>(<span class="s">'Equivalent radius (map length units)'</span>)
+<span class="k">ylabel</span>(<span class="s">'Probability density'</span>)
+<span class="k">legend</span>()</pre>
+    </div>
+  </div>
+</section>
+

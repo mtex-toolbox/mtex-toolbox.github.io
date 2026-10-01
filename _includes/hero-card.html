@@ -1,0 +1,28 @@
+{% comment %}
+The code card of the homepage: one tab per analysis step, with the MATLAB
+and Python code and the figures of _data/hero.yml (matlab/heroFigures.m via
+tools/hero-code.py). js/mx-home.js switches tabs, views and language.
+{% endcomment %}
+    <div class="mx-card" id="mx-card">
+      <div class="mx-card-tabrow">
+      <div class="mx-card-tabs" id="mx-hero-tabs" role="tablist" aria-label="Steps of an analysis">
+        {% for step in site.data.hero.steps %}<button type="button" role="tab" id="mx-tab{{ forloop.index }}" aria-controls="mx-pane{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"{% unless forloop.first %} tabindex="-1"{% endunless %}>{{ step.name }}</button>{% endfor %}
+      </div>
+      <button type="button" class="mx-scroll-next" data-scroll-target="mx-hero-tabs" aria-label="More analysis steps" hidden>›</button>
+      </div>
+      {% for step in site.data.hero.steps %}
+      {% assign pane = forloop.index %}
+      <div class="mx-card-pane" role="tabpanel" id="mx-pane{{ forloop.index }}" aria-labelledby="mx-tab{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>
+        <pre data-code="matlab" aria-label="MATLAB code">{{ step.code }}</pre>
+        <pre data-code="python" aria-label="Python code" hidden>{{ step.python }}</pre>
+        {% if step.figures.size > 1 %}
+        <div class="mx-card-views" role="group" aria-label="Choose a result image">
+          {% for f in step.figures %}<button type="button" data-view="{{ forloop.index0 }}" aria-controls="mx-figure{{ pane }}-{{ forloop.index0 }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ f.caption }}</button>{% endfor %}
+        </div>
+        {% endif %}
+        <div class="mx-card-figs" style="--n:{{ step.figures.size }}">
+          {% for f in step.figures %}<figure id="mx-figure{{ pane }}-{{ forloop.index0 }}"><div><img src="{{ f.file }}" alt="{{ f.caption }}"{% unless forloop.parentloop.first %} loading="lazy"{% endunless %}></div><figcaption>{{ f.caption }}{% if step.name == "Import" %} · <a href="data/twins.h5" download>twins.h5</a>{% endif %}</figcaption></figure>{% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>

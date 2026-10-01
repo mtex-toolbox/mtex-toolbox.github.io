@@ -1,13 +1,14 @@
 ---
-title: false
+title: Texture and microstructure analysis
+summary: Analyse 2D and 3D EBSD maps, pole figures and orientations with MTEX, the free scientific toolbox for MATLAB and Python.
 keywords: MTEX, EBSD, texture analysis, crystallographic texture, microstructure, pole figures, ODF, MATLAB, Python
 layout: home
 permalink: index
 ---
 {% comment %}
 The homepage, in the 2026 design (css/mtex-site.css, _layouts/home.html).
-The figures come from the documentation build (figures/<Page>_NN.png) and link
-to the page that draws them.
+The code and figures come from matlab/heroFigures.m and python/heroFigures.py
+via tools/hero-code.py.
 {% endcomment %}
 
 <section class="mx-hero">
@@ -15,167 +16,30 @@ to the page that draws them.
     <div class="mx-hero-text">
       <div class="mx-eyebrow">Free and open source</div>
       <h1>Texture and microstructure analysis</h1>
-      <p class="mx-lede">MTEX analyses EBSD maps in 2D and 3D, X-ray and neutron pole figures and orientation data with published algorithms that you can read, change and cite, in MATLAB and in Python.</p>
-      <p class="mx-lede">Each step of an analysis is a few lines of code. Choose a step to see it and what it draws.</p>
+      <p class="mx-lede">Analyse 2D and 3D EBSD maps, pole figures and orientations in MATLAB or Python.</p>
+      <p class="mx-lede">Choose a step to see its code and result. The grain, denoising, twin and texture steps continue the imported map.</p>
       <div class="mx-btns">
         <a class="mx-btn mx-btn-primary" href="#start">Get started</a>
-        <a class="mx-btn mx-btn-ghost" href="Documentation.html">Documentation</a>
+        <a class="mx-btn mx-btn-ghost" href="docs">Documentation</a>
       </div>
-      <p class="mx-people">You are not on your own: the <a href="https://github.com/mtex-toolbox/mtex/discussions">forum</a> holds 1,400 discussions, <a href="https://github.com/mtex-toolbox/mtex/graphs/contributors">43 people</a> have contributed code, and users meet at the <a href="workshop27">workshop in Freiberg</a>, held since 2008.</p>
+    </div>
+    <div class="mx-hero-community">
+      <p class="mx-people">Ask questions in the <a href="https://github.com/mtex-toolbox/mtex/discussions">forum</a> and build on code shared by <a href="https://github.com/mtex-toolbox/mtex/graphs/contributors">MTEX contributors</a>.</p>
       <ul class="mx-quick" aria-label="Quick links">
         <li><a href="https://github.com/mtex-toolbox/mtex/discussions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Forum</b>Ask a question</span></a></li>
         <li><a href="https://github.com/mtex-toolbox/mtex"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>GitHub</b>Source and issues</span></a></li>
         <li><a href="changelog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>MTEX 7.1.0</b>Sep 2026 · release notes</span></a></li>
-        <li><a href="workshop27"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><b>Workshop</b>March 2027, Freiberg</span></a></li>
+        <li><a href="gallery"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z" fill="none" stroke="currentColor" stroke-width="2"/></svg><span><b>Gallery</b>Explore the examples</span></a></li>
       </ul>
     </div>
-    {% comment %} the steps come from matlab/heroFigures.m via tools/hero-code.py {% endcomment %}
-    <div class="mx-card" id="mx-card">
-      <div class="mx-card-tabs" role="tablist" aria-label="Steps of an analysis">
-        {% for step in site.data.hero.steps %}<button type="button" role="tab" id="mx-tab{{ forloop.index }}" aria-controls="mx-pane{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"{% unless forloop.first %} tabindex="-1"{% endunless %}>{{ step.name }}</button>{% endfor %}
-      </div>
-      {% for step in site.data.hero.steps %}
-      <div class="mx-card-pane" role="tabpanel" id="mx-pane{{ forloop.index }}" aria-labelledby="mx-tab{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>
-        <pre>{{ step.code }}</pre>
-        <div class="mx-card-figs" style="--n:{{ step.figures.size }}">
-          {% for f in step.figures %}<figure><div><img src="{{ f.file }}" alt="{{ f.caption }}"{% unless forloop.parentloop.first %} loading="lazy"{% endunless %}></div><figcaption>{{ f.caption }}</figcaption></figure>{% endfor %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
+    {% include hero-card.html %}
   </div>
 </section>
 
-<section class="mx-section mx-band" aria-labelledby="mx-what">
-  <div class="mx-wrap">
-    <div class="mx-head"><h2 id="mx-what">What MTEX gives you</h2></div>
-    <div class="mx-cols">
-      <div class="mx-col">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h13l-3-3M20 17H7l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Read and write every instrument</h3>
-        <p>EBSD from Oxford Instruments, EDAX and Bruker, 3D data from Xnovo and DREAM.3D, Neper tessellations and 28 pole figure formats, in one data model and back out to vendor files. Compare maps from different microscopes in one script.</p>
-        <ul class="mx-items">
-          <li><a href="EBSDImport.html">Supported file formats</a></li>
-          <li><a href="EBSDExport.html">Export to vendor formats</a></li>
-          <li><a href="EBSDReferenceFrame.html">Reference frames of each vendor</a></li>
-        </ul>
-      </div>
-      <div class="mx-col">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Beyond the acquisition software</h3>
-        <p>MTEX also covers analyses that acquisition software leaves out, and it combines diffraction and EBSD data in one place.</p>
-        <ul class="mx-items">
-          <li><a href="PoleFigure2ODF.html">ODFs from X-ray and neutron pole figures</a></li>
-          <li><a href="MaParentGrainReconstruction.html">Parent grains for any orientation relationship</a></li>
-          <li><a href="TensorAverage.html">Elastic and other tensor properties from texture</a></li>
-          <li><a href="EBSDDenoising.html">Variational denoising of orientation maps</a></li>
-        </ul>
-      </div>
-      <div class="mx-col">
-        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Open, down to the algorithm</h3>
-        <p>Every function is source code you can open. The core algorithms are published in peer-reviewed papers. An analysis is a script: it reruns on three hundred maps, and it serves as your methods section.</p>
-        <ul class="mx-items">
-          <li><a href="https://github.com/mtex-toolbox/mtex">Source code on GitHub</a></li>
-          <li><a href="publications.html">The papers behind the algorithms</a></li>
-          <li><a href="MTEXScripts.html">Working with scripts</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+{% include home-start.html %}
 
-<section class="mx-section" aria-labelledby="mx-ws">
-  <div class="mx-wrap">
-    <div class="mx-ws">
-      <img src="images/workshop26/20260310_090511.jpg" alt="Workshop participants in miner's overalls and helmets on the 2026 mine excursion">
-      <div class="mx-ws-text">
-        <div class="mx-eyebrow">Annual workshop · Freiberg · March 2027</div>
-        <h2 id="mx-ws">Workshop on Quantitative Microstructure Analysis</h2>
-        <p>Two weeks with the MTEX developers. The first week teaches texture and microstructure analysis from the ground up. In the second you bring your own data and work on it with experts from metallurgy, geology and semiconductors.</p>
-        <div class="mx-tags"><span class="mx-new">New in 2027</span><span>AI-assisted analysis</span><span>MTEX for Python</span></div>
-        <a class="mx-btn mx-btn-primary" href="workshop27">Programme and registration</a>
-      </div>
-    </div>
-  </div>
-</section>
+{% include home-features.html %}
 
-<section class="mx-section mx-band" aria-labelledby="mx-ai">
-  <div class="mx-wrap mx-ai-grid">
-    <div class="mx-ai-text">
-      <div class="mx-eyebrow">Describe it, get a script</div>
-      <h2 id="mx-ai">AI assistants write MTEX scripts you can check</h2>
-      <p>Describe your analysis in plain words and an assistant drafts the script. The documentation is mapped for AI tools in <a href="llms.txt"><code>llms.txt</code></a>. The result is ordinary code, so you read it, run it and keep it with your data.</p>
-      <div class="mx-prompt">
-        <span class="mx-who">You</span>
-        <p>I have an Oxford map <code>A.ctf</code> and an EDAX map <code>B.ang</code> of the same steel. Compare the grain size distributions.</p>
-      </div>
-    </div>
-    <div class="mx-code" aria-label="Script written by an assistant">
-      <header>
-        <span id="mx-code-name">compareGrainSize.m</span>
-        <div class="mx-lang" role="group" aria-label="Code language">
-          <button type="button" data-lang="matlab" aria-pressed="true"><span class="mx-dot-m"></span>MATLAB</button>
-          <button type="button" data-lang="python" aria-pressed="false"><span class="mx-dot-p"></span>Python</button>
-        </div>
-      </header>
-<pre data-code="matlab"><span class="c">% two vendors, one data model</span>
-ebsdA = <span class="k">EBSD.load</span>(<span class="s">'A.ctf'</span>);   <span class="c">% Oxford Instruments</span>
-ebsdB = <span class="k">EBSD.load</span>(<span class="s">'B.ang'</span>);   <span class="c">% EDAX</span>
-
-<span class="c">% identical grain definition for both</span>
-grainsA = <span class="k">calcGrains</span>(ebsdA(<span class="s">'indexed'</span>),<span class="s">'angle'</span>,10*degree);
-grainsB = <span class="k">calcGrains</span>(ebsdB(<span class="s">'indexed'</span>),<span class="s">'angle'</span>,10*degree);
-
-<span class="c">% equivalent radius distributions</span>
-histogram(grainsA.equivalentRadius)
-hold on
-histogram(grainsB.equivalentRadius)
-hold off
-legend(<span class="s">'Oxford'</span>,<span class="s">'EDAX'</span>)</pre>
-<pre data-code="python" hidden><span class="c"># two vendors, one data model</span>
-ebsdA = <span class="k">EBSD.load</span>(<span class="s">'A.ctf'</span>)   <span class="c"># Oxford Instruments</span>
-ebsdB = <span class="k">EBSD.load</span>(<span class="s">'B.ang'</span>)   <span class="c"># EDAX</span>
-
-<span class="c"># identical grain definition for both</span>
-grainsA = <span class="k">calcGrains</span>(ebsdA[<span class="s">'indexed'</span>], angle=10*degree)
-grainsB = <span class="k">calcGrains</span>(ebsdB[<span class="s">'indexed'</span>], angle=10*degree)
-
-<span class="c"># equivalent radius distributions</span>
-histogram(grainsA.equivalentRadius)
-hold(True)
-histogram(grainsB.equivalentRadius)
-hold(False)
-legend(<span class="s">'Oxford'</span>, <span class="s">'EDAX'</span>)</pre>
-    </div>
-  </div>
-</section>
-
-<section class="mx-section" id="start" aria-labelledby="mx-start">
-  <div class="mx-wrap">
-    <div class="mx-head">
-      <h2 id="mx-start">Get started</h2>
-      <p>The same commands in both. The Python version needs no MATLAB licence.</p>
-    </div>
-    <div class="mx-start">
-      <div class="mx-door">
-        <h3><span class="mx-dot-m"></span>MTEX for MATLAB <span class="mx-ver">7.1.0 · Sep 2026</span></h3>
-        <ol>
-          <li>Download and unzip <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-7.1.0/mtex-7.1.0.zip">mtex-7.1.0.zip</a></li>
-          <li>In MATLAB, run <code>startup_mtex</code> in that folder</li>
-          <li>Try <code>mtexdata titanium</code>, then <code>plot(ebsd)</code></li>
-        </ol>
-        <div class="mx-links2"><a href="download#installation">Installation help</a><a href="EBSDTutorial.html">EBSD tutorial</a><a href="changelog">Release notes</a></div>
-      </div>
-      <div class="mx-door">
-        <h3><span class="mx-dot-p"></span>MTEX for Python <span class="mx-ver">1.0.0 · Python 3.12+</span></h3>
-        <ol>
-          <li><code>pip install "mtex[all]"</code></li>
-          <li><code>from mtex import *</code></li>
-          <li>Try <code>ebsd = mtexdata('titanium')</code>, then <code>plot(ebsd)</code></li>
-        </ol>
-        <div class="mx-links2"><a href="EBSDTutorial.html">EBSD tutorial</a></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="mx-section mx-band">
   <div class="mx-wrap mx-foot3">
@@ -210,41 +74,4 @@ legend(<span class="s">'Oxford'</span>, <span class="s">'EDAX'</span>)</pre>
   </div>
 </section>
 
-<script>
-(function () {
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('#mx-card [role=tab]'));
-  function pick(t) {
-    tabs.forEach(function (x) {
-      var on = x === t;
-      x.setAttribute('aria-selected', String(on));
-      x.tabIndex = on ? 0 : -1;
-      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
-    });
-  }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { pick(t); });
-    t.addEventListener('keydown', function (e) {
-      var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : -1;
-      if (tabs[j]) { e.preventDefault(); pick(tabs[j]); tabs[j].focus(); }
-    });
-  });
-})();
-</script>
-<script>
-(function () {
-  var names = { matlab: 'compareGrainSize.m', python: 'compare_grain_size.py' };
-  var buttons = document.querySelectorAll('.mx-lang button');
-  buttons.forEach(function (b) {
-    b.addEventListener('click', function () {
-      var lang = b.getAttribute('data-lang');
-      buttons.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-      document.querySelectorAll('[data-code]').forEach(function (p) { p.hidden = p.getAttribute('data-code') !== lang; });
-      document.getElementById('mx-code-name').textContent = names[lang];
-    });
-  });
-  // start in the language chosen in the top bar
-  function follow(l) { buttons.forEach(function (b) { if (b.getAttribute('data-lang') === l) { b.click(); } }); }
-  follow(document.documentElement.getAttribute('data-lang'));
-  document.addEventListener('mx-lang', function (e) { follow(e.detail); });
-})();
-</script>
+<script src="js/mx-home.js" defer></script>
