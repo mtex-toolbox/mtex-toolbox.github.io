@@ -134,7 +134,7 @@ the crystallographic Radon transform.
 
 ```python
 h = cat(f.h, Miller(1, 0, 0, cs), Miller(1, 1, 1, cs))
-plotPDF(odf, h, contourf=True)
+plotPF(odf, h, contourf=True)
 mtexColorbar(title='mrd')
 ```
 
@@ -179,7 +179,7 @@ to right.
 ```python
 mtexFig = newMtexFigure(layout=[1, 3], figSize='large')
 for i, hw in enumerate(halfwidths):
-  plotPDF(odfByHalfwidth[i], f.h, contourf=True, noTitle=True)
+  plotPF(odfByHalfwidth[i], f.h, contourf=True, title=False)
   mtexTitle(f'${hw / degree:g}^{{\\circ}}$')
   if i < len(halfwidths) - 1:
     nextAxis()
@@ -222,7 +222,7 @@ meanDistanceDegrees
 ```
 
 ```text
-array([10.637 , 10.6341])
+array([10.789 , 10.7727])
 ```
 
 The eigenvalues returned by the local branch test whether a fibre is a sensible model.
@@ -236,7 +236,7 @@ linearityRatio
 ```
 
 ```text
-83.0495
+79.8574
 ```
 
 Two warnings are essential. First, the fit always returns a fibre even when the data do

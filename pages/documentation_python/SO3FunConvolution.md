@@ -167,7 +167,7 @@ print(f'convolution {rightConvolutionValue:.4f}, estimate {rightIntegralEstimate
 ```
 
 ```text
-convolution 0.1909, estimate 0.1929, standard error 0.0018, difference 0.0019
+convolution 0.1909, estimate 0.1928, standard error 0.0018, difference 0.0019
 ```
 
 This Monte Carlo estimate checks the right-sided integral written in the maths section.

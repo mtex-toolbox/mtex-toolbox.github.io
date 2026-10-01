@@ -103,11 +103,11 @@ antipodal directions. This is the sign reversal expected for an odd-rank tensor.
 ## A radial surface
 
 [surf](S2Fun.surf.html) can use the absolute response as distance from the origin and
-the colour as its sign. The `noScaling` option keeps the physical zero and the original
+the colour as its sign. The `scaling=False` option keeps the physical zero and the original
 pC/N values.
 
 ```python
-surf(q, noScaling=True)
+surf(q, scaling=False)
 mtexColorbar(title='longitudinal coefficient (pC/N)')
 ```
 

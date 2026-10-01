@@ -17,7 +17,7 @@ status: Checked
 [Approximating Orientation-Dependent Functions from Discrete Data](SO3FunApproximationTheory_py.html)
 defines the approximation problem and compares the available models. This page assumes
 that a harmonic model is appropriate and shows how to control its bandwidth,
-regularization, sample weights, and iterative solver.
+regularisation, sample weights, and iterative solver.
 
 Harmonic approximation is particularly useful for a general physical response that is not
 a density function. It also handles large numbers of sample orientations without placing
@@ -55,11 +55,11 @@ Internally it calls [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate.html
 bandwidth is the largest harmonic degree in the fitted series. A low bandwidth limits the
 number of unknown coefficients and therefore limits how quickly the function can vary.
 
-Set `regularization` to zero temporarily so that the effect of bandwidth is visible on
+Set `regularisation` to zero temporarily so that the effect of bandwidth is visible on
 its own.
 
 ```python
-SO3F1 = interp(ori, val, 'harmonic', regularization=0, bandwidth=17)
+SO3F1 = interp(ori, val, 'harmonic', regularisation=0, bandwidth=17)
 SO3F1
 ```
 
@@ -119,7 +119,7 @@ system underdetermined. It is the opposite of oversampling: oversampling means h
 independent samples than unknowns.
 
 ```python
-SO3F2 = interp(ori, val, 'harmonic', regularization=0, bandwidth=32)
+SO3F2 = interp(ori, val, 'harmonic', regularisation=0, bandwidth=32)
 SO3F2
 ```
 
@@ -166,12 +166,12 @@ rather than the optimum of the least-squares problem.
 
 ## Read the spectrum
 
-[plotSpektra](SO3Fun.plotSpektra.html) summarizes the coefficient energy at each harmonic
+[plotSpectrum](SO3Fun.plotSpektra.html) summarizes the coefficient energy at each harmonic
 degree. It reveals high-frequency content that can be difficult to distinguish in a
 section plot.
 
 ```python
-plotSpektra([SO3F1, SO3F2], figSize='small')
+plotSpectrum([SO3F1, SO3F2], figSize='small')
 legend('Bandwidth 17', 'Bandwidth 32')
 ```
 
@@ -182,9 +182,9 @@ the energy fails to decay towards the cutoff and even increases at high degrees.
 high-degree tail matches the oscillations in the preceding section plot and is a
 practical overfitting diagnostic.
 
-## Add regularization
+## Add regularisation
 
-Tikhonov regularization penalizes high-degree coefficient energy. It lets you retain a
+Tikhonov regularisation penalizes high-degree coefficient energy. It lets you retain a
 bandwidth high enough for sharp real features while making oscillatory solutions more
 expensive.
 
@@ -194,7 +194,7 @@ here as an explicit smoothing choice, not as the current default. A suitable val
 on the data and should be checked rather than accepted automatically.
 
 ```python
-SO3F3 = interp(ori, val, 'harmonic', bandwidth=32, regularization=5e-7)
+SO3F3 = interp(ori, val, 'harmonic', bandwidth=32, regularisation=5e-7)
 relativeErrorReg = norm(SO3F3.eval(ori) - val) / norm(val)
 relativeErrorReg
 ```
@@ -216,7 +216,7 @@ the noisy samples is larger because the fit now balances agreement with smoothne
 residual is only the data term; it is not the complete regularized objective minimized by
 LSQR.
 
-## Sweep the regularization parameter
+## Sweep the regularisation parameter
 
 A very large $$\lambda$$ drives the fitted function towards zero. A very small value
 approaches the unregularized, oscillatory solution. The sweep below spans both failures so
@@ -224,7 +224,7 @@ that the useful transition can be seen.
 
 ```python
 reg = [1, 1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8, 1e-9, 1e-10, 1e-11, 1e-12, 1e-13, 1e-14]
-SO3F4 = [interp(ori, val, 'harmonic', bandwidth=32, regularization=r) for r in reg]
+SO3F4 = [interp(ori, val, 'harmonic', bandwidth=32, regularisation=r) for r in reg]
 
 newMtexFigure(layout=[5, 6])
 for i, r in enumerate(reg):
@@ -250,13 +250,13 @@ represent $$\lambda=10^{-2}$$, $$10^{-4}$$, $$10^{-8}$$, and $$10^{-12}$$.
 
 ```python
 ind = [2, 4, 8, 12]
-plotSpektra([SO3F4[i] for i in ind], figSize='small')
+plotSpectrum([SO3F4[i] for i in ind], figSize='small')
 legend('λ = 10⁻²', 'λ = 10⁻⁴', 'λ = 10⁻⁸', 'λ = 10⁻¹²')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/HarmonicApproximationTheory-15.png"></center>
 
-Strong regularization removes almost all high-degree energy. As $$\lambda$$ decreases, the
+Strong regularisation removes almost all high-degree energy. As $$\lambda$$ decreases, the
 tail rises. Choose a value before the tail becomes dominated by high-degree energy, then
 confirm the choice against held-out data or independent physical expectations.
 
@@ -267,7 +267,7 @@ index penalizes high degrees less strongly. The value of $$\lambda$$ must theref
 reconsidered whenever $$s$$ changes.
 
 ```python
-SO3F5 = interp(ori, val, 'harmonic', bandwidth=32, regularization=0.001, SobolevIndex=1)
+SO3F5 = interp(ori, val, 'harmonic', bandwidth=32, regularisation=0.001, SobolevIndex=1)
 SO3F5
 ```
 
@@ -319,7 +319,7 @@ nonnegativity and do not turn a harmonic fit into a density.
 
 ## Control LSQR convergence
 
-LSQR stops when it reaches its tolerance `tol` or iteration limit `maxit`. Their defaults
+LSQR stops when it reaches its tolerance `tol` or iteration limit `maxIter`. Their defaults
 are `1e-3` and `100`. A smaller tolerance requests a more accurate iterative solution, but
 the iteration limit may stop the solver first. Premature stopping can itself have a
 regularizing effect, so it must not be confused with convergence.
@@ -342,7 +342,7 @@ tight tol: flag 1, relative residual 0.0509115, iterations 100
 ```
 
 Compare the flags before comparing the residuals. If the tight-tolerance run stops at 100
-iterations, increase `maxit` deliberately and check whether the fit and validation error
+iterations, increase `maxIter` deliberately and check whether the fit and validation error
 materially change.
 
 Earlier code on this page printed `norm(f.eval(ori)-val)+5e-7*norm(f,2)` as the "energy
@@ -358,11 +358,11 @@ $$ f(x) = \sum_{n=0}^N \sum_{k,l=-n}^n
 \hat f_n^{k,l} D_n^{k,l}(x). $$
 
 The coefficient vector $$\mathbf{\hat f}$$ is chosen to minimize the data residual at the
-$$M$$ sample pairs $$(x_m,v_m)$$. Without regularization, the problem is
+$$M$$ sample pairs $$(x_m,v_m)$$. Without regularisation, the problem is
 
 $$ \min_f \sum_{m=1}^M \lvert f(x_m)-v_m \rvert^2. $$
 
-With Tikhonov regularization, MTEX minimizes
+With Tikhonov regularisation, MTEX minimizes
 
 $$ \min_f \left[\sum_{m=1}^M \lvert f(x_m)-v_m \rvert^2
 + \lambda \lVert f\rVert_{H^s}^2\right], $$

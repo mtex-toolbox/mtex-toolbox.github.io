@@ -69,7 +69,7 @@ $$5^\circ$$ resolution. An axis--angle plot shows the nodes throughout the cubic
 fundamental region.
 
 ```python
-plot(equiGrid, 'axisAngle', all=True, MarkerSize=2)
+plot(equiGrid, 'axisAngle', all=True, markerSize=2)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationGrid-3.png"></center>
@@ -97,7 +97,7 @@ The two entries are 4923 and 24624. Thus the regular grid has five times as many
 orientations at the same nominal resolution.
 
 ```python
-plot(regularGrid, 'axisAngle', all=True, MarkerSize=1)
+plot(regularGrid, 'axisAngle', all=True, markerSize=1)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationGrid-5.png"></center>
@@ -131,7 +131,7 @@ measure nearest-neighbour spacing, or turn the nodes into a quadrature rule.
 h = Miller([[1, 0, 0], [1, 1, 0], [1, 1, 1]], cs)
 equiOdf = unimodalODF(equiGrid, halfwidth=10 * degree)
 
-plotPDF(equiOdf, h)
+plotPF(equiOdf, h)
 setColorRange([0.7, 2.7])
 mtexColorbar()
 ```
@@ -146,7 +146,7 @@ looks like.
 ```python
 regularOdf = unimodalODF(regularGrid, halfwidth=10 * degree)
 
-plotPDF(regularOdf, h)
+plotPF(regularOdf, h)
 setColorRange([0.7, 2.7])
 mtexColorbar()
 ```
@@ -192,9 +192,9 @@ shell is $$8.75^\circ$$ from the centre, half a resolution step inside the reque
 $$10^\circ$$ radius.
 
 ```python
-plot(localGrid, angle(localGrid, center) / degree, 'axisAngle', all=True, MarkerSize=4)
+plot(localGrid, angle(localGrid, center) / degree, 'axisAngle', all=True, markerSize=4)
 hold(True)
-plot(center, MarkerFaceColor='r', MarkerSize=10)
+plot(center, markerFaceColor='r', markerSize=10)
 hold(False)
 mtexColorbar(title='angle to centre in degree')
 ```

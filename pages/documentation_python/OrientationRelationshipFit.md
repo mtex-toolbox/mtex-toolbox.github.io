@@ -38,7 +38,7 @@ Load the martensite map and segment its bcc measurements into grains. A grain is
 phase-homogeneous, spatially connected region of EBSD pixels.
 
 ```python
-ebsd = mtexdata('martensite', silent=True)
+ebsd = mtexdata('martensite', verbose=False)
 
 grains = calcGrains(ebsd, angle=3 * degree, minPixel=2, alpha=12)
 
@@ -79,6 +79,26 @@ p2cGlobal
 ```text
 misorientation (Iron fcc → Iron bcc (old))
   (111) || (011)   [101̅] || [111̅]
+ optimizing parent to child orientation relationship
+  (335.80°, 10.53°, 65.80°)  4.028
+  (339.45°, 10.39°, 62.94°)  3.502
+  (342.75°, 10.57°, 60.42°)  2.988
+  (345.83°, 10.53°, 57.75°)  2.727
+  (347.12°, 10.38°, 56.69°)  2.661
+  (347.66°, 10.29°, 56.24°)  2.648
+  (347.88°, 10.26°, 56.06°)  2.647
+  (347.93°, 10.25°, 56.03°)  2.646
+  (347.95°, 10.24°, 56.02°)  2.646
+  (347.95°, 10.24°, 56.03°)  2.646
+  ( 90.00°, 10.11°,310.91°)  3.805
+  ( 94.34°, 10.13°,308.12°)  2.946
+⋮
+  (347.65°, 10.27°, 56.30°)  2.649
+  (347.74°, 10.25°, 56.24°)  2.647
+  (347.00°, 10.00°, 57.10°)  2.604
+  (347.14°,  9.91°, 57.08°)  2.557
+  (346.72°,  9.31°, 57.61°)  2.348
+  (347.39°,  8.97°, 56.82°)  2.285
 misorientation (Iron fcc → Iron bcc (old))
   Bunge Euler angles in degree
   phi1   Phi  phi2
@@ -123,6 +143,7 @@ localToGlobal
 ```
 
 ```text
+ optimizing parent to child orientation relationship
 misorientation (Iron fcc → Iron bcc (old))
   Bunge Euler angles in degree
   phi1   Phi  phi2
@@ -184,7 +205,7 @@ conjugated by `p2c`. Conjugation leaves the rotation angles unchanged. Without c
 symmetry reduction, a cubic parent supplies only 0, 90, 120, and 180 degree rotations.
 
 ```python
-np.unique(np.round(angle(c2c, noSymmetry=True) / degree))
+np.unique(np.round(angle(c2c, symmetry=False) / degree))
 ```
 
 ```text
@@ -214,7 +235,7 @@ squares mark axes predicted by the fitted OR.
 plot(mori.axis(), 'contourf', 'fundamentalRegion', halfwidth=5 * degree)
 hold(True)
 isInformative = angle(c2c) > 1e-3 * degree
-plot(c2c[isInformative].axis(), Marker='s', MarkerFaceColor='none', MarkerEdgeColor='k', MarkerSize=8)
+plot(c2c[isInformative].axis(), marker='s', markerFaceColor='none', markerEdgeColor='k', markerSize=8)
 hold(False)
 ```
 

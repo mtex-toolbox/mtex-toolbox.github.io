@@ -108,7 +108,7 @@ valueFunction = lambda v: dot(v, vector3d.X) ** 9
 
 [S2FunHarmonic.quadrature](S2FunHarmonic.quadrature.html) evaluates this function on a
 weighted spherical grid and computes its coefficients. Without an explicit `bandwidth`
-option, it computes through the degree of the preference `maxS2Bandwidth`.
+option, it computes through the degree of the preference `defaultS2Bandwidth`.
 
 ```python
 S2F = S2FunHarmonic.quadrature(valueFunction)
@@ -117,8 +117,8 @@ S2F
 
 ```text
 S2FunHarmonic
-  bandwidth: 250
-  mean     : -1.043e-17
+  bandwidth: 128
+  mean     : -1.378e-17
 ```
 
 ---
@@ -129,7 +129,7 @@ defaultBandwidth
 ```
 
 ```text
-250
+128
 ```
 
 ---
@@ -149,11 +149,11 @@ stores many degrees, this polynomial needs no degree above 9.
 
 ## Inspect the harmonic spectrum
 
-[plotSpektra](S2FunHarmonic.plotSpektra.html) groups coefficients by degree. At degree
+[plotSpectrum](S2FunHarmonic.plotSpektra.html) groups coefficients by degree. At degree
 $$m$$, it plots $$\left(\sum_{k=-m}^{m}|\hat f_m^k|^2\right)^{1/2}$$.
 
 ```python
-plotSpektra(S2F, figSize='small')
+plotSpectrum(S2F, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/S2FunHarmonicRepresentation-9.png"></center>
@@ -179,7 +179,7 @@ S2F
 ```text
 S2FunHarmonic
   bandwidth: 9
-  mean     : -1.043e-17
+  mean     : -1.378e-17
 ```
 
 ---
@@ -196,7 +196,7 @@ truncatedBandwidth
 ---
 
 ```python
-plotSpektra(S2F, linewidth=2, figSize='small')
+plotSpectrum(S2F, lineWidth=2, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/S2FunHarmonicRepresentation-12.png"></center>
@@ -253,6 +253,5 @@ spherical density from principal axes and concentration parameters.
 
 ## Technical Details
 
-A callable is expanded up to the preference `maxS2Bandwidth`, 512, where MATLAB's run of
-this page reports 250.
+A callable is expanded up to the preference `defaultS2Bandwidth`, 128.
 {% endraw %}

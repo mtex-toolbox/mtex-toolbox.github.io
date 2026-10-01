@@ -44,7 +44,7 @@ files. Here the zero-range method handles regions where no intensity was measure
 
 ```python
 pf = mtexdata('dubna')
-odf = calcODF(pf, zeroRange=True, silent=True)
+odf = calcODF(pf, zeroRange=True, verbose=False)
 
 plotSection(odf, 'sigma', sections=12, layout=[3, 4])
 mtexColorbar(title='mrd')
@@ -89,7 +89,7 @@ percentage of material. The black marker sits in the brightest region of the sec
 plot.
 
 ```python
-annotate(peakOri, MarkerFaceColor='black')
+annotate(peakOri, markerFaceColor='black')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ODFComponents-7.png"></center>
@@ -109,7 +109,7 @@ array([106.9089,  47.7291,  30.3847])
 ```
 
 ```python
-annotate(localOri[1:], MarkerFaceColor='red')
+annotate(localOri[1:], markerFaceColor='red')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ODFComponents-9.png"></center>
@@ -207,7 +207,7 @@ are accumulated seed weights. They form a useful modal partition, but they are n
 integrals over uniquely defined geometric boundaries.
 
 ```python
-componentOri, componentFraction, _ = calcComponents(odf, silent=True)
+componentOri, componentFraction, _ = calcComponents(odf, verbose=False)
 componentPercent = 100 * componentFraction
 componentPercent
 ```
@@ -236,7 +236,7 @@ maxima located by `max`, while the fourth circle appears because the earlier cal
 requested only three local maxima.
 
 ```python
-annotate(componentOri, MarkerFaceColor='none', MarkerEdgeColor='white', LineWidth=2, MarkerSize=15, Marker='o')
+annotate(componentOri, markerFaceColor='none', markerEdgeColor='white', lineWidth=2, markerSize=15, marker='o')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ODFComponents-17.png"></center>

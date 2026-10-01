@@ -66,11 +66,11 @@ its own colour range, so the same colour does not yet mean the same value in all
 panels.
 
 MTEX estimates a marker size from the angular spacing and the figure size. The
-`MarkerSize` option replaces that estimate when it hides gaps or makes neighbouring
+`markerSize` option replaces that estimate when it hides gaps or makes neighbouring
 circles overlap.
 
 ```python
-plot(pf, MarkerSize=2)
+plot(pf, markerSize=2)
 mtexColorMap('parula')
 mtexColorbar(title='intensity')
 ```
@@ -142,12 +142,12 @@ measured. Reconstructing the ODF from measured pole figures is the subject of
 odf = calcODF(pf)
 ```
 
-[plotPDF](SO3Fun.plotPDF.html) recalculates the same three pole figures. Diffraction
+[plotPF](SO3Fun.plotPDF.html) recalculates the same three pole figures. Diffraction
 identifies a plane normal with its opposite, so `antipodal` folds the two directions
 into the same hemisphere.
 
 ```python
-plotPDF(odf, pf.h, antipodal=True)
+plotPF(odf, pf.h, antipodal=True)
 mtexColorMap('parula')
 setColorRange('equal')
 mtexColorbar(title='mrd')

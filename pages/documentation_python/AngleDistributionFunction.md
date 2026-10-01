@@ -77,12 +77,12 @@ Fewer symmetry operations leave a larger fundamental region and therefore permit
 distinct disorientation angles.
 
 ```python
-plotAngleDistribution(crystalFrame('1'), linewidth=2, figSize='small')
+plotAngleDistribution(crystalFrame('1'), lineWidth=2, figSize='small')
 hold(True)
-plotAngleDistribution(crystalFrame('622'), linewidth=2)
-plotAngleDistribution(crystalFrame('432'), linewidth=2)
+plotAngleDistribution(crystalFrame('622'), lineWidth=2)
+plotAngleDistribution(crystalFrame('432'), lineWidth=2)
 hold(False)
-legend('1', '622', '432', Location='northwest')
+legend('1', '622', '432', location='northwest')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/AngleDistributionFunction-3.png"></center>
@@ -95,7 +95,7 @@ A misorientation between two different phases has one crystal symmetry on each s
 both symmetry objects so that MTEX constructs their joint fundamental region.
 
 ```python
-plotAngleDistribution(crystalFrame('222'), crystalFrame('12/m1'), linewidth=2, figSize='small')
+plotAngleDistribution(crystalFrame('222'), crystalFrame('12/m1'), lineWidth=2, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/AngleDistributionFunction-4.png"></center>
@@ -110,7 +110,7 @@ plotting convention matches the specimen frame stored with the magnesium data se
 
 ```python
 plottingConvention.default('y↑→x')
-ebsd = mtexdata('twins', silent=True)
+ebsd = mtexdata('twins', verbose=False)
 
 grains = calcGrains(ebsd['indexed'], threshold=5 * degree)
 
@@ -150,7 +150,7 @@ histogram. Adding the random baseline makes the deviation from symmetry alone vi
 ```python
 plotAngleDistribution(mori, figSize='small')
 hold(True)
-plotAngleDistribution(mori.CS, mori.SS, linewidth=2)
+plotAngleDistribution(mori.CS, mori.SS, lineWidth=2)
 hold(False)
 legend('boundary misorientations', 'random orientations')
 ```
@@ -205,8 +205,8 @@ reference.
 ```python
 plotAngleDistribution(mori, figSize='small')
 hold(True)
-plotAngleDistribution(mdf, linewidth=2)
-plotAngleDistribution(mori.CS, mori.SS, linewidth=2)
+plotAngleDistribution(mdf, lineWidth=2)
+plotAngleDistribution(mori.CS, mori.SS, lineWidth=2)
 hold(False)
 legend('boundary', 'uncorrelated texture', 'random orientations')
 ```

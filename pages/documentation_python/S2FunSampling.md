@@ -60,7 +60,7 @@ vRnd = discreteSample(sF, 1000)
 
 contourf(sF)
 hold(True)
-scatter(vRnd, MarkerSize=4, MarkerFaceColor='k', MarkerEdgeColor='k')
+scatter(vRnd, markerSize=4, markerFaceColor='k', markerEdgeColor='k')
 hold(False)
 ```
 
@@ -81,7 +81,7 @@ vOpt = optimalSample(sF, 1000, bandwidth=128)
 
 contourf(sF)
 hold(True)
-scatter(vOpt, MarkerSize=4, MarkerFaceColor='k', MarkerEdgeColor='k')
+scatter(vOpt, markerSize=4, markerFaceColor='k', markerEdgeColor='k')
 hold(False)
 ```
 
@@ -113,7 +113,7 @@ np.array([np.min(c), np.max(c), np.sum(c)])
 ```
 
 ```text
-array([0.0057, 0.0187, 1.    ])
+array([0.0053, 0.0183, 1.    ])
 ```
 
 Marker area now follows the weight. A large marker represents a direction that carries a
@@ -122,7 +122,7 @@ larger share of the density.
 ```python
 contourf(sF)
 hold(True)
-scatter(vWgt, MarkerSize=40 * c / np.mean(c), MarkerFaceColor='k', MarkerEdgeColor='k')
+scatter(vWgt, markerSize=40 * c / np.mean(c), markerFaceColor='k', markerEdgeColor='k')
 hold(False)
 ```
 
@@ -187,11 +187,11 @@ for row in zip(M, densRnd, densOpt, densWgt, momRnd, momOpt, momWgt):
 
 ```text
            points    densityRandom   densityOptimal  densityWeighted     momentRandom    momentOptimal   momentWeighted
-               50           1.9561           1.0783           1.0724           2.4857           2.0485           2.0912
-              100           1.3072           0.6631           0.5443           1.6667           1.0036           0.9414
-              200           1.0046           0.4390           0.3018           1.2510           0.5687           0.3525
-              400           0.6801           0.3023           0.2514           0.8531           0.3309           0.2139
-              800           0.4964           0.2442           0.2351           0.6107           0.1808           0.0915
+               50           1.9701           1.0790           1.0739           2.5475           2.0445           2.0861
+              100           1.3830           0.6627           0.5446           1.7778           1.0059           0.9355
+              200           1.0074           0.4392           0.3069           1.2842           0.5671           0.3551
+              400           0.7199           0.3019           0.2538           0.8996           0.3295           0.2229
+              800           0.5247           0.2440           0.2352           0.5929           0.1806           0.0916
 ```
 
 ---

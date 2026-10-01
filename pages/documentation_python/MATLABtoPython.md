@@ -14,7 +14,7 @@ status: New
 <!--introduction-->
 
 MTEX for Python keeps the names of MATLAB MTEX: the classes (`vector3d`, `orientation`,
-`EBSD`, `grain2d`), the commands (`calcGrains`, `calcDensity`, `plotPDF`) and their
+`EBSD`, `grain2d`), the commands (`calcGrains`, `calcDensity`, `plotPF`) and their
 options. A MATLAB script translates line by line, and most lines change only in their
 punctuation. This page lists what does change, the rules of the Python language first and
 then the few places where MTEX itself behaves differently.
@@ -66,7 +66,13 @@ are keyword arguments: the option is `name=value`, the flag is `name=True`.
 |---|---|
 | `calcGrains(ebsd, 'angle', 10*degree)` | `calcGrains(ebsd, angle=10*degree)` |
 | `Miller(1,0,0, cs, 'antipodal')` | `Miller(1, 0, 0, cs, antipodal=True)` |
-| `plot(grains, 'linewidth', 2)` | `plot(grains, linewidth=2)` |
+| `plot(grains, 'linewidth', 2)` | `plot(grains, lineWidth=2)` |
+| `calcODF(pf, 'noGhostCorrection')` | `calcODF(pf, ghostCorrection=False)` |
+
+The keywords are spelled one way throughout: in camelCase (`lineWidth`, `markerSize`,
+`displayName`), a tolerance as `tol`, an iteration bound as `maxIter`, and a flag by what
+it switches on, so that MATLAB's `'noSymmetry'` is `symmetry=False`. Progress output is
+switched by `verbose`, where MATLAB silences it by `'silent'`: `mtexdata(..., verbose=False)`.
 
 A string that names something stays a string in the argument list: the kind of Miller
 indices `'uvw'`, an Euler convention `'ZYZ'`, an alignment `'X||a'`.
@@ -260,7 +266,7 @@ matplotlib, the standard plotting package of Python.
 ```python
 plot(ebsd['Forsterite'], ebsd['Forsterite'].orientations)
 hold(True)
-plot(grains.boundary, linewidth=1.5)
+plot(grains.boundary, lineWidth=1.5)
 hold(False)
 ```
 
@@ -269,7 +275,9 @@ hold(False)
 ## Names that changed
 
 A few classes carry the names of the coming MATLAB release, where the MATLAB pages of
-MTEX 6 still use the old ones. They take the same arguments.
+MTEX 6 still use the old ones, and a few commands have a better name in Python than in
+MATLAB: a misnomer, a duplicate or a workaround for a limit of MATLAB. They take the same
+arguments.
 
 | MATLAB MTEX 6 | Python |
 |---|---|
@@ -278,6 +286,25 @@ MTEX 6 still use the old ones. They take the same arguments.
 | `ebsd.opt` | `ebsd.meta` |
 | `loadEBSD(fname)` | `loadEBSD(fname)` or `EBSD.load(fname)` |
 | `import_wizard` | `importWizard()`, or `mtex-wizard` in a terminal |
+| `plotPDF(odf, h)`, `plotPDF(ori, h)` | `plotPF(odf, h)`, `plotPF(ori, h)` |
+| `plotIPDF(odf, r)`, `plotIPDF(ori, r)` | `plotIPF(odf, r)`, `plotIPF(ori, r)` |
+| `calcPDF(odf, h, r)`, `odf.pdf(h)` | `odf.radon(h, r)`, `odf.radon(h)` |
+| `odf.ipdf(r)` | `odf.radon(r=r)` |
+| `hist(grains)` | `histogram(grains, grouped=True)` |
+| `angle_outer(v1, v2)`, `dot_outer(v1, v2)` | `angle(v1, v2, outer=True)`, `dot(v1, v2, outer=True)` |
+| `eq(v1, v2)`, `eqTol(cs1, cs2)` | `isclose(v1, v2)`, `isclose(cs1, cs2)` |
+| `orientation.eye(cs)` | `orientation.id(cs)` |
+| `plotSpektra(odf)` | `plotSpectrum(odf)` |
+| `textureindex(odf)` | `textureIndex(odf)` |
+| `eS.addFeature_singleStep` | `eS.addFeature('singleStep')` |
+| `project2FundamentalRegion(ori)` | `projectIntoFundamentalRegion(ori)` |
+| `project2EulerFR(ori)` | `projectIntoEulerRegion(ori)` |
+| `sR.restrict2Upper` | `sR.restrictToUpper` |
+| `SO3F.SRight`, `SO3F.SLeft`, `oR.CS1`, `oR.CS2` | `SO3F.frameA`, `SO3F.frameB` (or `CS`, `SS`) |
+| `plotx2north` | `plottingConvention.default(north=xvector)` |
+| `quiver3(t)` | `quiver3d(t)` |
+| `loadEBSD_ang(fname)` | `loadEBSD(fname)`, the format from the extension or `interface='ang'` |
+| `export_VPSC(ori, fname)` | `export(ori, fname, interface='VPSC')` |
 
 ## Behaviour that differs on purpose
 

@@ -102,10 +102,10 @@ coordinates. The default representation is left.
 A tangent vector is drawn as an arrow attached to its base point.
 
 ```python
-plot(R, 'axisAngle', MarkerColor='red')
+plot(R, 'axisAngle', markerFaceColor='red')
 plt.gca().set_axis_off()
 hold(True)
-quiver3(vLeft, LineWidth=3, maxHeadSize=4)
+quiver3d(vLeft, lineWidth=3, maxHeadSize=4)
 hold(False)
 ```
 

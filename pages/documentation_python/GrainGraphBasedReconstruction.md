@@ -29,7 +29,7 @@ from scipy.sparse import triu
 from mtex import *
 
 plottingConvention.default('y↑→x')
-ebsd = mtexdata('martensite', silent=True)
+ebsd = mtexdata('martensite', verbose=False)
 ```
 
 ## Segment the child grains
@@ -100,7 +100,22 @@ changeFromKS
 ```
 
 ```text
-parentGrainReconstructor
+ optimizing parent to child orientation relationship
+  (335.80°, 10.53°, 65.80°)  3.973
+  (338.55°, 10.54°, 63.73°)  3.603
+  (341.29°, 10.76°, 61.51°)  3.301
+  (344.05°, 10.73°, 59.15°)  3.065
+  (345.74°, 10.58°, 57.80°)  2.947
+  (346.65°, 10.44°, 57.08°)  2.902
+  (347.21°, 10.35°, 56.64°)  2.886
+  (347.42°, 10.30°, 56.48°)  2.883
+  (347.53°, 10.28°, 56.41°)  2.882
+  (347.58°, 10.27°, 56.37°)  2.882
+  ( 90.00°, 10.11°,225.00°)  4.144
+  ( 96.91°,  9.83°,218.53°)  3.108
+  (101.94°,  9.67°,213.64°)  2.775
+  (102.89°,  9.30°,212.75°)  2.682
+⋮
 
   phase   mineral         symmetry  grains  area  reconstructed
   parent  Iron fcc        432       0       0%    0%           
@@ -139,7 +154,7 @@ half. The `tolerance` controls the width of the high-to-low transition. Earlier 
 transition-width parameter.
 
 ```python
-job.calcGraph(threshold=2.5 * degree, tolerance=2.5 * degree)
+job.calcGraph(threshold=2.5 * degree, tol=2.5 * degree)
 print(job)
 
 graphWeights = triu(job.graph, 1).data

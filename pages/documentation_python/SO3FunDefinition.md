@@ -118,7 +118,7 @@ The power spectrum shows how much squared coefficient magnitude belongs to each 
 degree.
 
 ```python
-plotSpektra(SO3FHarmonic, linewidth=2, figSize='small')
+plotSpectrum(SO3FHarmonic, lineWidth=2, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunDefinition-6.png"></center>

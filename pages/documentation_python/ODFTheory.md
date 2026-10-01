@@ -183,7 +183,7 @@ measured orientations relate to its high-density regions.
 ```python
 plot3d(odf, 'Euler')
 hold(True)
-plot(oriPlot, 'Euler', MarkerEdgeColor='k')
+plot(oriPlot, 'Euler', markerEdgeColor='k')
 hold(False)
 ```
 

@@ -82,7 +82,7 @@ Rodrigues--Frank coordinates keep the direction $$\vec n$$ but change the distan
 the origin to $$\tan(\omega/2)$$.
 
 ```python
-scatter(rot, 'Rodrigues', 'noBoundary')
+scatter(rot, 'Rodrigues', region=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RotationPlotting-7.png"></center>
@@ -108,9 +108,9 @@ small = rot[rot.angle() < threshold]
 ```
 
 ```python
-scatter(rot, 'axisAngle', MarkerFaceColor=[.7, .7, .7], MarkerSize=4)
+scatter(rot, 'axisAngle', markerFaceColor=[.7, .7, .7], markerSize=4)
 hold(True)
-scatter(small, 'axisAngle', MarkerFaceColor='r')
+scatter(small, 'axisAngle', markerFaceColor='r')
 hold(False)
 ```
 
@@ -126,7 +126,7 @@ numSmall, empiricalPercent
 ```
 
 ```text
-(34, 6.8)
+(33, 6.6)
 ```
 
 MATLAB's page quotes 20 of 500 rotations, or 4%, for its draw; the count above is this

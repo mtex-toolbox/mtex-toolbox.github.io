@@ -49,7 +49,7 @@ plottingConvention.default('y↓→x')
 ```
 
 ```python
-ebsd = mtexdata('trueEbsdWCCoSmall', silent=True)
+ebsd = mtexdata('trueEbsdWCCoSmall', verbose=False)
 ```
 
 ```python
@@ -259,7 +259,7 @@ Start again from the imported map. Suppose the detector was mounted a quarter tu
 the scan. Its rows run against x and its columns along y.
 
 ```python
-ebsd = mtexdata('trueEbsdWCCoSmall', silent=True)
+ebsd = mtexdata('trueEbsdWCCoSmall', verbose=False)
 
 gL = gridLayout(-xvector, yvector)
 gL

@@ -232,11 +232,11 @@ The specimen frame is the reference frame in which the map and sample are expres
 The same axis in this frame is the crystal axis carried over by the orientation of the
 measurement.
 
-The option `noSymmetry` is essential. The axis must be the representative that belongs
+The option `symmetry=False` is essential. The axis must be the representative that belongs
 to this orientation, not a symmetric equivalent.
 
 ```python
-axSpecimen = ebsd.orientations * grod.axis(noSymmetry=True)
+axSpecimen = ebsd.orientations * grod.axis(symmetry=False)
 
 h = plot(axSpecimen, contourf=True, halfwidth=2.5 * degree)
 mtexColorbar(title='distribution of misorientation axes in mrd')
@@ -277,7 +277,7 @@ omega = np.minimum(grod.angle() / degree / 7.5, 1)
 color = colorKey.direction2color(axSpecimen)
 
 # plot the data
-plot(ebsd, color, micronbar=False, FaceAlpha=omega)
+plot(ebsd, color, micronbar=False, faceAlpha=omega)
 
 hold(True)
 plot(grains.boundary, lineWidth=2)

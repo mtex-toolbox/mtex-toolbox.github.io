@@ -61,7 +61,7 @@ odf = unimodalODF(ori, weights=c, halfwidth=12 * degree)
 
 # plot three pole figures
 h = cat(Miller(1, 1, 1, CS), Miller(2, 0, 0, CS), Miller(2, 2, 0, CS))
-plotPDF(odf, h, antipodal=True, silent=True, complete=True, upper=True)
+plotPF(odf, h, antipodal=True, verbose=False, complete=True, upper=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/DetectionOfSampleSymmetry-2.png"></center>
@@ -93,7 +93,7 @@ ori = rot * ori
 odfEst = calcDensity(ori, halfwidth=10 * degree)
 
 # plot the tilted estimate
-plotPDF(odfEst, h, antipodal=True, silent=True)
+plotPF(odfEst, h, antipodal=True, verbose=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/DetectionOfSampleSymmetry-3.png"></center>
@@ -115,14 +115,14 @@ therefore recover the known mounting rotation.
 ```python
 odfCorrected, rotCorrection = centerSpecimen(odfEst)[:2]
 
-plotPDF(odfCorrected, h, antipodal=True, silent=True)
+plotPF(odfCorrected, h, antipodal=True, verbose=False)
 
 recoveryError = angle(rot, inv(rotCorrection)) / degree
 print(f'difference between applied and recovered rotation: {recoveryError:.3f} degree')
 ```
 
 ```text
-difference between applied and recovered rotation: 0.547 degree
+difference between applied and recovered rotation: 0.934 degree
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/DetectionOfSampleSymmetry-4.png"></center>
@@ -141,7 +141,7 @@ Aachen data and inspect the measurements before reconstruction.
 fname = mtexdatafile('aachenexp')
 pf = PoleFigure.load(fname)
 
-plot(pf, silent=True)
+plot(pf, verbose=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/DetectionOfSampleSymmetry-5.png"></center>
@@ -156,9 +156,9 @@ Reconstruct the ODF as described in [Reconstructing an ODF](PoleFigure2ODF_py.ht
 plot uses the same three pole families as the synthetic example.
 
 ```python
-odfMeasured = calcODF(pf, silent=True)
+odfMeasured = calcODF(pf, verbose=False)
 
-plotPDF(odfMeasured, h, antipodal=True, silent=True, noLabel=True, grid='on')
+plotPF(odfMeasured, h, antipodal=True, verbose=False, axisLabels=False, grid='on')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/DetectionOfSampleSymmetry-6.png"></center>
@@ -182,7 +182,7 @@ print(f'mounting correction: {angle(rotCorrection) / degree:.3f} degree')
 print(f'axis offsets from nominal RD, TD, ND: {angle(rdAxis, vector3d.X, antipodal=True) / degree:.3f}, '
       f'{angle(tdAxis, vector3d.Y, antipodal=True) / degree:.3f}, {angle(ndAxis, vector3d.Z, antipodal=True) / degree:.3f} degree')
 
-annotate(cat(rdAxis, tdAxis, ndAxis), label=['RD', 'TD', 'ND'], backgroundcolor='w', MarkerSize=8)
+annotate(cat(rdAxis, tdAxis, ndAxis), label=['RD', 'TD', 'ND'], backgroundColor='w', markerSize=8)
 ```
 
 ```text

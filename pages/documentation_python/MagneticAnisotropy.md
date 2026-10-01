@@ -87,7 +87,7 @@ lies along RD. The pole figure shows where the cubic $$\{100\}$$ easy directions
 the specimen. Its colour scale is in multiples of a random distribution (mrd).
 
 ```python
-plotPDF(odf, Miller(1, 0, 0, cs), 'antipodal', 'contourf')
+plotPF(odf, Miller(1, 0, 0, cs), 'antipodal', 'contourf')
 mtexColorbar(title='pole density (mrd)')
 ```
 
@@ -123,9 +123,9 @@ for k in range(len(fieldAngle)):
   fieldCrystal = inv(ori) * fieldSpecimen
 
   # direction cosines with the three cubic easy axes
-  alpha1 = dot(h100, fieldCrystal, noSymmetry=True)
-  alpha2 = dot(h010, fieldCrystal, noSymmetry=True)
-  alpha3 = dot(h001, fieldCrystal, noSymmetry=True)
+  alpha1 = dot(h100, fieldCrystal, symmetry=False)
+  alpha2 = dot(h010, fieldCrystal, symmetry=False)
+  alpha3 = dot(h001, fieldCrystal, symmetry=False)
 
   # first-order cubic magnetocrystalline anisotropy energy density
   anisotropyEnergy[k, :] = K1 * (alpha1**2 * alpha2**2 + alpha2**2 * alpha3**2 + alpha1**2 * alpha3**2)
@@ -150,10 +150,10 @@ directionalResults
 ```
 
 ```text
-array([[ 0.    ,  0.158 ,  1.9114],
-       [45.    ,  1.1902,  1.5249],
-       [55.    ,  1.2594,  1.499 ],
-       [90.    ,  0.984 ,  1.6021]])
+array([[ 0.    ,  0.1609,  1.9103],
+       [45.    ,  1.1889,  1.5254],
+       [55.    ,  1.2567,  1.5   ],
+       [90.    ,  0.9829,  1.6025]])
 ```
 
 At RD the mean energy is 0.1628 in units of $$10^4$$ J/m$$^3$$, and the predicted $$J_{50}$$
@@ -185,7 +185,7 @@ the field leaves the Goss $$[001]$$ direction and reaches a broad maximum betwee
 TD. The lower panel is the inverse of the upper trend because the empirical relation is
 linear in mean energy.
 
-## Why noSymmetry is required
+## Why symmetry=False is required
 
 The first-order energy density for a cubic crystal is
 
@@ -195,7 +195,7 @@ where $$\alpha_1$$, $$\alpha_2$$, and $$\alpha_3$$ are the direction cosines bet
 magnetization and the three crystal axes. The expression is invariant when cubic
 symmetry permutes or reverses those axes.
 
-The three cosines still have to be evaluated separately. Without `noSymmetry`,
+The three cosines still have to be evaluated separately. Without `symmetry=False`,
 [dot](vector3d.dot.html) compares a direction with symmetrically equivalent Miller
 directions and returns the best match. That would replace the three components
 required by the equation with three symmetry-reduced comparisons.

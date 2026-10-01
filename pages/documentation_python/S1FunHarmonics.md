@@ -67,10 +67,10 @@ shows angle on the horizontal axis.
 ```python
 plt.figure()
 plt.subplot(1, 2, 1, projection='polar')
-plot(S1F, linewidth=2)
+plot(S1F, lineWidth=2)
 mtexTitle('Polar Plot')
 plt.subplot(1, 2, 2)
-plot(S1F, linewidth=2, notPolar=True)
+plot(S1F, lineWidth=2, polar=False)
 mtexTitle('Cartesian Plot')
 ```
 
@@ -119,10 +119,10 @@ coefficientMean
 ```python
 plt.figure()
 plt.subplot(1, 2, 1, projection='polar')
-plot(S1FCoeff, linewidth=2)
+plot(S1FCoeff, lineWidth=2)
 mtexTitle('Polar Plot')
 plt.subplot(1, 2, 2)
-plot(S1FCoeff, linewidth=2, notPolar=True)
+plot(S1FCoeff, lineWidth=2, polar=False)
 mtexTitle('Cartesian Plot')
 ```
 
@@ -174,9 +174,9 @@ maxApproximationError
 ---
 
 ```python
-plot(S1F, linewidth=2)
+plot(S1F, lineWidth=2)
 hold(True)
-plot(S1FH, '--', linewidth=2)
+plot(S1FH, '--', lineWidth=2)
 hold(False)
 legend('S1FunHandle', 'S1FunHarmonic')
 ```
@@ -231,7 +231,7 @@ sampleResidual
 plt.figure()
 plt.plot(rho, values, 'x', label='samples')
 hold(True)
-plot(S1FI, linewidth=2, noPolar=True, displayName='periodic fit')
+plot(S1FI, lineWidth=2, polar=False, displayName='periodic fit')
 hold(False)
 legend()
 ```
@@ -241,8 +241,8 @@ legend()
 ## Read the sampled-data fit
 
 The curve joins the angular trend and closes periodically between $$2\pi$$ and zero. The
-default regularization leaves a maximum residual of about $$3.4\cdot10^{-4}$$ at these
-samples. Set bandwidth and regularization deliberately when the data contain noise or
+default regularisation leaves a maximum residual of about $$3.4\cdot10^{-4}$$ at these
+samples. Set bandwidth and regularisation deliberately when the data contain noise or
 sharp changes.
 
 ## Smooth small-scale oscillations
@@ -260,9 +260,9 @@ f = S1FunHarmonic(f, bandwidth=64)
 
 fSmooth = f.smooth(halfwidth=8 * degree)
 
-plot(f, linewidth=2, displayName='original')
+plot(f, lineWidth=2, displayName='original')
 hold(True)
-plot(fSmooth, linewidth=2, displayName='smoothed')
+plot(fSmooth, lineWidth=2, displayName='smoothed')
 hold(False)
 legend()
 ```
@@ -354,7 +354,7 @@ densityMean
 ---
 
 ```python
-plot(fun, linewidth=2)
+plot(fun, lineWidth=2)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/S1FunHarmonics-18.png"></center>

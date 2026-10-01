@@ -168,7 +168,7 @@ expresses the physical question.
 # select a fibre of interest
 f = fibre(Miller(1, 2, -3, 2, cs), vector3d(2, 1, 1))
 
-plot(odf, f, LineWidth=2, figSize='small')
+plot(odf, f, lineWidth=2, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ODFPlot-9.png"></center>
@@ -215,18 +215,18 @@ box, not the fundamental region itself. For cubic symmetry the box has about thr
 times the volume needed for one representative, which explains the repeated
 appearances in the first figure.
 
-Given an arbitrary orientation, [project2EulerFR](orientation.project2EulerFR.html)
+Given an arbitrary orientation, [projectIntoEulerRegion](orientation.project2EulerFR.html)
 selects a symmetry-equivalent representative inside this Euler box.
 
 ```python
 ori = orientation.rand(csCubic, ssOrtho)
-phi1, Phi, phi2 = ori.project2EulerFR()
+phi1, Phi, phi2 = ori.projectIntoEulerRegion()
 projectedEuler = np.array([phi1, Phi, phi2]) / degree
 projectedEuler
 ```
 
 ```text
-array([66.5449, 59.12  ,  6.7668])
+array([50.318 , 84.048 , 86.0683])
 ```
 
 All three displayed coordinates lie between $$0^{\circ}$$ and $$90^{\circ}$$. This
@@ -257,5 +257,5 @@ than another view.
 ## Technical Details
 
 `fundamentalRegionEuler` returns the three bounds in radians, as MATLAB's three outputs
-do, and `project2EulerFR` the three Euler angles.
+do, and `projectIntoEulerRegion` the three Euler angles.
 {% endraw %}

@@ -136,8 +136,8 @@ rDirection = ori * Miller(1, 0, 0, cs, 'uvw')
 ```
 
 ```python
-plot(cat(rPlane, rDirection), upper=True, grid=True, MarkerSize=10,
-     label=['(011)', '[100]'], backgroundColor='w', noLabel=True)
+plot(cat(rPlane, rDirection), upper=True, grid=True, markerSize=10,
+     label=['(011)', '[100]'], backgroundColor='w', axisLabels=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationDefinition-10.png"></center>
@@ -206,7 +206,7 @@ carry `antipodal`.
 The equivalence of the 24 settings is why the angle between two orientations is the
 smallest angle over all equivalent pairs. The dedicated
 [Symmetry](OrientationSymmetry_py.html) page develops this rule and explains when to use
-the `noSymmetry=True` option.
+the `symmetry=False` option.
 
 ## Specimen Symmetry
 

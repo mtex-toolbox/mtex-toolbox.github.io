@@ -70,7 +70,7 @@ Plot the ODF in sigma sections and draw the gradient arrows on top.
 ```python
 plot(odf, 'sigma')
 hold('on')
-plot(G, linewidth=1.5, color='black', resolution=7.5 * degree)
+plot(G, lineWidth=1.5, color='black', resolution=7.5 * degree)
 hold('off')
 ```
 
@@ -312,7 +312,7 @@ Every arrow points away from the identity at the origin, as a field of axis time
 must.
 
 ```python
-quiver3(VF, 'axisAngle', resolution=7.5 * degree, color='black', linewidth=2)
+quiver3d(VF, 'axisAngle', resolution=7.5 * degree, color='black', lineWidth=2)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunVectorField-17.png"></center>

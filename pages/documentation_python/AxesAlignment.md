@@ -76,9 +76,10 @@ plot(v1, label='v_1', figSize='small')
 <center class="mtex-figure"><img class="inline" src="figures/python/AxesAlignment-4.png"></center>
 
 Now y points west and x points north, so the marker and annotations turn
-together. The commands [plotx2east](plotx2east.html),
-[plotx2north](plotx2north.html) and
-[plotzIntoPlane](plotzIntoPlane.html) set common session conventions.
+together. A single direction can be set on its own, the others kept:
+`plottingConvention.default(north=xvector)` lets x point north, as MATLAB's
+[plotx2north](plotx2north.html) does, and `plottingConvention.default(intoScreen=zvector)`
+turns z into the screen.
 
 ```python
 plottingConvention.default('y↑→x')
@@ -169,10 +170,10 @@ It can be replaced by a custom annotation or disabled for the session:
 
     setMTEXpref('pfAnnotations', lambda *args, **kw: None)
 
-For one plot, `noLabel` suppresses the frame annotation instead.
+For one plot, `axisLabels=False` suppresses the frame annotation instead.
 
 ```python
-plot(v1, upper=True, label='v_1', noLabel=True)
+plot(v1, upper=True, label='v_1', axisLabels=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/AxesAlignment-11.png"></center>
@@ -212,9 +213,9 @@ figures use the same specimen alignment. Quantities derived from these
 data inherit that alignment.
 
 ```python
-odf = calcODF(pf, silent=True)
+odf = calcODF(pf, verbose=False)
 
-plotPDF(odf, pf.allH[0:4])
+plotPF(odf, pf.allH[0:4])
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/AxesAlignment-14.png"></center>

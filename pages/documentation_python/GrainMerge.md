@@ -97,7 +97,7 @@ Mg-Mg segments: 2698, candidate twin segments: 1408, percent: 52.187
 ```python
 # overlay the candidate twin boundaries
 hold(True)
-plot(twinBoundary, lineColor='w', lineWidth=4, DisplayName='candidate twin boundary')
+plot(twinBoundary, lineColor='w', lineWidth=4, displayName='candidate twin boundary')
 hold(False)
 ```
 
@@ -126,7 +126,7 @@ print(f'grains before: {len(grains)}, after: {len(mergedGrains)}')
 
 # overlay the reconstructed parent-grain boundaries
 hold(True)
-plot(mergedGrains.boundary, lineColor='k', lineWidth=2.5, DisplayName='merged grains')
+plot(mergedGrains.boundary, lineColor='k', lineWidth=2.5, displayName='merged grains')
 hold(False)
 ```
 
@@ -217,10 +217,10 @@ twinAreaPercent
 
 ```python
 # visualize the classification
-plot(grains[~isTwin], faceColor='darkgray', DisplayName='not twin')
+plot(grains[~isTwin], faceColor='darkgray', displayName='not twin')
 hold(True)
-plot(grains[isTwin], faceColor='red', DisplayName='twin')
-plot(mergedGrains.boundary, lineColor='k', lineWidth=2, DisplayName='merged grains')
+plot(grains[isTwin], faceColor='red', displayName='twin')
+plot(mergedGrains.boundary, lineColor='k', lineWidth=2, displayName='merged grains')
 mtexTitle('twin classification')
 hold(False)
 ```

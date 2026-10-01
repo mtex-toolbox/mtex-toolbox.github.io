@@ -56,12 +56,12 @@ weight, $$1/500$$ in this example.
 ori = fibre_odf.discreteSample(500)
 
 # plot the ODF in Bunge sections
-plot(fibre_odf, sections=6, silent=True)
+plot(fibre_odf, sections=6, verbose=False)
 mtexColorbar(title='mrd')
 
 # plot the sampled orientations on top
 hold(True)
-plot(ori, MarkerFaceColor='none', all=True, MarkerEdgeColor='k', MarkerSize=4)
+plot(ori, markerFaceColor='none', all=True, markerEdgeColor='k', markerSize=4)
 hold(False)
 ```
 
@@ -77,11 +77,11 @@ a quantitative error measure.
 
 ```python
 # plot the ODF in sigma sections
-plot(fibre_odf, 'sigma', sections=6, silent=True, contour=True, linewidth=2)
+plot(fibre_odf, 'sigma', sections=6, verbose=False, contour=True, lineWidth=2)
 
 # plot the sampled orientations in the same sections
 hold(True)
-plot(ori, MarkerFaceColor='none', all=True, MarkerEdgeColor='k', MarkerSize=4)
+plot(ori, markerFaceColor='none', all=True, markerEdgeColor='k', markerSize=4)
 hold(False)
 ```
 
@@ -108,7 +108,7 @@ texture features.
 # estimate an ODF with a narrow kernel
 odf_rec = calcDensity(ori, halfwidth=10 * degree)
 
-plot(odf_rec, 'sigma', silent=True)
+plot(odf_rec, 'sigma', verbose=False)
 mtexColorbar(title='mrd')
 
 errRandom10 = calcError(odf_rec, fibre_odf, 'L1')
@@ -116,7 +116,7 @@ print(f'L1 error, random sample, 10 degree: {errRandom10:.3f}')
 ```
 
 ```text
-L1 error, random sample, 10 degree: 0.166
+L1 error, random sample, 10 degree: 0.185
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-6.png"></center>
@@ -129,7 +129,7 @@ fibre.
 # reconstruct the same orientations with a wider kernel
 odf_rec = calcDensity(ori, halfwidth=20 * degree)
 
-plot(odf_rec, 'sigma', silent=True)
+plot(odf_rec, 'sigma', verbose=False)
 mtexColorbar(title='mrd')
 
 errRandom20 = calcError(odf_rec, fibre_odf, 'L1')
@@ -137,7 +137,7 @@ print(f'L1 error, random sample, 20 degree: {errRandom20:.3f}')
 ```
 
 ```text
-L1 error, random sample, 20 degree: 0.124
+L1 error, random sample, 20 degree: 0.144
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-7.png"></center>
@@ -153,8 +153,8 @@ print(f'texture index, random reconstruction: {norm(odf_rec) ** 2:.3f}')
 ```
 
 ```text
-texture index, original ODF: 1.279
-texture index, random reconstruction: 1.094
+texture index, original ODF: 1.371
+texture index, random reconstruction: 1.095
 ```
 
 ## Place an Optimized Sample
@@ -175,7 +175,7 @@ sample-scale peaks in the random reconstruction.
 ```python
 odf_rec = calcDensity(ori, halfwidth=10 * degree)
 
-plot(odf_rec, 'sigma', silent=True)
+plot(odf_rec, 'sigma', verbose=False)
 mtexColorbar(title='mrd')
 
 errOptimal10 = calcError(odf_rec, fibre_odf, 'L1')
@@ -183,7 +183,7 @@ print(f'L1 error, optimized sample, 10 degree: {errOptimal10:.3f}')
 ```
 
 ```text
-L1 error, optimized sample, 10 degree: 0.039
+L1 error, optimized sample, 10 degree: 0.037
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-10.png"></center>
@@ -199,8 +199,8 @@ print(f'texture index, optimized reconstruction: {norm(odf_rec) ** 2:.3f}')
 ```
 
 ```text
-texture index, original ODF: 1.279
-texture index, optimized reconstruction: 1.196
+texture index, original ODF: 1.371
+texture index, optimized reconstruction: 1.286
 ```
 
 ## Optimizing the Weights Too
@@ -281,8 +281,8 @@ print(f'halfwidth for optimalSample: {np.exp(pHwOpt[1]):.1f} degree * M^{pHwOpt[
 ```
 
 ```text
-halfwidth for discreteSample: 88.5 degree * M^-0.276
-halfwidth for optimalSample: 47.8 degree * M^-0.262
+halfwidth for discreteSample: 61.0 degree * M^-0.209
+halfwidth for optimalSample: 47.6 degree * M^-0.257
 ```
 
 Plot the measured halfwidths with their fitted laws. The circles are the means of five
@@ -319,7 +319,7 @@ print(f'ratio of optimized to random halfwidth: {hwOpt[0] / np.mean(hwRand[0]):.
 ```
 
 ```text
-ratio of optimized to random halfwidth: 0.56 at M = 32 and 0.57 at M = 512
+ratio of optimized to random halfwidth: 0.67 at M = 32 and 0.58 at M = 512
 ```
 
 ## The Asymptotic Halfwidth Rule
@@ -362,8 +362,8 @@ print(f'error for optimalSample: {np.exp(pEOpt[1]):.2f} * M^{pEOpt[0]:.3f}')
 ```
 
 ```text
-error for discreteSample: 0.75 * M^-0.163
-error for optimalSample: 0.82 * M^-0.346
+error for discreteSample: 0.82 * M^-0.197
+error for optimalSample: 0.83 * M^-0.364
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-16.png"></center>
@@ -382,11 +382,11 @@ for m in M:
 ```
 
 ```text
-32 optimized orientations correspond to 903 random ones
-64 optimized orientations correspond to 3917 random ones
-128 optimized orientations correspond to 16992 random ones
-256 optimized orientations correspond to 73715 random ones
-512 optimized orientations correspond to 319795 random ones
+32 optimized orientations correspond to 585 random ones
+64 optimized orientations correspond to 2108 random ones
+128 optimized orientations correspond to 7597 random ones
+256 optimized orientations correspond to 27378 random ones
+512 optimized orientations correspond to 98665 random ones
 ```
 
 ## Limits of the Comparison
@@ -407,7 +407,7 @@ other again.
 A sampled orientation list can be exported as [Euler angles](RotationDefinition_py.html)
 with [export](quaternion.export.html). Crystal-plasticity programs often require a
 particular convention and a weight in every row. Use
-[export_VPSC](orientation.export_VPSC.html) for the VPSC format.
+[export](orientation.export_VPSC.html) with `interface='VPSC'` for the VPSC format.
 
 The broader choice between exact ODF storage, tabulated function values, and weighted
 orientation lists is covered in [ODF Export](ODFExport_py.html).

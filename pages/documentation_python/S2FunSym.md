@@ -103,7 +103,7 @@ through 16.
 ```python
 sFs2 = S2FunHarmonic.quadrature(valueFunction, cs, bandwidth=16)
 
-contour(sFs2, linewidth=2)
+contour(sFs2, lineWidth=2)
 mtexColorMap('parula')
 ```
 

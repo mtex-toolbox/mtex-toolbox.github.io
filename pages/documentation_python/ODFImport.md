@@ -63,7 +63,7 @@ fname = mtexdatafile('odf')
 odfInterp = SO3Fun.load(fname, 'Bunge', 'interp', CS=cs, SS=ss, columnNames=['Euler 1', 'Euler 2', 'Euler 3', 'weights'])
 
 # plot the imported function
-plot(odfInterp, sections=6, silent=True)
+plot(odfInterp, sections=6, verbose=False)
 ```
 
 ```text
@@ -118,7 +118,7 @@ the other interpretation.
 
 For this file, MATLAB's default least-squares solver reports that it reached its
 iteration limit. The returned function is normalized, but that warning means
-convergence has not been established. Do not silence it. The options `tol` and `maxit`
+convergence has not been established. Do not silence it. The options `tol` and `maxIter`
 control termination, and the fitted values must be checked against the source table
 when interpolation accuracy matters.
 
@@ -165,7 +165,7 @@ variantName = ['tabulated values', 'density, 5 degrees', 'density, 10 degrees', 
 
 mtexFig = newMtexFigure(layout=[1, 4], figSize='large')
 for i in range(len(odfVariants)):
-  plotPDF(odfVariants[i], h, antipodal=True, contourf=True, noTitle=True)
+  plotPF(odfVariants[i], h, antipodal=True, contourf=True, title=False)
   mtexTitle(variantName[i])
   if i < len(odfVariants) - 1:
     nextAxis()

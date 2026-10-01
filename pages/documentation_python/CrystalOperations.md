@@ -22,7 +22,7 @@ geometry, but comparisons have one extra input: crystal symmetry.
 By default, `angle`, `dot` and `eq` compare a vector with the symmetry orbit of the
 other vector. In contrast, constructions such as `cross` act on the indexed vectors
 actually supplied. This page shows when to keep the default and when to request
-`noSymmetry`.
+`symmetry=False`.
 
 Read [Miller Indices](CrystalDirections_py.html) and
 [Lattice Metric and Plane Geometry](LatticeMetric_py.html) first if direct and reciprocal
@@ -56,11 +56,11 @@ the point representing its plane normal.
 ```python
 pattern = mtexdata('quartzPattern')
 
-plot(pattern, resolution=0.25 * degree, complete=True, upper=True, noLabel=True)
+plot(pattern, resolution=0.25 * degree, complete=True, upper=True, axisLabels=False)
 mtexColorMap('black2white')
 ax1 = gcm().children[-1]
 nextAxis()
-plot(pattern.radon(), resolution=0.25 * degree, complete=True, upper=True, noLabel=True)
+plot(pattern.radon(), resolution=0.25 * degree, complete=True, upper=True, axisLabels=False)
 mtexColorMap('black2white')
 ax2 = gcm().children[-1]
 ```
@@ -89,7 +89,7 @@ circle(m, parent=ax1, color='lightBlue')
 circle(r, parent=ax1, color='red')
 circle(z, parent=ax1, color='yellow')
 
-opt = dict(marker='s', MarkerFaceColor='none', parent=ax2, labeled=True, backgroundColor='w', linewidth=2)
+opt = dict(marker='s', markerFaceColor='none', parent=ax2, labeled=True, backgroundColor='w', lineWidth=2)
 plot(m, **opt, markerEdgeColor='lightBlue')
 plot(r, **opt, markerEdgeColor='red')
 plot(z, **opt, markerEdgeColor='yellow')
@@ -149,7 +149,7 @@ call keeps one entry per symmetry operation and may contain repeated vectors. Us
 `unique` when the number of distinct members is the question.
 
 ```python
-directedNormalCount = len(symmetrise(r, unique=True, noAntipodal=True))
+directedNormalCount = len(symmetrise(r, unique=True, antipodal=False))
 directedNormalCount
 ```
 
@@ -177,7 +177,7 @@ object being described.
 
 The multiplicity is the number of distinct directed
 vectors in a symmetry orbit. It is the count returned by
-`symmetrise(..., unique=True, noAntipodal=True)`. A direction on a symmetry axis has
+`symmetrise(..., unique=True, antipodal=False)`. A direction on a symmetry axis has
 lower multiplicity because some operations leave it fixed.
 
 For diffraction with Friedel equivalence, opposite reflection normals contribute
@@ -223,7 +223,7 @@ The result is false because no operation of `321` makes that mapping. Treating t
 normals as axes makes their signs irrelevant.
 
 ```python
-eq(r1, r2, antipodal=True)
+isclose(r1, r2, antipodal=True)
 ```
 
 ```text
@@ -240,7 +240,7 @@ three-index notation this is the *zone law*
 
 $$hu+kv+lw=0.$$
 
-Incidence concerns the two indices that were written. Use `noSymmetry` so that `dot`
+Incidence concerns the two indices that were written. Use `symmetry=False` so that `dot`
 does not substitute a symmetry-equivalent vector.
 
 ```python
@@ -250,7 +250,7 @@ directionInPlane = Miller(1, -1, 0, csOrtho, 'uvw')
 ```
 
 ```python
-dot(plane, directionInPlane, noSymmetry=True)
+dot(plane, directionInPlane, symmetry=False)
 ```
 
 ```text
@@ -261,7 +261,7 @@ Zero confirms that $$[1\bar{1}0]$$ lies in $$(110)$$. In contrast, the result fo
 is 1, so that direction does not lie in the plane.
 
 ```python
-dot(plane, Miller(1, 0, 0, csOrtho, 'uvw'), noSymmetry=True)
+dot(plane, Miller(1, 0, 0, csOrtho, 'uvw'), symmetry=False)
 ```
 
 ```text
@@ -290,7 +290,7 @@ vector3d (Quartz)
 ---
 
 ```python
-plot(d1, marker='s', parent=ax1, MarkerFaceColor='lightgreen', labeled=True, backgroundColor='w')
+plot(d1, marker='s', parent=ax1, markerFaceColor='lightgreen', labeled=True, backgroundColor='w')
 circle(d1, parent=ax2, lineColor='lightgreen')
 ```
 
@@ -317,7 +317,7 @@ vector3d (Quartz)
 ---
 
 ```python
-plot(d2, marker='s', parent=ax1, MarkerFaceColor='orange', labeled=True, backgroundColor='w')
+plot(d2, marker='s', parent=ax1, markerFaceColor='orange', labeled=True, backgroundColor='w')
 circle(d2, parent=ax2, lineColor='orange')
 ```
 
@@ -341,7 +341,7 @@ vector3d (Quartz)
 
 ```python
 circle(n, parent=ax1, lineColor='white')
-plot(n, **opt, MarkerEdgeColor='white')
+plot(n, **opt, markerEdgeColor='white')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/CrystalOperations-24.png"></center>
@@ -380,7 +380,7 @@ The result is numerically close to zero. To compare only the two Cartesian vecto
 written, ignore crystal symmetry.
 
 ```python
-geometricAngle = angle(r1, r2, noSymmetry=True) / degree
+geometricAngle = angle(r1, r2, symmetry=False) / degree
 geometricAngle
 ```
 
@@ -392,7 +392,7 @@ The geometric angle is $$180^\circ$$ because the normals are exactly opposite. T
 same two index sets give a $$60^\circ$$ point-group angle, a near-zero plane-axis angle
 and a $$180^\circ$$ geometric angle.
 
-The option `noSymmetry` is available to many commands that accept crystal directions or
+The option `symmetry=False` is available to many commands that accept crystal directions or
 orientations. Use it when the indexed vectors themselves, rather than their symmetry
 classes, are the subject.
 
@@ -429,7 +429,7 @@ vector3d (y↑→x)
 
 ```python
 hold(True)
-plot(specimenDirection, marker='s', MarkerFaceColor='lightgreen', label=d1.char(family=False), backgroundColor='w')
+plot(specimenDirection, marker='s', markerFaceColor='lightgreen', label=d1.char(family=False), backgroundColor='w')
 hold(False)
 ```
 
@@ -440,7 +440,7 @@ which this crystal family points.
 
 ```python
 hold(True)
-plot(ori * d1.symmetrise(), marker='s', MarkerFaceColor='lightgreen', label=d1.char(family=False), backgroundColor='w')
+plot(ori * d1.symmetrise(), marker='s', markerFaceColor='lightgreen', label=d1.char(family=False), backgroundColor='w')
 hold(False)
 ```
 

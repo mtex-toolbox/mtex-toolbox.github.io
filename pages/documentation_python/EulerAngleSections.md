@@ -63,11 +63,11 @@ option `sections` sets the number of panels; it does not set the angular resolut
 within a panel.
 
 ```python
-plotSection(odf, 'phi2', sections=9, silent=True, layout=[5, 2], figSize='large')
+plotSection(odf, 'phi2', sections=9, verbose=False, layout=[5, 2], figSize='large')
 
-annotate(ori1, MarkerSize=15)
-annotate(ori2, Marker='v', MarkerSize=15)
-plot(f, LineWidth=2, add2all=True)
+annotate(ori1, markerSize=15)
+annotate(ori2, marker='v', markerSize=15)
+plot(f, lineWidth=2, add2all=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EulerAngleSections-5.png"></center>
@@ -88,10 +88,10 @@ records this geometry so it can be reused for several ODFs or orientation sets.
 sectionAngles = np.array([25, 30, 35, 40]) * degree
 oS = phi2Sections(odf.CS, odf.SS, phi2=sectionAngles)
 
-plotSection(odf, oS, silent=True, figSize='large', layout=[2, 2])
-annotate(ori1, MarkerSize=15)
-annotate(ori2, Marker='v', MarkerSize=15)
-plot(f, LineWidth=2, add2all=True)
+plotSection(odf, oS, verbose=False, figSize='large', layout=[2, 2])
+annotate(ori1, markerSize=15)
+annotate(ori2, marker='v', markerSize=15)
+plot(f, lineWidth=2, add2all=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EulerAngleSections-6.png"></center>
@@ -133,7 +133,7 @@ informal expression in the Bunge angles; the coordinate conventions and referenc
 matter.
 
 ```python
-plotSection(odf, 'sigma', silent=True, figSize='large')
+plotSection(odf, 'sigma', verbose=False, figSize='large')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EulerAngleSections-7.png"></center>
@@ -150,7 +150,7 @@ Sections at constant first Bunge angle $$\varphi_1$$ put $$\varphi_2$$ and $$\Ph
 each panel.
 
 ```python
-plotSection(odf, 'phi1', sections=6, layout=[3, 2], silent=True, figSize='large')
+plotSection(odf, 'phi1', sections=6, layout=[3, 2], verbose=False, figSize='large')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EulerAngleSections-8.png"></center>
@@ -162,7 +162,7 @@ is the same ODF sampled on a different family of slices.
 Sections at constant $$\gamma$$ make the analogous choice in the Matthies convention.
 
 ```python
-plotSection(odf, 'gamma', sections=6, layout=[3, 2], silent=True, figSize='large')
+plotSection(odf, 'gamma', sections=6, layout=[3, 2], verbose=False, figSize='large')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EulerAngleSections-9.png"></center>
@@ -220,7 +220,7 @@ array([90., 90., 90.])
 ```
 
 ```python
-plotSection(odfOrtho, 'phi2', sections=6, layout=[3, 2], coordinates='off', xlabel='', ylabel='', silent=True, figSize='large')
+plotSection(odfOrtho, 'phi2', sections=6, layout=[3, 2], coordinates='off', xlabel='', ylabel='', verbose=False, figSize='large')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EulerAngleSections-11.png"></center>

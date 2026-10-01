@@ -183,7 +183,7 @@ as foliation, lineation, RD, TD or ND.
 
 ```python
 h = Miller([1, 0, 0], [0, 1, 0], [0, 0, 1], ebsd['O'].CS)
-plotPDF(ebsd['O'].orientations, h, contourf=True)
+plotPF(ebsd['O'].orientations, h, contourf=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDReferenceFrame-7.png"></center>

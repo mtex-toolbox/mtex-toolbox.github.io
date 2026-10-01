@@ -87,12 +87,12 @@ r = vector3d(1, 0, 1)
 
 # map the specimen direction into the crystal frame
 h = inv(ebsd.orientations) * r
-h = project2FundamentalRegion(h)
+h = projectIntoFundamentalRegion(h)
 
 # use its azimuth in degrees as the colour value, between -180 and 180 as MATLAB counts it
 color = (h.rho / degree + 180) % 360 - 180
 
-plotIPDF(ebsd.orientations, color, r, MarkerSize=3, grid=True, all=True)
+plotIPF(ebsd.orientations, color, r, markerSize=3, grid=True, all=True)
 mtexColorbar()
 ```
 
@@ -183,7 +183,7 @@ Drawing the key and ten sampled orientations shows where the contrast was placed
 plot(ipfKey, resolution=0.25 * degree)
 
 hold(True)
-plotIPDF(ebsd['indexed'].orientations, ipfKey.ipfDirection, points=10, MarkerSize=1, MarkerFaceColor='w', MarkerEdgeColor='w')
+plotIPF(ebsd['indexed'].orientations, ipfKey.ipfDirection, points=10, markerSize=1, markerFaceColor='w', markerEdgeColor='w')
 hold(False)
 ```
 

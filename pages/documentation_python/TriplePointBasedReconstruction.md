@@ -24,7 +24,7 @@ import numpy as np
 
 from mtex import *
 
-ebsd = mtexdata('alphaBetaTitanium', silent=True)
+ebsd = mtexdata('alphaBetaTitanium', verbose=False)
 
 # plot the measured alpha phase with inverse pole figure colours
 plot(ebsd['Ti (alpha)'], ebsd['Ti (alpha)'].orientations, figSize='large')
@@ -95,7 +95,7 @@ print(numChildTriplePoints)
 
 plot(grains.boundary, lineColor=[0.55, 0.55, 0.55], region=[600, 700, 500, 600], figSize='large')
 hold(True)
-plot(childTriplePoints, color='red', MarkerSize=5, region=[600, 700, 500, 600])
+plot(childTriplePoints, color='red', markerSize=5, region=[600, 700, 500, 600])
 hold(False)
 ```
 
@@ -179,7 +179,7 @@ mtexColorbar(title='best vote probability')
 ```
 
 ```text
-0.7800134861766689
+0.7799865138233311
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/TriplePointBasedReconstruction-8.png"></center>
@@ -209,16 +209,16 @@ fractionTransformedByTP
 parentGrainReconstructor
 
   phase   mineral     symmetry  grains  area  reconstructed
-  parent  Ti (BETA)   432       29347   83%   63%          
-  child   Ti (alpha)  622       16885   17%                
+  parent  Ti (BETA)   432       29346   83%   63%          
+  child   Ti (alpha)  622       16886   17%                
 
  OR: (110) || (0001)   [1̅11̅] || [21̅1̅0]
    p2c fit: 0.95°, 1.4°, 1.8°, 2.3° (quintiles)
    c2c fit: 1.1°, 1.6°, 2°, 2.7° (quintiles)
 
- votes: 8156 × 1
+ votes: 8157 × 1
    probabilities: 66%, 60%, 53%, 43% (quintiles)
-0.6314
+0.6313
 ```
 
 Earlier text reported that more than 66% of the input child grains were transformed by these

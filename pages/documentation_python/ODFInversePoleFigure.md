@@ -74,12 +74,12 @@ odf = SO3FunHarmonic(odf, bandwidth=32)
 
 ## Plotting Specimen Directions
 
-[plotIPDF](SO3Fun.plotIPDF.html) works like `plotPDF`, except that its input directions
+[plotIPF](SO3Fun.plotIPDF.html) works like `plotPF`, except that its input directions
 belong to the specimen frame. The coordinates inside each panel are crystal directions.
 This frame reversal is the point of an inverse pole figure.
 
 ```python
-plotIPDF(odf, cat(vector3d.X, vector3d.Z))
+plotIPF(odf, cat(vector3d.X, vector3d.Z))
 mtexColorMap('LaboTeX')
 mtexColorbar(title='mrd')
 ```
@@ -93,13 +93,13 @@ entire orientation fibre.
 
 ## Values Rather Than Colours
 
-[calcPDF](SO3Fun.calcPDF.html) with an empty crystal-direction argument returns an
+[radon](SO3Fun.calcPDF.html) with only a specimen direction, `r=`, returns an
 inverse pole density function. Its printed summary identifies the returned
 spherical-function representation and crystal symmetry.
 
 ```python
-ipdfX = calcPDF(odf, None, vector3d.X)
-ipdfZ = calcPDF(odf, None, vector3d.Z)
+ipdfX = radon(odf, r=vector3d.X)
+ipdfZ = radon(odf, r=vector3d.Z)
 ipdfX
 ```
 
@@ -135,7 +135,7 @@ is a modelling choice, not a display option. Use it only when the measurement or
 cannot distinguish the directions.
 
 ```python
-plotIPDF(odf, cat(vector3d.X, vector3d.Z), antipodal=True)
+plotIPF(odf, cat(vector3d.X, vector3d.Z), antipodal=True)
 mtexColorMap('LaboTeX')
 ```
 
@@ -152,7 +152,7 @@ expands those copies, while `upper` retains only the upper hemisphere. Neither f
 changes the density.
 
 ```python
-plotIPDF(odf, cat(vector3d.X, vector3d.Z), complete=True, upper=True)
+plotIPF(odf, cat(vector3d.X, vector3d.Z), complete=True, upper=True)
 mtexColorMap('LaboTeX')
 ```
 
@@ -168,7 +168,7 @@ Keep the same complete upper hemisphere and impose antipodal symmetry. This isol
 the change in density from the change in plotted region.
 
 ```python
-plotIPDF(odf, cat(vector3d.X, vector3d.Z), complete=True, antipodal=True, upper=True)
+plotIPF(odf, cat(vector3d.X, vector3d.Z), complete=True, antipodal=True, upper=True)
 mtexColorMap('LaboTeX')
 ```
 

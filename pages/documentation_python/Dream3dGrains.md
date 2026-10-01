@@ -86,7 +86,7 @@ outwardNormal = grain.I_GF[:, faceIndex].toarray().reshape(-1) * face.N
 
 plot(grain, faceAlpha=0.65, edgeAlpha=0.25)
 hold(True)
-quiver3(faceCentroid, outwardNormal, arrowSize=0.15, color=[0.7, 0, 0])
+quiver3d(faceCentroid, outwardNormal, arrowSize=0.15, color=[0.7, 0, 0])
 hold(False)
 setCamera(plottingConvention.default3D)
 ```
@@ -101,7 +101,7 @@ A reference frame is the coordinate system in which data are expressed. These no
 share the spatial reference frame of the mesh vertices. They describe boundary-plane
 directions, not the misorientation across a face.
 
-Pass `noOrientFaces=True` to `grain3d.load` only when the raw stored winding is
+Pass `orientFaces=False` to `grain3d.load` only when the raw stored winding is
 required. With raw winding, normal directions and signed volumes are not meaningful. The
 `boundary.grainId` order has no geometric direction either.
 

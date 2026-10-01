@@ -161,7 +161,7 @@ region in orientation space.
 
 ```python
 color = ind2color(np.tile(np.arange(1, oriMax.size + 1), (numSym(cs), 1)))
-plot(oriMax.symmetrise(), color, 'axisAngle', filled=True, markerSize=20, restrict2FundamentalRegion=True)
+plot(oriMax.symmetrise(), color, 'axisAngle', filled=True, markerSize=20, fundamentalRegion=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunConcept-8.png"></center>

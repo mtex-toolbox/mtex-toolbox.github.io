@@ -32,7 +32,7 @@ from scipy.special import erf
 from mtex import *
 
 plottingConvention.default('y↑→x')
-ebsd = mtexdata('martensite', silent=True)
+ebsd = mtexdata('martensite', verbose=False)
 ```
 
 ## Segment the measured martensite
@@ -88,7 +88,31 @@ boundaryFitQuantiles
 ```
 
 ```text
-3.4002168426557495
+ optimizing parent to child orientation relationship
+  (335.80°, 10.53°, 65.80°)  4.029
+  (338.80°, 10.53°, 63.48°)  3.65
+  (341.44°, 10.73°, 61.38°)  3.342
+  (344.02°, 10.69°, 59.21°)  3.107
+  (345.83°, 10.56°, 57.75°)  2.974
+  (346.77°, 10.41°, 56.99°)  2.929
+  (347.30°, 10.33°, 56.54°)  2.915
+  (347.50°, 10.28°, 56.40°)  2.912
+  (347.57°, 10.26°, 56.34°)  2.911
+  (347.65°, 10.25°, 56.29°)  2.911
+  (347.27°, 10.09°, 56.73°)  2.897
+  (347.40°, 10.03°, 56.66°)  2.893
+  (347.50°,  9.99°, 56.62°)  2.89
+  (347.56°,  9.96°, 56.59°)  2.887
+⋮
+  (344.26°, 10.68°, 58.96°)  3.081
+  (346.01°, 10.54°, 57.52°)  2.96
+  (346.90°, 10.40°, 56.81°)  2.916
+  (347.39°, 10.32°, 56.43°)  2.902
+  (347.63°, 10.27°, 56.25°)  2.897
+  (347.77°, 10.25°, 56.14°)  2.896
+  (347.84°, 10.24°, 56.09°)  2.895
+  (347.87°, 10.24°, 56.06°)  2.895
+3.4002168426595065
 array([1.2234, 1.6858, 2.1038, 3.8095])
 ```
 
@@ -331,7 +355,7 @@ reconstructed parent and all theoretical child variants.
 
 ```python
 selectedChildOri = ebsd[boundaryParentEBSD.grainId == selectedParentId].orientations
-plotPDF(selectedChildOri, Miller(0, 0, 1, csBCC), MarkerSize=3)
+plotPF(selectedChildOri, Miller(0, 0, 1, csBCC), markerSize=3)
 
 hold(True)
 selectedParentOri = selectedParent.meanOrientation
@@ -339,7 +363,7 @@ plot(selectedParentOri.symmetrise() * Miller(0, 0, 1, csFCC), markerSize=10, mar
      markerEdgeColor='black', lineWidth=2)
 
 selectedChildVariants = variants(fcc2bcc, selectedParentOri)
-plotPDF(selectedChildVariants, markerFaceColor='none', lineWidth=2, markerEdgeColor='orange')
+plotPF(selectedChildVariants, markerFaceColor='none', lineWidth=2, markerEdgeColor='orange')
 hold(False)
 ```
 
@@ -449,7 +473,7 @@ print(tripleFitQuantiles)
 plot(ebsd['Iron bcc'], ebsd['Iron bcc'].orientations, figSize='large')
 hold(True)
 plot(grains.boundary, lineWidth=2)
-plot(tP, tripleFit / degree, MarkerEdgeColor='k', MarkerSize=8)
+plot(tP, tripleFit / degree, markerEdgeColor='k', markerSize=8)
 hold(False)
 
 setColorRange([0, 5])

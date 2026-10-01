@@ -162,7 +162,7 @@ orientations in inverse pole figures retains that directional information. Colou
 the markers by distance retains their order along the line.
 
 ```python
-plotIPDF(oriLine, profileDist, cat(xvector, yvector, zvector), MarkerSize=20, antipodal=True)
+plotIPF(oriLine, profileDist, cat(xvector, yvector, zvector), markerSize=20, antipodal=True)
 mtexColorbar(title=f'distance along profile ({ebsdLine.scanUnit})')
 ```
 

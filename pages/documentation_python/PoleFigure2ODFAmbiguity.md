@@ -97,10 +97,10 @@ all.
 
 ```python
 h = Miller([[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1], [1, 2, 0]], cs)
-plotPDF(odf1, h, contourf=True)
+plotPF(odf1, h, contourf=True)
 mtexColorMap('LaboTeX')
 
-plotPDF(odf2, h, contourf=True)
+plotPF(odf2, h, contourf=True)
 mtexColorMap('LaboTeX')
 ```
 
@@ -200,9 +200,9 @@ ori1 = orientation.byEuler(30 * degree, 60 * degree, 10 * degree, cs)
 ori2 = orientation.byEuler(30 * degree, 60 * degree, 100 * degree, cs)
 
 h = Miller([[1, 0, 0], [1, 1, 0], [1, 1, 1], [1, 2, 3]], cs)
-plotPDF(ori1, h, MarkerSize=12)
+plotPF(ori1, h, markerSize=12)
 hold(True)
-plotPDF(ori2, h, MarkerSize=8)
+plotPF(ori2, h, markerSize=8)
 hold(False)
 ```
 
@@ -214,9 +214,9 @@ orientations are therefore distinct under -43m.
 Now impose antipodal symmetry, as ordinary diffraction does.
 
 ```python
-plotPDF(ori1, h, MarkerSize=12, antipodal=True)
+plotPF(ori1, h, markerSize=12, antipodal=True)
 hold(True)
-plotPDF(ori2, h, MarkerSize=8, antipodal=True)
+plotPF(ori2, h, markerSize=8, antipodal=True)
 hold(False)
 ```
 
@@ -234,9 +234,9 @@ ori1.CS = ori1.CS.Laue()
 ori2.CS = ori2.CS.Laue()
 h.CS = h.CS.Laue()
 
-plotPDF(ori1, h, MarkerSize=12)
+plotPF(ori1, h, markerSize=12)
 hold(True)
-plotPDF(ori2, h, MarkerSize=8)
+plotPF(ori2, h, markerSize=8)
 hold(False)
 ```
 
@@ -265,7 +265,7 @@ cs = crystalFrame('-1')
 
 odf1 = 2 / 3 * uniformODF(cs) + 1 / 3 * unimodalODF(orientation.id(cs), halfwidth=30 * degree)
 
-plotPDF(odf1, Miller([[1, 0, 0], [0, 1, 0], [0, 0, 1]], cs), antipodal=True)
+plotPF(odf1, Miller([[1, 0, 0], [0, 1, 0], [0, 0, 1]], cs), antipodal=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODFAmbiguity-13.png"></center>
@@ -278,7 +278,7 @@ Written as a harmonic series it is the same function in another representation.
 ```python
 odf1 = SO3FunHarmonic(odf1, bandwidth=10)
 
-plotPDF(odf1, Miller([[1, 0, 0], [0, 1, 0], [0, 0, 1]], cs))
+plotPF(odf1, Miller([[1, 0, 0], [0, 1, 0], [0, 0, 1]], cs))
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODFAmbiguity-14.png"></center>
@@ -290,7 +290,7 @@ nothing here.
 
 ```python
 plt.close('all')
-plotSpektra(odf1, linewidth=2, figSize='small')
+plotSpectrum(odf1, lineWidth=2, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODFAmbiguity-15.png"></center>
@@ -305,7 +305,7 @@ A = np.arange(1, 12) % 2
 odf2 = conv(odf1, A)
 
 hold(True)
-plotSpektra(odf2, linewidth=2, figSize='small')
+plotSpectrum(odf2, lineWidth=2, figSize='small')
 
 hold(False)
 plt.legend(['odf1', 'odf2'])
@@ -317,7 +317,7 @@ The second spectrum agrees at every even degree and is zero at every odd degree.
 Nevertheless, all pole figures of `odf2` are identical to those of `odf1`:
 
 ```python
-plotPDF(odf2, Miller([[1, 0, 0], [0, 1, 0], [0, 0, 1]], cs), antipodal=True)
+plotPF(odf2, Miller([[1, 0, 0], [0, 1, 0], [0, 0, 1]], cs), antipodal=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODFAmbiguity-17.png"></center>
@@ -395,7 +395,7 @@ odf_rec1 = calcODF(pf)
 Reconstruct once more without ghost correction.
 
 ```python
-odf_rec2 = calcODF(pf, noGhostCorrection=True)
+odf_rec2 = calcODF(pf, ghostCorrection=False)
 ```
 
 Along the alpha fibre the corrected reconstruction recovers `odf1` closely, while the
@@ -418,11 +418,11 @@ Without correction, the recovered odd-degree coefficients are far too small.
 
 ```python
 plt.close('all')
-plotSpektra(odf1, linewidth=2, bandwidth=10, figSize='small')
+plotSpectrum(odf1, lineWidth=2, bandwidth=10, figSize='small')
 hold(True)
-plotSpektra(odf2, linewidth=2)
-plotSpektra(odf_rec1, linewidth=2)
-plotSpektra(odf_rec2, linewidth=2)
+plotSpectrum(odf2, lineWidth=2)
+plotSpectrum(odf_rec1, lineWidth=2)
+plotSpectrum(odf_rec2, lineWidth=2)
 hold(False)
 plt.legend(['odf1', 'odf2', 'odf rec1', 'odf rec2'])
 ```
@@ -455,7 +455,7 @@ h = Miller([[1, 0, 0], [1, 1, 0], [1, 1, 1], [2, 1, 1]], odf.CS)
 pf = calcPoleFigure(SantaFe(), h)
 
 # plot them
-plot(pf, MarkerSize=5)
+plot(pf, markerSize=5)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODFAmbiguity-26.png"></center>
@@ -470,14 +470,14 @@ Reconstruct twice.
 rec = calcODF(pf)
 
 # one without ghost correction
-rec2 = calcODF(pf, noGhostCorrection=True)
+rec2 = calcODF(pf, ghostCorrection=False)
 ```
 
 Both reproduce the measured pole figures. This is the crux of the whole page: agreeing
 with the data is not evidence of being right.
 
 ```python
-plotPDF(rec, pf.h, antipodal=True, complete=True)
+plotPF(rec, pf.h, antipodal=True, complete=True)
 mtexColorMap('parula')
 ```
 
@@ -486,7 +486,7 @@ mtexColorMap('parula')
 ---
 
 ```python
-plotPDF(rec2, pf.h, antipodal=True, complete=True)
+plotPF(rec2, pf.h, antipodal=True, complete=True)
 mtexColorMap('parula')
 ```
 
@@ -520,16 +520,16 @@ pole-figure fit. Once more, the harmonic coefficients show where they come from.
 ```python
 plt.close('all')
 # the harmonic coefficients of the sample ODF
-plotSpektra(SantaFe(), bandwidth=32, linewidth=2, MarkerSize=10, figSize='small')
+plotSpectrum(SantaFe(), bandwidth=32, lineWidth=2, markerSize=10, figSize='small')
 
 # keep plot for adding the next plots
 hold(True)
 
 # the harmonic coefficients of the reconstruction with ghost correction:
-plotSpektra(rec, bandwidth=32, linewidth=2, MarkerSize=10)
+plotSpectrum(rec, bandwidth=32, lineWidth=2, markerSize=10)
 
 # the harmonic coefficients of the reconstruction without ghost correction:
-plotSpektra(rec2, bandwidth=32, linewidth=2, MarkerSize=10)
+plotSpectrum(rec2, bandwidth=32, lineWidth=2, markerSize=10)
 
 plt.legend(['true ODF', 'with ghost correction', 'without ghost correction'])
 # next plot command overwrites plot

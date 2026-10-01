@@ -92,8 +92,8 @@ The printed peak value is in mrd. The square markers show the poles of its orien
 on pole figures calculated from the measured ODF.
 
 ```python
-plotPDF(odfMeasured, pf.allH, antipodal=True, superposition=pf.c)
-annotate(preferredOrientation, marker='s', MarkerFaceColor='black')
+plotPF(odfMeasured, pf.allH, antipodal=True, superposition=pf.c)
+annotate(preferredOrientation, marker='s', markerFaceColor='black')
 mtexColorbar(title='mrd')
 ```
 

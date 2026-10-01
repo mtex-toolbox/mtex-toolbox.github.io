@@ -66,7 +66,7 @@ iteration, as MATLAB prints it by default.
 
 ```python
 tic = time.perf_counter()
-odf = calcODF(pf, silent=False)
+odf = calcODF(pf, verbose=True)
 defaultTime = time.perf_counter() - tic
 
 odf
@@ -113,7 +113,7 @@ The first validation is visual. Recalculate exactly the lattice planes and
 superpositions that were measured.
 
 ```python
-plotPDF(odf, pf.allH, antipodal=True, superposition=pf.c)
+plotPF(odf, pf.allH, antipodal=True, superposition=pf.c)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODF-4.png"></center>
@@ -186,7 +186,7 @@ reconstruction.
 _, oriPref = max(odf)
 odfModel = unimodalODF(oriPref, halfwidth=15 * degree)
 
-plotPDF(odfModel, pf.allH, antipodal=True, superposition=pf.c)
+plotPF(odfModel, pf.allH, antipodal=True, superposition=pf.c)
 
 odfDifference = calcError(odfModel, odf)
 odfDifference
@@ -220,7 +220,7 @@ tic = time.perf_counter()
 odfCoarse = calcODF(pf, resolution=15 * degree)
 coarseTime = time.perf_counter() - tic
 
-plotPDF(odfCoarse, pf.allH, antipodal=True, superposition=pf.c)
+plotPF(odfCoarse, pf.allH, antipodal=True, superposition=pf.c)
 
 defaultPeak = max(odf)[0]
 coarsePeak = max(odfCoarse)[0]
@@ -231,7 +231,7 @@ print(f'Default: {defaultTime:.2f} s, peak {defaultPeak:.1f} mrd, mean RP {meanD
 ```
 
 ```text
-Default: 0.98 s, peak 94.4 mrd, mean RP 0.59; 15 degree: 0.12 s, peak 26.3 mrd, mean RP 0.75
+Default: 1.08 s, peak 94.4 mrd, mean RP 0.59; 15 degree: 0.08 s, peak 26.3 mrd, mean RP 0.75
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODF-9.png"></center>
@@ -258,7 +258,7 @@ tic = time.perf_counter()
 odfZero = calcODF(pf, zeroRange=True)
 zeroTime = time.perf_counter() - tic
 
-plotPDF(odfZero, pf.allH, antipodal=True, superposition=pf.c)
+plotPF(odfZero, pf.allH, antipodal=True, superposition=pf.c)
 
 zeroPeak = max(odfZero)[0]
 meanZeroRP = np.mean(calcError(pf, odfZero, 'RP'))
@@ -267,7 +267,7 @@ print(f'Zero range: {zeroTime:.2f} s, peak {zeroPeak:.1f} mrd, mean RP {meanZero
 ```
 
 ```text
-Zero range: 0.79 s, peak 106.9 mrd, mean RP 0.51; default: 0.98 s, peak 94.4 mrd, mean RP 0.59
+Zero range: 0.40 s, peak 106.9 mrd, mean RP 0.51; default: 1.08 s, peak 94.4 mrd, mean RP 0.59
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODF-10.png"></center>

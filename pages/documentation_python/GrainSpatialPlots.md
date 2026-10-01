@@ -368,7 +368,7 @@ This example therefore demonstrates the arrow geometry rather than identifying o
 material direction.
 
 Arrow length otherwise carries no information except projection. An arrow appears short
-when it points steeply out of the section plane. Pass `noScaling=True` when the vector
+when it points steeply out of the section plane. Pass `scaling=False` when the vector
 magnitudes should set the lengths instead.
 
 An arrow pointing into the screen would be hidden below the map, so MTEX draws it tail

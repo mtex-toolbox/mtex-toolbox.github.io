@@ -44,7 +44,7 @@ S2DeLaValleePoussinKernel
 ---
 
 ```python
-surf(psi, resolution=2 * degree, EdgeColor='none')
+surf(psi, resolution=2 * degree, edgeColor='none')
 hold(True)
 arrow3d(2.4 * zvector, labeled=True, arrowWidth=0.01)
 hold(False)
@@ -59,7 +59,7 @@ changing azimuth while keeping angular distance fixed does not change the value.
 A meridian profile makes the angular dependence easier to read.
 
 ```python
-plot(psi, linewidth=2, symmetric=True)
+plot(psi, lineWidth=2, symmetric=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/S2Kernels-3.png"></center>
@@ -136,15 +136,15 @@ with its Fourier coefficients.
 ```python
 plt.figure()
 plt.subplot(1, 2, 1)
-plot(psi15, linewidth=2, symmetric=True)
+plot(psi15, lineWidth=2, symmetric=True)
 hold(True)
-plot(psi20, linewidth=2, symmetric=True)
+plot(psi20, lineWidth=2, symmetric=True)
 hold(False)
 legend('halfwidth = 15°', 'halfwidth = 20°')
 plt.subplot(1, 2, 2)
-plotSpektra(psi15, linewidth=2)
+plotSpectrum(psi15, lineWidth=2)
 hold(True)
-plotSpektra(psi20, linewidth=2)
+plotSpectrum(psi20, lineWidth=2)
 hold(False)
 legend('halfwidth = 15°', 'halfwidth = 20°')
 ```
@@ -189,15 +189,15 @@ S2DirichletKernel
 ```python
 plt.figure()
 plt.subplot(1, 2, 1)
-plot(dirichlet10, linewidth=2, symmetric=True)
+plot(dirichlet10, lineWidth=2, symmetric=True)
 hold(True)
-plot(dirichlet5, linewidth=2, symmetric=True)
+plot(dirichlet5, lineWidth=2, symmetric=True)
 hold(False)
 legend('bandwidth = 10', 'bandwidth = 5')
 plt.subplot(1, 2, 2)
-plotSpektra(dirichlet10, linewidth=2)
+plotSpectrum(dirichlet10, lineWidth=2)
 hold(True)
-plotSpektra(dirichlet5, linewidth=2)
+plotSpectrum(dirichlet5, lineWidth=2)
 hold(False)
 legend('bandwidth = 10', 'bandwidth = 5')
 ```
@@ -243,15 +243,15 @@ S2BumpKernel
 ```python
 plt.figure()
 plt.subplot(1, 2, 1)
-plot(bump30, linewidth=2, symmetric=True)
+plot(bump30, lineWidth=2, symmetric=True)
 hold(True)
-plot(bump50, linewidth=2, symmetric=True)
+plot(bump50, lineWidth=2, symmetric=True)
 hold(False)
 legend('halfwidth = 30°', 'halfwidth = 50°')
 plt.subplot(1, 2, 2)
-plotSpektra(bump30, linewidth=2)
+plotSpectrum(bump30, lineWidth=2)
 hold(True)
-plotSpektra(bump50, linewidth=2)
+plotSpectrum(bump50, lineWidth=2)
 hold(False)
 legend('halfwidth = 30°', 'halfwidth = 50°')
 ```
@@ -282,7 +282,7 @@ $$ \psi(t)=\sum_{n=0}^{\infty}(2n+1)\,\widehat\psi_n\,
 A general `S2FunHarmonic` has $$2n+1$$ spherical harmonic coefficients at degree $$n$$.
 Radial symmetry leaves only the zonal coefficient. An [S2Kernel](S2Kernel.S2Kernel.html)
 stores the scaled coefficients $$(2n+1)\widehat\psi_n$$ in its `A` property. The
-[plotSpektra](S2Kernel.plotSpektra.html) method divides by $$2n+1$$ and plots
+[plotSpectrum](S2Kernel.plotSpektra.html) method divides by $$2n+1$$ and plots
 $$\widehat\psi_n$$.
 
 This degree-by-degree representation makes radial convolution cheap. The

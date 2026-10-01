@@ -127,8 +127,8 @@ sS[active[0]]
 
 ```text
 slipSystem (m3̅m)
-  u   v   w  | h   k  l  CRSS
-  0  -1  -1   -1  -1  1     1
+  u  v   w  | h  k  l  CRSS
+  0  1  -1   -1  1  1     1
 ```
 
 ## Compute the Sachs factor
@@ -145,7 +145,7 @@ MSachs
 ```
 
 ```text
-2.2386
+2.2325
 ```
 
 The result is 2.24 for this random fcc texture, matching the classical random-texture
@@ -166,7 +166,7 @@ np.mean(MTaylor)
 ```
 
 ```text
-3.0629
+3.0722
 ```
 
 The mean Taylor factor is 3.07, again the classical value. The two models bracket the
@@ -189,7 +189,7 @@ np.min(SFmax)
 ```
 
 ```text
-0.2750
+0.2741
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SachsModel-11.png"></center>

@@ -314,9 +314,10 @@ cs
 
 ```text
 crystalFrame (⊙c→a)
-  symmetry: m3̅m
-  elements: 48
-  a, b, c : 1, 1, 1
+  symmetry : m3̅m
+  elements : 48
+  centering: F
+  a, b, c  : 1, 1, 1
 ```
 
 ---
@@ -344,9 +345,10 @@ combined
 
 ```text
 crystalFrame (⊙c→a)
-  symmetry: 432
-  elements: 24
-  a, b, c : 1, 1, 1
+  symmetry : 432
+  elements : 24
+  centering: F
+  a, b, c  : 1, 1, 1
 ```
 
 The operations of 23 together with the fourfold axis of 4 generate the 24 operations of
@@ -359,9 +361,10 @@ common
 
 ```text
 crystalFrame (⊙c→a)
-  symmetry: 222
-  elements: 4
-  a, b, c : 1, 1, 1
+  symmetry : 222
+  elements : 4
+  centering: F
+  a, b, c  : 1, 1, 1
 ```
 
 Cubic 432 and hexagonal 622 have the identity and three twofold rotations in common.

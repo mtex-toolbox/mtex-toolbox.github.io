@@ -52,10 +52,11 @@ cs
 
 ```text
 crystalFrame (⊙c→a)
-  mineral : Aluminum
-  symmetry: m3̅m
-  elements: 48
-  a, b, c : 4.05, 4.05, 4.05
+  mineral  : Aluminum
+  symmetry : m3̅m
+  elements : 48
+  centering: F
+  a, b, c  : 4.05, 4.05, 4.05
 ```
 
 The summary identifies aluminium, its point group, lattice parameters, and crystal-frame

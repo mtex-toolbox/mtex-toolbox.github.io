@@ -82,10 +82,10 @@ odd-order information.
 
 ## Reconstruct with and without correction
 
-The `noGhostCorrection` flag disables the default correction.
+The `ghostCorrection=False` flag disables the default correction.
 
 ```python
-rec = calcODF(pf, noGhostCorrection=True)
+rec = calcODF(pf, ghostCorrection=False)
 ```
 
 Omitting that flag gives the corrected reconstruction.
@@ -160,7 +160,7 @@ from the true ODF.
 Without ghost correction:
 
 ```python
-plot(rec, 'sigma', sections=9, silent=True)
+plot(rec, 'sigma', sections=9, verbose=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODFGhostCorrection-10.png"></center>
@@ -169,7 +169,7 @@ The component is broad and weak, and the surrounding density is raised. Now plot
 corrected reconstruction on the same type of sections.
 
 ```python
-plot(recCor, 'sigma', sections=9, silent=True)
+plot(recCor, 'sigma', sections=9, verbose=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODFGhostCorrection-11.png"></center>
@@ -186,7 +186,7 @@ true ODF first.
 ```python
 plt.close('all')
 f = fibre(Miller(0, 1, 0, cs), yvector)
-plot(odf, f, linewidth=2, figSize='small')
+plot(odf, f, lineWidth=2, figSize='small')
 hold(True)
 ```
 
@@ -195,7 +195,7 @@ hold(True)
 Add the reconstruction without correction.
 
 ```python
-plot(rec, f, linewidth=2)
+plot(rec, f, lineWidth=2)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODFGhostCorrection-13.png"></center>
@@ -203,7 +203,7 @@ plot(rec, f, linewidth=2)
 Finally add the corrected reconstruction as a dashed curve.
 
 ```python
-plot(recCor, f, linestyle='--', linewidth=2)
+plot(recCor, f, lineStyle='--', lineWidth=2)
 hold(False)
 plt.legend(['true ODF', 'without ghost correction', 'with ghost correction'])
 ```
@@ -280,7 +280,7 @@ A harmonic spectrum groups coefficient magnitudes by degree. Plot the true ODF f
 
 ```python
 plt.close('all')
-plotSpektra(odf, linewidth=2, figSize='small')
+plotSpectrum(odf, lineWidth=2, figSize='small')
 hold(True)
 ```
 
@@ -290,7 +290,7 @@ Add the uncorrected reconstruction. Its zig-zag is the key feature: odd degrees 
 pulled towards zero while the even degrees remain close to the truth.
 
 ```python
-plotSpektra(rec, linewidth=2)
+plotSpectrum(rec, lineWidth=2)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODFGhostCorrection-20.png"></center>
@@ -298,7 +298,7 @@ plotSpektra(rec, linewidth=2)
 The corrected reconstruction follows the true spectrum smoothly.
 
 ```python
-plotSpektra(recCor, linewidth=2)
+plotSpectrum(recCor, lineWidth=2)
 plt.legend(['true ODF', 'without ghost correction', 'with ghost correction'])
 # next plot command overwrites plot window
 hold(False)

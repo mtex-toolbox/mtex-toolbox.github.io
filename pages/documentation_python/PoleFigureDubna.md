@@ -187,7 +187,7 @@ A 10 degree orientation grid and at most six solver iterations provide a quick
 consistency check.
 
 ```python
-recCoarse = calcODF(pf, resolution=10 * degree, iterMax=6, silent=False)
+recCoarse = calcODF(pf, resolution=10 * degree, maxIter=6, verbose=True)
 recCoarse
 ```
 
@@ -225,7 +225,7 @@ two unresolved reflections with their imported structure coefficients instead of
 them as separate pole figures.
 
 ```python
-plotPDF(recCoarse, pf.allH, antipodal=True, superposition=pf.c)
+plotPF(recCoarse, pf.allH, antipodal=True, superposition=pf.c)
 mtexColorbar(title='mrd')
 ```
 

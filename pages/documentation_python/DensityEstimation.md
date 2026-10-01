@@ -256,7 +256,7 @@ one phase boundary population. A misorientation axis is the direction about whic
 crystal must be rotated to match the other.
 
 ```python
-ebsd = mtexdata('forsterite', silent=True)
+ebsd = mtexdata('forsterite', verbose=False)
 grains = calcGrains(ebsd)
 
 # Select boundaries between forsterite and enstatite grains.
@@ -264,7 +264,7 @@ gB = grains.boundary['Forsterite', 'Enstatite']
 # the axes are taken with respect to the forsterite frame, the first of the misorientation
 misAxes = gB.misorientation.axis()
 
-plot(misAxes, fundamentalRegion=True, MarkerFaceAlpha=0.1)
+plot(misAxes, fundamentalRegion=True, markerFaceAlpha=0.1)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/DensityEstimation-12.png"></center>
@@ -280,7 +280,7 @@ contourf(axisDensity)
 mtexColorMap('LaboTeX')
 mtexColorbar()
 hold(True)
-plot(misAxes, MarkerEdgeAlpha=0.25, MarkerFaceColor='none', MarkerEdgeColor='k')
+plot(misAxes, markerEdgeAlpha=0.25, markerFaceColor='none', markerEdgeColor='k')
 hold(False)
 ```
 
@@ -299,7 +299,7 @@ contourf(axisDensity5)
 mtexColorMap('LaboTeX')
 mtexColorbar()
 hold(True)
-plot(misAxes, MarkerEdgeAlpha=0.25, MarkerFaceColor='none', MarkerEdgeColor='k')
+plot(misAxes, markerEdgeAlpha=0.25, markerFaceColor='none', markerEdgeColor='k')
 hold(False)
 ```
 
@@ -330,7 +330,7 @@ SO3FunHarmonic (Forsterite → y↑→x)
 plotSection(odf, contourf=True)
 mtexColorMap('LaboTeX')
 hold(True)
-plot(forsteriteOri, MarkerEdgeAlpha=0.25, MarkerFaceColor='none', MarkerEdgeColor='k', MarkerSize=10)
+plot(forsteriteOri, markerEdgeAlpha=0.25, markerFaceColor='none', markerEdgeColor='k', markerSize=10)
 hold(False)
 ```
 
@@ -353,7 +353,7 @@ orientation?" Pixel-count weights approximate "what fraction of the mapped area 
 orientation?"
 
 ```python
-ebsd = mtexdata('titanium', silent=True)
+ebsd = mtexdata('titanium', verbose=False)
 grains = calcGrains(ebsd)
 indexedGrains = grains['indexed']
 

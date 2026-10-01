@@ -42,7 +42,7 @@ density.
 
 ```python
 # load the titanium example without displaying the EBSD summary
-ebsd = mtexdata('titanium', silent=True)
+ebsd = mtexdata('titanium', verbose=False)
 
 # select the indexed orientations
 titanium = ebsd['Titanium (Alpha)']
@@ -135,7 +135,7 @@ their input summary.
 plottingConvention.default('y↑→x')
 
 # load the pole figure example
-pf = mtexdata('ptx', silent=True)
+pf = mtexdata('ptx', verbose=False)
 pf
 ```
 
@@ -165,7 +165,7 @@ measurements. The `silent` flag hides the solver iteration table but leaves the 
 ODF summary visible.
 
 ```python
-odfFromPoleFigures = calcODF(pf, silent=True)
+odfFromPoleFigures = calcODF(pf, verbose=False)
 odfFromPoleFigures
 ```
 
@@ -181,13 +181,13 @@ SO3FunRBF (mmm → y↑→x)
       90  2.5   185  4.36e-05
       90  2.5   190  4.27e-05
       90  2.5   195  2.53e-05
-      90  2.5   200  1.13e-05
+      90  2.5   200  1.14e-05
        ⋮    ⋮     ⋮         ⋮
-    35.2  107   305  8.88e-06
+    35.2  107   305  8.93e-06
     40.4  107   310  1.66e-05
     45.7  107   314  3.33e-05
     50.9  107   319  3.58e-05
-    56.1  107   324  1.84e-05
+    56.1  107   324  1.85e-05
 ```
 
 ## Reading the reconstructed ODF summary
@@ -202,7 +202,7 @@ poleFigureODFMaximum
 ```
 
 ```text
-17.2091
+17.1247
 ```
 
 The maximum is 17.8 mrd, so this reconstructed texture is sharper than the titanium
@@ -214,7 +214,7 @@ The first validation is to recalculate the measured reflections.
 
 ```python
 # plot pole figures recalculated from the ODF
-plotPDF(odfFromPoleFigures, pf.allH)
+plotPF(odfFromPoleFigures, pf.allH)
 mtexColorbar(title='recalculated intensity')
 ```
 

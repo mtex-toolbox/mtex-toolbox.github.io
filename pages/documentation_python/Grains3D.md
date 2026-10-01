@@ -88,7 +88,7 @@ direction is outward for each grain. This makes signed volumes and `boundary.gra
 directly usable. Request the raw DREAM.3D winding only when that order is itself needed.
 
 ```python
-grainsRaw = grain3d.load(fname, noOrientFaces=True)
+grainsRaw = grain3d.load(fname, orientFaces=False)
 ```
 
 The first value below counts negative raw volumes; the second checks the oriented import.

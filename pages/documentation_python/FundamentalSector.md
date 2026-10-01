@@ -22,7 +22,7 @@ directions on the boundary need a qualification discussed below.
 This page assumes the Miller notation from [Miller Indices](CrystalDirections_py.html) and
 the equivalent-direction families from [Operations](CrystalOperations_py.html). The sector
 is the domain of an [inverse pole figure](OrientationInversePoleFigure_py.html). It is also
-the region into which `project2FundamentalRegion` maps crystal directions.
+the region into which `projectIntoFundamentalRegion` maps crystal directions.
 
 ```python
 from mtex import *
@@ -42,7 +42,7 @@ corners = Miller([[0, 0, 1], [1, 0, 1], [1, 1, 1]], cs, 'uvw')
 plot(cs)
 hold(True)
 plot(cs.fundamentalSector(), color='red')
-plot(corners, labeled=True, MarkerFaceColor='white', backgroundColor='w')
+plot(corners, labeled=True, markerFaceColor='white', backgroundColor='w')
 hold(False)
 ```
 
@@ -106,11 +106,11 @@ False
 The false result means that $$(231)$$ is outside the chosen sector. It does not mean that
 its symmetry-equivalent family is absent.
 
-[project2FundamentalRegion](vector3d.project2FundamentalRegion.html) selects an
+[projectIntoFundamentalRegion](vector3d.project2FundamentalRegion.html) selects an
 equivalent representative inside the sector.
 
 ```python
-vFundamental = v.project2FundamentalRegion()
+vFundamental = v.projectIntoFundamentalRegion()
 vFundamental
 ```
 
@@ -129,7 +129,7 @@ family.
 ```python
 hold(True)
 plot(v)
-plot(vFundamental, MarkerFaceColor='red')
+plot(vFundamental, markerFaceColor='red')
 hold(False)
 ```
 

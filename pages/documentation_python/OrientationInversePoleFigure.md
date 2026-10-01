@@ -92,7 +92,7 @@ Plot the copies in the [fundamental sector](FundamentalSector_py.html), the part
 sphere that retains one representative from each equivalent family.
 
 ```python
-plot(hSym, fundamentalRegion=True, MarkerFaceColor='red')
+plot(hSym, fundamentalRegion=True, markerFaceColor='red')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationInversePoleFigure-5.png"></center>
@@ -103,11 +103,11 @@ orientations.
 
 ## The Shortcut
 
-[plotIPDF](orientation.plotIPDF.html) performs the inverse map, symmetrisation,
+[plotIPF](orientation.plotIPDF.html) performs the inverse map, symmetrisation,
 reduction, and projection for several specimen directions at once.
 
 ```python
-plotIPDF(ori, [vector3d.X, vector3d.Y, vector3d.Z])
+plotIPF(ori, [vector3d.X, vector3d.Y, vector3d.Z])
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationInversePoleFigure-6.png"></center>
@@ -140,7 +140,7 @@ populationSize
 ---
 
 ```python
-plotIPDF(oriPopulation, [vector3d.X, vector3d.Y, vector3d.Z], contourf=True)
+plotIPF(oriPopulation, [vector3d.X, vector3d.Y, vector3d.Z], contourf=True)
 mtexColorbar()
 ```
 
@@ -154,11 +154,11 @@ in [Inverse Pole Figures of an ODF](ODFInversePoleFigure_py.html).
 
 ## Seeing the Symmetry Copies
 
-By default `plotIPDF` draws only the fundamental sector. The option `complete` ignores
+By default `plotIPF` draws only the fundamental sector. The option `complete` ignores
 that reduction, while `upper` restricts the result to the upper hemisphere.
 
 ```python
-plotIPDF(oriPopulation, r, contourf=True, complete=True, upper=True)
+plotIPF(oriPopulation, r, contourf=True, complete=True, upper=True)
 mtexColorbar()
 ```
 
@@ -174,7 +174,7 @@ Use it only when the measurement or model cannot distinguish a crystal direction
 its opposite. This is a modelling choice, not another operation of point group 321. See
 [Axes and Antipodal Symmetry](VectorsAxes_py.html).
 
-If an orientation carries a nontrivial specimen symmetry, `plotIPDF` also applies it to
+If an orientation carries a nontrivial specimen symmetry, `plotIPF` also applies it to
 the fixed specimen direction. Crystal symmetry acts after the inverse map in the crystal
 frame. Specimen symmetry acts before it in the specimen frame. See
 [Specimen Symmetry](SpecimenSymmetry_py.html).
@@ -191,7 +191,7 @@ themselves prove equal orientations.
 Let $$\mathbf{O}$$ map crystal coordinates into specimen coordinates. Let $$\mathbf{C}$$ be
 a crystal-symmetry operation, $$\mathbf{P}$$ a specimen-symmetry operation, and
 $$\mathbf{r}$$ the fixed specimen direction. Every crystal direction represented by
-`plotIPDF` has the form
+`plotIPF` has the form
 
 $$ \mathbf{h} = \mathbf{C}\,\mathbf{O}^{-1}\mathbf{P}\,\mathbf{r},
    \qquad \mathbf{C} \in \mathrm{S}_{\mathrm{c}}, \quad

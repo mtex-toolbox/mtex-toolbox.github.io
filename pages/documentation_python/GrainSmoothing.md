@@ -61,9 +61,9 @@ stages are not cosmetic. Smoothing a staircase directly only makes a finer stair
 The measured boundary is grey below, and the result is magenta.
 
 ```python
-plot(grains.boundary, lineWidth=4, lineColor='LightGray', DisplayName='measured', micronbar='off', region=[313, 353, 140, 156])
+plot(grains.boundary, lineWidth=4, lineColor='LightGray', displayName='measured', micronbar='off', region=[313, 353, 140, 156])
 hold(True)
-plot(grainsSmooth.boundary, lineWidth=2, lineColor='Fuchsia', DisplayName='smoothed')
+plot(grainsSmooth.boundary, lineWidth=2, lineColor='Fuchsia', displayName='smoothed')
 hold(False)
 legend()
 ```
@@ -125,10 +125,10 @@ boundary sampling changes. See the warning about shrinkage below before increasi
 iterations = [1, 5, 10, 25]
 color = plt.get_cmap('copper')(np.linspace(0, 1, len(iterations) + 1))
 
-plot(grains.boundary, lineWidth=1, lineColor='LightGray', DisplayName='measured', micronbar='off', region=[313, 353, 140, 156])
+plot(grains.boundary, lineWidth=1, lineColor='LightGray', displayName='measured', micronbar='off', region=[313, 353, 140, 156])
 for i, n in enumerate(iterations):
   hold(True)
-  plot(smoothBoundary(grains, n).boundary['indexed'], lineWidth=2, lineColor=color[i], DisplayName=f'{n} iterations')
+  plot(smoothBoundary(grains, n).boundary['indexed'], lineWidth=2, lineColor=color[i], displayName=f'{n} iterations')
 hold(False)
 legend()
 ```
@@ -191,11 +191,11 @@ A = grains.area
 gid = int(np.argmin(np.abs(A - 30)))
 c = grains[gid].centroid
 
-plot(grains[gid].boundary, lineWidth=4, lineColor='LightGray', DisplayName='measured', micronbar='off',
+plot(grains[gid].boundary, lineWidth=4, lineColor='LightGray', displayName='measured', micronbar='off',
      region=[c.x[0] - 6, c.x[0] + 6, c.y[0] - 6, c.y[0] + 6])
 hold(True)
-plot(grainsLaplace[gid].boundary, lineWidth=2.5, lineColor='Fuchsia', DisplayName='Laplace, 25 iterations')
-plot(grainsTaubin[gid].boundary, lineWidth=2.5, lineColor='DodgerBlue', DisplayName='Taubin, 25 iterations')
+plot(grainsLaplace[gid].boundary, lineWidth=2.5, lineColor='Fuchsia', displayName='Laplace, 25 iterations')
+plot(grainsTaubin[gid].boundary, lineWidth=2.5, lineColor='DodgerBlue', displayName='Taubin, 25 iterations')
 hold(False)
 legend()
 ```
@@ -216,9 +216,9 @@ has the same meaning for scans made at different step sizes.
 F = curvatureFilter()
 F.smoothingLength = 4   # in the units of the map, here um
 
-plot(grains.boundary, lineWidth=4, lineColor='LightGray', DisplayName='measured', micronbar='off', region=[313, 353, 140, 156])
+plot(grains.boundary, lineWidth=4, lineColor='LightGray', displayName='measured', micronbar='off', region=[313, 353, 140, 156])
 hold(True)
-plot(smoothBoundary(grains, F).boundary, lineWidth=2.5, lineColor='Orange', DisplayName='curvatureFilter, 4 um')
+plot(smoothBoundary(grains, F).boundary, lineWidth=2.5, lineColor='Orange', displayName='curvatureFilter, 4 um')
 hold(False)
 legend()
 ```
@@ -241,7 +241,7 @@ per segment, for example to look up the orientations on either side, switch both
 off.
 
 ```python
-grainsPlain = smoothBoundary(grains, 5, noSimplify=True, noRefine=True)
+grainsPlain = smoothBoundary(grains, 5, simplify=False, refine=False)
 
 print(f'boundary segments: {len(grains.boundary)} measured, {len(grainsSmooth.boundary)} after smoothing, '
       f'{len(grainsPlain.boundary)} with both steps off')

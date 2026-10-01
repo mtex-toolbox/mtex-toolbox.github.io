@@ -151,7 +151,7 @@ The first view places every component at its three Bunge Euler angles.
 
 ```python
 for i in range(len(components)):
-  plot(components[i], 'bunge', MarkerSize=10, MarkerColor=ind2color(i + 1), DisplayName=legendNames[i])
+  plot(components[i], 'bunge', markerSize=10, markerFaceColor=ind2color(i + 1), displayName=legendNames[i])
   hold(True)
 hold(False)
 legend(location='southoutside', numColumns=3)
@@ -171,7 +171,7 @@ components are usually recognized in an ODF. See
 
 ```python
 for i in range(len(components)):
-  plotSection(components[i], add2all=True, MarkerSize=10, MarkerColor=ind2color(i + 1), DisplayName=legendNames[i])
+  plotSection(components[i], add2all=True, markerSize=10, markerFaceColor=ind2color(i + 1), displayName=legendNames[i])
 
 legend(location='southeast')
 ```
@@ -190,7 +190,7 @@ cubic-orthorhombic symmetry pair. See
 
 ```python
 for i in range(len(components)):
-  plot(components[i], 'axisAngle', MarkerSize=10, MarkerColor=ind2color(i + 1), DisplayName=legendNames[i])
+  plot(components[i], 'axisAngle', markerSize=10, markerFaceColor=ind2color(i + 1), displayName=legendNames[i])
   hold(True)
 hold(False)
 legend(location='southoutside', numColumns=3)
@@ -213,7 +213,7 @@ h = Miller([[1, 0, 0], [1, 1, 0], [1, 1, 1], [3, 1, 1]], cs)
 
 ```python
 for i in range(len(components)):
-  plotPDF(components[i], h, MarkerSize=10, MarkerColor=ind2color(i + 1), DisplayName=legendNames[i])
+  plotPF(components[i], h, markerSize=10, markerFaceColor=ind2color(i + 1), displayName=legendNames[i])
   hold(True)
 hold(False)
 legend(location='northeast', numColumns=2)
@@ -235,7 +235,7 @@ r = cat(vector3d.X, vector3d.Y, vector3d.Z)
 
 ```python
 for i in range(len(components)):
-  plotIPDF(components[i], r, MarkerSize=(12 - i - 1) ** 1.5, MarkerColor=ind2color(i + 1), DisplayName=legendNames[i])
+  plotIPF(components[i], r, markerSize=(12 - i - 1) ** 1.5, markerFaceColor=ind2color(i + 1), displayName=legendNames[i])
   hold(True)
 hold(False)
 legend(location='northeast', numColumns=2)
@@ -271,9 +271,9 @@ SO3FunRBF (m3̅m → TD←RD↑)
 ```
 
 ```python
-plotPDF(odf, h)
+plotPF(odf, h)
 hold(True)
-plotPDF(odf, h, contour=True, lineColor='k', lineWidth=2)
+plotPF(odf, h, contour=True, lineColor='k', lineWidth=2)
 hold(False)
 ```
 
@@ -288,9 +288,9 @@ not a $$15^\circ$$ uniform band.
 The same spread appears around the Cube directions in the inverse pole figures.
 
 ```python
-plotIPDF(odf, r)
+plotIPF(odf, r)
 hold(True)
-plotIPDF(odf, r, contour=True, lineColor='k', lineWidth=2)
+plotIPF(odf, r, contour=True, lineColor='k', lineWidth=2)
 hold(False)
 ```
 
@@ -310,7 +310,7 @@ hold(True)
 plotSection(odf, contour=True, lineColor='k', lineWidth=2)
 
 for i in range(len(components)):
-  plotSection(components[i], MarkerSize=10, filled=True, MarkerColor=ind2color(i + 1), DisplayName=legendNames[i])
+  plotSection(components[i], markerSize=10, filled=True, markerFaceColor=ind2color(i + 1), displayName=legendNames[i])
 
 hold(False)
 ```

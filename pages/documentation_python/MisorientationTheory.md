@@ -40,7 +40,7 @@ The example is an EBSD map of magnesium containing extension twins. The map firs
 be divided into [grains](GrainReconstruction_py.html).
 
 ```python
-ebsd = mtexdata('twins', silent=True)
+ebsd = mtexdata('twins', verbose=False)
 
 # use only proper symmetry operations, which are rotations
 ebsd['M'].CS = ebsd['M'].CS.properGroup()
@@ -59,7 +59,7 @@ MATLAB, where these two are grains 57 and 58.
 plot(grains, grains.meanOrientation, ipfDirection=zvector, micronbar='off')
 
 hold(True)
-plot(grains[[42, 46]].boundary, edgecolor='w', linewidth=2)
+plot(grains[[42, 46]].boundary, edgeColor='w', lineWidth=2)
 hold(False)
 
 text(grains[[42, 46]], ['1', '2'])
@@ -105,8 +105,8 @@ Every symmetry-aware comparison therefore returns the same value. If symmetry is
 the same representatives span many rotation angles.
 
 ```python
-rawAngleRange = np.hstack([np.min(angle(ori1, ori2Equivalent, noSymmetry=True)),
-                          np.max(angle(ori1, ori2Equivalent, noSymmetry=True))]) / degree
+rawAngleRange = np.hstack([np.min(angle(ori1, ori2Equivalent, symmetry=False)),
+                          np.max(angle(ori1, ori2Equivalent, symmetry=False))]) / degree
 rawAngleRange
 ```
 
@@ -136,7 +136,7 @@ The displayed object is one representative of all equivalent rotations. Its raw 
 not necessarily the disorientation angle.
 
 ```python
-rawRepresentativeAngle = angle(mori, noSymmetry=True) / degree
+rawRepresentativeAngle = angle(mori, symmetry=False) / degree
 rawRepresentativeAngle
 ```
 
@@ -144,12 +144,12 @@ rawRepresentativeAngle
 array([107.9164])
 ```
 
-[project2FundamentalRegion](orientation.project2FundamentalRegion.html) chooses the
+[projectIntoFundamentalRegion](orientation.project2FundamentalRegion.html) chooses the
 representative in the fundamental region, where each physical relationship appears once.
 
 ```python
-disori = project2FundamentalRegion(mori)
-fundamentalRegionAngle = angle(disori, noSymmetry=True) / degree
+disori = projectIntoFundamentalRegion(mori)
+fundamentalRegionAngle = angle(disori, symmetry=False) / degree
 fundamentalRegionAngle
 ```
 
@@ -196,16 +196,16 @@ m = Miller([[1, -1, 0, 0], [1, 1, -2, 0], [-1, 0, 1, 1], [0, 0, 0, 1]], CS)
 
 # plot the major planes of grain 2 in the frame of grain 1
 for im in range(len(m)):
-  plot(mori * m[im].symmetrise(), MarkerSize=10, DisplayName=m[im].char('LaTex'), noLabel=True, upper=True,
+  plot(mori * m[im].symmetrise(), markerSize=10, displayName=m[im].char('LaTex'), axisLabels=False, upper=True,
        textBelowMarker=True)
   hold(True)
 hold(False)
 
 # label the corresponding planes of grain 1
-mm = round(unique(mori * m.symmetrise(), noSymmetry=True), maxHKL=6)
-annotate(mm, labeled=True, MarkerSize=5, textBelowMarker=True)
+mm = round(unique(mori * m.symmetrise(), symmetry=False), maxHKL=6)
+annotate(mm, labeled=True, markerSize=5, textBelowMarker=True)
 
-legend(location='southoutside', FontSize=13, numColumns=4)
+legend(location='southoutside', fontSize=13, numColumns=4)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/MisorientationTheory-13.png"></center>
@@ -284,15 +284,15 @@ extension-twin relationship.
 ```python
 # plot the approximation in place of the measured misorientation
 for im in range(len(m)):
-  plot(coincidenceMori * m[im].symmetrise(), MarkerSize=10, DisplayName=m[im].char('LaTex'), noLabel=True, upper=True)
+  plot(coincidenceMori * m[im].symmetrise(), markerSize=10, displayName=m[im].char('LaTex'), axisLabels=False, upper=True)
   hold(True)
 hold(False)
 
 # label the corresponding planes in the other crystal
-mm = round(unique(coincidenceMori * m.symmetrise(), noSymmetry=True), maxHKL=6)
-annotate(mm, labeled=True, MarkerSize=5)
+mm = round(unique(coincidenceMori * m.symmetrise(), symmetry=False), maxHKL=6)
+annotate(mm, labeled=True, markerSize=5)
 
-legend(location='southoutside', FontSize=13, numColumns=4)
+legend(location='southoutside', fontSize=13, numColumns=4)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/MisorientationTheory-19.png"></center>
@@ -378,7 +378,7 @@ isTwinning = angle(gB.misorientation, twinning) < 5 * degree
 # plot the grains and highlight candidate twin boundaries
 plot(grains, grains.meanOrientation, ipfDirection=zvector, micronbar='off')
 hold(True)
-plot(gB[isTwinning], edgecolor='w', linewidth=2)
+plot(gB[isTwinning], edgeColor='w', lineWidth=2)
 hold(False)
 ```
 
@@ -505,7 +505,7 @@ parent grain may therefore contain several child orientations related by the sam
 parent-to-child relationship.
 
 ```python
-plotPDF(childVariants, Miller([[1, 0, -1, 0], [1, 1, -2, 0], [0, 0, 0, 1]], CS_Hem))
+plotPF(childVariants, Miller([[1, 0, -1, 0], [1, 1, -2, 0], [0, 0, 0, 1]], CS_Hem))
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/MisorientationTheory-34.png"></center>

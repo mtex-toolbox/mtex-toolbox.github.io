@@ -45,7 +45,7 @@ sF
 
 ```text
 S2FunHarmonic
-  bandwidth: 250
+  bandwidth: 128
   mean     : 0.07417
 ```
 
@@ -126,12 +126,12 @@ unlabelled contours still show their shapes without adding more text.
 
 The same method applies to real pole figures. A multi-axis plotting command
 returns several contour handles, so there is no single handle to pass to
-`clabel`. `ShowText='on'` labels the drawn levels on every axis without
+`clabel`. `showText='on'` labels the drawn levels on every axis without
 requiring a loop over those handles.
 
 ```python
 pf = mtexdata('dubna')
-odf = calcODF(pf, silent=True)
+odf = calcODF(pf, verbose=False)
 
 pf
 ```
@@ -178,12 +178,12 @@ SO3FunRBF (Quartz → y↑→x)
 
 ```python
 h = pf[3:5].h
-plotPDF(odf, h)
+plotPF(odf, h)
 mtexColorMap('LaboTeX')
 mtexColorbar()
 
 hold(True)
-plotPDF(odf, h, contour=np.arange(1, 16, 2), lineColor='black', lineWidth=2, ShowText='on')
+plotPF(odf, h, contour=np.arange(1, 16, 2), lineColor='black', lineWidth=2, showText='on')
 hold(False)
 ```
 

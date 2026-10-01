@@ -321,7 +321,7 @@ angle(rot, rotFit) / degree
 ```
 
 ```text
-2.3199
+1.5408
 ```
 
 The nonzero error comes from the added perturbations. By default, `rotation.fit` uses

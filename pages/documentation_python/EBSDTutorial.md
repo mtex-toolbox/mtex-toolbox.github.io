@@ -126,7 +126,7 @@ orientation (Forsterite → y↓→x)
   size: 152345
   Bunge Euler angles in degree
   phi1   Phi  phi2
-  95.3  42.4   294
+  95.3  42.3   294
   95.6  42.3   293
   95.4  42.4   294
   95.6  42.2   293
@@ -255,7 +255,7 @@ shape is idealized and its linear scale follows the square root of grain area. S
 
 A [pole figure](OrientationPoleFigure_py.html) asks where a chosen crystal direction points
 in the specimen for every measured orientation. The command is
-[plotPDF](orientation.plotPDF.html). Here the three crystallographic axes are plotted as
+[plotPF](orientation.plotPDF.html). Here the three crystallographic axes are plotted as
 filled density contours.
 
 ```python
@@ -263,7 +263,7 @@ filled density contours.
 h = Miller([1, 0, 0], [0, 1, 0], [0, 0, 1], ebsd['Forsterite'].CS)
 
 # plot their specimen-direction distributions
-plotPDF(ebsd['Forsterite'].orientations, h, 'contourf')
+plotPF(ebsd['Forsterite'].orientations, h, 'contourf')
 mtexColorbar()
 ```
 
@@ -282,14 +282,14 @@ represent the specimen.
 
 An [inverse pole figure](OrientationInversePoleFigure_py.html) asks the complementary
 question: which crystal direction points along a chosen specimen direction? The command
-is [plotIPDF](orientation.plotIPDF.html).
+is [plotIPF](orientation.plotIPDF.html).
 
 ```python
 # select the specimen axes
 r = vector3d.cat(vector3d.X, vector3d.Y, vector3d.Z)
 
 # plot their crystal-direction distributions
-plotIPDF(ebsd['Forsterite'].orientations, r, 'contourf')
+plotIPF(ebsd['Forsterite'].orientations, r, 'contourf')
 mtexColorbar()
 ```
 

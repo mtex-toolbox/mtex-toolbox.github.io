@@ -56,7 +56,7 @@ model_odf = (0.5 * uniformODF(cs)
              + 0.05 * fibreODF(Miller(0, 0, 1, cs), zvector, halfwidth=10 * degree)
              + 0.05 * unimodalODF(mod1, halfwidth=15 * degree)
              + 0.3 * unimodalODF(mod2, halfwidth=25 * degree))
-plot(model_odf, sections=6, silent=True)
+plot(model_odf, sections=6, verbose=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ODFExport-4.png"></center>
@@ -203,8 +203,8 @@ texture exported by MTEX
 
 
 B 5000
- 357.16   89.09  128.03   0.0002000
- 338.10   70.37   66.58   0.0002000
+ 281.04   54.74  114.56   0.0002000
+ 270.02   31.95  289.31   0.0002000
 ```
 
 The `points` option controls the number of orientations and defaults to 10000. More
@@ -255,7 +255,7 @@ than an ODF.
 
 MATLAB's `.mat` working copy is Python's `pickle`; a pickled frame comes back as the
 session's own handle, so the loaded function lives in the same frames as the original.
-The three writers are `exportODF_generic`, `exportODF_mtex` and `exportODF_VPSC` in
-`mtex/io/exportodf.py`, chosen by the flag or the `interface` keyword. The VPSC sample
+The three writers, `'generic'`, `'mtex'` and `'VPSC'`, are in `mtex/io/exportodf.py`,
+chosen by the flag or the `interface` keyword. The VPSC sample
 is a random draw, so its rows differ from MATLAB's.
 {% endraw %}

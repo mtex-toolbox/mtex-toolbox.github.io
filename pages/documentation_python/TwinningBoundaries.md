@@ -107,7 +107,7 @@ grainBoundary (y↑→x)
 Colour each segment by its disorientation angle.
 
 ```python
-plot(gB_MgMg, gB_MgMg.misorientation.angle() / degree, linewidth=2)
+plot(gB_MgMg, gB_MgMg.misorientation.angle() / degree, lineWidth=2)
 mtexColorbar(title='misorientation angle in degree')
 ```
 
@@ -281,7 +281,7 @@ They account for about half of the total trace length.
 ```python
 plot(grains, grainColor)
 hold(True)
-plot(twinBoundary, linecolor='w', linewidth=4, displayName='candidate twin boundary')
+plot(twinBoundary, lineColor='w', lineWidth=4, displayName='candidate twin boundary')
 hold(False)
 ```
 

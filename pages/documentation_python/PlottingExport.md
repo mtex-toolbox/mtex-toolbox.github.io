@@ -128,7 +128,7 @@ figure. Three pole figures at `'normal'` therefore give three panels the
 size of a single normal-sized plot.
 
 ```python
-plotPDF(ebsdF.orientations, Miller([[1, 0, 0], [0, 1, 0], [0, 0, 1]], ebsdF.CS), contourf=True, figSize='normal')
+plotPF(ebsdF.orientations, Miller([[1, 0, 0], [0, 1, 0], [0, 0, 1]], ebsdF.CS), contourf=True, figSize='normal')
 mtexColorbar()
 ```
 

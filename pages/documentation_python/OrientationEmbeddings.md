@@ -47,8 +47,8 @@ from mtex import *
 cs = crystalFrame('432')
 
 # select representatives in the fundamental region
-ori1 = project2FundamentalRegion(orientation.rand(20000, cs))
-ori2 = project2FundamentalRegion(orientation.rand(20000, cs))
+ori1 = projectIntoFundamentalRegion(orientation.rand(20000, cs))
+ori2 = projectIntoFundamentalRegion(orientation.rand(20000, cs))
 
 # intrinsic misorientation angle in degrees
 omega = angle(ori1, ori2) / degree
@@ -89,7 +89,7 @@ orientations with Bunge Euler angles $$(44^{\circ},0^{\circ},0^{\circ})$$ and
 $$(46^{\circ},0^{\circ},0^{\circ})$$.
 
 ```python
-ori = project2FundamentalRegion(orientation.byEuler(np.array([44, 46]) * degree, 0, 0, cs))
+ori = projectIntoFundamentalRegion(orientation.byEuler(np.array([44, 46]) * degree, 0, 0, cs))
 
 # average the selected Rodrigues representatives
 naiveMean = orientation.byRodrigues(mean(ori.Rodrigues()), cs)
@@ -280,6 +280,35 @@ for k in range(1, 601, 2):
 n, sigma = np.array(n), np.array(sigma)
 plt.scatter(sigma, np.sqrt(np.maximum(0, 1 - n)), 12)
 plt.legend(['de la Vallee Poussin', 'Bingham'], loc='best')
+```
+
+```text
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+⋮
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
+Warning: overflow encountered in dot
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationEmbeddings-10.png"></center>

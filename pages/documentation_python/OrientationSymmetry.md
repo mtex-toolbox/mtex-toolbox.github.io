@@ -181,14 +181,14 @@ h = Miller(1, 0, 0, cs)
 ```
 
 ```python
-plotPDF(ori, h, complete=True, MarkerSize=10, figSize='small')
+plotPF(ori, h, complete=True, markerSize=10, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationSymmetry-14.png"></center>
 
 Notice six poles in each hemisphere. The sixfold crystal symmetry creates the
 crystallographically equivalent direction family, and the twofold specimen symmetry
-repeats that family in the specimen frame. Without `complete=True`, `plotPDF` exploits
+repeats that family in the specimen frame. Without `complete=True`, `plotPF` exploits
 both antipodal equivalence and specimen symmetry and shows only the non-redundant part
 of this example.
 
@@ -242,7 +242,7 @@ Switching symmetry off compares the stored rotations directly. It gives six diff
 angles, whose minimum is the repeated value above.
 
 ```python
-rawAngles = angle(probe, referenceEquivalents, noSymmetry=True) / degree
+rawAngles = angle(probe, referenceEquivalents, symmetry=False) / degree
 rawAngles
 ```
 
@@ -250,13 +250,13 @@ rawAngles
 array([ 55.3931,  28.9235,  75.3016, 132.464 , 169.2501, 111.1564])
 ```
 
-The `noSymmetry=True` flag is implemented by [angle](orientation.angle.html),
+The `symmetry=False` flag is implemented by [angle](orientation.angle.html),
 [dot](orientation.dot.html), and [unique](orientation.unique.html), among other
 orientation methods. Reach for it when an angle or dot product comes out smaller than
 expected. Leave it alone otherwise, because the symmetry-aware answer is normally the
 physically meaningful one.
 
-Do not pass `noSymmetry=True` to [calcCluster](orientation.calcCluster.html). That
+Do not pass `symmetry=False` to [calcCluster](orientation.calcCluster.html). That
 method does not define the flag, and an unknown option can be ignored silently.
 
 ## Technical Details

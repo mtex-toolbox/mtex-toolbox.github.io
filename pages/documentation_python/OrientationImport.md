@@ -75,7 +75,7 @@ itself. Here the $$(0001)$$ and $$(10\bar{1}0)$$ poles should show the texture c
 the imported orientations.
 
 ```python
-plotPDF(ori, Miller([[0, 0, 0, 1], [1, 0, -1, 0]], cs))
+plotPF(ori, Miller([[0, 0, 0, 1], [1, 0, -1, 0]], cs))
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationImport-3.png"></center>

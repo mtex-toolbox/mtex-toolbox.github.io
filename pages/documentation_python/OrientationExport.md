@@ -79,9 +79,9 @@ with open(fname) as f:
 
 ```text
    phi1     Phi     phi2
-219.957 121.963  1.21712
-216.125 118.576  347.037
-213.918  133.78  239.822
+229.091 145.904  354.754
+32.2262   52.53  3.78459
+19.6761 40.2484  149.101
 ```
 
 ## Other Conventions and Units
@@ -98,10 +98,10 @@ with open(fname) as f:
 ```
 
 ```text
-  alpha     beta    gamma
-2.26818  2.12866  1.59204
- 2.2013  2.06955  1.34455
-2.16278  2.33491  5.75647
+  alpha     beta     gamma
+ 2.4276  2.54651   1.47924
+5.27484 0.916822   1.63685
+ 5.0558 0.702467    4.1731
 ```
 
 The new header and values describe the same orientations in a different convention and
@@ -121,9 +121,9 @@ with open(fname) as f:
 ```
 
 ```text
-          a          b          c          d
-   0.170572    0.29003  -0.824968   -0.45411
-   0.102529   0.357133  -0.782061  -0.500323
+         a          b          c          d
+  0.109458   0.436545  -0.850576  -0.271971
+   0.85284   0.428963    0.10871   0.277193
 ```
 
 MTEX writes the scalar component first, in the order `a`, `b`, `c`, `d`. Other programs
@@ -149,8 +149,8 @@ with open(fname) as f:
 
 ```text
    phi1     Phi     phi2   angle weight
-219.957 121.963  1.21712 68.8296   0.01
-216.125 118.576  347.037 77.1006   0.01
+229.091 145.904  354.754 63.4513   0.01
+32.2262   52.53  3.78459 62.9561   0.01
 ```
 
 The preview shows that `angle` and `weight` remain aligned with the Euler angles on each
@@ -158,7 +158,7 @@ row.
 
 ## The VPSC Format
 
-[export_VPSC](orientation.export_VPSC.html) writes individual orientations in the
+[export](orientation.export_VPSC.html) with `interface='VPSC'` writes individual orientations in the
 texture format expected by the VPSC crystal plasticity code. It writes three Euler
 angles and one relative volume fraction per row.
 
@@ -168,7 +168,7 @@ format regardless of the session preference. The fourth header line records `B`,
 
 ```python
 fnameVPSC = os.path.join(tempfile.gettempdir(), 'orientations_vpsc.txt')
-export_VPSC(ori, fnameVPSC)
+export(ori, fnameVPSC, interface='VPSC')
 with open(fnameVPSC) as f:
   for k in range(6):
     print(f.readline(), end='')
@@ -179,8 +179,8 @@ texture exported by MTEX
 
 
 B 100
- 219.96  121.96    1.22   0.0100000
- 216.13  118.58  347.04   0.0100000
+ 229.09  145.90  354.75   0.0100000
+  32.23   52.53    3.78   0.0100000
 ```
 
 The line `B 100` identifies Bunge angles and the 100 orientations. The following rows
@@ -194,7 +194,7 @@ sum. MTEX divides the supplied values by their sum before writing them.
 
 ```python
 weights = np.arange(1, numOrientations + 1).reshape(ori.shape)
-export_VPSC(ori, fnameVPSC, weights=weights)
+export(ori, fnameVPSC, interface='VPSC', weights=weights)
 with open(fnameVPSC) as f:
   for k in range(6):
     print(f.readline(), end='')
@@ -209,8 +209,8 @@ texture exported by MTEX
 
 
 B 100
- 219.96  121.96    1.22   0.0001980
- 216.13  118.58  347.04   0.0003960
+ 229.09  145.90  354.75   0.0001980
+  32.23   52.53    3.78   0.0003960
 1.0000
 ```
 

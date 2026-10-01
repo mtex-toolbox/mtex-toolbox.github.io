@@ -113,14 +113,13 @@ odfMax
 ```
 
 ```text
-Warning: future versions will not create a writeable array from broadcast_array. Set the writable flag explicitly to avoid this warning.
 15.9612
 ```
 
 ---
 
 ```python
-plotPDF(odf1, cat(Miller(1, 0, 0, cs), Miller(1, 1, 0, cs)), antipodal=True, colorRange='equal')
+plotPF(odf1, cat(Miller(1, 0, 0, cs), Miller(1, 1, 0, cs)), antipodal=True, colorRange='equal')
 mtexColorbar(title='mrd')
 ```
 
@@ -170,7 +169,7 @@ coefficients still describe the fractions assigned to the two terms. They are no
 volumes of disjoint regions drawn around the maxima.
 
 ```python
-plotPDF(odf, cat(Miller(1, 0, 0, cs), Miller(1, 1, 0, cs)), antipodal=True, colorRange='equal')
+plotPF(odf, cat(Miller(1, 0, 0, cs), Miller(1, 1, 0, cs)), antipodal=True, colorRange='equal')
 mtexColorbar(title='mrd')
 ```
 
@@ -189,7 +188,7 @@ default, the rotation acts on the specimen side of every component orientation.
 ```python
 odfRot = rotate(odf, rotation.byAxisAngle(vector3d.Z, 30 * degree))
 
-plotPDF(odfRot, cat(Miller(1, 0, 0, cs), Miller(1, 1, 0, cs)), antipodal=True, colorRange='equal')
+plotPF(odfRot, cat(Miller(1, 0, 0, cs), Miller(1, 1, 0, cs)), antipodal=True, colorRange='equal')
 mtexColorbar(title='mrd')
 ```
 

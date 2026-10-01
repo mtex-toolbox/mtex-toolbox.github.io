@@ -100,11 +100,11 @@ mixture containing half uniform ODF both use the interval from 0 to 4 mrd.
 
 ```python
 plt.close('all')
-plotPDF(odf, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], colorRange=[0, 4], antipodal=True)
+plotPF(odf, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], colorRange=[0, 4], antipodal=True)
 mtexColorbar()
 
 odfMixed = 0.5 * odf + 0.5 * uniformODF(cs)
-plotPDF(odfMixed, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], colorRange=[0, 4], antipodal=True)
+plotPF(odfMixed, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], colorRange=[0, 4], antipodal=True)
 mtexColorbar()
 ```
 
@@ -125,7 +125,7 @@ contour plot. Reusing the levels makes separate contour plots comparable.
 
 ```python
 plt.close('all')
-plotPDF(odf, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], contourf=np.arange(0, 6), antipodal=True)
+plotPF(odf, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], contourf=np.arange(0, 6), antipodal=True)
 mtexColorbar()
 ```
 
@@ -156,7 +156,7 @@ across more colours. Its lower colour-range limit must be positive.
 
 ```python
 plt.close('all')
-plotPDF(odf, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], antipodal=True, logarithmic=True)
+plotPF(odf, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], antipodal=True, logarithmic=True)
 setColorRange([0.01, 12])
 mtexColorbar()
 ```
@@ -175,7 +175,7 @@ A colormap is the ordered set of colours assigned across the colour range.
 `white2black`, `blue2red`, and `LaboTeX` in addition to matplotlib's colormaps.
 
 ```python
-plotPDF(odf, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], antipodal=True)
+plotPF(odf, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], antipodal=True)
 mtexColorMap('white2black')
 mtexColorbar()
 ```

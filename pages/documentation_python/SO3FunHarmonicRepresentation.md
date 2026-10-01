@@ -79,7 +79,7 @@ explains why it is used.
 
 ```python
 pf = mtexdata('dubna')
-odf = calcODF(pf, resolution=5 * degree, zeroRange=True, silent=True)
+odf = calcODF(pf, resolution=5 * degree, zeroRange=True, verbose=False)
 ```
 
 Converting any `SO3Fun` to `SO3FunHarmonic` computes a finite harmonic approximation.
@@ -176,7 +176,7 @@ positive ODF can likewise create small negative undershoots, just as a truncated
 ordinary Fourier series can ring near a sharp edge.
 
 ```python
-plot(fExample, 'sigma', sections=6, silent=True)
+plot(fExample, 'sigma', sections=6, verbose=False)
 mtexColorbar(title='function value')
 ```
 
@@ -187,7 +187,7 @@ positive values, which is the visible consequence of choosing coefficients witho
 enforcing ODF positivity.
 
 ```python
-plotPDF(fExample, cat(Miller(1, 0, 0, cs), Miller(1, 1, 0, cs)), antipodal=True)
+plotPF(fExample, cat(Miller(1, 0, 0, cs), Miller(1, 1, 0, cs)), antipodal=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunHarmonicRepresentation-11.png"></center>
@@ -198,12 +198,12 @@ positivity, and normalization checks still apply in orientation space.
 
 ## Reading a Spectrum
 
-[plotSpektra](SO3Fun.plotSpektra.html) groups the coefficients by degree. At each degree
+[plotSpectrum](SO3Fun.plotSpektra.html) groups the coefficients by degree. At each degree
 it plots the square root of their summed squared magnitudes, not the individual
 coefficients.
 
 ```python
-plotSpektra(f, figSize='small')
+plotSpectrum(f, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunHarmonicRepresentation-12.png"></center>
@@ -244,7 +244,7 @@ maxApproximationError
 ```
 
 ```text
-1.0944
+1.2059
 ```
 
 The nonzero error is a truncation effect. The angle function has a cusp at `oriRef`
@@ -253,7 +253,7 @@ but not differentiable there, so its coefficients decay slowly and the finite cu
 felt away from the cusps as well.
 
 ```python
-plotSpektra(fAngleHarm, figSize='small')
+plotSpectrum(fAngleHarm, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunHarmonicRepresentation-16.png"></center>
@@ -295,7 +295,7 @@ function interface are collected in
 [Operations on Rotational Functions](SO3FunOperations_py.html). For the inverse problem
 that produced the measured ODF above, continue with
 [Reconstructing an ODF](PoleFigure2ODF_py.html). Approximation from scattered values,
-including regularization and overfitting, is covered in
+including regularisation and overfitting, is covered in
 [Harmonic Approximation from Discrete Data](HarmonicApproximationTheory_py.html). The next
 page in this chapter, [Importing an ODF](ODFImport_py.html), explains how MTEX
 reconstructs function objects from common file representations.

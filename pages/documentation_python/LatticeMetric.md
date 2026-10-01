@@ -134,7 +134,7 @@ The output is 223.5856 in the cube of the lattice-parameter unit. The defining d
 is seen directly in the matrix of pairwise dot products.
 
 ```python
-dot_outer(directBasis, reciprocalBasis)
+dot(directBasis, reciprocalBasis, outer=True)
 ```
 
 ```text
@@ -179,11 +179,11 @@ norm(m)
 
 The value 7.5563 is in the same units as `cs.abc`. Multiplying all indices by two leaves
 the geometric direction unchanged, up to numerical rounding, but doubles the vector
-length. The option `noSymmetry` compares the two vectors as written rather than
+length. The option `symmetry=False` compares the two vectors as written rather than
 searching their symmetry-equivalent directions.
 
 ```python
-angle(m, Miller(2, 0, 2, cs, 'uvw'), noSymmetry=True) / degree
+angle(m, Miller(2, 0, 2, cs, 'uvw'), symmetry=False) / degree
 ```
 
 ```text
@@ -260,7 +260,7 @@ $$G=A^{\mathrm T}A,\qquad G_{ij}=\vec a_i\mathbin{\cdot}\vec a_j.$$
 MTEX obtains it directly from the basis vectors.
 
 ```python
-metricMatrix = dot_outer(directBasis, directBasis)
+metricMatrix = dot(directBasis, directBasis, outer=True)
 metricMatrix
 ```
 
@@ -320,6 +320,6 @@ explains how the lattice basis is embedded in a Cartesian crystal frame.
 
 `cs.axes` and `cs.axesDual` are three vectors in the crystal frame's Cartesian
 coordinates, derived from the stored basis; `det(v)` of three vectors is the
-determinant of their matrix and `dot_outer` the matrix of pairwise products, as NumPy
+determinant of their matrix and `dot(..., outer=True)` the matrix of pairwise products, as NumPy
 arrays.
 {% endraw %}

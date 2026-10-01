@@ -105,7 +105,7 @@ seriesValue
 ```
 
 ```text
-(0.19953333233923354+0.035183110042075603j)
+(0.19953333233923354+0.0351831100420756j)
 ```
 
 The selected coefficient is row 3 and column 1 of the normalized matrix `W` above, `W[2,
@@ -128,7 +128,7 @@ comparisonError
 ```
 
 ```text
-0
+6.9389e-18
 ```
 
 ## Normalization

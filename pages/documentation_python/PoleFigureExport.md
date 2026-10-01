@@ -116,7 +116,7 @@ correspond to the physical sample.
 ## Read the data back
 
 The three columns are exactly those understood by
-[loadPoleFigure_generic](loadPoleFigure_generic.html). To reconstruct the object,
+the generic reader of [loadPoleFigure](loadPoleFigure_generic.html). To reconstruct the object,
 [PoleFigure.load](PoleFigure.load.html) also needs the Miller indices, crystal and
 specimen symmetries, and superposition coefficients that were not stored in the tables.
 

@@ -50,7 +50,7 @@ the axes.
 cs = crystalFrame('1')
 
 kappa = [100, 90, 80, 0]
-U = orientation.eye(cs)
+U = orientation.id(cs)
 
 odf = BinghamODF(kappa, U)
 odf
@@ -71,7 +71,7 @@ make the pole-density features anisotropic rather than round.
 
 ```python
 h = Miller([[0, 0, 1], [1, 0, 0], [1, 1, 1]], cs)
-plotPDF(odf, h, antipodal=True, silent=True, layout=[1, 3])
+plotPF(odf, h, antipodal=True, verbose=False, layout=[1, 3])
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/BinghamODFs-4.png"></center>
@@ -98,7 +98,7 @@ Start with a fibre ODF about a randomly chosen fibre.
 ```python
 odfTrue = fibreODF(fibre.rand(cs))
 
-plotPDF(odfTrue, h, antipodal=True, silent=True)
+plotPF(odfTrue, h, antipodal=True, verbose=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/BinghamODFs-6.png"></center>
@@ -111,7 +111,7 @@ Draw 2000 orientations from that ODF and add their pole points to all three pane
 
 ```python
 ori = discreteSample(odfTrue, 2000)
-plot(ori, add2all=True, MarkerEdgeColor='k', MarkerSize=5, MarkerFaceColor='none', MarkerEdgeAlpha=0.2)
+plot(ori, add2all=True, markerEdgeColor='k', markerSize=5, markerFaceColor='none', markerEdgeAlpha=0.2)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/BinghamODFs-7.png"></center>
@@ -128,14 +128,14 @@ odf
 
 ```text
 SO3FunBingham (1 → y↑→x)
-  kappa : [96.797 96.752  3.38   0.   ]
+  kappa : [96.355 96.335  4.379  0.   ]
   weight: 1
 ```
 
 ---
 
 ```python
-plotPDF(odf, h, antipodal=True, silent=True)
+plotPF(odf, h, antipodal=True, verbose=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/BinghamODFs-9.png"></center>
@@ -180,7 +180,7 @@ SO3FunBingham (321 → y↑→x)
 ```
 
 ```python
-plot(odf, 'sigma', sections=6, silent=True, contourf=True)
+plot(odf, 'sigma', sections=6, verbose=False, contourf=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/BinghamODFs-11.png"></center>
@@ -209,7 +209,7 @@ SO3FunBingham (321 → y↑→x)
 ---
 
 ```python
-plot(odf, 'sigma', sections=6, silent=True)
+plot(odf, 'sigma', sections=6, verbose=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/BinghamODFs-13.png"></center>
@@ -223,7 +223,7 @@ Three equal nonzero parameters give the spherical case. The omitted fourth value
 padded with zero, so this call uses `[10, 10, 10, 0]`.
 
 ```python
-odf = BinghamODF([10, 10, 10], quaternion.eye, cs)
+odf = BinghamODF([10, 10, 10], quaternion.id, cs)
 odf
 ```
 
@@ -236,7 +236,7 @@ SO3FunBingham (321 → y↑→x)
 ---
 
 ```python
-plot(odf, 'sigma', sections=6, silent=True)
+plot(odf, 'sigma', sections=6, verbose=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/BinghamODFs-15.png"></center>
@@ -257,7 +257,7 @@ Reconstruct the general example so the following output has deliberately unequal
 parameters.
 
 ```python
-odf = BinghamODF([100, 90, 80, 0], orientation.eye(cs))
+odf = BinghamODF([100, 90, 80, 0], orientation.id(cs))
 odf.axes
 ```
 

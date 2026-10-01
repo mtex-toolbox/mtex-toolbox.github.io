@@ -56,7 +56,7 @@ model_odf = 0.5 * uniformODF(cs) + \
   0.05 * unimodalODF(mod1, halfwidth=15 * degree) + \
   0.3 * unimodalODF(mod2, halfwidth=25 * degree)
 
-plot(model_odf, 'sigma', sections=6, silent=True, minmax=True)
+plot(model_odf, 'sigma', sections=6, verbose=False, minmax=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureSimulation-2.png"></center>
@@ -136,7 +136,7 @@ pole figure is estimated as part of that inversion.
 ```python
 odf = calcODF(pf)
 
-plot(odf, 'sigma', sections=6, silent=True, minmax=True)
+plot(odf, 'sigma', sections=6, verbose=False, minmax=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureSimulation-7.png"></center>
@@ -156,7 +156,7 @@ print(f'L1 reconstruction error: {modelError:.4f}')
 ```
 
 ```text
-L1 reconstruction error: 0.0808
+L1 reconstruction error: 0.0800
 ```
 
 The error is 8.3 percent of the volume. A real experiment has no known model ODF against
@@ -177,7 +177,7 @@ on. Each subset is reconstructed both without and with
 e = np.zeros((pf.numPF, 2))
 for i in range(pf.numPF):
 
-  odf = calcODF(pf[:i + 1], noGhostCorrection=True)
+  odf = calcODF(pf[:i + 1], ghostCorrection=False)
   e[i, 0] = calcError(odf, model_odf, resolution=2.5 * degree)
   odf = calcODF(pf[:i + 1])
   e[i, 1] = calcError(odf, model_odf, resolution=2.5 * degree)
@@ -189,13 +189,13 @@ for i in range(pf.numPF):
 
 ```text
 poleFigures  withoutGhostCorrection  withGhostCorrection
-          1                 0.3032               0.3004
-          2                 0.2484               0.2417
-          3                 0.1545               0.1400
-          4                 0.1280               0.1095
-          5                 0.1464               0.1300
-          6                 0.1164               0.0941
-          7                 0.1019               0.0807
+          1                 0.3029               0.2999
+          2                 0.2488               0.2419
+          3                 0.1517               0.1355
+          4                 0.1240               0.1081
+          5                 0.1456               0.1274
+          6                 0.1165               0.0925
+          7                 0.1019               0.0799
 ```
 
 ---

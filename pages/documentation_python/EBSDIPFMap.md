@@ -138,7 +138,7 @@ placed at the crystal direction parallel to the normal, and marker area is scale
 grain area.
 
 ```python
-plotIPDF(bigGrains['olivine'].meanOrientation, colors, vector3d.Z, MarkerSize=0.05 * bigGrains['olivine'].area, MarkerEdgeColor='k')
+plotIPF(bigGrains['olivine'].meanOrientation, colors, vector3d.Z, markerSize=0.05 * bigGrains['olivine'].area, markerEdgeColor='k')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDIPFMap-9.png"></center>

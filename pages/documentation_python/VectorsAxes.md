@@ -233,7 +233,7 @@ center = orientation.byEuler(20 * degree, 30 * degree, 0, 'ZYZ', CS)
 odf = unimodalODF(center)
 h = Miller(1, 2, 2, CS)
 
-plotPDF(odf, cat(h, -h))
+plotPF(odf, cat(h, -h))
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/VectorsAxes-16.png"></center>
@@ -242,7 +242,7 @@ The two pole figures have different intensity patterns. The ODF distinguishes th
 $$(122)$$ plane normal from its opposite for this non-Laue point group.
 
 ```python
-plotPDF(odf, h, antipodal=True)
+plotPF(odf, h, antipodal=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/VectorsAxes-17.png"></center>
@@ -257,7 +257,7 @@ An inverse pole figure fixes a specimen direction and displays crystal direction
 complementary view.
 
 ```python
-plotIPDF(odf, cat(vector3d.Y, -vector3d.Y), complete=True, noLabel=True)
+plotIPF(odf, cat(vector3d.Y, -vector3d.Y), complete=True, axisLabels=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/VectorsAxes-18.png"></center>
@@ -266,7 +266,7 @@ The complete inverse pole figures for Y and -Y differ. Without an antipodal assu
 reversing the specimen direction changes the question.
 
 ```python
-plotIPDF(odf, vector3d.Y, antipodal=True, complete=True, noLabel=True)
+plotIPF(odf, vector3d.Y, antipodal=True, complete=True, axisLabels=False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/VectorsAxes-19.png"></center>
@@ -281,7 +281,7 @@ Inverse pole figures are usually reduced to the
 crystal symmetry leaves inequivalent.
 
 ```python
-plotIPDF(odf, vector3d.Y)
+plotIPF(odf, vector3d.Y)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/VectorsAxes-20.png"></center>
@@ -290,7 +290,7 @@ Without antipodal symmetry, MTEX must retain the larger fundamental sector of po
 `321`.
 
 ```python
-plotIPDF(odf, vector3d.Y, antipodal=True)
+plotIPF(odf, vector3d.Y, antipodal=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/VectorsAxes-21.png"></center>

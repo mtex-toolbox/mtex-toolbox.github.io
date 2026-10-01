@@ -19,7 +19,7 @@ number of discrete objects must be distinguished, such as selected grains,
 boundary classes, or reference directions.
 
 In MTEX, legend entries are opt in. An object appears only when it is
-plotted with a `DisplayName`. This is the opposite of MATLAB's default
+plotted with a `displayName`. This is the opposite of MATLAB's default
 behaviour. It prevents markers, construction lines, and a colour-coded
 background from each acquiring an unhelpful entry.
 
@@ -31,12 +31,12 @@ names a point and a great circle. The pole at the centre remains unnamed.
 ```python
 from mtex import *
 
-plot(vector3d.X, upper=True, DisplayName='point')
+plot(vector3d.X, upper=True, displayName='point')
 hold(True)
 
-circle(vector3d.X, DisplayName='great circle', lineColor='r', lineWidth=2)
+circle(vector3d.X, displayName='great circle', lineColor='r', lineWidth=2)
 
-plot(vector3d.Z, Marker='p', MarkerSize=30)
+plot(vector3d.Z, marker='p', markerSize=30)
 hold(False)
 
 lgd = legend('show')
@@ -48,7 +48,7 @@ lgd = legend('show')
 
 The figure contains three plotted objects, but the legend has two entries.
 The central star is visible in the axes but absent from the legend because
-it has no `DisplayName`.
+it has no `displayName`.
 
 After MTEX has selected the entries, `legend` hands its options to matplotlib's
 [legend](https://matplotlib.org/stable/api/legend_api.html). Calling it again

@@ -72,10 +72,10 @@ Vectors, Miller indices and spherical grids use the same marker idea in a
 spherical projection. The marker is controlled by MATLAB's scatter property
 names, which the port translates to matplotlib:
 
-`Marker`, `MarkerSize`, `MarkerFaceColor`, `MarkerEdgeColor`
+`marker`, `markerSize`, `markerFaceColor`, `markerEdgeColor`
 
 ```python
-plot(zvector, Marker='p', MarkerSize=15, MarkerFaceColor='red', MarkerEdgeColor='black')
+plot(zvector, marker='p', markerSize=15, markerFaceColor='red', markerEdgeColor='black')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PlotTypes-5.png"></center>
@@ -88,7 +88,7 @@ A marker may carry a label, with the text properties
 `label`, `Color`, `BackgroundColor`, `FontSize`
 
 ```python
-plot(Miller([[1, 1, 1], [-1, 1, 1]], cs), label=['X', 'Y'], Color='blue', BackgroundColor='yellow', FontSize=20, grid=True)
+plot(Miller([[1, 1, 1], [-1, 1, 1]], cs), label=['X', 'Y'], color='blue', backgroundColor='yellow', fontSize=20, grid=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PlotTypes-6.png"></center>
@@ -118,7 +118,7 @@ can be given explicitly. Here they run from 0 to 4 in steps of 0.5
 multiples of a uniform orientation distribution:
 
 ```python
-plotPDF(odf, Miller(1, 0, 0, cs), contour=np.arange(0, 4.5, 0.5), antipodal=True)
+plotPF(odf, Miller(1, 0, 0, cs), contour=np.arange(0, 4.5, 0.5), antipodal=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PlotTypes-8.png"></center>
@@ -135,7 +135,7 @@ easy to scan, but they quantize the function: every value in one band gets
 the same colour, so a gentle gradient becomes a staircase.
 
 ```python
-plotPDF(odf, Miller(1, 0, 0, cs), contourf=True, antipodal=True)
+plotPF(odf, Miller(1, 0, 0, cs), contourf=True, antipodal=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PlotTypes-9.png"></center>
@@ -145,7 +145,7 @@ Its internal variation is hidden inside the filled bands.
 
 ## Smooth plots
 
-Smooth shading is the default when a function is plotted, as `plotPDF` does
+Smooth shading is the default when a function is plotted, as `plotPF` does
 for an ODF here. Measured `PoleFigure` data is drawn as a scatter instead,
 which is what the figure above shows. Smooth shading assigns a colour at
 every evaluation point, without contour boundaries.
@@ -153,7 +153,7 @@ every evaluation point, without contour boundaries.
 does not increase the resolution of measured data.
 
 ```python
-plotPDF(odf, Miller(1, 0, 0, cs), antipodal=True, resolution=10 * degree)
+plotPF(odf, Miller(1, 0, 0, cs), antipodal=True, resolution=10 * degree)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PlotTypes-10.png"></center>
@@ -175,7 +175,7 @@ line style options apply.
 ```python
 f = fibre(Miller(1, 0, 0, cs), xvector)
 
-plot(odf, f, linewidth=2, linestyle='-.', figSize='small')
+plot(odf, f, lineWidth=2, lineStyle='-.', figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PlotTypes-11.png"></center>

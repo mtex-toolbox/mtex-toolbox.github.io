@@ -88,9 +88,9 @@ their crystallographic spread.
 hC = Miller([[1, 1, 1], [1, 1, 0]], csC)
 hP = Miller([[1, 1, 0], [1, 0, 0]], csP)
 
-plotPDF(oriB, hC, MarkerSize=5, markerColor='black', figSize='medium')
+plotPF(oriB, hC, markerSize=5, markerFaceColor='black', figSize='medium')
 
-opt = dict(MarkerFaceColor='none', MarkerEdgeColor='darkred', lineWidth=3)
+opt = dict(markerFaceColor='none', markerEdgeColor='darkred', lineWidth=3)
 for k in (1, 2):
   nextAxis(k)
   hold(True)
@@ -115,7 +115,7 @@ random distribution (mrd). We place a 5-degree unimodal austenite ODF around `or
 odfA = unimodalODF(oriA, halfwidth=5 * degree)
 print(odfA)
 
-plotPDF(odfA, hP, figSize='medium')
+plotPF(odfA, hP, figSize='medium')
 mtexColorbar(title='mrd')
 ```
 
@@ -160,7 +160,7 @@ The 120,000 child orientations approximate the transformed texture.
 odfBSim = calcDensity(oriBSim, halfwidth=10 * degree)
 print(odfBSim)
 
-plotPDF(odfBSim, hC, 'contourf', figSize='medium')
+plotPF(odfBSim, hC, 'contourf', figSize='medium')
 mtexColorbar(title='mrd')
 ```
 
@@ -186,7 +186,7 @@ equal population of all child variants.
 odfB = variants(p2c, odfA)
 print(odfB)
 
-plotPDF(odfB, hC, 'contourf', figSize='medium')
+plotPF(odfB, hC, 'contourf', figSize='medium')
 mtexColorbar(title='mrd')
 ```
 
@@ -242,7 +242,7 @@ oriBSelected = variants(p2c, oriASim, selectedVariantId)
 odfBSelected = calcDensity(oriBSelected, halfwidth=10 * degree)
 print(odfBSelected)
 
-plotPDF(odfBSelected, hC, 'contourf', figSize='medium')
+plotPF(odfBSelected, hC, 'contourf', figSize='medium')
 mtexColorbar(title='mrd')
 ```
 

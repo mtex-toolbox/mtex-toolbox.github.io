@@ -35,7 +35,7 @@ from mtex import *
 plottingConvention.default('y↑→x')
 
 # load the magnesium example without displaying the full EBSD summary
-ebsd = mtexdata('twins', silent=True)
+ebsd = mtexdata('twins', verbose=False)
 
 # reconstruct grains using an explicit example threshold
 grains = calcGrains(ebsd, angle=15 * degree)
@@ -141,7 +141,7 @@ relationship. See [Grain Exchange Symmetry](MisorientationGrainExchangeSym_py.ht
 misorientationAngle = gB_MgMg.misorientation.angle() / degree
 
 # colour every selected segment by that angle
-plot(gB_MgMg, misorientationAngle, linewidth=2)
+plot(gB_MgMg, misorientationAngle, lineWidth=2)
 mtexColorbar(title='minimum misorientation angle (degree)')
 ```
 

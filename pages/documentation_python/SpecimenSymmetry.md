@@ -111,7 +111,7 @@ the comparison below, because a plot with nontrivial specimen symmetry otherwise
 to its specimen fundamental sector.
 
 ```python
-plotPDF(odf, Miller(1, 0, -1, 0, cs), contourf=True, complete=True, upper=True)
+plotPF(odf, Miller(1, 0, -1, 0, cs), contourf=True, complete=True, upper=True)
 mtexColorbar()
 ```
 
@@ -142,7 +142,7 @@ odf.SS = specimenFrame('mmm')
 ---
 
 ```python
-plotPDF(odf, Miller(1, 0, -1, 0, cs), contourf=True, complete=True, upper=True)
+plotPF(odf, Miller(1, 0, -1, 0, cs), contourf=True, complete=True, upper=True)
 mtexColorbar()
 ```
 

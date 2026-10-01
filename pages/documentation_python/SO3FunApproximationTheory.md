@@ -61,7 +61,7 @@ oscillations.
 
 Approximation finds a function that agrees reasonably well with the data. Interpolation is
 the special case in which it agrees exactly at the sample orientations. Noise, incomplete
-sampling, or regularization often makes approximation the more useful goal.
+sampling, or regularisation often makes approximation the more useful goal.
 
 [interp](rotation.interp.html) provides three approximation schemes:
 
@@ -81,7 +81,7 @@ useful, but it cannot by itself reveal oscillations or overfitting between them.
 
 The flag `'harmonic'` selects a harmonic expansion. Internally, `interp` calls
 [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate.html). The default fit includes
-regularization, which suppresses rapidly varying harmonic coefficients.
+regularisation, which suppresses rapidly varying harmonic coefficients.
 
 ```python
 SO3FReg = interp(ori, S['values'], 'harmonic')
@@ -114,14 +114,14 @@ plot(SO3FReg, 'sigma')
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunApproximationTheory-6.png"></center>
 
 Compare this plot with the discrete samples. The strongest regions remain in the same
-sections, while regularization rounds their peaks and prevents the fit from following
+sections, while regularisation rounds their peaks and prevents the fit from following
 every local variation.
 
-The default regularization parameter is $$\lambda=10^{-8}$$. Setting it to zero switches
-regularization off and asks the harmonic model to follow the samples more closely.
+The default regularisation parameter is $$\lambda=10^{-8}$$. Setting it to zero switches
+regularisation off and asks the harmonic model to follow the samples more closely.
 
 ```python
-SO3FUnreg = interp(ori, S['values'], 'harmonic', regularization=0)
+SO3FUnreg = interp(ori, S['values'], 'harmonic', regularisation=0)
 SO3FUnreg
 ```
 
@@ -154,13 +154,13 @@ A converged unregularized solution is free to make the residual much smaller, bu
 create narrow peaks and ripples between the samples. Do not interpret an unconverged
 residual as the optimum. Even after convergence, a smaller residual is not by itself
 evidence for a better model. The [next page](HarmonicApproximationTheory_py.html) explains
-how to choose regularization and check solver convergence.
+how to choose regularisation and check solver convergence.
 
-Reducing the harmonic bandwidth is another form of regularization. The bandwidth is the
+Reducing the harmonic bandwidth is another form of regularisation. The bandwidth is the
 largest harmonic degree retained by the series.
 
 ```python
-SO3FLow = interp(ori, S['values'], 'harmonic', regularization=0, bandwidth=16)
+SO3FLow = interp(ori, S['values'], 'harmonic', regularisation=0, bandwidth=16)
 SO3FLow
 ```
 
@@ -253,7 +253,7 @@ The peaks follow the high-valued sample regions, while the background remains
 nonnegative. The printed minimum and mean check the two density constraints directly. The
 residual can be larger than for an unconstrained fit because those constraints remove
 otherwise admissible solutions. If the iteration limit was reached, the coefficients may
-not yet be optimal. Adjust `maxit` or `tol` before making a quantitative comparison.
+not yet be optimal. Adjust `maxIter` or `tol` before making a quantitative comparison.
 
 The key smoothing parameter is the kernel halfwidth. A larger halfwidth blends information
 over a wider angular neighbourhood. A very small halfwidth can overfit the samples.
@@ -490,7 +490,7 @@ given.
 ## Next
 
 Continue with [Harmonic Interpolation](HarmonicApproximationTheory_py.html) to tune
-bandwidth, regularization, weights, and stopping criteria. Then use
+bandwidth, regularisation, weights, and stopping criteria. Then use
 [RBF-Kernel Interpolation](RBFApproximationTheory_py.html) to choose a kernel grid,
 halfwidth, density constraint, and least-squares solver.
 

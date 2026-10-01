@@ -87,7 +87,7 @@ the session-wide plotting convention, so the map, pole figures, and tensor
 plots below all use the same screen directions.
 
 ```python
-plotx2north()
+plottingConvention.default(north=xvector)
 plot(ebsd, refFrame=True)
 ```
 
@@ -273,10 +273,10 @@ stiffnessTensor (y←↑x)
   tensor in Voigt matrix representation
   241.8892    74.346   78.2438   0.7044   4.6701   -3.135
     74.346  210.3586   73.7002   3.5684  -0.5472  -1.8272
-   78.2438   73.7002  252.2108   6.4257   4.5987  -0.3055
+   78.2438   73.7002  252.2109   6.4257   4.5987  -0.3055
     0.7044    3.5684    6.4257  76.8438  -0.3922   1.6588
     4.6701   -0.5472    4.5987  -0.3922  84.8612   2.1661
-    -3.135   -1.8272   -0.3055   1.6588   2.1661  74.4988
+    -3.135   -1.8272   -0.3055   1.6588   2.1661  74.4987
 ```
 
 ```python

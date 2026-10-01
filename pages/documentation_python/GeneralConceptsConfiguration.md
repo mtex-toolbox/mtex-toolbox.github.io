@@ -39,7 +39,7 @@ getMTEXpref()
 ```
 
 ```text
-{'EulerAngleConvention': 'Bunge', 'UTF8Output': True, 'degreeChar': '°', 'FontSize': 13, 'markerSize': 10, 'stopOnSymmetryMissmatch': True, 'maxS1Bandwidth': 1024, 'maxS2Bandwidth': 512, 'maxSO3Bandwidth': 64, 'FFTAccuracy': 0.01, 'displayRows': 20}
+{'EulerAngleConvention': 'Bunge', 'UTF8Output': True, 'degreeChar': '°', 'FontSize': 13, 'markerSize': 10, 'stopOnSymmetryMissmatch': True, 'maxS1Bandwidth': 1024, 'maxS2Bandwidth': 512, 'maxSO3Bandwidth': 64, 'defaultS2Bandwidth': 128, 'defaultSO3Bandwidth': 64, 'FFTAccuracy': 0.01, 'displayRows': 20, 'hugePages': False}
 ```
 
 ## Change one preference temporarily
@@ -88,7 +88,10 @@ The preferences the port reads include:
 * `stopOnSymmetryMissmatch`, whether a symmetry mismatch stops with an error;
 * `kernels`, `threads`, `NUFFT` and `NFFTLibrary`, the compiled loops, the number of
   threads and the optional third-party transform used for the harmonic transforms;
-* `maxS2Bandwidth`, `maxSO3Bandwidth`, the largest harmonic degrees used by default.
+* `defaultS2Bandwidth`, `defaultSO3Bandwidth`, the harmonic degree a callable or values at
+  nodes are expanded to when no `bandwidth` is given;
+* `maxS2Bandwidth`, `maxSO3Bandwidth`, the largest degree of a result whose degree is known,
+  as the sum of the degrees in a product.
 
 ## Keep scripts reproducible
 

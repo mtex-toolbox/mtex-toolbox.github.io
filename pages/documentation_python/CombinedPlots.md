@@ -96,22 +96,22 @@ only their plotted description.
 ## The Same Data in Pole Figures
 
 Project the same comparison along two crystal directions. The second
-`plotPDF` does not repeat the `antipodal` flag. The existing axes already
+`plotPF` does not repeat the `antipodal` flag. The existing axes already
 define that symmetry. Added data must conform to those axes.
 
 ```python
 h = [Miller(0, 0, 0, 1, cs), Miller(1, 0, -1, 0, cs)]
-plotPDF(ori, h, antipodal=True, MarkerSize=4)
+plotPF(ori, h, antipodal=True, markerSize=4)
 hold(True)
-plotPDF(oriRotated, h, MarkerSize=4)
+plotPF(oriRotated, h, markerSize=4)
 hold(False)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/CombinedPlots-5.png"></center>
 
-Both pole-figure panels contain the two orientation sets. Here `plotPDF`
+Both pole-figure panels contain the two orientation sets. Here `plotPF`
 sees the two crystal directions. It adds the second set to both matching
-axes. That multi-axis behaviour belongs to `plotPDF`, not to `hold` itself.
+axes. That multi-axis behaviour belongs to `plotPF`, not to `hold` itself.
 
 ## Adding to Every Axis at Once
 
@@ -120,12 +120,12 @@ per crystal direction. The general way to add one data set to every MTEX
 axis is the `add2all` flag.
 
 ```python
-plotPDF(odf, h, antipodal=True, contourf=True, grid=True)
+plotPF(odf, h, antipodal=True, contourf=True, grid=True)
 mtexColorMap('white2black')
 
-plot(ori, DisplayName='original', MarkerSize=5, MarkerColor='b', MarkerEdgeColor='w', add2all=True)
+plot(ori, displayName='original', markerSize=5, markerFaceColor='b', markerEdgeColor='w', add2all=True)
 
-plot(oriRotated, DisplayName='rotated', MarkerSize=5, MarkerColor='r', MarkerEdgeColor='k', add2all=True)
+plot(oriRotated, displayName='rotated', markerSize=5, markerFaceColor='r', markerEdgeColor='k', add2all=True)
 
 legend('show', location='northeast')
 ```
@@ -143,8 +143,8 @@ axes, and every orientation belongs in the section closest to it.
 ```python
 plotSection(odf, 'sigma', sections=8, contourf=True)
 mtexColorMap('white2black')
-plot(ori, MarkerSize=6, MarkerColor='b', MarkerEdgeColor='w', add2all=True)
-plot(oriRotated, MarkerSize=6, MarkerColor='r', MarkerEdgeColor='k', add2all=True)
+plot(ori, markerSize=6, markerFaceColor='b', markerEdgeColor='w', add2all=True)
+plot(oriRotated, markerSize=6, markerFaceColor='r', markerEdgeColor='k', add2all=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/CombinedPlots-7.png"></center>
@@ -164,7 +164,7 @@ The `symmetrised` flag draws every symmetrically equivalent direction,
 while `labeled` writes the indices beside them.
 
 ```python
-plotIPDF(odf, xvector, noLabel=True)
+plotIPF(odf, xvector, axisLabels=False)
 mtexColorMap('white2black')
 
 hold(True)   # keep plot
@@ -195,7 +195,7 @@ pf = mtexdata('dubna')
 ---
 
 ```python
-odf = calcODF(pf, silent=True)
+odf = calcODF(pf, verbose=False)
 ```
 
 A measured, a recalculated, and a difference pole figure form the standard
@@ -215,7 +215,7 @@ plot(pf[0], parent=axesPos)
 axesPos = plt.subplot(1, 3, 2)
 
 # plot the recalculated pole figure at this position
-plotPDF(odf, pf.allH[0], antipodal=True, parent=axesPos)
+plotPF(odf, pf.allH[0], antipodal=True, parent=axesPos)
 
 # set position 3 in a 1x3 matrix as the current plotting position
 axesPos = plt.subplot(1, 3, 3)

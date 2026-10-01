@@ -93,10 +93,10 @@ cs_x2a = crystalFrame('321', [1.7, 1.7, 1.4], 'X||a', 'Z||c')
 
 ```python
 plot(cs_x2a)
-annotate(cs_x2a.aAxis, MarkerFaceColor='r', label='a', backgroundColor='w')
-annotate(cs_x2a.bAxis, MarkerFaceColor='r', label='b', backgroundColor='w')
-annotate(-vector3d.Y, MarkerFaceColor='green', label='-y', backgroundColor='w')
-annotate(-vector3d.X, MarkerFaceColor='green', label='-x', backgroundColor='w')
+annotate(cs_x2a.aAxis, markerFaceColor='r', label='a', backgroundColor='w')
+annotate(cs_x2a.bAxis, markerFaceColor='r', label='b', backgroundColor='w')
+annotate(-vector3d.Y, markerFaceColor='green', label='-y', backgroundColor='w')
+annotate(-vector3d.X, markerFaceColor='green', label='-x', backgroundColor='w')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/CrystalReferenceSystem-6.png"></center>
@@ -110,10 +110,10 @@ cs_y2a = crystalFrame('321', [1.7, 1.7, 1.4], 'Y||a', 'Z||c')
 
 ```python
 plot(cs_y2a)
-annotate(cs_y2a.aAxis, MarkerFaceColor='r', label='a', backgroundColor='w')
-annotate(cs_y2a.bAxis, MarkerFaceColor='r', label='b', backgroundColor='w')
-annotate(-vector3d.Y, MarkerFaceColor='green', label='-y', backgroundColor='w')
-annotate(-vector3d.X, MarkerFaceColor='green', label='-x', backgroundColor='w')
+annotate(cs_y2a.aAxis, markerFaceColor='r', label='a', backgroundColor='w')
+annotate(cs_y2a.bAxis, markerFaceColor='r', label='b', backgroundColor='w')
+annotate(-vector3d.Y, markerFaceColor='green', label='-y', backgroundColor='w')
+annotate(-vector3d.X, markerFaceColor='green', label='-x', backgroundColor='w')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/CrystalReferenceSystem-8.png"></center>
@@ -149,10 +149,10 @@ cs_y2a.how2plot.east = cs_y2a.bAxis
 
 ```python
 plot(cs_y2a)
-annotate(cs_y2a.aAxis, MarkerFaceColor='r', label='a', backgroundColor='w')
-annotate(cs_y2a.bAxis, MarkerFaceColor='r', label='b', backgroundColor='w')
-annotate(-vector3d.Y, MarkerFaceColor='green', label='-y', backgroundColor='w')
-annotate(-vector3d.X, MarkerFaceColor='green', label='-x', backgroundColor='w')
+annotate(cs_y2a.aAxis, markerFaceColor='r', label='a', backgroundColor='w')
+annotate(cs_y2a.bAxis, markerFaceColor='r', label='b', backgroundColor='w')
+annotate(-vector3d.Y, markerFaceColor='green', label='-y', backgroundColor='w')
+annotate(-vector3d.X, markerFaceColor='green', label='-x', backgroundColor='w')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/CrystalReferenceSystem-11.png"></center>
@@ -212,10 +212,10 @@ ori_y2a = orientation.byEuler(0, 0, 0, 'Bunge', cs_y2a)
 
 ```python
 newMtexFigure(innerPlotSpacing=20)
-plotPDF(ori_x2a, Miller(1, 0, 0, cs_x2a), MarkerSize=20)
+plotPF(ori_x2a, Miller(1, 0, 0, cs_x2a), markerSize=20)
 
 nextAxis()
-plotPDF(ori_y2a, Miller(1, 0, 0, cs_y2a), MarkerSize=20)
+plotPF(ori_y2a, Miller(1, 0, 0, cs_y2a), markerSize=20)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/CrystalReferenceSystem-17.png"></center>

@@ -308,7 +308,7 @@ plane, which is the $$xy$$ plane for the chosen $$z$$ pulling direction.
 
 ```python
 newMtexFigure()
-plotSection(nu, p, color='interp', linewidth=5)
+plotSection(nu, p, color='interp', lineWidth=5)
 plt.axis('off')
 mtexColorMap('blue2red')
 mtexColorbar(title="Poisson's ratio")
@@ -354,21 +354,21 @@ newMtexFigure(layout=[1, 3], figSize='large')
 
 hMiller = Miller(1, 0, 0, cs)
 h = hMiller.normalize()
-plotSection(C.shearModulus(h), h, color='interp', linewidth=5)
+plotSection(C.shearModulus(h), h, color='interp', lineWidth=5)
 mtexTitle(hMiller.char())
 plt.axis('off')
 
 nextAxis()
 hMiller = Miller(1, 1, 0, cs)
 h = hMiller.normalize()
-plotSection(C.shearModulus(h), h, color='interp', linewidth=5)
+plotSection(C.shearModulus(h), h, color='interp', lineWidth=5)
 mtexTitle(hMiller.char())
 plt.axis('off')
 
 nextAxis()
 hMiller = Miller(1, 1, 1, cs)
 h = hMiller.normalize()
-plotSection(C.shearModulus(h), h, color='interp', linewidth=5)
+plotSection(C.shearModulus(h), h, color='interp', lineWidth=5)
 mtexTitle(hMiller.char())
 plt.axis('off')
 

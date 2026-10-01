@@ -238,11 +238,11 @@ plot(sVF2, upper=True, resolution=15 * degree)
 Arrows are shortest near specimen Z and lengthen towards the equator. Their length shows
 the field magnitude, while their arrowhead shows the sense of each vector.
 
-[quiver3](S2VectorField.quiver3.html) attaches the same arrows to a three-dimensional
+[quiver3d](S2VectorField.quiver3.html) attaches the same arrows to a three-dimensional
 sphere.
 
 ```python
-quiver3(sVF2, resolution=15 * degree)
+quiver3d(sVF2, resolution=15 * degree)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/S2FunVectorField-18.png"></center>

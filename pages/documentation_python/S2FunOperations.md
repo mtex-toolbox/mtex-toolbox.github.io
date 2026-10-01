@@ -134,8 +134,8 @@ print(f'Global maximum: {maxValue:.3f}\nlocal minima  : {minValue[0]:.3f} and {m
 ```
 
 ```text
-Global maximum: 97.852
-local minima  : -7.470 and -7.470
+Global maximum: 97.850
+local minima  : -7.469 and -7.469
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/S2FunOperations-4.png"></center>
@@ -207,8 +207,8 @@ gradientAtX
 
 ```text
 vector3d (y↑→x)
-  x         y        z
-  0  1.88e-05  0.00016
+  x        y         z
+  0  -0.0005  -0.00118
 ```
 
 ---
@@ -219,7 +219,7 @@ gradientMagnitude
 ```
 
 ```text
-1.6123e-04
+0.0013
 ```
 
 The vector lies in the plane tangent to the sphere at X, so its X component is zero. Its
@@ -281,7 +281,7 @@ sFs
 
 ```text
 S2FunHarmonic (y↑→x)
-  bandwidth: 250
+  bandwidth: 128
   mean     : 0.006417
 ```
 

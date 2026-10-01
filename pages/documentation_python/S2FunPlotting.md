@@ -131,7 +131,7 @@ Peaks extend farther from the centre, while low values pull the surface inward. 
 camera is unchanged, so this shape can be compared directly with the previous
 three-dimensional view.
 
-The `noScaling` flag skips the default rescaling. In that case the radial distance is the
+The `scaling=False` flag skips the default rescaling. In that case the radial distance is the
 absolute function value, which is useful only when the original magnitude makes a readable
 surface.
 
@@ -142,7 +142,7 @@ plane. The normal vector `N` selects that plane.
 
 ```python
 N = zvector
-plotSection(sF2, N, color='interp', linewidth=10)
+plotSection(sF2, N, color='interp', lineWidth=10)
 mtexColorMap('spring')
 mtexTitle('Section in the xy plane')
 ```
@@ -154,11 +154,11 @@ oscillation from the sine factors more clearly than a single projected hemispher
 
 ## Harmonic spectrum
 
-[plotSpektra](S2FunHarmonic.plotSpektra.html) groups the spherical harmonic coefficients
+[plotSpectrum](S2FunHarmonic.plotSpektra.html) groups the spherical harmonic coefficients
 by degree. This view describes frequency content rather than position on the sphere.
 
 ```python
-plotSpektra(sF1, FontSize=15, linewidth=2, figSize='small')
+plotSpectrum(sF1, fontSize=15, lineWidth=2, figSize='small')
 plt.xlim(0, 40)
 ```
 

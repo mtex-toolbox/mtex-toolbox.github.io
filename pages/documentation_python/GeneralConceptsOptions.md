@@ -45,9 +45,9 @@ odf = SantaFe()
 h = Miller(1, 0, 0, odf.CS)
 
 newMtexFigure(layout=[1, 2])
-plotPDF(odf, h, resolution=10 * degree, contour=True, linewidth=2)
+plotPF(odf, h, resolution=10 * degree, contour=True, lineWidth=2)
 nextAxis()
-plotPDF(odf, h, resolution=2.5 * degree, contour=True, linewidth=2)
+plotPF(odf, h, resolution=2.5 * degree, contour=True, lineWidth=2)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/GeneralConceptsOptions-1.png"></center>
@@ -72,7 +72,7 @@ and still overrides one of its own defaults merges the two dictionaries, the lat
 winning, as MATLAB's rule for a repeated option does:
 
     def myPlot(odf, h, **kwargs):
-      return plotPDF(odf, h, **{'contour': True, **kwargs})
+      return plotPF(odf, h, **{'contour': True, **kwargs})
 
 ## Two traps
 

@@ -61,7 +61,7 @@ orientation (Forsterite → y↑→x)
   size: 152345
   Bunge Euler angles in degree
   phi1   Phi  phi2
-  95.3  42.4   294
+  95.3  42.3   294
   95.6  42.3   293
   95.4  42.4   294
   95.6  42.2   293
@@ -88,11 +88,11 @@ commands, not a statement about the data.
 
 A pole figure fixes a crystal direction and asks where it points in the specimen. Each
 sampled orientation maps the $$(100)$$ pole into the specimen frame.
-[plotPDF](orientation.plotPDF.html) also accounts for the crystallographically
+[plotPF](orientation.plotPDF.html) also accounts for the crystallographically
 equivalent poles.
 
 ```python
-plotPDF(ori, Miller(1, 0, 0, ori.CS))
+plotPF(ori, Miller(1, 0, 0, ori.CS))
 ```
 
 ```text
@@ -116,12 +116,12 @@ construction and its symmetry rules.
 ## Inverse pole figures
 
 An inverse pole figure fixes a specimen direction and asks which crystal direction
-points along it. [plotIPDF](orientation.plotIPDF.html) draws the answer in a
+points along it. [plotIPF](orientation.plotIPDF.html) draws the answer in a
 fundamental sector, which contains one representative of each family of
 crystal-symmetry-equivalent directions.
 
 ```python
-plotIPDF(ori, xvector)
+plotIPF(ori, xvector)
 ```
 
 ```text
@@ -207,9 +207,9 @@ Compare equally sized random samples. The blue markers represent individual
 measurements and the orange markers represent grain means.
 
 ```python
-plotIPDF(ori, xvector, points=1000, MarkerSize=3, MarkerColor='blue')
+plotIPF(ori, xvector, points=1000, markerSize=3, markerFaceColor='blue')
 hold(True)
-plotIPDF(foGrains.meanOrientation, xvector, points=1000, MarkerSize=3, MarkerColor='orange')
+plotIPF(foGrains.meanOrientation, xvector, points=1000, markerSize=3, markerFaceColor='orange')
 hold(False)
 ```
 
@@ -240,7 +240,7 @@ selected in lockstep with `ori`; see [Properties](Properties_py.html).
 
 ```python
 h = cat(Miller(1, 0, 0, ori.CS), Miller(1, 1, 0, ori.CS))
-plotPDF(ori, ebsd['Fo'].mad, h, antipodal=True, MarkerSize=4)
+plotPF(ori, ebsd['Fo'].mad, h, antipodal=True, markerSize=4)
 mtexColorbar(title='mean angular deviation (degree)')
 ```
 
@@ -258,7 +258,7 @@ The same positional argument accepts a scalar per grain. Colour by the logarithm
 grain area so that the wide size range remains visible.
 
 ```python
-plotSection(foGrains.meanOrientation, np.log(foGrains.area), 'sigma', sections=9, MarkerSize=10, all=True)
+plotSection(foGrains.meanOrientation, np.log(foGrains.area), 'sigma', sections=9, markerSize=10, all=True)
 mtexColorbar(title='log(grain area)')
 ```
 

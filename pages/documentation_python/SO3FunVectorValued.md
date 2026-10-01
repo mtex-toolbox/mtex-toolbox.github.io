@@ -80,7 +80,7 @@ call. The result is an array of two harmonic functions. Here the bandwidth is 48
 is limited to 10 iterations.
 
 ```python
-SO3F1 = SO3FunHarmonic.interpolate(nodes, y, maxit=10, bandwidth=48)
+SO3F1 = SO3FunHarmonic.interpolate(nodes, y, maxIter=10, bandwidth=48)
 SO3F1
 ```
 
@@ -92,7 +92,7 @@ SO3FunHarmonic (Quartz → y↑→x)
 ```
 
 The deliberately short iteration limit leaves the fit short of its optimum. Increase
-`maxit` when convergence, rather than a compact teaching run, is required.
+`maxIter` when convergence, rather than a compact teaching run, is required.
 
 Evaluating four orientations demonstrates the layout directly: four rows are nodes and two
 columns are components.
@@ -357,12 +357,12 @@ SO3FunHarmonic (1 → y↑→x)
 
 ## Inspect all components
 
-[plotSpektra](SO3Fun.plotSpektra.html) draws the harmonic power spectrum of every
+[plotSpectrum](SO3Fun.plotSpektra.html) draws the harmonic power spectrum of every
 component. The four curves show that components of one function array may have different
 distributions over harmonic degree.
 
 ```python
-plotSpektra(SO3F3, linewidth=2, figSize='small')
+plotSpectrum(SO3F3, lineWidth=2, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunVectorValued-21.png"></center>
@@ -396,7 +396,7 @@ three-dimensional plots, `plotFibre` draws every component along the selected be
 Here it draws the real parts, so the four curves can be compared at the same orientations.
 
 ```python
-plotFibre(SO3F3, fibre.beta(), linewidth=2)
+plotFibre(SO3F3, fibre.beta(), lineWidth=2)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunVectorValued-24.png"></center>

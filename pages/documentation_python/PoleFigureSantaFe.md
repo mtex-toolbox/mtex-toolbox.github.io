@@ -73,7 +73,7 @@ scale, not the same mean at every point. No background is added.
 ```python
 pf = noisepf(pf, 100)
 
-plot(pf, MarkerSize=5)
+plot(pf, markerSize=5)
 mtexColorMap('LaboTeX')
 ```
 
@@ -91,7 +91,7 @@ disables it explicitly. Solver output is suppressed here because
 
 ```python
 rec = calcODF(pf)
-rec2 = calcODF(pf, noGhostCorrection=True)
+rec2 = calcODF(pf, ghostCorrection=False)
 ```
 
 ## Compare fit with recovery
@@ -120,9 +120,9 @@ for name, a, b, c, d in zip(['model', 'withGhostCorrection', 'withoutGhostCorrec
 
 ```text
                           odfError  meanPFResidual  minimumMrd  maximumMrd
-model                       0.0000          0.0506      0.7300      5.0395
-withGhostCorrection         0.0497          0.0489      0.5755      4.9937
-withoutGhostCorrection      0.1025          0.0481      0.1803      4.5653
+model                       0.0000          0.0505      0.7300      5.0395
+withGhostCorrection         0.0477          0.0491      0.5953      4.9217
+withoutGhostCorrection      0.0989          0.0481      0.2179      4.6192
 ```
 
 The corrected reconstruction has an ODF error of about 0.045, so between four and five
@@ -155,7 +155,7 @@ The pole figures recalculated from the corrected ODF reproduce the broad maxima 
 noisy simulation.
 
 ```python
-plotPDF(rec, pf.h, antipodal=True)
+plotPF(rec, pf.h, antipodal=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureSantaFe-8.png"></center>
@@ -169,7 +169,7 @@ table above shows why it is not a sufficient validation when the true ODF is unk
 First plot the corrected reconstruction in Euler-angle sections.
 
 ```python
-plot(rec, sections=18, contourf=True, FontSize=10, silent=True, figSize='large', minmax=True)
+plot(rec, sections=18, contourf=True, fontSize=10, verbose=False, figSize='large', minmax=True)
 mtexColorMap('white2black')
 ```
 
@@ -178,7 +178,7 @@ mtexColorMap('white2black')
 The known model provides the reference.
 
 ```python
-plot(odf, sections=18, contourf=True, FontSize=10, silent=True, figSize='large', minmax=True)
+plot(odf, sections=18, contourf=True, fontSize=10, verbose=False, figSize='large', minmax=True)
 mtexColorMap('white2black')
 ```
 
@@ -187,7 +187,7 @@ mtexColorMap('white2black')
 Finally, plot the reconstruction without ghost correction.
 
 ```python
-plot(rec2, sections=18, contourf=True, FontSize=10, silent=True, figSize='large', minmax=True)
+plot(rec2, sections=18, contourf=True, fontSize=10, verbose=False, figSize='large', minmax=True)
 mtexColorMap('white2black')
 ```
 
@@ -202,15 +202,15 @@ the peaks.
 
 ## Read the harmonic spectrum
 
-[plotSpektra](SO3Fun.plotSpektra.html) groups the magnitude of the harmonic coefficients
+[plotSpectrum](SO3Fun.plotSpektra.html) groups the magnitude of the harmonic coefficients
 by degree. This is the most direct view of the even--odd defect.
 
 ```python
 plt.close('all')
-plotSpektra(odf, bandwidth=32, linewidth=2, figSize='small')
+plotSpectrum(odf, bandwidth=32, lineWidth=2, figSize='small')
 hold(True)
-plotSpektra(rec, bandwidth=32, linewidth=2)
-plotSpektra(rec2, bandwidth=32, linewidth=2)
+plotSpectrum(rec, bandwidth=32, lineWidth=2)
+plotSpectrum(rec2, bandwidth=32, lineWidth=2)
 plt.legend(['true ODF', 'with ghost correction', 'without ghost correction'])
 hold(False)
 ```

@@ -63,7 +63,7 @@ physical axis. The `antipodal` flag records that assumption.
 ```python
 cAxes.antipodal = True
 
-plot(cAxes, upper=True, MarkerFaceColor='none', MarkerEdgeAlpha=0.01, MarkerSize=4)
+plot(cAxes, upper=True, markerFaceColor='none', markerEdgeAlpha=0.01, markerSize=4)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/VectorsDensityEstimation-5.png"></center>
@@ -109,7 +109,7 @@ contourf(pdf)
 mtexColorMap('LaboTeX')
 
 hold(True)
-plot(cAxes, upper=True, MarkerFaceColor='none', MarkerEdgeColor='k', MarkerEdgeAlpha=0.01, MarkerSize=4)
+plot(cAxes, upper=True, markerFaceColor='none', markerEdgeColor='k', markerEdgeAlpha=0.01, markerSize=4)
 hold(False)
 ```
 
@@ -418,7 +418,7 @@ vRand = discreteSample(pdf, 500)
 
 plot(pdf, upper=True)
 hold(True)
-plot(vRand, MarkerFaceColor='k', MarkerSize=4)
+plot(vRand, markerFaceColor='k', markerSize=4)
 hold(False)
 ```
 
@@ -466,7 +466,7 @@ mtexColorbar()
 <center class="mtex-figure"><img class="inline" src="figures/python/VectorsDensityEstimation-26.png"></center>
 
 The coloured sector contains the complete inverse pole density without repeating
-symmetry-related directions. The `noSymmetry` option disables crystal symmetrization
+symmetry-related directions. The `symmetry=False` option disables crystal symmetrization
 when that is deliberately required.
 
 ## Choosing a Different Kernel
@@ -483,9 +483,9 @@ truncated at bandwidth 12.
 psi1 = S2DeLaValleePoussinKernel(halfwidth=10 * degree)
 psi2 = S2DirichletKernel(12)
 
-plot(psi1, linewidth=2)
+plot(psi1, lineWidth=2)
 hold(True)
-plot(psi2, linewidth=2)
+plot(psi2, lineWidth=2)
 hold(False)
 plt.xlim(0, 60)
 plt.legend(['de la Vallee Poussin', 'Dirichlet'])

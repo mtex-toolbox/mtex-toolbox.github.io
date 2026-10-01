@@ -135,11 +135,11 @@ Nearly every grain falls into the first bar. The plot answers how many grains ha
 area, so numerous small grains dominate even when they occupy little of the section.
 
 Weighting each grain by its area asks a different question: what fraction of the
-observed section belongs to grains in each size class? `hist(grains)` draws grouped
-bars, one colour per indexed phase.
+observed section belongs to grains in each size class? `histogram(grains, grouped=True)`
+draws grouped bars, one colour per indexed phase.
 
 ```python
-hist(grains)
+histogram(grains, grouped=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ShapeParameters-8.png"></center>

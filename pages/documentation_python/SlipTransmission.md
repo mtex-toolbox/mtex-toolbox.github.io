@@ -126,7 +126,7 @@ sSGrain = grains.meanOrientation * sSBasal[idActive]
 
 hold(True)
 quiver(grains, sSGrain.trace(), displayName='slip plane')
-quiver(grains, sSGrain.b, displayName='slip direction', project2plane=True)
+quiver(grains, sSGrain.b, displayName='slip direction', projectIntoPlane=True)
 hold(False)
 legend(location='northeast')
 
@@ -225,10 +225,10 @@ mPBoundary = mPrime(sSGrain[boundaryGrainInd[:, 0]], sSGrain[boundaryGrainInd[:,
 
 plot(grains, faceColor=0.8 * np.ones(3), figSize='large')
 hold(True)
-plot(gB, mPBoundary, linewidth=3)
+plot(gB, mPBoundary, lineWidth=3)
 mtexColorbar()
 quiver(grains, sSGrain.trace(), displayName='slip plane')
-quiver(grains, sSGrain.b, displayName='slip direction', project2plane=True)
+quiver(grains, sSGrain.b, displayName='slip direction', projectIntoPlane=True)
 hold(False)
 legend(location='northeast')
 

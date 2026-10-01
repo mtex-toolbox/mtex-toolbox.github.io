@@ -51,7 +51,7 @@ opposite half. The `minmax` option labels the extrema; it does not choose
 the hemispheres.
 
 ```python
-plotPDF(odf, Miller(1, 1, 0, cs), minmax=True)
+plotPF(odf, Miller(1, 1, 0, cs), minmax=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SphericalProjections-2.png"></center>
@@ -64,7 +64,7 @@ The `upper` and `lower` flags ask for one hemisphere alone. Here only
 the lower hemisphere remains.
 
 ```python
-plotPDF(odf, Miller(1, 1, 0, cs), lower=True)
+plotPF(odf, Miller(1, 1, 0, cs), lower=True)
 mtexColorbar()
 ```
 
@@ -82,7 +82,7 @@ opposite and produces this view. Any figure compared with measured
 pole-figure data must use it.
 
 ```python
-plotPDF(odf, Miller(1, 1, 0, cs), antipodal=True)
+plotPF(odf, Miller(1, 1, 0, cs), antipodal=True)
 mtexColorbar()
 ```
 
@@ -100,7 +100,7 @@ the data or their reference frame.
 ```python
 how2plot = plottingConvention('z↑→y')
 
-plotPDF(odf, Miller(1, 0, 0, cs), 'antipodal', how2plot)
+plotPF(odf, Miller(1, 0, 0, cs), 'antipodal', how2plot)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SphericalProjections-5.png"></center>
@@ -118,7 +118,7 @@ impression of how much of the sphere a feature covers, which is why it is
 the default. The names `'earea'` and `'schmidt'` request it explicitly.
 
 ```python
-plotPDF(odf, Miller(1, 0, 0, cs), antipodal=True, projection='earea')
+plotPF(odf, Miller(1, 0, 0, cs), antipodal=True, projection='earea')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SphericalProjections-6.png"></center>
@@ -171,7 +171,7 @@ the poles of the sphere become complete edges. This is the traditional
 presentation for ODF sections.
 
 ```python
-plotSection(SantaFe(), 'alpha', sections=18, projection='plain', contourf=True, FontSize=10, silent=True)
+plotSection(SantaFe(), 'alpha', sections=18, projection='plain', contourf=True, fontSize=10, verbose=False)
 mtexColorMap('white2black')
 ```
 
@@ -194,7 +194,7 @@ how2plot.east = vector3d(9, 3, 3)
 how2plot.outOfScreen = vector3d(6, 10, 9)
 
 plt.close('all')
-plotPDF(odf, Miller(1, 1, 0, odf.CS), '3d', how2plot, grid=True, grid_res=10 * degree, noTitle=True)
+plotPF(odf, Miller(1, 1, 0, odf.CS), '3d', how2plot, grid=True, grid_res=10 * degree, title=False)
 mtexColorMap('LaboTeX')
 ```
 

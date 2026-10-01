@@ -69,7 +69,7 @@ Talc is triclinic, so the axes are not mutually perpendicular. The angle between
 $$\vec a$$ and $$\vec c$$ is the unit-cell angle $$\beta=98.9^\circ$$.
 
 ```python
-metricAngleAC = angle(directAxes[0], directAxes[2], noSymmetry=True) / degree
+metricAngleAC = angle(directAxes[0], directAxes[2], symmetry=False) / degree
 metricAngleAC
 ```
 
@@ -77,7 +77,7 @@ metricAngleAC
 98.9000
 ```
 
-The `noSymmetry` option is essential when reading a metric angle. Without it, `angle`
+The `symmetry=False` option is essential when reading a metric angle. Without it, `angle`
 compares symmetry-equivalent directions. Inversion would replace $$\vec c$$ by $$-\vec c$$
 here and return $$81.1^\circ$$.
 
@@ -174,7 +174,7 @@ The objects above carry the same three numbers but use different bases. Their ge
 angle is
 
 ```python
-directReciprocalAngle = angle(m, n, noSymmetry=True) / degree
+directReciprocalAngle = angle(m, n, symmetry=False) / degree
 directReciprocalAngle
 ```
 

@@ -22,7 +22,7 @@ An *alpha value* controls how strongly a plotted object covers the objects
 behind it. An alpha value of 0 is completely transparent. A value of 1 is
 completely opaque. MTEX uses different option names for different objects:
 
-* `MarkerAlpha`, `MarkerFaceAlpha`, and `MarkerEdgeAlpha` control the
+* `markerAlpha`, `markerFaceAlpha`, and `markerEdgeAlpha` control the
   markers in pole figures, inverse pole figures, and ODF sections.
 * `faceAlpha` controls EBSD maps, grain maps, crystal shapes, and other
   surfaces.
@@ -55,17 +55,17 @@ solid blobs. Neither the number of points nor the shape of each maximum is
 easy to judge.
 
 ```python
-plotPDF(ori, h, MarkerSize=5, all=True)
+plotPF(ori, h, markerSize=5, all=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/TransparencyDemo-2.png"></center>
 
-Set `MarkerAlpha` to make both the marker faces and edges almost
+Set `markerAlpha` to make both the marker faces and edges almost
 transparent. Repeated overlap stays dark, whereas isolated orientations
 become faint. The result resembles a density plot.
 
 ```python
-plotPDF(ori, h, MarkerAlpha=0.05, MarkerSize=5, all=True)
+plotPF(ori, h, markerAlpha=0.05, markerSize=5, all=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/TransparencyDemo-3.png"></center>
@@ -77,7 +77,7 @@ maximum completely. In the fringes the rings resolve; the cores of the
 strongest maxima still saturate.
 
 ```python
-plotPDF(ori, h, MarkerFaceAlpha=0.01, MarkerEdgeAlpha=0.05, MarkerSize=10, all=True)
+plotPF(ori, h, markerFaceAlpha=0.01, markerEdgeAlpha=0.05, markerSize=10, all=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/TransparencyDemo-4.png"></center>
@@ -88,7 +88,7 @@ shows that estimate as filled contours. [Density Estimation](DensityEstimation_p
 explains how MTEX computes it.
 
 ```python
-plotPDF(ori, h, contourf=True)
+plotPF(ori, h, contourf=True)
 mtexColorbar()
 ```
 

@@ -162,7 +162,7 @@ fname = mtexdatafile('EMSphinx')
 EulerCorrection = rotation.map(xvector, xvector, zvector, -zvector)
 
 # create an EBSD variable containing the data
-ebsd = EBSD.load(fname, csList, dataSet=0, eulerCorrection=EulerCorrection, silent=True)
+ebsd = EBSD.load(fname, csList, dataSet=0, eulerCorrection=EulerCorrection, verbose=False)
 ```
 
 The crystal-symmetry calls state both a point group and a crystal frame. For cobalt, the
@@ -258,9 +258,9 @@ set per map.
 
 ## Writing Your Own Interface
 
-A format not covered above needs a loader function. The established name is
-`loadEBSD_xxx`, and the loaders in `mtex/io` are examples. Return an `EBSD` variable and
-call the new function directly while developing it.
+A format not covered above needs a loader function; the loaders in `mtex/io` are
+examples. Return an `EBSD` variable and call the new function directly while developing
+it.
 
 The dispatch of `EBSD.load` is explicit: placing a function in that folder does not by
 itself register a new extension. Full integration also requires a dispatch case in

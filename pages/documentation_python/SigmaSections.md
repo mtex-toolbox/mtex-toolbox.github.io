@@ -42,9 +42,9 @@ plottingConvention.default('y↑→x')
 
 ```python
 # the model ODF of the page, defined here so that the first plot can be read as an unknown texture
-def secretODF(cs):
-  ori = cat(orientation.byEuler(60 * degree, 0 * degree, 0 * degree, cs), orientation.byEuler(70 * degree, 30 * degree, 0 * degree, cs),
-            orientation.byEuler(80 * degree, 60 * degree, 0 * degree, cs), orientation.byEuler(90 * degree, 90 * degree, 0 * degree, cs))
+def secretODF(CS):
+  ori = cat(orientation.byEuler(60 * degree, 0 * degree, 0 * degree, CS), orientation.byEuler(70 * degree, 30 * degree, 0 * degree, CS),
+            orientation.byEuler(80 * degree, 60 * degree, 0 * degree, CS), orientation.byEuler(90 * degree, 90 * degree, 0 * degree, CS))
   return unimodalODF(ori)
 ```
 
@@ -119,8 +119,8 @@ The second maps $$\vec c$$ to specimen X and $$\vec a$$ to specimen negative Z.
 ori2 = orientation.map(cs.cAxis, vector3d.X, cs.aAxis, -vector3d.Z)
 
 hold(True)
-quiver(ori1.symmetrise(), ori1.symmetrise() * cs.aAxis, color='red', linewidth=2)
-quiver(ori2.symmetrise(), ori2.symmetrise() * cs.aAxis, color='green', linewidth=2)
+quiver(ori1.symmetrise(), ori1.symmetrise() * cs.aAxis, color='red', lineWidth=2)
+quiver(ori2.symmetrise(), ori2.symmetrise() * cs.aAxis, color='green', lineWidth=2)
 hold(False)
 ```
 
@@ -146,9 +146,9 @@ ori2 = orientation.byEuler(200 * degree, 80 * degree, 110 * degree, cs)
 ori3 = orientation.byEuler(40 * degree, 0 * degree, 0 * degree, cs)
 
 hold(True)
-quiver(ori1.symmetrise(), ori1.symmetrise() * cs.aAxis, color='red', linewidth=2)
-quiver(ori2.symmetrise(), ori2.symmetrise() * cs.aAxis, color='green', linewidth=2)
-quiver(ori3.symmetrise(), ori3.symmetrise() * cs.aAxis, color='blue', linewidth=2)
+quiver(ori1.symmetrise(), ori1.symmetrise() * cs.aAxis, color='red', lineWidth=2)
+quiver(ori2.symmetrise(), ori2.symmetrise() * cs.aAxis, color='green', lineWidth=2)
+quiver(ori3.symmetrise(), ori3.symmetrise() * cs.aAxis, color='blue', lineWidth=2)
 hold(False)
 ```
 
@@ -191,7 +191,7 @@ This reading predicts a c-axis girdle from Z to X and a complementary a-axis gir
 The two pole figures confirm those paths.
 
 ```python
-plotPDF(odf, cat(cs.cAxis, cs.aAxis))
+plotPF(odf, cat(cs.cAxis, cs.aAxis))
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SigmaSections-12.png"></center>
@@ -208,7 +208,7 @@ $$60^{\circ}$$ and $$90^{\circ}$$ from specimen Z. The last one lies on the rim 
 drawn at both ends of it.
 
 ```python
-plotPDF(odf, Miller(0, 0, 0, 1, cs))
+plotPF(odf, Miller(0, 0, 0, 1, cs))
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SigmaSections-13.png"></center>

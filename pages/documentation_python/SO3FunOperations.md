@@ -281,7 +281,7 @@ normalizedIntegral
 ```
 
 ```text
-1
+1.0000
 ```
 
 ---
@@ -292,7 +292,7 @@ integralFromSum
 ```
 
 ```text
-1
+1.0000
 ```
 
 These two values agree because dividing `sum` by $$8\pi^2$$ gives the same normalization as
@@ -370,7 +370,7 @@ SO3VectorFieldHarmonic (Quartz → y↑→x)
 ```python
 plot(SO3F1, 'sigma', sections=4)
 hold(True)
-plot(G, color='black', linewidth=1, resolution=5 * degree)
+plot(G, color='black', lineWidth=1, resolution=5 * degree)
 hold(False)
 ```
 

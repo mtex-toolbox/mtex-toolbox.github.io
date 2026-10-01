@@ -71,7 +71,7 @@ oriChild
 orientation (Ti (alpha) → y↑→x)
   Bunge Euler angles in degree
   phi1  Phi  phi2
-   270  128   136
+   312  119   331
 ```
 
 The Burgers OR aligns a hexagonal $$(0001)$$ plane with a cubic $$(110)$$ plane. It also aligns
@@ -88,19 +88,19 @@ copy the way a plane alignment does.
 
 ```python
 # (110) / (0001) pole figure
-plotPDF(oriParent, Miller(1, 1, 0, csBeta), MarkerSize=20, MarkerFaceColor='none', linewidth=4, layout=[1, 2])
+plotPF(oriParent, Miller(1, 1, 0, csBeta), markerSize=20, markerFaceColor='none', lineWidth=4, layout=[1, 2])
 hold(True)
-plot(oriChild.symmetrise() * Miller(0, 0, 0, 1, csAlpha), MarkerSize=12)
+plot(oriChild.symmetrise() * Miller(0, 0, 0, 1, csAlpha), markerSize=12)
 xlabel(Miller(0, 0, 0, 1, csAlpha).char(), color=ind2color(2))
 hold(False)
 
 # [111] / [2-1-10] pole figure
 nextAxis(2)
-plotPDF(oriParent, Miller(1, 1, 1, csBeta, 'uvw'), 'upper', MarkerSize=20, MarkerFaceColor='none', linewidth=4)
+plotPF(oriParent, Miller(1, 1, 1, csBeta, 'uvw'), 'upper', markerSize=20, markerFaceColor='none', lineWidth=4)
 
 dAlpha = Miller(2, -1, -1, 0, csAlpha, 'uvw')
 hold(True)
-plot(oriChild.symmetrise() * dAlpha, MarkerSize=12)
+plot(oriChild.symmetrise() * dAlpha, markerSize=12)
 xlabel(dAlpha.char(), color=ind2color(2))
 hold(False)
 gcm().drawNow()
@@ -156,7 +156,7 @@ The inverse pole figure places both members of each pair at the same location. T
 computations therefore appear as only 12 distinct points.
 
 ```python
-plotIPDF(oriChild, vector3d.Z)
+plotIPF(oriChild, vector3d.Z)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ParentChildVariants-9.png"></center>
@@ -168,7 +168,7 @@ directly. It returns the 12 child variants for this OR.
 oriChild = variants(beta2alpha, oriParent)
 
 for i in range(1, 13):
-  plotIPDF(oriChild[i - 1], ind2color(i), vector3d.Z, label=i, MarkerEdgeColor='k')
+  plotIPF(oriChild[i - 1], ind2color(i), vector3d.Z, label=i, markerEdgeColor='k')
   hold(True)
 hold(False)
 ```
@@ -188,8 +188,8 @@ orientation (Ti (alpha) → y↑→x)
   size: 2
   Bunge Euler angles in degree
   phi1   Phi  phi2
-   327  96.8  90.2
-  90.4  51.7   213
+  30.8   170   115
+  58.9  50.8   314
 ```
 
 ## Exact and approximate orientation relationships
@@ -211,7 +211,7 @@ perturbation has to exceed that for the pairs to separate.
 ```python
 oriChildPerturbed = variants(beta2alpha, oriParent)
 print(oriChildPerturbed.size)
-plotIPDF(oriChildPerturbed, vector3d.Z)
+plotIPF(oriChildPerturbed, vector3d.Z)
 ```
 
 ```text
@@ -260,7 +260,7 @@ np.min(angle(oriParents, oriParent)) / degree
 ```
 
 ```text
-4.2315e-14
+8.2273e-14
 ```
 
 The [`parents`](orientation.parents.html) method returns the same set of OR variants.
@@ -275,12 +275,12 @@ orientation (Ti (beta) → y↑→x)
   size: 6
   Bunge Euler angles in degree
   phi1   Phi  phi2
-   153  38.5   171
-   8.2  77.7   113
-  38.8  34.3   274
-    54  27.1  81.1
-  4.25  87.5   293
-   162  47.4   345
+   354  36.3  8.64
+    66   127   172
+  38.9  84.3   344
+  33.7  75.1   165
+  74.8   135   357
+   338  31.1   202
 ```
 
 A single child orientation cannot identify which candidate parent is correct. Parent grain

@@ -53,7 +53,7 @@ while `minPixel` removes indexed grains containing fewer than five measurements.
 
 A raw boundary follows the square measurement grid, so its trace points mostly along the
 grid axes. Smoothing removes that staircase before the trace direction is interpreted.
-The flags `noSimplify` and `noRefine` retain every segment and its link to the two
+The flags `simplify=False` and `refine=False` retain every segment and its link to the two
 neighboring measurements through `ebsdId`.
 
 ```python
@@ -61,7 +61,7 @@ neighboring measurements through `ebsdId`.
 grains = calcGrains(ebsd, threshold=[1 * degree, 15 * degree], minPixel=5)
 
 # smooth traces without breaking the segment-to-pixel relation
-grains = smoothBoundary(grains, 5, noSimplify=True, noRefine=True)
+grains = smoothBoundary(grains, 5, simplify=False, refine=False)
 
 # set up the IPF colouring
 cKey = ipfColorKey(ebsd['fo'].CS.properGroup())
@@ -207,7 +207,7 @@ vector3d (y↑→x)
 
 ```python
 # plot the specimen-frame axes
-plot(axS, MarkerAlpha=0.2, MarkerSize=2, figSize='small')
+plot(axS, markerAlpha=0.2, markerSize=2, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/TiltAndTwistBoundaries-9.png"></center>

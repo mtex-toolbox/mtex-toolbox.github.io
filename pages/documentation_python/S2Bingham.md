@@ -87,8 +87,8 @@ for k2 in kappa:
   for k1 in kappa:
     if k1 >= k2:
       bFun = S2FunBingham([-k1, -k2, 0])
-      plot(bFun, colorRange=[0, 25], noLabel=True)
-      mtexTitle(f'$\\kappa_1=${k1}  $\\kappa_2=${k2}', FontSize=12)
+      plot(bFun, colorRange=[0, 25], axisLabels=False)
+      mtexTitle(f'$\\kappa_1=${k1}  $\\kappa_2=${k2}', fontSize=12)
     if k1 < kappa[-1] or k2 < kappa[-1]:
       nextAxis()
 setColorRange('equal')
@@ -122,7 +122,7 @@ sampleSize
 ```python
 plot(bingFun)
 hold(True)
-plot(v, MarkerEdgeColor='k', MarkerFaceColor='gray', MarkerFaceAlpha=0.5)
+plot(v, markerEdgeColor='k', markerFaceColor='gray', markerFaceAlpha=0.5)
 hold(False)
 ```
 
@@ -145,7 +145,7 @@ estimatedZ
 ```
 
 ```text
-array([-10.0967,  -4.2302,   0.    ])
+array([-13.0515,  -4.674 ,   0.    ])
 ```
 
 ---
@@ -156,7 +156,7 @@ semiAxesDegrees
 ```
 
 ```text
-array([5.0097, 8.6511])
+array([4.4547, 8.1171])
 ```
 
 ---
@@ -164,13 +164,13 @@ array([5.0097, 8.6511])
 ```python
 plot(bingFunEst)
 hold(True)
-plot(v, MarkerEdgeColor='k', MarkerFaceColor='gray', MarkerFaceAlpha=0.5)
+plot(v, markerEdgeColor='k', markerFaceColor='gray', markerFaceAlpha=0.5)
 
 # mark one representative of the fitted modal axis
-annotate(bingFunEst.a[2], MarkerFaceColor='red', MarkerSize=10)
+annotate(bingFunEst.a[2], markerFaceColor='red', markerSize=10)
 
 # add the default p = 0.95 confidence ellipse
-ellipse(rot, ab[0], ab[1], linewidth=3, lineColor='k')
+ellipse(rot, ab[0], ab[1], lineWidth=3, lineColor='k')
 hold(False)
 ```
 

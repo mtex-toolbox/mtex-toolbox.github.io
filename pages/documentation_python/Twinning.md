@@ -33,7 +33,7 @@ import numpy as np
 from mtex import *
 
 plottingConvention.default('y↑→x')
-ebsd = mtexdata('twins', silent=True)
+ebsd = mtexdata('twins', verbose=False)
 
 # use the crystal symmetry and lattice parameters stored with the data
 CS = ebsd['Magnesium'].CS
@@ -76,9 +76,9 @@ rotates the orange copy while leaving its lattice and shape unchanged.
 ```python
 cS = crystalShape.hex(CS)
 
-plot(cS, FaceColor='LightSkyBlue', FaceAlpha=0.55, figSize='large')
+plot(cS, faceColor='LightSkyBlue', faceAlpha=0.55, figSize='large')
 hold(True)
-plot(0.9 * (twinning * cS), FaceColor='orange', FaceAlpha=0.55)
+plot(0.9 * (twinning * cS), faceColor='orange', faceAlpha=0.55)
 hold(False)
 plt.gca().view_init(elev=20, azim=35 - 90)
 ```
@@ -207,7 +207,7 @@ of the magnesium-to-magnesium boundary trace length.
 ```python
 plot(grains, grains.meanOrientation, ipfDirection=zvector, micronbar='off')
 hold(True)
-plot(gB[isCandidate], linecolor='w', linewidth=3)
+plot(gB[isCandidate], lineColor='w', lineWidth=3)
 hold(False)
 ```
 

@@ -41,7 +41,7 @@ import numpy as np
 from mtex import *
 
 plottingConvention.default('y↑→x')
-ebsd = mtexdata('forsterite', silent=True)
+ebsd = mtexdata('forsterite', verbose=False)
 
 grains = calcGrains(ebsd)
 ```
@@ -317,7 +317,7 @@ plotAngleDistribution(mdf_from_odfs, figSize='small')
 hold(True)
 plotAngleDistribution(ebsd['fo'].CS, ebsd['en'].CS)
 hold(False)
-legend('uncorrelated texture', 'uniform orientations', Location='best')
+legend('uncorrelated texture', 'uniform orientations', location='best')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/MisorientationDistributionFunction-18.png"></center>

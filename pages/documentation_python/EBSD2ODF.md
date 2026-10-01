@@ -86,7 +86,7 @@ Drawing one marker per measurement shows the data and nothing but the data.
 
 ```python
 h = cat(Miller(1, 0, 0, ori.CS), Miller(1, 1, 0, ori.CS), Miller(1, 1, 1, ori.CS))
-plotPDF(ori, h, antipodal=True, MarkerSize=2)
+plotPF(ori, h, antipodal=True, markerSize=2)
 ```
 
 ```text
@@ -129,7 +129,7 @@ Adding the option `contourf` replaces the markers by filled contours with a colo
 so the plot finally carries numbers.
 
 ```python
-plotPDF(ori, h, antipodal=True, contourf=True)
+plotPF(ori, h, antipodal=True, contourf=True)
 mtexColorbar(title='mrd')
 ```
 
@@ -148,7 +148,7 @@ its *halfwidth*, the angular distance at which it falls to half its peak value. 
 unspecified, the contoured pole figure uses 5 degrees. Ask for 15 degrees instead.
 
 ```python
-plotPDF(ori, h, antipodal=True, contourf=True, halfwidth=15 * degree)
+plotPF(ori, h, antipodal=True, contourf=True, halfwidth=15 * degree)
 mtexColorbar(title='mrd')
 ```
 
@@ -247,7 +247,7 @@ grainCount
 ```python
 plotSection(odfSharp, 'sigma', sections=6, contourf=True)
 hold(True)
-plotSection(copperGrains.meanOrientation, 'sigma', sections=6, MarkerSize=3, all=True, MarkerFaceColor='none', MarkerEdgeColor='k')
+plotSection(copperGrains.meanOrientation, 'sigma', sections=6, markerSize=3, all=True, markerFaceColor='none', markerEdgeColor='k')
 hold(False)
 ```
 

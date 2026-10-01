@@ -62,16 +62,16 @@ eS
 
 ```text
 simulateEBSD
-  xdim        100
-  ydim        100
-  stepSize    1
-  CS          1 (kryptonite)
-  noiseFun    None
-  noiseMax    0.05°
-  axS         (0, 1, 0)
-  gradDir     (1, 0, 0)
-  mori_angle  0.0974028°
-  EBSDsim     none yet
+  xdim       100
+  ydim       100
+  stepSize   1
+  CS         1 (kryptonite)
+  noiseFun   None
+  noiseMax   0.05°
+  axS        (0, 1, 0)
+  gradDir    (1, 0, 0)
+  moriAngle  0.0974028°
+  EBSDsim    none yet
 ```
 
 ## A uniform orientation field
@@ -124,7 +124,7 @@ fresh one when it is `None`; a seeded generator makes the page reproducible.
 eS.noiseFun = 'logn'
 eS.noiseMax = 2 * degree
 eS.rng = np.random.default_rng(1)
-eS.addnoise()
+eS.addNoise()
 
 noiseAngle = angle(eS.ori0, eS.EBSDsim.orientations) / degree
 print(f'Noise deviation: median {np.median(noiseAngle):.2f} degree; 90th percentile '
@@ -147,27 +147,27 @@ used here. This is orientation-level noise, not noise in simulated diffraction p
 ## A known low-angle boundary
 
 A step feature is specified by a misorientation axis in the specimen frame and a total
-misorientation angle. `addFeature_singleStep` rotates one stepped domain relative to the
+misorientation angle. `addFeature('singleStep')` rotates one stepped domain relative to the
 other.
 
 ```python
 eS.axS = yvector
-eS.mori_angle = 3 * degree
-eS.addFeature_singleStep()
+eS.moriAngle = 3 * degree
+eS.addFeature('singleStep')
 ```
 
 ```text
 simulateEBSD
-  xdim        200
-  ydim        100
-  stepSize    1
-  CS          mmm (Kryptonite)
-  noiseFun    'logn'
-  noiseMax    2°
-  axS         (0, 1, 0)
-  gradDir     (1, 0, 0)
-  mori_angle  3°
-  EBSDsim     20000 measurements
+  xdim       200
+  ydim       100
+  stepSize   1
+  CS         mmm (Kryptonite)
+  noiseFun   'logn'
+  noiseMax   2°
+  axS        (0, 1, 0)
+  gradDir    (1, 0, 0)
+  moriAngle  3°
+  EBSDsim    20000 measurements
 ```
 
 Feature methods modify the orientations already in `eS.EBSDsim`. They therefore
@@ -196,7 +196,7 @@ print(f'Inner boundary: {len(boundaryAngle)} segments; mean {boundaryAngle.mean(
 nextAxis()
 plot(grains)
 hold(True)
-plot(stepBoundary, boundaryAngle, linewidth=3)
+plot(stepBoundary, boundaryAngle, lineWidth=3)
 hold(False)
 setColorRange([2.75, 3.25])
 mtexColorbar(title='boundary angle in degree')
@@ -227,15 +227,15 @@ angular noise. See [Germain et al. (2014)](https://doi.org/10.1016/j.matchar.201
 
 `makeMap` discards the accumulated features and restores a uniform field. For a
 gradient, `gradDir` gives the direction of increase in the specimen frame. Here
-`mori_angle` is the angle increment per spatial grid step, not the total angle used by
+`moriAngle` is the angle increment per spatial grid step, not the total angle used by
 the step feature.
 
 ```python
 eS.makeMap()
 eS.axS = yvector
 eS.gradDir = xvector
-eS.mori_angle = 0.03 * degree
-eS.addFeature_simpleGradient()
+eS.moriAngle = 0.03 * degree
+eS.addFeature('simpleGradient')
 
 gradientAngle = angle(eS.ori0, eS.EBSDsim.orientations) / degree
 print(f'Gradient deviation: {gradientAngle.min():.2f} to {gradientAngle.max():.2f} degree')
@@ -254,9 +254,9 @@ The colour changes smoothly from left to right because `gradDir` is `xvector`. W
 default unit step, each column adds 0.03° about `yvector`. The first column is already one
 increment from `ori0` because the default map coordinates start at one.
 
-Further gradients can be superposed by changing `axS`, `gradDir`, or `mori_angle` and
-calling `addFeature_simpleGradient` again. In contrast, `addFeature_circularSubgrain`
-applies `mori_angle` as one total rotation. It changes the orientations inside a circular
+Further gradients can be superposed by changing `axS`, `gradDir`, or `moriAngle` and
+calling `addFeature('simpleGradient')` again. In contrast, `addFeature('circularSubgrain')`
+applies `moriAngle` as one total rotation. It changes the orientations inside a circular
 domain. Assign an existing map to `eS.EBSDsim` to start from measured or separately
 generated data.
 {% endraw %}

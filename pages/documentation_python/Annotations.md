@@ -49,7 +49,7 @@ mod2 = orientation.byEuler(310 * degree, 70 * degree, 40 * degree, cs)
 odf = 0.7 * unimodalODF(mod1) + 0.3 * unimodalODF(mod2)
 
 # plot two pole figures
-plotPDF(odf, Miller([[1, 0, 0], [1, 1, 1]], cs))
+plotPF(odf, Miller([[1, 0, 0], [1, 1, 1]], cs))
 
 # add a colourbar to each pole figure
 mtexColorbar()
@@ -95,7 +95,7 @@ direction expressed in the specimen frame. The text passed through `label`
 is arbitrary; here it names the vector drawn at $$(1,1,1)$$.
 
 ```python
-annotate(vector3d(1, 1, 1), label=['(111)'], BackgroundColor='w')
+annotate(vector3d(1, 1, 1), label=['(111)'], backgroundColor='w')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/Annotations-5.png"></center>
@@ -106,10 +106,10 @@ every symmetrically equivalent direction. The `labeled` option writes the
 Miller indices beside those markers.
 
 ```python
-plotIPDF(odf, [xvector, zvector], antipodal=True, marginx=10)
+plotIPF(odf, [xvector, zvector], antipodal=True, marginx=10)
 mtexColorMap('white2black')
 
-annotate(Miller([[2, -1, -1, 0], [2, -1, -1, 1]], cs), all=True, labeled=True, BackgroundColor='yellow')
+annotate(Miller([[2, -1, -1, 0], [2, -1, -1, 1]], cs), all=True, labeled=True, backgroundColor='yellow')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/Annotations-6.png"></center>
@@ -124,11 +124,11 @@ orientation appears. It places one marker per pole in every axis. The next
 figure marks the two components used to construct the model ODF.
 
 ```python
-plotIPDF(odf, [xvector, zvector], antipodal=True)
+plotIPF(odf, [xvector, zvector], antipodal=True)
 mtexColorMap('white2black')
-annotate(mod1, marker='s', MarkerSize=6, MarkerFaceColor='r', label='A', color='w')
+annotate(mod1, marker='s', markerSize=6, markerFaceColor='r', label='A', color='w')
 
-annotate(mod2, marker='s', MarkerSize=6, MarkerFaceColor='g', label='B')
+annotate(mod2, marker='s', markerSize=6, markerFaceColor='g', label='B')
 
 gcm().drawNow(figSize='normal')
 ```
@@ -144,9 +144,9 @@ represented by one point rather than by one pole in every axis.
 ```python
 plotSection(odf, 'sigma')
 mtexColorMap('white2black')
-annotate(mod1, label='A', textColor='r', MarkerSize=15, MarkerEdgeColor='r', MarkerFaceColor='none')
+annotate(mod1, label='A', textColor='r', markerSize=15, markerEdgeColor='r', markerFaceColor='none')
 
-annotate(mod2, label='B', textColor='b', MarkerSize=15, MarkerEdgeColor='b', MarkerFaceColor='none')
+annotate(mod2, label='B', textColor='b', markerSize=15, markerEdgeColor='b', markerFaceColor='none')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/Annotations-8.png"></center>
@@ -159,8 +159,8 @@ cloud lies around.
 ```python
 ori = odf.discreteSample(200)
 scatter(ori)
-annotate(mod1, MarkerSize=10, MarkerEdgeColor='r', MarkerFaceColor='r')
-annotate(mod2, MarkerSize=10, MarkerEdgeColor='g', MarkerFaceColor='g')
+annotate(mod1, markerSize=10, markerEdgeColor='r', markerFaceColor='r')
+annotate(mod2, markerSize=10, markerEdgeColor='g', markerFaceColor='g')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/Annotations-9.png"></center>
@@ -169,16 +169,16 @@ annotate(mod2, MarkerSize=10, MarkerEdgeColor='g', MarkerFaceColor='g')
 
 A colourbar explains numerical values encoded by colour. A legend instead
 identifies plotted objects by a label and symbol. Anything plotted with a
-`DisplayName` enters the legend, while everything else stays out. In a
-multi-plot figure, combine `DisplayName` with `add2all`. The object and
+`displayName` enters the legend, while everything else stays out. In a
+multi-plot figure, combine `displayName` with `add2all`. The object and
 its legend entry then appear on every panel.
 
 ```python
-plotPDF(odf, Miller([[1, 0, 0], [1, 1, 1]], cs))
-plot(ori, MarkerFaceColor='k', MarkerEdgeColor='black', add2all=True, DisplayName='randomSample')
+plotPF(odf, Miller([[1, 0, 0], [1, 1, 1]], cs))
+plot(ori, markerFaceColor='k', markerEdgeColor='black', add2all=True, displayName='randomSample')
 
 f = fibre(Miller(1, 1, -2, 1, cs), vector3d.Y)
-plot(f, color='red', linewidth=2, add2all=True, DisplayName='fibre')
+plot(f, color='red', lineWidth=2, add2all=True, displayName='fibre')
 
 legend('show')
 ```
@@ -194,10 +194,10 @@ fibre ODF through their power at each harmonic degree.
 
 ```python
 plt.close('all')
-plotSpektra(FourierODF(odf, 32), DisplayName='Two-component ODF', figSize='small')
+plotSpectrum(FourierODF(odf, 32), displayName='Two-component ODF', figSize='small')
 hold(True)
 fodf = fibreODF(Miller(1, 0, 0, cs), zvector)
-plotSpektra(FourierODF(fodf, 32), DisplayName='Fibre ODF')
+plotSpectrum(FourierODF(fodf, 32), displayName='Fibre ODF')
 hold(False)
 legend('show')
 ```
@@ -215,7 +215,7 @@ lets angles be read from the figure. The `grid` flag switches it on, and
 `grid_res` sets the angular spacing.
 
 ```python
-plotPDF(odf, [Miller(1, 0, 0, cs), Miller(0, 0, 1, cs)], grid=True, grid_res=15 * degree, antipodal=True)
+plotPF(odf, [Miller(1, 0, 0, cs), Miller(0, 0, 1, cs)], grid=True, grid_res=15 * degree, antipodal=True)
 mtexColorMap('white2black')
 ```
 

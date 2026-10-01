@@ -39,7 +39,7 @@ rng = np.random.default_rng(1)
 S2F = S2Fun.smiley() ** 2
 v = discreteSample(S2F, 10000, rng=rng)
 
-scatter(v, MarkerAlpha=0.2, MarkerSize=2)
+scatter(v, markerAlpha=0.2, markerSize=2)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ClusterDemo-1.png"></center>
@@ -57,7 +57,7 @@ then mark each returned center.
 ```python
 cInd, center = calcCluster(v)
 
-plot(v, ind2color(cInd + 1), MarkerAlpha=0.2, MarkerSize=2)
+plot(v, ind2color(cInd + 1), markerAlpha=0.2, markerSize=2)
 annotate(center)
 ```
 
@@ -104,7 +104,7 @@ opposites carries a color of its own.
 vSym.antipodal = True
 cInd, center = calcCluster(vSym)
 
-plot(vSym, ind2color(cInd + 1), MarkerAlpha=0.2, MarkerSize=2)
+plot(vSym, ind2color(cInd + 1), markerAlpha=0.2, markerSize=2)
 annotate(center)
 ```
 
@@ -141,7 +141,7 @@ orientations drawn over every section.
 ```python
 plotSection(odf, contourf=True)
 mtexColorMap('white2black')
-plot(ori, add2all=True, MarkerSize=3, MarkerAlpha=0.25, all=True)
+plot(ori, add2all=True, markerSize=3, markerAlpha=0.25, all=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ClusterDemo-6.png"></center>
@@ -160,7 +160,7 @@ radius and the minimum cluster size, as the text above says of this example.
 ```python
 cId, center = calcCluster(ori, method='classix', radius=0.1, minPoints=100)
 
-plotSection(ori, ind2color(cId + 1), MarkerSize=3, MarkerAlpha=0.25, all=True)
+plotSection(ori, ind2color(cId + 1), markerSize=3, markerAlpha=0.25, all=True)
 annotate(center)
 ```
 

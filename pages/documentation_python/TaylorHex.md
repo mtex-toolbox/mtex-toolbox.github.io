@@ -88,7 +88,7 @@ here, so opposite directions are drawn as the same pole.
 
 ```python
 h = Miller([[0, 0, 0, 1], [1, 0, -1, 0], [1, 0, -1, 1]], cs)
-plotPDF(odf, h, 'contourf', 'complete', 'upper')
+plotPF(odf, h, 'contourf', 'complete', 'upper')
 mtexColorbar()
 ```
 
@@ -229,13 +229,13 @@ arrange the three states as rows on common specimen axes.
 
 ```python
 newMtexFigure(layout=[3, 3])
-plotPDF(odf, h, 'contourf', 'complete', 'upper', 'grid', grid_res=30 * degree)
+plotPF(odf, h, 'contourf', 'complete', 'upper', 'grid', grid_res=30 * degree)
 
 nextAxis()
-plotPDF(oriCold, h, 'contourf', 'upper', 'complete', 'grid', grid_res=30 * degree, noLabel=True, noTitle=True)
+plotPF(oriCold, h, 'contourf', 'upper', 'complete', 'grid', grid_res=30 * degree, axisLabels=False, title=False)
 
 nextAxis()
-plotPDF(oriWarm, h, 'contourf', 'upper', 'complete', 'grid', grid_res=30 * degree, noLabel=True, noTitle=True)
+plotPF(oriWarm, h, 'contourf', 'upper', 'complete', 'grid', grid_res=30 * degree, axisLabels=False, title=False)
 mtexColorbar()
 ```
 

@@ -55,7 +55,7 @@ The seven values are the fit errors for the seven measured pole figures. Their
 recalculated pole figures are the visual baseline for the iterative result below.
 
 ```python
-plotPDF(odf_naive, pf.allH)
+plotPF(odf_naive, pf.allH)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureRefinement-3.png"></center>
@@ -66,11 +66,11 @@ The coarse stages suppress fine-scale variation and provide informed starting we
 for the finer stages.
 
 This scale progression acts as a regularisation strategy for irregularly sampled data.
-It does not replace ghost correction. The `nothinning` flag retains low-weight grid
+It does not replace ghost correction. The `thinning=False` flag retains low-weight grid
 nodes so that this comparison isolates the effect of the changing scale.
 
 ```python
-odf_iter = calcODFIterative(pf, nothinning=True, silent=False)
+odf_iter = calcODFIterative(pf, thinning=False, verbose=True)
 
 calcError(pf, odf_iter)
 ```
@@ -108,7 +108,7 @@ One fit error is reported per pole figure. All seven are smaller than those from
 ordinary reconstruction, in places by nearly a factor of two.
 
 ```python
-plotPDF(odf_iter, pf.allH)
+plotPF(odf_iter, pf.allH)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureRefinement-5.png"></center>
@@ -175,7 +175,7 @@ Three lattice planes will be measured.
 ```python
 h = Miller([[1, 1, 1], [1, 0, 0], [1, 1, 0]], cs)
 
-plotPDF(odf_true, h)
+plotPF(odf_true, h)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureRefinement-9.png"></center>
@@ -191,7 +191,7 @@ degrees.
 ```python
 r = equispacedS2Grid(resolution=15 * degree, maxTheta=80 * degree)
 
-plot(r, MarkerSize=12, upper=True)
+plot(r, markerSize=12, upper=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureRefinement-10.png"></center>
@@ -332,7 +332,7 @@ print(f'  error true -- iter. est. odf  : {calcError(odf_true, odf_recalc_iterat
 ```
 
 ```text
-  error true -- iter. est. odf  : 0.112711
+  error true -- iter. est. odf  : 0.111277
 ```
 
 The errors are 0.22 for the direct reconstruction and 0.12 for the iterative one. The
@@ -344,7 +344,7 @@ calcError(odf_recalc, odf_recalc_iterative, 'l1')
 ```
 
 ```text
-0.1725
+0.1733
 ```
 
 About a sixth of the volume is placed differently. On an unevenly sampled measurement,

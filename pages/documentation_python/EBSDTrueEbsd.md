@@ -49,7 +49,7 @@ plottingConvention.default('y↓→x')
 ```
 
 ```python
-ebsd = mtexdata('trueEbsdWCCoSmall', silent=True)
+ebsd = mtexdata('trueEbsdWCCoSmall', verbose=False)
 ```
 
 ```python

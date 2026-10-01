@@ -47,7 +47,7 @@ adf
 
 ```text
 S2FunHandle (432)
-  bandwidth hint: 250
+  bandwidth hint: 128
   antipodal     : true
 ```
 
@@ -92,7 +92,7 @@ specimen frame used by this data set.
 
 ```python
 plottingConvention.default('y↑→x')
-ebsd = mtexdata('twins', silent=True)
+ebsd = mtexdata('twins', verbose=False)
 
 grains = calcGrains(ebsd['indexed'], angle=5 * degree)
 grains = smoothBoundary(grains, 5)
@@ -201,7 +201,7 @@ one pair of pixels, and the port leaves its ids empty, so the pairs are read fro
 boundaries smoothed without those two stages, as the help of `smoothBoundary` advises.
 
 ```python
-gBp = smoothBoundary(calcGrains(ebsd['indexed'], angle=5 * degree), 5, noSimplify=True, noRefine=True)
+gBp = smoothBoundary(calcGrains(ebsd['indexed'], angle=5 * degree), 5, simplify=False, refine=False)
 gBp = gBp.boundary['Magnesium', 'Magnesium']
 ori1 = ebsd['id', gBp.ebsdId[:, 0]].orientations
 ori2 = ebsd['id', gBp.ebsdId[:, 1]].orientations

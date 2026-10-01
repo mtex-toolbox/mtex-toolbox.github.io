@@ -28,7 +28,7 @@ import numpy as np
 from mtex import *
 
 plottingConvention.default('y↑→x')
-ebsd = mtexdata('martensite', silent=True)
+ebsd = mtexdata('martensite', verbose=False)
 ```
 
 ## Segment the measured martensite
@@ -118,7 +118,22 @@ job
 
 ```text
 [2.5145 3.4875 4.4144 5.3474]
-[1.2157 1.6653 2.0673 3.0076]
+ optimizing parent to child orientation relationship
+  (335.80°, 10.53°, 65.80°)  4.028
+  (339.45°, 10.39°, 62.94°)  3.502
+  (342.75°, 10.57°, 60.42°)  2.988
+  (345.83°, 10.53°, 57.75°)  2.727
+  (347.12°, 10.38°, 56.69°)  2.661
+  (347.66°, 10.29°, 56.24°)  2.648
+  (347.88°, 10.26°, 56.06°)  2.647
+  (347.93°, 10.25°, 56.03°)  2.646
+  (347.95°, 10.24°, 56.02°)  2.646
+  (347.95°, 10.24°, 56.03°)  2.646
+  ( 90.00°, 10.11°,310.91°)  3.805
+  ( 94.34°, 10.13°,308.12°)  2.946
+  ( 94.06°,  9.76°,308.48°)  2.863
+⋮
+[1.2155 1.6655 2.0673 3.0076]
 parentGrainReconstructor
 
   phase   mineral         symmetry  grains  area  reconstructed
@@ -177,7 +192,7 @@ controls the width of the transition from high to low weight. Earlier text calle
 transition-width parameter.
 
 ```python
-job.calcVariantGraph(threshold=3.5 * degree, tolerance=3.5 * degree)
+job.calcVariantGraph(threshold=3.5 * degree, tol=3.5 * degree)
 job
 ```
 
@@ -192,7 +207,7 @@ parentGrainReconstructor
    c2c fit         : 1.2°, 1.7°, 2.1°, 3° (quintiles)
    closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.3°
 
- variant graph: 561554 entries
+ variant graph: 561543 entries
 ```
 
 Earlier versions also passed `'tortuosity'` here. `calcVariantGraph` has no such option, so
@@ -203,9 +218,9 @@ Large maps can reduce the first graph by grouping similarly oriented variants, t
 them in a second pass:
 
 ```python
-job.calcVariantGraph(threshold=2.5 * degree, tolerance=2.5 * degree, mergeSimilar=True)
+job.calcVariantGraph(threshold=2.5 * degree, tol=2.5 * degree, mergeSimilar=True)
 job.clusterVariantGraph()
-job.calcVariantGraph(threshold=2.5 * degree, tolerance=2.5 * degree)
+job.calcVariantGraph(threshold=2.5 * degree, tol=2.5 * degree)
 ```
 
 This two-pass route trades variant resolution in the first graph for lower cost. The present
@@ -303,7 +318,7 @@ reconstructed neighbours to vote for potential parents. `reconsiderAll` also per
 earlier assignment to be replaced.
 
 ```python
-job.calcGBVotes(p2c=True, reconsiderAll=True, threshold=4 * degree, tolerance=1.5 * degree)
+job.calcGBVotes(p2c=True, reconsiderAll=True, threshold=4 * degree, tol=1.5 * degree)
 print(job)
 
 job.calcParentFromVote()
@@ -449,14 +464,14 @@ parentOri = grainSelected.meanOrientation
 variantId, packetId, _, _ = calcVariantId(parentOri, childOri, job.p2c)
 
 color = ind2color(packetId)
-plotPDF(childOri, color, Miller(0, 0, 1, childOri.CS), MarkerSize=2, all=True)
+plotPF(childOri, color, Miller(0, 0, 1, childOri.CS), markerSize=2, all=True)
 
 hold(True)
 plot(parentOri.symmetrise() * Miller(0, 0, 1, parentOri.CS), markerSize=10, marker='s', markerFaceColor='w', markerEdgeColor='k',
      lineWidth=2)
 
 childVariants = variants(job.p2c, parentOri)
-plotPDF(childVariants, markerFaceColor='none', lineWidth=1.5, markerEdgeColor='k')
+plotPF(childVariants, markerFaceColor='none', lineWidth=1.5, markerEdgeColor='k')
 hold(False)
 ```
 

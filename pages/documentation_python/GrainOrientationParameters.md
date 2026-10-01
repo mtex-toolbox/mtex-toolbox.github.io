@@ -50,7 +50,7 @@ ebsd = mtexdata('ferrite')
 
 # reconstruct grains; one grain id per measurement is stored with the map
 grains = calcGrains(ebsd, angle=7.5 * degree, minPixel=5)
-ebsd = ebsd.project2FundamentalRegion()
+ebsd = ebsd.projectIntoFundamentalRegion()
 
 # smooth only the outlines used in the figures, and keep the indexed grains
 grains = smoothBoundary(grains, 5)
@@ -227,14 +227,14 @@ interpreted.
 ```python
 # visualize the selected grain orientations in a pole figure
 h = Miller(1, 0, 0, ebsd.CS)
-plotPDF(ori, h, MarkerSize=2, all=True)
+plotPF(ori, h, markerSize=2, all=True)
 
 # fit a fibre to those orientations
 f, lam, fit = fibre.fit(ori, 'local', diagnostics=True)
 
 # add the fibre to the pole figure
 hold(True)
-plotPDF(f.symmetrise(), h, lineColor='orange', lineWidth=2)
+plotPF(f.symmetrise(), h, lineColor='orange', lineWidth=2)
 hold(False)
 ```
 
@@ -251,8 +251,8 @@ axisSpecimen
 
 ```text
 vector3d (y↓→x)
-      x        y       z
-  0.282  -0.0471  -0.958
+       x       y      z
+  -0.282  0.0471  0.958
 ```
 
 ```python
@@ -262,8 +262,8 @@ axisCrystal
 
 ```text
 vector3d (Ferrite)
-        u        v        w
-  -0.0182  -0.2054  -0.2808
+       u       v       w
+  0.0182  0.2054  0.2808
 ```
 
 Rotation about an axis leaves that axis itself fixed. The crystal direction `f.h` should
@@ -271,7 +271,7 @@ therefore scatter less than the other directions in the pole figure.
 
 ```python
 hold(True)
-plot(ori * f.h, MarkerSize=2, all=True, MarkerFaceColor='k', antipodal=True)
+plot(ori * f.h, markerSize=2, all=True, markerFaceColor='k', antipodal=True)
 hold(False)
 ```
 
@@ -387,7 +387,7 @@ cKey = HSVDirectionKey(ebsd.CS, antipodal=True)
 # plot the key and the accepted dispersion axes
 plot(cKey)
 hold(True)
-plot(project2FundamentalRegion(GAX_C[isFibre], antipodal=True), MarkerFaceColor='black')
+plot(projectIntoFundamentalRegion(GAX_C[isFibre], antipodal=True), markerFaceColor='black')
 hold(False)
 ```
 
@@ -438,7 +438,7 @@ normal follows the shortening direction. These are kinematic interpretations of 
 aggregate, not identities that every deformed grain must obey.
 
 ```python
-plot(GAX_S[isFibre], antipodal=True, MarkerSize=4)
+plot(GAX_S[isFibre], antipodal=True, markerSize=4)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/GrainOrientationParameters-23.png"></center>
@@ -542,7 +542,7 @@ grains are restricted to the indexed ones before the mean orientations are colou
 `fibre.fit(ori, 'local', diagnostics=True)` returns MATLAB's triple; the eigenvalues are
 `lam[0]` to `lam[3]`, so MATLAB's `lambda(2)` and `lambda(3)` read `lam[:, 1]` and
 `lam[:, 2]` here. `calcGrains` writes the grain ids into the map and
-`ebsd.project2FundamentalRegion()` returns a new map. The measurements the closing
+`ebsd.projectIntoFundamentalRegion()` returns a new map. The measurements the closing
 absorbed keep their `notIndexed` phase and carry no orientation, so the fit and the
 distances skip them. MATLAB's `table` is a printed line.
 {% endraw %}

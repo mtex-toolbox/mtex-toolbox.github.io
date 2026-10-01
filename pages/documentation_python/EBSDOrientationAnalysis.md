@@ -65,7 +65,7 @@ the density of the three principal forsterite poles.
 # crystal symmetry of the forsterite phase
 cs = ebsd['Forsterite'].CS
 h = cat(Miller(1, 0, 0, cs), Miller(0, 1, 0, cs), Miller(0, 0, 1, cs))
-plotPDF(ebsd['Forsterite'].orientations, h, antipodal=True, smooth=True)
+plotPF(ebsd['Forsterite'].orientations, h, antipodal=True, smooth=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDOrientationAnalysis-5.png"></center>
@@ -102,7 +102,7 @@ vector3d (y↑→x)
 ```
 
 ```python
-plot(rOrth, add2all=True, Marker='square', MarkerColor='DarkRed')
+plot(rOrth, add2all=True, marker='square', markerFaceColor='DarkRed')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDOrientationAnalysis-7.png"></center>
@@ -118,7 +118,7 @@ angle about `rOrth` is therefore 80°.
 
 ```python
 nextAxis(1)
-circle(rOrth, 80 * degree, lineColor='darkred', lineWidth=5, EdgeAlpha=0.5)
+circle(rOrth, 80 * degree, lineColor='darkred', lineWidth=5, edgeAlpha=0.5)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDOrientationAnalysis-8.png"></center>
@@ -150,7 +150,7 @@ The inverse pole figure of `rOrth` asks which crystal direction points along tha
 specimen axis.
 
 ```python
-plotIPDF(ori, rOrth, smooth=True)
+plotIPF(ori, rOrth, smooth=True)
 mtexColorbar()
 ```
 
@@ -206,7 +206,7 @@ densityRange
 ```
 
 ```text
-[5.351239457436756, 19.4414399926558]
+[5.351239421811117, 19.441421811856525]
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDOrientationAnalysis-12.png"></center>

@@ -81,11 +81,11 @@ The two-dimensional estimator looks up the orientations beside each segment thro
 one specific pair of pixels.
 
 [smoothBoundary](grain2d.smoothBoundary.html) normally simplifies and resamples the
-segment list. The options `noSimplify` and `noRefine` smooth the vertex positions
+segment list. The options `simplify=False` and `refine=False` smooth the vertex positions
 without changing that list.
 
 ```python
-grains = smoothBoundary(grains, 10, noSimplify=True, noRefine=True)
+grains = smoothBoundary(grains, 10, simplify=False, refine=False)
 CS = grains.CS
 
 # compute IPF colours explicitly to keep the published output quiet
@@ -146,12 +146,12 @@ gbnd2 = calcGBND(gB[~cond], ebsd, halfwidth=5 * degree, nonneg=True)
 tp = Miller(1, 0, -1, 2, CS, 'hkil')
 
 # use one colour range so weak structure is not visually amplified
-contourf(gbnd1, colorRange=[0.5, 1.5], complete=True, upper=True, noLabel=True)
+contourf(gbnd1, colorRange=[0.5, 1.5], complete=True, upper=True, axisLabels=False)
 mtexTitle(r'GBND for $\omega > 80^{\circ}$')
 mtexColorMap('parula')
 annotate(symmetrise(tp), labeled=True, backgroundColor='w')
 nextAxis()
-contourf(gbnd2, colorRange=[0.5, 1.5], complete=True, upper=True, noLabel=True)
+contourf(gbnd2, colorRange=[0.5, 1.5], complete=True, upper=True, axisLabels=False)
 mtexTitle(r'GBND for $\omega < 80^{\circ}$')
 mtexColorMap('parula')
 mtexColorbar()
@@ -176,7 +176,7 @@ highAngleSummary
 ```
 
 ```text
-{'peakDensity': 1.3912131116954187, 'distanceToTwinPlaneDegree': 5.575478383679621}
+{'peakDensity': 1.3912131116954212, 'distanceToTwinPlaneDegree': 5.575478383679621}
 ```
 
 ---
@@ -187,7 +187,7 @@ remainingSummary
 ```
 
 ```text
-{'minimumDensity': 0.8590915918782474, 'maximumDensity': 1.0848686147087494}
+{'minimumDensity': 0.8590915918782424, 'maximumDensity': 1.0848686147087478}
 ```
 
 The peak lies 5.6 degrees from the nearest tension-twin plane. The remaining
@@ -222,12 +222,12 @@ tension-twin plane.
 ```python
 twinPeak, twinPeakPosition = gbcd.max()
 twinGBCDSummary = {'peakDensity': twinPeak,
-                   'distanceToTwinPlaneDegree': np.min(twinPeakPosition.angle(symmetrise(tp), noSymmetry=True)) / degree}
+                   'distanceToTwinPlaneDegree': np.min(twinPeakPosition.angle(symmetrise(tp), symmetry=False)) / degree}
 twinGBCDSummary
 ```
 
 ```text
-{'peakDensity': 2.1890197357756893, 'distanceToTwinPlaneDegree': 4.8433511616078455}
+{'peakDensity': 2.1890197358149455, 'distanceToTwinPlaneDegree': 4.8433511616078455}
 ```
 
 The printed angular distance is 1.3 degrees. Conditioning on the complete misorientation

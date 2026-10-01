@@ -47,7 +47,7 @@ p2c = orientation.KurdjumovSachs(csParent, csChild)
 oriParent = orientation.byEuler(0, 0, 0, csParent)
 oriChild = variants(p2c, oriParent)
 
-plotPDF(oriChild, Miller(0, 0, 1, csChild), MarkerSize=8, figSize='small')
+plotPF(oriChild, Miller(0, 0, 1, csChild), markerSize=8, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PhaseTransitions-2.png"></center>

@@ -138,7 +138,7 @@ initialTextureIndex
 ```
 
 ```text
-1.0011
+1.0009
 ```
 
 ## Step through the strain history
@@ -167,7 +167,7 @@ convention places RD north, TD west, and ND out of the page.
 previousFrame = specimenFrame.default
 specimenFrame.rolling.makeDefault()
 
-plotPDF(ori, Miller([[0, 0, 1], [1, 1, 1]], cs), 'contourf')
+plotPF(ori, Miller([[0, 0, 1], [1, 1, 1]], cs), 'contourf')
 mtexColorbar()
 ```
 
@@ -196,10 +196,10 @@ for s, t in zip([0, 20, 40, 60], textureIndex):
 
 ```text
 StrainPercent  TextureIndex
-            0        1.0011
-           20        1.1501
-           40        1.4771
-           60        1.8260
+            0        1.0009
+           20        1.1448
+           40        1.4656
+           60        1.8125
 ```
 
 The index rises from 1.0010 initially to 1.1499, 1.4984, and 1.9160. This steady

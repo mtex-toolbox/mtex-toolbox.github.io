@@ -70,12 +70,12 @@ odf = 0.2 * unimodalODF(mod1) + 0.3 * unimodalODF(mod2) + 0.5 * fibreODF(Miller(
 h = Miller([[1, 0, -1, 0], [0, 0, 0, 1], [1, 1, -2, 1]], cs)
 ```
 
-[plotPDF](SO3Fun.plotPDF.html) fixes each crystal direction in `h` and draws its pole
+[plotPF](SO3Fun.plotPDF.html) fixes each crystal direction in `h` and draws its pole
 density over specimen directions. The panels use the
 [default spherical projection](SphericalProjections_py.html).
 
 ```python
-plotPDF(odf, h)
+plotPF(odf, h)
 mtexColorMap('LaboTeX')
 ```
 
@@ -95,7 +95,7 @@ displayed region; it does not symmetrize the pole density or restore information
 by the projection.
 
 ```python
-plotPDF(odf, h, complete=True)
+plotPF(odf, h, complete=True)
 mtexColorMap('LaboTeX')
 ```
 
@@ -117,7 +117,7 @@ The `antipodal` flag averages opposite directions. With `complete` retained belo
 equal halves remain visible for comparison.
 
 ```python
-plotPDF(odf, h[2], antipodal=True, complete=True)
+plotPF(odf, h[2], antipodal=True, complete=True)
 mtexColorMap('LaboTeX')
 ```
 
@@ -128,11 +128,11 @@ make them independent measurements.
 
 ## Values Rather Than Pictures
 
-[calcPDF](SO3Fun.calcPDF.html) with only a crystal direction returns a spherical
+[radon](SO3Fun.calcPDF.html) with only a crystal direction returns a spherical
 function. Passing a specimen direction as well evaluates that function at one point.
 
 ```python
-pdf = calcPDF(odf, Miller(1, 0, 0, cs))
+pdf = radon(odf, Miller(1, 0, 0, cs))
 pdf
 ```
 
@@ -146,7 +146,7 @@ S2FunHarmonic (y↑→x)
 ---
 
 ```python
-densityAtX = calcPDF(odf, Miller(1, 0, 0, cs), vector3d.X)
+densityAtX = radon(odf, Miller(1, 0, 0, cs), vector3d.X)
 densityAtX
 ```
 
@@ -176,11 +176,11 @@ specimen direction for the third pole figure, then inspect the ODF along the
 corresponding fibre with [plotFibre](SO3Fun.plotFibre.html).
 
 ```python
-pdfPeak = calcPDF(odf, h[2])
+pdfPeak = radon(odf, h[2])
 _, rPeak = max(pdfPeak)
 f = fibre(h[2], rPeak)
 
-plotFibre(odf, f, LineWidth=2, figSize='small')
+plotFibre(odf, f, lineWidth=2, figSize='small')
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ODFPoleFigure-10.png"></center>

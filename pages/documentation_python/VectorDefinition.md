@@ -275,7 +275,7 @@ v = vector3d.rand(100)
 ```
 
 ```python
-plot(v, upper=True, grid=True, MarkerSize=4)
+plot(v, upper=True, grid=True, markerSize=4)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/VectorDefinition-20.png"></center>

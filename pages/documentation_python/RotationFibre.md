@@ -51,7 +51,7 @@ oriB = orientation.brass(cs)
 
 ```python
 # select the equivalent of oriB nearest to oriA
-oriB = oriB.project2FundamentalRegion(oriA)
+oriB = oriB.projectIntoFundamentalRegion(oriA)
 ```
 
 ```python
@@ -83,8 +83,8 @@ The default three-dimensional plot uses Bunge Euler coordinates.
 ```python
 plot(f, lineWidth=3, lineColor='red')
 hold(True)
-plot(oriA, 'filled', MarkerSize=20, MarkerFaceColor='darkred')
-plot(oriB, 'filled', MarkerSize=20, MarkerFaceColor='blue')
+plot(oriA, 'filled', markerSize=20, markerFaceColor='darkred')
+plot(oriB, 'filled', markerSize=20, markerFaceColor='blue')
 plt.xlim(0, 90)
 hold(False)
 ```
@@ -229,7 +229,7 @@ continuous red curve remains the underlying fibre.
 plot(f, lineWidth=2, lineColor='red')
 plt.xlim(0, 90)
 hold(True)
-plot(sampledOri, MarkerSize=8, MarkerEdgeColor='darkblue', linewidth=2)
+plot(sampledOri, markerSize=8, markerEdgeColor='darkblue', lineWidth=2)
 hold(False)
 ```
 

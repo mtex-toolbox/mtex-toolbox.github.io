@@ -47,7 +47,7 @@ Load the forsterite example and display the fields collected in `prop`.
 from mtex import *
 
 plottingConvention.default('y↑→x')
-ebsd = mtexdata('forsterite', silent=True)
+ebsd = mtexdata('forsterite', verbose=False)
 
 ebsd.prop
 ```

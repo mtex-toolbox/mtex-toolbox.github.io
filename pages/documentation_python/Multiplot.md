@@ -18,7 +18,7 @@ MTEX manages multiple axes through [mtexFigure](mtexFigure.mtexFigure.html).
 It keeps their sizes and spacing consistent. It also
 coordinates figure-wide tools such as colour ranges and colorbars.
 
-Commands such as `plotPDF` over several lattice planes, or `plot` of an
+Commands such as `plotPF` over several lattice planes, or `plot` of an
 ODF in sections, create this kind of figure automatically. To build one
 by hand, `newMtexFigure` creates the figure and its layout. The two
 entries of `layout` are the number of rows and columns.
@@ -28,7 +28,7 @@ from mtex import *
 
 mtexFig = newMtexFigure(layout=[2, 3], figSize='normal')
 plottingConvention.default('y↑→x')
-plot(vector3d(1, 1, 1), upper=True, MarkerSize=8)
+plot(vector3d(1, 1, 1), upper=True, markerSize=8)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/Multiplot-1.png"></center>
@@ -43,7 +43,7 @@ layout fills from left to right and then from top to bottom.
 ```python
 nextAxis()
 
-plot(vector3d(-1, 1, 1), upper=True, MarkerSize=8)
+plot(vector3d(-1, 1, 1), upper=True, markerSize=8)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/Multiplot-2.png"></center>
@@ -78,7 +78,7 @@ the selected axis and keep the arrangement.
 nextAxis(2, 3)
 
 hold(True)
-plot(vector3d(1, -1, 1), upper=True, MarkerSize=8)
+plot(vector3d(1, -1, 1), upper=True, markerSize=8)
 hold(False)
 ```
 

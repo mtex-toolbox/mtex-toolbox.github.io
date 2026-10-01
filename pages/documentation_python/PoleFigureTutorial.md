@@ -150,7 +150,7 @@ corrected measurements. `silent=True` suppresses the solver iteration history, w
 returned object remains visible.
 
 ```python
-odf = calcODF(pf, silent=True)
+odf = calcODF(pf, verbose=False)
 odf
 ```
 
@@ -192,7 +192,7 @@ Recalculate the four measured pole figures from the ODF and compare them with th
 corrected data above.
 
 ```python
-plotPDF(odf, pf.allH)
+plotPF(odf, pf.allH)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureTutorial-12.png"></center>
