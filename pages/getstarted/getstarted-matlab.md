@@ -7,8 +7,10 @@ layout: prose
 permalink: get-started-matlab
 ---
 
-You need MATLAB 2016b or newer. No further toolboxes are needed; only the GND
-and Taylor computations use the Optimization Toolbox.
+You need MATLAB R2022b or newer. No further toolboxes are needed; only the GND
+and Taylor computations use the Optimization Toolbox. Most of MTEX also runs in
+releases back to 2016b, but the import wizard needs R2022b and reading HDF5
+files R2019b.
 
 ## 1. Install MTEX
 
