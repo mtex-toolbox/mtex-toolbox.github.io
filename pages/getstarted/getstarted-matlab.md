@@ -33,8 +33,10 @@ mtexdata titanium
 plot(ebsd)
 ```
 
-A window with a coloured orientation map of titanium opens. On macOS, if MATLAB
-refuses to load the mex files, see [Installation problems](installation).
+A window with a coloured orientation map of titanium opens. The first start
+downloads MTEX's compiled binaries and the first `mtexdata` the example data,
+so both need an internet connection. If MTEX reports a missing or failing
+binary, see [Installation problems](installation).
 
 ## 2. The MATLAB desktop
 
