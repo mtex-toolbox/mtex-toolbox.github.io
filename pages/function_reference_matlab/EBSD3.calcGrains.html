@@ -1,5 +1,5 @@
 ---
-title: "EBSD3.calcGrains"
+title: 'EBSD3.calcGrains'
 
 sidebar: function_reference_sidebar
 permalink: EBSD3.calcGrains.html
@@ -23,46 +23,11 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>grains reconstruction from 2d EBSD data</p>
+<p>reconstruct 3d grains from a list of voxels</p>
+<p>A list of voxels, as a selection <code class="language-plaintext highlighter-rouge">ebsd('Quartz')</code> from a volume returns, is put back onto its lattice with <a href="EBSD3.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> and the grains are reconstructed on that grid; the cells of the lattice the list does not occupy are not indexed. The options are those of <a href="EBSD3square.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> on a voxel grid.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-[grains, ebsd] = calcGrains(ebsd,'angle',10*degree)
-{% endhighlight %}
-
-{% highlight matlab %}
-% reconstruction low and high angle grain boundaries
-lagb = 2*degree;
-hagb = 10*degree;
-grains = calcGrains(ebsd,'angle',[hagb lagb])
-{% endhighlight %}
-
-{% highlight matlab %}
-% allow grains to grow into not indexed regions
-grains = calcGrains(ebsd('indexed'),'angle',10*degree)
-{% endhighlight %}
-
-{% highlight matlab %}
-% do not allow grains to grow into not indexed regions
-grains = calcGrains(ebsd,'unitCell')
-{% endhighlight %}
-
-{% highlight matlab %}
-% follow non convex outer boundary
-grains = calcGrains(ebsd,'boundary','tight')
-{% endhighlight %}
-
-{% highlight matlab %}
-% specify phase dependent thresholds
-% thresholds follow the same order as ebsd.CSList and should have the same length
-grains = calcGrains(ebsd,'angle',{angl_1 angle_2 angle_3})
-{% endhighlight %}
-
-{% highlight matlab %}
-% Markovian clustering algorithm
-p = 1.5;    % inflation power (default = 1.4)
-maxIt = 10; % number of iterations (default = 4)
-delta = 5*degree % variance of the threshold angle
-grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree)
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -72,7 +37,7 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
             <tt>ebsd</tt>
          </td>
          <td>
-            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+            <tt><a href="EBSD3.EBSD3.html">EBSD3</a></tt>
          </td>
       </tr>
    </table>
@@ -85,7 +50,7 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
             <tt>grains</tt>
          </td>
          <td>
-            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
          </td>
       </tr>
       <tr>
@@ -93,99 +58,14 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
             <tt>ebsd</tt>
          </td>
          <td>
-            <tt><a href="EBSD.EBSD.html">EBSD</a> with additional property grainId</tt>
+            <tt>the input list with |grainId|; |grains.boundary.ebsdId| refers to the grid the reconstruction ran on</tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="6">Options</h2>
+<h2 id="6">See also</h2>
 <p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>threshold, angle</tt>
-         </td>
-         <td>
-            <tt>array of threshold angles per phase of mis/disorientation in radians</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>boundary</tt>
-         </td>
-         <td>
-            <tt>bounds the spatial domain ('convexhull', 'tight')</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>maxDist</tt>
-         </td>
-         <td>
-            <tt>maximum distance to for two pixels to be in one grain (default inf)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>fmc</tt>
-         </td>
-         <td>
-            <tt>fast multiscale clustering method</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>mcl</tt>
-         </td>
-         <td>
-            <tt>markovian clustering algorithm</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>custom</tt>
-         </td>
-         <td>
-            <tt>use a custom property for grain separation</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="7">Flags</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>unitCell</tt>
-         </td>
-         <td>
-            <tt>omit Voronoi decomposition and treat a unitcell lattice</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>qhull</tt>
-         </td>
-         <td>
-            <tt>use qHull for the Voronoi decomposition</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="8">References</h2>
-<div>
-<ul>
-<li>F.Bachmann, R. Hielscher, H. Schaeben, Grain detection from 2d and 3d EBSD data - Specification of the MTEX algorithm: Ultramicroscopy, 111, 1720-1733, 2011</li>
-</ul>
-</div>
-<div>
-<ul>
-<li>C. McMahon, B. Soe, A. Loeb, A. Vemulkar, M. Ferry, L. Bassman, Boundary identification in EBSD data with a generalization of fast multiscale clustering, <a href="https://doi.org/10.1016/j.ultramic.2013.04.009">Ultramicroscopy, 2013, 133:16-25</a>.</li>
-</ul>
-</div>
-<h2 id="9">See also</h2>
-<p>
-<a href="GrainReconstruction.html">GrainReconstruction</a> <a href="GrainReconstructionAdvanced.html">GrainReconstructionAdvanced</a>
+<a href="EBSD3square.calcGrains.html">EBSD3square.calcGrains</a> <a href="EBSD3.gridify.html">EBSD3.gridify</a>
 </p>
 </div>
 </body>

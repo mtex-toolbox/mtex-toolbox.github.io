@@ -295,7 +295,7 @@ toolchain applies to it directly. Here the section is segmented into grains and 
 boundaries drawn over the phase map.
 
 ```python
-grains = calcGrains(ebsdZ['indexed'])
+grains = calcGrains(ebsdZ)
 
 plot(ebsdZ, micronbar='off')
 hold(True)

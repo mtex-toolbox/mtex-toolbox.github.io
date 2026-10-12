@@ -210,7 +210,7 @@ rot = rotation.byAxisAngle(yvector, 180 * degree)
 ebsd_rot = rotate(ebsd, rot, 'keepEuler')
 
 # reconstruct grains
-grains = calcGrains(ebsd_rot['indexed'])
+grains = calcGrains(ebsd_rot)
 
 # select only large grains
 largeGrains = grains[grains.numPixel > 500]
@@ -240,7 +240,7 @@ The opposite operation keeps the coordinates and turns only the orientations.
 ebsd_rot = rotate(ebsd, rot, 'keepXY')
 
 # reconstruct grains
-grains = calcGrains(ebsd_rot['indexed'])
+grains = calcGrains(ebsd_rot)
 
 # select only large grains
 largeGrains = grains[grains.numPixel > 500]
@@ -280,7 +280,7 @@ rot = rotation.byAxisAngle(zvector, 5 * degree)
 ebsd_rot = rotate(ebsd, rot)
 
 # reconstruct grains
-grains = calcGrains(ebsd_rot['indexed'])
+grains = calcGrains(ebsd_rot)
 
 # select only large grains
 largeGrains = grains[grains.numPixel > 500]

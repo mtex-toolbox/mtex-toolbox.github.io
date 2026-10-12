@@ -43,7 +43,7 @@ from mtex import *
 plottingConvention.default('y↑→x')
 ebsd = mtexdata('forsterite')
 
-grainsRaw = calcGrains(ebsd['indexed'], angle=10 * degree)
+grainsRaw = calcGrains(ebsd, angle=10 * degree)
 
 # remove grains with ten or fewer measurements
 grainsRaw = grainsRaw[grainsRaw.numPixel > 10]
@@ -52,12 +52,13 @@ grainsRaw
 
 ```text
 grain2d (y↑→x)
-  size: 735
+  size: 745
   Phase  Grains               Mineral     Color         Symmetry  Crystal reference frame
+  0      10 (903 pixels)      notIndexed
   1      443 (151149 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
   2      185 (25457 pixels)   Enstatite   DarkSeaGreen  mmm       Enstatite
   3      107 (6962 pixels)    Diopside    Goldenrod     12/m1     Diopside
-  boundary segments: 44180, inner: 173, triple points: 3360
+  boundary segments: 44271, inner: 173, triple points: 3418
 ```
 
 ## Record how the grains were made
@@ -117,8 +118,8 @@ head(T)
                    1                   1          Forsterite                True                2550          6.4974e+06               11789              1438.1             0.56822
                    2                   1          Forsterite                True                  87          2.1425e+05              2146.5              261.15             0.87692
                    3                   2           Enstatite                True                  15               42579              994.75              116.42             0.24992
-                   5                   1          Forsterite                True                 427          1.2084e+06              4573.3               620.2             0.53336
-                   6                   1          Forsterite                True                  66          2.4014e+05                2359              276.47             0.52244
+                   5                   1          Forsterite                True                 427          1.2098e+06              4570.2              620.55             0.53336
+                   6                   1          Forsterite                True                  66          2.4026e+05              2329.4              276.54             0.52244
                    8                   1          Forsterite                True                 121          3.4983e+05              2738.2               333.7              1.9631
                    9                   1          Forsterite                True                 700          1.9734e+06              6191.5              792.56              2.0452
                   10                   1          Forsterite                True                  12               27491              876.24              93.544             0.21636
@@ -157,8 +158,8 @@ head({k: [float(r[i]) if k not in ('mineral', 'isBoundary') else r[i] for r in r
                   id               phase             mineral          isBoundary            numPixel            area_um2        perimeter_um equivalentRadius_um          GOS_degree   phi1_Bunge_degree    Phi_Bunge_degree   phi2_Bunge_degree
                    1                   1          Forsterite                True                2550          6.4974e+06               11789              1438.1             0.56822              95.892              42.532              292.81
                    2                   1          Forsterite                True                  87          2.1425e+05              2146.5              261.15             0.87692              170.36              153.19              279.13
-                   5                   1          Forsterite                True                 427          1.2084e+06              4573.3               620.2             0.53336              168.19              58.055              242.61
-                   6                   1          Forsterite                True                  66          2.4014e+05                2359              276.47             0.52244              175.12              31.094              263.33
+                   5                   1          Forsterite                True                 427          1.2098e+06              4570.2              620.55             0.53336              168.19              58.055              242.61
+                   6                   1          Forsterite                True                  66          2.4026e+05              2329.4              276.54             0.52244              175.12              31.094              263.33
                    8                   1          Forsterite                True                 121          3.4983e+05              2738.2               333.7              1.9631              158.97              110.06              265.58
                    9                   1          Forsterite                True                 700          1.9734e+06              6191.5              792.56              2.0452               57.41              162.62              335.06
                   10                   1          Forsterite                True                  12               27491              876.24              93.544             0.21636               137.2              161.48              224.95
@@ -339,14 +340,14 @@ head(TB)
 
 ```text
               grainA              grainB        segLength_umsegmentDisorientation_degree
-                1288                1380                  50               51.26
-                1288                1380              35.355              51.325
-                1288                1380              35.355              51.382
-                1288                1380                  50                51.2
-                1288                1380              35.355              50.644
-                1288                1380              35.355              50.694
-                1288                1380                  50              50.907
-                1288                1380                  50              50.987
+                1294                1386                  50               51.26
+                1294                1386              35.355              51.325
+                1294                1386              35.355              51.382
+                1294                1386                  50                51.2
+                1294                1386              35.355              50.644
+                1294                1386              35.355              50.694
+                1294                1386                  50              50.907
+                1294                1386                  50              50.987
 ```
 
 `gB` stores one row per boundary segment. The two IDs identify its neighbouring grains.

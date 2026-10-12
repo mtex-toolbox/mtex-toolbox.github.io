@@ -150,7 +150,7 @@ transparent than dark-coloured grains. The `translucent` option is a
 synonym for `faceAlpha`.
 
 ```python
-grains = calcGrains(ebsd['indexed'], angle=10 * degree)
+grains = calcGrains(ebsd, angle=10 * degree)
 grains = smoothBoundary(grains, 5)
 
 plot(ebsd, ebsd.bc)
@@ -200,7 +200,7 @@ np.mean(boundaryAlpha == 1)
 ```
 
 ```text
-0.8164
+0.8162
 ```
 
 ## Look through transparent surfaces

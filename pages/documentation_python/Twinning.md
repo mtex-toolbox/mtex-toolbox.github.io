@@ -155,7 +155,7 @@ pixels are excluded. Boundary geometry is then smoothed for five iterations befo
 lengths are compared.
 
 ```python
-grains = calcGrains(ebsd['indexed'], angle=5 * degree, minPixel=5)
+grains = calcGrains(ebsd, angle=5 * degree, minPixel=5)
 grains = smoothBoundary(grains, 5)
 
 # retain only boundaries between magnesium grains

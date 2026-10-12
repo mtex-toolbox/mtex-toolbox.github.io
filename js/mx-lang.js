@@ -28,7 +28,9 @@
   var here = pageOf(location.pathname.split('/').pop() + location.hash);
   // Without a remembered choice, a Python page opened from a link (a search
   // result, the pymtex docs) makes Python the choice; everything else is MATLAB.
-  var lang = stored();
+  var requestedLang = new URLSearchParams(location.search).get('lang');
+  var lang = requestedLang === 'python' || requestedLang === 'matlab' ? requestedLang : stored();
+  if (requestedLang === lang) set(lang);
   if (!lang && here && here.python) { lang = 'python'; set(lang); }
   lang = lang || 'matlab';
 
@@ -42,6 +44,8 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a) { return; }
+    var requested = a.getAttribute('data-page-lang');
+    if (requested) choose(requested, false);
     var p = pageOf(a.getAttribute('href'));
     if (p && p.python !== (lang === 'python')) { a.setAttribute('href', target(p, lang)); }
   }, true);
@@ -52,6 +56,18 @@
     });
     document.documentElement.setAttribute('data-lang', lang);
   }
+
+  function choose(value, navigate) {
+    if (value !== 'python' && value !== 'matlab') return;
+    lang = value;
+    set(lang);
+    mark();
+    if (here && navigate !== false) {
+      location.href = target({ name: here.name, python: false, hash: location.hash }, lang);
+    }
+    document.dispatchEvent(new CustomEvent('mx-lang', { detail: lang }));
+  }
+  window.MtexLanguage = { set: choose, current: function () { return lang; } };
 
   document.addEventListener('DOMContentLoaded', function () {
     mark();
@@ -66,11 +82,7 @@
     }
     document.querySelectorAll('.mx-lang-switch button').forEach(function (b) {
       b.addEventListener('click', function () {
-        lang = b.getAttribute('data-lang');
-        set(lang);
-        mark();
-        if (here) { location.href = target({ name: here.name, python: false, hash: location.hash }, lang); }
-        document.dispatchEvent(new CustomEvent('mx-lang', { detail: lang }));
+        choose(b.getAttribute('data-lang'));
       });
     });
   });

@@ -376,7 +376,7 @@ boundaries can give a slope between 1 and 2.
 ```python
 # reconstruct all indexed grains in the full data set once
 ebsd = mtexdata('forsterite')
-rawGrains = calcGrains(ebsd['indexed'])
+rawGrains = calcGrains(ebsd)
 rawGrains = rawGrains[~rawGrains.isBoundary]
 
 # use five smoothing iterations for the main estimate
@@ -408,7 +408,7 @@ fractalDimension
 ```
 
 ```text
-1.0124
+1.0129
 ```
 
 Treat the estimate with care. Pixel spacing sets the smallest visible feature, small
@@ -426,8 +426,8 @@ for iter in [0, 5, 25]:
 
 ```text
  0 smoothing iterations: fractal dimension 1.127
- 5 smoothing iterations: fractal dimension 1.012
-25 smoothing iterations: fractal dimension 0.963
+ 5 smoothing iterations: fractal dimension 1.013
+25 smoothing iterations: fractal dimension 0.962
 ```
 
 The pixel staircase gives 1.128 because grid corners add artificial length. Five

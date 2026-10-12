@@ -56,19 +56,9 @@ galleryExport('boundarytutorial','crop',0.8)                             % hide
 %#page PoleFigureTutorial
 %#title Your first pole figure analysis
 %#labels Tutorials, Pole figures
-cs = crystalSymmetry('6/mmm',[2.633 2.633 4.8],'X||a*','Y||b','Z||c');
-h = Miller({0,0,2},{1,0,0},{1,0,1},{1,0,2},cs);
-pname = fullfile(mtexDataPath,'PoleFigure','ZnCuTi');                 % hide
-fname = arrayfun(@(n) fullfile(pname,['ZnCuTi_Wal_50_5x5_PF_' n{1} '_R.UXD']),... % hide
-  {'002','100','101','102'},'UniformOutput',false);                      % hide
-fnameDef = arrayfun(@(n) fullfile(pname,['ZnCuTi_defocusing_PF_' n{1} '_R.UXD']),... % hide
-  {'002','100','101','102'},'UniformOutput',false);                      % hide
-pf = PoleFigure.load(fname,h,cs,'interface','uxd');
-pfDef = PoleFigure.load(fnameDef,h,cs,'interface','uxd');
-pf = correct(pf,'def',pfDef);
-pf(pf.intensities<0) = 0;
+mtexdata dubna silent
 odf = calcODF(pf,'silent');
-plotPDF(odf,h(1))
+plotPDF(odf,pf.allH(1),'antipodal')
 galleryExport('pftutorial')                                             % hide
 
 %% odftutorial
@@ -84,23 +74,23 @@ galleryExport('odftutorial')                                            % hide
 %% ipfmap
 %#page EBSDIPFMap
 %#title Colouring EBSD maps
-%#labels EBSD, Grains
-mtexdata twins
-[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',5*degree);
+%#labels EBSD
+mtexdata twins silent
 plot(ebsd,'ipfDirection',zvector)
-hold on, plot(grains.boundary,'lineWidth',1.5), hold off
 galleryExport('ipfmap','crop',0.95)                                 % hide
 
 %% twins
 %#page TwinningBoundaries
 %#title Twin boundaries
 %#labels Grains, Boundaries
-twin = orientation.map(Miller(0,1,-1,-2,grains.CS),Miller(0,-1,1,-2,grains.CS),...
-  Miller(2,-1,-1,0,grains.CS),Miller(2,-1,-1,0,grains.CS));
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',3);
+grains = smoothBoundary(grains,5);
+twin = orientation.map(Miller(1,-1,0,1,grains.CS),Miller(1,0,-1,-1,grains.CS),...
+  Miller(0,1,-1,1,grains.CS,'uvw'),Miller(1,-1,0,1,grains.CS,'uvw'));
 gB = grains.boundary('Magnesium','Magnesium');
 twinB = gB(gB.isTwinning(twin,5*degree));
-plot(grains,'faceColor',[0.13 0.22 0.25]), hold on
-plot(twinB,'lineColor',[1 0.72 0.15],'lineWidth',3), hold off
+plot(grains,grains.meanOrientation,'ipfDirection',zvector), hold on
+plot(twinB,'lineColor','w','lineWidth',3), hold off
 galleryExport('twins','crop',0.7)                                  % hide
 
 %% misorientation
@@ -118,9 +108,26 @@ galleryExport('misorientation','crop',0.8)                         % hide
 plotAngleDistribution(gB.misorientation)
 galleryExport('angledist')                              % hide
 
+%% density
+%#page DensityEstimation
+%#title Density estimation
+%#labels Texture, Mathematics
+x = linspace(0,1,500);
+f = @(x) (Gaussian(0.2,0.05,x)+Gaussian(0.5,0.2,x))/2;
+sample = discreteSample(f,80,'range',[0 1]);
+psi = Gaussian(0,0.05);
+estimate = @(x) mean(psi(x-sample),1);
+plot(x,f(x),'lineWidth',3), hold on
+plot(x,estimate(x),'lineWidth',3)
+plot(sample,zeros(size(sample)),'.','markerSize',14)
+hold off
+legend('True density','Kernel estimate','Sample','Location','northeast')
+xlabel('x'), ylabel('Density')
+galleryExport('density')                                                % hide
+
 %% caxes
 %#page VectorsDensityEstimation
-%#title Density estimation
+%#title Spherical density estimation
 %#labels EBSD, Texture
 c = ebsd('Magnesium').orientations * Miller(0,0,0,1,ebsd('Magnesium').CS);
 plot(calcDensity(c,'halfwidth',7.5*degree),'upper')
@@ -175,7 +182,7 @@ galleryExport('phases','crop',0.95)                                 % hide
 %#page ShapeParameters
 %#title Grain shape parameters
 %#labels Grains
-grains = calcGrains(ebsd('indexed'),'minPixel',10);
+grains = calcGrains(ebsd,'minPixel',10);
 plot(grains,grains.aspectRatio)
 setColorRange([1 4]), mtexColorbar('title','aspect ratio')
 galleryExport('shape','crop',0.95)                                  % hide
@@ -352,7 +359,8 @@ galleryExport('polefigures')                            % hide
 %#page PoleFigurePlot
 %#title Pole figure data
 %#labels Pole figures
-plot(pf{1},'contourf')
+mtexdata dubna silent
+plot(pf{1:4},'layout',[2 2],'markerSize',4)
 galleryExport('measured')                               % hide
 
 %% reconstruction
@@ -540,23 +548,6 @@ C = stiffnessTensor(Cij,ebsd('Magnesium').CS);
 plot(CHill.YoungsModulus,'complete','upper')
 mtexColorbar('title',"Young's modulus (GPa)")
 galleryExport('aggregate')                                              % hide
-
-%% density
-%#page DensityEstimation
-%#title From samples to a density
-%#labels Texture, Mathematics
-x = linspace(0,1,500);
-f = @(x) (Gaussian(0.2,0.05,x)+Gaussian(0.5,0.2,x))/2;
-sample = discreteSample(f,80,'range',[0 1]);
-psi = Gaussian(0,0.05);
-estimate = @(x) mean(psi(x-sample),1);
-plot(x,f(x),'lineWidth',3), hold on
-plot(x,estimate(x),'lineWidth',3)
-plot(sample,zeros(size(sample)),'.','markerSize',14)
-hold off
-legend('True density','Kernel estimate','Sample','Location','northeast')
-xlabel('x'), ylabel('Density')
-galleryExport('density')                                                % hide
 
 %% misorientationtheory
 %#page MisorientationTheory

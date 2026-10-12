@@ -174,7 +174,7 @@ Grains use the same mechanism. MTEX supplies derived grain properties such as `G
 `meanRotation`. You may add any other value that has one entry per grain.
 
 ```python
-grains = calcGrains(ebsd['indexed'], angle=10 * degree)
+grains = calcGrains(ebsd, angle=10 * degree)
 
 grains.prop
 ```
@@ -217,7 +217,7 @@ except ValueError as e:
 ```
 
 ```text
-the property 'nonsense' has 3 entries, the grains 3176
+the property 'nonsense' has 3 entries, the grains 3185
 ```
 
 ## How properties are implemented

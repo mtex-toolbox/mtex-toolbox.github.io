@@ -31,7 +31,7 @@ browser until its `id` in _data/announcement.yml changes.
   <div class="mx-wrap mx-top-row">
     <a class="mx-brand" href="index" aria-label="MTEX home"><img src="images/icons/MTEX_100x67px.png" alt="MTEX"></a>
     <nav aria-label="Site">
-      <ul class="mx-links">
+      <ul class="mx-links" id="mx-nav-links">
         {% for item in site.data.topnav.topnav %}
           {% assign target = item.url | split: "#" | first | remove: "/" %}
           {% assign here = page.url | remove: "/" | remove: ".html" %}
@@ -41,6 +41,7 @@ browser until its `id` in _data/announcement.yml changes.
           <li><a href="{{ item.url | remove_first: "/" }}"{% if classes != "" %} class="{{ classes }}"{% endif %}{% if classes == "mx-current" %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
         {% endfor %}
       </ul>
+      <button type="button" class="mx-scroll-next" data-scroll-target="mx-nav-links" aria-label="More navigation links" hidden>›</button>
     </nav>
     <div class="mx-lang-switch" role="group" aria-label="Language of code and pages">
       <button type="button" data-lang="matlab" aria-pressed="true">MATLAB</button>
@@ -49,3 +50,5 @@ browser until its `id` in _data/announcement.yml changes.
     <div class="mx-search">{% include search_box.html %}</div>
   </div>
 </header>
+
+<script src="js/mx-scroll.js" defer></script>
