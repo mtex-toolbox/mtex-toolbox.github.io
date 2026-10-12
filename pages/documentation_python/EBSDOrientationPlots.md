@@ -215,7 +215,7 @@ hold(False)
 
 ```text
   I'm plotting 1000 random orientations out of 152345 given orientations
-  I'm plotting 1000 random orientations out of 1152 given orientations
+  I'm plotting 1000 random orientations out of 1090 given orientations
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDOrientationPlots-10.png"></center>

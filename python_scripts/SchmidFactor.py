@@ -125,7 +125,7 @@ sS.SchmidFactor(sigma)
 # vectors as the two shear senses of the same geometric system.
 
 # %%
-sSAll = sS.symmetrise('antipodal')
+sSAll = sS.symmetrise(antipodal=True)
 sSAll
 
 # %% [markdown]
@@ -136,7 +136,7 @@ sSAll
 newMtexFigure(layout=[3, 4])
 for k in range(len(sSAll)):
   # the panels are filled column by column
-  nextAxis(k % 3 + 1, k // 3 + 1)
+  nextAxis(k % 3, k // 3)
   plot(cS, faceAlpha=0.5)
   mtexTitle(f'{k + 1}: ' + sSAll[k].char('latex'))
   hold(True)
@@ -176,7 +176,7 @@ tauRelative = sSAll.SchmidFactor(r, relative=True)
 # `tau` correspond to directions and columns correspond to slip systems.
 
 # %%
-rGrid = plotS2Grid('upper', cs, resolution=0.5 * degree)
+rGrid = plotS2Grid(cs, upper=True, resolution=0.5 * degree)
 tau = sSAll.SchmidFactor(rGrid)
 tauMax, id = np.abs(tau).max(axis=-1), np.abs(tau).argmax(axis=-1) + 1
 
@@ -213,7 +213,7 @@ hold(False)
 
 # %%
 tauFun = sSAll.SchmidFactor()
-contourf(max(abs(tauFun), axis=0), 'upper')
+contourf(max(abs(tauFun), axis=0), upper=True)
 mtexColorbar()
 
 tauFun

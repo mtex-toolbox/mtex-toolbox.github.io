@@ -203,21 +203,21 @@ v = vector3d.rand(100)
 
 for cm in ['hot', 'cool', 'parula']:
   nextAxis()
-  plot(v, 'smooth', grid=True, grid_res=90 * degree, upper=True)
+  plot(v, smooth=True, grid=True, grid_res=90 * degree, upper=True)
 
   mtexColorMap(mtexFig.gca, cm)
   mtexTitle(cm)
 
-mtexColorbar('multiple')
+mtexColorbar()
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ColorMaps-10.png"></center>
 
 These are three plots of the same random directions, yet each colormap
-gives a different visual impression. Independent colormaps need one colour
-bar each, which is what `'multiple'` asks for. A single bar carries one
-colormap and would describe only one of the three axes. That is the cost
-of using several colour mappings in one figure.
+gives a different visual impression. Every panel gets a colour bar of its
+own, because one bar carries a single colormap and would describe only one
+of the three axes. That is the cost of using several colour mappings in
+one figure.
 
 ## References
 

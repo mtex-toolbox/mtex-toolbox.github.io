@@ -71,7 +71,7 @@ density $$P_h(r)$$, the mean count is $$100P_h(r)$$ in this example; 100 is an i
 scale, not the same mean at every point. No background is added.
 
 ```python
-pf = noisepf(pf, 100)
+pf = noisepf(pf, 100, rng=np.random.default_rng(1))
 
 plot(pf, markerSize=5)
 mtexColorMap('LaboTeX')
@@ -120,9 +120,9 @@ for name, a, b, c, d in zip(['model', 'withGhostCorrection', 'withoutGhostCorrec
 
 ```text
                           odfError  meanPFResidual  minimumMrd  maximumMrd
-model                       0.0000          0.0505      0.7300      5.0395
-withGhostCorrection         0.0477          0.0491      0.5953      4.9217
-withoutGhostCorrection      0.0989          0.0481      0.2179      4.6192
+model                       0.0000          0.0511      0.7300      5.0395
+withGhostCorrection         0.0455          0.0494      0.5850      4.8902
+withoutGhostCorrection      0.1008          0.0482      0.1782      4.5416
 ```
 
 The corrected reconstruction has an ODF error of about 0.045, so between four and five
@@ -248,6 +248,6 @@ sequence to measured neutron pole figures. Once an ODF has been validated,
 
 `min(odf)` and `max(odf)` return the pair of the extreme value and the orientation where
 it is reached, so the table reads their first element. MATLAB's `table` is a printed
-loop. The Poisson draw of `noisepf` is not seeded, as MATLAB's is not, so the errors
-vary in the third digit between builds.
+loop. The Poisson draw of `noisepf` is seeded so that the page shows the same numbers on
+every build; MATLAB's is not, so its errors differ from these in the third digit.
 {% endraw %}

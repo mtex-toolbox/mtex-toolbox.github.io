@@ -129,7 +129,7 @@ The option `'antipodal'` identifies opposite Burgers-vector signs, because
 they describe the two shear senses of the same geometric system.
 
 ```python
-sSBasalSym = sSBasal.symmetrise('antipodal')
+sSBasalSym = sSBasal.symmetrise(antipodal=True)
 sSBasalSym
 ```
 
@@ -253,8 +253,8 @@ ori
 ```text
 orientation (Titanium (Alpha) → y↓→x)
   Bunge Euler angles in degree
-  phi1  Phi  phi2
-   112  129   152
+  phi1   Phi  phi2
+   360  72.7   273
 ```
 
 ```python
@@ -264,8 +264,8 @@ sSSpecimen
 
 ```text
 slipSystem (y↓→x)
-     x      y      z  |  x     y      z
-  0.05  -2.73  -1.24  0.15  0.06  -0.13
+     x      y     z  |  x     y     z
+  2.67  -0.43  -1.3     0  -0.2  0.06
 ```
 
 ## References

@@ -181,7 +181,7 @@ np.mean(np.abs(invRadon(radon(sFeven)).eval(nodes) - sFeven.eval(nodes)))
 ```
 
 ```text
-3.8330e-17
+6.1708e-16
 ```
 
 A general function cannot be recovered because its odd part has already been lost.
@@ -217,7 +217,7 @@ np.mean(np.abs(backF.eval(nodes) - sFeven.eval(nodes)))
 ```
 
 ```text
-5.3742e-17
+6.3130e-16
 ```
 
 ## The maths behind this

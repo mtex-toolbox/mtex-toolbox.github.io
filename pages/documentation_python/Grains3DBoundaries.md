@@ -193,7 +193,7 @@ character distribution reads anything but the voxel grid.
 grainsS = smoothBoundary(reduceBoundary(grains, 2, quadric=True), taubinFilter(20))
 gBS = grainsS.boundary['indexed']
 
-plot(calcGBND(gBS), 'upper')
+plot(calcGBND(gBS), upper=True)
 mtexColorbar()
 ```
 

@@ -155,7 +155,7 @@ minimumHarmonicValue
 # weights so that the result is nonnegative and then normalizes its mean to 1.
 
 # %%
-SO3FDensity = interp(ori, S['values'], 'density')
+SO3FDensity = interp(ori, S['values'], density=True)
 relativeErrorDensity = norm(SO3FDensity.eval(ori) - S['values']) / norm(S['values'])
 relativeErrorDensity
 
@@ -191,7 +191,7 @@ plot(SO3FDensity, 'sigma')
 
 # %%
 psi = SO3DeLaValleePoussinKernel(halfwidth=2.5 * degree)
-SO3FNarrow = interp(ori, S['values'], 'density', kernel=psi, resolution=5 * degree)
+SO3FNarrow = interp(ori, S['values'], density=True, kernel=psi, resolution=5 * degree)
 plot(SO3FNarrow, 'sigma')
 
 # %% [markdown]

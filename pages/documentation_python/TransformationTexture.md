@@ -91,11 +91,11 @@ hP = Miller([[1, 1, 0], [1, 0, 0]], csP)
 plotPF(oriB, hC, markerSize=5, markerFaceColor='black', figSize='medium')
 
 opt = dict(markerFaceColor='none', markerEdgeColor='darkred', lineWidth=3)
-for k in (1, 2):
+for k in (0, 1):
   nextAxis(k)
   hold(True)
-  plot(oriA * hP[k - 1].symmetrise(), **opt)
-  xlabel(hP[k - 1].char(), color='red')
+  plot(oriA * hP[k].symmetrise(), **opt)
+  xlabel(hP[k].char(), color='red')
   hold(False)
 gcm().drawNow()
 ```
@@ -160,7 +160,7 @@ The 120,000 child orientations approximate the transformed texture.
 odfBSim = calcDensity(oriBSim, halfwidth=10 * degree)
 print(odfBSim)
 
-plotPF(odfBSim, hC, 'contourf', figSize='medium')
+plotPF(odfBSim, hC, contourf=True, figSize='medium')
 mtexColorbar(title='mrd')
 ```
 
@@ -186,7 +186,7 @@ equal population of all child variants.
 odfB = variants(p2c, odfA)
 print(odfB)
 
-plotPF(odfB, hC, 'contourf', figSize='medium')
+plotPF(odfB, hC, contourf=True, figSize='medium')
 mtexColorbar(title='mrd')
 ```
 
@@ -219,7 +219,7 @@ print(textureIndexSampled, textureIndexDirect)
 
 ```text
 1.0000000000000002 1.0000000001483556
-3.455212210841727 17.45088855158692
+3.455212210841728 17.450888551586935
 ```
 
 Both means print as 1.0000, confirming that the ODFs are normalized. The sampled and direct
@@ -242,7 +242,7 @@ oriBSelected = variants(p2c, oriASim, selectedVariantId)
 odfBSelected = calcDensity(oriBSelected, halfwidth=10 * degree)
 print(odfBSelected)
 
-plotPF(odfBSelected, hC, 'contourf', figSize='medium')
+plotPF(odfBSelected, hC, contourf=True, figSize='medium')
 mtexColorbar(title='mrd')
 ```
 

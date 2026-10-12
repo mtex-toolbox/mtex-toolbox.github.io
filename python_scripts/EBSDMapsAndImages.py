@@ -140,7 +140,7 @@ plot(imgList, layout=[1, 3])
 # entry in the map frame.
 
 # %%
-imgList = transformReferenceFrame(imgList, ebsdFrame, 'byScreenAlignment')
+imgList = transformReferenceFrame(imgList, ebsdFrame, byScreenAlignment=True)
 imgList
 
 # %% [markdown]

@@ -62,11 +62,11 @@ hP = Miller([[1, 1, 0], [1, 0, 0]], csP)
 plotPF(oriB, hC, markerSize=5, markerFaceColor='black', figSize='medium')
 
 opt = dict(markerFaceColor='none', markerEdgeColor='darkred', lineWidth=3)
-for k in (1, 2):
+for k in (0, 1):
   nextAxis(k)
   hold(True)
-  plot(oriA * hP[k - 1].symmetrise(), **opt)
-  xlabel(hP[k - 1].char(), color='red')
+  plot(oriA * hP[k].symmetrise(), **opt)
+  xlabel(hP[k].char(), color='red')
   hold(False)
 gcm().drawNow()
 
@@ -112,7 +112,7 @@ numSimulatedChildren
 odfBSim = calcDensity(oriBSim, halfwidth=10 * degree)
 print(odfBSim)
 
-plotPF(odfBSim, hC, 'contourf', figSize='medium')
+plotPF(odfBSim, hC, contourf=True, figSize='medium')
 mtexColorbar(title='mrd')
 
 # %% [markdown]
@@ -130,7 +130,7 @@ mtexColorbar(title='mrd')
 odfB = variants(p2c, odfA)
 print(odfB)
 
-plotPF(odfB, hC, 'contourf', figSize='medium')
+plotPF(odfB, hC, contourf=True, figSize='medium')
 mtexColorbar(title='mrd')
 
 # %% [markdown]
@@ -173,7 +173,7 @@ oriBSelected = variants(p2c, oriASim, selectedVariantId)
 odfBSelected = calcDensity(oriBSelected, halfwidth=10 * degree)
 print(odfBSelected)
 
-plotPF(odfBSelected, hC, 'contourf', figSize='medium')
+plotPF(odfBSelected, hC, contourf=True, figSize='medium')
 mtexColorbar(title='mrd')
 
 # %% [markdown]

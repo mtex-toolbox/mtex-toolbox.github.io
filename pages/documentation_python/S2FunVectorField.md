@@ -103,7 +103,7 @@ np.max(norm(sVF1.eval(probe) - sVF2.eval(probe)))
 ```
 
 ```text
-3.2379e-08
+3.2232e-08
 ```
 
 ## Constructing a field from scalar components

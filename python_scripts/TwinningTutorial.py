@@ -85,7 +85,7 @@ mCompression
 
 # %%
 SFTwin = sSTwin.SchmidFactor()
-plot(SFTwin, 'upper')
+plot(SFTwin, upper=True)
 mtexColorbar()
 
 # %% [markdown]

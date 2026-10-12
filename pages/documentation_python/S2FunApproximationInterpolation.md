@@ -73,7 +73,7 @@ linearError
 ```
 
 ```text
-1.0318e-15
+1.1088e-15
 ```
 
 The residual norm is at machine precision. The function therefore matches the data at the

@@ -112,7 +112,7 @@ shows where this representative receives positive and negative resolved shear.
 
 ```python
 SFTwin = sSTwin.SchmidFactor()
-plot(SFTwin, 'upper')
+plot(SFTwin, upper=True)
 mtexColorbar()
 ```
 

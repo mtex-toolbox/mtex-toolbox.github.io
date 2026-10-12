@@ -98,10 +98,10 @@ calcError(pf, odf_iter)
    2 | 0.57  0.55  0.37  0.18  0.41  0.46  0.36
    3 | 0.55  0.55  0.38  0.16  0.39  0.45  0.35
    4 | 0.57  0.55  0.36  0.18  0.40  0.45  0.36
-   5 | 0.55  0.55  0.37  0.16  0.38  0.44  0.35
+   5 | 0.55  0.55  0.37  0.16  0.39  0.44  0.35
    6 | 0.56  0.54  0.36  0.17  0.40  0.45  0.35
    5 :   20040 | 0.29  0.19  0.22  0.18  0.17  0.27  0.28
-array([0.2924, 0.1908, 0.2215, 0.18  , 0.1666, 0.2699, 0.278 ])
+array([0.2924, 0.1908, 0.2215, 0.1801, 0.1667, 0.2699, 0.2779])
 ```
 
 One fit error is reported per pole figure. All seven are smaller than those from the
@@ -243,15 +243,15 @@ for k in range(nsteps):
 ```
 
 ```text
-- mean sampling resolution : 15.270083
-  error true -- estimated odf   : 0.816434
-- mean sampling resolution : 13.540583
+- mean sampling resolution : 15.270088
+  error true -- estimated odf   : 0.816625
+- mean sampling resolution : 13.540635
   error true -- estimated odf   : 1.004866
-- mean sampling resolution : 9.755460
-  error true -- estimated odf   : 0.657957
-- mean sampling resolution : 7.548422
-  error true -- estimated odf   : 0.381948
-- mean sampling resolution : 4.166825
+- mean sampling resolution : 9.755493
+  error true -- estimated odf   : 0.657554
+- mean sampling resolution : 7.548409
+  error true -- estimated odf   : 0.384405
+- mean sampling resolution : 4.166612
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureRefinement-11-1.png"></center>
@@ -319,7 +319,7 @@ print(f'  error true -- estimated odf   : {calcError(odf_true, odf_recalc):f}')
 ```
 
 ```text
-  error true -- estimated odf   : 0.239201
+  error true -- estimated odf   : 0.239274
 ```
 
 The iterative reconstruction reaches the same target scale through a sequence of wider
@@ -332,7 +332,7 @@ print(f'  error true -- iter. est. odf  : {calcError(odf_true, odf_recalc_iterat
 ```
 
 ```text
-  error true -- iter. est. odf  : 0.111277
+  error true -- iter. est. odf  : 0.115130
 ```
 
 The errors are 0.22 for the direct reconstruction and 0.12 for the iterative one. The
@@ -344,7 +344,7 @@ calcError(odf_recalc, odf_recalc_iterative, 'l1')
 ```
 
 ```text
-0.1733
+0.1708
 ```
 
 About a sixth of the volume is placed differently. On an unevenly sampled measurement,

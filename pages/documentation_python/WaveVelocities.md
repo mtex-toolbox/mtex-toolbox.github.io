@@ -260,7 +260,7 @@ Harmonic expansions are smooth and respect crystal symmetry exactly.
 They are the better choice for three-dimensional plots.
 
 ```python
-vpHarm = velocity(C, 'harmonic').vp
+vpHarm = velocity(C, harmonic=True).vp
 vpHarm
 ```
 

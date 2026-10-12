@@ -156,7 +156,7 @@ a spherical function and two spherical axis fields.
 ```python
 deltaNSphere, pMinField, pMaxField = rI.birefringence()
 
-plot3d(deltaNSphere, 'complete')
+plot3d(deltaNSphere, complete=True)
 mtexColorMap('parula')
 mtexColorbar()
 
@@ -348,7 +348,7 @@ maxRouteDifference
 ```
 
 ```text
-3.4284e-13
+3.4217e-13
 ```
 
 The notIndexed pixels inside olivine grains, which `calcGrains` gave the phase of their

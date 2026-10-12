@@ -369,7 +369,7 @@ characteristicAspectRatio
 ```
 
 ```text
-[1.3444299216788154, 1.343228562320453]
+[1.3444380965328955, 1.3437095650863362]
 ```
 
 Whether a difference between two such shapes is more than noise is not something these

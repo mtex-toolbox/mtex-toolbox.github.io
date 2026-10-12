@@ -163,7 +163,7 @@ screw systems. The `'antipodal'` option identifies opposite shear senses
 before the conversion.
 
 ```python
-sSFcc = symmetrise(slipSystem.fcc(cs), 'antipodal')
+sSFcc = symmetrise(slipSystem.fcc(cs), antipodal=True)
 dSFcc = dislocationSystem(sSFcc)
 [sum(dSFcc.isEdge), sum(dSFcc.isScrew)]
 ```

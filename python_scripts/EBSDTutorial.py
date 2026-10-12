@@ -183,7 +183,7 @@ hold(False)
 h = Miller([1, 0, 0], [0, 1, 0], [0, 0, 1], ebsd['Forsterite'].CS)
 
 # plot their specimen-direction distributions
-plotPF(ebsd['Forsterite'].orientations, h, 'contourf')
+plotPF(ebsd['Forsterite'].orientations, h, contourf=True)
 mtexColorbar()
 
 # %% [markdown]
@@ -208,7 +208,7 @@ mtexColorbar()
 r = vector3d.cat(vector3d.X, vector3d.Y, vector3d.Z)
 
 # plot their crystal-direction distributions
-plotIPF(ebsd['Forsterite'].orientations, r, 'contourf')
+plotIPF(ebsd['Forsterite'].orientations, r, contourf=True)
 mtexColorbar()
 
 # %% [markdown]
@@ -249,8 +249,9 @@ mtexColorbar()
 # %% [markdown]
 # ## Technical Details
 #
-# `calcGrains(ebsd, angle=10*degree, minPixel=5)` gives 14, 490, 213 and 168 notIndexed,
+# `calcGrains(ebsd, angle=10*degree, minPixel=5)` gives 20, 489, 209 and 167 notIndexed,
 # forsterite, enstatite and diopside grains and 36193 boundary segments where MATLAB has 9,
-# 489, 208, 167 and 35402: the cull of the small grains widens a small difference in the
-# segmentation, as on the other forsterite pages. The 262 forsterite grains above 100
+# 489, 208, 167 and 35402: the fragments the second segmentation leaves below minPixel are
+# notIndexed grains here, and a small difference in the segmentation remains, as on the
+# other forsterite pages. The 262 forsterite grains above 100
 # pixels agree, with 142943 pixels for MATLAB's 142951.

@@ -93,7 +93,7 @@ hold(False)
 ```
 
 ```text
-Default KAM median: 0.60 degree; maximum: 14.5 degree
+Default KAM median: 0.60 degree; maximum: 24.6 degree
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDKAM-4.png"></center>

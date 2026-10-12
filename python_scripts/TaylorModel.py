@@ -101,7 +101,7 @@ WFun.eval(ori)
 sP = phi1Sections(cs)
 sP.phi1 = np.arange(0, 91, 10) * degree
 
-plot(MFun, 'smooth', sP)
+plot(MFun, sP, smooth=True)
 mtexColorbar()
 
 hold(True)
@@ -122,7 +122,7 @@ hold(False)
 # angles for the strain step stored in `epsilon` and scale with the size of that step.
 
 # %%
-plot(norm(WFun) / degree, 'smooth', sP, resolution=0.5 * degree)
+plot(norm(WFun) / degree, sP, smooth=True, resolution=0.5 * degree)
 mtexColorbar()
 
 # %% [markdown]
@@ -131,7 +131,7 @@ mtexColorbar()
 
 # %%
 sP = sigmaSections(cs)
-plot(norm(WFun) / degree, 'smooth', sP)
+plot(norm(WFun) / degree, sP, smooth=True)
 mtexColorbar()
 
 # %% [markdown]

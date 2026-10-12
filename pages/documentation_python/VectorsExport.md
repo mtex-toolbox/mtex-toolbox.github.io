@@ -82,7 +82,7 @@ This representation contains directions only. It does not include vector length,
 Cartesian coordinates when magnitudes matter.
 
 ```python
-export(v, fname, 'polar')
+export(v, fname, polar=True)
 print(open(fname).read())
 ```
 

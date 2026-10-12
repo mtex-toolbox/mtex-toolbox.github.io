@@ -104,7 +104,7 @@ maximumOrbitDifference
 ```
 
 ```text
-1.3739e-14
+1.3656e-14
 ```
 
 ---
@@ -254,7 +254,7 @@ loses their differences, so the original nonsymmetric function cannot be recover
 `SO3F2Sym`.
 
 ```python
-plot(SO3F2Sym, 'complete')
+plot(SO3F2Sym, complete=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunSymmetricFunctions-13.png"></center>
@@ -320,5 +320,5 @@ which symmetries the result inherits.
 NumPy's generator cannot reproduce MATLAB's `rng(1)`, so the random coefficients, the
 orbit spread 9.84 for MATLAB's 4.71 and the coefficient change 0.70 for 0.74 differ from
 MATLAB's in the digits.
-`plot(f, 'complete')` draws the sections of the frames without their groups.
+`plot(f, complete=True)` draws the sections of the frames without their groups.
 {% endraw %}

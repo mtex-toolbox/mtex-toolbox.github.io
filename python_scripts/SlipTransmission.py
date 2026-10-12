@@ -116,7 +116,7 @@ plot(sSGrain.b)
 # east--west axis than near the north--south axis.
 
 # %%
-plot(sSGrain.b, 'contourf')
+plot(sSGrain.b, contourf=True)
 
 # %% [markdown]
 # The contour plot summarizes the same points as a density. Its east--west
@@ -201,7 +201,7 @@ moriGrid = sP.makeGrid()
 sSBasalReference = slipSystem.basal(ebsd.CS)
 mPGrid = mPrime(sSBasalReference, moriGrid.reshape(-1, 1) * sSBasalReference.symmetrise()).max(axis=1)
 
-sP.plot(mPGrid, 'smooth')
+sP.plot(mPGrid, smooth=True)
 mtexColorbar()
 
 # %% [markdown]

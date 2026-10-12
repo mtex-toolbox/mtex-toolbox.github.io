@@ -158,7 +158,7 @@ vpFromGridX
 # They are the better choice for three-dimensional plots.
 
 # %%
-vpHarm = velocity(C, 'harmonic').vp
+vpHarm = velocity(C, harmonic=True).vp
 vpHarm
 
 # %% [markdown]

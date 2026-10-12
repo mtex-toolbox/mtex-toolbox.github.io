@@ -241,7 +241,7 @@ grainCount
 ```
 
 ```text
-375
+368
 ```
 
 ```python
@@ -267,7 +267,7 @@ sharpAtGrainMeans
 ```
 
 ```text
-5.9457
+5.7919
 ```
 
 The grains carry about six times the average density, which is where the spikes came
@@ -348,8 +348,8 @@ for name, psi in [('KLCV', psiGrain), ('RuleOfThumb', psiThumb), ('magicRule', p
 
 ```text
 KLCV         selected halfwidth 4.725 degree
-RuleOfThumb  selected halfwidth 14.32 degree
-magicRule    selected halfwidth 14.98 degree
+RuleOfThumb  selected halfwidth 14.31 degree
+magicRule    selected halfwidth 15.02 degree
 ```
 
 Cross-validation asks for 4.7 degrees while the two rules ask for about 15, and that
@@ -384,8 +384,8 @@ for name, psi in [('UCV', psiUCV), ('conservative', psiConservative)]:
 ```
 
 ```text
-UCV          selected halfwidth 7.117 degree
-conservative selected halfwidth 40 degree
+UCV          selected halfwidth 7.488 degree
+conservative selected halfwidth 28.03 degree
 ```
 
 UCV asks for 9.7 degrees and the conservative rule for 27, and again the spread is the
@@ -414,8 +414,8 @@ for name, f in [('every pixel', odf), ('every grain', odfEqualGrain), ('grain me
 
 ```text
 every pixel            peak 3.727 mrd, distance to the pixel ODF 0
-every grain            peak 2.667 mrd, distance to the pixel ODF 0.1581
-grain means by area    peak 3.766 mrd, distance to the pixel ODF 0.01219
+every grain            peak 2.536 mrd, distance to the pixel ODF 0.1606
+grain means by area    peak 3.976 mrd, distance to the pixel ODF 0.0164
 ```
 
 On a regular scan, one pixel per measurement weights each orientation by the area it
@@ -436,7 +436,7 @@ meanSpread
 ```
 
 ```text
-0.9748
+1.0834
 ```
 
 ---
@@ -447,7 +447,7 @@ maxSpread
 ```
 
 ```text
-6.1110
+6.9751
 ```
 
 In this recrystallized copper the mean spread within a grain is about a degree and at

@@ -113,7 +113,7 @@ np.array([np.min(c), np.max(c), np.sum(c)])
 ```
 
 ```text
-array([0.0053, 0.0183, 1.    ])
+array([0.0056, 0.0189, 1.    ])
 ```
 
 Marker area now follows the weight. A large marker represents a direction that carries a
@@ -187,11 +187,11 @@ for row in zip(M, densRnd, densOpt, densWgt, momRnd, momOpt, momWgt):
 
 ```text
            points    densityRandom   densityOptimal  densityWeighted     momentRandom    momentOptimal   momentWeighted
-               50           1.9701           1.0790           1.0739           2.5475           2.0445           2.0861
-              100           1.3830           0.6627           0.5446           1.7778           1.0059           0.9355
-              200           1.0074           0.4392           0.3069           1.2842           0.5671           0.3551
-              400           0.7199           0.3019           0.2538           0.8996           0.3295           0.2229
-              800           0.5247           0.2440           0.2352           0.5929           0.1806           0.0916
+               50           1.8483           1.0790           1.0738           2.4475           2.0445           2.0861
+              100           1.4049           0.6570           0.5339           1.7759           0.9897           0.9171
+              200           1.0007           0.4387           0.3058           1.2691           0.5699           0.3510
+              400           0.7053           0.3017           0.2536           0.9066           0.3307           0.2280
+              800           0.5510           0.2450           0.2343           0.6215           0.1784           0.0909
 ```
 
 ---

@@ -49,7 +49,7 @@ plotSection(ori, val, 'sigma', all=True)
 # MTEX normalizes the fitted function to mean 1.
 
 # %%
-SO3FDensity = interp(ori, val, 'density')
+SO3FDensity = interp(ori, val, density=True)
 SO3FDensity
 
 # %% [markdown]
@@ -140,7 +140,7 @@ mtexColorbar()
 # `resolution` separately when the aim is to isolate the effect of halfwidth.
 
 # %%
-SO3FNarrow = interp(ori, val, 'density', halfwidth=2 * degree, resolution=5 * degree)
+SO3FNarrow = interp(ori, val, density=True, halfwidth=2 * degree, resolution=5 * degree)
 SO3FNarrow
 
 # %% [markdown]
@@ -156,7 +156,7 @@ plot(SO3FNarrow, 'sigma')
 # choice.
 
 # %%
-SO3FSmooth = interp(ori, val, 'density', halfwidth=10 * degree, resolution=5 * degree)
+SO3FSmooth = interp(ori, val, density=True, halfwidth=10 * degree, resolution=5 * degree)
 SO3FSmooth
 
 # %% [markdown]
@@ -182,7 +182,7 @@ S3G
 # ---
 
 # %%
-SO3FGrid = interp(ori, val, 'density', SO3Grid=S3G)
+SO3FGrid = interp(ori, val, density=True, SO3Grid=S3G)
 SO3FGrid
 
 # %% [markdown]
@@ -206,7 +206,7 @@ plot(SO3FGrid, 'sigma')
 hw = np.array([20, 15, 12.5, 10, 7.5, 5, 2.5])
 err = np.zeros(len(hw))
 for k in range(len(hw)):
-  SO3Fhw = interp(ori, val, 'density', halfwidth=hw[k] * degree, resolution=5 * degree)
+  SO3Fhw = interp(ori, val, density=True, halfwidth=hw[k] * degree, resolution=5 * degree)
   err[k] = norm(SO3Fhw.eval(ori) - S['values']) / norm(S['values'])
 
 plt.figure(figsize=(6, 3.5))
@@ -238,7 +238,7 @@ bestRecoveryError
 # ---
 
 # %%
-SO3FBest = interp(ori, val, 'density', halfwidth=bestHalfwidth * degree, resolution=5 * degree)
+SO3FBest = interp(ori, val, density=True, halfwidth=bestHalfwidth * degree, resolution=5 * degree)
 plot(SO3FBest, 'sigma')
 
 # %% [markdown]
@@ -264,7 +264,7 @@ psi
 # ---
 
 # %%
-SO3FAbel = interp(ori, val, 'density', kernel=psi, resolution=5 * degree)
+SO3FAbel = interp(ori, val, density=True, kernel=psi, resolution=5 * degree)
 plot(SO3FAbel, 'sigma')
 
 # %% [markdown]

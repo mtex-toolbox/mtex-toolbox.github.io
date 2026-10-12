@@ -120,16 +120,16 @@ hFcc = Miller([[1, 0, 0], [1, 1, 0], [1, 1, 1]], csAus)
 
 plotPF(childOri, hBcc, markerSize=5, markerFaceAlpha=0.05, markerEdgeAlpha=0.1, points=500)
 
-nextAxis(1)
+nextAxis(0)
 hold(True)
 plot(parentOri * hFcc[0].symmetrise(), markerFaceColor='r')
 xlabel('(100)', color='red')
 
-nextAxis(2)
+nextAxis(1)
 plot(parentOri * hFcc[2].symmetrise(), markerFaceColor='r')
 xlabel('(111)', color='red')
 
-nextAxis(3)
+nextAxis(2)
 plot(parentOri * hFcc[1].symmetrise(), markerFaceColor='r')
 xlabel('(110)', color='red')
 hold(False)
@@ -164,7 +164,7 @@ the OR explicitly, which makes its meaning visible.
 KS = orientation.map(Miller(1, 1, 1, csAus), Miller(0, 1, 1, csBcc), Miller(-1, 0, 1, csAus), Miller(-1, -1, 1, csBcc))
 print(KS)
 
-plotPF(variants(KS, parentOri), 'add2all', markerFaceColor='none', markerEdgeColor='k', lineWidth=2)
+plotPF(variants(KS, parentOri), add2all=True, markerFaceColor='none', markerEdgeColor='k', lineWidth=2)
 ```
 
 ```text
@@ -205,7 +205,7 @@ print(p2cMean)
 
 plotPF(childOri, hBcc, markerSize=5, markerFaceAlpha=0.05, markerEdgeAlpha=0.1, points=500)
 hold(True)
-plotPF(variants(p2cMean, parentOri), 'add2all', markerFaceColor='none', markerEdgeColor='k', lineWidth=2)
+plotPF(variants(p2cMean, parentOri), add2all=True, markerFaceColor='none', markerEdgeColor='k', lineWidth=2)
 hold(False)
 
 fitMean = np.mean(angle(mori, p2cMean)) / degree
@@ -257,24 +257,9 @@ fitIter
 misorientation (Austenite → Ferrite, bcc)
   (111) || (011)   [1̅10] || [100]
  optimizing parent to child orientation relationship
-  (180.00°, 99.74°, 45.00°)  5.419
-  (180.28°, 98.56°, 45.59°)  4.526
-  (181.73°, 97.63°, 47.04°)  2.85
-  (181.97°, 97.85°, 47.10°)  2.798
-  (182.16°, 97.98°, 47.04°)  2.772
-  (182.25°, 98.05°, 47.01°)  2.767
-  (182.31°, 98.08°, 46.99°)  2.76
-  (182.48°, 98.09°, 46.81°)  2.676
-  (182.66°, 98.09°, 46.51°)  2.601
-  (182.69°, 98.10°, 46.40°)  2.593
-  (182.69°, 98.11°, 46.37°)  2.592
-  (182.69°, 98.11°, 46.36°)  2.592
-⋮
-  (182.63°, 98.07°, 46.50°)  2.596
-  (182.68°, 98.08°, 46.40°)  2.588
-  (182.69°, 98.08°, 46.37°)  2.587
-  (182.69°, 98.08°, 46.36°)  2.587
-  (182.69°, 98.08°, 46.35°)  2.587
+  scanning 406 orientations
+  (108.25°,  8.49°,207.88°)  2.587
+  (108.24°,  8.49°,207.89°)  2.587
 misorientation (Austenite → Ferrite, bcc)
   Bunge Euler angles in degree
   phi1   Phi  phi2
@@ -306,7 +291,7 @@ Ordered colours give nearby variant IDs related colours. In the pole figures, ov
 the individual coloured points difficult to distinguish.
 
 ```python
-variantColor = ind2color(variantId, 'ordered')
+variantColor = ind2color(variantId - 1, 'ordered')
 plotPF(childOri, variantColor, hBcc, markerSize=5)
 ```
 
@@ -339,20 +324,20 @@ transition. Variants within one packet are related by specific symmetries, and t
 ID identifies that group.
 
 ```python
-packetColor = ind2color(packetId)
+packetColor = ind2color(packetId - 1)
 plotPF(childOri, packetColor, hBcc, markerSize=5, points=1000)
 
-nextAxis(1)
+nextAxis(0)
 hold(True)
 opt = dict(markerFaceColor='none', markerEdgeColor='k', lineWidth=3)
 plot(parentOri * hFcc[0].symmetrise(), **opt)
 xlabel('(100)', color='red')
 
-nextAxis(2)
+nextAxis(1)
 plot(parentOri * hFcc[2].symmetrise(), **opt)
 xlabel('(111)', color='red')
 
-nextAxis(3)
+nextAxis(2)
 plot(parentOri * hFcc[1].symmetrise(), **opt)
 xlabel('(110)', color='red')
 hold(False)
@@ -390,19 +375,19 @@ Packet and Bain group are independent classifications of the same variant. They 
 levels of one hierarchy.
 
 ```python
-bainColor = ind2color(bainId)
+bainColor = ind2color(bainId - 1)
 plotPF(childOri, bainColor, hBcc, markerSize=5, points=1000)
 
-nextAxis(1)
+nextAxis(0)
 hold(True)
 plot(parentOri * hFcc[0].symmetrise(), **opt)
 xlabel('(100)', color='red')
 
-nextAxis(2)
+nextAxis(1)
 plot(parentOri * hFcc[2].symmetrise(), **opt)
 xlabel('(111)', color='red')
 
-nextAxis(3)
+nextAxis(2)
 plot(parentOri * hFcc[1].symmetrise(), **opt)
 xlabel('(110)', color='red')
 hold(False)

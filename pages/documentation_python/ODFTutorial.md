@@ -181,13 +181,13 @@ SO3FunRBF (mmm → y↑→x)
       90  2.5   185  4.36e-05
       90  2.5   190  4.27e-05
       90  2.5   195  2.53e-05
-      90  2.5   200  1.14e-05
+      90  2.5   200  1.13e-05
        ⋮    ⋮     ⋮         ⋮
-    35.2  107   305  8.93e-06
+    35.2  107   305  8.88e-06
     40.4  107   310  1.66e-05
     45.7  107   314  3.33e-05
     50.9  107   319  3.58e-05
-    56.1  107   324  1.85e-05
+    56.1  107   324  1.84e-05
 ```
 
 ## Reading the reconstructed ODF summary
@@ -202,10 +202,10 @@ poleFigureODFMaximum
 ```
 
 ```text
-17.1247
+17.2091
 ```
 
-The maximum is 17.8 mrd, so this reconstructed texture is sharper than the titanium
+The maximum is about 17 mrd, so this reconstructed texture is sharper than the titanium
 estimate under their respective smoothing choices. Peak height alone should not be used
 to compare specimens unless the estimation and reconstruction settings are also
 comparable.
@@ -356,7 +356,7 @@ The titanium estimate agrees with MATLAB's to the digit: 8100 orientations, band
 maximum 9.0003 mrd, and the same sigma sections. The ptx reconstruction places its kernels
 on 29818 orientations where MATLAB's equispaced grid has 29772. The solver stops after six
 iterations under MATLAB's stopping rule, and its maximum, 17.21 mrd, is 3 percent below
-MATLAB's 17.72 (the text quotes 17.8). The maximum is sensitive to the stopping point:
+MATLAB's 17.72 (MATLAB's text quotes 17.8). The maximum is sensitive to the stopping point:
 five iterations give 12.8 mrd and seven give 23.8. The recalculated pole figures agree by
 eye. The model ODF, its display, its maximum 11.4879 (MATLAB 11.4878) and its sections
 agree.

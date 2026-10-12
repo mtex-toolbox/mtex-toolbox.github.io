@@ -83,8 +83,8 @@ The default three-dimensional plot uses Bunge Euler coordinates.
 ```python
 plot(f, lineWidth=3, lineColor='red')
 hold(True)
-plot(oriA, 'filled', markerSize=20, markerFaceColor='darkred')
-plot(oriB, 'filled', markerSize=20, markerFaceColor='blue')
+plot(oriA, filled=True, markerSize=20, markerFaceColor='darkred')
+plot(oriB, filled=True, markerSize=20, markerFaceColor='blue')
 plt.xlim(0, 90)
 hold(False)
 ```
@@ -164,7 +164,7 @@ displayed logical value confirms that the two definitions agree.
 
 ```python
 directionFibre = fibre(h, r)
-sameFullFibre = fullFibre == directionFibre
+sameFullFibre = fullFibre.isclose(directionFibre)
 sameFullFibre
 ```
 
@@ -191,10 +191,10 @@ not to several different fibres.
 
 ## The Complete Axis--Angle Domain
 
-The option `'complete'` removes the reduction by crystal symmetry.
+The option `complete=True` removes the reduction by crystal symmetry.
 
 ```python
-plot(fullFibre, 'axisAngle', 'complete', lineWidth=3, lineColor='red')
+plot(fullFibre, 'axisAngle', complete=True, lineWidth=3, lineColor='red')
 plt.gca().set_axis_off()
 ```
 

@@ -117,7 +117,7 @@ example.
 points but their relative size smaller.
 
 ```python
-pf = noisepf(pf, 1000)
+pf = noisepf(pf, 1000, rng=np.random.default_rng(1))
 
 plot(pf)
 ```
@@ -156,7 +156,7 @@ print(f'L1 reconstruction error: {modelError:.4f}')
 ```
 
 ```text
-L1 reconstruction error: 0.0800
+L1 reconstruction error: 0.0820
 ```
 
 The error is 8.3 percent of the volume. A real experiment has no known model ODF against
@@ -189,13 +189,13 @@ for i in range(pf.numPF):
 
 ```text
 poleFigures  withoutGhostCorrection  withGhostCorrection
-          1                 0.3029               0.2999
-          2                 0.2488               0.2419
-          3                 0.1517               0.1355
-          4                 0.1240               0.1081
-          5                 0.1456               0.1274
-          6                 0.1165               0.0925
-          7                 0.1019               0.0799
+          1                 0.3037               0.3003
+          2                 0.2487               0.2414
+          3                 0.1564               0.1425
+          4                 0.1253               0.1124
+          5                 0.1455               0.1302
+          6                 0.1163               0.0936
+          7                 0.1025               0.0820
 ```
 
 ---
@@ -214,12 +214,12 @@ plt.legend(['Without ghost correction', 'With ghost correction'])
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureSimulation-10.png"></center>
 
 Both curves fall steeply from one pole figure to four: the error with ghost correction
-drops from 0.299 to 0.110. They then flatten, with a bump when the fifth pole figure is
+drops from 0.300 to 0.112. They then flatten, with a bump when the fifth pole figure is
 added. In this experiment, four pole figures capture most of the recoverable
 information, and which four are chosen matters more than simply increasing their
 number.
 
-The corrected curve is lower at every count, though not by much: 0.083 against 0.102 at
+The corrected curve is lower at every count, though not by much: 0.082 against 0.103 at
 seven pole figures, and almost no difference at one. Ghost correction addresses a
 specific defect by estimating the uniform portion. This model has a large uniform
 portion by construction; see [The Ghost Effect](PoleFigure2ODFAmbiguity_py.html) for why
@@ -266,7 +266,7 @@ standard model ODF.
 
 ## Technical Details
 
-The slice `pf[:i + 1]` is MATLAB's `pf({1:i})`. The Poisson draw of `noisepf` is not
-seeded, as MATLAB's is not, so the errors of the table vary in the third digit between
-builds. MATLAB's `table` is a printed loop.
+The slice `pf[:i + 1]` is MATLAB's `pf({1:i})`. The Poisson draw of `noisepf` is
+seeded so that the page shows the same numbers on every build; MATLAB's is not, so the
+errors of its table differ from these in the third digit. MATLAB's `table` is a printed loop.
 {% endraw %}

@@ -7,8 +7,7 @@ toc: false
 search: exclude
 lang: python
 counterpart: CrystalOperations.html
-status: Written
-note: 'This page is not yet compared with the MATLAB page.'
+status: Checked
 ---
 {% raw %}
 <font size="2"><a href="python_scripts/CrystalOperations.py" download>download as script</a> · <a href="https://github.com/mtex-toolbox/pymtex/blob/main/docs/pages/CrystalGeometry/CrystalOperations.py">edit page</a></font>
@@ -421,8 +420,8 @@ specimenDirection
 
 ```text
 vector3d (y↑→x)
-      x     y     z
-  -2.79  1.69  6.54
+      x       y     z
+  -4.27  -0.286  5.92
 ```
 
 ---
@@ -462,8 +461,8 @@ cartesianDirection
 
 ```text
 vector3d (y↑→x)
-  x     y     z
-  0  4.92  5.41
+      x     y     z
+  -2.46  4.26  5.41
 ```
 
 The frame name shown in the display is therefore the current session default, not a
@@ -490,7 +489,7 @@ np.array([d1.theta, d1.rho]) / degree
 ```
 
 ```text
-array([42.2853, 90.    ])
+array([ 42.2705, 120.    ])
 ```
 
 ## References
@@ -524,10 +523,9 @@ directions point in that specimen.
 
 ## Technical Details
 
-The quartz master pattern is MATLAB's `quartzPattern.mat`, a v7.3 object file the
-frameSymmetry branch of MATLAB itself no longer loads; the sample data set
-`quartzPattern` reads its harmonic coefficients with h5py into the quartz frame, so the
-figures of this page have no MATLAB counterpart. `vector3d(m)` keeps the crystal frame
+The quartz master pattern is MATLAB's `quartzPattern.mat`, a v7.3 object file; the
+sample data set `quartzPattern` reads its harmonic coefficients with h5py into the frame
+they are written in, point group 321 with the a axis along x. `vector3d(m)` keeps the crystal frame
 here, the frame-free vector is built from the components. MATLAB's `polar(d1)` without
 an output prints the two angles in degrees; here they are the properties `theta` and
 `rho`.

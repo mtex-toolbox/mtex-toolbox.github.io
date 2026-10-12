@@ -128,7 +128,7 @@ odf
 
 ```text
 SO3FunBingham (1 → y↑→x)
-  kappa : [96.355 96.335  4.379  0.   ]
+  kappa : [100.291 100.268   4.537   0.   ]
   weight: 1
 ```
 

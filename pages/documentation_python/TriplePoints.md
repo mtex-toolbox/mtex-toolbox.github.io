@@ -64,11 +64,11 @@ tP
 
 ```text
 triplePointList (y↑→x)
-  size: 78
+  size: 68
   points   mineral 1   mineral 2   mineral 3
-      19  Forsterite  Forsterite  Forsterite
-       8  Forsterite  Forsterite   Enstatite
-      13  Forsterite  Forsterite    Diopside
+      14  Forsterite  Forsterite  Forsterite
+       7  Forsterite  Forsterite   Enstatite
+       9  Forsterite  Forsterite    Diopside
        4  Forsterite   Enstatite   Enstatite
       16  Forsterite   Enstatite    Diopside
        4  Forsterite    Diopside    Diopside
@@ -94,11 +94,11 @@ tP['Forsterite']
 
 ```text
 triplePointList (y↑→x)
-  size: 64
+  size: 54
   points   mineral 1   mineral 2   mineral 3
-      19  Forsterite  Forsterite  Forsterite
-       8  Forsterite  Forsterite   Enstatite
-      13  Forsterite  Forsterite    Diopside
+      14  Forsterite  Forsterite  Forsterite
+       7  Forsterite  Forsterite   Enstatite
+       9  Forsterite  Forsterite    Diopside
        4  Forsterite   Enstatite   Enstatite
       16  Forsterite   Enstatite    Diopside
        4  Forsterite    Diopside    Diopside
@@ -112,11 +112,11 @@ tP['Forsterite', 'Forsterite']
 
 ```text
 triplePointList (y↑→x)
-  size: 40
+  size: 30
   points   mineral 1   mineral 2   mineral 3
-      19  Forsterite  Forsterite  Forsterite
-       8  Forsterite  Forsterite   Enstatite
-      13  Forsterite  Forsterite    Diopside
+      14  Forsterite  Forsterite  Forsterite
+       7  Forsterite  Forsterite   Enstatite
+       9  Forsterite  Forsterite    Diopside
 ```
 
 Three repeated names restrict the selection to inner diopside triple points, where all
@@ -170,9 +170,9 @@ gB_Fo
 
 ```text
 grainBoundary (y↑→x)
-  size: 248 segments, 46 chains
+  size: 217 segments, 36 chains
   segments    length   mineral 1   mineral 2
-       248  11517 µm  Forsterite  Forsterite
+       217  10014 µm  Forsterite  Forsterite
 ```
 
 ---
@@ -185,9 +185,9 @@ gB_large
 
 ```text
 grainBoundary (y↑→x)
-  size: 48 segments, 16 chains
+  size: 46 segments, 15 chains
   segments   length   mineral 1   mineral 2
-        48  2182 µm  Forsterite  Forsterite
+        46  2103 µm  Forsterite  Forsterite
 ```
 
 ---
@@ -245,18 +245,18 @@ mori
 
 ```text
 misorientation (Forsterite → Forsterite)
-  size     : 19 × 3
+  size     : 14 × 3
   antipodal: true
   Bunge Euler angles in degree
   phi1   Phi  phi2
-  41.6    11   325
+   132  18.6   239
+  2.13   146   353
+   154   154   161
     69  6.44   316
-  53.5  16.9   338
-  40.2  11.2   327
-    69  6.44   316
+   179  60.6   180
      ⋮     ⋮     ⋮
-  29.7   142    20
-    11   149   355
+   292   121   299
+  60.9  56.3   260
    116  38.9  60.6
    251   120  96.9
    127   141   135
@@ -346,9 +346,9 @@ of parent grains.
 ## Technical Details
 
 A tuple of phase names in brackets selects triple points, MATLAB's
-`tP('Forsterite','Forsterite')`. The port finds 78 triple points where MATLAB finds 70,
-19 of them between three forsterite grains for MATLAB's 14, and 220 forsterite
-boundary segments become 248: the not indexed third of this map is closed by the
-neighbouring grains differently, and `alpha` does not change the closing here, as
-[Grain Reconstruction](GrainReconstruction_py.html) says.
+`tP('Forsterite','Forsterite')`. At MATLAB's default of 15 degrees the port finds 68
+triple points where MATLAB finds 70, the 14 between three forsterite grains as MATLAB's,
+and 217 forsterite boundary segments for MATLAB's 220: the not indexed third of this map
+is closed by the neighbouring grains a little differently, and `alpha` does not change
+the closing here, as [Grain Reconstruction](GrainReconstruction_py.html) says.
 {% endraw %}

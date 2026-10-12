@@ -75,7 +75,7 @@ mtexColorbar()
 # rotational angle and varies the rotational axis.
 
 # %%
-plotSection(SO3F, 'axisAngle', np.arange(15, 61, 15) * degree, 'pcolor')
+plotSection(SO3F, 'axisAngle', np.arange(15, 61, 15) * degree, pcolor=True)
 mtexColorbar()
 mtexColorMap('parula')
 
@@ -110,7 +110,7 @@ oriMax
 # region in orientation space.
 
 # %%
-color = ind2color(np.tile(np.arange(1, oriMax.size + 1), (numSym(cs), 1)))
+color = ind2color(np.tile(np.arange(oriMax.size), (numSym(cs), 1)))
 plot(oriMax.symmetrise(), color, 'axisAngle', filled=True, markerSize=20, fundamentalRegion=True)
 
 # %% [markdown]

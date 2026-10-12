@@ -36,13 +36,13 @@ scatter(v, markerAlpha=0.2, markerSize=2)
 # entries of `center` are the corresponding mean directions.
 #
 # Cluster labels are identifiers, not ranks: cluster 0 is not intrinsically more important
-# than cluster 1. We use the labels only to assign colors, `ind2color` counting from one, and
-# then mark each returned center.
+# than cluster 1. We use the labels only to assign colors, `ind2color` counting from zero as
+# well, and then mark each returned center.
 
 # %%
 cInd, center = calcCluster(v)
 
-plot(v, ind2color(cInd + 1), markerAlpha=0.2, markerSize=2)
+plot(v, ind2color(cInd), markerAlpha=0.2, markerSize=2)
 annotate(center)
 
 # %% [markdown]
@@ -73,7 +73,7 @@ vSym = cat(v, -v)
 
 cInd, center = calcCluster(vSym)
 
-plot(vSym, ind2color(cInd + 1))
+plot(vSym, ind2color(cInd))
 annotate(center)
 
 # %% [markdown]
@@ -85,7 +85,7 @@ annotate(center)
 vSym.antipodal = True
 cInd, center = calcCluster(vSym)
 
-plot(vSym, ind2color(cInd + 1), markerAlpha=0.2, markerSize=2)
+plot(vSym, ind2color(cInd), markerAlpha=0.2, markerSize=2)
 annotate(center)
 
 # %% [markdown]
@@ -137,7 +137,7 @@ plot(ori, add2all=True, markerSize=3, markerAlpha=0.25, all=True)
 # %%
 cId, center = calcCluster(ori, method='classix', radius=0.1, minPoints=100)
 
-plotSection(ori, ind2color(cId + 1), markerSize=3, markerAlpha=0.25, all=True)
+plotSection(ori, ind2color(cId), markerSize=3, markerAlpha=0.25, all=True)
 annotate(center)
 
 # %% [markdown]

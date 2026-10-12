@@ -199,7 +199,7 @@ print(f'{gB4.chainId[0]:>10d}{gB4.chainSize[0]:>12d}{str(bool(gB4.isClosed[0])):
 
 ```text
    chainId   chainSize   isClosed
-         1           8       True
+         0           8       True
 ```
 
 `arcLength` is the cumulative length from the start of a chain to the end of each

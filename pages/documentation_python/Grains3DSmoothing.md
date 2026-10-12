@@ -218,7 +218,7 @@ axes. After smoothing the normals spread over the sphere.
 ```python
 gB = grains.boundary
 gB = gB[np.all(gB.grainId > 0, axis=1)]
-plot(calcGBND(gB), 'upper')
+plot(calcGBND(gB), upper=True)
 mtexColorbar()
 ```
 
@@ -227,7 +227,7 @@ mtexColorbar()
 ```python
 gBS = grainsS.boundary
 gBS = gBS[np.all(gBS.grainId > 0, axis=1)]
-plot(calcGBND(gBS), 'upper')
+plot(calcGBND(gBS), upper=True)
 mtexColorbar()
 ```
 

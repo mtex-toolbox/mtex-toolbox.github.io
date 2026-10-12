@@ -190,7 +190,7 @@ plot(job.resizedList, edge=True)
 # difference, not a fitted residual and not a correction to apply.
 
 # %%
-job.calcDistortion('fitErr')
+job.calcDistortion(fitErr=True)
 
 # %% [markdown]
 # Afterwards `job.T` holds the *fitted* transforms rather than the prototypes it started

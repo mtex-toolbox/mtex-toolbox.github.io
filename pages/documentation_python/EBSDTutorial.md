@@ -179,10 +179,10 @@ grains
 grain2d (y↓→x)
   size: 885
   Phase  Grains               Mineral     Color         Symmetry  Crystal reference frame
-  0      14 (1373 pixels)     notIndexed
-  1      490 (151488 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
-  2      213 (25662 pixels)   Enstatite   DarkSeaGreen  mmm       Enstatite
-  3      168 (7420 pixels)    Diopside    Goldenrod     12/m1     Diopside
+  0      20 (1381 pixels)     notIndexed
+  1      489 (151487 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
+  2      209 (25656 pixels)   Enstatite   DarkSeaGreen  mmm       Enstatite
+  3      167 (7419 pixels)    Diopside    Goldenrod     12/m1     Diopside
   boundary segments: 36193, inner: 190, triple points: 1525
 ```
 
@@ -263,7 +263,7 @@ filled density contours.
 h = Miller([1, 0, 0], [0, 1, 0], [0, 0, 1], ebsd['Forsterite'].CS)
 
 # plot their specimen-direction distributions
-plotPF(ebsd['Forsterite'].orientations, h, 'contourf')
+plotPF(ebsd['Forsterite'].orientations, h, contourf=True)
 mtexColorbar()
 ```
 
@@ -289,7 +289,7 @@ is [plotIPF](orientation.plotIPDF.html).
 r = vector3d.cat(vector3d.X, vector3d.Y, vector3d.Z)
 
 # plot their crystal-direction distributions
-plotIPF(ebsd['Forsterite'].orientations, r, 'contourf')
+plotIPF(ebsd['Forsterite'].orientations, r, contourf=True)
 mtexColorbar()
 ```
 
@@ -329,9 +329,10 @@ into a function that can be evaluated, integrated, and compared.
 
 ## Technical Details
 
-`calcGrains(ebsd, angle=10*degree, minPixel=5)` gives 14, 490, 213 and 168 notIndexed,
+`calcGrains(ebsd, angle=10*degree, minPixel=5)` gives 20, 489, 209 and 167 notIndexed,
 forsterite, enstatite and diopside grains and 36193 boundary segments where MATLAB has 9,
-489, 208, 167 and 35402: the cull of the small grains widens a small difference in the
-segmentation, as on the other forsterite pages. The 262 forsterite grains above 100
+489, 208, 167 and 35402: the fragments the second segmentation leaves below minPixel are
+notIndexed grains here, and a small difference in the segmentation remains, as on the
+other forsterite pages. The 262 forsterite grains above 100
 pixels agree, with 142943 pixels for MATLAB's 142951.
 {% endraw %}

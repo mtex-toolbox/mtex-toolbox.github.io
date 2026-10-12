@@ -116,7 +116,7 @@ print(f'L1 error, random sample, 10 degree: {errRandom10:.3f}')
 ```
 
 ```text
-L1 error, random sample, 10 degree: 0.185
+L1 error, random sample, 10 degree: 0.161
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-6.png"></center>
@@ -137,7 +137,7 @@ print(f'L1 error, random sample, 20 degree: {errRandom20:.3f}')
 ```
 
 ```text
-L1 error, random sample, 20 degree: 0.144
+L1 error, random sample, 20 degree: 0.110
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-7.png"></center>
@@ -153,8 +153,8 @@ print(f'texture index, random reconstruction: {norm(odf_rec) ** 2:.3f}')
 ```
 
 ```text
-texture index, original ODF: 1.371
-texture index, random reconstruction: 1.095
+texture index, original ODF: 1.258
+texture index, random reconstruction: 1.104
 ```
 
 ## Place an Optimized Sample
@@ -183,7 +183,7 @@ print(f'L1 error, optimized sample, 10 degree: {errOptimal10:.3f}')
 ```
 
 ```text
-L1 error, optimized sample, 10 degree: 0.037
+L1 error, optimized sample, 10 degree: 0.041
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-10.png"></center>
@@ -199,8 +199,8 @@ print(f'texture index, optimized reconstruction: {norm(odf_rec) ** 2:.3f}')
 ```
 
 ```text
-texture index, original ODF: 1.371
-texture index, optimized reconstruction: 1.286
+texture index, original ODF: 1.258
+texture index, optimized reconstruction: 1.169
 ```
 
 ## Optimizing the Weights Too
@@ -281,8 +281,8 @@ print(f'halfwidth for optimalSample: {np.exp(pHwOpt[1]):.1f} degree * M^{pHwOpt[
 ```
 
 ```text
-halfwidth for discreteSample: 61.0 degree * M^-0.209
-halfwidth for optimalSample: 47.6 degree * M^-0.257
+halfwidth for discreteSample: 143.4 degree * M^-0.368
+halfwidth for optimalSample: 47.0 degree * M^-0.261
 ```
 
 Plot the measured halfwidths with their fitted laws. The circles are the means of five
@@ -291,7 +291,7 @@ random realizations, and the squares are the deterministic optimized samples.
 ```python
 Mf = np.logspace(np.log10(M[0]), np.log10(M[-1]), 100)
 evalLaw = lambda p, x: np.exp(np.polyval(p, np.log(x)))
-cRand, cOpt = ind2color(1), ind2color(2)
+cRand, cOpt = ind2color(0), ind2color(1)
 
 # an ordinary matplotlib figure of its own
 plt.figure()
@@ -319,7 +319,7 @@ print(f'ratio of optimized to random halfwidth: {hwOpt[0] / np.mean(hwRand[0]):.
 ```
 
 ```text
-ratio of optimized to random halfwidth: 0.67 at M = 32 and 0.58 at M = 512
+ratio of optimized to random halfwidth: 0.39 at M = 32 and 0.58 at M = 512
 ```
 
 ## The Asymptotic Halfwidth Rule
@@ -362,8 +362,8 @@ print(f'error for optimalSample: {np.exp(pEOpt[1]):.2f} * M^{pEOpt[0]:.3f}')
 ```
 
 ```text
-error for discreteSample: 0.82 * M^-0.197
-error for optimalSample: 0.83 * M^-0.364
+error for discreteSample: 0.73 * M^-0.155
+error for optimalSample: 0.83 * M^-0.340
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-16.png"></center>
@@ -382,11 +382,11 @@ for m in M:
 ```
 
 ```text
-32 optimized orientations correspond to 585 random ones
-64 optimized orientations correspond to 2108 random ones
-128 optimized orientations correspond to 7597 random ones
-256 optimized orientations correspond to 27378 random ones
-512 optimized orientations correspond to 98665 random ones
+32 optimized orientations correspond to 884 random ones
+64 optimized orientations correspond to 4036 random ones
+128 optimized orientations correspond to 18421 random ones
+256 optimized orientations correspond to 84083 random ones
+512 optimized orientations correspond to 383806 random ones
 ```
 
 ## Limits of the Comparison

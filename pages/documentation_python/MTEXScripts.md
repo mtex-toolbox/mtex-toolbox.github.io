@@ -96,13 +96,13 @@ grains
 
 ```text
 grain2d (y↓→x)
-  size: 1014
+  size: 962
   Phase  Grains               Mineral     Color         Symmetry  Crystal reference frame
-  0      13 (1298 pixels)     notIndexed
-  1      541 (151658 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
-  2      228 (25739 pixels)   Enstatite   DarkSeaGreen  mmm       Enstatite
-  3      232 (7673 pixels)    Diopside    Goldenrod     12/m1     Diopside
-  boundary segments: 37302, inner: 188, triple points: 1683
+  0      19 (1306 pixels)     notIndexed
+  1      490 (151673 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
+  2      224 (25736 pixels)   Enstatite   DarkSeaGreen  mmm       Enstatite
+  3      229 (7673 pixels)    Diopside    Goldenrod     12/m1     Diopside
+  boundary segments: 36604, inner: 282, triple points: 1579
 ```
 
 The returned [grain2d](grain2d.grain2d.html) object is stored in `grains`. Its summary

@@ -126,7 +126,7 @@ numSmall, empiricalPercent
 ```
 
 ```text
-(33, 6.6)
+(30, 6.0)
 ```
 
 MATLAB's page quotes 20 of 500 rotations, or 4%, for its draw; the count above is this

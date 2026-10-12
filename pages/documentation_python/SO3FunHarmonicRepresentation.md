@@ -244,7 +244,7 @@ maxApproximationError
 ```
 
 ```text
-1.2059
+1.0252
 ```
 
 The nonzero error is a truncation effect. The angle function has a cusp at `oriRef`

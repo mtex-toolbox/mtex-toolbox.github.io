@@ -99,12 +99,12 @@ orientation (432 → TD←RD↑)
   Bunge Euler angles in degree
   phi1  Phi  phi2
      0   30    15
-2.120773611404718
+2.120773612497205
 spinTensor (1)
   rank: 2 (3 × 3)
-        0  0.4968   0.6174
-  -0.4968       0  -0.2121
-  -0.6174  0.2121        0
+        0  0.5075    0.659
+  -0.5075       0  -0.2284
+   -0.659  0.2284        0
 ```
 
 For this orientation the Taylor factor is 2.1208. The vector `gamma` contains one
@@ -146,11 +146,11 @@ SO3FunHarmonic (432 → TD←RD↑)
 SO3VectorFieldHarmonic (432 → TD←RD↑)
   tangent space: left
   bandwidth    : 32
-2.104899187374197
+2.104899189353379
 SO3TangentVector (left, TD←RD↑)
   reference: orientation (432 → TD←RD↑)
-       x      y       z
-  0.0347  0.805  -0.094
+       x      y        z
+  0.0293  0.821  -0.0926
 ```
 
 The harmonic functions approximate the direct solution above. Their main advantage is
@@ -161,7 +161,7 @@ later orientation.
 sP = phi1Sections(cs)
 sP.phi1 = np.arange(0, 91, 10) * degree
 
-plot(MFun, 'smooth', sP)
+plot(MFun, sP, smooth=True)
 mtexColorbar()
 
 hold(True)
@@ -183,7 +183,7 @@ which the corresponding crystal rotates in the Taylor model. The values below ar
 angles for the strain step stored in `epsilon` and scale with the size of that step.
 
 ```python
-plot(norm(WFun) / degree, 'smooth', sP, resolution=0.5 * degree)
+plot(norm(WFun) / degree, sP, smooth=True, resolution=0.5 * degree)
 mtexColorbar()
 ```
 
@@ -194,7 +194,7 @@ increment. This plot reproduces the construction in Fig. 8 of Bunge (1970).
 
 ```python
 sP = sigmaSections(cs)
-plot(norm(WFun) / degree, 'smooth', sP)
+plot(norm(WFun) / degree, sP, smooth=True)
 mtexColorbar()
 ```
 

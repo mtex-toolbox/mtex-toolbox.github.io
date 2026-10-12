@@ -80,25 +80,10 @@ p2cGlobal
 misorientation (Iron fcc → Iron bcc (old))
   (111) || (011)   [101̅] || [111̅]
  optimizing parent to child orientation relationship
-  (335.80°, 10.53°, 65.80°)  4.028
-  (339.45°, 10.39°, 62.94°)  3.502
-  (342.75°, 10.57°, 60.42°)  2.988
-  (345.83°, 10.53°, 57.75°)  2.727
-  (347.12°, 10.38°, 56.69°)  2.661
-  (347.66°, 10.29°, 56.24°)  2.648
-  (347.88°, 10.26°, 56.06°)  2.647
-  (347.93°, 10.25°, 56.03°)  2.646
-  (347.95°, 10.24°, 56.02°)  2.646
-  (347.95°, 10.24°, 56.03°)  2.646
-  ( 90.00°, 10.11°,310.91°)  3.805
-  ( 94.34°, 10.13°,308.12°)  2.946
-⋮
-  (347.65°, 10.27°, 56.30°)  2.649
-  (347.74°, 10.25°, 56.24°)  2.647
-  (347.00°, 10.00°, 57.10°)  2.604
-  (347.14°,  9.91°, 57.08°)  2.557
-  (346.72°,  9.31°, 57.61°)  2.348
-  (347.39°,  8.97°, 56.82°)  2.285
+  scanning 406 orientations
+  (102.23°,  8.99°,303.54°)  2.291
+  (102.35°,  8.96°,303.47°)  2.287
+  (102.36°,  8.96°,303.47°)  2.287
 misorientation (Iron fcc → Iron bcc (old))
   Bunge Euler angles in degree
   phi1   Phi  phi2
@@ -144,6 +129,18 @@ localToGlobal
 
 ```text
  optimizing parent to child orientation relationship
+  (335.80°, 10.53°, 65.80°)  4.011
+  (339.00°, 10.45°, 63.23°)  3.568
+  (341.88°, 10.74°, 61.13°)  3.087
+  (344.84°, 10.65°, 58.59°)  2.806
+  (346.44°, 10.46°, 57.26°)  2.693
+  (347.25°, 10.34°, 56.61°)  2.658
+  (347.58°, 10.28°, 56.35°)  2.65
+  (347.71°, 10.26°, 56.25°)  2.648
+  (347.00°, 10.01°, 57.10°)  2.604
+  (347.14°,  9.91°, 57.08°)  2.558
+  (346.71°,  9.31°, 57.61°)  2.348
+  (347.39°,  8.97°, 56.82°)  2.284
 misorientation (Iron fcc → Iron bcc (old))
   Bunge Euler angles in degree
   phi1   Phi  phi2
@@ -232,7 +229,7 @@ The coloured density shows axes of the measured child-to-child misorientations. 
 squares mark axes predicted by the fitted OR.
 
 ```python
-plot(mori.axis(), 'contourf', 'fundamentalRegion', halfwidth=5 * degree)
+plot(mori.axis(), contourf=True, fundamentalRegion=True, halfwidth=5 * degree)
 hold(True)
 isInformative = angle(c2c) > 1e-3 * degree
 plot(c2c[isInformative].axis(), marker='s', markerFaceColor='none', markerEdgeColor='k', markerSize=8)

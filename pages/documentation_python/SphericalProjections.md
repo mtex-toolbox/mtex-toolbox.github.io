@@ -100,7 +100,7 @@ the data or their reference frame.
 ```python
 how2plot = plottingConvention('z↑→y')
 
-plotPF(odf, Miller(1, 0, 0, cs), 'antipodal', how2plot)
+plotPF(odf, Miller(1, 0, 0, cs), how2plot, antipodal=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SphericalProjections-5.png"></center>

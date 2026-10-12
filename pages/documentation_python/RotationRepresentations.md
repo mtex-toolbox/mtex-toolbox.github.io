@@ -204,7 +204,7 @@ np.max(angle(rot, rotFromCubochoric)) / degree
 ```
 
 ```text
-3.9789e-13
+4.1443e-13
 ```
 
 The displayed maximum is the angular round-trip error in degrees. Its small nonzero value

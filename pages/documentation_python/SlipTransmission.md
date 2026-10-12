@@ -135,7 +135,7 @@ sSGrain
 
 ```text
 slipSystem (y↓→x)
-  size: 87
+  size: 85
       x      y      z   |  x      y      z
   -2.62   1.45   -0.2  -0.01   0.01   0.21
    -2.8   0.26   1.05  -0.08  -0.04  -0.19
@@ -170,7 +170,7 @@ The point cloud is not uniform. More selected directions lie near the
 east--west axis than near the north--south axis.
 
 ```python
-plot(sSGrain.b, 'contourf')
+plot(sSGrain.b, contourf=True)
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SlipTransmission-10.png"></center>
@@ -237,7 +237,7 @@ mPStats
 ```
 
 ```text
-array([0.0001, 0.3727, 0.9835])
+array([0.0001, 0.3718, 0.9611])
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SlipTransmission-13.png"></center>
@@ -269,7 +269,7 @@ every outgoing system.
 sSBasalReference = slipSystem.basal(ebsd.CS)
 mPGrid = mPrime(sSBasalReference, moriGrid.reshape(-1, 1) * sSBasalReference.symmetrise()).max(axis=1)
 
-sP.plot(mPGrid, 'smooth')
+sP.plot(mPGrid, smooth=True)
 mtexColorbar()
 ```
 

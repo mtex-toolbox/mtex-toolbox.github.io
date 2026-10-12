@@ -89,31 +89,16 @@ boundaryFitQuantiles
 
 ```text
  optimizing parent to child orientation relationship
-  (335.80°, 10.53°, 65.80°)  4.029
-  (338.80°, 10.53°, 63.48°)  3.65
-  (341.44°, 10.73°, 61.38°)  3.342
-  (344.02°, 10.69°, 59.21°)  3.107
-  (345.83°, 10.56°, 57.75°)  2.974
-  (346.77°, 10.41°, 56.99°)  2.929
-  (347.30°, 10.33°, 56.54°)  2.915
-  (347.50°, 10.28°, 56.40°)  2.912
-  (347.57°, 10.26°, 56.34°)  2.911
-  (347.65°, 10.25°, 56.29°)  2.911
-  (347.27°, 10.09°, 56.73°)  2.897
-  (347.40°, 10.03°, 56.66°)  2.893
-  (347.50°,  9.99°, 56.62°)  2.89
-  (347.56°,  9.96°, 56.59°)  2.887
-⋮
-  (344.26°, 10.68°, 58.96°)  3.081
-  (346.01°, 10.54°, 57.52°)  2.96
-  (346.90°, 10.40°, 56.81°)  2.916
-  (347.39°, 10.32°, 56.43°)  2.902
-  (347.63°, 10.27°, 56.25°)  2.897
-  (347.77°, 10.25°, 56.14°)  2.896
-  (347.84°, 10.24°, 56.09°)  2.895
-  (347.87°, 10.24°, 56.06°)  2.895
-3.4002168426595065
-array([1.2234, 1.6858, 2.1038, 3.8095])
+  scanning 406 orientations
+  (347.67°, 10.01°, 56.44°)  2.876
+  (347.64°,  9.98°, 56.50°)  2.876
+  (347.67°,  9.97°, 56.49°)  2.875
+  (347.68°,  9.96°, 56.49°)  2.873
+  (347.16°,  9.42°, 57.06°)  2.731
+  (347.57°,  9.13°, 56.58°)  2.694
+  (347.79°,  9.11°, 56.34°)  2.694
+3.424663840367343
+array([1.204 , 1.6668, 2.0743, 3.8395])
 ```
 
 [`calcParent2Child`](calcParent2Child.html) assumes that most retained pairs are
@@ -195,7 +180,7 @@ boundaryA = coo_matrix((boundaryProbability, (grainPairs[:, 0] - 1, grainPairs[:
 ```
 
 ```text
-[0.     0.5801 0.9786]
+[0.     0.5958 0.9797]
 ```
 
 The 10th, 50th, and 90th similarity percentiles are 0, 0.3040, and 0.9475. The zero-valued
@@ -276,7 +261,7 @@ boundaryParentGrains[acceptComponent] = componentOri[acceptComponent]
 ```
 
 ```text
-276
+272
 ```
 
 ## Merge similarly oriented parent components
@@ -303,7 +288,7 @@ plot(boundaryParentGrains['Iron fcc'], boundaryParentGrains['Iron fcc'].meanOrie
 ```
 
 ```text
-276
+272
 162
 ```
 
@@ -323,7 +308,7 @@ martensite (011).
 ```python
 variantId, packetId, _, _ = calcVariantId(componentOri[childComponentId - 1], childOri, fcc2bcc)
 
-packetColor = ind2color(packetId)
+packetColor = ind2color(packetId - 1)
 plot(childGrains, packetColor, figSize='large')
 
 hold(True)
@@ -338,7 +323,7 @@ hold(False)
 ```
 
 ```text
-[104]
+[108]
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/MaParentGrainReconstructionAdvanced-14.png"></center>
@@ -368,7 +353,7 @@ hold(False)
 ```
 
 ```text
-  I'm plotting 416 random orientations out of 9364 given orientations
+  I'm plotting 416 random orientations out of 9358 given orientations
   You can specify the number of points by the option "points".
   The option "all" ensures that all data are plotted
 ```
@@ -398,7 +383,7 @@ plot(boundaryParentEBSD['Iron fcc'], boundaryParentEBSD['Iron fcc'].orientations
 ```
 
 ```text
-[ 1.9358  3.5898 10.8148]
+[ 1.9241  3.599  10.7584]
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/MaParentGrainReconstructionAdvanced-16.png"></center>
@@ -482,7 +467,7 @@ mtexColorbar(title='triple-point fit (degrees)')
 ```
 
 ```text
-[2.0411 2.4789 3.08   6.6519]
+[2.0197 2.4462 3.0536 6.6609]
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/MaParentGrainReconstructionAdvanced-18.png"></center>
@@ -530,8 +515,8 @@ hold(False)
 ```
 
 ```text
-[0.     0.6622 0.9631]
-656
+[0.     0.6765 0.9651]
+657
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/MaParentGrainReconstructionAdvanced-19.png"></center>

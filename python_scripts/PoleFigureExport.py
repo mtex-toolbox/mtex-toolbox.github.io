@@ -46,7 +46,7 @@ pf
 # %%
 # write into a temporary folder
 fname = os.path.join(tempfile.mkdtemp(), 'dubna')
-written = export(pf, fname, 'degree')
+written = export(pf, fname, degree=True)
 
 # %% [markdown]
 # ## Inspect the files
@@ -141,7 +141,7 @@ pfSim = calcPoleFigure(odf, pf.allH, pf.allR, superposition=pf.c)
 
 # %%
 recalculatedName = os.path.join(os.path.dirname(fname), 'dubnaRecalculated')
-writtenSim = export(pfSim, recalculatedName, 'degree')
+writtenSim = export(pfSim, recalculatedName, degree=True)
 
 # %% [markdown]
 # ## Clean up

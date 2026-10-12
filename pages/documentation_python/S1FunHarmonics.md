@@ -168,7 +168,7 @@ maxApproximationError
 ```
 
 ```text
-2.1538e-14
+2.5313e-14
 ```
 
 ---
@@ -329,7 +329,7 @@ Periodic functions also arise after density estimation from circular data. For e
 `periodic` option makes [calcDensity](calcDensity.html) return an `S1FunHarmonic`.
 
 ```python
-v = vector3d.rand(1000)
+v = vector3d.rand(1000, rng=np.random.default_rng(1))
 fun = calcDensity(v.rho, periodic=True)
 fun
 ```
@@ -405,6 +405,7 @@ periodic density functions to grain long-axis and shortest-caliper directions.
 ## Technical Details
 
 MATLAB's `subplot(1,2,1)` becomes a polar axes when a polar plot goes into it; with
-matplotlib the page asks for `projection='polar'`. The random directions are not seeded
-as MATLAB's `rng default`, so the density differs from MATLAB's in its fluctuations.
+matplotlib the page asks for `projection='polar'`. The random directions are seeded by
+NumPy's generator, not MATLAB's `rng default`, so the density differs from MATLAB's in
+its fluctuations.
 {% endraw %}

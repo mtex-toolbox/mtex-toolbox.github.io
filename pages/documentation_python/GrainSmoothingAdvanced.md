@@ -87,7 +87,7 @@ print(f'simplifying at a tolerance of {d / np.sqrt(2):.2f} {grains.scanUnit} tak
 ```
 
 ```text
-simplifying at a tolerance of 0.71 um takes the boundary from 21495 segments to 5313
+simplifying at a tolerance of 0.71 um takes the boundary from 21296 segments to 5240
 ```
 
 ## Step 2: restore evenly spaced samples
@@ -109,7 +109,7 @@ print(f'resampling at {d:.2f} {grains.scanUnit} puts them back: {len(grainsSimpl
 ```
 
 ```text
-resampling at 1.00 um puts them back: 5313 segments to 18621
+resampling at 1.00 um puts them back: 5240 segments to 18453
 ```
 
 ## Step 3: smooth the resampled boundary
@@ -143,7 +143,7 @@ print(f'resampling at {2 * d:.2f} {grains.scanUnit} instead leaves {len(grainsCo
 ```
 
 ```text
-resampling at 2.00 um instead leaves 9445 segments
+resampling at 2.00 um instead leaves 9358 segments
 ```
 
 ## What preprocessing changes
@@ -187,7 +187,7 @@ print(f'area comparison uses {np.count_nonzero(big)} of {len(ref)} grains')
 ```
 
 ```text
-area comparison uses 457 of 539 grains
+area comparison uses 443 of 523 grains
 ```
 
 ## The Laplace filter
@@ -208,8 +208,8 @@ print(f'  25 iterations {100 * np.mean((aL25 - A0) / A0):+6.2f}% on average, {10
 
 ```text
 grain area, laplaceFilter
-   5 iterations  -0.62% on average,  -17.2% for the worst grain
-  25 iterations  -2.24% on average,  -61.5% for the worst grain
+   5 iterations  -0.67% on average,  -17.2% for the worst grain
+  25 iterations  -2.44% on average,  -61.5% for the worst grain
 ```
 
 ## The Taubin filter
@@ -230,8 +230,8 @@ print(f'  25 iterations {100 * np.mean((aT25 - A0) / A0):+6.2f}% on average, {10
 
 ```text
 grain area, taubinFilter
-   5 iterations  -0.05% on average,   -2.5% for the worst grain
-  25 iterations  -0.10% on average,   -8.5% for the worst grain
+   5 iterations  -0.04% on average,   -2.5% for the worst grain
+  25 iterations  -0.08% on average,   -6.9% for the worst grain
 ```
 
 On this small grain, the Laplace result in magenta cuts inside the measured staircase.
@@ -271,7 +271,7 @@ print(f'  {100 * np.mean((aC - A0) / A0):+6.2f}% on average, {100 * np.min((aC -
 
 ```text
 grain area, curvatureFilter at a smoothing length of 8.0 um
-   -0.22% on average,  -19.8% for the worst grain
+   -0.26% on average,  -19.8% for the worst grain
 ```
 
 ## The Huber filter

@@ -127,7 +127,7 @@ deltaN, pMin, pMax
 # %%
 deltaNSphere, pMinField, pMaxField = rI.birefringence()
 
-plot3d(deltaNSphere, 'complete')
+plot3d(deltaNSphere, complete=True)
 mtexColorMap('parula')
 mtexColorbar()
 

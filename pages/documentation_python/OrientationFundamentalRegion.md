@@ -261,7 +261,7 @@ mori
 
 ```text
 misorientation (Forsterite → Forsterite)
-  size     : 16524
+  size     : 15828
   antipodal: true
   Bunge Euler angles in degree
   phi1   Phi  phi2
@@ -285,7 +285,7 @@ plot(mori)
 ```
 
 ```text
-plot 2000 random orientations out of 16524 given orientations
+plot 2000 random orientations out of 15828 given orientations
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationFundamentalRegion-14.png"></center>
@@ -303,7 +303,7 @@ plot(mori)
 ```
 
 ```text
-plot 2000 random orientations out of 16524 given orientations
+plot 2000 random orientations out of 15828 given orientations
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationFundamentalRegion-15.png"></center>
@@ -321,7 +321,7 @@ plotSection(mori, 'axisAngle')
 ```
 
 ```text
-plot 2000 random orientations out of 16524 given orientations
+plot 2000 random orientations out of 15828 given orientations
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationFundamentalRegion-16.png"></center>
@@ -336,7 +336,7 @@ plotSection(mori, 'axisAngle', antipodal=True)
 ```
 
 ```text
-plot 2000 random orientations out of 16524 given orientations
+plot 2000 random orientations out of 15828 given orientations
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationFundamentalRegion-17.png"></center>

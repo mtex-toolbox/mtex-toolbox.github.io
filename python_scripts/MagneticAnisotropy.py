@@ -69,7 +69,7 @@ modelInputs
 # the specimen. Its colour scale is in multiples of a random distribution (mrd).
 
 # %%
-plotPF(odf, Miller(1, 0, 0, cs), 'antipodal', 'contourf')
+plotPF(odf, Miller(1, 0, 0, cs), antipodal=True, contourf=True)
 mtexColorbar(title='pole density (mrd)')
 
 # %% [markdown]

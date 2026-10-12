@@ -115,8 +115,8 @@ the kernel density estimate.
 fN = lambda x: np.mean(psi(x[None, :] - xN[:, None]), axis=0)
 
 plt.figure()
-plt.plot(x, f(x), linewidth=3, color=ind2color(1))
-plt.plot(x, fN(x), linewidth=3, color=ind2color(2))
+plt.plot(x, f(x), linewidth=3, color=ind2color(0))
+plt.plot(x, fN(x), linewidth=3, color=ind2color(1))
 plt.xlabel('x')
 plt.ylabel('density')
 plt.legend(['true density', 'kernel estimate'])
@@ -368,8 +368,8 @@ for w, p in zip(weighting, peakMRD):
 ```
 
 ```text
-equal grains        7.4525
-grain pixel count   9.0181
+equal grains        7.6274
+grain pixel count   8.9862
 ```
 
 The unequal peaks, 7.6274 and 8.9863 mrd in MATLAB, show that weighting changes the

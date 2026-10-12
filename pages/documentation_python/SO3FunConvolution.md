@@ -293,7 +293,7 @@ calling `conv`.
 
 ```python
 sphereHInv = S2FunHarmonic(S2Fun.smiley(), rotF.CS)
-directionInv = conv(rotF, sphereHInv, 'inv')
+directionInv = conv(rotF, sphereHInv, inverse=True)
 directionInvEquivalent = conv(inv(rotF), sphereHInv)
 
 vSpecimen = xvector
@@ -405,7 +405,7 @@ kernelFormDifference
 ```
 
 ```text
-5.5511e-17
+8.3267e-17
 ```
 
 ---

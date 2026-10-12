@@ -162,20 +162,20 @@ mori_uncorrelated
 
 ```text
 misorientation (Forsterite → Enstatite)
-  size: 99971
+  size: 99970
   Bunge Euler angles in degree
   phi1   Phi  phi2
-  83.2  54.4  78.9
+  70.3   108  96.9
    NaN   NaN   NaN
    NaN   NaN   NaN
-   202  69.2  85.3
    NaN   NaN   NaN
+   222  25.7  95.4
      ⋮     ⋮     ⋮
+   112   151    49
+   208   119   143
    NaN   NaN   NaN
-   207  77.4    76
-   136  78.5   119
    NaN   NaN   NaN
-   NaN   NaN   NaN
+   236   135  82.1
 ```
 
 The summary reports 99,978 accepted pairs. These are pixel orientations, not grain mean
@@ -202,7 +202,7 @@ uncorrelatedPeakMRD
 ```
 
 ```text
-2.1443
+2.0448
 ```
 
 Its maximum is 2.06 mrd, not 118.34 mrd. The preferred boundary relationship is absent
@@ -253,7 +253,7 @@ relativeDifferencePercent
 ```
 
 ```text
-4.9483
+4.6167
 ```
 
 The difference is 4.94 percent in the $$L^2$$ norm. The ODF route smooths each texture

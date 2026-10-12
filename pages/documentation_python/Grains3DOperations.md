@@ -258,8 +258,8 @@ For example, the first command below turns the vertices while retaining the orie
 values. The second changes the orientations while retaining the vertices.
 
 ```python
-geometryOnly = rotate(grains, rot, 'keepEuler')
-orientationOnly = rotate(grains, rot, 'keepXY')
+geometryOnly = rotate(grains, rot, keepEuler=True)
+orientationOnly = rotate(grains, rot, keepXY=True)
 ```
 
 These flags are useful when geometry and orientation require separate corrections. They

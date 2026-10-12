@@ -71,13 +71,13 @@ W
 ```
 
 ```text
-2.315269640516254
+2.315269641295024
 spinTensor (1)
   rank: 2 (3 × 3)
   *10^-3
-       0  -4.5689  -7.3707
-  4.5689        0   3.3174
-  7.3707  -3.3174        0
+       0  -4.7478  -6.955
+  4.7478        0  2.4628
+   6.955  -2.4628       0
 ```
 
 Applying the negative crystallographic spin updates the orientation. The angle below
@@ -90,7 +90,7 @@ rotationAngle
 ```
 
 ```text
-0.5320
+0.5027
 ```
 
 One percent strain gives a Taylor factor of 2.3153 and rotates this crystal by 0.4975
@@ -138,7 +138,7 @@ initialTextureIndex
 ```
 
 ```text
-1.0009
+1.0010
 ```
 
 ## Step through the strain history
@@ -167,7 +167,7 @@ convention places RD north, TD west, and ND out of the page.
 previousFrame = specimenFrame.default
 specimenFrame.rolling.makeDefault()
 
-plotPF(ori, Miller([[0, 0, 1], [1, 1, 1]], cs), 'contourf')
+plotPF(ori, Miller([[0, 0, 1], [1, 1, 1]], cs), contourf=True)
 mtexColorbar()
 ```
 
@@ -196,10 +196,10 @@ for s, t in zip([0, 20, 40, 60], textureIndex):
 
 ```text
 StrainPercent  TextureIndex
-            0        1.0009
-           20        1.1448
-           40        1.4656
-           60        1.8125
+            0        1.0010
+           20        1.1857
+           40        1.5974
+           60        2.0737
 ```
 
 The index rises from 1.0010 initially to 1.1499, 1.4984, and 1.9160. This steady
@@ -208,7 +208,7 @@ yet extremely concentrated at 60 percent strain.
 
 ```python
 odf = odfAtStep
-plotSection(odf, 'phi2', np.array([0, 45, 65]) * degree, 'contourf')
+plotSection(odf, 'phi2', np.array([0, 45, 65]) * degree, contourf=True)
 mtexColorbar()
 
 # restore the incoming session frame after the published figures are made

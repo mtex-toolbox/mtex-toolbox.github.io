@@ -161,7 +161,7 @@ numClipped
 ```
 
 ```text
-8
+9
 ```
 
 The printed maximum rounds to 13, and the count confirms that eight grains lie above the
@@ -217,7 +217,7 @@ fractionInBand
 ```
 
 ```text
-0.4986
+0.5015
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/GrainSpatialPlots-14.png"></center>

@@ -210,7 +210,7 @@ column contains `NaN`.
 newMtexFigure(layout=[3, 3], figSize='large')
 for i in range(3):
   for j in range(3):
-    nextAxis(i + 1, j + 1)
+    nextAxis(i, j)
     plot(ebsd, kappaMeasured.M[..., i, j], micronbar='off')
     hold(True)
     plot(grains.boundary, lineWidth=2)
@@ -343,9 +343,9 @@ dislocationDensityTensor (y←↑x)
   unit: 1/um
   rank: 2 (3 × 3)
   *10^-4
-   3.7475  -0.5695   2.0359
-  -5.0601  -1.3565  -1.9214
-  -0.4706  -1.8151   6.6724
+   3.7476  -0.5695   2.0359
+  -5.0601  -1.3564  -1.9214
+  -0.4706   -1.815   6.6724
 ```
 
 ```python
@@ -388,15 +388,15 @@ curvatureTensor (y←↑x)
   rank: 2 (3 × 3)
   *10^-4
   -0.7842  -5.0601  -0.4706
-  -0.5695  -5.8882  -1.8151
-   2.0359  -1.9214   2.1407
+  -0.5695  -5.8882   -1.815
+   2.0359  -1.9214   2.1405
 ```
 
 ```python
 newMtexFigure(layout=[3, 3], figSize='large')
 for i in range(3):
   for j in range(3):
-    nextAxis(i + 1, j + 1)
+    nextAxis(i, j)
     plot(ebsd, kappaFitted.M[..., i, j], micronbar='off')
     hold(True)
     plot(grains.boundary, lineWidth=2)

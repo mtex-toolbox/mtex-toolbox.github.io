@@ -106,7 +106,7 @@ The same function is especially simple in axis--angle coordinates. Each section 
 rotational angle and varies the rotational axis.
 
 ```python
-plotSection(SO3F, 'axisAngle', np.arange(15, 61, 15) * degree, 'pcolor')
+plotSection(SO3F, 'axisAngle', np.arange(15, 61, 15) * degree, pcolor=True)
 mtexColorbar()
 mtexColorMap('parula')
 ```
@@ -160,7 +160,7 @@ values are about 62.799 degrees, and their positions are the vertices of the fun
 region in orientation space.
 
 ```python
-color = ind2color(np.tile(np.arange(1, oriMax.size + 1), (numSym(cs), 1)))
+color = ind2color(np.tile(np.arange(oriMax.size), (numSym(cs), 1)))
 plot(oriMax.symmetrise(), color, 'axisAngle', filled=True, markerSize=20, fundamentalRegion=True)
 ```
 

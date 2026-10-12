@@ -243,7 +243,7 @@ youngsModulusRange
 ```
 
 ```text
-[166.61157713039492, 306.4864864864865]
+[166.61157713039486, 306.4864864864865]
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/TensorDefinition-11.png"></center>

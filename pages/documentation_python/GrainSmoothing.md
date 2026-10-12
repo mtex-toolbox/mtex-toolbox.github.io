@@ -83,7 +83,7 @@ print(f'total boundary length: {lenRaw:.0f} {grains.scanUnit} measured, {lenSmoo
 ```
 
 ```text
-total boundary length: 19597 um measured, 15819 um smoothed - 19% shorter
+total boundary length: 19417 um measured, 15647 um smoothed - 19% shorter
 ```
 
 The direction distribution shows the same grid artifact. The raw boundary follows two
@@ -174,8 +174,8 @@ print(f'  taubinFilter            {100 * np.mean((aT - A0) / A0):+6.2f}% on aver
 
 ```text
 grain area after 25 iterations
-  laplaceFilter (default)  -2.24% on average,  -61.5% for the worst grain
-  taubinFilter             -0.10% on average,   -8.5% for the worst grain
+  laplaceFilter (default)  -2.44% on average,  -61.5% for the worst grain
+  taubinFilter             -0.08% on average,   -6.9% for the worst grain
 ```
 
 The reference has passed through simplification and resampling but has zero smoothing
@@ -248,7 +248,7 @@ print(f'boundary segments: {len(grains.boundary)} measured, {len(grainsSmooth.bo
 ```
 
 ```text
-boundary segments: 21495 measured, 18621 after smoothing, 21495 with both steps off
+boundary segments: 21296 measured, 18453 after smoothing, 21296 with both steps off
 ```
 
 Only the last count remains equal to the measured count. It therefore keeps one valid

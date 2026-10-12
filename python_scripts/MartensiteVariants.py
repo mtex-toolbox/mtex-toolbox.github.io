@@ -91,16 +91,16 @@ hFcc = Miller([[1, 0, 0], [1, 1, 0], [1, 1, 1]], csAus)
 
 plotPF(childOri, hBcc, markerSize=5, markerFaceAlpha=0.05, markerEdgeAlpha=0.1, points=500)
 
-nextAxis(1)
+nextAxis(0)
 hold(True)
 plot(parentOri * hFcc[0].symmetrise(), markerFaceColor='r')
 xlabel('(100)', color='red')
 
-nextAxis(2)
+nextAxis(1)
 plot(parentOri * hFcc[2].symmetrise(), markerFaceColor='r')
 xlabel('(111)', color='red')
 
-nextAxis(3)
+nextAxis(2)
 plot(parentOri * hFcc[1].symmetrise(), markerFaceColor='r')
 xlabel('(110)', color='red')
 hold(False)
@@ -127,7 +127,7 @@ gcm().drawNow()
 KS = orientation.map(Miller(1, 1, 1, csAus), Miller(0, 1, 1, csBcc), Miller(-1, 0, 1, csAus), Miller(-1, -1, 1, csBcc))
 print(KS)
 
-plotPF(variants(KS, parentOri), 'add2all', markerFaceColor='none', markerEdgeColor='k', lineWidth=2)
+plotPF(variants(KS, parentOri), add2all=True, markerFaceColor='none', markerEdgeColor='k', lineWidth=2)
 
 # %% [markdown]
 # The black rings are the ideal KS child variants predicted from the retained parent. Their
@@ -157,7 +157,7 @@ print(p2cMean)
 
 plotPF(childOri, hBcc, markerSize=5, markerFaceAlpha=0.05, markerEdgeAlpha=0.1, points=500)
 hold(True)
-plotPF(variants(p2cMean, parentOri), 'add2all', markerFaceColor='none', markerEdgeColor='k', lineWidth=2)
+plotPF(variants(p2cMean, parentOri), add2all=True, markerFaceColor='none', markerEdgeColor='k', lineWidth=2)
 hold(False)
 
 fitMean = np.mean(angle(mori, p2cMean)) / degree
@@ -218,7 +218,7 @@ variantId, packetId, bainId, _ = calcVariantId(parentOri, childOri, p2cIter)
 # the individual coloured points difficult to distinguish.
 
 # %%
-variantColor = ind2color(variantId, 'ordered')
+variantColor = ind2color(variantId - 1, 'ordered')
 plotPF(childOri, variantColor, hBcc, markerSize=5)
 
 # %% [markdown]
@@ -239,20 +239,20 @@ plot(childOri, variantColor, 'axisAngle')
 # ID identifies that group.
 
 # %%
-packetColor = ind2color(packetId)
+packetColor = ind2color(packetId - 1)
 plotPF(childOri, packetColor, hBcc, markerSize=5, points=1000)
 
-nextAxis(1)
+nextAxis(0)
 hold(True)
 opt = dict(markerFaceColor='none', markerEdgeColor='k', lineWidth=3)
 plot(parentOri * hFcc[0].symmetrise(), **opt)
 xlabel('(100)', color='red')
 
-nextAxis(2)
+nextAxis(1)
 plot(parentOri * hFcc[2].symmetrise(), **opt)
 xlabel('(111)', color='red')
 
-nextAxis(3)
+nextAxis(2)
 plot(parentOri * hFcc[1].symmetrise(), **opt)
 xlabel('(110)', color='red')
 hold(False)
@@ -282,19 +282,19 @@ plot(grains['Fe'], packetColor)
 # levels of one hierarchy.
 
 # %%
-bainColor = ind2color(bainId)
+bainColor = ind2color(bainId - 1)
 plotPF(childOri, bainColor, hBcc, markerSize=5, points=1000)
 
-nextAxis(1)
+nextAxis(0)
 hold(True)
 plot(parentOri * hFcc[0].symmetrise(), **opt)
 xlabel('(100)', color='red')
 
-nextAxis(2)
+nextAxis(1)
 plot(parentOri * hFcc[2].symmetrise(), **opt)
 xlabel('(111)', color='red')
 
-nextAxis(3)
+nextAxis(2)
 plot(parentOri * hFcc[1].symmetrise(), **opt)
 xlabel('(110)', color='red')
 hold(False)

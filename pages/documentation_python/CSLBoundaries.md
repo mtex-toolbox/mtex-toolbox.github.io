@@ -116,9 +116,9 @@ gB
 
 ```text
 grainBoundary (y↓→x)
-  size: 17759 segments, 2535 chains
+  size: 17566 segments, 2423 chains
   segments    length  mineral 1  mineral 2
-     17759  16490 µm       iron       iron
+     17566  16290 µm       iron       iron
 ```
 
 ```python
@@ -134,7 +134,7 @@ sigma3SegmentPercent
 ```
 
 ```text
-42.0970
+42.5880
 ```
 
 ```python
@@ -211,7 +211,7 @@ numberOfGrainsBeforeAndAfter
 ```
 
 ```text
-[924, 453]
+[885, 418]
 ```
 
 ```python
@@ -249,7 +249,7 @@ lowSigmaSegmentCounts
 ```
 
 ```text
-[26, 30, 506, 187]
+[26, 30, 502, 179]
 ```
 
 ```python
@@ -317,7 +317,7 @@ has no preferred side.
 
 ```python
 # compute and plot the boundary of the fundamental region
-oR = fundamentalRegion(ebsd.CS, ebsd.CS, 'antipodal')
+oR = fundamentalRegion(ebsd.CS, ebsd.CS, antipodal=True)
 plot(oR)
 
 # plot a reproducible sample of 500 boundary misorientations
@@ -390,7 +390,7 @@ peakMRD
 ```
 
 ```text
-array([53.6305,  1.6505])
+array([54.2407,  1.6606])
 ```
 
 ```python
@@ -431,7 +431,7 @@ sigma3WithinTwoDegrees
 ```
 
 ```text
-40.2500
+40.7150
 ```
 
 ```python
@@ -440,7 +440,7 @@ sigma9WithinTwoDegrees
 ```
 
 ```text
-2.0102
+2.0494
 ```
 
 ## Compare the direct segment fractions
@@ -493,7 +493,7 @@ testMisorientationMRD
 ```
 
 ```text
-1.5205
+1.5305
 ```
 
 ```python
@@ -502,7 +502,7 @@ sigma3MRD
 ```
 
 ```text
-array([53.6418])
+array([54.2521])
 ```
 
 ## Compare the two density values

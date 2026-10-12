@@ -39,7 +39,7 @@ getMTEXpref()
 ```
 
 ```text
-{'EulerAngleConvention': 'Bunge', 'UTF8Output': True, 'degreeChar': '°', 'FontSize': 13, 'markerSize': 10, 'stopOnSymmetryMissmatch': True, 'maxS1Bandwidth': 1024, 'maxS2Bandwidth': 512, 'maxSO3Bandwidth': 64, 'defaultS2Bandwidth': 128, 'defaultSO3Bandwidth': 64, 'FFTAccuracy': 0.01, 'displayRows': 20, 'hugePages': False}
+{'EulerAngleConvention': 'Bunge', 'UTF8Output': True, 'degreeChar': '°', 'FontSize': 13, 'markerSize': 10, 'stopOnSymmetryMissmatch': True, 'maxS1Bandwidth': 1024, 'maxS2Bandwidth': 512, 'maxSO3Bandwidth': 64, 'defaultS2Bandwidth': 128, 'defaultSO3Bandwidth': 64, 'FFTAccuracy': 0.01, 'displayRows': 20, 'hugePages': 'auto'}
 ```
 
 ## Change one preference temporarily

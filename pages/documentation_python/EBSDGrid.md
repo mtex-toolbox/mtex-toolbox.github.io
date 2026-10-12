@@ -222,7 +222,7 @@ ebsd
 ```
 
 ```text
-Warning: the measurements span 15040 lattice cells but there are only 617 of them, so they do not form a grid; keeping the data as a list, call gridify explicitly for the raster anyway
+Warning: the measurements are not on a lattice; keeping the data as a list
 EBSD (y↑→x)
   size: 617
   Phase  Orientations  Mineral                Color       Symmetry  Crystal reference frame
@@ -231,10 +231,9 @@ EBSD (y↑→x)
   5      215 (35%)     Omphacite              DarkBlue    12/m1     Omphacite
   6      61 (9.9%)     Coesite                DarkGreen   12/m1     Coesite
   7      172 (28%)     Quartz-new             DarkRed     -3m1      Quartz-new
-  properties    : bands, bc, bs, error, mad
-  scan unit     : um
-  X × Y         : [1.911 → 716.5] × [1.91 → 622.9]
-  square lattice: spacing 5.77
+  properties: bands, bc, bs, error, mad
+  scan unit : um
+  X × Y     : [1.911 → 716.5] × [1.91 → 622.9]
 ```
 
 The warning above says why the data stays a list. MTEX also keeps a list when the
@@ -680,12 +679,12 @@ grains
 
 ```text
 grain2d (y↑→x)
-  size: 27
+  size: 24
   Phase  Grains            Mineral     Color         Symmetry  Crystal reference frame
-  1      18 (1942 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
+  1      15 (1943 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
   2      3 (284 pixels)    Enstatite   DarkSeaGreen  mmm       Enstatite
   3      6 (240 pixels)    Diopside    Goldenrod     12/m1     Diopside
-  boundary segments: 1149, inner: 1, triple points: 30
+  boundary segments: 1091, inner: 30, triple points: 22
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDGrid-35.png"></center>

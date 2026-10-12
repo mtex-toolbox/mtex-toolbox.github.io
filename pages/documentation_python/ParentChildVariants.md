@@ -70,8 +70,8 @@ oriChild
 ```text
 orientation (Ti (alpha) → y↑→x)
   Bunge Euler angles in degree
-  phi1  Phi  phi2
-   312  119   331
+  phi1   Phi  phi2
+   287  17.3   324
 ```
 
 The Burgers OR aligns a hexagonal $$(0001)$$ plane with a cubic $$(110)$$ plane. It also aligns
@@ -91,17 +91,17 @@ copy the way a plane alignment does.
 plotPF(oriParent, Miller(1, 1, 0, csBeta), markerSize=20, markerFaceColor='none', lineWidth=4, layout=[1, 2])
 hold(True)
 plot(oriChild.symmetrise() * Miller(0, 0, 0, 1, csAlpha), markerSize=12)
-xlabel(Miller(0, 0, 0, 1, csAlpha).char(), color=ind2color(2))
+xlabel(Miller(0, 0, 0, 1, csAlpha).char(), color=ind2color(1))
 hold(False)
 
 # [111] / [2-1-10] pole figure
-nextAxis(2)
-plotPF(oriParent, Miller(1, 1, 1, csBeta, 'uvw'), 'upper', markerSize=20, markerFaceColor='none', lineWidth=4)
+nextAxis(1)
+plotPF(oriParent, Miller(1, 1, 1, csBeta, 'uvw'), upper=True, markerSize=20, markerFaceColor='none', lineWidth=4)
 
 dAlpha = Miller(2, -1, -1, 0, csAlpha, 'uvw')
 hold(True)
 plot(oriChild.symmetrise() * dAlpha, markerSize=12)
-xlabel(dAlpha.char(), color=ind2color(2))
+xlabel(dAlpha.char(), color=ind2color(1))
 hold(False)
 gcm().drawNow()
 ```
@@ -168,7 +168,7 @@ directly. It returns the 12 child variants for this OR.
 oriChild = variants(beta2alpha, oriParent)
 
 for i in range(1, 13):
-  plotIPF(oriChild[i - 1], ind2color(i), vector3d.Z, label=i, markerEdgeColor='k')
+  plotIPF(oriChild[i - 1], ind2color(i - 1), vector3d.Z, label=i, markerEdgeColor='k')
   hold(True)
 hold(False)
 ```
@@ -188,8 +188,8 @@ orientation (Ti (alpha) → y↑→x)
   size: 2
   Bunge Euler angles in degree
   phi1   Phi  phi2
-  30.8   170   115
-  58.9  50.8   314
+   347  98.8  99.7
+   112  42.7   208
 ```
 
 ## Exact and approximate orientation relationships
@@ -260,7 +260,7 @@ np.min(angle(oriParents, oriParent)) / degree
 ```
 
 ```text
-8.2273e-14
+2.4841e-14
 ```
 
 The [`parents`](orientation.parents.html) method returns the same set of OR variants.
@@ -275,12 +275,12 @@ orientation (Ti (beta) → y↑→x)
   size: 6
   Bunge Euler angles in degree
   phi1   Phi  phi2
-   354  36.3  8.64
-    66   127   172
-  38.9  84.3   344
-  33.7  75.1   165
-  74.8   135   357
-   338  31.1   202
+   184  38.5   156
+  24.5  73.3   122
+  47.6  26.4   285
+  64.5    18  89.6
+    22  83.5   302
+   189  48.4   332
 ```
 
 A single child orientation cannot identify which candidate parent is correct. Parent grain

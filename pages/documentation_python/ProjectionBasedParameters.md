@@ -274,7 +274,7 @@ parorMinimum
 ```
 
 ```text
-array([0.7118, 0.7241])
+array([0.7118, 0.7238])
 ```
 
 The forsterite and enstatite minima are 0.7118 and 0.7214, a difference of about 0.01.
@@ -297,7 +297,7 @@ harmonicDirectionsFo
 ```
 
 ```text
-array([71.2455, 74.4585])
+array([71.2453, 74.4607])
 ```
 
 ```python
@@ -310,7 +310,7 @@ harmonicDirectionsEn
 ```
 
 ```text
-array([87.0989, 88.7002])
+array([87.1575, 88.7155])
 ```
 
 For forsterite the two fitted directions are 71.5 and 74.5 degrees; for enstatite they
@@ -340,7 +340,7 @@ sampledDirectionsEn
 ```
 
 ```text
-array([86., 89.])
+array([87., 89.])
 ```
 
 ## From boundaries to a surface fabric: SURFOR
@@ -379,7 +379,7 @@ for name, mn, d in zip(pairName, surforMinimum, surforLongDirection):
   boundaryPair  minimumToMaximum  longDirectionDegree
          Fo-Fo           0.76161                   63
          Fo-En           0.72393                   83
-         Fo-Di           0.67934                   74
+         Fo-Di           0.67923                   74
          En-Di           0.87224                   85
 ```
 
@@ -434,7 +434,7 @@ characteristicCaliperAngle
 ```
 
 ```text
-array([79.4635, 79.2353, 88.5263])
+array([79.4633, 79.2353, 88.5263])
 ```
 
 The two single-phase shapes both give 79.3 degrees. Each is skewed by about 10.7

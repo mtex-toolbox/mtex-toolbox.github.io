@@ -156,13 +156,13 @@ G.eval(ori.symmetrise())
 SO3TangentVector (left, y↑→x)
   size     : 6
   reference: orientation (Quartz → y↑→x), one per element
-        x     y        z
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
+        x       y        z
+  0.00292  0.0501  -0.0189
+  0.00292  0.0501  -0.0189
+  0.00292  0.0501  -0.0189
+  0.00292  0.0501  -0.0189
+  0.00292  0.0501  -0.0189
+  0.00292  0.0501  -0.0189
 ```
 
 ---
@@ -177,10 +177,10 @@ SO3TangentVector (right, Quartz)
   reference: orientation (Quartz → y↑→x), one per element
         x        y        z
    0.0134  -0.0467   0.0226
-  -0.0471   0.0117   0.0226
-   0.0471   0.0117  -0.0226
-   0.0337    0.035   0.0226
-  -0.0337    0.035  -0.0226
+  -0.0472   0.0118   0.0226
+   0.0472   0.0118  -0.0226
+   0.0338    0.035   0.0226
+  -0.0338    0.035  -0.0226
   -0.0134  -0.0467  -0.0226
 ```
 
@@ -476,8 +476,8 @@ WCopper
 ```text
 SO3TangentVector (left, y↑→x)
   reference: orientation (432 → y↑→x)
-  x       y  z
-  0  -0.463  0
+          x       y         z
+  -2.97e-10  -0.464  1.34e-09
 ```
 
 ## The amount of spin
@@ -494,7 +494,7 @@ oriMax
 orientation (432 → y↑→x)
   Bunge Euler angles in degree
   phi1   Phi  phi2
-   259  42.4   123
+  55.8  50.3   293
 ```
 
 Plot the norm at $$0.5^\circ$$ resolution and overlay the more coarsely sampled vector

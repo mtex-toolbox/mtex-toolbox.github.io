@@ -206,8 +206,8 @@ grainsAboutCenter = rotate(grains, rot, center=rotationCenter)
 # values. The second changes the orientations while retaining the vertices.
 
 # %%
-geometryOnly = rotate(grains, rot, 'keepEuler')
-orientationOnly = rotate(grains, rot, 'keepXY')
+geometryOnly = rotate(grains, rot, keepEuler=True)
+orientationOnly = rotate(grains, rot, keepXY=True)
 
 # %% [markdown]
 # These flags are useful when geometry and orientation require separate corrections. They

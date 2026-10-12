@@ -408,7 +408,7 @@ fractalDimension
 ```
 
 ```text
-1.0129
+1.0152
 ```
 
 Treat the estimate with care. Pixel spacing sets the smallest visible feature, small
@@ -425,9 +425,9 @@ for iter in [0, 5, 25]:
 ```
 
 ```text
- 0 smoothing iterations: fractal dimension 1.127
- 5 smoothing iterations: fractal dimension 1.013
-25 smoothing iterations: fractal dimension 0.962
+ 0 smoothing iterations: fractal dimension 1.131
+ 5 smoothing iterations: fractal dimension 1.015
+25 smoothing iterations: fractal dimension 0.965
 ```
 
 The pixel staircase gives 1.128 because grid corners add artificial length. Five

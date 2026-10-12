@@ -231,7 +231,7 @@ print(f'Default: {defaultTime:.2f} s, peak {defaultPeak:.1f} mrd, mean RP {meanD
 ```
 
 ```text
-Default: 1.08 s, peak 94.4 mrd, mean RP 0.59; 15 degree: 0.08 s, peak 26.3 mrd, mean RP 0.75
+Default: 1.36 s, peak 94.4 mrd, mean RP 0.59; 15 degree: 0.19 s, peak 26.3 mrd, mean RP 0.75
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODF-9.png"></center>
@@ -267,7 +267,7 @@ print(f'Zero range: {zeroTime:.2f} s, peak {zeroPeak:.1f} mrd, mean RP {meanZero
 ```
 
 ```text
-Zero range: 0.40 s, peak 106.9 mrd, mean RP 0.51; default: 1.08 s, peak 94.4 mrd, mean RP 0.59
+Zero range: 0.76 s, peak 106.9 mrd, mean RP 0.51; default: 1.36 s, peak 94.4 mrd, mean RP 0.59
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODF-10.png"></center>

@@ -64,7 +64,7 @@ least squares, `'mlsq'`. This solver constrains the kernel weights to be nonnega
 MTEX normalizes the fitted function to mean 1.
 
 ```python
-SO3FDensity = interp(ori, val, 'density')
+SO3FDensity = interp(ori, val, density=True)
 SO3FDensity
 ```
 
@@ -225,7 +225,7 @@ That coupling changes both the kernel shape and the number of unknown weights. S
 `resolution` separately when the aim is to isolate the effect of halfwidth.
 
 ```python
-SO3FNarrow = interp(ori, val, 'density', halfwidth=2 * degree, resolution=5 * degree)
+SO3FNarrow = interp(ori, val, density=True, halfwidth=2 * degree, resolution=5 * degree)
 SO3FNarrow
 ```
 
@@ -264,7 +264,7 @@ start with a halfwidth at least as large as the resolution of the data, then val
 choice.
 
 ```python
-SO3FSmooth = interp(ori, val, 'density', halfwidth=10 * degree, resolution=5 * degree)
+SO3FSmooth = interp(ori, val, density=True, halfwidth=10 * degree, resolution=5 * degree)
 SO3FSmooth
 ```
 
@@ -319,7 +319,7 @@ SO3Grid (1 → y↑→x)
 ---
 
 ```python
-SO3FGrid = interp(ori, val, 'density', SO3Grid=S3G)
+SO3FGrid = interp(ori, val, density=True, SO3Grid=S3G)
 SO3FGrid
 ```
 
@@ -366,7 +366,7 @@ values.
 hw = np.array([20, 15, 12.5, 10, 7.5, 5, 2.5])
 err = np.zeros(len(hw))
 for k in range(len(hw)):
-  SO3Fhw = interp(ori, val, 'density', halfwidth=hw[k] * degree, resolution=5 * degree)
+  SO3Fhw = interp(ori, val, density=True, halfwidth=hw[k] * degree, resolution=5 * degree)
   err[k] = norm(SO3Fhw.eval(ori) - S['values']) / norm(S['values'])
 
 plt.figure(figsize=(6, 3.5))
@@ -408,7 +408,7 @@ bestRecoveryError
 ---
 
 ```python
-SO3FBest = interp(ori, val, 'density', halfwidth=bestHalfwidth * degree, resolution=5 * degree)
+SO3FBest = interp(ori, val, density=True, halfwidth=bestHalfwidth * degree, resolution=5 * degree)
 plot(SO3FBest, 'sigma')
 ```
 
@@ -442,7 +442,7 @@ SO3AbelPoissonKernel
 ---
 
 ```python
-SO3FAbel = interp(ori, val, 'density', kernel=psi, resolution=5 * degree)
+SO3FAbel = interp(ori, val, density=True, kernel=psi, resolution=5 * degree)
 plot(SO3FAbel, 'sigma')
 ```
 

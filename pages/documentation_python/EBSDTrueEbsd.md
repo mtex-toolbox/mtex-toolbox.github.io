@@ -244,7 +244,7 @@ their shift is taken as zero. The displayed `difference` for that hop is the raw
 difference, not a fitted residual and not a correction to apply.
 
 ```python
-job.calcDistortion('fitErr')
+job.calcDistortion(fitErr=True)
 ```
 
 ```text

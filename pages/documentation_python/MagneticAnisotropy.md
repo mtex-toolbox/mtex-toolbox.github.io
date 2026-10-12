@@ -87,7 +87,7 @@ lies along RD. The pole figure shows where the cubic $$\{100\}$$ easy directions
 the specimen. Its colour scale is in multiples of a random distribution (mrd).
 
 ```python
-plotPF(odf, Miller(1, 0, 0, cs), 'antipodal', 'contourf')
+plotPF(odf, Miller(1, 0, 0, cs), antipodal=True, contourf=True)
 mtexColorbar(title='pole density (mrd)')
 ```
 
@@ -150,10 +150,10 @@ directionalResults
 ```
 
 ```text
-array([[ 0.    ,  0.1609,  1.9103],
-       [45.    ,  1.1889,  1.5254],
-       [55.    ,  1.2567,  1.5   ],
-       [90.    ,  0.9829,  1.6025]])
+array([[ 0.    ,  0.1596,  1.9107],
+       [45.    ,  1.1905,  1.5248],
+       [55.    ,  1.2576,  1.4997],
+       [90.    ,  0.9822,  1.6028]])
 ```
 
 At RD the mean energy is 0.1628 in units of $$10^4$$ J/m$$^3$$, and the predicted $$J_{50}$$

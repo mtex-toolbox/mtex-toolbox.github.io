@@ -104,7 +104,7 @@ hold(False)
 # before the conversion.
 
 # %%
-sSFcc = symmetrise(slipSystem.fcc(cs), 'antipodal')
+sSFcc = symmetrise(slipSystem.fcc(cs), antipodal=True)
 dSFcc = dislocationSystem(sSFcc)
 [sum(dSFcc.isEdge), sum(dSFcc.isScrew)]
 

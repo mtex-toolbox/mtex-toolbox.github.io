@@ -305,7 +305,7 @@ print(f'Large forsterite grains: {len(grainsLarge)}; ratio above three: {np.coun
 ```
 
 ```text
-Large forsterite grains: 262; ratio above three: 147 (56.1 percent)
+Large forsterite grains: 249; ratio above three: 141 (56.6 percent)
 ```
 
 Only the grains that pass the stated screen enter the aggregate plots. The others are
@@ -333,11 +333,11 @@ peakSpecimenAxis
 ```
 
 ```text
-Maximum specimen-axis density: 2.22 multiples of uniform
+Maximum specimen-axis density: 1.96 multiples of uniform
 vector3d (y↑→x)
   antipodal: true
-      x      y     z
-  0.946  0.248  0.21
+      x       y     z
+  0.961  0.0626  0.27
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/Grain_dispersion_axes-18.png"></center>
@@ -366,11 +366,11 @@ peakCrystalAxis
 ```
 
 ```text
-Maximum crystal-axis density: 2.83 multiples of uniform
+Maximum crystal-axis density: 2.92 multiples of uniform
 vector3d (Forsterite)
   antipodal: true
-  h       k       l
-  0  8.2586  3.5141
+  h       k  l
+  0  10.207  0
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/Grain_dispersion_axes-19.png"></center>

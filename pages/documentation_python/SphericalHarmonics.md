@@ -95,7 +95,7 @@ valueFromSeries
 ```
 
 ```text
-(0.34549414947133544+0j)
+(0.3454941494713355+0j)
 ```
 
 ## Compare the two evaluation routes

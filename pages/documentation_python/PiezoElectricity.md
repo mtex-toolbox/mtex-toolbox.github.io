@@ -91,7 +91,7 @@ A rank three directional response is odd: $$q(-n)=-q(n)$$. Plotting both hemisph
 makes that sign reversal explicit.
 
 ```python
-plot(P, 'complete', 'smooth', 'upper', 'lower')
+plot(P, complete=True, smooth=True, upper=True, lower=True)
 mtexColorbar(title='longitudinal coefficient (pC/N)')
 ```
 
@@ -176,7 +176,7 @@ prediction for the rock.
 apparentMean = ori.calcTensor(P)
 qApparent = apparentMean.directionalMagnitude()
 
-plot(apparentMean, 'complete', 'smooth', 'upper', 'lower')
+plot(apparentMean, complete=True, smooth=True, upper=True, lower=True)
 mtexColorbar(title='apparent longitudinal coefficient (pC/N)')
 
 # rows: the single crystal and the all right-handed average, columns: minimum, maximum

@@ -177,7 +177,7 @@ plot(SO3F2Sym)
 # `SO3F2Sym`.
 
 # %%
-plot(SO3F2Sym, 'complete')
+plot(SO3F2Sym, complete=True)
 
 # %% [markdown]
 # In the complete plot, every twofold-related position now carries the same value. This
@@ -235,4 +235,4 @@ SO3F3
 # NumPy's generator cannot reproduce MATLAB's `rng(1)`, so the random coefficients, the
 # orbit spread 9.84 for MATLAB's 4.71 and the coefficient change 0.70 for 0.74 differ from
 # MATLAB's in the digits.
-# `plot(f, 'complete')` draws the sections of the frames without their groups.
+# `plot(f, complete=True)` draws the sections of the frames without their groups.

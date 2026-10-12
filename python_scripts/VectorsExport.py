@@ -57,7 +57,7 @@ print(open(fname).read())
 # Cartesian coordinates when magnitudes matter.
 
 # %%
-export(v, fname, 'polar')
+export(v, fname, polar=True)
 print(open(fname).read())
 
 # %% [markdown]

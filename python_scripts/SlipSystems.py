@@ -81,7 +81,7 @@ hold(False)
 # they describe the two shear senses of the same geometric system.
 
 # %%
-sSBasalSym = sSBasal.symmetrise('antipodal')
+sSBasalSym = sSBasal.symmetrise(antipodal=True)
 sSBasalSym
 
 # %% [markdown]

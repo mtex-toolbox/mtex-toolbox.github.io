@@ -88,7 +88,7 @@ here, so opposite directions are drawn as the same pole.
 
 ```python
 h = Miller([[0, 0, 0, 1], [1, 0, -1, 0], [1, 0, -1, 1]], cs)
-plotPF(odf, h, 'contourf', 'complete', 'upper')
+plotPF(odf, h, contourf=True, complete=True, upper=True)
 mtexColorbar()
 ```
 
@@ -173,14 +173,14 @@ orientation (Mg → TD←RD↑)
   size: 5000
   Bunge Euler angles in degree
   phi1    Phi  phi2
-   300  0.186   294
+   300  0.188   295
   28.3   16.4  80.4
    176    171   164
-   328   8.78   249
-   116   15.1   335
+   328   8.79   249
+   116     15   335
      ⋮      ⋮     ⋮
   59.8    172   234
-   207   22.6   317
+   207   22.7   317
    177    9.2   222
    327    173   308
    295    168   214
@@ -207,7 +207,7 @@ meanRotation
 ```
 
 ```text
-array([ 8.0951, 15.4951])
+array([ 8.0945, 15.1041])
 ```
 
 The mean orientation changes are 8.3179 degrees at room temperature and 15.4162
@@ -229,13 +229,13 @@ arrange the three states as rows on common specimen axes.
 
 ```python
 newMtexFigure(layout=[3, 3])
-plotPF(odf, h, 'contourf', 'complete', 'upper', 'grid', grid_res=30 * degree)
+plotPF(odf, h, contourf=True, complete=True, upper=True, grid=True, grid_res=30 * degree)
 
 nextAxis()
-plotPF(oriCold, h, 'contourf', 'upper', 'complete', 'grid', grid_res=30 * degree, axisLabels=False, title=False)
+plotPF(oriCold, h, contourf=True, upper=True, complete=True, grid=True, grid_res=30 * degree, axisLabels=False, title=False)
 
 nextAxis()
-plotPF(oriWarm, h, 'contourf', 'upper', 'complete', 'grid', grid_res=30 * degree, axisLabels=False, title=False)
+plotPF(oriWarm, h, contourf=True, upper=True, complete=True, grid=True, grid_res=30 * degree, axisLabels=False, title=False)
 mtexColorbar()
 ```
 
@@ -265,8 +265,8 @@ for name, row in familyActivity.items():
 
 ```text
                  Basal  Prismatic  Pyramidal  CompressionTwin
-RoomTemperature   0.025398    0.38817     0.2806          0
-    250DegreesC   0.050629    0.75462    0.81836          0
+RoomTemperature   0.025387    0.38817    0.28061 1.2417e-10
+    250DegreesC   0.050593    0.75461    0.81838 3.3852e-11
 ```
 
 Use a logarithmic scale because the active family totals span several orders of

@@ -189,7 +189,7 @@ plotted frames are physically aligned.
 entry in the map frame.
 
 ```python
-imgList = transformReferenceFrame(imgList, ebsdFrame, 'byScreenAlignment')
+imgList = transformReferenceFrame(imgList, ebsdFrame, byScreenAlignment=True)
 imgList
 ```
 

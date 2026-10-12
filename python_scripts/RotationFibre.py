@@ -60,8 +60,8 @@ f
 # %%
 plot(f, lineWidth=3, lineColor='red')
 hold(True)
-plot(oriA, 'filled', markerSize=20, markerFaceColor='darkred')
-plot(oriB, 'filled', markerSize=20, markerFaceColor='blue')
+plot(oriA, filled=True, markerSize=20, markerFaceColor='darkred')
+plot(oriB, filled=True, markerSize=20, markerFaceColor='blue')
 plt.xlim(0, 90)
 hold(False)
 
@@ -119,7 +119,7 @@ fullFibre
 
 # %%
 directionFibre = fibre(h, r)
-sameFullFibre = fullFibre == directionFibre
+sameFullFibre = fullFibre.isclose(directionFibre)
 sameFullFibre
 
 # %% [markdown]
@@ -141,10 +141,10 @@ plt.gca().set_axis_off()
 # %% [markdown]
 # ## The Complete Axis--Angle Domain
 #
-# The option `'complete'` removes the reduction by crystal symmetry.
+# The option `complete=True` removes the reduction by crystal symmetry.
 
 # %%
-plot(fullFibre, 'axisAngle', 'complete', lineWidth=3, lineColor='red')
+plot(fullFibre, 'axisAngle', complete=True, lineWidth=3, lineColor='red')
 plt.gca().set_axis_off()
 
 # %% [markdown]

@@ -259,7 +259,7 @@ print(f'max {maxValue:.4f} at {extremePositionsDegree[0]:.1f}, min {minValue:.4f
 # `periodic` option makes [calcDensity](https://mtex-toolbox.github.io/calcDensity.html) return an `S1FunHarmonic`.
 
 # %%
-v = vector3d.rand(1000)
+v = vector3d.rand(1000, rng=np.random.default_rng(1))
 fun = calcDensity(v.rho, periodic=True)
 fun
 
@@ -323,5 +323,6 @@ plot(fun, lineWidth=2)
 # ## Technical Details
 #
 # MATLAB's `subplot(1,2,1)` becomes a polar axes when a polar plot goes into it; with
-# matplotlib the page asks for `projection='polar'`. The random directions are not seeded
-# as MATLAB's `rng default`, so the density differs from MATLAB's in its fluctuations.
+# matplotlib the page asks for `projection='polar'`. The random directions are seeded by
+# NumPy's generator, not MATLAB's `rng default`, so the density differs from MATLAB's in
+# its fluctuations.
