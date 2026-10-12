@@ -1,0 +1,48 @@
+---
+title: How fast MTEX is
+eyebrow: Benchmark
+lead: Ninety operations, from loading a map to the Taylor model, timed on the same input in five versions of MTEX for MATLAB and in MTEX for Python.
+summary: The time of 90 MTEX operations in MTEX 5.11.2, 6.1.1, 7.0.0, 7.1.0, the development version and MTEX for Python, as a log-log scatter plot and a table.
+keywords: benchmark, speed, performance, MTEX versions, MATLAB, Python
+layout: prose
+permalink: speed
+---
+
+<p>Each point is one operation. Its horizontal position is the time the operation takes in MTEX {{ site.data.version_speeds.base }}, its height the time in another version: a point below the solid line is faster than {{ site.data.version_speeds.base }}, a point on the lower dashed line ten times faster. Both axes are logarithmic. Click a version to hide it; point at a dot to read its operation.</p>
+
+<div class="mx-speed-panel">
+{% include speed-chart.html %}
+</div>
+
+<h2 id="summary">Against MTEX {{ site.data.version_speeds.base }}</h2>
+
+<p>How many times faster each version is than {{ site.data.version_speeds.base }}, over the operations both can run.</p>
+
+<div class="mx-speed-scroll">
+<table class="mx-speed-table" id="mx-speed-summary">
+  <thead><tr><th scope="col">version</th><th scope="col">operations</th><th scope="col">median</th><th scope="col">geometric mean</th><th scope="col">faster</th><th scope="col">more than 2× faster</th><th scope="col">more than 2× slower</th></tr></thead>
+  <tbody></tbody>
+</table>
+</div>
+
+<h2 id="reading">What the numbers say</h2>
+
+<ul>
+  <li>MTEX for Python is a median eleven times faster than MTEX 6.1.1, and faster in 62 of the 63 operations both run. The largest gains are the kernel sum of a radial ODF (about 1000×), the Taylor model (500×) and the harmonic form of a radial ODF (300×).</li>
+  <li>MTEX 7.1.0 and the development version gain over 6.1.1 mostly in the maps and the export: the kernel average misorientation 9×, the HDF5 export 70×, and in the development version the Taylor model 125×. MTEX 7.0.0 runs at the speed of 6.1.1, except the two interpolations, which take about twice as long.</li>
+  <li>MTEX 5.11.2 runs at the speed of 6.1.1 overall. Its interpolation on the rotation group is seven times faster, its ODF average of a tensor fifteen times slower.</li>
+  <li><code>maps_smooth_boundary</code> is <code>smooth(grains,5)</code> in 5.11.2 and 6.1.1 and <code>smoothBoundary</code> from 7.0.0 on, so its ratios compare two algorithms and every newer version lies above the line.</li>
+  <li>An operation is missing where a version cannot run it: TrueEBSD, the halfwidth selection, CLASSIX and the 3D maps before the versions that brought them, the EDAX HDF5 reader in 6.1.1, <code>calcGrains</code> returning its map in 5.11.2.</li>
+</ul>
+
+<h2 id="times">All times, in milliseconds</h2>
+
+<input class="mx-speed-filter" id="mx-speed-filter" type="search" placeholder="Filter operations, e.g. maps_ or interpolate" aria-label="Filter operations">
+
+<div class="mx-speed-scroll">
+<table class="mx-speed-table" id="mx-speed-table"><thead></thead><tbody></tbody></table>
+</div>
+
+<h2 id="method">How it was measured</h2>
+
+<p>The operations are those of the cross-check between MTEX for Python and MTEX for MATLAB, which runs both on one input and compares the results. Measured on {{ site.data.version_speeds.measured }} on a 32 core server with MATLAB R2024b in batch mode, every version with its default threading, the best of five runs after a warm-up and single runs for the long operations. The releases are their GitHub archives with the mex files of their tag. Two other users kept about 18 of the cores busy through all runs, the same for every version, so the absolute times are high: read the ratios. The script is <a href="https://github.com/mtex-toolbox/pymtex/blob/main/bench/mtex_versions.py"><code>bench/mtex_versions.py</code></a> in the repository of MTEX for Python.</p>

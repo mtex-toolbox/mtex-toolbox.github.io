@@ -1,0 +1,16 @@
+{% comment %}
+The speed of the MTEX versions as a log-log scatter: one point per operation,
+x its time in the base version, y its time in another. The times are
+_data/version_speeds.json; js/mx-speed.js draws the chart, its legend and,
+where the page has them, the tables #mx-speed-summary and #mx-speed-table.
+One chart per page.
+{% endcomment %}
+<div class="mx-speed" id="mx-speed">
+  <div class="mx-speed-legend" role="group" aria-label="Versions shown"></div>
+  <div class="mx-speed-plot">
+    <svg viewBox="0 0 640 560" role="img" aria-label="Time of each operation in every MTEX version against its time in MTEX {{ site.data.version_speeds.base }}, on logarithmic axes"></svg>
+    <div class="mx-speed-tip" hidden></div>
+  </div>
+</div>
+<script type="application/json" id="mx-speed-data">{{ site.data.version_speeds | jsonify }}</script>
+<script src="js/mx-speed.js" defer></script>
