@@ -63,7 +63,7 @@ P = tensor (Quartz)
 <p>This is the engineering-shear convention used by the quartz file. Do not infer it from the shape of a table: omitting the option for this source would silently double part of the tensor.</p>
 <h2 id="4">Load a physically specific tensor</h2>
 <p>Common physical tensors have dedicated loaders. The <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor.load</code></a> method returns the physically typed class, fixes rank 4, uses the stiffness form of the Voigt convention, and supplies GPa as the default unit label.</p>
-<p>Those defaults are correct for this olivine file, but they are still assumptions rather than unit conversion or validation. The file also gives a density of 3355 kg/m\(^3\). The numeric interface does not attach it, so it is converted to 3.355 g/cm\(^3\) and supplied explicitly.</p>
+<p>Those defaults are correct for this olivine file, but they are still assumptions rather than unit conversion or validation. The file also gives a density of 3355 kg/m\(^3\), which is 3.355 g/cm\(^3\). The loader reads it from the file; giving it explicitly records it with the import.</p>
 {% highlight matlab %}
 % define the file name
 olivineFile = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
@@ -100,7 +100,7 @@ symmetryMatches = [checkSymmetry(P),checkSymmetry(C)]
 
 {% highlight plaintext %}
 symmetryMatches =
-  1×2 logical array
+  1x2 logical array
    1   1
 {% endhighlight %}
 <p>Both values are true for these files. This check can detect an incompatible point group, and for the quartz file it also catches a missing <code class="language-plaintext highlighter-rouge">'doubleConvention'</code>. It cannot verify units, axis sense, handedness, or whether the correct physical property was selected. Compare those items with the source publication before using the tensor.</p>

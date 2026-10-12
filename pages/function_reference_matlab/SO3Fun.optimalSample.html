@@ -1,5 +1,5 @@
 ---
-title: "SO3Fun.optimalSample"
+title: 'SO3Fun.optimalSample'
 
 sidebar: function_reference_sidebar
 permalink: SO3Fun.optimalSample.html
@@ -34,12 +34,11 @@ To make changes, update the MATLAB code and republish this document.
 <p>becomes small. Here \(A_n\) are the Chebyshev coefficients of the <a href="SO3RestrictedDistanceKernel.html">restricted distance kernel</a> and \(N\) is the <code class="language-plaintext highlighter-rouge">bandwidth</code>, i.e. only the harmonic degrees up to \(N\) are taken into account - choose it to match the intended use of the orientations. The minimization is done by a limited memory BFGS iteration with Armijo line search.</p>
 <p>
 <b>Why L-BFGS and not gradient descent.</b> \(J\) is badly conditioned - in a minimizer of a 92 point sample of the <code class="language-plaintext highlighter-rouge">SO3Fun.dubna</code> ODF the Hessian has a condition number of roughly 2000 - and the convergence rate of gradient descent degrades with exactly that number. Collecting curvature from the steps already taken costs nothing beyond a few vectors of memory and buys about an order of magnitude in time to a given discrepancy. A true Newton method does not pay on top of that: the Hessian couples every pair of orientations, so it is a dense \(3M \times 3M\) matrix, and in a measurement its iteration count was no better than the one of L-BFGS.</p>
-<p>Both descent methods are available and are selected by <code class="language-plaintext highlighter-rouge">method</code>,</p>
+<p>Plain gradient descent, the method of the cited literature, is the same iteration with an empty memory,</p>
 {% highlight matlab %}
-ori = optimalSample(f,n,'method','lbfgs')            % the default
-ori = optimalSample(f,n,'method','steepestDescent')
+ori = optimalSample(f,n,'memory',0)
 {% endhighlight %}
-<p>where <code class="language-plaintext highlighter-rouge">'steepestDescent'</code> is the plain gradient descent described above. It is kept because it is the method the cited literature uses and because it is the reference the L-BFGS iteration is compared against; there is no reason to prefer it in production.</p>
+<p>which <code class="language-plaintext highlighter-rouge">'method','steepestDescent'</code> says as well.</p>
 <p>Note that the sum above starts at degree 1. The restricted distance kernel is only conditionally positive definite, its Chebyshev coefficient of degree 0 being negative, \(A_0 = -\frac{16\sqrt2}{3\pi} &lt; 0\). Since \(D_0\) is constant, the degree 0 term of \(\mu - f\) equals \(\lambda (\sum_j c_j - 1)/(\sqrt{8}\pi)\) and hence vanishes for weights that sum up to 1 - which is why it is simply dropped.</p>
 <p>
 <b>Optimizing the weights.</b> By default the weights are fixed, \(c_j = 1/M\), and the orientations are the only unknowns. If the weights are asked for as a second output</p>
@@ -54,7 +53,10 @@ ori = optimalSample(f,n,'method','steepestDescent')
 <p>
 <b>Choose the bandwidth to match the intended use.</b> The weights buy their accuracy up to <code class="language-plaintext highlighter-rouge">bandwidth</code> partly at the expense of the higher degrees, since concentrating the mass on fewer orientations makes the sample less uniform. On the <code class="language-plaintext highlighter-rouge">SO3Fun.dubna</code> ODF with 200-300 orientations the weighted sample beats the equally weighted one in the L1 error of the reconstructed density by 4-8 percent at every kernel halfwidth between 5 and 12 degree - but only if <code class="language-plaintext highlighter-rouge">bandwidth</code> is chosen large enough (64 in that test). With the default of 32 the advantage is present for halfwidth 10 degree and above and turns into a disadvantage below. Note also that the improvement is in the L1 error; measured in the L2 error, which punishes the deviation of the peaks much harder, the equally weighted sample can remain the better choice at halfwidths well below the optimized bandwidth.</p>
 <p>
-<b>Starting from a grid that ignores the density</b> - e.g. <a href="equispacedSO3Grid.html"><code class="language-plaintext highlighter-rouge">equispacedSO3Grid</code></a> instead of the default <a href="SO3Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> - the first weight step is drastic and kills nodes before they ever had a chance to move. Since the update of <code class="language-plaintext highlighter-rouge">mlsq</code> is multiplicative, a weight that reaches 0 stays 0, and since the gradient with respect to \(R_j\) carries the factor \(c_j\), such a node is frozen in place as well and is lost for good. Use <code class="language-plaintext highlighter-rouge">warmUp</code> to move the orientations only for the first iterations in that case.</p>
+<b>Starting from nodes that ignore the density</b> - the default Kronecker sequence or <a href="equispacedSO3Grid.html"><code class="language-plaintext highlighter-rouge">equispacedSO3Grid</code></a> - the first weight step is drastic and kills nodes before they ever had a chance to move. Since the update of <code class="language-plaintext highlighter-rouge">mlsq</code> is multiplicative, a weight that reaches 0 stays 0, and since the gradient with respect to \(R_j\) carries the factor \(c_j\), such a node is frozen in place as well and is lost for good. Use <code class="language-plaintext highlighter-rouge">warmUp</code> to move the orientations only for the first iterations in that case, or start from <a href="SO3Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a>,</p>
+{% highlight matlab %}
+[ori,c] = optimalSample(f,discreteSample(f,n))
+{% endhighlight %}
 <p>For more details, see</p>
 <p>Gr&auml;f, Manuel; Potts, Daniel; Steidl, Gabriele (2012). Quadrature Errors, Discrepancies, and Their Relations to Halftoning on the Torus and the Sphere. SIAM Journal on Scientific Computing, 34(5), A2760&ndash;A2791. doi:10.1137/100814731</p>
 <p>Knezevic, Marko; Landry, Nicholas W. (2015). Procedures for reducing large datasets of crystal orientations using generalized spherical harmonics. Mechanics of Materials, 88, 73&ndash;86. doi:10.1016/j.mechmat.2015.04.014</p>
@@ -153,7 +155,7 @@ ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
             <tt>method</tt>
          </td>
          <td>
-            <tt>'lbfgs' (default) or 'steepestDescent', see above</tt>
+            <tt>'lbfgs' (default), or 'steepestDescent' for an empty memory</tt>
          </td>
       </tr>
       <tr>
@@ -162,6 +164,14 @@ ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
          </td>
          <td>
             <tt>secant pairs kept by the L-BFGS iteration (default = 5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tolJ</tt>
+         </td>
+         <td>
+            <tt>terminate below this relative decrease of J (default = 1e-4)</tt>
          </td>
       </tr>
       <tr>
@@ -213,7 +223,7 @@ ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
 </p>
 <h2 id="8">See also</h2>
 <p>
-<a href="SO3Fun.discreteSample.html">SO3Fun.discreteSample</a> <a href="mlsq.html">mlsq</a> <a href="SO3RestrictedDistanceKernel.html">SO3RestrictedDistanceKernel</a>
+<a href="SO3Fun.discrepancy.html">SO3Fun.discrepancy</a> <a href="SO3Fun.discreteSample.html">SO3Fun.discreteSample</a> <a href="mlsq.html">mlsq</a> <a href="SO3RestrictedDistanceKernel.html">SO3RestrictedDistanceKernel</a>
 </p>
 </div>
 </body>

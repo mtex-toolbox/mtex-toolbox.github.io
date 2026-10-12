@@ -1,5 +1,5 @@
 ---
-title: "loadEBSD_ang"
+title: 'loadEBSD_ang'
 
 sidebar: function_reference_sidebar
 permalink: loadEBSD_ang.html
@@ -26,6 +26,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>read EDAX *.ang file</p>
 <h2 id="3">Description</h2>
 <p>EDAX and EMSphInx write the very same .ang layout but number the phase column differently, and neither states which of the two it used. Since the values alone can not tell them apart the header is fingerprinted: EMSphInx leaves every MaterialName empty, states NumberFamilies 0 and lists no reflectors, where OIM always names the material. Pass the EDAX or the EMSphInx flag to overrule the guess.</p>
+<p>NanoMegas ASTAR writes the .ang layout too, from its ACOM-TEM results, with the map coordinates in nanometres. Its files start with the line "File created from ACOM RES results", which sets the scan unit to nm.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 ebsd = loadEBSD_ang(fname,'setting',2)
@@ -68,6 +69,14 @@ ebsd = loadEBSD_ang(fname,'setting',2)
          </td>
          <td>
             <tt>return only phase/header metadata, skip reading the data</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>scanUnit</tt>
+         </td>
+         <td>
+            <tt>unit of the map coordinates, default is 'um', and 'nm' for ASTAR files</tt>
          </td>
       </tr>
    </table>

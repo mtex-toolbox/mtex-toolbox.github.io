@@ -1,5 +1,5 @@
 ---
-title: "grainBoundary.refine"
+title: 'grainBoundary.refine'
 
 sidebar: function_reference_sidebar
 permalink: grainBoundary.refine.html
@@ -28,7 +28,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>Places new vertices at equal arc length along each chain, between the vertices that have to survive, which stay exactly where they are. The new vertices lie on the old boundary, so this changes nothing about its shape - it only changes how it is sampled.</p>
 <p>A chain is cut into pieces that are resampled independently at every vertex that may not move: its two junctions, a vertex where the neighbouring grains change, and anything passed in as 'protect'. A chain resampled in one piece visits none of the ones in between, which leaves the inner boundary hanging off a vertex the outer walk no longer reaches, and lets a segment carry the grainId pair of its neighbour.</p>
 <p>This is what makes a subsequent grain2d/smoothBoundary work properly. Subdividing each segment, as grain2d/refineBoundary used to do on its own, preserves the staircase of the pixel grid and only makes it finer. Resampling at equal arc length instead gives the smoothing evenly spaced degrees of freedom that are not tied to the grid.</p>
-<p>grainId and phaseId are constant along a chain and carry over exactly. ebsdId and misrotation belong to a specific pair of pixels, which a resampled segment no longer corresponds to - those are inherited from whichever original segment covers the new segment's midpoint. A midpoint landing on the seam between two of them is covered by both, and which one it takes is then decided by the last bits of the arc length.</p>
+<p>grainId and phaseId are constant along a chain and carry over exactly. ebsdId and misrotation belong to a specific pair of pixels: a new segment lying within one original segment inherits them, one spanning several gets the misrotation of the original covering its midpoint and the ebsdId 0, a pair of no pixels, as the outer boundary has.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 gB_r = refine(gB)

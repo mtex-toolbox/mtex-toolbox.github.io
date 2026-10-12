@@ -35,12 +35,11 @@ To make changes, update the MATLAB code and republish this document.
 <p>becomes small. Here \(A_n\) are the Legendre coefficients of the <a href="S2RestrictedDistanceKernel.html">restricted distance kernel</a> and \(N\) is the <code class="language-plaintext highlighter-rouge">bandwidth</code>, i.e. only the harmonic degrees up to \(N\) are taken into account - choose it to match the intended use of the points. The minimization is done by a limited memory BFGS iteration along the geodesics of the sphere together with an Armijo line search.</p>
 <p>
 <b>Why L-BFGS and not gradient descent.</b> \(J\) is badly conditioned and the convergence rate of gradient descent degrades with exactly that condition number, while collecting the curvature of the steps already taken costs nothing beyond a few vectors of memory. In contrast to the rotation group the sphere is no group, so the tangent plane turns with the node and the stored steps have to be parallel transported along every step before they may be used again.</p>
-<p>Both descent methods are available and are selected by <code class="language-plaintext highlighter-rouge">method</code>,</p>
+<p>Plain gradient descent is the same iteration with an empty memory,</p>
 {% highlight matlab %}
-v = optimalSample(sF,n,'method','lbfgs')            % the default
-v = optimalSample(sF,n,'method','steepestDescent')
+v = optimalSample(sF,n,'memory',0)
 {% endhighlight %}
-<p>where <code class="language-plaintext highlighter-rouge">'steepestDescent'</code> is the plain gradient descent described above.</p>
+<p>which <code class="language-plaintext highlighter-rouge">'method','steepestDescent'</code> says as well.</p>
 <p>Note that the sum above starts at degree 1. The restricted distance kernel is only conditionally positive definite, its Legendre coefficient of degree 0 being negative, \(A_0 = -\frac43 &lt; 0\). Since \(Y_0^0\) is constant, the degree 0 term of \(\mu - f\) equals \(\lambda (\sum_j c_j - 1)/\sqrt{4\pi}\) and hence vanishes for weights that sum up to 1 - which is why it is simply dropped.</p>
 <p>
 <b>Optimizing the weights.</b> By default the weights are fixed, \(c_j = 1/M\), and the directions are the only unknowns. If the weights are asked for as a second output</p>
@@ -55,7 +54,7 @@ v = optimalSample(sF,n,'method','steepestDescent')
 <p>\[ \frac{\partial J}{\partial c_j} = 2 \lambda \, (\psi * (\mu - f))(v_j), \]</p>
 <p>is the value of the very convolution whose gradient moves the directions and costs one additional transform per iteration.</p>
 <p>
-<b>The first <code class="language-plaintext highlighter-rouge">warmUp</code> iterations move the points only.</b> Started on a grid that ignores the density, e.g. <a href="equispacedS2Grid.html"><code class="language-plaintext highlighter-rouge">equispacedS2Grid</code></a>, the weights would otherwise concentrate on the few points that happen to lie well before the points ever had a chance to move. Letting the points settle first is measurably better: on <code class="language-plaintext highlighter-rouge">abs(S2Fun.smiley)</code> with 100 points and bandwidth 32 the warm up buys a factor 2.5 in \(J\).</p>
+<b>The first <code class="language-plaintext highlighter-rouge">warmUp</code> iterations move the points only.</b> Started on points that ignore the density, such as the default Fibonacci points, the weights would otherwise concentrate on the few points that happen to lie well before the points ever had a chance to move. Letting the points settle first is measurably better: on <code class="language-plaintext highlighter-rouge">abs(S2Fun.smiley)</code> with 100 points and bandwidth 32 the warm up buys a factor 2.5 in \(J\).</p>
 <p>
 <b>The weights help most where the points are far from optimal.</b> On <code class="language-plaintext highlighter-rouge">abs(S2Fun.smiley)</code> with 200 points and bandwidth 64 the weights alone reduce \(J\) by a factor of 16 on the raw <a href="S2Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> nodes, while on nodes that are already driven to convergence they only add a few percent - the points have then essentially solved the problem on their own. The benefit of the weights is therefore that a given accuracy is reached with fewer points and fewer iterations, not that the converged optimum is much lower.</p>
 <p>Note that the weights buy their accuracy up to <code class="language-plaintext highlighter-rouge">bandwidth</code> partly at the expense of the higher degrees, since concentrating the mass on fewer points makes the sample less uniform.</p>
@@ -157,7 +156,7 @@ v = optimalSample(sF,n,'maxIter',1000,'tol',0.005*degree)
             <tt>method</tt>
          </td>
          <td>
-            <tt>'lbfgs' (default) or 'steepestDescent', see above</tt>
+            <tt>'lbfgs' (default), or 'steepestDescent' for an empty memory</tt>
          </td>
       </tr>
       <tr>

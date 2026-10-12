@@ -1,5 +1,5 @@
 ---
-title: "S1Fun.mean"
+title: 'S1Fun.mean'
 
 sidebar: function_reference_sidebar
 permalink: S1Fun.mean.html
@@ -23,23 +23,25 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Calculates the mean value of a SO3Fun or calculates the mean along a specified dimension of a vector-valued SO3Fun</p>
+<p>mean value of a S1Fun or along a dimension of a vector-valued S1Fun</p>
+<p>\[ v = \frac{1}{2\pi} \int_{0}^{2\pi} f( o ) do \]</p>
 <h2 id="3">Description</h2>
-<p>If SO3F is a 3x3 SO3Fun then <code class="language-plaintext highlighter-rouge">mean(SO3F)</code> returns a 3x3 matrix with the mean values of each function <code class="language-plaintext highlighter-rouge">mean(SO3F, 1)</code> returns a 1x3 SO3Fun which contains the pointwise mean values along the first dimension</p>
+<p>If sF is a 3x3 S1Fun then <code class="language-plaintext highlighter-rouge">mean(sF)</code> returns a 3x3 matrix with the mean values of each function <code class="language-plaintext highlighter-rouge">mean(sF, 1)</code> returns a 1x3 S1Fun which contains the pointwise mean values along the first dimension</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
-value = mean(SO3F)
-SO3F = mean(SO3F, d)
+value = mean(sF)
+value = mean(sF,'resolution',0.1*degree)
+sF = mean(sF, d)
 {% endhighlight %}
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>SO3F</tt>
+            <tt>sF</tt>
          </td>
          <td>
-            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
+            <tt><a href="S1Fun.S1Fun.html">S1Fun</a></tt>
          </td>
       </tr>
       <tr>
@@ -57,73 +59,73 @@ SO3F = mean(SO3F, d)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>SO3F</tt>
-         </td>
-         <td>
-            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
             <tt>value</tt>
          </td>
          <td>
             <tt>double</tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>sF</tt>
+         </td>
+         <td>
+            <tt><a href="S1Fun.S1Fun.html">S1Fun</a></tt>
+         </td>
+      </tr>
    </table>
 </p>
-<h2 id="7">Example</h2>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>resolution</tt>
+         </td>
+         <td>
+            <tt>spacing of the quadrature nodes, default 0.3 degree</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Example</h2>
+<p>a scalar valued function</p>
 {% highlight matlab %}
-%generate SO3Funs
-SO3F1 = SO3Fun.dubna
-SO3F2 = SO3FunHandle(@(rot) SO3F1.eval(rot))
-A = ones(2,3);
-SO3F3 = SO3F2.*A
+sF = S1FunHandle(@(o) sin(o).^2)
+mean(sF)
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F1 = SO3FunRBF (Quartz → y↑→x)
+sF = S1FunHandle
+  eval: @(o)sin(o).^2
  
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19848 orientations, resolution: 5°
-  weight: 1
- 
- 
-SO3F2 = SO3FunHandle (y↓→x → y↓→x)
-  eval: @(rot)SO3F1.eval(rot)
- 
- 
-SO3F3 = SO3FunHandle (y↓→x → y↓→x)
-  size: 2 x 3
-  eval: @(rot)reshape(SO3F1,[1,size(SO3F1)]).*reshape(SO3F2.eval(rot),[numel(rot),size(SO3F2)])
+ans =
+    0.5000
 {% endhighlight %}
-
+<p>a vector valued function</p>
 {% highlight matlab %}
-%calculate mean values of SO3Funs
-mean(SO3F2)
-mean(SO3F3)
-mean(SO3F3,2)
-mean(SO3F3,1)
+sF = S1FunHandle(@(o) [sin(o).^2, cos(2*o).^2, 1+0*o])
+mean(sF)
+mean(sF,1)
 {% endhighlight %}
 
 {% highlight plaintext %}
+sF = S1FunHandle
+  size: 3 × 1
+  eval: @(o)[sin(o).^2,cos(2*o).^2,1+0*o]
+ 
 ans =
-    0.9998
-ans =
-    0.9998    0.9998    0.9998
-    0.9998    0.9998    0.9998
+    0.5000
+    0.5000
+    1.0000
  
-ans = SO3FunHandle (y↓→x → y↓→x)
-  size: 2 x 1
-  eval: @(rot)mean(SO3F.eval(rot),varargin{1}+1)
- 
- 
-ans = SO3FunHandle (y↓→x → y↓→x)
-  size: 1 x 3
-  eval: @(rot)mean(SO3F.eval(rot),varargin{1}+1)
+ans = S1FunHandle
+  eval: @(o)mean(sF.eval(o),varargin{1}+1)
 {% endhighlight %}
+<h2 id="10">See also</h2>
+<p>
+<a href="S1Fun.sum.html">S1Fun.sum</a> <a href="S1FunHarmonic.mean.html">S1FunHarmonic.mean</a>
+</p>
 </div>
 </body>
 </html>

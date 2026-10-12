@@ -1,5 +1,5 @@
 ---
-title: "grain2d.smoothBoundary"
+title: 'grain2d.smoothBoundary'
 
 sidebar: function_reference_sidebar
 permalink: grain2d.smoothBoundary.html
@@ -46,7 +46,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>Both tolerances are derived from the median segment length <b>before</b> the first step - afterwards the median is the length of the straightened runs, not the pixel spacing.</p>
 <p>Neither of the first two steps is cosmetic. Simplifying alone leaves a curve as a handful of long chords, and smoothing those cuts the corners off the polygon they form - a circle of 15 pixel radius loses 14% of its area over 25 iterations, against 0.4% for the full three steps. Smoothing alone leaves the boundary directions of a straight boundary scattered around the grid axes.</p>
 <p>Junctions - triple points, quadruple points, and the vertices where the inner boundary ends on the outer one - stay exactly where they are throughout, unless <code class="language-plaintext highlighter-rouge">moveTriplePoints</code> is given. When grains were segmented using alphaShapes, all grains next to holes have outer boundary.</p>
-<p>Note that the first two steps change the number of boundary segments, and a resampled segment no longer runs between a specific pair of pixels. Where <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> is analysed per segment, switch them off with <code class="language-plaintext highlighter-rouge">'noSimplify'</code> and <code class="language-plaintext highlighter-rouge">'noRefine'</code>.</p>
+<p>Note that the first two steps change the number of boundary segments. A segment that no longer runs between a specific pair of pixels gets the <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> 0, as the outer boundary has; where the pixel pairs are analysed, switch the steps off with <code class="language-plaintext highlighter-rouge">'noSimplify'</code> and <code class="language-plaintext highlighter-rouge">'noRefine'</code> to keep them all.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 grains = smoothBoundary(grains)

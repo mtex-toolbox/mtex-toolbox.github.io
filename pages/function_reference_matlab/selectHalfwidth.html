@@ -1,0 +1,159 @@
+---
+title: 'selectHalfwidth'
+
+sidebar: function_reference_sidebar
+permalink: selectHalfwidth.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>selectHalfwidth</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_selectHalfwidth.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/statistic_tools/selectHalfwidth.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>halfwidth of a de la Vallee Poussin kernel for a density estimate of orientations or directions</p>
+<h2 id="3">Description</h2>
+<p>Both methods judge a candidate halfwidth by the mean integrated squared error of the density estimate. In harmonics orthonormal for the uniform distribution it is</p>
+<p>\[ \mathrm{MISE} = \sum_{\ell \ge 1} (1 - b_\ell)^2 A_\ell + b_\ell^2 V_\ell, \]</p>
+<p>with \(b_\ell\) the multipliers of the kernel, \(A_\ell\) the degree energies of the density and \(V_\ell\) the variance of the empirical coefficients of degree \(\ell\). <code class="language-plaintext highlighter-rouge">'UCV'</code> inserts unbiased estimates of the energies, <code class="language-plaintext highlighter-rouge">'conservative'</code> lower confidence bounds that vanish above the bandwidth, which can only widen the kernel. Both are bounded below by a noise floor: the smallest halfwidth at which the sampling noise stays below a fraction <code class="language-plaintext highlighter-rouge">tauMax</code> of the estimate's maximum plus half the local density.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+hw = selectHalfwidth(ori,'UCV')
+hw = selectHalfwidth(v,'conservative')
+hw = selectHalfwidth(ori,'UCV','groups',grainId)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ori</tt>
+         </td>
+         <td>
+            <tt><a href="orientation.orientation.html">orientation</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>v</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, <a href="Miller.Miller.html">Miller</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>hw</tt>
+         </td>
+         <td>
+            <tt>halfwidth</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>E</tt>
+         </td>
+         <td>
+            <tt>struct with the degree energies |E.A|, their errors |E.se| and the sample statistics</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>weights</tt>
+         </td>
+         <td>
+            <tt>weights of the points</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>groups</tt>
+         </td>
+         <td>
+            <tt>ids of mutually dependent points, e.g. the grainId of EBSD pixels</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>bandwidth</tt>
+         </td>
+         <td>
+            <tt>harmonic degree of the energies, default 64 (UCV of orientations), 256 (UCV of directions), 32 (conservative)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>halfwidths</tt>
+         </td>
+         <td>
+            <tt>candidate halfwidths, default 60 between 2° and 40° (orientations) or between 1° and 60° (directions)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>folds</tt>
+         </td>
+         <td>
+            <tt>number of disjoint parts the energies are cross-fitted over (default 8)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>z</tt>
+         </td>
+         <td>
+            <tt>multiple of the error the conservative energies are lowered by (default 2)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tauMax</tt>
+         </td>
+         <td>
+            <tt>noise floor as a fraction of the estimate's maximum (default 0.2)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>noNoiseFloor</tt>
+         </td>
+         <td>
+            <tt>do not bound the halfwidth from below by the noise</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">See also</h2>
+<p>
+<a href="orientation.calcKernel.html">orientation.calcKernel</a> <a href="vector3d.calcKernel.html">vector3d.calcKernel</a> <a href="EBSD.calcKernel.html">EBSD.calcKernel</a>
+</p>
+</div>
+</body>
+</html>

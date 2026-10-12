@@ -183,7 +183,7 @@ ebsdRoundTrip = EBSDsquare (y↓→x, row↓→col)
   I'm going to transform the data from the first one to the second one
  
 roundTripError =
-   30.0000
+   6.0685e-04
 {% endhighlight %}
 <p>Both summaries contain 22,879 measurements: 22,833 indexed magnesium measurements and 46 notIndexed measurements. Their property lists differ because ANG and CTF define different columns. A missing property name does not always mean that its values vanished. The exporter may map a compatible quantity to the target format's name.</p>
 <p>The import warning concerns the relationship between the Euler-angle and map reference frames. Export and import both use ANG setting 2 here, so that relationship is consistent. The measured <code class="language-plaintext highlighter-rouge">roundTripError</code> is \(30^\circ\), which exposes another loss.</p>
@@ -196,7 +196,7 @@ delete(exportFile);
 <p>The HDF5 exporter instead copies the file from which the map was imported and patches the changed values into that copy. The output remains in the vendor's layout.</p>
 {% highlight matlab %}
 ebsd = EBSD.load('myfile.h5oina');
-ebsd = ebsd.denoise(halfQuadraticFilter);
+ebsd = ebsd.denoise(l1TVFilter);
 {% endhighlight %}
 
 {% highlight matlab %}

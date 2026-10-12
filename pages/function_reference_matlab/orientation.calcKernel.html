@@ -24,12 +24,17 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>compute an optimal kernel function for ODF estimation</p>
-<h2 id="3">Syntax</h2>
+<h2 id="3">Description</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">'UCV'</code> minimises an unbiased estimate of the integrated squared error, <code class="language-plaintext highlighter-rouge">'conservative'</code> errs towards wider kernels, both bounded below by a noise floor, see <a href="selectHalfwidth.html">selectHalfwidth</a>. <code class="language-plaintext highlighter-rouge">'KLCV'</code>, <code class="language-plaintext highlighter-rouge">'LSCV'</code> and <code class="language-plaintext highlighter-rouge">'BCV'</code> are Kullback Leibler, least squares and biased cross validation over ten candidates, <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> reads the nearest neighbour distances and <code class="language-plaintext highlighter-rouge">'magicRule'</code> only the number of orientations.</p>
+<h2 id="4">Syntax</h2>
 {% highlight matlab %}
 psi = calcKernel(ori)
+psi = calcKernel(ori,'method','conservative')
+psi = calcKernel(ori,'groups',grainId)
 psi = calcKernel(ori,'method','ruleOfThumb')
 {% endhighlight %}
-<h2 id="4">Input</h2>
+<h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -42,7 +47,7 @@ psi = calcKernel(ori,'method','ruleOfThumb')
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="6">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -50,59 +55,43 @@ psi = calcKernel(ori,'method','ruleOfThumb')
             <tt>psi</tt>
          </td>
          <td>
-            <tt><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a></tt>
+            <tt><a href="SO3DeLaValleePoussinKernel.html">SO3DeLaValleePoussinKernel</a></tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="6">Flags</h2>
+<h2 id="7">Options</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>magicrule</tt>
+            <tt>method</tt>
          </td>
          <td>
-            <tt/>
+            <tt>|'KLCV'| (default), |'UCV'| (default with |'groups'|), |'conservative'|, |'LSCV'|, |'BCV'|, |'RuleOfThumb'|, |'magicRule'|</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>RuleOfThumb</tt>
+            <tt>weights</tt>
          </td>
          <td>
-            <tt/>
+            <tt>weights of the orientations</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>LSCV</tt>
+            <tt>groups</tt>
          </td>
          <td>
-            <tt>least squares cross validation</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>KLCV</tt>
-         </td>
-         <td>
-            <tt>Kullback Leibler cross validation (default)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>BCV</tt>
-         </td>
-         <td>
-            <tt>biased cross validation</tt>
+            <tt>ids of mutually dependent orientations, e.g. the grainId of EBSD pixels (UCV and conservative only)</tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="7">See also</h2>
+<h2 id="8">See also</h2>
 <p>
-<a href="EBSD.EBSD.html">EBSD.EBSD</a> <a href="orientation.BCV.html">orientation.BCV</a> <a href="orientation.KLCV.html">orientation.KLCV</a> <a href="orientation.LSCV.html">orientation.LSCV</a>
+<a href="selectHalfwidth.html">selectHalfwidth</a> <a href="EBSD.calcKernel.html">EBSD.calcKernel</a> <a href="vector3d.calcKernel.html">vector3d.calcKernel</a> <a href="orientation.BCV.html">orientation.BCV</a> <a href="orientation.KLCV.html">orientation.KLCV</a> <a href="orientation.LSCV.html">orientation.LSCV</a>
 </p>
 </div>
 </body>
