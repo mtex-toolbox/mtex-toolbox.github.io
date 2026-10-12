@@ -168,17 +168,4 @@
       });
     });
   }
-
-  // the homepage shows the chart in a dialog, opened by the links to the speed page
-  var dialog = document.getElementById('mx-speed-dialog');
-  if (dialog && dialog.showModal) {
-    document.querySelectorAll('[data-speed-open]').forEach(function (a) {
-      a.addEventListener('click', function (ev) { ev.preventDefault(); dialog.showModal(); });
-    });
-    // index#speed opens it too, for a link from elsewhere
-    if (location.hash === '#speed') dialog.showModal();
-    dialog.addEventListener('click', function (ev) {
-      if (ev.target === dialog || ev.target.closest('[data-speed-close]')) dialog.close();
-    });
-  }
 })();

@@ -8,31 +8,40 @@ permalink: get-started
   <div class="mx-pagehead">
     <div class="mx-eyebrow">Get started</div>
     <h1>Install MTEX and run your first analysis</h1>
-    <p>MTEX runs in MATLAB and in Python, with the same analysis workflow in both. Install it, load one of the example data sets, and follow a tutorial for your kind of data.</p>
+    <p>MTEX runs in MATLAB and in Python, with the same analysis workflow in both. Install it, load one of the example data sets, import your own file, and follow a tutorial for your kind of data.</p>
   </div>
 
-  <div class="mx-start">
-    <div class="mx-door">
+  <p class="mx-start-switch" data-only="matlab">This page shows MTEX for MATLAB. <button type="button" data-lang="python">Show MTEX for Python</button></p>
+  <p class="mx-start-switch" data-only="python">This page shows MTEX for Python. <button type="button" data-lang="matlab">Show MTEX for MATLAB</button></p>
+
+  <div class="mx-start mx-start-one">
+    <div class="mx-door" data-only="matlab">
       <h3><span class="mx-dot-m"></span>MTEX for MATLAB <span class="mx-ver">7.1.0 · Sep 2026</span></h3>
       <ol>
         <li>Download and unzip <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-7.1.0/mtex-7.1.0.zip">mtex-7.1.0.zip</a></li>
         <li>In MATLAB, change to that folder and run <code>startup_mtex</code></li>
         <li>Try <code>mtexdata titanium</code>, then <code>plot(ebsd)</code></li>
+        <li>Import your own file with <code>import_wizard</code></li>
       </ol>
       <p class="mx-small">MATLAB R2022b or newer, no further toolboxes needed. GND and Taylor computations use the Optimization Toolbox.</p>
       <a class="mx-btn mx-btn-primary mx-door-guide" href="get-started-matlab">New to MATLAB? Step by step →</a>
       <div class="mx-links2"><a href="installation">Troubleshooting</a><a href="download">All releases</a><a href="changelog">Release notes</a></div>
     </div>
-    <div class="mx-door">
+    <div class="mx-door" data-only="python">
       <h3><span class="mx-dot-p"></span>MTEX for Python <span class="mx-ver">1.0.0 · Python 3.12+</span></h3>
       <ol>
         <li><code>pip install "mtex[all]"</code></li>
         <li><code>from mtex import *</code></li>
         <li>Try <code>ebsd = mtexdata('titanium')</code>, then <code>plot(ebsd)</code></li>
+        <li>Import your own file with <code>ebsd = importWizard()</code></li>
       </ol>
       <p class="mx-small">Linux, macOS and Windows. The Python version needs no MATLAB licence.</p>
       <a class="mx-btn mx-btn-primary mx-door-guide" href="get-started-python">New to Python? Step by step →</a>
-      <div class="mx-links2"><a href="MATLABtoPython_py.html?lang=python" data-page-lang="python">Coming from MATLAB</a></div>
+      <div class="mx-links2"><a href="MATLABtoPython_py.html?lang=python" data-page-lang="python">Coming from MATLAB</a><a href="speed">Speed against MATLAB</a></div>
+    </div>
+    <div class="mx-door mx-door-wizard" id="wizard">
+      <h3><img src="images/icons/importWizard.svg" alt="">Import your own data</h3>
+{% include wizard-intro.html %}
     </div>
   </div>
 
@@ -51,3 +60,11 @@ permalink: get-started
     <li><a href="workshop27"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><b>Workshop</b>Learn MTEX in two weeks, March 2027</span></a></li>
   </ul>
 </div>
+<script>
+// the buttons naming the other language drive the switch in the top bar
+document.querySelectorAll('.mx-start-switch [data-lang]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    document.querySelector('.mx-lang-switch [data-lang="' + b.getAttribute('data-lang') + '"]').click();
+  });
+});
+</script>

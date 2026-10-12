@@ -29,13 +29,14 @@ via tools/hero-code.py.
         <div data-only="matlab">
           <a class="mx-btn mx-btn-primary mx-install-dl" href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-{{ rel.version }}/mtex-{{ rel.version }}.zip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg>MTEX {{ rel.version }}</a>
           <p>Unzip and run <code>startup_mtex</code> in MATLAB R2022b or newer.</p>
-          <p class="mx-install-links"><a href="changelog">What is new</a><a href="download">All releases</a><a href="speed" data-speed-open>Speed of the versions</a><a href="https://github.com/mtex-toolbox/mtex">Source on GitHub</a></p>
+          <p class="mx-install-links"><a href="changelog">What is new</a><a href="download">All releases</a><a href="speed" data-dialog-open="mx-speed-dialog">Speed of the versions</a><a href="https://github.com/mtex-toolbox/mtex">Source on GitHub</a></p>
         </div>
         <div data-only="python">
           <div class="mx-pip"><span>pip install "mtex[all]"</span><button type="button" data-copy='pip install "mtex[all]"'>Copy</button></div>
           <p>MTEX for Python 1.0 · Python 3.12+ · no MATLAB licence needed.</p>
-          <p class="mx-install-links"><a href="MATLABtoPython_py.html">Coming from MATLAB</a><a href="speed" data-speed-open>Speed against MATLAB</a><a href="https://github.com/mtex-toolbox/pymtex">Source on GitHub</a></p>
+          <p class="mx-install-links"><a href="MATLABtoPython_py.html">Coming from MATLAB</a><a href="speed" data-dialog-open="mx-speed-dialog">Speed against MATLAB</a><a href="https://github.com/mtex-toolbox/pymtex">Source on GitHub</a></p>
         </div>
+        <a class="mx-install-wizard" href="get-started#wizard" data-dialog-open="mx-wizard-dialog"><img src="images/icons/importWizard.svg" alt=""><span><b>Import your own data</b>The import wizard reads your file and writes the script that loads it.</span></a>
         <a class="mx-install-next" href="EBSDTutorial.html">Then follow the EBSD tutorial →</a>
       </div>
     </div>
@@ -51,14 +52,24 @@ via tools/hero-code.py.
 
 {% include home-features.html %}
 
-<dialog class="mx-speed-dialog" id="mx-speed-dialog" aria-labelledby="mx-speed-title">
-  <div class="mx-speed-dialog-head">
+<dialog class="mx-dialog" id="mx-speed-dialog" data-hash="speed" aria-labelledby="mx-speed-title">
+  <div class="mx-dialog-head">
     <h2 id="mx-speed-title">How fast MTEX is</h2>
-    <button type="button" class="mx-speed-close" data-speed-close aria-label="Close">×</button>
+    <button type="button" class="mx-dialog-close" data-dialog-close aria-label="Close">×</button>
   </div>
   <p>Each point is one of 90 operations: across, its time in MTEX {{ site.data.version_speeds.base }}; up, its time in another version. Below the solid line is faster.</p>
   {% include speed-chart.html %}
-  <p class="mx-speed-more"><a href="speed">All numbers and how they were measured →</a></p>
+  <p class="mx-dialog-more"><a href="speed">All numbers and how they were measured →</a></p>
+</dialog>
+
+<dialog class="mx-dialog" id="mx-wizard-dialog" data-hash="wizard" aria-labelledby="mx-wizard-title">
+  <div class="mx-dialog-head">
+    <h2 id="mx-wizard-title"><img src="images/icons/importWizard.svg" alt="">Import your own data</h2>
+    <button type="button" class="mx-dialog-close" data-dialog-close aria-label="Close">×</button>
+  </div>
+  <p>The import wizard reads your file, shows the map, and writes the script that loads it.</p>
+  {% include wizard-intro.html %}
+  <p class="mx-dialog-more"><a href="get-started-matlab#5-import-your-own-data" data-only="matlab">Step by step, from installing MATLAB to your own map →</a><a href="get-started-python#6-import-your-own-data" data-only="python">Step by step, from installing Python to your own map →</a></p>
 </dialog>
 
 
@@ -76,3 +87,4 @@ document.querySelectorAll('[data-copy]').forEach(function (b) {
 });
 </script>
 <script src="js/mx-home.js" defer></script>
+<script src="js/mx-dialog.js" defer></script>
