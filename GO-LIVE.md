@@ -1,14 +1,14 @@
 # Going live with the redesign
 
 The redesign is built on branch `redesign` (this worktree, `web-next`) and
-previewed at https://mtex-playground.github.io. Going live means merging it
-into `master` of `mtex-toolbox/mtex-toolbox.github.io`, which GitHub Pages
+previewed at https://mtex-playground.github.io. Going live means pushing it
+to `master` of `mtex-toolbox/mtex-toolbox.github.io`, which GitHub Pages
 serves. The live site stays as it is until that push.
 
 Checked on 1 Oct 2026: all 2,804 URLs of the live site exist in the redesign
-(`support.html` and `scripts.html` as forwards), `redesign` merges into
-`master` without conflicts, and the pages GitHub Pages would build are
-identical to the preview build apart from the preview's noindex tag.
+(`support.html` and `scripts.html` as forwards), and the pages GitHub Pages
+would build are identical to the preview build apart from the preview's
+noindex tag. `redesign` contains `master`, so going live is a fast-forward.
 
 ## 1. Preparation
 
@@ -81,17 +81,18 @@ In this order: each step makes the next one's links true.
   tools/deploy-figures.sh                   # force-pushes mtex-toolbox/figures
   ```
 
-- [ ] **Merge and push the site.**
+- [ ] **Push the site.**
 
   ```bash
-  cd ~/mtex/web                             # on master
-  git pull
-  git merge origin/redesign
-  git push
+  cd ~/mtex/web-next                        # on redesign
+  git fetch origin
+  git merge origin/master                   # "Already up to date" unless master moved
+  git push origin redesign redesign:master
   ```
 
+  The push is a fast-forward of `master` and needs no clean `~/mtex/web`.
   `update.sh` is for content updates and stages only build output, so it is
-  not the tool for this merge.
+  not the tool for this step.
 - [ ] **Watch the Pages build** (about two minutes):
   `gh run list -R mtex-toolbox/mtex-toolbox.github.io --limit 3`
 - [ ] **Look at the live site:**
