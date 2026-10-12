@@ -186,7 +186,7 @@ ebsd = EBSD.load('map.h5oina');
 ebsd = EBSD.load('map.ctf');
 ebsd = EBSD.load('map.cpr');
 {% endhighlight %}
-<p>An <code class="language-plaintext highlighter-rouge">.h5oina</code> file states its scan rotation, and MTEX applies it. For <code class="language-plaintext highlighter-rouge">.ctf</code> and <code class="language-plaintext highlighter-rouge">.cpr</code> MTEX assumes the Oxford default, Euler angles turned by 180&deg; about the z axis against the map. A file exported with another alignment is imported with that rotation stated explicitly:</p>
+<p>Oxford states its Euler angles in the sample surface frame \(X_1\), \(Y_1\), \(Z_1\), with \(Z_1\) pointing out of the surface. An <code class="language-plaintext highlighter-rouge">.h5oina</code> file states its scan rotation, and MTEX applies it. For <code class="language-plaintext highlighter-rouge">.ctf</code> and <code class="language-plaintext highlighter-rouge">.cpr</code> MTEX assumes the Oxford default of a scan turned by 180&deg;, which puts \(X_1\) to the west and \(Y_1\) to the south of a map drawn with \(x\) east and \(y\) south, i.e. Euler angles turned by 180&deg; about the y axis against the map. A file exported with another alignment is imported with that rotation stated explicitly:</p>
 {% highlight matlab %}
 ebsd = EBSD.load('map.ctf','EulerCorrection',rotation.id);
 {% endhighlight %}
