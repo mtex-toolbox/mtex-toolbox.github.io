@@ -14,9 +14,9 @@ files R2019b.
 
 ## 1. Install MTEX
 
-1. Download [mtex-7.1.0.zip](https://github.com/mtex-toolbox/mtex/releases/download/mtex-7.1.0/mtex-7.1.0.zip)
+1. Download [mtex-7.2.0.zip](https://github.com/mtex-toolbox/mtex/releases/download/mtex-7.2.0/mtex-7.2.0.zip)
    and unzip it into a folder that stays where it is, for instance
-   `Documents/MATLAB/mtex-7.1.0`.
+   `Documents/MATLAB/mtex-7.2.0`.
 2. Start MATLAB. In the *Current Folder* panel on the left, go to that folder,
    or type its path into the address bar above the panel.
 3. In the *Command Window*, the large panel in the middle, type
