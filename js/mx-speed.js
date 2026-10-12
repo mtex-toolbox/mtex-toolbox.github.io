@@ -34,6 +34,13 @@
     return n;
   }
 
+  // a label written along a line of slope one, ending shortly before the line's end at (ex, ey)
+  var slope = -Math.atan2(H - T - B, W - L - R) * 180 / Math.PI;
+  function along(ex, ey, text) {
+    var x = X(ex - 0.12), y = Y(ey - 0.12);
+    el('text', { x: x, y: y, dy: -5, 'text-anchor': 'end', 'class': 'mx-speed-note', transform: 'rotate(' + slope + ' ' + x + ' ' + y + ')' }, text);
+  }
+
   var points = [], mark = null;
   function draw() {
     svg.replaceChildren();
@@ -47,9 +54,9 @@
     el('line', { x1: X(lo), y1: Y(lo + 1), x2: X(hi - 1), y2: Y(hi), 'class': 'mx-speed-decade' });
     el('line', { x1: X(lo + 1), y1: Y(lo), x2: X(hi), y2: Y(hi - 1), 'class': 'mx-speed-decade' });
     el('line', { x1: X(lo), y1: Y(lo), x2: X(hi), y2: Y(hi), 'class': 'mx-speed-equal' });
-    el('text', { x: X(hi) - 50, y: Y(hi) + 14, 'text-anchor': 'end', 'class': 'mx-speed-note' }, 'same speed');
-    el('text', { x: X(hi) - 50, y: Y(hi - 1) + 14, 'text-anchor': 'end', 'class': 'mx-speed-note' }, '10× faster');
-    el('text', { x: X(hi - 1) - 50, y: Y(hi) + 14, 'text-anchor': 'end', 'class': 'mx-speed-note' }, '10× slower');
+    along(hi, hi, 'same speed');
+    along(hi, hi - 1, '10× faster');
+    along(hi - 1, hi, '10× slower');
     el('text', { x: (L + W - R) / 2, y: H - 10, 'text-anchor': 'middle', 'class': 'mx-speed-axis' }, 'time in MTEX ' + base);
     var my = (T + H - B) / 2;
     el('text', { x: 16, y: my, 'text-anchor': 'middle', 'class': 'mx-speed-axis', transform: 'rotate(-90 16 ' + my + ')' }, 'time in the other version');
