@@ -10,7 +10,7 @@
   var data = JSON.parse(source.textContent);
   var times = data.times, base = data.base, ops = Object.keys(times);
   var names = { pymtex: 'MTEX for Python' };
-  var colors = { 'pymtex': '#2a78d6', 'develop': '#eb6834', '7.1.0': '#1baf7a', '7.0.0': '#eda100', '5.11.2': '#e87ba4' };
+  var colors = { 'pymtex': '#d23b3b', '7.2': '#8a5cc7', '7.1.0': '#2f74c0', '7.0.0': '#2c9f5a', '5.11.2': '#8c564b' };
   // drawn in this order, so that the Python points lie on top; the legend lists them first
   var series = data.versions.filter(function (v) { return v !== base; });
   var shown = {};
