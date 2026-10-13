@@ -76,7 +76,27 @@ plot(regularGrid,'axisAngle','all','MarkerSize',1);
 <p>In Bunge Euler angles, the invariant volume element on rotation space is proportional to</p>
 <p>\[ \sin\Phi\,\mathrm{d}\varphi_1\,\mathrm{d}\Phi\,\mathrm{d}\varphi_2. \]</p>
 <p>Equal increments of \(\Phi\) therefore represent unequal volumes. A regular Euler grid places too many equal-weight nodes where the coordinate map is compressed. This is the three-dimensional counterpart of longitude lines meeting at the poles of a spherical grid.</p>
-<h2 id="9">An Equal-Weight Uniformity Diagnostic</h2>
+<h2 id="9">The Fibonacci Grid</h2>
+<p> <a href="fibonacciSO3Grid.fibonacciSO3Grid.html"><code class="language-plaintext highlighter-rouge">fibonacciSO3Grid</code></a> places its nodes along a spiral through orientation space. There are no coordinate steps to be rounded, so the number of nodes is a free parameter.</p>
+{% highlight matlab %}
+fibGrid = fibonacciSO3Grid(cs,'resolution',5*degree);
+
+fibCounts = [length(fibGrid),length(fibonacciSO3Grid(cs,'points',5000))]
+{% endhighlight %}
+
+{% highlight plaintext %}
+fibCounts =
+        4994        5034
+{% endhighlight %}
+<p>The two entries are 4994 and 5034, so the spiral meets a requested node count to within one percent. It is the construction to reach for when a fixed budget of orientations is the constraint.</p>
+{% highlight matlab %}
+plot(fibGrid,'axisAngle','all','MarkerSize',2);
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationGrid_03.png" %}
+</center>
+<p>The spiral is generated over all of \(\mathrm{SO}(3)\) and then restricted to the fundamental region, so the nodes fill the same region as the equispaced grid. They carry no bands and no shell structure.</p>
+<h2 id="12">An Equal-Weight Uniformity Diagnostic</h2>
 <p>A practical diagnostic treats every node as the centre of an equally weighted kernel. If the nodes represent the invariant volume uniformly, the resulting ODF should be close to the uniform value 1. Its pole figures should therefore also be nearly flat at 1.</p>
 <p>The result depends on the kernel halfwidth, which is made explicit here. It tests equal-weight node placement at that smoothing scale. It does not prove equidistribution, measure nearest-neighbour spacing, or turn the nodes into a quadrature rule.</p>
 {% highlight matlab %}
@@ -88,7 +108,7 @@ setColorRange([0.7 2.7]);
 mtexColorbar;
 {% endhighlight %}
 <center class="mtex-figure">
-{% include inline_image.html file="OrientationGrid_03.png" %}
+{% include inline_image.html file="OrientationGrid_04.png" %}
 </center>
 <p>On the common colour range used for both constructions, all three pole figures appear flat. Their values span 0.93 to 1.02, so the equispaced grid stays within about 7 percent of 1 in this diagnostic. Flat to within a few percent is what a usable grid looks like.</p>
 {% highlight matlab %}
@@ -99,13 +119,24 @@ setColorRange([0.7 2.7]);
 mtexColorbar;
 {% endhighlight %}
 <center class="mtex-figure">
-{% include inline_image.html file="OrientationGrid_04.png" %}
+{% include inline_image.html file="OrientationGrid_05.png" %}
 </center>
 <p>The regular grid develops a strong peak. Its (100) pole figure spans 0.79 to 2.62, and the three pole figures together span 0.75 to 2.62. The extra points therefore do not buy equal-weight uniformity.</p>
-<h2 id="12">Choosing a Global Grid</h2>
+{% highlight matlab %}
+fibOdf = unimodalODF(fibGrid,'halfwidth',10*degree);
+
+plotPDF(fibOdf,h);
+setColorRange([0.7 2.7]);
+mtexColorbar;
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationGrid_06.png" %}
+</center>
+<p>The Fibonacci grid spans 0.99 to 1.02, within about 2 percent of 1, at the same node count as the equispaced grid.</p>
+<h2 id="16">Choosing a Global Grid</h2>
 <p>Use a regular grid when values must lie on an Euler-angle raster, for example when <a href="ODFExport.html">exporting an ODF</a> to a format that expects one. Use an equispaced grid when approximately uniform equal-weight nodes matter more than rectangular Euler indexing.</p>
 <p>A nearly uniform point set is not automatically an integration rule. Exactness for a class of band-limited functions requires nodes together with their prescribed weights; see <a href="SO3FunQuadrature.html">Quadrature of Rotational Functions</a>.</p>
-<h2 id="13">Grids Around a Given Orientation</h2>
+<h2 id="17">Grids Around a Given Orientation</h2>
 <p> <a href="localOrientationGrid.html"><code class="language-plaintext highlighter-rouge">localOrientationGrid</code></a> covers a ball around one orientation rather than the full symmetry-reduced region. This is the useful construction for a local search or a perturbation study.</p>
 {% highlight matlab %}
 center = orientation.byEuler(10*degree,20*degree,30*degree,cs);
@@ -132,19 +163,20 @@ hold off
 mtexColorbar('title','angle to centre in degree');
 {% endhighlight %}
 <center class="mtex-figure">
-{% include inline_image.html file="OrientationGrid_05.png" %}
+{% include inline_image.html file="OrientationGrid_07.png" %}
 </center>
 <p>The red point marks the centre, and colour records rotational distance from it. The ball appears as two patches because it crosses a boundary of the fundamental region and wraps to a symmetrically equivalent face. Despite that split in the plot, every node lies within the requested ball.</p>
-<h2 id="16">Further Reading</h2>
+<h2 id="20">Further Reading</h2>
 <div>
 <ul>
 <li>H.-J. Bunge, <a href="https://shop.elsevier.com/books/texture-analysis-in-materials-science/bunge/978-0-408-10642-9">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, 1982. Sections on the invariant measure and Euler space give the texture-analysis foundation for the volume element above.</li>
 <li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004. This book develops rotation-space geometry and symmetry-reduced regions.</li>
 <li>A. Yershova, S. Jain, S. M. LaValle and J. C. Mitchell, <a href="https://doi.org/10.1177/0278364909352700">Generating Uniform Incremental Grids on SO(3) Using the Hopf Fibration</a>, <i>The International Journal of Robotics Research</i> 29(7), 801--812, 2010. The paper compares criteria for uniform deterministic grids on rotation space.</li>
 <li>D. Roşca, A. Morawiec and M. De Graef, <a href="https://doi.org/10.1088/0965-0393/22/7/075013">A New Method of Constructing a Grid in the Space of 3D Rotations and Its Applications to Texture Analysis</a>, <i>Modelling and Simulation in Materials Science and Engineering</i> 22, 075013, 2014. This paper develops a volume-preserving cubochoric construction for texture analysis.</li>
+<li>M. Alexa, <a href="https://doi.org/10.1109/CVPR52688.2022.00811">Super-Fibonacci Spirals: Fast, Low-Discrepancy Sampling of SO(3)</a>, <i>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</i>, 8291--8300, 2022. This paper gives the spiral construction behind <code class="language-plaintext highlighter-rouge">fibonacciSO3Grid</code> and the two irrational ratios it uses.</li>
 </ul>
 </div>
-<h2 id="17">Next</h2>
+<h2 id="21">Next</h2>
 <p>Curves through orientation space, along which many real textures lie, are <a href="OrientationFibre.html">Fibres of Orientations</a>. Sampling an ODF statistically rather than placing a grid is <a href="RandomSampling.html">Random Sampling</a>.</p>
 </div>
 </body>

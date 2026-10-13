@@ -53,7 +53,7 @@ dSEdge = dislocationSystem
  symmetry: 432
  edge dislocations : 1 × 1
  Burgers vector  line vector  energy  length
-      [1  1  0]    [1 -1 -2]       1    1.41
+      [1  1  0]    [1 -1 -2]       2    1.41
 {% endhighlight %}
 <p>The grey arrow is the line vector, along which the defect runs. The red arrow is the Burgers vector, which gives the lattice shift across it.</p>
 {% highlight matlab %}
@@ -89,7 +89,7 @@ dSScrew = dislocationSystem
  symmetry: 432
  screw dislocations: 1 × 1
  Burgers vector  energy  length
-      [1  1  0]       1    1.41
+      [1  1  0]     1.4    1.41
 {% endhighlight %}
 <p>Draw the line vector longer so that both arrows remain visible when they lie on top of one another.</p>
 {% highlight matlab %}
@@ -128,7 +128,7 @@ dSBcc = dislocationSystem.bcc(cs);
 ans =
     48     4
 {% endhighlight %}
-<p>MTEX uses one half of the cubic slip direction as the Burgers vector during this conversion. It also uses one third of a hexagonal slip direction. Other lattices trigger a warning because the physical scale is ambiguous.</p>
+<p>MTEX uses one half of the cubic slip direction as the Burgers vector during this conversion. A hexagonal slip direction is the Burgers vector itself: the direction \([11\bar{2}0]\) of MTEX has length \(a\). Other lattices trigger a warning because the physical scale is ambiguous.</p>
 <h2 id="11">The dislocation tensor</h2>
 <p>A dislocation system contributes the dyadic tensor \(\mathbf b\otimes\hat{\mathbf l}\), where the hat denotes a unit line vector. This tensor is sometimes described informally as a deformation matrix. In MTEX it is a basis tensor for the dislocation-density tensor used on the next page.</p>
 {% highlight matlab %}
@@ -136,7 +136,7 @@ dTBcc = dSBcc.tensor
 {% endhighlight %}
 
 {% highlight plaintext %}
-dTBcc = dislocationDensityTensor (crystal)
+dTBcc = dislocationDensityTensor (432)
   size: 52 × 1   
   unit: au       
   rank: 2 (3 × 3)
@@ -162,18 +162,24 @@ ans =
     0.7071    0.7071
 {% endhighlight %}
 <h2 id="14">Set relative line energies</h2>
-<p>The property <code class="language-plaintext highlighter-rouge">u</code> stores the relative line energy used when MTEX chooses a non-negative combination of systems. A directly constructed system has <code class="language-plaintext highlighter-rouge">u = 1</code> by default. Conversion from slip systems currently initializes <code class="language-plaintext highlighter-rouge">u = 2</code> for edge systems and <code class="language-plaintext highlighter-rouge">u = 1</code> for screw systems.</p>
+<p>The property <code class="language-plaintext highlighter-rouge">u</code> stores the relative line energy used when MTEX chooses a non-negative combination of systems. By default it is \(b^2\) for an edge and \(0.7\,b^2\) for a screw system, in the squared length unit of the unit cell.</p>
 <p>Hull and Bacon give the elastic line energies</p>
 <p>\[ U_{\mathrm{screw}} = \frac{G b^2}{4\pi} \ln\left(\frac{R}{r_0}\right), \]</p>
 <p>\[ U_{\mathrm{edge}} = \frac{1}{1-\nu} U_{\mathrm{screw}}, \]</p>
 <p>where \(G\) is the shear modulus, \(b\) is the Burgers-vector length, \(\nu\) is Poisson's ratio, \(R\) is the outer cut-off radius, and \(r_0\) is the dislocation-core radius.</p>
-<p>If all systems share the other factors, one convenient normalization is \(U_{\mathrm{edge}}=1\) and \(U_{\mathrm{screw}}=1-\nu\).</p>
+<p>The default sets the factors all systems share to one and takes \(\nu=0.3\). Relative to the shortest Burgers vector \(b_{\min}\) the line energies are \((b/b_{\min})^2\) for an edge system and \((1-\nu)\,(b/b_{\min})^2\) for a screw system, which keeps the weights independent of the length unit and lets you choose \(\nu\).</p>
 {% highlight matlab %}
 nu = 0.3;
-dSBcc(dSBcc.isEdge).u = 1;
-dSBcc(dSBcc.isScrew).u = 1 - nu;
+dSBcc.u = (norm(dSBcc.b) / min(norm(dSBcc.b))).^2 .* (1 - nu * dSBcc.isScrew);
+[dSBcc(1).u, dSBcc(end).u]
 {% endhighlight %}
-<p>There is no single accepted way to set these weights. Another model may use <code class="language-plaintext highlighter-rouge">u = c * G * norm(b)^2</code>, with a model-dependent constant <code class="language-plaintext highlighter-rouge">c</code>. When \(G\) is a shear modulus, this expression has units of energy per unit length; earlier wording on this page called it energy per length squared. Choose <code class="language-plaintext highlighter-rouge">u</code> for the material and model being compared rather than treating an MTEX default as a measured energy.</p>
+
+{% highlight plaintext %}
+ans =
+    1.0000    0.7000
+{% endhighlight %}
+<p>All BCC Burgers vectors have the same length, which leaves 1 for the edge and \(1-\nu\) for the screw systems. Where families with different Burgers vectors act together the length matters: the \(\langle c+a\rangle\) systems of titanium are about 3.5 times as costly as its \(\langle a\rangle\) systems.</p>
+<p>There is no single accepted way to set these weights. The shear modulus and the cut-off radii may differ between families, and a model may account for them. Choose <code class="language-plaintext highlighter-rouge">u</code> for the material and model being compared rather than treating an MTEX default as a measured energy.</p>
 <h2 id="16">References</h2>
 <div>
 <ul>
