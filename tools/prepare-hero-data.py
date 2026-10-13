@@ -2,7 +2,7 @@
 """Prepare the correction-free magnesium map for the homepage.
 
 Run with a Python environment containing mtex and h5py:
-    python tools/prepare-hero-data.py ../mtex-next/data/EBSD/twins.ctf
+    python tools/prepare-hero-data.py ../master/data/EBSD/twins.ctf
 
 This is a fixture conversion for the existing twins sample, not a general
 HDF5 exporter. It writes the Oxford HDF5 layout understood by both ports,

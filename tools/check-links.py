@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Report the internal links and images of a built site that lead nowhere.
 
-    tools/check-links.py ../web-next-full           # summary and the worst pages
-    tools/check-links.py ../web-next-full --all     # every dead link, as TSV
+    tools/check-links.py _site           # summary and the worst pages
+    tools/check-links.py _site --all     # every dead link, as TSV
 
-Run it on the output of a full build (tools/deploy-next.sh --full --dry-run,
-or bundle exec jekyll build). The figures live in their own repository, so the
+Run it on the output of bundle exec jekyll build. The figures live in their own repository, so the
 site needs figures/ next to its pages: a symlink to the figures checkout will
 do, and the script makes one when it is missing.
 

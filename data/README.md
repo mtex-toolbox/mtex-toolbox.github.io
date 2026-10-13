@@ -10,4 +10,4 @@ notes are recorded in the HDF5 attributes.
 
 Recreate and check the file with a Python environment containing mtex and h5py:
 
-    python tools/prepare-hero-data.py ../mtex-next/data/EBSD/twins.ctf
+    python tools/prepare-hero-data.py ../master/data/EBSD/twins.ctf

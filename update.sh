@@ -24,8 +24,7 @@
 
 set -eu
 
-# Only master is served. A worktree on another branch (web-next, the preview)
-# publishes through tools/deploy-next.sh instead.
+# Only master is served.
 branch=$(git branch --show-current)
 if [ "$branch" != master ]; then
   echo "on branch '$branch', not master - this script publishes the live site" >&2
