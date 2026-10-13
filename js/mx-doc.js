@@ -321,6 +321,26 @@
     });
   }
 
+  /* --------------------------------------------------------------- copy code */
+
+  // a copy button on every block of input code; program output takes none
+  function copyButtons() {
+    if (!navigator.clipboard) { return; }
+    Array.prototype.forEach.call(article.querySelectorAll('.highlight > pre'), function (pre) {
+      if (pre.closest('.language-text') || pre.querySelector('code[data-lang="plaintext"]')) { return; }
+      var button = el('button', { class: 'mx-copy', type: 'button' }, 'Copy');
+      button.addEventListener('click', function () {
+        navigator.clipboard.writeText(pre.textContent.replace(/\n$/, '')).then(function () {
+          button.textContent = 'Copied';
+          setTimeout(function () { button.textContent = 'Copy'; }, 1500);
+        });
+      });
+      pre.parentNode.classList.add('mx-copy-host');
+      pre.parentNode.appendChild(button);
+    });
+  }
+
   buildRail();
   buildSidebar();
+  copyButtons();
 })();
