@@ -80,7 +80,7 @@ p2cGlobal
 misorientation (Iron fcc → Iron bcc (old))
   (111) || (011)   [101̅] || [111̅]
  optimizing parent to child orientation relationship
-  scanning 406 orientations
+  scanning 398 orientations
   (102.23°,  8.99°,303.54°)  2.291
   (102.35°,  8.96°,303.47°)  2.287
   (102.36°,  8.96°,303.47°)  2.287
