@@ -133,7 +133,15 @@ Start it from the interactive window with
 ebsd = importWizard()
 ```
 
-or, without VS Code, from a terminal with `mtex-wizard`.
+or from the terminal of VS Code (*Terminal > New Terminal*) with
+
+```
+mtex-wizard
+```
+
+The command is part of the project's `.venv`. If the prompt of the terminal does
+not start with `(.venv)`, or in a terminal outside VS Code, change to the project
+folder and type `.venv/bin/mtex-wizard` (on Windows `.venv\Scripts\mtex-wizard`).
 
 <figure class="mx-shot"><img src="figures/python/importWizard.png" alt="The MTEX import wizard for Python: a file browser on the left, the phase table across the top, the two coordinate systems at the top left and an orientation map below" loading="lazy"><figcaption>The import wizard with an EBSD map loaded.</figcaption></figure>
 
