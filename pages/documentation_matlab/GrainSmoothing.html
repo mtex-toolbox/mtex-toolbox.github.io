@@ -189,7 +189,7 @@ legend('Location','best')
 <p>The orange curve removes pixel-scale turns but follows the larger bends of the measured boundary. Use one physical smoothing length across scans when their spatial resolutions differ.</p>
 <p> <a href="huberFilter.html"><code class="language-plaintext highlighter-rouge">huberFilter</code></a> is available for faceted materials. It keeps genuine corners sharp instead of rounding them off. It is not a good default; see <a href="GrainSmoothingAdvanced.html">Smoothing Algorithms</a>.</p>
 <h2 id="14">When to switch the first two stages off</h2>
-<p>Simplification and resampling change the number of boundary segments. A resampled segment no longer runs between one specific pair of pixels. Wherever <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> is read per segment, for example to look up the orientations on either side, switch both stages off.</p>
+<p>Simplification and resampling change the number of boundary segments. A segment that no longer runs between one specific pair of pixels gets the <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> 0. Wherever <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> is read per segment, for example to look up the orientations on either side, switch both stages off.</p>
 {% highlight matlab %}
 grainsPlain = smoothBoundary(grains,5,'noSimplify','noRefine');
 

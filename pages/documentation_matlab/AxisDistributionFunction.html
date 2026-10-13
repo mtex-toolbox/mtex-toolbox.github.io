@@ -62,7 +62,7 @@ uniformRatio =
 {% endhighlight %}
 <p>The density runs from 0.597 to 1.565 multiples of the mean, a factor of 2.620. A measured ADF must therefore be compared with this reference, not with a constant.</p>
 <h2 id="6">The axis distribution of boundary misorientations</h2>
-<p>A grain is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. A grain boundary is a segment between two neighbouring pixels that belong to different grains. Load the magnesium map, segment its indexed pixels at \(5^\circ\), and smooth the boundary geometry for five iterations. The plotting convention states the specimen frame used by this data set.</p>
+<p>A grain is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. A grain boundary is a segment between two neighbouring pixels that belong to different grains. Load the magnesium map, segment it at \(5^\circ\), and smooth the boundary geometry for five iterations. The plotting convention states the specimen frame used by this data set.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata twins silent
@@ -123,13 +123,15 @@ mtexColorbar
 <p>An ADF has discarded the angle, so an axis peak alone does not identify a twin law. Confirm the complete misorientation against the ideal relation, as in <a href="Twinning.html">Twinning</a>.</p>
 <h2 id="12">Crystal versus specimen coordinates</h2>
 <p>A reference frame is the coordinate system in which data are expressed; it is distinct from the symmetry attached to it. The crystal frame is fixed to the lattice, whereas the specimen frame is fixed to the sample. The crystal-coordinate ADF above asks which lattice direction is the axis.</p>
-<p>Passing two orientations separately to <code class="language-plaintext highlighter-rouge">plotAxisDistribution</code> asks where that axis points in the specimen frame. The two EBSD ids stored for every segment recover the orientations on its two sides.</p>
+<p>Passing two orientations separately to <code class="language-plaintext highlighter-rouge">plotAxisDistribution</code> asks where that axis points in the specimen frame. The two EBSD ids stored for every segment recover the orientations on its two sides. A segment that smoothing simplified or resampled no longer runs between one pair of pixels and has the ids 0, so the pairs are read from the boundaries smoothed without those two stages, as the help of <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> advises.</p>
 {% highlight matlab %}
-ori1 = ebsd(gB.ebsdId(:,1)).orientations;
-ori2 = ebsd(gB.ebsdId(:,2)).orientations;
+grainsP = smoothBoundary(calcGrains(ebsd,'angle',5*degree),5,'noSimplify','noRefine');
+gBp = grainsP.boundary('Magnesium','Magnesium');
+ori1 = ebsd('id',gBp.ebsdId(:,1)).orientations;
+ori2 = ebsd('id',gBp.ebsdId(:,2)).orientations;
 
 plotAxisDistribution(ori1,ori2,'contourf','halfwidth',5*degree,...
-  'weights',gB.segLength)
+  'weights',gBp.segLength)
 mtexColorbar
 {% endhighlight %}
 <center class="mtex-figure">

@@ -77,8 +77,8 @@ plot(ebsdSub,ebsdSub.orientations,'ipfDirection',zvector)
 ebsdSub = EBSD (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1    668 (4.2%)  notIndexed          none                                   
-     0   15147 (96%)     Ferrite  LightSkyBlue      m-3m                         
+    -1    669 (4.2%)  notIndexed          none                                   
+     0   15146 (96%)     Ferrite  LightSkyBlue      m-3m                         
  
  Properties: ci, fit, iq, sem_signal, oldId, grainId
  Scan unit : um
@@ -122,11 +122,11 @@ hold off
 </center>
 <p>The grain interiors are now coloured. Sharp patches remain because a nearest-neighbour estimate repeats a measured orientation instead of creating a gradual orientation field. Positions not covered by a grain remain notIndexed, which preserves holes along the grain boundaries.</p>
 <h2 id="8">Filling with a denoising filter</h2>
-<p>A denoising filter can estimate the missing orientations while smoothing the orientation field. Supply the option <code class="language-plaintext highlighter-rouge">'fill'</code> and the grains to <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>. The <a href="halfQuadraticFilter.html">halfQuadraticFilter</a> used here is a total-variation method for rotation-valued data; its mathematical basis is described by <a href="https://doi.org/10.3934/ipi.2016001">Bergmann et al. (2016)</a>.</p>
+<p>A denoising filter can estimate the missing orientations while smoothing the orientation field. Supply the option <code class="language-plaintext highlighter-rouge">'fill'</code> and the grains to <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>. The <a href="l1TVFilter.l1TVFilter.html">l1TVFilter</a> used here is a total-variation method for rotation-valued data; its mathematical basis is described by <a href="https://doi.org/10.3934/ipi.2016001">Bergmann et al. (2016)</a>.</p>
 <p>In contrast to nearest-neighbour interpolation, the filter can create a smooth transition between the estimated orientations. It is still an estimate, and the reconstructed grain boundaries still constrain it. Neither method reconstructs the grains again. The supplied boundaries remain the segmentation model for the filled map.</p>
 {% highlight matlab %}
-F = halfQuadraticFilter;
-F.alpha = 0.25;
+F = l1TVFilter;
+F.alpha = 0.21;
 
 % interpolate and smooth the missing orientations
 ebsdSub_smoothed = smooth(ebsdSub,F,'fill',grainsSub);
@@ -184,7 +184,7 @@ fprintf('%d positions had no orientation before smoothing\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-48134 positions had no orientation before smoothing
+48127 positions had no orientation before smoothing
 {% endhighlight %}
 <h2 id="14">Filling is not resampling</h2>
 <p>If all per-pixel properties are needed at arbitrary query positions, use <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a>. It transfers the complete record of the nearest existing measurement to a requested position. The page <a href="EBSDInter.html">Interpolating EBSD Data</a> develops that operation.</p>
@@ -227,8 +227,8 @@ The submap contains 29.0 percent notIndexed measurements
 <h2 id="17">Fill only grain interiors</h2>
 <p>The option <code class="language-plaintext highlighter-rouge">'fill'</code> asks <code class="language-plaintext highlighter-rouge">smooth</code> to fill holes inside the grains. Passing <code class="language-plaintext highlighter-rouge">grains</code> is what lets MTEX decide whether a position is inside a grain. <code class="language-plaintext highlighter-rouge">notIndexed</code> positions along grain boundaries remain untouched.</p>
 {% highlight matlab %}
-F = halfQuadraticFilter;
-F.alpha = 10;
+F = l1TVFilter;
+F.alpha = 1.25;
 
 ebsdS = smooth(ebsd,F,'fill',grains);
 

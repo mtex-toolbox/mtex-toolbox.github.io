@@ -346,10 +346,10 @@ plot(parentEBSD(betaName),parentColor,'figSize','large')
   'angle',5*degree,'minPixel',15);
 parentGrains = smoothBoundary(parentGrains,5);
 {% endhighlight %}
-<p>A <a href="halfQuadraticFilter.html"><code class="language-plaintext highlighter-rouge">halfQuadraticFilter</code></a> with a small <code class="language-plaintext highlighter-rouge">alpha</code> preserves more local detail. The <code class="language-plaintext highlighter-rouge">'fill'</code> option interpolates missing orientations inside the supplied grain boundaries.</p>
+<p>A <a href="l1TVFilter.l1TVFilter.html"><code class="language-plaintext highlighter-rouge">l1TVFilter</code></a> with a small <code class="language-plaintext highlighter-rouge">alpha</code> preserves more local detail. The <code class="language-plaintext highlighter-rouge">'fill'</code> option interpolates missing orientations inside the supplied grain boundaries.</p>
 {% highlight matlab %}
-F = halfQuadraticFilter;
-F.alpha = 0.1;
+F = l1TVFilter;
+F.alpha = 0.125;
 parentEBSD = smooth(parentEBSD,F,'fill',parentGrains);
 
 parentColor = ipfKey.orientation2color(...
@@ -399,7 +399,7 @@ hold off
 mis2MeanQuantiles =
     1.1605
     2.0542
-    3.1468
+    3.1469
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="LowLevelParentGrainReconstruction_12.png" %}

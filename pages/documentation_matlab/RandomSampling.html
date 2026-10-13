@@ -78,7 +78,7 @@ fprintf('L1 error, random sample, 10 degree: %.3f\n',errRandom10)
 {% endhighlight %}
 
 {% highlight plaintext %}
-L1 error, random sample, 10 degree: 0.153
+L1 error, random sample, 10 degree: 0.163
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_03.png" %}
@@ -96,7 +96,7 @@ fprintf('L1 error, random sample, 20 degree: %.3f\n',errRandom20)
 {% endhighlight %}
 
 {% highlight plaintext %}
-L1 error, random sample, 20 degree: 0.082
+L1 error, random sample, 20 degree: 0.111
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_04.png" %}
@@ -109,7 +109,7 @@ fprintf('texture index, random reconstruction: %.3f\n',norm(odf_rec)^2)
 
 {% highlight plaintext %}
 texture index, original ODF: 1.351
-texture index, random reconstruction: 1.220
+texture index, random reconstruction: 1.154
 {% endhighlight %}
 <h2 id="8">Place an Optimized Sample</h2>
 <p>Random points are appropriate when the realization itself is part of the experiment, such as a bootstrap study of measurement accuracy. When the aim is instead a compact numerical representation, use <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a>. It moves the orientations to reduce their discrepancy from the ODF rather than drawing independent observations.</p>
@@ -128,7 +128,7 @@ fprintf('L1 error, optimized sample, 10 degree: %.3f\n',errOptimal10)
 {% endhighlight %}
 
 {% highlight plaintext %}
-L1 error, optimized sample, 10 degree: 0.039
+L1 error, optimized sample, 10 degree: 0.038
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_05.png" %}
@@ -200,8 +200,8 @@ fprintf('halfwidth for optimalSample: %.1f degree * M^%.3f\n',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-halfwidth for discreteSample: 92.9 degree * M^-0.279
-halfwidth for optimalSample: 51.7 degree * M^-0.271
+halfwidth for discreteSample: 66.1 degree * M^-0.219
+halfwidth for optimalSample: 47.7 degree * M^-0.258
 {% endhighlight %}
 <p>Plot the measured halfwidths with their fitted laws. The circles are the means of five random realizations, and the squares are the deterministic optimized samples.</p>
 {% highlight matlab %}
@@ -228,7 +228,7 @@ grid on
 <center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_06.png" %}
 </center>
-<p>Both curves fall as the sample grows, and the optimized points lie below the random ones throughout. The random halfwidth falls the faster of the two, so the gap narrows: an optimized sample supports a much sharper kernel at the smallest size and a moderately sharper one at the largest.</p>
+<p>Both curves fall as the sample grows, and the optimized points lie below the random ones throughout. The optimized halfwidth falls the faster of the two, so the gap widens: an optimized sample supports a kernel about a third sharper at the smallest size and two fifths sharper at the largest.</p>
 {% highlight matlab %}
 fprintf('ratio of optimized to random halfwidth: %.2f at M = %d and %.2f at M = %d\n',...
   hwOpt(1)/mean(hwRand(1,:)),M(1),...
@@ -236,7 +236,7 @@ fprintf('ratio of optimized to random halfwidth: %.2f at M = %d and %.2f at M = 
 {% endhighlight %}
 
 {% highlight plaintext %}
-ratio of optimized to random halfwidth: 0.53 at M = 32 and 0.57 at M = 512
+ratio of optimized to random halfwidth: 0.64 at M = 32 and 0.57 at M = 512
 {% endhighlight %}
 <h2 id="16">The Asymptotic Halfwidth Rule</h2>
 <p>For comparison, the <code class="language-plaintext highlighter-rouge">'magicRule'</code> in <a href="orientation.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> sets the parameter of the <a href="SO3DeLaValleePoussinKernel.html">de la Vallee Poussin kernel</a> to \(\kappa \sim M^{2/7}\). Since its halfwidth behaves like \(\delta \sim \kappa^{-1/2}\), the rule corresponds to \(\delta \sim M^{-1/7} \approx M^{-0.14}\).</p>
@@ -270,8 +270,8 @@ fprintf('error for optimalSample: %.2f * M^%.3f\n',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-error for discreteSample: 0.83 * M^-0.190
-error for optimalSample: 0.88 * M^-0.370
+error for discreteSample: 0.54 * M^-0.111
+error for optimalSample: 0.75 * M^-0.343
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_07.png" %}
@@ -288,15 +288,15 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-32 optimized orientations correspond to 618 random ones
-64 optimized orientations correspond to 2379 random ones
-128 optimized orientations correspond to 9163 random ones
-256 optimized orientations correspond to 35289 random ones
-512 optimized orientations correspond to 135899 random ones
+32 optimized orientations correspond to 2450 random ones
+64 optimized orientations correspond to 20844 random ones
+128 optimized orientations correspond to 177312 random ones
+256 optimized orientations correspond to 1508334 random ones
+512 optimized orientations correspond to 12830870 random ones
 {% endhighlight %}
 <h2 id="19">Limits of the Comparison</h2>
 <p>These numbers belong to the model ODF on this page. Neither prefactors nor exponents carry over unchanged to another ODF. The prefactors scale with the halfwidth of the true ODF, and the fitted exponents become flatter for a sharper texture.</p>
-<p>The robust qualitative result is the structure of the comparison: the best halfwidths have similar exponents, while the optimized sample works with a kernel about one third sharper in this experiment. Its advantage is also limited by the harmonic <code class="language-plaintext highlighter-rouge">bandwidth</code> used during optimization. Once a reconstruction depends on degrees beyond that bandwidth, the optimization no longer controls its error and the curves approach each other again.</p>
+<p>The robust qualitative result is the structure of the comparison: the best halfwidths follow similar power laws, while the optimized sample works with a kernel a third to two fifths sharper in this experiment. Its advantage is also limited by the harmonic <code class="language-plaintext highlighter-rouge">bandwidth</code> used during optimization. Once a reconstruction depends on degrees beyond that bandwidth, the optimization no longer controls its error and the curves approach each other again.</p>
 <h2 id="20">Exporting the Orientations</h2>
 <p>A sampled orientation list can be exported as <a href="RotationDefinition.html">Euler angles</a> with <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a>. Crystal-plasticity programs often require a particular convention and a weight in every row. Use <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a> for the VPSC format.</p>
 <p>The broader choice between exact ODF storage, tabulated function values, and weighted orientation lists is covered in <a href="ODFExport.html">ODF Export</a>.</p>

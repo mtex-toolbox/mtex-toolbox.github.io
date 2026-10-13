@@ -66,9 +66,10 @@ hold off
 <center class="mtex-figure">
 {% include inline_image.html file="GND_02.png" %}
 </center>
-<p>The pixel-scale color speckle is the symptom to notice. A <code class="language-plaintext highlighter-rouge">halfQuadraticFilter</code> reduces that noise while the <code class="language-plaintext highlighter-rouge">'fill'</code> option uses the grain partition to prevent smoothing across grain boundaries.</p>
+<p>The pixel-scale color speckle is the symptom to notice. A <code class="language-plaintext highlighter-rouge">l1TVFilter</code> reduces that noise while the <code class="language-plaintext highlighter-rouge">'fill'</code> option uses the grain partition to prevent smoothing across grain boundaries.</p>
 {% highlight matlab %}
-F = halfQuadraticFilter;
+F = l1TVFilter;
+F.alpha = 1.25;
 ebsd = smooth(ebsd,F,'fill',grains);
 
 axisKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
@@ -84,13 +85,12 @@ hold off
 </center>
 <p>The denoised map retains broad color gradients inside grains but suppresses much of the isolated pixel-to-pixel variation. Filtering is therefore part of the measurement model, not merely cosmetic preparation for the plot.</p>
 <h2 id="7">Estimate GND content in one command</h2>
-<p>Ferrite is body-centred cubic, so this example uses the standard BCC set of 48 edge and 4 screw systems. Following the normalization on the preceding page, the edge weight is one and the screw weight is \(1-\nu\), with Poisson's ratio \(\nu=0.3\).</p>
+<p>Ferrite is body-centred cubic, so this example uses the standard BCC set of 48 edge and 4 screw systems. Following the normalization on the preceding page, the line energies are taken relative to the shortest Burgers vector: the edge weight is one and the screw weight is \(1-\nu\), with Poisson's ratio \(\nu=0.3\).</p>
 <p>There is no universally accepted set of line-energy weights. Replace these illustrative values with values appropriate to the material and model.</p>
 {% highlight matlab %}
 dS = dislocationSystem.bcc(ebsd.CS);
 nu = 0.3;
-dS(dS.isEdge).u = 1;
-dS(dS.isScrew).u = 1 - nu;
+dS.u = (norm(dS.b) / min(norm(dS.b))).^2 .* (1 - nu * dS.isScrew);
 {% endhighlight %}
 <p> <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a> returns an energy-weighted GND density for each pixel and the signed density assigned to each candidate system. The first output is often called the total dislocation energy. With the dimensionless weights above, it is an energy-weighted density rather than an absolute energy measurement.</p>
 {% highlight matlab %}
@@ -137,9 +137,9 @@ ans = curvatureTensor (y←↑x)
   rank: 2 (3 × 3)
  
  *10^-5
-   4.28 -27.46    NaN
-   7.96 -61.91    NaN
-  57.48 -30.84    NaN
+   6.88 -21.63    NaN
+  10.41 -57.76    NaN
+  65.15 -22.39    NaN
 ans =
    101    51
 {% endhighlight %}
@@ -182,9 +182,9 @@ ans = dislocationDensityTensor (y←↑x)
   rank: 2 (3 × 3)
  
  *10^-5
-    NaN   7.96  57.48
- -27.46    NaN -30.84
-    NaN    NaN  57.63
+    NaN  10.41  65.15
+ -21.63    NaN -22.39
+    NaN    NaN  50.89
 {% endhighlight %}
 <p>This tensor remains incomplete because the map contains no derivative normal to its plane. MTEX can recover the \((3,3)\) entry from the two known diagonal curvature components, but the other missing entries remain <code class="language-plaintext highlighter-rouge">NaN</code>.</p>
 <h2 id="17">Rotate the candidate systems</h2>
@@ -236,18 +236,18 @@ ans = dislocationDensityTensor (y←↑x)
   rank: 2 (3 × 3)
  
  *10^-5
-  59.13   7.96  57.48
- -27.46  -7.06 -30.84
-  12.66  -9.03  57.63
+  62.51  10.41  65.15
+ -21.63  -2.13 -22.39
+  14.11  -3.76  50.89
  
 ans = dislocationDensityTensor (y←↑x)
   unit: 1/um     
   rank: 2 (3 × 3)
  
  *10^-5
-    NaN   7.96  57.48
- -27.46    NaN -30.84
-    NaN    NaN  57.63
+    NaN  10.41  65.15
+ -21.63    NaN -22.39
+    NaN    NaN  50.89
 {% endhighlight %}
 <p>The fitted tensor is complete because the chosen dislocation population supplies the components that EBSD cannot measure directly. Converting it back gives a complete fitted curvature tensor.</p>
 {% highlight matlab %}
@@ -279,9 +279,9 @@ ans = curvatureTensor (y←↑x)
   rank: 2 (3 × 3)
  
  *10^-5
-   4.28 -27.46  12.66
-   7.96 -61.91  -9.03
-  57.48 -30.84   2.78
+   6.88 -21.63  14.11
+  10.41 -57.76  -3.76
+  65.15 -22.39  -4.75
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="GND_06.png" %}

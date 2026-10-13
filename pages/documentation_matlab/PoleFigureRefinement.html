@@ -39,7 +39,7 @@ calcError(pf,odf_naive,'silent')
 
 {% highlight plaintext %}
 ans =
-    0.3957    0.3248    0.2381    0.2886    0.2900    0.3619    0.3222
+    0.3909    0.3238    0.2358    0.2881    0.2892    0.3599    0.3224
 {% endhighlight %}
 <p>The seven values are the fit errors for the seven measured pole figures. Their recalculated pole figures are the visual baseline for the iterative result below.</p>
 {% highlight matlab %}
@@ -58,7 +58,7 @@ calcError(pf,odf_iter,'silent')
 
 {% highlight plaintext %}
 ans =
-    0.2896    0.1808    0.2221    0.1732    0.1570    0.2622    0.2722
+    0.2873    0.1828    0.2199    0.1729    0.1586    0.2615    0.2727
 {% endhighlight %}
 <p>One fit error is reported per pole figure. All seven are smaller than those from the ordinary reconstruction, in places by nearly a factor of two.</p>
 {% highlight matlab %}
@@ -74,7 +74,7 @@ calcError(odf_iter,odf_naive,'l1')
 
 {% highlight plaintext %}
 ans =
-    0.1612
+    0.1581
 {% endhighlight %}
 <p>Sixteen percent of the volume sits in different places in the two reconstructions. Recalculating pole figures from their signed difference shows where that volume moved. The printed values give the minimum, mean, and maximum difference over all seven pole figures.</p>
 {% highlight matlab %}
@@ -87,12 +87,12 @@ fprintf('pole figure difference min / mean / max : %.2f / %.2f / %.2f\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-pole figure difference min / mean / max : -1.09 / 0.00 / 0.63
+pole figure difference min / mean / max : -1.06 / 0.00 / 0.59
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigureRefinement_03.png" %}
 </center>
-<p>The range from -1.09 to 0.63 is centred at 0.00. Broad, smooth differences extend across the sphere instead of concentrating at the texture maxima. Compare the centre of each pole figure with its rim.</p>
+<p>The range from -1.06 to 0.59 is centred at 0.00. Broad, smooth differences extend across the sphere instead of concentrating at the texture maxima. Compare the centre of each pole figure with its rim.</p>
 <p>This is the appearance of a differently distributed uniform portion. It is the part of an ODF that pole figures constrain least, which is why a smaller fit error does not prove that the reconstructed ODF is closer to the unknown true ODF.</p>
 <h2 id="9">Adapting the measurement</h2>
 <p>The rest of the page uses a simulation so that the true ODF is known. <a href="PoleFigureSimulation.html">Simulating Pole Figure Data</a> develops this validation strategy. Here the model has two sharp components, and pole figures can be evaluated at whichever specimen directions are selected.</p>
@@ -174,21 +174,21 @@ end
 
 {% highlight plaintext %}
 - mean sampling resolution : 14.545455
-  error true -- estimated odf   : 0.948044
-- mean sampling resolution : 13.087864
-  error true -- estimated odf   : 0.408412
-- mean sampling resolution : 9.449497
-  error true -- estimated odf   : 0.236763
-- mean sampling resolution : 6.737637
-  error true -- estimated odf   : 0.306671
-- mean sampling resolution : 3.717936
+  error true -- estimated odf   : 0.830589
+- mean sampling resolution : 13.584345
+  error true -- estimated odf   : 0.282092
+- mean sampling resolution : 9.654143
+  error true -- estimated odf   : 0.324115
+- mean sampling resolution : 5.344595
+  error true -- estimated odf   : 0.498815
+- mean sampling resolution : 3.065834
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigureRefinement_06.png" %}
 </center>
 <p>Every round prints the mean resolution of the three accumulated direction sets. This single value summarises an irregular sampling pattern; it does not mean that neighbouring points are that far apart everywhere.</p>
-<p>The mean resolution falls from 14.5 to 3.7 degrees. The four interim ODF errors are 0.95, 0.41, 0.24, and 0.31. A real experiment could not compute these errors because its true ODF is unknown.</p>
-<p>That rise is the point of the demonstration. The measurement is now dense where the texture is strong and coarse everywhere else. An ordinary fine-grid reconstruction then puts ODF components at orientations that the sparse regions do not constrain.</p>
+<p>The mean resolution falls from 14.5 to 3.1 degrees. The four interim ODF errors are 0.83, 0.28, 0.32, and 0.50. They do not fall monotonically: the first refinement locates the components, and every later round concentrates the new directions further on the predicted maxima while the regions between them stay as coarse as before. A real experiment could not compute these errors because its true ODF is unknown.</p>
+<p>That non-monotonicity is the point of the demonstration. The measurement is now dense where the texture is strong and coarse everywhere else. An ordinary fine-grid reconstruction then puts ODF components at orientations that the sparse regions do not constrain.</p>
 <h2 id="16">What was measured</h2>
 <p>The object summary gives the number of accumulated directions for each pole figure. The sampling pattern is no longer a regular grid.</p>
 {% highlight matlab %}
@@ -197,12 +197,12 @@ plot(pf_measured,'silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-pf_measured = PoleFigure (y↑→x)
+pf_measured = PoleFigure (m3̅m → y↑→x)
   crystal symmetry : m-3m
  
-  h = (111), r = 367 × 1 points
-  h = (100), r = 367 × 1 points
-  h = (110), r = 367 × 1 points
+  h = (111), r = 327 × 1 points
+  h = (100), r = 327 × 1 points
+  h = (110), r = 327 × 1 points
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigureRefinement_07.png" %}
@@ -218,7 +218,7 @@ fprintf('  error true -- estimated odf   : %f\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-error true -- estimated odf   : 0.412129
+error true -- estimated odf   : 0.753080
 {% endhighlight %}
 <p>The iterative reconstruction reaches the same target scale through a sequence of wider kernels. Sparse regions inherit the broad distribution established at coarse scale instead of being determined only at the finest scale.</p>
 {% highlight matlab %}
@@ -229,16 +229,16 @@ fprintf('  error true -- iter. est. odf  : %f\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-error true -- iter. est. odf  : 0.109858
+error true -- iter. est. odf  : 0.173514
 {% endhighlight %}
-<p>The errors are 0.11 and 0.41. The iterative error is less than one third of the direct error from the same measurements. The L1 distance below shows how much the two estimated ODFs distribute differently.</p>
+<p>The errors are 0.75 for the direct reconstruction and 0.17 for the iterative one. The iterative error is less than a quarter of the direct error from the same measurements. The L1 distance below shows how much the two estimated ODFs distribute differently.</p>
 {% highlight matlab %}
 calcError(odf_recalc,odf_recalc_iterative,'l1')
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.3305
+    0.6416
 {% endhighlight %}
 <p>About a third of the volume is placed differently. On an unevenly sampled measurement, the choice between a direct fine-scale solve and successive refinement is therefore part of the model, not an implementation detail.</p>
 <h2 id="22">Further reading</h2>

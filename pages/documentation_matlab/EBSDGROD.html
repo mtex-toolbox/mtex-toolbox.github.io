@@ -45,7 +45,8 @@ lowAngle = 1*degree;
 grains = smoothBoundary(grains,5);
 
 % denoise the orientations
-F = halfQuadraticFilter;
+F = l1TVFilter;
+F.alpha = 0.83;
 ebsd = smooth(ebsd,F,grains,'fill');
 
 ipfKey = ipfColorKey(ebsd.CS);
@@ -83,12 +84,12 @@ fprintf('GROD angle: median %.2f degree; maximum %.1f degree\n',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-GROD angle: median 1.55 degree; maximum 18.9 degree
+GROD angle: median 1.51 degree; maximum 18.9 degree
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="EBSDGROD_02.png" %}
 </center>
-<p>Half the measurements are within 1.6&deg; of their grain mean and the worst reach 18.9&deg;. The large values are not scattered. They fill extended parts of grains and often end at the inner boundaries.</p>
+<p>Half the measurements are within 1.5&deg; of their grain mean and the worst reach 18.9&deg;. The large values are not scattered. They fill extended parts of grains and often end at the inner boundaries.</p>
 <p>Those boundaries were detected from local neighbour misorientations, not from GROD. A <a href="SubGrainBoundaries.html">subgrain boundary</a> can coincide with a jump in GROD, but a GROD jump is not its definition.</p>
 <h2 id="6">Grain orientation spread</h2>
 <p>Averaging the deviation angle over each grain gives the grain orientation spread. <a href="EBSD.grainMean.html"><code class="language-plaintext highlighter-rouge">grainMean</code></a> performs that averaging.</p>
@@ -105,12 +106,12 @@ fprintf('GOS for %d grains: median %.2f degree; maximum %.1f degree\n',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-GOS for 377 grains: median 0.69 degree; maximum 6.6 degree
+GOS for 377 grains: median 0.64 degree; maximum 6.6 degree
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="EBSDGROD_03.png" %}
 </center>
-<p>Of the 377 grains the median spread is 0.69&deg; and the largest 6.6&deg;. The map is not uniform. Some grains have much more internal orientation variation than their neighbours, producing an order-of-magnitude spread.</p>
+<p>Of the 377 grains the median spread is 0.64&deg; and the largest 6.6&deg;. The map is not uniform. Some grains have much more internal orientation variation than their neighbours, producing an order-of-magnitude spread.</p>
 <p>GOS depends on segmentation, denoising, reference orientation, and grain size. Comparisons require the same choices.</p>
 <h2 id="8">The misorientation axis in crystal coordinates</h2>
 <p>Every deviation also has an axis, and it matters in which reference frame that axis is expressed. The crystal frame is attached to the lattice of the phase. In this frame the axis is an \((hk\ell)\) crystal direction, obtained with <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a>.</p>
@@ -126,12 +127,12 @@ fprintf('Crystal-frame axis density: %.2f to %.2f mrd\n',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Crystal-frame axis density: 0.83 to 1.21 mrd
+Crystal-frame axis density: 0.81 to 1.23 mrd
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="EBSDGROD_04.png" %}
 </center>
-<p>The range is 0.83 to 1.21 times uniform. In crystal coordinates the axes are therefore close to evenly distributed, with a slight preference for \([101]\). A colour key shows where those directions occur in the map.</p>
+<p>The range is 0.81 to 1.23 times uniform. In crystal coordinates the axes are therefore close to evenly distributed, with a slight preference for \([101]\). A colour key shows where those directions occur in the map.</p>
 {% highlight matlab %}
 colorKey = HSVDirectionKey(ebsd.CS,'antipodal');
 
@@ -179,12 +180,12 @@ fprintf('Specimen-frame axis density: %.2f to %.2f mrd\n',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Specimen-frame axis density: 0.24 to 6.77 mrd
+Specimen-frame axis density: 0.21 to 6.92 mrd
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="EBSDGROD_07.png" %}
 </center>
-<p>This distribution runs from 0.24 to 6.77 times uniform. The same axes that were spread evenly over the crystal are strongly clustered in the specimen frame. Loading is defined in this frame, which makes the clustering useful. Texture and a few highly deformed grains can also produce maxima; the map below distinguishes those possibilities.</p>
+<p>This distribution runs from 0.21 to 6.92 times uniform. The same axes that were spread evenly over the crystal are strongly clustered in the specimen frame. Loading is defined in this frame, which makes the clustering useful. Texture and a few highly deformed grains can also produce maxima; the map below distinguishes those possibilities.</p>
 <p>In the specimen frame the axes have no crystal symmetry and are directional rather than antipodal. The colour key therefore uses the whole sphere.</p>
 {% highlight matlab %}
 colorKey = HSVDirectionKey;

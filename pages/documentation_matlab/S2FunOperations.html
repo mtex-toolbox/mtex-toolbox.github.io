@@ -63,7 +63,7 @@ Shift at specimen X: 1.0
 <center class="mtex-figure">
 {% include inline_image.html file="S2FunOperations_02.png" %}
 </center>
-<p>The combined plot retains the pattern of the first function and adds the sharp peak of the second. The scalar factor makes the broad pattern visible on the same colour scale as that peak. The printed difference of 1.0 confirms that adding one shifts the value without changing the pattern.</p>
+<p>The combined plot retains the pattern of the first function and adds the sharp peak of the second. Even scaled by 15, the broad pattern stays faint, because the peak sets the top of the colour scale. The printed difference of 1.0 confirms that adding one shifts the value without changing the pattern.</p>
 <h2 id="5">Pointwise operations</h2>
 <p>The basic operations <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.^</code> and <code class="language-plaintext highlighter-rouge">/</code> also work with <a href="S2Fun.S2Fun.html">S2Fun</a> objects. Functions such as <a href="S2Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a>, <a href="S2Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a>, <a href="S2Fun.abs.html"><code class="language-plaintext highlighter-rouge">abs</code></a> and <a href="S2Fun.sqrt.html"><code class="language-plaintext highlighter-rouge">sqrt</code></a> likewise return spherical functions when used pointwise.</p>
 <p>For two functions, pointwise multiplication and division use <code class="language-plaintext highlighter-rouge">.*</code> and <code class="language-plaintext highlighter-rouge">./</code>. Plain <code class="language-plaintext highlighter-rouge">*</code> scales a function, while <code class="language-plaintext highlighter-rouge">sF / a</code> divides it by a scalar.</p>
@@ -112,12 +112,12 @@ fprintf('Global maximum: %.3f; local minima: %.3f and %.3f\n',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Global maximum: 15.716; local minima: -7.204 and -7.204
+Global maximum: 97.847; local minima: -7.465 and -7.465
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="S2FunOperations_04.png" %}
 </center>
-<p>The maximum marker sits on the highest feature of the combined function. The minimum markers identify separate basins instead of merely the lowest sampled pixels in the plot. The maximum is 15.716, while the two basins have nearly equal minima of -7.204.</p>
+<p>The maximum marker sits on the top of the narrow peak. The minimum markers identify the two eyes, separate basins instead of merely the lowest sampled pixels in the plot. The maximum is 97.847, while the two basins have equal minima of -7.465.</p>
 <h2 id="9">Integration and norms</h2>
 <p> <a href="S2Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> returns the surface integral over the sphere. Thus the constant function one integrates to \(4\pi\). <a href="S2Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> divides that integral by \(4\pi\), so the constant function one has mean value one. These two normalisations therefore give the same result for any function.</p>
 {% highlight matlab %}
@@ -163,7 +163,7 @@ gradientAtX = vector3d (y↑→x)
 gradientMagnitude =
     0.0012
 {% endhighlight %}
-<p>At specimen X the gradient magnitude is 0.0012. Its vector lies in the plane tangent to the sphere at X, so its X component is zero.</p>
+<p>The vector lies in the plane tangent to the sphere at X, so its X component is zero. Its magnitude of about \(10^{-3}\) is no feature of the smiley, which is flat around X, but the residue of expanding a function with sharp edges into harmonics of finite degree.</p>
 <p>Gradients at all directions form a spherical vector field. Calling <a href="S2Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a> without an evaluation direction returns an <a href="S2VectorFieldHarmonic.S2VectorFieldHarmonic.html">S2VectorFieldHarmonic</a>.</p>
 {% highlight matlab %}
 % compute the gradient as a vector field

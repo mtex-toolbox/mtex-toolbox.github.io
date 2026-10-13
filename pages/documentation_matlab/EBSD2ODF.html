@@ -135,27 +135,28 @@ halfwidthSummary =
            20            1.4762
 {% endhighlight %}
 <p>A factor of five in halfwidth moves the peak by a factor of twenty five, from 37 mrd to 1.5 mrd. All three describe the same 16116 measurements, so at most one of them describes the copper.</p>
-<p>Reconstruct the grains and plot the sharpest estimate with one marker per grain mean orientation on top of it. <code class="language-plaintext highlighter-rouge">'minPixel'</code> discards segmented regions below five pixels; <a href="GrainReconstruction.html">Grain Reconstruction</a> explains that choice.</p>
+<p>Reconstruct the grains and plot the sharpest estimate with the measured pixel orientations on top of it. <code class="language-plaintext highlighter-rouge">'minPixel'</code> discards segmented regions below five pixels; <a href="GrainReconstruction.html">Grain Reconstruction</a> explains that choice.</p>
 {% highlight matlab %}
-grains = calcGrains(ebsd,'minPixel',5);
+[grains,ebsd] = calcGrains(ebsd,'minPixel',5);
 copperGrains = grains('copper');
 grainCount = length(copperGrains)
 
 plotSection(odfSharp,'contourf','sigma','sections',6,'silent')
 hold on
-plot(copperGrains.meanOrientation,'MarkerSize',3,'all',...
-  'MarkerFaceColor','none','MarkerEdgeColor','k')
+plot(ebsd.orientations,'MarkerSize',3,...
+  'MarkerFaceColor','none','MarkerEdgeColor','orange')
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
 grainCount =
    368
+  plotting 2000 random orientations out of 16184 given orientations
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="EBSD2ODF_07.png" %}
 </center>
-<p>Every spike sits on a black marker, and the sections are white between them. With a 4 degree kernel the estimate is a picture of the 368 grains rather than of a texture, and its 37 mrd maximum lies 0.6 degrees from the mean orientation of the largest grain, which covers 669 pixels. One well-measured grain has become a texture component.</p>
+<p>Every spike sits on a dense cluster of orange markers, the pixels of one grain, and the sections are white between the clusters. With a 4 degree kernel the estimate is a picture of the 368 grains rather than of a texture, and its 37 mrd maximum lies 0.6 degrees from the mean orientation of the largest grain, which covers 669 pixels. One well-measured grain has become a texture component.</p>
 <p>Every ODF averages 1 mrd over orientation space, since that is what the normalization means. Ask this one for its average at the grain mean orientations alone.</p>
 {% highlight matlab %}
 sharpAtGrainMeans = mean(odfSharp.eval(copperGrains.meanOrientation))
@@ -176,52 +177,84 @@ mtexColorbar('title','mrd')
 <p>The whole function now lies between 0.7 and 1.5 mrd, and neighbouring maxima of the previous figures have merged into single broad hills. A genuine sharp component would be flattened the same way, so this estimate cannot distinguish a weak texture from a smeared strong one.</p>
 <p>Between those extremes there is no value that is right in general. A halfwidth that is too small reproduces the individual grains, one that is too large erases the features worth reporting, and which of the two errors matters depends on how representative the map is for the whole specimen. A map holding a few hundred grains cannot support a sharp ODF, however many pixels it has.</p>
 <h2 id="16">Letting the data choose the halfwidth</h2>
-<p> <a href="orientation.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> selects a halfwidth by cross-validation. It leaves one orientation out, estimates a density from the rest, and scores how well that estimate predicts the omitted one. The halfwidth with the best score over the whole sample wins. No model of the texture is needed, only the sample.</p>
+<p> <a href="EBSD.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> selects the halfwidth from the map itself. For every candidate halfwidth it estimates how far the resulting density would lie from the unknown texture, as an integrated squared error, and returns the kernel where that error is least. The rule is called unbiased cross-validation (UCV). Give it the map after grain reconstruction: <code class="language-plaintext highlighter-rouge">calcGrains</code> above stored the grain id of every pixel in <code class="language-plaintext highlighter-rouge">ebsd</code>, and the selection needs them.</p>
 {% highlight matlab %}
-psiPixel = calcKernel(ori,'silent');
+psi = calcKernel(ebsd('copper'));
+selectedHalfwidth = psi.halfwidth ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+selectedHalfwidth =
+    7.4880
+{% endhighlight %}
+<p>The map asks for 7.5 degrees, between the spiky 4 degrees and the smeared 20 degrees. Estimate the density from all pixels with this kernel.</p>
+{% highlight matlab %}
+odfSelected = calcDensity(ori,'kernel',psi,'silent');
+plotSection(odfSelected,'contourf','sigma','sections',6,'silent')
+mtexColorbar('title','mrd')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSD2ODF_09.png" %}
+</center>
+<p>A few dozen separate maxima of 3 to 6.6 mrd stand on a background below 1 mrd. The maxima no longer sit on single grains: averaged over the grain mean orientations this density is 1.8 mrd, against 5.8 mrd for the 4 degree estimate.</p>
+{% highlight matlab %}
+selectedAtGrainMeans = mean(odfSelected.eval(copperGrains.meanOrientation))
+{% endhighlight %}
+
+{% highlight plaintext %}
+selectedAtGrainMeans =
+    1.8227
+{% endhighlight %}
+<p>The halfwidth is set by how much the map can tell, not by its pixel count. Its grains are few and of very different sizes, so weighted by area the 16116 pixels carry as much information as about a hundred equally sized grains. Any kernel narrower than 7.5 degrees would let the sampling noise of so few grains raise bumps above a fifth of the estimate's maximum, and <code class="language-plaintext highlighter-rouge">calcKernel</code> never selects such a kernel. This lower bound is called the noise floor.</p>
+<h2 id="20">Why the grain ids matter</h2>
+<p>Neighbouring pixels of one grain are near copies of each other. The selection therefore splits the map into parts that share no grain and compares only pixels of different parts, so the copies inside a grain drop out without discarding a pixel. Given the bare list of orientations, <code class="language-plaintext highlighter-rouge">calcKernel</code> has to count every pixel as an independent observation.</p>
+{% highlight matlab %}
+psiPixel = calcKernel(ori,'method','UCV');
 pixelHalfwidth = psiPixel.halfwidth ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
 pixelHalfwidth =
-    2.7377
+    2.0000
 {% endhighlight %}
-<p>The pixel list returns 2.7 degrees, the regime that reproduces the grains. The reason is an assumption, not a bug: cross-validation treats the observations as independent draws. Neighbouring pixels of one grain are near copies of each other, so an omitted pixel is predicted almost perfectly by the pixels beside it, and the score keeps improving as the kernel narrows.</p>
-<p>Give the selection one orientation per grain instead. Grain means are not perfectly independent either, but they no longer contain the same crystal measured hundreds of times.</p>
+<p>The bare list returns 2 degrees, the narrowest candidate. The rule reads the repetition inside every grain as a sharp texture, and with 16116 supposedly independent observations it expects hardly any sampling noise. Select from orientations only when they are independent, for example grain mean orientations, or pass the grain ids with <code class="language-plaintext highlighter-rouge">calcKernel(ori,'groups',grainId)</code>.</p>
+<h2 id="22">A cautious alternative</h2>
+<p>The selected halfwidth is the best guess, not a guarantee. When spurious features would be costly, <code class="language-plaintext highlighter-rouge">'conservative'</code> returns a halfwidth that is at least as wide as the one of least error with high probability.</p>
 {% highlight matlab %}
-psiGrain = calcKernel(copperGrains.meanOrientation,'silent');
-grainHalfwidth = psiGrain.halfwidth ./ degree
+psiConservative = calcKernel(ebsd('copper'),'method','conservative');
+conservativeHalfwidth = psiConservative.halfwidth ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-grainHalfwidth =
-    4.7247
+conservativeHalfwidth =
+   40.0000
 {% endhighlight %}
-<p>The 368 grain means return 4.7 degrees. The two other methods offered by <code class="language-plaintext highlighter-rouge">calcKernel</code> read the same 368 orientations quite differently.</p>
+<p>It returns 40 degrees, its widest candidate. A hundred grains' worth of information bounds the texture too loosely for the rule to promise any sharper estimate. Read this as a statement about the size of the map: a larger map, or several maps of the same specimen, would narrow it.</p>
+<h2 id="24">Other selection rules</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">calcKernel</code> also offers Kullback--Leibler cross-validation (<code class="language-plaintext highlighter-rouge">'KLCV'</code>), which scores how well a density from all other orientations predicts each omitted one, and two rules that read only the number of orientations and the symmetry. All three count every orientation as an independent observation, so they do not accept a map. Compare them with the default on the 368 grain mean orientations.</p>
 {% highlight matlab %}
-psiThumb = calcKernel(copperGrains.meanOrientation,...
-  'method','RuleOfThumb','silent');
-psiMagic = calcKernel(copperGrains.meanOrientation,...
-  'method','magicRule','silent');
-
-method = ["KLCV";"RuleOfThumb";"magicRule"];
-selectedHalfwidth = [psiGrain.halfwidth;psiThumb.halfwidth;...
-  psiMagic.halfwidth] ./ degree;
-methodSummary = table(method,selectedHalfwidth)
+method = ["UCV";"KLCV";"RuleOfThumb";"magicRule"];
+grainMeanHalfwidth = zeros(size(method));
+for k = 1:numel(method)
+  psiK = calcKernel(copperGrains.meanOrientation,'method',char(method(k)),'silent');
+  grainMeanHalfwidth(k) = psiK.halfwidth ./ degree;
+end
+methodSummary = table(method,grainMeanHalfwidth)
 {% endhighlight %}
 
 {% highlight plaintext %}
 methodSummary =
-  3×2 table
-       method        selectedHalfwidth
-    _____________    _________________
-    "KLCV"                4.7247      
-    "RuleOfThumb"         14.304      
-    "magicRule"            15.02
+  4×2 table
+       method        grainMeanHalfwidth
+    _____________    __________________
+    "UCV"                  4.0714      
+    "KLCV"                 4.7247      
+    "RuleOfThumb"          14.304      
+    "magicRule"             15.02
 {% endhighlight %}
-<p>Cross-validation asks for 4.7 degrees while the two rules ask for about 15, and that spread is the useful result. The selected 4.7 degrees is barely above the 4 degrees of the spiky figure, so even grain means put the automatic choice in the regime where single grains are visible.</p>
-<p>The methods answer different questions. Cross-validation asks which halfwidth describes <b>this sample</b> best, which is the right question only when the sample is the specimen. The two rules read only the number of orientations and the symmetry, and 368 orientations do not buy a sharp estimate. <a href="OptimalKernel.html">Optimal Kernel Selection</a> compares the three methods against a known model ODF, where the best halfwidth can be measured rather than argued.</p>
-<h2 id="20">What one observation stands for</h2>
+<p>UCV and KLCV ask for 4.1 and 4.7 degrees, the two rules for about 15. Both cross-validation results are narrower than the 7.5 degrees of the map. Equal grain means count a five-pixel grain as much as a 669-pixel one, so they describe the population of 368 grains rather than the mapped area, and 368 equal votes carry more information than a hundred effective ones. The two rules ignore the data beyond its size. <a href="OptimalKernel.html">Optimal Kernel Selection</a> compares all methods against a known model ODF, where UCV comes closest to the halfwidth of least error.</p>
+<h2 id="26">What one observation stands for</h2>
 <p>The halfwidth settles how far each observation spreads. Which observations enter the sum is a separate question with three common answers. All estimates so far used one observation per pixel; the other two put one observation per grain, with and without an area weight.</p>
 {% highlight matlab %}
 odfEqualGrain = calcDensity(copperGrains.meanOrientation,...
@@ -259,23 +292,23 @@ maxSpread =
     6.9751
 {% endhighlight %}
 <p>In this recrystallized copper the mean spread within a grain is 1.1 degrees and at most 7.0 degrees, well below any halfwidth considered here, so little is lost. In deformed material the spread inside one grain reaches tens of degrees and carries much of the texture. There a grain-mean ODF is not a smoothed version of the pixel ODF but a different quantity, and a map with few grains rests the whole estimate on very few numbers.</p>
-<p>A practical division of labour follows from the two sections: select the halfwidth from grain means, which are approximately independent, and estimate the density from the pixels, which carry the area and the intragranular spread.</p>
+<p>In practice, select the halfwidth from the map with its grains, <code class="language-plaintext highlighter-rouge">calcKernel(ebsd)</code>, and estimate the density from the pixels with that kernel. The pixels carry the area and the intragranular spread that grain means lose.</p>
 <p>Whatever the choice, state it. An area fraction measured in a section is not automatically a bulk volume fraction; that step needs sampling and stereological assumptions of its own.</p>
 <p>Finally, do not estimate a density from a densified or interpolated copy of a map. Repeated cells are not new measurements and would take extra statistical weight. <a href="EBSDInter.html">Regridding and Interpolation</a> explains that distinction.</p>
-<h2 id="23">The definition</h2>
+<h2 id="29">The definition</h2>
 <p>Let \(\psi : \mathrm{SO}(3) \to \mathbf{R}\) be a radially symmetric, unimodal kernel. Let the orientations \(o_1,o_2,\ldots,o_M\) carry non-negative weights \(w_1,w_2,\ldots,w_M\). The weighted kernel density estimator is</p>
 <p>\[f(o) = \frac{1}{\sum_{j=1}^{M} w_j} \sum_{i=1}^{M} w_i \psi(o o_i^{-1}).\]</p>
 <p>Each observation contributes one copy of \(\psi\) centred on itself, and its weight sets how much mass that copy carries. The halfwidth of \(\psi\) is the only smoothing parameter.</p>
 <p>The formula suppresses symmetry notation for readability. MTEX accounts for the symmetry-equivalent representatives carried by each orientation. Different phases generally carry different crystal symmetries, which is why an EBSD-derived ODF is estimated from one selected phase at a time. <a href="SO3Kernels.html">Kernel Functions on SO(3)</a> compares the available kernel families, and <a href="DensityEstimation.html">Density Estimation</a> develops the same estimator for real numbers and for directions.</p>
-<h2 id="24">References</h2>
+<h2 id="30">References</h2>
 <div>
 <ul>
-<li>R. Hielscher, <a href="https://doi.org/10.1016/j.jmva.2013.03.014">Kernel density estimation on the rotation group and its application to crystallographic texture analysis</a>, <i>Journal of Multivariate Analysis</i> 119 (2013), 119--143, gives the estimator used by <code class="language-plaintext highlighter-rouge">calcDensity</code>, the cross-validation rule used by <code class="language-plaintext highlighter-rouge">calcKernel</code>, and the fast algorithms behind both.</li>
+<li>R. Hielscher, <a href="https://doi.org/10.1016/j.jmva.2013.03.014">Kernel density estimation on the rotation group and its application to crystallographic texture analysis</a>, <i>Journal of Multivariate Analysis</i> 119 (2013), 119--143, gives the estimator used by <code class="language-plaintext highlighter-rouge">calcDensity</code>, Kullback--Leibler cross-validation, and the fast algorithms behind both. The <code class="language-plaintext highlighter-rouge">'UCV'</code> and <code class="language-plaintext highlighter-rouge">'conservative'</code> rules of <code class="language-plaintext highlighter-rouge">calcKernel</code> are described in <a href="OptimalKernel.html">Optimal Kernel Selection</a>.</li>
 <li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops orientation distributions, their symmetry, and the mrd normalization used throughout this page.</li>
 <li>J. Gal&aacute;n L&oacute;pez and L. A. I. Kestens, <a href="https://doi.org/10.1107/S1600576720014909">A multivariate grain size and orientation distribution function: derivation from electron backscatter diffraction data and applications</a>, <i>Journal of Applied Crystallography</i> 54 (2021), 148--162, treats grain frequency, grain size, and orientation as linked distributions rather than interchangeable weights.</li>
 </ul>
 </div>
-<h2 id="25">Next</h2>
+<h2 id="31">Next</h2>
 <p>
 <a href="OptimalKernel.html">Optimal Kernel Selection</a> examines the selection methods behind <code class="language-plaintext highlighter-rouge">calcKernel</code> where the true density is known. <a href="ODFAnalysis.html">ODF Analysis</a> explains what else an ODF can be asked, and <a href="ODFPlot.html">ODF Plots</a> and <a href="ODFCharacteristics.html">ODF Characteristics</a> visualize and quantify the estimate.</p>
 </div>

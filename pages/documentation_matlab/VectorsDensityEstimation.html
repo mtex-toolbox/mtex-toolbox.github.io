@@ -132,7 +132,7 @@ halfwidth: 10° -> maximum: 3.8 mud, bandwidth: 25
 halfwidth: 20° -> maximum: 2.5 mud, bandwidth: 13
 {% endhighlight %}
 <p>Across this sweep the maximum falls from 14 to 2.5 m.u.d., while the bandwidth falls from 92 to 13. A sharper estimate is more expensive as well as more sensitive to fine-scale variation.</p>
-<p>The relevant sample size is the number of independent observations, not merely the number of pixels. Neighbouring EBSD pixels are spatially correlated because many sample the same grain. MTEX does not select a halfwidth automatically for directional data. For orientation data, <a href="EBSD2ODF.html">ODF Estimation from EBSD Data</a> explains this dependence and <a href="OptimalKernel.html">Optimal Kernel Selection</a> describes automatic methods.</p>
+<p>The relevant sample size is the number of independent observations, not merely the number of pixels. Neighbouring EBSD pixels are spatially correlated because many sample the same grain. <a href="vector3d.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> selects a halfwidth from the data with the grains taken into account, and the section <i>Letting the Data Choose the Halfwidth</i> below applies it once the grains are reconstructed. For orientation data, <a href="EBSD2ODF.html">ODF Estimation from EBSD Data</a> explains this dependence and <a href="OptimalKernel.html">Optimal Kernel Selection</a> describes the selection methods.</p>
 <h2 id="12">Weighting Changes the Question</h2>
 <p>A grain is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. Reconstruct the map with an example 10 degree misorientation threshold, then keep the Forsterite grains.</p>
 {% highlight matlab %}
@@ -172,7 +172,51 @@ mtexFig.drawNow
 {% include inline_image.html file="VectorsDensityEstimation_05.png" %}
 </center>
 <p>With a common colour range, equal grain weights give the flattest panel. Area weighting restores the main concentrations of the pixel estimate, although replacing every grain by its mean orientation removes the within-grain spread. The scientifically correct weights depend on whether the population of interest is grains, mapped area, or something else.</p>
-<h2 id="15">Working with the Density Function</h2>
+<h2 id="15">Letting the Data Choose the Halfwidth</h2>
+<p> <a href="vector3d.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> selects the kernel from the axes themselves. Its default method <code class="language-plaintext highlighter-rouge">'UCV'</code> estimates the integrated squared error of the density for every candidate halfwidth and takes the halfwidth where that estimate is least. It never returns a halfwidth so narrow that noise could raise bumps above a fifth of the estimate's maximum. <code class="language-plaintext highlighter-rouge">'conservative'</code> takes a halfwidth at least as wide as the optimum with high probability. <a href="OptimalKernel.html">Optimal Kernel Selection</a> explains both.</p>
+<p>Both rules take the observations as independent unless told otherwise. Pixel axes are not, so pass the grain id of every pixel. <code class="language-plaintext highlighter-rouge">calcGrains</code> stored the ids in <code class="language-plaintext highlighter-rouge">ebsd</code>. Recompute the pixel axes after reconstruction so that they follow any pixels relabelled as not indexed.</p>
+{% highlight matlab %}
+pixelAxes = ebsd('Fo').orientations * ebsd('Fo').CS.cAxis;
+pixelAxes.antipodal = true;
+pixelGrainId = ebsd('Fo').grainId;
+
+psiAsIndependent = calcKernel(pixelAxes);
+psiPixels = calcKernel(pixelAxes,'groups',pixelGrainId);
+psiGrainArea = calcKernel(cAxesGrains,'weights',grains.area);
+psiGrains = calcKernel(cAxesGrains);
+
+selection = ["pixels as independent";"pixels with grain ids";...
+  "grains weighted by area";"grains, one vote each"];
+halfwidthInDegree = [psiAsIndependent.halfwidth;psiPixels.halfwidth;...
+  psiGrainArea.halfwidth;psiGrains.halfwidth] ./ degree;
+halfwidthTable = table(selection,halfwidthInDegree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+halfwidthTable =
+  4×2 table
+            selection            halfwidthInDegree
+    _________________________    _________________
+    "pixels as independent"                1      
+    "pixels with grain ids"           21.187      
+    "grains weighted by area"         19.767      
+    "grains, one vote each"           2.1455
+{% endhighlight %}
+<p>Taken as independent, the pixel axes drive the selection to the narrowest candidate, 1 degree. Neighbouring pixels repeat one axis, and the rule reads the repetition as a sharp density. Even the noise floor cannot help, since with that many observations it expects hardly any noise. With the grain ids the rule asks for 21 degrees. That is close to the 20 degrees of the grain axes weighted by their area, which describe the same mapped area.</p>
+<p>One vote per grain asks for about 2 degrees. Of the 1151 grains, 530 are single pixels, and the area weight gives those almost no say.</p>
+<p>The conservative rule on the pixels with their grain ids:</p>
+{% highlight matlab %}
+psiConservative = calcKernel(pixelAxes,'method','conservative',...
+  'groups',pixelGrainId);
+psiConservative.halfwidth / degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   22.7100
+{% endhighlight %}
+<p>It asks for 23 degrees, a little wider than the 21 degrees of UCV. It takes the energies of the axis distribution at their lower confidence bounds. Weighted by area, the few large grains dominate the map, which leaves these bounds loose. A reported halfwidth is worth checking against the plots of the previous section rather than taken on trust.</p>
+<h2 id="18">Working with the Density Function</h2>
 <p>A density is an <a href="S2FunConcept.html"><code class="language-plaintext highlighter-rouge">S2Fun</code></a>, so it can be evaluated, integrated, searched for peaks, combined with other spherical functions, and sampled. <a href="S2FunOperations.html">Operations on Spherical Functions</a> develops that common interface.</p>
 <p>First find the global maximum.</p>
 {% highlight matlab %}
@@ -254,7 +298,7 @@ hold off
 {% include inline_image.html file="VectorsDensityEstimation_06.png" %}
 </center>
 <p>The 500 black points follow the same broad concentrations as the coloured density, but retain the sampling variation expected from a finite draw. They are simulated representatives, not a lossless compression of the original 152345 measurements.</p>
-<h2 id="22">Crystal Directions and Symmetry</h2>
+<h2 id="25">Crystal Directions and Symmetry</h2>
 <p>The previous density lives in the specimen reference frame. An inverse pole density instead fixes a specimen direction and asks which crystal directions are parallel to it. Express specimen Z in the crystal frame of every Forsterite orientation.</p>
 {% highlight matlab %}
 h = inv(ebsd('Fo').orientations) .* vector3d.Z;
@@ -278,7 +322,7 @@ mtexColorbar
 {% include inline_image.html file="VectorsDensityEstimation_07.png" %}
 </center>
 <p>The coloured sector contains the complete inverse pole density without repeating symmetry-related directions. The <code class="language-plaintext highlighter-rouge">'noSymmetry'</code> option disables crystal symmetrization when that is deliberately required.</p>
-<h2 id="26">Choosing a Different Kernel</h2>
+<h2 id="29">Choosing a Different Kernel</h2>
 <p>The default is the non-negative <a href="S2DeLaValleePoussinKernel.html">de la Vallee Poussin kernel</a>. Its finite harmonic expansion avoids truncation ringing. The <code class="language-plaintext highlighter-rouge">'kernel'</code> option also accepts other <a href="S2Kernels.html">spherical kernels</a>.</p>
 <p>Compare the default 10 degree kernel with a <a href="S2DirichletKernel.html">Dirichlet kernel</a> truncated at bandwidth 12.</p>
 {% highlight matlab %}
@@ -313,7 +357,7 @@ minimumDirichletDensity =
 {% include inline_image.html file="VectorsDensityEstimation_09.png" %}
 </center>
 <p>The minimum is -0.4029, which is not a valid probability density. Non-negative kernels are therefore the appropriate default for density estimation. A Dirichlet kernel remains useful for operations where exact harmonic truncation, rather than non-negativity, is the objective.</p>
-<h2 id="29">Density Estimation While Plotting</h2>
+<h2 id="32">Density Estimation While Plotting</h2>
 <p>Smooth plotting options for a large <code class="language-plaintext highlighter-rouge">vector3d</code> list perform density estimation internally. The <code class="language-plaintext highlighter-rouge">'contourf'</code>, <code class="language-plaintext highlighter-rouge">'smooth'</code> and <code class="language-plaintext highlighter-rouge">'pcolor'</code> modes use a 5 degree halfwidth when none is supplied.</p>
 {% highlight matlab %}
 plot(cAxes,'contourf','upper')
@@ -324,12 +368,12 @@ mtexColorbar
 {% include inline_image.html file="VectorsDensityEstimation_10.png" %}
 </center>
 <p>This 5 degree plot is sharper than the explicit 10 degree estimate <code class="language-plaintext highlighter-rouge">pdf</code>. Use <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a> explicitly when the density itself, its weights, its kernel, or a reproducible smoothing choice matters.</p>
-<h2 id="31">The Maths Behind the Estimate</h2>
+<h2 id="34">The Maths Behind the Estimate</h2>
 <p>Let \(v_n\) be unit directions with non-negative weights \(w_n\), and let \(\psi\) be a normalized radial kernel. MTEX computes the weighted kernel estimate</p>
 <p>\[f(v) = \frac{1}{\sum_{n=1}^{N}w_n} \sum_{n=1}^{N} w_n\,\psi(v\mathbin{\cdot}v_n).\]</p>
 <p>Equal weights reduce the denominator to \(N\). For axial input, the result is symmetrized so that \(f(v)=f(-v)\). The normalization makes the mean of \(f\) equal to one under MTEX's uniform spherical measure.</p>
 <p>The estimate is a model of an unknown population density, not the unknown density itself. Decreasing the halfwidth reduces smoothing bias but raises sampling variation; increasing it does the reverse.</p>
-<h2 id="32">Further Reading</h2>
+<h2 id="35">Further Reading</h2>
 <div>
 <ul>
 <li>K. V. Mardia and P. E. Jupp, <a href="https://doi.org/10.1002/9780470316979">Directional Statistics</a>, Wiley, 1999, treats probability models and inference for both directions and axes.</li>
@@ -337,7 +381,7 @@ mtexColorbar
 <li>H. Schaeben and K. G. van den Boogaart, <a href="https://doi.org/10.1016/S0040-1951(03)00190-2">Spherical harmonics in texture analysis</a>, <i>Tectonophysics</i> 370 (2003), 253-268, connects spherical kernels, harmonic representations and texture analysis.</li>
 </ul>
 </div>
-<h2 id="33">Next</h2>
+<h2 id="36">Next</h2>
 <p>Continue with <a href="SphericalFunctions.html">Spherical Functions</a> to work with densities as mathematical objects. Use <a href="EBSD2ODF.html">ODF Estimation from EBSD Data</a> when the input is a list of orientations rather than directions, and <a href="ODFTutorial.html">the ODF tutorial</a> for the complete texture workflow.</p>
 </div>
 </body>

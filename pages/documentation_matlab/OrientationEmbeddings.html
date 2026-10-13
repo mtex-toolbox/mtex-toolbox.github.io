@@ -179,7 +179,7 @@ for hw = logspace(-1,1.75,40)*degree
 
   psi = SO3DeLaValleePoussinKernel('halfwidth',hw);
   odf = unimodalODF(orientation.rand(cs),psi);
-  ori = discreteSample(odf,round(1000*(hw*6)^3));
+  ori = discreteSample(odf,max(1000,round(1000*(hw*6)^3)));
 
   n(end+1) = norm(mean(embedding(ori)),'normalized');
   sigma(end+1) = std(ori);
@@ -261,7 +261,7 @@ ylabel('\(\Vert\mathtt{double}(\mathcal E_1)-\mathtt{double}(\mathcal E_2)\Vert_
 
 {% highlight plaintext %}
 packingError =
-   4.2633e-14
+   2.1316e-14
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="OrientationEmbeddings_05.png" %}

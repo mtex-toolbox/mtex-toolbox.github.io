@@ -25,12 +25,12 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>
 <a href="DensityEstimation.html">Density Estimation</a> showed that kernel width decides which features survive smoothing. A width that is too small leaves oscillations and sharp peaks at individual observations. A width that is too large erases genuine features of the unknown density.</p>
-<p>There is no universally optimal halfwidth. The useful value depends on both the number of independent observations and the smoothness of the unknown density. This page compares the three selection methods provided by <a href="orientation.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> and shows how to check their choices against a known model.</p>
+<p>There is no universally optimal halfwidth. The useful value depends on both the number of independent observations and the smoothness of the unknown density. <a href="orientation.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> therefore selects it from the data. Its method <code class="language-plaintext highlighter-rouge">'UCV'</code> estimates the error of the density for every candidate halfwidth and takes the halfwidth where that error is least. This page applies the selection to orientations drawn from a known model, so that its choice can be checked, and then compares it with the other methods <code class="language-plaintext highlighter-rouge">calcKernel</code> offers.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
 <h2 id="2">Build a model with several kinds of structure</h2>
-<p>The original example described the following crystal symmetry as cubic. Point group 321 is trigonal, so the code and its resulting fundamental region must be read as a trigonal example.</p>
+<p>The example uses the trigonal point group 321.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('321');
 {% endhighlight %}
@@ -49,8 +49,8 @@ mtexColorbar('title','mrd');
 {% include inline_image.html file="OptimalKernel_01.png" %}
 </center>
 <p>The sections contain a localized maximum and an elongated fibre feature above a non-zero background. A useful selected kernel should retain both shapes without turning finite-sample noise into new maxima.</p>
-<h2 id="5">Select a kernel from sampled orientations</h2>
-<p>Draw 10000 orientations from the model. The random seed makes the sample and every reported result reproducible.</p>
+<h2 id="5">Select a kernel and estimate the density</h2>
+<p>Draw 10000 orientations from the model.</p>
 {% highlight matlab %}
 ori = discreteSample(modelODF,10000,'silent');
 sampleCount = length(ori)
@@ -60,21 +60,22 @@ sampleCount = length(ori)
 sampleCount =
        10000
 {% endhighlight %}
-<p>With no method option, <code class="language-plaintext highlighter-rouge">calcKernel</code> uses Kullback--Leibler cross-validation (KLCV). It returns a de la Vall&eacute;e Poussin kernel rather than an ODF.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">calcKernel</code> returns a de la Vall&eacute;e Poussin kernel rather than an ODF.</p>
 {% highlight matlab %}
-psi = calcKernel(ori,'silent')
+psi = calcKernel(ori,'method','UCV','silent')
 selectedHalfwidth = psi.halfwidth ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
 psi = SO3DeLaValleePoussinKernel
-  bandwidth: 43
-  halfwidth: 5.7°
+  bandwidth: 58
+  halfwidth: 4.1°
  
 selectedHalfwidth =
-    5.6653
+    4.0714
 {% endhighlight %}
-<p>Pass that kernel to <a href="rotation.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>. The same <code class="language-plaintext highlighter-rouge">psi</code> can therefore be reused for another sample that represents the same population and sampling process.</p>
+<p>Pass that kernel to <a href="rotation.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>. The same <code class="language-plaintext highlighter-rouge">psi</code> can be reused for another sample that represents the same population and sampling process.</p>
 {% highlight matlab %}
 reconstructedODF = calcDensity(ori,'kernel',psi,'silent');
 reconstructionError = calcError(reconstructedODF,modelODF,...
@@ -86,7 +87,7 @@ mtexColorbar('title','mrd');
 
 {% highlight plaintext %}
 reconstructionError =
-    0.0976
+    0.1313
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="OptimalKernel_02.png" %}
@@ -94,8 +95,27 @@ reconstructionError =
 <p>Compare these sections with the model above. The localized maximum and the fibre remain in the same places, while their contours are not identical because only a finite random sample was reconstructed.</p>
 <p>
 <code class="language-plaintext highlighter-rouge">reconstructionError</code> compares density values over orientation space. It is not an angular error and must not be labelled in degrees.</p>
-<h2 id="9">What the three methods use</h2>
-<p>The method names are sometimes described as flags in older material. The current interface passes each name as the value of <code class="language-plaintext highlighter-rouge">'method'</code>.</p>
+<h2 id="9">How UCV selects</h2>
+<p>Unbiased cross-validation, <code class="language-plaintext highlighter-rouge">'UCV'</code>, works as follows. For each of 60 candidate halfwidths between 2 and 40 degrees it estimates the integrated squared error between the density estimate and the unknown texture, and returns the candidate where that error is least. The estimate is computed from the harmonic coefficients of the sample, so it costs about one harmonic transform of the orientations, and no model of the texture is needed.</p>
+<p>The selection is bounded below by a noise floor. It never returns a halfwidth so narrow that the sampling noise could raise bumps above a fifth of the estimate's maximum. For small samples this bound, rather than the error estimate, decides the halfwidth. The flag <code class="language-plaintext highlighter-rouge">'noNoiseFloor'</code> removes it.</p>
+<h2 id="10">A cautious alternative</h2>
+<p>The selected halfwidth is the best estimate, not a guarantee. When spurious features would be costly, <code class="language-plaintext highlighter-rouge">'conservative'</code> inserts lower confidence bounds for the harmonic content of the texture into the same error formula. Less content favours a wider kernel, so its halfwidth is at least the one of least error whenever the bounds hold.</p>
+{% highlight matlab %}
+psiConservative = calcKernel(ori,'method','conservative','silent');
+conservativeHalfwidth = psiConservative.halfwidth ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+conservativeHalfwidth =
+    4.0714
+{% endhighlight %}
+<p>With 10000 orientations the harmonic content of this texture is resolved well enough that the conservative choice nearly agrees with UCV. With few orientations, or few grains in a map, it stays much wider.</p>
+<h2 id="12">Orientations that are not independent</h2>
+<p>Automatic selection assumes that the input orientations are independent observations of the intended population. Neighbouring pixels in one EBSD grain are strongly correlated, so treating every pixel as independent selects a kernel that follows the grains instead of the texture.</p>
+<p>Pass the map after grain reconstruction instead. <a href="EBSD.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel(ebsd)</code></a> splits it into parts that share no grain and compares only pixels of different parts. The option <code class="language-plaintext highlighter-rouge">'groups'</code> does the same for orientations or directions given with their grain ids, <code class="language-plaintext highlighter-rouge">calcKernel(ori,'groups',grainId)</code>. <a href="EBSD2ODF.html">ODF Estimation from EBSD Data</a> works through a map and through the separate question of how pixels and grains should be weighted.</p>
+<h2 id="13">Other selection methods</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">calcKernel</code> offers three further methods, chosen by the option <code class="language-plaintext highlighter-rouge">'method'</code>.</p>
 <p>
    <table class="usertable">
       <tr>
@@ -112,14 +132,40 @@ reconstructionError =
       <tr>
          <td>
                <p>
+                  <tt>'UCV'</tt>
+               </p>
+         </td>
+         <td>
+               <p>unbiased estimate of the integrated squared error, with a noise floor</p>
+         </td>
+         <td>
+               <p>aims at the halfwidth of least error</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'conservative'</tt>
+               </p>
+         </td>
+         <td>
+               <p>lower bounds of the harmonic content, with a noise floor</p>
+         </td>
+         <td>
+               <p>errs towards smoothing</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
                   <tt>'KLCV'</tt>
                </p>
          </td>
          <td>
-               <p>leave-one-out likelihood on candidate kernels</p>
+               <p>leave-one-out likelihood on ten candidate kernels</p>
          </td>
          <td>
-               <p>default; data-adaptive</p>
+               <p>default; data-adaptive and fast</p>
          </td>
       </tr>
       <tr>
@@ -150,15 +196,32 @@ reconstructionError =
       </tr>
    </table>
 </p>
-<p>Older descriptions say that <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> uses the variance of the orientations to estimate smoothness. The current implementation instead uses a quantile of nearest-neighbour angular distances, with a lower halfwidth limit of 2 degrees.</p>
-<p>KLCV evaluates how well kernels centred on the other orientations predict each omitted orientation. The <code class="language-plaintext highlighter-rouge">'SamplingSize'</code> option limits how many observations contribute to that score. It reduces computation, but it does not create an independent validation dataset.</p>
-<h2 id="10">Compare the methods on the same samples</h2>
+<p>Kullback--Leibler cross-validation, <code class="language-plaintext highlighter-rouge">'KLCV'</code>, scores how well kernels centred on the other orientations predict each omitted orientation. The <code class="language-plaintext highlighter-rouge">'SamplingSize'</code> option limits how many observations contribute to that score. It reduces computation, but it does not create an independent validation dataset. <code class="language-plaintext highlighter-rouge">'KLCV'</code> is the default of <code class="language-plaintext highlighter-rouge">calcKernel</code>: it is two to four times faster than <code class="language-plaintext highlighter-rouge">'UCV'</code> and selects somewhat wider kernels. <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> uses a quantile of nearest-neighbour angular distances, with a lower halfwidth limit of 2 degrees. <code class="language-plaintext highlighter-rouge">'magicRule'</code> reads only the number of orientations and the symmetry. None of the three accepts grain ids.</p>
+<p>Since the model is known here, the error of each choice can be measured. Compare UCV and the conservative rule with KLCV on the same sample.</p>
+{% highlight matlab %}
+method = ["UCV","conservative","KLCV"];
+for m = method
+  psiM = calcKernel(ori,'method',char(m),'silent');
+  odfM = calcDensity(ori,'kernel',psiM,'silent');
+  fprintf('%-12s halfwidth %5.2f%s, error %.3f, L2 error %.3f\n',m,...
+    psiM.halfwidth/degree,mtexdegchar,...
+    calcError(odfM,modelODF,'resolution',5*degree),calcError(odfM,modelODF,'L2'));
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+UCV          halfwidth  4.07°, error 0.131, L2 error 0.178
+conservative halfwidth  4.07°, error 0.131, L2 error 0.178
+KLCV         halfwidth  5.67°, error 0.120, L2 error 0.229
+{% endhighlight %}
+<p>UCV and the conservative rule ask for about 4 degrees, KLCV for 5.7 to 7 degrees. The default error of <code class="language-plaintext highlighter-rouge">calcError</code>, half the mean absolute difference, finds the three close. The <code class="language-plaintext highlighter-rouge">'L2'</code> error, the integrated squared error that UCV minimises, separates them: UCV meets the best candidate halfwidth for that error, and KLCV's error is a third to twice as large again.</p>
+<h2 id="15">Compare the methods across sample sizes</h2>
 <p>The full scaling experiment associated with this page uses 10, 100, ..., 1000000 orientations. That run is appropriate for an attended benchmark, not an executable documentation page. Uncomment the alternative <code class="language-plaintext highlighter-rouge">sampleSize</code> line when that full study is intended.</p>
 {% highlight matlab %}
 sampleSize = [30 100 300 1000];
 % sampleSize = 10.^(1:6); % full study: 10 through 1000000
 
-method = ["KLCV","RuleOfThumb","magicRule"];
+method = ["UCV","conservative","KLCV","RuleOfThumb","magicRule"];
 halfwidthInDegree = zeros(numel(sampleSize),numel(method));
 estimationError = zeros(numel(sampleSize),numel(method));
 
@@ -189,23 +252,24 @@ errorTable = array2table(estimationError,...
 
 {% highlight plaintext %}
 halfwidthTable =
-  4×3 table
-               KLCV     RuleOfThumb    magicRule
-              ______    ___________    _________
-    N_30          15      35.361        26.117  
-    N_100     11.906      36.493        22.018  
-    N_300     9.4494      22.379        18.836  
-    N_1000       7.5      17.726         15.87  
+  4×5 table
+               UCV      conservative     KLCV     RuleOfThumb    magicRule
+              ______    ____________    ______    ___________    _________
+    N_30      28.035           40       23.811       44.95        26.117  
+    N_100      13.09       16.873           15      32.895        22.018  
+    N_300     10.155       10.684       11.906      27.932        18.836  
+    N_1000    6.1117       6.7649       9.4494      17.238         15.87  
 errorTable =
-  4×3 table
-               KLCV      RuleOfThumb    magicRule
-              _______    ___________    _________
-    N_30      0.41223      0.46603        0.4362 
-    N_100     0.27855      0.48149        0.3864 
-    N_300     0.24292      0.39677       0.35625 
-    N_1000    0.17398      0.33499       0.30463
+  4×5 table
+                UCV      conservative     KLCV      RuleOfThumb    magicRule
+              _______    ____________    _______    ___________    _________
+    N_30      0.46541      0.51023        0.4475      0.52287       0.45695 
+    N_100     0.34245      0.36259       0.35073      0.46183       0.39644 
+    N_300     0.26957      0.27292       0.28415      0.44752       0.36878 
+    N_1000    0.21893      0.20858       0.21886      0.34294        0.3237
 {% endhighlight %}
-<p>Read each row as one random sample tested three ways. This controls the sample-to-sample variation when comparing methods within a row. One draw at each size is a demonstration, not evidence that one method is always best.</p>
+<p>Read each row as one random sample tested five ways. This controls the sample-to-sample variation when comparing methods within a row. One draw at each size is a demonstration, not evidence that one method is always best.</p>
+<p>With 30 orientations the noise floor keeps UCV and the conservative rule wide, and their choice changes strongly from one draw to the next. No narrower kernel would stand out of the sampling noise. From a few hundred orientations on, UCV's error is close to that of KLCV or below it, and at 1000 orientations UCV asks for 6 to 7 degrees where KLCV asks for 9.4. From 100 orientations on, the two rules that ignore the data beyond its size have the largest error.</p>
 {% highlight matlab %}
 figure;
 loglog(sampleSize,estimationError,'o-','LineWidth',2);
@@ -218,21 +282,26 @@ grid on;
 {% include inline_image.html file="OptimalKernel_03.png" %}
 </center>
 <p>The curves compare density-space error, with smaller values indicating a closer reconstruction. Their differences show that kernel selection is part of the statistical model rather than a display preference.</p>
-<h2 id="13">Before trusting an automatic halfwidth</h2>
-<p>Automatic selection assumes that the input orientations represent the intended population. Neighbouring pixels in one EBSD grain are strongly correlated, so treating every pixel as independent can select a kernel that follows intragranular scatter. Use grain means to select the kernel when grains are the independent sampling units.</p>
-<p>Weighting answers a separate question. After selecting a kernel from grain means, an area-based ODF may still use pixels or grain-area weights. <a href="EBSD2ODF.html">ODF Estimation from EBSD Data</a> works through that choice.</p>
-<p>Also inspect the selected halfwidth and the reconstructed plots. A value at the edge of the tested candidate range, or peaks supported by only one or two observations, is a reason to test nearby kernels manually.</p>
-<h2 id="14">The maths behind the sample-size rule</h2>
+<h2 id="18">Before trusting an automatic halfwidth</h2>
+<p>Inspect the selected halfwidth and the reconstructed plots. A value at the edge of the candidate range, or peaks supported by only one or two observations, is a reason to test nearby kernels manually.</p>
+<h2 id="19">The maths behind UCV and the conservative rule</h2>
+<p>Write the density in harmonics orthonormal for the uniform distribution, \(f = 1 + \sum_{\ell \ge 1} f_\ell\), with the degree energies \(A_\ell = \|f_\ell\|^2\). A radial kernel multiplies degree \(\ell\) by a factor \(b_\ell\) that falls as the halfwidth grows. For \(N\) independent orientations the mean integrated squared error is exactly</p>
+<p>\[ \mathrm{MISE} = \sum_{\ell \ge 1} (1 - b_\ell)^2 A_\ell + \frac{1}{N} \sum_{\ell \ge 1} b_\ell^2 \left( d_\ell - A_\ell \right), \]</p>
+<p>where \(d_\ell\) is the dimension of degree \(\ell\) reduced by the crystal and specimen symmetry. <code class="language-plaintext highlighter-rouge">'UCV'</code> inserts unbiased estimates of \(A_\ell\) and minimises over the candidates. <code class="language-plaintext highlighter-rouge">'conservative'</code> obtains the estimates from products of disjoint parts of the sample, inserts lower confidence bounds, and sets the unresolved high degrees to zero. Lowering the energies can only move the minimiser to a wider kernel. Splitting a map into parts that share no grain keeps the estimates unbiased when pixels of one grain are correlated.</p>
+<p>The noise floor looks at the estimate itself. At an orientation where the smoothed density is \(y\), the estimate is a sum of \(N\) independent terms, none larger than \(\psi(0)/N\), with variance \(y\,\|\psi\|^2/N\). Bennett's inequality bounds its deviation at every one of the independent kernel footprints of orientation space. The floor is the smallest halfwidth at which that bound stays below a fifth of the estimate's maximum plus half the local density. <a href="selectHalfwidth.html"><code class="language-plaintext highlighter-rouge">selectHalfwidth</code></a> exposes the candidates, the bandwidth and these constants as options.</p>
+<h2 id="20">The maths behind the sample-size rule</h2>
 <p>For the de la Vall&eacute;e Poussin kernel, <code class="language-plaintext highlighter-rouge">'magicRule'</code> sets the concentration parameter \(\kappa\) proportional to \(N^{2/7}\). The kernel halfwidth then behaves approximately as</p>
 <p>\[ \delta \mathrel{\sim} \kappa^{-1/2} \mathrel{\sim} N^{-1/7}. \]</p>
 <p>The rule therefore narrows the kernel as the sample grows. It cannot use the unknown density's feature sizes, which is why it is conservative. Rule-of-thumb and cross-validation methods use the observations to add information about those scales.</p>
-<h2 id="15">References</h2>
+<h2 id="21">References</h2>
 <div>
 <ul>
 <li>R. Hielscher, <a href="https://doi.org/10.1016/j.jmva.2013.03.014">Kernel density estimation on the rotation group and its application to crystallographic texture analysis</a>, <i>Journal of Multivariate Analysis</i> 119 (2013), 119--143, derives the orientation-space estimator, asymptotic halfwidth rules, and fast algorithms used for large orientation samples.</li>
+<li>P. Hall, G. S. Watson and J. Cabrera, <a href="https://doi.org/10.1093/biomet/74.4.751">Kernel density estimation with spherical data</a>, <i>Biometrika</i> 74 (1987), 751--762, introduces least squares and likelihood cross-validation for kernel estimates on the sphere, the criteria behind <code class="language-plaintext highlighter-rouge">'UCV'</code> and <code class="language-plaintext highlighter-rouge">'KLCV'</code>.</li>
+<li>G. Bennett, <a href="https://doi.org/10.1080/01621459.1962.10482149">Probability inequalities for the sum of independent random variables</a>, <i>Journal of the American Statistical Association</i> 57 (1962), 33--45, gives the deviation bound of the noise floor.</li>
 </ul>
 </div>
-<h2 id="16">Next</h2>
+<h2 id="22">Next</h2>
 <p>
 <a href="ClusterDemo.html">Clustering</a> replaces a continuous density by discrete groups of nearby orientations. Use it when group membership is the goal rather than estimating how probability varies through orientation space.</p>
 </div>

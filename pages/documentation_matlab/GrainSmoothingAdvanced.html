@@ -114,7 +114,7 @@ fprintf('resampling at %.2f %s instead leaves %d segments\n', ...
 resampling at 2.00 um instead leaves 9396 segments
 {% endhighlight %}
 <h2 id="8">What preprocessing changes</h2>
-<p>Simplification and resampling change the number of boundary segments. A resampled segment no longer lies between one specific pair of EBSD measurements, so its row of <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> no longer identifies the pixels on its two sides. Use <code class="language-plaintext highlighter-rouge">'noSimplify'</code> and <code class="language-plaintext highlighter-rouge">'noRefine'</code> when an analysis needs that per-segment association.</p>
+<p>Simplification and resampling change the number of boundary segments. A segment that no longer lies between one specific pair of EBSD measurements gets the row <code class="language-plaintext highlighter-rouge">[0 0]</code> in <code class="language-plaintext highlighter-rouge">gB.ebsdId</code>, as the outer boundary has. Use <code class="language-plaintext highlighter-rouge">'noSimplify'</code> and <code class="language-plaintext highlighter-rouge">'noRefine'</code> when an analysis needs that per-segment association for every segment.</p>
 <p>Smoothing also changes lengths, areas, directions, and curvatures. It is a measurement choice, not merely a plotting choice. Record the filter and its settings when comparing maps or reporting shape statistics.</p>
 <h2 id="9">Choose the filter</h2>
 <p>A <a href="boundaryFilter.html"><code class="language-plaintext highlighter-rouge">boundaryFilter</code></a> controls the third stage. <a href="laplaceFilter.html"><code class="language-plaintext highlighter-rouge">laplaceFilter</code></a> and <a href="taubinFilter.html"><code class="language-plaintext highlighter-rouge">taubinFilter</code></a> apply a local averaging step a fixed number of times. Their effect therefore depends on how densely the boundary is sampled. <a href="curvatureFilter.html"><code class="language-plaintext highlighter-rouge">curvatureFilter</code></a> and <a href="huberFilter.html"><code class="language-plaintext highlighter-rouge">huberFilter</code></a> instead specify a smoothing length in map units, which does not change when the same sample is measured on a finer grid. That length makes the setting comparable between scans only when their spatial units and preprocessing are also comparable.</p>
@@ -261,7 +261,7 @@ grain area, curvatureFilter at a smoothing length of 8.0 um
       </tr>
    </table>
 </p>
-<p>A threshold of 15 degree is appropriate for the <a href="EBSDDenoising.html"><code class="language-plaintext highlighter-rouge">halfQuadraticFilter</code></a> on orientations, but it would never activate corner protection here. The default boundary threshold is 5 degree.</p>
+<p>A threshold of 15 degree is appropriate for the <a href="EBSDDenoising.html"><code class="language-plaintext highlighter-rouge">l1TVFilter</code></a> on orientations, but it would never activate corner protection here. The default boundary threshold is 5 degree.</p>
 {% highlight matlab %}
 G = huberFilter;
 G.smoothingLength = 8*d;

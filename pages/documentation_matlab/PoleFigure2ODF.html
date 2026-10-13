@@ -72,9 +72,9 @@ rpError = calcError(pf,odf,'RP','silent')
 
 {% highlight plaintext %}
 rpError =
-    0.8258    0.8571    0.3662    0.3629    0.6014    0.6140    0.4803
+    0.8088    0.8491    0.3634    0.3637    0.6003    0.6141    0.4893
 {% endhighlight %}
-<p>The seven RP values range from 0.36 to 0.86. Because RP is relative, weak regions can dominate even when their absolute differences are small.</p>
+<p>The seven RP values range from 0.36 to 0.85. Because RP is relative, weak regions can dominate even when their absolute differences are small.</p>
 <p>Called without a measure, <code class="language-plaintext highlighter-rouge">calcError</code> uses a regularised relative error. It divides by the larger intensity plus half the scale factor, so it does not divide by a value near zero.</p>
 {% highlight matlab %}
 regularisedError = calcError(pf,odf,'silent')
@@ -82,9 +82,9 @@ regularisedError = calcError(pf,odf,'silent')
 
 {% highlight plaintext %}
 regularisedError =
-    0.3957    0.3248    0.2381    0.2886    0.2900    0.3619    0.3222
+    0.3909    0.3238    0.2358    0.2881    0.2892    0.3599    0.3224
 {% endhighlight %}
-<p>The regularised values range from 0.24 to 0.40. They are not smaller RP values; they answer a different question. Compare reconstructions with the same measure and threshold throughout. The other available measures are <code class="language-plaintext highlighter-rouge">'l1'</code> and <code class="language-plaintext highlighter-rouge">'l2'</code>.</p>
+<p>The regularised values range from 0.24 to 0.39. They are not smaller RP values; they answer a different question. Compare reconstructions with the same measure and threshold throughout. The other available measures are <code class="language-plaintext highlighter-rouge">'l1'</code> and <code class="language-plaintext highlighter-rouge">'l2'</code>.</p>
 <p>A single error vector hides where the mismatch occurs. <a href="PoleFigure.plotDiff.html"><code class="language-plaintext highlighter-rouge">plotDiff</code></a> plots the regularised relative difference for every measured direction.</p>
 {% highlight matlab %}
 plotDiff(pf,odf,'silent')
@@ -107,7 +107,7 @@ odfDifference = calcError(odfModel,odf)
 
 {% highlight plaintext %}
 odfDifference =
-    0.5868
+    0.5864
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODF_04.png" %}
@@ -135,12 +135,12 @@ fprintf(['Default: %.2f s, peak %.1f mrd, mean RP %.2f; ',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Default: 2.41 s, peak 94.0 mrd, mean RP 0.59; 15 degree: 0.16 s, peak 27.1 mrd, mean RP 0.75
+Default: 2.19 s, peak 92.9 mrd, mean RP 0.58; 15 degree: 0.15 s, peak 27.5 mrd, mean RP 0.75
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODF_05.png" %}
 </center>
-<p>The 15 degree result keeps the main maxima but broadens them. The timing printed above shows the speed-up. Its peak is 27.1 mrd instead of 94.0 mrd, and the mean RP error rises from 0.59 to 0.75. A coarse grid cannot represent a sharp texture. A finer grid costs more time and, once it exceeds the information in the measurements, can give a false impression of resolved detail.</p>
+<p>The 15 degree result keeps the main maxima but broadens them. The timing printed above shows the speed-up. Its peak is 27.5 mrd instead of 92.9 mrd, and the mean RP error rises from 0.58 to 0.75. A coarse grid cannot represent a sharp texture. A finer grid costs more time and, once it exceeds the information in the measurements, can give a false impression of resolved detail.</p>
 <p>Two options control the kernel directly. The <code class="language-plaintext highlighter-rouge">'kernel'</code> option accepts an <code class="language-plaintext highlighter-rouge">SO3Kernel</code> object. The <code class="language-plaintext highlighter-rouge">'halfwidth'</code> option keeps the default de la Vallee Poussin kernel and changes its width.</p>
 <h2 id="15">The zero range method</h2>
 <p>If a measured pole figure is genuinely zero in a region, every orientation contributing there must also have zero density. The zero range method removes those orientation-grid nodes before solving. It can make a sharp reconstruction with large empty regions both faster and finer.</p>
@@ -160,12 +160,12 @@ fprintf(['Zero range: %.2f s, peak %.1f mrd, mean RP %.2f; ',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Zero range: 1.12 s, peak 110.4 mrd, mean RP 0.51; default: 2.41 s, peak 94.0 mrd, mean RP 0.59
+Zero range: 1.67 s, peak 107.1 mrd, mean RP 0.51; default: 2.19 s, peak 92.9 mrd, mean RP 0.58
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="PoleFigure2ODF_06.png" %}
 </center>
-<p>On this data set the method does change the reconstruction. The peak rises from 94.0 to 110.4 mrd and the mean RP error falls from 0.59 to 0.51. The timings printed above show that it also runs faster here, because the solver keeps far fewer grid nodes. The sharper recalculated maxima are the visible difference to look for. Try the method rather than assuming it will help. The <a href="zeroRangeMethod.zeroRangeMethod.html"><code class="language-plaintext highlighter-rouge">zeroRangeMethod</code></a> reference lists the threshold and smoothing options that decide what counts as zero.</p>
+<p>On this data set the method does change the reconstruction. The peak rises from 92.9 to 107.1 mrd and the mean RP error falls from 0.58 to 0.51. The timings printed above show that it also runs faster here, because the solver keeps far fewer grid nodes. The sharper recalculated maxima are the visible difference to look for. Try the method rather than assuming it will help. The <a href="zeroRangeMethod.zeroRangeMethod.html"><code class="language-plaintext highlighter-rouge">zeroRangeMethod</code></a> reference lists the options that decide which region counts as measured and what counts as zero.</p>
 <h2 id="17">Ghost correction</h2>
 <p>The odd-order harmonic coefficients of an ODF do not appear in its pole figures, so the measurements do not determine them. Setting them to zero produces the <b>ghost effect</b>: a raised uniform background, weakened real components, and sometimes spurious components.</p>
 <p>

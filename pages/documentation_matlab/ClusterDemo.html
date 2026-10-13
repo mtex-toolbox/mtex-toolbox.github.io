@@ -29,7 +29,6 @@ To make changes, update the MATLAB code and republish this document.
 <p>We start with directions sampled from a squared smiley function. Squaring the function concentrates the sample around its eyes and mouth while retaining points between those features.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-rng default
 S2F = S2Fun.smiley.^2;
 v = S2F.discreteSample(10000);
 
@@ -52,7 +51,7 @@ annotate(center)
 </center>
 <h2 id="3">Tune the grouping</h2>
 <p>The colored regions follow the separated strokes of the smiley, while the centers sit inside the densest parts of those regions. CLASSIX first forms local groups and then merges nearby groups into clusters.</p>
-<p>Two options control how readily this happens. Increasing <code class="language-plaintext highlighter-rouge">'radius'</code> makes the local groups coarser and usually produces fewer clusters. The <code class="language-plaintext highlighter-rouge">'minPoints'</code> option sets the size below which tiny groups are merged into neighboring clusters. If the automatic result is too fragmented, increase <code class="language-plaintext highlighter-rouge">'radius'</code>; if isolated specks survive, increase <code class="language-plaintext highlighter-rouge">'minPoints'</code>. This example supplies both values so that estimating the radius does not require the Statistics and Machine Learning Toolbox.</p>
+<p>Two options control how readily this happens. Increasing <code class="language-plaintext highlighter-rouge">'radius'</code> makes the local groups coarser and usually produces fewer clusters. The <code class="language-plaintext highlighter-rouge">'minPoints'</code> option sets the size below which tiny groups are merged into neighboring clusters. If the automatic result is too fragmented, increase <code class="language-plaintext highlighter-rouge">'radius'</code>; if isolated specks survive, increase <code class="language-plaintext highlighter-rouge">'minPoints'</code>.</p>
 <h2 id="4">Respect antipodal symmetry</h2>
 <p>Antipodal directions identify a direction <code class="language-plaintext highlighter-rouge">v</code> with its opposite <code class="language-plaintext highlighter-rouge">-v</code>. Setting the <code class="language-plaintext highlighter-rouge">antipodal</code> property tells MTEX to measure proximity with this equivalence in mind.</p>
 <p>The smiley sample on its own cannot show this. No feature of it lies opposite another, so identifying <code class="language-plaintext highlighter-rouge">v</code> with <code class="language-plaintext highlighter-rouge">-v</code> has nothing to merge. Add the opposite of every sampled direction, and each feature gains one.</p>
@@ -67,7 +66,7 @@ annotate(center)
 <center class="mtex-figure">
 {% include inline_image.html file="ClusterDemo_03.png" %}
 </center>
-<p>The two discs are the upper and the lower hemisphere. Read as ordinary directions, the sample falls into eight clusters. Every feature of the smiley and every one of their opposites carries a color of its own.</p>
+<p>The two discs are the upper and the lower hemisphere. Read as ordinary directions, the sample falls into ten clusters. Every feature of the smiley and every one of their opposites carries a color of its own.</p>
 {% highlight matlab %}
 vSym.antipodal = true;
 [cInd,center] = calcCluster(vSym);
@@ -78,8 +77,8 @@ annotate(center)
 <center class="mtex-figure">
 {% include inline_image.html file="ClusterDemo_04.png" %}
 </center>
-<p>One disc is left, and four clusters, each exactly twice the size of before. Every feature has been merged with the one opposite it. The two eyes stay apart, because one eye is not the opposite of the other.</p>
-<p>The blue cluster reaches the rim of the disc at the top and at the bottom. Those are opposite directions, and they now share a label. This is a change in the meaning of a direction, not merely a change in how the same labels are drawn.</p>
+<p>One disc is left, and five clusters, each exactly twice the size of before. Every feature has been merged with the one opposite it. The two eyes stay apart, because one eye is not the opposite of the other.</p>
+<p>One cluster reaches the rim of the disc at the top and at the bottom. Those are opposite directions, and they now share a label. This is a change in the meaning of a direction, not merely a change in how the same labels are drawn.</p>
 <h2 id="7">Build an orientation example</h2>
 <p>The same idea applies in orientation space. We construct an orientation distribution function (ODF) with a broad fibre component and a compact unimodal component. <a href="OptimalKernel.html">Kernel selection</a> explains how the halfwidth controls smoothing when an ODF is estimated from observations.</p>
 {% highlight matlab %}

@@ -84,7 +84,7 @@ plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs));
                </p>
          </td>
          <td>
-               <p>angles are in radians rather than degrees; see the limitation below</p>
+               <p>angles are in radians rather than degrees</p>
          </td>
       </tr>
       <tr>
@@ -114,13 +114,13 @@ plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs));
                </p>
          </td>
          <td>
-               <p>request the inverse map; see the limitation below</p>
+               <p>request the inverse map</p>
          </td>
       </tr>
    </table>
 </p>
 <p>The names and positions solve different problems. For example, <code class="language-plaintext highlighter-rouge">'Columns',[4 2 7]</code> selects physical columns 4, 2, and 7, while <code class="language-plaintext highlighter-rouge">'ColumnNames',{'phi1','Phi','phi2'}</code> assigns their meanings in that order.</p>
-<p>The generic importer advertises quaternion columns named <code class="language-plaintext highlighter-rouge">{'Quat real','Quat i','Quat j','Quat k'}</code>. In the current implementation, however, that path passes all four columns as one matrix to a constructor that expects four arrays and raises an error. Until it is fixed, read the numeric columns separately and construct <code class="language-plaintext highlighter-rouge">orientation(quaternion(a,b,c,d),cs)</code>. Quaternions avoid the Euler-angle sequence and angular-unit questions, but they do not identify the mapping direction or either reference frame.</p>
+<p>Instead of Euler angles, the generic importer reads quaternion columns named <code class="language-plaintext highlighter-rouge">{'Quat real','Quat i','Quat j','Quat k'}</code>. Quaternions avoid the Euler-angle sequence and angular-unit questions, but they do not identify the mapping direction or either reference frame.</p>
 <h2 id="7">Four Questions to Answer Before Trusting the Result</h2>
 <p>A plain numeric file does not contain enough information to distinguish several valid interpretations. All four questions below must be answered from its header, accompanying documentation, or a known physical feature.</p>
 <div>
@@ -132,7 +132,7 @@ plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs));
 <div>
 <ul>
 <li>
-<b>Degrees or radians?</b> The generic text importer ignores <code class="language-plaintext highlighter-rouge">'radians'</code> and decides the unit from the values instead: a file is read as degrees only when some angle exceeds 15, and as radians otherwise. A file of small angles in degrees is therefore read as radians, silently and with valid-looking results, so the values alone are not a reliable test.</li>
+<b>Degrees or radians?</b> The generic text importer reads degrees unless <code class="language-plaintext highlighter-rouge">'radians'</code> is given. A file in radians read without it gives valid-looking orientations close to the identity, so the values alone are not a reliable test.</li>
 </ul>
 </div>
 <div>
@@ -142,10 +142,8 @@ plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs));
 </ul>
 </div>
 {% highlight matlab %}
-The generic text importer currently applies |'passive'| twice, so the
-two inversions cancel and the option has no effect. Until that defect is
-fixed, import first and use |ori = inv(ori)| only when an independent
-convention check establishes that the stored map is the inverse.
+Select |'passive'| only when an independent convention check
+establishes that the stored map is the inverse.
 {% endhighlight %}
 <div>
 <ul>

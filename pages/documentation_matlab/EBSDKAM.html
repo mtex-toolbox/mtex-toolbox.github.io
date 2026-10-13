@@ -130,8 +130,8 @@ Third-order thresholded KAM median: 0.81 degree
 <p>A second approach keeps the first-order neighbourhood and reduces random scatter in the orientations before computing KAM. See <a href="EBSDDenoising.html">Denoising</a> for the filter assumptions and alternatives.</p>
 {% highlight matlab %}
 % choose a total variation filter
-F = halfQuadraticFilter;
-F.alpha = 0.5;
+F = l1TVFilter;
+F.alpha = 0.42;
 
 % denoise within the reconstructed grains and fill missing lattice sites
 ebsdS = smooth(ebsd,F,'fill',grains);
@@ -152,7 +152,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Denoised first-order KAM median: 0.27 degree
+Denoised first-order KAM median: 0.26 degree
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="EBSDKAM_05.png" %}

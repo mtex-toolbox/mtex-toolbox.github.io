@@ -182,7 +182,8 @@ hold off
 <p>Within each grain, similar hues identify a common disorientation axis and stronger saturation identifies a larger angle from the original grain mean. Pixel-scale speckle is superposed on extended colour gradients. The outlined grains are the segmentation used to define the references.</p>
 <p>This sensitive view also shows what a denoising filter changes. The filter itself is explained in <a href="EBSDDenoising.html">Denoising Orientation Maps</a>, and the colour construction follows <a href="https://doi.org/10.1016/j.ultramic.2017.06.021">Thomsen et al. (2017)</a>.</p>
 {% highlight matlab %}
-F = halfQuadraticFilter;
+F = l1TVFilter;
+F.alpha = 1.25;
 ebsdS = smooth(ebsd,F,'fill',grains);
 indexedS = ebsdS('indexed');
 

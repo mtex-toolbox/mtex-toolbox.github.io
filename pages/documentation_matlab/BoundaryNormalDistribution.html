@@ -234,7 +234,7 @@ mtexColorbar
 <center class="mtex-figure">
 {% include inline_image.html file="BoundaryNormalDistribution_06.png" %}
 </center>
-<p>The crystal GBND is almost uniform. Taken over all internal interfaces, this data set has no strong preferred habit plane. Its values range from 0.96 to 1.03.</p>
+<p>The crystal GBND has its maximum of 2.0 at the {111} planes and its minimum of 0.74 at {100}. Taken over all internal interfaces, this data set already prefers {111} as the boundary plane.</p>
 {% highlight matlab %}
 crystalSummary = table(min(gbndCrystal),max(gbndCrystal),...
   'VariableNames',{'minimumDensity','maximumDensity'})
@@ -245,10 +245,10 @@ crystalSummary =
   1×2 table
     minimumDensity    maximumDensity
     ______________    ______________
-       0.95879            1.0273
+        0.7411            2.0043
 {% endhighlight %}
 <h2 id="20">The GBCD in three dimensions</h2>
-<p>This changes when the distribution is conditioned on the cubic \(\Sigma 3\) misorientation: a 60 degree rotation about a [111] axis. The ten-degree halfwidth below gives the estimator a twenty-degree inclusion window, matching the implementation of the GBCD kernel.</p>
+<p>The preference sharpens when the distribution is conditioned on the cubic \(\Sigma 3\) misorientation: a 60 degree rotation about a [111] axis. The ten-degree halfwidth below gives the estimator a twenty-degree inclusion window, matching the implementation of the GBCD kernel.</p>
 {% highlight matlab %}
 cs3 = grains3.CSList(2);
 sigma3 = orientation.byAxisAngle(...
@@ -305,9 +305,9 @@ sigma3GBCDSummary =
   1×2 table
     peakDensity    distanceToSigma3PlaneDegree
     ___________    ___________________________
-      2.3322                0.0015378
+      16.307                0.012591
 {% endhighlight %}
-<p>The printed peak distance is less than 0.002 degrees. The all-boundary crystal GBND is nearly uniform, while the \(\Sigma 3\) GBCD is sharply peaked. There is no contradiction: averaging over every misorientation hides a habit that is specific to one boundary character.</p>
+<p>The peak density is 16.3, about 0.01 degrees from the plane, eight times the maximum of the all-boundary crystal GBND. The {111} preference seen there comes from these twins: they make up about a quarter of the internal faces, and averaging over every misorientation dilutes a habit that is specific to one boundary character.</p>
 <h2 id="23">Interpreting a stereological estimate</h2>
 <p>The two-dimensional estimator weights every trace segment by its length. The three-dimensional estimator weights every triangular face by its area. Neither result is a count of physical boundaries or twin domains.</p>
 <p>Plane normals are axes: a normal and its negative describe the same unoriented plane. Crystal symmetry adds further equivalent normals, which is why every member of a plane family is annotated above.</p>

@@ -52,7 +52,8 @@ ebsd = EBSDsquare (y↓→x, row↓→col)
 ebsdNoisy = ebsd;
 
 % denoise without smoothing across grain boundaries
-F = halfQuadraticFilter;
+F = l1TVFilter;
+F.alpha = 1.25;
 ebsd = smooth(ebsd,F,'fill',grains);
 
 % the integral implementation uses ordfilt2 from Image Processing Toolbox
@@ -263,12 +264,12 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-oneSided   defined at 10198 of 10201 pixels,  mean |W| = 0.0288,  max |W| = 0.4340
-1hop       defined at 10200 of 10201 pixels,  mean |W| = 0.0277,  max |W| = 0.2562
-full       defined at 10200 of 10201 pixels,  mean |W| = 0.0271,  max |W| = 0.2169
+oneSided   defined at 10198 of 10201 pixels,  mean |W| = 0.0276,  max |W| = 0.4278
+1hop       defined at 10200 of 10201 pixels,  mean |W| = 0.0266,  max |W| = 0.2550
+full       defined at 10200 of 10201 pixels,  mean |W| = 0.0261,  max |W| = 0.2154
 {% endhighlight %}
 <p>
-<code class="language-plaintext highlighter-rouge">'oneSided'</code> is defined at 10,198 of the 10,201 pixels and the other two at 10,200. The mean changes only from 0.0288 to 0.0271, while the maximum falls from 0.4340 to 0.2169, almost exactly by half. The stencil therefore acts most strongly on the sharpest gradients and leaves the bulk of this map comparatively stable.</p>
+<code class="language-plaintext highlighter-rouge">'oneSided'</code> is defined at 10,198 of the 10,201 pixels and the other two at 10,200. The mean changes only from 0.0276 to 0.0261, while the maximum falls from 0.4278 to 0.2154, almost exactly by half. The stencil therefore acts most strongly on the sharpest gradients and leaves the bulk of this map comparatively stable.</p>
 <p>Whether that change removes noise or erases structure is a question about the data. <code class="language-plaintext highlighter-rouge">'oneSided'</code> preserves the most local features, <code class="language-plaintext highlighter-rouge">'full'</code> is the most stable, and the symmetric <code class="language-plaintext highlighter-rouge">'1hop'</code> choice lies between them.</p>
 <p>This control is distinct from integral <code class="language-plaintext highlighter-rouge">'windowSize'</code>. A stencil reaches only immediate neighbours; an integral loop can expand to 5-by-5, 7-by-7, and beyond. If <code class="language-plaintext highlighter-rouge">'full'</code> does not sufficiently stabilize noisy data, denoise it or use a larger integral loop.</p>
 <h2 id="19">Why the two methods measure the same vector</h2>

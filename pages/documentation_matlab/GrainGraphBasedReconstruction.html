@@ -200,7 +200,7 @@ ans = parentGrainReconstructor
  child   Iron bcc (old)  432       52      0.26%               
  
  OR: (348.1°,10.3°,55.9°)
-   p2c fit: 4.9°, 6.9°, 13°, 21° (quintiles)
+   p2c fit: 4.9°, 6.9°, 13°, 22° (quintiles)
    c2c fit: 5.8°, 5.8°, 5.8°, 5.8° (quintiles)
    closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.3°
  
@@ -399,12 +399,12 @@ pixelFitQuantiles =
     7.1494
 {% endhighlight %}
 <p>The printed fit quantiles are the compact numerical check for this graph reconstruction. The median, 90th, and 99th percentiles are 2.234, 4.155, and 7.149 degrees. Low values mean the measured child pixels agree with their assigned parent orientation.</p>
-<p>To fill remaining notIndexed or not reconstructed pixels, the earlier page segments <code class="language-plaintext highlighter-rouge">parentEBSD</code> at 3 degrees with <code class="language-plaintext highlighter-rouge">'minPixel',10</code>, smooths the parent boundaries by 10 iterations, and applies a <code class="language-plaintext highlighter-rouge">halfQuadraticFilter</code>:</p>
+<p>To fill remaining notIndexed or not reconstructed pixels, the earlier page segments <code class="language-plaintext highlighter-rouge">parentEBSD</code> at 3 degrees with <code class="language-plaintext highlighter-rouge">'minPixel',10</code>, smooths the parent boundaries by 10 iterations, and applies a <code class="language-plaintext highlighter-rouge">l1TVFilter</code>:</p>
 {% highlight matlab %}
 [parentGrains,parentEBSD] = calcGrains(parentEBSD,...
   'angle',3*degree,'minPixel',10);
 parentGrains = smoothBoundary(parentGrains,10);
-F = halfQuadraticFilter;
+F = l1TVFilter;
 parentEBSD = smooth(parentEBSD('indexed'),F,'fill',parentGrains);
 {% endhighlight %}
 <p>The grain boundaries constrain the fill so it does not blur across the reconstructed parent partition.</p>
