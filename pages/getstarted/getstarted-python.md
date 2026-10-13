@@ -38,7 +38,10 @@ and show its figures, as the MATLAB editor does with its sections.
 ## 3. A project folder with MTEX
 
 1. Make a folder for your analysis, for instance `Documents/mtex-first-steps`,
-   and open it in VS Code with *File > Open Folder...*.
+   and open it in VS Code with *File > Open Folder...*. When VS Code asks
+   whether you trust the authors of the folder, answer **Yes, I trust the
+   authors**. If the bottom left of the window shows **Restricted Mode**, click
+   it and choose *Trust*: in that mode VS Code does not run Python.
 2. Press Ctrl+Shift+P (Cmd+Shift+P on macOS), type **Python: Create
    Environment**, choose **Venv** and then the Python 3.14 you installed. A
    folder `.venv` appears in the file list. It holds this project's own copy
@@ -50,6 +53,8 @@ and show its figures, as the MATLAB editor does with its sections.
    ```
 
    Wait until it reports *Successfully installed*. This downloads about 300 MB.
+   If the prompt of the terminal does not start with `(.venv)`, type
+   `.venv/bin/pip` in place of `pip` (on Windows `.venv\Scripts\pip`).
 
 The environment is made once per project folder. The full description, with
 what to do when something goes wrong, is
