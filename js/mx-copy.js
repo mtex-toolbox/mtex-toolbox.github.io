@@ -9,11 +9,14 @@
     var button = document.createElement('button');
     button.className = 'mx-copy';
     button.type = 'button';
-    button.textContent = 'Copy';
+    button.title = 'Copy';
+    button.setAttribute('aria-label', 'Copy');
+    var icon = button.appendChild(document.createElement('i'));
+    icon.className = 'fa-regular fa-copy';
     button.addEventListener('click', function () {
       navigator.clipboard.writeText(pre.textContent.replace(/\n$/, '')).then(function () {
-        button.textContent = 'Copied';
-        setTimeout(function () { button.textContent = 'Copy'; }, 1500);
+        icon.className = 'fa-solid fa-check';
+        setTimeout(function () { icon.className = 'fa-regular fa-copy'; }, 1500);
       });
     });
     pre.parentNode.classList.add('mx-copy-host');
