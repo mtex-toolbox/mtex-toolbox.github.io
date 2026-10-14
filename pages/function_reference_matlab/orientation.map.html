@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_orientation__map.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@orientation/map.m">
     edit page</a></font>
 <div>
@@ -25,16 +26,29 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>define orientations by pairs of vectors</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
-h = Miller({1,0,0},{0,0,1},cs) % two crystal directions
-r = [xvector, yvector]         % two specimen directions
+h = Miller({1,0,0},{0,0,1},cs)
+{% endhighlight %}
+<p>Two crystal directions.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+r = [xvector, yvector]
+{% endhighlight %}
+<p>Two specimen directions.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 ori = orientation.map(h(1),r(1),h(2),r(2))
 {% endhighlight %}
+</div>
 <p>defines an orientation <code class="language-plaintext highlighter-rouge">ori</code> that appears</p>
 <pre>* in the |(100)| pole figure at position |z| and in the |(001)| pole
 figure at position |y|.
 * in the |z| inverse pole figure at position |(100)| and in the |y|
 inverse pole figure at position |(001)|.</pre>
+<div class="mx-form">
 {% highlight matlab %}
 nAlpha = Miller({1,0,0},csAlpha,'hkl')
 nBeta  = Miller({0,1,1},csBeta, 'hkl')
@@ -42,6 +56,7 @@ dAlpha = Miller({1,1,1},csAlpha,'uvw')
 dBeta  = Miller({0,1,-1},csBeta, 'uvw')
 mori = orientation.map(nAlpha,nBeta,dAlpha,dBeta)
 {% endhighlight %}
+</div>
 <p>defines an misorientation that aligns the lattice plane <code class="language-plaintext highlighter-rouge">(1,0,0)</code> of the alpha phase with the lattice plane <code class="language-plaintext highlighter-rouge">(011)</code> of the beta phase and the lattice direction <code class="language-plaintext highlighter-rouge">[111]</code> of the alpha phase with the lattice direction <code class="language-plaintext highlighter-rouge">[01-1]</code> of the beta phase.</p>
 <h2 id="4">Input</h2>
 <p>

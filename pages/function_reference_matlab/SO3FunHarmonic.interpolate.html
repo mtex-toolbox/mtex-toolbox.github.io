@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_SO3FunHarmonic__interpolate.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3FunHarmonic/interpolate.m">
     edit page</a></font>
 <div>
@@ -31,15 +32,26 @@ To make changes, update the MATLAB code and republish this document.
 <p>where \(\lambda\) is the regularization parameter and \(s\) the Sobolev index. The Sobolev norm of an SO3FunHarmonic with harmonic coefficients \(\hat{f}\) reads as</p>
 <p>\[\|f\|^2_{H^s} = \sum_{n=0}^N (2n+1)^{2s} \, \sum_{k,l=-n}^n|\hat{f}_n^{k,l}|^2.\]</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 SO3F = SO3FunHarmonic.interpolate(nodes,y)
 SO3F = SO3FunHarmonic.interpolate(nodes,y,'bandwidth',48)
 SO3F = SO3FunHarmonic.interpolate(nodes,y,'weights','Voronoi')
 SO3F = SO3FunHarmonic.interpolate(nodes,y,'bandwidth',48,'weights',W,'tol',1e-6,'maxit',200)
-SO3F = SO3FunHarmonic.interpolate(nodes,y,'regularization',0) % no regularization
+{% endhighlight %}
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+SO3F = SO3FunHarmonic.interpolate(nodes,y,'regularization',0)
+{% endhighlight %}
+<p>No regularization.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 SO3F = SO3FunHarmonic.interpolate(nodes,y,'regularization',1e-4,'SobolevIndex',2)
 [SO3F,lsqrParameters] = SO3FunHarmonic.interpolate(___)
 {% endhighlight %}
+</div>
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -57,27 +69,6 @@ SO3F = SO3FunHarmonic.interpolate(nodes,y,'regularization',1e-4,'SobolevIndex',2
          </td>
          <td>
             <tt>function values on the grid (maybe multidimensional)</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="5">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>SO3F</tt>
-         </td>
-         <td>
-            <tt><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>lsqrParameters</tt>
-         </td>
-         <td>
-            <tt>double</tt>
          </td>
       </tr>
    </table>
@@ -139,6 +130,27 @@ SO3F = SO3FunHarmonic.interpolate(nodes,y,'regularization',1e-4,'SobolevIndex',2
          </td>
          <td>
             <tt>cut off parameter m of the window functions in NFFT (default: 4, as in eval)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>SO3F</tt>
+         </td>
+         <td>
+            <tt><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lsqrParameters</tt>
+         </td>
+         <td>
+            <tt>double</tt>
          </td>
       </tr>
    </table>

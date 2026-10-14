@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_grain3d__smoothBoundary.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain3d/smoothBoundary.m">
     edit page</a></font>
 <div>
@@ -28,6 +29,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>The vertices move, nothing else: the faces, the grains they separate and the voxels they carry stay. The boundary network is a stratified complex. Quadruple points, where four grains meet, are kept fixed. The <code class="language-plaintext highlighter-rouge">'hierarchical'</code> scheme then smooths every triple line as a curve between its quadruple points and afterwards every boundary face as a surface between its triple lines, so that a junction is never averaged with the interior of a face. The <code class="language-plaintext highlighter-rouge">'coupled'</code> scheme smooths all vertices at once and lets a triple line drift with the faces around it.</p>
 <p>Which filter moves the vertices is a <a href="boundaryFilter.html"><code class="language-plaintext highlighter-rouge">boundaryFilter</code></a>, the same objects as in two dimensions: <code class="language-plaintext highlighter-rouge">laplaceFilter</code> shrinks every grain a little per iteration, <code class="language-plaintext highlighter-rouge">taubinFilter</code> keeps the volumes approximately, <code class="language-plaintext highlighter-rouge">curvatureFilter</code> and <code class="language-plaintext highlighter-rouge">huberFilter</code> solve for a smoothing length. The outer hull is fixed, so the volumes of all grains together are conserved exactly. <code class="language-plaintext highlighter-rouge">'maxDisplacement'</code> bounds how far the surface may travel, half a voxel keeps a one voxel grain in place.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 grains = smoothBoundary(grains)
 grains = smoothBoundary(grains,10)
@@ -35,6 +37,7 @@ grains = smoothBoundary(grains,taubinFilter(20))
 grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
 grains = smoothBoundary(grains,10,'maxDisplacement',0.5)
 {% endhighlight %}
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -52,19 +55,6 @@ grains = smoothBoundary(grains,10,'maxDisplacement',0.5)
          </td>
          <td>
             <tt>number of iterations (default 1)</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>grains</tt>
-         </td>
-         <td>
-            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
          </td>
       </tr>
    </table>
@@ -107,6 +97,19 @@ grains = smoothBoundary(grains,10,'maxDisplacement',0.5)
          </td>
          <td>
             <tt>let the vertices on the outer hull move</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
          </td>
       </tr>
    </table>

@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_gbcFMC__gbcFMC.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/grainBoundaryCriteria/@gbcFMC/gbcFMC.m">
     edit page</a></font>
 <div>
@@ -27,13 +28,24 @@ To make changes, update the MATLAB code and republish this document.
 <p>Wraps the FMC algorithm (McMahon et al.). Unlike the local criteria this one clusters the whole neighbourhood graph at once; doEvaluate therefore builds the adjacency from (i,j), runs FMC, and reports for each pair whether both endpoints ended up in the same (non-zero) cluster.</p>
 <p>Each indexed phase is clustered separately, on its own pixels and with its own symmetry, so a pair straddling a phase boundary is always a boundary.</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 criterion = gbcFMC(cmaha);
 criterion = gbcFMC('cmaha',3,'quatmax',5);
 grains = calcGrains(ebsd,'fmc',3.8);
-grains = calcGrains(ebsd,'fmc',3.8,'verbose');   % report the hierarchy
+{% endhighlight %}
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+grains = calcGrains(ebsd,'fmc',3.8,'verbose');
+{% endhighlight %}
+<p>Report the hierarchy.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 out = criterion.eval(ebsd,i,j);
 {% endhighlight %}
+</div>
 <h2 id="4">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">

@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_grainBoundary__calcGBND.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grainBoundary/calcGBND.m">
     edit page</a></font>
 <div>
@@ -25,20 +26,26 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>estimate GBND and GBCD from 2d boundary segments</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 gbnd = calcGBND(gB,ebsd)
 gbnd = calcGBND(gB,grains)
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% the gbcd for a specific misorientation
 gbcd = calcGBND(gB,grains,mori)
 {% endhighlight %}
+<p>The gbcd for a specific misorientation.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% use a specific halfwidth
 gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
 {% endhighlight %}
+<p>Use a specific halfwidth.</p>
+</div>
 <p>Given an <a href="EBSD.EBSD.html">EBSD</a> the orientations on either side of a segment are looked up through <code class="language-plaintext highlighter-rouge">gB.ebsdId</code>, which is only meaningful while every segment still runs between one specific pair of pixels. <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> breaks that by default - it merges and resamples segments - so smooth with <code class="language-plaintext highlighter-rouge">'noSimplify','noRefine'</code> before calling this, or pass the <a href="grain2d.grain2d.html">grain2d</a> instead and work from the grain mean orientations.</p>
 <h2 id="4">Input</h2>
 <p>
@@ -85,19 +92,6 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>gbnd</tt>
-         </td>
-         <td>
-            <tt><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></tt>
-         </td>
-      </tr>
-   </table>
-</p>
 <h2 id="6">Options</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -115,6 +109,19 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
          </td>
          <td>
             <tt>use a nonnegative kernel</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>gbnd</tt>
+         </td>
+         <td>
+            <tt><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></tt>
          </td>
       </tr>
    </table>

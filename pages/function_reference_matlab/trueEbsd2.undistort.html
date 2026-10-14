@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_trueEbsd2__undistort.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@trueEbsd2/undistort.m">
     edit page</a></font>
 <div>
@@ -30,10 +31,12 @@ To make changes, update the MATLAB code and republish this document.
 <p>Resampling is nearest neighbour throughout. For images that is a choice - linear or cubic would work and would be smoother - but nearest neighbour is least likely to invent intensities that were never measured.</p>
 <p>For <a href="EBSD.EBSD.html">EBSD</a> data it is not a choice. Orientations and phase labels have no meaningful in-between, so what gets resampled is the map's id: the id travels through exactly the same mapping as the image, and the output map is rebuilt by looking up each resampled id in the input map. Note that EBSDsquare/interp is not usable here - it assumes a regular grid, and the whole point of this step is that the input is not on one.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 job = undistort(job)
 job = undistort(job,'backend','scattered')
 {% endhighlight %}
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -47,19 +50,6 @@ job = undistort(job,'backend','scattered')
       </tr>
    </table>
 </p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>job</tt>
-         </td>
-         <td>
-            <tt>the same @trueEbsd (a handle), with undistortedList filled in</tt>
-         </td>
-      </tr>
-   </table>
-</p>
 <h2 id="7">Options</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -69,6 +59,19 @@ job = undistort(job,'backend','scattered')
          </td>
          <td>
             <tt>'inverse' (default) or 'scattered', see remapShifted. 'inverse' is the fast one; 'scattered' is what TrueEBSD &lt;= 2.1.0 ran, for reproducing older numbers.</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>job</tt>
+         </td>
+         <td>
+            <tt>the same @trueEbsd (a handle), with undistortedList filled in</tt>
          </td>
       </tr>
    </table>

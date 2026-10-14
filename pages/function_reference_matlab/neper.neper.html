@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_neper__neper.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@neper/neper.m">
     edit page</a></font>
 <div>
@@ -25,57 +26,98 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>class that provides an interface to the crystal simulation software neper (see <a href="https://neper.info">https://neper.info</a>)</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 neper.init
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-%select working folder, default: |tempdir|
 neper.filePath='C:\\Users\user\Work\Mtex\NeperExamples';
 {% endhighlight %}
+<p>Select working folder, default: |tempdir|.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% specifying filenames
 neper.fileName3d='my100Grains';    %default: 'allgrains'
 {% endhighlight %}
+<p>Specifying filenames.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-%specifying size of tessellation domain
 neper.geometry = "cube(4,4,1)";
-%defining tessellation id
+{% endhighlight %}
+<p>Specifying size of tessellation domain.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 neper.id = 512;
 {% endhighlight %}
+<p>Defining tessellation id.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-%eventually set a list of additional options to be found here
-%to be found here: https://neper.info/doc/neper_t.html
 neper.varNeperopts = '-regularization 1'
 {% endhighlight %}
+<p>Eventually set a list of additional options to be found here. To be found here: https://neper.info/doc/neper_t.html.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
 cs = crystalSymmetry('mmm');
 odf = unimodalODF(orientation.rand(cs))
 numGrains = 100;
 myNeper.simulateGrains(numGrains,odf)
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-N = vector3d(1,1,1);    % normal vector (a,b,c) of a plane
-d = 1;                  % d of a plane equation(a,b,c,d)
+N = vector3d(1,1,1);
+{% endhighlight %}
+<p>Normal vector (a,b,c) of a plane.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+d = 1;
+{% endhighlight %}
+<p>D of a plane equation(a,b,c,d).</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 grains = neper.getSlice(N,d)
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-N = vector3d(0,0,1);    % normal vector of a plane
-A = vector3d(0,0,0.5);  % point from the plane
+N = vector3d(0,0,1);
+{% endhighlight %}
+<p>Normal vector of a plane.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+A = vector3d(0,0,0.5);
+{% endhighlight %}
+<p>Point from the plane.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 grains2 = neper.getSlice(N,A)
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
 plot(grains,grains.meanOrientation)
 hold
 plot(grains2,grains2.meanOrientation)
 {% endhighlight %}
+</div>
 <h2 id="4">Class Properties</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">

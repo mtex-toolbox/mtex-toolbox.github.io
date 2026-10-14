@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_SO3Fun__discrepancy.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3Fun/discrepancy.m">
     edit page</a></font>
 <div>
@@ -34,6 +35,7 @@ D_2^2(nu) = nu(SO(3))^2/2
 <p>D_ball uses a finite search: it is a lower-bound approximation for the represented measures, not a certified global maximum. info.isExact is false, and info.closed=false denotes the open-ball limiting value at the reported radius. Orientation space is three dimensional, so a center grid resolves it far more coarsely than a grid of the same size resolves the sphere and the estimate rises well past the default - refine numCenters and numRadii until it settles. Against a peaked density the atoms themselves are the decisive centers and the estimate is stable much earlier.</p>
 <p>'kernel' preserves the historical squared, truncated optimalSample objective and uses that iteration's transform, so it reproduces it exactly. Its degree zero coefficient is negative, so it drops the mass term and takes two functions of equal integral only. It equals 2*sqrt(2)*pi times the squared D_2 of the harmonically projected difference, and it imposes the symmetry of the density on the sample. It is NOT maximum ball discrepancy. 'squared' is redundant for this legacy metric.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 d = discrepancy(f,g,'metric','D_2')
 d = discrepancy(f,ori,'metric','D_ball','numCenters',4097)
@@ -41,6 +43,7 @@ d = discrepancy(f,ori,'metric','L2','bandwidth',16)
 d2 = discrepancy(f,ori,'metric','L2','bandwidth',16,'squared')
 [d,info] = discrepancy(f,ori,'metric','D_ball')
 {% endhighlight %}
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -58,27 +61,6 @@ d2 = discrepancy(f,ori,'metric','L2','bandwidth',16,'squared')
          </td>
          <td>
             <tt><a href="rotation.rotation.html">rotation</a> or <a href="orientation.orientation.html">orientation</a>, representing a weighted probability measure</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>res</tt>
-         </td>
-         <td>
-            <tt>discrepancy (square root for D_2 and L2 unless 'squared')</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>info</tt>
-         </td>
-         <td>
-            <tt>method and approximation information; for D_ball also a witness ball</tt>
          </td>
       </tr>
    </table>
@@ -145,6 +127,27 @@ d2 = discrepancy(f,ori,'metric','L2','bandwidth',16,'squared')
          </td>
          <td>
             <tt>return the square of the standard discrepancy</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>res</tt>
+         </td>
+         <td>
+            <tt>discrepancy (square root for D_2 and L2 unless 'squared')</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>info</tt>
+         </td>
+         <td>
+            <tt>method and approximation information; for D_ball also a witness ball</tt>
          </td>
       </tr>
    </table>

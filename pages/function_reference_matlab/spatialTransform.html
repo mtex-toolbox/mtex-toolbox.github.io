@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_spatialTransform.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/spatialTransforms/spatialTransform.m">
     edit page</a></font>
 <div>
@@ -49,14 +50,35 @@ T2 * T1   COMPOSES. It reads in matrix order, T1 applied first, and it
 <p>Use + to declare a distortion that is about to be fitted, * for transforms that already are. An unfitted prototype has zero coefficients and so reports isid, which is why the two differ where it matters: shift * drift is a bare drift with the shift silently gone, while shift + drift is the two stage model it looks like.</p>
 <p>Note that + is not the pointwise + of vector3d or S2Fun. It chains the maps, it does not add the displacements - though for displacements small against the scale they vary on the two agree to first order, which is why the notation reads the way it does.</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 posB = eval(T,posA)
-posB = T * posA               % the same
-T    = T1 + T2                % chain as stages, T1 applied first
-T    = T2 * T1                % compose, T1 applied first
+{% endhighlight %}
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+posB = T * posA
+{% endhighlight %}
+<p>The same.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+T    = T1 + T2
+{% endhighlight %}
+<p>Chain as stages, T1 applied first.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+T    = T2 * T1
+{% endhighlight %}
+<p>Compose, T1 applied first.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 Tinv = inv(T)
 tf   = isid(T)
 {% endhighlight %}
+</div>
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">

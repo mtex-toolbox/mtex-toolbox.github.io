@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_EBSD3square__calcGrains.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD3square/calcGrains.m">
     edit page</a></font>
 <div>
@@ -27,27 +28,34 @@ To make changes, update the MATLAB code and republish this document.
 <h2 id="3">Description</h2>
 <p>Voxels are 6-connected. A boundary face separates two neighbouring voxels the criterion tells apart; together with the outer hull the faces close every grain, so volumes follow from the divergence theorem. notIndexed voxels form notIndexed grains.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 [grains, ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',5)
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% reconstruction low and high angle grain boundaries
 lagb = 2*degree;
 hagb = 10*degree;
 grains = calcGrains(ebsd,'angle',[hagb lagb])
 {% endhighlight %}
+<p>Reconstruction low and high angle grain boundaries.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% grains from a grainId stored with the data, e.g. imported from a file
 grains = calcGrains(ebsd,'grainId')
 {% endhighlight %}
+<p>Grains from a grainId stored with the data, e.g. imported from a file.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% specify phase dependent thresholds
-% thresholds follow the same order as ebsd.CSList and should have the same length
 grains = calcGrains(ebsd,'angle',{angle_1 angle_2 angle_3})
 {% endhighlight %}
+<p>Specify phase dependent thresholds. Thresholds follow the same order as ebsd.CSList and should have the same length.</p>
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -57,27 +65,6 @@ grains = calcGrains(ebsd,'angle',{angle_1 angle_2 angle_3})
          </td>
          <td>
             <tt><a href="EBSD3square.EBSD3square.html">EBSD3square</a></tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>grains</tt>
-         </td>
-         <td>
-            <tt><a href="grain3d.grain3d.html">grain3d</a>, the boundary consists of triangles, two per voxel face</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>ebsd</tt>
-         </td>
-         <td>
-            <tt><a href="EBSD3square.EBSD3square.html">EBSD3square</a> with additional property grainId</tt>
          </td>
       </tr>
    </table>
@@ -136,6 +123,27 @@ grains = calcGrains(ebsd,'angle',{angle_1 angle_2 angle_3})
          </td>
          <td>
             <tt>connect voxels with the same ebsd.grainId instead of a criterion on the orientations</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a>, the boundary consists of triangles, two per voxel face</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD3square.EBSD3square.html">EBSD3square</a> with additional property grainId</tt>
          </td>
       </tr>
    </table>

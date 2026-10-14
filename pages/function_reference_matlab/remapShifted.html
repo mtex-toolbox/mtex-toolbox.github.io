@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_remapShifted.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/registration_tools/remapShifted.m">
     edit page</a></font>
 <div>
@@ -31,10 +32,12 @@ To make changes, update the MATLAB code and republish this document.
 <p>The two agree on all but a few pixels in ten thousand - ties in the nearest neighbour lookup fall differently - and 'inverse' keeps a slightly wider border, because 'scattered' returns NaN outside the convex hull of the displaced points while 'inverse' returns NaN outside the image.</p>
 <p>If the fixed point iteration does not settle, the mapping is not invertible on this grid, which means the fitted distortion folds the image over itself. That is a broken registration rather than a hard case, so it warns and falls back to 'scattered' rather than returning a wrong answer.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 imgOut = remapShifted(pos,shifts,img,'test2ref')
 imgOut = remapShifted(pos,shifts,img,'ref2test','backend','scattered')
 {% endhighlight %}
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -80,19 +83,6 @@ imgOut = remapShifted(pos,shifts,img,'ref2test','backend','scattered')
       </tr>
    </table>
 </p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>imgOut</tt>
-         </td>
-         <td>
-            <tt>img resampled on pos, same r*c*z, NaN where pos falls outside the shifted image</tt>
-         </td>
-      </tr>
-   </table>
-</p>
 <h2 id="7">Options</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -110,6 +100,19 @@ imgOut = remapShifted(pos,shifts,img,'ref2test','backend','scattered')
          </td>
          <td>
             <tt>scatter the shifted pixels and rebuild with scatteredInterpolant, as TrueEBSD &lt;= 2.1.0 did</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>imgOut</tt>
+         </td>
+         <td>
+            <tt>img resampled on pos, same r*c*z, NaN where pos falls outside the shifted image</tt>
          </td>
       </tr>
    </table>

@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_grain2d__smoothBoundary.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain2d/smoothBoundary.m">
     edit page</a></font>
 <div>
@@ -48,17 +49,21 @@ To make changes, update the MATLAB code and republish this document.
 <p>Junctions - triple points, quadruple points, and the vertices where the inner boundary ends on the outer one - stay exactly where they are throughout, unless <code class="language-plaintext highlighter-rouge">moveTriplePoints</code> is given. When grains were segmented using alphaShapes, all grains next to holes have outer boundary.</p>
 <p>Note that the first two steps change the number of boundary segments. A segment that no longer runs between a specific pair of pixels gets the <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> 0, as the outer boundary has; where the pixel pairs are analysed, switch the steps off with <code class="language-plaintext highlighter-rouge">'noSimplify'</code> and <code class="language-plaintext highlighter-rouge">'noRefine'</code> to keep them all.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 grains = smoothBoundary(grains)
 grains = smoothBoundary(grains,iter)
 grains = smoothBoundary(grains,iter,'noSimplify','noRefine')
 grains = smoothBoundary(grains,iter,'simplify',epsilon,'refine',delta)
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
 grains = smoothBoundary(grains,taubinFilter)
 grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
 {% endhighlight %}
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -84,27 +89,6 @@ grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
          </td>
          <td>
             <tt><a href="boundaryFilter.html">boundaryFilter</a>, the smoothing algorithm to use</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>grains</tt>
-         </td>
-         <td>
-            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>F</tt>
-         </td>
-         <td>
-            <tt><a href="boundaryFilter.html">boundaryFilter</a> that was used</tt>
          </td>
       </tr>
    </table>
@@ -203,6 +187,27 @@ grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
          </td>
          <td>
             <tt>umbrella smoothing kernel</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt><a href="boundaryFilter.html">boundaryFilter</a> that was used</tt>
          </td>
       </tr>
    </table>

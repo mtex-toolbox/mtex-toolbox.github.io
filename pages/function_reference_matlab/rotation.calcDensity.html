@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_rotation__calcDensity.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@rotation/calcDensity.m">
     edit page</a></font>
 <div>
@@ -35,26 +36,34 @@ To make changes, update the MATLAB code and republish this document.
 <h2 id="3">Description</h2>
 <p>If the number of orientations is very large (more than about 10 * bandwidth^3) the Fourier method rounds the orientations onto a regular quadrature grid and computes the Fourier coefficients by a plain FFT instead of the NFFT, see <code class="language-plaintext highlighter-rouge">SO3FunHarmonic.adjoint</code>. The rounding error is at most half the grid spacing and hence negligible compared to the kernel halfwidth. Use the flag <code class="language-plaintext highlighter-rouge">'exact'</code> to avoid any gridding.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
-% use kernel density estimation with a 10 degree kernel
 odf = calcDensity(ori,'halfwidth',10*degree)
 {% endhighlight %}
+<p>Use kernel density estimation with a 10 degree kernel.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% use grain area as weights for the orientations
 odf = calcDensity(grains.meanOrientation,'weights',grains.area)
 {% endhighlight %}
+<p>Use grain area as weights for the orientations.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% use a specific kernel
 psi = SO3AbelPoissonKernel('halfwidth',10*degree)
 odf = calcDensity(ori,'kernel',psi)
 {% endhighlight %}
+<p>Use a specific kernel.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% compute the ODF as a Fourier series of order 16
 odf = calcDensity(ori,'order',16)
 {% endhighlight %}
+<p>Compute the ODF as a Fourier series of order 16.</p>
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -64,19 +73,6 @@ odf = calcDensity(ori,'order',16)
          </td>
          <td>
             <tt><a href="orientation.orientation.html">orientation</a></tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>odf</tt>
-         </td>
-         <td>
-            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
          </td>
       </tr>
    </table>
@@ -167,6 +163,19 @@ odf = calcDensity(ori,'order',16)
          </td>
          <td>
             <tt>no Fourier method</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>odf</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
          </td>
       </tr>
    </table>

@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_xcfShift.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/registration_tools/xcfShift.m">
     edit page</a></font>
 <div>
@@ -33,11 +34,13 @@ T = spatialTransformShift.fit(pos, pos + u, 'weights', peak);
 <h2 id="3">Description</h2>
 <p>Only the region where both images are finite is tiled, so the padding an earlier resampling left behind is excluded rather than correlated against. A tile that still contains a non finite value, or that is flat, comes back with NaN in all three outputs - drop those before fitting, which every spatialTransform fit does for you.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 [u,peak,pos] = xcfShift(A,B)
 [u,peak,pos] = xcfShift(mgA,mgB)
 [u,peak,pos] = xcfShift(A,B,'ROISize',64,'numROI',[24 18])
 {% endhighlight %}
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -55,35 +58,6 @@ T = spatialTransformShift.fit(pos, pos + u, 'weights', peak);
          </td>
          <td>
             <tt><a href="mapImage.mapImage.html">mapImage</a> on the same grid, in which case u and pos are in specimen units rather than pixels</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>u</tt>
-         </td>
-         <td>
-            <tt>n × 1 <a href="vector3d.vector3d.html">vector3d</a>, the displacement from A to B at each tile: the feature at pos in A is at pos + u in B</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>peak</tt>
-         </td>
-         <td>
-            <tt>n × 1 correlation peak height, the fit weight</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>pos</tt>
-         </td>
-         <td>
-            <tt>n × 1 <a href="vector3d.vector3d.html">vector3d</a>, the tile centres, in A</tt>
          </td>
       </tr>
    </table>
@@ -134,6 +108,35 @@ T = spatialTransformShift.fit(pos, pos + u, 'weights', peak);
          </td>
          <td>
             <tt>drop the duplicated band pass indices, see xcfCorrelate</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>u</tt>
+         </td>
+         <td>
+            <tt>n × 1 <a href="vector3d.vector3d.html">vector3d</a>, the displacement from A to B at each tile: the feature at pos in A is at pos + u in B</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>peak</tt>
+         </td>
+         <td>
+            <tt>n × 1 correlation peak height, the fit weight</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt>n × 1 <a href="vector3d.vector3d.html">vector3d</a>, the tile centres, in A</tt>
          </td>
       </tr>
    </table>

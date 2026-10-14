@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_EBSD__calcGrains.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/calcGrains.m">
     edit page</a></font>
 <div>
@@ -25,35 +26,44 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>grains reconstruction from 2d EBSD data</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 [grains, ebsd] = calcGrains(ebsd, 'angle', 10*degree, 'minPixel', 2, 'alpha', 3.7)
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% reconstruction low and high angle grain boundaries
 lagb = 2*degree;
 hagb = 10*degree;
 grains = calcGrains(ebsd,'angle',[hagb lagb])
 {% endhighlight %}
+<p>Reconstruction low and high angle grain boundaries.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% grains from a grainId stored with the data, e.g. imported from a file
 grains = calcGrains(ebsd,'grainId')
 {% endhighlight %}
+<p>Grains from a grainId stored with the data, e.g. imported from a file.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% specify phase dependent thresholds
-% thresholds follow the same order as ebsd.CSList and should have the same length
 grains = calcGrains(ebsd,'angle',{angl_1 angle_2 angle_3})
 {% endhighlight %}
+<p>Specify phase dependent thresholds. Thresholds follow the same order as ebsd.CSList and should have the same length.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% Markovian clustering algorithm
 p = 1.5;    % inflation power (default = 1.4)
 maxIt = 10; % number of iterations (default = 4)
 delta = 5*degree % variance of the threshold angle
 grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
 {% endhighlight %}
+<p>Markovian clustering algorithm.</p>
+</div>
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -63,27 +73,6 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
          </td>
          <td>
             <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="5">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>grains</tt>
-         </td>
-         <td>
-            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>ebsd</tt>
-         </td>
-         <td>
-            <tt><a href="EBSD.EBSD.html">EBSD</a> with additional property grainId</tt>
          </td>
       </tr>
    </table>
@@ -174,6 +163,27 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
          </td>
          <td>
             <tt>use a true circumradius-based alpha-complex (exact, not a raster approximation) instead of the default morphological closing to partition the spatial domain - see spatialDecompositionAlpha.m. Useful for large alpha, where the default's disk structuring element gets slow.</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a> with additional property grainId</tt>
          </td>
       </tr>
    </table>

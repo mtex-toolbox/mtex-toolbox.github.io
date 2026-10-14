@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_trueEbsd__trueEbsd.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@trueEbsd/trueEbsd.m">
     edit page</a></font>
 <div>
@@ -29,11 +30,14 @@ To make changes, update the MATLAB code and republish this document.
 <p>A handle class, as every class guiding a process in MTEX is - see <a href="parentGrainReconstructor.parentGrainReconstructor.html">parentGrainReconstructor</a>. The methods still return the job, so job = pixelSizeMatch(job,pixSz) reads as before, but the job is modified in place: a second variable holding it is an alias rather than a snapshot, and a method that errors part way leaves the job partly filled.</p>
 <p>THE MODEL IS THE CLASS. A hop's distortion is an unfitted <a href="spatialTransform.html">spatialTransform</a> - the class names which distortion separates the pair and calcDistortion fills in the coefficients. A multi stage hop is written with + and never *, because mtimes absorbs an operand reporting isid and an unfitted prototype has zero coefficients, so * would silently drop a stage. There is no sentinel on the reference: where nothing separates a pair, the entry is spatialTransformId.</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 job = trueEbsd(imgList)
 job = trueEbsd(imgList,T)
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
 imgList = [mapImage(ebsd.bc,ebsd), mapImage(img,'dxy',0.05)]
 job = trueEbsd(imgList, spatialTransformShift + spatialTransformDrift)
@@ -41,6 +45,7 @@ job.pixelSizeMatch
 job.calcDistortion('fitErr')
 job.undistort
 {% endhighlight %}
+</div>
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">

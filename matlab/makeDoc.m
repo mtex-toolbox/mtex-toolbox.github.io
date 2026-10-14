@@ -283,6 +283,14 @@ if doRef
 
   publish(refFiles,options);
 
+  % the calling forms in boxes of their own, their comments as text below
+  % them, and the keyword sections after Input, as the Python pages show them
+  [status,out] = system(['python3 "' fullfile(pwd,'..','tools','reference-forms.py') '"']);
+  disp(out);
+  if status ~= 0
+    warning('MTEX:makeDoc','could not lay out the calling forms of the reference');
+  end
+
 end
 
 %% Publish Doc

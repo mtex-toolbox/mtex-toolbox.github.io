@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_dropSymmetry.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/geometry_tools/dropSymmetry.m">
     edit page</a></font>
 <div>
@@ -30,10 +31,12 @@ To make changes, update the MATLAB code and republish this document.
 <p>The membership test covers a single rotation and a list at once: <code class="language-plaintext highlighter-rouge">all(any(rot(:).' == sym.rot(:)))</code> reduces to <code class="language-plaintext highlighter-rouge">any(rot == sym.rot(:))</code> when <code class="language-plaintext highlighter-rouge">rot</code> is scalar, which is what rotate needs and rotate_outer generalises.</p>
 <p>It also gates the products in <a href="orientation.orientation.html">orientation</a>/private/ensureSym: a rotation applied on the left acts in the specimen frame and can destroy the specimen symmetry, on the right it acts in the crystal frame. That guard used to be a separate one testing dot_outer(sym.rot,rot) &gt; 0.99 - a quaternion dot of 0.99 is a rotation angle of 16.2 degree, so any rotation up to sixteen degrees counted as a symmetry element and the claim survived untouched.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 SO3F.CS = dropSymmetry(SO3F.CS,rot,'crystal','ODF')
 SO3F.SS = dropSymmetry(SO3F.SS,rot,'specimen','ODF')
 {% endhighlight %}
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">

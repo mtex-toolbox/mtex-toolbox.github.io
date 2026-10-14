@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_plottingConvention.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/plottingConvention.m">
     edit page</a></font>
 <div>
@@ -26,34 +27,38 @@ To make changes, update the MATLAB code and republish this document.
 <p>class describing the alignment of a reference frame on the screen</p>
 <p>plottingConvention is a value class: assigning one always copies, so a convention can never be changed behind the back of the data holding it. What couples data to the session default is the shared referenceFrame - see <a href="specimenFrame.specimenFrame.html">specimenFrame.default</a> - not a shared convention handle.</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
-% specify a custom plotting convention
 pC = plottingConvention(outOfScreen,east)
 plot(ebsd,pC)
 {% endhighlight %}
+<p>Specify a custom plotting convention.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% specify a custom plotting convention by a string - each axis is
-% followed or preceded by the direction it points to on screen
 pC = plottingConvention('y↑→x')  % y points up, x points to the right
 pC = plottingConvention('x←↑y')  % x points to the left, y points up
 pC = plottingConvention('z⊙→x')  % z points out of screen, x right
 pC = plottingConvention('y^->x') % same as 'y↑→x', ASCII arrows
 pC = plottingConvention('z(.)->x') % same as 'z⊙→x', (x) is ⊗
 {% endhighlight %}
+<p>Specify a custom plotting convention by a string - each axis is. Followed or preceded by the direction it points to on screen.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% changing the default plotting convention - modify a copy and make
-% it the default (this is what plotx2east and friends do)
 pC = plottingConvention.default; pC.east = yvector; pC.makeDefault
 {% endhighlight %}
+<p>Changing the default plotting convention - modify a copy and make. It the default (this is what plotx2east and friends do).</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% a convention belongs to a reference frame, never to a data object, so
-% how2plot is read only everywhere but <referenceFrame.referenceFrame.html referenceFrame> - align data by
-% moving it into a frame that carries the convention
 ebsd.frame = specimenFrame.rolling
 {% endhighlight %}
+<p>A convention belongs to a reference frame, never to a data object, so. How2plot is read only everywhere but &lt;referenceFrame.referenceFrame.html referenceFrame&gt; - align data by. Moving it into a frame that carries the convention.</p>
+</div>
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">

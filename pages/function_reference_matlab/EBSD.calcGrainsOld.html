@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_EBSD__calcGrainsOld.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/calcGrainsOld.m">
     edit page</a></font>
 <div>
@@ -25,45 +26,58 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>grains reconstruction from 2d EBSD data</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 [grains, ebsd.grainId] = calcGrains(ebsd,'angle',10*degree)
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% reconstruction low and high angle grain boundaries
 lagb = 2*degree;
 hagb = 10*degree;
 grains = calcGrains(ebsd,'angle',[hagb lagb])
 {% endhighlight %}
+<p>Reconstruction low and high angle grain boundaries.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% allow grains to grow into not indexed regions
 grains = calcGrains(ebsd,'angle',10*degree)
 {% endhighlight %}
+<p>Allow grains to grow into not indexed regions.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% do not allow grains to grow into not indexed regions
 grains = calcGrains(ebsd,'unitCell')
 {% endhighlight %}
+<p>Do not allow grains to grow into not indexed regions.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% follow non convex outer boundary
 grains = calcGrains(ebsd,'boundary','tight')
 {% endhighlight %}
+<p>Follow non convex outer boundary.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% specify phase dependent thresholds
-% thresholds follow the same order as ebsd.CSList and should have the same length
 grains = calcGrains(ebsd,'angle',{angl_1 angle_2 angle_3})
 {% endhighlight %}
+<p>Specify phase dependent thresholds. Thresholds follow the same order as ebsd.CSList and should have the same length.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% Markovian clustering algorithm
 p = 1.5;    % inflation power (default = 1.4)
 maxIt = 10; % number of iterations (default = 4)
 delta = 5*degree % variance of the threshold angle
 grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
 {% endhighlight %}
+<p>Markovian clustering algorithm.</p>
+</div>
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -73,27 +87,6 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
          </td>
          <td>
             <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="5">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>grains</tt>
-         </td>
-         <td>
-            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>ebsd.grainId</tt>
-         </td>
-         <td>
-            <tt>grainId of each pixel</tt>
          </td>
       </tr>
    </table>
@@ -176,6 +169,27 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
          </td>
          <td>
             <tt>use qHull for the Voronoi decomposition</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd.grainId</tt>
+         </td>
+         <td>
+            <tt>grainId of each pixel</tt>
          </td>
       </tr>
    </table>

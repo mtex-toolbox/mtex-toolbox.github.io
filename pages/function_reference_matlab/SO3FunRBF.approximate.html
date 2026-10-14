@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_SO3FunRBF__approximate.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3FunRBF/approximate.m">
     edit page</a></font>
 <div>
@@ -29,6 +30,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>The spatial method is well suited for sharp functions (i.e. high bandwidth), whereas the harmonic method is better suited for low bandwidth, since the system matrix becomes very large for high bandwidths.</p>
 <p>For the spatial method, instead of modified least squares (mlsq) also the maximum-likelihood estimate (mlrl) can be computed. Note that both of this methods have the condition that we approximate a odf (the mean of the SO3Fun is 1). We can also use some standard least squares methods (for example lsqr).</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 SO3F = SO3FunRBF.approximate(f)
 SO3F = SO3FunRBF.approximate(f,'kernel',psi)
@@ -38,22 +40,29 @@ SO3F = SO3FunRBF.approximate(f,'kernel',psi,'resolution',5*degree)
 SO3F = SO3FunRBF.approximate(f,'kernel',psi,'resolution',5*degree,'approxresolution',2*degree)
 SO3F = SO3FunRBF.approximate(f,'mlsq','tol',1e-3,'maxit',100,'density')
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
 SO3F = SO3FunRBF.approximate(f,'harmonic')
 SO3F = SO3FunRBF.approximate(f,'harmonic','tol',1e-3,'maxit',100)
 SO3F = SO3FunRBF.approximate(f,'harmonic','kernel',psi,'SO3Grid',S3G,'density')
 {% endhighlight %}
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% given function values at given nodes - handed to SO3FunRBF.interpolate
 SO3F = SO3FunRBF.approximate(nodes,y)
 SO3F = SO3FunRBF.approximate(nodes,y,'kernel',psi)
 {% endhighlight %}
+<p>Given function values at given nodes - handed to SO3FunRBF.interpolate.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
 [SO3F,lsqrIter] = SO3FunRBF.approximate(___)
 {% endhighlight %}
+</div>
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -95,27 +104,6 @@ SO3F = SO3FunRBF.approximate(nodes,y,'kernel',psi)
          </td>
          <td>
             <tt><a href="rotation.rotation.html">rotation</a></tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="5">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>SO3F</tt>
-         </td>
-         <td>
-            <tt><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>lsqrIter</tt>
-         </td>
-         <td>
-            <tt>number of iterations of the LSQR-Solver</tt>
          </td>
       </tr>
    </table>
@@ -238,6 +226,27 @@ SO3F = SO3FunRBF.approximate(nodes,y,'kernel',psi)
          </td>
          <td>
             <tt>maximum likelihood estimate (with positivity condition and normalization to mean 1)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>SO3F</tt>
+         </td>
+         <td>
+            <tt><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lsqrIter</tt>
+         </td>
+         <td>
+            <tt>number of iterations of the LSQR-Solver</tt>
          </td>
       </tr>
    </table>

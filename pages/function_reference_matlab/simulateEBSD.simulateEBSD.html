@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_simulateEBSD__simulateEBSD.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@simulateEBSD/simulateEBSD.m">
     edit page</a></font>
 <div>
@@ -28,58 +29,89 @@ To make changes, update the MATLAB code and republish this document.
 <p>It allows to simulate a single/multigradient EBSD map with a free choice of the starting orientation, size, misorientation axis, direction of misorientaiton increase, type and range of noise Multiple gradients can be superposed and you can use an existing map and add noise or deform it.</p>
 <p>TODO: - add the singleJump, multiKnob, polyGrain - make noise distribution more flexible - allow to start from a different pos - fix first column of pixels</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
-% initialize the object
 ebsdSIM = simulateEBSD
 {% endhighlight %}
+<p>Initialize the object.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% set the dimension (optional)
 ebsdSIM.xdim = 50
 ebsdSIM.ydim = 50
 {% endhighlight %}
+<p>Set the dimension (optional).</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% change the initial orientation (optional)
 ebsdSIM.ori0 = orientation.byEuler([0, pi, 30]*degree,ebsdSIM.CS)
 {% endhighlight %}
+<p>Change the initial orientation (optional).</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% make a planar map
 ebsdSIM.makeMap
 plot(ebsdSIM.EBSDsim)
 {% endhighlight %}
+<p>Make a planar map.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% 1) create a simple gradient
-% 1a) set the misorientation axis
 ebsdSIM.axS = vector3d(1,1,0)
-% 1b) set the direction towards which the misorientation increases
+{% endhighlight %}
+<p>1) create a simple gradient. 1a) set the misorientation axis.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 ebsdSIM.gradDir = vector3d(1,0,0);
-% 1c) create the gradient
+{% endhighlight %}
+<p>1b) set the direction towards which the misorientation increases.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 ebsdSIM.addFeature_simpleGradient
 {% endhighlight %}
+<p>1c) create the gradient.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% 2) add noise
-% 2a) specify noise type: 'uniform' or 'logn'
 ebsdSIM.noiseFun = 'logn'
-% 2b) specify maximum noise
+{% endhighlight %}
+<p>2) add noise. 2a) specify noise type: 'uniform' or 'logn'.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 ebsdSIM.noiseMax = 0.1*degree;
-% 2c) create noise
+{% endhighlight %}
+<p>2b) specify maximum noise.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 ebsdSIM.addnoise
 {% endhighlight %}
+<p>2c) create noise.</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% 3) add a circular "subgrain"
-% 3a) set the misorientation axis
 ebsdSIM.axS = vector3d(1,1,1)
-% 3b) add "subgrain"
+{% endhighlight %}
+<p>3) add a circular "subgrain". 3a) set the misorientation axis.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 ebsdSIM.addFeature_circularSubgrain
 {% endhighlight %}
+<p>3b) add "subgrain".</p>
+</div>
 
+<div class="mx-form">
 {% highlight matlab %}
-% inspect the result
 ebsd = ebsdSIM.EBSDsim;
 plot(ebsd,angle(ebsd.orientations,ebsd.orientations(1))/degree)
 nextAxis
@@ -94,6 +126,9 @@ plot(ebsd,ck.direction2color(sax))
 nextAxis
 plot(ck)
 {% endhighlight %}
+<p>Inspect the result.</p>
+</div>
+
 </div>
 </body>
 </html>

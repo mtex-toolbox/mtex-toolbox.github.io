@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_grain3d__reduceBoundary.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain3d/reduceBoundary.m">
     edit page</a></font>
 <div>
@@ -28,11 +29,13 @@ To make changes, update the MATLAB code and republish this document.
 <p>The volume is divided into cells n times the voxel size, and the vertices of a cell become one. Vertices that belong to different sets of grains, or to different faces of the outer hull, never merge: a triple line stays a triple line between the same grains, a quadruple point stays where four grains meet, and the hull stays flat. Faces whose vertices fell together vanish, so a grain smaller than a cell keeps its voxels but loses its surface and its volume drops to zero.</p>
 <p>This is the blunt instrument: it thins a flat face and a curved one alike. The centroid of a cluster already averages the voxel steps, the <code class="language-plaintext highlighter-rouge">'quadric'</code> placement keeps flat faces flat and triple lines sharp.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 grains = reduceBoundary(grains)
 grains = reduceBoundary(grains,3)
 grains = reduceBoundary(grains,2,'quadric')
 {% endhighlight %}
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -50,19 +53,6 @@ grains = reduceBoundary(grains,2,'quadric')
          </td>
          <td>
             <tt>coarsening factor (default 2)</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>grains</tt>
-         </td>
-         <td>
-            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
          </td>
       </tr>
    </table>
@@ -89,6 +79,19 @@ grains = reduceBoundary(grains,2,'quadric')
          </td>
          <td>
             <tt>place each vertex where the faces it stands for are best approximated, instead of at the centroid of its cluster</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
          </td>
       </tr>
    </table>

@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_EBSD__gridify.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/gridify.m">
     edit page</a></font>
 <div>
@@ -32,12 +33,14 @@ To make changes, update the MATLAB code and republish this document.
 <p>Of the sample files shipped with MTEX, none keeps its order under the default layout and seven of eleven keep it under <code class="language-plaintext highlighter-rouge">'rowMajor'</code>; the rest cannot be matched by either flag, because they scan x descending (Emsland_plessite) or are hexagonal. Reordering is thus the normal case, and <code class="language-plaintext highlighter-rouge">'rowMajor'</code> is a layout choice, not a way to preserve the input order.</p>
 <p>This is safe for reconstruction: <code class="language-plaintext highlighter-rouge">calcGrains</code> is invariant under the order of its input - shuffling forsterite's 187467 indexed measurements at random reproduces the grain count and the multiset of boundary segment lengths exactly, with the total length moving by 2 ulp from summation order alone. Anything that does depend on the order is a defect in that code rather than a reason to reshape the grid; see <a href="EBSD.latticeBasis.html">latticeBasis</a>, which used to derive a mirrored lattice basis from the reordered unit cell.</p>
 <h2 id="4">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
 [ebsdGrid,newId] = gridify(ebsd)
 [ebsdGrid,newId] = gridify(ebsd,'unitCell',unitCell)
 [ebsdGrid,newId] = gridify(ebsd,'rowMajor')
 [ebsdGrid,newId] = gridify(ebsd,gridLayout(otherMap))
 {% endhighlight %}
+</div>
 <h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -55,27 +58,6 @@ To make changes, update the MATLAB code and republish this document.
          </td>
          <td>
             <tt><a href="gridLayout.gridLayout.html">gridLayout</a>, any axis aligned layout</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>ebsd</tt>
-         </td>
-         <td>
-            <tt><a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, <a href="EBSDhex.EBSDhex.html">EBSDhex</a> data on a regular grid</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>newId</tt>
-         </td>
-         <td>
-            <tt>closest regular grid point for every non regular grid point</tt>
          </td>
       </tr>
    </table>
@@ -118,6 +100,27 @@ To make changes, update the MATLAB code and republish this document.
          </td>
          <td>
             <tt>the transposed layout, i.e. size(ebsd) = [numCols numRows]</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, <a href="EBSDhex.EBSDhex.html">EBSDhex</a> data on a regular grid</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>newId</tt>
+         </td>
+         <td>
+            <tt>closest regular grid point for every non regular grid point</tt>
          </td>
       </tr>
    </table>

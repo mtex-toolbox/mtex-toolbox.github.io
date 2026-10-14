@@ -18,6 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_EBSD__transform.m">
 </head>
 <body>
+<!-- mx-reference-forms -->
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/transform.m">
     edit page</a></font>
 <div>
@@ -26,9 +27,8 @@ To make changes, update the MATLAB code and republish this document.
 <p>apply an arbitrary spatial transformation to an EBSD map</p>
 <p>Applies fun to the position of every pixel and to the unit cell, leaving orientations, phase and all other properties untouched. Unlike <a href="EBSD.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>, fun need not be a rigid transformation - it may be any map from position to position, e.g. to simulate an instrument distortion such as a trapezoidal stage drift, or to reproject onto a different coordinate system.</p>
 <h2 id="3">Syntax</h2>
+<div class="mx-form">
 {% highlight matlab %}
-% scale x about the map centre by an amount that grows with y - a
-% trapezoidal stage drift of trapFrac at the outermost rows
 x = ebsd.pos.x; xCenter = (min(x)+max(x))/2;
 y = ebsd.pos.y; yCenter = (min(y)+max(y))/2; yHalf = (max(y)-min(y))/2;
 trapFrac = 0.02;
@@ -36,6 +36,8 @@ ebsd = transform(ebsd, @(pos) vector3d( ...
   xCenter + (pos.x-xCenter) .* (1 + trapFrac*(pos.y-yCenter)/yHalf), ...
   pos.y, pos.z));
 {% endhighlight %}
+<p>Scale x about the map centre by an amount that grows with y - a. Trapezoidal stage drift of trapFrac at the outermost rows.</p>
+</div>
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
