@@ -1,5 +1,5 @@
 ---
-title: "orientation.map"
+title: 'orientation.map'
 
 sidebar: function_reference_sidebar
 permalink: orientation.map.html
@@ -25,29 +25,23 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>define orientations by pairs of vectors</p>
-<h2 id="3">Syntax</h2>
+<h2 id="3">Description</h2>
+<p>orientation.map(h1,r1,h2,r2) defines the orientation that maps the crystal direction h1 onto the specimen direction r1 and h2 onto r2; h1 and h2 have to enclose the same angle as r1 and r2. The orientation of the first example below appears</p>
+<pre>* in the |(100)| pole figure at position |x| and in the |(001)| pole
+figure at position |y|,
+* in the |x| inverse pole figure at position |(100)| and in the |y|
+inverse pole figure at position |(001)|.</pre>
+<p>The second example defines a misorientation that aligns the lattice plane <code class="language-plaintext highlighter-rouge">(100)</code> of the alpha phase with the lattice plane <code class="language-plaintext highlighter-rouge">(011)</code> of the beta phase and the lattice direction <code class="language-plaintext highlighter-rouge">[111]</code> of the alpha phase with the lattice direction <code class="language-plaintext highlighter-rouge">[01-1]</code> of the beta phase.</p>
+<h2 id="4">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
-h = Miller({1,0,0},{0,0,1},cs)
-{% endhighlight %}
-<p>Two crystal directions.</p>
-</div>
-<div class="mx-form">
-{% highlight matlab %}
-r = [xvector, yvector]
-{% endhighlight %}
-<p>Two specimen directions.</p>
-</div>
-<div class="mx-form">
-{% highlight matlab %}
+h = Miller({1,0,0},{0,0,1},cs) % two crystal directions
+r = [xvector, yvector]         % two specimen directions
 ori = orientation.map(h(1),r(1),h(2),r(2))
 {% endhighlight %}
+<p>An orientation from two crystal and two specimen directions.</p>
 </div>
-<p>defines an orientation <code class="language-plaintext highlighter-rouge">ori</code> that appears</p>
-<pre>* in the |(100)| pole figure at position |z| and in the |(001)| pole
-figure at position |y|.
-* in the |z| inverse pole figure at position |(100)| and in the |y|
-inverse pole figure at position |(001)|.</pre>
+
 <div class="mx-form">
 {% highlight matlab %}
 nAlpha = Miller({1,0,0},csAlpha,'hkl')
@@ -56,9 +50,16 @@ dAlpha = Miller({1,1,1},csAlpha,'uvw')
 dBeta  = Miller({0,1,-1},csBeta, 'uvw')
 mori = orientation.map(nAlpha,nBeta,dAlpha,dBeta)
 {% endhighlight %}
+<p>A misorientation from two pairs of crystal directions.</p>
 </div>
-<p>defines an misorientation that aligns the lattice plane <code class="language-plaintext highlighter-rouge">(1,0,0)</code> of the alpha phase with the lattice plane <code class="language-plaintext highlighter-rouge">(011)</code> of the beta phase and the lattice direction <code class="language-plaintext highlighter-rouge">[111]</code> of the alpha phase with the lattice direction <code class="language-plaintext highlighter-rouge">[01-1]</code> of the beta phase.</p>
-<h2 id="4">Input</h2>
+
+<div class="mx-form">
+{% highlight matlab %}
+ori = orientation.map(h1,r1)
+{% endhighlight %}
+<p>An arbitrary orientation that maps h1 onto r1.</p>
+</div>
+<h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -95,7 +96,7 @@ mori = orientation.map(nAlpha,nBeta,dAlpha,dBeta)
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="6">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -108,7 +109,7 @@ mori = orientation.map(nAlpha,nBeta,dAlpha,dBeta)
       </tr>
    </table>
 </p>
-<h2 id="6">See also</h2>
+<h2 id="7">See also</h2>
 <p>
 <a href="DefinitionAsCoordinateTransform.html">DefinitionAsCoordinateTransform</a> <a href="orientation.byMiller.html">orientation.byMiller</a> <a href="orientation.byAxisAngle.html">orientation.byAxisAngle</a> <a href="orientation.byEuler.html">orientation.byEuler</a>
 </p>

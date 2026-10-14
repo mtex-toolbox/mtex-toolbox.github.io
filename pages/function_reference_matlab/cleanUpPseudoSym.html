@@ -1,5 +1,5 @@
 ---
-title: "cleanUpPseudoSym"
+title: 'cleanUpPseudoSym'
 
 sidebar: function_reference_sidebar
 permalink: cleanUpPseudoSym.html
@@ -24,18 +24,25 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>cleanUpPseudoSym Corrects pseudo-symmetry artifacts in a single phase using tortuosity.</p>
+<p>correct pseudo-symmetry artifacts in a single phase using the tortuosity of the boundaries</p>
+<h2 id="3">Description</h2>
 <p>A pseudo symmetry is a rotation which is not a symmetry of the crystal but maps the diffraction pattern almost onto itself, such that the indexing picks between the two solutions at random. The resulting boundaries follow the indexing noise and are therefore much more tortuous, i.e. much longer relative to the distance between their end points, than real grain boundaries. This command merges all grains separated by such a boundary and rotates the affected pixels by the pseudo symmetry.</p>
 <p>Since the phase to be corrected is determined by the symmetry of <code class="language-plaintext highlighter-rouge">mori</code>, only one phase is treated per call. To clean up pseudo-symmetries in multiple phases, run this function for each phase individually. Grain boundaries should not have been smoothed before, as this destroys exactly the tortuosity the detection is based on.</p>
-<h2 id="3">Syntax</h2>
+<p>It is enough to pass one representative of each pseudo symmetry. A measurement is a fixed representative of an orientation, so the alternative indexing solution is <code class="language-plaintext highlighter-rouge">ori * s * mori</code> for some symmetry element <code class="language-plaintext highlighter-rouge">s</code> and not simply <code class="language-plaintext highlighter-rouge">ori * mori</code>. All these operators are generated internally, which is why passing a pseudo symmetry or its inverse or any symmetrically equivalent misorientation gives the same result.</p>
+<h2 id="4">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
 [ebsd, grainsM, numChanged] = cleanUpPseudoSym(ebsd, grains, mori)
+{% endhighlight %}
+<p>Merge across pseudo-symmetric boundaries.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 [ebsd, grainsM, numChanged] = cleanUpPseudoSym(ebsd, grains, mori, 'threshold', 1.5)
 {% endhighlight %}
+<p>With a tortuosity threshold.</p>
 </div>
-<p>It is enough to pass one representative of each pseudo symmetry. A measurement is a fixed representative of an orientation, so the alternative indexing solution is <code class="language-plaintext highlighter-rouge">ori * s * mori</code> for some symmetry element <code class="language-plaintext highlighter-rouge">s</code> and not simply <code class="language-plaintext highlighter-rouge">ori * mori</code>. All these operators are generated internally, which is why passing a pseudo symmetry or its inverse or any symmetrically equivalent misorientation gives the same result.</p>
-<h2 id="4">Input</h2>
+<h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -43,7 +50,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>ebsd</tt>
          </td>
          <td>
-            <tt><a href="EBSD.EBSD.html">EBSD</a> object, with grainId set by <a href="EBSD.EBSD.html">EBSD</a>.calcGrains</tt>
+            <tt><a href="EBSD.EBSD.html">EBSD</a>, with grainId set by <a href="EBSD.EBSD.html">EBSD</a>.calcGrains</tt>
          </td>
       </tr>
       <tr>
@@ -51,7 +58,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>grains</tt>
          </td>
          <td>
-            <tt><a href="grain2d.grain2d.html">grain2d</a> object</tt>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
          </td>
       </tr>
       <tr>
@@ -59,33 +66,33 @@ To make changes, update the MATLAB code and republish this document.
             <tt>mori</tt>
          </td>
          <td>
-            <tt><a href="orientation.orientation.html">orientation</a> (array of pseudo-symmetries, same CS and SS)</tt>
+            <tt><a href="orientation.orientation.html">orientation</a>, array of pseudo-symmetries, same CS and SS</tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="6">Options</h2>
+<h2 id="7">Options</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>'delta'</tt>
+            <tt>delta</tt>
          </td>
          <td>
-            <tt>Tolerance for boundary misorientation angle to match pseudo-symmetry (default: 2*degree)</tt>
+            <tt>tolerance of the boundary misorientation angle to match a pseudo-symmetry (default: 2*degree)</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>'threshold'</tt>
+            <tt>threshold</tt>
          </td>
          <td>
-            <tt>Minimum tortuosity (boundary length / straight distance) to trigger merge (default: 1.5)</tt>
+            <tt>minimum tortuosity (boundary length / straight distance) to trigger a merge (default: 1.5)</tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="6">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -93,7 +100,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>ebsd</tt>
          </td>
          <td>
-            <tt>updated <a href="EBSD.EBSD.html">EBSD</a> object</tt>
+            <tt>updated <a href="EBSD.EBSD.html">EBSD</a></tt>
          </td>
       </tr>
       <tr>
@@ -101,7 +108,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>grainsM</tt>
          </td>
          <td>
-            <tt>merged <a href="grain2d.grain2d.html">grain2d</a> object</tt>
+            <tt>merged <a href="grain2d.grain2d.html">grain2d</a></tt>
          </td>
       </tr>
       <tr>
@@ -114,7 +121,7 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<h2 id="7">Example</h2>
+<h2 id="8">Example</h2>
 {% highlight matlab %}
 mtexdata forsterite
 ebsd = ebsd('indexed');
@@ -132,9 +139,9 @@ ebsd = EBSDsquare (y↓→x, row↓→col)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
+ X × Y × Z : [0 → 36550] × [0 → 16750] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :336 x 732
+ Square grid  :336 × 732
 {% endhighlight %}
 <p>the pseudo hexagonal oxygen sublattice of olivine</p>
 {% highlight matlab %}
@@ -156,7 +163,7 @@ ebsd = EBSD (y↓→x)
  
  Properties: bands, bc, bs, error, mad, oldId, grainId
  Scan unit : um
- X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
+ X × Y × Z : [0 → 36550] × [0 → 16750] × [0 → 0]
  Normal vector: (0,0,1)
  
  
@@ -174,7 +181,7 @@ grains = grain2d (y↓→x)
  
  Properties: meanRotation, GOS
 {% endhighlight %}
-<h2 id="10">See also</h2>
+<h2 id="11">See also</h2>
 <p>
 <a href="EBSDPseudoSymmetry.html">EBSDPseudoSymmetry</a> <a href="grain2d.merge.html">grain2d.merge</a>
 </p>

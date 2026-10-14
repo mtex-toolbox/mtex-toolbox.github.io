@@ -25,12 +25,20 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>estimate GBND and GBCD from 2d boundary segments</p>
-<h2 id="3">Syntax</h2>
+<h2 id="3">Description</h2>
+<p>Given an <a href="EBSD.EBSD.html">EBSD</a> the orientations on either side of a segment are looked up through <code class="language-plaintext highlighter-rouge">gB.ebsdId</code>, which is only meaningful while every segment still runs between one specific pair of pixels. <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> breaks that by default - it merges and resamples segments - so smooth with <code class="language-plaintext highlighter-rouge">'noSimplify','noRefine'</code> before calling this, or pass the <a href="grain2d.grain2d.html">grain2d</a> instead and work from the grain mean orientations.</p>
+<h2 id="4">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
 gbnd = calcGBND(gB,ebsd)
+{% endhighlight %}
+<p>From the orientations of the pixels.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 gbnd = calcGBND(gB,grains)
 {% endhighlight %}
+<p>From the grain mean orientations.</p>
 </div>
 
 <div class="mx-form">
@@ -46,8 +54,7 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
 {% endhighlight %}
 <p>Use a specific halfwidth.</p>
 </div>
-<p>Given an <a href="EBSD.EBSD.html">EBSD</a> the orientations on either side of a segment are looked up through <code class="language-plaintext highlighter-rouge">gB.ebsdId</code>, which is only meaningful while every segment still runs between one specific pair of pixels. <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> breaks that by default - it merges and resamples segments - so smooth with <code class="language-plaintext highlighter-rouge">'noSimplify','noRefine'</code> before calling this, or pass the <a href="grain2d.grain2d.html">grain2d</a> instead and work from the grain mean orientations.</p>
-<h2 id="4">Input</h2>
+<h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -92,7 +99,7 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
       </tr>
    </table>
 </p>
-<h2 id="6">Options</h2>
+<h2 id="7">Options</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -113,7 +120,7 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="6">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -126,7 +133,7 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
       </tr>
    </table>
 </p>
-<h2 id="7">References</h2>
+<h2 id="8">References</h2>
 <div>
 <ul>
 <li>D.M. Saylor, G.S. Rohrer: <a href="https://doi.org/10.1111/J.1151-2916.2002.TB00531.X">Determining crystal habits from observations of planar sections</a> in J. Am. Ceram. Soc., 85(11):2799&ndash;2804, 2002.</li>
@@ -137,7 +144,7 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
 <li>R. Hielscher, R. Kilian, E. W&uuml;nsche: Efficient computation of the grain boundary normal distribution from two dimensional EBSD data, not yet published.</li>
 </ul>
 </div>
-<h2 id="8">See also</h2>
+<h2 id="9">See also</h2>
 </div>
 </body>
 </html>

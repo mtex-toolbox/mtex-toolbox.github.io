@@ -1,5 +1,5 @@
 ---
-title: "planarColorKey"
+title: 'planarColorKey'
 
 sidebar: function_reference_sidebar
 permalink: planarColorKey.html
@@ -24,23 +24,30 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>planarColorKey encode two scalar properties as hue &times; saturation colors</p>
-{% highlight matlab %}
-* Property 1  →  Hue        (sampled from a user-supplied or default LUT)
-* Property 2  →  Saturation (linearly from 0 or 1 to full color)
-{% endhighlight %}
-<h2 id="3">Syntax</h2>
+<p>encode two scalar properties as hue &times; saturation colors</p>
+<h2 id="3">Description</h2>
+<p>The first property selects the hue, sampled from a colour map, the second the saturation, from no colour (white or black) to the full colour:</p>
+<pre>* property 1 - hue, sampled from a user-supplied or the default colour map
+* property 2 - saturation, linearly from white or black to the full colour</pre>
+<h2 id="4">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
 cK = planarColorKey
-cK = planarColorKey(winter, 'colorModel', 'white', ...)
 {% endhighlight %}
+<p>Key over the default colour map.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+cK = planarColorKey(winter,'shading','black')
+{% endhighlight %}
+<p>Key over winter, fading to black.</p>
 </div>
 
 <div class="mx-form">
 {% highlight matlab %}
 rgb = cK.property2color(v1, v2)
 {% endhighlight %}
+<p>Colours of the values v1, v2.</p>
 </div>
 
 <div class="mx-form">
@@ -51,12 +58,199 @@ plot(cK)
 </div>
 <div class="mx-form">
 {% highlight matlab %}
-plot(cK, 'labeled')
+plot(cK, v1, v2)
 {% endhighlight %}
-<p>Legend with labels according to data range.</p>
+<p>Legend with axes and labels according to the data range.</p>
 </div>
-<p>Properties colorMap - n-by-3 hue look-up table. colorModel - 'white' (default) | 'black' what zero-saturation maps to periode - frequency of periodic data (pi/2*pi), wrapping v1. Default: NaN quantileCap - quantile for maximum of v2. Default: 0.975 range1 - data range of v1. Default: [min(v1), max(v1)] range2 - data range of v2. Default: [min(v2), quantile(v2,0.975)] label1 - x-axis label in plot(). Default: 'Property 1' label2 - y-axis label in plot(). Default: 'Property 2'</p>
-<h2 id="4">Example</h2>
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>winter</tt>
+         </td>
+         <td>
+            <tt>n x 3 colour map of the hue, or the name of one</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>v1</tt>
+         </td>
+         <td>
+            <tt>double, the property mapped to hue</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>v2</tt>
+         </td>
+         <td>
+            <tt>double, the property mapped to saturation, same size as v1</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>shading</tt>
+         </td>
+         <td>
+            <tt>'white' (default) or 'black', what zero saturation maps to</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>satRange</tt>
+         </td>
+         <td>
+            <tt>saturation range for v2, default [0 1]</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>quantileCap</tt>
+         </td>
+         <td>
+            <tt>quantile for the maximum of v2, default 0.975</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>range1</tt>
+         </td>
+         <td>
+            <tt>data range of v1, default [min(v1), max(v1)]</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>range2</tt>
+         </td>
+         <td>
+            <tt>data range of v2, default [min(v2), quantile(v2,0.975)]</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>label1</tt>
+         </td>
+         <td>
+            <tt>x-axis label in plot(), default 'Property 1'</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>label2</tt>
+         </td>
+         <td>
+            <tt>y-axis label in plot(), default 'Property 2'</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>cK</tt>
+         </td>
+         <td>
+            <tt><a href="planarColorKey.html">planarColorKey</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rgb</tt>
+         </td>
+         <td>
+            <tt>colours of size [size(v1), 3]</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>colorMap</tt>
+         </td>
+         <td>
+            <tt>n x 3 hue look-up table</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>shading</tt>
+         </td>
+         <td>
+            <tt>'white' (default) or 'black', what zero saturation maps to</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>satRange</tt>
+         </td>
+         <td>
+            <tt>saturation range for v2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>periode</tt>
+         </td>
+         <td>
+            <tt>period of periodic data (pi or 2*pi), wrapping v1, default NaN</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>quantileCap</tt>
+         </td>
+         <td>
+            <tt>quantile for the maximum of v2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>range1</tt>
+         </td>
+         <td>
+            <tt>data range of v1</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>range2</tt>
+         </td>
+         <td>
+            <tt>data range of v2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>label1</tt>
+         </td>
+         <td>
+            <tt>x-axis label in plot()</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>label2</tt>
+         </td>
+         <td>
+            <tt>y-axis label in plot()</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">Example</h2>
 <p>Example 1: long axis mapping, with saturation given by aspect ratio get the data</p>
 {% highlight matlab %}
 mtexdata martensite silent
@@ -74,16 +268,10 @@ pK.label2 = 'a/b';
 % and plot it
 plot(pK,mod(lax.rho,pi)/degree,asr)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="planarColorKey_01.png" %}
-</center>
 <p>use the key to colorize the map</p>
 {% highlight matlab %}
 plot(grains('indexed'),pK.property2color(mod(lax.rho,pi)/degree,asr))
 {% endhighlight %}
-<center>
-{% include inline_image.html file="planarColorKey_02.png" %}
-</center>
 <p>example 2: highlight grains which are large AND have a large aspect ratio</p>
 {% highlight matlab %}
 v1 = grains('indexed').aspectRatio;
@@ -110,16 +298,14 @@ pK.quantileCap = 0.9;
 pK.label1 = 'asr'; pK.label2 = 'area';
 close all; plot(pK,v1,v2)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="planarColorKey_03.png" %}
-</center>
+
 {% highlight matlab %}
 plot(grains('indexed'),pK.property2color(v1,v2))
 {% endhighlight %}
-<center>
-{% include inline_image.html file="planarColorKey_04.png" %}
-</center>
-<h2 id="15">See also</h2>
+<h2 id="20">See also</h2>
+<p>
+<a href="directionColorKey.html">directionColorKey</a> <a href="ipfColorKey.html">ipfColorKey</a> <a href="HSVDirectionKey.html">HSVDirectionKey</a>
+</p>
 </div>
 </body>
 </html>

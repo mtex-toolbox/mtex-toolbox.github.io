@@ -28,13 +28,19 @@ To make changes, update the MATLAB code and republish this document.
 <p>Two pictures of the same area rarely overlay: the EBSD map is taken at a tilt and drifts as it scans, the electron images do not, and no single distortion relates the extremes. TrueEBSD relates them through a CHAIN of intermediate maps instead, each pair separated by one distortion simple enough to fit, and composes the hops. What comes out is one common grid on which every pixel of every map is the same piece of specimen, so an image becomes a per pixel property of the map.</p>
 <p>The sequence is ordered from the most distorted map to the ground truth, and hop n separates imgList(n) from imgList(n+1). Three methods walk it: pixelSizeMatch puts every map on one grid, calcDistortion measures and fits each hop, undistort accumulates the hops and resamples.</p>
 <p>A handle class, as every class guiding a process in MTEX is - see <a href="parentGrainReconstructor.parentGrainReconstructor.html">parentGrainReconstructor</a>. The methods still return the job, so job = pixelSizeMatch(job,pixSz) reads as before, but the job is modified in place: a second variable holding it is an alias rather than a snapshot, and a method that errors part way leaves the job partly filled.</p>
-<p>THE MODEL IS THE CLASS. A hop's distortion is an unfitted <a href="spatialTransform.html">spatialTransform</a> - the class names which distortion separates the pair and calcDistortion fills in the coefficients. A multi stage hop is written with + and never *, because mtimes absorbs an operand reporting isid and an unfitted prototype has zero coefficients, so * would silently drop a stage. There is no sentinel on the reference: where nothing separates a pair, the entry is spatialTransformId.</p>
+<p>The distortion of a hop is an unfitted <a href="spatialTransform.html">spatialTransform</a>: its class names the distortion that separates the pair and calcDistortion fills in the coefficients. A hop of several stages is written with + and never with *, since * absorbs an unfitted prototype as the identity and so drops a stage. Where nothing separates a pair, the entry is spatialTransformId.</p>
 <h2 id="3">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
 job = trueEbsd(imgList)
+{% endhighlight %}
+<p>A job with the distortions set later.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 job = trueEbsd(imgList,T)
 {% endhighlight %}
+<p>A job with one distortion per hop.</p>
 </div>
 
 <div class="mx-form">
@@ -45,6 +51,7 @@ job.pixelSizeMatch
 job.calcDistortion('fitErr')
 job.undistort
 {% endhighlight %}
+<p>Align an EBSD map to an image: match the pixel sizes, fit, resample.</p>
 </div>
 <h2 id="4">Input</h2>
 <p>
@@ -112,7 +119,7 @@ job.undistort
             <tt>shifts</tt>
          </td>
          <td>
-            <tt>cell, one entry per hop, each a <a href="pairShifts.pairShifts.html">pairShifts</a> array with one entry per fit stage, the last being the final fit</tt>
+            <tt>cell, one entry per hop, each a <a href="pairShifts.pairShifts.html">pairShifts</a> array with one entry per fit stage: the shifts that stage was fitted to</tt>
          </td>
       </tr>
       <tr>
@@ -120,7 +127,7 @@ job.undistort
             <tt>fitError</tt>
          </td>
          <td>
-            <tt><a href="pairShifts.pairShifts.html">pairShifts</a> array, one per hop: the residual shifts measured AFTER correction, which is what says whether registration worked. Needs the 'fitErr' flag</tt>
+            <tt><a href="pairShifts.pairShifts.html">pairShifts</a> array, one per hop: the shifts measured AFTER correction, which is what says whether registration worked. Needs the 'fitErr' flag</tt>
          </td>
       </tr>
       <tr>
@@ -140,29 +147,21 @@ job.undistort
          </td>
       </tr>
       <tr>
-         <td width="100px">
-            <tt>Indexing, with numel(job.T) == numel(job.imgList)</tt>
-         </td>
-         <td>
-            <tt>1</tt>
-         </td>
-      </tr>
-      <tr>
          <td colspan="2">
-            <tt>job.imgList(n)          % <a href="mapImage.mapImage.html">mapImage</a> job.T(n)                % <a href="spatialTransform.html">spatialTransform</a>, hop n</tt>
-         </td>
-      </tr>
-      <tr>
-         <td colspan="2">
-            <tt>job.T is a sequence and every <a href="spatialTransform.html">spatialTransform</a> method takes one transform,</tt>
+            <tt>Indexing</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>so inv(job.T) and isid(job.T) do not work</tt>
+            <tt>With numel(job.T) == numel(job.imgList)</tt>
          </td>
          <td>
-            <tt>index a hop, or fold the chain with *. See <a href="spatialTransform.html">spatialTransform</a> and docs/adr/0007. job.opt(n)              % the settings for map n job.shifts{n}(m)        % hop n, fit stage m job.fitError(n)         % <a href="pairShifts.pairShifts.html">pairShifts</a></tt>
+            <tt>1, hop n separates map n from map n+1. job.T is a sequence while every <a href="spatialTransform.html">spatialTransform</a> method takes one transform, so inv(job.T) and isid(job.T) do not work: index a hop, or fold the chain with *.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>job.imgList(n)          % map n, a <a href="mapImage.mapImage.html">mapImage</a> job.T(n)                % the <a href="spatialTransform.html">spatialTransform</a> of hop n job.opt(n)              % the settings for map n job.shifts{n}(m)        % the shifts of hop n, fit stage m job.fitError(n)         % the residual <a href="pairShifts.pairShifts.html">pairShifts</a> of hop n</tt>
          </td>
       </tr>
    </table>

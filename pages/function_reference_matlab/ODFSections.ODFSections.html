@@ -1,5 +1,5 @@
 ---
-title: "ODFSections.ODFSections"
+title: 'ODFSections.ODFSections'
 
 sidebar: function_reference_sidebar
 permalink: ODFSections.ODFSections.html
@@ -26,7 +26,33 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>an abstract class representing sections through orientation space</p>
 <p>Orientation space is three dimensional, so plotting an ODF means slicing it. A deriving class fixes how the slices are cut and how an orientation is projected into a slice; everything the plotting needs - the grid, the projection, the axes labels - is asked through this interface.</p>
-<h2 id="3">Class Properties</h2>
+<h2 id="3">Syntax</h2>
+<div class="mx-form">
+{% highlight matlab %}
+cs = crystalSymmetry('222')
+oS = axisAngleSections(cs,cs);
+{% endhighlight %}
+<p>Sections are constructed by one of the derived classes.</p>
+</div>
+
+<div class="mx-form">
+{% highlight matlab %}
+ori = oS.makeGrid('resolution',2.5*degree);
+oM = PatalaColorKey(cs,cs)
+rgb = oM.orientation2color(ori);
+plot(oS,rgb,'surf')
+{% endhighlight %}
+<p>Colour the sections by a misorientation colour key.</p>
+</div>
+
+<div class="mx-form">
+{% highlight matlab %}
+ori = orientation.rand(100,cs,cs)
+plot(oS,ori)
+{% endhighlight %}
+<p>Plot orientations into the sections.</p>
+</div>
+<h2 id="4">Class Properties</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -71,7 +97,7 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<h2 id="4">Derived Classes</h2>
+<h2 id="5">Derived Classes</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -156,44 +182,7 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<h2 id="5">Example</h2>
-{% highlight matlab %}
-cs = crystalSymmetry('222')
-oS = axisAngleSections(cs,cs);
-ori = oS.makeGrid('resolution',2.5*degree);
-oM = PatalaColorKey(cs,cs)
-rgb = oM.orientation2color(ori);
-plot(oS,rgb,'surf')
-{% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  symmetry: 222    
-  elements: 4      
-  a, b, c : 1, 1, 1
- 
- 
-oM = PatalaColorKey (222 → 222)
- 
-  antipodal: true
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFSections.ODFSections_01.png" %}
-</center>
-{% highlight matlab %}
-ori = orientation.rand(100,cs,cs)
-plot(oS,ori)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ori = misorientation (222 → 222)
-  size: 100 x 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFSections.ODFSections_02.png" %}
-</center>
-<h2 id="7">See also</h2>
+<h2 id="6">See also</h2>
 <p>
 <a href="sigmaSections.html">sigmaSections</a> <a href="phi2Sections.html">phi2Sections</a> <a href="SO3Fun.plotSection.html">SO3Fun.plotSection</a>
 </p>

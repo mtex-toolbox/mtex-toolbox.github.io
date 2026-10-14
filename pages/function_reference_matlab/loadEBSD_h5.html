@@ -24,14 +24,55 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>How it is working: - You load your file of hdf5 format - The program will try to find groups with certain codes like EBSD --&gt; if there is no such data an error is thrown - One can modify the search codes - The data will be extracted using an algorithm fitted to the data - There are helper functions to convert data and build the EBSD object</p>
-<h2 id="3">Syntax</h2>
+<p>read EBSD data from the HDF5 files of the vendors</p>
+<h2 id="3">Description</h2>
+<p>The reader works as follows:</p>
+<pre>* the file is matched against the configurations in interfaces/hdf5_config,
+by the manufacturer stated in the file or by the option 'type'
+* the configuration names the groups holding the EBSD data; an error is
+thrown if there is no such data
+* the data are extracted as the configuration says and converted into an
+&lt;EBSD.EBSD.html EBSD&gt; map</pre>
+<p>Every per pixel data set the config does not read itself becomes a property of the map. For an Oxford file that includes the EDS element maps stored next to the EBSD data set, e.g. plot(ebsd, ebsd.Fe_WindowIntegral_Ka1) - the element comes first and the subgroup they are sorted into is part of the property name, since a quantified map holds a "Fe Ka1" both as a window integral and as a peak area. The EDS header - beam voltage, detector geometry, channel width - comes along as ebsd.opt.eds.header.</p>
+<h2 id="4">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
-[ebsd] = loadEBSD_h5(fname, varargin)
+ebsd = EBSD.load(fname)
 {% endhighlight %}
+<p>The map of an HDF5 file.</p>
 </div>
-<h2 id="4">Options</h2>
+<div class="mx-form">
+{% highlight matlab %}
+ebsd = EBSD.load(fname,'dataSet',2)
+{% endhighlight %}
+<p>The second data set of the file.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+ebsd = EBSD.load(fname,'dataSet','OIM Map 2')
+{% endhighlight %}
+<p>The data set of this name.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+ebsd = EBSD.load(fname,'headerOnly')
+{% endhighlight %}
+<p>The phases and the data sets only.</p>
+</div>
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fname</tt>
+         </td>
+         <td>
+            <tt>file name</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -44,39 +85,44 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
       <tr>
          <td width="100px">
+            <tt>type</tt>
+         </td>
+         <td>
+            <tt>the configuration to use, by one of its manufacturer keys, e.g. 'Oxford_EBSD', instead of detecting it</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>debug</tt>
+         </td>
+         <td>
+            <tt>report the steps of the import</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
             <tt>headerOnly</tt>
          </td>
          <td>
             <tt>return only phase/header metadata, skip reading the (potentially large) per-pixel position/rotation/phase data and any other top-level category (e.g. electron images). Also lists the data sets the file contains.</tt>
          </td>
       </tr>
-      <tr>
-         <td colspan="2">
-            <tt>Every per pixel data set the config does not read itself becomes a property of the map. For an Oxford file that includes the EDS element maps stored next to the EBSD data set, e.g. plot(ebsd,</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>ebsd.Fe_WindowIntegral_Ka1)</tt>
-         </td>
-         <td>
-            <tt>the element comes first and the subgroup they are sorted into is part of the property name, since a quantified</tt>
-         </td>
-      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>map holds a "Fe Ka1" both as a window integral and as a peak area. The EDS header</tt>
+            <tt>ebsd</tt>
          </td>
          <td>
-            <tt>beam voltage,</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>detector geometry, channel width</tt>
-         </td>
-         <td>
-            <tt>comes along as ebsd.opt.eds.header.</tt>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
          </td>
       </tr>
    </table>

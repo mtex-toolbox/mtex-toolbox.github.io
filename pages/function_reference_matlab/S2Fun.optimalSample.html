@@ -59,18 +59,36 @@ v = optimalSample(sF,n,'memory',0)
 <p>
 <b>The weights help most where the points are far from optimal.</b> On <code class="language-plaintext highlighter-rouge">abs(S2Fun.smiley)</code> with 200 points and bandwidth 64 the weights alone reduce \(J\) by a factor of 16 on the raw <a href="S2Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> nodes, while on nodes that are already driven to convergence they only add a few percent - the points have then essentially solved the problem on their own. The benefit of the weights is therefore that a given accuracy is reached with fewer points and fewer iterations, not that the converged optimum is much lower.</p>
 <p>Note that the weights buy their accuracy up to <code class="language-plaintext highlighter-rouge">bandwidth</code> partly at the expense of the higher degrees, since concentrating the mass on fewer points makes the sample less uniform.</p>
-<p>For more details, see</p>
-<p>Gr&auml;f, Manuel; Potts, Daniel; Steidl, Gabriele (2012). Quadrature Errors, Discrepancies, and Their Relations to Halftoning on the Torus and the Sphere. SIAM Journal on Scientific Computing, 34(5), A2760&ndash;A2791. doi:10.1137/100814731</p>
-<p>Knezevic, Marko; Landry, Nicholas W. (2015). Procedures for reducing large datasets of crystal orientations using generalized spherical harmonics. Mechanics of Materials, 88, 73&ndash;86. doi:10.1016/j.mechmat.2015.04.014</p>
 <h2 id="4">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
 v = optimalSample(sF,n)
+{% endhighlight %}
+<p>N points with equal weights.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 v = optimalSample(sF,v)
+{% endhighlight %}
+<p>Start from the points v.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 v = optimalSample(sF,n,'bandwidth',128)
+{% endhighlight %}
+<p>Match the degrees up to 128.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 v = optimalSample(sF,n,'method','steepestDescent')
+{% endhighlight %}
+<p>Plain gradient descent.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 v = optimalSample(sF,n,'maxIter',1000,'tol',0.005*degree)
 {% endhighlight %}
+<p>Iterate longer and finer.</p>
 </div>
 
 <div class="mx-form">
@@ -83,6 +101,7 @@ v = optimalSample(sF,n,'maxIter',1000,'tol',0.005*degree)
 {% highlight matlab %}
 [v,c] = optimalSample(sF,n,'minWeight',1e-4)
 {% endhighlight %}
+<p>Drop the points of a smaller weight.</p>
 </div>
 <h2 id="5">Input</h2>
 <p>
@@ -165,16 +184,11 @@ v = optimalSample(sF,n,'maxIter',1000,'tol',0.005*degree)
          </td>
       </tr>
       <tr>
-         <td colspan="2">
-            <tt>The following options apply only if the weights are optimized</tt>
-         </td>
-      </tr>
-      <tr>
          <td width="100px">
             <tt>warmUp</tt>
          </td>
          <td>
-            <tt>iterations that move the points only (default = maxIter/5)</tt>
+            <tt>iterations that move the points only, when the weights are optimized (default = maxIter/5)</tt>
          </td>
       </tr>
       <tr>
@@ -182,7 +196,7 @@ v = optimalSample(sF,n,'maxIter',1000,'tol',0.005*degree)
             <tt>tolWeights</tt>
          </td>
          <td>
-            <tt>termination tolerance for the weights (default = 1e-3/M)</tt>
+            <tt>termination tolerance for the weights, when they are optimized (default = 1e-3/M)</tt>
          </td>
       </tr>
       <tr>
@@ -190,7 +204,7 @@ v = optimalSample(sF,n,'maxIter',1000,'tol',0.005*degree)
             <tt>tolJ</tt>
          </td>
          <td>
-            <tt>terminate below this relative decrease of J (default = 1e-4)</tt>
+            <tt>terminate below this relative decrease of J, when the weights are optimized (default = 1e-4)</tt>
          </td>
       </tr>
       <tr>
@@ -198,7 +212,7 @@ v = optimalSample(sF,n,'maxIter',1000,'tol',0.005*degree)
             <tt>minWeight</tt>
          </td>
          <td>
-            <tt>discard directions with a smaller weight (default = 0, i.e. keep all)</tt>
+            <tt>discard directions with a smaller weight, when the weights are optimized (default = 0, i.e. keep all)</tt>
          </td>
       </tr>
    </table>
@@ -224,7 +238,14 @@ v = optimalSample(sF,n,'maxIter',1000,'tol',0.005*degree)
       </tr>
    </table>
 </p>
-<h2 id="8">See also</h2>
+<h2 id="8">References</h2>
+<div>
+<ul>
+<li>Gr&auml;f, Manuel; Potts, Daniel; Steidl, Gabriele (2012). Quadrature Errors, Discrepancies, and Their Relations to Halftoning on the Torus and the Sphere. SIAM Journal on Scientific Computing, 34(5), A2760&ndash;A2791. doi:10.1137/100814731</li>
+<li>Knezevic, Marko; Landry, Nicholas W. (2015). Procedures for reducing large datasets of crystal orientations using generalized spherical harmonics. Mechanics of Materials, 88, 73&ndash;86. doi:10.1016/j.mechmat.2015.04.014</li>
+</ul>
+</div>
+<h2 id="9">See also</h2>
 <p>
 <a href="S2Fun.discrepancy.html">S2Fun.discrepancy</a> <a href="S2Fun.discreteSample.html">S2Fun.discreteSample</a> <a href="S2RestrictedDistanceKernel.html">S2RestrictedDistanceKernel</a>
 </p>

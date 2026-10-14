@@ -1,5 +1,5 @@
 ---
-title: "S2VectorField.S2VectorField"
+title: 'S2VectorField.S2VectorField'
 
 sidebar: function_reference_sidebar
 permalink: S2VectorField.S2VectorField.html
@@ -26,7 +26,30 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>an abstract class representing vector fields on the sphere</p>
 <p>A spherical vector field assigns a <a href="vector3d.vector3d.html">vector3d</a> to every direction, e.g. the gradient of an <a href="S2Fun.S2Fun.html">S2Fun</a>. Deriving classes only have to implement the method eval, plotting and arithmetics are inherited from here.</p>
-<h2 id="3">Derived Classes</h2>
+<h2 id="3">Syntax</h2>
+<div class="mx-form">
+{% highlight matlab %}
+vF = S2VectorFieldHarmonic(fun)
+vF = S2VectorFieldTri(nodes,values)
+vF = S2VectorFieldHandle(@(v) fun(v))
+{% endhighlight %}
+<p>A vector field is constructed by one of the derived classes.</p>
+</div>
+
+<div class="mx-form">
+{% highlight matlab %}
+vF = S2VectorField.polar(vector3d.Z)
+{% endhighlight %}
+<p>The reference field towards the z-axis.</p>
+</div>
+
+<div class="mx-form">
+{% highlight matlab %}
+w = vF.eval(v)
+{% endhighlight %}
+<p>Evaluate it at directions.</p>
+</div>
+<h2 id="4">Derived Classes</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -55,14 +78,6 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<h2 id="4">Example</h2>
-{% highlight matlab %}
-vF = S2VectorField.polar(vector3d.Z)
-{% endhighlight %}
-
-{% highlight plaintext %}
-vF = S2VectorFieldHandle
-{% endhighlight %}
 <h2 id="5">See also</h2>
 <p>
 <a href="S2Fun.S2Fun.html">S2Fun</a> <a href="S2AxisField.S2AxisField.html">S2AxisField</a>

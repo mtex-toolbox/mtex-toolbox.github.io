@@ -25,18 +25,40 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>discrepancy between weighted orientation sets or a rotational density</p>
-<h2 id="3">Syntax</h2>
+<h2 id="3">Description</h2>
+<p>Point weights are nonnegative and normalized independently to mass one. An orientation set paired with a density is scaled to the density's integral, and keeps mass one if that integral vanishes. A symmetric orientation splits its mass uniformly over the orbit of symmetrically equivalent rotations. D_2 is the standard root ball L2 discrepancy, evaluated without truncating atomic measures and counting a difference in total mass. L2 is the root bandlimited norm. Use 'squared' for their squares. D_ball is a finite ball-search approximation over a three dimensional space; info.isExact is false and the estimate needs refinement to settle. 'kernel' is the historical squared truncated optimization objective and takes two densities of equal integral only. See SO3Fun/discrepancy for all options and normalization conventions.</p>
+<h2 id="4">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
 d = discrepancy(ori1,ori2,'metric','D_2')
+{% endhighlight %}
+<p>Ball L2 discrepancy of two sets.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 [d,info] = discrepancy(ori1,ori2,'metric','D_ball','numCenters',4097)
+{% endhighlight %}
+<p>Ball-search estimate.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 d = discrepancy(ori1,ori2,'metric','L2','bandwidth',16)
+{% endhighlight %}
+<p>Bandlimited L2 norm.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 d = discrepancy(ori1,ori2,'weights',c,'weights2',d,'metric','D_2')
+{% endhighlight %}
+<p>Weighted sets.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
 d = discrepancy(ori,f,'weights',c,'metric','D_2')
 {% endhighlight %}
+<p>Weighted set against a density.</p>
 </div>
-<p>Point weights are nonnegative and normalized independently to mass one. An orientation set paired with a density is scaled to the density's integral, and keeps mass one if that integral vanishes. A symmetric orientation splits its mass uniformly over the orbit of symmetrically equivalent rotations. D_2 is the standard root ball L2 discrepancy, evaluated without truncating atomic measures and counting a difference in total mass. L2 is the root bandlimited norm. Use 'squared' for their squares. D_ball is a finite ball-search approximation over a three dimensional space; info.isExact is false and the estimate needs refinement to settle. 'kernel' is the historical squared truncated optimization objective and takes two densities of equal integral only. See SO3Fun/discrepancy for all options and normalization conventions.</p>
-<h2 id="4">See also</h2>
+<h2 id="5">See also</h2>
 <p>
 <a href="SO3Fun.discrepancy.html">SO3Fun.discrepancy</a> <a href="SO3Fun.optimalSample.html">SO3Fun.optimalSample</a>
 </p>

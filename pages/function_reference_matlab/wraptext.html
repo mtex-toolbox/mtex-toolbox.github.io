@@ -1,5 +1,5 @@
 ---
-title: "wraptext"
+title: 'wraptext'
 
 sidebar: function_reference_sidebar
 permalink: wraptext.html
@@ -24,36 +24,62 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>WRAPTEXT Wrap text to a maximum line length (Unicode-aware). out = wraptext(txt,width) returns text where each original line is wrapped so that no wrapped line exceeds 'width' visible characters. Words are not split.</p>
-{% highlight matlab %}
-Extra rules:
-1) Existing newline characters in TXT are respected. I.e. each
-   paragraph (line) is wrapped independently and separated by '\n'
-   exactly as in the input.
-2) HTML fragments of the form <a ...>...</a> are treated as a single
-   unbreakable word, even if they contain spaces in attributes. They
-   count towards the line length by the text they show, not by the
-   length of their markup - a hyperlink that is only a few characters
-   wide on screen must not push the words around it onto the next line,
-   and a line must never be broken inside the tag, which would leave
-   the command window with markup it can no longer turn into a link.
-{% endhighlight %}
-
-{% highlight matlab %}
-txt   ... string or char
-width ... positive integer
-{% endhighlight %}
-
-{% highlight matlab %}
-Returns a char vector with '\n' as newline separators.
-{% endhighlight %}
-<h2 id="3">Syntax</h2>
+<p>wrap text to a maximum line length</p>
+<h2 id="3">Description</h2>
+<p>Each line of txt is wrapped on its own, so that no wrapped line exceeds width visible characters; the line breaks of txt are kept. Words are not split. A hyperlink <a href="a">...</a>...&lt;/a&gt; is treated as one word, as long as the text it shows, and is never broken.</p>
+<h2 id="4">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
 out = wraptext(txt,width)
 {% endhighlight %}
+<p>Wrap to width characters.</p>
 </div>
-
+<div class="mx-form">
+{% highlight matlab %}
+out = wraptext(txt)
+{% endhighlight %}
+<p>Wrap to the width of the command window.</p>
+</div>
+<div class="mx-form">
+{% highlight matlab %}
+wraptext(txt,width)
+{% endhighlight %}
+<p>Display the wrapped text.</p>
+</div>
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>txt</tt>
+         </td>
+         <td>
+            <tt>char or string</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>width</tt>
+         </td>
+         <td>
+            <tt>positive integer</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>out</tt>
+         </td>
+         <td>
+            <tt>char vector with newline characters as line separators</tt>
+         </td>
+      </tr>
+   </table>
+</p>
 </div>
 </body>
 </html>
