@@ -16,5 +16,5 @@ a distance between orientations that makes points repel each other
 
 | [bandwidth](SO3RestrictedDistanceKernel.bandwidth_py.html) | the degree N the kernel is cut at |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L596">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L601">source</a></font>
 {% endraw %}

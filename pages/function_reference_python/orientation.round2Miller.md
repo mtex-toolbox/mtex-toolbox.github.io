@@ -104,5 +104,5 @@ of the relation to the misorientation; a list of misorientations gives lists.
 
 MATLAB's [orientation.round2Miller](orientation.round2Miller.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L588">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L598">source</a></font>
 {% endraw %}

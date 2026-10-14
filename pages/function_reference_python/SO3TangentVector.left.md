@@ -26,5 +26,5 @@ SO3TangentVector.left(self)
 
 MATLAB's [SO3TangentVector.left](SO3TangentVector.left.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L232">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L239">source</a></font>
 {% endraw %}

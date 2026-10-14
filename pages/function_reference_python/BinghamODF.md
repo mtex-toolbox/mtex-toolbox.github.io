@@ -92,5 +92,5 @@ BinghamODF(kappa, A=None, *frames, **kwargs)
 
 MATLAB's [BinghamODF](BinghamODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L341">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L342">source</a></font>
 {% endraw %}

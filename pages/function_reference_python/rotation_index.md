@@ -45,7 +45,6 @@ rotation(cs)
 | [inv](rotation.inv_py.html) | the inverse rotation, the conjugate quaternion |
 | [inversion](rotation.inversion_py.html) | a property of the class itself, vector3d.X |
 | [isclose](rotation.isclose_py.html) | equal within the angular tolerance tol, MATLAB's eq |
-| [line](rotation.line_py.html) | a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
 | [map](rotation.map_py.html) | the smallest rotation taking u1 to v1, or the one taking u1 to v1 and u2 to v2 |
 | [matrix](rotation.matrix_py.html) | the rotation matrices, of shape (..., 3, 3) |
 | [mtimes](rotation.mtimes_py.html) |  |
@@ -65,5 +64,5 @@ rotation(cs)
 
 MATLAB's [rotation_index](rotation_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L600">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L601">source</a></font>
 {% endraw %}

@@ -63,5 +63,5 @@ scatter and the spherical plots.
 
 MATLAB's [crystalSymmetry.plotHKL](crystalSymmetry.plotHKL.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1070">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1077">source</a></font>
 {% endraw %}

@@ -89,5 +89,5 @@ framing. The coordinates are those of v, in its frame.
 
 MATLAB's [vector3d.arrow3d](vector3d.arrow3d.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L876">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L875">source</a></font>
 {% endraw %}

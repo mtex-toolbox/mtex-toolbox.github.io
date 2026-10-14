@@ -53,5 +53,5 @@ Z pointing away.
 
 [triadGeometry](triadGeometry_py.html), [mapLayout](mapLayout_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L434">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L436">source</a></font>
 {% endraw %}

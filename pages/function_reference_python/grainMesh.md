@@ -86,5 +86,5 @@ the faces are translucent, faceAlpha below 1. A grain whose value is NaN is not 
 
 [boundaryMesh](boundaryMesh_py.html), [volumeSlices](volumeSlices_py.html), [scene3d](scene3d_index_py.html), [plot3d](S2Fun.plot3d_py.html), [Grains3D](Grains3D_py.html), [EBSD3Plotting](EBSD3Plotting_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L292">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L297">source</a></font>
 {% endraw %}

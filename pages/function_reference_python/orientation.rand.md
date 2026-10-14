@@ -80,5 +80,5 @@ about the identity; the symmetry of the frames does not enter the draw.
 
 [rotation.rand](rotation.rand_py.html), [orientation.id](orientation.id_py.html), [discreteSample](discreteSample_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L334">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L346">source</a></font>
 {% endraw %}

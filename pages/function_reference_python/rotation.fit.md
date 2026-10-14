@@ -81,5 +81,5 @@ vectors is not ported: the vectors are taken with their sign.
 
 MATLAB's [rotation.fit](rotation.fit.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L715">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L716">source</a></font>
 {% endraw %}

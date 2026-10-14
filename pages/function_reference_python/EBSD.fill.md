@@ -67,9 +67,9 @@ polygon holds it, which needs the grain ids calcGrains writes into the map:
 orientation
 - padding a polygon holds becomes a cell of the map
 
-A pixel counts as measured by its phase: the notIndexed pixels calcGrains absorbs into a
-grain carry its phase, so they are not filled and keep their NaN orientation. The map
-passed is not changed.
+A pixel counts as measured when it is indexed and has an orientation: the notIndexed pixels
+calcGrains absorbs into a grain, which carry its phase and a NaN orientation, are filled
+from within that grain. The map passed is not changed.
 
 ## Input
 
@@ -93,5 +93,5 @@ passed is not changed.
 
 MATLAB's [EBSD.fill](EBSD.fill.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L335">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L339">source</a></font>
 {% endraw %}

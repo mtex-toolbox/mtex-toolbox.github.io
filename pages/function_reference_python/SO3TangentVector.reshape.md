@@ -33,5 +33,5 @@ SO3TangentVector.reshape(self, *shape)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L186">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L193">source</a></font>
 {% endraw %}

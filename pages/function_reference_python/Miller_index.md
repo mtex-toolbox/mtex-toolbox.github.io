@@ -212,7 +212,6 @@ function Miller from its indices.
 | [k](vector3d.k_py.html) | the Miller index k of a plane normal |
 | [l](vector3d.l_py.html) | the Miller index l of a plane normal |
 | [lattice](vector3d.lattice_py.html) | the lattice type of the crystal frame, latticeType.none for a vector in no crystal frame |
-| [line](vector3d.line_py.html) | a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
 | [lineIntersect](vector3d.lineIntersect_py.html) | where the segments from a to b cross the planes <n, v> = d, NaN where they do not, MATLAB's lineIntersect |
 | [load](vector3d.load_py.html) | vector3d.load('vectors.txt', columnNames=[...]): the directions a text table holds, read by the interfaces layer above this one |
 | [mean](Miller.mean_py.html) | the mean direction of a list of vectors, of axes, or of crystal directions |

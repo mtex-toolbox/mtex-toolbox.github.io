@@ -80,7 +80,7 @@ coefficients are the internal ones, F._fhat.
 | keyword | default | description |
 |---|---|---|
 | `real` | `True` | the plan for real valued functions, which needs half the Fourier array |
-| `folds` | `(1, 1)` | (rA, rB), the folds about z on the crystal and the specimen side the coefficients are known to have, which shrink the Fourier array; a grid brings its own |
+| `folds` | `(1, 1)` | (rA, rB), the folds about z on the crystal and the specimen side the coefficients are known to have, which shrink the Fourier array; not read for a quadratureSO3Grid, whose own folds decide the plan |
 
 ## Output
 

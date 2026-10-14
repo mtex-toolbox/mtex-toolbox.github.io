@@ -14,5 +14,5 @@ A property of [SO3TangentVector](SO3TangentVector_index_py.html).
 the frame the components are written in: the specimen frame of the reference on the left, its
 crystal frame on the right
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L122">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L129">source</a></font>
 {% endraw %}

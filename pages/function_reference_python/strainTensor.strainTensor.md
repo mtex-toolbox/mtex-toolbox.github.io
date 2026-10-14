@@ -44,5 +44,5 @@ strainTensor(M, *args, type=None, **kwargs)
 
 MATLAB's [strainTensor.strainTensor](strainTensor.strainTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1287">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1298">source</a></font>
 {% endraw %}

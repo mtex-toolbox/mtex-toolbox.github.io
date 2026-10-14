@@ -71,10 +71,9 @@ The matrices are MTEX's Wigner functions, the basis the coefficients fhat of an
 SO3FunHarmonic are taken in: with normalize=True, f(g) = sum fhat_n^{kl} D_n^{kl}(g). A
 list of rotations gives the matrices stacked in front, (..., 2l+1, 2l+1).
 
-For a frame or a point group the result is the projection onto the functions invariant
-under the group. It is taken in the port's internal sign convention, which differs from
-the mean of WignerD(g, l) over the group's rotations by the signs of some entries, and
-normalize does not apply to it. MATLAB's kernel option is not there.
+For a frame or a point group the result is the mean of the matrices over the rotations of
+its proper group, the projection onto the functions invariant under the group. MATLAB's
+kernel option is not there.
 
 ## Input
 
@@ -107,5 +106,5 @@ normalize does not apply to it. MATLAB's kernel option is not there.
 
 MATLAB's [WignerD](WignerD.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L246">source</a></font>
 {% endraw %}

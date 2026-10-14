@@ -13,5 +13,5 @@ A property of [SO3DirichletKernel](SO3DirichletKernel_index_py.html).
 
 the degree N of the kernel
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L578">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L583">source</a></font>
 {% endraw %}

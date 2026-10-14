@@ -77,5 +77,5 @@ refractiveIndexTensor.birefringence(rI, vprop=None)
 
 MATLAB's [refractiveIndexTensor.birefringence](refractiveIndexTensor.birefringence.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/optics.py#L66">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/optics.py#L69">source</a></font>
 {% endraw %}

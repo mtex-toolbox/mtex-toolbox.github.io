@@ -95,7 +95,7 @@ over the angles.
 - an SO3Fun: that uniform distribution times the mean of the function over the axes at each
 angle, scaled by the same factor, so that a uniform density gives the uniform distribution.
 - misorientations: a histogram of the disorientation angles in percent, summing to 100,
-with omega the centres of the bins.
+with omega the centres of the bins, zero in every bin for no misorientations.
 
 The angles are in radians and end at the largest angle of the fundamental region; angles
 given beyond it are dropped. They may also be given positionally, after the second frame.

@@ -20,7 +20,7 @@ the WhiteJet colour map, as MATLAB's WhiteJetColorMap returns it
 rgb = WhiteJetColorMap()
 ```
 
-256 colours.
+100 colours, as MATLAB's.
 
 </div>
 
@@ -43,7 +43,7 @@ mtexColorMap or as a plot's colormap.
 
 | keyword | default | description |
 |---|---|---|
-| `n` | `256` | the number of colours |
+| `n` | `100` | the number of colours |
 
 ## Output
 
@@ -55,5 +55,5 @@ mtexColorMap or as a plot's colormap.
 
 MATLAB's [WhiteJetColorMap](WhiteJetColorMap.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L199">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L208">source</a></font>
 {% endraw %}

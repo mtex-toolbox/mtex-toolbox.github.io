@@ -39,5 +39,5 @@ T.inv(), T.displacement(pos), T.discretize(pos), transform(ebsd, T)
 | [shortChar](spatialTransform.shortChar_py.html) | the short name of the transform in its display, the class name without spatialTransform |
 | [stageList](spatialTransform.stageList_py.html) | the stages the transform is applied in, a list |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L104">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L105">source</a></font>
 {% endraw %}

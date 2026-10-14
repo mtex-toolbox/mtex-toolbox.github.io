@@ -77,7 +77,7 @@ readable; a harmonic component is noted as not written.
 drawn from the function.
 
 The angles are in degrees unless radians=True, in the Bunge convention unless 'ZYZ' (or
-'ABG', 'Matthies') is given. Keywords the interface does not know are ignored.
+'ABG', 'Matthies') is given. A keyword the interface does not take is refused.
 
 ## Input
 
@@ -94,5 +94,5 @@ The angles are in degrees unless radians=True, in the Bunge convention unless 'Z
 
 [loadODF](loadODF_VPSC_py.html), [exportOrientation](exportOrientation_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/exportodf.py#L117">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/exportodf.py#L119">source</a></font>
 {% endraw %}

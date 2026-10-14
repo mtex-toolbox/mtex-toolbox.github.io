@@ -120,7 +120,7 @@ components and is restated in the crystal frame.
 
 | keyword | default | description |
 |---|---|---|
-| `antipodal` | `False` | the antipodal symmetry, here the frame's Laue group in place of its point group; MATLAB sets the antipodal flag instead, which stays False here |
+| `antipodal` | `False` | the antipodal symmetry: sets m.antipodal, and the frame's Laue group takes the place of its point group |
 | `dispStyle` | `None` | the indices the display shows and the numbers are read as, the same as the style given positionally ('hkl', 'hkil', 'uvw', 'UVTW', 'xyz'); a string keeps the style of its brackets |
 
 ## Output

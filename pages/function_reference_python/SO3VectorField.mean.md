@@ -26,5 +26,5 @@ SO3VectorFieldHarmonic.mean(self)
 
 MATLAB's [SO3VectorField.mean](SO3VectorField.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L585">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L587">source</a></font>
 {% endraw %}

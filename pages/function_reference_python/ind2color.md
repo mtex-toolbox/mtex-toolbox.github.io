@@ -74,5 +74,5 @@ the indices are told apart.
 
 MATLAB's [ind2color](ind2color.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L266">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L280">source</a></font>
 {% endraw %}

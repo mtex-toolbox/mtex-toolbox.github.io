@@ -83,5 +83,5 @@ further keywords go to matplotlib's colorbar.
 
 MATLAB's [mtexColorbar](mtexColorbar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L702">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L705">source</a></font>
 {% endraw %}

@@ -25,5 +25,5 @@ left(t)
 
 [RotationTangentSpace](RotationTangentSpace_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L598">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L613">source</a></font>
 {% endraw %}

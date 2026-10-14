@@ -57,5 +57,5 @@ The pointwise sum along the first axis.
 
 MATLAB's [SO3FunHarmonic.sum](SO3FunHarmonic.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L573">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L576">source</a></font>
 {% endraw %}

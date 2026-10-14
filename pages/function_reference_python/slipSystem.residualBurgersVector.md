@@ -26,5 +26,5 @@ slipSystem.residualBurgersVector(self, other)
 
 MATLAB's [slipSystem.residualBurgersVector](slipSystem.residualBurgersVector.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L234">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L247">source</a></font>
 {% endraw %}

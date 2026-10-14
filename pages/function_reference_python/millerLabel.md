@@ -69,5 +69,5 @@ within 1e-4 radians is written, in the brackets of a direction.
 
 [Miller](Miller_py.html), [round](round_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L653">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L657">source</a></font>
 {% endraw %}

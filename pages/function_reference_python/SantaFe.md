@@ -30,5 +30,5 @@ SantaFe()
 
 MATLAB's [SantaFe](SantaFe.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L1042">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L1044">source</a></font>
 {% endraw %}

@@ -75,5 +75,5 @@ column of a curvature computed from it is NaN.
 
 MATLAB's [curvatureTensor_index](curvatureTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1455">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1466">source</a></font>
 {% endraw %}

@@ -61,5 +61,5 @@ the side of the first, is shorter than tol. The operator == compares exactly.
 
 MATLAB's [SO3TangentVector.eq](SO3TangentVector.eq.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L352">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L361">source</a></font>
 {% endraw %}

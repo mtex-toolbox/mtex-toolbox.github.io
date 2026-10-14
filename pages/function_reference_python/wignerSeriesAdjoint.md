@@ -62,7 +62,7 @@ real function.
 | keyword | default | description |
 |---|---|---|
 | `weights` | `None` | the weight of every rotation; by default 1/n, or the grid's rule |
-| `folds` | `(1, 1)` | (rA, rB), the folds about z the result is known to have, which shrink the NUFFT's array; a grid brings its own |
+| `folds` | `(1, 1)` | (rA, rB), the folds about z the result is known to have, which shrink the NUFFT's array; not read for a quadratureSO3Grid, whose own folds decide the route |
 
 ## Output
 
@@ -72,5 +72,5 @@ real function.
 
 [wignerSeries](wignerSeries_py.html), [wignerSeriesAdjointGridded](wignerSeriesAdjointGridded_py.html), [wignerPlan](wignerPlan_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L988">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L989">source</a></font>
 {% endraw %}

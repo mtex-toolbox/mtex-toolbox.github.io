@@ -119,5 +119,5 @@ scale the result to the whole sample. MATLAB's 'LSCV' and 'BCV' are not provided
 
 MATLAB's [vector3d.calcKernel](vector3d.calcKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1099">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1116">source</a></font>
 {% endraw %}

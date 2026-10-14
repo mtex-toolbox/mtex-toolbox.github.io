@@ -73,5 +73,5 @@ PoleFigure(h, r, I, cs, ss, superposition=c, complete=True)
 
 MATLAB's [PoleFigure_index](PoleFigure_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L109">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L110">source</a></font>
 {% endraw %}

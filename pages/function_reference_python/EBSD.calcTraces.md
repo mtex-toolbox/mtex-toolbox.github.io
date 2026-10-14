@@ -77,8 +77,9 @@ On grains it is:
 - 'calliper': the direction across the shortest calliper of that shape
 - 'hist': the maximum of the length weighted density of the segment directions
 
-The method is a positional string or method=. A cluster filling a rectangle has no
-direction: 'Fourier' then gives NaN, 'Radon' a side of the rectangle with high reliability.
+The method is a positional string or method=, in any case. A cluster filling a rectangle
+has no direction: 'Fourier' then gives NaN, 'Radon' a side of the rectangle with high
+reliability, as MATLAB's.
 
 ## Input
 
@@ -106,5 +107,5 @@ direction: 'Fourier' then gives NaN, 'Radon' a side of the rectangle with high r
 
 MATLAB's [EBSD.calcTraces](EBSD.calcTraces.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/traces.py#L186">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/traces.py#L187">source</a></font>
 {% endraw %}

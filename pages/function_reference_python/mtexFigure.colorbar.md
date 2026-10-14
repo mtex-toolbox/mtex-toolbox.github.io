@@ -74,5 +74,5 @@ keywords, as location, go to matplotlib's colorbar.
 
 MATLAB's [mtexFigure.colorbar](mtexFigure.colorbar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L361">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L364">source</a></font>
 {% endraw %}

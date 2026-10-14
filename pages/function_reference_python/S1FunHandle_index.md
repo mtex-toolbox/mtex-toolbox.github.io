@@ -37,5 +37,5 @@ S1FunHandle(fun, bandwidth=L)     the bandwidth of its harmonic form
 
 MATLAB's [S1FunHandle_index](S1FunHandle_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L665">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L667">source</a></font>
 {% endraw %}

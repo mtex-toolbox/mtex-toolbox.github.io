@@ -75,5 +75,5 @@ are.
 
 MATLAB's [slipSystem.symmetrise](slipSystem.symmetrise.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L156">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L169">source</a></font>
 {% endraw %}

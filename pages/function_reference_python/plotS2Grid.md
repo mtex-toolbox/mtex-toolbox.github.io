@@ -94,5 +94,5 @@ a sphericalRegion.
 
 MATLAB's [plotS2Grid](plotS2Grid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L720">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L724">source</a></font>
 {% endraw %}

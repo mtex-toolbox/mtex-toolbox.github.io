@@ -13,5 +13,5 @@ A property of [embeddingSpec](embeddingSpec_index_py.html).
 
 the dimension of the space the images move in, the number of columns of the basis
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L200">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L202">source</a></font>
 {% endraw %}

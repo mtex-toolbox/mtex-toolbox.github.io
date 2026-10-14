@@ -49,8 +49,8 @@ The RP error against pole figures.
 ## Description
 
 Two functions are compared at the nodes of an equispaced grid of the resolution in the
-fundamental region of f; g is evaluated there whatever its own symmetry, where MATLAB
-refuses functions of different symmetry. The mode chooses the measure:
+fundamental region of f; their crystal groups and their specimen groups must be of the same
+Laue class. The mode chooses the measure:
 
 - 'l1', the default: half the mean absolute difference. For two densities it is the fraction
 of the volume that would have to move to turn one into the other, between 0 and 1.

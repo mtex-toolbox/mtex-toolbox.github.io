@@ -19,5 +19,5 @@ a distance between orientations that makes points repel each other
 
 MATLAB's [SO3RestrictedDistanceKernel](SO3RestrictedDistanceKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L596">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L601">source</a></font>
 {% endraw %}

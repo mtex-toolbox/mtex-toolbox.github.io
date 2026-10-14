@@ -135,7 +135,7 @@ and figSize= the size of a new figure. Other keywords go to the matplotlib artis
 
 | keyword | default | description |
 |---|---|---|
-| `faceColor` | `None` | one colour for every grain; 'none' fills the grains black, alpha=0 draws the boundary alone |
+| `faceColor` | `None` | one colour for every grain; 'none' draws the outlines alone |
 | `colormap` | `'viridis'` | the colour map of values |
 | `colorRange` | `None` | (lo, hi), the values the colour map spans |
 | `colorbar` | `False` | add a colour bar for values |

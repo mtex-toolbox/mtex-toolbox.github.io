@@ -55,7 +55,7 @@ are normalised so that a uniform distribution of planes gives one.
 By default Psi solves the integral equation that makes the density of the normals the de
 la Vallee Poussin kernel of the halfwidth, or the S2Kernel given in its place; that
 solution may be negative. nonneg takes a Gaussian in t instead, bump the indicator of
-|t| < sin(halfwidth).
+|t| < arcsin(halfwidth), MATLAB's bound.
 
 ## Keywords
 

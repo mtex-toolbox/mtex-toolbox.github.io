@@ -17,5 +17,5 @@ basis of the space it moves in, built once per frame
 | [dim](embeddingSpec.dim_py.html) | the dimension of the space the images move in, the number of columns of the basis |
 | [seeds](embeddingSpec.seeds_py.html) | the seeds of a projection and their images, built on first use |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L180">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L182">source</a></font>
 {% endraw %}

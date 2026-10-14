@@ -84,5 +84,5 @@ quaternion.exp, [SO3TangentVector](SO3TangentVector_index_py.html), [geodesic](g
 
 MATLAB's [quaternion.log](quaternion.log.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L352">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L353">source</a></font>
 {% endraw %}

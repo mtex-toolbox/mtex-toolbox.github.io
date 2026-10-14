@@ -26,5 +26,5 @@ a / b
 
 MATLAB's [SO3Kernel.mrdivide](SO3Kernel.mrdivide.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L152">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L153">source</a></font>
 {% endraw %}

@@ -99,5 +99,5 @@ region, or with stable kept in the order of first appearance.
 
 MATLAB's [orientation.unique](orientation.unique.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L599">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L611">source</a></font>
 {% endraw %}

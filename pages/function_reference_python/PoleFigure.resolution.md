@@ -13,5 +13,5 @@ A property of [PoleFigure](PoleFigure_index_py.html).
 
 the resolution of the measurement, the finest over the pole figures
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L232">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L233">source</a></font>
 {% endraw %}

@@ -109,5 +109,5 @@ lineWidth), MATLAB's vector3d/quiver3.
 
 MATLAB's [vector3d.quiver3](vector3d.quiver3.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L766">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L765">source</a></font>
 {% endraw %}

@@ -20,7 +20,7 @@ the blue2red colour map, as MATLAB's blue2redColorMap returns it
 rgb = blue2redColorMap()
 ```
 
-256 colours.
+128 colours, as MATLAB's.
 
 </div>
 
@@ -43,7 +43,7 @@ mtexColorMap or as a plot's colormap.
 
 | keyword | default | description |
 |---|---|---|
-| `n` | `256` | the number of colours |
+| `n` | `128` | the number of colours |
 
 ## Output
 
@@ -59,5 +59,5 @@ mtexColorMap or as a plot's colormap.
 
 MATLAB's [blue2redColorMap](blue2redColorMap.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L199">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L208">source</a></font>
 {% endraw %}

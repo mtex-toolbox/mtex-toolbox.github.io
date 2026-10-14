@@ -57,5 +57,5 @@ spacing needs a positive lower end and is linear otherwise.
 
 [contour](S2Fun.contour_py.html), [contourf](S2Fun.contourf_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L140">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L144">source</a></font>
 {% endraw %}

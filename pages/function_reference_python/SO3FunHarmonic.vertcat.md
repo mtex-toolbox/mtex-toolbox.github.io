@@ -39,10 +39,10 @@ Two lists of n functions as the columns of n x 2.
 
 ## Description
 
-The lists are joined along an axis they have: two single functions give a list of two, and
-two columns of n functions, F.T of a list F, joined along axis 1 give n x 2 functions. An axis
-the lists do not have is not refused but joins the coefficient vectors. The real flag is
-kept when every function is real.
+Two single functions give a list of two, and two columns of n functions, F.T of a list F,
+joined along axis 1 give n x 2 functions. A list lacking the axis gets it as a trailing axis
+of length one, as MATLAB's cat(2, F1, F2) gives a 1 x 2 list of two functions. The real flag
+is kept when every function is real.
 
 ## Input
 
@@ -64,5 +64,5 @@ kept when every function is real.
 
 MATLAB's [SO3FunHarmonic.vertcat](SO3FunHarmonic.vertcat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L209">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L212">source</a></font>
 {% endraw %}

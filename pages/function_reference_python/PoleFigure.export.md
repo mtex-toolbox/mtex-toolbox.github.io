@@ -41,7 +41,8 @@ The angles in degrees.
 
 Every crystal direction (or superposition of directions) gets the file
 <fname>_<directions>.txt with three columns, the polar angle and the azimuth of the specimen
-directions and the intensity, the table loadPoleFigure reads back.
+directions and the intensity, the table loadPoleFigure reads back, with radians=True unless
+written with degree=True. The angles are in radians by default, as MATLAB writes them.
 
 ## Input
 
@@ -64,5 +65,5 @@ directions and the intensity, the table loadPoleFigure reads back.
 
 MATLAB's [PoleFigure.export](PoleFigure.export.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/exportpolefigure.py#L20">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/exportpolefigure.py#L21">source</a></font>
 {% endraw %}

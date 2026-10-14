@@ -73,5 +73,5 @@ Where neither works, as for fewer than four distinct directions, the weights are
 
 MATLAB's [vector3d.calcQuadratureWeights](vector3d.calcQuadratureWeights.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L968">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L964">source</a></font>
 {% endraw %}

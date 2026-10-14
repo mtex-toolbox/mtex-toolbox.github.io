@@ -735,7 +735,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [keyResolution](keyResolution_py.html) | the step a key of that many pixels is meshed at: about two pixels to a quad over a sector some ninety degrees across, never finer than a key drawn for a page nor coarser than the eye would catch |
 | [LaboTeXColorMap](LaboTeXColorMap_py.html) | the LaboTeX colour map, as MATLAB's LaboTeXColorMap returns it |
 | [legend](legend_py.html) | a legend: of every artist a displayName named, or naming the curves of the current axes |
-| [line](rotation.line_py.html) | a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
+| [line](line_py.html) | a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
 | [logAxis](logAxis_py.html) | both axes of a plot logarithmic, a decade of the same length on either |
 | [makeSphericalProjection](makeSphericalProjection_py.html) | the charts a spherical plot is drawn on, the projection of the region its data cover |
 | [mapAliases](mapAliases_py.html) | the style keywords of a map plot, checked for their spelling |
@@ -769,7 +769,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [plotEllipse](plotEllipse_py.html) | ellipses drawn into the map that is held, one per centre |
 | [plotEllipsoid](plotEllipsoid_py.html) | ellipsoids with the half axes a, b, c about their centres, in a 3D scene |
 | [plotFibre](SO3Fun.plotFibre_py.html) | the ODF along the fibre f, as a line over the angle along the fibre |
-| [plotFibreSection](plotFibreSection_py.html) | a fibre on the current section plot, as a chain of dots through the sections it passes |
+| [plotFibreSection](plotFibreSection_py.html) | a fibre on the current section plot, as lines through the sections it passes |
 | [plotGrains](grain2d.plot_py.html) | the grains of a map as polygons, coloured by phase, by a value or by orientation, with their boundaries on top |
 | [plotHKL](crystalSymmetry.plotHKL_py.html) | the low index directions <100>, <110>, <111> of a crystal with all their symmetric equivalents, labelled by their indices |
 | [plotInnerDirection](crystalShape.plotInnerDirection_py.html) | a crystal direction drawn as an arrow from the centre of a crystal shape to its surface |

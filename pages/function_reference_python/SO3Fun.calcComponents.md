@@ -54,8 +54,8 @@ decreasing weight.
 
 The seeds are, in this order of preference:
 
-- the orientations given as seed, with equal weights unless weights are given; MATLAB
-weighs them by the function's values there.
+- the orientations given as seed, weighted by the function's values there unless weights
+are given.
 - the centres of a radial function, with its weights.
 - the nodes of a 2.5 degree grid, with equal weights, which first climb to their peaks on
 the grid; the weight of a mode is then the share of the orientation space that flows into
@@ -63,7 +63,8 @@ it, not its volume.
 
 Seeds of weight zero are left out, so centerId has one entry per seed of positive weight.
 Modes of less than one percent of the weight are dropped unless exact=True, and the seeds
-that reached them get centerId -1. The progress is not reported, whatever verbose says.
+that reached them get centerId -1. No seed gives no modes. With verbose the number of seeds
+and of the components found are reported.
 
 ## Input
 
@@ -74,7 +75,7 @@ that reached them get centerId -1. The progress is not reported, whatever verbos
 | keyword | default | description |
 |---|---|---|
 | `seed` | `None` | orientation, the starting points of the ascent |
-| `weights` | `None` | the weights of the seeds, equal by default |
+| `weights` | `None` | the weights of the seeds, by default the values of the function at them, equal for the nodes of the grid |
 | `tol` | `1.5*degree` | the angle within which modes merge, and the accuracy of the ascent |
 | `maxIter` | `100` | the largest number of steps of the ascent |
 | `radius` | `inf` | only the seeds within this angle of their mode count to its weight; MATLAB's 'angle' |
@@ -97,5 +98,5 @@ that reached them get centerId -1. The progress is not reported, whatever verbos
 
 MATLAB's [SO3Fun.calcComponents](SO3Fun.calcComponents.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L891">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L893">source</a></font>
 {% endraw %}

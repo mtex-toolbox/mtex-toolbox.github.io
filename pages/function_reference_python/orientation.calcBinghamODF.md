@@ -76,5 +76,5 @@ smallest value of zero, or exactly by Newton on the moments.
 
 MATLAB's [orientation.calcBinghamODF](orientation.calcBinghamODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L390">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L391">source</a></font>
 {% endraw %}

@@ -92,10 +92,11 @@ the closest centres are more than maxAngle apart. More than 1000 orientations ar
 binned on a grid of the given resolution.
 
 The density method leaves some orientations without a cluster: those further from their
-centre than twice the mean angle of the cluster get NaN in cId, and those whose mode is too
-small to be kept by calcComponents get -1. The centres of 'odf' are the modes of the density,
-those of the other methods the (weighted) means of the clusters. cId has the shape of the
-input.
+centre than twice the mean angle of the cluster and those whose mode is not among the centres
+get NaN in cId. Elements that are NaN themselves get NaN in cId with every method, the others
+are clustered without them; no elements give no clusters. The centres of 'odf' are the modes
+of the density, those of the other methods the (weighted) means of the clusters. cId has the
+shape of the input.
 
 ## Input
 
@@ -115,11 +116,11 @@ input.
 | `halfwidth` | `5*degree` | the halfwidth of the kernel of the density method |
 | `weights` | `None` | a weight per element, for the density and the hierarchical method |
 | `resolution` | `2.5*degree` | the grid the hierarchical method bins more than 1000 orientations on |
-| `verbose` | `False` | accepted for MATLAB's 'silent'; nothing is reported |
+| `verbose` | `False` | report the progress of calcComponents (the density method) |
 
 ## Output
 
-| `cId` | ndarray of ints, the cluster of every element counted from zero, a float array with NaN for the orientations the density method leaves out |
+| `cId` | ndarray of ints, the cluster of every element counted from zero, a float array with NaN for the elements that are NaN and the orientations the density method leaves out |
 | `center` | vector3d or orientation, the centre of every cluster |
 
 ## References

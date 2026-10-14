@@ -80,5 +80,5 @@ plot3d(v) of directions is the same.
 
 MATLAB's [vector3d.scatter3d](vector3d.scatter3d.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L276">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L275">source</a></font>
 {% endraw %}

@@ -64,8 +64,8 @@ lies between -0.5 and 0.5.
 
 One load on a list of systems gives one factor per system, a list of loads a (loads,
 systems) matrix. Without a load the result is the function of the tension direction on
-the sphere, antipodal, vector valued for several systems; relative=True does not divide
-this function by the CRSS, unlike MATLAB.
+the sphere, antipodal, vector valued for several systems; relative=True divides it by the
+CRSS as well.
 
 The systems and the load must be given in the same frame: both in crystal coordinates, or
 ori * sS and the stress as measured.

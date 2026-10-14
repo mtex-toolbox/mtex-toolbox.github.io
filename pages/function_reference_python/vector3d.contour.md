@@ -26,5 +26,5 @@ vector3d.contour(x, *args, **kw)
 
 MATLAB's [vector3d.contour](vector3d.contour.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1305">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1312">source</a></font>
 {% endraw %}

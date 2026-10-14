@@ -90,5 +90,5 @@ takes them as one.
 
 MATLAB's [quaternion.unique](quaternion.unique.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L420">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L421">source</a></font>
 {% endraw %}

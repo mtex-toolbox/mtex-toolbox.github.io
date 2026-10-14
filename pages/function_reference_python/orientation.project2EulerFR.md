@@ -26,5 +26,5 @@ orientation.project2EulerFR(self)
 
 MATLAB's [orientation.project2EulerFR](orientation.project2EulerFR.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L738">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L750">source</a></font>
 {% endraw %}

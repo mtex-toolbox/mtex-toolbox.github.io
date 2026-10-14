@@ -74,5 +74,5 @@ screen and their scanUnit.
 
 MATLAB's [scaleBar](scaleBar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L401">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L403">source</a></font>
 {% endraw %}

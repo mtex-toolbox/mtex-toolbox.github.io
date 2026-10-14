@@ -41,8 +41,8 @@ Every third pixel.
 
 The measurements are selected by their lattice index, so a square, a hexagonal and a
 rotated lattice are all reduced alike; the kept sites form the same kind of lattice factor
-times coarser, which the result carries. The result is a list of measurements;
-gridify(ebsd) turns it into a grid again.
+times coarser, which the result carries. A gridded map gives a grid, a list of
+measurements a list.
 
 ## Input
 
@@ -64,5 +64,5 @@ gridify(ebsd) turns it into a grid again.
 
 MATLAB's [EBSD3.reduce](EBSD3.reduce.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L488">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L493">source</a></font>
 {% endraw %}

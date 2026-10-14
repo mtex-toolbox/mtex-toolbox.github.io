@@ -54,5 +54,5 @@ s = sS.char('latex')
 
 Miller.char
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L279">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L292">source</a></font>
 {% endraw %}

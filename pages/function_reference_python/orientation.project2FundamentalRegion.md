@@ -73,5 +73,5 @@ MATLAB's second form, the symmetry elements that do the projection, is not retur
 
 MATLAB's [orientation.project2FundamentalRegion](orientation.project2FundamentalRegion.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L678">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L690">source</a></font>
 {% endraw %}

@@ -17,5 +17,5 @@ length bandwidth + 1 per function
 
 MATLAB's [S2FunHarmonic.power](S2FunHarmonic.power.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L363">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L364">source</a></font>
 {% endraw %}

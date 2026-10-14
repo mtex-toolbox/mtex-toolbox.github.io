@@ -68,7 +68,7 @@ the NUFFT, is chosen by the number of nodes. The result has the shape of the rot
 | keyword | default | description |
 |---|---|---|
 | `real` | `None` | whether the coefficients are those of a real function, whose values are returned real; by default isRealWigner(fhat) |
-| `folds` | `(1, 1)` | (rA, rB), the folds about z the coefficients have, which shrink the NUFFT's array; a grid brings its own |
+| `folds` | `(1, 1)` | (rA, rB), the folds about z the coefficients have, which shrink the NUFFT's array; not read for a quadratureSO3Grid, whose own folds decide the route |
 
 ## Output
 
@@ -78,5 +78,5 @@ the NUFFT, is chosen by the number of nodes. The result has the shape of the rot
 
 [wignerSeriesAdjoint](wignerSeriesAdjoint_py.html), [wignerPlan](wignerPlan_py.html), [SO3FunHarmonic.eval](SO3FunHarmonic.eval_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L948">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L949">source</a></font>
 {% endraw %}

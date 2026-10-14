@@ -59,5 +59,5 @@ of the polar angle.
 
 S2Kernel.eval, [SO3Kernel.calcFourier](SO3Kernel.calcFourier_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L742">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L747">source</a></font>
 {% endraw %}

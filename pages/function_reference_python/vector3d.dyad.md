@@ -34,10 +34,31 @@ The third dyadic power v x v x v.
 
 </div>
 
+<div class="mx-form" markdown="1">
+
+```python
+T = dyad(v, n=3)
+```
+
+The same.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+T = dyad(T1, T2, 2)
+```
+
+The second dyadic power of the outer product.
+
+</div>
+
 ## Description
 
 A vector counts as a tensor of rank one; a single argument is returned as a tensor. The
-power is given as the second argument; the keyword n is not used.
+power is the second argument or the keyword n; after a second factor it raises their
+outer product to that power.
 
 ## Input
 
@@ -48,7 +69,7 @@ power is given as the second argument; the keyword n is not used.
 
 | keyword | default | description |
 |---|---|---|
-| `n` | `None` | not used |
+| `n` | `None` | the dyadic power, a positive integer |
 
 ## Output
 

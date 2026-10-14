@@ -91,8 +91,8 @@ the child group; the parent variants, with parent=True, are the distinct r * p2c
 child group modulo the parent group.
 
 They are numbered as MTEX numbers them, for Kurdjumov-Sachs as Morito does; this order is
-what a variant id means. The ids count from 1 up to the number of variants; an id of 0 or
-below counts from the end, as NumPy indexes.
+what a variant id means. The ids count from 1 up to the number of variants; an id outside
+is refused.
 
 The second argument decides what is returned:
 

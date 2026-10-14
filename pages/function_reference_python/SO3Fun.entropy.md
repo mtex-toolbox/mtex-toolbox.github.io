@@ -64,5 +64,5 @@ mean over the sphere, as MATLAB divides by 4 pi.
 
 MATLAB's [SO3Fun.entropy](SO3Fun.entropy.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L72">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L71">source</a></font>
 {% endraw %}

@@ -68,5 +68,5 @@ fhat runs over e^{-ikx}). The result has the shape of x.
 
 [fourierSeriesAdjoint](fourierSeriesAdjoint_py.html), [S1FunHarmonic](S1FunHarmonic_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1234">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1237">source</a></font>
 {% endraw %}

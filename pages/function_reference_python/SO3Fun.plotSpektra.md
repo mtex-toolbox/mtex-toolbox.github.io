@@ -55,6 +55,16 @@ One line per function.
 
 </div>
 
+<div class="mx-form" markdown="1">
+
+```python
+odf.plotSpectrum()
+```
+
+The same, as a method.
+
+</div>
+
 ## Description
 
 What is drawn depends on the input:
@@ -65,16 +75,15 @@ logarithmic=True their absolute values on log-log axes.
 - a function on S2 or SO(3): the power of every degree, the norm of its coefficients, as
 open circles on a dotted line, up to the bandwidth of the function. A function of another
 kind is first expanded into harmonics; logarithmic changes nothing.
+- a function on the circle: the norm of the coefficients of k and -k over |k|, drawn the
+same way.
 - a list: one line per entry, in one axes.
-
-A function on the circle, S1FunHarmonic, is not supported: it is expanded as if it were a
-function on SO(3), where MATLAB draws the absolute values of its coefficients per |k|.
 
 The other keywords are those of a line plot; fontSize sets the size of the labels and ticks.
 
 ## Input
 
-| `x` | an S2Kernel or SO3Kernel, an S2Fun or SO3Fun, or a list of them |
+| `x` | an S2Kernel or SO3Kernel, an S1Fun, S2Fun or SO3Fun, or a list of them |
 
 ## Keywords
 

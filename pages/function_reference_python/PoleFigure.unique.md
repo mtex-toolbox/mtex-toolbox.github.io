@@ -40,10 +40,8 @@ A coarser tolerance.
 
 ## Description
 
-Two directions are merged when one of them, turned by a rotation of the specimen group,
-has a dot product with the other above 1 - tol (its absolute value for axes). Only the
-rotations of the group count, and a group of two elements is not used: the directions are
-then merged only when they coincide.
+Two directions are merged when one of them, mapped by an element of the specimen group,
+has a dot product with the other above 1 - tol (its absolute value for axes).
 
 ## Input
 
@@ -65,5 +63,5 @@ then merged only when they coincide.
 
 MATLAB's [PoleFigure.unique](PoleFigure.unique.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L417">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L418">source</a></font>
 {% endraw %}

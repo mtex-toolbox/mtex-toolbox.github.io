@@ -35,8 +35,8 @@ Grains, turned to another convention.
 
 ## Description
 
-A map reaches a lattice spacing beyond its outer measurements, the padding of a grid left
-out; grains end at the vertices of their boundary, a boundary or a list of triple points at
+A map reaches the unit cell around its outer measurements, half a spacing on a square grid,
+as MATLAB's plot, the padding of a grid left out; grains end at the vertices of their boundary, a boundary or a list of triple points at
 its vertices. Nothing to show gives zeros.
 
 ## Input

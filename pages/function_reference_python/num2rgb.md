@@ -37,6 +37,16 @@ Another map, a fixed range.
 <div class="mx-form" markdown="1">
 
 ```python
+rgb = num2rgb(values, 'LaboTeX', N=16)
+```
+
+One of 16 colours of a named map.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
 rgb = num2rgb(values, blue2redColorMap(8))
 ```
 
@@ -46,9 +56,9 @@ One of eight colours of a matrix.
 
 ## Description
 
-The values are scaled to the range and clipped to it; a map given by name is sampled
-continuously, a matrix of colours gives the nearest of its rows (MATLAB's option N, the
-number of colours of a named map, is not taken).
+The values are scaled to the range and clipped to it, and take one of the N colours a named
+map is sampled at, or of the rows of a matrix of colours: the value at the fraction t of the
+range the colour ceil(t N), counted from one, the lowest value the first.
 
 ## Input
 
@@ -60,6 +70,7 @@ number of colours of a named map, is not taken).
 |---|---|---|
 | `colormap` | `'WhiteJet'` | the name of a colour map, a matplotlib map or an n x 3 matrix of colours |
 | `range` | `None` | [lower, upper] limit of the values, by default their minimum and maximum |
+| `N` | `255` | the number of colours a named map is sampled at; a matrix has its rows |
 
 ## Output
 
@@ -75,5 +86,5 @@ number of colours of a named map, is not taken).
 
 MATLAB's [num2rgb](num2rgb.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L166">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L170">source</a></font>
 {% endraw %}

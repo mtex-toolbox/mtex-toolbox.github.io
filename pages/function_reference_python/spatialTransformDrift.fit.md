@@ -51,8 +51,8 @@ Continued beyond the lines.
 The points of one scan line share their coordinate along the slow scan direction, up to
 rounding; each line becomes a knot with the median displacement of its points. The median
 rather than the mean: a line crossing a badly correlated patch is not pulled by it. The
-weights only drop the points of weight zero, since one number per line leaves nothing for
-them to outvote.
+weights only drop the points whose weight is not a number, since one number per line
+leaves nothing for them to outvote; a weight zero is kept, as MATLAB keeps it.
 
 ## Input
 
@@ -63,7 +63,7 @@ them to outvote.
 
 | keyword | default | description |
 |---|---|---|
-| `weights` | `None` | array, a weight per point pair; zero drops a point |
+| `weights` | `None` | array, a weight per point pair; not a number drops a point |
 | `slowScan` | `None` | vector3d, the slow scan direction, by default y |
 | `extrapolate` | `False` | continue the end segments beyond the first and last line, where the drift is otherwise NaN |
 

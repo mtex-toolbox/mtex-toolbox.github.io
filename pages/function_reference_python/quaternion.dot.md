@@ -26,10 +26,20 @@ A b + ... + d d of the coefficients.
 
 </div>
 
+<div class="mx-form" markdown="1">
+
+```python
+d = dot(q1, q2, antipodal=True)
+```
+
+Its absolute value.
+
+</div>
+
 ## Description
 
 The plain inner product of the quaternions as vectors of R^4, signed: q and -q give
-opposite values. rotation.dot takes its absolute value.
+opposite values. rotation.dot takes its absolute value by default.
 
 ## Input
 
@@ -39,7 +49,7 @@ opposite values. rotation.dot takes its absolute value.
 
 | keyword | default | description |
 |---|---|---|
-| `antipodal` | `True` | not used by quaternions, which keep the sign; taken so that the call is the one of rotations |
+| `antipodal` | `False` | take the absolute value, q and -q read as one |
 
 ## Output
 

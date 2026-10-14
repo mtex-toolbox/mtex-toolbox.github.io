@@ -90,9 +90,8 @@ The parent ids, nothing merged.
 ## Description
 
 Two grains go into one when a criterion joins them, directly or through a chain of other
-grains. Inclusions combine with pairs or a threshold. A threshold, however, replaces the
-pairs given with it, and a label per grain ignores inclusions; MATLAB applies every
-criterion given.
+grains. Every criterion given applies at once: pairs or labels, a threshold and inclusions
+together join what any of them joins.
 
 Grains of two phases are merged only by an inclusion, which then takes the phase and the
 orientation of its host. A pair of two phases is passed over, and a label spanning phases

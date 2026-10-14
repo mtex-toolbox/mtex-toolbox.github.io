@@ -39,7 +39,7 @@ Under a layout that flips the plane.
 ## Input
 
 | `cS` | crystalShape, one shape or a list of shapes |
-| `plane` | mapPlane, the plane the shapes are seen in |
+| `plane` | mapPlane or plane3d, the plane the shapes are seen in |
 
 ## Keywords
 

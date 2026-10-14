@@ -52,5 +52,5 @@ Resized to a named size of its layout.
 
 MATLAB's [mtexFigure.drawNow](mtexFigure.drawNow.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L415">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L418">source</a></font>
 {% endraw %}

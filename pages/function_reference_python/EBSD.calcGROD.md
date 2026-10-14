@@ -78,5 +78,5 @@ grain or not indexed is NaN. The map must hold one phase.
 
 MATLAB's [EBSD.calcGROD](EBSD.calcGROD.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L525">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L535">source</a></font>
 {% endraw %}

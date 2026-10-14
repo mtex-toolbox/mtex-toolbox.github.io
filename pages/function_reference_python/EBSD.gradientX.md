@@ -61,5 +61,5 @@ The stencil is that of gradient.
 
 MATLAB's [EBSD.gradientX](EBSD.gradientX.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L283">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L289">source</a></font>
 {% endraw %}

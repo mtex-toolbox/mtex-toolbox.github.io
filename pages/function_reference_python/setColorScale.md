@@ -51,5 +51,5 @@ Linear colours again on a figure given.
 
 [GND](GND_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L824">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L830">source</a></font>
 {% endraw %}

@@ -61,5 +61,5 @@ One system of the family; symmetrise gives every equivalent one.
 
 [Lankford](Lankford_py.html), [SlipSystems](SlipSystems_py.html), [SlipTransmission](SlipTransmission_py.html), [TaylorHex](TaylorHex_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L395">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L408">source</a></font>
 {% endraw %}

@@ -59,5 +59,5 @@ The tensor components, repeated ones included.
 
 MATLAB's [quaternion.double](quaternion.double.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L525">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L527">source</a></font>
 {% endraw %}

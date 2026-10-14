@@ -72,5 +72,5 @@ follows the keywords of the spherical plots.
 
 [plotHKL](crystalSymmetry.plotHKL_py.html), [crystalFrame](crystalFrame_index_py.html), [fundamentalSector](fundamentalSector_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1111">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1118">source</a></font>
 {% endraw %}

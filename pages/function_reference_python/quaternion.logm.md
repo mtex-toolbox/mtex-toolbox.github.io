@@ -24,5 +24,5 @@ logm(T)
 
 MATLAB's [quaternion.logm](quaternion.logm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1666">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1677">source</a></font>
 {% endraw %}

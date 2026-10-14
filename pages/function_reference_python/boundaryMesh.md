@@ -73,5 +73,5 @@ A face whose value or colour is NaN is not drawn.
 
 [grainMesh](grainMesh_py.html), [scene3d](scene3d_index_py.html), [plot3d](S2Fun.plot3d_py.html), [Grains3DBoundaries](Grains3DBoundaries_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L354">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L359">source</a></font>
 {% endraw %}

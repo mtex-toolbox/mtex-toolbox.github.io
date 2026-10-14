@@ -117,5 +117,5 @@ every other keyword goes to the matplotlib artist.
 
 MATLAB's [grainBoundary.plot](grainBoundary.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L818">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L821">source</a></font>
 {% endraw %}

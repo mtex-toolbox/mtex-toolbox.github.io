@@ -84,5 +84,5 @@ With a fibre as other it is the angle to the fibre.
 
 MATLAB's [orientation.angle](orientation.angle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L480">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L492">source</a></font>
 {% endraw %}

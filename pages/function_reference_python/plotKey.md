@@ -79,5 +79,5 @@ of the spherical plots.
 
 [ipfColorKey](ipfColorKey_index_py.html), [HSVDirectionKey](HSVDirectionKey_index_py.html), [direction2color](HKLDirectionKey.direction2color_py.html), [orientation2color](BungeColorKey.orientation2color_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1426">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1433">source</a></font>
 {% endraw %}

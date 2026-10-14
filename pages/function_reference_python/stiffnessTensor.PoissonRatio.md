@@ -41,6 +41,14 @@ The function of the transverse direction.
 <div class="mx-form" markdown="1">
 
 ```python
+nu = PoissonRatio(C, None, y) # the function of the tension direction
+```
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
 nu = PoissonRatio(C)
 ```
 
@@ -50,10 +58,9 @@ The isotropic ratio.
 
 ## Description
 
-Without directions the ratio of an isotropic polycrystal, (3K - 2G) / (2 (3K + G)) from
-the Voigt bounds of the bulk and the shear modulus. MATLAB's PoissonRatio(S, [], y), the
-function of the tension direction, has no counterpart: without x the isotropic ratio is
-returned.
+Without directions the ratio of an isotropic polycrystal, that of the compliance tensor
+averaged over uniformly distributed orientations: (3K - 2G) / (2 (3K + G)) with the
+Reuss bounds of the bulk and the shear modulus.
 
 ## Input
 
@@ -63,7 +70,7 @@ returned.
 
 ## Output
 
-| `nu` | the Poisson ratio, or an S2Fun of the transverse direction |
+| `nu` | the Poisson ratio, or an S2Fun of the transverse or the tension direction |
 
 ## See also
 
@@ -81,5 +88,5 @@ stiffnessTensor.PoissonRatio(T, x=None, y=None)
 
 MATLAB's [stiffnessTensor.PoissonRatio](stiffnessTensor.PoissonRatio.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L323">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L328">source</a></font>
 {% endraw %}

@@ -82,5 +82,5 @@ port always does, with these defaults.
 
 MATLAB's [calcVariantId](calcVariantId.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L306">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L308">source</a></font>
 {% endraw %}

@@ -36,5 +36,5 @@ PoleFigure(h, r, intensities, *frames, superposition=None, complete=False)
 
 MATLAB's [PoleFigure.PoleFigure](PoleFigure.PoleFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L109">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L110">source</a></font>
 {% endraw %}

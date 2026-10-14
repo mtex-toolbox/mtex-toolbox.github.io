@@ -74,5 +74,5 @@ have one shape; they do not broadcast.
 
 MATLAB's [orientation.exp](orientation.exp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L377">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L378">source</a></font>
 {% endraw %}

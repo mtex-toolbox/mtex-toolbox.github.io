@@ -29,5 +29,5 @@ S2KernelHandle(lambda t: t**2, bandwidth=16)
 
 MATLAB's [S2KernelHandle](S2KernelHandle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L959">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L968">source</a></font>
 {% endraw %}

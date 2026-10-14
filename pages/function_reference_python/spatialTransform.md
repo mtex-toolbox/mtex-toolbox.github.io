@@ -42,5 +42,5 @@ T.inv(), T.displacement(pos), T.discretize(pos), transform(ebsd, T)
 
 MATLAB's [spatialTransform](spatialTransform.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L104">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L105">source</a></font>
 {% endraw %}

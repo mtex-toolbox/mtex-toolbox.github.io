@@ -49,7 +49,7 @@ Another resolution.
 The format is that of the extension. A bitmap is written at 1.5 times the screen
 resolution, a map at 2.5 times and without smoothing between its cells, so that no colour
 is invented between measurements. 'crop' and 'pdf' of MATLAB's TeX tools need nothing here.
-Further keywords go to matplotlib's savefig; positional arguments after fig are ignored.
+Further keywords go to matplotlib's savefig; a positional argument after fig is refused.
 MATLAB's file dialog without a name has no counterpart.
 
 ## Input
@@ -72,5 +72,5 @@ MATLAB's file dialog without a name has no counterpart.
 
 MATLAB's [saveFigure](saveFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L738">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L741">source</a></font>
 {% endraw %}

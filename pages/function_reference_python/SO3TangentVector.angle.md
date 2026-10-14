@@ -35,9 +35,20 @@ The angle between the vectors.
 
 </div>
 
+<div class="mx-form" markdown="1">
+
+```python
+omega = angle(v1, v2, antipodal=True)
+```
+
+Read as axes, at most 90 degree.
+
+</div>
+
 ## Description
 
-The second vectors are brought to the reference and side of the first.
+The second vectors are brought to the reference and side of the first; the keywords are
+those of vector3d.angle and need the second vectors.
 
 ## Input
 
@@ -62,5 +73,5 @@ SO3TangentVector.angle(self, other=None, **kwargs)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L322">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L330">source</a></font>
 {% endraw %}

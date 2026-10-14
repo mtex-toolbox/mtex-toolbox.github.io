@@ -64,5 +64,5 @@ the kernel families and by quadrature for a kernel given as a function. MATLAB's
 
 MATLAB's [SO3Kernel.calcFourier](SO3Kernel.calcFourier.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L246">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L247">source</a></font>
 {% endraw %}

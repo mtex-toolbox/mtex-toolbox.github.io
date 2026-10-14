@@ -32,6 +32,7 @@ sS = slipSystem.fcc(cs)
 | [bcc](slipSystem.bcc_py.html) | the slip systems <1-11>{011}, <-111>{211} and <-111>{321} of a body-centred cubic crystal |
 | [cat](slipSystem.cat_py.html) | the list of several systems of one crystal, MATLAB's [sS1, sS2] |
 | [char](slipSystem.char_py.html) | one plane and one direction in it, (111)[01-1], one string per system |
+| [CRSS](slipSystem.CRSS_py.html) | the critical resolved shear stress of every system |
 | [CS](slipSystem.CS_py.html) | the crystal frame of the systems, None once they are in specimen coordinates |
 | [deformationTensor](slipSystem.deformationTensor_py.html) | the dyad as a tensor in the frame of the systems, a single one for a single system |
 | [eq](slipSystem.eq_py.html) | Return self==value |

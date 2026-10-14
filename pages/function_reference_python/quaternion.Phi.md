@@ -13,5 +13,5 @@ A property of [quaternion](quaternion_index_py.html).
 
 the second Bunge Euler angle Phi
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L326">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L327">source</a></font>
 {% endraw %}

@@ -67,8 +67,8 @@ calcGrains, leaves the grain gives NaN, so a larger window leaves more pixels Na
 from the curvature of the nearest neighbours. It runs on a list and on a map of several
 phases as well.
 
-The vectors are in the specimen frame, per scan unit. windowSize must be at least 1; 0 gives
-infinite values.
+The vectors are in the specimen frame, per scan unit. windowSize is a whole number of at
+least 1.
 
 ## Input
 
@@ -96,5 +96,5 @@ infinite values.
 
 MATLAB's [EBSD3.weightedBurgersVec](EBSD3.weightedBurgersVec.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L383">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L391">source</a></font>
 {% endraw %}

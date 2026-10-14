@@ -60,5 +60,5 @@ annotate(v, *args, **kw)
 
 MATLAB's [annotate](annotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1205">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1212">source</a></font>
 {% endraw %}

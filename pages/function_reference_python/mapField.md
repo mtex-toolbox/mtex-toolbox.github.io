@@ -90,5 +90,5 @@ maxSO3Bandwidth.
 
 [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html), [grad](grad_py.html), [antiderivative](antiderivative_py.html), [SO3FunVectorField](SO3FunVectorField_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L842">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L844">source</a></font>
 {% endraw %}

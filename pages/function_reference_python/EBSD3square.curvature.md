@@ -41,7 +41,7 @@ inverse scan unit. The volume is gridded first and must hold one indexed phase.
 
 | keyword | default | description |
 |---|---|---|
-| `stencil` | `None` | accepted for the signature of EBSD.curvature and not used: a volume takes the one sided differences |
+| `stencil` | `'oneSided'` | 'oneSided', the one sided difference, the one a volume takes; another is refused |
 
 ## Output
 
@@ -53,5 +53,5 @@ inverse scan unit. The volume is gridded first and must hold one indexed phase.
 
 MATLAB's [EBSD3square.curvature](EBSD3square.curvature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/intragranular3d.py#L132">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/intragranular3d.py#L138">source</a></font>
 {% endraw %}

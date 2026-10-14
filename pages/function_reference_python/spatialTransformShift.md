@@ -39,5 +39,5 @@ T = spatialTransformShift.fit(posA, posB, weights=w)
 
 MATLAB's [spatialTransformShift](spatialTransformShift.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L241">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L242">source</a></font>
 {% endraw %}

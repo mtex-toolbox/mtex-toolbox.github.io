@@ -26,5 +26,5 @@ EBSD3.spatialProfile(ebsd, points)
 
 MATLAB's [EBSD3square.spatialProfile](EBSD3square.spatialProfile.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/intragranular3d.py#L271">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/intragranular3d.py#L277">source</a></font>
 {% endraw %}

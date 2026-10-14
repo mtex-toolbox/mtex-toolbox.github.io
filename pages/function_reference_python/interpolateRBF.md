@@ -89,13 +89,13 @@ to the mean of the values over the Voronoi cells of the nodes. Above 10000 nodes
 mean, LSQR as below.
 - values of both signs: LSQR, the weights of any sign.
 
-Values with more than one column raise an error, since an SO3FunRBF holds one weight per
-centre.
+Values of shape (n, k) give a list of k functions, one per column, on the same centres, and
+withIterations a list of the iterations of each.
 
 ## Input
 
 | `ori` | orientation, the nodes |
-| `y` | the values at the nodes, (n,) |
+| `y` | the values at the nodes, (n,) or (n, k) |
 
 ## Keywords
 
@@ -114,7 +114,7 @@ centre.
 
 ## Output
 
-| `SO3F` | SO3FunRBF |
+| `SO3F` | SO3FunRBF, or a list of them for several columns |
 | `it` | the number of iterations |
 
 ## References

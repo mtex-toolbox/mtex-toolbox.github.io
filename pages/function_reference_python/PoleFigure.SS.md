@@ -13,5 +13,5 @@ A property of [PoleFigure](PoleFigure_index_py.html).
 
 the specimen frame, that of the specimen directions allR
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L177">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L178">source</a></font>
 {% endraw %}

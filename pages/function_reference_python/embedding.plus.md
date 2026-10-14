@@ -26,5 +26,5 @@ a + b
 
 MATLAB's [embedding.plus](embedding.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L320">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L322">source</a></font>
 {% endraw %}

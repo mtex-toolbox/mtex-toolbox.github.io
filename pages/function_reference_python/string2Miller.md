@@ -48,10 +48,11 @@ h = string2Miller('PF_002_R.UXD')
 
 ## Description
 
-Only the base name of a path is read. Four digits from 0 to 6 with optional minus signs are
-taken when the first three sum to zero, else three digits without a sign, else three with
-signs; a name with none is (100). MATLAB's second output, whether the name spelled one, is
-not returned.
+Only the base name of a path is read. A digit with a bar over it, as char(h) and
+export(pf) write it, counts as negative. Four digits from 0 to 6 with optional minus signs
+are taken when the first three sum to zero, else three digits without a sign, else three
+with signs; a name with none is (100). MATLAB's second output, whether the name spelled
+one, is not returned.
 
 ## Input
 

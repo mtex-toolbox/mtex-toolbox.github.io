@@ -43,6 +43,16 @@ Fewer points, a thick red line.
 
 </div>
 
+<div class="mx-form" markdown="1">
+
+```python
+plotFibre([odf1, odf2], f)
+```
+
+One line per function.
+
+</div>
+
 ## Description
 
 The fibre is sampled at equally spaced orientations and the ODF evaluated there, the real
@@ -54,7 +64,7 @@ the port returns the line.
 
 ## Input
 
-| `odf` | SO3Fun |
+| `odf` | SO3Fun, or a list of them |
 | `f` | fibre |
 
 ## Keywords

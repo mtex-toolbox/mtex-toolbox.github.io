@@ -26,5 +26,5 @@ vector3d.smooth(x, *args, **kw)
 
 MATLAB's [Miller.smooth](Miller.smooth.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1310">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1317">source</a></font>
 {% endraw %}

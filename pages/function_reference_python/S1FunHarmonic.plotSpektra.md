@@ -10,6 +10,8 @@ counterpart: S1FunHarmonic.plotSpektra.html
 status: Reference
 ---
 {% raw %}
+A method of [S1FunHarmonic](S1FunHarmonic_index_py.html).
+
 the Chebyshev coefficients of a kernel, or the harmonic power of a function, per degree;
 MATLAB's plotSpektra
 
@@ -55,6 +57,16 @@ One line per function.
 
 </div>
 
+<div class="mx-form" markdown="1">
+
+```python
+odf.plotSpectrum()
+```
+
+The same, as a method.
+
+</div>
+
 ## Description
 
 What is drawn depends on the input:
@@ -65,16 +77,15 @@ logarithmic=True their absolute values on log-log axes.
 - a function on S2 or SO(3): the power of every degree, the norm of its coefficients, as
 open circles on a dotted line, up to the bandwidth of the function. A function of another
 kind is first expanded into harmonics; logarithmic changes nothing.
+- a function on the circle: the norm of the coefficients of k and -k over |k|, drawn the
+same way.
 - a list: one line per entry, in one axes.
-
-A function on the circle, S1FunHarmonic, is not supported: it is expanded as if it were a
-function on SO(3), where MATLAB draws the absolute values of its coefficients per |k|.
 
 The other keywords are those of a line plot; fontSize sets the size of the labels and ticks.
 
 ## Input
 
-| `x` | an S2Kernel or SO3Kernel, an S2Fun or SO3Fun, or a list of them |
+| `x` | an S2Kernel or SO3Kernel, an S1Fun, S2Fun or SO3Fun, or a list of them |
 
 ## Keywords
 
@@ -90,10 +101,6 @@ The other keywords are those of a line plot; fontSize sets the size of the label
 ## See also
 
 [SO3FunHarmonic.power](SO3FunHarmonic.power_py.html), [plotSO3Kernel](plotSO3Kernel_py.html)
-
-## Used on
-
-[ODFShapes](ODFShapes_py.html), [SO3FunHarmonicRepresentation](SO3FunHarmonicRepresentation_py.html), [Annotations](Annotations_py.html), [PoleFigure2ODFAmbiguity](PoleFigure2ODFAmbiguity_py.html), [PoleFigure2ODFGhostCorrection](PoleFigure2ODFGhostCorrection_py.html), [PoleFigureSantaFe](PoleFigureSantaFe_py.html), [HarmonicApproximationTheory](HarmonicApproximationTheory_py.html), [SO3FunConvolution](SO3FunConvolution_py.html), [SO3FunDefinition](SO3FunDefinition_py.html), [SO3FunVectorValued](SO3FunVectorValued_py.html), [SO3Kernels](SO3Kernels_py.html), [S2FunHarmonicRepresentation](S2FunHarmonicRepresentation_py.html)
 
 MATLAB's [S1FunHarmonic.plotSpektra](S1FunHarmonic.plotSpektra.html)
 

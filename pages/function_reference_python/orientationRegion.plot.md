@@ -81,5 +81,5 @@ region; a region reaching the half turn keeps the whole ball. plot3d(oR) is the 
 
 MATLAB's [orientationRegion.plot](orientationRegion.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L495">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L494">source</a></font>
 {% endraw %}

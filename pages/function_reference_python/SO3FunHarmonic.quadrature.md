@@ -98,5 +98,5 @@ SO3FunHarmonic.approximate is the same function.
 
 MATLAB's [SO3FunHarmonic.quadrature](SO3FunHarmonic.quadrature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L248">source</a></font>
 {% endraw %}

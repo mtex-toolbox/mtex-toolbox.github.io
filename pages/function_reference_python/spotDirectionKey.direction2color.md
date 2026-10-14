@@ -25,6 +25,16 @@ The colours of crystal directions.
 
 </div>
 
+<div class="mx-form" markdown="1">
+
+```python
+rgb = key.direction2color(h, gray=0.5)
+```
+
+Less saturated.
+
+</div>
+
 ## Description
 
 Every direction starts white and is multiplied, for every centre, by the colour of the
@@ -39,7 +49,7 @@ the full colour at a centre, white far from all.
 
 | keyword | default | description |
 |---|---|---|
-| `gray` | `None` | taken for the calling form of the other keys and not used |
+| `gray` | `None` | the saturation, in [0, 1], one for all directions or one each, by default 1: a factor on the weight every centre's colour has |
 
 ## Output
 

@@ -26,5 +26,5 @@ PoleFigure.calcNormalization(self, other)
 
 MATLAB's [PoleFigure.calcNormalization](PoleFigure.calcNormalization.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L620">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L616">source</a></font>
 {% endraw %}

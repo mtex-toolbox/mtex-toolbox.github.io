@@ -53,5 +53,5 @@ The zero kernel.
 
 [S1Kernel.grad](S1Kernel.grad_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1219">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1228">source</a></font>
 {% endraw %}

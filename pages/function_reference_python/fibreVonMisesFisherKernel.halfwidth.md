@@ -23,5 +23,5 @@ fibreVonMisesFisherKernel.halfwidth(self)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L671">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L676">source</a></font>
 {% endraw %}

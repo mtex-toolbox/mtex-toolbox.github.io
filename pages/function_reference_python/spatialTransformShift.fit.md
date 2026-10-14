@@ -40,7 +40,7 @@ The points weighted.
 
 The degree one polynomial fit of spatialTransformPoly.fit, plain least squares without
 the reweighting against outliers, as MATLAB's. A point with a missing position or weight
-is dropped; other keywords are accepted and not used.
+is dropped.
 
 ## Input
 
@@ -61,5 +61,5 @@ is dropped; other keywords are accepted and not used.
 
 [spatialTransformPoly.fit](spatialTransformPoly.fit_py.html), [spatialTransformRigid.fit](spatialTransformRigid.fit_py.html), [spatialTransformProjective.fit](spatialTransformProjective.fit_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L291">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L292">source</a></font>
 {% endraw %}

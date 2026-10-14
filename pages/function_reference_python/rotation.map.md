@@ -67,5 +67,5 @@ rotation.map(u1, v1, u2=None, v2=None)
 
 MATLAB's [rotation.map](rotation.map.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L693">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L694">source</a></font>
 {% endraw %}

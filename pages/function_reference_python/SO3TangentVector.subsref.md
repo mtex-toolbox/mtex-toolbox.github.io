@@ -26,5 +26,5 @@ a[ind]
 
 MATLAB's [SO3TangentVector.subsref](SO3TangentVector.subsref.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L174">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L181">source</a></font>
 {% endraw %}

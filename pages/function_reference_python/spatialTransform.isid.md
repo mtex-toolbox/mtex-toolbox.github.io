@@ -13,5 +13,5 @@ A property of [spatialTransform](spatialTransform_index_py.html).
 
 whether the transform is the identity
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L165">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L166">source</a></font>
 {% endraw %}

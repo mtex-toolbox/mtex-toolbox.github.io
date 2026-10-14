@@ -27,5 +27,5 @@ slipSystem.mPrime(self, other)
 
 MATLAB's [slipSystem.mPrime](slipSystem.mPrime.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L229">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L242">source</a></font>
 {% endraw %}

@@ -50,8 +50,7 @@ The right sided gradient.
 ## Description
 
 A function without a harmonic form is differentiated by central differences of 0.05
-degree along the three axes, a field evaluated when asked. Evaluated directly, as
-SO3F.grad(ori), it does not return at present (a recursion); evaluate the field instead.
+degree along the three axes, a field evaluated when asked, as SO3F.grad(ori) is.
 
 ## Input
 

@@ -26,5 +26,5 @@ SO3Kernel.radon(self)
 
 MATLAB's [SO3Kernel.radon](SO3Kernel.radon.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L279">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L280">source</a></font>
 {% endraw %}

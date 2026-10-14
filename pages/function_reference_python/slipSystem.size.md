@@ -13,5 +13,5 @@ A property of [slipSystem](slipSystem_index_py.html).
 
 the number of slip systems
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L97">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L110">source</a></font>
 {% endraw %}

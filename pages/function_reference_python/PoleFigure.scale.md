@@ -26,5 +26,5 @@ PoleFigure.scale(self, alpha)
 
 MATLAB's [PoleFigure.scale](PoleFigure.scale.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L315">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L316">source</a></font>
 {% endraw %}

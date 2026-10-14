@@ -61,5 +61,5 @@ one array.
 
 [S2FunHarmonic.norm](S2FunHarmonic.norm_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L668">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L669">source</a></font>
 {% endraw %}

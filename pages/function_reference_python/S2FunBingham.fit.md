@@ -85,5 +85,5 @@ onto the mode, drawn by ellipse(rot, ab[0], ab[1]).
 
 MATLAB's [S2FunBingham.fit](S2FunBingham.fit.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L503">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L504">source</a></font>
 {% endraw %}

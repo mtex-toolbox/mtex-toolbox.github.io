@@ -39,8 +39,9 @@ Lists of shape (n, 1) side by side, an (n, 2) list.
 
 ## Description
 
-A single function counts as a list of one. The axis is that of the lists: the lists must
-agree in every other axis, and to join along axis 1 they need two axes.
+A single function counts as a list of one, and a list lacking the axis gets it as a trailing
+axis of length one, as MATLAB's cat(2, sF1, sF2) gives a 1 x 2 list of two functions. The
+lists must agree in every other axis.
 
 ## Input
 

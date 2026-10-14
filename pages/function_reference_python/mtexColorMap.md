@@ -96,5 +96,5 @@ matplotlib figure the images and filled contours of the current figure take the 
 
 MATLAB's [mtexColorMap](mtexColorMap.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L69">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L73">source</a></font>
 {% endraw %}

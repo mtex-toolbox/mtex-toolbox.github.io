@@ -16,5 +16,5 @@ the heat kernel of the circle, a wrapped Gaussian: what smooths a density of ang
 | [bandwidth](S1GaussKernel.bandwidth_py.html) | the modes beyond 6 / sigma are below e^{-18} |
 | [halfwidth](S1GaussKernel.halfwidth_py.html) | the halfwidth in closed form, sigma sqrt(2 log 2) |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1242">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1251">source</a></font>
 {% endraw %}

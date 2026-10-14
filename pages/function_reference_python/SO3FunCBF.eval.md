@@ -27,5 +27,5 @@ SO3FunCBF.eval(self, x)
 
 MATLAB's [SO3FunCBF.eval](SO3FunCBF.eval.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L675">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L676">source</a></font>
 {% endraw %}

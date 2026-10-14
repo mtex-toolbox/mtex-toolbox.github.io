@@ -136,5 +136,5 @@ upper, lower, the projection and the layout.
 
 MATLAB's [SO3FunRBF.plotPDF](SO3FunRBF.plotPDF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1569">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1576">source</a></font>
 {% endraw %}

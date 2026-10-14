@@ -28,6 +28,16 @@ Every axes, and the plots to come.
 <div class="mx-form" markdown="1">
 
 ```python
+mtexFig.setColormap('LaboTeX')
+```
+
+One of MTEX's maps.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
 mtexFig.setColormap('hot', ax=mtexFig.children[0])
 ```
 
@@ -41,7 +51,7 @@ A filled contour plot cuts its bands out of the map, so it is drawn again.
 
 ## Input
 
-| `cmap` | a matplotlib colour map or the name of one of matplotlib's; mtexColorMap resolves MTEX's names, as 'LaboTeX', and calls this |
+| `cmap` | a matplotlib colour map, the name of one of MTEX's maps, as 'LaboTeX', or of matplotlib's, or an n x 3 matrix of colours |
 
 ## Keywords
 

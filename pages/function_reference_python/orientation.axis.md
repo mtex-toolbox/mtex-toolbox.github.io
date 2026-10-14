@@ -98,5 +98,5 @@ with grain exchange it is an axis without sign.
 
 MATLAB's [orientation.axis](orientation.axis.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L516">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L528">source</a></font>
 {% endraw %}

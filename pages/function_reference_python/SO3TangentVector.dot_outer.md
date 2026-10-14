@@ -12,7 +12,8 @@ status: Reference
 {% raw %}
 A method of [SO3TangentVector](SO3TangentVector_index_py.html).
 
-the inner product with tangent vectors at the same reference, brought to this side
+the inner product with tangent vectors at the same reference, brought to this side; the
+keywords of vector3d.dot
 
 ## Syntax
 
@@ -26,5 +27,5 @@ SO3TangentVector.dot_outer(self, other, **kwargs)
 
 MATLAB's [SO3TangentVector.dot_outer](SO3TangentVector.dot_outer.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L314">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L321">source</a></font>
 {% endraw %}

@@ -75,5 +75,5 @@ strainRateTensor(L) of a velocity gradient is strainRate(L).
 
 MATLAB's [strainRateTensor_index](strainRateTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1316">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1327">source</a></font>
 {% endraw %}

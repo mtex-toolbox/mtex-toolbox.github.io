@@ -106,5 +106,5 @@ max(SO3F, [], dim), the port writes max(SO3F, axis=dim - 1).
 
 MATLAB's [SO3Fun.max](SO3Fun.max.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L728">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L730">source</a></font>
 {% endraw %}

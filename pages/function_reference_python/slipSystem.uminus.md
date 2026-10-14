@@ -26,5 +26,5 @@ the negative, the operator -a
 
 MATLAB's [slipSystem.uminus](slipSystem.uminus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L269">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L282">source</a></font>
 {% endraw %}

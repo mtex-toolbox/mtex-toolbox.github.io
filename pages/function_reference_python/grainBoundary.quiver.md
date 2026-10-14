@@ -150,5 +150,5 @@ of the spherical plots.
 
 MATLAB's [grainBoundary.quiver](grainBoundary.quiver.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1318">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1325">source</a></font>
 {% endraw %}

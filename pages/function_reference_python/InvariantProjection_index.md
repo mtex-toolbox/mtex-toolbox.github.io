@@ -23,5 +23,5 @@ rotation part) projects with the identity and is held as no matrices at all
 | [nonzeros](InvariantProjection.nonzeros_py.html) | the entries of the blocks above rounding level as flat lists over the degrees, degree n at ptr[n]:ptr[n+1], with block indices: what the compiled projection visits |
 | [support](InvariantProjection.support_py.html) | the indices an r fold about z leaves at degree n, k = 0 mod r, as block indices |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L298">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L299">source</a></font>
 {% endraw %}

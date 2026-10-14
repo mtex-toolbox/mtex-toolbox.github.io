@@ -26,5 +26,5 @@ stiffnessTensor.volumeCompressibility(T)
 
 MATLAB's [stiffnessTensor.volumeCompressibility](stiffnessTensor.volumeCompressibility.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L282">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L284">source</a></font>
 {% endraw %}

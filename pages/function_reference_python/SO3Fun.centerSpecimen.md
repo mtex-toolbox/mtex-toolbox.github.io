@@ -79,5 +79,5 @@ truncated to it. MATLAB's flags 'Fourier' and 'silent' change nothing; its 'SO3G
 
 MATLAB's [SO3Fun.centerSpecimen](SO3Fun.centerSpecimen.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1215">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1232">source</a></font>
 {% endraw %}

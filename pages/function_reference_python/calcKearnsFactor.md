@@ -38,6 +38,16 @@ With the z direction.
 <div class="mx-form" markdown="1">
 
 ```python
+k = calcKearnsFactor(odf)
+```
+
+Of (0001) with the z direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
 k = calcKearnsFactor(pdf, N)
 ```
 
@@ -48,14 +58,14 @@ Of a pole figure.
 ## Description
 
 The integral of the pole figure of h against (r . N)^2 over the sphere, normalised so that
-a uniform texture gives 1/3. MATLAB's order is calcKearnsFactor(odf, N, h), the arguments
-told apart by their class; here h comes first. MATLAB's default h = [0001] is not taken:
-an ODF needs h.
+a uniform texture gives 1/3. With an ODF the two directions are told apart by their class,
+the Miller one the crystal direction, so MATLAB's order calcKearnsFactor(odf, N, h) gives
+the same.
 
 ## Input
 
 | `f` | SO3Fun, an ODF, or S2Fun, a pole figure |
-| `h` | Miller, the crystal direction (with an ODF); with a pole figure the place of N |
+| `h` | Miller, the crystal direction (with an ODF), (0001) when left out; with a pole figure the place of N |
 | `N` | vector3d, the specimen direction, z when left out |
 
 ## Output
@@ -78,5 +88,5 @@ calcKearnsFactor(f, h=None, N=None)
 
 MATLAB's [calcKearnsFactor](calcKearnsFactor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L263">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L271">source</a></font>
 {% endraw %}

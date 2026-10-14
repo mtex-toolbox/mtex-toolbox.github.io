@@ -72,5 +72,5 @@ for max.
 
 MATLAB's [S1Grid.min](S1Grid.min.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L759">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L761">source</a></font>
 {% endraw %}

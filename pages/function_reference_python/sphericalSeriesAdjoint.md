@@ -48,7 +48,8 @@ The quadrature of a grid.
 
 The internal coefficients fhat_l^m = sum_q w_q v_q conj(Y_l^m(v_q)), the adjoint of
 sphericalSeries; on a quadrature grid with its weights the exact coefficients of a function
-of that bandwidth.
+of that bandwidth. Every route gives the same coefficients; real chooses only the array of
+the NUFFT, half of it for real values, the full one otherwise.
 
 ## Input
 
@@ -61,7 +62,7 @@ of that bandwidth.
 | keyword | default | description |
 |---|---|---|
 | `weights` | `None` | the weight of every direction; by default 1/n, or the grid's rule |
-| `real` | `False` | the values are real, which halves the NUFFT's array; the direct sum below 50 nodes and a grid's plan decide by the values themselves |
+| `real` | `None` | the NUFFT works on half its array, complex values taken as two real ones; by default when the values are real |
 
 ## Output
 
@@ -71,5 +72,5 @@ of that bandwidth.
 
 [sphericalSeries](sphericalSeries_py.html), [sphericalPlan](sphericalPlan_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1193">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1194">source</a></font>
 {% endraw %}

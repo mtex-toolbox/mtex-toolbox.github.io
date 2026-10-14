@@ -89,8 +89,8 @@ under the frames unless symmetrise=False.
 functions, a quadrature only for the weights of a quadrature rule.
 - a callable of orientations: sampled on a quadrature grid of the bandwidth, by default the
 preference defaultSO3Bandwidth.
-- three component functions: their coefficients, cut to the largest bandwidth; a Python
-list takes its frames from cs and ss, else the trivial frames.
+- three component functions: their coefficients, cut to the largest bandwidth, and their
+frames unless cs and ss are given.
 
 ## Input
 

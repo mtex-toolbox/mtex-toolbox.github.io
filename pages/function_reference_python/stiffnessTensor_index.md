@@ -38,5 +38,5 @@ the elastic stiffness C, sigma = C : eps; a 6 x 6 Voigt matrix in GPa or the ful
 
 MATLAB's [stiffnessTensor_index](stiffnessTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1182">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1193">source</a></font>
 {% endraw %}

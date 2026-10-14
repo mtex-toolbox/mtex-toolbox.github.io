@@ -62,5 +62,5 @@ the half axes as vectors, as principalComponents of 3D grains returns them.
 
 [plotEllipsoid](plotEllipsoid_py.html), [scene3d](scene3d_index_py.html), [arrows3d](arrows3d_py.html), [Grains3DProperties](Grains3DProperties_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L201">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L206">source</a></font>
 {% endraw %}

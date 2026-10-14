@@ -26,5 +26,5 @@ embedding.rotate(self, r)
 
 MATLAB's [embedding.rotate](embedding.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L405">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L407">source</a></font>
 {% endraw %}

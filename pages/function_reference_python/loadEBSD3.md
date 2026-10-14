@@ -64,8 +64,8 @@ The voxels of a DREAM.3D or xnovo file form a voxelLattice, so ebsd[i, j, k] add
 of them; every further scalar array of the file becomes a property.
 
 A list of files is read by loadEBSD, every file a layer at its height z, as a list of voxels
-without a lattice. The phases are those of the first file, CS does not replace them; the
-properties are those all files have. EBSD3.load is the same function.
+without a lattice. The phases are those of the first file, or CS, which every file is read
+with; the properties are those all files have. EBSD3.load is the same function.
 
 ## Input
 
@@ -77,7 +77,7 @@ properties are those all files have. EBSD3.load is the same function.
 |---|---|---|
 | `interface` | `None` | the format, 'dream3d' or 'xnovo'; by default told by the file |
 | `z` | `None` | the height of every map of a stack, by default 0, 1, 2, ... |
-| `CS` | `None` | a crystalFrame or a phaseList replacing the phases of a DREAM.3D or xnovo file |
+| `CS` | `None` | a crystalFrame or a phaseList replacing the phases of the file, or of every map of a stack |
 
 ## Output
 

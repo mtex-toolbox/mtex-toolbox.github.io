@@ -9,8 +9,8 @@ lang: python
 status: Reference
 ---
 {% raw %}
-a fibre on the current section plot, as a chain of dots through the sections it passes;
-what plot(f) does on a section plot
+a fibre on the current section plot, as lines through the sections it passes; what
+plot(f) does on a section plot, MATLAB's line of the orientations of the fibre
 
 ## Syntax
 
@@ -27,10 +27,10 @@ The fibre over the sections of an ODF.
 <div class="mx-form" markdown="1">
 
 ```python
-plot(f, points=200, lineColor='r')
+plot(f, points=200, lineColor='r', lineWidth=2)
 ```
 
-Fewer and red dots.
+Coarser, red and thicker.
 
 </div>
 
@@ -46,8 +46,10 @@ The same, called directly.
 
 ## Description
 
-The fibre is sampled at evenly spaced orientations, each drawn as a dot in the section it
-lies in. Further keywords go to the markers, as markerSize; lineWidth is ignored.
+The fibre is sampled at evenly spaced orientations and every symmetric equivalent of them
+is put into the section it lies in; neighbours along the fibre in one section are joined by
+a line, which breaks where the fibre leaves the section or the chart. Further keywords go to
+the lines.
 
 ## Input
 
@@ -58,11 +60,12 @@ lies in. Further keywords go to the markers, as markerSize; lineWidth is ignored
 | keyword | default | description |
 |---|---|---|
 | `points` | `1000` | the number of orientations along the fibre |
-| `lineColor` | `'k'` | the colour of the dots |
+| `lineColor` | `'k'` | the colour of the lines |
+| `lineWidth` | `1.5` | the width of the lines |
 
 ## Output
 
-| `h` | list of the marker handles |
+| `h` | list of the line handles |
 
 ## See also
 

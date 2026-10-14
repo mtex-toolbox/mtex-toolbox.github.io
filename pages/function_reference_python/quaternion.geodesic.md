@@ -26,5 +26,5 @@ quaternion.geodesic(self, other, s)
 
 MATLAB's [quaternion.geodesic](quaternion.geodesic.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L405">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L406">source</a></font>
 {% endraw %}

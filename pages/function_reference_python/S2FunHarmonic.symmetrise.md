@@ -75,5 +75,5 @@ returning a kernel, has no counterpart.
 
 MATLAB's [S2FunHarmonic.symmetrise](S2FunHarmonic.symmetrise.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L424">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L425">source</a></font>
 {% endraw %}

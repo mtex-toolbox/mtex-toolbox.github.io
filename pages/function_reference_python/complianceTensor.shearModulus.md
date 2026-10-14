@@ -40,6 +40,16 @@ The function of the shear direction.
 <div class="mx-form" markdown="1">
 
 ```python
+G = shearModulus(C, None, u)
+```
+
+The function of the shear plane.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
 G = shearModulus(C)
 ```
 
@@ -68,12 +78,11 @@ GV, GR, GH = shearModulus(C, 'all') # all three
 ## Description
 
 With the plane and the direction the anisotropic modulus of the single crystal; with the
-plane alone the function on the sphere of the shear direction. Without both, or with a
-bound's name in place of the plane, the isotropic shear modulus of a polycrystal of
-uniformly distributed orientations: the Voigt upper bound, the Reuss lower bound or their
-mean, Hill's; 'all' returns the three as a named tuple (voigt, reuss, hill), MATLAB's
-three outputs. MATLAB's shearModulus(C, [], u), the function of the plane, has no
-counterpart.
+plane alone the function on the sphere of the shear direction, with the direction alone
+the function of the shear plane. Without both, or with a bound's name in place of the
+plane, the isotropic shear modulus of a polycrystal of uniformly distributed orientations:
+the Voigt upper bound, the Reuss lower bound or their mean, Hill's; 'all' returns the
+three as a named tuple (voigt, reuss, hill), MATLAB's three outputs.
 
 ## Input
 
@@ -83,7 +92,7 @@ counterpart.
 
 ## Output
 
-| `G` | the shear modulus, an S2Fun of the direction, or the bounds |
+| `G` | the shear modulus, an S2Fun of the direction or the plane, or the bounds |
 
 ## See also
 
@@ -101,5 +110,5 @@ complianceTensor.shearModulus(T, h=None, u=None, *args)
 
 MATLAB's [complianceTensor.shearModulus](complianceTensor.shearModulus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L287">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L289">source</a></font>
 {% endraw %}

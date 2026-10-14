@@ -26,5 +26,5 @@ a / b
 
 MATLAB's [embedding.rdivide](embedding.rdivide.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L334">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L336">source</a></font>
 {% endraw %}

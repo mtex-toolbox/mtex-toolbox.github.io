@@ -35,5 +35,5 @@ box.
 
 MATLAB's [SO3Fun.plot3d](SO3Fun.plot3d.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L249">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L248">source</a></font>
 {% endraw %}

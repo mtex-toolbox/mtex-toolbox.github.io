@@ -74,13 +74,12 @@ fundamental region, counting its symmetric copies, at most one. A uniform densit
 the share of the ball itself, so a value above it marks a preferred orientation.
 
 On the sphere the ball is a spherical cap; an antipodal function over a cap of 90 degree
-gives its mean value. The spherical form is a function only, volume(sF, v, r), not a
-method of the spherical functions.
+gives its mean value.
 
 The centre may also be:
 
 - a fibre: the volume of the tube about it, as fibreVolume.
-- a list of centres: one value each.
+- a list of centres: one value each, an empty array for none.
 
 Given a list of orientations instead of a function, the result is the share of them
 within the radius.
@@ -107,5 +106,5 @@ within the radius.
 
 MATLAB's [SO3FunComposition.volume](SO3FunComposition.volume.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L103">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L102">source</a></font>
 {% endraw %}

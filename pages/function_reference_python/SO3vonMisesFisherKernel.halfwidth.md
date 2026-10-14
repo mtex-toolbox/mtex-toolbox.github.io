@@ -23,5 +23,5 @@ SO3vonMisesFisherKernel.halfwidth(self)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L436">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L441">source</a></font>
 {% endraw %}

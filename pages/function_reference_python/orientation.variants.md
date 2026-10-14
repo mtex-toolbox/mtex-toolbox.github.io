@@ -133,5 +133,5 @@ new last axis; with ids one per child.
 
 MATLAB's [orientation.variants](orientation.variants.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L801">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L813">source</a></font>
 {% endraw %}

@@ -94,8 +94,8 @@ follows from the number of nodes, on SO(3) at most the preference 'maxSO3Bandwid
 On SO(3) the fit is posed among the functions with the symmetries of the nodes. Nodes closer
 than 0.02 are merged into one carrying the mean of their values.
 
-Values with further axes after the node axis give one function per component; withParameters
-is then ignored, as it is on the sphere. A vector field on SO(3) is fitted componentwise,
+Values with further axes after the node axis give one function per component, and the LSQR
+parameters then arrays of one per component. A vector field on SO(3) is fitted componentwise,
 three SO3FunHarmonic, as MATLAB's SO3VectorFieldHarmonic.interpolate; MATLAB passes the
 tangent vectors as values, here they carry their orientations.
 
@@ -114,7 +114,7 @@ tangent vectors as values, here they carry their orientations.
 | `weights` | `None` | the weights of the nodes: by default their Voronoi volumes below 10000 nodes, else equal; 'equal', or one number per node |
 | `maxIter` | `100` | the largest number of LSQR iterations |
 | `tol` | `None` | the tolerance of LSQR, 1e-3 on SO(3) and 1e-6 on the sphere by default |
-| `withParameters` | `False` | return also LSQR's flag, residual and number of iterations |
+| `withParameters` | `False` | return also LSQR's flag, 1 when the iterations ran out, the relative residual and the number of iterations, for a function on SO(3) or the sphere |
 
 ## Output
 

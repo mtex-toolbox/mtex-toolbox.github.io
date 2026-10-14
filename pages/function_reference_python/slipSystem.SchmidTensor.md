@@ -30,5 +30,5 @@ slipSystem.SchmidTensor(self)
 
 MATLAB's [slipSystem.SchmidTensor](slipSystem.SchmidTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L223">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L236">source</a></font>
 {% endraw %}

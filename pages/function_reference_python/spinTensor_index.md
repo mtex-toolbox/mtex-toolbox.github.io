@@ -24,5 +24,5 @@ spinTensor(M), or spinTensor(v) the skew matrix of a rotation vector, in its fra
 
 MATLAB's [spinTensor_index](spinTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1432">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1443">source</a></font>
 {% endraw %}

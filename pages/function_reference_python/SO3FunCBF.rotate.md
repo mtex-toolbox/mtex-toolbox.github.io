@@ -63,5 +63,5 @@ frame, with a warning.
 
 MATLAB's [SO3FunCBF.rotate](SO3FunCBF.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L751">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L752">source</a></font>
 {% endraw %}

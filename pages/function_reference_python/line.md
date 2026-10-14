@@ -1,12 +1,11 @@
 ---
-title: 'vector3d.line'
+title: 'line'
 sidebar: function_reference_sidebar
-permalink: vector3d.line_py.html
+permalink: line_py.html
 folder: function_reference
 toc: false
 search: exclude
 lang: python
-counterpart: vector3d.line.html
 status: Reference
 ---
 {% raw %}
@@ -72,7 +71,5 @@ separating its pieces.
 
 [Grains3DBoundaries](Grains3DBoundaries_py.html), [BoundaryIntersections](BoundaryIntersections_py.html)
 
-MATLAB's [vector3d.line](vector3d.line.html)
-
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L994">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L997">source</a></font>
 {% endraw %}

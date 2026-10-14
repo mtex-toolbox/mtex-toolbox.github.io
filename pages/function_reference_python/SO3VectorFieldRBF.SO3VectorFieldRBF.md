@@ -91,5 +91,5 @@ MATLAB stores the three components as SO3FunRBF; here the weights are one vector
 
 MATLAB's [SO3VectorFieldRBF.SO3VectorFieldRBF](SO3VectorFieldRBF.SO3VectorFieldRBF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1005">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1007">source</a></font>
 {% endraw %}

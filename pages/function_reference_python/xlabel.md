@@ -57,5 +57,5 @@ mtexFigure it is matplotlib's. Further keywords go to matplotlib's text.
 
 [TwinningBoundaries](TwinningBoundaries_py.html), [MartensiteVariants](MartensiteVariants_py.html), [ParentChildVariants](ParentChildVariants_py.html), [TransformationTexture](TransformationTexture_py.html), [BoundaryTutorial](BoundaryTutorial_py.html), [GrainTutorial](GrainTutorial_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L624">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L627">source</a></font>
 {% endraw %}

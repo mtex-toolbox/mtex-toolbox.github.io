@@ -41,7 +41,7 @@ grainId. The volume is gridded first and must hold one indexed phase.
 
 | keyword | default | description |
 |---|---|---|
-| `stencil` | `None` | accepted for the signature of EBSD.gradientX and not used: a volume takes the one sided difference |
+| `stencil` | `'oneSided'` | 'oneSided', the one sided difference, the one a volume takes; another is refused |
 
 ## Output
 
@@ -51,5 +51,5 @@ grainId. The volume is gridded first and must hold one indexed phase.
 
 [EBSD3.gradientX](EBSD3.gradientX_py.html), [EBSD3.gradientY](EBSD3.gradientY_py.html), [EBSD3.gradientZ](EBSD3.gradientZ_py.html), [EBSD3.curvature](EBSD3square.curvature_py.html), [EBSD.gradientX](EBSD.gradientX_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/intragranular3d.py#L63">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/intragranular3d.py#L69">source</a></font>
 {% endraw %}

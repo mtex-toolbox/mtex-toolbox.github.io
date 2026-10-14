@@ -105,5 +105,5 @@ filter, is the F passed.
 
 MATLAB's [EBSD3.smooth](EBSD3.smooth.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L286">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L290">source</a></font>
 {% endraw %}

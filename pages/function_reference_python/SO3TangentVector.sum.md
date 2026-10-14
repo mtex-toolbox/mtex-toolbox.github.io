@@ -56,5 +56,5 @@ Along the first axis.
 
 MATLAB's [SO3TangentVector.sum](SO3TangentVector.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L386">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L402">source</a></font>
 {% endraw %}

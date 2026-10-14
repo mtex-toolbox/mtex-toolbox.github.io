@@ -41,5 +41,5 @@ S2FunBingham(Z, a=None, frame=None)
 
 MATLAB's [S2FunBingham.S2FunBingham](S2FunBingham.S2FunBingham.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L431">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L432">source</a></font>
 {% endraw %}

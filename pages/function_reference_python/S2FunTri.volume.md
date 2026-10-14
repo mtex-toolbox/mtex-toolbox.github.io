@@ -10,6 +10,8 @@ counterpart: S2FunTri.volume.html
 status: Reference
 ---
 {% raw %}
+A method of [S2FunTri](S2FunTri_index_py.html).
+
 the share of orientations within a radius of a centre: the integral of f over the ball,
 int_{angle(g, c) < r} f(g) dg, relative to the integral over all orientations; MATLAB's volume
 
@@ -72,13 +74,12 @@ fundamental region, counting its symmetric copies, at most one. A uniform densit
 the share of the ball itself, so a value above it marks a preferred orientation.
 
 On the sphere the ball is a spherical cap; an antipodal function over a cap of 90 degree
-gives its mean value. The spherical form is a function only, volume(sF, v, r), not a
-method of the spherical functions.
+gives its mean value.
 
 The centre may also be:
 
 - a fibre: the volume of the tube about it, as fibreVolume.
-- a list of centres: one value each.
+- a list of centres: one value each, an empty array for none.
 
 Given a list of orientations instead of a function, the result is the share of them
 within the radius.
@@ -103,11 +104,7 @@ within the radius.
 
 [fibreVolume](SO3Fun.fibreVolume_py.html), [entropy](SO3Fun.entropy_py.html), [SO3FunHarmonic.mean](SO3FunHarmonic.mean_py.html)
 
-## Used on
-
-[OrientationFibre](OrientationFibre_py.html), [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html), [EBSDOrientationAnalysis](EBSDOrientationAnalysis_py.html), [CSLBoundaries](CSLBoundaries_py.html), [ODFCharacteristics](ODFCharacteristics_py.html), [ODFComponents](ODFComponents_py.html), [ODFTheory](ODFTheory_py.html), [VectorsDensityEstimation](VectorsDensityEstimation_py.html)
-
 MATLAB's [S2FunTri.volume](S2FunTri.volume.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L103">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L102">source</a></font>
 {% endraw %}

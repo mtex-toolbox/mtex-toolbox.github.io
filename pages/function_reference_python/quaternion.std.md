@@ -82,5 +82,5 @@ mean only, not the average of the angles.
 
 MATLAB's [quaternion.std](quaternion.std.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L532">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L533">source</a></font>
 {% endraw %}

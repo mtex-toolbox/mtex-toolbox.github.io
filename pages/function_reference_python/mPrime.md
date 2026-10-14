@@ -26,5 +26,5 @@ mPrime(sS1, sS2)
 
 [SlipTransmission](SlipTransmission_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L741">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L754">source</a></font>
 {% endraw %}

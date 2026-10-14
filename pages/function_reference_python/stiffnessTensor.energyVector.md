@@ -72,15 +72,15 @@ polarisation of one of the three waves velocity returns.
 Its projection onto n is the phase speed, so its length is at least v. Pass the speed and
 the polarisation of the same wave, at the same directions.
 
-Given a speed function and a polarisation field, the result is a vector field on the
-sphere, also when a direction n is given; MATLAB evaluates the two at n then.
+Given a speed function and a polarisation field, they are evaluated at the directions n;
+without directions the result is the vector field on the sphere.
 
 ## Input
 
 | `C` | stiffnessTensor in GPa |
 | `n` | vector3d, the propagation directions, or None for the vector field |
-| `speed` | the phase speed of the wave in km/s, vp, vs1 or vs2 of velocity, an S2Fun for the vector field |
-| `polarization` | vector3d, the polarisation of the wave, pp, ps1 or ps2 of velocity, an S2AxisField for the vector field |
+| `speed` | the phase speed of the wave in km/s, vp, vs1 or vs2 of velocity, or an S2Fun |
+| `polarization` | vector3d, the polarisation of the wave, pp, ps1 or ps2 of velocity, or an S2AxisField |
 
 ## Keywords
 

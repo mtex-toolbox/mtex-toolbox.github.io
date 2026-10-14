@@ -53,14 +53,14 @@ that runs backwards. A tie, a grid turned by 45 degrees, keeps the order unless 
 direction of gL is nearer y than x.
 
 The inverse is the same call with the two layouts swapped. The source is given as two
-directions, since a grid may be sheared; MATLAB also takes a gridLayout there, the port
-does not.
+directions, since a grid may be sheared, or as the gridLayout it is in. Dimensions beyond
+the first two are left alone.
 
 ## Input
 
 | `gL` | gridLayout, the layout the array is to be laid out in, the target |
-| `d` | (d1, d2), vector3d, the directions the first and the second index advance along |
-| `shape` | the shape of the array, its two dimensions |
+| `d` | (d1, d2), vector3d, the directions the first and the second index advance along, or the gridLayout the array is in |
+| `shape` | the shape of the array |
 
 ## Keywords
 

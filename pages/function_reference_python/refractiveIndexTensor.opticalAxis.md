@@ -66,5 +66,5 @@ empty list.
 
 MATLAB's [refractiveIndexTensor.opticalAxis](refractiveIndexTensor.opticalAxis.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/optics.py#L104">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/optics.py#L107">source</a></font>
 {% endraw %}

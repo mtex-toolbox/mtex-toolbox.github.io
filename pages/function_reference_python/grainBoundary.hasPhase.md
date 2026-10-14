@@ -48,10 +48,12 @@ Between two indexed measurements.
 
 ## Description
 
-A phase is named by its mineral or its phase id. Without a phase of that name in the list,
-'indexed' takes the segments between two indexed measurements and 'notIndexed' the others,
-those with a not indexed side or with the rim of the scan on one. gB['Forsterite'] selects
-by this.
+A phase is named by its mineral or its phase id. A not indexed phase includes the rim of
+the scan, as MATLAB's hasPhaseId: gB.hasPhase('notIndexed') takes the segments with a not
+indexed side or with the rim on one, and gB.hasPhase('notIndexed', 'Forsterite') the rim
+of the Forsterite grains too. Without a phase of that name in the list, 'indexed' takes the
+segments between two indexed measurements and 'notIndexed' the others. gB['Forsterite']
+selects by this.
 
 ## Input
 

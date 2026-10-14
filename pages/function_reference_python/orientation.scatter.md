@@ -124,5 +124,5 @@ takes the next colour as open circles. plot3d(ori) is the same.
 
 MATLAB's [orientation.scatter](orientation.scatter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L626">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L625">source</a></font>
 {% endraw %}

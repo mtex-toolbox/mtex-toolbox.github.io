@@ -13,5 +13,5 @@ A property of [dislocationSystem](dislocationSystem_index_py.html).
 
 which systems are edge dislocations, the line vector orthogonal to the Burgers vector
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L668">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L681">source</a></font>
 {% endraw %}

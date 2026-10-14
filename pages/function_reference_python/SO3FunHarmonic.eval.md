@@ -27,5 +27,5 @@ SO3FunHarmonic.eval(self, x)
 
 MATLAB's [SO3FunHarmonic.eval](SO3FunHarmonic.eval.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L384">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L387">source</a></font>
 {% endraw %}

@@ -46,5 +46,5 @@ rotation.byAxisAngle(v, omega)
 
 MATLAB's [rotation.byAxisAngle](rotation.byAxisAngle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L662">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L663">source</a></font>
 {% endraw %}

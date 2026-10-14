@@ -37,8 +37,8 @@ Coarser arcs.
 
 ## Description
 
-Unlike the other charts a whole sphere or hemisphere has no boundary here: the list is
-empty.
+A whole sphere, which has no boundary of its own, gets the rectangle of its azimuth and
+polar ranges, as the other charts get the horizon.
 
 ## Keywords
 

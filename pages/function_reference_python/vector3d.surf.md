@@ -72,5 +72,5 @@ functions is drawn one panel each, in a new figure.
 
 MATLAB's [vector3d.surf](vector3d.surf.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L379">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L378">source</a></font>
 {% endraw %}

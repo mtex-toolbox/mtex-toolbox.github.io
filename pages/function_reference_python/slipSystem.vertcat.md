@@ -26,10 +26,19 @@ One list of both.
 
 </div>
 
+<div class="mx-form" markdown="1">
+
+```python
+sS = cat(sS1, sS2, axis=1)
+```
+
+Arrays of systems side by side.
+
+</div>
+
 ## Description
 
-The systems must be written in one frame; None operands are skipped. The result is
-always one flat list.
+The systems must be written in one frame; None operands are skipped.
 
 ## Input
 
@@ -39,7 +48,7 @@ always one flat list.
 
 | keyword | default | description |
 |---|---|---|
-| `axis` | `0` | NumPy's axis, not used: the systems are always joined into one list |
+| `axis` | `0` | the axis along which they are joined, as NumPy's concatenate |
 
 ## Output
 
@@ -51,5 +60,5 @@ always one flat list.
 
 MATLAB's [slipSystem.vertcat](slipSystem.vertcat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L116">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L129">source</a></font>
 {% endraw %}

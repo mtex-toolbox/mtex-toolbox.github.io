@@ -114,5 +114,5 @@ every boundary unless oneSide=True.
 
 MATLAB's [grainBoundary.calcGBND](grainBoundary.calcGBND.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/gbnd.py#L167">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/gbnd.py#L172">source</a></font>
 {% endraw %}

@@ -58,5 +58,5 @@ mtexFigure it is matplotlib's. Further keywords go to matplotlib's text.
 
 [VPSCImport](VPSCImport_py.html), [BoundaryTutorial](BoundaryTutorial_py.html), [GrainTutorial](GrainTutorial_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L596">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L599">source</a></font>
 {% endraw %}

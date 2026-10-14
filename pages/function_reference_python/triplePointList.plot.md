@@ -95,5 +95,5 @@ every other keyword goes to the matplotlib artist.
 
 MATLAB's [triplePointList.plot](triplePointList.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L912">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L915">source</a></font>
 {% endraw %}

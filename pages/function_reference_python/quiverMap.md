@@ -64,6 +64,16 @@ Scale times the length of v.
 
 </div>
 
+<div class="mx-form" markdown="1">
+
+```python
+quiver(ebsd, v, maxHeadSize=0.2)
+```
+
+Heads a fifth of the longest arrow.
+
+</div>
+
 ## Description
 
 A direction starts at its point, an axis (an antipodal vector, or antipodal=True) runs both
@@ -98,6 +108,7 @@ into a map of their own.
 | `autoScaleFactor` | `None` | a factor on the automatic length |
 | `projectIntoPlane` | `False` | let the arrow of a grain start at its centroid even when its direction points into the map, where it would otherwise end there |
 | `antipodal` | `False` | draw the vectors as axes, centred on their points |
+| `maxHeadSize` | `None` | the length of the heads as a fraction of the longest arrow, MATLAB's MaxHeadSize; by default matplotlib's heads |
 
 ## Output
 
@@ -107,5 +118,5 @@ into a map of their own.
 
 [grain2d.plot](grain2d.plot_py.html), [EBSD.plot](EBSD.plot_py.html), [Annotations](Annotations_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1079">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1082">source</a></font>
 {% endraw %}

@@ -62,5 +62,5 @@ The mean value is the first Wigner coefficient, 1/(8 pi^2) times the integral ov
 
 MATLAB's [SO3FunHarmonic.mean](SO3FunHarmonic.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L549">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L552">source</a></font>
 {% endraw %}

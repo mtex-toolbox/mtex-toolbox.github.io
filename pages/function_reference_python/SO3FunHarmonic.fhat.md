@@ -13,5 +13,5 @@ A property of [SO3FunHarmonic](SO3FunHarmonic_index_py.html).
 
 the coefficients in MTEX's basis, as MATLAB's SO3F.fhat reads and assigns them
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L316">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L319">source</a></font>
 {% endraw %}

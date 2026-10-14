@@ -69,13 +69,13 @@ are keyword arguments, their names in any case:
 
 - roiSize: the width of a correlation tile, a length; one, or one per fit stage; 0 for a
 map correlated against nothing, as the reference.
-- numROI: the number of tiles across the image, the number down following from the aspect
-ratio; a fraction is rounded down.
+- numROI: the number of tiles across the image, a whole number, the number down following
+from the aspect ratio.
 - registerOn: 'edge' to correlate the edge transform, 'raw' the values as they are, for a
 pair already sharing its contrast.
 - edgeWidth: the neighbour distance of the edge transform, a length.
 - highContrast: whether the image can be registered on directly, True, False or 'auto'.
-- pixelTime: the dwell time per pixel, carried and not used.
+- pixelTime: the dwell time per pixel, a number not below 0, carried and not used.
 
 ## Input
 

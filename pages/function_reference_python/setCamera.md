@@ -28,7 +28,7 @@ The view of the default convention.
 <div class="mx-form" markdown="1">
 
 ```python
-setCamera(plottingConvention('x↑→y'))
+setCamera('x↑→y')
 ```
 
 X up and y to the right.
@@ -49,12 +49,11 @@ The view of a given 3D axes.
 
 The camera is orthographic. A figure holding a 3D scene is drawn again from the new
 camera, and a map seen from off its normal becomes a scene of the maps drawn into it.
-Unlike MATLAB's setCamera(ax, how2plot), the axes come as a keyword and the convention
-must be a plottingConvention, not its string.
+Unlike MATLAB's setCamera(ax, how2plot), the axes come as a keyword.
 
 ## Input
 
-| `how2plot` | plottingConvention; plottingConvention.default when None |
+| `how2plot` | plottingConvention or its string; plottingConvention.default when None |
 
 ## Keywords
 

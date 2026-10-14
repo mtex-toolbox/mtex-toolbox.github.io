@@ -26,5 +26,5 @@ chainOrder(F, nV)
 
 MATLAB's [chainOrder](chainOrder.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L787">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L800">source</a></font>
 {% endraw %}

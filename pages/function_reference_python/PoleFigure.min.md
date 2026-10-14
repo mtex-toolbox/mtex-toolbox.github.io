@@ -68,5 +68,5 @@ The smaller intensity of two pole figures on the same directions.
 
 MATLAB's [PoleFigure.min](PoleFigure.min.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L340">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L341">source</a></font>
 {% endraw %}

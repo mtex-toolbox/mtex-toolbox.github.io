@@ -26,5 +26,5 @@ a[ind]
 
 MATLAB's [slipSystem.subsref](slipSystem.subsref.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L107">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L120">source</a></font>
 {% endraw %}

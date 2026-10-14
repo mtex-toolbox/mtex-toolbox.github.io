@@ -50,8 +50,9 @@ The number of crossings.
 
 ## Description
 
-A line through a vertex crosses both segments there, as MATLAB's tolerance has it. MATLAB
-returns the intercepts as a third output always; here segLength=True asks for them.
+A line through a vertex crosses both segments there, as MATLAB's tolerance has it, and the
+intercepts count that crossing once, so none is of zero length. MATLAB returns the
+intercepts as a third output always; here segLength=True asks for them.
 
 ## Input
 
@@ -75,5 +76,5 @@ returns the intercepts as a third output always; here segLength=True asks for th
 
 MATLAB's [grainBoundary.intersect](grainBoundary.intersect.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L553">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L562">source</a></font>
 {% endraw %}

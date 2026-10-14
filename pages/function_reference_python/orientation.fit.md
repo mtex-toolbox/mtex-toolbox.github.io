@@ -40,9 +40,10 @@ The pairs weighted.
 ## Description
 
 The rotation minimises the sum of w |ori * u - v|^2 over the pairs of normalised directions,
-by Horn's quaternion method. The frames are those
-named; MATLAB also adopts the frames of crystal directions u and v, which the port does not:
-without frames the result is between the triclinic frame and the session's specimen frame.
+by Horn's quaternion method. The crystal frame is that of crystal directions u, the
+second frame that of crystal directions v; a frame named fills the one missing, and two
+frames named replace both. Without frames the result is between the triclinic frame and the
+session's specimen frame.
 
 ## Input
 

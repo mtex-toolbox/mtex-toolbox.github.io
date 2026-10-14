@@ -63,5 +63,5 @@ other keywords go to the spherical plots and matplotlib's lines.
 
 MATLAB's [sphericalRegion.plot](sphericalRegion.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1393">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1400">source</a></font>
 {% endraw %}

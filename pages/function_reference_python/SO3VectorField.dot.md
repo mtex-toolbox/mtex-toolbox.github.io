@@ -26,5 +26,5 @@ SO3VectorFieldHarmonic.dot(self, x)
 
 MATLAB's [SO3VectorField.dot](SO3VectorField.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L619">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L621">source</a></font>
 {% endraw %}

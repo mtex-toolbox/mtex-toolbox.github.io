@@ -69,5 +69,5 @@ direction, as MATLAB draws it.
 
 [fundamentalSector](fundamentalSector_py.html), [plotIPF](SO3Fun.plotIPDF_py.html), [makeSphericalProjection](makeSphericalProjection_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L595">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L599">source</a></font>
 {% endraw %}

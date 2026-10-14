@@ -26,5 +26,5 @@ a + b
 
 MATLAB's [PoleFigure.plus](PoleFigure.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L290">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L291">source</a></font>
 {% endraw %}

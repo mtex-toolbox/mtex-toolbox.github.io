@@ -62,5 +62,5 @@ stiffnessTensor.linearCompressibility(T, v=None)
 
 MATLAB's [stiffnessTensor.linearCompressibility](stiffnessTensor.linearCompressibility.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L261">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L263">source</a></font>
 {% endraw %}

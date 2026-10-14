@@ -76,5 +76,5 @@ it in sections too.
 
 [orientationColorKey.orientation2color](orientationColorKey.orientation2color_py.html), [plotSection](S2Fun.plotSection_py.html), [ipfColorKey](ipfColorKey_index_py.html), [BungeColorKey](BungeColorKey_index_py.html), [EBSDOrientationPlots](EBSDOrientationPlots_py.html), [OrientationVisualizationSections](OrientationVisualizationSections_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L529">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L547">source</a></font>
 {% endraw %}

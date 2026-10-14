@@ -10,7 +10,7 @@ status: Reference
 ---
 {% raw %}
 n colours of vega's twenty categorical ones, repeated beyond twenty, an n x 3 array;
-MATLAB's vega20, matplotlib's tab20
+MATLAB's vega20
 
 ## Syntax
 
@@ -20,7 +20,7 @@ MATLAB's vega20, matplotlib's tab20
 map = vega20()
 ```
 
-The twenty colours.
+As many as the current colour map has.
 
 </div>
 
@@ -36,14 +36,14 @@ The first five.
 
 ## Description
 
-The colours of matplotlib 2.0 for categorical data, pairs of a dark and a light shade. MATLAB
-takes as many as the current colour map has by default and interpolates between the twenty.
+The colours of matplotlib 2.0 for categorical data, matplotlib's tab20, in MATLAB's order:
+the ten dark shades first, then the ten light ones.
 
 ## Keywords
 
 | keyword | default | description |
 |---|---|---|
-| `n` | `20` | the number of colours |
+| `n` | `None` | the number of colours; by default that of the colour map of the current MTEX figure, else of the preference defaultColorMap |
 
 ## Output
 
@@ -57,5 +57,5 @@ takes as many as the current colour map has by default and interpolates between 
 
 [SchmidFactor](SchmidFactor_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L227">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L236">source</a></font>
 {% endraw %}

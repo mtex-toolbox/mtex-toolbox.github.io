@@ -62,5 +62,5 @@ after the nodes. It is what exp, log, sqrt, max and min of the harmonic function
 
 [SO3FunHarmonic.exp](SO3FunHarmonic.exp_py.html), [SO3FunHarmonic.sqrt](SO3FunHarmonic.sqrt_py.html), [max](S1Grid.max_py.html), [SO3FunHarmonic.quadrature](SO3FunHarmonic.quadrature_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/funops.py#L390">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/funops.py#L396">source</a></font>
 {% endraw %}

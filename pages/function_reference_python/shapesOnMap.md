@@ -68,5 +68,5 @@ A shape per measurement.
 
 [shapeOutlines](shapeOutlines_py.html), [crystalShape](crystalShape_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L306">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L326">source</a></font>
 {% endraw %}

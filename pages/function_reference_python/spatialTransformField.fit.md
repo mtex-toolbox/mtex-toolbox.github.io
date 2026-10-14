@@ -29,8 +29,8 @@ The displacements as measured.
 
 There is nothing to fit: the field interpolates its samples exactly. The weights only
 drop the points whose weight is not a number, as the points with a missing position are
-dropped, so the same call works on the output of a failed correlation; other keywords are
-accepted and not used.
+dropped, so the same call works on the output of a failed correlation; a weight zero is
+kept, as MATLAB keeps it.
 
 ## Input
 

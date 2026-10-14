@@ -40,7 +40,8 @@ The parents weighted by a function vSel.
 The child ODF at a child orientation is the mean of the parent ODF over the parent
 orientations it can come from, one per variant of p2c, expanded to the bandwidth of the
 parent ODF. With vSel the parents are weighted by its values at them, normalised to mean
-one per child orientation. MATLAB's 'variantSelection' takes a weight per variant or the
+one per child orientation, and the child ODF is scaled to the mean of the parent ODF, a
+density again, where MATLAB leaves it unscaled. MATLAB's 'variantSelection' takes a weight per variant or the
 number of one variant instead; the port has no such form.
 
 ## Input
@@ -64,5 +65,5 @@ number of one variant instead; the port has no such form.
 
 MATLAB's [transformODF](transformODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/funops.py#L143">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/funops.py#L147">source</a></font>
 {% endraw %}

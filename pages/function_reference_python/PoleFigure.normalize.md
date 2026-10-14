@@ -57,5 +57,5 @@ Scaled to the mass of the pole figures of the ODF.
 
 MATLAB's [PoleFigure.normalize](PoleFigure.normalize.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L384">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L385">source</a></font>
 {% endraw %}

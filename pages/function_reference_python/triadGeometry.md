@@ -60,5 +60,5 @@ Twice as large.
 
 [frameOnScreen](frameOnScreen_py.html), [scaleBar](scaleBar_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L462">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L464">source</a></font>
 {% endraw %}
