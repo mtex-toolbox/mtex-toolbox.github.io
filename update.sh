@@ -37,7 +37,7 @@ staged=0
 cleanup() { [ "$staged" -eq 1 ] && git reset -q || true; }
 trap cleanup EXIT
 
-BUILD_PATHS='pages images _data/sidebars _data/python_pages.yml python_scripts search.json'
+BUILD_PATHS='pages images _data/sidebars _data/python_pages.yml python_scripts python_refs.json search.json'
 
 all=0
 dry=0
