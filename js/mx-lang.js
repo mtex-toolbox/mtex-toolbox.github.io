@@ -1,18 +1,22 @@
 /* The MATLAB | Python switch of the top bar.
  *
  * A documentation page <Page>.html has a Python version <Page>_py.html when
- * pymtex docs/site.py exported one; window.MX_PY lists those pages (from
- * _data/python_pages.yml). The choice is remembered in the browser. Switching
- * opens the other version of the current page at the same section, and every
- * link to a documentation page follows the chosen language from then on. A
- * page without a Python version stays as it is.
+ * pymtex docs/site.py exported one, as _data/python_pages.yml lists. A page
+ * learns whether it has one from its tag <meta name="mx-python">, written at
+ * build time; the whole list, python_pages.json, is fetched once after the
+ * page has loaded, to point its links at the chosen language. A link followed
+ * before the list arrived opens the MATLAB page, whose tag forwards it. The
+ * choice is remembered in the browser. Switching opens the other version of
+ * the current page at the same section. A page without a Python version stays
+ * as it is.
  */
 (function () {
   'use strict';
 
   var KEY = 'mx-lang';
   var py = {};
-  (window.MX_PY || []).forEach(function (n) { py[n] = true; });
+  var tag = document.querySelector('meta[name="mx-python"]');
+  if (tag) { py[tag.getAttribute('content')] = true; }
 
   // the remembered choice, or null when the visitor has never chosen
   function stored() { try { var v = localStorage.getItem(KEY); return v === 'python' || v === 'matlab' ? v : null; } catch (e) { return null; } }
@@ -68,6 +72,14 @@
     document.dispatchEvent(new CustomEvent('mx-lang', { detail: lang }));
   }
   window.MtexLanguage = { set: choose, current: function () { return lang; } };
+
+  // the pages that have a Python version, for the links; the browser caches it
+  function loadList() {
+    fetch('python_pages.json').then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (names) { names.forEach(function (n) { py[n] = true; }); })
+      .catch(function () {});
+  }
+  window.addEventListener('load', loadList);
 
   document.addEventListener('DOMContentLoaded', function () {
     mark();

@@ -4,7 +4,8 @@ links come from _data/topnav.yml; an item with `pill: true` is drawn as the
 amber highlight. The announcement can be dismissed and stays hidden in that
 browser until its `id` in _data/announcement.yml changes.
 {% endcomment %}
-<script>window.MX_PY = [{% for p in site.data.python_pages %}"{{ p[0] }}"{% unless forloop.last %},{% endunless %}{% endfor %}];</script>
+{%- assign mxName = page.permalink | split: '/' | last | remove: '_py.html' | remove: '.html' -%}
+{%- if site.data.python_pages[mxName] %}<meta name="mx-python" content="{{ mxName }}">{% endif %}
 <script src="js/mx-lang.js"></script>
 {% assign ann = site.data.announcement %}
 {% if ann and ann.show %}
