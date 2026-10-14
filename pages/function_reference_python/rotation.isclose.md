@@ -15,9 +15,43 @@ equal within the angular tolerance tol, MATLAB's eq
 
 ## Syntax
 
+Equal up to 5e-4:
+
 ```python
-rotation.isclose(self, other, tol=0.0005)
+b = rot1.isclose(rot2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L633">source</a></font>
+A coarser tolerance:
+
+```python
+b = rot1.isclose(rot2, tol=1*degree)
+```
+
+True where |cos(omega / 2)| of the angle omega between them exceeds cos(tol), as
+MATLAB's eq, so where omega is below 2 tol; q and -q are one rotation. An improper
+transform is never close to a rotation. The operator == compares exactly.
+
+## Input
+
+| | |
+|---|---|
+| `rot1, rot2` | rotation |
+
+## Output
+
+| | |
+|---|---|
+| `b` | boolean array |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `tol` | `0.0005` | the tolerance, an angle |
+
+## See also
+
+[quaternion.isclose](quaternion.eq_py.html), [rotation.dot](rotation.dot_py.html), [orientation.isclose](orientation.isclose_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L820">source</a></font>
 {% endraw %}

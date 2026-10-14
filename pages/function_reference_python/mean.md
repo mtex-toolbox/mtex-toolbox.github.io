@@ -21,7 +21,7 @@ mean(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [embedding](embedding.mean_py.html) | the mean image, weighted by weights if given |
+| [embedding](embedding.mean_py.html) | the arithmetic mean of the images |
 | [orientation](orientation.mean_py.html) | the mean of a list of orientations, with the principal moments and axes of inertia |
 | [PoleFigure](PoleFigure.mean_py.html) | the mean intensity of each pole figure, the integral over the sphere |
 | [quaternion](quaternion.mean_py.html) | the mean of a list of quaternions, with the principal moments and axes of inertia |

@@ -28,7 +28,7 @@ f = mapField(np.multiply, v, w, reduce=True, invariant=True)
 A field times a scalar function:
 
 ```python
-u = mapField(lambda a, f: a * f[:, None], v, F, bandwidth=8)
+u = mapField(np.multiply, v, F, bandwidth=8)
 ```
 
 A field times a number:
@@ -39,8 +39,9 @@ u = mapField(np.multiply, v, 2)
 
 The arguments are evaluated on the quadrature grid of the component frames of v, op is
 applied to the arrays, the tangent vectors of a field an (n, 3) array in the tangent space of
-v, a function's values an array of n, a number itself, and the result is expanded again: an
-(n, 3) result is a field in the tangent space of v, an (n,) one a function. The bandwidth is
+v, a function's values an (n, 1) column, which broadcasts against them, a number itself, and
+the result is expanded again: an (n, 3) result is a field in the tangent space of v, one
+value per node a function. The bandwidth is
 that of the operands added, at most the preference maxSO3Bandwidth. A scalar result lives
 on the component frames of v unless invariant says it is invariant under the full frames of
 the field.
@@ -72,5 +73,5 @@ the field.
 
 [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html), [grad](grad_py.html), [antiderivative](antiderivative_py.html), [SO3FunVectorField](SO3FunVectorField_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L674">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L837">source</a></font>
 {% endraw %}

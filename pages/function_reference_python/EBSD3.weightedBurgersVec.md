@@ -76,5 +76,5 @@ specimen frame, per scan unit, after Wheeler et al.
 
 MATLAB's [EBSD3.weightedBurgersVec](EBSD3.weightedBurgersVec.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L274">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L378">source</a></font>
 {% endraw %}

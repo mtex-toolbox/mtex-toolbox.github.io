@@ -31,5 +31,5 @@ S2DirichletKernel()        N the preference maxS2Bandwidth
 
 MATLAB's [S2DirichletKernel](S2DirichletKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L777">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L863">source</a></font>
 {% endraw %}

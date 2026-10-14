@@ -12,18 +12,51 @@ status: Reference
 {% raw %}
 A method of [grainBoundary](grainBoundary_index_py.html).
 
-the characteristic shape of a set of boundary segments: every segment and its antipode,
-sorted by direction and laid end to end, the convex, centrally symmetric outline whose
-boundary length in each direction is the boundary length the map has in it. A convex
-outline of a hundred thousand segments is sampled down to nmax, which keeps its extent
+the characteristic shape of a set of boundary segments; MATLAB's
+grainBoundary.characteristicShape
 
 ## Syntax
 
+Of the boundaries of a phase:
+
 ```python
-grainBoundary.characteristicShape(x, nmax=1024)
+cShape = characteristicShape(grains.boundary['Fo', 'Fo'])
 ```
+
+Of the boundary of the grains:
+
+```python
+cShape = grains.characteristicShape(nmax=256)
+```
+
+Every segment and its antipode, sorted by direction and laid end to end, close into a
+convex, centrally symmetric outline whose boundary length in each direction is the
+boundary length the map has in it. An outline of more than nmax vertices is sampled down to
+nmax, which keeps its extent.
+
+## Input
+
+| | |
+|---|---|
+| `x` | grainBoundary, or grain2d for its boundary |
+
+## Output
+
+| | |
+|---|---|
+| `cShape` | shape2d |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `nmax` | `1024` | the largest number of vertices of the outline |
+
+## See also
+
+[shape2d.byFV](shape2d.byFV_py.html), [grainBoundary.surfor](grainBoundary.surfor_py.html), [ShapeParameters](ShapeParameters_py.html)
 
 MATLAB's [grainBoundary.characteristicShape](grainBoundary.characteristicShape.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L305">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L375">source</a></font>
 {% endraw %}

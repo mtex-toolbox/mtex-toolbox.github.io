@@ -22,7 +22,7 @@ projectIntoFundamentalRegion(x, *args, **kwargs)
 | | |
 |---|---|
 | [EBSD](EBSD.project2FundamentalRegion_py.html) | the map with every orientation replaced by its representative in the fundamental region of its phase (MATLAB's EBSD.project2FundamentalRegion) |
-| [orientation](orientation.project2FundamentalRegion_py.html) | the symmetric equivalents in the fundamental region, or those closest to the reference ref |
+| [orientation](orientation.project2FundamentalRegion_py.html) | the symmetric equivalents in the fundamental region, or those closest to the reference ref (MATLAB's orientation.project2FundamentalRegion, quaternion.project2FundamentalRegion, rotation.project2FundamentalRegion) |
 | [vector3d](Miller.project2FundamentalRegion_py.html) | the directions folded into the fundamental sector of their frame, with antipodal=True into that of the Laue group |
 
 ## Used on

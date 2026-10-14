@@ -17,9 +17,46 @@ values with their weights, MATLAB's name for the constructor
 
 ## Syntax
 
+Of a function returning vectors:
+
 ```python
-S2VectorFieldHarmonic.quadrature(f, *args, bandwidth=None, weights=None)
+vF = S2VectorFieldHarmonic.quadrature(lambda v: v.cross(zvector), bandwidth=8)
 ```
+
+Of vectors w at directions v:
+
+```python
+vF = S2VectorFieldHarmonic.quadrature(v, w, bandwidth=8, weights=wq)
+```
+
+A function is approximated by quadrature on a grid of the bandwidth, componentwise in x, y
+and z; vectors at scattered directions by the quadrature sum with the weights given, which
+is exact only for the weights of a quadrature rule; S2VectorFieldHarmonic.interpolate fits
+them by least squares.
+
+## Input
+
+| | |
+|---|---|
+| `f` | a function of vector3d returning vectors, S2VectorField, or vector3d of directions |
+| `args` | the vectors at the directions, and the frame of the field |
+
+## Output
+
+| | |
+|---|---|
+| `vF` | S2VectorFieldHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `bandwidth` | `None` | the largest harmonic degree; by default the preference 'defaultS2Bandwidth', for a field the field's |
+| `weights` | `None` | the quadrature weights of vectors at scattered directions, equal ones of sum 4 pi by default |
+
+## See also
+
+[S2VectorFieldHarmonic](S2VectorFieldHarmonic_index_py.html), [S2VectorFieldHarmonic.interpolate](S2VectorFieldHarmonic.interpolate_py.html)
 
 MATLAB's [S2VectorFieldHarmonic.quadrature](S2VectorFieldHarmonic.quadrature.html)
 

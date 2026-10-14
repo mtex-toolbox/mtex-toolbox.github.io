@@ -73,5 +73,5 @@ for every crystal direction h restated as h'.
 
 MATLAB's [orientation.transformReferenceFrame](orientation.transformReferenceFrame.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L567">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L743">source</a></font>
 {% endraw %}

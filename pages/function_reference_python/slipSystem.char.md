@@ -16,9 +16,39 @@ as one piece of mathematics
 
 ## Syntax
 
+'(111)[011̅]':
+
 ```python
-slipSystem.char(self, style=None)
+s = sS.char()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L234">source</a></font>
+'$(111)[01\bar{1}]$':
+
+```python
+s = sS.char('latex')
+```
+
+## Input
+
+| | |
+|---|---|
+| `sS` | slipSystem |
+
+## Output
+
+| | |
+|---|---|
+| `s` | str for a single system, a list of them otherwise |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `style` | `None` | None for plain text with combining bars, 'latex' for LaTeX, as Miller.char |
+
+## See also
+
+Miller.char
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L279">source</a></font>
 {% endraw %}

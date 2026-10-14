@@ -91,5 +91,5 @@ Exchange symmetry needs the same frame on both sides.
 
 MATLAB's [SO3FunHandle_index](SO3FunHandle_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L201">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L232">source</a></font>
 {% endraw %}

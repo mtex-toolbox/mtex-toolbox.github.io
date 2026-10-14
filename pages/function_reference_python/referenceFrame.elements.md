@@ -11,21 +11,47 @@ status: Reference
 {% raw %}
 A method of [referenceFrame](referenceFrame_index_py.html).
 
-the rotational axes of the group, both signs, and their multiplicities; with a multiplicity
-only the axes of that order
+the rotational axes of the group, both signs, and their multiplicities; MATLAB's elements
 
 ## Syntax
 
+Every rotational axis and its multiplicity:
+
 ```python
 axes, mult = cs.elements()
+```
+
+The threefold axes:
+
+```python
 axes = cs.elements(3)
 ```
 
-## Signature
+Every axis appears with both signs; its multiplicity is the highest order of a rotation
+about it.
 
-```python
-referenceFrame.elements(self, multiplicity=None)
-```
+## Input
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L215">source</a></font>
+| | |
+|---|---|
+| `cs` | referenceFrame |
+
+## Output
+
+| | |
+|---|---|
+| `axes` | vector3d, the axes |
+| `mult` | their multiplicities (without multiplicity) |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `multiplicity` | `None` | return only the axes of this order |
+
+## See also
+
+[referenceFrame.nfold](referenceFrame.nfold_py.html), [referenceFrame.rotations](referenceFrame.rotations_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L228">source</a></font>
 {% endraw %}

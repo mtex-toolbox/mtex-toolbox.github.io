@@ -13,5 +13,5 @@ A property of [S2FunSum](S2FunSum_index_py.html).
 
 the frame the summands share, MATLAB's sF.CS
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L555">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L617">source</a></font>
 {% endraw %}

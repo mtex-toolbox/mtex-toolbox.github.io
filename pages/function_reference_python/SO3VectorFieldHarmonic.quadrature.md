@@ -17,11 +17,55 @@ the last degree that carries more than rounding, as a polynomial field is
 
 ## Syntax
 
+A callable, cut to its degree:
+
 ```python
-SO3VectorFieldHarmonic.quadrature(fun, *args, bandwidth=None, tol=1e-10)
+SO3VF = SO3VectorFieldHarmonic.quadrature(lambda ori: ori * xvector, cs, ss)
 ```
+
+At a bandwidth of its own:
+
+```python
+SO3VF = SO3VectorFieldHarmonic.quadrature(F.eval, cs, ss, bandwidth=20)
+```
+
+Through tangent vectors t at orientations:
+
+```python
+SO3VF = SO3VectorFieldHarmonic.quadrature(t, bandwidth=8)
+```
+
+The field is the SO3VectorFieldHarmonic of fun and the further arguments, a callable taking
+orientations and returning vectors or tangent vectors evaluated by exact quadrature, another
+field, or tangent vectors at orientations; then every degree above the last whose
+coefficients exceed tol times the largest is dropped. A callable is in the left tangent space
+unless 'right' is passed after the frames.
+
+## Input
+
+| | |
+|---|---|
+| `fun` | callable, SO3VectorField or SO3TangentVector |
+| `cs, ss` | the crystal and the specimen frame, for a callable |
+
+## Output
+
+| | |
+|---|---|
+| `SO3VF` | SO3VectorFieldHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `bandwidth` | `None` | the bandwidth of the quadrature; the preference 'defaultSO3Bandwidth' (64) by default |
+| `tol` | `1e-10` | the coefficients below tol times the largest count as rounding when the degree is cut |
+
+## See also
+
+[SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html), [SO3FunHarmonic.quadrature](SO3FunHarmonic.quadrature_py.html), [interpolate](SO3VectorFieldHarmonic.interpolate_py.html)
 
 MATLAB's [SO3VectorFieldHarmonic.quadrature](SO3VectorFieldHarmonic.quadrature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L373">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L450">source</a></font>
 {% endraw %}

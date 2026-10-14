@@ -21,7 +21,7 @@ flip(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [grain3Boundary](grain3Boundary.flip_py.html) | the two sides exchanged, of all faces or a selection, as MATLAB's flip |
+| [grain3Boundary](grain3Boundary.flip_py.html) | the boundary faces with their two sides exchanged, of all faces or a selection |
 | [grainBoundary](grainBoundary.flip_py.html) | swap the two sides of the segments marked, or of all of them, and walk the chains again |
 
 ## Used on

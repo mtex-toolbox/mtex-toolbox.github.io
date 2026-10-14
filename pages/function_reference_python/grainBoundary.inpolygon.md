@@ -40,5 +40,5 @@ grainBoundary.inpolygon(self, region)
 
 MATLAB's [grainBoundary.inpolygon](grainBoundary.inpolygon.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L485">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L592">source</a></font>
 {% endraw %}

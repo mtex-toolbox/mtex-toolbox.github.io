@@ -32,5 +32,5 @@ rotate(v, rot, *args, **kwargs)
 
 MATLAB's [sphericalRegion.rotate](sphericalRegion.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L112">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L113">source</a></font>
 {% endraw %}

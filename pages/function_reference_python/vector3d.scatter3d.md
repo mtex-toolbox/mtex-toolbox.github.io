@@ -66,9 +66,9 @@ plot3d(v) of directions is the same.
 
 ## See also
 
-arrow3d, [plot3d](S2Fun.plot3d_py.html), [scatter](quaternion.scatter_py.html), [VectorDefinition](VectorDefinition_py.html)
+[arrow3d](vector3d.arrow3d_py.html), [plot3d](S2Fun.plot3d_py.html), [scatter](quaternion.scatter_py.html), [VectorDefinition](VectorDefinition_py.html)
 
 MATLAB's [vector3d.scatter3d](vector3d.scatter3d.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L259">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L276">source</a></font>
 {% endraw %}

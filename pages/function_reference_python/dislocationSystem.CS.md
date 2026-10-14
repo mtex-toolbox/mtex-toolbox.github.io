@@ -13,5 +13,5 @@ A property of [dislocationSystem](dislocationSystem_index_py.html).
 
 the crystal frame of the systems, None once they are in specimen coordinates
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L407">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L658">source</a></font>
 {% endraw %}

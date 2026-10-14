@@ -11,13 +11,39 @@ status: Reference
 {% raw %}
 A method of [mtexFigure](mtexFigure_index_py.html).
 
-a filled contour plot cuts its bands out of the map, so it is drawn again
+the colour map of the plots of the figure, or of one axes; MATLAB's mtexColorMap
 
 ## Syntax
 
+Every axes, and the plots to come:
+
 ```python
-mtexFigure.setColormap(self, cmap, ax=None)
+mtexFig.setColormap('viridis')
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L274">source</a></font>
+One axes only:
+
+```python
+mtexFig.setColormap('hot', ax=mtexFig.children[0])
+```
+
+A filled contour plot cuts its bands out of the map, so it is drawn again.
+
+## Input
+
+| | |
+|---|---|
+| `cmap` | a matplotlib colour map or the name of one of matplotlib's; mtexColorMap resolves MTEX's names, as 'LaboTeX', and calls this |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `ax` | `None` | the one axes to recolour; the figure keeps its colour map for the others |
+
+## See also
+
+[mtexColorMap](mtexColorMap_py.html), [mtexFigure.setColorRange](mtexFigure.setColorRange_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L331">source</a></font>
 {% endraw %}

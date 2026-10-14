@@ -379,7 +379,7 @@ of measurement density can recover.
 
 `union` takes `None` for the empty data set MATLAB starts from, and `pf_measured[l]` is
 MATLAB's `pf_measured{l}`. `calcODFIterative` prints its ladder of grids and fit errors
-with `silent=False`.
+with `verbose=True`.
 
 Two things make the refinement loop take a different path from MATLAB's. A pole figure
 derives the resolution of its specimen directions from the points, as the square root of

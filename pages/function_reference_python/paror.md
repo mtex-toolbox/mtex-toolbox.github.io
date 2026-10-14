@@ -21,7 +21,7 @@ paror(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [grain2d](grain2d.paror_py.html) | the cumulative projection length of the outlines, measured along each direction (Panozzo 1983): the width of the convex hull seen from that direction, summed over the outlines and normalised by its largest value |
+| [grain2d](grain2d.paror_py.html) | the cumulative particle projection function of the outlines (Panozzo 1983) |
 
 ## Used on
 

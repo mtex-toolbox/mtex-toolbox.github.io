@@ -26,5 +26,5 @@ rgb = spotColorKey(center, (0, 0, 1)).orientation2color(ori)
 spotColorKey.orientation2color(self, ori)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L342">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L368">source</a></font>
 {% endraw %}

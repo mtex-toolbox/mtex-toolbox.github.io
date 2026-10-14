@@ -64,5 +64,5 @@ dimension. NumPy's np.sum(T) and np.sum(T, axis=1) call it.
 
 MATLAB's [tensor.sum](tensor.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L724">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L767">source</a></font>
 {% endraw %}

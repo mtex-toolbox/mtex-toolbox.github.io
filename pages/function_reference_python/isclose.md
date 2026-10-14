@@ -23,7 +23,7 @@ isclose(x, *args, **kwargs)
 |---|---|
 | [embedding](embedding.isclose_py.html) | whether two embeddings belong to the same frame and have the same images up to atol |
 | [fibre](fibre.eq_py.html) | equal when the frames are the same and h and r agree up to the symmetry of the frames within tol, both flipped counting as well |
-| [orientation](orientation.isclose_py.html) | equal up to the symmetry of the frames within the angular tolerance tol, between the same frames, MATLAB's eq |
+| [orientation](orientation.isclose_py.html) | equal up to the symmetry of the frames within the angular tolerance tol, between the same frames |
 | [orthogonalTransform](orthogonalTransform.isclose_py.html) | equal within the angular tolerance tol and of one parity, MATLAB's eq |
 | [quaternion](quaternion.eq_py.html) | equal within the angular tolerance tol, MATLAB's eq |
 | [referenceFrame](referenceFrame.isclose_py.html) | whether two frames may be treated as one: the same class of group and aligned bases, and for crystal frames the same mineral (MATLAB's eqTol) |

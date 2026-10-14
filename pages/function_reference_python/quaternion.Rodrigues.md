@@ -26,5 +26,5 @@ quaternion.Rodrigues(self)
 
 MATLAB's [quaternion.Rodrigues](quaternion.Rodrigues.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L275">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L340">source</a></font>
 {% endraw %}

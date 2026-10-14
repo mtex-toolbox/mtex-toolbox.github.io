@@ -61,8 +61,8 @@ polarisers.
 
 | | |
 |---|---|
-| [birefringence](refractiveIndexTensor.birefringence_py.html) | the birefringence for light along vprop: the index difference and the fast and the slow polarisation axis |
-| [opticalAxis](refractiveIndexTensor.opticalAxis_py.html) | the optical axes of a refractive index tensor: the directions along which the two indices coincide, one for a uniaxial and two for a biaxial crystal |
+| [birefringence](refractiveIndexTensor.birefringence_py.html) | the birefringence for light propagating along vprop, the difference of the two refractive indices, and the polarisation axes of the fast and the slow wave |
+| [opticalAxis](refractiveIndexTensor.opticalAxis_py.html) | the optical axes of a refractive index tensor, the directions along which the two refractive indices coincide and the birefringence vanishes |
 | [refractiveIndex](refractiveIndexTensor.refractiveIndex_py.html) | the refractive index in the direction v, n_ij v_i v_j |
 | [refractiveIndexTensor](refractiveIndexTensor.refractiveIndexTensor_py.html) | the rank two symmetric refractive index tensor, whose anisotropy makes a crystal birefringent |
 | [spectralTransmission](refractiveIndexTensor.spectralTransmission_py.html) | the colour of white light passing a birefringent plate between a polariser and an analyser, as a thin section shows it under the microscope |
@@ -73,5 +73,5 @@ polarisers.
 
 MATLAB's [refractiveIndexTensor_index](refractiveIndexTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1382">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1535">source</a></font>
 {% endraw %}

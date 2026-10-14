@@ -72,5 +72,5 @@ cumulative distribution, and its plot when no output is asked are not ported.
 
 [kdeN](kdeN_py.html), [calcDensity](calcDensity_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kde.py#L116">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kde.py#L131">source</a></font>
 {% endraw %}

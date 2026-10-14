@@ -10,9 +10,17 @@ counterpart: uniformODF.html
 status: Reference
 ---
 {% raw %}
-the uniform ODF, constant one, between a crystal and a specimen frame
+the uniform ODF, constant one, between a crystal and a specimen frame; MATLAB's uniformODF
 
 ## Syntax
+
+The specimen frame the default one:
+
+```python
+odf = uniformODF(cs)
+```
+
+Between two frames:
 
 ```python
 odf = uniformODF(cs, ss)
@@ -24,11 +32,30 @@ A uniform misorientation distribution:
 mdf = uniformODF(cs, cs, antipodal=True)
 ```
 
-## Signature
+The result is an SO3FunRBF without centres whose constant part is one. Without a frame the
+crystal frame has the point group 1.
 
-```python
-uniformODF(*frames, antipodal=False)
-```
+## Input
+
+| | |
+|---|---|
+| `cs, ss` | crystalFrame, specimenFrame (or a second crystalFrame) |
+
+## Output
+
+| | |
+|---|---|
+| `odf` | SO3FunRBF |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` | `False` | the function symmetric under g -> g^-1, as a misorientation distribution of one phase |
+
+## See also
+
+[unimodalODF](unimodalODF_py.html), [fibreODF](fibreODF_py.html), [SO3FunRBF](SO3FunRBF_index_py.html)
 
 ## Used on
 
@@ -36,5 +63,5 @@ uniformODF(*frames, antipodal=False)
 
 MATLAB's [uniformODF](uniformODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L824">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L911">source</a></font>
 {% endraw %}

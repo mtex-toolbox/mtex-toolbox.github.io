@@ -15,5 +15,5 @@ MATLAB's spacing of the positions: the shortest distance from the first corner o
 unit cell to the others, the step on a square lattice and the step over sqrt(3) on a
 hexagonal one, where lattice.dxy is the step
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L510">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L552">source</a></font>
 {% endraw %}

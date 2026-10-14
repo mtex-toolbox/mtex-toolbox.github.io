@@ -68,7 +68,7 @@ MATLAB's option 'matrix', one grid per column of points, is not taken.
 | | |
 |---|---|
 | [dist](S1Grid.dist_py.html) | the periodic distance of two angles |
-| [double](S1Grid.double_py.html) | double(e) is e.double(): the coordinates of the images in the orthonormal basis, one row per orientation |
+| [double](S1Grid.double_py.html) | the coordinates of the images of an embedding in their orthonormal basis, one row per orientation, e.double() |
 | [fold](S1Grid.fold_py.html) | an angle moved into [min, min + period) |
 | [ladderIndex](S1Grid.ladderIndex_py.html) | the index of the nearest point of an equispaced ladder, arithmetic |
 | [max](S1Grid.max_py.html) | the maximum of a function on SO(3) or the sphere, the value and the position, numLocal local maxima from a grid refined down to the accuracy |

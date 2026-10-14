@@ -19,5 +19,5 @@ the conjugate quaternion a - b i - c j - d k, of a rotation its inverse
 quaternion.conj(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L192">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L203">source</a></font>
 {% endraw %}

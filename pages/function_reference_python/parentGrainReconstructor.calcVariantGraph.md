@@ -79,5 +79,5 @@ changed in place; clusterVariantGraph clusters the graph.
 
 MATLAB's [parentGrainReconstructor.calcVariantGraph](parentGrainReconstructor.calcVariantGraph.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L273">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L335">source</a></font>
 {% endraw %}

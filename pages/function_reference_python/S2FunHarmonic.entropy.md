@@ -12,13 +12,47 @@ status: Reference
 {% raw %}
 A method of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
--int f log f by the exact rule at a raised bandwidth, since f log f is not bandlimited
+the entropy -int f log f of a function on SO(3) or on the sphere; MATLAB's entropy
 
 ## Syntax
 
+At twice the bandwidth, at least 64 (128 on the sphere):
+
 ```python
-S2FunHarmonic.entropy(f, bandwidth=None)
+e = odf.entropy()
 ```
+
+The quadrature of another bandwidth:
+
+```python
+e = odf.entropy(bandwidth=128)
+```
+
+The integral is computed by the exact quadrature rule of a raised bandwidth, since f log f
+is not bandlimited; points where f is not positive contribute zero. On the sphere it is the
+mean over the sphere, as MATLAB divides by 4 pi.
+
+## Input
+
+| | |
+|---|---|
+| `f` | SO3Fun or S2Fun |
+
+## Output
+
+| | |
+|---|---|
+| `e` | the entropy, a number |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `bandwidth` | `None` | the bandwidth of the quadrature grid, at most twice the preference maxSO3Bandwidth (maxS2Bandwidth on the sphere) |
+
+## See also
+
+[textureIndex](textureIndex_py.html), [SO3FunHarmonic.norm](SO3FunHarmonic.norm_py.html)
 
 MATLAB's [S2FunHarmonic.entropy](S2FunHarmonic.entropy.html)
 

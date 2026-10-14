@@ -65,5 +65,5 @@ A list of rotations, with one a and b or one per rotation, gives several ellipse
 
 MATLAB's [ellipse](ellipse.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L798">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L807">source</a></font>
 {% endraw %}

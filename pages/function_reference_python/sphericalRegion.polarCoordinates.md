@@ -18,11 +18,56 @@ much of the turn as a narrow one and the vertices sit at equal angles
 
 ## Syntax
 
+The radius and the equalised azimuth:
+
 ```python
-polarCoordinates(sR, v, center, ref=None, equalise=True)
+r, rho = polarCoordinates(sR, h, regionCenter(sR))
 ```
+
+The plain azimuth about the centre:
+
+```python
+r, rho = polarCoordinates(sR, h, regionCenter(sR), equalise=False)
+```
+
+The reference direction for rho = 0:
+
+```python
+r, rho = polarCoordinates(sR, h, regionCenter(sR), ref=xvector)
+```
+
+The azimuth starts at the pole of the plotting convention seen from the centre; only where
+the centre is that pole does the reference direction take over. A centre at a vertex or
+on the boundary of the region spreads the part of the turn the region covers over the
+whole turn.
+
+## Input
+
+| | |
+|---|---|
+| `sR` | sphericalRegion |
+| `v` | vector3d, the directions |
+| `center` | vector3d or (3,) array, the centre of the coordinates |
+
+## Output
+
+| | |
+|---|---|
+| `r` | array, one at the centre and zero on the boundary |
+| `rho` | array, the azimuth about the centre in [0, 2 pi) |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `ref` | `None` | the direction rho = 0 points to where the centre is the pole; x by default |
+| `equalise` | `True` | reparametrise the azimuth by the distance to the boundary |
+
+## See also
+
+[regionCenter](regionCenter_py.html), [HSVDirectionKey](HSVDirectionKey_index_py.html), [sectorFolds](sectorFolds_py.html)
 
 MATLAB's [sphericalRegion.polarCoordinates](sphericalRegion.polarCoordinates.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectorfold.py#L172">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectorfold.py#L220">source</a></font>
 {% endraw %}

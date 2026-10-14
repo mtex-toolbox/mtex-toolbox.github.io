@@ -19,5 +19,5 @@ the polar angle arcsin(r) drawn at the plane radius r
 orthographicProjection.polarAngle(r)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L300">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L347">source</a></font>
 {% endraw %}

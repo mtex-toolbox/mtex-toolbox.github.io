@@ -13,15 +13,7 @@ the file of a sample data set, or its files, fetched on first use
 
 ## Syntax
 
-```python
-mtexdatafile(name, root=None, download=True)
-```
-
-Besides the data sets mtexdata reads, every data set of the data repository has its
-files here, the Neper tessellation 'my100grains' for instance. root= is the folder the
-files are kept in, mtexDataPath() by default; download=False raises for a missing one
-instead of fetching it.
-
+The file of a map:
 
 ```python
 fname = mtexdatafile('forsterite')
@@ -33,13 +25,50 @@ A data set of several files:
 tess, oris = mtexdatafile('my100grains')
 ```
 
+Only a file already there:
+
 ```python
 fname = mtexdatafile('forsterite', root=mtexDataPath(), download=False)
 ```
+
+Fetched without saying so:
+
+```python
+fnames = mtexdatafile('dubna', verbose=False)
+```
+
+Besides the data sets mtexdata reads, every data set of the data repository has its
+files here, the Neper tessellation 'my100grains' for instance. A data set of one file gives
+its path, one of several the list of paths. A missing file is downloaded from the data
+repository into the folder root.
+
+## Input
+
+| | |
+|---|---|
+| `name` | the name of a data set, as mtexdata() lists them, or of a data set of the repository |
+
+## Output
+
+| | |
+|---|---|
+| `fname` | the path of the file, or a list of paths |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `root` | `None` | the folder the files are kept in, mtexDataPath() by default |
+| `download` | `True` | fetch a missing file; False raises for it instead |
+| `verbose` | `True` | say when a file is fetched |
+
+## See also
+
+[mtexdata](mtexdata_py.html), [mtexDataPath](mtexDataPath_py.html)
 
 ## Used on
 
 [SymmetryAlignment](SymmetryAlignment_py.html), [OrientationImport](OrientationImport_py.html), [Grains3D](Grains3D_py.html), [Grains3DBoundaries](Grains3DBoundaries_py.html), [Grains3DOperations](Grains3DOperations_py.html), [Grains3DProperties](Grains3DProperties_py.html), [Grains3DReconstruction](Grains3DReconstruction_py.html), [Grains3DSmoothing](Grains3DSmoothing_py.html), [NeperInterface](NeperInterface_py.html), [EBSDGrid](EBSDGrid_py.html), [EBSDImport](EBSDImport_py.html), [EBSDInterfaceHDF5](EBSDInterfaceHDF5_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/sampledata.py#L109">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/sampledata.py#L112">source</a></font>
 {% endraw %}

@@ -66,5 +66,5 @@ order is that of first appearance, where MATLAB sorts unless 'stable' is given.
 
 MATLAB's [SO3TangentVector.unique](SO3TangentVector.unique.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L368">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L430">source</a></font>
 {% endraw %}

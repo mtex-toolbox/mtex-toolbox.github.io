@@ -18,9 +18,47 @@ orientation fits its frame: another lattice is left out
 
 ## Syntax
 
+A shape per Forsterite grain:
+
 ```python
-shapesOnMap(x, cS, scale=1.0)
+s, ids = shapesOnMap(grains, crystalShape.olivine(grains.CSList[1]))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L212">source</a></font>
+At half the size:
+
+```python
+s, ids = shapesOnMap(grains, crystalShape.olivine(grains.CSList[1]), scale=0.5)
+```
+
+A shape per measurement:
+
+```python
+s, ids = shapesOnMap(ebsd['Fo'], crystalShape.olivine(ebsd.CSList[1]), scale=0.3)
+```
+
+## Input
+
+| | |
+|---|---|
+| `x` | grain2d or EBSD |
+| `cS` | crystalShape in a crystal frame |
+
+## Output
+
+| | |
+|---|---|
+| `s` | crystalShape, one list of shapes, None when no phase takes the shape |
+| `ids` | int array, the grains or the measurements the shapes stand for |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `scale` | `1.0` | the factor on the size: the square root of the area of a grain, one on a map |
+
+## See also
+
+[shapeOutlines](shapeOutlines_py.html), [crystalShape](crystalShape_index_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L306">source</a></font>
 {% endraw %}

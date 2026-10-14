@@ -21,7 +21,7 @@ pos2ind(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [mapImage](mapImage.pos2ind_py.html) | the pixel covering each position: row and column, not clipped, and whether it lies on the grid |
+| [mapImage](mapImage.pos2ind_py.html) | the pixel of the image covering each position |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

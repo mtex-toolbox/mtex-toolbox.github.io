@@ -13,20 +13,48 @@ status: Reference
 A method of [SO3FunHarmonic](SO3FunHarmonic_index_py.html).
 
 the functions joined into one list along an axis, the coefficients padded to the largest
-bandwidth
+bandwidth; MATLAB's cat and [SO3F1; SO3F2]
 
 ## Syntax
 
+One list after the other:
+
 ```python
 SO3F = cat(SO3F1, SO3F2)
-SO3F = SO3FunHarmonic.cat(SO3F1, SO3F2, axis=1)
 ```
 
-## Signature
+Two lists of n functions as the columns of n x 2:
 
 ```python
-SO3FunHarmonic.cat(*fs, axis=0)
+SO3F = SO3FunHarmonic.cat(F1.T, F2.T, axis=1)
 ```
+
+The lists are joined along an axis they have: two single functions give a list of two, and
+two columns of n functions, F.T of a list F, joined along axis 1 give n x 2 functions. An axis
+the lists do not have is not refused but joins the coefficient vectors. The real flag is
+kept when every function is real.
+
+## Input
+
+| | |
+|---|---|
+| `SO3F1, SO3F2, ...` | SO3FunHarmonic, single functions or lists of the same frames |
+
+## Output
+
+| | |
+|---|---|
+| `SO3F` | SO3FunHarmonic, the list of functions |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `axis` | `0` | the axis of the lists along which they are joined |
+
+## See also
+
+[SO3FunHarmonic.truncate](SO3FunHarmonic.truncate_py.html), [SO3FunHarmonic.sum](SO3FunHarmonic.sum_py.html), [SO3FunHarmonic.mean](SO3FunHarmonic.mean_py.html)
 
 MATLAB's [SO3FunHarmonic.cat](SO3FunHarmonic.cat.html)
 

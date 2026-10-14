@@ -77,5 +77,5 @@ needs them and is mostly the better choice.
 
 MATLAB's [grainBoundary.reduce](grainBoundary.reduce.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L130">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L145">source</a></font>
 {% endraw %}

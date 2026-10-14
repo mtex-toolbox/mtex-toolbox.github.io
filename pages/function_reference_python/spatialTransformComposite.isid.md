@@ -13,5 +13,5 @@ A property of [spatialTransformComposite](spatialTransformComposite_index_py.htm
 
 whether every stage is the identity
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L734">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L800">source</a></font>
 {% endraw %}

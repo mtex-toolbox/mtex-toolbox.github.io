@@ -22,5 +22,5 @@ vector3d.polar(self)
 
 MATLAB's [vector3d.polar](vector3d.polar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L523">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L551">source</a></font>
 {% endraw %}

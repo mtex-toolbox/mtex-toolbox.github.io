@@ -22,5 +22,5 @@ a == b
 
 MATLAB's [symmetry.eq](symmetry.eq.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L484">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L561">source</a></font>
 {% endraw %}

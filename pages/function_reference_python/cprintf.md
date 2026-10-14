@@ -15,9 +15,44 @@ one row
 
 ## Syntax
 
+A matrix, the columns right aligned:
+
 ```python
-cprintf(d, *args, Lc=None, Lr=None)
+cprintf(np.eye(2))
 ```
+
+With column and row labels:
+
+```python
+cprintf([[1, 2], [3, 4]], Lc=['a', 'b'], Lr=['x', 'y'])
+```
+
+MATLAB's option pairs:
+
+```python
+cprintf([[1, 2], [3, 4]], '-Lc', ['a', 'b'])
+```
+
+The numbers are printed in the shortest form (%g), every column as wide as the widest. Of
+MATLAB's options only the labels '-Lc' and '-Lr' are taken, as pairs or as keywords, and
+the table is printed, not returned as a character array.
+
+## Input
+
+| | |
+|---|---|
+| `d` | a matrix or a vector of numbers |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `Lc` | `None` | the labels of the columns |
+| `Lr` | `None` | the labels of the rows |
+
+## See also
+
+[exportVector3d](exportVector3d_py.html)
 
 ## Used on
 

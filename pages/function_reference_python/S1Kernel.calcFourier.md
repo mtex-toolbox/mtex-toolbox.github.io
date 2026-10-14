@@ -11,13 +11,47 @@ status: Reference
 {% raw %}
 A method of [S1Kernel](S1Kernel_index_py.html).
 
-the Fourier coefficients of the kernel, degrees -L .. L, to its bandwidth by default
+the Fourier coefficients of the kernel, degrees -L .. L, to its bandwidth by default;
+MATLAB's calcFourier
 
 ## Syntax
 
+Up to the bandwidth of the kernel, psi.fhat:
+
 ```python
-S1Kernel.calcFourier(self, L=None)
+fhat = psi.calcFourier()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L943">source</a></font>
+The degrees -16 .. 16:
+
+```python
+fhat = psi.calcFourier(16)
+```
+
+The kernel is the even series psi(x) = sum_k c_k e^{ikx}, c_-k = c_k; the coefficients are
+returned two sided, beyond the bandwidth as zeros.
+
+## Input
+
+| | |
+|---|---|
+| `psi` | S1Kernel |
+
+## Output
+
+| | |
+|---|---|
+| `fhat` | ndarray of 2L + 1 coefficients |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `L` | `None` | the largest degree, the bandwidth of the kernel when not given |
+
+## See also
+
+[S1Kernel.grad](S1Kernel.grad_py.html), [SO3Kernel.calcFourier](SO3Kernel.calcFourier_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1029">source</a></font>
 {% endraw %}

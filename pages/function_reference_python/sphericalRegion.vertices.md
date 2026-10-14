@@ -15,9 +15,33 @@ the corners of the region: the intersections of its circles that lie inside
 
 ## Syntax
 
+The corners, each once:
+
 ```python
-sphericalRegion.vertices(self, tol=1e-08)
+V = sR.vertices()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L176">source</a></font>
+## Input
+
+| | |
+|---|---|
+| `sR` | sphericalRegion |
+
+## Output
+
+| | |
+|---|---|
+| `V` | vector3d of unit vectors in the frame of the region |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `tol` | `1e-08` | the margin by which an intersection may lie outside the other circles |
+
+## See also
+
+[sphericalRegion.boundary](sphericalRegion.boundary_py.html), [sphericalRegion.byVertices](sphericalRegion.byVertices_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L265">source</a></font>
 {% endraw %}

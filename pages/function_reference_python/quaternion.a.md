@@ -13,5 +13,5 @@ A property of [quaternion](quaternion_index_py.html).
 
 the real part a of the quaternions
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L106">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L117">source</a></font>
 {% endraw %}

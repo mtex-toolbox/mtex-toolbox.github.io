@@ -48,5 +48,5 @@ orthogonalTransform(cs)              the elements of a point group
 
 [CrystalSymmetries](CrystalSymmetries_py.html), [RotationImproper](RotationImproper_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L656">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L859">source</a></font>
 {% endraw %}

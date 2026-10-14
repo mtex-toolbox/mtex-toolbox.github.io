@@ -19,5 +19,5 @@ the vectors on the side asked for, 'left' or 'right'
 SO3TangentVector.toSide(self, side)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L233">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L244">source</a></font>
 {% endraw %}

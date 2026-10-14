@@ -71,9 +71,9 @@ framing. The coordinates are those of v, in its frame.
 
 ## See also
 
-scatter3d, [quiver3d](S2AxisField.quiver3_py.html), [text](EBSD.text_py.html), [VectorDefinition](VectorDefinition_py.html), [RotationDefinition](RotationDefinition_py.html)
+[scatter3d](vector3d.scatter3d_py.html), [quiver3d](S2AxisField.quiver3_py.html), [text](EBSD.text_py.html), [VectorDefinition](VectorDefinition_py.html), [RotationDefinition](RotationDefinition_py.html)
 
 MATLAB's [vector3d.arrow3d](vector3d.arrow3d.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L855">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L876">source</a></font>
 {% endraw %}

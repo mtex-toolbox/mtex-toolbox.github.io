@@ -64,7 +64,7 @@ its own grayValue, grayGradient and colorStretching.
 
 ## See also
 
-[HSVDirectionKey](HSVDirectionKey_index_py.html), direction2color, [ipfHSVKey](ipfHSVKey_index_py.html), [EBSDIPFMap](EBSDIPFMap_py.html)
+[HSVDirectionKey](HSVDirectionKey_index_py.html), [direction2color](HKLDirectionKey.direction2color_py.html), [ipfHSVKey](ipfHSVKey_index_py.html), [EBSDIPFMap](EBSDIPFMap_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L96">source</a></font>
 {% endraw %}

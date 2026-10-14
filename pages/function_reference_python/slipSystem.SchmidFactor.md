@@ -12,23 +12,63 @@ status: Reference
 {% raw %}
 A method of [slipSystem](slipSystem_index_py.html).
 
-the Schmid factor of the systems: under a stress tensor the shear it resolves on them,
-for tension directions cos(phi) cos(lambda), without a load the functions of the tension
-direction on the sphere; relative=True divides by the critical resolved shear stress
+the Schmid factor of the slip systems; MATLAB's SchmidFactor
 
 ## Syntax
 
-```python
-sS.SchmidFactor(v)
-sS.SchmidFactor(sigma)
-sS.SchmidFactor()
-```
-
-## Signature
+Under a uniaxial tension along v:
 
 ```python
-slipSystem.SchmidFactor(self, sigma=None, relative=False)
+tau = sS.SchmidFactor(v)
 ```
+
+Under a stress tensor:
+
+```python
+tau = sS.SchmidFactor(sigma)
+```
+
+Over the critical resolved shear stress:
+
+```python
+tau = sS.SchmidFactor(sigma, relative=True)
+```
+
+A function of the tension direction:
+
+```python
+sF = sS.SchmidFactor()
+```
+
+For a tension direction cos(phi) cos(lambda), the cosines of its angles to the slip
+direction and to the plane normal; under a stress tensor the shear it resolves on the
+system over the difference of the extreme principal stresses; without a load the
+function of the tension direction on the sphere. A list of loads on a list of systems
+gives a (loads, systems) matrix. The systems and the load must be given in the same
+frame: both in crystal coordinates, or ori * sS and the stress as measured.
+
+## Input
+
+| | |
+|---|---|
+| `sS` | slipSystem |
+| `sigma` | stressTensor, or vector3d or Miller, the tension directions |
+
+## Output
+
+| | |
+|---|---|
+| `tau` | the Schmid factors, or an S2FunHarmonic of the tension direction |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `relative` | `False` | divide by the critical resolved shear stress sS.CRSS of every system |
+
+## See also
+
+[SchmidFactor](mtex.SchmidFactor_py.html), [SchmidTensor](SchmidTensor_index_py.html), [calcShearStress](stressTensor.calcShearStress_py.html)
 
 ## Used on
 
@@ -36,5 +76,5 @@ slipSystem.SchmidFactor(self, sigma=None, relative=False)
 
 MATLAB's [slipSystem.SchmidFactor](slipSystem.SchmidFactor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L279">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L385">source</a></font>
 {% endraw %}

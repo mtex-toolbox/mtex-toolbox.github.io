@@ -76,5 +76,5 @@ returned; MATLAB's flag nothinning is thinning=0. Further keywords go to MLSSolv
 
 [PoleFigureRefinement](PoleFigureRefinement_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L562">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L591">source</a></font>
 {% endraw %}

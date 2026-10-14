@@ -19,5 +19,5 @@ the radius of the polar angle 80 degrees, the extent of a gnomonic chart
 gnomonicProjection.extent()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L320">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L367">source</a></font>
 {% endraw %}

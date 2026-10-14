@@ -15,9 +15,33 @@ the azimuth and polar ranges of the region in degrees, widened by the margin
 
 ## Syntax
 
+Tight:
+
 ```python
-plainProjection.bounds(self, margin=0.0)
+rhoMin, rhoMax, thetaMin, thetaMax = plainProjection(sR).bounds()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L375">source</a></font>
+Widened:
+
+```python
+rhoMin, rhoMax, thetaMin, thetaMax = plainProjection(sR).bounds(margin=0.1)
+```
+
+## Output
+
+| | |
+|---|---|
+| `rhoMin, rhoMax, thetaMin, thetaMax` | floats in degree |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `margin` | `0.0` | the widening on every side, a fraction of the shorter of the two ranges |
+
+## See also
+
+[sphericalProjection.bounds](sphericalProjection.bounds_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L435">source</a></font>
 {% endraw %}

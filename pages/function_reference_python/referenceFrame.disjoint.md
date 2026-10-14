@@ -20,5 +20,5 @@ specimen frame of the same group
 referenceFrame.disjoint(self, other)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L301">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L326">source</a></font>
 {% endraw %}

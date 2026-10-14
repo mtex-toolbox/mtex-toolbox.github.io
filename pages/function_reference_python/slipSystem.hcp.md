@@ -16,9 +16,30 @@ there is no hcp default: raises an error naming the hexagonal families to choose
 
 ## Syntax
 
+What to write instead:
+
 ```python
-slipSystem.hcp(CS=None, CRSS=1)
+sS = cat(slipSystem.basal(cs, CRSS=1), slipSystem.prismaticA(cs, CRSS=2))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L278">source</a></font>
+The critical resolved shear stresses of the hexagonal families differ from material to
+material, so they are chosen one by one, as MATLAB's error message says too.
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame, not used |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `CRSS` | `1` | not used |
+
+## See also
+
+[slipSystem.basal](slipSystem.basal_py.html), [slipSystem.prismaticA](slipSystem.prismaticA_py.html), [slipSystem.pyramidalCA](slipSystem.pyramidalCA_py.html), [slipSystem.twinT1](slipSystem.twinT1_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L377">source</a></font>
 {% endraw %}

@@ -16,16 +16,39 @@ save=True also the default of every later session, stored in the user's settings
 
 ## Syntax
 
+For this session:
+
 ```python
 plottingConvention('y↑→x').makeDefault()
+```
+
+For every later session too:
+
+```python
+plottingConvention('y↑→x').makeDefault(save=True)
+```
+
+The same:
+
+```python
 plottingConvention.default('y↑→x', save=True)
 ```
 
-## Signature
+## Input
 
-```python
-plottingConvention.makeDefault(self, save=False)
-```
+| | |
+|---|---|
+| `pC` | plottingConvention |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L80">source</a></font>
+## Keywords
+
+| | default | |
+|---|---|---|
+| `save` | `False` | store the convention in mtex_settings.json as well |
+
+## See also
+
+[plottingConvention.default](plotx2east_py.html), [setMTEXpref](setMTEXpref_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L94">source</a></font>
 {% endraw %}

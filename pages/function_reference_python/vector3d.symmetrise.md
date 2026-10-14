@@ -18,11 +18,53 @@ its third the rotations of the frame, v.frame.rotations()
 
 ## Syntax
 
+Every image, numSym x shape:
+
 ```python
-vector3d.symmetrise(self, unique=False, antipodal=None)
+hs = h.symmetrise()
 ```
+
+The distinct ones of one direction:
+
+```python
+hs = h.symmetrise(unique=True)
+```
+
+The negatives too:
+
+```python
+hs = h.symmetrise(antipodal=True)
+```
+
+With antipodal=True the negatives are added, unless the group holds the inversion or h
+is an axis; with unique=True an axis, or antipodal=True, takes v and -v as one, and
+antipodal=False keeps them apart. A vector in no crystal frame is returned with a leading
+axis of one.
+
+## Input
+
+| | |
+|---|---|
+| `h` | Miller |
+
+## Output
+
+| | |
+|---|---|
+| `hs` | Miller |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `unique` | `False` | the distinct images of a single direction, a flat list |
+| `antipodal` | `None` | treat the directions as axes; by default as h says |
+
+## See also
+
+[Miller.multiplicity](Miller.multiplicity_py.html), [symmetry.rotations](symmetry.rotations_py.html)
 
 MATLAB's [vector3d.symmetrise](vector3d.symmetrise.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L970">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1063">source</a></font>
 {% endraw %}

@@ -19,5 +19,5 @@ the orientations at points vs of the chart of section k
 eulerSections.orientationsAt(self, k, vs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L242">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L289">source</a></font>
 {% endraw %}

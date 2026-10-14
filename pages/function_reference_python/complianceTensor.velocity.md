@@ -76,7 +76,7 @@ and expanded. MATLAB's velocity(C, n, rho) passes the density third, which is ta
 
 ## See also
 
-energyVector, [ChristoffelTensor](ChristoffelTensor_index_py.html), plotSeismicVelocities, [WaveVelocities](WaveVelocities_py.html)
+[energyVector](stiffnessTensor.energyVector_py.html), [ChristoffelTensor](ChristoffelTensor_index_py.html), [plotSeismicVelocities](stiffnessTensor.plotSeismicVelocities_py.html), [WaveVelocities](WaveVelocities_py.html)
 
 MATLAB's [complianceTensor.velocity](complianceTensor.velocity.html)
 

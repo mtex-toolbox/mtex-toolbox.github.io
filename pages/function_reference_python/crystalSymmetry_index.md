@@ -155,12 +155,12 @@ or R, which centering also sets.
 | [cAxisRec](crystalFrame.cAxisRec_py.html) | the reciprocal axis c* as the Miller plane normal (001) of the frame |
 | [centering](crystalFrame.centering_py.html) | the centring of the lattice: P primitive, A, B, C one face, I the body, F every face, R rhombohedral in the hexagonal cell |
 | [char](crystalFrame.char_py.html) | the mineral name of the frame, or the symbol of its point group |
-| [conventionChar](crystalFrame.conventionChar_py.html) | the convention in crystal directions, e.g |
+| [conventionChar](crystalFrame.conventionChar_py.html) | the plotting convention in crystal directions, e.g |
 | [crystalFrame](crystalFrame.crystalFrame_py.html) | the reference frame glued to the lattice basis of a phase, with the point group of the crystal |
 | [crystalSymmetry](crystalSymmetry.crystalSymmetry_py.html) | the reference frame glued to the lattice basis of a phase, with the point group of the crystal |
 | [gamma](crystalFrame.gamma_py.html) | the angle gamma between the a and b axes, in radians |
 | [load](crystalSymmetry.load_py.html) | the constructor answers with the registered instance crystalFrame.load('Al-Aluminum.cif'): the frame a CIF file describes, read by the interfaces layer above this one |
-| [plotHKL](crystalSymmetry.plotHKL_py.html) | plotHKL(cs): the low index directions <100>, <110>, <111> of a crystal with all their symmetric equivalents, labelled, on the upper hemisphere unless complete (MATLAB crystalFrame/plotHKL) |
+| [plotHKL](crystalSymmetry.plotHKL_py.html) | the low index directions <100>, <110>, <111> of a crystal with all their symmetric equivalents, labelled by their indices |
 | [primitiveAxes](crystalFrame.primitiveAxes_py.html) | the axes of a primitive cell of the lattice, the conventional axes where it is primitive |
 | [transformationMatrix](crystalFrame.transformationMatrix_py.html) | between crystal frames the axes are first re-paired by nearest length when the cells disagree, which is how the monoclinic settings 121 and 112 relate |
 | [transformationMatrix](crystalSymmetry.transformationMatrix_py.html) | between crystal frames the axes are first re-paired by nearest length when the cells disagree, which is how the monoclinic settings 121 and 112 relate |
@@ -171,5 +171,5 @@ or R, which centering also sets.
 
 MATLAB's [crystalSymmetry_index](crystalSymmetry_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L594">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L715">source</a></font>
 {% endraw %}

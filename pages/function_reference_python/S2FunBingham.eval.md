@@ -19,5 +19,5 @@ the values of the density at directions, the mean over the symmetric copies of i
 S2FunBingham.eval(self, x)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L435">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L484">source</a></font>
 {% endraw %}

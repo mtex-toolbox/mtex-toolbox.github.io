@@ -22,5 +22,5 @@ SO3VectorFieldHarmonic.left(self)
 
 MATLAB's [SO3VectorFieldHarmonic.left](SO3VectorFieldHarmonic.left.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L199">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L232">source</a></font>
 {% endraw %}

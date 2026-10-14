@@ -20,5 +20,5 @@ this one, registered and sealed from now on
 referenceFrame.intern(fr)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L435">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L524">source</a></font>
 {% endraw %}

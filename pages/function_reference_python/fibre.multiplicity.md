@@ -22,5 +22,5 @@ fibre.multiplicity(self)
 
 MATLAB's [fibre.multiplicity](fibre.multiplicity.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L244">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L313">source</a></font>
 {% endraw %}

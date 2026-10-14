@@ -16,7 +16,7 @@ the disjoint list of orientations, symmetric equivalents within a tolerance take
 
 ## Syntax
 
-One of each:
+One of each, sorted:
 
 ```python
 u = unique(ori)
@@ -26,6 +26,12 @@ Within 1 degree as one:
 
 ```python
 u = unique(ori, tol=1*degree)
+```
+
+In the order of first appearance:
+
+```python
+u = unique(ori, stable=True)
 ```
 
 The rotations as stored:
@@ -42,8 +48,8 @@ u, iOri, iu = unique(ori, return_index=True, return_inverse=True)
 
 Two orientations are one when their misorientation angle, symmetry reduced, is below tol.
 Every orientation not yet taken takes the later ones within the tolerance, so the first of
-each kept is returned, in the order of first appearance. MATLAB sorts unless 'stable' is
-given; here the order is always that of first appearance.
+each is kept. They are sorted by the coefficients of their equivalents in the fundamental
+region, or with stable kept in the order of first appearance.
 
 ## Input
 
@@ -65,7 +71,7 @@ given; here the order is always that of first appearance.
 |---|---|---|
 | `tol` | `0.001` | the angular tolerance, in radians |
 | `symmetry` | `True` | take symmetric equivalents as one; False compares the rotations as stored, MATLAB's 'noSymmetry' |
-| `stable` | `False` | accepted for MATLAB's flag; the order is that of first appearance anyway |
+| `stable` | `False` | keep the order of first appearance instead of sorting |
 | `return_index` | `False` | also return iOri |
 | `return_inverse` | `False` | also return iu |
 
@@ -75,5 +81,5 @@ given; here the order is always that of first appearance.
 
 MATLAB's [orientation.unique](orientation.unique.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L439">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L599">source</a></font>
 {% endraw %}

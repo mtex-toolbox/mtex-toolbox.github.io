@@ -19,5 +19,5 @@ the polar angle arctan(r) drawn at the plane radius r
 gnomonicProjection.polarAngle(r)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L315">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L362">source</a></font>
 {% endraw %}

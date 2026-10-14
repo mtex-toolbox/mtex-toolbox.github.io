@@ -55,5 +55,5 @@ EulerAngleConvention decides, Bunge's ZXZ by default.
 
 [rotation.byEuler](rotation.byEuler_py.html), [orthogonalTransform.byMatrix](orthogonalTransform.byMatrix_py.html), [RotationRepresentations](RotationRepresentations_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L700">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L903">source</a></font>
 {% endraw %}

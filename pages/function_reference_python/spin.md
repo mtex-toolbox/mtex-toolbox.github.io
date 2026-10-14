@@ -17,5 +17,5 @@ the spin tensor of a velocity gradient, its antisymmetric part
 spin(L)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L198">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L292">source</a></font>
 {% endraw %}

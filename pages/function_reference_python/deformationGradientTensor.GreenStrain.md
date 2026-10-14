@@ -22,5 +22,5 @@ deformationGradientTensor.GreenStrain(F)
 
 MATLAB's [deformationGradientTensor.GreenStrain](deformationGradientTensor.GreenStrain.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L174">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L236">source</a></font>
 {% endraw %}

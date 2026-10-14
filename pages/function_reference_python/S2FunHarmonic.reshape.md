@@ -26,5 +26,5 @@ sF = sF.reshape((2, 3))
 S2FunHarmonic.reshape(self, *shape)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L289">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L313">source</a></font>
 {% endraw %}

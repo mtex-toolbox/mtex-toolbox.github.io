@@ -18,5 +18,5 @@ operators as shifts of the coefficient vector, the degrees never mixing
 angularDerivatives(fhat)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L423">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L461">source</a></font>
 {% endraw %}

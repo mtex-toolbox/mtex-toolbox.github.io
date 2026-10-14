@@ -9,10 +9,44 @@ lang: python
 status: Reference
 ---
 {% raw %}
-a polar axes: the parent named, the held one, the one nextAxis prepared turned polar, a
-fresh figure's first axes, or a new figure
+the polar axes a polar plot draws into
 
 ## Syntax
+
+The next polar axes:
+
+```python
+ax = polarAxes()
+```
+
+The axes given:
+
+```python
+ax = polarAxes(ax)
+```
+
+In this order: the parent given, a polar axes the user made with plt.subplot, the last
+axes of a held figure when it is polar, the axes nextAxis prepared turned polar, or a new
+axes in a new figure. MATLAB's polar plots take their axes with the keyword parent, which
+is what the polar plots of the port pass here.
+
+## Input
+
+| | |
+|---|---|
+| `parent` | a matplotlib axes to draw into |
+
+## Output
+
+| | |
+|---|---|
+| `ax` | the matplotlib polar axes |
+
+## See also
+
+[setView](setView_py.html), [histogram](SO3Fun.hist_py.html), [nextAxis](nextAxis_py.html)
+
+## Signature
 
 ```python
 polarAxes(parent=None)

@@ -26,5 +26,5 @@ difference that still counts as one grain, gbcCustom('grainId', 0.5)
 
 MATLAB's [gbcCustom](gbcCustom.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L235">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L267">source</a></font>
 {% endraw %}

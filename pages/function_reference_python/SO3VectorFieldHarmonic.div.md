@@ -16,6 +16,41 @@ the divergence, a function on SO(3); with x its values at the orientations x
 
 ## Syntax
 
+The divergence, an SO3FunHarmonic:
+
+```python
+D = SO3VF.div()
+```
+
+Its values at orientations:
+
+```python
+d = SO3VF.div(ori)
+```
+
+The field is taken in its harmonic form; the divergence of a gradient is the Laplacian of
+the function.
+
+## Input
+
+| | |
+|---|---|
+| `SO3VF` | SO3VectorField |
+| `x` | orientation, where to evaluate the divergence |
+
+## Output
+
+| | |
+|---|---|
+| `D` | SO3FunHarmonic |
+| `d` | array, the values at x |
+
+## See also
+
+[curl](curl_py.html), [SO3VectorField.antiderivative](SO3VectorField.antiderivative_py.html), [SO3FunHarmonic.grad](SO3FunHarmonic.grad_py.html)
+
+## Signature
+
 ```python
 SO3VectorFieldHarmonic.div(self, x=None)
 ```
@@ -26,5 +61,5 @@ SO3VectorFieldHarmonic.div(self, x=None)
 
 MATLAB's [SO3VectorFieldHarmonic.div](SO3VectorFieldHarmonic.div.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L251">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L299">source</a></font>
 {% endraw %}

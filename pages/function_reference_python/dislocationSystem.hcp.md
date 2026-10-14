@@ -15,9 +15,27 @@ there is no hcp default: raises an error naming the hexagonal families to choose
 
 ## Syntax
 
+What to write instead:
+
+```python
+dS = dislocationSystem(slipSystem.basal(cs).symmetrise(antipodal=True))
+```
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame, not used |
+
+## See also
+
+[dislocationSystem.fcc](dislocationSystem.fcc_py.html), [dislocationSystem.bcc](dislocationSystem.bcc_py.html), [slipSystem.hcp](slipSystem.hcp_py.html)
+
+## Signature
+
 ```python
 dislocationSystem.hcp(CS=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L477">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L728">source</a></font>
 {% endraw %}

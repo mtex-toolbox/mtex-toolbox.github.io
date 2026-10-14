@@ -23,5 +23,5 @@ shape2d(V, plane=None, frame=None)
 
 MATLAB's [shape2d.shape2d](shape2d.shape2d.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L323">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L408">source</a></font>
 {% endraw %}

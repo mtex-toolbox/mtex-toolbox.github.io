@@ -28,5 +28,5 @@ triplePointList(V, grainId, phaseId, boundaryId, angles, CSList, plane, frame, v
 
 MATLAB's [triplePointList.triplePointList](triplePointList.triplePointList.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L529">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L636">source</a></font>
 {% endraw %}

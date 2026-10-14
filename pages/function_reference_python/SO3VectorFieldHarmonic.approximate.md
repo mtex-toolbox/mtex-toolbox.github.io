@@ -22,5 +22,5 @@ SO3VectorFieldHarmonic.approximate(fun, *args, **kwargs)
 
 MATLAB's [SO3VectorFieldHarmonic.approximate](SO3VectorFieldHarmonic.approximate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L385">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L484">source</a></font>
 {% endraw %}

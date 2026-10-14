@@ -16,5 +16,5 @@ whether the group holds proper rotations only
 
 MATLAB's [symmetry.isProper](symmetry.isProper.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L287">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L300">source</a></font>
 {% endraw %}

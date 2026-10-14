@@ -13,5 +13,5 @@ A property of [symmetry](symmetry_index_py.html).
 
 the highest order of a rotation axis of the group perpendicular to z, 1 if there is none
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L350">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L390">source</a></font>
 {% endraw %}

@@ -15,10 +15,36 @@ the rotational angle of the rotational part, or the angle between the rotational
 
 ## Syntax
 
+The angle of the rotational part:
+
 ```python
 omega = angle(T)
+```
+
+Between the rotational parts:
+
+```python
 omega = angle(T1, T2)
 ```
+
+The parity is not looked at: a transform and its negative have the angle 0 between them.
+
+## Input
+
+| | |
+|---|---|
+| `T` | orthogonalTransform |
+| `other` | orthogonalTransform or rotation, the second one |
+
+## Output
+
+| | |
+|---|---|
+| `omega` | the angles in radians |
+
+## See also
+
+[orthogonalTransform.dot](orthogonalTransform.dot_py.html), [quaternion.angle](quaternion.angle_py.html)
 
 ## Signature
 
@@ -26,5 +52,5 @@ omega = angle(T1, T2)
 orthogonalTransform.angle(self, other=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L809">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1012">source</a></font>
 {% endraw %}

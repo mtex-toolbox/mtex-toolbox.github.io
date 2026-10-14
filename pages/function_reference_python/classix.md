@@ -59,7 +59,7 @@ the nearest group of a large enough cluster.
 
 ## See also
 
-calcCluster, [ClusterDemo](ClusterDemo_py.html)
+[calcCluster](orientation.calcCluster_py.html), [ClusterDemo](ClusterDemo_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/cluster.py#L36">source</a></font>
 {% endraw %}

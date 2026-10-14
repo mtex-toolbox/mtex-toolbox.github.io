@@ -14,10 +14,35 @@ two frames, the specimen frame the default second
 
 ## Syntax
 
+With the default specimen frame:
+
 ```python
 maxPhi1, maxPhi, maxPhi2 = eulerRegion(cs)
-eulerRegion(cs1, cs2)
 ```
+
+```python
+maxPhi1, maxPhi, maxPhi2 = eulerRegion(cs, ss) # with a specimen symmetry, or a second crystal
+```
+
+The rotations about z of the two groups divide phi1 and phi2, the two-folds perpendicular
+to z halve Phi, and one of the reflections they make on phi1 or phi2 halves that angle.
+
+## Input
+
+| | |
+|---|---|
+| `frA` | crystalFrame |
+| `frB` | the second frame, by default the default specimen frame |
+
+## Output
+
+| | |
+|---|---|
+| `maxPhi1, maxPhi, maxPhi2` | the upper bounds of the three Bunge Euler angles in radians |
+
+## See also
+
+[fundamentalRegionEuler](symmetry.fundamentalRegionEuler_py.html), [fundamentalRegion](fundamentalRegion_py.html), [projectIntoEulerRegion](quaternion.project2EulerFR_py.html)
 
 ## Signature
 
@@ -25,5 +50,5 @@ eulerRegion(cs1, cs2)
 eulerRegion(frA, frB=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L326">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L407">source</a></font>
 {% endraw %}

@@ -18,5 +18,5 @@ pole figure to the mass of the first
 calcNormalization(pf, other)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L672">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L834">source</a></font>
 {% endraw %}

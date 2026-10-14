@@ -84,5 +84,5 @@ misorientations gives lists.
 
 MATLAB's [orientation.round2Miller](orientation.round2Miller.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L558">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L580">source</a></font>
 {% endraw %}

@@ -12,14 +12,49 @@ status: Reference
 {% raw %}
 A method of [mtexFigure](mtexFigure_index_py.html).
 
-mtexColorbar: a bar per axes, or one for all when they share a range and a colour map; a
-figure that has bars loses them instead, as MATLAB's toggle does
+the colour bars of the figure: a bar per axes, or one for all when they share a range and
+a colour map; a figure that has bars loses them instead, as MATLAB's toggle does
 
 ## Syntax
 
+A bar per axes, or one for all:
+
 ```python
-mtexFigure.colorbar(self, label='', multiple=False, **kwargs)
+mtexFig.colorbar()
 ```
+
+With a label:
+
+```python
+mtexFig.colorbar(label='mrd')
+```
+
+A bar per axes, also where the ranges agree:
+
+```python
+mtexFig.colorbar(multiple=True)
+```
+
+A figure of explicit colours, as a boundary coloured by num2rgb, shows the colour map over
+the range setColorRange gave. mtexColorbar calls this on the current figure; further
+keywords, as location, go to matplotlib's colorbar.
+
+## Output
+
+| | |
+|---|---|
+| `bars` | list of the matplotlib colour bars drawn, empty when they were removed |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `label` | `''` | the label of the bar, or a list of one label per bar in the order of the axes |
+| `multiple` | `False` | a bar per axes even where the ranges and the colour maps agree |
+
+## See also
+
+[mtexColorbar](mtexColorbar_py.html), [setColorRange](setColorRange_py.html), [mtexFigure.setColormap](mtexFigure.setColormap_py.html)
 
 ## Used on
 
@@ -27,5 +62,5 @@ mtexFigure.colorbar(self, label='', multiple=False, **kwargs)
 
 MATLAB's [mtexFigure.colorbar](mtexFigure.colorbar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L288">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L358">source</a></font>
 {% endraw %}

@@ -25,5 +25,5 @@ SO3F = exp(odf)
 SO3FunCBF.exp(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L710">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L772">source</a></font>
 {% endraw %}

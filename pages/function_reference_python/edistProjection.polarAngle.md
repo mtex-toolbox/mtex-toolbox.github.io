@@ -19,5 +19,5 @@ the polar angle drawn at the plane radius r, r itself
 edistProjection.polarAngle(r)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L285">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L332">source</a></font>
 {% endraw %}

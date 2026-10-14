@@ -18,5 +18,5 @@ Condon-Shortley phase, so that Y_l^m = P_l^m e^{im rho}; m in front of the shape
 normalizedLegendre(l, x)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L470">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L509">source</a></font>
 {% endraw %}

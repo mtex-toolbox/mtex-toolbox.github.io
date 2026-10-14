@@ -9,9 +9,54 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the import wizard's window; returns the map it imported when the window is closed
+the import wizard: a window that browses the files of a folder, shows what a file holds,
+lets the phases, the conventions and the reference frames be chosen and writes the Python of
+the import; MATLAB's import_wizard
 
 ## Syntax
+
+Browse the current folder:
+
+```python
+ebsd = importWizard()
+```
+
+A folder, or a file to open on start:
+
+```python
+ebsd = importWizard('/data/ebsd')
+```
+
+The window, without its event loop:
+
+```python
+w = importWizard(show=False, exec=False)
+```
+
+The window blocks until it is closed and returns the map imported, unless a Qt event loop
+runs already, as under IPython's %gui qt, where it returns the window. From a terminal,
+mtex-wizard [path] or python -m mtex.wizard [path] opens the same. It needs PySide6, the
+wizard extra (pip install mtex[wizard]), and on Linux the system libraries of Qt, which it
+names when they are missing. The keywords go to runWizard: show=False keeps the window
+hidden, exec=False returns it without running the event loop.
+
+## Input
+
+| | |
+|---|---|
+| `path` | a folder to browse or a file to open, by default the current folder |
+
+## Output
+
+| | |
+|---|---|
+| `ebsd` | the map imported, None when nothing was; or the window |
+
+## See also
+
+[loadEBSD](loadEBSD_ang_py.html), [inspectEBSD](inspectEBSD_py.html), [buildImportWizardScript](buildImportWizardScript_py.html)
+
+## Signature
 
 ```python
 importWizard(path=None, **kwargs)

@@ -24,6 +24,8 @@ One:
 rot = rotation.rand()
 ```
 
+A list of 100:
+
 ```python
 rot = rotation.rand(100)
 ```
@@ -34,15 +36,40 @@ A 10 x 3 array:
 rot = rotation.rand(10, 3)
 ```
 
+Within 10 degree of the identity:
+
 ```python
 rot = rotation.rand(100, maxAngle=10*degree)
 ```
 
-## Signature
+Reproducible:
 
 ```python
-rotation.rand(*shape, rng=None, maxAngle=None)
+rot = rotation.rand(100, rng=np.random.default_rng(0))
 ```
+
+## Input
+
+| | |
+|---|---|
+| `shape` | the sizes of the array, one tuple or several integers |
+
+## Output
+
+| | |
+|---|---|
+| `rot` | quaternions of the class it is called on, rotation or quaternion |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `rng` | `None` | the NumPy random generator, a fresh one by default |
+| `maxAngle` | `None` | the largest rotational angle about the identity |
+
+## See also
+
+[orientation.rand](orientation.rand_py.html), [vector3d.rand](vector3d.rand_py.html), [rotation.id](rotation.id_py.html)
 
 MATLAB's [rotation.rand](rotation.rand.html)
 

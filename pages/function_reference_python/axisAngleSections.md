@@ -37,5 +37,5 @@ axisAngleSections(cs1, cs2, sections=5, volumeScaling=False, antipodal=True)
 
 MATLAB's [axisAngleSections](axisAngleSections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L483">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L567">source</a></font>
 {% endraw %}

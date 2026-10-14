@@ -87,5 +87,5 @@ is NaN. The map needs no grid: the lattice of a list is used too. The angles are
 
 MATLAB's [EBSD.KAM](EBSD.KAM.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L339">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L443">source</a></font>
 {% endraw %}

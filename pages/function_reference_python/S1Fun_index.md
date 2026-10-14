@@ -106,7 +106,7 @@ c_{-k} = conj(c_k), which is checked from the coefficients unless real says it.
 | [norm](S1FunHarmonic.norm_py.html) | the L2 norm for the normalised measure, the Euclidean norm of the coefficients |
 | [odd](S1FunHarmonic.odd_py.html) | whether f(x) = -f(-x): c_{-k} = -c_k |
 | [plot](S1Fun.plot_py.html) | plot of a function on the circle, its values as the radius of a polar line |
-| [plotSpektra](S1FunHarmonic.plotSpektra_py.html) | plotSpectrum(psi), plotSpectrum(odf): the Chebyshev coefficients of a kernel, or the harmonic power of a function, per degree (MATLAB's plotSpektra) |
+| [plotSpektra](S1FunHarmonic.plotSpektra_py.html) | the Chebyshev coefficients of a kernel, or the harmonic power of a function, per degree |
 | [plus](S1Fun.plus_py.html) |  |
 | [plus](S1FunHarmonic.plus_py.html) |  |
 | [power](S1Fun.power_py.html) |  |

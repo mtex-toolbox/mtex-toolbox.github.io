@@ -19,5 +19,5 @@ the edge and screw dislocations of the symmetrised face-centred cubic slip syste
 dislocationSystem.fcc(CS)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L467">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L718">source</a></font>
 {% endraw %}

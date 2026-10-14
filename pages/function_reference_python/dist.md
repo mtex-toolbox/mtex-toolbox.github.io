@@ -17,5 +17,5 @@ dist(plane, v), dist(plane, plane2): the signed distance to the plane
 dist(plane, v, **kw)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L172">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L218">source</a></font>
 {% endraw %}

@@ -33,5 +33,5 @@ colour is NaN above thresholdAngle. Without a reference the identity is the refe
 
 [EBSDDenoising](EBSDDenoising_py.html), [EBSDFilling](EBSDFilling_py.html), [EBSDSharpPlot](EBSDSharpPlot_py.html), [Grain_dispersion_axes](Grain_dispersion_axes_py.html), [LowLevelParentGrainReconstruction](LowLevelParentGrainReconstruction_py.html), [GND](GND_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L247">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L261">source</a></font>
 {% endraw %}

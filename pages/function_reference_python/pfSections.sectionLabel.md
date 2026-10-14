@@ -19,5 +19,5 @@ the title of section k, the twist angle in degrees
 pfSections.sectionLabel(self, k)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L407">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L454">source</a></font>
 {% endraw %}

@@ -20,5 +20,5 @@ D(s)^T from the right, which is the transpose of the same Kronecker product
 equivariantProjection(actions, Ds)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L130">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L163">source</a></font>
 {% endraw %}

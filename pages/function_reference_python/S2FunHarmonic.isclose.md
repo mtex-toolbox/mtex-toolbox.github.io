@@ -15,9 +15,45 @@ whether the coefficients agree with those of g within the tolerances, relative t
 
 ## Syntax
 
+Equal up to a relative 1e-8:
+
 ```python
-S2FunHarmonic.isclose(self, g, rtol=1e-08, atol=0.0)
+tf = isclose(sF1, sF2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L506">source</a></font>
+Up to a relative 1e-2:
+
+```python
+tf = isclose(sF1, sF2, rtol=1e-2)
+```
+
+The functions are compared at the larger of their bandwidths: the norm of the difference of
+the coefficients must not exceed atol + rtol times the norm of those of g; a list counts as
+one array.
+
+## Input
+
+| | |
+|---|---|
+| `sF1` | S2FunHarmonic |
+| `g` | S2FunHarmonic, the function to compare with |
+
+## Output
+
+| | |
+|---|---|
+| `tf` | bool |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `rtol` | `1e-08` | the tolerance relative to the norm of g |
+| `atol` | `0.0` | the absolute tolerance |
+
+## See also
+
+[S2FunHarmonic.norm](S2FunHarmonic.norm_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L660">source</a></font>
 {% endraw %}

@@ -19,5 +19,5 @@ the short names of the stages joined by dashes
 spatialTransformComposite.shortChar(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L739">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L805">source</a></font>
 {% endraw %}

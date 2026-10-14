@@ -98,5 +98,5 @@ outputs in this order. The angles may also be given positionally, after the seco
 
 MATLAB's [SO3Fun.calcAngleDistribution](SO3Fun.calcAngleDistribution.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L199">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L256">source</a></font>
 {% endraw %}

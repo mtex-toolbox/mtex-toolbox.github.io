@@ -19,5 +19,5 @@ the Radon transform: the kernel on the sphere of the same coefficients, in close
 SO3SquareSingularityKernel.radon(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L443">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L500">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ crystalFrame.basisDual(self)
 
 MATLAB's [crystalFrame.basisDual](crystalFrame.basisDual.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L829">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L950">source</a></font>
 {% endraw %}

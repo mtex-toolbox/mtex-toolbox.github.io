@@ -10,13 +10,46 @@ counterpart: Gaussian.html
 status: Reference
 ---
 {% raw %}
-the normal density of mean m and width delta, the standard deviation times sqrt(2)
+the normal density of mean m and width delta, the standard deviation times sqrt(2);
+MATLAB's Gaussian
 
 ## Syntax
 
+The density as a function:
+
 ```python
-Gaussian(m, delta, x=None)
+f = Gaussian(m, delta)
 ```
+
+Its values at x:
+
+```python
+fx = Gaussian(m, delta, x)
+```
+
+## Input
+
+| | |
+|---|---|
+| `m` | the mean |
+| `delta` | the width, the standard deviation times sqrt(2) |
+
+## Output
+
+| | |
+|---|---|
+| `f` | a function of x, exp(-(x - m)^2 / delta^2) / (delta sqrt(pi)) |
+| `fx` | its values at x |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `x` | `None` | the points to evaluate at; the function when None |
+
+## See also
+
+[calcDensity](calcDensity_py.html), [kde1d](kde1d_py.html)
 
 ## Used on
 

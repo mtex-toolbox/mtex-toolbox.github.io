@@ -70,5 +70,5 @@ several circles.
 
 MATLAB's [vector3d.circle](vector3d.circle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L761">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L770">source</a></font>
 {% endraw %}

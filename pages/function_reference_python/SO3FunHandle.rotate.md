@@ -11,13 +11,47 @@ status: Reference
 {% raw %}
 A method of [SO3FunHandle](SO3FunHandle_index_py.html).
 
-the function rotated by r from the left or the right, through the harmonic form
+the function rotated by r from the left or the right, through the harmonic form;
+MATLAB's rotate
 
 ## Syntax
 
+Rotated in specimen coordinates:
+
 ```python
-SO3FunHandle.rotate(self, r, side='left')
+SO3F = SO3F.rotate(r)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L256">source</a></font>
+Rotated in crystal coordinates:
+
+```python
+SO3F = SO3F.rotate(r, side='right')
+```
+
+The handle is expanded into its harmonic form, which is rotated.
+
+## Input
+
+| | |
+|---|---|
+| `SO3F` | SO3FunHandle |
+| `r` | rotation |
+
+## Output
+
+| | |
+|---|---|
+| `SO3F` | SO3FunHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `side` | `'left'` | 'left', the specimen side, or 'right', the crystal side, as MATLAB's flag 'right' |
+
+## See also
+
+[SO3FunHarmonic.rotate](SO3FunHarmonic.rotate_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L287">source</a></font>
 {% endraw %}

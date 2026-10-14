@@ -17,5 +17,5 @@ antiSym(T) is T.antiSym(): the antisymmetric part of a rank two tensor
 antiSym(T)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1465">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1641">source</a></font>
 {% endraw %}

@@ -10,13 +10,43 @@ counterpart: HEALPixS2Grid.html
 status: Reference
 ---
 {% raw %}
-the HEALPix nodes of the sphere as a list of directions
+the HEALPix nodes of the sphere as a list of directions; MATLAB's HEALPixS2Grid
 
 ## Syntax
 
+Nside the power of two nearest to 1/resolution:
+
 ```python
-HEALPixS2Grid(resolution=None, nside=None)
+S2G = HEALPixS2Grid(resolution=5*degree)
 ```
+
+12 nside^2 nodes:
+
+```python
+S2G = HEALPixS2Grid(nside=8)
+```
+
+The nodes are the centres of the hierarchical equal area iso-latitude pixels of Gorski et
+al. 2005, in the ring scheme: 12 nside^2 of them, nside a power of two. Without either keyword
+the resolution is 2.5 degree, nside 32. The result is a plain vector3d, not a grid with a
+search of its own.
+
+## Output
+
+| | |
+|---|---|
+| `S2G` | vector3d, 12 nside^2 directions |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `resolution` | `None` | the resolution, nside = 2^round(log2(1/resolution)) |
+| `nside` | `None` | the number of divisions of a base pixel's side, instead of the resolution |
+
+## See also
+
+[equispacedS2Grid](equispacedS2Grid_py.html), [fibonacciS2Grid](fibonacciS2Grid_index_py.html), [regularS2Grid](regularS2Grid_py.html)
 
 ## Used on
 

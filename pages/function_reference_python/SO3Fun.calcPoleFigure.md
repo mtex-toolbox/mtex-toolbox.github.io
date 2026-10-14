@@ -91,5 +91,5 @@ can be turned into counts by noisepf.
 
 MATLAB's [SO3Fun.calcPoleFigure](SO3Fun.calcPoleFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L707">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L884">source</a></font>
 {% endraw %}

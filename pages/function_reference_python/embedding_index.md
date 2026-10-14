@@ -79,7 +79,7 @@ given tensors, is built here by setDouble(e, d) or from the keywords.
 
 ## See also
 
-[embedding.project](embedding.project_py.html), [double](S1Grid.double_py.html), [setDouble](setDouble_py.html), calcCluster, [OrientationEmbeddings](OrientationEmbeddings_py.html)
+[embedding.project](embedding.project_py.html), [double](S1Grid.double_py.html), [setDouble](setDouble_py.html), [calcCluster](orientation.calcCluster_py.html), [OrientationEmbeddings](OrientationEmbeddings_py.html)
 
 ## Members
 
@@ -89,14 +89,14 @@ given tensors, is built here by setDouble(e, d) or from the keywords.
 | [CS](embedding.CS_py.html) | the crystal frame the embedding belongs to |
 | [dim](embedding.dim_py.html) | the dimension of the space of the images, the length of a row of double(e) |
 | [dot](embedding.dot_py.html) | the inner product of two embeddings of the same crystal frame, image by image |
-| [double](embedding.double_py.html) | the Euclidean coordinates in the orthonormal basis, one row per orientation |
+| [double](embedding.double_py.html) | the Euclidean coordinates of the images in their orthonormal basis, one row per orientation |
 | [embedding](embedding.embedding_py.html) | the isometric embedding of orientations into a Euclidean space: one matrix of components with a column per orientation, so that norm(e1 - e2) is a metric on the orientations modulo the crystal symmetry |
 | [isclose](embedding.isclose_py.html) | whether two embeddings belong to the same frame and have the same images up to atol |
-| [mean](embedding.mean_py.html) | the mean image, weighted by weights if given |
+| [mean](embedding.mean_py.html) | the arithmetic mean of the images |
 | [minus](embedding.minus_py.html) |  |
 | [mtimes](embedding.mtimes_py.html) |  |
-| [norm](embedding.norm_py.html) | the Euclidean norm of every image, with normalized=True over the norm every orientation's image has |
-| [orientation](embedding.orientation_py.html) | the orientations whose images are closest to the embedding, the projection back to the orientations of e.CS in the specimen frame SS |
+| [norm](embedding.norm_py.html) | the Euclidean norm of every image |
+| [orientation](embedding.orientation_py.html) | the orientations whose images are closest to the embedding, the projection back onto the orientations of e.CS |
 | [plot](embedding.plot_py.html) | plot(x, ...) draws x as its kind is drawn |
 | [plus](embedding.plus_py.html) |  |
 | [project](embedding.project_py.html) | the rotations whose images are closest to the embedding, the projection of a point of the Euclidean space back onto the orientations |

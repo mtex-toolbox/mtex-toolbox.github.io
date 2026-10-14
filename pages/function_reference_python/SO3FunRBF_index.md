@@ -78,7 +78,7 @@ values. MATLAB's SO3FunRBF(F) approximating another SO3Fun is not ported.
 | [exp](SO3FunRBF.exp_py.html) | the exponential of the function, pointwise, as a function handle |
 | [frameA](SO3FunRBF.frameA_py.html) | the frame the orientations map from, the crystal frame |
 | [frameB](SO3FunRBF.frameB_py.html) | the frame the orientations map to, the specimen or a second crystal frame |
-| [grad](SO3FunRBF.grad_py.html) | the gradient: minus the kernel's angular derivative along the geodesic to every equivalent within its support |
+| [grad](SO3FunRBF.grad_py.html) | the gradient of a kernel sum at orientations, or without them the vector field of the gradients of its harmonic expansion, as MATLAB's grad |
 | [interpolate](SO3FunRBF.interpolate_py.html) | the sum of kernels through values at orientations, MATLAB's SO3FunRBF.interpolate |
 | [inv](SO3FunRBF.inv_py.html) | the inverse function f(g^-1), the centres inverted, crystal and specimen sides exchanged |
 | [log](SO3FunRBF.log_py.html) | the logarithm of the function, pointwise, as a function handle |
@@ -86,9 +86,9 @@ values. MATLAB's SO3FunRBF(F) approximating another SO3Fun is not ported.
 | [norm](SO3FunRBF.norm_py.html) | the L2 norm of the function, from its harmonic expansion |
 | [plot3d](SO3FunRBF.plot3d_py.html) | plot3d(v), plot3d(v, data), plot3d(sF), plot3d(vF), plot3d(oR), plot3d(ori), plot3d(odf) |
 | [plot](SO3FunRBF.plot_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
-| [plotFibre](SO3FunRBF.plotFibre_py.html) | plotFibre(odf, f): the ODF along the fibre f, as a line over the angle along the fibre |
+| [plotFibre](SO3FunRBF.plotFibre_py.html) | the ODF along the fibre f, as a line over the angle along the fibre |
 | [plotIPDF](SO3FunRBF.plotIPDF_py.html) | plotIPF(odf, r): the inverse pole figures of an ODF, one axes per specimen direction (MATLAB's plotIPDF) |
-| [plotPDF](SO3FunRBF.plotPDF_py.html) | plotPF(odf, h): the pole figures of an ODF, one axes per crystal direction (MATLAB's plotPDF) |
+| [plotPDF](SO3FunRBF.plotPDF_py.html) | the pole figures of an ODF, one axes per crystal direction |
 | [plotSection](SO3FunRBF.plotSection_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
 | [plus](SO3FunRBF.plus_py.html) |  |
 | [psi](SO3FunRBF.psi_py.html) | the kernel |
@@ -101,7 +101,7 @@ values. MATLAB's SO3FunRBF(F) approximating another SO3Fun is not ported.
 | [textureIndex](SO3FunRBF.textureIndex_py.html) | the texture index of a function on SO(3) or on the sphere, the squared L2 norm of its harmonic expansion |
 | [times](SO3FunRBF.times_py.html) |  |
 | [uminus](SO3FunRBF.uminus_py.html) |  |
-| [volume](SO3FunRBF.volume_py.html) | the share of orientations within a radius of a centre: the mean of f on a local grid in the ball, times the ball's share of the fundamental region (its Haar measure times the number of symmetric copies, at most one) |
+| [volume](SO3FunRBF.volume_py.html) | the share of orientations within a radius of a centre: the integral of f over the ball, int_{angle(g, c) < r} f(g) dg, relative to the integral over all orientations |
 | [weights](SO3FunRBF.weights_py.html) | the weight of every centre |
 
 ## Used on
@@ -110,5 +110,5 @@ values. MATLAB's SO3FunRBF(F) approximating another SO3Fun is not ported.
 
 MATLAB's [SO3FunRBF_index](SO3FunRBF_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L141">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L158">source</a></font>
 {% endraw %}

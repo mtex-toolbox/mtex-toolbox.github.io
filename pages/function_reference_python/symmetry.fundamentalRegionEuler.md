@@ -17,6 +17,39 @@ fundamentalRegionEuler(cs, ss): MATLAB's name of the Euler plotting box
 
 ## Syntax
 
+With the default specimen frame:
+
+```python
+maxPhi1, maxPhi, maxPhi2 = fundamentalRegionEuler(cs)
+```
+
+With a specimen symmetry:
+
+```python
+maxPhi1, maxPhi, maxPhi2 = fundamentalRegionEuler(cs, ss)
+```
+
+The same as eulerRegion. MATLAB's flag 'complete', the full box, is not taken.
+
+## Input
+
+| | |
+|---|---|
+| `frA` | crystalFrame |
+| `frB` | the second frame, by default the default specimen frame |
+
+## Output
+
+| | |
+|---|---|
+| `maxPhi1, maxPhi, maxPhi2` | the upper bounds of the three Bunge Euler angles in radians |
+
+## See also
+
+[eulerRegion](eulerRegion_py.html), [fundamentalRegion](fundamentalRegion_py.html), [fundamentalSector](fundamentalSector_py.html)
+
+## Signature
+
 ```python
 fundamentalRegionEuler(frA, frB=None)
 ```
@@ -27,5 +60,5 @@ fundamentalRegionEuler(frA, frB=None)
 
 MATLAB's [symmetry.fundamentalRegionEuler](symmetry.fundamentalRegionEuler.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L292">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L360">source</a></font>
 {% endraw %}

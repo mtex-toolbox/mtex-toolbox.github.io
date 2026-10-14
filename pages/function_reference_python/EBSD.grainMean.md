@@ -71,5 +71,5 @@ A pixel without a grain and a grain without a value in the range are NaN.
 
 MATLAB's [EBSD.grainMean](EBSD.grainMean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L445">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L565">source</a></font>
 {% endraw %}

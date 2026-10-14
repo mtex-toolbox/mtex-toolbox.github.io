@@ -22,5 +22,5 @@ the negative, the operator -a
 
 MATLAB's [S2Kernel.uminus](S2Kernel.uminus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L135">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L155">source</a></font>
 {% endraw %}

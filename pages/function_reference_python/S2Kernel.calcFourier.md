@@ -11,13 +11,47 @@ status: Reference
 {% raw %}
 A method of [S2Kernel](S2Kernel_index_py.html).
 
-the Legendre coefficients A_0 .. A_L of the kernel, to its bandwidth by default
+the Legendre coefficients A_0 .. A_L of the kernel, to its bandwidth by default; MATLAB's
+calcFourier
 
 ## Syntax
 
+Up to the bandwidth of the kernel, psi.A:
+
 ```python
-S2Kernel.calcFourier(self, L=None)
+A = psi.calcFourier()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L672">source</a></font>
+Up to the degree 64:
+
+```python
+A = psi.calcFourier(64)
+```
+
+The kernel is the series psi(t) = sum_n A_n P_n(t) of Legendre polynomials in the cosine t
+of the polar angle.
+
+## Input
+
+| | |
+|---|---|
+| `psi` | S2Kernel |
+
+## Output
+
+| | |
+|---|---|
+| `A` | ndarray of L + 1 coefficients |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `L` | `None` | the largest degree, the bandwidth of the kernel when not given |
+
+## See also
+
+S2Kernel.eval, [SO3Kernel.calcFourier](SO3Kernel.calcFourier_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L742">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [S1DeLaValleePoussinKernel](S1DeLaValleePoussinKernel_index_py.htm
 
 the degree 2n beyond which the coefficients vanish
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1031">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1145">source</a></font>
 {% endraw %}

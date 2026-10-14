@@ -15,9 +15,41 @@ the slip system <100>{010} of a primitive cubic crystal
 
 ## Syntax
 
+With the critical resolved shear stress 1:
+
 ```python
-slipSystem.primitiveCubic(CS, CRSS=1)
+sS = slipSystem.primitiveCubic(cs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L263">source</a></font>
+With another:
+
+```python
+sS = slipSystem.primitiveCubic(cs, CRSS=2)
+```
+
+One system of the family; symmetrise gives every equivalent one.
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame of a cubic crystal |
+
+## Output
+
+| | |
+|---|---|
+| `sS` | slipSystem |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `CRSS` | `1` | the critical resolved shear stress |
+
+## See also
+
+[slipSystem](slipSystem_index_py.html), [slipSystem.symmetrise](slipSystem.symmetrise_py.html), [dislocationSystem](dislocationSystem_index_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L320">source</a></font>
 {% endraw %}

@@ -62,7 +62,7 @@ particular alignment sets it itself. mtexdatafile gives the files without readin
 |---|---|---|
 | `root` | `None` | the folder the files are kept in, instead of mtexDataPath() |
 | `download` | `True` | fetch a missing file; False raises instead |
-| `verbose` | `True` | accepted for MATLAB's silent flag; reading prints nothing, a download its source |
+| `verbose` | `True` | report a download, its source and where the file is kept; False is MATLAB's silent |
 
 ## See also
 
@@ -74,5 +74,5 @@ particular alignment sets it itself. mtexdatafile gives the files without readin
 
 MATLAB's [mtexdata](mtexdata.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/sampledata.py#L167">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/sampledata.py#L182">source</a></font>
 {% endraw %}

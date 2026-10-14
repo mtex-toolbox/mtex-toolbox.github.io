@@ -48,8 +48,8 @@ fits them by least squares). The field is symmetrised under the group of its fra
 S2AxisField is the abstract class above it, S2AxisFieldHandle the field of a function
 evaluated where it is asked.
 
-The coefficient form takes a (L+1)^2 x 6 matrix in the port's internal normalisation, not
-MATLAB's six S2FunHarmonic components.
+The coefficient form takes a (L+1)^2 x 6 matrix, one column per component xx, xy, xz, yy,
+yz, zz, in MTEX's basis, the coefficients aF.fhat returns and S2FunHarmonic takes.
 
 ## Input
 
@@ -74,7 +74,7 @@ MATLAB's six S2FunHarmonic components.
 
 ## See also
 
-[S2VectorFieldHarmonic](S2VectorFieldHarmonic_index_py.html), [S2FunHarmonic](S2FunHarmonic_index_py.html), [S2AxisFieldHarmonic.interpolate](S2AxisFieldHarmonic.interpolate_py.html), velocity, [S2FunVectorField](S2FunVectorField_py.html)
+[S2VectorFieldHarmonic](S2VectorFieldHarmonic_index_py.html), [S2FunHarmonic](S2FunHarmonic_index_py.html), [S2AxisFieldHarmonic.interpolate](S2AxisFieldHarmonic.interpolate_py.html), [velocity](complianceTensor.velocity_py.html), [S2FunVectorField](S2FunVectorField_py.html)
 
 ## Used on
 

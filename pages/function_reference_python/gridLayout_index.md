@@ -86,7 +86,7 @@ layout, ebsd.layout says the one it is in.
 | [basis](gridLayout.basis_py.html) | the directions row, col and row x col as one vector3d of three |
 | [columnMajor](gridLayout.columnMajor_py.html) | the layout with the first index along y, the second along x, MATLAB's images |
 | [gridLayout](gridLayout.gridLayout_py.html) | the order a grid is stored in: the directions of the specimen its row index and its column index advance along |
-| [layoutIndex](gridLayout.layoutIndex_py.html) | the index that lays out an array whose first and second index run along d = (d1, d2) as gL asks: new[r, c] = old.flat[lin[r, c]] |
+| [layoutIndex](gridLayout.layoutIndex_py.html) | the index that lays out an array whose first and second index run along d = (d1, d2) as gL asks, new[r, c] = old.flat[lin[r, c]] |
 | [rowMajor](gridLayout.rowMajor_py.html) | the layout with the first index along x, the second along y |
 
 ## Used on

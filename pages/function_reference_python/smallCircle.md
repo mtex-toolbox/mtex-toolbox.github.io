@@ -13,9 +13,40 @@ the circle of directions at an angle about a direction, closed; the plane at 90 
 
 ## Syntax
 
+The great circle perpendicular to z:
+
 ```python
-smallCircle(n, opening=90*degree, points=361)
+c = smallCircle(zvector)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L41">source</a></font>
+The cone of 30 degree about x:
+
+```python
+c = smallCircle(xvector, opening=30*degree, points=91)
+```
+
+## Input
+
+| | |
+|---|---|
+| `n` | vector3d or three numbers, the axis of the circle |
+
+## Output
+
+| | |
+|---|---|
+| `c` | (points, 3) array, the directions along the circle, the first repeated as the last |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `opening` | `90*degree` | the angle between the axis and the circle |
+| `points` | `361` | the number of points |
+
+## See also
+
+[sphereGridLines](sphereGridLines_py.html), [circle](vector3d.circle_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L52">source</a></font>
 {% endraw %}

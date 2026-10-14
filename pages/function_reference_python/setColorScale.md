@@ -9,17 +9,41 @@ lang: python
 status: Reference
 ---
 {% raw %}
-setColorScale('log'): logarithmic colours on every plot of the figure, 'linear' back
+logarithmic or linear colours on every plot of the figure
 
 ## Syntax
 
+The colours spread over the decades of the range:
+
 ```python
-setColorScale(scale='linear', fig=None)
+setColorScale('log')
 ```
+
+Linear colours again on a figure given:
+
+```python
+setColorScale('linear', fig=mtexFig)
+```
+
+## Input
+
+| | |
+|---|---|
+| `scale` | 'log' or 'linear' |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `fig` | `None` | the mtexFigure; the current one by default |
+
+## See also
+
+[mtexFigure.setColorScale](mtexFigure.setColorScale_py.html), [setColorRange](setColorRange_py.html)
 
 ## Used on
 
 [GND](GND_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L621">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L821">source</a></font>
 {% endraw %}

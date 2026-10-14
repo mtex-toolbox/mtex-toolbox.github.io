@@ -15,9 +15,33 @@ the bounding box of the drawn region, from its boundary, as (xmin, xmax, ymin, y
 
 ## Syntax
 
+With a margin of 2 percent:
+
 ```python
-sphericalProjection.bounds(self, margin=0.02)
+xmin, xmax, ymin, ymax = proj.bounds()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L211">source</a></font>
+Tight about the boundary:
+
+```python
+xmin, xmax, ymin, ymax = proj.bounds(margin=0)
+```
+
+## Output
+
+| | |
+|---|---|
+| `xmin, xmax, ymin, ymax` | floats |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `margin` | `0.02` | the widening on every side, a fraction of the shorter side of the box |
+
+## See also
+
+[sphericalProjection.boundary](sphericalProjection.boundary_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L248">source</a></font>
 {% endraw %}

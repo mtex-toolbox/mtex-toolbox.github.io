@@ -22,5 +22,5 @@ S2FunBingham.rotate(self, r)
 
 MATLAB's [S2FunBingham.rotate](S2FunBingham.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L449">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L498">source</a></font>
 {% endraw %}

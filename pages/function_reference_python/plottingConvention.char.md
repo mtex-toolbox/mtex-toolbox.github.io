@@ -15,9 +15,46 @@ A method of [plottingConvention](plottingConvention_index_py.html).
 
 ## Syntax
 
+'y↑→x':
+
 ```python
-plottingConvention.char(self, utf8=None, names=('x', 'y', 'z'))
+s = pC.char()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L164">source</a></font>
+'y^->x':
+
+```python
+s = pC.char(utf8=False)
+```
+
+In the axis names of a file, 'Y1↑→X1':
+
+```python
+s = pC.char(names=('X1', 'Y1', 'Z1'))
+```
+
+## Input
+
+| | |
+|---|---|
+| `pC` | plottingConvention |
+
+## Output
+
+| | |
+|---|---|
+| `s` | str |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `utf8` | `None` | arrows as Unicode characters, or as ASCII ('^', 'v', '->', '<-'); by default the preference 'UTF8Output' |
+| `names` | `('x', 'y', 'z')` | the names of the three reference axes |
+
+## See also
+
+[conventionNames](conventionNames_py.html), [plottingConvention.isPictogram](plottingConvention.isPictogram_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L186">source</a></font>
 {% endraw %}

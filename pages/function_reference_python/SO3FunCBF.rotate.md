@@ -13,15 +13,49 @@ status: Reference
 A method of [SO3FunCBF](SO3FunCBF_index_py.html).
 
 the function rotated by r on the left, the specimen side, or with side='right' on the crystal
-side; the frame of the rotated side turns with it
+side; the frame of the rotated side turns with it; MATLAB's rotate
 
 ## Syntax
 
+F(rot^-1 g), the specimen side turned:
+
 ```python
-SO3FunCBF.rotate(self, r, side='left')
+SO3F = rotate(SO3F, rot)
 ```
+
+F(g rot^-1), the crystal side turned:
+
+```python
+SO3F = SO3F.rotate(rot, side='right')
+```
+
+A rotation that is no symmetry of the rotated side's group strips that group from its
+frame, with a warning.
+
+## Input
+
+| | |
+|---|---|
+| `SO3F` | SO3FunCBF |
+| `r` | rotation, one |
+
+## Output
+
+| | |
+|---|---|
+| `SO3F` | SO3FunCBF |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `side` | `'left'` | 'left' or 'right' |
+
+## See also
+
+[SO3FunHarmonic.rotate](SO3FunHarmonic.rotate_py.html), [rotate](S2Fun.rotate_py.html)
 
 MATLAB's [SO3FunCBF.rotate](SO3FunCBF.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L677">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L748">source</a></font>
 {% endraw %}

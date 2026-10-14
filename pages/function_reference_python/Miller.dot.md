@@ -86,5 +86,5 @@ over their symmetric equivalents.
 
 MATLAB's [Miller.dot](Miller.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L639">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L667">source</a></font>
 {% endraw %}

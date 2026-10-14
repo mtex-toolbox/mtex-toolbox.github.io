@@ -22,5 +22,5 @@ SO3TangentVector.dot(self, other, **kwargs)
 
 MATLAB's [SO3TangentVector.dot](SO3TangentVector.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L303">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L314">source</a></font>
 {% endraw %}

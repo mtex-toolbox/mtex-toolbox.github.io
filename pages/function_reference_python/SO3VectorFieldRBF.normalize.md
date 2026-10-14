@@ -22,5 +22,5 @@ SO3VectorFieldRBF.normalize(self)
 
 MATLAB's [SO3VectorFieldRBF.normalize](SO3VectorFieldRBF.normalize.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L237">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L270">source</a></font>
 {% endraw %}

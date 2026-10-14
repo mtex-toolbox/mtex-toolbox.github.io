@@ -16,11 +16,38 @@ the inner product of the coefficients
 
 ## Syntax
 
+A b + ... + d d of the coefficients:
+
 ```python
-quaternion.dot_outer(self, other, antipodal=True)
+d = dot(q1, q2)
 ```
+
+The plain inner product of the quaternions as vectors of R^4, signed: q and -q give
+opposite values. rotation.dot takes its absolute value.
+
+## Input
+
+| | |
+|---|---|
+| `q1, q2` | quaternion |
+
+## Output
+
+| | |
+|---|---|
+| `d` | the inner products |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` | `True` | not used by quaternions, which keep the sign; taken so that the call is the one of rotations |
+
+## See also
+
+[rotation.dot](rotation.dot_py.html), [quaternion.angle](quaternion.angle_py.html)
 
 MATLAB's [quaternion.dot_outer](quaternion.dot_outer.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L210">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L221">source</a></font>
 {% endraw %}

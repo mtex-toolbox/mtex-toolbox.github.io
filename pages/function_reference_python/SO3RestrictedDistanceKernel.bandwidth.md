@@ -13,5 +13,5 @@ A property of [SO3RestrictedDistanceKernel](SO3RestrictedDistanceKernel_index_py
 
 the degree N the kernel is cut at
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L538">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L608">source</a></font>
 {% endraw %}

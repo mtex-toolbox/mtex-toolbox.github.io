@@ -22,5 +22,5 @@ a != b
 
 MATLAB's [symmetry.ne](symmetry.ne.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L491">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L568">source</a></font>
 {% endraw %}

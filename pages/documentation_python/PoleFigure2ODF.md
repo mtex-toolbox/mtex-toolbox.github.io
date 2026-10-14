@@ -61,7 +61,7 @@ explain the data.
 ## Reconstruct an ODF
 
 With no options, `calcODF` uses MTEX's modified least-squares solver and automatic ghost
-correction. `silent=False` shows the fit error of every pole figure after each
+correction. `verbose=True` shows the fit error of every pole figure after each
 iteration, as MATLAB prints it by default.
 
 ```python
@@ -231,7 +231,7 @@ print(f'Default: {defaultTime:.2f} s, peak {defaultPeak:.1f} mrd, mean RP {meanD
 ```
 
 ```text
-Default: 1.98 s, peak 94.4 mrd, mean RP 0.59; 15 degree: 0.19 s, peak 26.3 mrd, mean RP 0.75
+Default: 1.68 s, peak 94.4 mrd, mean RP 0.59; 15 degree: 0.20 s, peak 26.3 mrd, mean RP 0.75
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODF-9.png"></center>
@@ -267,7 +267,7 @@ print(f'Zero range: {zeroTime:.2f} s, peak {zeroPeak:.1f} mrd, mean RP {meanZero
 ```
 
 ```text
-Zero range: 0.70 s, peak 106.9 mrd, mean RP 0.51; default: 1.98 s, peak 94.4 mrd, mean RP 0.59
+Zero range: 1.24 s, peak 106.9 mrd, mean RP 0.51; default: 1.68 s, peak 94.4 mrd, mean RP 0.59
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODF-10.png"></center>
@@ -325,7 +325,7 @@ unnormalised intensity data to be used.
 
 ## Technical Details
 
-`calcODF` is silent unless `silent=False` is given; MATLAB prints the trace unless
+`calcODF` is silent unless `verbose=True` is given; MATLAB prints the trace unless
 `'silent'` is given. The RP threshold is the keyword `epsilon`, MATLAB's number after
 `'RP'`. `max(odf)` returns the pair of the value and the orientation, so the peak is its
 first element and the mode its second.

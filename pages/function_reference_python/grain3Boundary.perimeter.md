@@ -16,5 +16,5 @@ the perimeter of every face, the length of its edges
 
 MATLAB's [grain3Boundary.perimeter](grain3Boundary.perimeter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L203">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L258">source</a></font>
 {% endraw %}

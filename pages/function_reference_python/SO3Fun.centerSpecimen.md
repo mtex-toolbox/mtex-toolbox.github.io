@@ -67,5 +67,5 @@ to them. The search always runs on the harmonic series, so MATLAB's flags 'Fouri
 
 MATLAB's [SO3Fun.centerSpecimen](SO3Fun.centerSpecimen.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1030">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1165">source</a></font>
 {% endraw %}

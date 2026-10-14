@@ -13,5 +13,5 @@ A property of [orthogonalTransform](orthogonalTransform_index_py.html).
 
 the coefficient d of the rotational part
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L768">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L971">source</a></font>
 {% endraw %}

@@ -27,5 +27,5 @@ oS = alphaSections(cs, ss, alpha=np.arange(0, 91, 15)*degree)
 
 MATLAB's [alphaSections](alphaSections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L305">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L352">source</a></font>
 {% endraw %}

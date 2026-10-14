@@ -14,9 +14,44 @@ columns for the right; the degree is preserved
 
 ## Syntax
 
+The left derivatives, one column each:
+
 ```python
-differentiate(fhat, side='left')
+D = differentiate(SO3F._fhat)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L72">source</a></font>
+The right derivatives:
+
+```python
+D = differentiate(SO3F._fhat, side='right')
+```
+
+The three columns are the coefficients of the derivatives along the x, y and z axes of the
+tangent space, the coefficient matrix of the gradient field; the vector is in the port's
+internal convention (docs/design/harmonics.md), not MATLAB's fhat. The port's own, no MATLAB
+counterpart.
+
+## Input
+
+| | |
+|---|---|
+| `fhat` | ndarray, deg2dim(L + 1) Wigner coefficients |
+
+## Output
+
+| | |
+|---|---|
+| `D` | ndarray of shape (deg2dim(L + 1), 3) |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `side` | `'left'` | 'left' or 'right', the tangent space |
+
+## See also
+
+[SO3FunHarmonic.grad](SO3FunHarmonic.grad_py.html), [div](div_py.html), [curl](curl_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L88">source</a></font>
 {% endraw %}

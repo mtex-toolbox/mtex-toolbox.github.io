@@ -85,5 +85,5 @@ the specimen direction w, one for all or one per orientation.
 
 MATLAB's [S2VectorField.quiverSection](S2VectorField.quiverSection.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L269">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L309">source</a></font>
 {% endraw %}

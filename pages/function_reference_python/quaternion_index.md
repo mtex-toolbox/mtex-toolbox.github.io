@@ -38,7 +38,7 @@ quaternion(abcd)                     an array of shape (..., 4) or (4, N)
 | [d](quaternion.d_py.html) | the coefficient d of k |
 | [dot](quaternion.dot_py.html) | the inner product of the coefficients |
 | [dot_outer](quaternion.dot_outer_py.html) | the inner product of the coefficients |
-| [double](quaternion.double_py.html) | double(e) is e.double(): the coordinates of the images in the orthonormal basis, one row per orientation |
+| [double](quaternion.double_py.html) | the coordinates of the images of an embedding in their orthonormal basis, one row per orientation, e.double() |
 | [eq](quaternion.eq_py.html) | equal within the angular tolerance tol, MATLAB's eq |
 | [Euler](quaternion.Euler_py.html) | the Euler angles (alpha, beta, gamma) in the convention named, the session's by default |
 | [export](quaternion.export_py.html) | write a map to the file the extension names |

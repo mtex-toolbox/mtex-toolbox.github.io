@@ -20,5 +20,5 @@ differs by at most the threshold, as an angle for vectors and orientations, 0 ot
 gbcCustom.evaluate(self, ebsd, i, j)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L247">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L279">source</a></font>
 {% endraw %}

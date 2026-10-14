@@ -14,9 +14,53 @@ quadrature grid brings the weights of its rule
 
 ## Syntax
 
+The weights 1/n:
+
 ```python
-wignerSeriesAdjoint(rots, values, L, weights=None, folds=(1, 1))
+fhat = wignerSeriesAdjoint(rots, values, 8)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L803">source</a></font>
+Weighted:
+
+```python
+fhat = wignerSeriesAdjoint(rots, values, 8, weights=w)
+```
+
+The quadrature of a grid:
+
+```python
+fhat = wignerSeriesAdjoint(quadratureSO3Grid(16), values, 8)
+```
+
+The internal Wigner coefficients fhat_n^{kl} = sqrt(2n+1) sum_q w_q v_q conj(D_n^{kl}(R_q))
+up to bandwidth L, the adjoint of wignerSeries; on a quadrature grid with its weights the
+exact coefficients of a function of that bandwidth. Real values give the coefficients of a
+real function.
+
+## Input
+
+| | |
+|---|---|
+| `rots` | rotations, or a quadratureSO3Grid |
+| `values` | the values at the rotations |
+| `L` | the bandwidth |
+
+## Output
+
+| | |
+|---|---|
+| `fhat` | the Wigner coefficients, internal convention |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `weights` | `None` | the weight of every rotation; by default 1/n, or the grid's rule |
+| `folds` | `(1, 1)` | (rA, rB), the folds about z the result is known to have, which shrink the NUFFT's array; a grid brings its own |
+
+## See also
+
+[wignerSeries](wignerSeries_py.html), [wignerSeriesAdjointGridded](wignerSeriesAdjointGridded_py.html), [wignerPlan](wignerPlan_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L985">source</a></font>
 {% endraw %}

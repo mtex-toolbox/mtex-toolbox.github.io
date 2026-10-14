@@ -14,9 +14,52 @@ below 50 nodes; a quadrature grid brings the weights of its rule
 
 ## Syntax
 
+The weights 1/n:
+
 ```python
-sphericalSeriesAdjoint(v, values, L, weights=None, real=False)
+fhat = sphericalSeriesAdjoint(v, values, 8)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L946">source</a></font>
+Weighted, real values:
+
+```python
+fhat = sphericalSeriesAdjoint(v, values, 8, weights=w, real=True)
+```
+
+The quadrature of a grid:
+
+```python
+fhat = sphericalSeriesAdjoint(quadratureS2Grid(16), values, 8)
+```
+
+The internal coefficients fhat_l^m = sum_q w_q v_q conj(Y_l^m(v_q)), the adjoint of
+sphericalSeries; on a quadrature grid with its weights the exact coefficients of a function
+of that bandwidth.
+
+## Input
+
+| | |
+|---|---|
+| `v` | vector3d, or a quadratureS2Grid |
+| `values` | the values at the directions |
+| `L` | the bandwidth |
+
+## Output
+
+| | |
+|---|---|
+| `fhat` | the (L+1)^2 spherical coefficients, internal convention |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `weights` | `None` | the weight of every direction; by default 1/n, or the grid's rule |
+| `real` | `False` | the values are real, which halves the NUFFT's array; the direct sum below 50 nodes and a grid's plan decide by the values themselves |
+
+## See also
+
+[sphericalSeries](sphericalSeries_py.html), [sphericalPlan](sphericalPlan_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1190">source</a></font>
 {% endraw %}

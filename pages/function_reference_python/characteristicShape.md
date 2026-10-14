@@ -22,7 +22,7 @@ characteristicShape(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [grainBoundary](grainBoundary.characteristicShape_py.html) | the characteristic shape of a set of boundary segments: every segment and its antipode, sorted by direction and laid end to end, the convex, centrally symmetric outline whose boundary length in each direction is the boundary length the map has in it |
+| [grainBoundary](grainBoundary.characteristicShape_py.html) | the characteristic shape of a set of boundary segments |
 
 ## Used on
 

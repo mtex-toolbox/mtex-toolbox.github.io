@@ -111,9 +111,10 @@ if hasNeper:
 
 `simulateGrains` accepts either an orientation distribution function
 ([ODF](ODFTheory_py.html)) and a grain count, or a list of orientations. For a list, its
-length determines the grain count. With `silent=True` Neper's console output goes to
-`neper.log` in `filePath`. Both the generated grains and the imported example use the
-ODF's trigonal quartz symmetry, also used on the Properties and Operations pages.
+length determines the grain count. With `verbose=False`, the default, Neper's console
+output goes to `neper.log` in `filePath`. Both the generated grains and the imported
+example use the ODF's trigonal quartz symmetry, also used on the Properties and Operations
+pages.
 
 ```python
 # the Dubna ODF has trigonal quartz symmetry
@@ -138,7 +139,7 @@ grain3d (y↑→x)
 To prescribe every orientation rather than sample the ODF internally, use
 
     ori = odf.discreteSample(numGrains)
-    grains = neper.simulateGrains(ori, silent=True)
+    grains = neper.simulateGrains(ori)
 
 The summary confirms that the result is a three-dimensional grain collection. The
 fallback is an existing example, not a realization of the settings above: it retains its

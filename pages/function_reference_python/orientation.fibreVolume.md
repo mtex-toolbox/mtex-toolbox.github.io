@@ -66,5 +66,5 @@ is (1 - cos radius) / 2 times the number of the copies.
 
 MATLAB's [orientation.fibreVolume](orientation.fibreVolume.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L123">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L164">source</a></font>
 {% endraw %}

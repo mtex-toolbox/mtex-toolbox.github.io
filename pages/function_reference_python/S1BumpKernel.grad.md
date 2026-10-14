@@ -15,9 +15,39 @@ the derivative of the bump kernel, zero wherever it exists; without an argument 
 
 ## Syntax
 
+Zeros of the shape of x:
+
 ```python
-S1BumpKernel.grad(self, x=None)
+d = psi.grad(x)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1105">source</a></font>
+The zero kernel:
+
+```python
+dpsi = psi.grad()
+```
+
+## Input
+
+| | |
+|---|---|
+| `psi` | S1BumpKernel |
+
+## Output
+
+| | |
+|---|---|
+| `d` | ndarray of zeros, or S1Kernel without an argument |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `x` | `None` | the angles; without them the zero kernel is returned |
+
+## See also
+
+[S1Kernel.grad](S1Kernel.grad_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1219">source</a></font>
 {% endraw %}

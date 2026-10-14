@@ -35,5 +35,5 @@ SO3VectorFieldHandle(lambda ori: ..., cs, ss, 'left')
 
 MATLAB's [SO3VectorFieldHandle_index](SO3VectorFieldHandle_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L732">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L898">source</a></font>
 {% endraw %}

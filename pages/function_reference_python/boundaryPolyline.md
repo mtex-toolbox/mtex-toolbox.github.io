@@ -17,5 +17,5 @@ a boundary as one polyline, the chains in walk order separated by a NaN row
 boundaryPolyline(gB)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L248">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L308">source</a></font>
 {% endraw %}

@@ -25,5 +25,5 @@ t = norm(odf)
 SO3FunCBF.norm(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L749">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L836">source</a></font>
 {% endraw %}

@@ -17,11 +17,41 @@ the pieces whose midpoint lies inside are kept
 
 ## Syntax
 
+Points every degree along each arc:
+
 ```python
-sphericalRegion.boundary(self, resolution=1*degree)
+arcs = sR.boundary()
 ```
+
+Coarser:
+
+```python
+arcs = sR.boundary(resolution=5*degree)
+```
+
+## Input
+
+| | |
+|---|---|
+| `sR` | sphericalRegion |
+
+## Output
+
+| | |
+|---|---|
+| `arcs` | list of vector3d, the points along every arc of the boundary |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `resolution` | `1*degree` | the largest spacing of the points along an arc |
+
+## See also
+
+[sphericalRegion.vertices](sphericalRegion.vertices_py.html), [plot](S1Grid.plot_py.html)
 
 MATLAB's [sphericalRegion.boundary](sphericalRegion.boundary.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L184">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L284">source</a></font>
 {% endraw %}

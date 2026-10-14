@@ -13,9 +13,43 @@ the frames the components are functions on: the group on the tangent side is str
 
 ## Syntax
 
+Of a field in the left tangent space:
+
 ```python
-componentFrames(CS, SS, side='left')
+cA, cB = componentFrames(cs, ss)
 ```
+
+Of one in the right tangent space:
+
+```python
+cA, cB = componentFrames(cs, ss, side='right')
+```
+
+A field in the left tangent space returns vectors in the specimen frame, which turn with a
+specimen symmetry, so its three components are invariant only under the crystal symmetry;
+in the right tangent space the other way round. The port's own, no MATLAB counterpart.
+
+## Input
+
+| | |
+|---|---|
+| `CS, SS` | the crystal and the specimen frame of the field |
+
+## Output
+
+| | |
+|---|---|
+| `cA, cB` | the crystal and the specimen frame of the components |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `side` | `'left'` | 'left' or 'right', the tangent space |
+
+## See also
+
+[SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L58">source</a></font>
 {% endraw %}

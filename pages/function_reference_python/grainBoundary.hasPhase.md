@@ -11,13 +11,56 @@ status: Reference
 {% raw %}
 A method of [grainBoundary](grainBoundary_index_py.html).
 
-the segments between the two phases named, in either order, or with one named on either side
+the segments between the two phases named, in either order, or with one named on either
+side; MATLAB's grainBoundary.hasPhase
 
 ## Syntax
 
+A Forsterite grain on either side:
+
 ```python
-grainBoundary.hasPhase(self, a, b=None)
+ind = gB.hasPhase('Forsterite')
 ```
+
+Between Forsterite and Enstatite:
+
+```python
+ind = gB.hasPhase('Forsterite', 'Enstatite')
+```
+
+Between two indexed measurements:
+
+```python
+ind = gB.hasPhase('indexed')
+```
+
+A phase is named by its mineral or its phase id. Without a phase of that name in the list,
+'indexed' takes the segments between two indexed measurements and 'notIndexed' the others,
+those with a not indexed side or with the rim of the scan on one. gB['Forsterite'] selects
+by this.
+
+## Input
+
+| | |
+|---|---|
+| `gB` | grainBoundary |
+| `a` | the first phase, a mineral name or a phase id |
+
+## Output
+
+| | |
+|---|---|
+| `ind` | a boolean per segment |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `b` | `None` | the second phase; the segments with a on either side when not given |
+
+## See also
+
+[grainBoundary.flip](grainBoundary.flip_py.html), [grainBoundary.isTwinning](grainBoundary.isTwinning_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L315">source</a></font>
 {% endraw %}

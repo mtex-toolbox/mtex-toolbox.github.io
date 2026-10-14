@@ -17,5 +17,5 @@ the colour of every phase of a list
 phasePalette(pl)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L294">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L371">source</a></font>
 {% endraw %}

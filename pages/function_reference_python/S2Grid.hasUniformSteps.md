@@ -14,5 +14,5 @@ A property of [S2Grid](S2Grid_index_py.html).
 whether the polar ladder and every ring of more than one point have uniform steps, so that the
 nearest point is found by arithmetic
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L172">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L188">source</a></font>
 {% endraw %}

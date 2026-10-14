@@ -19,5 +19,5 @@ the halfwidth in closed form, acos(1 - log(2) / kappa)
 fibreVonMisesFisherKernel.halfwidth(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L601">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L671">source</a></font>
 {% endraw %}

@@ -107,5 +107,5 @@ means for antipodal directions; cId has the shape of the input.
 
 MATLAB's [orientation.calcCluster](orientation.calcCluster.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/cluster.py#L177">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/cluster.py#L194">source</a></font>
 {% endraw %}

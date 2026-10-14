@@ -23,5 +23,5 @@ dislocationSystem.rotate(self, rot)
 
 MATLAB's [dislocationSystem.rotate](dislocationSystem.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L435">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L686">source</a></font>
 {% endraw %}

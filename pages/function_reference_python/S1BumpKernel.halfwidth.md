@@ -19,5 +19,5 @@ the halfwidth, the half length delta of the interval
 S1BumpKernel.halfwidth(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1111">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1237">source</a></font>
 {% endraw %}

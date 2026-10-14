@@ -26,5 +26,5 @@ grain2d.paris(self)
 
 MATLAB's [grain2d.paris](grain2d.paris.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L152">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L168">source</a></font>
 {% endraw %}

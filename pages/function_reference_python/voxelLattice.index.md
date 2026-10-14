@@ -19,5 +19,5 @@ the real index of positions: integer on the voxel centres
 voxelLattice.index(self, P)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L92">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L105">source</a></font>
 {% endraw %}

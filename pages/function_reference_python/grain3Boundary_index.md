@@ -24,11 +24,11 @@ the grains, voxels and phases on their two sides and the misrotation across: gra
 | [diameter](grain3Boundary.diameter_py.html) | the largest distance between two corners of every face |
 | [edges](grain3Boundary.edges_py.html) | the edges of a triangulated boundary, sorted pairs of vertices, and the three edges of every face |
 | [F](grain3Boundary.F_py.html) | the triangles as an (m, 3) array, a polygonal boundary as a list of index arrays |
-| [flip](grain3Boundary.flip_py.html) | the two sides exchanged, of all faces or a selection, as MATLAB's flip |
-| [flipN](grain3Boundary.flipN_py.html) | the faces turned round: the corners in the reverse order, the normals the other way |
+| [flip](grain3Boundary.flip_py.html) | the boundary faces with their two sides exchanged, of all faces or a selection |
+| [flipN](grain3Boundary.flipN_py.html) | the boundary faces turned round, their normals pointing the other way |
 | [grain3Boundary](grain3Boundary.grain3Boundary_py.html) | the faces between the grains of a volume, triangles or polygons over the vertices allV, with the grains, voxels and phases on their two sides and the misrotation across: grains.boundary |
-| [hasGrain](grain3Boundary.hasGrain_py.html) | whether a face touches a grain, or lies between two |
-| [hasPhase](grain3Boundary.hasPhase_py.html) | the faces with a phase on one side, or between two phases, by name, frame or number |
+| [hasGrain](grain3Boundary.hasGrain_py.html) | the boundary faces of a grain, or between two grains |
+| [hasPhase](grain3Boundary.hasPhase_py.html) | the boundary faces with a phase on one side, or between two phases |
 | [I_FG](grain3Boundary.I_FG_py.html) | faces x grains, the columns the grain ids |
 | [I_VF](grain3Boundary.I_VF_py.html) | the incidence of vertices and faces, a sparse boolean matrix vertices x faces |
 | [I_VG](grain3Boundary.I_VG_py.html) | the incidence of vertices and grains, a sparse boolean matrix vertices x grains |

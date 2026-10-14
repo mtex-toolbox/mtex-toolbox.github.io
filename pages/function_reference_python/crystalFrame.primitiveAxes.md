@@ -20,5 +20,5 @@ rhombohedral axes are primitive already
 crystalFrame.primitiveAxes(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L749">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L870">source</a></font>
 {% endraw %}

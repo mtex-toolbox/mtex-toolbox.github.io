@@ -65,7 +65,7 @@ velocities are in km/s for a stiffness in GPa and a density in g/cm^3.
 
 ## See also
 
-velocity, [stiffnessTensor](stiffnessTensor_index_py.html), [plotPF](SO3Fun.plotPDF_py.html), [WaveVelocities](WaveVelocities_py.html), [CPOSeismicProperties](CPOSeismicProperties_py.html)
+[velocity](complianceTensor.velocity_py.html), [stiffnessTensor](stiffnessTensor_index_py.html), [plotPF](SO3Fun.plotPDF_py.html), [WaveVelocities](WaveVelocities_py.html), [CPOSeismicProperties](CPOSeismicProperties_py.html)
 
 MATLAB's [stiffnessTensor.plotSeismicVelocities](stiffnessTensor.plotSeismicVelocities.html)
 

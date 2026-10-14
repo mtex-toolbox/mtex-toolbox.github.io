@@ -12,13 +12,31 @@ status: Reference
 {% raw %}
 A method of [mtexFigure](mtexFigure_index_py.html).
 
-drawNow(figSize='normal'): the figure resized to a named size of its layout, then drawn
+the figure drawn, resized first when a size is given; MATLAB's drawNow(mtexFig)
 
 ## Syntax
 
+The figure drawn as it is:
+
 ```python
-mtexFigure.drawNow(self, figSize=None)
+mtexFig.drawNow()
 ```
+
+Resized to a named size of its layout:
+
+```python
+mtexFig.drawNow(figSize='large')
+```
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `figSize` | `None` | 'tiny', 'small', 'medium', 'normal', 'large', 'huge', scaling the size the layout gives, or (width, height) in inches; by default the size is kept |
+
+## See also
+
+[mtexFigure](mtexFigure_index_py.html), [saveFigure](saveFigure_py.html)
 
 ## Used on
 
@@ -26,5 +44,5 @@ mtexFigure.drawNow(self, figSize=None)
 
 MATLAB's [mtexFigure.drawNow](mtexFigure.drawNow.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L326">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L412">source</a></font>
 {% endraw %}

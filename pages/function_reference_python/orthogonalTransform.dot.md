@@ -16,9 +16,40 @@ parity; antipodal=False keeps the sign
 
 ## Syntax
 
+|cos(omega/2)|, 0 for different parity:
+
 ```python
-orthogonalTransform.dot(self, other, antipodal=True)
+d = dot(T1, T2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L826">source</a></font>
+With the sign of the quaternions:
+
+```python
+d = dot(T1, T2, antipodal=False)
+```
+
+## Input
+
+| | |
+|---|---|
+| `T1` | orthogonalTransform |
+| `T2` | orthogonalTransform or rotation |
+
+## Output
+
+| | |
+|---|---|
+| `d` | the inner products |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` | `True` | take the absolute value |
+
+## See also
+
+[orthogonalTransform.isclose](orthogonalTransform.isclose_py.html), [rotation.dot](rotation.dot_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1051">source</a></font>
 {% endraw %}

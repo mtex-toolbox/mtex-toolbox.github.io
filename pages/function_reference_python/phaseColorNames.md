@@ -18,5 +18,5 @@ order for an indexed phase, None for a not indexed one without a colour
 phaseColorNames(frames)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L185">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L198">source</a></font>
 {% endraw %}

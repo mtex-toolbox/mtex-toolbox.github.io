@@ -13,5 +13,5 @@ A property of [grain3Boundary](grain3Boundary_index_py.html).
 
 the unit normal of every face, NaN for a face of no area
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L181">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L236">source</a></font>
 {% endraw %}

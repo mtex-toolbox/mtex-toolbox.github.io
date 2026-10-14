@@ -12,21 +12,47 @@ status: Reference
 A method of [axisAngleColorKey](axisAngleColorKey_index_py.html).
 
 the colours of orientations: the axis of the rotation from the reference through the key of
-the sphere, its angle as the saturation, NaN above thresholdAngle; the reference given here
-takes the place of the key's
+the sphere, its angle as the saturation, NaN above thresholdAngle
 
 ## Syntax
 
+From the key's reference:
+
 ```python
 rgb = key.orientation2color(ori)
+```
+
+From a reference given here:
+
+```python
 rgb = key.orientation2color(ori, oriRef)
 ```
 
-## Signature
+The saturation is full at the key's maxAngle, by default the 80th percentile of the angles
+of ori. Without any reference the identity is the reference, so the colour shows the
+rotation itself.
 
-```python
-axisAngleColorKey.orientation2color(self, ori, oriRef=None)
-```
+## Input
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L267">source</a></font>
+| | |
+|---|---|
+| `ori` | orientation |
+
+## Output
+
+| | |
+|---|---|
+| `rgb` | (..., 3) array of colours, NaN above thresholdAngle and for an unmeasured orientation |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `oriRef` | `None` | one reference orientation, or one per orientation, in place of the key's |
+
+## See also
+
+[axisAngleColorKey](axisAngleColorKey_index_py.html), [ipfColorKey.orientation2color](ipfColorKey.orientation2color_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L281">source</a></font>
 {% endraw %}

@@ -22,7 +22,7 @@ fill(x, *args, **kwargs)
 | | |
 |---|---|
 | [EBSD](EBSD.fill_py.html) | the map with every pixel that carries no measurement filled, the measured ones left as they are |
-| [EBSD3](EBSD3.fill_py.html) | the empty voxels, padding and not indexed, given the phase, orientation and properties of the nearest measured voxel |
+| [EBSD3](EBSD3.fill_py.html) | the empty voxels of a volume filled from their nearest measured voxel |
 
 ## Used on
 

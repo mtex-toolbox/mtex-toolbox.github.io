@@ -74,5 +74,5 @@ further keywords go to matplotlib's plot.
 
 MATLAB's [S1Fun.plot](S1Fun.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polarplot.py#L118">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polarplot.py#L147">source</a></font>
 {% endraw %}

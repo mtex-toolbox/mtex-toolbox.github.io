@@ -76,5 +76,5 @@ hemisphere and no restrict2MinMax.
 
 MATLAB's [regularS2Grid](regularS2Grid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L345">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L379">source</a></font>
 {% endraw %}

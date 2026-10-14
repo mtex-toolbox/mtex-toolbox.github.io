@@ -12,35 +12,58 @@ status: Reference
 {% raw %}
 A method of [EBSD3](EBSD3_index_py.html).
 
-the section through a plane: the volume sampled on a square grid of the voxel spacing in
-the plane, spanned by the direction of the box nearest to the plane and the one across; the
-plane is a plane3d, or its normal with a point on it or its distance from the origin
+the 2D map of the section of a volume through a plane; MATLAB's slice of EBSD3
 
 ## Syntax
 
-```python
-ebsd = ebsd3.slice(plane3d(vector3d.Z, vector3d(0, 0, 0.15)))
-```
-
-Normal and point:
+A plane3d:
 
 ```python
-ebsd = ebsd3.slice(vector3d(1, 1, 1), vector3d(0, 0, 0))
+ebsd = ebsd3.slice(plane3d(vector3d.Z, vector3d(0, 0, 2)))
 ```
 
-Normal and distance:
+Normal and a point on the plane:
 
 ```python
-ebsd = ebsd3.slice(vector3d.Z, 0.15)
+ebsd = ebsd3.slice(vector3d(1, 1, 1), vector3d(1, 1, 2))
 ```
 
-## Signature
+Normal and distance from the origin:
 
 ```python
-EBSD3.slice(self, plane, P0=None)
+ebsd = ebsd3.slice(vector3d.Z, 2.5)
 ```
+
+The volume is sampled on a square grid of the voxel spacing in the plane, spanned by the
+edge of the bounding box that lies most in the plane and the direction across it, the
+grid covering the section of the box. Every grid point takes the voxel holding it, as
+interp does; the points outside the volume are not indexed. The result is a gridded EBSD
+map whose positions lie in the plane.
+
+## Input
+
+| | |
+|---|---|
+| `ebsd3` | EBSD3 |
+| `plane` | plane3d, or the normal vector3d of the plane |
+
+## Output
+
+| | |
+|---|---|
+| `ebsd` | EBSD, a gridded map in the plane |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `P0` | `None` | with a normal: a point on the plane, a vector3d, or its distance from the origin; by default the plane through the origin |
+
+## See also
+
+[EBSD3.interp](EBSD3.interp_py.html), [grain3d.slice](grain3d.slice_py.html), [plane3d](plane3d_index_py.html), [EBSD3Plotting](EBSD3Plotting_py.html)
 
 MATLAB's [EBSD3.slice](EBSD3.slice.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L233">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L252">source</a></font>
 {% endraw %}

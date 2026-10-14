@@ -38,13 +38,13 @@ grain3d.load('grains.dream3d')
 | [histogram](grain3d.histogram_py.html) | histogram(grains), histogram(grains, prop, bins): the area weighted distribution of a grain property as one histogram per indexed phase, drawn over each other, or with grouped=True side by side (MATLAB's hist) |
 | [id2ind](grain3d.id2ind_py.html) | the position of grain ids |
 | [indexedPhaseId](grain3d.indexedPhaseId_py.html) | the ids of the indexed phases among the grains |
-| [intersected](grain3d.intersected_py.html) | whether a plane runs through a grain: vertices of it on both sides |
+| [intersected](grain3d.intersected_py.html) | whether a plane runs through a grain |
 | [isIndexed](grain3d.isIndexed_py.html) | whether the phase of every grain is indexed |
 | [load](grain3d.load_py.html) | grain3d.load('grains.dream3d'), grain3d.load('grains.tess', CS=cs) |
 | [meanOrientation](grain3d.meanOrientation_py.html) | the mean orientations of the grains, which must be of one phase |
 | [midPoint](grain3d.midPoint_py.html) | the largest distance between two vertices of every grain, on MATLAB's rounding to 1e-4 the centre of the box of the vertices, as MATLAB's midPoint |
 | [mineralList](grain3d.mineralList_py.html) | the names of the phases of the phase list |
-| [neighbors](grain3d.neighbors_py.html) | the pairs of neighbouring grains, each sorted, among the grains of the set or with full all pairs any of them has |
+| [neighbors](grain3d.neighbors_py.html) | the ids of neighbouring grains |
 | [numFaces](grain3d.numFaces_py.html) | the number of faces of every grain |
 | [numNeighbors](grain3d.numNeighbors_py.html) | the number of neighbouring grains of every grain |
 | [orientFaces](grain3d.orientFaces_py.html) | the faces turned consistently around every grain, the normals out of it, as MATLAB's orientFaces |
@@ -55,7 +55,7 @@ grain3d.load('grains.dream3d')
 | [refineBoundary](grain3d.refineBoundary_py.html) | the grains with their triangulated boundary refined, every triangle split into four at the midpoints of its edges, n times |
 | [rotate](grain3d.rotate_py.html) | the grains turned about a centre, their faces and their orientations |
 | [size](grain3d.size_py.html) | the number of grains |
-| [slice](grain3d.slice_py.html) | the 2D grains a plane cuts from the grains, as MATLAB's slice |
+| [slice](grain3d.slice_py.html) | the 2D grains a plane cuts from 3D grains |
 | [smoothBoundary](grain3d.smoothBoundary_py.html) | the grains with their boundary surfaces smoothed, hierarchically: the triple lines along themselves first, then the faces |
 | [subsref](grain3d.subsref_py.html) |  |
 | [surface](grain3d.surface_py.html) | MATLAB's name for the surface area |

@@ -114,7 +114,7 @@ largest degree.
 | [plus](S2VectorFieldHarmonic.plus_py.html) |  |
 | [quadrature](S2VectorFieldHarmonic.quadrature_py.html) | S2VectorFieldHarmonic.quadrature(f, bandwidth=L), from a callable or from nodes and values with their weights, MATLAB's name for the constructor |
 | [quiver3](S2VectorField.quiver3_py.html) | arrows in space: tangent vectors in orientation space, a field on the sphere or SO(3), or arrows at positions |
-| [quiver](S2VectorField.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
+| [quiver](S2VectorField.quiver_py.html) | arrows: tangent vectors at directions, a vector or axis field on the sphere, arrows at orientations in the sections of the current figure, or directions on a map or a volume |
 | [quiverSection](S2VectorField.quiverSection_py.html) | arrows on a section plot: of a function on the sphere along one of its circles, or at orientations in the sections of orientation space |
 | [rdivide](S2VectorFieldHarmonic.rdivide_py.html) |  |
 | [rotate](S2VectorFieldHarmonic.rotate_py.html) | v'(xi) = r v(r^-1 xi): the components rotate and mix |

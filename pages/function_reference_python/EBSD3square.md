@@ -65,5 +65,5 @@ ebsd.isGridded; MATLAB passes the positions and the phaseMap too.
 
 [EBSD3](EBSD3_index_py.html), [EBSDsquare](EBSDsquare_py.html), [voxelLattice](voxelLattice_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L296">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L330">source</a></font>
 {% endraw %}

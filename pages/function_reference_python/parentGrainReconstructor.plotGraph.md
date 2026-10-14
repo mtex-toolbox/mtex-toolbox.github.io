@@ -27,5 +27,5 @@ parentGrainReconstructor.plotGraph(job, **kwargs)
 
 MATLAB's [parentGrainReconstructor.plotGraph](parentGrainReconstructor.plotGraph.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L217">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L279">source</a></font>
 {% endraw %}

@@ -19,5 +19,5 @@ the distinct nodes, MATLAB's grid(:)
 quadratureSO3Grid.flatten(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L213">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L244">source</a></font>
 {% endraw %}

@@ -27,5 +27,5 @@ rgb = ipfKey.orientation2color(ebsd['Fo'].orientations)
 ipfColorKey.orientation2color(self, ori)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L108">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L122">source</a></font>
 {% endraw %}

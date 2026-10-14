@@ -23,5 +23,5 @@ tensor.polar(self)
 
 MATLAB's [tensor.polar](tensor.polar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L549">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L566">source</a></font>
 {% endraw %}

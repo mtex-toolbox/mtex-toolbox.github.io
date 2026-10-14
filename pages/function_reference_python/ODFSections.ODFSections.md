@@ -32,5 +32,5 @@ ODFSections(frameA, frameB, values, tol)
 
 MATLAB's [ODFSections.ODFSections](ODFSections.ODFSections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L77">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L95">source</a></font>
 {% endraw %}

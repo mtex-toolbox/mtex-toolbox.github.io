@@ -16,5 +16,5 @@ the reciprocal axes a*, b*, c*, MATLAB's axesDual
 
 MATLAB's [crystalSymmetry.axesDual](crystalSymmetry.axesDual.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L762">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L883">source</a></font>
 {% endraw %}

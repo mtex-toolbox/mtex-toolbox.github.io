@@ -19,5 +19,5 @@ the orientations at axes vs rotated by the angle of section k
 axisAngleSections.orientationsAt(self, k, vs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L558">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L642">source</a></font>
 {% endraw %}

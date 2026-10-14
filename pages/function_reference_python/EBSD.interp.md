@@ -71,5 +71,5 @@ the orientations are interpolated.
 
 MATLAB's [EBSD.interp](EBSD.interp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L494">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L512">source</a></font>
 {% endraw %}

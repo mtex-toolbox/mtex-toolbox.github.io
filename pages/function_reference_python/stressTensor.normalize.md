@@ -22,5 +22,5 @@ stressTensor.normalize(self)
 
 MATLAB's [stressTensor.normalize](stressTensor.normalize.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L404">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L421">source</a></font>
 {% endraw %}

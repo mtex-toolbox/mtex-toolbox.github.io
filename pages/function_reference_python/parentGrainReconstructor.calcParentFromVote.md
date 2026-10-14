@@ -88,5 +88,5 @@ fits, as MATLAB's code does, not probabilities, as its help says.
 
 MATLAB's [parentGrainReconstructor.calcParentFromVote](parentGrainReconstructor.calcParentFromVote.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L904">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L936">source</a></font>
 {% endraw %}

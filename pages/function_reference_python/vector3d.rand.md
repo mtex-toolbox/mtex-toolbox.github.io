@@ -41,13 +41,38 @@ Uniform in the region sR:
 v = vector3d.rand(100, sR)
 ```
 
-## Signature
+Reproducible:
 
 ```python
-vector3d.rand(*shape, antipodal=False, rng=None)
+v = vector3d.rand(100, rng=np.random.default_rng(0))
 ```
+
+In a region the uniform vectors outside it are rejected until enough are left.
+
+## Input
+
+| | |
+|---|---|
+| `shape` | the sizes of the array, one tuple or several integers, and a sphericalRegion as the last argument |
+
+## Output
+
+| | |
+|---|---|
+| `v` | vector3d of unit vectors |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` | `False` | the vectors as axes |
+| `rng` | `None` | the NumPy random generator, a fresh one by default |
+
+## See also
+
+[rotation.rand](rotation.rand_py.html), [equispacedS2Grid](equispacedS2Grid_py.html)
 
 MATLAB's [vector3d.rand](vector3d.rand.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L424">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L438">source</a></font>
 {% endraw %}

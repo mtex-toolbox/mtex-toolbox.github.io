@@ -19,5 +19,5 @@ the Laplace-Beltrami operator applied to the function, the degree l scaled by -l
 S2FunHarmonic.laplace(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L532">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L704">source</a></font>
 {% endraw %}

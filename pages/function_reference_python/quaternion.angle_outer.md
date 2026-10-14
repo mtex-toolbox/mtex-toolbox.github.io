@@ -17,10 +17,34 @@ keep their digits near 0 and pi
 
 ## Syntax
 
+The rotational angle:
+
 ```python
 omega = angle(q)
+```
+
+The angle of q1^-1 q2, between the two:
+
+```python
 omega = angle(q1, q2)
 ```
+
+## Input
+
+| | |
+|---|---|
+| `q` | quaternion |
+| `other` | quaternion, the second one; the angle is that of the rotation from one to the other |
+
+## Output
+
+| | |
+|---|---|
+| `omega` | the angles in radians |
+
+## See also
+
+[quaternion.axis](quaternion.axis_py.html), [quaternion.dot](quaternion.dot_py.html), [orientation.angle](orientation.angle_py.html)
 
 ## Signature
 
@@ -30,5 +54,5 @@ quaternion.angle_outer(self, other=None)
 
 MATLAB's [quaternion.angle_outer](quaternion.angle_outer.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L214">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L240">source</a></font>
 {% endraw %}

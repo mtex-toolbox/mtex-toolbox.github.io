@@ -21,7 +21,7 @@ reduceBoundary(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [grain2d](grain2d.reduceBoundary_py.html) | the grains thin, simplify or refine their boundary and keep their inner boundary on it |
+| [grain2d](grain2d.reduceBoundary_py.html) | the grains with every n-th vertex of their boundary kept along each chain, whatever the shape, the inner boundary kept on it |
 | [grain3d](grain3d.reduceBoundary_py.html) | the grains with their triangulated boundary coarsened, the vertices within cells of n edges merged |
 
 ## Used on

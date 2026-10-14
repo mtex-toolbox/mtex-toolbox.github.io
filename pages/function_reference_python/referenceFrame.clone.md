@@ -19,5 +19,5 @@ an unsealed copy of the frame, not registered
 referenceFrame.clone(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L256">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L281">source</a></font>
 {% endraw %}

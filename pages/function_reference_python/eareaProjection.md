@@ -14,5 +14,5 @@ the equal area, Schmidt, projection: r = 2 sin(theta / 2)
 
 MATLAB's [eareaProjection](eareaProjection.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L256">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L303">source</a></font>
 {% endraw %}

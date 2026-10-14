@@ -25,5 +25,5 @@ SO3F = abs(SO3F)
 SO3FunHarmonic.abs(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L445">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L475">source</a></font>
 {% endraw %}

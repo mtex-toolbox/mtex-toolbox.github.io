@@ -19,5 +19,5 @@ the mean over the sphere, through the harmonic form
 S2FunHandle.mean(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L489">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L551">source</a></font>
 {% endraw %}

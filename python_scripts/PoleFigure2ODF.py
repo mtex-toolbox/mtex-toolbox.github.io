@@ -47,7 +47,7 @@ plot(pf)
 # ## Reconstruct an ODF
 #
 # With no options, `calcODF` uses MTEX's modified least-squares solver and automatic ghost
-# correction. `silent=False` shows the fit error of every pole figure after each
+# correction. `verbose=True` shows the fit error of every pole figure after each
 # iteration, as MATLAB prints it by default.
 
 # %%
@@ -260,7 +260,7 @@ print(f'Zero range: {zeroTime:.2f} s, peak {zeroPeak:.1f} mrd, mean RP {meanZero
 # %% [markdown]
 # ## Technical Details
 #
-# `calcODF` is silent unless `silent=False` is given; MATLAB prints the trace unless
+# `calcODF` is silent unless `verbose=True` is given; MATLAB prints the trace unless
 # `'silent'` is given. The RP threshold is the keyword `epsilon`, MATLAB's number after
 # `'RP'`. `max(odf)` returns the pair of the value and the orientation, so the peak is its
 # first element and the mode its second.

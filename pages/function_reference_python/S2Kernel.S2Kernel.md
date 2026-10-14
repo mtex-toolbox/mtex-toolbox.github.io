@@ -20,5 +20,5 @@ S2Kernel(A)
 
 MATLAB's [S2Kernel.S2Kernel](S2Kernel.S2Kernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L639">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L709">source</a></font>
 {% endraw %}

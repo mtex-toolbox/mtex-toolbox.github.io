@@ -23,5 +23,5 @@ vector3d.load(fname, *args, **kwargs)
 
 MATLAB's [vector3d.load](vector3d.load.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L376">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L378">source</a></font>
 {% endraw %}

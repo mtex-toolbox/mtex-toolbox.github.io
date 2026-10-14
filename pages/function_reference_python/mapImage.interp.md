@@ -12,16 +12,58 @@ status: Reference
 {% raw %}
 A method of [mapImage](mapImage_index_py.html).
 
-the image values at positions: bilinear on the grid by default, 'nearest' or 'cubic';
-outside the grid NaN, or the nearest border value with extrapolationMethod='nearest'
+the image values at arbitrary positions; MATLAB's mapImage.interp
 
 ## Syntax
 
+Bilinear, NaN outside the grid:
+
 ```python
-mapImage.interp(self, pos, method='linear', extrapolationMethod='none')
+v = mg.interp(pos)
 ```
+
+The value of the pixel covering it:
+
+```python
+v = mg.interp(pos, 'nearest')
+```
+
+The nearest border value outside:
+
+```python
+v = mg.interp(pos, extrapolationMethod='nearest')
+```
+
+The positions reduce to fractional rows and columns of the regular grid, which are
+interpolated: 'linear' bilinearly, 'nearest' by the covering pixel, and 'cubic', 'spline' or
+'makima' through SciPy's RegularGridInterpolator (cubic, quintic and pchip). Resampling onto
+another grid is this at the positions of the target.
+
+## Input
+
+| | |
+|---|---|
+| `mg` | mapImage |
+| `pos` | vector3d, or an (..., 2) or (..., 3) array of positions |
+
+## Output
+
+| | |
+|---|---|
+| `v` | array of the shape of pos, with the channels as a last axis when there are several |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `method` | `'linear'` | 'linear', 'nearest', 'cubic', 'spline' or 'makima' |
+| `extrapolationMethod` | `'none'` | 'none', NaN outside the grid, or 'nearest', the border value |
+
+## See also
+
+[mapImage.pos2ind](mapImage.pos2ind_py.html), [EBSD.interp](EBSD.interp_py.html)
 
 MATLAB's [mapImage.interp](mapImage.interp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L243">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L261">source</a></font>
 {% endraw %}

@@ -11,13 +11,62 @@ status: Reference
 {% raw %}
 A method of [grain3Boundary](grain3Boundary_index_py.html).
 
-the faces with a phase on one side, or between two phases, by name, frame or number
+the boundary faces with a phase on one side, or between two phases; MATLAB's hasPhase
+of the boundaries
 
 ## Syntax
 
+A face of an Iron grain:
+
 ```python
-grain3Boundary.hasPhase(self, a, b=None)
+ind = gB.hasPhase('Iron')
 ```
+
+Between two Iron grains:
+
+```python
+ind = gB.hasPhase('Iron', 'Iron')
+```
+
+At the outside or a not indexed region:
+
+```python
+ind = gB.hasPhase('notIndexed')
+```
+
+A phase by its number:
+
+```python
+ind = gB.hasPhase(1)
+```
+
+A phase is given by its mineral name, its crystal frame or its number in gB.CSList.
+'indexed', when no mineral has the name, selects the faces with both sides indexed and
+'notIndexed' the others, those with a side of phase 0: the outside of the volume or a not
+indexed region.
+
+## Input
+
+| | |
+|---|---|
+| `gB` | grain3Boundary |
+| `a` | a phase: mineral name, crystalFrame or phase number |
+
+## Output
+
+| | |
+|---|---|
+| `ind` | boolean mask of the faces |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `b` | `None` | a second phase: the faces between a and b |
+
+## See also
+
+[grain3Boundary.hasGrain](grain3Boundary.hasGrain_py.html), [grainBoundary.hasPhase](grainBoundary.hasPhase_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L130">source</a></font>
 {% endraw %}

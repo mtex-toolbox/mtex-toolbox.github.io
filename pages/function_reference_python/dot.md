@@ -22,7 +22,7 @@ dot(x, *args, **kwargs)
 | | |
 |---|---|
 | [embedding](embedding.dot_py.html) | the inner product of two embeddings of the same crystal frame, image by image |
-| [orientation](orientation.dot_py.html) | the reduced dot product and the disorientation angle, over the groups of both frames |
+| [orientation](orientation.dot_py.html) | the dot product up to symmetry, cos(omega/2) of the misorientation angle omega reduced over the groups of both frames |
 | [orthogonalTransform](orthogonalTransform.dot_py.html) | the inner product of the rotational parts up to sign, zero between transforms of different parity |
 | [quaternion](quaternion.dot_py.html) | the inner product of the coefficients |
 | [rotation](rotation.dot_py.html) | the inner product up to sign, since q and -q are one rotation |
@@ -31,7 +31,7 @@ dot(x, *args, **kwargs)
 | [S2FunHarmonic](S2FunHarmonic.dot_py.html) | the inner product with another function of the same frame, for the normalised surface measure: int conj(f) g dS / 4 pi |
 | [S2VectorFieldHarmonic](S2VectorFieldHarmonic.dot_py.html) | the inner product with a constant vector, exact, a function without the group |
 | [SO3FunHarmonic](SO3FunHarmonic.dot_py.html) | the inner product int conj(f) g, the first argument conjugated |
-| [SO3Grid](SO3Grid.dot_outer_py.html) | the reduced dot product and the disorientation angle, over the groups of both frames |
+| [SO3Grid](SO3Grid.dot_outer_py.html) | the dot product up to symmetry, cos(omega/2) of the misorientation angle omega reduced over the groups of both frames |
 | [SO3TangentVector](SO3TangentVector.dot_py.html) | the inner product with tangent vectors at the same reference, brought to this side |
 | [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic.dot_py.html) | the inner product with a constant vector, exact, a function on the component frames |
 | [SO3VectorFieldRBF](SO3VectorFieldRBF.dot_py.html) | the pointwise inner product: with another field a function on SO(3), with a constant vector a function on the component frames |

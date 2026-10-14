@@ -15,9 +15,39 @@ the exponential of the function, by quadrature at twice the bandwidth, or at the
 
 ## Syntax
 
+At twice the bandwidth:
+
 ```python
-SO3FunHarmonic.exp(self, bandwidth=None)
+SO3F = exp(SO3F)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L456">source</a></font>
+At a bandwidth of its own:
+
+```python
+SO3F = SO3F.exp(bandwidth=8)
+```
+
+## Input
+
+| | |
+|---|---|
+| `SO3F` | SO3FunHarmonic |
+
+## Output
+
+| | |
+|---|---|
+| `SO3F` | SO3FunHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `bandwidth` | `None` | the bandwidth of the result; twice that of the function by default |
+
+## See also
+
+[SO3FunHarmonic.log](SO3FunHarmonic.log_py.html), [SO3FunHarmonic.sqrt](SO3FunHarmonic.sqrt_py.html), [mapFun](mapFun_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L501">source</a></font>
 {% endraw %}

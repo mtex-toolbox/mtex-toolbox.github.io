@@ -18,5 +18,5 @@ mask over the faces, one row per shape of a list
 visibleFaces(cS, view)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L183">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L261">source</a></font>
 {% endraw %}

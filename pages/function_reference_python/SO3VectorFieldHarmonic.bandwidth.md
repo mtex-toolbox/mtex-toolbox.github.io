@@ -13,5 +13,5 @@ A property of [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html).
 
 the bandwidth, the largest degree of the component expansions
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L418">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L517">source</a></font>
 {% endraw %}

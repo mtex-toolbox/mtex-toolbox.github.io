@@ -92,5 +92,5 @@ point at the pole, not MATLAB's centre direction.
 
 MATLAB's [equispacedS2Grid](equispacedS2Grid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L232">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L266">source</a></font>
 {% endraw %}

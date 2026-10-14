@@ -16,18 +16,45 @@ the L2 norm, or the Sobolev norm sqrt(sum (2n+1)^{2s} |fhat_n|^2)
 
 ## Syntax
 
+The L2 norm, the texture index:
+
 ```python
 t = norm(SO3F)
+```
+
+The Sobolev norm of index 1:
+
+```python
 t = norm(SO3F, s=1)
 ```
 
-## Signature
+By Parseval's equality the L2 norm sqrt(1/(8 pi^2) int |f(R)|^2 dR) is the Euclidean norm of
+the Wigner coefficients, the Wigner functions being normalised; MATLAB calls it the texture
+index. With a Sobolev index s every degree n is weighted by (2n+1)^{2s}.
 
-```python
-SO3FunHarmonic.norm(self, s=None)
-```
+## Input
+
+| | |
+|---|---|
+| `SO3F` | SO3FunHarmonic, a single function or a list |
+
+## Output
+
+| | |
+|---|---|
+| `t` | float, or an array of the shape of the list |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `s` | `None` | the Sobolev index; None or 0 for the L2 norm |
+
+## See also
+
+[SO3FunHarmonic.mean](SO3FunHarmonic.mean_py.html), [textureIndex](textureIndex_py.html)
 
 MATLAB's [SO3FunHarmonic.norm](SO3FunHarmonic.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L486">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L580">source</a></font>
 {% endraw %}

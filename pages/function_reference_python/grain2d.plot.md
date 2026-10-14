@@ -91,7 +91,7 @@ every other keyword goes to the matplotlib artist.
 | | |
 |---|---|
 | `grains` | grain2d |
-| `color` | the colouring: an array of values or of RGB colours, orientations, an orientationColorKey, a crystalShape, a vector3d per grain, a property name, 'phase' or one colour |
+| `color` | the colouring: an array of values or of RGB colours, orientations, an orientationColorKey, a crystalShape, a vector3d per grain, the name of a property or of a measure ('area', 'aspectRatio', ...), 'phase' or one colour |
 
 ## Output
 
@@ -125,5 +125,5 @@ every other keyword goes to the matplotlib artist.
 
 MATLAB's [grain2d.plot](grain2d.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L586">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L625">source</a></font>
 {% endraw %}

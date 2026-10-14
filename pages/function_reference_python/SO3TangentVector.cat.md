@@ -17,6 +17,8 @@ every list shares the same one
 
 ## Syntax
 
+One after the other:
+
 ```python
 v = cat(v1, v2)
 ```
@@ -27,11 +29,29 @@ Side by side:
 v = cat(v1, v2, axis=1)
 ```
 
-## Signature
+The vectors are brought to the side of the first operand.
 
-```python
-SO3TangentVector.cat(*arrays, axis=0)
-```
+## Input
+
+| | |
+|---|---|
+| `arrays` | SO3TangentVector |
+
+## Output
+
+| | |
+|---|---|
+| `v` | SO3TangentVector |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `axis` | `0` | the axis along which they are joined, as NumPy's concatenate |
+
+## See also
+
+[SO3TangentVector](SO3TangentVector_index_py.html), [vector3d.cat](vector3d.cat_py.html)
 
 MATLAB's [SO3TangentVector.cat](SO3TangentVector.cat.html)
 

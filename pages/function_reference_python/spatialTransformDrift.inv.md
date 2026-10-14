@@ -19,5 +19,5 @@ the inverse by fixed point iteration
 spatialTransformDrift.inv(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L554">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L603">source</a></font>
 {% endraw %}

@@ -11,21 +11,56 @@ status: Reference
 {% raw %}
 A method of [referenceFrame](referenceFrame_index_py.html).
 
-the elements of the point group of a frame drawn on the upper hemisphere: the mirror planes as
-great circles, the rotation and rotoinversion axes as polygons of their order; plot(cs)
+the elements of the point group of a frame drawn on the upper hemisphere, as the
+international tables draw them; MATLAB's referenceFrame.plot
 
 ## Syntax
 
+The symmetry elements:
+
 ```python
 plot(cs)
+```
+
+Larger symbols, thinner mirrors:
+
+```python
 plot(cs, symbolSize=2, mirrorLineWidth=1.5)
 ```
 
-## Signature
+The same by name:
 
 ```python
-referenceFrame.plot(fr, symbolSize=None, mirrorLineWidth=2.5, **kw)
+plotSymmetry(crystalFrame('-3m'))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1042">source</a></font>
+A mirror plane is a great circle, an n-fold rotation axis a filled polygon of n corners (a
+lens for a twofold), a rotoinversion axis a hollow one around the polygon of its proper
+part, and the inversion of a Laue group a hollow circle at the centre. The projection
+follows the keywords of the spherical plots.
+
+## Input
+
+| | |
+|---|---|
+| `fr` | crystalFrame or specimenFrame |
+
+## Output
+
+| | |
+|---|---|
+| `sP` | the spherical plot drawn into |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `symbolSize` | `None` | a factor on the size of the symbols, by default a third of the chart's extent |
+| `mirrorLineWidth` | `2.5` | the width of the great circles of the mirror planes |
+
+## See also
+
+[plotHKL](crystalSymmetry.plotHKL_py.html), [crystalFrame](crystalFrame_index_py.html), [fundamentalSector](fundamentalSector_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1111">source</a></font>
 {% endraw %}

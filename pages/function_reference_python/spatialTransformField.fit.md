@@ -15,9 +15,39 @@ the field of the displacements of the point pairs, at the points of frame A
 
 ## Syntax
 
+The displacements as measured:
+
 ```python
-spatialTransformField.fit(posA, posB, weights=None, **kwargs)
+T = spatialTransformField.fit(posA, posB)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L676">source</a></font>
+There is nothing to fit: the field interpolates its samples exactly. The weights only
+drop the points whose weight is not a number, as the points with a missing position are
+dropped, so the same call works on the output of a failed correlation; other keywords are
+accepted and not used.
+
+## Input
+
+| | |
+|---|---|
+| `posA` | vector3d, the positions in frame A |
+| `posB` | vector3d, the same points in frame B |
+
+## Output
+
+| | |
+|---|---|
+| `T` | spatialTransformField |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `weights` | `None` | one weight per point |
+
+## See also
+
+[spatialTransformField](spatialTransformField_index_py.html), [spatialTransformPoly.fit](spatialTransformPoly.fit_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L725">source</a></font>
 {% endraw %}

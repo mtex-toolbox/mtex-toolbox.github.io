@@ -10,14 +10,53 @@ counterpart: vector3d.line.html
 status: Reference
 ---
 {% raw %}
-line(x, y, lineStyle=':', lineWidth=4, color='w'): a polyline in the coordinates of the
-current map, drawn under its layout, MATLAB's line
+a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line
 
 ## Syntax
 
 ```python
-line(x, y, z=None, **kw)
+plot(ebsd)
 ```
+
+A dotted white line across the map:
+
+```python
+line([0, 10000], [0, 5000], lineStyle=':', lineWidth=4, color='w')
+```
+
+A polyline in a 3D scene:
+
+```python
+line(x, y, z)
+```
+
+The points are given in the map's coordinates and placed on the screen as the map is,
+whatever its plotting convention; without a map the line goes into the current axes as
+given. The line is black, solid and 0.5 wide unless the keywords say otherwise; the other
+keywords are matplotlib's. With z the polyline goes into the current 3D scene, NaN
+separating its pieces.
+
+## Input
+
+| | |
+|---|---|
+| `x, y` | the coordinates of the points |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the matplotlib line, or the scene object of a line in space |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `z` | `None` | the third coordinates, a polyline in space |
+
+## See also
+
+[scatterXY](scatterXY_py.html), [text](EBSD.text_py.html), [quiver](ODFSections.quiver_py.html)
 
 ## Used on
 
@@ -25,5 +64,5 @@ line(x, y, z=None, **kw)
 
 MATLAB's [vector3d.line](vector3d.line.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L937">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L985">source</a></font>
 {% endraw %}

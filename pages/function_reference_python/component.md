@@ -17,5 +17,5 @@ component(v, i) is the i-th component of the field v, a function on its componen
 component(v, i)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L661">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L824">source</a></font>
 {% endraw %}

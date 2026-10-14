@@ -17,18 +17,42 @@ MATLAB's sum(odf, d) with d = axis + 1, which for a single function is the funct
 
 ## Syntax
 
+The integral, 8 pi^2 for an ODF:
+
 ```python
 value = sum(odf)
+```
+
+Along an axis of a list, the function itself for one:
+
+```python
 odf = sum(odf, axis=0)
 ```
 
-## Signature
+## Input
 
-```python
-SO3FunRBF.sum(self, axis=None)
-```
+| | |
+|---|---|
+| `odf` | SO3Fun |
+
+## Output
+
+| | |
+|---|---|
+| `value` | the integral, a number |
+| `odf` | the function summed along the axis |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `axis` | `None` | the axis to sum along, a non-negative integer; the integral when None |
+
+## See also
+
+[SO3FunHarmonic.sum](SO3FunHarmonic.sum_py.html), [SO3FunHarmonic.mean](SO3FunHarmonic.mean_py.html)
 
 MATLAB's [SO3FunRBF.sum](SO3FunRBF.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L716">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L778">source</a></font>
 {% endraw %}

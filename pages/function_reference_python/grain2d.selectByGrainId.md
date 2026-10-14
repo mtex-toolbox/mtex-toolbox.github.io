@@ -26,5 +26,5 @@ grain = grains.selectByGrainId(17)
 grain2d.selectByGrainId(self, ids)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L447">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L493">source</a></font>
 {% endraw %}

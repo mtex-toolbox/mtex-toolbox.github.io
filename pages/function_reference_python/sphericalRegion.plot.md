@@ -12,15 +12,50 @@ status: Reference
 {% raw %}
 A method of [sphericalRegion](sphericalRegion_index_py.html).
 
-plot(sR): the outline of a spherical region
+the outline of a spherical region on the charts of the current figure, or of a new one;
+MATLAB's sphericalRegion.plot
 
 ## Syntax
 
+The fundamental sector of a crystal:
+
 ```python
-sphericalRegion.plot(sR, color='k', lineWidth=1.0, **kw)
+plot(cs.fundamentalSector())
 ```
+
+In red, thicker:
+
+```python
+plot(sR, color='r', lineWidth=2)
+```
+
+The boundary is drawn as its arcs at half a degree; lineColor is taken for color, the
+other keywords go to the spherical plots and matplotlib's lines.
+
+## Input
+
+| | |
+|---|---|
+| `sR` | sphericalRegion |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the matplotlib lines |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `color` | `'k'` | the colour of the outline |
+| `lineWidth` | `1.0` | its width |
+
+## See also
+
+[sphericalRegion](sphericalRegion_index_py.html), [fundamentalSector](fundamentalSector_py.html), [plot](S1Grid.plot_py.html)
 
 MATLAB's [sphericalRegion.plot](sphericalRegion.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1265">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1387">source</a></font>
 {% endraw %}

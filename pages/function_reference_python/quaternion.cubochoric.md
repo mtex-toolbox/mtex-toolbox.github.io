@@ -26,5 +26,5 @@ quaternion.cubochoric(self)
 
 MATLAB's [quaternion.cubochoric](quaternion.cubochoric.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L283">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L348">source</a></font>
 {% endraw %}

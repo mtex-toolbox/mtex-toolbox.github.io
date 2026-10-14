@@ -26,5 +26,5 @@ not by how far it is from it rather than by which side it fell on
 
 MATLAB's [gbcSoft](gbcSoft.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L179">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L211">source</a></font>
 {% endraw %}

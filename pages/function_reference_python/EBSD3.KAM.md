@@ -73,5 +73,5 @@ volume holds one indexed phase. The angles are in radian.
 
 MATLAB's [EBSD3.KAM](EBSD3.KAM.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/intragranular3d.py#L92">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/intragranular3d.py#L159">source</a></font>
 {% endraw %}

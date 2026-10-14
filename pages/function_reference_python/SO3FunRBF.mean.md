@@ -22,5 +22,5 @@ SO3FunRBF.mean(self)
 
 MATLAB's [SO3FunRBF.mean](SO3FunRBF.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L255">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L272">source</a></font>
 {% endraw %}

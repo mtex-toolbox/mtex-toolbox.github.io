@@ -39,5 +39,5 @@ colon(A, B)
 
 MATLAB's [complianceTensor.colon](complianceTensor.colon.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1003">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1117">source</a></font>
 {% endraw %}

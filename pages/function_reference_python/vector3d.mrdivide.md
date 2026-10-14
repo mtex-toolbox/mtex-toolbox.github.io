@@ -22,5 +22,5 @@ a / b
 
 MATLAB's [vector3d.mrdivide](vector3d.mrdivide.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L632">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L660">source</a></font>
 {% endraw %}

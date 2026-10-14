@@ -14,15 +14,51 @@ A method of [grainBoundary](grainBoundary_index_py.html).
 
 the signed curvature of every segment: the Menger curvature through the midpoints of a
 segment and its two neighbours along the chain, smoothed by a binomial filter along
-it; positive where the boundary bulges into grainId[:, 1]
+it; positive where the boundary bulges into grainId[:, 1]; MATLAB's grainBoundary.curvature
 
 ## Syntax
 
+Smoothed 50 times:
+
 ```python
-grainBoundary.curvature(self, n=50)
+kappa = gB.curvature()
 ```
+
+Smoothed twice:
+
+```python
+kappa = gB.curvature(2)
+```
+
+The segments are stored in walk order with the grain grainId[:, 0] on the left, so the sign
+says into which grain the boundary bulges. To read it as convex or concave with respect to
+one grain, put that grain first throughout, gB.flip(gB.grainId[:, 1] == id). A segment at
+the end of an open chain has a neighbour on one side only and is NaN, as is a chain of one
+segment; a closed chain wraps around.
+
+## Input
+
+| | |
+|---|---|
+| `gB` | grainBoundary |
+
+## Output
+
+| | |
+|---|---|
+| `kappa` | one over the radius of the fitted circle, in the units of the map, per segment |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `n` | `50` | the number of passes of the binomial filter along the chain |
+
+## See also
+
+[grainBoundary.flip](grainBoundary.flip_py.html), [grainBoundary.calcMeanDirection](grainBoundary.calcMeanDirection_py.html)
 
 MATLAB's [grainBoundary.curvature](grainBoundary.curvature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L408">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L463">source</a></font>
 {% endraw %}

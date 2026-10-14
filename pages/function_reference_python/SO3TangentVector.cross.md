@@ -22,5 +22,5 @@ SO3TangentVector.cross(self, other)
 
 MATLAB's [SO3TangentVector.cross](SO3TangentVector.cross.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L307">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L318">source</a></font>
 {% endraw %}

@@ -20,5 +20,5 @@ coloured white, as MTEX greys such a cell rather than failing the map
 colorGrid.direction2color(self, h)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L425">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L451">source</a></font>
 {% endraw %}

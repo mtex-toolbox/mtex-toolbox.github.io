@@ -12,9 +12,11 @@ status: Reference
 {% raw %}
 A method of [fibre](fibre_index_py.html).
 
-the fibres joined into one list along an axis
+the fibres joined into one list along an axis, MATLAB's [f1, f2]
 
 ## Syntax
+
+One after the other:
 
 ```python
 f = cat(f1, f2)
@@ -26,11 +28,27 @@ Side by side:
 f = cat(f1, f2, axis=1)
 ```
 
-## Signature
+## Input
 
-```python
-fibre.horzcat(*fibres, axis=0)
-```
+| | |
+|---|---|
+| `fibres` | fibre, between the same frames |
+
+## Output
+
+| | |
+|---|---|
+| `f` | fibre |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `axis` | `0` | the axis of the shape along which the fibres are joined |
+
+## See also
+
+[fibre.reshape](fibre.reshape_py.html), [fibre.flatten](fibre.flatten_py.html)
 
 MATLAB's [fibre.horzcat](fibre.horzcat.html)
 

@@ -14,26 +14,77 @@ A method of [SO3FunHarmonic](SO3FunHarmonic_index_py.html).
 
 the maximum of a function on SO(3) or the sphere, the value and the position, numLocal local maxima
 from a grid refined down to the accuracy; with a second function or a number the pointwise
-maximum; with axis= the maximum of a list of functions along an axis
+maximum; with axis= the maximum of a list of functions along an axis; MATLAB's max
 
 ## Syntax
 
+The global maximum and where it is:
+
 ```python
 value, ori = max(odf)
+```
+
+The five largest local maxima:
+
+```python
 values, oris = max(odf, numLocal=5, resolution=5*degree, accuracy=0.25*degree)
+```
+
+The pointwise maximum of two functions:
+
+```python
 f = max(odf1, odf2)
-v, pos = max(sF)                       on the circle, the angle
+```
+
+On the sphere, the direction:
+
+```python
+v, pos = max(sF)
+```
+
+Three local maxima on the sphere:
+
+```python
 values, positions = max(sF, numLocal=3)
+```
+
+The pointwise maximum with a number:
+
+```python
 sF = max(sF, 0.5)
 ```
 
-## Signature
+The local maxima are searched from a grid of the spacing resolution (5 degree on SO(3), 2.5
+on the sphere) and refined down to accuracy (0.25 and 0.05 degree); the keywords
+resolution, accuracy and, on SO(3), startingNodes, the orientations to start from, go to
+that search. Maxima closer than the resolution are merged, so fewer than numLocal can come
+back. A function on the circle and a pole figure take their own max. Where MATLAB writes
+max(SO3F, [], dim), the port writes max(SO3F, axis=dim - 1).
 
-```python
-SO3FunHarmonic.max(f, *args, numLocal=1, **kwargs)
-```
+## Input
+
+| | |
+|---|---|
+| `f` | SO3Fun, S2Fun or S1Fun; a second function or a number for the pointwise maximum |
+
+## Output
+
+| | |
+|---|---|
+| `value` | the largest value, or numLocal values in descending order |
+| `ori` | the position: orientation, vector3d, or the angle on the circle |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `numLocal` | `1` | the number of local maxima returned |
+
+## See also
+
+[min](S1Grid.min_py.html), [calcComponents](SO3Fun.calcComponents_py.html), [SO3FunHarmonic.mean](SO3FunHarmonic.mean_py.html)
 
 MATLAB's [SO3FunHarmonic.max](SO3FunHarmonic.max.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L608">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L708">source</a></font>
 {% endraw %}

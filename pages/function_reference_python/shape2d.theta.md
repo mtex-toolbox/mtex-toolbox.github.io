@@ -13,5 +13,5 @@ A property of [shape2d](shape2d_index_py.html).
 
 the angle of every vertex in polar coordinates of the plane, from the x axis
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L391">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L494">source</a></font>
 {% endraw %}

@@ -21,5 +21,5 @@ the orthographic projection: r = sin(theta)
 
 MATLAB's [orthographicProjection](orthographicProjection.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L291">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L338">source</a></font>
 {% endraw %}

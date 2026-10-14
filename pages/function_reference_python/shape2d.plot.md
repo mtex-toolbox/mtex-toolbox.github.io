@@ -62,5 +62,5 @@ Further keywords go to matplotlib's plot.
 
 MATLAB's [shape2d.plot](shape2d.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polarplot.py#L314">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polarplot.py#L343">source</a></font>
 {% endraw %}

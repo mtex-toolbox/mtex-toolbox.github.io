@@ -94,5 +94,5 @@ with more than one column give one set of weights per column.
 
 [interpSO3](interpSO3_py.html), [interpolate](SO3VectorFieldHarmonic.interpolate_py.html), [mlsq](mlsq_py.html), [SO3FunRBF](SO3FunRBF_index_py.html), [RBFApproximationTheory](RBFApproximationTheory_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbfinterpolation.py#L104">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbfinterpolation.py#L149">source</a></font>
 {% endraw %}

@@ -60,5 +60,5 @@ readable (nm, um, mm).
 
 [EBSD.plot](EBSD.plot_py.html), [scaleBar](scaleBar_py.html), [EBSDPlotting](EBSDPlotting_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1128">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1211">source</a></font>
 {% endraw %}

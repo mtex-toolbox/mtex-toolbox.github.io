@@ -19,5 +19,5 @@ the name of the function as a line of text
 spatialTransformHandle.paramChar(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L705">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L771">source</a></font>
 {% endraw %}

@@ -14,5 +14,5 @@ SchmidTensor(n, b) of a plane normal and a slip direction, SchmidTensor(sS) of s
 
 MATLAB's [SchmidTensor](SchmidTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1418">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1571">source</a></font>
 {% endraw %}

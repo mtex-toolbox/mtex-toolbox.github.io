@@ -13,15 +13,45 @@ status: Reference
 A method of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
 the mean over the sphere, int f dS / 4 pi, one per function; with an axis the mean
-function along that axis of a list
+function along that axis of a list; MATLAB's mean
 
 ## Syntax
 
+The mean value, one per function of a list:
+
 ```python
-S2FunHarmonic.mean(self, axis=None)
+value = mean(sF)
 ```
+
+The pointwise mean of a list along its first axis:
+
+```python
+sF = mean(sF, axis=0)
+```
+
+## Input
+
+| | |
+|---|---|
+| `sF` | S2FunHarmonic |
+
+## Output
+
+| | |
+|---|---|
+| `value` | float, or an array of the shape of the list; with an axis S2FunHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `axis` | `None` | the axis of the list along which the functions are averaged |
+
+## See also
+
+[S2FunHarmonic.sum](S2FunHarmonic.sum_py.html), [S2FunHarmonic.norm](S2FunHarmonic.norm_py.html)
 
 MATLAB's [S2FunHarmonic.mean](S2FunHarmonic.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L458">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L578">source</a></font>
 {% endraw %}

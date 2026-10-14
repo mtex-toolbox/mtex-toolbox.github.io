@@ -15,9 +15,36 @@ the directions and vectors of a field drawn over section k, None for sections wi
 
 ## Syntax
 
+None: Euler and axis angle sections carry no field:
+
 ```python
-ODFSections.sectionField(self, k, resolution=15*degree)
+oS.sectionField(k)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L118">source</a></font>
+Only the pole figure sections draw a field over their charts, pfSections.sectionField;
+every other kind of section returns None.
+
+## Input
+
+| | |
+|---|---|
+| `k` | int, the index of the section |
+
+## Output
+
+| | |
+|---|---|
+| `None` |  |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `resolution` | `15*degree` | the spacing of the grid the field would be given on |
+
+## See also
+
+[pfSections.sectionField](pfSections.sectionField_py.html), [quiverSectionField](quiverSectionField_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L136">source</a></font>
 {% endraw %}

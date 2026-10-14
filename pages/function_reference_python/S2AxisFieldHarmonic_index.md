@@ -48,8 +48,8 @@ fits them by least squares). The field is symmetrised under the group of its fra
 S2AxisField is the abstract class above it, S2AxisFieldHandle the field of a function
 evaluated where it is asked.
 
-The coefficient form takes a (L+1)^2 x 6 matrix in the port's internal normalisation, not
-MATLAB's six S2FunHarmonic components.
+The coefficient form takes a (L+1)^2 x 6 matrix, one column per component xx, xy, xz, yy,
+yz, zz, in MTEX's basis, the coefficients aF.fhat returns and S2FunHarmonic takes.
 
 ## Input
 
@@ -74,7 +74,7 @@ MATLAB's six S2FunHarmonic components.
 
 ## See also
 
-[S2VectorFieldHarmonic](S2VectorFieldHarmonic_index_py.html), [S2FunHarmonic](S2FunHarmonic_index_py.html), [S2AxisFieldHarmonic.interpolate](S2AxisFieldHarmonic.interpolate_py.html), velocity, [S2FunVectorField](S2FunVectorField_py.html)
+[S2VectorFieldHarmonic](S2VectorFieldHarmonic_index_py.html), [S2FunHarmonic](S2FunHarmonic_index_py.html), [S2AxisFieldHarmonic.interpolate](S2AxisFieldHarmonic.interpolate_py.html), [velocity](complianceTensor.velocity_py.html), [S2FunVectorField](S2FunVectorField_py.html)
 
 ## Members
 
@@ -89,7 +89,7 @@ MATLAB's six S2FunHarmonic components.
 | [plot](S2AxisField.plot_py.html) | plot(x, ...) draws x as its kind is drawn |
 | [quadrature](S2AxisFieldHarmonic.quadrature_py.html) | S2AxisFieldHarmonic.quadrature(f, bandwidth=L), MATLAB's name for the constructor |
 | [quiver3](S2AxisField.quiver3_py.html) | arrows in space: tangent vectors in orientation space, a field on the sphere or SO(3), or arrows at positions |
-| [quiver](S2AxisField.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
+| [quiver](S2AxisField.quiver_py.html) | arrows: tangent vectors at directions, a vector or axis field on the sphere, arrows at orientations in the sections of the current figure, or directions on a map or a volume |
 | [S2AxisField](S2AxisField.S2AxisField_py.html) | an axis field on the sphere by a harmonic series: an axis without sign at every direction, as the principal directions of a stress or the polarisations of a wave |
 | [S2AxisFieldHarmonic](S2AxisFieldHarmonic.S2AxisFieldHarmonic_py.html) | an axis field on the sphere by a harmonic series: an axis without sign at every direction, as the principal directions of a stress or the polarisations of a wave |
 | [symmetrise](S2AxisFieldHarmonic.symmetrise_py.html) | the projection onto the equivariant fields, a(s xi) = +- s a(xi) |

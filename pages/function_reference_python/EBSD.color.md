@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the colour of the one phase of the map, read and set on its frame: ebsd['Diopside'].color
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L583">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L625">source</a></font>
 {% endraw %}

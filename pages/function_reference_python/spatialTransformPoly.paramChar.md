@@ -19,5 +19,5 @@ the size of the coefficients as a line of text
 spatialTransformPoly.paramChar(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L473">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L522">source</a></font>
 {% endraw %}

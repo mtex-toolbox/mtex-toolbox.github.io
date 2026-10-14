@@ -100,7 +100,7 @@ scaling factors, solver.zrm the zero range method; solver.odf the ODF they descr
 | [frameB](MLSSolver.frameB_py.html) | the frame the orientations map to, the specimen or a second crystal frame |
 | [init](MLSSolver.init_py.html) | the operators on the grid the zero range method leaves |
 | [initIter](MLSSolver.initIter_py.html) | the state the iteration starts from: the normalisation directions a_i, the scalings alpha_i and the weighted residuals u_i |
-| [initRegularisation](MLSSolver.initRegularisation_py.html) | a discrete Laplacian on the grid: minus the dots within two halfwidths off the diagonal, the row sums on it |
+| [initRegularisation](MLSSolver.initRegularisation_py.html) | sets the regularisation matrix of the solver, its weight times a discrete Laplacian on the grid |
 | [iterate](MLSSolver.iterate_py.html) | the iteration, stopped when the residual improves by less than five percent |
 | [MLSSolver](MLSSolver.MLSSolver_py.html) | the modified least squares solver of the pole figure inversion, an ODF as a weighted sum of unimodal components fitted to scattered pole figure intensities |
 | [odf](MLSSolver.odf_py.html) | the ODF the current coefficients describe |
@@ -109,5 +109,5 @@ scaling factors, solver.zrm the zero range method; solver.odf the ODF they descr
 
 MATLAB's [MLSSolver_index](MLSSolver_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L188">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L201">source</a></font>
 {% endraw %}

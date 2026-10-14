@@ -83,13 +83,13 @@ lattice leave ebsd.lattice None. EBSD3.load reads the volumes of DREAM.3D and Ne
 
 | | |
 |---|---|
-| [calcGND](EBSD3square.calcGND_py.html) | gnd, rho = calcGND(ebsd, dS): the geometrically necessary dislocation content of every pixel after Pantleon (2008), MATLAB's route: the curvature of the map, the systems rotated into every pixel, the densities of least total line energy reproducing the curvature |
+| [calcGND](EBSD3square.calcGND_py.html) | the geometrically necessary dislocation content of every pixel after Pantleon (2008) |
 | [calcGrains](EBSD3.calcGrains_py.html) | the grains of a map, the pixels joined across every boundary the criterion keeps |
 | [calcGrains](EBSD3square.calcGrains_py.html) | the grains of a map, the pixels joined across every boundary the criterion keeps |
-| [calcTraces](EBSD3.calcTraces_py.html) | traces, rel, cSize = calcTraces(ebsd \| grains, clusterId, 'Radon' \| 'Fourier' \| 'calliper' \| 'hist', minClusterSize=100) |
+| [calcTraces](EBSD3.calcTraces_py.html) | the traces of subregions of a map or of sets of grains, the direction their lamellae run along |
 | [cat](EBSD3.cat_py.html) | the list of several maps, the phases of the first, MATLAB's [ebsd1, ebsd2] |
 | [copy](EBSD3.copy_py.html) | a copy of the volume with its own arrays, the frames shared |
-| [curvature](EBSD3square.curvature_py.html) | the curvature tensor of every voxel, the gradients along the three lattice directions, in the specimen frame and in the inverse scan unit |
+| [curvature](EBSD3square.curvature_py.html) | the curvature tensor of every voxel |
 | [d1](EBSD3.d1_py.html) | the first step vector of the voxel lattice |
 | [d2](EBSD3.d2_py.html) | the second step vector of the voxel lattice |
 | [d3](EBSD3.d3_py.html) | the third step vector of the voxel lattice |
@@ -100,15 +100,15 @@ lattice leave ebsd.lattice None. EBSD3.load reads the volumes of DREAM.3D and Ne
 | [EBSD3](EBSD3.EBSD3_py.html) | the measurements of a volume: positions, rotations and phase ids of voxels with the list of the phases' frames and the properties of every measurement |
 | [EBSD3square](EBSD3square.EBSD3square_py.html) | the measurements of a volume: positions, rotations and phase ids of voxels with the list of the phases' frames and the properties of every measurement |
 | [extent](EBSD3.extent_py.html) | the bounding box of the voxels, [xmin, xmax, ymin, ymax, zmin, zmax], the padding left out |
-| [fill](EBSD3.fill_py.html) | the empty voxels, padding and not indexed, given the phase, orientation and properties of the nearest measured voxel |
+| [fill](EBSD3.fill_py.html) | the empty voxels of a volume filled from their nearest measured voxel |
 | [fillByGrainId](EBSD3.fillByGrainId_py.html) | the map with every pixel of a grain given the mean orientation of that grain, which is the map the grains describe rather than the one they were built from |
 | [findByLocation](EBSD3.findByLocation_py.html) | the measurements closest to positions, or within a radius of them |
 | [flatten](EBSD3.flatten_py.html) | the voxels as a list, the volume itself when it is one |
 | [gradientDim](EBSD3.gradientDim_py.html) | the derivative of the orientation along the array axis dim of a gridded volume per unit length, the forward difference, backwards at the last voxel, NaN across a grain boundary |
-| [gradientX](EBSD3.gradientX_py.html) | the derivative of the orientation along the first axis of the volume per unit length, gradientDim(ebsd, 0) |
-| [gradientY](EBSD3.gradientY_py.html) | the derivative of the orientation along the second axis of the volume per unit length, gradientDim(ebsd, 1) |
-| [gradientZ](EBSD3.gradientZ_py.html) | the derivative of the orientation along the third axis of the volume per unit length, gradientDim(ebsd, 2) |
-| [gridify](EBSD3.gridify_py.html) | the list on the (n1, n2, n3) array of its lattice, every cell no voxel occupies padded as notIndexed |
+| [gradientX](EBSD3.gradientX_py.html) | the derivative of the orientation along the first axis of the volume per unit length |
+| [gradientY](EBSD3.gradientY_py.html) | the derivative of the orientation along the second axis of the volume per unit length |
+| [gradientZ](EBSD3.gradientZ_py.html) | the derivative of the orientation along the third axis of the volume per unit length |
+| [gridify](EBSD3.gridify_py.html) | a list of voxels put back onto the (n1, n2, n3) array of its lattice |
 | [interp](EBSD3.interp_py.html) | the voxel holding every position, or none outside the box of voxel centres, as MATLAB's nearest griddedInterpolant without extrapolation |
 | [interp](EBSD3square.interp_py.html) | the voxel holding every position, or none outside the box of voxel centres, as MATLAB's nearest griddedInterpolant without extrapolation |
 | [isGridded](EBSD3.isGridded_py.html) | whether the voxels are held as an (n1, n2, n3) array |
@@ -117,7 +117,7 @@ lattice leave ebsd.lattice None. EBSD3.load reads the volumes of DREAM.3D and Ne
 | [N](EBSD3.N_py.html) | a volume has no measurement plane |
 | [plot](EBSD3.plot_py.html) | the voxels of a volume in three orthogonal slice planes, coloured by phase, by a value, a colour or an orientation per voxel |
 | [reduce](EBSD3.reduce_py.html) | every n-th measurement along each lattice direction, which is the map at a coarser step |
-| [slice](EBSD3.slice_py.html) | the section through a plane: the volume sampled on a square grid of the voxel spacing in the plane, spanned by the direction of the box nearest to the plane and the one across |
+| [slice](EBSD3.slice_py.html) | the 2D map of the section of a volume through a plane |
 | [smooth](EBSD3.smooth_py.html) | the map with its orientations denoised, every one replaced by one computed from its neighbours, within the grains where the map knows them and within the phases otherwise |
 | [spatialProfile](EBSD3.spatialProfile_py.html) | the voxels along a polyline, sampled at the voxel spacing, and their distance along it |
 | [spatialProfile](EBSD3square.spatialProfile_py.html) | the voxels along a polyline, sampled at the voxel spacing, and their distance along it |

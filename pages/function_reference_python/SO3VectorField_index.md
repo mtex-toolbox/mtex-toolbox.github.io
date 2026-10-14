@@ -126,7 +126,7 @@ frames unless symmetrise=False.
 | [plus](SO3VectorFieldHarmonic.plus_py.html) |  |
 | [quadrature](SO3VectorFieldHarmonic.quadrature_py.html) | MATLAB's SO3VectorFieldHarmonic.quadrature(fun, cs): the field of a callable, cut to the last degree that carries more than rounding, as a polynomial field is |
 | [quiver3](SO3VectorField.quiver3_py.html) | arrows in space: tangent vectors in orientation space, a field on the sphere or SO(3), or arrows at positions |
-| [quiver](SO3VectorField.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
+| [quiver](SO3VectorField.quiver_py.html) | arrows: tangent vectors at directions, a vector or axis field on the sphere, arrows at orientations in the sections of the current figure, or directions on a map or a volume |
 | [quiverSection](SO3VectorField.quiverSection_py.html) | arrows on a section plot: of a function on the sphere along one of its circles, or at orientations in the sections of orientation space |
 | [rdivide](SO3VectorField.rdivide_py.html) |  |
 | [rdivide](SO3VectorFieldHarmonic.rdivide_py.html) |  |
@@ -149,5 +149,5 @@ frames unless symmetrise=False.
 
 MATLAB's [SO3VectorField_index](SO3VectorField_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L287">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L364">source</a></font>
 {% endraw %}

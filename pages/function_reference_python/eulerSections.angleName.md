@@ -13,5 +13,5 @@ A property of [eulerSections](eulerSections_index_py.html).
 
 the name of the Euler angle that is constant on each section
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L200">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L247">source</a></font>
 {% endraw %}

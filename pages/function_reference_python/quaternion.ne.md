@@ -22,5 +22,5 @@ a != b
 
 MATLAB's [quaternion.ne](quaternion.ne.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L240">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L291">source</a></font>
 {% endraw %}

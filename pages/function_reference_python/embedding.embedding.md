@@ -79,7 +79,7 @@ given tensors, is built here by setDouble(e, d) or from the keywords.
 
 ## See also
 
-[embedding.project](embedding.project_py.html), [double](S1Grid.double_py.html), [setDouble](setDouble_py.html), calcCluster, [OrientationEmbeddings](OrientationEmbeddings_py.html)
+[embedding.project](embedding.project_py.html), [double](S1Grid.double_py.html), [setDouble](setDouble_py.html), [calcCluster](orientation.calcCluster_py.html), [OrientationEmbeddings](OrientationEmbeddings_py.html)
 
 ## Used on
 

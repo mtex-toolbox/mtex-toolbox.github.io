@@ -15,9 +15,43 @@ equal within the angular tolerance tol and of one parity, MATLAB's eq
 
 ## Syntax
 
+Equal up to 5e-4:
+
 ```python
-orthogonalTransform.isclose(self, other, tol=0.0005)
+b = T1.isclose(T2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L841">source</a></font>
+A coarser tolerance:
+
+```python
+b = T1.isclose(T2, tol=1*degree)
+```
+
+As rotation.isclose, the angle between the rotational parts below 2 tol, and the parities
+equal.
+
+## Input
+
+| | |
+|---|---|
+| `T1` | orthogonalTransform |
+| `T2` | orthogonalTransform or rotation |
+
+## Output
+
+| | |
+|---|---|
+| `b` | boolean array |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `tol` | `0.0005` | the tolerance, an angle |
+
+## See also
+
+[orthogonalTransform.dot](orthogonalTransform.dot_py.html), [rotation.isclose](rotation.isclose_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1079">source</a></font>
 {% endraw %}

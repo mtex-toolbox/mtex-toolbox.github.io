@@ -37,7 +37,7 @@ gB.segLength, gB.misorientation
 | [chainNeighbors](grainBoundary.chainNeighbors_py.html) | the segment before and after each one along its chain: a closed chain wraps its two ends onto each other, an open one clamps them, so a filter along the chain does not spread the undefined end |
 | [chainSize](grainBoundary.chainSize_py.html) | the number of segments of the chain of every segment |
 | [chainV](grainBoundary.chainV_py.html) | the vertices of every chain in walk order, the chains separated by -1 |
-| [characteristicShape](grainBoundary.characteristicShape_py.html) | the characteristic shape of a set of boundary segments: every segment and its antipode, sorted by direction and laid end to end, the convex, centrally symmetric outline whose boundary length in each direction is the boundary length the map has in it |
+| [characteristicShape](grainBoundary.characteristicShape_py.html) | the characteristic shape of a set of boundary segments |
 | [componentId](grainBoundary.componentId_py.html) | the connected component each segment lies in, junctions included, and its size |
 | [componentSize](grainBoundary.componentSize_py.html) | the number of segments of the connected component of every segment |
 | [curvature](grainBoundary.curvature_py.html) | the signed curvature of every segment: the Menger curvature through the midpoints of a segment and its two neighbours along the chain, smoothed by a binomial filter along it |
@@ -58,7 +58,7 @@ gB.segLength, gB.misorientation
 | [misorientation](grainBoundary.misorientation_py.html) | the misorientations of the boundary, which needs one pair of phases in one order throughout, with the grain exchange symmetry where both sides are one phase |
 | [perimeter](grainBoundary.perimeter_py.html) | the total length of the boundary, the sum of the segment lengths |
 | [plot](grainBoundary.plot_py.html) | the grain boundary segments, in one colour or coloured segment by segment |
-| [quiver](grainBoundary.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
+| [quiver](grainBoundary.quiver_py.html) | arrows: tangent vectors at directions, a vector or axis field on the sphere, arrows at orientations in the sections of the current figure, or directions on a map or a volume |
 | [reduce](grainBoundary.reduce_py.html) | the boundary coarsened by keeping every n-th vertex along each chain, whatever the shape |
 | [refine](grainBoundary.refine_py.html) | split every segment into pieces of about length delta: the old vertices stay where they are and the new ones lie on the old segments, so the boundary keeps its shape and its length and only the sampling gets finer, which gives a smoothing that follows evenly spaced degrees of freedom |
 | [rotate](grainBoundary.rotate_py.html) | rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method |
@@ -67,7 +67,7 @@ gB.segLength, gB.misorientation
 | [simplify](grainBoundary.simplify_py.html) | the boundary with the vertices dropped that carry no shape, Douglas-Peucker chain by chain |
 | [size](grainBoundary.size_py.html) | the number of segments |
 | [subsref](grainBoundary.subsref_py.html) |  |
-| [surfor](grainBoundary.surfor_py.html) | the cumulative projection length of the boundary segments (Panozzo 1984): a projection is a dot product, the segment vector projected onto the direction, so no angle is formed and none has to be folded into [0, pi) |
+| [surfor](grainBoundary.surfor_py.html) | the cumulative projection length of the boundary segments (Panozzo 1984) |
 | [triplePoints](grainBoundary.triplePoints_py.html) | the triple points of the network, of a selection those at a vertex of its segments, with boundaryId into the whole network, as MATLAB's |
 | [V_used](grainBoundary.V_used_py.html) | the indices of the vertices the segments use, sorted |
 | [vertexDegree](grainBoundary.vertexDegree_py.html) | the number of segments meeting at every vertex |

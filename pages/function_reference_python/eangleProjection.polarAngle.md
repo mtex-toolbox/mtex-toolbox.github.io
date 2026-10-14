@@ -19,5 +19,5 @@ the polar angle 2 arctan(r) drawn at the plane radius r
 eangleProjection.polarAngle(r)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L270">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L317">source</a></font>
 {% endraw %}

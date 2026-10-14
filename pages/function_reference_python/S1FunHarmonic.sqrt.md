@@ -16,11 +16,46 @@ the pointwise square root, a Fourier series of a smoothing bandwidth, or at the 
 
 ## Syntax
 
+At twice the bandwidth, at least 32:
+
 ```python
-S1FunHarmonic.sqrt(self, bandwidth=None)
+sF = sqrt(sF)
 ```
+
+At the bandwidth given:
+
+```python
+sF = sqrt(sF, bandwidth=64)
+```
+
+The function is evaluated on an equispaced grid and expanded again by quadrature (mapFun).
+The square root is no trigonometric polynomial, so the expansion is cut at the bandwidth: by
+default twice that of the function, at least 32, where MATLAB takes the default bandwidth of
+S1FunHarmonic.quadrature.
+
+## Input
+
+| | |
+|---|---|
+| `sF` | S1FunHarmonic |
+
+## Output
+
+| | |
+|---|---|
+| `sF` | S1FunHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `bandwidth` | `None` | the largest frequency of the result |
+
+## See also
+
+[mapFun](mapFun_py.html), [S1FunHarmonic.quadrature](S1FunHarmonic.quadrature_py.html)
 
 MATLAB's [S1FunHarmonic.sqrt](S1FunHarmonic.sqrt.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L288">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L321">source</a></font>
 {% endraw %}

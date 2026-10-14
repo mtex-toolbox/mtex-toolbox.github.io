@@ -33,5 +33,5 @@ grain2d.principalComponents(self)
 
 MATLAB's [grain2d.principalComponents](grain2d.principalComponents.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L76">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L92">source</a></font>
 {% endraw %}

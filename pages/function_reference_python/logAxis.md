@@ -56,5 +56,5 @@ logAxis(ax=None, xLimits=None, yLimits=None)
 
 MATLAB's [logAxis](logAxis.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L584">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L773">source</a></font>
 {% endraw %}

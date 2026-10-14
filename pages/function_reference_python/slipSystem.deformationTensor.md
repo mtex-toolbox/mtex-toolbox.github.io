@@ -27,5 +27,5 @@ slipSystem.deformationTensor(self)
 
 MATLAB's [slipSystem.deformationTensor](slipSystem.deformationTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L185">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L216">source</a></font>
 {% endraw %}

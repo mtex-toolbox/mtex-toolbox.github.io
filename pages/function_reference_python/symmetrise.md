@@ -22,8 +22,8 @@ symmetrise(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [fibre](fibre.symmetrise_py.html) | the equivalent fibres s * o1 * inv(g) about g * h over both groups, or the distinct ones |
-| [orientation](orientation.symmetrise_py.html) | the symmetric equivalents l * o * r, shaped (numL * numR,) + shape |
+| [fibre](fibre.symmetrise_py.html) | the symmetrically equivalent fibres, MATLAB's fibre.symmetrise |
+| [orientation](orientation.symmetrise_py.html) | all crystallographically equivalent orientations |
 | [S2AxisFieldHarmonic](S2AxisFieldHarmonic.symmetrise_py.html) | the projection onto the equivariant fields, a(s xi) = +- s a(xi) |
 | [S2FunHarmonic](S2FunHarmonic.symmetrise_py.html) | the projection onto the functions invariant under the group of the frame, or under a list of rotations forming a group the frame does not name |
 | [S2VectorFieldHarmonic](S2VectorFieldHarmonic.symmetrise_py.html) | the projection onto the equivariant fields of the frame, v(s xi) = s v(xi) for the elements of the group including the improper ones |

@@ -84,5 +84,5 @@ the GND and KAM do not need a grid, they run on the lattice of a list too.
 
 MATLAB's [EBSD.gridify](EBSD.gridify.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L520">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L562">source</a></font>
 {% endraw %}

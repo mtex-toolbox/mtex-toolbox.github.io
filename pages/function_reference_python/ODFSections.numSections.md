@@ -13,5 +13,5 @@ A property of [ODFSections](ODFSections_index_py.html).
 
 the number of sections
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L109">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L127">source</a></font>
 {% endraw %}

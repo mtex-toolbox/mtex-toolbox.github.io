@@ -19,5 +19,5 @@ the inner product int conj(f) g, the first argument conjugated
 SO3FunHarmonic.dot(self, g)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L498">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L605">source</a></font>
 {% endraw %}

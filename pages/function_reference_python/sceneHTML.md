@@ -9,13 +9,47 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the scene as a standalone HTML page drawn by three.js
+the scene as a standalone HTML page that draws it with three.js in the browser, turned
+and zoomed with the mouse
 
 ## Syntax
 
+The scene of the current figure:
+
 ```python
-sceneHTML(scene, title='MTEX 3D plot')
+page = sceneHTML(gcs())
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/render3d.py#L305">source</a></font>
+With a title of the page:
+
+```python
+page = sceneHTML(scene, title='grains')
+```
+
+The page holds the geometry and the colours compressed in itself and loads three.js from
+a CDN.
+
+## Input
+
+| | |
+|---|---|
+| `scene` | scene3d |
+
+## Output
+
+| | |
+|---|---|
+| `page` | str, the HTML text |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `title` | `'MTEX 3D plot'` | the title of the page |
+
+## See also
+
+[writeHTML](writeHTML_py.html), [exportHTML](exportHTML_py.html), [renderImage](renderImage_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/render3d.py#L321">source</a></font>
 {% endraw %}

@@ -29,5 +29,5 @@ oS = sigmaSections(cs, ss, sigma=np.arange(0, 60, 10)*degree)
 
 [SigmaSections](SigmaSections_py.html), [TaylorModel](TaylorModel_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L462">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L546">source</a></font>
 {% endraw %}

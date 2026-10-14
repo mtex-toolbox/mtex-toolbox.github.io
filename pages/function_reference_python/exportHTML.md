@@ -9,13 +9,45 @@ lang: python
 status: Reference
 ---
 {% raw %}
-exportHTML('grains.html'): the scene of the current figure as an interactive page
+the scene of the current figure written as an interactive three.js page, which a browser
+rotates and zooms
 
 ## Syntax
 
+The scene of the current figure:
+
 ```python
-exportHTML(fname, fig=None, title='MTEX 3D plot')
+exportHTML('grains.html')
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L526">source</a></font>
+Of another figure, with a title:
+
+```python
+exportHTML('grains.html', fig=fig, title='Iron grains')
+```
+
+## Input
+
+| | |
+|---|---|
+| `fname` | the name of the HTML file |
+
+## Output
+
+| | |
+|---|---|
+| `fname` | the file written |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `fig` | `None` | the mtexFigure holding the scene, by default the current one |
+| `title` | `'MTEX 3D plot'` | the title of the page |
+
+## See also
+
+[show3d](show3d_py.html), [gcs](gcs_py.html), [saveFigure](saveFigure_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L565">source</a></font>
 {% endraw %}

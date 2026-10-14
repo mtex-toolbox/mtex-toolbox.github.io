@@ -20,5 +20,5 @@ the threshold at their misorientation angle, 0 across phases
 gbcSoft.evaluate(self, ebsd, i, j)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L197">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L229">source</a></font>
 {% endraw %}

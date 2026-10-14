@@ -23,5 +23,5 @@ slipSystem.rotate(self, rot)
 
 MATLAB's [slipSystem.rotate](slipSystem.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L215">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L260">source</a></font>
 {% endraw %}

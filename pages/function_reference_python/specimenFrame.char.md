@@ -19,5 +19,5 @@ the name or the convention, the point group after it when there is one: y↑→x
 specimenFrame.char(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1047">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1197">source</a></font>
 {% endraw %}

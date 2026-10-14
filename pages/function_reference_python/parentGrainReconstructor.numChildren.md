@@ -14,5 +14,5 @@ A property of [parentGrainReconstructor](parentGrainReconstructor_index_py.html)
 the number of prior child grains merged into each grain of the current stage (MATLAB's
 parentGrainReconstructor.numChilds)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L429">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L440">source</a></font>
 {% endraw %}

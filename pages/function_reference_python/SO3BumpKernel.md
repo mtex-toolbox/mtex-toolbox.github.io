@@ -34,5 +34,5 @@ SO3BumpKernel(halfwidth=10*degree, bandwidth=64)
 
 MATLAB's [SO3BumpKernel](SO3BumpKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L448">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L505">source</a></font>
 {% endraw %}

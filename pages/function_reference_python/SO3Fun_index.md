@@ -20,15 +20,15 @@ the functions on SO(3): SO3FunHarmonic, SO3FunRBF, SO3FunCBF, SO3FunBingham, SO3
 | [calcAxisDistribution](SO3Fun.calcAxisDistribution_py.html) | the axis distribution of an SO(3) function, an S2 function of the rotation axes symmetric under the rotations the two frames share |
 | [calcComponents](SO3Fun.calcComponents_py.html) | the modal orientations of an orientation density, the components: their orientations, their volumes and the mode every seed flowed into |
 | [calcError](SO3Fun.calcError_py.html) | the error between a measurement and a recalculation, or between two SO(3) functions |
-| [calcMDF](SO3Fun.calcMDF_py.html) | the misorientation distribution of two ODFs, the density of inv(o1) o2 for independent grains, (inv f1 * f2)(g) = int f1(S g^-1) f2(S) dS, with exchange symmetry for one ODF |
-| [calcMIndex](SO3Fun.calcMIndex_py.html) | the M-index: half the total variation between the angle distributions of the uniform and the uncorrelated misorientation distribution |
+| [calcMDF](SO3Fun.calcMDF_py.html) | the uncorrelated misorientation distribution function of one or two ODFs |
+| [calcMIndex](SO3Fun.calcMIndex_py.html) | the M-index of an ODF by Skemer et al., computed from the ODF instead of a discrete number of orientations |
 | [calcPoleFigure](SO3Fun.calcPoleFigure_py.html) | the pole figures an ODF predicts: simulated diffraction intensities, superposed pole figures and any specimen directions |
-| [calcTensor](SO3Fun.calcTensor_py.html) | the texture average of a single crystal tensor |
+| [calcTensor](SO3Fun.calcTensor_py.html) | the texture average of a single crystal tensor over an ODF, a list of orientations or a map |
 | [centerSpecimen](SO3Fun.centerSpecimen_py.html) | an orientation density of an assumed orthotropic texture rotated so that its two fold axes lie on the specimen axes |
 | [discrepancy](SO3Fun.discrepancy_py.html) | the discrepancy between two densities and/or weighted point sets on the sphere (S2Fun, vector3d) or on SO(3) (SO3Fun, rotation, orientation), in either order |
 | [discreteSample](SO3Fun.discreteSample_py.html) | a random sample of n orientations drawn from an orientation density, of directions from a density on the sphere, of numbers from a density on an interval, or n random members of a list |
 | [dubna](SO3Fun.dubna_py.html) | the ODF of the Dubna quartz pole figures, MTEX's example function |
-| [entropy](SO3Fun.entropy_py.html) | -int f log f by the exact rule at a raised bandwidth, since f log f is not bandlimited |
+| [entropy](SO3Fun.entropy_py.html) | the entropy -int f log f of a function on SO(3) or on the sphere |
 | [export](SO3Fun.export_py.html) | write a map to the file the extension names |
 | [export_VPSC](SO3Fun.export_VPSC_py.html) | write a map to the file the extension names |
 | [fibreVolume](SO3Fun.fibreVolume_py.html) | the volume of a fibre: the share of an orientation density within a radius of the fibre of the orientations that map the crystal direction h onto the specimen direction r |
@@ -36,20 +36,20 @@ the functions on SO(3): SO3FunHarmonic, SO3FunRBF, SO3FunCBF, SO3FunBingham, SO3
 | [load](SO3Fun.load_py.html) | an ODF read from a file, loadODF |
 | [max](SO3Fun.max_py.html) | the maximum of a function on SO(3) or the sphere, the value and the position, numLocal local maxima from a grid refined down to the accuracy |
 | [min](SO3Fun.min_py.html) | the minimum of a function on SO(3) or the sphere, the value and the position, numLocal local minima |
-| [optimalSample](SO3Fun.optimalSample_py.html) | the sample of n nodes that reproduces a density best up to the bandwidth: the nodes, and with optimizeWeights=True the nodes and their weights (volume fractions summing to one) |
+| [optimalSample](SO3Fun.optimalSample_py.html) | the sample of n nodes that reproduces a density best up to the bandwidth, on the sphere or the rotation group |
 | [plot3d](SO3Fun.plot3d_py.html) | plot3d(v), plot3d(v, data), plot3d(sF), plot3d(vF), plot3d(oR), plot3d(ori), plot3d(odf) |
 | [plot](SO3Fun.plot_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
-| [plotDiff](SO3Fun.plotDiff_py.html) | plotDiff(pf, odf), plotDiff(pf, pf2, 'l1'): the difference between a measured pole figure and a recalculated one, or two measurements, as a pole figure of the error |
-| [plotFibre](SO3Fun.plotFibre_py.html) | plotFibre(odf, f): the ODF along the fibre f, as a line over the angle along the fibre |
-| [plotIPDF](SO3Fun.plotIPDF_py.html) | plotIPF(ori, r), plotIPF(ori, data, r), plotIPF(odf, r): the inverse pole figures of a list of orientations, the crystal directions along r as markers on the crystal sector, or of an ODF (MATLAB's plotIPDF) |
+| [plotDiff](SO3Fun.plotDiff_py.html) | the difference between measured pole figures and recalculated ones, or two measurements, drawn as pole figures of the error |
+| [plotFibre](SO3Fun.plotFibre_py.html) | the ODF along the fibre f, as a line over the angle along the fibre |
+| [plotIPDF](SO3Fun.plotIPDF_py.html) | inverse pole figures, one per specimen direction: of an ODF or of a list of orientations |
 | [plotPDF](SO3Fun.plotPDF_py.html) | pole figures, one per crystal direction: of an ODF, of a list of orientations or of a measured PoleFigure |
 | [plotSection](SO3Fun.plotSection_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
-| [plotSpektra](SO3Fun.plotSpektra_py.html) | plotSpectrum(psi), plotSpectrum(odf): the Chebyshev coefficients of a kernel, or the harmonic power of a function, per degree (MATLAB's plotSpektra) |
+| [plotSpektra](SO3Fun.plotSpektra_py.html) | the Chebyshev coefficients of a kernel, or the harmonic power of a function, per degree |
 | [rotate](SO3Fun.rotate_py.html) | rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method |
 | [SO3Fun](SO3Fun.SO3Fun_py.html) | the functions on SO(3): SO3FunHarmonic, SO3FunRBF, SO3FunCBF, SO3FunBingham, SO3FunHandle, SO3FunComposition |
 | [sum](SO3Fun.sum_py.html) | sum(x) of an MTEX object by its own sum, of an array or with an axis as NumPy sums, of any other iterable as Python sums, so that from mtex import * keeps Python's sum |
 | [times](SO3Fun.times_py.html) | times(A, B) is A.times(B): the product of corresponding coefficients, MATLAB's A .* B |
-| [volume](SO3Fun.volume_py.html) | the share of orientations within a radius of a centre: the mean of f on a local grid in the ball, times the ball's share of the fundamental region (its Haar measure times the number of symmetric copies, at most one) |
+| [volume](SO3Fun.volume_py.html) | the share of orientations within a radius of a centre: the integral of f over the ball, int_{angle(g, c) < r} f(g) dg, relative to the integral over all orientations |
 
 MATLAB's [SO3Fun_index](SO3Fun_index.html)
 

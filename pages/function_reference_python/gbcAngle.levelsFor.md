@@ -19,5 +19,5 @@ the levels of a phase: its own from byPhase or the per phase list, else the comm
 gbcAngle.levelsFor(self, CSList, p)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L137">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L151">source</a></font>
 {% endraw %}

@@ -66,5 +66,5 @@ MATLAB's 'L0', the volume where the two differ by more than epsilon, is not prov
 
 [PoleFigure.calcError](PoleFigure.calcError_py.html), [calcODF](calcODF_py.html), [PoleFigure2ODF](PoleFigure2ODF_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L364">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L464">source</a></font>
 {% endraw %}

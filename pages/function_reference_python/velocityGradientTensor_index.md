@@ -78,14 +78,14 @@ spin(L). A solid does not compress, so every velocity gradient of one has trace 
 | [expm](velocityGradientTensor.expm_py.html) | the matrix exponential of a rank two tensor, or of a rank four one through its Kelvin matrix, the class kept |
 | [polar](velocityGradientTensor.polar_py.html) | the polar decomposition T = R SR = SL R of a rank two tensor, R orthogonal, SL and SR symmetric |
 | [rotationRate](velocityGradientTensor.rotationRate_py.html) | the rotation rate of a velocity gradient, the length of its angular velocity vector |
-| [simpleShear](velocityGradientTensor.simpleShear_py.html) | the velocity gradient of a simple shear along d on the plane n with the rate e |
+| [simpleShear](velocityGradientTensor.simpleShear_py.html) | the velocity gradient of a simple shear along d on the plane n, 2 e d n^T |
 | [spin](velocityGradientTensor.spin_py.html) | the spin tensor of a velocity gradient, its antisymmetric part |
 | [strainRate](velocityGradientTensor.strainRate_py.html) | the symmetric part of a velocity gradient is the strain rate, the antisymmetric one the spin, whose axial vector is the angular velocity |
-| [uniaxial](velocityGradientTensor.uniaxial_py.html) | the velocity gradient of a uniaxial flow along d with the ratio q of the transverse rates |
+| [uniaxial](velocityGradientTensor.uniaxial_py.html) | the velocity gradient of a uniaxial tension along d, of unit rate along it |
 | [velocityGradientTensor](velocityGradientTensor.velocityGradientTensor_py.html) | a velocity gradient tensor L, the rank two tensor of the spatial derivatives of the velocity |
 | [vorticity](velocityGradientTensor.vorticity_py.html) | the vorticity of a velocity gradient, its rotation rate over the magnitude of its strain rate |
 
 MATLAB's [velocityGradientTensor_index](velocityGradientTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1241">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1394">source</a></font>
 {% endraw %}

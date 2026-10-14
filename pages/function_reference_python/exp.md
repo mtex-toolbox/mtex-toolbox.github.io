@@ -29,7 +29,7 @@ exp(x, *args, **kwargs)
 | [SO3FunHarmonic](SO3FunHarmonic.exp_py.html) | the exponential of the function, by quadrature at twice the bandwidth, or at the bandwidth given |
 | [SO3FunRBF](SO3FunRBF.exp_py.html) | the exponential of the function, pointwise, as a function handle |
 | [SO3TangentVector](SO3TangentVector.exp_py.html) | the rotation or orientation the vector points to, with the frames of the reference |
-| [spinTensor](spinTensor.exp_py.html) | the rotation of a spin tensor, or the orientation a spin at a reference points to |
+| [spinTensor](spinTensor.exp_py.html) | the rotation a spin tensor generates, the exponential of its axial vector, or the orientation a spin at a reference orientation leads to |
 | [vector3d](vector3d.exp_py.html) | the rotation vector to its rotation: at the identity, or at a reference as a tangent vector |
 
 ## Used on

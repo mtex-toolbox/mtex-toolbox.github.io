@@ -13,9 +13,48 @@ the plan for a node set on the sphere: the FFT on a Clenshaw-Curtis grid, the NU
 
 ## Syntax
 
+The NUFFT at arbitrary directions:
+
 ```python
-sphericalPlan(nodes, L, real=False)
+p = sphericalPlan(vector3d.rand(1000), 8)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L775">source</a></font>
+The FFT on a Clenshaw-Curtis grid:
+
+```python
+p = sphericalPlan(quadratureS2Grid(16), 8, real=True)
+```
+
+The series at the nodes:
+
+```python
+f = p(fhat)
+```
+
+The coefficients are the internal ones of an S2FunHarmonic, f._fhat, not MATLAB's fhat.
+
+## Input
+
+| | |
+|---|---|
+| `nodes` | directions, or a quadratureS2Grid |
+| `L` | the bandwidth |
+
+## Output
+
+| | |
+|---|---|
+| `plan` | S2GridPlan or S2FourierPlan, called with coefficients, plan.adjoint with values and weights |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `real` | `False` | the plan for real valued functions, which needs half the Fourier array |
+
+## See also
+
+[sphericalSeries](sphericalSeries_py.html), [sphericalSeriesAdjoint](sphericalSeriesAdjoint_py.html), [wignerPlan](wignerPlan_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L918">source</a></font>
 {% endraw %}

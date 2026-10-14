@@ -119,9 +119,9 @@ symmetrise=False. A list of functions carries its shape in front of the coeffici
 | [norm](SO3FunHarmonic.norm_py.html) | the L2 norm, or the Sobolev norm sqrt(sum (2n+1)^{2s} \|fhat_n\|^2) |
 | [plot3d](SO3FunHarmonic.plot3d_py.html) | plot3d(v), plot3d(v, data), plot3d(sF), plot3d(vF), plot3d(oR), plot3d(ori), plot3d(odf) |
 | [plot](SO3FunHarmonic.plot_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
-| [plotFibre](SO3FunHarmonic.plotFibre_py.html) | plotFibre(odf, f): the ODF along the fibre f, as a line over the angle along the fibre |
+| [plotFibre](SO3FunHarmonic.plotFibre_py.html) | the ODF along the fibre f, as a line over the angle along the fibre |
 | [plotIPDF](SO3FunHarmonic.plotIPDF_py.html) | plotIPF(odf, r): the inverse pole figures of an ODF, one axes per specimen direction (MATLAB's plotIPDF) |
-| [plotPDF](SO3FunHarmonic.plotPDF_py.html) | plotPF(odf, h): the pole figures of an ODF, one axes per crystal direction (MATLAB's plotPDF) |
+| [plotPDF](SO3FunHarmonic.plotPDF_py.html) | the pole figures of an ODF, one axes per crystal direction |
 | [plotSection](SO3FunHarmonic.plotSection_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
 | [plus](SO3FunHarmonic.plus_py.html) |  |
 | [power](SO3FunHarmonic.power_py.html) | the harmonic power per degree, the norm of the coefficients of that degree |
@@ -143,7 +143,7 @@ symmetrise=False. A list of functions carries its shape in front of the coeffici
 | [truncate](SO3FunHarmonic.truncate_py.html) | the coefficient vector cut or padded to a bandwidth |
 | [uminus](SO3FunHarmonic.uminus_py.html) |  |
 | [vertcat](SO3FunHarmonic.vertcat_py.html) | the functions joined into one list along an axis, the coefficients padded to the largest bandwidth |
-| [volume](SO3FunHarmonic.volume_py.html) | the share of orientations within a radius of a centre: the mean of f on a local grid in the ball, times the ball's share of the fundamental region (its Haar measure times the number of symmetric copies, at most one) |
+| [volume](SO3FunHarmonic.volume_py.html) | the share of orientations within a radius of a centre: the integral of f over the ball, int_{angle(g, c) < r} f(g) dg, relative to the integral over all orientations |
 | [withExchange](SO3FunHarmonic.withExchange_py.html) | the function with the exchange symmetry f(g) = f(g^-1) imposed, by the mean with its inverse |
 
 ## Used on

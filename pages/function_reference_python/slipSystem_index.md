@@ -47,7 +47,7 @@ sS = slipSystem.fcc(cs)
 | [pyramidalCA](slipSystem.pyramidalCA_py.html) | the pyramidal c+a slip system <2-1-13>{-1101} of a hexagonal crystal |
 | [residualBurgersVector](slipSystem.residualBurgersVector_py.html) | the length of the difference of the Burgers vectors of paired systems, entry by entry |
 | [rotate](slipSystem.rotate_py.html) | an orientation or a rotation carries the systems into specimen coordinates, broadcast as NumPy does: a column of orientations times a row of systems is MATLAB's outer ori * sS |
-| [SchmidFactor](slipSystem.SchmidFactor_py.html) | the Schmid factor of the systems: under a stress tensor the shear it resolves on them, for tension directions cos(phi) cos(lambda), without a load the functions of the tension direction on the sphere |
+| [SchmidFactor](slipSystem.SchmidFactor_py.html) | the Schmid factor of the slip systems |
 | [SchmidTensor](slipSystem.SchmidTensor_py.html) | the Schmid tensor b n^T of the normalised vectors as a velocity gradient tensor, one per system |
 | [shape](slipSystem.shape_py.html) | a list, or an array once a column of orientations has rotated a row of systems |
 | [size](slipSystem.size_py.html) | the number of slip systems |

@@ -17,5 +17,5 @@ innerFace(cS, n): the section of the shape by the plane through its centre
 innerFace(cS, n)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L580">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L1363">source</a></font>
 {% endraw %}

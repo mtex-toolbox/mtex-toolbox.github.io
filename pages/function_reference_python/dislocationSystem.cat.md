@@ -42,5 +42,5 @@ cat(*arrays, **kwargs)
 
 MATLAB's [dislocationSystem.cat](dislocationSystem.cat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/_array.py#L185">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/_array.py#L198">source</a></font>
 {% endraw %}

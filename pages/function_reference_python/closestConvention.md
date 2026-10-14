@@ -17,5 +17,5 @@ the entry of AXIS_CONVENTIONS nearest a rotation, and how far it is from it in r
 closestConvention(rot)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L268">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L318">source</a></font>
 {% endraw %}

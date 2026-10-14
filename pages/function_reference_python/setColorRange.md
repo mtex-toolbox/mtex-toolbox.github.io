@@ -15,16 +15,42 @@ the one given as (lo, hi)
 
 ## Syntax
 
+One range over every axes:
+
 ```python
 setColorRange('equal')
+```
+
+The range given:
+
+```python
 setColorRange((0, 4))
 ```
 
-## Signature
+Each axes of a figure given its own range:
 
 ```python
-setColorRange(colorRange='equal', fig=None)
+setColorRange('tight', fig=mtexFig)
 ```
+
+MATLAB's 'log' option is setColorScale('log'), its choice of the figures ('all', 'current',
+'figure') the keyword fig, and 'zero2white' has no counterpart.
+
+## Input
+
+| | |
+|---|---|
+| `colorRange` | 'equal', 'tight' or (lo, hi) |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `fig` | `None` | the mtexFigure; the current one by default |
+
+## See also
+
+[mtexFigure.setColorRange](mtexFigure.setColorRange_py.html), [setColorScale](setColorScale_py.html), [mtexColorbar](mtexColorbar_py.html)
 
 ## Used on
 
@@ -32,5 +58,5 @@ setColorRange(colorRange='equal', fig=None)
 
 MATLAB's [setColorRange](setColorRange.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L610">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L799">source</a></font>
 {% endraw %}

@@ -19,5 +19,5 @@ the Radon transform: the Dirichlet kernel on the sphere of the same degree
 SO3DirichletKernel.radon(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L521">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L591">source</a></font>
 {% endraw %}

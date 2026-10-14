@@ -14,9 +14,46 @@ one preference, or with no name all of them as a new dict, MATLAB's struct
 
 ## Syntax
 
+One preference:
+
 ```python
-getMTEXpref(name=None, default=None)
+value = getMTEXpref('EulerAngleConvention')
 ```
+
+A preference that may not be set:
+
+```python
+value = getMTEXpref('myPref', default=1)
+```
+
+All of them:
+
+```python
+prefs = getMTEXpref()
+```
+
+## Input
+
+| | |
+|---|---|
+| `name` | the name of the preference |
+
+## Output
+
+| | |
+|---|---|
+| `value` | its value in this session, or default when it is not set |
+| `prefs` | dict of every preference, a copy |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `default` | `None` | what an unset preference returns |
+
+## See also
+
+[setMTEXpref](setMTEXpref_py.html), [loadSettings](loadSettings_py.html)
 
 ## Used on
 

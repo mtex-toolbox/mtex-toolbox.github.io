@@ -12,15 +12,44 @@ status: Reference
 {% raw %}
 A method of [zeroRangeMethod](zeroRangeMethod_index_py.html).
 
-which orientations the zero range method rules out: those some pole figure is zero at in
-one of their symmetric poles; with i, which directions the i-th pole figure is zero at
+which orientations the zero range method rules out, those some pole figure is zero at in
+one of their symmetric poles; MATLAB's checkZeroRange
 
 ## Syntax
 
+The orientations ruled out by any pole figure:
+
 ```python
-zrm.checkZeroRange(ori)
-zrm.checkZeroRange(v, i)
+isZero = zrm.checkZeroRange(ori)
 ```
+
+The directions the i-th pole figure is zero at:
+
+```python
+isZero = zrm.checkZeroRange(v, i)
+```
+
+A direction is in the zero range of a pole figure where the kernel density of its
+measured directions exceeds the threshold and the kernel sum, positive at intensities
+above the background and negative below, is negative there.
+
+## Input
+
+| | |
+|---|---|
+| `zrm` | zeroRangeMethod |
+| `ori` | orientation, or v - vector3d, the specimen directions with an index |
+| `i` | the index of the pole figure, counted from zero |
+
+## Output
+
+| | |
+|---|---|
+| `isZero` | bool array, one entry per orientation or direction |
+
+## See also
+
+[zeroRangeMethod](zeroRangeMethod_index_py.html), [MLSSolver](MLSSolver_index_py.html), [calcODF](calcODF_py.html)
 
 ## Signature
 

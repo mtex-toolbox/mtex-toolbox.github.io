@@ -77,5 +77,5 @@ boundary at 45 degree, so it removes the grid and nothing else.
 
 MATLAB's [grainBoundary.simplify](grainBoundary.simplify.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L169">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L184">source</a></font>
 {% endraw %}

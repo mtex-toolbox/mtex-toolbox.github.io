@@ -69,7 +69,7 @@ transformationMatrix gives the change of coordinates between two frames.
 | [char](referenceFrame.char_py.html) | the name of the frame, or its class name |
 | [clone](referenceFrame.clone_py.html) | an unsealed copy of the frame, not registered |
 | [conventionalSector](referenceFrame.conventionalSector_py.html) | the conventional sector of the group, the one MTEX draws, oriented by the up and east directions of the frame's plotting convention |
-| [conventionChar](referenceFrame.conventionChar_py.html) | the convention in the frame's own axes names, e.g |
+| [conventionChar](referenceFrame.conventionChar_py.html) | the plotting convention in the frame's own axes names, e.g |
 | [disjoint](referenceFrame.disjoint_py.html) | the sibling frame carrying the intersection of the two groups |
 | [elements](referenceFrame.elements_py.html) | the rotational axes of the group, both signs, and their multiplicities |
 | [factor](referenceFrame.factor_py.html) | the factorisation of the two groups: self = rot1 * d and other = d * rot2 with d the common elements |
@@ -79,9 +79,9 @@ transformationMatrix gives the change of coordinates between two frames.
 | [how2plot](referenceFrame.how2plot_py.html) | the default plotting convention the frame is drawn with, a plottingConvention or None |
 | [id](referenceFrame.id_py.html) | the group questions a frame answers, read through the frame |
 | [intern](referenceFrame.intern_py.html) | the session instance of a frame: the registered one when it agrees by key, otherwise this one, registered and sealed from now on |
-| [isAligned](referenceFrame.isAligned_py.html) | the same basis, up to a relative tolerance on the basis vectors |
+| [isAligned](referenceFrame.isAligned_py.html) | whether two frames have the same basis, up to a relative tolerance on the basis vectors |
 | [isclose](referenceFrame.isclose_py.html) | whether two frames may be treated as one: the same class of group and aligned bases, and for crystal frames the same mineral (MATLAB's eqTol) |
-| [isCompatible](referenceFrame.isCompatible_py.html) | whether a transition between the frames exists: the matrix is close to orthogonal |
+| [isCompatible](referenceFrame.isCompatible_py.html) | whether a transition between the frames exists, and the transition |
 | [isIndexed](referenceFrame.isIndexed_py.html) | whether the frame is an indexed phase, False for the notIndexedFrame |
 | [isLaue](referenceFrame.isLaue_py.html) | whether the point group is a Laue group, i.e |
 | [isProper](referenceFrame.isProper_py.html) | whether the point group has proper rotations only |
@@ -94,7 +94,7 @@ transformationMatrix gives the change of coordinates between two frames.
 | [nfold](referenceFrame.nfold_py.html) | the highest order of a symmetry axis of the group |
 | [numProper](referenceFrame.numProper_py.html) | the number of proper rotations in the point group |
 | [numSym](referenceFrame.numSym_py.html) | the number of elements of the point group |
-| [plot](referenceFrame.plot_py.html) | the elements of the point group of a frame drawn on the upper hemisphere: the mirror planes as great circles, the rotation and rotoinversion axes as polygons of their order |
+| [plot](referenceFrame.plot_py.html) | the elements of the point group of a frame drawn on the upper hemisphere, as the international tables draw them |
 | [pointGroup](referenceFrame.pointGroup_py.html) | the Hermann-Mauguin symbol of the point group |
 | [properGroup](referenceFrame.properGroup_py.html) | the sibling frame carrying the proper point group, the elements with their parity dropped |
 | [properSubGroup](referenceFrame.properSubGroup_py.html) | the sibling frame carrying only the proper rotations of this group |

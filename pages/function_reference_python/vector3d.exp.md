@@ -16,11 +16,51 @@ the rotation vector to its rotation: at the identity, or at a reference as a tan
 
 ## Syntax
 
+The rotation of axis v and angle |v|:
+
 ```python
-vector3d.exp(self, ref=None, side=None)
+rot = exp(v)
 ```
+
+A crystal direction: a misorientation of its frame:
+
+```python
+mori = exp(h)
+```
+
+At a reference orientation:
+
+```python
+ori = exp(h, oriRef)
+```
+
+A vector in a crystal frame gives the misorientation of that frame with itself, and is
+taken on the right of a reference; a specimen vector on the left.
+
+## Input
+
+| | |
+|---|---|
+| `v` | vector3d or Miller, the rotation vector: the axis times the angle |
+| `ref` | rotation or orientation, the reference |
+
+## Output
+
+| | |
+|---|---|
+| `rot` | rotation, or orientation for a crystal direction or a reference orientation |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `side` | `None` | 'left' or 'right', the side of the reference; by default right for a crystal direction, left otherwise |
+
+## See also
+
+[quaternion.log](quaternion.log_py.html), quaternion.exp, [SO3TangentVector](SO3TangentVector_index_py.html)
 
 MATLAB's [vector3d.exp](vector3d.exp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L965">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1040">source</a></font>
 {% endraw %}

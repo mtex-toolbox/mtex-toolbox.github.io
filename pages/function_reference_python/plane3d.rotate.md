@@ -19,5 +19,5 @@ a rotation turns the normal, the distance stays
 plane3d.rotate(self, rot)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L136">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L166">source</a></font>
 {% endraw %}

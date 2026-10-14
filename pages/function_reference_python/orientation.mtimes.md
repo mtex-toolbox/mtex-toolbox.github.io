@@ -22,5 +22,5 @@ a * b
 
 MATLAB's [orientation.mtimes](orientation.mtimes.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L325">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L420">source</a></font>
 {% endraw %}

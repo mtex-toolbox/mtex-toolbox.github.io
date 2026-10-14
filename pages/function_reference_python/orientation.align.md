@@ -11,14 +11,50 @@ status: Reference
 {% raw %}
 A method of [orientation](orientation_index_py.html).
 
-the orientation two frames stand in by their axes: a point at v in frA sits at
-orientation.align(frA, frB) * v in frB; the transition has to be a rotation
+the orientation two frames stand in by their axes, MATLAB's orientation.align
 
 ## Syntax
 
+The rotation from the axes of cs1 to those of cs2:
+
 ```python
-orientation.align(frA, frB, tol=0.1)
+ori = orientation.align(cs1, cs2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L666">source</a></font>
+A transition nearer a rotation demanded:
+
+```python
+ori = orientation.align(cs1, cs2, tol=1e-3)
+```
+
+A point sitting at v in frA sits at ori * v in frB. Unlike orientation.byScreenAlignment,
+which infers the rotation from how the two frames are drawn, this reads the two bases: it is
+the rotation of referenceFrame.transformationMatrix, which vector3d.transformReferenceFrame
+applies to move data from one frame into the other. The orientation is between the frames
+without their groups (stripSym).
+
+## Input
+
+| | |
+|---|---|
+| `frA` | referenceFrame, the source |
+| `frB` | referenceFrame, the target |
+
+## Output
+
+| | |
+|---|---|
+| `ori` | orientation from frA to frB |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `tol` | `0.1` | how far, as the norm of I - M M', the transition M may be from a rotation; a larger deviation is refused |
+
+## See also
+
+[orientation.byScreenAlignment](orientation.byScreenAlignment_py.html), [referenceFrame.isCompatible](referenceFrame.isCompatible_py.html), [transformReferenceFrame](transformReferenceFrame_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L858">source</a></font>
 {% endraw %}

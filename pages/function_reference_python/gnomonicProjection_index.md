@@ -19,5 +19,5 @@ the gnomonic projection: r = tan(theta), great circles drawn as straight lines
 | [polarAngle](gnomonicProjection.polarAngle_py.html) | the polar angle arctan(r) drawn at the plane radius r |
 | [radius](gnomonicProjection.radius_py.html) | the plane radius tan(theta) of the polar angle theta |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L306">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L353">source</a></font>
 {% endraw %}

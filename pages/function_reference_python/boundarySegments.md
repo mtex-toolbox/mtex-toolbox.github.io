@@ -17,5 +17,5 @@ the two vertices of every segment, shape (n, 2, 2)
 boundarySegments(gB)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L257">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L317">source</a></font>
 {% endraw %}

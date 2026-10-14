@@ -24,5 +24,5 @@ SO3Kernel(A)
 
 MATLAB's [SO3Kernel.SO3Kernel](SO3Kernel.SO3Kernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L192">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L212">source</a></font>
 {% endraw %}

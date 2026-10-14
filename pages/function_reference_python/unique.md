@@ -23,7 +23,7 @@ unique(x, *args, **kwargs)
 |---|---|
 | [orientation](orientation.unique_py.html) | the disjoint list of orientations, symmetric equivalents within a tolerance taken as one |
 | [orthogonalTransform](orthogonalTransform.unique_py.html) | the disjoint list of orthogonal transforms, those equal up to a tolerance taken as one |
-| [PoleFigure](PoleFigure.unique_py.html) | equivalent specimen directions under the specimen group carry the same pole density, so they are merged and their intensities averaged |
+| [PoleFigure](PoleFigure.unique_py.html) | the duplicated directions removed: equivalent specimen directions under the specimen group carry the same pole density, so they are merged and their intensities averaged |
 | [quaternion](quaternion.unique_py.html) | the disjoint list of quaternions, those equal up to a tolerance in the coefficients taken as one |
 | [rotation](rotation.unique_py.html) | the disjoint list of quaternions, those equal up to a tolerance in the coefficients taken as one |
 | [SO3TangentVector](SO3TangentVector.unique_py.html) | the disjoint list of tangent vectors at one shared reference |

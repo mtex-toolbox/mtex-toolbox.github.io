@@ -33,6 +33,12 @@ High and low angle boundaries:
 grains = calcGrains(ebsd, angle=[10*degree, 2*degree])
 ```
 
+A threshold per indexed phase:
+
+```python
+grains = calcGrains(ebsd, angle=[[10*degree], [5*degree]])
+```
+
 A threshold per phase:
 
 ```python
@@ -61,7 +67,10 @@ Two neighbouring pixels belong to one grain when the misorientation between them
 below the threshold angle, and a grain is a connected set of such pixels. With a pair
 [high, low] the boundaries above high separate the grains, and those between low and high
 are kept as low angle boundaries inside them, grains.innerBoundary: the subgrain boundaries.
-A threshold per phase, a soft threshold or any other rule is a grainBoundaryCriterion.
+A list of other than two numbers, or of lists, gives every phase a threshold or a pair of its
+own: one entry per indexed phase, or one per entry of ebsd.CSList as MATLAB's cell
+{a1, a2, a3}; two numbers are always the pair [high, low], as MATLAB's [a1 a2], so two
+phases take [[a1], [a2]]. A soft threshold or any other rule is a grainBoundaryCriterion.
 
 The map is divided into cells around its pixels, a Voronoi decomposition bounded by alpha:
 a not indexed region narrower than 2 alpha pixel spacings is filled by the grains around
@@ -87,7 +96,7 @@ ebsd.copy() to keep the map as it was.
 
 | | default | |
 |---|---|---|
-| `angle` | `15*degree` | the misorientation angle above which neighbouring pixels belong to different grains; a pair [high, low] also keeps the low angle boundaries between low and high as grains.innerBoundary |
+| `angle` | `15*degree` | the misorientation angle above which neighbouring pixels belong to different grains; a pair [high, low] also keeps the low angle boundaries between low and high as grains.innerBoundary; a list of an angle or a pair per phase gives every phase its own |
 | `threshold` | `None` | the same as angle, which it replaces when given |
 | `criterion` | `None` | a grainBoundaryCriterion instead of the angle: gbcAngle with thresholds per phase, gbcSoft for a soft threshold, gbcEqual for a property that must agree, gbcCustom for a rule of your own, gbcFMC with every parameter of fast multiscale clustering |
 | `minPixel` | `1` | the smallest number of pixels of a grain; the pixels of an indexed grain that would be smaller are marked notIndexed and the grains reconstructed again |

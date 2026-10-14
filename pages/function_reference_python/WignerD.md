@@ -87,5 +87,5 @@ and normalize does not apply to them. MATLAB's kernel option is not there.
 
 MATLAB's [WignerD](WignerD.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L230">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L245">source</a></font>
 {% endraw %}

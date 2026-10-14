@@ -20,5 +20,5 @@ reference field there
 pfSections.orientationsAt(self, k, vs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L451">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L535">source</a></font>
 {% endraw %}

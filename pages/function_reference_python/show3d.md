@@ -9,13 +9,39 @@ lang: python
 status: Reference
 ---
 {% raw %}
-show3d(): the scene of the current figure in an interactive PyVista window
+the scene of the current figure in an interactive PyVista window, rotated and zoomed with
+the mouse
 
 ## Syntax
 
+The scene of the current figure:
+
 ```python
-show3d(fig=None, window_size=(900, 900))
+show3d()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L515">source</a></font>
+Of another figure, in a smaller window:
+
+```python
+show3d(fig, window_size=(600, 400))
+```
+
+## Output
+
+| | |
+|---|---|
+| `p` | the pyvista Plotter of the window |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `fig` | `None` | the mtexFigure holding the scene, by default the current one |
+| `window_size` | `(900, 900)` | the size of the window in pixels |
+
+## See also
+
+[exportHTML](exportHTML_py.html), [gcs](gcs_py.html), [setCamera](setCamera_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L542">source</a></font>
 {% endraw %}

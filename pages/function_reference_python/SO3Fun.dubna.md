@@ -17,6 +17,39 @@ orientations when given
 
 ## Syntax
 
+The example ODF, an SO3FunHarmonic of trigonal quartz:
+
+```python
+odf = SO3Fun.dubna()
+```
+
+Its values at orientations:
+
+```python
+values = SO3Fun.dubna(ori)
+```
+
+The function is read from the sample data, mtexdata('dubnaODF').
+
+## Input
+
+| | |
+|---|---|
+| `ori` | orientation of quartz, where to evaluate the function |
+
+## Output
+
+| | |
+|---|---|
+| `odf` | SO3FunHarmonic |
+| `values` | array, the values at ori |
+
+## See also
+
+[mtexdata](mtexdata_py.html), [SO3FunHarmonic](SO3FunHarmonic_index_py.html)
+
+## Signature
+
 ```python
 SO3Fun.dubna(ori=None)
 ```

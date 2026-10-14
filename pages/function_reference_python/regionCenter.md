@@ -16,9 +16,43 @@ sector, so it is this centre and not the group's Dirichlet centre that it turns 
 
 ## Syntax
 
+The centre as an (3,) array:
+
 ```python
-regionCenter(sR, resolution=1*degree)
+c = regionCenter(cs.fundamentalSector())
 ```
+
+A finer grid for the centroid:
+
+```python
+c = regionCenter(cs.fundamentalSector(), resolution=0.5*degree)
+```
+
+The resolution matters only for a region of four or more vertices, whose centroid is
+summed over an equispaced grid of that spacing; a region without boundary has its centre
+at z.
+
+## Input
+
+| | |
+|---|---|
+| `sR` | sphericalRegion |
+
+## Output
+
+| | |
+|---|---|
+| `c` | (3,) array, the unit vector of the centre |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `resolution` | `1*degree` | the spacing of the grid the area centroid is summed over |
+
+## See also
+
+[sphericalRegion.center](sphericalRegion.center_py.html), [polarCoordinates](sphericalRegion.polarCoordinates_py.html), [sectorFolds](sectorFolds_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectorfold.py#L41">source</a></font>
 {% endraw %}

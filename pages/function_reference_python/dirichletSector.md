@@ -68,5 +68,5 @@ for a group the conventional sector does not fit, such as the rotations two fram
 
 [fundamentalSector](fundamentalSector_py.html), [sphericalRegion](sphericalRegion_index_py.html), [tilesSphere](tilesSphere_py.html), [FundamentalSector](FundamentalSector_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L313">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L425">source</a></font>
 {% endraw %}

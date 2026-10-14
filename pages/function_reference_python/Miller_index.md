@@ -149,9 +149,9 @@ function Miller from its indices.
 | [dot](vector3d.dot_py.html) | the inner product of two vectors, pointwise |
 | [dot_outer](Miller.dot_outer_py.html) | the inner product of two vectors, pointwise |
 | [dot_outer](vector3d.dot_outer_py.html) | the inner product of two vectors, pointwise |
-| [double](vector3d.double_py.html) | double(e) is e.double(): the coordinates of the images in the orthonormal basis, one row per orientation |
+| [double](vector3d.double_py.html) | the coordinates of the images of an embedding in their orthonormal basis, one row per orientation, e.double() |
 | [dspacing](Miller.dspacing_py.html) | the distance between the lattice planes with this normal, in the units of the cell |
-| [dyad](vector3d.dyad_py.html) | the outer product of tensors or vectors |
+| [dyad](vector3d.dyad_py.html) | the dyadic product of tensors or vectors, their outer product |
 | [eig](vector3d.eig_py.html) | the principal axes of the moment matrix and its eigenvalues, vector3d/eig |
 | [eq](vector3d.eq_py.html) | isclose(v, w), isclose(v, w, antipodal=True, tol=): pointing the same way up to the group of a crystal frame within the tolerance tol of the cosine, and up to sign when antipodal (MATLAB's eq) |
 | [exp](Miller.exp_py.html) | the rotation vector to its rotation: at the identity, or at a reference as a tangent vector |
@@ -172,8 +172,8 @@ function Miller from its indices.
 | [k](vector3d.k_py.html) | the Miller index k of a plane normal |
 | [l](vector3d.l_py.html) | the Miller index l of a plane normal |
 | [lattice](vector3d.lattice_py.html) | the lattice type of the crystal frame, latticeType.none for a vector in no crystal frame |
-| [line](vector3d.line_py.html) | line(x, y, lineStyle=':', lineWidth=4, color='w'): a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
-| [lineIntersect](vector3d.lineIntersect_py.html) | where the segments from a to b cross the planes <n, v> = d, NaN where they do not |
+| [line](vector3d.line_py.html) | a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
+| [lineIntersect](vector3d.lineIntersect_py.html) | where the segments from a to b cross the planes <n, v> = d, NaN where they do not, MATLAB's lineIntersect |
 | [load](vector3d.load_py.html) | vector3d.load('vectors.txt', columnNames=[...]): the directions a text table holds, read by the interfaces layer above this one |
 | [mean](Miller.mean_py.html) | the mean direction of a list of vectors, of axes, or of crystal directions |
 | [mean](vector3d.mean_py.html) | the mean direction of a list of vectors, of axes, or of crystal directions |
@@ -198,7 +198,7 @@ function Miller from its indices.
 | [project2FundamentalRegion](Miller.project2FundamentalRegion_py.html) | the directions folded into the fundamental sector of their frame, with antipodal=True into that of the Laue group |
 | [project2FundamentalRegion](vector3d.project2FundamentalRegion_py.html) | the directions folded into the fundamental sector of their frame, with antipodal=True into that of the Laue group |
 | [quiver3](vector3d.quiver3_py.html) | arrows in space: tangent vectors in orientation space, a field on the sphere or SO(3), or arrows at positions |
-| [quiver](vector3d.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
+| [quiver](vector3d.quiver_py.html) | arrows: tangent vectors at directions, a vector or axis field on the sphere, arrows at orientations in the sections of the current figure, or directions on a map or a volume |
 | [rand](vector3d.rand_py.html) | uniformly distributed unit vectors or axes, on the sphere or in a sphericalRegion given last |
 | [rdivide](vector3d.rdivide_py.html) |  |
 | [refine](vector3d.refine_py.html) | the directions with a new one between every three neighbours: the centroids of the Delaunay triangles of the points on the sphere, none below the lowest point, so a cap stays a cap |
@@ -220,8 +220,8 @@ function Miller from its indices.
 | [symmetrise](Miller.symmetrise_py.html) | the symmetrically equivalent directions, numSym x shape, or the distinct ones of one direction with unique=True |
 | [symmetrise](vector3d.symmetrise_py.html) | the symmetrically equivalent directions, numSym x shape, or the distinct ones of one direction with unique=True |
 | [T](vector3d.T_py.html) | the Miller-Bravais index T = -(U + V) of a lattice direction |
-| [text](Miller.text_py.html) | text(v, labels): text at directions, text(v, labeled=True) each direction's own name |
-| [text](vector3d.text_py.html) | text(v, labels): text at directions, text(v, labeled=True) each direction's own name |
+| [text](Miller.text_py.html) | text at directions on the sphere, at the measurements or grains of a map, or at a point of the current axes |
+| [text](vector3d.text_py.html) | text at directions on the sphere, at the measurements or grains of a map, or at a point of the current axes |
 | [theta](vector3d.theta_py.html) | the polar angle to z, in [0, pi] |
 | [times](vector3d.times_py.html) |  |
 | [transformReferenceFrame](Miller.transformReferenceFrame_py.html) | the same direction written in another frame |

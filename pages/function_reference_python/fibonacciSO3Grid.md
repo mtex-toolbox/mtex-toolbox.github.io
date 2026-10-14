@@ -73,5 +73,5 @@ localOrientationGrid.
 
 [superfibonacciSO3Grid](superfibonacciSO3Grid_py.html), [equispacedSO3Grid](equispacedSO3Grid_py.html), [localOrientationGrid](localOrientationGrid_py.html), [fibonacciS2Grid](fibonacciS2Grid_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/superfibonacci.py#L133">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/superfibonacci.py#L154">source</a></font>
 {% endraw %}

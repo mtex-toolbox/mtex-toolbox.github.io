@@ -16,9 +16,44 @@ directions of the frame's plotting convention
 
 ## Syntax
 
+As the frame is drawn:
+
 ```python
-referenceFrame.conventionalSector(self, up=None, east=None)
+sR = cs.conventionalSector()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L368">source</a></font>
+Other directions:
+
+```python
+sR = cs.conventionalSector(up=vector3d(0, 0, 1), east=vector3d(0, 1, 0))
+```
+
+The sector is the hemisphere towards up where an element of the group sends up below it, a
+wedge about the c axis of the angle the order leaves, starting on a mirror plane, a twofold
+axis or the a axis, and the standard triangles of the cubic groups.
+
+## Input
+
+| | |
+|---|---|
+| `cs` | referenceFrame |
+
+## Output
+
+| | |
+|---|---|
+| `sR` | sphericalRegion |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `up` | `None` | the direction out of the screen; by default the frame's plotting convention's |
+| `east` | `None` | the direction to the east the wedge starts from; by default the convention's |
+
+## See also
+
+[referenceFrame.fundamentalSector](referenceFrame.fundamentalSector_py.html), [sphericalRegion](sphericalRegion_index_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L393">source</a></font>
 {% endraw %}

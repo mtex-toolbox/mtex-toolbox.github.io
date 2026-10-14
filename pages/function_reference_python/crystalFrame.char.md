@@ -19,5 +19,5 @@ the mineral name of the frame, or the symbol of its point group
 crystalFrame.char(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L869">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1007">source</a></font>
 {% endraw %}

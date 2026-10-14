@@ -32,7 +32,7 @@ pC = plottingConvention.ij          x east, y south, z into the screen
 | [makeDefault](plottingConvention.makeDefault_py.html) | makes this convention the session default, that of the default specimen frame |
 | [north](plottingConvention.north_py.html) | the reference direction pointing north on screen |
 | [outOfScreen](plottingConvention.outOfScreen_py.html) | the reference direction pointing out of the screen |
-| [setView](plottingConvention.setView_py.html) | setView(pC), pC.setView(): a polar axes turned as the plotting convention says, a 3D axes looking down its out of screen direction |
+| [setView](plottingConvention.setView_py.html) | a polar axes turned as the plotting convention says, a 3D axes looking down its out of screen direction |
 | [south](plottingConvention.south_py.html) | the reference direction pointing south on screen |
 | [west](plottingConvention.west_py.html) | the reference direction pointing west on screen |
 

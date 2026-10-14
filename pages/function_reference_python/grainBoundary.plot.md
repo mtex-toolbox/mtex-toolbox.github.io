@@ -44,10 +44,17 @@ A transparency per segment:
 plot(gB, edgeAlpha=a)
 ```
 
+The chains with rounded joins:
+
+```python
+plot(gB, lineWidth=4, smooth=True)
+```
+
 Without values the boundary is drawn as joined chains in one colour; a value per segment
 colours it through a colour map, an RGB triple per segment directly, both segment by
 segment with round caps, so that a staircase reads as one line. A boundary draws no phase
-legend. MATLAB's edgeColor is a synonym of lineColor here too.
+legend. MATLAB's edgeColor is a synonym of lineColor here too. smooth=True rounds the joins
+and the ends of the lines, which shows on thick ones.
 
 region=(xmin, xmax, ymin, ymax) shows a part of the map, title= names the axes,
 coordinates=True labels the axes with the map coordinates, how2plot= a plottingConvention
@@ -80,6 +87,7 @@ every other keyword goes to the matplotlib artist.
 | `micronbar` | `None` | draw the scale bar; by default the preference showMicronBar |
 | `refFrame` | `True` | draw the axes of the specimen frame in the scale bar box |
 | `displayName` | `None` | the name in a legend |
+| `smooth` | `False` | draw the chains with round joins and ends |
 
 ## See also
 
@@ -87,5 +95,5 @@ every other keyword goes to the matplotlib artist.
 
 MATLAB's [grainBoundary.plot](grainBoundary.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L767">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L809">source</a></font>
 {% endraw %}

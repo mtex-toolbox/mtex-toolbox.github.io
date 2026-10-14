@@ -15,9 +15,40 @@ the derivative of the bump kernel, zero wherever it exists; without an argument 
 
 ## Syntax
 
+Zeros of the shape of t:
+
 ```python
-SO3BumpKernel.grad(self, t=None, other=None)
+d = psi.grad(t)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L476">source</a></font>
+The zero kernel:
+
+```python
+dpsi = psi.grad()
+```
+
+## Input
+
+| | |
+|---|---|
+| `psi` | SO3BumpKernel |
+| `t` | ndarray of cosines cos(omega/2), or rotation |
+
+## Output
+
+| | |
+|---|---|
+| `d` | ndarray of zeros, or SO3Kernel without an argument |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `other` | `None` | a second rotation: the angle between t and it |
+
+## See also
+
+[SO3Kernel.grad](SO3Kernel.grad_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L533">source</a></font>
 {% endraw %}

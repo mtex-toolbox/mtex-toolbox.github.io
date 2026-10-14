@@ -12,15 +12,50 @@ status: Reference
 {% raw %}
 A method of [grain3Boundary](grain3Boundary_index_py.html).
 
-the two sides exchanged, of all faces or a selection, as MATLAB's flip
+the boundary faces with their two sides exchanged, of all faces or a selection; MATLAB's
+flip of grain3Boundary
 
 ## Syntax
 
+Every face:
+
 ```python
-grain3Boundary.flip(self, sel=None)
+gB = gB.flip()
 ```
+
+The faces of grain 1:
+
+```python
+gB = gB.flip(gB.hasGrain(1))
+```
+
+The grain ids, the voxel ids and the phase ids of the two sides change places and the
+misrotation is inverted. The corners and so the normals stay; flipN turns those. The
+boundary is copied.
+
+## Input
+
+| | |
+|---|---|
+| `gB` | grain3Boundary |
+
+## Output
+
+| | |
+|---|---|
+| `gB` | grain3Boundary |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `sel` | `None` | the faces to flip, a boolean mask or indices; by default every face |
+
+## See also
+
+[grain3Boundary.flipN](grain3Boundary.flipN_py.html), [grainBoundary.flip](grainBoundary.flip_py.html)
 
 MATLAB's [grain3Boundary.flip](grain3Boundary.flip.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L141">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L162">source</a></font>
 {% endraw %}

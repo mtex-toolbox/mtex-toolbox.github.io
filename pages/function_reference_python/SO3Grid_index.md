@@ -26,8 +26,8 @@ S3G = equispacedSO3Grid(cs, ss, resolution=5*degree)
 | | |
 |---|---|
 | [alphaPeriod](SO3Grid.alphaPeriod_py.html) | the period of alpha, 2 pi over the order of the rotations about z the frames share |
-| [dot_outer](SO3Grid.dot_outer_py.html) | the reduced dot product and the disorientation angle, over the groups of both frames |
-| [find](SO3Grid.find_py.html) | the nearest grid rotation of every orientation, or the k nearest, or all within a radius, up to the symmetries of the grid's frames, through the quaternion k-d tree of orientationtree.py (MATLAB SO3Grid/find): cos(w/2) of the reduced misorientation angle w for the nearest, the angles for the k nearest and the radius |
+| [dot_outer](SO3Grid.dot_outer_py.html) | the dot product up to symmetry, cos(omega/2) of the misorientation angle omega reduced over the groups of both frames |
+| [find](SO3Grid.find_py.html) | the nearest grid rotation of every orientation, or the k nearest, or all within a radius, up to the symmetries of the grid's frames |
 | [gamma](SO3Grid.gamma_py.html) | the ladder of every node as an S1Grid |
 | [mtimes](SO3Grid.mtimes_py.html) |  |
 | [node](SO3Grid.node_py.html) | the indices of the orientations on the gamma ladder of node k |

@@ -48,5 +48,5 @@ calcError(a, b, *args, **kwargs)
 
 MATLAB's [SO3Fun.calcError](SO3Fun.calcError.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L684">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L861">source</a></font>
 {% endraw %}

@@ -47,6 +47,12 @@ The text above:
 scatter(v, label=texts, textAboveMarker=True)
 ```
 
+Every direction labelled 1, 2, ..., n:
+
+```python
+scatter(v, numbered=True)
+```
+
 Every equivalent, named by its indices:
 
 ```python
@@ -81,7 +87,7 @@ The plot is new, or the one held; its projection, hemisphere and region follow t
 and the keywords of the spherical plots (upper, lower, fundamentalRegion, ...). A Miller
 direction or plane with symmetrised=True is drawn at all its distinct symmetric equivalents.
 Orientations go to scatter3d's axis angle space, two lists of coordinates to the map
-held. MATLAB's numbered flag is not there.
+held.
 
 ## Input
 
@@ -105,6 +111,7 @@ held. MATLAB's numbered flag is not there.
 | `minmax` | `False` | mark the smallest and the largest value |
 | `symmetrised` | `False` | draw every distinct symmetric equivalent of a crystal direction |
 | `colorbar` | `False` | add a colour bar for the data |
+| `numbered` | `False` | label the directions by their number, 1 to n, in their order |
 
 ## See also
 
@@ -112,5 +119,5 @@ held. MATLAB's numbered flag is not there.
 
 MATLAB's [Miller.scatter](Miller.scatter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L883">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L910">source</a></font>
 {% endraw %}

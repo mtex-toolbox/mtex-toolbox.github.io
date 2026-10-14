@@ -22,5 +22,5 @@ SO3Kernel.conv(self, other)
 
 MATLAB's [SO3Kernel.conv](SO3Kernel.conv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L283">source</a></font>
 {% endraw %}

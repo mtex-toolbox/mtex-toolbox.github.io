@@ -9,17 +9,53 @@ lang: python
 status: Reference
 ---
 {% raw %}
-mtexTitle('text'): the title of the current axes, mtexTitle(ax, 'text') that of the axes given
+a title over an axes
 
 ## Syntax
 
+The title of the current axes:
+
 ```python
-mtexTitle(*args, fig=None, **kwargs)
+mtexTitle('pole figures')
 ```
+
+The title of the axes given:
+
+```python
+mtexTitle(ax, '(100)')
+```
+
+The axes of a figure given, larger:
+
+```python
+mtexTitle('(110)', fig=mtexFig, fontSize=14)
+```
+
+The current axes is the one drawn into last; an axes made with plt.subplot outside an
+mtexFigure takes the title as well. Further keywords go to matplotlib's set_title, fontSize
+as its fontsize. MATLAB's 'global' title over all axes and its alignments have no
+counterpart.
+
+## Input
+
+| | |
+|---|---|
+| `ax` | the matplotlib axes, before the text |
+| `text` | the title |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `fig` | `None` | the mtexFigure whose axes drawn into last takes the title; the current one by default |
+
+## See also
+
+[xlabel](xlabel_py.html), [ylabel](ylabel_py.html), [mtexFigure](mtexFigure_index_py.html)
 
 ## Used on
 
 [FundamentalSector](FundamentalSector_py.html), [EBSD3Analysis](EBSD3Analysis_py.html), [EBSD3Plotting](EBSD3Plotting_py.html), [Grains3DOperations](Grains3DOperations_py.html), [Grains3DProperties](Grains3DProperties_py.html), [Grains3DSmoothing](Grains3DSmoothing_py.html), [NeperInterface](NeperInterface_py.html), [EBSDGrid](EBSDGrid_py.html), [EBSDMapsAndImages](EBSDMapsAndImages_py.html), [EBSDSimulation](EBSDSimulation_py.html), [EBSDSpatialTransform](EBSDSpatialTransform_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L450">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L557">source</a></font>
 {% endraw %}

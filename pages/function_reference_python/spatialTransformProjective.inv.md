@@ -19,5 +19,5 @@ the homography of the inverse matrix
 spatialTransformProjective.inv(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L355">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L388">source</a></font>
 {% endraw %}

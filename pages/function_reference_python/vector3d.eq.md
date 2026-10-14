@@ -18,11 +18,52 @@ of a crystal frame within the tolerance tol of the cosine, and up to sign when a
 
 ## Syntax
 
+The same direction:
+
 ```python
-vector3d.eq(self, other, antipodal=False, tol=1e-10)
+b = v.isclose(w)
 ```
+
+The same axis:
+
+```python
+b = v.isclose(w, antipodal=True)
+```
+
+A coarser tolerance:
+
+```python
+b = v.isclose(w, tol=1e-6)
+```
+
+True where <v, w> differs from |v| |w| by less than tol, the product reduced over the
+group of a crystal frame; vectors of different frames are never close. The operator ==
+compares exactly.
+
+## Input
+
+| | |
+|---|---|
+| `v, w` | vector3d or Miller |
+
+## Output
+
+| | |
+|---|---|
+| `b` | boolean array |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` | `False` | up to sign, also when neither vector is antipodal |
+| `tol` | `1e-10` | the tolerance of the cosine times the lengths |
+
+## See also
+
+[vector3d.angle](vector3d.angle_py.html), [vector3d.dot](vector3d.dot_py.html)
 
 MATLAB's [vector3d.eq](vector3d.eq.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L943">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1000">source</a></font>
 {% endraw %}

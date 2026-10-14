@@ -19,5 +19,5 @@ the name in the display, poly11 or poly22 by the degree
 spatialTransformPoly.shortChar(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L469">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L518">source</a></font>
 {% endraw %}

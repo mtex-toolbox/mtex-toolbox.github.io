@@ -25,5 +25,5 @@ rho over theta in degrees: the polar angles of the frame itself, no convention
 | [projectUnchecked](plainProjection.projectUnchecked_py.html) | the plane coordinates (rho, theta) in degrees of directions known to lie in the chart |
 | [withRegion](plainProjection.withRegion_py.html) | the same chart showing another region |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L326">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L373">source</a></font>
 {% endraw %}

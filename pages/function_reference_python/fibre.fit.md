@@ -12,20 +12,60 @@ status: Reference
 {% raw %}
 A method of [fibre](fibre_index_py.html).
 
-the fibre through a list of orientations: the plane of the two leading eigenvectors
-of their quaternion tensor, the orientations first moved to the representatives
-nearest their mean, or taken as stored with symmetry=False; with diagnostics the
-eigenvalues, ascending and summing to one, and the mean angle of the orientations to
-the fibre come too. This is the local fit of a concentrated cloud; the search through
-the pole figures of an ODF is the business of P2
+the fibre that fits a list of orientations best, MATLAB's fibre.fit
 
 ## Syntax
 
+The fibre through the orientations:
+
 ```python
-fibre.fit(ori, *args, diagnostics=False, symmetry=True)
+f = fibre.fit(ori)
 ```
+
+With the eigenvalues and the mean angle:
+
+```python
+f, lam, delta = fibre.fit(ori, diagnostics=True)
+```
+
+The orientations as stored:
+
+```python
+f = fibre.fit(ori, symmetry=False)
+```
+
+The fibre is the plane of the two leading eigenvectors of the quaternion tensor of the
+orientations, after they are moved to the symmetric equivalents nearest their mean. This
+is MATLAB's 'local' fit of a concentrated cloud, the one algorithm here; MATLAB's fit to an
+ODF is not taken. The result is a full fibre, with r in the upper hemisphere.
+
+## Input
+
+| | |
+|---|---|
+| `ori` | orientation |
+| `args` | 'local', MATLAB's flag, accepted |
+
+## Output
+
+| | |
+|---|---|
+| `f` | fibre, full |
+| `lam` | the eigenvalues of the quaternion tensor, ascending and summing to one (diagnostics) |
+| `delta` | the mean angle of the orientations to the fibre (diagnostics) |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `diagnostics` | `False` | also return lam and delta, MATLAB's second and third outputs |
+| `symmetry` | `True` | move the orientations to the equivalents nearest their mean first; False takes them as stored |
+
+## See also
+
+[fibre.angle](fibre.angle_py.html), [orientation.mean](orientation.mean_py.html)
 
 MATLAB's [fibre.fit](fibre.fit.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L289">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L382">source</a></font>
 {% endraw %}

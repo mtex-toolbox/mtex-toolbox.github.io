@@ -21,7 +21,7 @@ norm(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [embedding](embedding.norm_py.html) | the Euclidean norm of every image, with normalized=True over the norm every orientation's image has |
+| [embedding](embedding.norm_py.html) | the Euclidean norm of every image |
 | [quaternion](quaternion.norm_py.html) | the norm of the quaternions, sqrt(a^2 + b^2 + c^2 + d^2) |
 | [S1FunHarmonic](S1FunHarmonic.norm_py.html) | the L2 norm for the normalised measure, the Euclidean norm of the coefficients |
 | [S1Kernel](S1Kernel.norm_py.html) | the L2 norm of the kernel, the Euclidean norm of its two sided coefficients |

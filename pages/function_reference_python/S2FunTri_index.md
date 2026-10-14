@@ -42,7 +42,7 @@ S2FunTri(fun)                a callable sampled on a 1.5 degree grid
 | [times](S2FunTri.times_py.html) |  |
 | [uminus](S2FunTri.uminus_py.html) |  |
 | [vertices](S2FunTri.vertices_py.html) | the vertices of the triangulation, the directions the values are given at |
-| [volume](S2FunTri.volume_py.html) | the share of orientations within a radius of a centre: the mean of f on a local grid in the ball, times the ball's share of the fundamental region (its Haar measure times the number of symmetric copies, at most one) |
+| [volume](S2FunTri.volume_py.html) | the share of orientations within a radius of a centre: the integral of f over the ball, int_{angle(g, c) < r} f(g) dg, relative to the integral over all orientations |
 
 MATLAB's [S2FunTri_index](S2FunTri_index.html)
 

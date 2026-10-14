@@ -32,18 +32,18 @@ sF = S2Fun.unimodal(halfwidth=10*degree)
 The kernel psi about the direction v:
 
 ```python
-sF = S2Fun.unimodal(v, psi=psi)
+sF = S2Fun.unimodal(v, psi)
 ```
 
-The function is the de la Vallee Poussin kernel of the halfwidth, or the kernel psi, turned
-from the north pole to v. MATLAB's S2Fun.unimodal(v, psi) takes the kernel positionally;
-here it is the keyword psi.
+The function is the kernel psi, by default the de la Vallee Poussin kernel of the
+halfwidth, turned from the north pole to v.
 
 ## Input
 
 | | |
 |---|---|
 | `v` | vector3d, the direction of the maximum, by default the north pole |
+| `psi` | S2Kernel, by default the de la Vallee Poussin kernel of the halfwidth |
 
 ## Output
 
@@ -55,8 +55,7 @@ here it is the keyword psi.
 
 | | default | |
 |---|---|---|
-| `halfwidth` | `25*degree` | the halfwidth of the de la Vallee Poussin kernel |
-| `psi` | `None` | S2Kernel, the kernel instead |
+| `halfwidth` | `25*degree` | the halfwidth of the default de la Vallee Poussin kernel |
 
 ## See also
 

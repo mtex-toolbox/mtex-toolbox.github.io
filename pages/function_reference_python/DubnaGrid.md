@@ -21,5 +21,5 @@ DubnaGrid(ntheta)
 
 MATLAB's [DubnaGrid](DubnaGrid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/loadpolefigure.py#L91">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/loadpolefigure.py#L110">source</a></font>
 {% endraw %}

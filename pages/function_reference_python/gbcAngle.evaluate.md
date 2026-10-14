@@ -13,13 +13,54 @@ A method of [gbcAngle](gbcAngle_index_py.html).
 
 the connectivity of the pairs i[k], j[k]: the share of the angle levels their misorientation
 stays below, 0 across phases, 1 between not indexed measurements; a compiled loop when
-numba is the backend
+numba is the backend; MATLAB's gbcAngle.evaluate
 
 ## Syntax
 
+1 joined, 0 a boundary:
+
 ```python
-gbcAngle.evaluate(self, ebsd, i, j, backend=None)
+c = gbcAngle(10*degree).evaluate(ebsd, i, j)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L146">source</a></font>
+0.5 for a low angle boundary:
+
+```python
+c = gbcAngle([10*degree, 2*degree]).evaluate(ebsd, i, j)
+```
+
+The NumPy loop:
+
+```python
+c = gbcAngle(10*degree).evaluate(ebsd, i, j, backend='numpy')
+```
+
+With a pair [high, low] the value is 1 below low, 0.5 between low and high and 0 above
+high: the share of the levels the misorientation angle stays below. calcGrains joins two
+pixels whose value is 1 into one grain.
+
+## Input
+
+| | |
+|---|---|
+| `ebsd` | EBSD |
+| `i, j` | the flat indices of the pairs of measurements, equally long |
+
+## Output
+
+| | |
+|---|---|
+| `c` | the connectivity of every pair, between 0 and 1 |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `backend` | `None` | 'numba' or 'numpy', by default the preference 'kernels' |
+
+## See also
+
+[gbcSoft](gbcSoft_index_py.html), [gbcEqual](gbcEqual_index_py.html), [calcGrains](EBSD.calcGrains_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L160">source</a></font>
 {% endraw %}

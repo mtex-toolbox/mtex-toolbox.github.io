@@ -12,17 +12,50 @@ status: Reference
 {% raw %}
 A method of [crystalFrame](crystalFrame_index_py.html).
 
-plotHKL(cs): the low index directions <100>, <110>, <111> of a crystal with all their
-symmetric equivalents, labelled, on the upper hemisphere unless complete (MATLAB
-crystalFrame/plotHKL)
+the low index directions <100>, <110>, <111> of a crystal with all their symmetric
+equivalents, labelled by their indices; MATLAB's crystalFrame.plotHKL
 
 ## Syntax
 
+On the upper hemisphere:
+
 ```python
-crystalFrame.plotHKL(CS, complete=False, **kw)
+plotHKL(cs)
 ```
+
+On the whole sphere:
+
+```python
+cs.plotHKL(complete=True)
+```
+
+Every family is scattered with symmetrised=True and labeled=True, <111>, <110>, <100> in
+the colours of that order, with black marker edges over a grid; the other keywords go to
+scatter and the spherical plots.
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the matplotlib collections |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `complete` | `False` | the whole sphere instead of the upper hemisphere |
+
+## See also
+
+[plotSymmetry](plotSymmetry_py.html), [scatter](quaternion.scatter_py.html), [Miller.symmetrise](Miller.symmetrise_py.html)
 
 MATLAB's [crystalSymmetry.plotHKL](crystalSymmetry.plotHKL.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1020">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1070">source</a></font>
 {% endraw %}

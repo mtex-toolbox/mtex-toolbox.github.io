@@ -21,7 +21,7 @@ subGrid(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [mapImage](mapImage.subGrid_py.html) | a rectangle cut out, rows and cols contiguous and ascending, or the box round a mask |
+| [mapImage](mapImage.subGrid_py.html) | a rectangle cut out of the image |
 | [S1Grid](S1Grid.subGrid_py.html) | the points selected by a mask, the range kept |
 | [S2Grid](S2Grid.subGrid_py.html) | the grid points selected by a mask, or within eps of a centre |
 | [SO3FibonacciGrid](SO3FibonacciGrid.subGrid_py.html) | the grid of the orientations a mask or an index array selects |

@@ -36,5 +36,5 @@ sigmaSections(cs, ss, sections=6, sigma=values)   with h1 = c*, h2 = a
 
 MATLAB's [pfSections](pfSections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L330">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L377">source</a></font>
 {% endraw %}

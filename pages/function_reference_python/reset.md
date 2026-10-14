@@ -18,5 +18,5 @@ a default frame is what frames.py installed and stays
 reset()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/session.py#L125">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/session.py#L151">source</a></font>
 {% endraw %}

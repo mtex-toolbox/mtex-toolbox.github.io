@@ -21,7 +21,7 @@ normalize(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [PoleFigure](PoleFigure.normalize_py.html) | scaled to mean one, or to the pole figures the ODF predicts |
+| [PoleFigure](PoleFigure.normalize_py.html) | the pole figures scaled to mean one, or to the pole figures an ODF predicts |
 | [quaternion](quaternion.normalize_py.html) | the quaternions divided by their norm |
 | [S2VectorFieldHarmonic](S2VectorField.normalize_py.html) | the field scaled to unit length at every direction |
 | [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic.normalize_py.html) | the field of unit vectors in the directions of the field, by quadrature at twice the bandwidth |

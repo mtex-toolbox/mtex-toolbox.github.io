@@ -15,13 +15,45 @@ the second prismatic a slip system <01-10>{2-1-10} of a hexagonal crystal
 
 ## Syntax
 
+With the critical resolved shear stress 1:
+
 ```python
-slipSystem.prismatic2A(CS, CRSS=1)
+sS = slipSystem.prismatic2A(cs)
 ```
+
+With another:
+
+```python
+sS = slipSystem.prismatic2A(cs, CRSS=2)
+```
+
+One system of the family; symmetrise gives every equivalent one.
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame of a hexagonal crystal |
+
+## Output
+
+| | |
+|---|---|
+| `sS` | slipSystem |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `CRSS` | `1` | the critical resolved shear stress |
+
+## See also
+
+[slipSystem](slipSystem_index_py.html), [slipSystem.symmetrise](slipSystem.symmetrise_py.html), [dislocationSystem](dislocationSystem_index_py.html)
 
 ## Used on
 
 [Lankford](Lankford_py.html), [SlipSystems](SlipSystems_py.html), [TaylorHex](TaylorHex_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L294">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L433">source</a></font>
 {% endraw %}

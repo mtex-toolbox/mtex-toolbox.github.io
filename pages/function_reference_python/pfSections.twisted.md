@@ -20,5 +20,5 @@ point for the orientation to belong there
 pfSections.twisted(self, r, omega)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L419">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L466">source</a></font>
 {% endraw %}

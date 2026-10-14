@@ -18,18 +18,51 @@ that of the Laue group; given a centre, the equivalent nearest it instead
 
 ## Syntax
 
-```python
-v.projectIntoFundamentalRegion()
-v.projectIntoFundamentalRegion(center)
-```
-
-## Signature
+Into the sector of an inverse pole figure:
 
 ```python
-vector3d.project2FundamentalRegion(self, center=None, antipodal=False)
+h = h.projectIntoFundamentalRegion()
 ```
+
+Into the sector of the Laue group:
+
+```python
+h = h.projectIntoFundamentalRegion(antipodal=True)
+```
+
+The equivalent nearest a centre:
+
+```python
+h = h.projectIntoFundamentalRegion(center)
+```
+
+The sector is the conventional one, fundamentalSector of the frame. Vectors in no
+crystal frame are returned as they are.
+
+## Input
+
+| | |
+|---|---|
+| `h` | Miller |
+| `center` | Miller, the centre the equivalent nearest to it is taken for |
+
+## Output
+
+| | |
+|---|---|
+| `h` | Miller, in the shape of h |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` | `False` | fold the directions as axes, into the sector of the Laue group |
+
+## See also
+
+[fundamentalSector](fundamentalSector_py.html), [projectIntoRegion](projectIntoRegion_py.html), [Miller.symmetrise](Miller.symmetrise_py.html)
 
 MATLAB's [vector3d.project2FundamentalRegion](vector3d.project2FundamentalRegion.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L983">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1107">source</a></font>
 {% endraw %}

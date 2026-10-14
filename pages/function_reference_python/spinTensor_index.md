@@ -16,7 +16,7 @@ spinTensor(M), or spinTensor(v) the skew matrix of a rotation vector, in its fra
 
 | | |
 |---|---|
-| [exp](spinTensor.exp_py.html) | the rotation of a spin tensor, or the orientation a spin at a reference points to |
+| [exp](spinTensor.exp_py.html) | the rotation a spin tensor generates, the exponential of its axial vector, or the orientation a spin at a reference orientation leads to |
 | [spinTensor](spinTensor.spinTensor_py.html) | spinTensor(M), or spinTensor(v) the skew matrix of a rotation vector, in its frame |
 | [vector](spinTensor.vector_py.html) | the axial vector of a spin tensor |
 
@@ -26,5 +26,5 @@ spinTensor(M), or spinTensor(v) the skew matrix of a rotation vector, in its fra
 
 MATLAB's [spinTensor_index](spinTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1279">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1432">source</a></font>
 {% endraw %}

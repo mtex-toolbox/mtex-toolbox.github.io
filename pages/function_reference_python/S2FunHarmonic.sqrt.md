@@ -16,11 +16,45 @@ the square root of the function, expanded by quadrature, or at the bandwidth giv
 
 ## Syntax
 
+At twice the bandwidth, at least 32:
+
 ```python
-S2FunHarmonic.sqrt(self, bandwidth=None)
+sF = sqrt(sF)
 ```
+
+At the bandwidth given:
+
+```python
+sF = sqrt(sF, bandwidth=64)
+```
+
+The function is evaluated on a quadrature grid and expanded again (mapFun); the square root
+is no polynomial, so the expansion is cut at the bandwidth: by default twice that of the
+function, at least 32. A negative value gives NaN.
+
+## Input
+
+| | |
+|---|---|
+| `sF` | S2FunHarmonic |
+
+## Output
+
+| | |
+|---|---|
+| `sF` | S2FunHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `bandwidth` | `None` | the largest harmonic degree of the result |
+
+## See also
+
+[mapFun](mapFun_py.html), [S2FunHarmonic.quadrature](S2FunHarmonic.quadrature_py.html)
 
 MATLAB's [S2FunHarmonic.sqrt](S2FunHarmonic.sqrt.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L441">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L513">source</a></font>
 {% endraw %}

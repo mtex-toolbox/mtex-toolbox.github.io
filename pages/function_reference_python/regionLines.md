@@ -13,9 +13,39 @@ the parallels and meridians drawn on the surface, which is how a viewer reads it
 
 ## Syntax
 
+Lines every 15 degree:
+
 ```python
-regionLines(oR, step=15*degree)
+L = regionLines(oR)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L122">source</a></font>
+Fewer lines:
+
+```python
+L = regionLines(oR, step=30*degree)
+```
+
+## Input
+
+| | |
+|---|---|
+| `oR` | orientationRegion |
+
+## Output
+
+| | |
+|---|---|
+| `L` | list of (k, 3) arrays, the lines of sphereGridLines pushed out to the surface, NaN outside the region's sector |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `step` | `15*degree` | the spacing of the parallels and meridians |
+
+## See also
+
+[regionSurface](regionSurface_py.html), [sphereGridLines](sphereGridLines_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L187">source</a></font>
 {% endraw %}

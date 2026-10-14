@@ -23,8 +23,8 @@ spotDirectionKey(cs, center=Miller(1, 1, 1, cs), color=(0, 0, 1), psi=S2DeLaVall
 | | |
 |---|---|
 | [center](spotDirectionKey.center_py.html) | the centres, with the equivalents under the group kept beside them |
-| [direction2color](spotDirectionKey.direction2color_py.html) | the colours of directions: white, multiplied for every centre by its colour faded with the kernel of the angle to the nearest equivalent of the centre |
+| [direction2color](spotDirectionKey.direction2color_py.html) | the colours of directions under the spot key |
 | [whiteCenter](spotDirectionKey.whiteCenter_py.html) | the first centre of the key |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L448">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L495">source</a></font>
 {% endraw %}

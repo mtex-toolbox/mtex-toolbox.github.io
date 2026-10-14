@@ -14,9 +14,42 @@ the face alpha of a map, and the grains keep translucent, MATLAB's alpha that fo
 
 ## Syntax
 
+{'faceAlpha': 0.5}:
+
 ```python
-mapAliases(kw, grains=False)
+kw = mapAliases({'transparent': 0.5})
 ```
+
+{'translucent': 0.5}:
+
+```python
+kw = mapAliases({'transparent': 0.5}, grains=True)
+```
+
+A variant spelling of a keyword is refused with the one to write. The dictionary is changed
+in place and returned.
+
+## Input
+
+| | |
+|---|---|
+| `kw` | dict, the keywords of a map plot |
+
+## Output
+
+| | |
+|---|---|
+| `kw` | the same dict, the aliases replaced |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `grains` | `False` | the keywords of a plot of grains, which keep translucent |
+
+## See also
+
+[plotEBSD](EBSD.plot_py.html), [plotGrains](grain2d.plot_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L206">source</a></font>
 {% endraw %}

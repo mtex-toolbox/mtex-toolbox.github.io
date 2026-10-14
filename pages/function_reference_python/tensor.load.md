@@ -22,5 +22,5 @@ tensor.load(fname, *args, **kwargs)
 
 MATLAB's [tensor.load](tensor.load.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/loadtensor.py#L87">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/loadtensor.py#L110">source</a></font>
 {% endraw %}

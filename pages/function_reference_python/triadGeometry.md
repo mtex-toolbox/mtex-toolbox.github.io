@@ -18,9 +18,43 @@ positions, and the bounding box (umin, umax, vmin, vmax)
 
 ## Syntax
 
+In text heights:
+
 ```python
-triadGeometry(screen, labels, t=1.0)
+arrows, symbol, texts, bbox = triadGeometry(frameOnScreen(pl), ['x', 'y', 'z'])
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L352">source</a></font>
+Twice as large:
+
+```python
+arrows, symbol, texts, bbox = triadGeometry(screen, labels, t=2.0)
+```
+
+## Input
+
+| | |
+|---|---|
+| `screen` | the (right, up, out) triples of the axes, frameOnScreen |
+| `labels` | the label of every axis |
+
+## Output
+
+| | |
+|---|---|
+| `arrows` | a list of polygons of shape (7, 2) |
+| `symbol` | array of shape (m, 2), the circle and its spokes, NaN rows between pieces |
+| `texts` | a list of (position, label) |
+| `bbox` | (umin, umax, vmin, vmax) |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `t` | `1.0` | the height of the text, the unit of the drawing |
+
+## See also
+
+[frameOnScreen](frameOnScreen_py.html), [scaleBar](scaleBar_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L462">source</a></font>
 {% endraw %}

@@ -106,7 +106,7 @@ function its harmonic expansion gives.
 
 ## See also
 
-[plotIPF](SO3Fun.plotIPDF_py.html), SO3Fun.radon, [PoleFigure](PoleFigure_index_py.html), [calcPoleFigure](SO3Fun.calcPoleFigure_py.html), [annotate](annotate_py.html), [ODFPoleFigure](ODFPoleFigure_py.html), [OrientationPoleFigure](OrientationPoleFigure_py.html), [PoleFigurePlot](PoleFigurePlot_py.html)
+[plotIPF](SO3Fun.plotIPDF_py.html), [SO3Fun.radon](SO3FunBingham.radon_py.html), [PoleFigure](PoleFigure_index_py.html), [calcPoleFigure](SO3Fun.calcPoleFigure_py.html), [annotate](annotate_py.html), [ODFPoleFigure](ODFPoleFigure_py.html), [OrientationPoleFigure](OrientationPoleFigure_py.html), [PoleFigurePlot](PoleFigurePlot_py.html)
 
 ## Used on
 

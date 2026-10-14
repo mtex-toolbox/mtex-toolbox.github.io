@@ -15,13 +15,45 @@ the second order pyramidal c+a slip system <2-1-13>{-2112} of a hexagonal crysta
 
 ## Syntax
 
+With the critical resolved shear stress 1:
+
 ```python
-slipSystem.pyramidal2CA(CS, CRSS=1)
+sS = slipSystem.pyramidal2CA(cs)
 ```
+
+With another:
+
+```python
+sS = slipSystem.pyramidal2CA(cs, CRSS=2)
+```
+
+One system of the family; symmetrise gives every equivalent one.
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame of a hexagonal crystal |
+
+## Output
+
+| | |
+|---|---|
+| `sS` | slipSystem |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `CRSS` | `1` | the critical resolved shear stress |
+
+## See also
+
+[slipSystem](slipSystem_index_py.html), [slipSystem.symmetrise](slipSystem.symmetrise_py.html), [dislocationSystem](dislocationSystem_index_py.html)
 
 ## Used on
 
 [CrystalShapes](CrystalShapes_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L309">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L490">source</a></font>
 {% endraw %}

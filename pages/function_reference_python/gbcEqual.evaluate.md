@@ -19,5 +19,5 @@ the connectivity of the pairs i[k], j[k]: 1 where the property agrees, 0 where i
 gbcEqual.evaluate(self, ebsd, i, j)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L223">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L255">source</a></font>
 {% endraw %}

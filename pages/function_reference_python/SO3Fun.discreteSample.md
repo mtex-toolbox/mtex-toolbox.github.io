@@ -45,6 +45,12 @@ N members of a list, none twice:
 ori = discreteSample(ori, n, withoutReplacement=True)
 ```
 
+N measurements of a map, of any phases:
+
+```python
+ebsd = discreteSample(ebsd, n)
+```
+
 A density is sampled on the nodes of a grid with probability proportional to its values, and
 every node drawn is moved by a random rotation within the grid resolution and turned by a
 random element of each symmetry group. A radial function is sampled exactly: a centre by its
@@ -57,7 +63,7 @@ indices of the members drawn from a list are not provided.
 
 | | |
 |---|---|
-| `f` | SO3Fun, S2Fun, a Python function of numbers, or a list of orientations or directions |
+| `f` | SO3Fun, S2Fun, a Python function of numbers, or a list of orientations or directions, an EBSD map, grains or grain boundary segments |
 | `n` | int, the size of the sample |
 
 ## Output
@@ -85,5 +91,5 @@ indices of the members drawn from a list are not provided.
 
 MATLAB's [SO3Fun.discreteSample](SO3Fun.discreteSample.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L825">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L957">source</a></font>
 {% endraw %}

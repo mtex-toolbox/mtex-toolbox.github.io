@@ -22,5 +22,5 @@ the negative, the operator -a
 
 MATLAB's [S1FunHarmonic.uminus](S1FunHarmonic.uminus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L265">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L298">source</a></font>
 {% endraw %}

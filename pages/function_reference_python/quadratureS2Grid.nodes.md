@@ -19,5 +19,5 @@ the nodes as a plain list of directions
 quadratureS2Grid.nodes(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L307">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L338">source</a></font>
 {% endraw %}

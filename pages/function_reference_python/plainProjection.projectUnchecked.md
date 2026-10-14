@@ -19,5 +19,5 @@ the plane coordinates (rho, theta) in degrees of directions known to lie in the 
 plainProjection.projectUnchecked(self, v)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L347">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L394">source</a></font>
 {% endraw %}

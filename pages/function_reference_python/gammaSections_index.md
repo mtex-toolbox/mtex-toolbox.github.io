@@ -24,5 +24,5 @@ oS = gammaSections(cs, ss, gamma=np.arange(0, 91, 15)*degree)
 |---|---|
 | [gamma](gammaSections.gamma_py.html) | the gamma values of the sections |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L287">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L334">source</a></font>
 {% endraw %}

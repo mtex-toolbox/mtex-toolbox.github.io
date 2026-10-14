@@ -13,5 +13,5 @@ A property of [slipSystem](slipSystem_index_py.html).
 
 whether the systems are in crystal coordinates
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L134">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L146">source</a></font>
 {% endraw %}

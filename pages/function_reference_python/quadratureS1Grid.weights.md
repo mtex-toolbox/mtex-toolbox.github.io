@@ -13,5 +13,5 @@ A property of [quadratureS1Grid](quadratureS1Grid_index_py.html).
 
 the quadrature weights, all equal and summing to one
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L334">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L365">source</a></font>
 {% endraw %}

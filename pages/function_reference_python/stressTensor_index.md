@@ -76,7 +76,7 @@ are computed from it.
 | [meanStress](stressTensor.meanStress_py.html) | the mean stress, a third of the trace of the stress tensor |
 | [normalize](stressTensor.normalize_py.html) | the tensors divided by their Frobenius norms |
 | [stressTensor](stressTensor.stressTensor_py.html) | a rank two symmetric stress tensor, or a list of them |
-| [uniaxial](stressTensor.uniaxial_py.html) | the stress of a uniaxial tension along v |
+| [uniaxial](stressTensor.uniaxial_py.html) | the stress of a uniaxial tension along v, sigma v v^T |
 
 ## Used on
 
@@ -84,5 +84,5 @@ are computed from it.
 
 MATLAB's [stressTensor_index](stressTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1101">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1231">source</a></font>
 {% endraw %}

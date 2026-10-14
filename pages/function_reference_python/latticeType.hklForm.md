@@ -13,5 +13,5 @@ A property of [latticeType](latticeType_index_py.html).
 
 three or four Miller indices
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/latticetype.py#L54">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/latticetype.py#L69">source</a></font>
 {% endraw %}

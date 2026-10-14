@@ -14,11 +14,38 @@ the black2white colour map, as MATLAB's black2whiteColorMap returns it
 
 ## Syntax
 
+256 colours:
+
 ```python
-black2whiteColorMap(n=256)
+rgb = black2whiteColorMap()
 ```
+
+16 colours:
+
+```python
+rgb = black2whiteColorMap(16)
+```
+
+The colours are interpolated linearly between the stops of the map; pass the result to
+mtexColorMap or as a plot's colormap.
+
+## Output
+
+| | |
+|---|---|
+| `rgb` | an n x 3 array of rgb values in [0, 1] |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `n` | `256` | the number of colours |
+
+## See also
+
+[mtexColorMap](mtexColorMap_py.html), [num2rgb](num2rgb_py.html)
 
 MATLAB's [black2whiteColorMap](black2whiteColorMap.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L149">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L199">source</a></font>
 {% endraw %}

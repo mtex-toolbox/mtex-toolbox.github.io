@@ -12,22 +12,50 @@ status: Reference
 {% raw %}
 A method of [embedding](embedding_index_py.html).
 
-the mean image, weighted by weights if given; NaN for an empty list
+the arithmetic mean of the images; MATLAB's mean of an embedding
 
 ## Syntax
 
-```python
-mean(e)
-mean(e, weights=w)
-```
-
-## Signature
+The mean image of the whole list:
 
 ```python
-embedding.mean(self, weights=None)
+m = mean(e)
 ```
+
+Weighted, the weights normalised to sum one:
+
+```python
+m = mean(e, weights=w)
+```
+
+The mean of the images is no image of an orientation; m.orientation() projects it back,
+the mean orientation, and norm(m, normalized=True) measures the spread. The mean of an
+empty list is NaN. MATLAB's mean along a dimension, mean(e, d), has no counterpart here:
+the mean is always over the whole list.
+
+## Input
+
+| | |
+|---|---|
+| `e` | embedding |
+
+## Output
+
+| | |
+|---|---|
+| `m` | embedding, a single image |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `weights` | `None` | one weight per image |
+
+## See also
+
+[embedding.orientation](embedding.orientation_py.html), [embedding.norm](embedding.norm_py.html), [OrientationEmbeddings](OrientationEmbeddings_py.html)
 
 MATLAB's [embedding.mean](embedding.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L357">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L381">source</a></font>
 {% endraw %}

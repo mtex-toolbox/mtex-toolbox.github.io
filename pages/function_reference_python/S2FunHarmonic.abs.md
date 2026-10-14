@@ -25,5 +25,5 @@ sF = abs(sF)
 S2FunHarmonic.abs(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L435">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L507">source</a></font>
 {% endraw %}

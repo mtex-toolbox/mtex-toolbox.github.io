@@ -22,5 +22,5 @@ SO3TangentVector.exp(self)
 
 MATLAB's [SO3TangentVector.exp](SO3TangentVector.exp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L247">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L258">source</a></font>
 {% endraw %}

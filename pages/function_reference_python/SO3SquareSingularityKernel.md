@@ -32,5 +32,5 @@ SO3SquareSingularityKernel(halfwidth=10*degree)
 
 MATLAB's [SO3SquareSingularityKernel](SO3SquareSingularityKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L422">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L479">source</a></font>
 {% endraw %}

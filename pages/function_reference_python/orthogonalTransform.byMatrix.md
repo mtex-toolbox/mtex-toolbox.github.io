@@ -19,5 +19,5 @@ an orthogonal matrix of either sign
 orthogonalTransform.byMatrix(M)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L692">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L895">source</a></font>
 {% endraw %}

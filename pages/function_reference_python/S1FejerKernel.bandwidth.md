@@ -13,5 +13,5 @@ A property of [S1FejerKernel](S1FejerKernel_index_py.html).
 
 the degree n of the kernel
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1077">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1191">source</a></font>
 {% endraw %}

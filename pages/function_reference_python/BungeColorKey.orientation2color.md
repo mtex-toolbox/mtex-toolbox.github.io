@@ -26,5 +26,5 @@ rgb = BungeColorKey(cs).orientation2color(ori)
 BungeColorKey.orientation2color(self, ori)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L305">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L331">source</a></font>
 {% endraw %}

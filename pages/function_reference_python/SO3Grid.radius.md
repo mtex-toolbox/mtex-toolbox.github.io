@@ -21,5 +21,5 @@ queries carry the grid's frames and numba is there, the tree otherwise
 SO3Grid.radius(self, o, eps)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/so3grid.py#L126">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/so3grid.py#L145">source</a></font>
 {% endraw %}

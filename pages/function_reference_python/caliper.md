@@ -21,7 +21,7 @@ caliper(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [grain2d](grain2d.caliper_py.html) | the caliper: with nothing, the longest width of every outline as a framed axis of that length |
+| [grain2d](grain2d.caliper_py.html) | the caliper, the Feret diameter, of every outline: its width across a direction, or the longest or the shortest width as a framed axis of that length |
 
 ## Used on
 

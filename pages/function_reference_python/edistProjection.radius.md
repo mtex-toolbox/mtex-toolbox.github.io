@@ -19,5 +19,5 @@ the plane radius of the polar angle theta, theta itself
 edistProjection.radius(theta)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L280">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L327">source</a></font>
 {% endraw %}

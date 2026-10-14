@@ -24,5 +24,5 @@ contour(x, *args, **kw)
 
 MATLAB's [S2Fun.contour](S2Fun.contour.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1219">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1305">source</a></font>
 {% endraw %}

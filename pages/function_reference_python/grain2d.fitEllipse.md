@@ -26,5 +26,5 @@ grain2d.fitEllipse(self)
 
 MATLAB's [grain2d.fitEllipse](grain2d.fitEllipse.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L85">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L101">source</a></font>
 {% endraw %}

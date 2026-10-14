@@ -16,6 +16,42 @@ distance wd: the far side shrinks and straight lines stay straight
 
 ## Syntax
 
+About the x axis:
+
+```python
+T = spatialTransformProjective.byTilt(70*degree, wd)
+```
+
+Through a point left in place:
+
+```python
+T = spatialTransformProjective.byTilt(70*degree, wd, centre)
+```
+
+cos(theta) foreshortens across the tilt axis and wd sets how much the scale varies over
+the frame: as wd grows the perspective vanishes and only the foreshortening is left. This
+is a tilt one knows; one that was measured is fitted by spatialTransformTilt.
+
+## Input
+
+| | |
+|---|---|
+| `theta` | the tilt angle about the x axis |
+| `wd` | the working distance the surface is seen from, positive |
+| `centre` | vector3d, the point the tilt leaves in place, by default the origin |
+
+## Output
+
+| | |
+|---|---|
+| `T` | spatialTransformProjective |
+
+## See also
+
+[spatialTransformProjective.fit](spatialTransformProjective.fit_py.html), [spatialTransformTilt](spatialTransformTilt_index_py.html)
+
+## Signature
+
 ```python
 spatialTransformProjective.byTilt(theta, wd, centre=None)
 ```
@@ -24,5 +60,5 @@ spatialTransformProjective.byTilt(theta, wd, centre=None)
 
 [EBSDGrid](EBSDGrid_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L372">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L405">source</a></font>
 {% endraw %}

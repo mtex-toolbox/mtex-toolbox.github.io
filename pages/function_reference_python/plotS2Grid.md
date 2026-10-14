@@ -27,6 +27,12 @@ Crystal directions, upper hemisphere:
 r = plotS2Grid(cs, resolution=2*degree, upper=True)
 ```
 
+5 degree in the polar angle, 2.5 in the azimuth:
+
+```python
+r = plotS2Grid(resolution=(5*degree, 2.5*degree))
+```
+
 Values on the grid, drawn as they lie:
 
 ```python
@@ -38,8 +44,8 @@ azimuth, in the frame given, so that values computed on them are drawn by contou
 pcolor without interpolation. A grid of both hemispheres puts them side by side with a
 blank column between. The region is the whole sphere, or the sphericalRegion given.
 
-MATLAB's pair of resolutions for the polar and the azimuthal angle, and the bounds minRho,
-maxRho, minTheta, maxTheta and restrict2MinMax, are not taken: pass a sphericalRegion.
+MATLAB's bounds minRho, maxRho, minTheta, maxTheta and restrict2MinMax are not taken: pass
+a sphericalRegion.
 
 ## Input
 
@@ -58,7 +64,7 @@ maxRho, minTheta, maxTheta and restrict2MinMax, are not taken: pass a sphericalR
 
 | | default | |
 |---|---|---|
-| `resolution` | `1*degree` | the spacing of the grid, an angle |
+| `resolution` | `1*degree` | the spacing of the grid, an angle, or a pair (polar, azimuthal) |
 | `upper` | `False` | the upper hemisphere only |
 | `lower` | `False` | the lower hemisphere only |
 | `complete` | `False` | the whole sphere |
@@ -74,5 +80,5 @@ maxRho, minTheta, maxTheta and restrict2MinMax, are not taken: pass a sphericalR
 
 MATLAB's [plotS2Grid](plotS2Grid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L614">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L720">source</a></font>
 {% endraw %}

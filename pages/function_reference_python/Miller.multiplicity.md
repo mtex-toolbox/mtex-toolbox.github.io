@@ -17,11 +17,41 @@ antipodal
 
 ## Syntax
 
+12 for <110> in 432:
+
 ```python
-vector3d.multiplicity(self, antipodal=None)
+n = h.multiplicity()
 ```
+
+6, the axes:
+
+```python
+n = h.multiplicity(antipodal=True)
+```
+
+## Input
+
+| | |
+|---|---|
+| `h` | Miller |
+
+## Output
+
+| | |
+|---|---|
+| `n` | an integer per vector, in the shape of h |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` | `None` | count the axes, v and -v one; by default as h says |
+
+## See also
+
+[Miller.symmetrise](Miller.symmetrise_py.html)
 
 MATLAB's [Miller.multiplicity](Miller.multiplicity.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L977">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1089">source</a></font>
 {% endraw %}

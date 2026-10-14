@@ -18,5 +18,5 @@ of its frames first: axis times angle, in radians, shape (n, 3)
 axisAnglePoints(o)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L72">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L110">source</a></font>
 {% endraw %}

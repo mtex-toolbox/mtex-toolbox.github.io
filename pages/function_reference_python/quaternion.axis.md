@@ -28,5 +28,5 @@ quaternion.axis(self)
 
 MATLAB's [quaternion.axis](quaternion.axis.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L224">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L259">source</a></font>
 {% endraw %}

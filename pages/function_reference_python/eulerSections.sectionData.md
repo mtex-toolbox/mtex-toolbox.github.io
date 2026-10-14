@@ -20,5 +20,5 @@ each and the index of the orientation it comes from; a degenerate one falls into
 eulerSections.sectionData(self, ori)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L223">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L270">source</a></font>
 {% endraw %}

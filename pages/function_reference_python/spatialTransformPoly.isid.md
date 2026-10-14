@@ -13,5 +13,5 @@ A property of [spatialTransformPoly](spatialTransformPoly_index_py.html).
 
 whether every coefficient vanishes
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L457">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L506">source</a></font>
 {% endraw %}

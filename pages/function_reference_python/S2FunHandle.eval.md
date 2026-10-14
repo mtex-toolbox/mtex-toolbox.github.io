@@ -19,5 +19,5 @@ the values of the callable at the directions x, taken into the frame of the func
 S2FunHandle.eval(self, x)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L478">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L540">source</a></font>
 {% endraw %}

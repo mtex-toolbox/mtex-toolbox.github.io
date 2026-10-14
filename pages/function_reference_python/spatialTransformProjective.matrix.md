@@ -19,5 +19,5 @@ the 3 x 3 homography
 spatialTransformProjective.matrix(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L364">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L397">source</a></font>
 {% endraw %}

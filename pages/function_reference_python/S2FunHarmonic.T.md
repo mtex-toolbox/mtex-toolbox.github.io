@@ -13,5 +13,5 @@ A property of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
 the list transposed, a row of n functions becoming a column, and MATLAB's ' as sF.conj().T
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L297">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L321">source</a></font>
 {% endraw %}

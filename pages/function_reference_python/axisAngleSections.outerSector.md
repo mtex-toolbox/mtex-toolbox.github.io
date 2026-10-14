@@ -13,5 +13,5 @@ A property of [axisAngleSections](axisAngleSections_index_py.html).
 
 the sector the axes are drawn on, the conventional sector of the rotations both frames share
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L528">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L612">source</a></font>
 {% endraw %}

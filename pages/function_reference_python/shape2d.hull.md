@@ -19,5 +19,5 @@ the convex hull of the outline, as an outline
 shape2d.hull(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L401">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L504">source</a></font>
 {% endraw %}

@@ -32,5 +32,5 @@ oS = phi2Sections(cs, ss, phi2=np.arange(0, 91, 15)*degree)
 
 MATLAB's [phi2Sections](phi2Sections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L250">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L297">source</a></font>
 {% endraw %}

@@ -80,5 +80,5 @@ part. orientation.mean reduces by the symmetry first.
 
 MATLAB's [quaternion.mean](quaternion.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L352">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L473">source</a></font>
 {% endraw %}

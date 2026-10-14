@@ -68,5 +68,5 @@ MATLAB's second output, the projected embedding, is embedding of that orientatio
 
 MATLAB's [embedding.project](embedding.project.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L390">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L440">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ a * b
 
 MATLAB's [rotation.times](rotation.times.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L154">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L165">source</a></font>
 {% endraw %}

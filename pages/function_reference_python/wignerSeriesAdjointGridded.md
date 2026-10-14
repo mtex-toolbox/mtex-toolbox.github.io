@@ -15,9 +15,47 @@ approximate, and its cost independent of the number of rotations
 
 ## Syntax
 
+The weights 1/n:
+
 ```python
-wignerSeriesAdjointGridded(rots, values, L, weights=None, folds=(1, 1))
+fhat = wignerSeriesAdjointGridded(rots, values, 8)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L836">source</a></font>
+Weighted, a twofold axis:
+
+```python
+fhat = wignerSeriesAdjointGridded(rots, values, 8, weights=w, folds=(2, 1))
+```
+
+The weighted values are summed at the nearest node of a Clenshaw-Curtis grid of bandwidth
+min(2L, max(L, 128)) and the grid's exact adjoint taken; the error is at most half the grid's
+spacing, which a kernel of bandwidth L hardly sees. MATLAB's SO3FunHarmonic.adjoint(...,
+'gridded').
+
+## Input
+
+| | |
+|---|---|
+| `rots` | rotations |
+| `values` | the values at the rotations |
+| `L` | the bandwidth |
+
+## Output
+
+| | |
+|---|---|
+| `fhat` | the Wigner coefficients, internal convention |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `weights` | `None` | the weight of every rotation; by default 1/n |
+| `folds` | `(1, 1)` | (rA, rB), the folds about z of the result, which the grid then covers only the folded region of |
+
+## See also
+
+[wignerSeriesAdjoint](wignerSeriesAdjoint_py.html), SO3FunHarmonic.adjoint
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1040">source</a></font>
 {% endraw %}

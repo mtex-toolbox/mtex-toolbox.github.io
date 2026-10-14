@@ -24,5 +24,5 @@ crystalFrame.load(fname)
 
 MATLAB's [crystalSymmetry.load](crystalSymmetry.load.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L723">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L844">source</a></font>
 {% endraw %}

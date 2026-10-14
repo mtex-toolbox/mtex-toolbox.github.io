@@ -12,13 +12,48 @@ status: Reference
 {% raw %}
 A method of [tensor](tensor_index_py.html).
 
-whether two tensors of one rank and shape agree coefficientwise within rtol and atol
+whether two tensors of one rank and shape agree coefficientwise within rtol and atol;
+MATLAB's eq, T1 == T2
 
 ## Syntax
 
+Equal up to rounding:
+
 ```python
-tensor.eq(self, other, rtol=1e-08, atol=0.0)
+T1.isclose(T2)
 ```
+
+Every coefficient within 1e-3:
+
+```python
+T1.isclose(T2, atol=1e-3)
+```
+
+The comparison is that of np.allclose, |a - b| <= atol + rtol |b|, over all coefficients;
+one answer for the whole list. T1 == T2 is the exact equality, of the frame too.
+
+## Input
+
+| | |
+|---|---|
+| `T1, T2` | tensor |
+
+## Output
+
+| | |
+|---|---|
+| `tf` | bool |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `rtol` | `1e-08` | the tolerance relative to the coefficients of T2 |
+| `atol` | `0.0` | the absolute tolerance |
+
+## See also
+
+[tensor.checkSymmetry](tensor.checkSymmetry_py.html), [tensor.norm](tensor.norm_py.html)
 
 MATLAB's [tensor.eq](tensor.eq.html)
 

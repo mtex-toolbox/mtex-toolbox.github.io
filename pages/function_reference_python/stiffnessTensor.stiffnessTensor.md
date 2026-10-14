@@ -24,5 +24,5 @@ stiffnessTensor(M, *args, **kwargs)
 
 MATLAB's [stiffnessTensor.stiffnessTensor](stiffnessTensor.stiffnessTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1052">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1182">source</a></font>
 {% endraw %}

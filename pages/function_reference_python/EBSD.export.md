@@ -22,5 +22,5 @@ EBSD.export(self, fname, *args, **kwargs)
 
 MATLAB's [EBSD.export](EBSD.export.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L601">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L643">source</a></font>
 {% endraw %}

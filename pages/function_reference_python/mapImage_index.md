@@ -93,17 +93,17 @@ be square. An integer image is scaled to [0, 1].
 | [gridSize](mapImage.gridSize_py.html) | the number of rows and columns of the image |
 | [how2plot](mapImage.how2plot_py.html) | the plotting convention of the image's frame, None without a frame |
 | [imboxfilt](mapImage.imboxfilt_py.html) | a box filter of k pixels, or (rows, cols), odd: the window shrinks at the border and around a missing value, so a NaN padding neither spreads nor darkens the frame (MATLAB's own, movmean down the columns and then along the rows) |
-| [interp](mapImage.interp_py.html) | the image values at positions: bilinear on the grid by default, 'nearest' or 'cubic' |
+| [interp](mapImage.interp_py.html) | the image values at arbitrary positions |
 | [isempty](mapImage.isempty_py.html) | whether the image has no pixel |
 | [layout](mapImage.layout_py.html) | the gridLayout of the image, the directions its rows and columns advance along |
 | [mapImage](mapImage.mapImage_py.html) | an image that knows where on the specimen it sits: a raster of values on a regular grid of an origin and two perpendicular steps |
 | [nChannel](mapImage.nChannel_py.html) | the number of channels, 1 for a two dimensional image |
 | [origin](mapImage.origin_py.html) | the centre of pixel (0, 0) |
 | [plot](mapImage.plot_py.html) | an image, or a list of them, drawn where it sits on the specimen, in the specimen's coordinates and in the screen orientation of its frame |
-| [pos2ind](mapImage.pos2ind_py.html) | the pixel covering each position: row and column, not clipped, and whether it lies on the grid |
+| [pos2ind](mapImage.pos2ind_py.html) | the pixel of the image covering each position |
 | [pos](mapImage.pos_py.html) | the centre of every pixel, (rows, cols) |
 | [rescale](mapImage.rescale_py.html) | the values of one or more images stretched to a common range |
-| [subGrid](mapImage.subGrid_py.html) | a rectangle cut out, rows and cols contiguous and ascending, or the box round a mask |
+| [subGrid](mapImage.subGrid_py.html) | a rectangle cut out of the image |
 | [transformReferenceFrame](mapImage.transformReferenceFrame_py.html) | the images stated in a frame and laid out that way: a layout reindexes and nothing else, a frame restates where they sit by the orientation given, by 'byScreenAlignment', the assertion that the frames were drawn the same way up, or by nothing where the frames are already related |
 
 ## Used on

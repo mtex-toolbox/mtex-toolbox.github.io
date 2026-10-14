@@ -28,5 +28,5 @@ quaternion.norm(self)
 
 MATLAB's [quaternion.norm](quaternion.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L200">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L211">source</a></font>
 {% endraw %}

@@ -79,11 +79,11 @@ lineWidth), MATLAB's vector3d/quiver3.
 | `axisAngle` | `False` | draw in axis angle space |
 | `Rodrigues` | `False` | draw in Rodrigues space |
 | `Euler` | `False` | draw in Euler angle space |
-| `maxHeadSize` | `None` | MATLAB's MaxHeadSize, accepted without effect: the heads keep their size |
+| `maxHeadSize` | `None` | the length of the heads as a fraction of the arrows; by default 0.25 for tangent vectors and arrows at positions, 0.3 for fields |
 
 ## See also
 
-[SO3TangentVector](SO3TangentVector_index_py.html), [orientation.scatter](orientation.scatter_py.html), arrow3d, [plot3d](S2Fun.plot3d_py.html), [RotationTangentSpace](RotationTangentSpace_py.html), [SO3FunVectorField](SO3FunVectorField_py.html), [S2FunVectorField](S2FunVectorField_py.html)
+[SO3TangentVector](SO3TangentVector_index_py.html), [orientation.scatter](orientation.scatter_py.html), [arrow3d](vector3d.arrow3d_py.html), [plot3d](S2Fun.plot3d_py.html), [RotationTangentSpace](RotationTangentSpace_py.html), [SO3FunVectorField](SO3FunVectorField_py.html), [S2FunVectorField](S2FunVectorField_py.html)
 
 ## Used on
 
@@ -91,5 +91,5 @@ lineWidth), MATLAB's vector3d/quiver3.
 
 MATLAB's [vector3d.quiver3](vector3d.quiver3.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L749">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L766">source</a></font>
 {% endraw %}

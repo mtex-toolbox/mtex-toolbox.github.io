@@ -21,7 +21,7 @@ isCompatible(x, *args, **kwargs)
 
 | | |
 |---|---|
-| [referenceFrame](referenceFrame.isCompatible_py.html) | whether a transition between the frames exists: the matrix is close to orthogonal |
+| [referenceFrame](referenceFrame.isCompatible_py.html) | whether a transition between the frames exists, and the transition |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

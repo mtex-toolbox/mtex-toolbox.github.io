@@ -13,17 +13,50 @@ status: Reference
 A method of [EBSD](EBSD_index_py.html).
 
 the curvature tensor of every pixel, kappa = d omega / d x, in the specimen frame per scan
-unit, its rows the components of the rotation vector and its columns the directions of the
-specimen. A two dimensional map says nothing about how the orientation changes along its
-normal, so every column the normal reaches is unknown and NaN
+unit; MATLAB's EBSD.curvature, the incomplete curvature tensor
 
 ## Syntax
 
+From one sided differences:
+
 ```python
-EBSD.curvature(ebsd, stencil='oneSided')
+kappa = curvature(ebsd)
 ```
+
+From the least squares fit with the diagonals:
+
+```python
+kappa = curvature(ebsd, stencil='full')
+```
+
+Its rows are the components of the rotation vector and its columns the directions of the
+specimen, assembled from the gradient along the two axes of the plane of the map. A two
+dimensional map says nothing about how the orientation changes along its normal, so every
+column the normal reaches is unknown and NaN.
+
+## Input
+
+| | |
+|---|---|
+| `ebsd` | EBSD of one phase |
+
+## Output
+
+| | |
+|---|---|
+| `kappa` | curvatureTensor, of the shape of the map |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `stencil` | `'oneSided'` | 'oneSided', 'lattice' ('1hop') or 'full', passed to gradient |
+
+## See also
+
+[gradient](gradient_py.html), [calcGND](calcGND_py.html), [dislocationDensityTensor](dislocationDensityTensor_index_py.html)
 
 MATLAB's [EBSD.curvature](EBSD.curvature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L252">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L341">source</a></font>
 {% endraw %}

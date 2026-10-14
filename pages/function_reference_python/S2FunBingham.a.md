@@ -13,5 +13,5 @@ A property of [S2FunBingham](S2FunBingham_index_py.html).
 
 the principal axes as directions, the modal axis a[2], as MATLAB's a
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L412">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L461">source</a></font>
 {% endraw %}

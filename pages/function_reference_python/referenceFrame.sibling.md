@@ -19,5 +19,5 @@ this frame with another group in it, from the register
 referenceFrame.sibling(self, s)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L239">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L264">source</a></font>
 {% endraw %}

@@ -17,5 +17,5 @@ the pixels of a picture an EBSD file holds, by an entry of ebsd.meta['images']
 h5Image(fname, entry)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/h5.py#L304">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/h5.py#L327">source</a></font>
 {% endraw %}

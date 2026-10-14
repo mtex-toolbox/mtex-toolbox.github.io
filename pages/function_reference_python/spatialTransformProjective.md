@@ -39,5 +39,5 @@ T = spatialTransformProjective.fit(posA, posB, weights=w)
 
 MATLAB's [spatialTransformProjective](spatialTransformProjective.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L332">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L365">source</a></font>
 {% endraw %}

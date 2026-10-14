@@ -86,9 +86,9 @@ its contrast stretched over the 2nd to 98th percentile.
 
 ## See also
 
-[mapImage](mapImage_index_py.html), edgeMap, [xcfShift](xcfShift_py.html), [EBSDMapsAndImages](EBSDMapsAndImages_py.html)
+[mapImage](mapImage_index_py.html), [edgeMap](mapImage.edgeMap_py.html), [xcfShift](xcfShift_py.html), [EBSDMapsAndImages](EBSDMapsAndImages_py.html)
 
 MATLAB's [mapImage.plot](mapImage.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1301">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1400">source</a></font>
 {% endraw %}

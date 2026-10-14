@@ -14,10 +14,36 @@ convention, every other key the preference of that name. Returns the settings ap
 
 ## Syntax
 
+The user's file again, after reset() say:
+
 ```python
-loadSettings()                        the user's file again, after reset() say
+loadSettings()
+```
+
+Another file:
+
+```python
 loadSettings('~/lab/mtex_settings.json')
 ```
+
+A setting that cannot be applied is left out with a warning; a missing file applies
+nothing. The threads and huge pages are applied anew afterwards.
+
+## Input
+
+| | |
+|---|---|
+| `path` | the settings file, by default the user's: MTEX_SETTINGS when set, else mtex_settings.json in the user's configuration folder |
+
+## Output
+
+| | |
+|---|---|
+| `data` | dict of the settings read |
+
+## See also
+
+[setMTEXpref](setMTEXpref_py.html), [getMTEXpref](getMTEXpref_py.html), [plottingConvention.makeDefault](plottingConvention.makeDefault_py.html)
 
 ## Signature
 

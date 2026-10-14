@@ -22,5 +22,5 @@ a + b
 
 MATLAB's [quaternion.plus](quaternion.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L178">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L189">source</a></font>
 {% endraw %}

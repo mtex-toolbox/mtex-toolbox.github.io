@@ -15,9 +15,36 @@ the boundary of the region as plane coordinates, one pair of arrays per arc
 
 ## Syntax
 
+(rho, theta) in degree every half degree:
+
 ```python
-plainProjection.boundary(self, resolution=0.5*degree)
+b = plainProjection(sR).boundary()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L371">source</a></font>
+Coarser arcs:
+
+```python
+b = plainProjection(sR).boundary(resolution=2*degree)
+```
+
+Unlike the other charts a whole sphere or hemisphere has no boundary here: the list is
+empty.
+
+## Output
+
+| | |
+|---|---|
+| `b` | list of (rho, theta) pairs of arrays in degree, one per arc |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `resolution` | `0.5*degree` | the spacing of the points along an arc |
+
+## See also
+
+[plainProjection.bounds](plainProjection.bounds_py.html), [sphericalProjection.boundary](sphericalProjection.boundary_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L418">source</a></font>
 {% endraw %}

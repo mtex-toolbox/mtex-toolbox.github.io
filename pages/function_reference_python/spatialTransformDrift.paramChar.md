@@ -19,5 +19,5 @@ the knots and the largest displacement as a line of text
 spatialTransformDrift.paramChar(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L563">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L612">source</a></font>
 {% endraw %}

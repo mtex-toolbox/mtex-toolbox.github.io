@@ -27,5 +27,5 @@ SO3SobolevKernel(1.1, bandwidth=20)
 
 [SO3Kernels](SO3Kernels_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L562">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L632">source</a></font>
 {% endraw %}

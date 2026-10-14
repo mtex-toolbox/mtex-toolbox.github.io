@@ -22,5 +22,5 @@ S2VectorFieldHarmonic.cross(self, x)
 
 MATLAB's [S2VectorFieldHarmonic.cross](S2VectorFieldHarmonic.cross.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L369">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L407">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [parentGrainReconstructor](parentGrainReconstructor_index_py.html)
 
 the child to child misorientations of the relationship, the identity included
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L418">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L429">source</a></font>
 {% endraw %}

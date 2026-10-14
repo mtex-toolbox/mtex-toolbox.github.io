@@ -96,5 +96,5 @@ the shears are None then.
 
 MATLAB's [velocityGradientTensor.calcTaylor](velocityGradientTensor.calcTaylor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L339">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L357">source</a></font>
 {% endraw %}

@@ -80,7 +80,7 @@ ansatz functions; calcODF(pf, zeroRange=zrm) uses the method set up here.
 
 | | |
 |---|---|
-| [checkZeroRange](zeroRangeMethod.checkZeroRange_py.html) | which orientations the zero range method rules out: those some pole figure is zero at in one of their symmetric poles |
+| [checkZeroRange](zeroRangeMethod.checkZeroRange_py.html) | which orientations the zero range method rules out, those some pole figure is zero at in one of their symmetric poles |
 | [plot](zeroRangeMethod.plot_py.html) | plot(x, ...) draws x as its kind is drawn |
 | [zeroRangeMethod](zeroRangeMethod.zeroRangeMethod_py.html) | the zero range method of the pole figure inversion: where a pole figure vanishes, the ODF vanishes on every fibre through it |
 

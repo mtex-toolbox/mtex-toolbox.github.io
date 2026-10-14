@@ -68,5 +68,5 @@ least four points are needed.
 
 [spatialTransformPoly.fit](spatialTransformPoly.fit_py.html), [spatialTransformProjective.byTilt](spatialTransformProjective.byTilt_py.html), [spatialTransformTilt](spatialTransformTilt_index_py.html), [transform](transform_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L383">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L432">source</a></font>
 {% endraw %}

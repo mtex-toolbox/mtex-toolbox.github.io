@@ -23,5 +23,5 @@ grain3d.refineBoundary(self, *args, **kwargs)
 
 MATLAB's [grain3d.refineBoundary](grain3d.refineBoundary.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L416">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L432">source</a></font>
 {% endraw %}

@@ -90,5 +90,5 @@ and 'BCV' are not provided.
 
 MATLAB's [EBSD.calcKernel](EBSD.calcKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L925">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1060">source</a></font>
 {% endraw %}

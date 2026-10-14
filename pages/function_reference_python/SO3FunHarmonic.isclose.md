@@ -15,9 +15,43 @@ the same coefficients up to a tolerance
 
 ## Syntax
 
+Equal up to the relative tolerance 1e-8:
+
 ```python
-SO3FunHarmonic.isclose(self, g, rtol=1e-08, atol=0.0)
+SO3F.isclose(SO3F2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L505">source</a></font>
+Or up to an absolute one:
+
+```python
+SO3F.isclose(SO3F2, atol=1e-12)
+```
+
+The coefficients of both functions, padded to the larger bandwidth, agree when the norm of
+their difference is at most atol + rtol times the norm of those of g.
+
+## Input
+
+| | |
+|---|---|
+| `SO3F, g` | SO3FunHarmonic |
+
+## Output
+
+| | |
+|---|---|
+| `tf` | bool |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `rtol` | `1e-08` | the tolerance relative to the norm of g |
+| `atol` | `0.0` | the absolute tolerance |
+
+## See also
+
+[SO3FunHarmonic.norm](SO3FunHarmonic.norm_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L612">source</a></font>
 {% endraw %}

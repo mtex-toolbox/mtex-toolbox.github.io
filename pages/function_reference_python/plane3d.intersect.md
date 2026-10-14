@@ -16,11 +16,43 @@ where the segments from v1 to v2 cross the plane, NaN where they do not
 
 ## Syntax
 
+The crossings of the segments from v1 to v2:
+
 ```python
-plane3d.intersect(self, v1, v2=None, tol=5.72958e-12*degree)
+v = plane.intersect(v1, v2)
 ```
+
+The segments as the pairs V[..., 0], V[..., 1]:
+
+```python
+v = plane.intersect(V)
+```
+
+## Input
+
+| | |
+|---|---|
+| `plane` | plane3d |
+| `v1` | vector3d, the starting points of the segments |
+| `v2` | vector3d, their end points, by default the last axis of v1 holding both |
+
+## Output
+
+| | |
+|---|---|
+| `v` | vector3d of the crossings |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `tol` | `5.72958e-12*degree` | how far, as a fraction of the segment, a crossing may lie beyond its ends |
+
+## See also
+
+[intersect](intersect_py.html), [lineIntersect](vector3d.lineIntersect_py.html), [plane3d.dist](plane3d.dist_py.html)
 
 MATLAB's [plane3d.intersect](plane3d.intersect.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L110">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L126">source</a></font>
 {% endraw %}

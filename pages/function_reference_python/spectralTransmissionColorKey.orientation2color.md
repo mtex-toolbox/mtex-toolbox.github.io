@@ -28,5 +28,5 @@ rgb = key.orientation2color(ebsd['Fo'].orientations)
 spectralTransmissionColorKey.orientation2color(self, ori)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L381">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L407">source</a></font>
 {% endraw %}

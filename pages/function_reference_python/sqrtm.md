@@ -17,5 +17,5 @@ sqrtm(T) is T.sqrtm(): the matrix square root
 sqrtm(T)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1495">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1671">source</a></font>
 {% endraw %}

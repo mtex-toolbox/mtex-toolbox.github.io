@@ -19,5 +19,5 @@ the title of section k, the constant angle in degrees
 eulerSections.sectionLabel(self, k)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L210">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L257">source</a></font>
 {% endraw %}

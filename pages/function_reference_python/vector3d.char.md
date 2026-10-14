@@ -47,14 +47,15 @@ s = m.char(utf8=False)
 
 A point group makes the indices stand for the whole symmetrically equivalent set, so they
 are written in the family brackets {hkl} and <uvw>, while the trivial group leaves one plane
-or one direction, (hkl) and [uvw]. A list of directions is written one after another.
-MATLAB's flags no_scopes and commasep are not taken.
+or one direction, (hkl) and [uvw]. A direction outside a crystal frame is written in its
+coordinates, (1,2,3). A list of directions is written one after another. MATLAB's flags
+no_scopes and commasep are not taken.
 
 ## Input
 
 | | |
 |---|---|
-| `m` | vector3d in a crystal frame |
+| `m` | vector3d, in a crystal frame for the indices |
 
 ## Output
 

@@ -16,9 +16,33 @@ hemisphere has no boundary of its own and gets the horizon
 
 ## Syntax
 
+Points every half degree:
+
 ```python
-sphericalProjection.boundary(self, resolution=0.5*degree)
+b = proj.boundary()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L185">source</a></font>
+Coarser arcs:
+
+```python
+b = proj.boundary(resolution=2*degree)
+```
+
+## Output
+
+| | |
+|---|---|
+| `b` | list of (x, y) pairs of arrays, one per arc of the region |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `resolution` | `0.5*degree` | the spacing of the points along an arc |
+
+## See also
+
+[sphericalProjection.bounds](sphericalProjection.bounds_py.html), [sphericalRegion.boundary](sphericalRegion.boundary_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L199">source</a></font>
 {% endraw %}

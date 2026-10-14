@@ -12,15 +12,47 @@ status: Reference
 {% raw %}
 A method of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
-the surface gradient: a vector field, or its values at the directions x
+the surface gradient: a vector field, or its values at the directions x; MATLAB's grad
 
 ## Syntax
 
+The gradient as a vector field:
+
 ```python
-S2FunHarmonic.grad(self, x=None)
+sVF = grad(sF)
 ```
+
+The gradient at the directions v, vector3d:
+
+```python
+g = grad(sF, v)
+```
+
+The gradient is tangent to the sphere, the derivative of the function along the sphere.
+
+## Input
+
+| | |
+|---|---|
+| `sF` | S2FunHarmonic |
+
+## Output
+
+| | |
+|---|---|
+| `sVF` | S2VectorFieldHarmonic, or vector3d at x |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `x` | `None` | vector3d, the directions at which to evaluate the gradient |
+
+## See also
+
+[S2VectorFieldHarmonic](S2VectorFieldHarmonic_index_py.html), [S2FunHarmonic.laplace](S2FunHarmonic.laplace_py.html)
 
 MATLAB's [S2FunHarmonic.grad](S2FunHarmonic.grad.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L537">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L709">source</a></font>
 {% endraw %}

@@ -97,7 +97,7 @@ fraction of the sphere the region covers.
 | [eq](sphericalRegion.eq_py.html) | Return self==value |
 | [isLower](sphericalRegion.isLower_py.html) | whether the region lies within the hemisphere into the screen of the convention pC |
 | [isUpper](sphericalRegion.isUpper_py.html) | whether the region lies within the hemisphere out of the screen of the convention pC |
-| [plot](sphericalRegion.plot_py.html) | plot(sR): the outline of a spherical region |
+| [plot](sphericalRegion.plot_py.html) | the outline of a spherical region on the charts of the current figure, or of a new one |
 | [polarCoordinates](sphericalRegion.polarCoordinates_py.html) | polar coordinates of a region (MATLAB @sphericalRegion/polarCoordinates), which is what a colour key is built on: the radius is one at the centre and zero on the boundary, taken along the great circle through the centre, and the azimuth is measured about the centre from a reference direction and then equalised, so that a wide part of the sector takes as much of the turn as a narrow one and the vertices sit at equal angles |
 | [restrict2Lower](sphericalRegion.restrict2Lower_py.html) | the hemisphere opposite to a direction, z by default, added to the region (MATLAB's sphericalRegion.restrict2Lower) |
 | [restrict2Upper](sphericalRegion.restrict2Upper_py.html) | the hemisphere seen from a direction added to the region (MATLAB's sphericalRegion.restrict2Upper) |

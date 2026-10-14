@@ -19,5 +19,5 @@ the chart section k is drawn on, the axis sector the region allows at its angle
 axisAngleSections.sectionCharts(self, k)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L538">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L622">source</a></font>
 {% endraw %}

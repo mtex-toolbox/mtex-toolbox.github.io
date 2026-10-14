@@ -13,5 +13,5 @@ A property of [quadratureS2Grid](quadratureS2Grid_index_py.html).
 
 the shape of the nodes over the axes, rho by theta
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L302">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L333">source</a></font>
 {% endraw %}

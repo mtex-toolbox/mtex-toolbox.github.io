@@ -28,5 +28,5 @@ gB = cat(gB['Forsterite', 'Forsterite'], gB['Forsterite', 'Enstatite'])
 grainBoundary.cat(*parts)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L328">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L348">source</a></font>
 {% endraw %}

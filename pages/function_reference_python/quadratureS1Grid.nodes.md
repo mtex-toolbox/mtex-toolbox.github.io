@@ -19,5 +19,5 @@ the nodes, 2L+2 equispaced angles in [0, 2 pi)
 quadratureS1Grid.nodes(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L330">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L361">source</a></font>
 {% endraw %}

@@ -31,5 +31,5 @@ psi.defocusing(pf)                       the factor on the specimen directions o
 
 MATLAB's [SchulzDefocusingKernel](SchulzDefocusingKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L911">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1105">source</a></font>
 {% endraw %}

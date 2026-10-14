@@ -17,11 +17,47 @@ a right one; F'(R) = F(R q^-1) and q^-1 F(R q^-1) for a rotation of the crystal
 
 ## Syntax
 
+Turned in the specimen frame:
+
 ```python
-SO3VectorFieldHarmonic.rotate(self, r, side='left')
+SO3VF = rotate(SO3VF, rot)
 ```
+
+Turned in the crystal frame:
+
+```python
+SO3VF = SO3VF.rotate(rot, side='right')
+```
+
+The coefficients of the three components are turned as those of a function, and where the
+rotation acts on the tangent space of the field the components are combined linearly as the
+vectors turn. A symmetry the rotation does not map onto itself is dropped with a warning. An
+orientation turns the field into the other frame of the orientation, as SO3FunHarmonic.rotate.
+
+## Input
+
+| | |
+|---|---|
+| `SO3VF` | SO3VectorFieldHarmonic |
+| `rot` | rotation or orientation, one |
+
+## Output
+
+| | |
+|---|---|
+| `SO3VF` | SO3VectorFieldHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `side` | `'left'` | 'left', the specimen side, or 'right', the crystal side; MATLAB's flag 'right' |
+
+## See also
+
+[SO3VectorFieldHandle.rotate](SO3VectorFieldHandle.rotate_py.html), [SO3VectorFieldRBF.rotate](SO3VectorFieldRBF.rotate_py.html), [SO3FunHarmonic.rotate](SO3FunHarmonic.rotate_py.html)
 
 MATLAB's [SO3VectorField.rotate](SO3VectorField.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L514">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L630">source</a></font>
 {% endraw %}

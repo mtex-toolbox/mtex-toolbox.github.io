@@ -22,5 +22,5 @@ a / b
 
 MATLAB's [SO3TangentVector.rdivide](SO3TangentVector.rdivide.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L292">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L303">source</a></font>
 {% endraw %}

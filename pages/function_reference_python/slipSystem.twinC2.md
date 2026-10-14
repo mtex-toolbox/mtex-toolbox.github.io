@@ -15,9 +15,41 @@ the compressive twin C2 <2-1-1-3>{2-1-12} of a hexagonal crystal
 
 ## Syntax
 
+With the critical resolved shear stress 1:
+
 ```python
-slipSystem.twinC2(CS, CRSS=1)
+sS = slipSystem.twinC2(cs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L329">source</a></font>
+With another:
+
+```python
+sS = slipSystem.twinC2(cs, CRSS=2)
+```
+
+One system of the family; symmetrise gives every equivalent one.
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame of a hexagonal crystal |
+
+## Output
+
+| | |
+|---|---|
+| `sS` | slipSystem |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `CRSS` | `1` | the critical resolved shear stress |
+
+## See also
+
+[slipSystem](slipSystem_index_py.html), [slipSystem.symmetrise](slipSystem.symmetrise_py.html), [dislocationSystem](dislocationSystem_index_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L566">source</a></font>
 {% endraw %}

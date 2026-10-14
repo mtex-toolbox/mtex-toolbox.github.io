@@ -27,14 +27,14 @@ The symmetric part of a velocity gradient:
 E = strainRate(L)
 ```
 
-The matrix given is taken as it is; strainRate(L) takes the symmetric part of a
-velocityGradientTensor, which MATLAB's strainRateTensor(L) does on construction.
+Only the symmetric part of the matrix given is kept, as MATLAB's constructor does, so that
+strainRateTensor(L) of a velocity gradient is strainRate(L).
 
 ## Input
 
 | | |
 |---|---|
-| `M` | 3 x 3 symmetric matrix, or an array (..., 3, 3) of them |
+| `M` | 3 x 3 matrix, or an array (..., 3, 3) of them |
 
 ## Output
 
@@ -71,5 +71,5 @@ velocityGradientTensor, which MATLAB's strainRateTensor(L) does on construction.
 
 MATLAB's [strainRateTensor_index](strainRateTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1171">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1316">source</a></font>
 {% endraw %}

@@ -18,5 +18,5 @@ for an indexed phase, white for a not indexed one without a colour
 phaseColor(pl, i)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L287">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L364">source</a></font>
 {% endraw %}

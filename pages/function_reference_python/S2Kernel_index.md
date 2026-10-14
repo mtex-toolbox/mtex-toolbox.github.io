@@ -23,7 +23,7 @@ a kernel on the sphere given by its Legendre coefficients A
 | [mrdivide](S2Kernel.mrdivide_py.html) |  |
 | [mtimes](S2Kernel.mtimes_py.html) |  |
 | [norm](S2Kernel.norm_py.html) | the L2 norm of the kernel, sqrt(sum_n A_n^2 / (2n+1)) |
-| [plotSpektra](S2Kernel.plotSpektra_py.html) | plotSpectrum(psi), plotSpectrum(odf): the Chebyshev coefficients of a kernel, or the harmonic power of a function, per degree (MATLAB's plotSpektra) |
+| [plotSpektra](S2Kernel.plotSpektra_py.html) | the Chebyshev coefficients of a kernel, or the harmonic power of a function, per degree |
 | [plus](S2Kernel.plus_py.html) |  |
 | [radon](S2Kernel.radon_py.html) | the Funk transform: A_n P_n(0) |
 | [rdivide](S2Kernel.rdivide_py.html) |  |
@@ -33,5 +33,5 @@ a kernel on the sphere given by its Legendre coefficients A
 
 MATLAB's [S2Kernel_index](S2Kernel_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L639">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L709">source</a></font>
 {% endraw %}

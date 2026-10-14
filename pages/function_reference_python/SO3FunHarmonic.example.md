@@ -26,5 +26,5 @@ SO3FunHarmonic.example()
 
 MATLAB's [SO3FunHarmonic.example](SO3FunHarmonic.example.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L283">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L297">source</a></font>
 {% endraw %}

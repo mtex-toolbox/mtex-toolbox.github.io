@@ -103,23 +103,23 @@ Voigt convention.
 | | |
 |---|---|
 | [antiSym](tensor.antiSym_py.html) | the antisymmetric part (T - T^t) / 2 of a rank two tensor |
-| [cat](tensor.cat_py.html) | the list of tensors of different densities keeps one density per tensor, as MATLAB's [C1, C2] does, which is what a weighted mean averages |
-| [checkSymmetry](tensor.checkSymmetry_py.html) | whether the tensor is invariant under every element of the group of its frame, up to atol relative to the largest norm |
+| [cat](tensor.cat_py.html) | the list of the tensors, MATLAB's [T1, T2] |
+| [checkSymmetry](tensor.checkSymmetry_py.html) | whether the tensor is invariant under every element of the group of its frame |
 | [colon](tensor.colon_py.html) | the double contraction A : B, the last two indices of A against the first two of B, MATLAB's A:B |
 | [CS](tensor.CS_py.html) | the frame the tensor is written in, MATLAB's T.CS |
 | [ctranspose](tensor.ctranspose_py.html) | the transpose swaps the indices of a rank two and the pairs of a rank four |
 | [det](tensor.det_py.html) | the determinant of a rank two tensor |
-| [directionalMagnitude](tensor.directionalMagnitude_py.html) | the tensor contracted with the unit direction on every index |
-| [double](tensor.double_py.html) | double(e) is e.double(): the coordinates of the images in the orthonormal basis, one row per orientation |
+| [directionalMagnitude](tensor.directionalMagnitude_py.html) | the magnitude of a tensor in the direction v, the tensor contracted with the unit direction on every index, T_i1...iR v_i1 .. |
+| [double](tensor.double_py.html) | the coordinates of the images of an embedding in their orthonormal basis, one row per orientation, e.double() |
 | [eig](tensor.eig_py.html) | the eigenvalues in ascending order and the eigenvectors as axes of the frame |
 | [eigvals](tensor.eigvals_py.html) | the eigenvalues in ascending order, of a rank two tensor or of the Voigt matrix of a rank four |
 | [EinsteinSum](tensor.EinsteinSum_py.html) | the contraction of tensors, vectors, rotations or arrays over the indices they share |
 | [eq](tensor.eq_py.html) | whether two tensors of one rank and shape agree coefficientwise within rtol and atol |
 | [expm](tensor.expm_py.html) | the matrix exponential of a rank two tensor, or of a rank four one through its Kelvin matrix, the class kept |
 | [export](tensor.export_py.html) | write a map to the file the extension names |
-| [eye](tensor.eye_py.html) | the identity tensor, rank two the unit matrix, rank four the symmetric identity on rank two tensors |
+| [eye](tensor.eye_py.html) | the identity tensor, of rank two the unit matrix, of rank four the symmetric identity on rank two tensors |
 | [frame](tensor.frame_py.html) | the frame the tensor is written in, a crystal frame or the specimen frame |
-| [horzcat](tensor.horzcat_py.html) | the list of tensors of different densities keeps one density per tensor, as MATLAB's [C1, C2] does, which is what a weighted mean averages |
+| [horzcat](tensor.horzcat_py.html) | the list of the tensors, MATLAB's [T1, T2] |
 | [inv](tensor.inv_py.html) | the inverse: rank two by the matrix, rank four through the Voigt matrix, which swaps the convention and with it the class, a stiffness inverting to a compliance |
 | [isSkewSymmetric](tensor.isSkewSymmetric_py.html) | whether every tensor equals minus its transpose, up to a relative 1e-6 |
 | [isSymmetric](tensor.isSymmetric_py.html) | whether every tensor of rank two or four equals its transpose, up to a relative 1e-6 |
@@ -134,11 +134,11 @@ Voigt convention.
 | [ne](tensor.ne_py.html) | Return self!=value |
 | [norm](tensor.norm_py.html) | the Frobenius norm of every tensor, over all its coefficients |
 | [normalize](tensor.normalize_py.html) | the tensors divided by their Frobenius norms |
-| [ones](tensor.ones_py.html) | a tensor of ones of the rank of the class, or of rank=, the list shape given by the numbers |
+| [ones](tensor.ones_py.html) | a tensor of ones of the rank of the class, or a list of them |
 | [plot](tensor.plot_py.html) | plot(x, ...) draws x as its kind is drawn |
 | [plus](tensor.plus_py.html) |  |
 | [polar](tensor.polar_py.html) | the polar decomposition T = R SR = SL R of a rank two tensor, R orthogonal, SL and SR symmetric |
-| [rand](tensor.rand_py.html) | a random tensor with the symmetries its class and frame ask for: a plain tensor of entries drawn uniformly from [0, 1], as MATLAB's, a symmetric one the symmetric part of such a tensor, symmetrised in its frame, a stiffness or compliance one positive definite besides |
+| [rand](tensor.rand_py.html) | a random tensor with the symmetries its class and frame ask for |
 | [rdivide](tensor.rdivide_py.html) |  |
 | [rotate](tensor.rotate_py.html) | the tensor turned by a rotation, an orthogonal transform or an orientation |
 | [sqrtm](tensor.sqrtm_py.html) | the matrix square root of a rank two tensor, or of a rank four one through its Kelvin matrix, the class kept |
@@ -154,9 +154,9 @@ Voigt convention.
 | [transformReferenceFrame](tensor.transformReferenceFrame_py.html) | the same coefficients read in another frame, the numbers changed by the rigid part of the transition between the two bases |
 | [transpose](tensor.transpose_py.html) | the transpose swaps the indices of a rank two and the pairs of a rank four |
 | [uminus](tensor.uminus_py.html) |  |
-| [vertcat](tensor.vertcat_py.html) | the list of tensors of different densities keeps one density per tensor, as MATLAB's [C1, C2] does, which is what a weighted mean averages |
+| [vertcat](tensor.vertcat_py.html) | the list of the tensors, MATLAB's [T1, T2] |
 | [Voigt](tensor.Voigt_py.html) | the Voigt matrix of a tensor: 6 x 6 for rank four, 3 x 6 for rank three, six components for rank two, the off diagonal entries doubled where the class prescribes it |
-| [zeros](tensor.zeros_py.html) | a tensor of zeros of the rank of the class, or of rank=, the list shape given by the numbers |
+| [zeros](tensor.zeros_py.html) | a tensor of zeros of the rank of the class, or a list of them |
 
 ## Used on
 

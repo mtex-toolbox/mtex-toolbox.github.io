@@ -69,5 +69,5 @@ flags phi1 and Phi, the 'ZYZ' convention and the Clenshaw-Curtis grid are not th
 
 MATLAB's [regularSO3Grid](regularSO3Grid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/so3grid.py#L313">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/so3grid.py#L332">source</a></font>
 {% endraw %}

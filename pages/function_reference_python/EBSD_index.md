@@ -76,20 +76,20 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 
 | | |
 |---|---|
-| [calcGND](EBSD.calcGND_py.html) | gnd, rho = calcGND(ebsd, dS): the geometrically necessary dislocation content of every pixel after Pantleon (2008), MATLAB's route: the curvature of the map, the systems rotated into every pixel, the densities of least total line energy reproducing the curvature |
+| [calcGND](EBSD.calcGND_py.html) | the geometrically necessary dislocation content of every pixel after Pantleon (2008) |
 | [calcGrains](EBSD.calcGrains_py.html) | the grains of a map, the pixels joined across every boundary the criterion keeps |
 | [calcGROD](EBSD.calcGROD_py.html) | the grain reference orientation deviation, mis2mean: the misorientation of every pixel from the mean orientation of its grain, or from a given reference |
 | [calcKernel](EBSD.calcKernel_py.html) | the kernel a density estimate of orientations or directions should use, a de la Vallee Poussin kernel of the halfwidth chosen from the sample |
 | [calcMisorientation](EBSD.calcMisorientation_py.html) | uncorrelated misorientations: those of random pairs of measurements far enough apart that they say nothing about one another |
-| [calcTensor](EBSD.calcTensor_py.html) | the texture average of a single crystal tensor |
-| [calcTraces](EBSD.calcTraces_py.html) | traces, rel, cSize = calcTraces(ebsd \| grains, clusterId, 'Radon' \| 'Fourier' \| 'calliper' \| 'hist', minClusterSize=100) |
+| [calcTensor](EBSD.calcTensor_py.html) | the texture average of a single crystal tensor over an ODF, a list of orientations or a map |
+| [calcTraces](EBSD.calcTraces_py.html) | the traces of subregions of a map or of sets of grains, the direction their lamellae run along |
 | [cat](EBSD.cat_py.html) | the list of several maps, the phases of the first, MATLAB's [ebsd1, ebsd2] |
 | [color](EBSD.color_py.html) | the colour of the one phase of the map, read and set on its frame: ebsd['Diopside'].color |
 | [colorList](EBSD.colorList_py.html) | the colours of the phases, in the order of CSList |
 | [copy](EBSD.copy_py.html) | a copy of the map with its own arrays |
 | [CS](EBSD.CS_py.html) | the crystal frame of the one indexed phase present |
 | [cube2hex](EBSDhex.cube2hex_py.html) | the row and column (counted from 0) of the cells with cube coordinates x, y, z, NaN for a cell outside the grid |
-| [curvature](EBSD.curvature_py.html) | the curvature tensor of every pixel, kappa = d omega / d x, in the specimen frame per scan unit, its rows the components of the rotation vector and its columns the directions of the specimen |
+| [curvature](EBSD.curvature_py.html) | the curvature tensor of every pixel, kappa = d omega / d x, in the specimen frame per scan unit |
 | [dPos](EBSD.dPos_py.html) | MATLAB's spacing of the positions: the shortest distance from the first corner of the unit cell to the others, the step on a square lattice and the step over sqrt(3) on a hexagonal one, where lattice.dxy is the step |
 | [dtype](EBSD.dtype_py.html) | the floating point type of the rotations, single or double precision |
 | [EBSD](EBSD.EBSD_py.html) | an EBSD map: positions, rotations and phase ids with the list of the phases' frames and the properties of every measurement |
@@ -108,7 +108,7 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 | [gradient](EBSD.gradient_py.html) | the derivative of the orientation along the two axes of the plane of the map, per unit length, as a pair of framed vectors |
 | [gradientX](EBSD.gradientX_py.html) | the derivative of the orientation along the specimen x axis per unit length, gradient(ebsd, xvector) |
 | [gradientY](EBSD.gradientY_py.html) | the derivative of the orientation along the specimen y axis per unit length, gradient(ebsd, yvector) |
-| [gradientZ](EBSD.gradientZ_py.html) | the derivative of the orientation along the specimen z axis per unit length, gradient(ebsd, zvector), which a planar map has only where z lies in its plane |
+| [gradientZ](EBSD.gradientZ_py.html) | the derivative of the orientation along the specimen z axis per unit length, gradient(ebsd, zvector) |
 | [grainMean](EBSD.grainMean_py.html) | the average of a property over each grain |
 | [gridify](EBSD.gridify_py.html) | the same map with its arrays in map shape, the missing cells padding |
 | [hex2cube](EBSDhex.hex2cube_py.html) | the cube coordinates x, y, z of cells of a hexagonal grid, given by their row and column (counted from 0) or by their flat index |
@@ -132,7 +132,7 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 | [phase](EBSD.phase_py.html) | the phase numbers of the file, the phase ids translated through phaseMap |
 | [plot](EBSD.plot_py.html) | a spatial EBSD map, coloured by phase, by a value, by orientation or by colours given |
 | [project2FundamentalRegion](EBSD.project2FundamentalRegion_py.html) | the map with every orientation replaced by its representative in the fundamental region of its phase (MATLAB's EBSD.project2FundamentalRegion) |
-| [quiver](EBSD.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
+| [quiver](EBSD.quiver_py.html) | arrows: tangent vectors at directions, a vector or axis field on the sphere, arrows at orientations in the sections of the current figure, or directions on a map or a volume |
 | [reduce](EBSD.reduce_py.html) | every n-th measurement along each lattice direction, which is the map at a coarser step |
 | [rotate](EBSD.rotate_py.html) | a rigid motion of the map |
 | [rotate](EBSDsquare.rotate_py.html) | a rigid motion of the map |
@@ -140,10 +140,10 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 | [shift](EBSD.shift_py.html) | the map with every position moved by the vector v, the arrays not reordered |
 | [size](EBSD.size_py.html) | the number of measurements, the padding of a grid included |
 | [smooth](EBSD.smooth_py.html) | the map with its orientations denoised, every one replaced by one computed from its neighbours, within the grains where the map knows them and within the phases otherwise |
-| [spatialProfile](EBSD.spatialProfile_py.html) | the measurements along a polyline, in the order they are met, and the distance along the line of each of them, as MATLAB's pair |
-| [spatialProfile](EBSDsquare.spatialProfile_py.html) | the measurements along a polyline, in the order they are met, and the distance along the line of each of them, as MATLAB's pair |
+| [spatialProfile](EBSD.spatialProfile_py.html) | the measurements along a polyline, in the order they are met, and the distance along the line of each of them |
+| [spatialProfile](EBSDsquare.spatialProfile_py.html) | the measurements along a polyline, in the order they are met, and the distance along the line of each of them |
 | [subsref](EBSD.subsref_py.html) |  |
-| [text](EBSD.text_py.html) | text(v, labels): text at directions, text(v, labeled=True) each direction's own name |
+| [text](EBSD.text_py.html) | text at directions on the sphere, at the measurements or grains of a map, or at a point of the current axes |
 | [transform](EBSD.transform_py.html) | any map of the positions |
 | [unitCell](EBSD.unitCell_py.html) | the cell of the lattice about a site, as its corners |
 | [weightedBurgersVec](EBSD.weightedBurgersVec_py.html) | the weighted Burgers vector: the net Burgers vector of the dislocations crossing the map per unit area, by the integral or the gradient method |

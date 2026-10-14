@@ -22,5 +22,5 @@ SO3VectorFieldHarmonic.eval(self, x)
 
 MATLAB's [SO3VectorFieldHarmonic.eval](SO3VectorFieldHarmonic.eval.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L437">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L536">source</a></font>
 {% endraw %}

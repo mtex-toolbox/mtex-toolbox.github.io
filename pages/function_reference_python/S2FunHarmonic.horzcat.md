@@ -12,22 +12,49 @@ status: Reference
 {% raw %}
 A method of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
-the functions joined into one list along an axis, cut or padded to the largest bandwidth
+the functions joined into one list along an axis, padded to the largest bandwidth;
+MATLAB's cat, horzcat and vertcat
 
 ## Syntax
 
+A list of two functions:
+
 ```python
 sF = cat(sF1, sF2)
-sF = S2FunHarmonic.cat(sF1, sF2, axis=1)
 ```
 
-## Signature
+Lists of shape (n, 1) side by side, an (n, 2) list:
 
 ```python
-S2FunHarmonic.horzcat(*fs, axis=0)
+sF = S2FunHarmonic.cat(sFa, sFb, axis=1)
 ```
+
+A single function counts as a list of one. The axis is that of the lists: the lists must
+agree in every other axis, and to join along axis 1 they need two axes.
+
+## Input
+
+| | |
+|---|---|
+| `fs` | S2FunHarmonic, the functions or lists to join |
+
+## Output
+
+| | |
+|---|---|
+| `sF` | S2FunHarmonic, a list of functions |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `axis` | `0` | the axis of the lists along which they are joined |
+
+## See also
+
+[S2FunHarmonic.sum](S2FunHarmonic.sum_py.html), [S2FunHarmonic.mean](S2FunHarmonic.mean_py.html)
 
 MATLAB's [S2FunHarmonic.horzcat](S2FunHarmonic.horzcat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L306">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L330">source</a></font>
 {% endraw %}

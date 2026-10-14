@@ -32,5 +32,5 @@ dislocationSystem.tensor(self)
 
 MATLAB's [dislocationSystem.tensor](dislocationSystem.tensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L427">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L678">source</a></font>
 {% endraw %}

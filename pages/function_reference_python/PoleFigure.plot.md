@@ -12,16 +12,70 @@ status: Reference
 {% raw %}
 A method of [PoleFigure](PoleFigure_index_py.html).
 
-plot(pf), plot(pf, contourf=True), plot(pf, minmax=True): a measured pole figure, or a data
-set of them in a row, the specimen directions as markers coloured by intensity
+measured pole figures in a row, the specimen directions as markers coloured by intensity;
+MATLAB's PoleFigure/plot
 
 ## Syntax
 
+Every pole figure of the data set:
+
 ```python
-PoleFigure.plot(pf, colorRange='individual', bandwidth=None, **kw)
+plot(pf)
 ```
+
+Only the first pole figure:
+
+```python
+plot(pf.select(0))
+```
+
+Filled contours of the harmonic expansion:
+
+```python
+pf.plot(contourf=True)
+```
+
+Of an expansion to degree 16:
+
+```python
+pf.plot(contourf=True, bandwidth=16)
+```
+
+With the minimum and the maximum:
+
+```python
+pf.plot(minmax=True)
+```
+
+One colour range over all pole figures:
+
+```python
+pf.plot(colorRange='equal')
+```
+
+With contourf, contour, pcolor or smooth (MATLAB's flags, keywords here) each pole figure is
+first expanded into spherical harmonics, S2FunHarmonic(pf.select(i)), and drawn as a
+function on the sphere. The other keywords are those of plot of vector3d; mtexColorbar adds
+the colour bars.
+
+## Input
+
+| | |
+|---|---|
+| `pf` | PoleFigure |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `colorRange` | `'individual'` | 'individual', each pole figure its own range, 'equal', one range over all, or (lo, hi) |
+| `bandwidth` | `None` | the harmonic degree of the expansion a filled style draws; by default that of S2FunHarmonic |
+
+## See also
+
+[plotPF](SO3Fun.plotPDF_py.html), [PoleFigure.plotDiff](PoleFigure.plotDiff_py.html), [mtexColorbar](mtexColorbar_py.html), [PoleFigurePlot](PoleFigurePlot_py.html)
 
 MATLAB's [PoleFigure.plot](PoleFigure.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L296">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L324">source</a></font>
 {% endraw %}

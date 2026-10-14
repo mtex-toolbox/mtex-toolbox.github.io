@@ -22,5 +22,5 @@ symmetry.properGroup(self)
 
 MATLAB's [symmetry.properGroup](symmetry.properGroup.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L389">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L429">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ rotation.byRodrigues(v)
 
 MATLAB's [rotation.byRodrigues](rotation.byRodrigues.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L557">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L678">source</a></font>
 {% endraw %}

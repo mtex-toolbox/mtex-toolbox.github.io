@@ -28,5 +28,5 @@ ipfKey.plot(complete=True, resolution=1*degree)
 ipfColorKey.plot(self, **kwargs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L141">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L155">source</a></font>
 {% endraw %}

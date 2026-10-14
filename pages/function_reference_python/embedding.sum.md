@@ -25,5 +25,5 @@ sum(x, *args, **kwargs)
 
 MATLAB's [embedding.sum](embedding.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L90">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L91">source</a></font>
 {% endraw %}

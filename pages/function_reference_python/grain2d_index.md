@@ -95,8 +95,8 @@ grains come from a segmentation alone.
 | [area](grain2d.area_py.html) | the area an outline covers, its holes taken off |
 | [aspectRatio](grain2d.aspectRatio_py.html) | the ratio of the two half axes, one for a circle |
 | [boundarySize](grain2d.boundarySize_py.html) | the number of vertices on the loops of an outline, the holes included |
-| [calcTraces](grain2d.calcTraces_py.html) | traces, rel, cSize = calcTraces(ebsd \| grains, clusterId, 'Radon' \| 'Fourier' \| 'calliper' \| 'hist', minClusterSize=100) |
-| [caliper](grain2d.caliper_py.html) | the caliper: with nothing, the longest width of every outline as a framed axis of that length |
+| [calcTraces](grain2d.calcTraces_py.html) | the traces of subregions of a map or of sets of grains, the direction their lamellae run along |
+| [caliper](grain2d.caliper_py.html) | the caliper, the Feret diameter, of every outline: its width across a direction, or the longest or the shortest width as a framed axis of that length |
 | [cat](grain2d.cat_py.html) | the grains of several parts of one segmentation, MATLAB's [grains1, grains2]: the parts share its phases, frame and boundary vertices |
 | [centroid](grain2d.centroid_py.html) | the centroid of the area, holes taken off, as a framed point |
 | [checkInside](grain2d.checkInside_py.html) | whether points lie inside the outlines: within the outer loop and outside the holes, as a (points, outlines) matrix |
@@ -132,15 +132,15 @@ grains come from a segmentation alone.
 | [neighbors](grain2d.neighbors_py.html) | the pairs of ids of grains sharing a boundary, both in the selection, or either with full |
 | [numNeighbors](grain2d.numNeighbors_py.html) | the number of grains every grain shares a boundary with, the neighbours outside the selection included |
 | [paris](grain2d.paris_py.html) | how much the outline is indented against its convex hull, in percent |
-| [paror](grain2d.paror_py.html) | the cumulative projection length of the outlines, measured along each direction (Panozzo 1983): the width of the convex hull seen from that direction, summed over the outlines and normalised by its largest value |
+| [paror](grain2d.paror_py.html) | the cumulative particle projection function of the outlines (Panozzo 1983) |
 | [perimeter](grain2d.perimeter_py.html) | the length of the outer loop of an outline, as MATLAB's default |
 | [phase](grain2d.phase_py.html) | the phase number of every grain as the file numbered it |
 | [plane](grain2d.plane_py.html) | the plane the map lies in, a mapPlane |
 | [plot](grain2d.plot_py.html) | the grains of a map as polygons, coloured by phase, by a value or by orientation, with their boundaries on top |
 | [principalComponents](grain2d.principalComponents_py.html) | the two half axes of the ellipse with the same second area moments as every outline, the long one first, as antipodal vectors of the specimen frame |
-| [quiver](grain2d.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
-| [reduceBoundary](grain2d.reduceBoundary_py.html) | the grains thin, simplify or refine their boundary and keep their inner boundary on it |
-| [refineBoundary](grain2d.refineBoundary_py.html) | refining appends its new vertices, so the pool has to reach the second boundary before it is refined in turn, and the first one back afterwards |
+| [quiver](grain2d.quiver_py.html) | arrows: tangent vectors at directions, a vector or axis field on the sphere, arrows at orientations in the sections of the current figure, or directions on a map or a volume |
+| [reduceBoundary](grain2d.reduceBoundary_py.html) | the grains with every n-th vertex of their boundary kept along each chain, whatever the shape, the inner boundary kept on it |
+| [refineBoundary](grain2d.refineBoundary_py.html) | the grains with their boundary and inner boundary refined, every segment split into pieces of about length delta |
 | [rotate](grain2d.rotate_py.html) | rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method |
 | [scanUnit](grain2d.scanUnit_py.html) | the unit of the map the grains were reconstructed from, as their boundary carries it |
 | [selectByGrainId](grain2d.selectByGrainId_py.html) | the grains named by id, in the order asked for |
@@ -152,9 +152,9 @@ grains come from a segmentation alone.
 | [size](grain2d.size_py.html) | the number of grains |
 | [smoothBoundary](grain2d.smoothBoundary_py.html) | the grains with the pixel staircase of their boundaries turned into smooth curves |
 | [subBoundaryLength](grain2d.subBoundaryLength_py.html) | the length of the subgrain boundaries inside every grain, of the inner boundary segments sel selects if given |
-| [subBoundarySize](grain2d.subBoundarySize_py.html) | the inner boundary of every grain: how many segments and how much length of the subgrain boundaries lie in it |
+| [subBoundarySize](grain2d.subBoundarySize_py.html) | the inner boundary of every grain: how many segments of the subgrain boundaries lie in it |
 | [subsref](grain2d.subsref_py.html) |  |
-| [text](grain2d.text_py.html) | text(v, labels): text at directions, text(v, labeled=True) each direction's own name |
+| [text](grain2d.text_py.html) | text at directions on the sphere, at the measurements or grains of a map, or at a point of the current axes |
 | [triplePoints](grain2d.triplePoints_py.html) | the triple points of the grain boundary |
 | [update](grain2d.update_py.html) | the grains with the phase of every boundary segment read off the grain it borders, as it has to be after the grains changed phase (MATLAB grains.update) |
 | [V](grain2d.V_py.html) | the vertices of the boundary in the coordinates of the map plane, (n, 2) |

@@ -84,7 +84,7 @@ rotation axes besides.
 | [rodriguesPlanes](orientationRegion.rodriguesPlanes_py.html) | the region in Rodrigues space as A rho <= b: a bound dot(q, N) <= 0 reads n  |
 | [rotate](orientationRegion.rotate_py.html) | rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method |
 | [SS](orientationRegion.SS_py.html) | the second frame of the region, frameB: the specimen or second crystal frame (MATLAB's orientationRegion.CS2) |
-| [volume](orientationRegion.volume_py.html) | the share of orientations within a radius of a centre: the mean of f on a local grid in the ball, times the ball's share of the fundamental region (its Haar measure times the number of symmetric copies, at most one) |
+| [volume](orientationRegion.volume_py.html) | the share of orientations within a radius of a centre: the integral of f over the ball, int_{angle(g, c) < r} f(g) dg, relative to the integral over all orientations |
 
 MATLAB's [orientationRegion_index](orientationRegion_index.html)
 

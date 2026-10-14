@@ -15,9 +15,39 @@ the viewer, who looks from the other side of the plane when the layout flips it
 
 ## Syntax
 
+X, y, z under the identity:
+
 ```python
-frameOnScreen(pl, layout=None)
+s = frameOnScreen(ebsd.lattice.plane)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L337">source</a></font>
+Z pointing away:
+
+```python
+s = frameOnScreen(ebsd.lattice.plane, mapLayout('x↑→y'))
+```
+
+## Input
+
+| | |
+|---|---|
+| `pl` | the plane of the map |
+
+## Output
+
+| | |
+|---|---|
+| `s` | a list of three (right, up, out) triples, for x, y and z |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `layout` | `None` | the 2 x 2 matrix taking the plane to the screen, mapLayout; by default the identity |
+
+## See also
+
+[triadGeometry](triadGeometry_py.html), [mapLayout](mapLayout_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L434">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [InvariantProjection](InvariantProjection_index_py.html).
 
 the highest degree the held projection blocks reach
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L318">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L334">source</a></font>
 {% endraw %}

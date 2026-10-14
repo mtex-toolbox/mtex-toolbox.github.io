@@ -119,7 +119,7 @@ numNegative
 # ## Reconstruct an ODF
 #
 # [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF_py.html) finds an ODF whose recalculated pole figures fit the
-# corrected measurements. `silent=True` suppresses the solver iteration history, while the
+# corrected measurements. `verbose=False` suppresses the solver iteration history, while the
 # returned object remains visible.
 
 # %%

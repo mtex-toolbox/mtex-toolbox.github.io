@@ -26,5 +26,5 @@ grain2d.shortAxis(self)
 
 MATLAB's [grain2d.shortAxis](grain2d.shortAxis.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L98">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L114">source</a></font>
 {% endraw %}

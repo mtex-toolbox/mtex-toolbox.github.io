@@ -19,5 +19,5 @@ the same chart showing another region
 plainProjection.withRegion(self, sR)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L357">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L404">source</a></font>
 {% endraw %}

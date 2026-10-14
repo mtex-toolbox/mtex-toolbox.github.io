@@ -11,21 +11,52 @@ status: Reference
 ---
 {% raw %}
 the colour of the index i in MTEX's colour order, counting from 0 (MATLAB counts from 1); an
-RGB row per index of an array, NaN where the index is negative or NaN
+RGB row per index of an array, NaN where the index is negative or NaN; MATLAB's ind2color
 
 ## Syntax
 
-```python
-ind2color(i)
-ind2color(ids, 'ordered')     the order in which neighbouring ids get related colours
-ind2color(ids, cmap)          a matrix of colours as the order
-```
-
-## Signature
+One colour of the order of MTEX's preference:
 
 ```python
-ind2color(i, cmap=None)
+rgb = ind2color(i)
 ```
+
+The order in which neighbouring ids get related colours:
+
+```python
+rgb = ind2color(ids, 'ordered')
+```
+
+A matrix of colours as the order:
+
+```python
+rgb = ind2color(ids, cmap)
+```
+
+The order has 24 colours and repeats beyond them, so that the phases or grains numbered by
+the indices are told apart.
+
+## Input
+
+| | |
+|---|---|
+| `i` | an index, or an array of them |
+
+## Output
+
+| | |
+|---|---|
+| `rgb` | an rgb triplet, or one row per index |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `cmap` | `None` | 'ordered' for MATLAB's order of related neighbours, or a matrix of colours |
+
+## See also
+
+[vega20](vega20_py.html), [num2rgb](num2rgb_py.html)
 
 ## Used on
 
@@ -33,5 +64,5 @@ ind2color(i, cmap=None)
 
 MATLAB's [ind2color](ind2color.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L195">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L266">source</a></font>
 {% endraw %}

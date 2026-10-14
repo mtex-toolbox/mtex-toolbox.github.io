@@ -17,5 +17,5 @@ annotate(ori) on a section plot: every orientation marked in the section it lies
 annotateSection(ori, *args, **kw)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L248">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L270">source</a></font>
 {% endraw %}

@@ -32,7 +32,7 @@ yellow, and the key comes closer to MTEX's and less even.
 
 | | |
 |---|---|
-| [direction2color](HSVDirectionKey.direction2color_py.html) | the colour of directions: each is brought into the sector, then into the white half, the fold telling which of the two centres its colours run from |
+| [direction2color](HSVDirectionKey.direction2color_py.html) | the colours of directions under the key |
 
 ## Used on
 

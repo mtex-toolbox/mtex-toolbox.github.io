@@ -19,5 +19,5 @@ the coefficient vector cut or padded to a bandwidth
 SO3FunHarmonic.truncate(self, L)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L336">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L350">source</a></font>
 {% endraw %}

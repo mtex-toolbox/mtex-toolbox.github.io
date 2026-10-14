@@ -12,15 +12,50 @@ status: Reference
 {% raw %}
 A method of [referenceFrame](referenceFrame_index_py.html).
 
-whether a transition between the frames exists: the matrix is close to orthogonal
+whether a transition between the frames exists, and the transition; MATLAB's isCompatible
 
 ## Syntax
 
+The transition from cs1 to cs2:
+
 ```python
-referenceFrame.isCompatible(self, other, tol=None)
+ok, M = cs1.isCompatible(cs2)
 ```
+
+With another tolerance:
+
+```python
+ok, M = cs1.isCompatible(cs2, tol=1e-3)
+```
+
+Two frames are compatible when the transition between them is close to orthogonal: the
+same data can be expressed in either. The lengths of the basis vectors do not enter, the
+transition is computed on normalised bases.
+
+## Input
+
+| | |
+|---|---|
+| `cs1, cs2` | referenceFrame |
+
+## Output
+
+| | |
+|---|---|
+| `ok` | bool |
+| `M` | the 3 x 3 transition matrix from cs1 to cs2 |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `tol` | `None` | the tolerance on the orthogonality defect of M; by default referenceFrame.tolCompatible, 0.1 |
+
+## See also
+
+[referenceFrame.isAligned](referenceFrame.isAligned_py.html), [referenceFrame.transformationMatrix](referenceFrame.transformationMatrix_py.html)
 
 MATLAB's [referenceFrame.isCompatible](referenceFrame.isCompatible.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L397">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L468">source</a></font>
 {% endraw %}

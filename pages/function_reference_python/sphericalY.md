@@ -25,5 +25,5 @@ sphericalY(l, v)
 
 MATLAB's [sphericalY](sphericalY.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L505">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L544">source</a></font>
 {% endraw %}

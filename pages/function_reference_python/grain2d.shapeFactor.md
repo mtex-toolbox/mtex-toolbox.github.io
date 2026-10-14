@@ -26,5 +26,5 @@ grain2d.shapeFactor(self)
 
 MATLAB's [grain2d.shapeFactor](grain2d.shapeFactor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L159">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L175">source</a></font>
 {% endraw %}

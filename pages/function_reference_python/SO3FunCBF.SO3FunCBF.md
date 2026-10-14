@@ -69,5 +69,5 @@ mean of one. fibreODF builds one with the weights normalised.
 
 MATLAB's [SO3FunCBF.SO3FunCBF](SO3FunCBF.SO3FunCBF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L539">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L590">source</a></font>
 {% endraw %}

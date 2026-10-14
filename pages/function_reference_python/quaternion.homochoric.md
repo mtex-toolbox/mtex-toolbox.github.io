@@ -26,5 +26,5 @@ quaternion.homochoric(self)
 
 MATLAB's [quaternion.homochoric](quaternion.homochoric.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L279">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L344">source</a></font>
 {% endraw %}

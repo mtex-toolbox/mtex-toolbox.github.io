@@ -23,7 +23,7 @@ S3G = superfibonacciSO3Grid(cs, ss, resolution=5*degree)
 
 | | |
 |---|---|
-| [find](SO3FibonacciGrid.find_py.html) | nearest (eps None), k nearest (int) or all within a radius (float), through the tree |
+| [find](SO3FibonacciGrid.find_py.html) | the nearest grid rotation of every orientation, or the k nearest, or all within a radius, up to the symmetries of the grid's frames |
 | [resolution](SO3FibonacciGrid.resolution_py.html) | the mean nearest-neighbour spacing the grid was built for, in radians |
 | [subGrid](SO3FibonacciGrid.subGrid_py.html) | the grid of the orientations a mask or an index array selects |
 

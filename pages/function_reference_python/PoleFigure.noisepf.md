@@ -68,5 +68,5 @@ result is negative, unless nonnegative=True sets it to zero.
 
 MATLAB's [PoleFigure.noisepf](PoleFigure.noisepf.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L422">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L518">source</a></font>
 {% endraw %}

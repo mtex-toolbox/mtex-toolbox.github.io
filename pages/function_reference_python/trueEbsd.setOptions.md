@@ -12,19 +12,71 @@ status: Reference
 {% raw %}
 A method of [trueEbsd](trueEbsd_index_py.html).
 
-job.setOptions(roiSize=5, numROI=24), job.setOptions(3, registerOn='raw')
+the registration settings of every map of the job, or of one; MATLAB's setOptions of
+trueEbsd
 
 ## Syntax
 
+5 um tiles on every map:
+
 ```python
-trueEbsd.setOptions(self, n=None, **kwargs)
+job.setOptions(roiSize=5, numROI=24)
 ```
 
-The registration settings of every map, or of map n (or a list of them) alone: roiSize, the
-tile width as a length in the scan unit, one or one per fit stage, 0 for a map correlated
-against nothing; numROI, the tiles across; registerOn, 'edge' or 'raw'; edgeWidth, the
-neighbour distance of the edge transform, a length; highContrast, True, False or 'auto';
-pixelTime, carried. What is left at 'auto' is measured when calcDistortion needs it.
+Map 1 alone matched on its values:
+
+```python
+job.setOptions(1, registerOn='raw')
+```
+
+A tile width per fit stage of map 0:
+
+```python
+job.setOptions(0, roiSize=[4, 8])
+```
+
+Maps 0 and 1, measured when needed:
+
+```python
+job.setOptions([0, 1], highContrast='auto')
+```
+
+The settings say how the job registers, not what an image is, so they live on the job. They
+are lengths in the scan unit, not pixels, so they may be set before or after pixelSizeMatch.
+What is left at 'auto' is measured from a coarse correlation when calcDistortion first needs
+it, and what it chose is printed; what is set here is used as it is. The maps are counted
+from 0, where MATLAB counts them from 1. The settings are keyword arguments, the names in
+any case:
+
+roiSize - the width of a correlation tile, a length; one, or one per fit stage; 0 for a map
+correlated against nothing, as the reference. numROI - the tiles across the image, the
+number down following from the aspect ratio. registerOn - 'edge' to correlate the edge
+transform, 'raw' the values as they are, for a pair already sharing its contrast.
+edgeWidth - the neighbour distance of the edge transform, a length. highContrast - whether
+the image can be registered on directly: True, False or 'auto'. pixelTime - the dwell time
+per pixel, carried and not used.
+
+## Input
+
+| | |
+|---|---|
+| `job` | trueEbsd |
+
+## Output
+
+| | |
+|---|---|
+| `the job is changed in place` |  |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `n` | `None` | the map, or a list of maps, the settings apply to; by default every map |
+
+## See also
+
+[trueEbsd](trueEbsd_index_py.html), [trueEbsd.calcDistortion](trueEbsd.calcDistortion_py.html), [mapImage.edgeMap](mapImage.edgeMap_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
 
 ## Used on
 

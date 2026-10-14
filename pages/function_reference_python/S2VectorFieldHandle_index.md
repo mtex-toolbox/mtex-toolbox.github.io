@@ -27,5 +27,5 @@ vF = S2VectorFieldHandle(lambda v: v.cross(vector3d.Z()))
 | [rotate](S2VectorFieldHandle.rotate_py.html) | the field rotated by r, v'(xi) = r v(r^-1 xi) |
 | [S2VectorFieldHandle](S2VectorFieldHandle.S2VectorFieldHandle_py.html) | a vector field on the sphere given by a callable of the directions, the bandwidth a hint for its harmonic expansion |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L486">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L527">source</a></font>
 {% endraw %}

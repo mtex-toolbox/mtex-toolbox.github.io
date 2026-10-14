@@ -18,11 +18,46 @@ dot(v, a_i) <= cot(w/2) tan(w_i/4), a small circle about the axis
 
 ## Syntax
 
+The axes of a 40 degree rotation in the region:
+
 ```python
-orientationRegion.axisSector(self, omega, sector='own')
+sR = oR.axisSector(40*degree)
 ```
+
+Without the region's own sector of axes:
+
+```python
+sR = oR.axisSector(40*degree, sector=None)
+```
+
+The bounds whose small circle covers every axis at this angle drop out; the remaining
+circles are joined with a sector of axes, by default the region's own, the sector its
+symmetry leaves for the axes.
+
+## Input
+
+| | |
+|---|---|
+| `oR` | orientationRegion |
+| `omega` | the rotation angle |
+
+## Output
+
+| | |
+|---|---|
+| `sR` | sphericalRegion of the axes, in the first frame of the region |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `sector` | `'own'` | the sphericalRegion the axes are restricted to as well, 'own' the region's own sector, None no restriction |
+
+## See also
+
+[orientationRegion.maxAngle](orientationRegion.maxAngle_py.html), [sphericalRegion](sphericalRegion_index_py.html)
 
 MATLAB's [orientationRegion.axisSector](orientationRegion.axisSector.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L120">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L137">source</a></font>
 {% endraw %}

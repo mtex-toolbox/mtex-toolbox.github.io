@@ -24,5 +24,5 @@ spinTensor(M, *args, **kwargs)
 
 MATLAB's [spinTensor.spinTensor](spinTensor.spinTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1279">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1432">source</a></font>
 {% endraw %}

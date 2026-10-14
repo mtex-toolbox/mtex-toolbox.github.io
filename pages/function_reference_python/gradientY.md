@@ -22,7 +22,7 @@ gradientY(x, *args, **kwargs)
 | | |
 |---|---|
 | [EBSD](EBSD.gradientY_py.html) | the derivative of the orientation along the specimen y axis per unit length, gradient(ebsd, yvector) |
-| [EBSD3](EBSD3.gradientY_py.html) | the derivative of the orientation along the second axis of the volume per unit length, gradientDim(ebsd, 1) |
+| [EBSD3](EBSD3.gradientY_py.html) | the derivative of the orientation along the second axis of the volume per unit length |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

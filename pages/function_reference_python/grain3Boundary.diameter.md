@@ -16,5 +16,5 @@ the largest distance between two corners of every face
 
 MATLAB's [grain3Boundary.diameter](grain3Boundary.diameter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L210">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L265">source</a></font>
 {% endraw %}

@@ -61,8 +61,10 @@ The figure becomes the current one, which gcm returns and into which the plots o
 draw; newMtexFigure makes one the same way. Without layout or columns the n axes are laid
 out in the grid nearest to a slightly wide picture. The layout grows when more axes are
 asked for than it holds, and the figure grows with it, so that the axes keep their size.
-The spacing between the axes is matplotlib's constrained layout; MATLAB's
-innerPlotSpacing and outerPlotSpacing are taken and have no effect.
+The spacing between the axes is matplotlib's constrained layout, which makes room for
+titles, labels and colour bars; innerPlotSpacing sets the gap between neighbouring axes and
+outerPlotSpacing the margin around them all, at least half that gap, in pixels at 96 to
+the inch, as MATLAB's.
 
 ## Input
 
@@ -85,8 +87,8 @@ innerPlotSpacing and outerPlotSpacing are taken and have no effect.
 | `figure` | `None` | a matplotlib figure to adopt, with its axes, instead of a new one; one embedded in a window keeps its size |
 | `columns` | `None` | the number of columns of the layout |
 | `layout` | `None` | (rows, columns) of the layout |
-| `innerPlotSpacing` | `None` | MATLAB's spacing between the axes, without effect |
-| `outerPlotSpacing` | `None` | MATLAB's margin around the figure, without effect |
+| `innerPlotSpacing` | `None` | the gap between neighbouring axes, in pixels at 96 to the inch |
+| `outerPlotSpacing` | `None` | the margin around the axes, in pixels at 96 to the inch |
 | `marginx` | `None` | the space left and right of every axes, in pixels at 96 to the inch |
 | `marginy` | `None` | the space above and below every axes, in pixels at 96 to the inch |
 
@@ -100,5 +102,5 @@ innerPlotSpacing and outerPlotSpacing are taken and have no effect.
 
 MATLAB's [mtexFigure.mtexFigure](mtexFigure.mtexFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L54">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L71">source</a></font>
 {% endraw %}

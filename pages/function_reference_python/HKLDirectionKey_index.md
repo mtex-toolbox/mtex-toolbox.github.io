@@ -22,8 +22,8 @@ key = HKLDirectionKey(cs)
 
 | | |
 |---|---|
-| [direction2color](HKLDirectionKey.direction2color_py.html) | the colours of directions, red at the pole of the sector, green and blue along its two edges |
+| [direction2color](HKLDirectionKey.direction2color_py.html) | the colours of directions under the HKL key |
 | [whiteCenter](HKLDirectionKey.whiteCenter_py.html) | the centre of the fundamental sector |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L408">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L440">source</a></font>
 {% endraw %}

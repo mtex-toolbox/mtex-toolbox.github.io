@@ -23,5 +23,5 @@ SO3VectorFieldRBF.dot(self, x)
 
 MATLAB's [SO3VectorFieldRBF.dot](SO3VectorFieldRBF.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L219">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L252">source</a></font>
 {% endraw %}

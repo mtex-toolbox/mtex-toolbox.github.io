@@ -19,5 +19,5 @@ the spherical coefficients from weighted values at the nodes, the adjoint of the
 S2FourierPlan.adjoint(self, values, weights)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L551">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L651">source</a></font>
 {% endraw %}

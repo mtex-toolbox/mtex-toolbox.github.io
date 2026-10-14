@@ -34,5 +34,5 @@ axisAngleSections(cs1, cs2, sections=5, volumeScaling=False, antipodal=True)
 
 [SlipTransmission](SlipTransmission_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L483">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L567">source</a></font>
 {% endraw %}

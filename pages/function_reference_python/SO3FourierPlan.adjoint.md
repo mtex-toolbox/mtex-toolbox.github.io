@@ -20,5 +20,5 @@ lattice
 SO3FourierPlan.adjoint(self, values, weights)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L497">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L597">source</a></font>
 {% endraw %}

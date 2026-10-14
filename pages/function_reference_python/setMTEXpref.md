@@ -15,17 +15,44 @@ it holds in every later session
 
 ## Syntax
 
+For this session:
+
 ```python
 setMTEXpref('maxS2Bandwidth', 256)
+```
+
+The NumPy forms instead of the compiled loops:
+
+```python
 setMTEXpref('kernels', 'numpy')
+```
+
+For every later session too:
+
+```python
 setMTEXpref('displayRows', 40, save=True)
 ```
 
-## Signature
+Setting 'threads' or 'hugePages' applies the new value at once to the libraries it
+concerns. The settings file is mtex_settings.json, MATLAB's mtex_settings.m; nothing is
+written when MTEX_SETTINGS is empty.
 
-```python
-setMTEXpref(name, value, save=False)
-```
+## Input
+
+| | |
+|---|---|
+| `name` | the name of the preference |
+| `value` | its new value |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `save` | `False` | store the preference in the user's settings file as well |
+
+## See also
+
+[getMTEXpref](getMTEXpref_py.html), [loadSettings](loadSettings_py.html), [plottingConvention.default](plotx2east_py.html)
 
 ## Used on
 
@@ -33,5 +60,5 @@ setMTEXpref(name, value, save=False)
 
 MATLAB's [setMTEXpref](setMTEXpref.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/session.py#L59">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/session.py#L73">source</a></font>
 {% endraw %}

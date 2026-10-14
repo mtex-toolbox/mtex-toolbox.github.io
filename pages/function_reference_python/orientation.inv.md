@@ -19,5 +19,5 @@ the inverse maps the other way: the frames swap
 orientation.inv(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L319">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L414">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ tensor.trace(self)
 
 MATLAB's [tensor.trace](tensor.trace.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L408">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L425">source</a></font>
 {% endraw %}

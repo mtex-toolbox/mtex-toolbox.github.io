@@ -15,13 +15,45 @@ the pyramidal a slip system <2-1-10>{01-11} of a hexagonal crystal
 
 ## Syntax
 
+With the critical resolved shear stress 1:
+
 ```python
-slipSystem.pyramidalA(CS, CRSS=1)
+sS = slipSystem.pyramidalA(cs)
 ```
+
+With another:
+
+```python
+sS = slipSystem.pyramidalA(cs, CRSS=2)
+```
+
+One system of the family; symmetrise gives every equivalent one.
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame of a hexagonal crystal |
+
+## Output
+
+| | |
+|---|---|
+| `sS` | slipSystem |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `CRSS` | `1` | the critical resolved shear stress |
+
+## See also
+
+[slipSystem](slipSystem_index_py.html), [slipSystem.symmetrise](slipSystem.symmetrise_py.html), [dislocationSystem](dislocationSystem_index_py.html)
 
 ## Used on
 
 [CrystalShapes](CrystalShapes_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L299">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L452">source</a></font>
 {% endraw %}

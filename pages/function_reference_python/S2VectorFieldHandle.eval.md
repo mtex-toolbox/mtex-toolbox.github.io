@@ -19,5 +19,5 @@ the vectors the callable gives at the directions x, vF(x)
 S2VectorFieldHandle.eval(self, x)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L499">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L540">source</a></font>
 {% endraw %}

@@ -12,14 +12,50 @@ status: Reference
 {% raw %}
 A method of [mapImage](mapImage_index_py.html).
 
-the pixel covering each position: row and column, not clipped, and whether it lies on the
-grid; linear=True the index into the flattened grid, -1 outside
+the pixel of the image covering each position; MATLAB's mapImage.pos2ind
 
 ## Syntax
 
+Row and column, and whether on the grid:
+
 ```python
-mapImage.pos2ind(self, pos, linear=False)
+i, j, inside = mg.pos2ind(pos)
 ```
+
+The index into the flattened grid:
+
+```python
+ind = mg.pos2ind(pos, linear=True)
+```
+
+On a regular grid this is a projection and a rounding, not a search: the two steps are
+perpendicular, so the row and the column separate. The row and column are counted from zero
+and not clipped to the grid; the linear index is -1 outside it, where MATLAB's is NaN.
+
+## Input
+
+| | |
+|---|---|
+| `mg` | mapImage |
+| `pos` | vector3d, or an (..., 2) or (..., 3) array of positions |
+
+## Output
+
+| | |
+|---|---|
+| `i, j` | int arrays, row and column of the pixel |
+| `inside` | bool array, whether it lies on the grid |
+| `ind` | int array, the index into the flattened grid, row by row, -1 outside |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `linear` | `False` | return the linear index alone |
+
+## See also
+
+[mapImage.interp](mapImage.interp_py.html), [mapImage.subGrid](mapImage.subGrid_py.html)
 
 MATLAB's [mapImage.pos2ind](mapImage.pos2ind.html)
 

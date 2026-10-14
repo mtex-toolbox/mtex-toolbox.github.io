@@ -63,5 +63,5 @@ column of a curvature computed from it is NaN.
 
 MATLAB's [curvatureTensor.curvatureTensor](curvatureTensor.curvatureTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1302">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1455">source</a></font>
 {% endraw %}

@@ -92,5 +92,5 @@ than 80 percent of them and averages again.
 
 MATLAB's [Miller.mean](Miller.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L842">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L899">source</a></font>
 {% endraw %}

@@ -21,5 +21,5 @@ the chart; a list of (direction, text)
 sphericalProjection.labels(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L218">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L265">source</a></font>
 {% endraw %}

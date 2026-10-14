@@ -13,5 +13,5 @@ A property of [quaternion](quaternion_index_py.html).
 
 the coefficient c of j
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L126">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L137">source</a></font>
 {% endraw %}

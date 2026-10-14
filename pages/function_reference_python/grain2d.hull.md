@@ -23,5 +23,5 @@ grain2d.hull(self)
 
 MATLAB's [grain2d.hull](grain2d.hull.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L413">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L516">source</a></font>
 {% endraw %}

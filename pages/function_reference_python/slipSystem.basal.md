@@ -15,13 +15,45 @@ the basal slip system <11-20>(0001) of a hexagonal crystal
 
 ## Syntax
 
+With the critical resolved shear stress 1:
+
 ```python
-slipSystem.basal(CS, CRSS=1)
+sS = slipSystem.basal(cs)
 ```
+
+With another:
+
+```python
+sS = slipSystem.basal(cs, CRSS=2)
+```
+
+One system of the family; symmetrise gives every equivalent one.
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame of a hexagonal crystal |
+
+## Output
+
+| | |
+|---|---|
+| `sS` | slipSystem |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `CRSS` | `1` | the critical resolved shear stress |
+
+## See also
+
+[slipSystem](slipSystem_index_py.html), [slipSystem.symmetrise](slipSystem.symmetrise_py.html), [dislocationSystem](dislocationSystem_index_py.html)
 
 ## Used on
 
 [Lankford](Lankford_py.html), [SlipSystems](SlipSystems_py.html), [SlipTransmission](SlipTransmission_py.html), [TaylorHex](TaylorHex_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L284">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L395">source</a></font>
 {% endraw %}

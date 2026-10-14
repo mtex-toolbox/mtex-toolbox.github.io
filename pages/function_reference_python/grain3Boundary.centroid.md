@@ -16,5 +16,5 @@ the mean of the corners of a triangle, the area centroid of a polygon
 
 MATLAB's [grain3Boundary.centroid](grain3Boundary.centroid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L193">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L248">source</a></font>
 {% endraw %}

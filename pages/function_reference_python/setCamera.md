@@ -10,14 +10,49 @@ counterpart: setCamera.html
 status: Reference
 ---
 {% raw %}
-setCamera(how2plot): the 3D view of the current axes looking down how2plot.outOfScreen,
-with how2plot.north up; without a convention the default one
+the 3D view of the current axes looking down how2plot.outOfScreen, with how2plot.north up;
+without a convention the default one; MATLAB's setCamera
 
 ## Syntax
 
+The view of the default convention:
+
 ```python
-setCamera(how2plot=None, ax=None)
+setCamera()
 ```
+
+X up and y to the right:
+
+```python
+setCamera(plottingConvention('x↑→y'))
+```
+
+The view of a given 3D axes:
+
+```python
+setCamera(plottingConvention('z↑→x'), ax=ax)
+```
+
+The camera is orthographic. A figure holding a 3D scene is drawn again from the new
+camera, and a map seen from off its normal becomes a scene of the maps drawn into it.
+Unlike MATLAB's setCamera(ax, how2plot), the axes come as a keyword and the convention
+must be a plottingConvention, not its string.
+
+## Input
+
+| | |
+|---|---|
+| `how2plot` | plottingConvention; plottingConvention.default when None |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `ax` | `None` | the matplotlib 3D axes; by default the current scene or the last axes of the current figure |
+
+## See also
+
+[plottingConvention](plottingConvention_index_py.html), [plot3d](S2Fun.plot3d_py.html), [scatter3d](vector3d.scatter3d_py.html)
 
 ## Used on
 

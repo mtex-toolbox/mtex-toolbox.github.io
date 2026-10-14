@@ -31,6 +31,25 @@ MATLAB's words, the figure held returned:
 mtexFig = hold('on')
 ```
 
+A plain matplotlib figure opened after the last MTEX figure is adopted as an mtexFigure;
+without any figure a new one is made.
+
+## Input
+
+| | |
+|---|---|
+| `on` | True or 'on' to hold, False or 'off' to release |
+
+## Output
+
+| | |
+|---|---|
+| `mtexFig` | the mtexFigure held |
+
+## See also
+
+[gcm](gcm_py.html), [nextAxis](nextAxis_py.html), [mtexFigure](mtexFigure_index_py.html)
+
 ## Signature
 
 ```python
@@ -41,5 +60,5 @@ hold(on=True)
 
 [CrystalDirections](CrystalDirections_py.html), [CrystalOperations](CrystalOperations_py.html), [CrystalReferenceSystem](CrystalReferenceSystem_py.html), [CrystalShapes](CrystalShapes_py.html), [FundamentalSector](FundamentalSector_py.html), [QuasiCrystals](QuasiCrystals_py.html), [DefinitionAsCoordinateTransform](DefinitionAsCoordinateTransform_py.html), [MTEXvsBungeConvention](MTEXvsBungeConvention_py.html), [OrientationFibre](OrientationFibre_py.html), [OrientationFundamentalRegion](OrientationFundamentalRegion_py.html), [OrientationGrid](OrientationGrid_py.html), [OrientationStandard](OrientationStandard_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L516">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L667">source</a></font>
 {% endraw %}

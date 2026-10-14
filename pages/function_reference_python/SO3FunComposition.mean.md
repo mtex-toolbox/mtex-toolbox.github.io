@@ -22,5 +22,5 @@ SO3FunComposition.mean(self)
 
 MATLAB's [SO3FunComposition.mean](SO3FunComposition.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L297">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L344">source</a></font>
 {% endraw %}

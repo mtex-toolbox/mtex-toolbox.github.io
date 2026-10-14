@@ -13,5 +13,5 @@ A property of [SO3KernelHandle](SO3KernelHandle_index_py.html).
 
 the degree the coefficients are computed to, the preference maxS1Bandwidth unless given
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L627">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L697">source</a></font>
 {% endraw %}

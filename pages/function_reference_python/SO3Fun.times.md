@@ -24,5 +24,5 @@ times(A, B)
 
 MATLAB's [SO3Fun.times](SO3Fun.times.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1470">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1646">source</a></font>
 {% endraw %}

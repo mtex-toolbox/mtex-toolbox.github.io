@@ -45,8 +45,9 @@ rgb, scalar = mapValues(ebsd, 'mad', at=ind)
 The colouring asked for is one of: None or 'phase', the colours of the phases;
 'orientation', or an ipfDirection alone, every phase through the inverse pole figure key of
 its own frame; an orientation per element, through the inverse pole figure key of its
-phase; an orientationColorKey; the name of a property of the map; a value or an RGB colour
-per element; one colour, a name or an RGB triple, for all; faceColor alone, one colour for
+phase; an orientationColorKey; the name of a property of the map or of a value per element
+it computes (area, perimeter, aspectRatio, ... of grains); a value or an RGB colour per
+element; one colour, a name or an RGB triple, for all; faceColor alone, one colour for
 all. A site without an orientation is white, a not indexed phase white unless its frame
 has a colour of its own.
 
@@ -81,5 +82,5 @@ at.
 
 [EBSD.plot](EBSD.plot_py.html), [grain2d.plot](grain2d.plot_py.html), [ipfColors](ipfColors_py.html), [ipfColorKey](ipfColorKey_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L232">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L247">source</a></font>
 {% endraw %}

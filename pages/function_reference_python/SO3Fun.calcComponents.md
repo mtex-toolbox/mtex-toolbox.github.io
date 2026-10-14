@@ -76,5 +76,5 @@ The modes are ordered by decreasing weight.
 
 MATLAB's [SO3Fun.calcComponents](SO3Fun.calcComponents.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L739">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L871">source</a></font>
 {% endraw %}

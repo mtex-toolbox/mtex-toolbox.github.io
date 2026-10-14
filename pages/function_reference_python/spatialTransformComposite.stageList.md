@@ -19,5 +19,5 @@ the stages, a list
 spatialTransformComposite.stageList(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L747">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L813">source</a></font>
 {% endraw %}

@@ -23,8 +23,8 @@ interp(x, *args, **kwargs)
 |---|---|
 | [EBSD](EBSD.interp_py.html) | the map read at positions of one's own choosing, a new map with these positions |
 | [EBSD3](EBSD3.interp_py.html) | the voxel holding every position, or none outside the box of voxel centres, as MATLAB's nearest griddedInterpolant without extrapolation |
-| [mapImage](mapImage.interp_py.html) | the image values at positions: bilinear on the grid by default, 'nearest' or 'cubic' |
-| [rotation](rotation.interp_py.html) | interp(ori, values, 'harmonic' \| 'bingham' \| 'density'): a function on SO(3) through values at the rotations, by the function spaces above this layer, MATLAB's rotation/interp |
+| [mapImage](mapImage.interp_py.html) | the image values at arbitrary positions |
+| [rotation](rotation.interp_py.html) | interp(ori, values, 'harmonic' \| 'bingham'): a function on SO(3) through values at the rotations, by the function spaces above this layer, MATLAB's rotation/interp |
 | [vector3d](vector3d.interp_py.html) | interp(v, y, 'linear' \| 'harmonic' \| 'nearest' \| 'inverseDistance'): a function on the sphere through the values y at the directions v, by the function spaces above this layer, vector3d/interp |
 
 ## Used on

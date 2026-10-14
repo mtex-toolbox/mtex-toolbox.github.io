@@ -28,7 +28,7 @@ dirMap is the direction key doing the colouring, HSVDirectionKey unless given.
 | [crystalDirection](ipfColorKey.crystalDirection_py.html) | the crystal directions along the specimen direction of every orientation |
 | [orientation2color](ipfColorKey.orientation2color_py.html) | an orientation that was never measured has no colour, and a map shows nothing for it |
 | [plot](ipfColorKey.plot_py.html) | the direction key drawn on its sector, or with complete=True over the whole sphere |
-| [precompute](ipfColorKey.precompute_py.html) | MATLAB's precompute: the direction key evaluated once on a grid of the whole sphere, the colours then read off the node nearest each crystal direction without folding it into the sector |
+| [precompute](ipfColorKey.precompute_py.html) | the direction key evaluated once on a grid of the whole sphere, so that the colours of many orientations are cheap |
 | [whiteCenter](ipfColorKey.whiteCenter_py.html) | the white centre of the direction key |
 
 ## Used on

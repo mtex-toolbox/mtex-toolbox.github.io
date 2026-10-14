@@ -26,5 +26,5 @@ rot1, d, rot2 = cs1.factor(cs2)
 referenceFrame.factor(self, other)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L312">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L337">source</a></font>
 {% endraw %}

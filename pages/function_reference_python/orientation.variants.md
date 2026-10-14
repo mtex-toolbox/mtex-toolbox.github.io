@@ -100,5 +100,5 @@ parent frame.
 
 MATLAB's [orientation.variants](orientation.variants.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L609">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L801">source</a></font>
 {% endraw %}

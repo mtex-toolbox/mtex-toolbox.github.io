@@ -33,5 +33,5 @@ rotation(*args, dtype=None)
 
 MATLAB's [rotation.rotation](rotation.rotation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L479">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L600">source</a></font>
 {% endraw %}

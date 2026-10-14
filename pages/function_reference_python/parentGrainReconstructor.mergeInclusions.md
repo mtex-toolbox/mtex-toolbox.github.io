@@ -12,14 +12,41 @@ status: Reference
 {% raw %}
 A method of [parentGrainReconstructor](parentGrainReconstructor_index_py.html).
 
-job.mergeInclusions(maxSize=50): the child and parent grains lying inside a parent
-grain, below maxSize pixels, become part of it, with its orientation
+the inclusions merged into the parent grains around them; MATLAB's
+parentGrainReconstructor.mergeInclusions
 
 ## Syntax
 
+Every grain enclosed by a parent grain:
+
 ```python
-parentGrainReconstructor.mergeInclusions(self, maxSize=inf)
+job.mergeInclusions()
 ```
+
+Only those of at most 50 pixels:
+
+```python
+job.mergeInclusions(maxSize=50)
+```
+
+The child and parent grains lying inside a parent grain, of at most maxSize pixels, become
+part of it, with its orientation; job.grains and job.mergeId follow the merge.
+
+## Input
+
+| | |
+|---|---|
+| `job` | parentGrainReconstructor |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `maxSize` | `inf` | the largest number of pixels of an inclusion that is merged |
+
+## See also
+
+[parentGrainReconstructor.mergeSimilar](parentGrainReconstructor.mergeSimilar_py.html), [grain2d.merge](grain2d.merge_py.html)
 
 ## Used on
 
@@ -27,5 +54,5 @@ parentGrainReconstructor.mergeInclusions(self, maxSize=inf)
 
 MATLAB's [parentGrainReconstructor.mergeInclusions](parentGrainReconstructor.mergeInclusions.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L995">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1040">source</a></font>
 {% endraw %}

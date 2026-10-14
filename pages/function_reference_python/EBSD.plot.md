@@ -132,5 +132,5 @@ every other keyword goes to the matplotlib artist.
 
 MATLAB's [EBSD.plot](EBSD.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L377">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L415">source</a></font>
 {% endraw %}

@@ -28,5 +28,5 @@ SO3VectorFieldRBF.norm(self)
 
 MATLAB's [SO3VectorFieldRBF.norm](SO3VectorFieldRBF.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L241">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L274">source</a></font>
 {% endraw %}

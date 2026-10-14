@@ -25,5 +25,5 @@ t = norm(psi)
 S1Kernel.norm(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L979">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1081">source</a></font>
 {% endraw %}

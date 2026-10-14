@@ -10,18 +10,63 @@ counterpart: BinghamODF.html
 status: Reference
 ---
 {% raw %}
-BinghamODF(kappa, U), BinghamODF(kappa, cs), BinghamODF(20, ori), BinghamODF(20, f), BinghamODF([10, 10, 10], quaternion.id, cs)
+a Bingham distributed ODF; MATLAB's BinghamODF
 
 ## Syntax
 
+About one orientation, the identity basis in its frames:
+
 ```python
-BinghamODF(kappa, A=None, *frames, **kwargs)
+odf = BinghamODF(20, ori)
+```
+
+About a fibre:
+
+```python
+odf = BinghamODF(20, f)
+```
+
+The identity basis in a crystal frame:
+
+```python
+odf = BinghamODF(20, cs)
+```
+
+Four concentrations, the axes a 4x4 matrix:
+
+```python
+odf = BinghamODF([20, 10, 0, 0], A, cs, ss)
 ```
 
 A Bingham distribution from four concentrations and four orthogonal quaternion axes, the
 axes as a 4x4 matrix, four orientations, or one orientation standing for the identity
 basis; fewer concentrations are padded with zeros; a fibre takes its two axes with the
-same concentration, as MATLAB's constructor does.
+same concentration, as MATLAB's constructor does. The keywords of SO3FunBingham, weight
+and antipodal, are passed on.
+
+## Input
+
+| | |
+|---|---|
+| `kappa` | the form parameters, up to four concentrations |
+| `A` | the axes: an orthogonal 4x4 matrix, four orientations, one orientation, a fibre, a crystal frame, or a crystal direction h followed by a specimen direction r for the fibre between them |
+| `frames` | the crystal and the specimen frame, when A does not carry them |
+
+## Output
+
+| | |
+|---|---|
+| `odf` | SO3FunBingham |
+
+## See also
+
+[calcBinghamODF](orientation.calcBinghamODF_py.html), [fibreODF](fibreODF_py.html), [unimodalODF](unimodalODF_py.html), [uniformODF](uniformODF_py.html), [SO3FunBingham](SO3FunBingham_index_py.html)
+
+## Signature
+
+```python
+BinghamODF(kappa, A=None, *frames, **kwargs)
+```
 
 ## Used on
 
@@ -29,5 +74,5 @@ same concentration, as MATLAB's constructor does.
 
 MATLAB's [BinghamODF](BinghamODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L325">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L341">source</a></font>
 {% endraw %}

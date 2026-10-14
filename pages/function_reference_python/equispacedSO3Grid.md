@@ -77,5 +77,5 @@ smaller than the fundamental region is a localOrientationGrid, an orientation.
 
 MATLAB's [equispacedSO3Grid](equispacedSO3Grid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/so3grid.py#L186">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/so3grid.py#L205">source</a></font>
 {% endraw %}

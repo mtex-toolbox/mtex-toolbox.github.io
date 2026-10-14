@@ -32,5 +32,5 @@ S1DeLaValleePoussinKernel(halfwidth=5*degree)
 
 MATLAB's [S1DeLaValleePoussinKernel](S1DeLaValleePoussinKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1013">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1127">source</a></font>
 {% endraw %}

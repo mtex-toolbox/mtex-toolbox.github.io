@@ -40,5 +40,5 @@ EBSD.inpolygon(self, region)
 
 MATLAB's [EBSD.inpolygon](EBSD.inpolygon.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L442">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L462">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [S2KernelHandle](S2KernelHandle_index_py.html).
 
 the degree the coefficients are computed to, the preference maxS2Bandwidth unless given
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L888">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L974">source</a></font>
 {% endraw %}

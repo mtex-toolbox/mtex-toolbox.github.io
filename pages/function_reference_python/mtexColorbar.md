@@ -11,21 +11,55 @@ status: Reference
 ---
 {% raw %}
 a colour bar per axes of the current figure, or one when the ranges agree; toggled off when
-the figure has bars; a MATLAB location as the first argument
+the figure has bars; MATLAB's mtexColorbar
 
 ## Syntax
 
+A bar per axes, or one for all:
+
 ```python
 mtexColorbar()
+```
+
+A bar with a title:
+
+```python
+mtexColorbar(title='misorientation angle')
+```
+
+A horizontal bar below:
+
+```python
 mtexColorbar('southoutside', title='mrd')
+```
+
+A bar per axes, also where the ranges agree:
+
+```python
 mtexColorbar('multiple')
 ```
 
-## Signature
+One bar for all axes needs the same colour range on them, which setColorRange('equal')
+gives first. A MATLAB location, 'eastoutside', 'southoutside', 'northoutside',
+'westoutside' or without 'outside', may stand in place of fig or be given as location=;
+further keywords go to matplotlib's colorbar.
 
-```python
-mtexColorbar(fig=None, title=None, **kwargs)
-```
+## Output
+
+| | |
+|---|---|
+| `bars` | list of the matplotlib colour bars drawn, empty when they were removed |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `fig` | `None` | the mtexFigure; the current one by default |
+| `title` | `None` | the label of the bar, or a list of one per bar |
+
+## See also
+
+[mtexFigure.colorbar](mtexFigure.colorbar_py.html), [setColorRange](setColorRange_py.html), [setColorScale](setColorScale_py.html)
 
 ## Used on
 
@@ -33,5 +67,5 @@ mtexColorbar(fig=None, title=None, **kwargs)
 
 MATLAB's [mtexColorbar](mtexColorbar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L538">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L699">source</a></font>
 {% endraw %}

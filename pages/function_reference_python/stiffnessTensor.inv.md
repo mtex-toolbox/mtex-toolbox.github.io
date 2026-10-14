@@ -23,5 +23,5 @@ stiffnessTensor.inv(self)
 
 MATLAB's [stiffnessTensor.inv](stiffnessTensor.inv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L457">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L474">source</a></font>
 {% endraw %}

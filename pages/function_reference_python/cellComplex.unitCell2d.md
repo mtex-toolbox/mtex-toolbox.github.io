@@ -19,5 +19,5 @@ the corners of one lattice cell in the plane's coordinates
 cellComplex.unitCell2d(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/decomposition.py#L83">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/decomposition.py#L102">source</a></font>
 {% endraw %}

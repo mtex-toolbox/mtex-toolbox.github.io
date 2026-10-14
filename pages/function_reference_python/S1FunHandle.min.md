@@ -70,5 +70,5 @@ an S1FunHarmonic of the bandwidth when one of the two is harmonic; as S1FunHarmo
 
 [S1FunHandle.max](S1FunHandle.max_py.html), [S1FunHarmonic.min](S1FunHarmonic.min_py.html), [S1FunHandle](S1FunHandle_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L659">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L721">source</a></font>
 {% endraw %}

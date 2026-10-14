@@ -18,5 +18,5 @@ the lattice axes a, b, c of a crystal frame
 frameAxes(fr)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L60">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L98">source</a></font>
 {% endraw %}

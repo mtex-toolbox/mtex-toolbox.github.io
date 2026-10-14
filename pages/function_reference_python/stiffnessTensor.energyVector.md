@@ -76,7 +76,7 @@ result is a vector field on the sphere.
 
 ## See also
 
-velocity, [ChristoffelTensor](ChristoffelTensor_index_py.html), [WaveVelocities](WaveVelocities_py.html)
+[velocity](complianceTensor.velocity_py.html), [ChristoffelTensor](ChristoffelTensor_index_py.html), [WaveVelocities](WaveVelocities_py.html)
 
 MATLAB's [stiffnessTensor.energyVector](stiffnessTensor.energyVector.html)
 

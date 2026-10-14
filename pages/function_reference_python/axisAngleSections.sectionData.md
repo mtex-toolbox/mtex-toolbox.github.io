@@ -20,5 +20,5 @@ the section of their angle and the index of the orientation
 axisAngleSections.sectionData(self, ori)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L546">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L630">source</a></font>
 {% endraw %}

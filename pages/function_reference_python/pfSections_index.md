@@ -33,5 +33,5 @@ sigmaSections(cs, ss, sections=6, sigma=values)   with h1 = c*, h2 = a
 | [sectionLabel](pfSections.sectionLabel_py.html) | the title of section k, the twist angle in degrees |
 | [twisted](pfSections.twisted_py.html) | the field turned about the direction by the angle of the section, where ori * h2 has to point for the orientation to belong there |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L330">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L377">source</a></font>
 {% endraw %}

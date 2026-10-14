@@ -20,5 +20,5 @@ isUpper(sR, pC)
 
 MATLAB's [sphericalRegion.isUpper](sphericalRegion.isUpper.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L412">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L482">source</a></font>
 {% endraw %}

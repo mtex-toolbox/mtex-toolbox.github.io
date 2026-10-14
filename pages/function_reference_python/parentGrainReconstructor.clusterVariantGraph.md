@@ -82,5 +82,5 @@ removed unless keepGraph. The job is changed in place.
 
 MATLAB's [parentGrainReconstructor.clusterVariantGraph](parentGrainReconstructor.clusterVariantGraph.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L366">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L428">source</a></font>
 {% endraw %}

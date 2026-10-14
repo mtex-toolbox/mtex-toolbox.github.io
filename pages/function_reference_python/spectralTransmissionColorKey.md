@@ -33,5 +33,5 @@ key.propagationDirection, key.polarizer, key.phi
 
 MATLAB's [spectralTransmissionColorKey](spectralTransmissionColorKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L364">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L390">source</a></font>
 {% endraw %}

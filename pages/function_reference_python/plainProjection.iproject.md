@@ -19,5 +19,5 @@ the direction of the azimuth x and the polar angle y, both in degrees
 plainProjection.iproject(self, x, y)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L352">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L399">source</a></font>
 {% endraw %}

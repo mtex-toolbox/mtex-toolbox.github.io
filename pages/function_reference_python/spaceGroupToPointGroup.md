@@ -17,5 +17,5 @@ the Hermann-Mauguin symbol of the point group of a space group given by its numb
 spaceGroupToPointGroup(n)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L549">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L644">source</a></font>
 {% endraw %}

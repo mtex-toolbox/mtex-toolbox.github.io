@@ -13,5 +13,5 @@ A property of [shape2d](shape2d_index_py.html).
 
 the number of outlines, one
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L368">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L471">source</a></font>
 {% endraw %}

@@ -40,5 +40,5 @@ dislocation unless given, the isotropic line energy with Poisson ratio 0.3
 
 MATLAB's [dislocationSystem_index](dislocationSystem_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L348">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L599">source</a></font>
 {% endraw %}

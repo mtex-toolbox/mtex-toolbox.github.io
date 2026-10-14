@@ -17,9 +17,40 @@ allow it; an open region is cut at a turn of nearly 180 degrees
 
 ## Syntax
 
+40 points along every edge:
+
 ```python
-orientationRegion.edges(self, points=40, tol=1e-09)
+E = oR.edges()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L178">source</a></font>
+Coarser chains:
+
+```python
+E = oR.edges(points=5)
+```
+
+## Input
+
+| | |
+|---|---|
+| `oR` | orientationRegion |
+
+## Output
+
+| | |
+|---|---|
+| `E` | list of (points, 3) arrays, the axis times the angle; empty when the sector of axes has caps |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `points` | `40` | the number of points on each edge |
+| `tol` | `1e-09` | the slack by which a parallel plane may miss the edge before it removes it |
+
+## See also
+
+[plot](S1Grid.plot_py.html), [orientationRegion.maxAngle](orientationRegion.maxAngle_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L232">source</a></font>
 {% endraw %}

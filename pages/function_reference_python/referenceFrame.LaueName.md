@@ -19,5 +19,5 @@ the international symbol of the Laue class of the group
 referenceFrame.LaueName(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L223">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L248">source</a></font>
 {% endraw %}

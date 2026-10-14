@@ -22,5 +22,5 @@ quaternion.matrix(self)
 
 MATLAB's [quaternion.matrix](quaternion.matrix.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L271">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L336">source</a></font>
 {% endraw %}

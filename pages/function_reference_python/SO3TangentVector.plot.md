@@ -75,5 +75,5 @@ SO3TangentVector.plot(v, *args, **kw)
 
 MATLAB's [SO3TangentVector.plot](SO3TangentVector.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L590">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L599">source</a></font>
 {% endraw %}

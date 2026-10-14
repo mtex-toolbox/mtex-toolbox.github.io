@@ -9,16 +9,51 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the layout a convention asks for: the components of east and north along the coordinates
-of the map's plane (x and y without a plane), snapped to the signed permutation an axis
-aligned convention is. A convention whose screen is not the plane, as the xy convention of a
-map in the yz plane, draws the plane's own coordinates east and north.
+the layout a convention asks for: the 2 x 2 matrix taking the in-plane coordinates of a map
+to the screen, east to the right and north up
 
 ## Syntax
 
+The default plotting convention:
+
 ```python
-mapLayout(pC=None, plane=None)
+M = mapLayout()
 ```
+
+X up, y to the right:
+
+```python
+M = mapLayout('x↑→y')
+```
+
+A map in another plane:
+
+```python
+M = mapLayout(pC, ebsd.lattice.plane)
+```
+
+The rows are the components of east and north along the coordinates of the map's plane (x
+and y without a plane), snapped to the signed permutation an axis aligned convention is,
+so that the picture is turned rather than resampled. A convention whose screen is not the
+plane, as the xy convention of a map in the yz plane, draws the plane's own coordinates
+east and north.
+
+## Output
+
+| | |
+|---|---|
+| `M` | a 2 x 2 array |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `pC` | `None` | plottingConvention, or the string of one; by default plottingConvention.default |
+| `plane` | `None` | the plane of the map, whose e1 and e2 are its coordinates |
+
+## See also
+
+[plottingConvention](plottingConvention_index_py.html), [mapRaster](mapRaster_py.html), [mapCells](mapCells_py.html), [mapPoints](mapPoints_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L42">source</a></font>
 {% endraw %}

@@ -12,24 +12,58 @@ status: Reference
 {% raw %}
 A method of [orientation](orientation_index_py.html).
 
-the orientations of ori nearest to w up to symmetry: the pair (ind, d) of the nearest, the k
-nearest for an integer, or two sparse matrices of those within the radius eps
+the orientations of ori nearest to w up to symmetry, MATLAB's orientation.find
 
 ## Syntax
 
+The nearest of ori to every w:
+
 ```python
 ind, d = ori.find(w)
-ind, d = ori.find(w, 5)
-ind, d = ori.find(w, 5*degree)
 ```
 
-## Signature
+The 5 nearest:
 
 ```python
-orientation.find(self, w, epsOrK=None)
+ind, d = ori.find(w, 5)
 ```
+
+All within 5 degree:
+
+```python
+I, D = ori.find(w, 5*degree)
+```
+
+The distance is the misorientation angle up to the symmetries of the frames, and the grain
+exchange where ori is antipodal; d are angles. Long lists are searched through a
+quaternion k-d tree, short ones by all the angles.
+
+## Input
+
+| | |
+|---|---|
+| `ori` | orientation, the list searched |
+| `w` | orientation, the orientations searched for |
+
+## Output
+
+| | |
+|---|---|
+| `ind` | the index into ori of the nearest, of the shape of w; with k a (len(w), k) array of distinct indices |
+| `d` | the angles, of the shape of ind |
+| `I, D` | with a radius the sparse incidence and the sparse angles, (len(w) x len(ori)) |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `epsOrK` | `None` | an integer k for the k nearest, a float for the radius of the search |
+
+## See also
+
+[vector3d.find](vector3d.find_py.html), [SO3Grid.find](SO3Grid.find_py.html), [orientation.angle](orientation.angle_py.html)
 
 MATLAB's [orientation.find](orientation.find.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L599">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L775">source</a></font>
 {% endraw %}

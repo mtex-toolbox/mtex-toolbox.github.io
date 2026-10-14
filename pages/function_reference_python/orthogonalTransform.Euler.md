@@ -15,9 +15,39 @@ the Euler angles of the rotational part, in the convention named or the session'
 
 ## Syntax
 
+The session's convention:
+
 ```python
-orthogonalTransform.Euler(self, convention=None)
+phi1, Phi, phi2 = T.Euler()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L822">source</a></font>
+Matthies' convention:
+
+```python
+alpha, beta, gamma = T.Euler('ZYZ')
+```
+
+## Input
+
+| | |
+|---|---|
+| `T` | orthogonalTransform |
+
+## Output
+
+| | |
+|---|---|
+| `alpha, beta, gamma` | three arrays of angles in radians |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `convention` | `None` | the name of the convention, as quaternion.Euler |
+
+## See also
+
+[quaternion.Euler](quaternion.Euler_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1035">source</a></font>
 {% endraw %}

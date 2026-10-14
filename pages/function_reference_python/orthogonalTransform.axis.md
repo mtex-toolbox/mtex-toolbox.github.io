@@ -25,5 +25,5 @@ v = axis(T)
 orthogonalTransform.axis(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L816">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1029">source</a></font>
 {% endraw %}

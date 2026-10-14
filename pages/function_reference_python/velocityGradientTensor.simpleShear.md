@@ -12,15 +12,47 @@ status: Reference
 {% raw %}
 A method of [velocityGradientTensor](velocityGradientTensor_index_py.html).
 
-the velocity gradient of a simple shear along d on the plane n with the rate e
+the velocity gradient of a simple shear along d on the plane n, 2 e d n^T; MATLAB's
+velocityGradientTensor.simpleShear
 
 ## Syntax
 
+Of the strain rate one:
+
 ```python
-velocityGradientTensor.simpleShear(d, n, e=1.0)
+L = velocityGradientTensor.simpleShear(d, n)
 ```
+
+Of the strain rate 1e-3:
+
+```python
+L = velocityGradientTensor.simpleShear(d, n, e=1e-3)
+```
+
+## Input
+
+| | |
+|---|---|
+| `d` | vector3d or Miller, the shear direction |
+| `n` | vector3d or Miller, the normal of the shear plane |
+
+## Output
+
+| | |
+|---|---|
+| `L` | velocityGradientTensor |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `e` | `1.0` | the strain rate |
+
+## See also
+
+[velocityGradientTensor.uniaxial](velocityGradientTensor.uniaxial_py.html), [deformationGradientTensor.simpleShear](deformationGradientTensor.simpleShear_py.html)
 
 MATLAB's [velocityGradientTensor.simpleShear](velocityGradientTensor.simpleShear.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L187">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L267">source</a></font>
 {% endraw %}

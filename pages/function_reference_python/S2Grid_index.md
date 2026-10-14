@@ -70,7 +70,7 @@ matrix of vector3d, as their layout is the matrix.
 |---|---|
 | [cat](S2Grid.cat_py.html) | the list of the operands, MATLAB's [a, b] |
 | [cross](S2Grid.cross_py.html) | the cross product of two plane normals is a lattice direction and the one of two directions a plane normal, so the indices switch sides |
-| [find](S2Grid.find_py.html) | the nearest grid point of every direction, or all within eps: an index per direction, or a sparse incidence matrix (directions x grid) with a sparse matrix of the angles |
+| [find](S2Grid.find_py.html) | the nearest grid point of every direction and its angle, or with eps the sparse matrices of the points within eps and their angles |
 | [hasUniformSteps](S2Grid.hasUniformSteps_py.html) | whether the polar ladder and every ring of more than one point have uniform steps, so that the nearest point is found by arithmetic |
 | [nearestStepwise](S2Grid.nearestStepwise_py.html) | the nearest point without a search, for equispaced ladders: the ring is the polar angle over the ring step and the point the azimuth over that ring's step, both rounded the nearest node of a grid with uniform steps, arithmetic on every direction at once: the ring from the polar angle, the node on the ring from the azimuth against the ring's own first node, step and count |
 | [neighbourIndices](S2Grid.neighbourIndices_py.html) | the indices of the grid points within eps of one direction |

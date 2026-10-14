@@ -19,5 +19,5 @@ the slow scan direction, the keyword a refit keeps
 spatialTransformDrift.fitOptions(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L569">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L618">source</a></font>
 {% endraw %}

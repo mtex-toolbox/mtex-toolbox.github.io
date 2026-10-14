@@ -22,5 +22,5 @@ quaternion.normalize(self)
 
 MATLAB's [quaternion.normalize](quaternion.normalize.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L206">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L217">source</a></font>
 {% endraw %}

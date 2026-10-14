@@ -57,5 +57,5 @@ within tol. The map must lie on a lattice; a map without one is refused.
 
 [calcGrains](EBSD.calcGrains_py.html), [EBSD.gridify](EBSD.gridify_py.html), [GrainReconstruction](GrainReconstruction_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/decomposition.py#L366">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/decomposition.py#L385">source</a></font>
 {% endraw %}

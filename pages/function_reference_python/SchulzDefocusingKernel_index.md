@@ -28,5 +28,5 @@ psi.defocusing(pf)                       the factor on the specimen directions o
 | [defocusing](SchulzDefocusingKernel.defocusing_py.html) | the correction on the specimen directions of a pole figure, one at the pole |
 | [eval](SchulzDefocusingKernel.eval_py.html) | the defocusing factor at t = cos(alpha) of the tilt alpha, 1 at no tilt, infinite at 90 degrees |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L911">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1105">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ a * b
 
 MATLAB's [S1FunHarmonic.mtimes](S1FunHarmonic.mtimes.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L268">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L301">source</a></font>
 {% endraw %}

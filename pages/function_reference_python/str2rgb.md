@@ -24,5 +24,5 @@ str2rgb(name)
 
 MATLAB's [str2rgb](str2rgb.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L103">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/colormaps.py#L120">source</a></font>
 {% endraw %}

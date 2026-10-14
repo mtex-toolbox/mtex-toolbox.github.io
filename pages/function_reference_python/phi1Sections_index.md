@@ -28,5 +28,5 @@ oS = phi1Sections(cs, ss, phi1=np.arange(0, 91, 15)*degree)
 
 [TaylorModel](TaylorModel_py.html), [SO3FunVectorField](SO3FunVectorField_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L269">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L316">source</a></font>
 {% endraw %}

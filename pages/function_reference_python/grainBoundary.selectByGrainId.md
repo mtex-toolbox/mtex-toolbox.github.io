@@ -38,5 +38,5 @@ grainBoundary.selectByGrainId(self, ids)
 
 MATLAB's [grainBoundary.selectByGrainId](grainBoundary.selectByGrainId.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L354">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L374">source</a></font>
 {% endraw %}

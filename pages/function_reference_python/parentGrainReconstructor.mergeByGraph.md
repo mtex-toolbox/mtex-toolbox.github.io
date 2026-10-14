@@ -12,16 +12,53 @@ status: Reference
 {% raw %}
 A method of [parentGrainReconstructor](parentGrainReconstructor_index_py.html).
 
-job.mergeByGraph(threshold=5*degree): every component of job.graph whose grains fit a
-common parent within the threshold becomes one parent grain of that orientation
+the grains of every cluster of the graph merged into a parent grain; MATLAB's
+mergeByGraph of parentGrainReconstructor
 
 ## Syntax
 
+Merged where they fit within 5 degrees:
+
 ```python
-parentGrainReconstructor.mergeByGraph(job, threshold=5*degree)
+job.mergeByGraph()
 ```
+
+A tighter fit:
+
+```python
+job.mergeByGraph(threshold=3*degree)
+```
+
+The components of job.graph, after clusterGraph, are merged as a test first. For every
+component of more than one grain the parent orientation is fitted: the mean of its parent
+grains, the parent fitted to its child grains by calcParent, or the robust mean of both;
+the misfit is the largest over its child grains. The components that fit within the
+threshold become parent grains of that orientation, the others are left as they were. The
+graph and the votes are removed; the job is changed in place.
+
+## Input
+
+| | |
+|---|---|
+| `job` | parentGrainReconstructor with a clustered job.graph |
+
+## Output
+
+| | |
+|---|---|
+| `job.grains` | the reconstructed parent grains |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `threshold` | `5*degree` | the largest misfit of a component that is merged |
+
+## See also
+
+[parentGrainReconstructor.clusterGraph](parentGrainReconstructor.clusterGraph_py.html), [parentGrainReconstructor.calcParentFromGraph](parentGrainReconstructor.calcParentFromGraph_py.html), [calcParent](calcParent_py.html), [GrainGraphBasedReconstruction](GrainGraphBasedReconstruction_py.html)
 
 MATLAB's [parentGrainReconstructor.mergeByGraph](parentGrainReconstructor.mergeByGraph.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L166">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L208">source</a></font>
 {% endraw %}

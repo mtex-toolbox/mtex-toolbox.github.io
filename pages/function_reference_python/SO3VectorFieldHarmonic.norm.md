@@ -28,5 +28,5 @@ SO3VectorFieldHarmonic.norm(self)
 
 MATLAB's [SO3VectorFieldHarmonic.norm](SO3VectorFieldHarmonic.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L485">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L584">source</a></font>
 {% endraw %}

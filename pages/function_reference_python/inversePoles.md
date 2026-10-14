@@ -10,13 +10,48 @@ status: Reference
 ---
 {% raw %}
 the inverse poles: the crystal directions that lie along the specimen direction r, over
-the distinct equivalents of r under the specimen group, shaped (..., m) in the crystal frame
+the distinct equivalents of r under the specimen group; MATLAB's inv(ori) * symmetrise(r)
 
 ## Syntax
 
+The crystal directions along z:
+
 ```python
-inversePoles(o, r, antipodal=False)
+h = inversePoles(ori, zvector)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/poles.py#L65">source</a></font>
+As axes:
+
+```python
+h = inversePoles(ori, zvector, antipodal=True)
+```
+
+They are what plotIPF draws for a list of orientations, which folds them into the
+fundamental sector of the crystal; here they are not folded. An axis and its antipode
+count once when antipodal is asked for, r is an axis, or -r is an equivalent of r.
+
+## Input
+
+| | |
+|---|---|
+| `ori` | orientation, shaped (...) |
+| `r` | vector3d, one specimen direction |
+
+## Output
+
+| | |
+|---|---|
+| `h` | vector3d in the crystal frame, shaped (..., m) over the m distinct equivalents of r |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` | `False` | count an axis and its antipode once |
+
+## See also
+
+[poles](poles_py.html), [plotIPF](SO3Fun.plotIPDF_py.html), [ipfColorKey](ipfColorKey_index_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/poles.py#L83">source</a></font>
 {% endraw %}

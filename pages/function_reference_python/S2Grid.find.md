@@ -12,16 +12,52 @@ status: Reference
 {% raw %}
 A method of [S2Grid](S2Grid_index_py.html).
 
-the nearest grid point of every direction, or all within eps: an index per direction,
-or a sparse incidence matrix (directions x grid) with a sparse matrix of the angles
+the nearest grid point of every direction and its angle, or with eps the sparse matrices of
+the points within eps and their angles; MATLAB's S2Grid.find
 
 ## Syntax
 
+The nearest grid point and the angle to it:
+
 ```python
-S2Grid.find(self, v, eps=None)
+ind, d = S2G.find(v)
 ```
+
+Every grid point within 10 degree:
+
+```python
+I, d = S2G.find(v, 10*degree)
+```
+
+The search for the nearest point runs over the rings, a binary search in the polar angle and in
+the azimuth of each ring near it; the search within eps through a k-d tree. On an antipodal grid a direction and its antipode are the same.
+
+## Input
+
+| | |
+|---|---|
+| `S2G` | S2Grid |
+| `v` | vector3d, the directions searched for |
+
+## Output
+
+| | |
+|---|---|
+| `ind` | the index of the nearest grid point, of the shape of v |
+| `d` | its angle to v; with eps a sparse matrix (directions x grid) of the angles |
+| `I` | with eps a sparse boolean matrix (directions x grid) of the grid points within eps |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `eps` | `None` | the radius of the search; by default only the nearest point is returned |
+
+## See also
+
+[equispacedS2Grid](equispacedS2Grid_py.html), [S2Grid.subGrid](S2Grid.subGrid_py.html), [fibonacciS2Grid.find](fibonacciS2Grid.find_py.html)
 
 MATLAB's [S2Grid.find](S2Grid.find.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L205">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L221">source</a></font>
 {% endraw %}

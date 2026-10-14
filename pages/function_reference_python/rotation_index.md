@@ -36,14 +36,14 @@ rotation(cs)
 | [discrepancy](rotation.discrepancy_py.html) | the discrepancy between two densities and/or weighted point sets on the sphere (S2Fun, vector3d) or on SO(3) (SO3Fun, rotation, orientation), in either order |
 | [dot](rotation.dot_py.html) | the inner product up to sign, since q and -q are one rotation |
 | [dot_outer](rotation.dot_outer_py.html) | the inner product up to sign, since q and -q are one rotation |
-| [double](rotation.double_py.html) | double(e) is e.double(): the coordinates of the images in the orthonormal basis, one row per orientation |
+| [double](rotation.double_py.html) | the coordinates of the images of an embedding in their orthonormal basis, one row per orientation, e.double() |
 | [fit](rotation.fit_py.html) | the rotation best mapping the list u onto the list v, by Horn's quaternion method or Kabsch's matrix method |
 | [id](rotation.id_py.html) | a property of the class itself, vector3d.X |
-| [interp](rotation.interp_py.html) | interp(ori, values, 'harmonic' \| 'bingham' \| 'density'): a function on SO(3) through values at the rotations, by the function spaces above this layer, MATLAB's rotation/interp |
+| [interp](rotation.interp_py.html) | interp(ori, values, 'harmonic' \| 'bingham'): a function on SO(3) through values at the rotations, by the function spaces above this layer, MATLAB's rotation/interp |
 | [inv](rotation.inv_py.html) | the inverse rotation, the conjugate quaternion |
 | [inversion](rotation.inversion_py.html) | a property of the class itself, vector3d.X |
 | [isclose](rotation.isclose_py.html) | equal within the angular tolerance tol, MATLAB's eq |
-| [line](rotation.line_py.html) | line(x, y, lineStyle=':', lineWidth=4, color='w'): a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
+| [line](rotation.line_py.html) | a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
 | [map](rotation.map_py.html) | the smallest rotation taking u1 to v1, or the one taking u1 to v1 and u2 to v2 |
 | [matrix](rotation.matrix_py.html) | the rotation matrices, of shape (..., 3, 3) |
 | [mtimes](rotation.mtimes_py.html) |  |
@@ -63,5 +63,5 @@ rotation(cs)
 
 MATLAB's [rotation_index](rotation_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L479">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L600">source</a></font>
 {% endraw %}

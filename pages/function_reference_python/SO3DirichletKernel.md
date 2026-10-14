@@ -33,5 +33,5 @@ SO3DirichletKernel()        N the preference maxSO3Bandwidth
 
 MATLAB's [SO3DirichletKernel](SO3DirichletKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L494">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L564">source</a></font>
 {% endraw %}

@@ -19,5 +19,5 @@ the axial vector of a spin tensor
 spinTensor.vector(W)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L225">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L319">source</a></font>
 {% endraw %}

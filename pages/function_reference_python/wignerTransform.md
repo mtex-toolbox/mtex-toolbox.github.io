@@ -69,5 +69,5 @@ k = 0 mod rB: those axes are indexed by l / rA and k / rB.
 
 [wignerTransformAdjoint](wignerTransformAdjoint_py.html), [sphericalTransform](sphericalTransform_py.html), [SO3FunHarmonic](SO3FunHarmonic_index_py.html), [SO3FourierPlan](SO3FourierPlan_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L169">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L185">source</a></font>
 {% endraw %}

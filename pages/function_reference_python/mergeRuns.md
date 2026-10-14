@@ -20,5 +20,5 @@ run runs between no one pair of pixels any more and says so
 mergeRuns(gB, keep)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L107">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L122">source</a></font>
 {% endraw %}

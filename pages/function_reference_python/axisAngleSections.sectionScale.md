@@ -19,5 +19,5 @@ the sector shrinks with the angle, so the axes grow with 1/sin(w/2) to keep area
 axisAngleSections.sectionScale(self, k)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L542">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L626">source</a></font>
 {% endraw %}

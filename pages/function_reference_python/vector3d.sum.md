@@ -64,5 +64,5 @@ first axis that is not a singleton; the sum here is over all axes unless one is 
 
 MATLAB's [vector3d.sum](vector3d.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L817">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L874">source</a></font>
 {% endraw %}
