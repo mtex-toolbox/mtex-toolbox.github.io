@@ -73,6 +73,36 @@ shape translucent first, plot(cS, faceAlpha=0.2), and hold the figure.
 
 | `h` | the matplotlib collection of the slip planes |
 
+## Example
+
+Draw two pyramidal slip systems in a translucent magnesium crystal. The blue plane and
+arrow show an a-type system; the red ones show a c+a-type system. The lattice parameters
+are those of Mg-Magnesium.cif in the MATLAB example, in angstroms.
+
+
+```python
+from mtex import crystalFrame, crystalShape, slipSystem, plot, hold
+from matplotlib.pyplot import show
+
+cs = crystalFrame('6/mmm', [3.20927, 3.20927, 5.21033], mineral='Magnesium')
+cS = crystalShape.hex(cs)
+aSlip = slipSystem.pyramidalA(cs)
+caSlip = slipSystem.pyramidal2CA(cs)
+
+plot(cS, faceAlpha=0.2)
+hold(True)
+plot(cS, aSlip, faceColor='blue')
+plot(cS, caSlip, faceColor='red')
+hold(False)
+show()
+```
+
+Keep the first plot with hold(True) so that the slip planes and arrows are added to the
+same figure.
+
+![Example output for crystalShape.plotSlipSystem](figures/python_reference/crystalShape.plotSlipSystem-01.png)
+
+
 ## See also
 
 [crystalShape.plotInnerFace](crystalShape.plotInnerFace_py.html), [crystalShape.plotInnerDirection](crystalShape.plotInnerDirection_py.html), [slipSystem](slipSystem_index_py.html), [crystalShape.plot](crystalShape.plot_py.html), [CrystalShapes](CrystalShapes_py.html)
