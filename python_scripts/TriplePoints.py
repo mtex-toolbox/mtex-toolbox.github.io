@@ -10,11 +10,11 @@
 # [grain reconstruction](https://mtex-toolbox.github.io/GrainReconstruction_py.html). They are available from a grain list
 # through `grains.triplePoints`, just as the boundary segments are available through
 # [grains.boundary](https://mtex-toolbox.github.io/GrainBoundaries.html). The result is a
-# [triplePointList](https://mtex-toolbox.github.io/triplePointList.triplePointList.html).
+# [triplePointList](https://mtex-toolbox.github.io/triplePointList.triplePointList_py.html).
 #
 # A square measurement grid can also produce vertices where four boundary segments meet.
 # When analysing triple points, it is a good idea to pass `removeQuadruplePoints` to
-# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html). This converts each ambiguous quadruple point into
+# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains_py.html). This converts each ambiguous quadruple point into
 # two triple points. [Quadruple Points](https://mtex-toolbox.github.io/QuadruplePoints_py.html) explains the resulting
 # topology.
 #

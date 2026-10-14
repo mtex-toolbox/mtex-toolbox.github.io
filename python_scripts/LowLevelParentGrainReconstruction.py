@@ -66,7 +66,7 @@ tP = grains.triplePoints(alphaName, alphaName, alphaName)
 tP
 
 # %% [markdown]
-# [`calcParent`](https://mtex-toolbox.github.io/calcParent.html) tests the three mean alpha orientations at each point
+# [`calcParent`](https://mtex-toolbox.github.io/calcParent_py.html) tests the three mean alpha orientations at each point
 # against all Burgers variants. The `id` flag returns variant IDs instead of parent
 # orientations. The `numFit=2` option retains the best and second-best combinations.
 
@@ -115,7 +115,7 @@ hold(False)
 # ## Require consistent votes within each child grain
 #
 # Each retained triple point casts one variant-ID vote for each of its three grains.
-# [`majorityVote`](https://mtex-toolbox.github.io/majorityVote.html) with `strict` returns an ID only when every vote
+# [`majorityVote`](https://mtex-toolbox.github.io/majorityVote_py.html) with `strict` returns an ID only when every vote
 # received by that grain is identical. Conflicting grains receive `NaN`.
 
 # %%
@@ -146,7 +146,7 @@ plot(parentGrains[betaName], parentColor, figSize='large')
 # ## Reject isolated seeds before merging
 #
 # As an additional consistency check, require every proposed parent component to contain at
-# least two measured child grains. A test run of [`merge`](https://mtex-toolbox.github.io/grain2d.merge.html) returns the
+# least two measured child grains. A test run of [`merge`](https://mtex-toolbox.github.io/grain2d.merge_py.html) returns the
 # proposed old-to-new grain IDs without modifying the map.
 
 # %%
@@ -195,7 +195,7 @@ plot(parentGrains[betaName], parentColor, figSize='large')
 #
 # ## Find alpha grains next to reconstructed beta grains
 #
-# [`neighbors`](https://mtex-toolbox.github.io/grain2d.neighbors.html) returns the IDs of neighbouring alpha and beta grains.
+# [`neighbors`](https://mtex-toolbox.github.io/grain2d.neighbors_py.html) returns the IDs of neighbouring alpha and beta grains.
 # For every pair, `calcParent` compares the measured alpha orientation with the reconstructed
 # beta orientation.
 
@@ -275,7 +275,7 @@ isNowBeta = (parentGrains.phaseId[np.maximum(1, gid) - 1] == ebsd.name2id(betaNa
 
 # %% [markdown]
 # With a measured child orientation and a reconstructed parent grain,
-# [`calcParent`](https://mtex-toolbox.github.io/calcParent.html) returns the compatible beta orientation and its angular fit.
+# [`calcParent`](https://mtex-toolbox.github.io/calcParent_py.html) returns the compatible beta orientation and its angular fit.
 
 # %%
 parentOri, pixelFit = calcParent(parentEBSD[isNowBeta].orientations, parentGrains.selectByGrainId(gid[isNowBeta]).meanOrientation,
@@ -317,7 +317,7 @@ parentGrains = calcGrains(parentEBSD, angle=5 * degree, minPixel=15)
 parentGrains = smoothBoundary(parentGrains, 5)
 
 # %% [markdown]
-# A [`halfQuadraticFilter`](https://mtex-toolbox.github.io/halfQuadraticFilter.html) with a small `alpha` preserves more
+# A [`halfQuadraticFilter`](https://mtex-toolbox.github.io/halfQuadraticFilter_py.html) with a small `alpha` preserves more
 # local detail. The `fill` option interpolates missing orientations inside the supplied grain
 # boundaries.
 

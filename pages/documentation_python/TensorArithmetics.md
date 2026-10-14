@@ -89,7 +89,7 @@ indices of the strain,
 
 $$\sigma_{ij} = \sum_{k,l} C_{ijkl} \epsilon_{kl}.$$
 
-[EinsteinSum](EinsteinSum.html) takes each tensor followed by one label
+[EinsteinSum](EinsteinSum_py.html) takes each tensor followed by one label
 for each of its indices. Equal negative labels mark indices to sum over.
 Positive labels survive, and their values set the index order in the
 result. The signs are MTEX syntax; the physical indices are not negative.
@@ -160,7 +160,7 @@ $$S=C^{-1}$$,
 
 $$ \beta(v) = \sum_{i,j,k} S_{ijkk} v_i v_j.$$
 
-[inv](tensor.inv.html) turns the stiffness into a compliance tensor. The
+[inv](tensor.inv_py.html) turns the stiffness into a compliance tensor. The
 data file identifies x with [100], the crystallographic a direction.
 
 ```python
@@ -175,7 +175,7 @@ beta
 ```
 
 The result is 0.0018 GPa$$^{-1}$$. It is the same contraction used by
-[linearCompressibility](stiffnessTensor.linearCompressibility.html).
+[linearCompressibility](stiffnessTensor.linearCompressibility_py.html).
 
 ```python
 betaDirect = C.linearCompressibility(v)
@@ -226,12 +226,12 @@ inner
 ```
 
 ```text
-array([5.8716, 1.5269, 3.4654])
+array([1.9959, 2.2963, 2.6327])
 ```
 
 ## Rank 2 matrix operations
 
-[det](tensor.det.html) returns one determinant for each rank 2 tensor in
+[det](tensor.det_py.html) returns one determinant for each rank 2 tensor in
 the list.
 
 ```python
@@ -240,12 +240,12 @@ d
 ```
 
 ```text
-array([0.3867, 0.0764, 2.4332])
+array([ 0.0055, -0.2327,  0.1594])
 ```
 
 ## Rotating a tensor
 
-[rotate](tensor.rotate.html) actively rotates a physical property. The
+[rotate](tensor.rotate_py.html) actively rotates a physical property. The
 workshop example below starts with a second-rank thermal-conductivity
 tensor whose largest value, 10.5 W m$$^{-1}$$ K$$^{-1}$$, is along x. The
 rotation moves that preferred direction 45 degrees about z.
@@ -276,7 +276,7 @@ $$ K'_{ij} = \sum_{p,q} R_{ip} R_{jq} K_{pq}. $$
 
 Rotating the property is not a *frame change*. A frame change re-expresses
 the same physical object in another reference frame. Use
-[transformReferenceFrame](tensor.transformReferenceFrame.html) for that
+[transformReferenceFrame](tensor.transformReferenceFrame_py.html) for that
 operation; [Reference Frame Alignment](SymmetryAlignment_py.html) shows why
 the distinction matters for published crystal properties.
 

@@ -17,7 +17,7 @@ status: Checked
 A *fibre* is a one-dimensional curve through orientation space. Every orientation on a
 full fibre maps one fixed crystal direction `h` onto one fixed specimen direction `r`
 while leaving rotation about that direction free. MTEX stores the curve as a
-[fibre](fibre.fibre.html) variable.
+[fibre](fibre.fibre_py.html) variable.
 
 Many real textures concentrate around a line rather than one ideal orientation. Rolling
 textures of cubic metals are therefore commonly described by named fibres. A real
@@ -144,7 +144,7 @@ boundary-to-boundary line represents one closed fibre.
 ## Fibres in Pole Figures
 
 Everything that can be plotted for orientations can also be plotted for fibres.
-[plotPF](fibre.plotPDF.html) maps the fibre into [pole figures](OrientationPoleFigure_py.html),
+[plotPF](fibre.plotPDF_py.html) maps the fibre into [pole figures](OrientationPoleFigure_py.html),
 where one orientation becomes a point and a fibre becomes a curve.
 
 ```python
@@ -160,7 +160,7 @@ projection boundary, but it still represents one continuous set of orientations.
 ## Symmetrising a Fibre
 
 Unlike an orientation pole-figure plot, a fibre is not automatically symmetrised.
-[symmetrise](fibre.symmetrise.html) generates the crystallographically equivalent
+[symmetrise](fibre.symmetrise_py.html) generates the crystallographically equivalent
 fibres. The `unique` option removes repeated copies.
 
 ```python
@@ -185,7 +185,7 @@ plotPF(symFibre, Miller([[1, 1, 0], [2, 1, 0], [1, 1, 1]], cs), lineWidth=3, lin
 
 ## Fibres in Inverse Pole Figures
 
-[plotIPF](fibre.plotIPDF.html) maps the fibre into
+[plotIPF](fibre.plotIPDF_py.html) maps the fibre into
 [inverse pole figures](OrientationInversePoleFigure_py.html). It fixes specimen directions
 and draws the crystal directions found along the fibre. By default it restricts them to
 the fundamental sector.
@@ -216,7 +216,7 @@ repeated traces are symmetry equivalents, not additional input fibres.
 
 ## Defining a Fibre by Directions
 
-A Miller direction and a [vector3d](vector3d.vector3d.html) specimen
+A [Miller](Miller_py.html) direction and a [vector3d](vector3d.vector3d_py.html) specimen
 direction define the full fibre directly. The next fibre contains every orientation that
 makes the crystal c-axis $$[001]$$ parallel to specimen Z.
 
@@ -277,8 +277,8 @@ plot(cube111Fibre, 'axisAngle', lineColor='darkred', lineWidth=4, fundamentalReg
 The dark-red curve passes through the Cube orientation at zero angle. Its ends meet the
 boundary at symmetry-equivalent continuations of the curve.
 
-[orientation](fibre.orientation.html) samples a fibre for numerical work.
-[angle](fibre.angle.html) measures the angular distance from an orientation to its
+[orientation](fibre.orientation_py.html) samples a fibre for numerical work.
+[angle](fibre.angle_py.html) measures the angular distance from an orientation to its
 nearest point on a fibre. Their geometric use without crystal symmetry is developed in
 [Fibres in Rotation Space](RotationFibre_py.html).
 
@@ -318,7 +318,7 @@ on its full direction-pair circle.
 ## Fibre ODFs
 
 A fibre is a curve of zero orientation-space volume, while a real texture has a spread
-around one. [fibreODF](fibreODF.html) turns the full curve into a density with a given
+around one. [fibreODF](fibreODF_py.html) turns the full curve into a density with a given
 halfwidth. This is the model fitted against a measurement.
 
 ```python
@@ -344,7 +344,7 @@ density, so it forms a tube rather than a line.
 
 ## Evaluating an ODF Along a Fibre
 
-[plotFibre](SO3Fun.plotFibre.html) evaluates an ODF along a chosen curve. Here the
+[plotFibre](SO3Fun.plotFibre_py.html) evaluates an ODF along a chosen curve. Here the
 beta-fibre ODF is read along the eta fibre.
 
 ```python
@@ -358,7 +358,7 @@ marks the part of the eta segment closest to the beta-fibre ridge.
 
 ## The Volume Around a Fibre
 
-[volume](SO3Fun.volume.html) integrates the ODF inside a tube of a given angular radius
+[volume](SO3Fun.volume_py.html) integrates the ODF inside a tube of a given angular radius
 about a fibre. This is the quantity meant when a texture is reported as "so many percent
 beta fibre".
 
@@ -384,7 +384,7 @@ volume10Percent
 ```
 
 The second result is 100 percent to the precision printed. It does not mean the ODF is a
-zero-width line or vanishes at $$10^\circ$$. [fibreVolume](SO3Fun.fibreVolume.html)
+zero-width line or vanishes at $$10^\circ$$. [fibreVolume](SO3Fun.fibreVolume_py.html)
 discretises the tube and clips its numerical estimate at 1, so the displayed percentage
 can be exactly 100.
 

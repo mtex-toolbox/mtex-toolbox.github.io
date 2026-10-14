@@ -49,7 +49,7 @@ notation.
 h = Miller(1, 0, 0, cs)
 ```
 
-[symmetrise](vector3d.symmetrise.html) applies the crystal point group to the pole. The
+[symmetrise](vector3d.symmetrise_py.html) applies the crystal point group to the pole. The
 orientation then maps every returned pole into the specimen frame.
 
 ```python
@@ -80,7 +80,7 @@ orientations.
 
 ## The Shortcut
 
-[plotPF](orientation.plotPDF.html) performs the symmetrisation, coordinate map, and
+[plotPF](orientation.plotPDF_py.html) performs the symmetrisation, coordinate map, and
 projection for several poles at once.
 
 ```python

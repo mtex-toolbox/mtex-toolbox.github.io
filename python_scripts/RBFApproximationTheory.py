@@ -43,8 +43,8 @@ plotSection(ori, val, 'sigma', all=True)
 #
 # ## Fit a density
 #
-# [interp](https://mtex-toolbox.github.io/rotation.interp.html) uses an RBF model by default and calls
-# [SO3FunRBF.interpolate](https://mtex-toolbox.github.io/SO3FunRBF.interpolate.html). The `'density'` flag selects modified
+# [interp](https://mtex-toolbox.github.io/rotation.interp_py.html) uses an RBF model by default and calls
+# [SO3FunRBF.interpolate](https://mtex-toolbox.github.io/SO3FunRBF.interpolate_py.html). The `'density'` flag selects modified
 # least squares, `'mlsq'`. This solver constrains the kernel weights to be nonnegative, and
 # MTEX normalizes the fitted function to mean 1.
 
@@ -253,7 +253,7 @@ plot(SO3FBest, 'sigma')
 #
 # ## Choose another kernel
 #
-# `halfwidth` constructs a [SO3DeLaValleePoussinKernel](https://mtex-toolbox.github.io/SO3DeLaValleePoussinKernel.html).
+# `halfwidth` constructs a [SO3DeLaValleePoussinKernel](https://mtex-toolbox.github.io/SO3DeLaValleePoussinKernel_py.html).
 # Pass `kernel` to use another [rotational kernel function](https://mtex-toolbox.github.io/SO3Kernels_py.html).
 
 # %%

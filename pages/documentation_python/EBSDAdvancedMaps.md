@@ -30,15 +30,15 @@ A colour edge may therefore come from the key rather than from the specimen.
 
 The right compromise depends on the question. MTEX provides
 
-* [ipfHSVKey](ipfHSVKey.html), the default MTEX inverse pole figure key
-* [ipfTSLKey](ipfTSLKey.html) and [ipfHKLKey](ipfHKLKey.html), for maps compatible with
+* [ipfHSVKey](ipfHSVKey_py.html), the default MTEX inverse pole figure key
+* [ipfTSLKey](ipfTSLKey_py.html) and [ipfHKLKey](ipfHKLKey_py.html), for maps compatible with
   other EBSD systems
-* [BungeColorKey](BungeColorKey.html), which maps Euler angles to RGB
+* [BungeColorKey](BungeColorKey_py.html), which maps Euler angles to RGB
 * `PatalaColorKey`, for the grain-boundary misorientations demonstrated in
   [Grain Boundary Plots](BoundaryPlots_py.html); it is not ported yet
-* [axisAngleColorKey](axisAngleColorKey.html), for deviations from a reference
+* [axisAngleColorKey](axisAngleColorKey_py.html), for deviations from a reference
   orientation
-* [spotColorKey](spotColorKey.html) and [ipfSpotKey](ipfSpotKey.html), for highlighting
+* [spotColorKey](spotColorKey_py.html) and [ipfSpotKey](ipfSpotKey_py.html), for highlighting
   chosen orientations or fibres
 
 [IPF Maps](EBSDIPFMap_py.html) develops the first three keys.
@@ -130,7 +130,7 @@ orientation space, not a range on a single Euler angle.
 
 The 20° halfwidth is where the kernel, and hence the blue saturation, falls to half its
 value at the centre. The fade has no hard edge. To count a specified neighbourhood, use
-[volume](orientation.volume.html) with an explicit radius.
+[volume](orientation.volume_py.html) with an explicit radius.
 
 ```python
 spotPercent = 100 * volume(ebsd['fo'].orientations, colorKey.center, 20 * degree)
@@ -270,7 +270,7 @@ orientation.
 
 A highlighted component is easier to place when the microstructure remains visible
 underneath it. Draw band contrast first, then add the spot colours with the
-[faceAlpha](EBSD.plot.html) option.
+[faceAlpha](EBSD.plot_py.html) option.
 
 ```python
 plot(ebsd, ebsd.bc, micronbar=False)

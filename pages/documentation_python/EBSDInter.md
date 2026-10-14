@@ -41,7 +41,7 @@ ebsd = mtexdata('twins')
 
 ## Reading the Map at One Point
 
-[interp](EBSD.interp.html) evaluates a map at arbitrary coordinates. It works with a
+[interp](EBSD.interp_py.html) evaluates a map at arbitrary coordinates. It works with a
 plain `EBSD` list, a phase subset, and a rotated or sheared map. The imported map in
 this example happens to be a square grid.
 
@@ -124,7 +124,7 @@ measurements.
 
 ## Resampling onto a Different Grid
 
-A unit cell describes the shape and scale of a grid. [gridify](EBSD.gridify.html)
+A unit cell describes the shape and scale of a grid. [gridify](EBSD.gridify_py.html)
 derives its cell-to-cell translations, builds a lattice over the map extent, and reads
 the nearest measurement at the new positions. Here the unit cell is twice as large and
 rotated by 45 degrees.

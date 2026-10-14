@@ -41,7 +41,7 @@ plottingConvention.default('y↑→x')
 
 ## The known model
 
-[SantaFe](SantaFe.html) has cubic crystal symmetry and orthorhombic specimen symmetry.
+[SantaFe](SantaFe_py.html) has cubic crystal symmetry and orthorhombic specimen symmetry.
 It combines a 0.73 mrd uniform background with one component containing 27 percent of
 the volume. Values are in multiples of a random distribution (mrd), so a uniform ODF has
 the value 1 mrd everywhere; see [ODF Theory](ODFTheory_py.html).
@@ -66,7 +66,7 @@ r = equispacedS2Grid(resolution=5 * degree, antipodal=True)
 pf = calcPoleFigure(odf, h, r)
 ```
 
-[noisepf](PoleFigure.noisepf.html) draws Poisson counts. At a direction with pole
+[noisepf](PoleFigure.noisepf_py.html) draws Poisson counts. At a direction with pole
 density $$P_h(r)$$, the mean count is $$100P_h(r)$$ in this example; 100 is an intensity
 scale, not the same mean at every point. No background is added.
 
@@ -85,7 +85,7 @@ noise is large compared with a small signal.
 
 ## Reconstruct with and without ghost correction
 
-[calcODF](PoleFigure.calcODF.html) applies ghost correction by default. The second call
+[calcODF](PoleFigure.calcODF_py.html) applies ghost correction by default. The second call
 disables it explicitly. Solver output is suppressed here because
 [ODF Estimation](PoleFigure2ODF_py.html) explains the iteration history.
 
@@ -97,12 +97,12 @@ rec2 = calcODF(pf, ghostCorrection=False)
 ## Compare fit with recovery
 
 Two different comparisons are needed. The ODF error from
-[calcError](SO3Fun.calcError.html) is half the mean absolute difference on a 5 degree
+[calcError](SO3Fun.calcError_py.html) is half the mean absolute difference on a 5 degree
 orientation grid. For normalized ODFs, it is the fraction of material that would have to
 move through orientation space to turn one distribution into the other.
 
 The mean pole-figure residual instead compares each function with the noisy data. It is
-the regularised relative error used by [calcError](PoleFigure.calcError.html), averaged
+the regularised relative error used by [calcError](PoleFigure.calcError_py.html), averaged
 over the four pole figures. The extrema give a second reading of the reconstructed ODFs.
 
 ```python
@@ -120,7 +120,7 @@ for name, a, b, c, d in zip(['model', 'withGhostCorrection', 'withoutGhostCorrec
 
 ```text
                           odfError  meanPFResidual  minimumMrd  maximumMrd
-model                       0.0000          0.0511      0.7300      5.0395
+model                       0.0000          0.0511      0.7300      5.0394
 withGhostCorrection         0.0455          0.0494      0.5850      4.8902
 withoutGhostCorrection      0.1008          0.0482      0.1782      4.5416
 ```
@@ -136,7 +136,7 @@ digit. The ordering of the two reconstructions does not.
 
 ## Where the corrected reconstruction misses the data
 
-[plotDiff](PoleFigure.plotDiff.html) shows the regularised relative difference at every
+[plotDiff](PoleFigure.plotDiff_py.html) shows the regularised relative difference at every
 simulated measurement direction.
 
 ```python
@@ -202,7 +202,7 @@ the peaks.
 
 ## Read the harmonic spectrum
 
-[plotSpectrum](SO3Fun.plotSpektra.html) groups the magnitude of the harmonic coefficients
+[plotSpectrum](SO3Fun.plotSpektra_py.html) groups the magnitude of the harmonic coefficients
 by degree. This is the most direct view of the even--odd defect.
 
 ```python

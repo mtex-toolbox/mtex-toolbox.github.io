@@ -42,7 +42,7 @@ odf = 0.2 * unimodalODF(ori1) + 0.3 * unimodalODF(ori2) + 0.5 * fibreODF(f)
 # %% [markdown]
 # ## Default Bunge Sections
 #
-# [plotSection](https://mtex-toolbox.github.io/SO3Fun.plotSection.html) uses sections at constant third Bunge angle
+# [plotSection](https://mtex-toolbox.github.io/SO3Fun.plotSection_py.html) uses sections at constant third Bunge angle
 # $\varphi_2$ by default. Here the explicit `'phi2'` flag makes that choice visible. The
 # option `sections` sets the number of panels; it does not set the angular resolution
 # within a panel.
@@ -65,7 +65,7 @@ plot(f, lineWidth=2, add2all=True)
 #
 # Pass explicit angle values with an option named after the fixed coordinate. The
 # following four panels restrict the display to $\varphi_2=25^\circ$, $30^\circ$,
-# $35^\circ$, and $40^\circ$. Constructing [phi2Sections](https://mtex-toolbox.github.io/phi2Sections.html) explicitly
+# $35^\circ$, and $40^\circ$. Constructing [phi2Sections](https://mtex-toolbox.github.io/phi2Sections_py.html) explicitly
 # records this geometry so it can be reused for several ODFs or orientation sets.
 
 # %%
@@ -97,10 +97,10 @@ plot(f, lineWidth=2, add2all=True)
 # | `'alpha'` | Matthies angle $\alpha$ | `alpha=values` |
 # | `'sigma'` | Matthies coordinate $\sigma=\alpha+\gamma$ | `sigma=values` |
 #
-# The corresponding classes are [phi2Sections](https://mtex-toolbox.github.io/phi2Sections.html),
-# [phi1Sections](https://mtex-toolbox.github.io/phi1Sections.html), [PhiSections](https://mtex-toolbox.github.io/PhiSections.html),
-# [gammaSections](https://mtex-toolbox.github.io/gammaSections.html), [alphaSections](https://mtex-toolbox.github.io/alphaSections.html), and
-# [sigmaSections](https://mtex-toolbox.github.io/sigmaSections.html). They share layout, resolution, and the
+# The corresponding classes are [phi2Sections](https://mtex-toolbox.github.io/phi2Sections_py.html),
+# [phi1Sections](https://mtex-toolbox.github.io/phi1Sections_py.html), [PhiSections](https://mtex-toolbox.github.io/PhiSections.html),
+# [gammaSections](https://mtex-toolbox.github.io/gammaSections_py.html), [alphaSections](https://mtex-toolbox.github.io/alphaSections_py.html), and
+# [sigmaSections](https://mtex-toolbox.github.io/sigmaSections_py.html). They share layout, resolution, and the
 # [plot-type](https://mtex-toolbox.github.io/PlotTypes_py.html) options. The `secResolution` option is specific to
 # `phi2Sections` and sets the spacing between its section angles.
 

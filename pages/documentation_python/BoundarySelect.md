@@ -66,17 +66,17 @@ gB
 
 ```text
 grainBoundary (y↑→x)
-  size: 2954 segments, 252 chains
+  size: 2985 segments, 252 chains
   segments    length   mineral 1   mineral 2
-       559  27508 µm  notIndexed  Forsterite
-        32   1586 µm  notIndexed   Enstatite
-        29   1392 µm  notIndexed    Diopside
-      1174  54734 µm  Forsterite  Forsterite
-       552  26018 µm  Forsterite   Enstatite
-       436  20159 µm  Forsterite    Diopside
-        27   1278 µm   Enstatite   Enstatite
-       123   5705 µm   Enstatite    Diopside
-        22    930 µm    Diopside    Diopside
+       558  27636 µm  notIndexed  Forsterite
+        33   1603 µm  notIndexed   Enstatite
+        29   1393 µm  notIndexed    Diopside
+      1187  54989 µm  Forsterite  Forsterite
+       561  26162 µm  Forsterite   Enstatite
+       443  20288 µm  Forsterite    Diopside
+        27   1280 µm   Enstatite   Enstatite
+       125   5758 µm   Enstatite    Diopside
+        22    934 µm    Diopside    Diopside
 ```
 
 The rows involving `notIndexed` combine two situations. Some segments border a connected
@@ -176,8 +176,8 @@ grains[70].boundary
 grainBoundary (y↑→x)
   size: 30 segments, 1 chains
   segments   length   mineral 1  mineral 2
-        23  1077 µm  Forsterite   Diopside
-         7   311 µm   Enstatite   Diopside
+        24  1088 µm  Forsterite   Diopside
+         6   310 µm   Enstatite   Diopside
 ```
 
 ---
@@ -207,9 +207,9 @@ grains.innerBoundary
 
 ```text
 grainBoundary (y↑→x)
-  size: 11 segments, 1 chains
+  size: 10 segments, 1 chains
   segments  length   mineral 1   mineral 2
-        11  477 µm  Forsterite  Forsterite
+        10  471 µm  Forsterite  Forsterite
 ```
 
 ---
@@ -244,9 +244,9 @@ gB_high
 
 ```text
 grainBoundary (y↑→x)
-  size: 471 segments, 37 chains
+  size: 480 segments, 37 chains
   segments    length   mineral 1   mineral 2
-       471  21925 µm  Forsterite  Forsterite
+       480  22019 µm  Forsterite  Forsterite
 ```
 
 ---

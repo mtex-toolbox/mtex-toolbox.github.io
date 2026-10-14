@@ -7,7 +7,7 @@
 # table. The crystal symmetry, Miller indices and angular units have to be stated
 # correctly. So does the specimen frame, before an ODF can be reconstructed.
 #
-# MTEX stores the result in a [PoleFigure](https://mtex-toolbox.github.io/PoleFigure.PoleFigure.html) object. Its entries
+# MTEX stores the result in a [PoleFigure](https://mtex-toolbox.github.io/PoleFigure.PoleFigure_py.html) object. Its entries
 # are one or more measured pole figures, not pixels or individual orientations. The
 # imported values are diffraction intensities. They are not yet normalized pole densities
 # in multiples of a random distribution (mrd).
@@ -76,7 +76,7 @@ h = [Miller(1, 0, -1, 0, cs), Miller([[0, 1, -1, 1], [1, 0, -1, 1]], cs)]
 c = [1, [0.52, 1.23]]
 
 # %% [markdown]
-# [PoleFigure.load](https://mtex-toolbox.github.io/PoleFigure.load.html) detects the file format and joins the files,
+# [PoleFigure.load](https://mtex-toolbox.github.io/PoleFigure.load_py.html) detects the file format and joins the files,
 # reflections and weights into one object.
 
 # %%
@@ -142,7 +142,7 @@ mtexColorbar()
 # ## Generic text files
 #
 # When no dedicated reader matches, MTEX falls back to the
-# [generic ASCII reader](https://mtex-toolbox.github.io/loadPoleFigure_generic.html). A common file is one row per
+# [generic ASCII reader](https://mtex-toolbox.github.io/loadPoleFigure_generic_py.html). A common file is one row per
 # measurement,
 #
 #     polar_angle  azimuth_angle  intensity
@@ -170,7 +170,7 @@ mtexColorbar()
 # table; the PopLA, LaboTEX, BearTex, Philips, Rigaku, Juelich and PANalytical readers of
 # MATLAB MTEX are not ported yet.
 #
-# [PoleFigure.load](https://mtex-toolbox.github.io/PoleFigure.load.html) tries the installed `loadPoleFigure_*` readers
+# [PoleFigure.load](https://mtex-toolbox.github.io/PoleFigure.load_py.html) tries the installed `loadPoleFigure_*` readers
 # and then the generic reader. Its reference page is version-specific. So are the reader
 # functions in `mtex/io/loadpolefigure.py`.
 #
@@ -179,9 +179,9 @@ mtexColorbar()
 #
 #     pf = PoleFigure.load(fname, ..., interface='name')
 #
-# during development. The [Dubna reader](https://mtex-toolbox.github.io/loadPoleFigure_dubna.html) in
+# during development. The [Dubna reader](https://mtex-toolbox.github.io/loadPoleFigure_dubna_py.html) in
 # `mtex/io/loadpolefigure.py` is a compact format-specific template, the
-# [generic reader](https://mtex-toolbox.github.io/loadPoleFigure_generic.html) beside it the corresponding generic
+# [generic reader](https://mtex-toolbox.github.io/loadPoleFigure_generic_py.html) beside it the corresponding generic
 # template.
 
 # %% [markdown]

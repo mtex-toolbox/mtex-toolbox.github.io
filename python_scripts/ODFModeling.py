@@ -23,7 +23,7 @@
 # | [harmonic representation](https://mtex-toolbox.github.io/SO3FunHarmonicRepresentation_py.html) | a series expansion, the classical form used for pole figure inversion |
 #
 # Harmonic names a representation, not another physical peak shape. The current
-# [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF.html) normally returns a radial-basis ODF. It can then be
+# [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF_py.html) normally returns a radial-basis ODF. It can then be
 # converted to a harmonic series. All of these objects share one interface for
 # evaluation, plotting, scaling, and addition. This is why components with different
 # representations can be mixed in one model.
@@ -129,7 +129,7 @@ mtexColorbar(title='mrd')
 # %% [markdown]
 # ## Rotating a Model
 #
-# [rotate](https://mtex-toolbox.github.io/SO3Fun.rotate.html) actively moves a model relative to the specimen axes. By
+# [rotate](https://mtex-toolbox.github.io/SO3Fun.rotate_py.html) actively moves a model relative to the specimen axes. By
 # default, the rotation acts on the specimen side of every component orientation.
 
 # %%

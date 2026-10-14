@@ -32,7 +32,7 @@ setMTEXpref('defaultColorMap', blue2redColorMap)
 #
 # The simplest tensor plot assigns one scalar to every unit direction.
 # MTEX calls this scalar the *directional magnitude*.
-# [plot](https://mtex-toolbox.github.io/tensor.plot.html) draws it as a spherical function.
+# [plot](https://mtex-toolbox.github.io/tensor.plot_py.html) draws it as a spherical function.
 #
 # The example is the stiffness tensor of olivine measured by Abramson et
 # al. (1997). Its printed summary records the rank, unit, crystal frame, and
@@ -58,13 +58,13 @@ mtexColorbar(title='directional magnitude in GPa')
 #
 # This plot shows the self-contraction of `C`. It is not Young's modulus or
 # a complete picture of the stiffness tensor. Use
-# [YoungsModulus](https://mtex-toolbox.github.io/stiffnessTensor.YoungsModulus.html) when that physical
+# [YoungsModulus](https://mtex-toolbox.github.io/stiffnessTensor.YoungsModulus_py.html) when that physical
 # property is the question.
 
 # %% [markdown]
 # ## Inspecting the spherical function
 #
-# [directionalMagnitude](https://mtex-toolbox.github.io/tensor.directionalMagnitude.html) returns the
+# [directionalMagnitude](https://mtex-toolbox.github.io/tensor.directionalMagnitude_py.html) returns the
 # spherical function used by `plot`. The object display identifies its
 # representation, symmetry, bandwidth, and antipodal character.
 
@@ -74,7 +74,7 @@ sF
 
 # %% [markdown]
 # Spherical-function operations can now be applied directly. For example,
-# [max](https://mtex-toolbox.github.io/S2Fun.max.html) finds the largest value and its direction.
+# [max](https://mtex-toolbox.github.io/S2Fun.max_py.html) finds the largest value and its direction.
 
 # %%
 maxValue, maxDirection = max(sF)
@@ -98,7 +98,7 @@ maxDirection
 #
 # For a symmetric rank-two tensor, the directional magnitude is a quadratic
 # form. Its extrema lie along the principal axes, which are the eigenvectors
-# returned by [eig](https://mtex-toolbox.github.io/tensor.eig.html) after the eigenvalues.
+# returned by [eig](https://mtex-toolbox.github.io/tensor.eig_py.html) after the eigenvalues.
 
 # %%
 T = tensor(np.diag([3, 1, -1]), rank=2)
@@ -133,7 +133,7 @@ mtexColorbar(title='directional magnitude')
 #
 # Fix the loading direction `p` along z. The admissible transverse
 # directions then form the great circle normal to `p`, so
-# [plotSection](https://mtex-toolbox.github.io/S2Fun.plotSection.html) is the natural display.
+# [plotSection](https://mtex-toolbox.github.io/S2Fun.plotSection_py.html) is the natural display.
 
 # %%
 p = vector3d.Z

@@ -94,7 +94,7 @@ Cij = [[211.50,  65.60,  43.20,  0.00,  -6.50,  0.00],
 C_epidote = stiffnessTensor(Cij, CS_Tensor_epidote, density=rho_epidote)
 
 # %% [markdown]
-# [stiffnessTensor](https://mtex-toolbox.github.io/stiffnessTensor.stiffnessTensor.html) records the unit, crystal
+# [stiffnessTensor](https://mtex-toolbox.github.io/stiffnessTensor.stiffnessTensor_py.html) records the unit, crystal
 # frame, and density with each coefficient array.
 
 # %% [markdown]
@@ -111,7 +111,7 @@ phaseFractions = {'Epidote': len(ebsdAggregate['Epidote']) / len(ebsdAggregate),
 phaseFractions
 
 # %% [markdown]
-# [calcTensor](https://mtex-toolbox.github.io/EBSD.calcTensor.html) matches each phase to a compatible tensor by the
+# [calcTensor](https://mtex-toolbox.github.io/EBSD.calcTensor_py.html) matches each phase to a compatible tensor by the
 # attached symmetry and lattice parameters. The argument order does not define that
 # mapping. MTEX then rotates every tensor into the specimen frame, the reference frame
 # of the map, and averages the pixels. The flag `'all'` asks for the three estimates at
@@ -158,7 +158,7 @@ CVoigt_glaucophane_ebsd, CReuss_glaucophane_ebsd, CHill_glaucophane_ebsd = calcT
 #
 # Spatial positions are not required once the orientations have been reduced to an
 # orientation distribution function (ODF). The `halfwidth` controls the smoothing used
-# by [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity.html).
+# by [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity_py.html).
 
 # %%
 odf_glaucophane = calcDensity(ebsd['Glaucophane'].orientations, halfwidth=10 * degree)
@@ -186,7 +186,7 @@ glaucophaneBulkModuli
 # ## Use the aggregate tensor
 #
 # An averaged stiffness tensor predicts elastic wave propagation through the aggregate.
-# [plotSeismicVelocities](https://mtex-toolbox.github.io/stiffnessTensor.plotSeismicVelocities.html) maps several
+# [plotSeismicVelocities](https://mtex-toolbox.github.io/stiffnessTensor.plotSeismicVelocities_py.html) maps several
 # velocities and polarizations.
 
 # %%

@@ -2,7 +2,7 @@
 # # Smoothing Algorithms
 #
 # [Grain Boundary Smoothing](https://mtex-toolbox.github.io/GrainSmoothing_py.html) introduces
-# [`smoothBoundary`](https://mtex-toolbox.github.io/grain2d.smoothBoundary.html). This page explains its three stages,
+# [`smoothBoundary`](https://mtex-toolbox.github.io/grain2d.smoothBoundary_py.html). This page explains its three stages,
 # the tolerances they use, and the four filters available for the last stage.
 #
 # The page assumes that grains have already been reconstructed as in
@@ -44,7 +44,7 @@ hold(False)
 #
 # For an ideal straight boundary, the staircase is never farther than `d/sqrt(2)` from the
 # line it approximates. The worst case is a boundary at 45 degree, whose corners lie
-# exactly that far from the diagonal. [`simplifyBoundary`](https://mtex-toolbox.github.io/grain2d.simplifyBoundary.html)
+# exactly that far from the diagonal. [`simplifyBoundary`](https://mtex-toolbox.github.io/grain2d.simplifyBoundary_py.html)
 # therefore uses this as its default tolerance. It drops a vertex when removing it moves
 # the boundary by less than the tolerance.
 #
@@ -75,9 +75,10 @@ print(f'simplifying at a tolerance of {d / np.sqrt(2):.2f} {grains.scanUnit} tak
 # form. A circle with a radius of 15 pixels loses 14% of its area over 25 iterations that
 # way, compared with 0.4% when this resampling step is included.
 #
-# [`refineBoundary`](https://mtex-toolbox.github.io/grain2d.refineBoundary.html) resamples each chain at equal arc length.
-# It changes only the sampling, not the polygonal shape. The smoothing stage then receives
-# evenly spaced degrees of freedom that are no longer tied to the measurement grid.
+# [`refineBoundary`](https://mtex-toolbox.github.io/grain2d.refineBoundary_py.html) splits each segment into pieces of about
+# equal length. It changes only the sampling, not the polygonal shape. The smoothing stage
+# then receives evenly spaced degrees of freedom that are no longer tied to the measurement
+# grid.
 
 # %%
 grainsRefined = refineBoundary(grainsSimple, d)
@@ -128,11 +129,11 @@ print(f'resampling at {2 * d:.2f} {grains.scanUnit} instead leaves {len(grainsCo
 # %% [markdown]
 # ## Choose the filter
 #
-# A [`boundaryFilter`](https://mtex-toolbox.github.io/boundaryFilter.html) controls the third stage.
-# [`laplaceFilter`](https://mtex-toolbox.github.io/laplaceFilter.html) and [`taubinFilter`](https://mtex-toolbox.github.io/taubinFilter.html) apply a
+# A [`boundaryFilter`](https://mtex-toolbox.github.io/boundaryFilter_py.html) controls the third stage.
+# [`laplaceFilter`](https://mtex-toolbox.github.io/laplaceFilter_py.html) and [`taubinFilter`](https://mtex-toolbox.github.io/taubinFilter_py.html) apply a
 # local averaging step a fixed number of times. Their effect therefore depends on how
-# densely the boundary is sampled. [`curvatureFilter`](https://mtex-toolbox.github.io/curvatureFilter.html) and
-# [`huberFilter`](https://mtex-toolbox.github.io/huberFilter.html) instead specify a smoothing length in map units, which
+# densely the boundary is sampled. [`curvatureFilter`](https://mtex-toolbox.github.io/curvatureFilter_py.html) and
+# [`huberFilter`](https://mtex-toolbox.github.io/huberFilter_py.html) instead specify a smoothing length in map units, which
 # does not change when the same sample is measured on a finer grid. That length makes the
 # setting comparable between scans only when their spatial units and preprocessing are also
 # comparable.
@@ -157,7 +158,7 @@ print(f'area comparison uses {np.count_nonzero(big)} of {len(ref)} grains')
 # %% [markdown]
 # ## The Laplace filter
 #
-# [`laplaceFilter`](https://mtex-toolbox.github.io/laplaceFilter.html) is the default. It replaces each movable vertex by a
+# [`laplaceFilter`](https://mtex-toolbox.github.io/laplaceFilter_py.html) is the default. It replaces each movable vertex by a
 # weighted local mean, `iter` times. It is fast and useful for plots, directions, and
 # lengths, but repeated averaging pulls a convex grain inward. Nothing bounds that
 # shrinkage.
@@ -173,7 +174,7 @@ print(f'  25 iterations {100 * np.mean((aL25 - A0) / A0):+6.2f}% on average, {10
 # %% [markdown]
 # ## The Taubin filter
 #
-# [`taubinFilter`](https://mtex-toolbox.github.io/taubinFilter.html) follows every smoothing pass with a slightly larger
+# [`taubinFilter`](https://mtex-toolbox.github.io/taubinFilter_py.html) follows every smoothing pass with a slightly larger
 # unshrinking pass. This approximately gives the area back instead of letting the mean area
 # drift downwards. Areas still change, so the method is shrinkage resistant rather than
 # exactly area preserving.
@@ -205,7 +206,7 @@ hold(False)
 # %% [markdown]
 # ## The curvature filter
 #
-# [`curvatureFilter`](https://mtex-toolbox.github.io/curvatureFilter.html) has no iteration count. `smoothingLength` is the
+# [`curvatureFilter`](https://mtex-toolbox.github.io/curvatureFilter_py.html) has no iteration count. `smoothingLength` is the
 # wavelength damped to half amplitude, in the units of the map. Detail finer than that
 # length is suppressed more strongly, and coarser detail survives. This gives the parameter
 # a physical meaning that an iteration count does not have.
@@ -222,7 +223,7 @@ print(f'  {100 * np.mean((aC - A0) / A0):+6.2f}% on average, {100 * np.min((aC -
 # %% [markdown]
 # ## The Huber filter
 #
-# [`huberFilter`](https://mtex-toolbox.github.io/huberFilter.html) uses the same smoothing length but protects sharp
+# [`huberFilter`](https://mtex-toolbox.github.io/huberFilter_py.html) uses the same smoothing length but protects sharp
 # corners. Gentle undulations are smoothed like `curvatureFilter`, while a genuinely
 # faceted boundary keeps its facets. This protection can also preserve corners left by the
 # pixel grid on a boundary that is really straight or smooth. Reach for this filter when

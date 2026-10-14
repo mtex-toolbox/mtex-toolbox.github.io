@@ -14,9 +14,9 @@ status: Checked
 
 <!--introduction-->
 
-[export](vector3d.export.html) writes a `vector3d` array as a whitespace-separated text
+[export](vector3d.export_py.html) writes a `vector3d` array as a whitespace-separated text
 table. Each vector occupies one row, and the first row names the columns.
-[vector3d.load](vector3d.load.html) can read the table back, so the format is useful for
+[vector3d.load](vector3d.load_py.html) can read the table back, so the format is useful for
 another program or a later MTEX session.
 
 This page assumes that Cartesian components, polar angle, and azimuth are familiar. See

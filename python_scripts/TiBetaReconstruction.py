@@ -59,7 +59,7 @@ grains = calcGrains(ebsd, threshold=1.5 * degree, removeQuadruplePoints=True)
 #
 # ## Set up the reconstruction job
 #
-# A [`parentGrainReconstructor`](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html)
+# A [`parentGrainReconstructor`](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor_py.html)
 # stores the input, the current reconstruction, and the relation between them. Assigning
 # `p2c` tells it which phase is the parent and which phase is the child.
 
@@ -84,21 +84,21 @@ job
 #
 # The class also provides several reconstruction routes and cleanup operations.
 #
-# * [`calcVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariantGraph.html) constructs a variant
+# * [`calcVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariantGraph_py.html) constructs a variant
 #   graph.
-# * [`clusterVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterVariantGraph.html) converts graph
+# * [`clusterVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterVariantGraph_py.html) converts graph
 #   clusters into parent votes.
-# * [`calcGBVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBVotes.html) obtains votes from child-child
+# * [`calcGBVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBVotes_py.html) obtains votes from child-child
 #   and parent-child grain boundaries.
-# * [`calcTPVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcTPVotes.html) obtains votes from
+# * [`calcTPVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcTPVotes_py.html) obtains votes from
 #   child-child-child triple points.
-# * [`calcParentFromVote`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromVote.html) transforms grains
+# * [`calcParentFromVote`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromVote_py.html) transforms grains
 #   selected by votes.
-# * [`calcParentFromGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromGraph.html) transforms and
+# * [`calcParentFromGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromGraph_py.html) transforms and
 #   merges graph clusters.
-# * [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar.html) merges neighbouring parent
+# * [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar_py.html) merges neighbouring parent
 #   grains with similar orientations.
-# * [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions.html) merges small enclosed
+# * [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions_py.html) merges small enclosed
 #   grains into parent hosts.
 #
 # These operations can be repeated while refining a reconstruction. They are not arbitrary in
@@ -109,7 +109,7 @@ job
 # A *variant graph* has one node for every combination of child grain and candidate parent
 # variant. Its edges connect compatible candidate variants of neighbouring grains.
 #
-# [`calcVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariantGraph.html) converts angular fit
+# [`calcVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariantGraph_py.html) converts angular fit
 # into edge probability. Here 1.5 degrees is the misfit at which the default probability
 # model gives an edge weight of one half.
 
@@ -120,7 +120,7 @@ job
 # %% [markdown]
 # ## Cluster candidate variants
 #
-# [`clusterVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterVariantGraph.html) propagates
+# [`clusterVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterVariantGraph_py.html) propagates
 # compatibility through the graph. Three iterations produce probabilities for the candidate
 # parents of each child grain.
 
@@ -138,7 +138,7 @@ job
 # *Transform* is the first reconstruction step. Each selected child grain is assigned one
 # candidate parent orientation and changes from the child phase to the parent phase.
 #
-# [`calcParentFromVote`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromVote.html) accepts the
+# [`calcParentFromVote`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromVote_py.html) accepts the
 # highest-probability candidate here.
 
 # %%
@@ -172,7 +172,7 @@ plot(job.parentGrains, parentColor, figSize='large')
 # *Merge* is the second reconstruction step. Neighbouring transformed grains with compatible
 # parent orientations are combined into one grain footprint.
 #
-# [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar.html) uses an angular threshold.
+# [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar_py.html) uses an angular threshold.
 # Here neighbours within 5 degrees are treated as one parent grain.
 
 # %%
@@ -191,7 +191,7 @@ plot(job.parentGrains, parentColor, figSize='large')
 # An inclusion is a grain entirely enclosed by another grain. Some small child grains remain
 # as inclusions because no parent orientation was assigned to them confidently.
 #
-# [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions.html) merges inclusions of at
+# [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions_py.html) merges inclusions of at
 # most 10 pixels into their surrounding parent grains.
 
 # %%
@@ -208,7 +208,7 @@ plot(job.parentGrains, parentColor, figSize='large')
 # ## Reconstruct a parent orientation at every pixel
 #
 # So far, parent orientations have been stored as grain means.
-# [`calcParentEBSD`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentEBSD.html) transfers the
+# [`calcParentEBSD`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentEBSD_py.html) transfers the
 # reconstruction to an EBSD variable and assigns a parent orientation to every transformed
 # child pixel.
 

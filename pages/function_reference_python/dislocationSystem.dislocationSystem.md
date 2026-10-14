@@ -1,0 +1,31 @@
+---
+title: 'dislocationSystem.dislocationSystem'
+sidebar: function_reference_sidebar
+permalink: dislocationSystem.dislocationSystem_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+counterpart: dislocationSystem.dislocationSystem.html
+status: Reference
+---
+{% raw %}
+a Burgers vector with a line vector, edge when orthogonal and screw when parallel; from
+slip systems, the edge dislocations of every system and the screw ones of every distinct
+Burgers vector. The line energy u is |b|^2 for an edge and 0.7 |b|^2 for a screw
+dislocation unless given, the isotropic line energy with Poisson ratio 0.3
+
+## Syntax
+
+```python
+dislocationSystem(b, l=None, u=None)
+```
+
+## Used on
+
+[DislocationSystems](DislocationSystems_py.html)
+
+MATLAB's [dislocationSystem.dislocationSystem](dislocationSystem.dislocationSystem.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L348">source</a></font>
+{% endraw %}

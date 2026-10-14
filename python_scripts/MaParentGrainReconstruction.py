@@ -39,7 +39,7 @@ hold(False)
 #
 # ## Set up the reconstruction job
 #
-# A [`parentGrainReconstructor`](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html)
+# A [`parentGrainReconstructor`](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor_py.html)
 # stores the input and the current reconstruction. It also records how each measured child
 # grain maps to a recovered parent.
 
@@ -66,7 +66,7 @@ job
 #
 # A real austenite-to-martensite transformation does not follow one ideal OR exactly. The OR
 # should therefore be fitted for each sample.
-# [`calcParent2Child`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParent2Child.html) implements the
+# [`calcParent2Child`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParent2Child_py.html) implements the
 # iterative method proposed by Nyyssönen and co-workers. It starts from the KS guess and fits
 # the child-to-child misorientations.
 
@@ -96,13 +96,13 @@ job
 #
 # The earlier version of this page said that `calcParent2Child` stored these values in
 # `job.fit`. The current class has no such property. Use
-# [`calcGBFit`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBFit.html) to recompute them. The fit assumes
+# [`calcGBFit`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBFit_py.html) to recompute them. The fit assumes
 # that most measured boundaries are child-to-child boundaries.
 #
 # ## Map the boundary misfit
 #
 # `calcGBFit` returns one fit for every child-grain neighbour pair.
-# [`selectByGrainId`](https://mtex-toolbox.github.io/grainBoundary.selectByGrainId.html) selects all boundary segments
+# [`selectByGrainId`](https://mtex-toolbox.github.io/grainBoundary.selectByGrainId_py.html) selects all boundary segments
 # belonging to those pairs.
 
 # %%
@@ -126,7 +126,7 @@ hold(False)
 # child-grain and candidate-variant pair. Edges connect compatible candidates belonging to
 # neighbouring grains.
 #
-# [`calcVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariantGraph.html) converts angular misfit
+# [`calcVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariantGraph_py.html) converts angular misfit
 # into an edge weight. The `threshold` is the misfit whose weight is one half. The `tolerance`
 # controls the width of the transition from high to low weight. Earlier text called
 # `tolerance` a Gaussian standard deviation, but the implementation uses it directly as the
@@ -155,7 +155,7 @@ job
 #
 # ## Cluster candidate variants
 #
-# [`clusterVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterVariantGraph.html) propagates
+# [`clusterVariantGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterVariantGraph_py.html) propagates
 # compatibility through the graph. The `includeSimilar` option lets candidates within 5
 # degrees share support.
 
@@ -205,7 +205,7 @@ plot(job.parentGrains, job.parentGrains.meanOrientation)
 # ## Reconsider uncertain grains from their neighbours
 #
 # A second variant-graph pass with relaxed probabilities is one route. Here
-# [`calcGBVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBVotes.html) instead asks the already
+# [`calcGBVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBVotes_py.html) instead asks the already
 # reconstructed neighbours to vote for potential parents. `reconsiderAll` also permits an
 # earlier assignment to be replaced.
 
@@ -227,7 +227,7 @@ plot(job.parentGrains, job.parentGrains.meanOrientation)
 #
 # *Merge* is the second parent grain reconstruction step. Neighbouring transformed grains with
 # compatible parent orientations are combined into one parent-grain footprint.
-# [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar.html) uses a 7.5-degree threshold
+# [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar_py.html) uses a 7.5-degree threshold
 # here.
 
 # %%
@@ -244,7 +244,7 @@ plot(job.parentGrains, job.parentGrains.meanOrientation)
 #
 # An inclusion is a grain entirely enclosed by another grain. Some poorly indexed child grains
 # remain as inclusions because no parent orientation could be assigned confidently.
-# [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions.html) merges inclusions of at
+# [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions_py.html) merges inclusions of at
 # most 50 pixels into the surrounding parent grain.
 
 # %%
@@ -258,7 +258,7 @@ plot(job.parentGrains, job.parentGrains.meanOrientation)
 #
 # ## Identify variants and packets
 #
-# Once the parent orientations are known, [`calcVariants`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariants.html)
+# Once the parent orientations are known, [`calcVariants`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariants_py.html)
 # classifies each transformed child grain. `variantId` is its finest crystallographic class. A
 # *packet* groups variants that share the parent {111} habit plane. In this reconstruction,
 # `packetId` selects the parent {111} plane closest to the martensite (011) plane.
@@ -307,7 +307,7 @@ hold(False)
 #
 # ## Check the selected parent's crystallography
 #
-# [`calcVariantId`](https://mtex-toolbox.github.io/calcVariantId.html) independently assigns variant and packet IDs to every
+# [`calcVariantId`](https://mtex-toolbox.github.io/calcVariantId_py.html) independently assigns variant and packet IDs to every
 # measured child orientation inside the selected parent.
 
 # %%
@@ -334,7 +334,7 @@ hold(False)
 # ## Reconstruct the parent EBSD map
 #
 # The reconstruction so far used grain means.
-# [`calcParentEBSD`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentEBSD.html) assigns a parent
+# [`calcParentEBSD`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentEBSD_py.html) assigns a parent
 # orientation to each transformed pixel in the original EBSD map.
 
 # %%
@@ -381,7 +381,7 @@ hold(False)
 
 # %% [markdown]
 # The outlines define the parent regions that constrain the fill operation.
-# [`smooth`](https://mtex-toolbox.github.io/EBSD.smooth.html) then fills holes without crossing those outlines.
+# [`smooth`](https://mtex-toolbox.github.io/EBSD.smooth_py.html) then fills holes without crossing those outlines.
 
 # %%
 F = halfQuadraticFilter()

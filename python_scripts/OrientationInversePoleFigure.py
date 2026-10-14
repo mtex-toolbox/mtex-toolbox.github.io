@@ -46,7 +46,7 @@ h
 
 # %% [markdown]
 # The displayed Miller indices are the crystal-frame coordinates of the specimen Z
-# direction. [symmetrise](https://mtex-toolbox.github.io/vector3d.symmetrise.html) applies the crystal point group. It
+# direction. [symmetrise](https://mtex-toolbox.github.io/vector3d.symmetrise_py.html) applies the crystal point group. It
 # returns every equivalent description.
 
 # %%
@@ -71,7 +71,7 @@ plot(hSym, fundamentalRegion=True, markerFaceColor='red')
 #
 # ## The Shortcut
 #
-# [plotIPF](https://mtex-toolbox.github.io/orientation.plotIPDF.html) performs the inverse map, symmetrisation,
+# [plotIPF](https://mtex-toolbox.github.io/orientation.plotIPDF_py.html) performs the inverse map, symmetrisation,
 # reduction, and projection for several specimen directions at once.
 
 # %%

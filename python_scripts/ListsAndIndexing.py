@@ -1,10 +1,10 @@
 # %% [markdown]
 # # Lists and Indexing
 #
-# Almost every MTEX variable is a list of objects of one kind. An [EBSD](https://mtex-toolbox.github.io/EBSD.EBSD.html)
-# variable is a list of measurements, a [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d.html) variable is a list
+# Almost every MTEX variable is a list of objects of one kind. An [EBSD](https://mtex-toolbox.github.io/EBSD.EBSD_py.html)
+# variable is a list of measurements, a [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d_py.html) variable is a list
 # of grains, and `grains.boundary` is a list of grain boundary segments. An
-# [orientation](https://mtex-toolbox.github.io/orientation.orientation.html) variable commonly stores a list of
+# [orientation](https://mtex-toolbox.github.io/orientation.orientation_py.html) variable commonly stores a list of
 # orientations.
 #
 # There is no separate type for one grain. A single grain is a `grain2d` list with length

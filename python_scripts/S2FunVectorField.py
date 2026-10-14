@@ -9,7 +9,7 @@
 # may have radial and tangential parts. The gradient of a scalar `S2Fun` is a special case
 # whose values are tangential.
 #
-# MTEX represents this mapping with [S2VectorField](https://mtex-toolbox.github.io/S2VectorField.S2VectorField.html). This
+# MTEX represents this mapping with [S2VectorField](https://mtex-toolbox.github.io/S2VectorField.S2VectorField_py.html). This
 # page constructs a harmonic representation, evaluates it, combines fields, and reads its
 # two- and three-dimensional plots.
 #
@@ -34,7 +34,7 @@ sVF2 = S2VectorFieldHarmonic(f, bandwidth=4)
 sVF2
 
 # %% [markdown]
-# The explicit [quadrature](https://mtex-toolbox.github.io/S2VectorFieldHarmonic.quadrature.html) call is equivalent.
+# The explicit [quadrature](https://mtex-toolbox.github.io/S2VectorFieldHarmonic.quadrature_py.html) call is equivalent.
 
 # %%
 sVF2q = S2VectorFieldHarmonic.quadrature(f, bandwidth=4)
@@ -50,7 +50,7 @@ vector3d.cat(sVF2.eval(xvector), sVF2.eval(zvector))
 # ## Constructing a field from sampled values
 #
 # If directions and their vector values are already available, use
-# [interpolate](https://mtex-toolbox.github.io/S2VectorFieldHarmonic.interpolate.html). Here the samples come from the same
+# [interpolate](https://mtex-toolbox.github.io/S2VectorFieldHarmonic.interpolate_py.html). Here the samples come from the same
 # function so that the two construction routes can be compared.
 
 # %%
@@ -136,8 +136,8 @@ fieldCross = cross(sVF1, sVF2)
 crossWithZ = cross(sVF1, vector3d(0, 0, 1))
 
 # %% [markdown]
-# [mean](https://mtex-toolbox.github.io/S2VectorFieldHarmonic.mean.html) returns one mean `vector3d`.
-# [norm](https://mtex-toolbox.github.io/S2VectorFieldHarmonic.norm.html) returns the scalar function of pointwise vector
+# [mean](https://mtex-toolbox.github.io/S2VectorFieldHarmonic.mean_py.html) returns one mean `vector3d`.
+# [norm](https://mtex-toolbox.github.io/S2VectorFieldHarmonic.norm_py.html) returns the scalar function of pointwise vector
 # lengths.
 
 # %%
@@ -162,8 +162,8 @@ rotatedField = rotate(sVF1, r)
 # ## Visualizing direction and magnitude
 #
 # Fix the plotting convention so specimen X points right and specimen Y points up. The
-# default [plot](https://mtex-toolbox.github.io/S2VectorField.plot.html) command draws a projected quiver plot;
-# [quiver](https://mtex-toolbox.github.io/S2VectorField.quiver.html) is an alias.
+# default [plot](https://mtex-toolbox.github.io/S2VectorField.plot_py.html) command draws a projected quiver plot;
+# [quiver](https://mtex-toolbox.github.io/S2VectorField.quiver_py.html) is an alias.
 
 # %%
 plottingConvention.default('y↑→x')
@@ -173,7 +173,7 @@ plot(sVF2, upper=True, resolution=15 * degree)
 # Arrows are shortest near specimen Z and lengthen towards the equator. Their length shows
 # the field magnitude, while their arrowhead shows the sense of each vector.
 #
-# [quiver3d](https://mtex-toolbox.github.io/S2VectorField.quiver3.html) attaches the same arrows to a three-dimensional
+# [quiver3d](https://mtex-toolbox.github.io/S2VectorField.quiver3_py.html) attaches the same arrows to a three-dimensional
 # sphere.
 
 # %%

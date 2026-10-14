@@ -10,7 +10,7 @@
 # [Calculating with Rotations](https://mtex-toolbox.github.io/RotationOperations_py.html), and the tangent vectors
 # introduced in [Tangent Spaces](https://mtex-toolbox.github.io/RotationTangentSpace_py.html).
 #
-# MTEX uses a [spinTensor](https://mtex-toolbox.github.io/spinTensor.spinTensor.html) as the matrix form of a tangent
+# MTEX uses a [spinTensor](https://mtex-toolbox.github.io/spinTensor.spinTensor_py.html) as the matrix form of a tangent
 # vector on the rotation group SO(3). MTEX calls its two coordinate representations left
 # and right.
 
@@ -138,7 +138,7 @@ ax.view_init(elev=25, azim=-180)
 # ## Finite Changes with Log and Exp
 #
 # Matrix subtraction is useful only for a small perturbation. For a finite change,
-# [log](https://mtex-toolbox.github.io/quaternion.log.html) returns the exact tangent generator at a reference rotation.
+# [log](https://mtex-toolbox.github.io/quaternion.log_py.html) returns the exact tangent generator at a reference rotation.
 # Here the perturbation angle is one radian. The third argument names the side of the
 # tangent space, and `spinTensor` gives the matrix form.
 
@@ -178,7 +178,7 @@ spinVectorResidual
 # Both zero residuals confirm that spin tensors and rotation vectors are two
 # representations of the same tangent coordinates.
 #
-# [exp](https://mtex-toolbox.github.io/vector3d.exp.html) applies those coordinates, as a vector or as a spin tensor, back
+# [exp](https://mtex-toolbox.github.io/vector3d.exp_py.html) applies those coordinates, as a vector or as a spin tensor, back
 # at the reference rotation. All four reconstructions below should return `rotEnd`.
 
 # %%
@@ -215,7 +215,7 @@ oriEnd = oriRef * crystalIncrement
 
 # %% [markdown]
 # The right tangent is expressed in crystal coordinates. Converting it to
-# [Miller](https://mtex-toolbox.github.io/Miller.html) indices recovers the direction used above.
+# [Miller](https://mtex-toolbox.github.io/Miller_py.html) indices recovers the direction used above.
 
 # %%
 crystalAxis = Miller(log(oriEnd, oriRef, 'right'), oriEnd.CS)
@@ -239,7 +239,7 @@ orientationRoundTripError = angle(oriEnd, oriFromCrystalVector) / degree
 orientationRoundTripError
 
 # %% [markdown]
-# [orientation.log](https://mtex-toolbox.github.io/orientation.log.html) first chooses the shortest symmetry-equivalent
+# [orientation.log](https://mtex-toolbox.github.io/orientation.log_py.html) first chooses the shortest symmetry-equivalent
 # change. This makes the tangent describe the two crystal orientations rather than their
 # stored representatives. Pass `symmetry=False` only when the unreduced rotation
 # representatives are the intended objects.
@@ -271,7 +271,7 @@ orientationRoundTripError
 # ## Next
 #
 # [Tensors](https://mtex-toolbox.github.io/TensorDefinition_py.html) introduces the typed tensors used in the material
-# description, including [velocityGradientTensor](https://mtex-toolbox.github.io/velocityGradientTensor.velocityGradientTensor.html).
+# description, including [velocityGradientTensor](https://mtex-toolbox.github.io/velocityGradientTensor.velocityGradientTensor_py.html).
 # [Taylor Model](https://mtex-toolbox.github.io/TaylorModel_py.html) computes crystallographic spin, and
 # [Texture Evolution](https://mtex-toolbox.github.io/TextureEvolution_py.html) applies those increments to a population of
 # crystal orientations.

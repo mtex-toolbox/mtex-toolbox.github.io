@@ -29,9 +29,9 @@ degrees are needed to represent the resulting ODF.
 and defines its bandwidth.
 
 This page compares kernels for point-centred radial components. Pass an `SO3Kernel`
-object to [unimodalODF](unimodalODF.html), or use its `halfwidth` option to select the
+object to [unimodalODF](unimodalODF_py.html), or use its `halfwidth` option to select the
 default de la Vallee Poussin kernel. A [fibre ODF](FibreODFs_py.html) is different: current
-[fibreODF](fibreODF.html) accepts an `S2Kernel` because its density decays across a
+[fibreODF](fibreODF_py.html) accepts an `S2Kernel` because its density decays across a
 curve rather than from one orientation.
 
 ```python

@@ -97,9 +97,10 @@ represented by a few long chords, and a Laplacian cuts the corners from the poly
 form. A circle with a radius of 15 pixels loses 14% of its area over 25 iterations that
 way, compared with 0.4% when this resampling step is included.
 
-[`refineBoundary`](grain2d.refineBoundary.html) resamples each chain at equal arc length.
-It changes only the sampling, not the polygonal shape. The smoothing stage then receives
-evenly spaced degrees of freedom that are no longer tied to the measurement grid.
+[`refineBoundary`](grain2d.refineBoundary.html) splits each segment into pieces of about
+equal length. It changes only the sampling, not the polygonal shape. The smoothing stage
+then receives evenly spaced degrees of freedom that are no longer tied to the measurement
+grid.
 
 ```python
 grainsRefined = refineBoundary(grainsSimple, d)
@@ -109,7 +110,7 @@ print(f'resampling at {d:.2f} {grains.scanUnit} puts them back: {len(grainsSimpl
 ```
 
 ```text
-resampling at 1.00 um puts them back: 5240 segments to 18453
+resampling at 1.00 um puts them back: 5240 segments to 18424
 ```
 
 ## Step 3: smooth the resampled boundary
@@ -143,7 +144,7 @@ print(f'resampling at {2 * d:.2f} {grains.scanUnit} instead leaves {len(grainsCo
 ```
 
 ```text
-resampling at 2.00 um instead leaves 9358 segments
+resampling at 2.00 um instead leaves 10085 segments
 ```
 
 ## What preprocessing changes
@@ -208,8 +209,8 @@ print(f'  25 iterations {100 * np.mean((aL25 - A0) / A0):+6.2f}% on average, {10
 
 ```text
 grain area, laplaceFilter
-   5 iterations  -0.67% on average,  -17.2% for the worst grain
-  25 iterations  -2.44% on average,  -61.5% for the worst grain
+   5 iterations  -0.69% on average,  -17.3% for the worst grain
+  25 iterations  -2.49% on average,  -61.5% for the worst grain
 ```
 
 ## The Taubin filter
@@ -230,8 +231,8 @@ print(f'  25 iterations {100 * np.mean((aT25 - A0) / A0):+6.2f}% on average, {10
 
 ```text
 grain area, taubinFilter
-   5 iterations  -0.04% on average,   -2.5% for the worst grain
-  25 iterations  -0.08% on average,   -6.9% for the worst grain
+   5 iterations  -0.05% on average,   -2.6% for the worst grain
+  25 iterations  -0.10% on average,   -6.6% for the worst grain
 ```
 
 On this small grain, the Laplace result in magenta cuts inside the measured staircase.
@@ -271,7 +272,7 @@ print(f'  {100 * np.mean((aC - A0) / A0):+6.2f}% on average, {100 * np.min((aC -
 
 ```text
 grain area, curvatureFilter at a smoothing length of 8.0 um
-   -0.26% on average,  -19.8% for the worst grain
+   -0.29% on average,  -17.3% for the worst grain
 ```
 
 ## The Huber filter
@@ -307,7 +308,7 @@ print(f'  {100 * np.mean((aH - A0) / A0):+6.2f}% on average, {100 * np.min((aH -
 
 ```text
 grain area, huberFilter at the same smoothing length
-   -0.15% on average,   -7.5% for the worst grain
+   -0.16% on average,   -5.9% for the worst grain
 ```
 
 A synthetic Voronoi map provides a case whose boundaries are exactly straight. On that

@@ -72,7 +72,7 @@ boundaryFitQuantiles = np.nanquantile(boundaryFit / degree, [0.2, 0.4, 0.6, 0.8]
 boundaryFitQuantiles
 
 # %% [markdown]
-# [`calcParent2Child`](https://mtex-toolbox.github.io/calcParent2Child.html) assumes that most retained pairs are
+# [`calcParent2Child`](https://mtex-toolbox.github.io/calcParent2Child_py.html) assumes that most retained pairs are
 # child-to-child boundaries. It adjusts the OR to reduce their mismatch from theoretical
 # child-to-child misorientations. The fitted OR is 3.132 degrees from KS. Its 20th, 40th,
 # 60th, and 80th fit percentiles are 1.483, 2.018, 2.613, and 4.207 degrees.
@@ -89,7 +89,7 @@ plt.ylabel('grain-pair count')
 #
 # ## Map the boundary evidence
 #
-# [`selectByGrainId`](https://mtex-toolbox.github.io/grainBoundary.selectByGrainId.html) maps each retained grain pair to all
+# [`selectByGrainId`](https://mtex-toolbox.github.io/grainBoundary.selectByGrainId_py.html) maps each retained grain pair to all
 # of its boundary segments.
 
 # %%
@@ -149,7 +149,7 @@ boundaryA = coo_matrix((boundaryProbability, (grainPairs[:, 0] - 1, grainPairs[:
 #
 # ## Cluster the boundary graph
 #
-# [`mclComponents`](https://mtex-toolbox.github.io/mclComponents.html) applies Markov clustering to the similarity matrix.
+# [`mclComponents`](https://mtex-toolbox.github.io/mclComponents_py.html) applies Markov clustering to the similarity matrix.
 # The inflation power controls cluster granularity. Larger values separate the graph more
 # aggressively.
 
@@ -158,7 +158,7 @@ boundaryInflationPower = 1.6
 boundaryA = mclComponents(boundaryA, boundaryInflationPower)
 
 # %% [markdown]
-# Each resulting component is a candidate parent footprint. [`merge`](https://mtex-toolbox.github.io/grain2d.merge.html)
+# Each resulting component is a candidate parent footprint. [`merge`](https://mtex-toolbox.github.io/grain2d.merge_py.html)
 # removes boundaries within a component; `grains.parentId` is the component of every grain.
 
 # %%
@@ -190,7 +190,7 @@ hold(False)
 #
 # ## Fit an austenite orientation to every component
 #
-# [`calcParent`](https://mtex-toolbox.github.io/calcParent.html) fits one common parent orientation to all martensite grains
+# [`calcParent`](https://mtex-toolbox.github.io/calcParent_py.html) fits one common parent orientation to all martensite grains
 # in a component. Pixel counts weight larger child grains more strongly. Components with fewer
 # than two child grains are left unassigned, and fits of 5 degrees or more are rejected.
 
@@ -245,7 +245,7 @@ plot(boundaryParentGrains['Iron fcc'], boundaryParentGrains['Iron fcc'].meanOrie
 # ## Classify child variants and packets
 #
 # [Parent Austenite Reconstruction](https://mtex-toolbox.github.io/MaParentGrainReconstruction_py.html) defines variants and
-# packets. Here [`calcVariantId`](https://mtex-toolbox.github.io/calcVariantId.html) classifies each child against its
+# packets. Here [`calcVariantId`](https://mtex-toolbox.github.io/calcVariantId_py.html) classifies each child against its
 # component orientation. For this OR, `packetId` selects the parent {111} plane closest to
 # martensite (011).
 

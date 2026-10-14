@@ -66,7 +66,7 @@ lineSec = np.array([[18826, 6438], [18089, 10599]])
 plt.plot(lineSec[:, 0], lineSec[:, 1], linewidth=2)
 
 # %% [markdown]
-# [spatialProfile](https://mtex-toolbox.github.io/EBSD.spatialProfile.html) returns the measurements near the segment
+# [spatialProfile](https://mtex-toolbox.github.io/EBSD.spatialProfile_py.html) returns the measurements near the segment
 # in traversal order. Its second output is their projected distance from the first
 # endpoint. The object summary shows that this profile contains 86 measurements.
 

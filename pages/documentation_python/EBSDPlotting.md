@@ -36,7 +36,7 @@ ebsd = mtexdata('forsterite')
 
 ## Phase maps
 
-Calling [plot](EBSD.plot.html) without a second argument colours the map by phase. This
+Calling [plot](EBSD.plot_py.html) without a second argument colours the map by phase. This
 is the quickest way to see what is in the specimen and where.
 
 ```python
@@ -63,7 +63,7 @@ ebsd['Diopside'].color
 array([0.8549, 0.6471, 0.1255])
 ```
 
-Any RGB triplet can replace it. The function [str2rgb](str2rgb.html) saves you looking
+Any RGB triplet can replace it. The function [str2rgb](str2rgb_py.html) saves you looking
 one up because it turns a colour name into the triplet.
 
 ```python

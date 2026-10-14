@@ -64,7 +64,7 @@ m = np.cos(angle(r, sS.n, symmetry=False)) * np.cos(angle(r, sS.b, symmetry=Fals
 m
 
 # %% [markdown]
-# The [`SchmidFactor`](https://mtex-toolbox.github.io/slipSystem.SchmidFactor.html) method performs the same
+# The [`SchmidFactor`](https://mtex-toolbox.github.io/slipSystem.SchmidFactor_py.html) method performs the same
 # calculation. Both routes give $m=-0.4082$ for this signed system.
 
 # %%

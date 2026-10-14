@@ -82,7 +82,7 @@ hold(False)
 # $$ \mathtt{ori} * h = r. $$
 #
 # The endpoint constructor has already computed these directions. They are available as
-# the `h` and `r` properties of [fibre](https://mtex-toolbox.github.io/fibre.fibre.html).
+# the `h` and `r` properties of [fibre](https://mtex-toolbox.github.io/fibre.fibre_py.html).
 
 # %%
 h = f.h
@@ -158,7 +158,7 @@ plt.gca().set_axis_off()
 # %% [markdown]
 # ## Sampling a Fibre
 #
-# [orientation](https://mtex-toolbox.github.io/fibre.orientation.html) discretises a fibre for plotting or numerical
+# [orientation](https://mtex-toolbox.github.io/fibre.orientation_py.html) discretises a fibre for plotting or numerical
 # calculations. Specify the number of samples when it matters.
 
 # %%
@@ -193,7 +193,7 @@ hold(False)
 # %% [markdown]
 # ## Where Fibres Reappear in MTEX
 #
-# [angle](https://mtex-toolbox.github.io/fibre.angle.html) measures the distance from an orientation to a fibre.
+# [angle](https://mtex-toolbox.github.io/fibre.angle_py.html) measures the distance from an orientation to a fibre.
 # [Fibres of Orientations](https://mtex-toolbox.github.io/OrientationFibre_py.html) develops pole-figure and
 # inverse-pole-figure plots, symmetrisation, and named rolling-texture fibres.
 # [Fibre ODFs](https://mtex-toolbox.github.io/FibreODFs_py.html) spreads a density around a fibre.

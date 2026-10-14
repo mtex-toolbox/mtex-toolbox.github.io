@@ -23,7 +23,7 @@ This page assumes the active rotations introduced in
 [Calculating with Rotations](RotationOperations_py.html), and the tangent vectors
 introduced in [Tangent Spaces](RotationTangentSpace_py.html).
 
-MTEX uses a [spinTensor](spinTensor.spinTensor.html) as the matrix form of a tangent
+MTEX uses a [spinTensor](spinTensor.spinTensor_py.html) as the matrix form of a tangent
 vector on the rotation group SO(3). MTEX calls its two coordinate representations left
 and right.
 
@@ -184,7 +184,7 @@ physical meaning come from the quantity used to construct it.
 ## Finite Changes with Log and Exp
 
 Matrix subtraction is useful only for a small perturbation. For a finite change,
-[log](quaternion.log.html) returns the exact tangent generator at a reference rotation.
+[log](quaternion.log_py.html) returns the exact tangent generator at a reference rotation.
 Here the perturbation angle is one radian. The third argument names the side of the
 tangent space, and `spinTensor` gives the matrix form.
 
@@ -246,7 +246,7 @@ array([0., 0.])
 Both zero residuals confirm that spin tensors and rotation vectors are two
 representations of the same tangent coordinates.
 
-[exp](vector3d.exp.html) applies those coordinates, as a vector or as a spin tensor, back
+[exp](vector3d.exp_py.html) applies those coordinates, as a vector or as a spin tensor, back
 at the reference rotation. All four reconstructions below should return `rotEnd`.
 
 ```python
@@ -287,7 +287,7 @@ oriEnd = oriRef * crystalIncrement
 ```
 
 The right tangent is expressed in crystal coordinates. Converting it to
-Miller indices recovers the direction used above.
+[Miller](Miller_py.html) indices recovers the direction used above.
 
 ```python
 crystalAxis = Miller(log(oriEnd, oriRef, 'right'), oriEnd.CS)
@@ -328,7 +328,7 @@ orientationRoundTripError
 1.9083e-14
 ```
 
-[orientation.log](orientation.log.html) first chooses the shortest symmetry-equivalent
+[orientation.log](orientation.log_py.html) first chooses the shortest symmetry-equivalent
 change. This makes the tangent describe the two crystal orientations rather than their
 stored representatives. Pass `symmetry=False` only when the unreduced rotation
 representatives are the intended objects.
@@ -357,7 +357,7 @@ rotation; only the coordinate frame changes.
 ## Next
 
 [Tensors](TensorDefinition_py.html) introduces the typed tensors used in the material
-description, including [velocityGradientTensor](velocityGradientTensor.velocityGradientTensor.html).
+description, including [velocityGradientTensor](velocityGradientTensor.velocityGradientTensor_py.html).
 [Taylor Model](TaylorModel_py.html) computes crystallographic spin, and
 [Texture Evolution](TextureEvolution_py.html) applies those increments to a population of
 crystal orientations.

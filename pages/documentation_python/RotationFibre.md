@@ -106,7 +106,7 @@ orientation `ori` on the full fibre satisfies
 $$ \mathtt{ori} * h = r. $$
 
 The endpoint constructor has already computed these directions. They are available as
-the `h` and `r` properties of [fibre](fibre.fibre.html).
+the `h` and `r` properties of [fibre](fibre.fibre_py.html).
 
 ```python
 h = f.h
@@ -209,7 +209,7 @@ closed fibre in rotation space.
 
 ## Sampling a Fibre
 
-[orientation](fibre.orientation.html) discretises a fibre for plotting or numerical
+[orientation](fibre.orientation_py.html) discretises a fibre for plotting or numerical
 calculations. Specify the number of samples when it matters.
 
 ```python
@@ -249,7 +249,7 @@ one subarc of this circle.
 
 ## Where Fibres Reappear in MTEX
 
-[angle](fibre.angle.html) measures the distance from an orientation to a fibre.
+[angle](fibre.angle_py.html) measures the distance from an orientation to a fibre.
 [Fibres of Orientations](OrientationFibre_py.html) develops pole-figure and
 inverse-pole-figure plots, symmetrisation, and named rolling-texture fibres.
 [Fibre ODFs](FibreODFs_py.html) spreads a density around a fibre.

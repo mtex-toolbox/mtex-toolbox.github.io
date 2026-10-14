@@ -43,7 +43,7 @@ r = ori * h
 r
 
 # %% [markdown]
-# [rotate](https://mtex-toolbox.github.io/vector3d.rotate.html) performs the same operation. The zero angular residual
+# [rotate](https://mtex-toolbox.github.io/vector3d.rotate_py.html) performs the same operation. The zero angular residual
 # confirms that the two forms agree.
 
 # %%

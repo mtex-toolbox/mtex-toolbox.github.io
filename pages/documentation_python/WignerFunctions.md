@@ -18,7 +18,7 @@ Wigner-D functions play the role of sine and cosine waves for rotations. Weighte
 them can represent any square-integrable function on the rotation group $$\mathrm{SO}(3)$$.
 
 Each function has a non-negative *degree* $$n$$ and two *orders* $$k$$ and $$l$$, both between
-$$-n$$ and $$n$$. The command [WignerD](WignerD.html) evaluates a complete matrix of orders at
+$$-n$$ and $$n$$. The command [WignerD](WignerD_py.html) evaluates a complete matrix of orders at
 once.
 
 ## Evaluate one degree

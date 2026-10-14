@@ -107,7 +107,7 @@ nu = 0.3
 dS.u = (dS.b.norm() / dS.b.norm().min()) ** 2 * (1 - nu * dS.isScrew)
 
 # %% [markdown]
-# [`calcGND`](https://mtex-toolbox.github.io/EBSD.calcGND.html) returns an energy-weighted GND density for
+# [`calcGND`](https://mtex-toolbox.github.io/EBSD.calcGND_py.html) returns an energy-weighted GND density for
 # each pixel and the signed density assigned to each candidate system.
 # The first output is often called the total dislocation energy. With the
 # dimensionless weights above, it is an energy-weighted density rather than
@@ -191,7 +191,7 @@ setColorRange([-0.005, 0.005])
 # $$ \boldsymbol\alpha = \boldsymbol\kappa^{T}
 #    - \mathrm{tr}(\boldsymbol\kappa)\,\mathbf I. $$
 #
-# The method [`dislocationDensity`](https://mtex-toolbox.github.io/curvatureTensor.dislocationDensity.html)
+# The method [`dislocationDensity`](https://mtex-toolbox.github.io/curvatureTensor.dislocationDensity_py.html)
 # applies this relation.
 
 # %%
@@ -227,7 +227,7 @@ dS[0].tensor()
 # %% [markdown]
 # ## Fit individual system densities
 #
-# [`fitDislocationSystems`](https://mtex-toolbox.github.io/curvatureTensor.fitDislocationSystems.html)
+# [`fitDislocationSystems`](https://mtex-toolbox.github.io/curvatureTensor.fitDislocationSystems_py.html)
 # solves a linear program at every pixel. It reproduces the six measured
 # curvature components while minimizing
 # $\sum_j u_j\lvert\rho_j\rvert$ over the candidate systems.

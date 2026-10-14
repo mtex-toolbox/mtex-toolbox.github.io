@@ -37,7 +37,7 @@ plottingConvention.default('y↑→x')
 ## The Lattice and Its Crystal Frame
 
 Miller indices have meaning only together with the lattice they refer to. A
-[crystalFrame](crystalFrame.crystalFrame.html) stores the point symmetry, lattice metric
+[crystalFrame](crystalFrame.crystalFrame_py.html) stores the point symmetry, lattice metric
 and crystal frame of a phase.
 
 A reference frame is the coordinate system in which data are expressed. The crystal
@@ -87,7 +87,7 @@ A direct-lattice vector is an integer combination of the lattice axes,
 
 $$\vec m=u\vec a+v\vec b+w\vec c.$$
 
-Its direction is written $$[uvw]$$. In MTEX it is represented by a Miller
+Its direction is written $$[uvw]$$. In MTEX it is represented by a [Miller](Miller_py.html)
 with display style `'uvw'`.
 
 ```python
@@ -114,7 +114,7 @@ annotate(directAxes, label=['a', 'b', 'c'], backgroundColor='w', textAboveMarker
 The marker is the direction of $$\vec a+\vec c$$. The labelled axes show how its position
 must be read in this non-orthogonal lattice.
 
-A [plotting convention](plottingConvention.html) controls how a reference frame is laid
+A [plotting convention](plottingConvention_py.html) controls how a reference frame is laid
 out on screen. Changing it does not rotate the direction or alter its indices.
 
 ```python
@@ -261,7 +261,7 @@ vector3d (Quartz)
   1.6667  1.3333  0.3333
 ```
 
-[round](vector3d.round.html) rescales the same direction to an equivalent small integer
+[round](vector3d.round_py.html) rescales the same direction to an equivalent small integer
 triplet.
 
 ```python
@@ -294,7 +294,7 @@ vector3d (Quartz)
 ```
 
 Internally, each `Miller` stores Cartesian components like a
-[vector3d](vector3d.vector3d.html). Its crystal frame and `dispStyle` retain how those
+[vector3d](vector3d.vector3d_py.html). Its crystal frame and `dispStyle` retain how those
 components should be interpreted and displayed. A direct vector stays direct when
 switching from `UVTW` to `uvw`, and a reciprocal normal stays reciprocal when switching
 from `hkil` to `hkl`.

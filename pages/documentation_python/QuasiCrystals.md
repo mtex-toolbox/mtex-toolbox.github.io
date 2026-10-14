@@ -125,7 +125,7 @@ axis-angle coordinate grid drawn on its faces.
 
 ## Build an Inverse Pole Figure Colour Key
 
-An [ipfHSVKey](ipfHSVKey.html) assigns a colour to each direction in the fundamental
+An [ipfHSVKey](ipfHSVKey_py.html) assigns a colour to each direction in the fundamental
 sector. For an EBSD orientation, the key first expresses its chosen specimen direction
 in the crystal frame and then colours the resulting crystal direction.
 
@@ -186,7 +186,7 @@ surrounding threefold and twofold axes have rotated with it.
 ## Add Inversion
 
 Many commonly studied icosahedral quasicrystals are centrosymmetric. Adding
-[rotation.inversion](rotation.inversion.html) combines every proper rotation with
+[rotation.inversion](rotation.inversion_py.html) combines every proper rotation with
 inversion.
 
 ```python

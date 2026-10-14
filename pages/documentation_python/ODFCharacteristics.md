@@ -63,7 +63,7 @@ odfMeasured = mtexdata('dubnaODF')
 ## The Modal Orientation
 
 A *mode* is a local maximum of the ODF. Its value is a density in mrd, not a percentage
-of material. [max](SO3Fun.max.html) returns the global maximum and the orientation
+of material. [max](SO3Fun.max_py.html) returns the global maximum and the orientation
 where it is attained.
 
 ```python
@@ -106,7 +106,7 @@ along fibres, so its maximum need not be the projection of the ODF maximum.
 Peak values are especially sensitive to the halfwidth and resolution used to estimate
 an ODF. Compare them only when those choices are comparable.
 [Density Estimation](DensityEstimation_py.html) explains the halfwidth choice.
-[max(odf, numLocal=n)](SO3Fun.max.html) returns several local modes;
+[max(odf, numLocal=n)](SO3Fun.max_py.html) returns several local modes;
 [Component Analysis](ODFComponents_py.html) explains how to interpret them.
 
 ## Texture Index
@@ -179,7 +179,7 @@ both values change when smoothing changes; report the ODF estimation choices wit
 
 A volume fraction asks a more local question: what fraction of the material lies within
 a chosen disorientation angle of an orientation or a fibre?
-[volume](SO3Fun.volume.html) integrates the normalized ODF over either region.
+[volume](SO3Fun.volume_py.html) integrates the normalized ODF over either region.
 
 ```python
 preferredVolumePercent = 100 * volume(odfMeasured, preferredOrientation, 30 * degree)

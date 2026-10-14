@@ -97,7 +97,7 @@ Without density, stiffness alone does not determine a velocity in km/s.
 
 The propagation direction $$n$$ is normal to the moving wavefront.
 The polarisation direction gives the particle vibration.
-[velocity](stiffnessTensor.velocity.html) returns all three speeds and
+[velocity](stiffnessTensor.velocity_py.html) returns all three speeds and
 all three polarisations at once.
 
 ```python
@@ -381,8 +381,8 @@ the same directions as either speed alone.
 ## Compare with an isotropic aggregate
 
 Average randomly oriented olivine crystals with a
-[uniform ODF](uniformODF.html).
-[mean](tensor.mean.html) gives the Voigt average.
+[uniform ODF](uniformODF_py.html).
+[mean](tensor.mean_py.html) gives the Voigt average.
 [Isotropic Theory](IsotropicTheory_py.html) defines the Voigt, Reuss, and Hill
 alternatives and explains why the exact aggregate stiffness is bounded.
 
@@ -484,7 +484,7 @@ Phase velocity describes how fast a wavefront moves along its normal $$n$$.
 
 Energy travels along the energy velocity vector $$V_e$$.
 In a lossless medium this is a good proxy for group velocity.
-[energyVector](stiffnessTensor.energyVector.html) computes it from the
+[energyVector](stiffnessTensor.energyVector_py.html) computes it from the
 stiffness, propagation direction, phase speed, and polarisation.
 
 ```python
@@ -618,7 +618,7 @@ The slowness panel is longest where that same wave is slowest.
 
 ## Use the overview plot
 
-[plotSeismicVelocities](stiffnessTensor.plotSeismicVelocities.html)
+[plotSeismicVelocities](stiffnessTensor.plotSeismicVelocities_py.html)
 collects the main velocity, anisotropy, ratio, and polarisation maps.
 
 ```python
@@ -647,7 +647,7 @@ The result is the Christoffel equation
 $$C_{ijkl}n_jn_l\,p_k=\rho v^2p_i.$$
 
 The rank-two tensor $$T_{ik}(n)=C_{ijkl}n_jn_l$$ is the Christoffel tensor.
-[ChristoffelTensor](stiffnessTensor.ChristoffelTensor.html) computes it
+[ChristoffelTensor](stiffnessTensor.ChristoffelTensor_py.html) computes it
 for a chosen propagation direction.
 
 ```python

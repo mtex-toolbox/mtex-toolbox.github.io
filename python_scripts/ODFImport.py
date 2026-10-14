@@ -22,7 +22,7 @@
 # * a generic text table containing Euler angles and values or weights.
 #
 # The MTEX ASCII description is intended to preserve supported components. In the
-# current source tree, however, [SO3Fun.load](https://mtex-toolbox.github.io/SO3Fun.load.html) has loaders only for
+# current source tree, however, [SO3Fun.load](https://mtex-toolbox.github.io/SO3Fun.load_py.html) has loaders only for
 # generic and VPSC ODF files. There is no matching reader of the MTEX component file.
 # Use `pickle` when an exact round trip matters.
 #

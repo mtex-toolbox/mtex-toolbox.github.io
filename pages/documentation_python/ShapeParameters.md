@@ -112,7 +112,7 @@ grains[8].area
 ```
 
 ```text
-array([23741.0496])
+array([23777.982])
 ```
 
 `numPixel` is a count, while `area` is in the square of the map unit. They are
@@ -166,7 +166,7 @@ largestForsteriteArea
 ```
 
 ```text
-2.8049e+06
+2.8045e+06
 ```
 
 ```python
@@ -175,7 +175,7 @@ largestForsteriteFraction
 ```
 
 ```text
-0.1531
+0.1530
 ```
 
 The largest forsterite section covers 2.805 mm² and accounts for 15.31 percent of the
@@ -192,7 +192,7 @@ grains[8].boundarySize
 ```
 
 ```text
-array([17], dtype=int32)
+array([16], dtype=int32)
 ```
 
 ```python
@@ -200,7 +200,7 @@ grains[8].perimeter
 ```
 
 ```text
-array([741.3723])
+array([743.5364])
 ```
 
 Both are shortcuts for asking the grain boundary itself, which is a list of segments
@@ -211,7 +211,7 @@ len(grains[8].boundary)
 ```
 
 ```text
-17
+16
 ```
 
 ```python
@@ -219,7 +219,7 @@ np.sum(grains[8].boundary.segLength)
 ```
 
 ```text
-741.3723
+743.5364
 ```
 
 The two pairs react differently to processing. `numPixel` remains tied to the
@@ -250,7 +250,7 @@ perimeter than the circle, and no grain of that area has a smaller maximum diame
 ```
 
 ```text
-array([173.8621])
+array([173.9973])
 ```
 
 ```python
@@ -258,7 +258,7 @@ grains[8].equivalentPerimeter
 ```
 
 ```text
-array([546.204])
+array([546.6287])
 ```
 
 ## Departure from a circle
@@ -312,7 +312,7 @@ parisSummary
 ```
 
 ```text
-array([ 2.7659, 43.0223])
+array([ 3.0481, 44.549 ])
 ```
 
 ```python
@@ -321,7 +321,7 @@ shapeParisCorrelation
 ```
 
 ```text
-0.4773
+0.4998
 ```
 
 ```python
@@ -408,7 +408,7 @@ fractalDimension
 ```
 
 ```text
-1.0152
+1.0258
 ```
 
 Treat the estimate with care. Pixel spacing sets the smallest visible feature, small
@@ -426,8 +426,8 @@ for iter in [0, 5, 25]:
 
 ```text
  0 smoothing iterations: fractal dimension 1.131
- 5 smoothing iterations: fractal dimension 1.015
-25 smoothing iterations: fractal dimension 0.965
+ 5 smoothing iterations: fractal dimension 1.026
+25 smoothing iterations: fractal dimension 0.968
 ```
 
 The pixel staircase gives 1.128 because grid corners add artificial length. Five

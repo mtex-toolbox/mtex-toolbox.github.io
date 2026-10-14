@@ -23,11 +23,11 @@ MTEX computes triple points automatically during
 [grain reconstruction](GrainReconstruction_py.html). They are available from a grain list
 through `grains.triplePoints`, just as the boundary segments are available through
 [grains.boundary](GrainBoundaries.html). The result is a
-[triplePointList](triplePointList.triplePointList.html).
+[triplePointList](triplePointList.triplePointList_py.html).
 
 A square measurement grid can also produce vertices where four boundary segments meet.
 When analysing triple points, it is a good idea to pass `removeQuadruplePoints` to
-[calcGrains](EBSD.calcGrains.html). This converts each ambiguous quadruple point into
+[calcGrains](EBSD.calcGrains_py.html). This converts each ambiguous quadruple point into
 two triple points. [Quadruple Points](QuadruplePoints_py.html) explains the resulting
 topology.
 
@@ -170,9 +170,9 @@ gB_Fo
 
 ```text
 grainBoundary (y↑→x)
-  size: 217 segments, 36 chains
+  size: 223 segments, 36 chains
   segments    length   mineral 1   mineral 2
-       217  10014 µm  Forsterite  Forsterite
+       223  10149 µm  Forsterite  Forsterite
 ```
 
 ---
@@ -187,7 +187,7 @@ gB_large
 grainBoundary (y↑→x)
   size: 46 segments, 15 chains
   segments   length   mineral 1   mineral 2
-        46  2103 µm  Forsterite  Forsterite
+        46  2082 µm  Forsterite  Forsterite
 ```
 
 ---

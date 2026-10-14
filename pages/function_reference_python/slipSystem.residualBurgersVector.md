@@ -1,0 +1,26 @@
+---
+title: 'slipSystem.residualBurgersVector'
+sidebar: function_reference_sidebar
+permalink: slipSystem.residualBurgersVector_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+counterpart: slipSystem.residualBurgersVector.html
+status: Reference
+---
+{% raw %}
+A method of [slipSystem](slipSystem_index_py.html).
+
+the length of the difference of the Burgers vectors of paired systems, entry by entry
+
+## Syntax
+
+```python
+slipSystem.residualBurgersVector(self, other)
+```
+
+MATLAB's [slipSystem.residualBurgersVector](slipSystem.residualBurgersVector.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L203">source</a></font>
+{% endraw %}

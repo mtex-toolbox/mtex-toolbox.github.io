@@ -61,7 +61,7 @@ nodes = nodes.flatten()
 sampleValues = np.stack([S2Fun.smiley(nodes), nodes.x * nodes.y], axis=-1)
 
 # %% [markdown]
-# [interpolate](https://mtex-toolbox.github.io/S2FunHarmonic.interpolate.html) takes the component dimensions after the node
+# [interpolate](https://mtex-toolbox.github.io/S2FunHarmonic.interpolate_py.html) takes the component dimensions after the node
 # dimension. The resulting `sF1` has shape `(2,)`.
 
 # %%
@@ -106,7 +106,7 @@ handleArraySize
 # ## Construct from harmonic coefficients
 #
 # If the coefficients are already known, pass them directly to the
-# [S2FunHarmonic](https://mtex-toolbox.github.io/S2FunHarmonic.S2FunHarmonic.html) constructor. The last dimension of
+# [S2FunHarmonic](https://mtex-toolbox.github.io/S2FunHarmonic.S2FunHarmonic_py.html) constructor. The last dimension of
 # `fhat` holds the coefficients of one scalar function. Component-array dimensions come
 # before it.
 #

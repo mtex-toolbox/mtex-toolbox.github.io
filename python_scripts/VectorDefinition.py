@@ -1,7 +1,7 @@
 # %% [markdown]
 # # Defining Three-Dimensional Vectors
 #
-# A [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html) stores one or more vectors through their Cartesian
+# A [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html) stores one or more vectors through their Cartesian
 # components $x$, $y$ and $z$. A reference frame identifies the coordinate system in which
 # data are expressed. It includes an identity, basis and default plotting convention. The
 # components are coordinates in that frame.
@@ -42,14 +42,14 @@ plot(v, grid=True, upper=True)
 # positive number would not move this point. [Spherical Projections](https://mtex-toolbox.github.io/SphericalProjections_py.html)
 # explains how the sphere is mapped onto the page.
 #
-# The [norm](https://mtex-toolbox.github.io/vector3d.norm.html) is the stored vector's length.
+# The [norm](https://mtex-toolbox.github.io/vector3d.norm_py.html) is the stored vector's length.
 
 # %%
 norm(v)
 
 # %% [markdown]
 # For $(1,2,3)$ the result is $\sqrt{14}$, displayed here as 3.7417.
-# [normalize](https://mtex-toolbox.github.io/vector3d.normalize.html) divides each component by that length, so the
+# [normalize](https://mtex-toolbox.github.io/vector3d.normalize_py.html) divides each component by that length, so the
 # result has length one without changing direction.
 
 # %%
@@ -86,7 +86,7 @@ v
 #
 # A direction can also be described by two angles. The *polar angle* $\theta$ is measured
 # away from the Z axis. The *azimuth angle* $\rho$ is measured in the XY plane away from
-# the X axis. [vector3d.byPolar](https://mtex-toolbox.github.io/vector3d.byPolar.html) takes the angles in that order and
+# the X axis. [vector3d.byPolar](https://mtex-toolbox.github.io/vector3d.byPolar_py.html) takes the angles in that order and
 # returns a unit vector.
 
 # %%
@@ -170,7 +170,7 @@ v
 # matters. The constructor also accepts coordinate matrices and reads them by rows as well,
 # one vector per row of three components.
 #
-# [vector3d.rand](https://mtex-toolbox.github.io/vector3d.rand.html) creates uniformly distributed random unit
+# [vector3d.rand](https://mtex-toolbox.github.io/vector3d.rand_py.html) creates uniformly distributed random unit
 # directions. The following call creates 100 directions. Its long object summary is not
 # useful here, so the assignment keeps it out of the page.
 
@@ -187,7 +187,7 @@ plot(v, upper=True, grid=True, markerSize=4)
 # %% [markdown]
 # ## Plotting Conventions
 #
-# A [plotting convention](https://mtex-toolbox.github.io/plottingConvention.html) states how a reference frame is laid
+# A [plotting convention](https://mtex-toolbox.github.io/plottingConvention_py.html) states how a reference frame is laid
 # out on screen. It does not change the vector or re-express it in another frame. Pass
 # `how2plot` to change one plot.
 

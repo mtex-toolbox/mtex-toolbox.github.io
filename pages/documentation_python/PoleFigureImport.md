@@ -20,7 +20,7 @@ whose diffraction peak was measured. Importing is therefore more than reading a 
 table. The crystal symmetry, Miller indices and angular units have to be stated
 correctly. So does the specimen frame, before an ODF can be reconstructed.
 
-MTEX stores the result in a [PoleFigure](PoleFigure.PoleFigure.html) object. Its entries
+MTEX stores the result in a [PoleFigure](PoleFigure.PoleFigure_py.html) object. Its entries
 are one or more measured pole figures, not pixels or individual orientations. The
 imported values are diffraction intensities. They are not yet normalized pole densities
 in multiples of a random distribution (mrd).
@@ -88,7 +88,7 @@ and therefore weight 1.
 c = [1, [0.52, 1.23]]
 ```
 
-[PoleFigure.load](PoleFigure.load.html) detects the file format and joins the files,
+[PoleFigure.load](PoleFigure.load_py.html) detects the file format and joins the files,
 reflections and weights into one object.
 
 ```python
@@ -174,7 +174,7 @@ and measured phase.
 ## Generic text files
 
 When no dedicated reader matches, MTEX falls back to the
-[generic ASCII reader](loadPoleFigure_generic.html). A common file is one row per
+[generic ASCII reader](loadPoleFigure_generic_py.html). A common file is one row per
 measurement,
 
     polar_angle  azimuth_angle  intensity
@@ -201,7 +201,7 @@ they cover Dubna, Siemens, Geesthacht, Bruker and Aachen data and any three colu
 table; the PopLA, LaboTEX, BearTex, Philips, Rigaku, Juelich and PANalytical readers of
 MATLAB MTEX are not ported yet.
 
-[PoleFigure.load](PoleFigure.load.html) tries the installed `loadPoleFigure_*` readers
+[PoleFigure.load](PoleFigure.load_py.html) tries the installed `loadPoleFigure_*` readers
 and then the generic reader. Its reference page is version-specific. So are the reader
 functions in `mtex/io/loadpolefigure.py`.
 
@@ -210,9 +210,9 @@ returns a `PoleFigure` object. Register it in the loader table of that module an
 
     pf = PoleFigure.load(fname, ..., interface='name')
 
-during development. The [Dubna reader](loadPoleFigure_dubna.html) in
+during development. The [Dubna reader](loadPoleFigure_dubna_py.html) in
 `mtex/io/loadpolefigure.py` is a compact format-specific template, the
-[generic reader](loadPoleFigure_generic.html) beside it the corresponding generic
+[generic reader](loadPoleFigure_generic_py.html) beside it the corresponding generic
 template.
 
 ## Before reconstructing an ODF

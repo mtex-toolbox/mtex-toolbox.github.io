@@ -54,7 +54,7 @@ A single segmentation threshold has to choose between grain scale and subgrain s
 10 degrees the low-angle walls are missed. At 1 degree the same walls divide the map
 into many separate grains.
 
-[calcGrains](EBSD.calcGrains.html) accepts both thresholds at once. The first value
+[calcGrains](EBSD.calcGrains_py.html) accepts both thresholds at once. The first value
 separates grains, while the second records boundaries whose two pixels remain in the
 same grain as `innerBoundary`.
 
@@ -90,7 +90,7 @@ print(f'{len(grains.boundary):>23d}{len(grains.innerBoundary):>23d}{len(subGB):>
 
 ```text
   grainBoundarySegments  innerBoundarySegments  strictLowAngleSegments  innerSegmentsAboveHighAngle
-                  15724                  31027                   30565                          462
+                  16167                  31928                   31454                          474
 ```
 
 ## Draw the subgrain-boundary network
@@ -131,7 +131,7 @@ also be noise.
 
 ## Normalize the amount within each grain
 
-[subBoundarySize](grain2d.subBoundarySize.html) counts inner-boundary segments belonging
+[subBoundarySize](grain2d.subBoundarySize_py.html) counts inner-boundary segments belonging
 to each grain. Its optional logical selection keeps only the strict low-angle
 population. Dividing by the number of pixels removes most of the effect of grain size
 within this one map.
@@ -148,8 +148,8 @@ Grains crossed by many blue walls have the largest segment-per-pixel values. Thi
 is useful within one regular grid, but it changes with pixel spacing and should not be
 compared between acquisitions.
 
-The physical-unit alternative uses [subBoundaryLength](grain2d.subBoundaryLength.html).
-Dividing the selected length by [area](grain2d.area.html) gives boundary length per
+The physical-unit alternative uses [subBoundaryLength](grain2d.subBoundaryLength_py.html).
+Dividing the selected length by [area](grain2d.area_py.html) gives boundary length per
 area, here in inverse micrometres.
 
 ```python
@@ -217,7 +217,7 @@ hold(False)
 ```
 
 ```text
-Segments in components above 50: 28.8% of the strict low-angle set; 30.3% of all inner boundaries
+Segments in components above 50: 29.1% of the strict low-angle set; 30.8% of all inner boundaries
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SubGrainBoundaries-9.png"></center>

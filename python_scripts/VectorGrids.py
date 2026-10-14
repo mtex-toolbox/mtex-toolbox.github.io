@@ -28,9 +28,9 @@ plottingConvention.default('y↑→x')
 # %% [markdown]
 # ## Four Constructions
 #
-# MTEX offers the [regularS2Grid](https://mtex-toolbox.github.io/regularS2Grid.html) and the
-# [equispacedS2Grid](https://mtex-toolbox.github.io/equispacedS2Grid.html). Two further choices are the
-# [HEALPixS2Grid](https://mtex-toolbox.github.io/HEALPixS2Grid.html) and [fibonacciS2Grid](https://mtex-toolbox.github.io/fibonacciS2Grid.fibonacciS2Grid.html).
+# MTEX offers the [regularS2Grid](https://mtex-toolbox.github.io/regularS2Grid_py.html) and the
+# [equispacedS2Grid](https://mtex-toolbox.github.io/equispacedS2Grid_py.html). Two further choices are the
+# [HEALPixS2Grid](https://mtex-toolbox.github.io/HEALPixS2Grid_py.html) and [fibonacciS2Grid](https://mtex-toolbox.github.io/fibonacciS2Grid.fibonacciS2Grid_py.html).
 #
 # The regular grid is a tensor product of polar and azimuth angles. The equispaced grid
 # changes the number of azimuth steps from one latitude to the next. HEALPix supplies the

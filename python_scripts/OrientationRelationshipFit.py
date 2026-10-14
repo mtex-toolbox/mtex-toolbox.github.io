@@ -2,7 +2,7 @@
 # # Fitting the Orientation Relationship
 #
 # An orientation relationship (OR) is the rotation that relates the parent crystal frame to
-# the child crystal frame during a phase transition. [`calcParent2Child`](https://mtex-toolbox.github.io/calcParent2Child.html)
+# the child crystal frame during a phase transition. [`calcParent2Child`](https://mtex-toolbox.github.io/calcParent2Child_py.html)
 # estimates this rotation when only the child phase remains in an EBSD map.
 #
 # The fit uses misorientations between neighbouring child grains. It assumes that most
@@ -34,7 +34,7 @@ csParent = job.csParent
 csChild = job.csChild
 
 # %% [markdown]
-# [`neighbors`](https://mtex-toolbox.github.io/grain2d.neighbors.html) returns pairs of child grains that share a boundary.
+# [`neighbors`](https://mtex-toolbox.github.io/grain2d.neighbors_py.html) returns pairs of child grains that share a boundary.
 # The mean orientations of each pair give one child-to-child misorientation.
 
 # %%

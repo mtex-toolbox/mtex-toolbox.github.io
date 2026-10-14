@@ -233,8 +233,8 @@ hold(False)
 # Rotating both parts keeps the data self-consistent and moves the map as a whole. This
 # active rotation is appropriate when the specimen really is to be reoriented by a known
 # amount, for example to correct different mounting angles before several maps are
-# compared. Translation is handled by [shift](https://mtex-toolbox.github.io/EBSD.shift.html) and rotation by
-# [rotate](https://mtex-toolbox.github.io/EBSD.rotate.html).
+# compared. Translation is handled by [shift](https://mtex-toolbox.github.io/EBSD.shift_py.html) and rotation by
+# [rotate](https://mtex-toolbox.github.io/EBSD.rotate_py.html).
 #
 # This is distinct from a *frame change*, which re-expresses the same physical object in
 # another reference frame without moving it. Naming an already calibrated frame and

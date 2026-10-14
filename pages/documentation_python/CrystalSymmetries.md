@@ -51,7 +51,7 @@ The 11 crystallographic point-group types containing only proper rotations are 1
 222, 3, 32, 4, 422, 6, 622, 23, and 432. They are also called the enantiomorphic point
 groups.
 
-[crystalFrame](crystalFrame.crystalFrame.html) accepts either a Hermann--Mauguin symbol
+[crystalFrame](crystalFrame.crystalFrame_py.html) accepts either a Hermann--Mauguin symbol
 
 ```python
 cs = crystalFrame('432')
@@ -84,8 +84,8 @@ together with the identity, give 24 operations.
 
 ## Laue Groups
 
-Adding [rotation.inversion](rotation.inversion.html) to a proper-rotation group gives
-its Laue group. union performs that construction here.
+Adding [rotation.inversion](rotation.inversion_py.html) to a proper-rotation group gives
+its Laue group. [union](referenceFrame.union_py.html) performs that construction here.
 
 ```python
 csLaue = union(cs, rotation.inversion)
@@ -98,7 +98,7 @@ plot(csLaue)
 <center class="mtex-figure"><img class="inline" src="figures/python/CrystalSymmetries-7.png"></center>
 
 The hollow circle at the centre is the inversion. The result is also available from the
-[Laue](symmetry.Laue.html) method. Its summary shows that 432 has become $$m\bar{3}m$$
+[Laue](symmetry.Laue_py.html) method. Its summary shows that 432 has become $$m\bar{3}m$$
 with 48 operations.
 
 ```python
@@ -207,7 +207,7 @@ Consider -4m2.
 cs = crystalFrame('-4m2')
 ```
 
-[properGroup](symmetry.properGroup.html) replaces every improper operation by the proper
+[properGroup](symmetry.properGroup_py.html) replaces every improper operation by the proper
 rotation with the same stored axis and angle. The result is 422 with eight operations.
 
 ```python
@@ -222,7 +222,7 @@ crystalFrame (⊙c→a)
   a, b, c : 1, 1, 1
 ```
 
-[properSubGroup](symmetry.properSubGroup.html) instead retains only the operations of
+[properSubGroup](symmetry.properSubGroup_py.html) instead retains only the operations of
 the original group that are proper. The result is 222 with four operations.
 
 ```python
@@ -334,8 +334,8 @@ part of $$Fm\bar{3}m$$.
 
 ## Computing with Symmetries
 
-union combines compatible symmetry operations, while
-disjoint retains the operations common to two
+[union](referenceFrame.union_py.html) combines compatible symmetry operations, while
+[disjoint](referenceFrame.disjoint_py.html) retains the operations common to two
 symmetries.
 
 ```python

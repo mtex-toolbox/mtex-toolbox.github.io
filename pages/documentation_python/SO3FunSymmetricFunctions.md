@@ -92,7 +92,7 @@ If $$s_L$$ belongs to `frameB` and $$s_R$$ belongs to `frameA`, a symmetric func
 $$ f(s_L R s_R)=f(R). $$
 
 Rotation composition is not commutative, so the two point groups cannot be exchanged.
-[symmetrise](orientation.symmetrise.html) constructs the complete orbit $$s_L R s_R$$ of an
+[symmetrise](orientation.symmetrise_py.html) constructs the complete orbit $$s_L R s_R$$ of an
 orientation.
 
 ```python
@@ -214,7 +214,7 @@ smaller plot domain is not evidence of actual invariance.
 
 ## Project onto symmetric functions
 
-[SO3FunHarmonic.symmetrise](SO3FunHarmonic.symmetrise.html) averages the function over
+[SO3FunHarmonic.symmetrise](SO3FunHarmonic.symmetrise_py.html) averages the function over
 its left and right point groups. In coefficient space this projects the Fourier
 coefficients onto the subspace with the requested invariance.
 

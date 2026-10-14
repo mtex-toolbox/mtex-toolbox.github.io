@@ -78,7 +78,7 @@ mtexTitle('Hard threshold + MCL')
 # the same 19 grains on this map. Here the binary criterion has not given MCL useful
 # boundary-strength information.
 #
-# The soft threshold [`gbcSoft`](https://mtex-toolbox.github.io/gbcSoft.html) supplies that information. Its connectivity
+# The soft threshold [`gbcSoft`](https://mtex-toolbox.github.io/gbcSoft_py.html) supplies that information. Its connectivity
 # falls gradually around the threshold instead of jumping. It takes the threshold angle
 # and the width of the transition.
 
@@ -149,7 +149,7 @@ for p in [1.1, 1.4, 1.8]:
 # [Grain Reconstruction](https://mtex-toolbox.github.io/GrainReconstruction_py.html) for that route.
 #
 # MCL remains the more flexible option. It clusters the weights produced by
-# [`gbcSoft`](https://mtex-toolbox.github.io/gbcSoft.html), [`gbcCustom`](https://mtex-toolbox.github.io/gbcCustom.html), or a criterion of your own
+# [`gbcSoft`](https://mtex-toolbox.github.io/gbcSoft_py.html), [`gbcCustom`](https://mtex-toolbox.github.io/gbcCustom_py.html), or a criterion of your own
 # without needing to know what those weights mean. Since expansion can make the sparse
 # transition matrix much denser, test the method on a representative subregion before
 # applying it to a large map.

@@ -211,7 +211,7 @@ longAxisPeakDegree
 ```
 
 ```text
-array([72.3, 89.5])
+array([72.2, 89.3])
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EllipseBasedParameters-9.png"></center>
@@ -252,7 +252,7 @@ caliperPeakDegree
 ```
 
 ```text
-array([73.3, 85.3])
+array([73.9, 85.3])
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EllipseBasedParameters-10.png"></center>
@@ -327,7 +327,7 @@ gridPeakRelativeHeight
 ```
 
 ```text
-0.9400
+0.9300
 ```
 
 The forsterite-forsterite curve peaks at 75 degrees, agreeing with the two measures
@@ -369,7 +369,7 @@ characteristicAspectRatio
 ```
 
 ```text
-[1.3444380965328955, 1.3437095650863362]
+[1.3430118925521497, 1.3430008803428453]
 ```
 
 Whether a difference between two such shapes is more than noise is not something these

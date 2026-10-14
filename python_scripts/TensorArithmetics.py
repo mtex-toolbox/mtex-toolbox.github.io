@@ -67,7 +67,7 @@ eps
 #
 # $$\sigma_{ij} = \sum_{k,l} C_{ijkl} \epsilon_{kl}.$$
 #
-# [EinsteinSum](https://mtex-toolbox.github.io/EinsteinSum.html) takes each tensor followed by one label
+# [EinsteinSum](https://mtex-toolbox.github.io/EinsteinSum_py.html) takes each tensor followed by one label
 # for each of its indices. Equal negative labels mark indices to sum over.
 # Positive labels survive, and their values set the index order in the
 # result. The signs are MTEX syntax; the physical indices are not negative.
@@ -118,7 +118,7 @@ aDotB
 #
 # $$ \beta(v) = \sum_{i,j,k} S_{ijkk} v_i v_j.$$
 #
-# [inv](https://mtex-toolbox.github.io/tensor.inv.html) turns the stiffness into a compliance tensor. The
+# [inv](https://mtex-toolbox.github.io/tensor.inv_py.html) turns the stiffness into a compliance tensor. The
 # data file identifies x with [100], the crystallographic a direction.
 
 # %%
@@ -129,7 +129,7 @@ beta
 
 # %% [markdown]
 # The result is 0.0018 GPa$^{-1}$. It is the same contraction used by
-# [linearCompressibility](https://mtex-toolbox.github.io/stiffnessTensor.linearCompressibility.html).
+# [linearCompressibility](https://mtex-toolbox.github.io/stiffnessTensor.linearCompressibility_py.html).
 
 # %%
 betaDirect = C.linearCompressibility(v)
@@ -169,7 +169,7 @@ inner
 # %% [markdown]
 # ## Rank 2 matrix operations
 #
-# [det](https://mtex-toolbox.github.io/tensor.det.html) returns one determinant for each rank 2 tensor in
+# [det](https://mtex-toolbox.github.io/tensor.det_py.html) returns one determinant for each rank 2 tensor in
 # the list.
 
 # %%
@@ -179,7 +179,7 @@ d
 # %% [markdown]
 # ## Rotating a tensor
 #
-# [rotate](https://mtex-toolbox.github.io/tensor.rotate.html) actively rotates a physical property. The
+# [rotate](https://mtex-toolbox.github.io/tensor.rotate_py.html) actively rotates a physical property. The
 # workshop example below starts with a second-rank thermal-conductivity
 # tensor whose largest value, 10.5 W m$^{-1}$ K$^{-1}$, is along x. The
 # rotation moves that preferred direction 45 degrees about z.
@@ -208,7 +208,7 @@ mtexColorbar(title='thermal conductivity (W m$^{-1}$ K$^{-1}$)')
 #
 # Rotating the property is not a *frame change*. A frame change re-expresses
 # the same physical object in another reference frame. Use
-# [transformReferenceFrame](https://mtex-toolbox.github.io/tensor.transformReferenceFrame.html) for that
+# [transformReferenceFrame](https://mtex-toolbox.github.io/tensor.transformReferenceFrame_py.html) for that
 # operation; [Reference Frame Alignment](https://mtex-toolbox.github.io/SymmetryAlignment_py.html) shows why
 # the distinction matters for published crystal properties.
 

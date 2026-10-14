@@ -80,7 +80,7 @@ mtexColorbar()
 #
 # ## Pointwise Minimum and Maximum
 #
-# With two function arguments, [max](https://mtex-toolbox.github.io/SO3Fun.max.html) and [min](https://mtex-toolbox.github.io/SO3Fun.min.html) compare
+# With two function arguments, [max](https://mtex-toolbox.github.io/SO3Fun.max_py.html) and [min](https://mtex-toolbox.github.io/SO3Fun.min_py.html) compare
 # values independently at every orientation.
 
 # %%
@@ -165,7 +165,7 @@ maxNodes
 # ## Integration and Norms
 #
 # [mean](https://mtex-toolbox.github.io/SO3Fun.mean.html) returns the normalized integral over $SO(3)$. It assigns the
-# constant function one an integral of one. [sum](https://mtex-toolbox.github.io/SO3Fun.sum.html) uses the full
+# constant function one an integral of one. [sum](https://mtex-toolbox.github.io/SO3Fun.sum_py.html) uses the full
 # rotation-group volume $8\pi^2$.
 
 # %%
@@ -208,7 +208,7 @@ directNorm
 # ## Differentiation at One Orientation
 #
 # The gradient at a particular orientation belongs to the tangent space of $SO(3)$ at that
-# orientation. MTEX represents it by an [SO3TangentVector](https://mtex-toolbox.github.io/SO3TangentVector.SO3TangentVector.html).
+# orientation. MTEX represents it by an [SO3TangentVector](https://mtex-toolbox.github.io/SO3TangentVector.SO3TangentVector_py.html).
 
 # %%
 gradientAtR = grad(SO3F1, R)
@@ -245,7 +245,7 @@ hold(False)
 #
 # ## Rotating a Function
 #
-# [rotate](https://mtex-toolbox.github.io/SO3Fun.rotate.html) moves an orientation-dependent function by a specified
+# [rotate](https://mtex-toolbox.github.io/SO3Fun.rotate_py.html) moves an orientation-dependent function by a specified
 # rotation. This changes where its features occur. It is not a frame change, which would
 # re-express the same physical function in a different reference frame.
 

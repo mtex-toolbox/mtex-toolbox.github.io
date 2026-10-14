@@ -104,7 +104,7 @@ between those two limiting shapes. Blank cells omit the redundant cases with $$k
 
 ## Draw a random sample
 
-[discreteSample](S2Fun.discreteSample.html) draws directions with probability
+[discreteSample](S2Fun.discreteSample_py.html) draws directions with probability
 proportional to the density.
 
 ```python
@@ -134,7 +134,7 @@ uses one signed direction.
 
 ## Fit a Bingham distribution to directions
 
-Given arbitrarily scattered directions, [fit](S2FunBingham.fit.html) estimates the
+Given arbitrarily scattered directions, [fit](S2FunBingham.fit_py.html) estimates the
 principal axes and concentrations of the best-fitting Bingham distribution. With
 `confidenceEllipse=True` it also returns the uncertainty in the fitted modal axis.
 
@@ -145,7 +145,7 @@ estimatedZ
 ```
 
 ```text
-array([-13.4113,  -3.7401,   0.    ])
+array([-7.3478, -3.8824,  0.    ])
 ```
 
 ---
@@ -156,7 +156,7 @@ semiAxesDegrees
 ```
 
 ```text
-array([4.4586, 9.4562])
+array([6.4752, 8.6202])
 ```
 
 ---

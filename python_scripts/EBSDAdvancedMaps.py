@@ -17,15 +17,15 @@
 #
 # The right compromise depends on the question. MTEX provides
 #
-# * [ipfHSVKey](https://mtex-toolbox.github.io/ipfHSVKey.html), the default MTEX inverse pole figure key
-# * [ipfTSLKey](https://mtex-toolbox.github.io/ipfTSLKey.html) and [ipfHKLKey](https://mtex-toolbox.github.io/ipfHKLKey.html), for maps compatible with
+# * [ipfHSVKey](https://mtex-toolbox.github.io/ipfHSVKey_py.html), the default MTEX inverse pole figure key
+# * [ipfTSLKey](https://mtex-toolbox.github.io/ipfTSLKey_py.html) and [ipfHKLKey](https://mtex-toolbox.github.io/ipfHKLKey_py.html), for maps compatible with
 #   other EBSD systems
-# * [BungeColorKey](https://mtex-toolbox.github.io/BungeColorKey.html), which maps Euler angles to RGB
+# * [BungeColorKey](https://mtex-toolbox.github.io/BungeColorKey_py.html), which maps Euler angles to RGB
 # * `PatalaColorKey`, for the grain-boundary misorientations demonstrated in
 #   [Grain Boundary Plots](https://mtex-toolbox.github.io/BoundaryPlots_py.html); it is not ported yet
-# * [axisAngleColorKey](https://mtex-toolbox.github.io/axisAngleColorKey.html), for deviations from a reference
+# * [axisAngleColorKey](https://mtex-toolbox.github.io/axisAngleColorKey_py.html), for deviations from a reference
 #   orientation
-# * [spotColorKey](https://mtex-toolbox.github.io/spotColorKey.html) and [ipfSpotKey](https://mtex-toolbox.github.io/ipfSpotKey.html), for highlighting
+# * [spotColorKey](https://mtex-toolbox.github.io/spotColorKey_py.html) and [ipfSpotKey](https://mtex-toolbox.github.io/ipfSpotKey_py.html), for highlighting
 #   chosen orientations or fibres
 #
 # [IPF Maps](https://mtex-toolbox.github.io/EBSDIPFMap_py.html) develops the first three keys.
@@ -106,7 +106,7 @@ plot(colorKey, 'sigma', sections=9)
 #
 # The 20° halfwidth is where the kernel, and hence the blue saturation, falls to half its
 # value at the centre. The fade has no hard edge. To count a specified neighbourhood, use
-# [volume](https://mtex-toolbox.github.io/orientation.volume.html) with an explicit radius.
+# [volume](https://mtex-toolbox.github.io/orientation.volume_py.html) with an explicit radius.
 
 # %%
 spotPercent = 100 * volume(ebsd['fo'].orientations, colorKey.center, 20 * degree)
@@ -222,7 +222,7 @@ plot(ebsd['fo'], colorKey.orientation2color(ebsd['fo'].orientations))
 #
 # A highlighted component is easier to place when the microstructure remains visible
 # underneath it. Draw band contrast first, then add the spot colours with the
-# [faceAlpha](https://mtex-toolbox.github.io/EBSD.plot.html) option.
+# [faceAlpha](https://mtex-toolbox.github.io/EBSD.plot_py.html) option.
 
 # %%
 plot(ebsd, ebsd.bc, micronbar=False)

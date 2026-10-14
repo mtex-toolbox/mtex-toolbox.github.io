@@ -29,9 +29,9 @@ v = vector3d.X + 2 * vector3d.Y
 v
 
 # %% [markdown]
-# [+](https://mtex-toolbox.github.io/vector3d.plus.html) and [-](https://mtex-toolbox.github.io/vector3d.minus.html) add or subtract Cartesian
-# components. [*](https://mtex-toolbox.github.io/vector3d.mtimes.html) scales a vector by a scalar. The inner product
-# [dot](https://mtex-toolbox.github.io/vector3d.dot.html) and cross product [cross](https://mtex-toolbox.github.io/vector3d.cross.html) have their usual
+# [+](https://mtex-toolbox.github.io/vector3d.plus_py.html) and [-](https://mtex-toolbox.github.io/vector3d.minus_py.html) add or subtract Cartesian
+# components. [*](https://mtex-toolbox.github.io/vector3d.mtimes_py.html) scales a vector by a scalar. The inner product
+# [dot](https://mtex-toolbox.github.io/vector3d.dot_py.html) and cross product [cross](https://mtex-toolbox.github.io/vector3d.cross_py.html) have their usual
 # linear-algebra meanings. The order of the cross product matters.
 
 # %%
@@ -53,7 +53,7 @@ hold(False)
 # %% [markdown]
 # ## Angles
 #
-# The [angle](https://mtex-toolbox.github.io/vector3d.angle.html) between two directions is a central measurement in
+# The [angle](https://mtex-toolbox.github.io/vector3d.angle_py.html) between two directions is a central measurement in
 # texture analysis. One example is the tilt of a lattice-plane normal away from the sheet
 # normal. The angle between complete crystal orientations is a different operation,
 # introduced in [Misorientations](https://mtex-toolbox.github.io/MisorientationTheory_py.html).
@@ -69,8 +69,8 @@ angle(vector3d.X, vector3d.Y) / degree
 # %% [markdown]
 # ## Length and Normalization
 #
-# [norm](https://mtex-toolbox.github.io/vector3d.norm.html) returns the length of each vector.
-# [normalize](https://mtex-toolbox.github.io/vector3d.normalize.html) divides each vector by its length.
+# [norm](https://mtex-toolbox.github.io/vector3d.norm_py.html) returns the length of each vector.
+# [normalize](https://mtex-toolbox.github.io/vector3d.normalize_py.html) divides each vector by its length.
 
 # %%
 norm(u)
@@ -114,8 +114,8 @@ w
 
 # %% [markdown]
 # When both inputs are lists of the same size, binary operations pair their entries by
-# position. The keyword `outer=True` of [angle](https://mtex-toolbox.github.io/vector3d.angle_outer.html) and
-# [dot](https://mtex-toolbox.github.io/vector3d.dot_outer.html) compares every entry of one list with every entry of
+# position. The keyword `outer=True` of [angle](https://mtex-toolbox.github.io/vector3d.angle_outer_py.html) and
+# [dot](https://mtex-toolbox.github.io/vector3d.dot_outer_py.html) compares every entry of one list with every entry of
 # another.
 
 # %% [markdown]
@@ -150,7 +150,7 @@ numOmitted
 # %% [markdown]
 # ## Averaging a List
 #
-# [mean](https://mtex-toolbox.github.io/vector3d.mean.html) averages the Cartesian components. The result is a mean
+# [mean](https://mtex-toolbox.github.io/vector3d.mean_py.html) averages the Cartesian components. The result is a mean
 # vector, which generally is not a unit vector.
 
 # %%
@@ -188,22 +188,22 @@ meanResultantLength
 #
 # | | |
 # |---|---|
-# | [angle(v1,v2)](https://mtex-toolbox.github.io/vector3d.angle.html) | pointwise angle between vectors |
-# | [angle(v1,v2,outer=True)](https://mtex-toolbox.github.io/vector3d.angle_outer.html) | all pairwise angles |
-# | [dot(v1,v2)](https://mtex-toolbox.github.io/vector3d.dot.html) | pointwise inner product |
-# | [dot(v1,v2,outer=True)](https://mtex-toolbox.github.io/vector3d.dot_outer.html) | all pairwise inner products |
-# | [cross(v1,v2)](https://mtex-toolbox.github.io/vector3d.cross.html) | pointwise cross product |
-# | [a*v](https://mtex-toolbox.github.io/vector3d.mtimes.html) | multiplication by a scalar |
-# | [a*v](https://mtex-toolbox.github.io/vector3d.times.html) | componentwise scaling by an array of the same size |
-# | [norm(v)](https://mtex-toolbox.github.io/vector3d.norm.html) | length of every vector |
-# | [normalize(v)](https://mtex-toolbox.github.io/vector3d.normalize.html) | length scaled to one |
-# | [orth(v)](https://mtex-toolbox.github.io/vector3d.orth.html) | an arbitrary orthogonal unit vector |
-# | [orthProj(v,N)](https://mtex-toolbox.github.io/vector3d.orthProj.html) | component orthogonal to `N` |
-# | [perp(v)](https://mtex-toolbox.github.io/vector3d.perp.html) | best-fit direction orthogonal to a list |
-# | [v.sum()](https://mtex-toolbox.github.io/vector3d.sum.html) | componentwise sum over a list |
-# | [mean(v)](https://mtex-toolbox.github.io/vector3d.mean.html) | mean vector, or mean axis for antipodal data |
-# | [polar(v)](https://mtex-toolbox.github.io/vector3d.polar.html) | polar angle, azimuth, and length |
-# | [rotate(v,rot)](https://mtex-toolbox.github.io/vector3d.rotate.html) | turn by a rotation |
+# | [angle(v1,v2)](https://mtex-toolbox.github.io/vector3d.angle_py.html) | pointwise angle between vectors |
+# | [angle(v1,v2,outer=True)](https://mtex-toolbox.github.io/vector3d.angle_outer_py.html) | all pairwise angles |
+# | [dot(v1,v2)](https://mtex-toolbox.github.io/vector3d.dot_py.html) | pointwise inner product |
+# | [dot(v1,v2,outer=True)](https://mtex-toolbox.github.io/vector3d.dot_outer_py.html) | all pairwise inner products |
+# | [cross(v1,v2)](https://mtex-toolbox.github.io/vector3d.cross_py.html) | pointwise cross product |
+# | [a*v](https://mtex-toolbox.github.io/vector3d.mtimes_py.html) | multiplication by a scalar |
+# | [a*v](https://mtex-toolbox.github.io/vector3d.times_py.html) | componentwise scaling by an array of the same size |
+# | [norm(v)](https://mtex-toolbox.github.io/vector3d.norm_py.html) | length of every vector |
+# | [normalize(v)](https://mtex-toolbox.github.io/vector3d.normalize_py.html) | length scaled to one |
+# | [orth(v)](https://mtex-toolbox.github.io/vector3d.orth_py.html) | an arbitrary orthogonal unit vector |
+# | [orthProj(v,N)](https://mtex-toolbox.github.io/vector3d.orthProj_py.html) | component orthogonal to `N` |
+# | [perp(v)](https://mtex-toolbox.github.io/vector3d.perp_py.html) | best-fit direction orthogonal to a list |
+# | [v.sum()](https://mtex-toolbox.github.io/vector3d.sum_py.html) | componentwise sum over a list |
+# | [mean(v)](https://mtex-toolbox.github.io/vector3d.mean_py.html) | mean vector, or mean axis for antipodal data |
+# | [polar(v)](https://mtex-toolbox.github.io/vector3d.polar_py.html) | polar angle, azimuth, and length |
+# | [rotate(v,rot)](https://mtex-toolbox.github.io/vector3d.rotate_py.html) | turn by a rotation |
 
 # %% [markdown]
 # ## Further Reading

@@ -32,7 +32,7 @@ plottingConvention.default('y↑→x')
 
 ## Reference Frames Carry the Alignment
 
-A [reference frame](referenceFrame.referenceFrame.html) identifies where
+A [reference frame](referenceFrame.referenceFrame_py.html) identifies where
 coordinates are expressed, supplies a basis and provides a default
 convention for drawing them. The point-group symmetry attached to a
 frame is a separate property. A `plottingConvention` describes the
@@ -78,7 +78,7 @@ plot(v1, label='v_1', figSize='small')
 Now y points west and x points north, so the marker and annotations turn
 together. A single direction can be set on its own, the others kept:
 `plottingConvention.default(north=xvector)` lets x point north, as MATLAB's
-[plotx2north](plotx2north.html) does, and `plottingConvention.default(intoScreen=zvector)`
+[plotx2north](plotx2north_py.html) does, and `plottingConvention.default(intoScreen=zvector)`
 turns z into the screen.
 
 ```python
@@ -124,10 +124,10 @@ session frame in displays but silently stopped following later changes.
 
 A specimen frame has an identity and named axes. The frame in which an
 Oxford instrument states Euler angles is
-[specimenFrame.measurement](specimenFrame.specimenFrame.html) with the
+[specimenFrame.measurement](specimenFrame.specimenFrame_py.html) with the
 axes `X1`, `Y1` and `Z1` in Oxford notation: the sample surface CS1. For
 rolled sheets the frame
-[specimenFrame.rolling](specimenFrame.specimenFrame.html) names its axes
+[specimenFrame.rolling](specimenFrame.specimenFrame_py.html) names its axes
 `RD`, `TD` and `ND`. Its typical rolling convention puts RD to the north
 and TD to the west.
 

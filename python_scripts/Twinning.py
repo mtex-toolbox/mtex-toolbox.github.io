@@ -42,7 +42,7 @@ twinDirection = Miller(1, -1, 0, 1, CS, 'uvw')
 twinning = orientation.map(parentPlane, twinPlane, parentDirection, twinDirection)
 
 # %% [markdown]
-# [round2Miller](https://mtex-toolbox.github.io/orientation.round2Miller.html) recovers one low-index description of the
+# [round2Miller](https://mtex-toolbox.github.io/orientation.round2Miller_py.html) recovers one low-index description of the
 # relationship. Crystal symmetry permits several equally valid descriptions. The reported
 # indices therefore need not repeat the input representatives.
 
@@ -72,7 +72,7 @@ plt.gca().view_init(elev=20, azim=35 - 90)
 # ## Why 86.3 Degrees and 180 Degrees Are Both Correct
 #
 # A twin law is an equivalence class of rotations under crystal symmetry.
-# [angle](https://mtex-toolbox.github.io/orientation.angle.html) returns the smallest-angle representative by default,
+# [angle](https://mtex-toolbox.github.io/orientation.angle_py.html) returns the smallest-angle representative by default,
 # while the `max` option returns the largest-angle representative.
 
 # %%

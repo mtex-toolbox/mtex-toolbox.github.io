@@ -1,0 +1,17 @@
+---
+title: 'grain3d.allV'
+sidebar: function_reference_sidebar
+permalink: grain3d.allV_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+status: Reference
+---
+{% raw %}
+A property of [grain3d](grain3d_index_py.html).
+
+all vertices of the boundary, as vectors
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L234">source</a></font>
+{% endraw %}

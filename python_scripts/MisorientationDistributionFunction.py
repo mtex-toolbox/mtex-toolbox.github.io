@@ -48,7 +48,7 @@ mori_boundary
 # boundary therefore contributes more samples than a short one. The result also depends on
 # how finely the boundary was sampled.
 #
-# [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity.html) estimates the density, just as it does for a
+# [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity_py.html) estimates the density, just as it does for a
 # list of orientations. The `halfwidth` is the angular smoothing scale. A smaller value
 # resolves sharper peaks but also more sampling noise.
 
@@ -97,7 +97,7 @@ mtexColorbar()
 #
 # ## The Uncorrelated Misorientation Distribution Function
 #
-# [calcMisorientation](https://mtex-toolbox.github.io/EBSD.calcMisorientation.html) draws random pairs of EBSD pixels
+# [calcMisorientation](https://mtex-toolbox.github.io/EBSD.calcMisorientation_py.html) draws random pairs of EBSD pixels
 # without requiring them to be neighbours. By default it draws 100,000 pairs and rejects
 # points closer than one percent of the map diagonal. Fixing the random seed makes the
 # published example reproducible.
@@ -147,7 +147,7 @@ odf_fo = calcDensity(ebsd['fo'].orientations, halfwidth=10 * degree)
 odf_en = calcDensity(ebsd['en'].orientations, halfwidth=10 * degree)
 
 # %% [markdown]
-# [calcMDF](https://mtex-toolbox.github.io/SO3Fun.calcMDF.html) computes their convolution. The argument order below gives
+# [calcMDF](https://mtex-toolbox.github.io/SO3Fun.calcMDF_py.html) computes their convolution. The argument order below gives
 # the same forsterite-to-enstatite mapping as the boundary misorientations.
 
 # %%
@@ -217,8 +217,8 @@ legend('uncorrelated texture', 'uniform orientations', location='best')
 
 # %% [markdown]
 # The orange curve is the texture-free baseline, not a horizontal line. The numbers behind
-# the curves come from [calcAngleDistribution(mdf)](https://mtex-toolbox.github.io/SO3Fun.calcAngleDistribution.html) and
-# [calcAngleDistribution(ori)](https://mtex-toolbox.github.io/orientation.calcAngleDistribution.html). See
+# the curves come from [calcAngleDistribution(mdf)](https://mtex-toolbox.github.io/SO3Fun.calcAngleDistribution_py.html) and
+# [calcAngleDistribution(ori)](https://mtex-toolbox.github.io/orientation.calcAngleDistribution_py.html). See
 # [Angle Distribution](https://mtex-toolbox.github.io/AngleDistributionFunction_py.html) for their use.
 #
 # ## Axis Distribution
@@ -241,7 +241,7 @@ mtexColorbar()
 # %% [markdown]
 # The broad lobe covers much of the symmetry sector rather than collapsing onto the boundary
 # relationship. The marginal is itself a spherical function, returned by
-# [calcAxisDistribution](https://mtex-toolbox.github.io/SO3Fun.calcAxisDistribution.html).
+# [calcAxisDistribution](https://mtex-toolbox.github.io/SO3Fun.calcAxisDistribution_py.html).
 
 # %%
 axisDistribution = calcAxisDistribution(mdf_boundary)

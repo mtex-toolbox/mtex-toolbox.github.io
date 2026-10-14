@@ -69,7 +69,7 @@ optical response.
 
 The refractive index is $$n=c/v$$, so a larger index means a slower wave. A symmetric
 rank-two tensor stores its directional dependence.
-[refractiveIndexTensor](refractiveIndexTensor.refractiveIndexTensor.html) attaches that
+[refractiveIndexTensor](refractiveIndexTensor.refractiveIndexTensor_py.html) attaches that
 tensor to the crystal frame.
 
 Orthorhombic olivine is optically biaxial. Its three principal indices are
@@ -150,7 +150,7 @@ other. They are polarization directions, not two different propagation rays.
 
 ## Birefringence over every propagation direction
 
-Omitting `vProp` makes [birefringence](refractiveIndexTensor.birefringence.html) return
+Omitting `vProp` makes [birefringence](refractiveIndexTensor.birefringence_py.html) return
 a spherical function and two spherical axis fields.
 
 ```python
@@ -215,7 +215,7 @@ change the state of polarization. An anisotropic crystal splits the incident
 polarization into fast and slow components. Their retardation depends on $$\Delta n$$,
 thickness, and wavelength.
 
-[spectralTransmission](refractiveIndexTensor.spectralTransmission.html) integrates the
+[spectralTransmission](refractiveIndexTensor.spectralTransmission_py.html) integrates the
 transmitted visible spectrum into an RGB triplet. Thickness is specified in nanometres,
 so 30000 corresponds to 30 micrometres.
 
@@ -332,7 +332,7 @@ supplies orientation only; thickness and composition remain explicit model input
 
 ## Verify the equivalent direction route
 
-An [orientation](orientation.orientation.html) maps crystal coordinates into specimen
+An [orientation](orientation.orientation_py.html) maps crystal coordinates into specimen
 coordinates. Its inverse therefore maps each specimen direction into the corresponding
 crystal frame before applying the original tensor.
 
@@ -358,7 +358,7 @@ reveal a reference-frame mistake.
 
 ## Package the model as a colour key
 
-A [spectralTransmissionColorKey](spectralTransmissionColorKey.html) stores the tensor,
+A [spectralTransmissionColorKey](spectralTransmissionColorKey_py.html) stores the tensor,
 thickness, propagation direction, polarizer, and analyser angle. Its defaults reproduce
 the specimen-frame setup above.
 

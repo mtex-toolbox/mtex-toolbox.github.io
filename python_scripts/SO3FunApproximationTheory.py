@@ -22,7 +22,7 @@ plottingConvention.default('y↑→x')
 # ## Importing the samples
 #
 # An ASCII file can contain one orientation and one or more measured values per row.
-# [loadOrientation](https://mtex-toolbox.github.io/orientation.load.html) needs the columns of the Euler angles and the
+# [loadOrientation](https://mtex-toolbox.github.io/orientation.load_py.html) needs the columns of the Euler angles and the
 # names of the additional columns.
 
 # %%
@@ -48,7 +48,7 @@ plotSection(ori, S['values'], 'sigma', all=True)
 # the special case in which it agrees exactly at the sample orientations. Noise, incomplete
 # sampling, or regularisation often makes approximation the more useful goal.
 #
-# [interp](https://mtex-toolbox.github.io/rotation.interp.html) provides three approximation schemes:
+# [interp](https://mtex-toolbox.github.io/rotation.interp_py.html) provides three approximation schemes:
 #
 # * A harmonic expansion is a global series model. Prefer it for a general
 #   orientation-dependent relationship, especially with many nodes, outliers, or noise.
@@ -65,7 +65,7 @@ plotSection(ori, S['values'], 'sigma', all=True)
 # ## Harmonic approximation
 #
 # The flag `'harmonic'` selects a harmonic expansion. Internally, `interp` calls
-# [SO3FunHarmonic.interpolate](https://mtex-toolbox.github.io/SO3FunHarmonic.interpolate.html). The default fit includes
+# [SO3FunHarmonic.interpolate](https://mtex-toolbox.github.io/SO3FunHarmonic.interpolate_py.html). The default fit includes
 # regularisation, which suppresses rapidly varying harmonic coefficients.
 
 # %%
@@ -151,7 +151,7 @@ minimumHarmonicValue
 # ## Density-constrained RBF approximation
 #
 # Without a method flag, `interp` uses an RBF model and internally calls
-# [SO3FunRBF.interpolate](https://mtex-toolbox.github.io/SO3FunRBF.interpolate.html). The `'density'` flag constrains the
+# [SO3FunRBF.interpolate](https://mtex-toolbox.github.io/SO3FunRBF.interpolate_py.html). The `'density'` flag constrains the
 # weights so that the result is nonnegative and then normalizes its mean to 1.
 
 # %%
@@ -239,7 +239,7 @@ plot(SO3FRBF, 'sigma')
 #
 # ## Fitting a Bingham distribution
 #
-# [SO3FunBingham.interpolate](https://mtex-toolbox.github.io/SO3FunBingham.interpolate.html) fits the samples with one
+# [SO3FunBingham.interpolate](https://mtex-toolbox.github.io/SO3FunBingham.interpolate_py.html) fits the samples with one
 # Bingham distribution. The flag `'bingham'` selects it through `interp`. The following
 # controlled example begins with a fibre ODF and samples it on a coarse grid.
 

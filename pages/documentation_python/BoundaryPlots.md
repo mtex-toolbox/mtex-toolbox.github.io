@@ -50,7 +50,7 @@ grains = smoothBoundary(grains, 4, simplify=False, refine=False)
 
 ## One colour for every boundary
 
-With no data argument, [plot](grainBoundary.plot.html) draws all boundary segments in
+With no data argument, [plot](grainBoundary.plot_py.html) draws all boundary segments in
 one colour on top of the phase map.
 
 ```python
@@ -98,7 +98,7 @@ coordinates, it identifies lattice directions about which the neighboring crysta
 rotated.
 
 Crystal symmetry gives several equivalent descriptions of the same axis.
-[HSVDirectionKey](HSVDirectionKey.html) folds them into one fundamental sector and
+[HSVDirectionKey](HSVDirectionKey_py.html) folds them into one fundamental sector and
 assigns one colour to each direction there.
 
 ```python
@@ -180,7 +180,7 @@ recognize that jump.
 ## Colouring the whole misorientation
 
 Angle and axis together are three parameters. The
-[PatalaColorKey](PatalaColorKey.PatalaColorKey.html) maps all three to a single RGB colour
+[PatalaColorKey](PatalaColorKey.PatalaColorKey_py.html) maps all three to a single RGB colour
 using the construction of S. Patala, J. K. Mason and C. A. Schuh,
 [Improved representations of misorientation information for grain boundary science and
 engineering](https://doi.org/10.1016/j.pmatsci.2012.04.002), Prog. Mater. Sci. 57,

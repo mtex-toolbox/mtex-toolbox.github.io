@@ -134,7 +134,7 @@ nu
 # Young's modulus $E$ relates axial stress to axial strain.
 # Poisson's ratio $\nu$ is minus transverse strain divided by axial strain.
 #
-# [YoungsModulus](https://mtex-toolbox.github.io/stiffnessTensor.YoungsModulus.html) asks for a direction.
+# [YoungsModulus](https://mtex-toolbox.github.io/stiffnessTensor.YoungsModulus_py.html) asks for a direction.
 # An isotropic tensor gives the same answer in every direction.
 # That equality is a useful check that the average really is isotropic.
 
@@ -165,7 +165,7 @@ Go = np.linspace(GMin, GMax, 300)
 G0Mesh, K0Mesh = np.meshgrid(Go, Ko)
 
 # %% [markdown]
-# For every candidate, [HashinShtrikmanModulus](https://mtex-toolbox.github.io/stiffnessTensor.HashinShtrikmanModulus.html)
+# For every candidate, [HashinShtrikmanModulus](https://mtex-toolbox.github.io/stiffnessTensor.HashinShtrikmanModulus_py.html)
 # computes effective bulk and shear moduli.
 # It also tests the residual stiffness tensor.
 # A positive definite residual identifies a lower-bound candidate.

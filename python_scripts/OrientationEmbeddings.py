@@ -66,7 +66,7 @@ plt.title('two coordinate distances')
 # %% [markdown]
 # In the first two panels, points near the left edge can still have a large coordinate
 # distance. The third panel shows that matrix and
-# [Rodrigues Frank](https://mtex-toolbox.github.io/rotation.byRodrigues.html) coordinates jump differently. Neither
+# [Rodrigues Frank](https://mtex-toolbox.github.io/rotation.byRodrigues_py.html) coordinates jump differently. Neither
 # Euclidean coordinate distance is the geometry of orientation space.
 #
 # This is why averaging fundamental-region coordinates is unsafe. Consider the
@@ -83,7 +83,7 @@ naiveMean
 # %% [markdown]
 # The displayed result is the identity orientation. It is $45^{\circ}$ from the expected
 # mean because the two selected Rodrigues vectors lie on opposite sides of a
-# fundamental-region boundary. In contrast, [mean](https://mtex-toolbox.github.io/orientation.mean.html) handles crystal
+# fundamental-region boundary. In contrast, [mean](https://mtex-toolbox.github.io/orientation.mean_py.html) handles crystal
 # symmetry.
 
 # %%
@@ -134,7 +134,7 @@ plt.ylabel(r'$\Vert\mathcal{E}(\mathtt{ori}_1)-\mathcal{E}(\mathtt{ori}_2)\Vert_
 #
 # An arithmetic mean of embeddings lies in the ambient Euclidean space and generally is
 # not itself the embedding of an orientation. Project it back with
-# [orientation](https://mtex-toolbox.github.io/embedding.orientation.html).
+# [orientation](https://mtex-toolbox.github.io/embedding.orientation_py.html).
 
 # %%
 e = embedding(ori)
@@ -236,15 +236,15 @@ plt.legend(['de la Vallee Poussin', 'Bingham'], loc='best')
 # Embeddings support the following linear-space operations:
 #
 # * `+`, `-`, `*` and `/`
-# * [mean](https://mtex-toolbox.github.io/embedding.mean.html)
-# * [norm](https://mtex-toolbox.github.io/embedding.norm.html)
-# * [dot](https://mtex-toolbox.github.io/embedding.dot.html)
-# * [rotate](https://mtex-toolbox.github.io/embedding.rotate.html)
+# * [mean](https://mtex-toolbox.github.io/embedding.mean_py.html)
+# * [norm](https://mtex-toolbox.github.io/embedding.norm_py.html)
+# * [dot](https://mtex-toolbox.github.io/embedding.dot_py.html)
+# * [rotate](https://mtex-toolbox.github.io/embedding.rotate_py.html)
 #
 # ## Packed Numeric Coordinates
 #
 # The tensor representation stores repeated components. The
-# [double](https://mtex-toolbox.github.io/embedding.double.html) method packs the independent components into a numeric
+# [double](https://mtex-toolbox.github.io/embedding.double_py.html) method packs the independent components into a numeric
 # matrix while preserving Euclidean distances exactly. For cubic symmetry the following
 # output compares the full tensor component count with the packed dimension.
 

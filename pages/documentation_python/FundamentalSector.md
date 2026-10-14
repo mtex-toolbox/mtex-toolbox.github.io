@@ -53,7 +53,7 @@ sector, and the three labelled directions identify its corners.
 
 ## How MTEX Stores the Sector
 
-[sphericalRegion](sphericalRegion.sphericalRegion.html) represents the sector as an
+[sphericalRegion](sphericalRegion.sphericalRegion_py.html) represents the sector as an
 intersection of spherical half-spaces.
 
 ```python
@@ -92,7 +92,7 @@ Consider the Miller direction $$(231)$$.
 v = Miller(2, 3, 1, cs)
 ```
 
-[checkInside](sphericalRegion.checkInside.html) tests it against all three half-spaces.
+[checkInside](sphericalRegion.checkInside_py.html) tests it against all three half-spaces.
 
 ```python
 isInside = sR.checkInside(v)
@@ -106,7 +106,7 @@ False
 The false result means that $$(231)$$ is outside the chosen sector. It does not mean that
 its symmetry-equivalent family is absent.
 
-[projectIntoFundamentalRegion](vector3d.project2FundamentalRegion.html) selects an
+[projectIntoFundamentalRegion](vector3d.project2FundamentalRegion_py.html) selects an
 equivalent representative inside the sector.
 
 ```python
@@ -203,7 +203,7 @@ crystallographically equivalent.
 
 A sector is a purely geometric object and carries no orientation information. Its
 counterpart for orientations is the [Fundamental Region](OrientationFundamentalRegion_py.html),
-represented by an [orientationRegion](orientationRegion.orientationRegion.html). The
+represented by an [orientationRegion](orientationRegion.orientationRegion_py.html). The
 sector is also what an [inverse pole figure](OrientationInversePoleFigure_py.html) is drawn
 on.
 

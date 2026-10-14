@@ -6,7 +6,7 @@
 # physical geometry. It determines the length of $[uvw]$, the normal to $(hkl)$, and the
 # spacing between neighbouring $(hkl)$ planes.
 #
-# In MTEX, a [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame.html) bundles point symmetry with a
+# In MTEX, a [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame_py.html) bundles point symmetry with a
 # crystal frame. The crystal frame carries the lattice basis and its metric; symmetry
 # states which operations leave crystal data invariant. Keeping those ideas separate
 # matters because a lattice metric can have more symmetry than the atoms placed in its
@@ -125,7 +125,7 @@ dot(directBasis, reciprocalBasis, outer=True)
 #
 # $$\vec m=u\vec a+v\vec b+w\vec c.$$
 #
-# Its [norm](https://mtex-toolbox.github.io/vector3d.norm.html) is therefore a physical length, not just a plotting
+# Its [norm](https://mtex-toolbox.github.io/vector3d.norm_py.html) is therefore a physical length, not just a plotting
 # radius. The indices are coefficients in the generally oblique lattice basis, not
 # Cartesian components. For example, $[101]$ spans one $\vec a$ and one $\vec c$.
 
@@ -153,7 +153,7 @@ norm(Miller(2, 0, 2, cs, 'uvw')) / norm(m)
 # %% [markdown]
 # The angle is numerically zero, while the length ratio is 2.
 #
-# Use [normalize](https://mtex-toolbox.github.io/vector3d.normalize.html) when only the direction matters. Keep the
+# Use [normalize](https://mtex-toolbox.github.io/vector3d.normalize_py.html) when only the direction matters. Keep the
 # original magnitude when the lattice translation or Burgers-vector length is part of the
 # calculation.
 

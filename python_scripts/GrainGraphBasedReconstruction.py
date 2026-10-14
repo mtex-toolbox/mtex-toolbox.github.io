@@ -41,7 +41,7 @@ hold(False)
 # ## Set up and fit the orientation relationship
 #
 # The earlier steel page introduces
-# [`parentGrainReconstructor`](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html) and
+# [`parentGrainReconstructor`](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor_py.html) and
 # its phase guess. We again start from the Kurdjumov-Sachs (KS) parent-to-child OR. A
 # Nishiyama-Wassermann OR could be supplied as another initial guess.
 
@@ -72,7 +72,7 @@ changeFromKS = angle(initialP2C, job.p2c) / degree
 changeFromKS
 
 # %% [markdown]
-# [`calcParent2Child`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParent2Child.html) uses the iterative
+# [`calcParent2Child`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParent2Child_py.html) uses the iterative
 # method of Nyyssönen and co-workers. It assumes that most measured boundaries are
 # child-to-child boundaries. The first fit quintile is 1.453 degrees, consistent with the
 # former rounded value of 1.5 degrees. The change from KS is 3.110 degrees, not 2.3 degrees.
@@ -80,7 +80,7 @@ changeFromKS
 # OR, so the earlier text compared two different quantities.
 #
 # Older text said the command stored the misfits in `job.fit`. The current class has no such
-# property. [`calcGBFit`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBFit.html) computes them on demand
+# property. [`calcGBFit`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBFit_py.html) computes them on demand
 # and also returns their child-grain neighbour pairs. The former reference also paired an
 # unrelated title with a 2018 DOI. The References section gives the OR-fitting paper and DOI
 # used here.
@@ -91,7 +91,7 @@ changeFromKS
 # weight expresses how compatible the two grains are with a common parent orientation under
 # the fitted OR.
 #
-# [`calcGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html) derives that weight from the
+# [`calcGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph_py.html) derives that weight from the
 # child-to-child misorientation fit. The `threshold` is the misfit whose weight is exactly one
 # half. The `tolerance` controls the width of the high-to-low transition. Earlier text called
 # `tolerance` a Gaussian standard deviation, but the implementation uses it directly as the
@@ -115,7 +115,7 @@ graphWeightQuantiles
 #
 # ## Read the graph on the map
 #
-# [`plotGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.plotGraph.html) maps the edge weights back to their
+# [`plotGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.plotGraph_py.html) maps the edge weights back to their
 # grain boundaries.
 
 # %%
@@ -131,7 +131,7 @@ hold(False)
 #
 # ## Cluster the grain graph
 #
-# [`clusterGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterGraph.html) uses Markov clustering to turn
+# [`clusterGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterGraph_py.html) uses Markov clustering to turn
 # compatible nodes into components. `inflationPower` controls their granularity. A smaller
 # value produces fewer, larger clusters; a larger value separates the graph more
 # aggressively.
@@ -147,7 +147,7 @@ job
 #
 # ## Transform grains from the graph components
 #
-# [`calcParentFromGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromGraph.html) fits one common
+# [`calcParentFromGraph`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromGraph_py.html) fits one common
 # parent to every component. It then assigns each member its compatible candidate parent
 # orientation. This is the transform step introduced on the earlier steel page. It does not
 # yet merge the component footprints.
@@ -196,7 +196,7 @@ print(job)
 plot(job.parentGrains, job.parentGrains.meanOrientation)
 
 # %% [markdown]
-# [`revert`](https://mtex-toolbox.github.io/parentGrainReconstructor.revert.html) restores the measured child phase and
+# [`revert`](https://mtex-toolbox.github.io/parentGrainReconstructor.revert_py.html) restores the measured child phase and
 # orientation for the rejected grains. The criteria flag 848 grains. Of those, 54 carry no
 # graph assignment to undo, so this call reverts 794 of them and leaves 846 child grains.
 # Called without an argument, `job.revert()` undoes the entire reconstruction. That full reset
@@ -226,9 +226,9 @@ plot(job.parentGrains, job.parentGrains.meanOrientation)
 # ## Merge parent fragments and inclusions
 #
 # The earlier steel page defines the separate transform and merge steps.
-# [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar.html) now combines neighbouring
+# [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar_py.html) now combines neighbouring
 # parent fragments within 7.5 degrees.
-# [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions.html) then absorbs enclosed
+# [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions_py.html) then absorbs enclosed
 # grains containing at most 50 pixels into their parent host.
 
 # %%
@@ -248,7 +248,7 @@ plot(job.parentGrains, job.parentGrains.meanOrientation)
 #
 # ## Check packets and input-to-parent membership
 #
-# [`calcVariants`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariants.html) stores `variantId` and
+# [`calcVariants`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariants_py.html) stores `variantId` and
 # `packetId` on `job.transformedGrains`. A packet groups variants that share the same parent
 # {111} habit plane. Here `packetId` selects the parent {111} plane closest to martensite
 # (011).
@@ -285,11 +285,11 @@ numChildrenInSelectedParent
 # ## Reuse the common crystallographic and pixel checks
 #
 # The earlier [Parent Austenite Reconstruction](https://mtex-toolbox.github.io/MaParentGrainReconstruction_py.html) works
-# through the remaining checks in full. [`calcVariantId`](https://mtex-toolbox.github.io/calcVariantId.html) compares the
+# through the remaining checks in full. [`calcVariantId`](https://mtex-toolbox.github.io/calcVariantId_py.html) compares the
 # measured child orientations with all theoretical variants of one reconstructed parent. Its
 # pole figure tests crystallography inside a grain, not only its outline.
 #
-# [`calcParentEBSD`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentEBSD.html) transfers the grain result
+# [`calcParentEBSD`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentEBSD_py.html) transfers the grain result
 # to individual pixels. The per-pixel property `parentEBSD.fit` measures correspondence
 # between the pixel-derived parent and its reconstructed grain orientation.
 

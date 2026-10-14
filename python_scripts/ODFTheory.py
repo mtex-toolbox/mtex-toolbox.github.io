@@ -75,7 +75,7 @@ plot(oriPlot, 'Euler')
 # %% [markdown]
 # ## From Orientations to a Density
 #
-# [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity.html) places a kernel at every orientation and adds
+# [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity_py.html) places a kernel at every orientation and adds
 # the kernels. The full indexed pixel list is used here, so equal-area pixels have equal
 # statistical weight.
 

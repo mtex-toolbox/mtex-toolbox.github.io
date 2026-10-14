@@ -4,7 +4,7 @@
 # A *fibre* is a one-dimensional curve through orientation space. Every orientation on a
 # full fibre maps one fixed crystal direction `h` onto one fixed specimen direction `r`
 # while leaving rotation about that direction free. MTEX stores the curve as a
-# [fibre](https://mtex-toolbox.github.io/fibre.fibre.html) variable.
+# [fibre](https://mtex-toolbox.github.io/fibre.fibre_py.html) variable.
 #
 # Many real textures concentrate around a line rather than one ideal orientation. Rolling
 # textures of cubic metals are therefore commonly described by named fibres. A real
@@ -114,7 +114,7 @@ hold(False)
 # ## Fibres in Pole Figures
 #
 # Everything that can be plotted for orientations can also be plotted for fibres.
-# [plotPF](https://mtex-toolbox.github.io/fibre.plotPDF.html) maps the fibre into [pole figures](https://mtex-toolbox.github.io/OrientationPoleFigure_py.html),
+# [plotPF](https://mtex-toolbox.github.io/fibre.plotPDF_py.html) maps the fibre into [pole figures](https://mtex-toolbox.github.io/OrientationPoleFigure_py.html),
 # where one orientation becomes a point and a fibre becomes a curve.
 
 # %%
@@ -128,7 +128,7 @@ plotPF(fullFibre, h, lineWidth=3, lineColor='orange')
 # ## Symmetrising a Fibre
 #
 # Unlike an orientation pole-figure plot, a fibre is not automatically symmetrised.
-# [symmetrise](https://mtex-toolbox.github.io/fibre.symmetrise.html) generates the crystallographically equivalent
+# [symmetrise](https://mtex-toolbox.github.io/fibre.symmetrise_py.html) generates the crystallographically equivalent
 # fibres. The `unique` option removes repeated copies.
 
 # %%
@@ -147,7 +147,7 @@ plotPF(symFibre, Miller([[1, 1, 0], [2, 1, 0], [1, 1, 1]], cs), lineWidth=3, lin
 # %% [markdown]
 # ## Fibres in Inverse Pole Figures
 #
-# [plotIPF](https://mtex-toolbox.github.io/fibre.plotIPDF.html) maps the fibre into
+# [plotIPF](https://mtex-toolbox.github.io/fibre.plotIPDF_py.html) maps the fibre into
 # [inverse pole figures](https://mtex-toolbox.github.io/OrientationInversePoleFigure_py.html). It fixes specimen directions
 # and draws the crystal directions found along the fibre. By default it restricts them to
 # the fundamental sector.
@@ -174,7 +174,7 @@ plotIPF(symFibre, vector3d.Z, complete=True, lineWidth=3, lineColor='orange')
 #
 # ## Defining a Fibre by Directions
 #
-# A [Miller](https://mtex-toolbox.github.io/Miller.html) direction and a [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html) specimen
+# A [Miller](https://mtex-toolbox.github.io/Miller_py.html) direction and a [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html) specimen
 # direction define the full fibre directly. The next fibre contains every orientation that
 # makes the crystal c-axis $[001]$ parallel to specimen Z.
 
@@ -221,8 +221,8 @@ plot(cube111Fibre, 'axisAngle', lineColor='darkred', lineWidth=4, fundamentalReg
 # The dark-red curve passes through the Cube orientation at zero angle. Its ends meet the
 # boundary at symmetry-equivalent continuations of the curve.
 #
-# [orientation](https://mtex-toolbox.github.io/fibre.orientation.html) samples a fibre for numerical work.
-# [angle](https://mtex-toolbox.github.io/fibre.angle.html) measures the angular distance from an orientation to its
+# [orientation](https://mtex-toolbox.github.io/fibre.orientation_py.html) samples a fibre for numerical work.
+# [angle](https://mtex-toolbox.github.io/fibre.angle_py.html) measures the angular distance from an orientation to its
 # nearest point on a fibre. Their geometric use without crystal symmetry is developed in
 # [Fibres in Rotation Space](https://mtex-toolbox.github.io/RotationFibre_py.html).
 #
@@ -260,7 +260,7 @@ legend(location='best')
 # ## Fibre ODFs
 #
 # A fibre is a curve of zero orientation-space volume, while a real texture has a spread
-# around one. [fibreODF](https://mtex-toolbox.github.io/fibreODF.html) turns the full curve into a density with a given
+# around one. [fibreODF](https://mtex-toolbox.github.io/fibreODF_py.html) turns the full curve into a density with a given
 # halfwidth. This is the model fitted against a measurement.
 
 # %%
@@ -284,7 +284,7 @@ hold(False)
 #
 # ## Evaluating an ODF Along a Fibre
 #
-# [plotFibre](https://mtex-toolbox.github.io/SO3Fun.plotFibre.html) evaluates an ODF along a chosen curve. Here the
+# [plotFibre](https://mtex-toolbox.github.io/SO3Fun.plotFibre_py.html) evaluates an ODF along a chosen curve. Here the
 # beta-fibre ODF is read along the eta fibre.
 
 # %%
@@ -296,7 +296,7 @@ plotFibre(odf, fibre.eta(cs, ss), lineWidth=2, figSize='small')
 #
 # ## The Volume Around a Fibre
 #
-# [volume](https://mtex-toolbox.github.io/SO3Fun.volume.html) integrates the ODF inside a tube of a given angular radius
+# [volume](https://mtex-toolbox.github.io/SO3Fun.volume_py.html) integrates the ODF inside a tube of a given angular radius
 # about a fibre. This is the quantity meant when a texture is reported as "so many percent
 # beta fibre".
 
@@ -314,7 +314,7 @@ volume10Percent
 
 # %% [markdown]
 # The second result is 100 percent to the precision printed. It does not mean the ODF is a
-# zero-width line or vanishes at $10^\circ$. [fibreVolume](https://mtex-toolbox.github.io/SO3Fun.fibreVolume.html)
+# zero-width line or vanishes at $10^\circ$. [fibreVolume](https://mtex-toolbox.github.io/SO3Fun.fibreVolume_py.html)
 # discretises the tube and clips its numerical estimate at 1, so the displayed percentage
 # can be exactly 100.
 #

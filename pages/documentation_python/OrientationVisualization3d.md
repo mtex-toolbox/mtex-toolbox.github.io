@@ -42,7 +42,7 @@ ori = orientation.rand(100, cs)
 
 ## Euler Angle Space
 
-[plot](orientation.plot.html) with `'Bunge'` places each orientation at its three Bunge
+[plot](orientation.plot_py.html) with `'Bunge'` places each orientation at its three Bunge
 Euler angles $$(\varphi_1,\Phi,\varphi_2)$$.
 
 ```python
@@ -76,7 +76,7 @@ $$\sin\Phi$$. A cluster near $$\Phi=0$$ is therefore not as concentrated as it l
 
 The rectangular geometry is only a coordinate chart. Do not use the Euclidean distance
 between two plotted points as their angular separation; use
-[angle](orientation.angle.html) on the orientations themselves.
+[angle](orientation.angle_py.html) on the orientations themselves.
 
 ## Axis--Angle Space
 

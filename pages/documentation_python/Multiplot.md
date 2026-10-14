@@ -14,7 +14,7 @@ status: Checked
 
 <!--introduction-->
 
-MTEX manages multiple axes through [mtexFigure](mtexFigure.mtexFigure.html).
+MTEX manages multiple axes through [mtexFigure](mtexFigure.mtexFigure_py.html).
 It keeps their sizes and spacing consistent. It also
 coordinates figure-wide tools such as colour ranges and colorbars.
 

@@ -28,7 +28,7 @@ rot = rotation.rand(500)
 # %% [markdown]
 # ## Euler Angle Space
 #
-# [scatter](https://mtex-toolbox.github.io/quaternion.scatter.html) places each rotation at its three Bunge Euler angles.
+# [scatter](https://mtex-toolbox.github.io/quaternion.scatter_py.html) places each rotation at its three Bunge Euler angles.
 # This is the default for rotations without crystal symmetry. The complete box spans
 # $0\leq\varphi_1,\varphi_2\leq2\pi$ and $0\leq\Phi\leq\pi$.
 
@@ -73,7 +73,7 @@ scatter(rot, 'Rodrigues', region=False)
 # preserve volume.
 #
 # In all three plots, coordinate distance should not be read as the angular distance
-# between arbitrary rotations. Use [angle](https://mtex-toolbox.github.io/quaternion.angle.html) for that comparison.
+# between arbitrary rotations. Use [angle](https://mtex-toolbox.github.io/quaternion.angle_py.html) for that comparison.
 # Homochoric and cubochoric coordinates preserve volume instead; see
 # [Rotation Representations](https://mtex-toolbox.github.io/RotationRepresentations_py.html).
 
@@ -128,7 +128,7 @@ exactPercent
 # %% [markdown]
 # The result is 5.7669%. Even this broad $60^\circ$ ball occupies only a small part of
 # rotation space. A scatter plot shows sampled coordinates; estimating a continuous texture
-# density requires [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity.html).
+# density requires [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity_py.html).
 
 # %% [markdown]
 # ## Further Reading

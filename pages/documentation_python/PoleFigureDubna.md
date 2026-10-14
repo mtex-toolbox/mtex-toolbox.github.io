@@ -94,7 +94,7 @@ distribution (mrd); see [ODF Theory](ODFTheory_py.html).
 
 The object exposes the measured intensities, crystal-plane normals, and specimen
 directions as ordinary arrays. Different pole figures can use different direction grids,
-so [PoleFigure](PoleFigure.PoleFigure.html) also provides the list-valued properties
+so [PoleFigure](PoleFigure.PoleFigure_py.html) also provides the list-valued properties
 `allI`, `allH`, and `allR`.
 
 ```python
@@ -120,7 +120,7 @@ for label, lo, hi in zip(poleFigureLabel, min(pf), max(pf)):
 (11-22)                    0.0     962.0
 ```
 
-[isOutlier](PoleFigure.isOutlier.html) compares every measurement with its
+[isOutlier](PoleFigure.isOutlier_py.html) compares every measurement with its
 neighbourhood. Use it to create a mask for inspection:
 
     outlierMask = isOutlier(pf)
@@ -163,7 +163,7 @@ contains 1224 of its original 1368 specimen directions.
 
 ## Rotate the measured directions
 
-[rotate](PoleFigure.rotate.html) actively moves every measured specimen direction while
+[rotate](PoleFigure.rotate_py.html) actively moves every measured specimen direction while
 leaving its intensity unchanged. This is not a frame change and not a plotting
 convention. If import assigned the wrong specimen reference frame, correct the import
 whenever possible.
@@ -248,7 +248,7 @@ output in detail.
 rec = calcODF(pf)
 ```
 
-[calcError](PoleFigure.calcError.html) returns one regularised relative residual per
+[calcError](PoleFigure.calcError_py.html) returns one regularised relative residual per
 measured pole figure. Label the values so the superposed measurement remains
 identifiable.
 
@@ -272,7 +272,7 @@ projection. It does not prove that the ODF itself is unique or true.
 
 ## Locate the remaining mismatch
 
-[plotDiff](PoleFigure.plotDiff.html) shows the same regularised relative residual at
+[plotDiff](PoleFigure.plotDiff_py.html) shows the same regularised relative residual at
 every measured direction.
 
 ```python
@@ -293,7 +293,7 @@ Working through these on the same data set covers the rest of the chapter:
 
 1. inspect the raw pole figures and identify measurements you would not trust;
 2. remove only values for which you have a physical reason, reconstruct the ODF, and
-   compare the [calcError](PoleFigure.calcError.html) values;
+   compare the [calcError](PoleFigure.calcError_py.html) values;
 3. reconstruct from fewer pole figures and find the smallest set that still gives a
    recognisable texture; and
 4. compare reconstructions with and without

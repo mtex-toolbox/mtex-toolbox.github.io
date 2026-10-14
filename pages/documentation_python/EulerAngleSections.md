@@ -57,7 +57,7 @@ odf = 0.2 * unimodalODF(ori1) + 0.3 * unimodalODF(ori2) + 0.5 * fibreODF(f)
 
 ## Default Bunge Sections
 
-[plotSection](SO3Fun.plotSection.html) uses sections at constant third Bunge angle
+[plotSection](SO3Fun.plotSection_py.html) uses sections at constant third Bunge angle
 $$\varphi_2$$ by default. Here the explicit `'phi2'` flag makes that choice visible. The
 option `sections` sets the number of panels; it does not set the angular resolution
 within a panel.
@@ -81,7 +81,7 @@ $$\varphi_2$$ period without repeating its equivalent endpoint.
 
 Pass explicit angle values with an option named after the fixed coordinate. The
 following four panels restrict the display to $$\varphi_2=25^\circ$$, $$30^\circ$$,
-$$35^\circ$$, and $$40^\circ$$. Constructing [phi2Sections](phi2Sections.html) explicitly
+$$35^\circ$$, and $$40^\circ$$. Constructing [phi2Sections](phi2Sections_py.html) explicitly
 records this geometry so it can be reused for several ODFs or orientation sets.
 
 ```python
@@ -114,10 +114,10 @@ option name for explicit section values.
 | `'alpha'` | Matthies angle $$\alpha$$ | `alpha=values` |
 | `'sigma'` | Matthies coordinate $$\sigma=\alpha+\gamma$$ | `sigma=values` |
 
-The corresponding classes are [phi2Sections](phi2Sections.html),
-[phi1Sections](phi1Sections.html), [PhiSections](PhiSections.html),
-[gammaSections](gammaSections.html), [alphaSections](alphaSections.html), and
-[sigmaSections](sigmaSections.html). They share layout, resolution, and the
+The corresponding classes are [phi2Sections](phi2Sections_py.html),
+[phi1Sections](phi1Sections_py.html), [PhiSections](PhiSections.html),
+[gammaSections](gammaSections_py.html), [alphaSections](alphaSections_py.html), and
+[sigmaSections](sigmaSections_py.html). They share layout, resolution, and the
 [plot-type](PlotTypes_py.html) options. The `secResolution` option is specific to
 `phi2Sections` and sets the spacing between its section angles.
 

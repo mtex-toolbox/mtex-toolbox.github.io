@@ -62,7 +62,7 @@ cs = crystalFrame('mmm', [4.756, 10.207, 5.98], mineral='Forsterite')
 # Smorf drawing of the same views, with the interfacial angles to compare against. The
 # equal-distance drawing in the previous screenshot is only a starting block: at distance
 # 1 the (010), (001) and (110) forms do not reach the surface at all. The same six plane
-# normals are a list of [Miller](https://mtex-toolbox.github.io/Miller.html) indices in MTEX.
+# normals are a list of [Miller](https://mtex-toolbox.github.io/Miller_py.html) indices in MTEX.
 
 # %%
 N = Miller([[0, 1, 0], [0, 0, 1], [0, 2, 1], [1, 1, 0], [1, 0, 1], [1, 2, 0]], cs)
@@ -92,7 +92,7 @@ dist = np.array([0.4, 1.3, 1.4, 1.05, 1.85, 1.35])
 # %% [markdown]
 # ## Transfer the Distances to MTEX
 #
-# [crystalShape](https://mtex-toolbox.github.io/crystalShape.crystalShape.html) describes each limiting plane by a normal
+# [crystalShape](https://mtex-toolbox.github.io/crystalShape.crystalShape_py.html) describes each limiting plane by a normal
 # $\mathbf{n}$ and the half-space $\mathbf{x}\cdot\mathbf{n}\leq 1$. A longer normal
 # therefore moves its plane inward. To preserve the distances entered in Smorf, divide
 # each Miller normal by its corresponding distance:

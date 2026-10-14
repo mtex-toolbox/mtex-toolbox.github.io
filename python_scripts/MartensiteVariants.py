@@ -65,8 +65,8 @@ plot(ebsd['Aus'].orientations, 'axisAngle')
 # deviations are assumed to record deformation from high-speed collisions in the asteroid
 # belt.
 #
-# The [`mean`](https://mtex-toolbox.github.io/orientation.mean.html) estimates the common parent orientation. The
-# [`std`](https://mtex-toolbox.github.io/quaternion.std.html) reports its angular spread in degrees.
+# The [`mean`](https://mtex-toolbox.github.io/orientation.mean_py.html) estimates the common parent orientation. The
+# [`std`](https://mtex-toolbox.github.io/quaternion.std_py.html) reports its angular spread in degrees.
 
 # %%
 parentOri = mean(ebsd['Aus'].orientations)
@@ -148,7 +148,7 @@ fitKS
 #
 # ## Fit the orientation relationship from a known parent
 #
-# Because the parent orientation is known here, a robust [`mean`](https://mtex-toolbox.github.io/orientation.mean.html) of
+# Because the parent orientation is known here, a robust [`mean`](https://mtex-toolbox.github.io/orientation.mean_py.html) of
 # all measured parent-to-child misorientations is a direct candidate for a better OR.
 
 # %%
@@ -169,7 +169,7 @@ fitMean
 #
 # ## Fit the relationship without a known parent
 #
-# If no parent orientation remains, [`calcParent2Child`](https://mtex-toolbox.github.io/calcParent2Child.html) can estimate
+# If no parent orientation remains, [`calcParent2Child`](https://mtex-toolbox.github.io/calcParent2Child_py.html) can estimate
 # the OR solely from child-to-child misorientations. The method iteratively assigns symmetry
 # operators and refines the OR.
 #
@@ -205,7 +205,7 @@ fitIter
 # orientation predicted from a single parent orientation by a known OR. A variant ID
 # identifies one member of that ordered set.
 #
-# [`calcVariantId`](https://mtex-toolbox.github.io/calcVariantId.html) compares every measured child orientation with all
+# [`calcVariantId`](https://mtex-toolbox.github.io/calcVariantId_py.html) compares every measured child orientation with all
 # predictions. It returns the closest variant ID and the associated packet and Bain group IDs.
 
 # %%

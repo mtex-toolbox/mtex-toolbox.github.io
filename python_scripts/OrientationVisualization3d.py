@@ -29,7 +29,7 @@ ori = orientation.rand(100, cs)
 # %% [markdown]
 # ## Euler Angle Space
 #
-# [plot](https://mtex-toolbox.github.io/orientation.plot.html) with `'Bunge'` places each orientation at its three Bunge
+# [plot](https://mtex-toolbox.github.io/orientation.plot_py.html) with `'Bunge'` places each orientation at its three Bunge
 # Euler angles $(\varphi_1,\Phi,\varphi_2)$.
 
 # %%
@@ -59,7 +59,7 @@ plot(ori, 'Bunge', ignoreFundamentalRegion=True)
 #
 # The rectangular geometry is only a coordinate chart. Do not use the Euclidean distance
 # between two plotted points as their angular separation; use
-# [angle](https://mtex-toolbox.github.io/orientation.angle.html) on the orientations themselves.
+# [angle](https://mtex-toolbox.github.io/orientation.angle_py.html) on the orientations themselves.
 #
 # ## Axis--Angle Space
 #

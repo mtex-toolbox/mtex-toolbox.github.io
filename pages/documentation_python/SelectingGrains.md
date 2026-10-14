@@ -133,7 +133,7 @@ grain2d (y↑→x)
   size: 61
   Phase  Grains             Mineral     Color         Symmetry  Crystal reference frame
   1      61 (14010 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
-  boundary segments: 2819, inner: 12, triple points: 133
+  boundary segments: 2851, inner: 12, triple points: 133
 ```
 
 The mineral name is the readable form of a condition on `phase`. This property stores
@@ -174,7 +174,7 @@ maxArea
 ```
 
 ```text
-4.0983e+06
+4.0977e+06
 ```
 
 ```python
@@ -244,7 +244,7 @@ grain2d (y↑→x)
   size: 4
   Phase  Grains           Mineral     Color         Symmetry  Crystal reference frame
   1      4 (5248 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
-  boundary segments: 736, inner: 0, triple points: 43
+  boundary segments: 745, inner: 0, triple points: 43
         Id   Phase  Pixels        meanRotation         GOS
         14       1    1448    (166°,127°,259°)      0.0135
         19       1    1208     (153°,68°,237°)     0.00808
@@ -280,7 +280,7 @@ grain2d (y↑→x)
   size: 3
   Phase  Grains          Mineral     Color         Symmetry  Crystal reference frame
   1      3 (523 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
-  boundary segments: 164, inner: 0, triple points: 13
+  boundary segments: 165, inner: 0, triple points: 13
         Id   Phase  Pixels        meanRotation         GOS
         25       1     181     (131°,64°,245°)     0.00698
         26       1     323     (131°,64°,250°)     0.00795

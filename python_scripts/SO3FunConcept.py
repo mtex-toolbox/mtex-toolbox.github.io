@@ -11,11 +11,11 @@
 #
 # ## A First Orientation-Dependent Function
 #
-# MTEX represents a scalar function on $SO(3)$ by an object of type [SO3Fun](https://mtex-toolbox.github.io/SO3Fun.SO3Fun.html).
+# MTEX represents a scalar function on $SO(3)$ by an object of type [SO3Fun](https://mtex-toolbox.github.io/SO3Fun.SO3Fun_py.html).
 # Its symmetries determine which rotations represent the same argument.
 #
 # Consider the smallest rotational angle between an orientation and the identity, including
-# its cubic symmetry equivalents. The [angle](https://mtex-toolbox.github.io/orientation.angle.html) command returns this
+# its cubic symmetry equivalents. The [angle](https://mtex-toolbox.github.io/orientation.angle_py.html) command returns this
 # angle in radians. Dividing by `degree` makes the function value a number in degrees.
 
 # %%
@@ -36,7 +36,7 @@ SO3F
 # `SO3FunHandle` turns a Python function into an `SO3Fun`. The variable `SO3F` now stores
 # the formula together with its symmetry.
 #
-# Use [eval](https://mtex-toolbox.github.io/SO3FunHandle.eval.html) to evaluate it at one or many orientations. Here the
+# Use [eval](https://mtex-toolbox.github.io/SO3FunHandle.eval_py.html) to evaluate it at one or many orientations. Here the
 # input is fixed so that the result is reproducible.
 
 # %%
@@ -91,7 +91,7 @@ mtexColorMap('parula')
 # searches for extrema. For this angle function, a local maximum is an orientation farthest
 # from a cubic symmetry equivalent of the identity.
 #
-# The [max](https://mtex-toolbox.github.io/SO3Fun.max.html) command below requests up to ten distinct local maxima. The
+# The [max](https://mtex-toolbox.github.io/SO3Fun.max_py.html) command below requests up to ten distinct local maxima. The
 # `accuracy` option controls the final angular search tolerance.
 
 # %%

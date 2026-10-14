@@ -102,7 +102,7 @@ mori
 # [Grain Exchange Symmetry](https://mtex-toolbox.github.io/MisorientationGrainExchangeSym_py.html) for why reversing the
 # grains gives an equivalent inverse.
 #
-# [plotAngleDistribution](https://mtex-toolbox.github.io/plotAngleDistribution.html) displays the measured angles as a
+# [plotAngleDistribution](https://mtex-toolbox.github.io/plotAngleDistribution_py.html) displays the measured angles as a
 # histogram. Adding the random baseline makes the deviation from symmetry alone visible.
 
 # %%
@@ -122,7 +122,7 @@ legend('boundary misorientations', 'random orientations')
 # distribution (mrd) instead.
 #
 # The numbers behind the histogram are returned by
-# [calcAngleDistribution](https://mtex-toolbox.github.io/orientation.calcAngleDistribution.html).
+# [calcAngleDistribution](https://mtex-toolbox.github.io/orientation.calcAngleDistribution_py.html).
 
 # %%
 density, omega = calcAngleDistribution(mori)
@@ -150,7 +150,7 @@ odf = calcDensity(grains['Magnesium'].meanOrientation, halfwidth=10 * degree)
 mdf = calcMDF(SO3FunHarmonic(odf))
 
 # %% [markdown]
-# [calcMDF](https://mtex-toolbox.github.io/SO3Fun.calcMDF.html) pairs the texture with itself to obtain the uncorrelated
+# [calcMDF](https://mtex-toolbox.github.io/SO3Fun.calcMDF_py.html) pairs the texture with itself to obtain the uncorrelated
 # MDF. Plot its angle marginal between the boundary histogram and the symmetry-only
 # reference.
 

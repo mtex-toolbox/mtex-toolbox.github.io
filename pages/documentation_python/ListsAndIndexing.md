@@ -14,10 +14,10 @@ status: Checked
 
 <!--introduction-->
 
-Almost every MTEX variable is a list of objects of one kind. An [EBSD](EBSD.EBSD.html)
-variable is a list of measurements, a [grain2d](grain2d.grain2d.html) variable is a list
+Almost every MTEX variable is a list of objects of one kind. An [EBSD](EBSD.EBSD_py.html)
+variable is a list of measurements, a [grain2d](grain2d.grain2d_py.html) variable is a list
 of grains, and `grains.boundary` is a list of grain boundary segments. An
-[orientation](orientation.orientation.html) variable commonly stores a list of
+[orientation](orientation.orientation_py.html) variable commonly stores a list of
 orientations.
 
 There is no separate type for one grain. A single grain is a `grain2d` list with length

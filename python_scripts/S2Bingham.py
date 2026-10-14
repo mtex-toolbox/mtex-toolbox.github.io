@@ -83,7 +83,7 @@ mtexFig.drawNow()
 #
 # ## Draw a random sample
 #
-# [discreteSample](https://mtex-toolbox.github.io/S2Fun.discreteSample.html) draws directions with probability
+# [discreteSample](https://mtex-toolbox.github.io/S2Fun.discreteSample_py.html) draws directions with probability
 # proportional to the density.
 
 # %%
@@ -107,7 +107,7 @@ hold(False)
 #
 # ## Fit a Bingham distribution to directions
 #
-# Given arbitrarily scattered directions, [fit](https://mtex-toolbox.github.io/S2FunBingham.fit.html) estimates the
+# Given arbitrarily scattered directions, [fit](https://mtex-toolbox.github.io/S2FunBingham.fit_py.html) estimates the
 # principal axes and concentrations of the best-fitting Bingham distribution. With
 # `confidenceEllipse=True` it also returns the uncertainty in the fitted modal axis.
 

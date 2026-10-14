@@ -76,10 +76,10 @@ gB
 
 ```text
 grainBoundary (y↑→x)
-  size: 3305 segments, 248 chains
+  size: 3270 segments, 248 chains
   segments  length   mineral 1  mineral 2
        607  182 µm  notIndexed  Magnesium
-      2698  717 µm   Magnesium  Magnesium
+      2663  719 µm   Magnesium  Magnesium
 ```
 
 Of these segments, some are boundaries against the edge of the scan, where a grain is cut
@@ -97,9 +97,9 @@ gB_MgMg
 
 ```text
 grainBoundary (y↑→x)
-  size: 2698 segments, 216 chains
+  size: 2663 segments, 216 chains
   segments  length  mineral 1  mineral 2
-      2698  717 µm  Magnesium  Magnesium
+      2663  719 µm  Magnesium  Magnesium
 ```
 
 ## Find the Repeated Misorientation
@@ -140,7 +140,7 @@ peakSummary
 ```
 
 ```text
-{'segments': 899, 'percentOfMgMgSegments': 33.320978502594514}
+{'segments': 878, 'percentOfMgMgSegments': 32.970334209538116}
 ```
 
 ## Identify the Relationship
@@ -260,9 +260,9 @@ twinBoundary
 
 ```text
 grainBoundary (y↑→x)
-  size: 1408 segments, 67 chains
+  size: 1379 segments, 67 chains
   segments  length  mineral 1  mineral 2
-      1408  356 µm  Magnesium  Magnesium
+      1379  358 µm  Magnesium  Magnesium
 ```
 
 ```python
@@ -272,7 +272,7 @@ candidateTracePercent
 ```
 
 ```text
-49.7057
+49.7584
 ```
 
 The two object summaries show how many magnesium-to-magnesium segments pass the test.

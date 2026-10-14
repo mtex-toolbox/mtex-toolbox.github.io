@@ -237,7 +237,7 @@ mPStats
 ```
 
 ```text
-array([0.0001, 0.3718, 0.9611])
+array([0.0001, 0.3719, 0.9611])
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/SlipTransmission-13.png"></center>

@@ -82,7 +82,7 @@ h = [Miller(0, 0, 2, CS), Miller(1, 0, 0, CS), Miller(1, 0, 1, CS), Miller(1, 0,
 
 ## Import and correct the intensities
 
-[PoleFigure.load](PoleFigure.load.html) combines the four files in one `PoleFigure`
+[PoleFigure.load](PoleFigure.load_py.html) combines the four files in one `PoleFigure`
 object. Its display reports four pole figures with 1152 specimen directions each, for
 4608 measured intensities in total.
 
@@ -100,7 +100,7 @@ PoleFigure (6/mmm → y←↑x)
 ```
 
 Keep the reference measurement quiet because it is only an input to the correction.
-[correct](PoleFigure.correct.html) divides the specimen data by this reference to
+[correct](PoleFigure.correct_py.html) divides the specimen data by this reference to
 compensate for intensity lost as the specimen tilts.
 
 ```python
@@ -145,7 +145,7 @@ in [Modify Pole Figures](PoleFigureCorrection_py.html).
 
 ## Reconstruct an ODF
 
-[calcODF](PoleFigure.calcODF.html) finds an ODF whose recalculated pole figures fit the
+[calcODF](PoleFigure.calcODF_py.html) finds an ODF whose recalculated pole figures fit the
 corrected measurements. `silent=True` suppresses the solver iteration history, while the
 returned object remains visible.
 
@@ -177,7 +177,7 @@ SO3FunRBF (6/mmm → y←↑x)
       21  91.5   349  3.98e-05
 ```
 
-The display identifies the result as an [SO3FunRBF](SO3FunRBF.SO3FunRBF.html). Radial
+The display identifies the result as an [SO3FunRBF](SO3FunRBF.SO3FunRBF_py.html). Radial
 basis functions are its numerical representation, not a different scientific quantity.
 MTEX plotting and analysis commands operate through the common ODF interface.
 
@@ -201,7 +201,7 @@ The recalculated panels are smooth fields rather than discrete dots. Compare the
 high- and low-intensity regions with the measurements above; the reconstruction should
 follow the structure without reproducing every point-to-point fluctuation.
 
-[calcError](PoleFigure.calcError.html) quantifies the same comparison. It returns one
+[calcError](PoleFigure.calcError_py.html) quantifies the same comparison. It returns one
 regularised relative error for each measured pole figure.
 
 ```python

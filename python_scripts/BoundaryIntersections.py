@@ -10,7 +10,7 @@
 # In MTEX the boundary network comes from [grain reconstruction](https://mtex-toolbox.github.io/GrainReconstruction_py.html).
 # A grain boundary starts as a list of short segments. Each segment lies between
 # neighbouring EBSD pixels assigned to different grains. The
-# [intersect](https://mtex-toolbox.github.io/grainBoundary.intersect.html) command finds where a test line crosses that
+# [intersect](https://mtex-toolbox.github.io/grainBoundary.intersect_py.html) command finds where a test line crosses that
 # reconstructed boundary network.
 #
 # We use a magnesium map containing thin twin lamellae.

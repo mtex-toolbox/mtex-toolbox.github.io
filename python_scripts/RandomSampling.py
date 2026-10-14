@@ -33,7 +33,7 @@ fibre_odf = 0.5 * uniformODF(cs) + 0.5 * fibreODF(fibre.rand(cs), halfwidth=20 *
 # %% [markdown]
 # ## Draw a Random Sample
 #
-# [discreteSample](https://mtex-toolbox.github.io/SO3Fun.discreteSample.html) draws orientations with probability
+# [discreteSample](https://mtex-toolbox.github.io/SO3Fun.discreteSample_py.html) draws orientations with probability
 # proportional to the ODF. Each orientation in the returned list has the same implicit
 # weight, $1/500$ in this example.
 
@@ -77,7 +77,7 @@ hold(False)
 #
 # A reconstruction converts the point set back to an ODF. Comparing it with the known
 # model measures how well the sample represents the original. Here
-# [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError.html) is asked explicitly for the $L^1$ error. The
+# [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError_py.html) is asked explicitly for the $L^1$ error. The
 # sample-size experiment below uses relative $L^2$ error because that norm is cheap for
 # harmonic ODFs. Compare errors within each experiment, not across the two different
 # norms.
@@ -126,7 +126,7 @@ print(f'texture index, random reconstruction: {norm(odf_rec) ** 2:.3f}')
 #
 # Random points are appropriate when the realization itself is part of the experiment,
 # such as a bootstrap study of measurement accuracy. When the aim is instead a compact
-# numerical representation, use [optimalSample](https://mtex-toolbox.github.io/SO3Fun.optimalSample.html). It moves the
+# numerical representation, use [optimalSample](https://mtex-toolbox.github.io/SO3Fun.optimalSample_py.html). It moves the
 # orientations to reduce their discrepancy from the ODF rather than drawing independent
 # observations.
 
@@ -172,7 +172,7 @@ print(f'texture index, optimized reconstruction: {norm(odf_rec) ** 2:.3f}')
 # Whether weighted points help depends on the reconstruction halfwidth and on the
 # harmonic `bandwidth` used by `optimalSample`. The bandwidth says which harmonic degrees
 # the optimization controls. Choose it for the intended use of the points; the
-# [optimalSample](https://mtex-toolbox.github.io/SO3Fun.optimalSample.html) reference gives the details.
+# [optimalSample](https://mtex-toolbox.github.io/SO3Fun.optimalSample_py.html) reference gives the details.
 
 # %% [markdown]
 # ## How Sample Size Changes the Best Halfwidth
@@ -268,8 +268,8 @@ print(f'ratio of optimized to random halfwidth: {hwOpt[0] / np.mean(hwRand[0]):.
 # %% [markdown]
 # ## The Asymptotic Halfwidth Rule
 #
-# For comparison, the `'magicRule'` in [calcKernel](https://mtex-toolbox.github.io/orientation.calcKernel.html) sets the
-# parameter of the [de la Vallee Poussin kernel](https://mtex-toolbox.github.io/SO3DeLaValleePoussinKernel.html) to
+# For comparison, the `'magicRule'` in [calcKernel](https://mtex-toolbox.github.io/orientation.calcKernel_py.html) sets the
+# parameter of the [de la Vallee Poussin kernel](https://mtex-toolbox.github.io/SO3DeLaValleePoussinKernel_py.html) to
 # $\kappa \sim M^{2/7}$. Since its halfwidth behaves like $\delta \sim \kappa^{-1/2}$,
 # the rule corresponds to $\delta \sim M^{-1/7} \approx M^{-0.14}$.
 #
@@ -336,9 +336,9 @@ for m in M:
 # ## Exporting the Orientations
 #
 # A sampled orientation list can be exported as [Euler angles](https://mtex-toolbox.github.io/RotationDefinition_py.html)
-# with [export](https://mtex-toolbox.github.io/quaternion.export.html). Crystal-plasticity programs often require a
+# with [export](https://mtex-toolbox.github.io/quaternion.export_py.html). Crystal-plasticity programs often require a
 # particular convention and a weight in every row. Use
-# [export](https://mtex-toolbox.github.io/orientation.export_VPSC.html) with `interface='VPSC'` for the VPSC format.
+# [export](https://mtex-toolbox.github.io/orientation.export_VPSC_py.html) with `interface='VPSC'` for the VPSC format.
 #
 # The broader choice between exact ODF storage, tabulated function values, and weighted
 # orientation lists is covered in [ODF Export](https://mtex-toolbox.github.io/ODFExport_py.html).

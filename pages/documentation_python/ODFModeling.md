@@ -36,7 +36,7 @@ choice:
 | [harmonic representation](SO3FunHarmonicRepresentation_py.html) | a series expansion, the classical form used for pole figure inversion |
 
 Harmonic names a representation, not another physical peak shape. The current
-[calcODF](PoleFigure.calcODF.html) normally returns a radial-basis ODF. It can then be
+[calcODF](PoleFigure.calcODF_py.html) normally returns a radial-basis ODF. It can then be
 converted to a harmonic series. All of these objects share one interface for
 evaluation, plotting, scaling, and addition. This is why components with different
 representations can be mixed in one model.
@@ -113,7 +113,7 @@ odfMax
 ```
 
 ```text
-15.9612
+15.9608
 ```
 
 ---
@@ -182,7 +182,7 @@ the reconstruction against the answer.
 
 ## Rotating a Model
 
-[rotate](SO3Fun.rotate.html) actively moves a model relative to the specimen axes. By
+[rotate](SO3Fun.rotate_py.html) actively moves a model relative to the specimen axes. By
 default, the rotation acts on the specimen side of every component orientation.
 
 ```python

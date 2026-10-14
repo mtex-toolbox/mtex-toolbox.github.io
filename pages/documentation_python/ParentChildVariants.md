@@ -47,7 +47,7 @@ oriParent = orientation.rand(csBeta)
 ```
 
 The dominant OR between beta and alpha titanium is the Burgers OR. MTEX stores it as a
-parent-to-child [orientation](orientation.orientation.html).
+parent-to-child [orientation](orientation.orientation_py.html).
 
 ```python
 beta2alpha = orientation.Burgers(csBeta, csAlpha)
@@ -71,7 +71,7 @@ oriChild
 orientation (Ti (alpha) → y↑→x)
   Bunge Euler angles in degree
   phi1   Phi  phi2
-   287  17.3   324
+  73.3  92.6  65.5
 ```
 
 The Burgers OR aligns a hexagonal $$(0001)$$ plane with a cubic $$(110)$$ plane. It also aligns
@@ -188,8 +188,8 @@ orientation (Ti (alpha) → y↑→x)
   size: 2
   Bunge Euler angles in degree
   phi1   Phi  phi2
-   347  98.8  99.7
-   112  42.7   208
+  13.7   105   126
+   156  19.4   183
 ```
 
 ## Exact and approximate orientation relationships
@@ -260,7 +260,7 @@ np.min(angle(oriParents, oriParent)) / degree
 ```
 
 ```text
-2.4841e-14
+3.8167e-14
 ```
 
 The [`parents`](orientation.parents.html) method returns the same set of OR variants.
@@ -275,12 +275,12 @@ orientation (Ti (beta) → y↑→x)
   size: 6
   Bunge Euler angles in degree
   phi1   Phi  phi2
-   184  38.5   156
-  24.5  73.3   122
-  47.6  26.4   285
-  64.5    18  89.6
-    22  83.5   302
-   189  48.4   332
+   234  45.6   117
+    36  65.9   149
+  4.31    20   354
+   335  13.5   203
+  38.6  76.1   328
+   230  55.7   300
 ```
 
 A single child orientation cannot identify which candidate parent is correct. Parent grain

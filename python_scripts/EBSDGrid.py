@@ -2,7 +2,7 @@
 # # Gridded EBSD Data
 #
 # Most EBSD maps are measured on a square or hexagonal scan lattice. By default,
-# [EBSD.load](https://mtex-toolbox.github.io/EBSD.load.html) keeps that structure: it returns a map on its square or
+# [EBSD.load](https://mtex-toolbox.github.io/EBSD.load_py.html) keeps that structure: it returns a map on its square or
 # hexagonal grid whenever every measurement fits on one lattice. Otherwise it keeps the
 # measurements as a plain `EBSD` list and explains why.
 #
@@ -65,8 +65,8 @@ ebsd[49, 99]
 # whichever corner the acquisition started from.
 #
 # A stored matrix is not required nearly as often as it once was. The
-# [orientation gradient](https://mtex-toolbox.github.io/EBSD.gradientX.html), [curvature](https://mtex-toolbox.github.io/EBSD.curvature.html),
-# [GND](https://mtex-toolbox.github.io/EBSD.calcGND.html), and [fill](https://mtex-toolbox.github.io/EBSD.fill.html) operate on the virtual lattice
+# [orientation gradient](https://mtex-toolbox.github.io/EBSD.gradientX_py.html), [curvature](https://mtex-toolbox.github.io/EBSD.curvature_py.html),
+# [GND](https://mtex-toolbox.github.io/EBSD.calcGND_py.html), and [fill](https://mtex-toolbox.github.io/EBSD.fill_py.html) operate on the virtual lattice
 # derived by [lattice](https://mtex-toolbox.github.io/EBSD.lattice.html). They also work on plain lists, phase subsets,
 # and arbitrarily aligned maps.
 
@@ -79,7 +79,7 @@ ebsd[49, 99]
 # compares a real map with SEM images of the same area.
 #
 # `'columnMajor'` and `'rowMajor'` are the two layouts aligned with x and y. Both are
-# [gridLayout](https://mtex-toolbox.github.io/gridLayout.gridLayout.html) objects. A layout names the row direction
+# [gridLayout](https://mtex-toolbox.github.io/gridLayout.gridLayout_py.html) objects. A layout names the row direction
 # first, in the same order as the shape of the array. Suppose an image's rows run against
 # x and its columns run along y, as for a detector mounted a quarter turn from the scan.
 
@@ -155,7 +155,7 @@ ebsd
 #     setMTEXpref('gridifyOnImport', False)
 #
 # You may change representation later. `ebsd.flatten()` flattens a gridded map into a
-# list, while [gridify](https://mtex-toolbox.github.io/EBSD.gridify.html) puts a list on its grid.
+# list, while [gridify](https://mtex-toolbox.github.io/EBSD.gridify_py.html) puts a list on its grid.
 
 # %% [markdown]
 # ## Selecting a Subset Drops the Matrix Shape
@@ -171,7 +171,7 @@ ebsdMg = ebsd['Magnesium']
 ebsdMg
 
 # %% [markdown]
-# Reapplying [gridify](https://mtex-toolbox.github.io/EBSD.gridify.html) restores the matrix shape.
+# Reapplying [gridify](https://mtex-toolbox.github.io/EBSD.gridify_py.html) restores the matrix shape.
 
 # %%
 ebsdMg = ebsd['Magnesium'].gridify()
@@ -200,7 +200,7 @@ plot(ebsdMg[49:100, 4:100], ebsdMg[49:100, 4:100].orientations)
 # %% [markdown]
 # ## Gridding Reorders the Measurements
 #
-# [gridify](https://mtex-toolbox.github.io/EBSD.gridify.html) does not preserve input order, and generally cannot. The
+# [gridify](https://mtex-toolbox.github.io/EBSD.gridify_py.html) does not preserve input order, and generally cannot. The
 # layout fixes the first matrix dimension to y, whereas `.ctf` and `.ang` files usually
 # write x fastest. Consequently, the k-th entry of the flattened grid is generally not
 # line k of the input file.
@@ -225,7 +225,7 @@ np.array_equal(ebsdGrid.pos.flatten()[newId].data, ebsd.flatten().pos.data)
 # %% [markdown]
 #
 # This distinction matters only to code that depends on input order. Grain reconstruction
-# does not: [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html) returns the same grains from the list and
+# does not: [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains_py.html) returns the same grains from the list and
 # from the map.
 
 # %% [markdown]
@@ -276,7 +276,7 @@ plot(ebsd[0:20, 0:40], ebsd[0:20, 0:40].orientations, micronbar=False, edgeColor
 # ## Switching from a Hexagonal to a Square Grid
 #
 # Some external image-processing tools require square pixels. Passing a square `unitCell`
-# to [gridify](https://mtex-toolbox.github.io/EBSD.gridify.html) resamples the hexagonal measurements onto such a grid.
+# to [gridify](https://mtex-toolbox.github.io/EBSD.gridify_py.html) resamples the hexagonal measurements onto such a grid.
 
 # %%
 # define a square unit cell
@@ -329,8 +329,8 @@ hold(False)
 # [Regridding and Interpolation](https://mtex-toolbox.github.io/EBSDInter_py.html) develops this distinction in detail.
 #
 # Pixels that remain notIndexed correspond to measurements that were not indexed in the
-# source map. [fill](https://mtex-toolbox.github.io/EBSD.fill.html) may replace them by interpolation;
-# [smooth](https://mtex-toolbox.github.io/EBSD.smooth.html) offers more sophisticated methods; see
+# source map. [fill](https://mtex-toolbox.github.io/EBSD.fill_py.html) may replace them by interpolation;
+# [smooth](https://mtex-toolbox.github.io/EBSD.smooth_py.html) offers more sophisticated methods; see
 # [Filling Missing Data](https://mtex-toolbox.github.io/EBSDFilling_py.html).
 
 # %% [markdown]
@@ -364,8 +364,8 @@ gridify(ebsdR.flatten())
 # EBSD is measured on a tilted specimen. Seen from a finite working distance, the far
 # edge is farther away and appears smaller. The measured positions can therefore depart
 # smoothly from any single rigid lattice. MTEX still reconstructs the underlying grid
-# indices of an [EBSD](https://mtex-toolbox.github.io/EBSD.EBSD.html) object. This matters to `gridify` and to every
-# operation that needs neighbours, including [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html) and the
+# indices of an [EBSD](https://mtex-toolbox.github.io/EBSD.EBSD_py.html) object. This matters to `gridify` and to every
+# operation that needs neighbours, including [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains_py.html) and the
 # cell drawing of a map.
 #
 # Grid reconstruction uses a local deformation model. MTEX first fits an ideal affine
@@ -387,9 +387,9 @@ gridify(ebsdR.flatten())
 ebsd = mtexdata('small')
 
 # %% [markdown]
-# [transform](https://mtex-toolbox.github.io/EBSD.transform.html) moves every pixel and its unit cell. It leaves
+# [transform](https://mtex-toolbox.github.io/EBSD.transform_py.html) moves every pixel and its unit cell. It leaves
 # orientations and all other per-pixel properties untouched. The command takes a
-# [spatialTransform](https://mtex-toolbox.github.io/spatialTransform.html), which records the mapping as an object; see
+# [spatialTransform](https://mtex-toolbox.github.io/spatialTransform_py.html), which records the mapping as an object; see
 # [Spatial Transforms](https://mtex-toolbox.github.io/EBSDSpatialTransform_py.html).
 #
 # A tilt is a projective transform. Straight lines remain straight, but parallel lines need
@@ -399,7 +399,7 @@ ebsd = mtexdata('small')
 # perspective, which vanishes as that distance grows.
 #
 # Here the tilt is known and imposed. Recovering an unknown tilt from two measured images
-# is the inverse problem. [spatialTransformTilt](https://mtex-toolbox.github.io/spatialTransformTilt.html) fits it in
+# is the inverse problem. [spatialTransformTilt](https://mtex-toolbox.github.io/spatialTransformTilt_py.html) fits it in
 # stages.
 
 # %%
@@ -454,7 +454,7 @@ np.array_equal(ebsdDistorted['Fo'].lattice.ij, ebsd['Fo'].lattice.ij)
 # Drawing each measurement as its unit cell shows the result. The cells form one
 # continuous deformed mesh, with no cell sheared independently of its neighbours. A rigid
 # reconstruction would make the mesh wavy and would give
-# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html) the wrong neighbours.
+# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains_py.html) the wrong neighbours.
 
 # %%
 plot(ebsdDistorted['Fo'], ebsdDistorted['Fo'].orientations, edgeColor='black')

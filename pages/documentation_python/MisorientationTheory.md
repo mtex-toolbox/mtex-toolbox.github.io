@@ -144,7 +144,7 @@ rawRepresentativeAngle
 array([107.9164])
 ```
 
-[projectIntoFundamentalRegion](orientation.project2FundamentalRegion.html) chooses the
+[projectIntoFundamentalRegion](orientation.project2FundamentalRegion_py.html) chooses the
 representative in the fundamental region, where each physical relationship appears once.
 
 ```python
@@ -398,7 +398,7 @@ twinLengthFraction
 ```
 
 ```text
-0.4906
+0.4910
 ```
 
 ## Reading a Population of Misorientations
@@ -442,7 +442,7 @@ CS_Hem = loadCIF('Hematite')
 
 A reported magnetite-to-hematite relationship has $$\{111\}_{m} \parallel \{0001\}_{h}$$
 and $$\{\bar101\}_{m} \parallel \{10\bar10\}_{h}$$. These two parallelisms are exactly the
-input expected by [orientation.map](orientation.map.html).
+input expected by [orientation.map](orientation.map_py.html).
 
 ```python
 Mag2Hem = orientation.map(Miller(1, 1, 1, CS_Mag), Miller(0, 0, 0, 1, CS_Hem),
@@ -478,7 +478,7 @@ variantCounts
 
 A *variant* is one crystallographically equivalent child orientation predicted from a
 single parent orientation through a known orientation relationship.
-[variants](orientation.variants.html) removes duplicate descriptions directly.
+[variants](orientation.variants_py.html) removes duplicate descriptions directly.
 
 ```python
 childVariants = variants(Mag2Hem, ori_Mag)

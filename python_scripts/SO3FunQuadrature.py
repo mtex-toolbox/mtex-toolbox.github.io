@@ -22,8 +22,8 @@ plottingConvention.default('y↑→x')
 # Use the Dubna orientation distribution function (ODF) as the evaluator. An ODF is a
 # nonnegative orientation-dependent density with mean 1.
 #
-# The [SO3FunHarmonic](https://mtex-toolbox.github.io/SO3FunHarmonic.SO3FunHarmonic.html) constructor falls back on
-# [SO3FunHarmonic.quadrature](https://mtex-toolbox.github.io/SO3FunHarmonic.quadrature.html) only when its input has no
+# The [SO3FunHarmonic](https://mtex-toolbox.github.io/SO3FunHarmonic.SO3FunHarmonic_py.html) constructor falls back on
+# [SO3FunHarmonic.quadrature](https://mtex-toolbox.github.io/SO3FunHarmonic.quadrature_py.html) only when its input has no
 # faster route of its own. The Dubna ODF is an `SO3FunRBF`, which builds its coefficients
 # from its centres and kernel, so no quadrature grid is used in the call below. The explicit
 # sequence later on this page takes the quadrature route.
@@ -105,7 +105,7 @@ CC_result
 # grid object retains the mapping and weights needed to integrate over the complete
 # orientation space.
 #
-# [SO3FunHarmonic.interpolate](https://mtex-toolbox.github.io/SO3FunHarmonic.interpolate.html) recognizes a
+# [SO3FunHarmonic.interpolate](https://mtex-toolbox.github.io/SO3FunHarmonic.interpolate_py.html) recognizes a
 # `quadratureSO3Grid` and performs the same calculation. For example,
 # `SO3FunHarmonic.interpolate(CC_grid, CC_values)` is equivalent here.
 
@@ -190,13 +190,13 @@ schemeDifference
 #
 # If an external experiment can be run at arbitrary orientations, the quadrature grid is the
 # optimal structured choice for a harmonic result. If an RBF result is required instead,
-# evaluate an [equispacedSO3Grid](https://mtex-toolbox.github.io/equispacedSO3Grid.html) and pass the resulting
-# orientation--value pairs to [SO3FunRBF.interpolate](https://mtex-toolbox.github.io/SO3FunRBF.interpolate.html).
+# evaluate an [equispacedSO3Grid](https://mtex-toolbox.github.io/equispacedSO3Grid_py.html) and pass the resulting
+# orientation--value pairs to [SO3FunRBF.interpolate](https://mtex-toolbox.github.io/SO3FunRBF.interpolate_py.html).
 #
 # ## Quadrature is not RBF fitting
 #
 # [RBF-Kernel Interpolation](https://mtex-toolbox.github.io/RBFApproximationTheory_py.html) develops the RBF workflow in full.
-# An [SO3FunRBF](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF.html) represents a function as a weighted sum of
+# An [SO3FunRBF](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF_py.html) represents a function as a weighted sum of
 # rotational kernels centred at chosen orientations. Its spatial method chooses the
 # coefficients by minimizing pointwise error at an evaluation grid. LSQR is the default
 # unconstrained solver. Although stationarity can be expressed through the normal equations,

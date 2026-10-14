@@ -56,7 +56,7 @@ ori
 #
 # A pole figure fixes a crystal direction and asks where it points in the specimen. Each
 # sampled orientation maps the $(100)$ pole into the specimen frame.
-# [plotPF](https://mtex-toolbox.github.io/orientation.plotPDF.html) also accounts for the crystallographically
+# [plotPF](https://mtex-toolbox.github.io/orientation.plotPDF_py.html) also accounts for the crystallographically
 # equivalent poles.
 
 # %%
@@ -77,7 +77,7 @@ plotPF(ori, Miller(1, 0, 0, ori.CS))
 # ## Inverse pole figures
 #
 # An inverse pole figure fixes a specimen direction and asks which crystal direction
-# points along it. [plotIPF](https://mtex-toolbox.github.io/orientation.plotIPDF.html) draws the answer in a
+# points along it. [plotIPF](https://mtex-toolbox.github.io/orientation.plotIPDF_py.html) draws the answer in a
 # fundamental sector, which contains one representative of each family of
 # crystal-symmetry-equivalent directions.
 
@@ -97,7 +97,7 @@ plotIPF(ori, xvector)
 # Orientation space has three dimensions. A section plot replaces it with a stack of
 # two-dimensional slices, so it retains all three orientation coordinates across the
 # stack rather than projecting away one rotation.
-# [plotSection](https://mtex-toolbox.github.io/orientation.plotSection.html) draws points within a finite tolerance of
+# [plotSection](https://mtex-toolbox.github.io/orientation.plotSection_py.html) draws points within a finite tolerance of
 # each slice. An orientation can therefore miss every panel, and a symmetry-equivalent
 # representative can appear more than once.
 #

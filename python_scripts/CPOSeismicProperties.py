@@ -67,7 +67,7 @@ plot(ebsd, refFrame=True)
 # Abramson et al. (1997) reported the following olivine stiffness coefficients
 # in GPa. The crystal symmetry records the lattice parameters and the crystal
 # reference frame in which those coefficients were measured. The density is
-# in $\mathrm{g/cm}^3$ so that [velocity](https://mtex-toolbox.github.io/stiffnessTensor.velocity.html)
+# in $\mathrm{g/cm}^3$ so that [velocity](https://mtex-toolbox.github.io/stiffnessTensor.velocity_py.html)
 # returns km/s.
 
 # %%
@@ -137,12 +137,12 @@ C_cpx = stiffnessTensor(Cij, cs_Tensor_cpx, density=rho_cpx)
 # ## Match the tensor and EBSD crystal frames
 #
 # The published Diopside lattice parameters differ from those of the measured
-# phase by about 2%. [calcTensor](https://mtex-toolbox.github.io/EBSD.calcTensor.html) matches a phase tensor
+# phase by about 2%. [calcTensor](https://mtex-toolbox.github.io/EBSD.calcTensor_py.html) matches a phase tensor
 # by mineral name, Laue group, and lattice parameters. It accepts at most 1%
 # relative deviation in the lattice axes and 0.01 rad in the lattice angles,
 # so it deliberately rejects this near match.
 #
-# The remedy is [transformReferenceFrame](https://mtex-toolbox.github.io/tensor.transformReferenceFrame.html).
+# The remedy is [transformReferenceFrame](https://mtex-toolbox.github.io/tensor.transformReferenceFrame_py.html).
 # A frame change re-expresses the same physical tensor in the crystal frame of
 # the measured phase; it does not rotate the crystal or change its elastic
 # response.
@@ -159,7 +159,7 @@ C_cpx = transformReferenceFrame(C_cpx, ebsd['Diopside'].CS)
 #
 # [Wave Velocities](https://mtex-toolbox.github.io/WaveVelocities_py.html) develops the three wave modes and
 # their polarization directions. Here
-# [plotSeismicVelocities](https://mtex-toolbox.github.io/stiffnessTensor.plotSeismicVelocities.html)
+# [plotSeismicVelocities](https://mtex-toolbox.github.io/stiffnessTensor.plotSeismicVelocities_py.html)
 # summarizes the Forsterite result.
 
 # %%

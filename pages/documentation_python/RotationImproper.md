@@ -24,7 +24,7 @@ in [Defining Rotations](RotationDefinition_py.html).
 
 Proper and improper transformations together form the orthogonal group O(3). Its proper
 part is the rotation group SO(3). MTEX stores both: a proper element is a
-[rotation](rotation.rotation.html), and an orthogonalTransform
+[rotation](rotation.rotation_py.html), and an orthogonalTransform
 records which part an element belongs to with an inversion flag.
 
 ```python
@@ -42,7 +42,7 @@ plottingConvention.default('y↑→x')
 ## The Inversion
 
 The inversion sends every direction to its opposite. The named constructor is
-[rotation.inversion](rotation.inversion.html).
+[rotation.inversion](rotation.inversion_py.html).
 
 ```python
 I = rotation.inversion
@@ -69,7 +69,7 @@ I == -rotation.id
 True
 ```
 
-Do not confuse unary minus with [inv](quaternion.inv.html). `inv(turn)` undoes a turn,
+Do not confuse unary minus with [inv](quaternion.inv_py.html). `inv(turn)` undoes a turn,
 whereas `-turn` combines the same proper part with the inversion. The first result below
 is proper and the second is improper.
 
@@ -88,7 +88,7 @@ array([False,  True])
 ## Reflection in a Plane
 
 A reflection leaves every direction in its mirror plane fixed and reverses the component
-normal to the plane. In MTEX, [reflection](reflection.html) takes the plane normal as its
+normal to the plane. In MTEX, [reflection](reflection_py.html) takes the plane normal as its
 argument.
 
 ```python
@@ -154,7 +154,7 @@ hold(False)
 
 ## Parity under Composition
 
-isImproper reports whether a transformation
+[isImproper](orthogonalTransform.isImproper_py.html) reports whether a transformation
 reverses handedness. A single reflection is improper, whereas composing two reflections
 restores handedness.
 
@@ -203,8 +203,8 @@ improperFlags = ops.isImproper
 ```
 
 Only the proper operations are physical turns that superpose the crystal on itself.
-[properSubGroup](symmetry.properSubGroup.html) retains those four operations. Do not
-confuse it with [properGroup](symmetry.properGroup.html), which returns the associated
+[properSubGroup](symmetry.properSubGroup_py.html) retains those four operations. Do not
+confuse it with [properGroup](symmetry.properGroup_py.html), which returns the associated
 enantiomorphic group and has eight operations in this example.
 
 ```python
@@ -235,7 +235,7 @@ array([ 1., -1.])
 
 MTEX stores an improper transformation as a proper quaternion together with the
 inversion flag. Axis-angle and Euler values therefore describe only that stored proper
-part. Use `isImproper` or [matrix](rotation.matrix.html) when the handedness of the full
+part. Use `isImproper` or [matrix](rotation.matrix_py.html) when the handedness of the full
 transformation matters.
 
 ## References

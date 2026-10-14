@@ -72,7 +72,7 @@ measurements are forsterite. Its grid is gone as well. A selection is generally 
 full rectangular grid, although every retained measurement still has its original
 position.
 
-Use [gridify](EBSD.gridify.html) when later code explicitly needs a matrix-shaped map.
+Use [gridify](EBSD.gridify_py.html) when later code explicitly needs a matrix-shaped map.
 Many spatial MTEX operations reconstruct the virtual lattice internally;
 [Square and Hex Grids](EBSDGrid_py.html) explains when the stored grid shape matters.
 
@@ -147,7 +147,7 @@ plt.gca().add_patch(Rectangle(region[:2], region[2], region[3], edgecolor='red',
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDSelect-10.png"></center>
 
 The red rectangle crosses all three indexed phases and many notIndexed points.
-[inpolygon](EBSD.inpolygon.html) tests every measurement and returns one `True` or
+[inpolygon](EBSD.inpolygon_py.html) tests every measurement and returns one `True` or
 `False` for each point.
 
 ```python

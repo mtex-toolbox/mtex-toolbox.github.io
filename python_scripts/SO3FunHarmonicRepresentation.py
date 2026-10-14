@@ -154,7 +154,7 @@ plotPF(fExample, cat(Miller(1, 0, 0, cs), Miller(1, 1, 0, cs)), antipodal=True)
 # %% [markdown]
 # ## Reading a Spectrum
 #
-# [plotSpectrum](https://mtex-toolbox.github.io/SO3Fun.plotSpektra.html) groups the coefficients by degree. At each degree
+# [plotSpectrum](https://mtex-toolbox.github.io/SO3Fun.plotSpektra_py.html) groups the coefficients by degree. At each degree
 # it plots the square root of their summed squared magnitudes, not the individual
 # coefficients.
 
@@ -181,7 +181,7 @@ oriRef = orientation.byEuler(30 * degree, 50 * degree, 10 * degree, cs)
 fAngle = SO3FunHandle(lambda ori: angle(ori, oriRef) / degree, cs)
 
 # %% [markdown]
-# [quadrature](https://mtex-toolbox.github.io/SO3FunHarmonic.quadrature.html) evaluates the function on a quadrature
+# [quadrature](https://mtex-toolbox.github.io/SO3FunHarmonic.quadrature_py.html) evaluates the function on a quadrature
 # grid and computes its Fourier coefficients. Request the same bandwidth 32 used above.
 
 # %%

@@ -80,7 +80,7 @@ hold(False)
 #
 # ## Set up the reconstruction job
 #
-# A [`parentGrainReconstructor`](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html)
+# A [`parentGrainReconstructor`](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor_py.html)
 # stores both the measured child grains and the current reconstruction. Assigning `p2c`
 # identifies the beta phase as the parent and the alpha phase as the child.
 
@@ -92,7 +92,7 @@ job
 # %% [markdown]
 # ## Find unambiguous triple-point seeds
 #
-# [`calcTPVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcTPVotes.html) asks whether the three child
+# [`calcTPVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcTPVotes_py.html) asks whether the three child
 # orientations at each triple point are variants of one beta orientation. It computes the
 # best and second-best common-parent fits.
 
@@ -131,7 +131,7 @@ mtexColorbar(title='best vote probability')
 # candidate beta orientation and changes from the child phase to the parent phase. It has not
 # yet been merged with neighbouring candidates.
 #
-# [`calcParentFromVote`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromVote.html) applies the 70%
+# [`calcParentFromVote`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentFromVote_py.html) applies the 70%
 # probability threshold used above.
 
 # %%
@@ -163,7 +163,7 @@ plot(job.parentGrains, parentColor, figSize='large')
 #
 # ## Grow from parent-child boundaries
 #
-# [`calcGBVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBVotes.html) with `p2c` considers only
+# [`calcGBVotes`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGBVotes_py.html) with `p2c` considers only
 # boundaries between a reconstructed parent grain and an unreconstructed child grain. Three
 # passes use thresholds of 2.5, 5, and 7.5 degrees. Newly transformed grains can support the
 # next pass.
@@ -190,7 +190,7 @@ plot(job.parentGrains, parentColor, figSize='large')
 # *Merge* is the second reconstruction step. It combines neighbouring transformed grains into
 # one parent-grain footprint.
 #
-# [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar.html) treats parent neighbours
+# [`mergeSimilar`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeSimilar_py.html) treats parent neighbours
 # within 5 degrees as parts of the same beta grain.
 
 # %%
@@ -216,7 +216,7 @@ plot(job.parentGrains, parentColor, figSize='large')
 #
 # The earlier description called these poorly indexed inclusions. Here they are
 # unreconstructed indexed child grains; the notIndexed phase is not a reconstruction
-# candidate. [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions.html) absorbs
+# candidate. [`mergeInclusions`](https://mtex-toolbox.github.io/parentGrainReconstructor.mergeInclusions_py.html) absorbs
 # inclusions of at most five pixels into their surrounding reconstructed parent grains.
 
 # %%
@@ -238,7 +238,7 @@ plot(job.parentGrains, parentColor, figSize='large')
 # ## Reconstruct beta orientations at individual pixels
 #
 # So far, the reconstructed beta orientations have been stored as grain means. Reading
-# `job.ebsd` calls [`calcParentEBSD`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentEBSD.html) and
+# `job.ebsd` calls [`calcParentEBSD`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcParentEBSD_py.html) and
 # returns an EBSD variable with a parent orientation for each transformed child pixel.
 
 # %%

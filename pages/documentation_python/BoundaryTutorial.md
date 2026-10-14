@@ -24,7 +24,7 @@ one MTEX object holds a vectorized list of grains or boundary segments.
 
 A grain boundary is a segment between two neighbouring EBSD pixels that belong to
 different grains. MTEX stores the complete boundary network as a
-[grainBoundary](grainBoundary.grainBoundary.html) object with one entry per segment.
+[grainBoundary](grainBoundary.grainBoundary_py.html) object with one entry per segment.
 
 ```python
 import matplotlib.pyplot as plt
@@ -52,7 +52,7 @@ grain2d (y↑→x)
   size: 121
   Phase  Grains              Mineral    Color         Symmetry  Crystal reference frame
   1      121 (22833 pixels)  Magnesium  LightSkyBlue  6/mmm     Magnesium
-  boundary segments: 3363, inner: 3, triple points: 114
+  boundary segments: 3326, inner: 3, triple points: 114
 ```
 
 ## See the grains before measuring their boundaries
@@ -61,7 +61,7 @@ The displayed summary reports 121 magnesium grains. The 15 degree reconstruction
 threshold is an example parameter, not a universal grain definition.
 [Grain Reconstruction](GrainReconstruction_py.html) explains how to choose and report it.
 
-[smoothBoundary](grain2d.smoothBoundary.html) simplifies, refines, and smooths the pixel
+[smoothBoundary](grain2d.smoothBoundary_py.html) simplifies, refines, and smooths the pixel
 staircase by default. This improves trace geometry but changes the number and length of
 segments. [Grain Smoothing](GrainSmoothing_py.html) develops that choice.
 
@@ -94,10 +94,10 @@ gB
 
 ```text
 grainBoundary (y↑→x)
-  size: 3363 segments, 297 chains
+  size: 3326 segments, 297 chains
   segments  length   mineral 1  mineral 2
        608  183 µm  notIndexed  Magnesium
-      2755  771 µm   Magnesium  Magnesium
+      2718  785 µm   Magnesium  Magnesium
 ```
 
 ## Reading the boundary summary
@@ -120,9 +120,9 @@ gB_MgMg
 
 ```text
 grainBoundary (y↑→x)
-  size: 2755 segments, 259 chains
+  size: 2718 segments, 259 chains
   segments  length  mineral 1  mineral 2
-      2755  771 µm  Magnesium  Magnesium
+      2718  785 µm  Magnesium  Magnesium
 ```
 
 ## Misorientation angle along the boundary
@@ -164,7 +164,7 @@ medianAngle
 ```
 
 ```text
-84.5516
+84.5508
 ```
 
 ```python
@@ -173,7 +173,7 @@ fractionAbove80
 ```
 
 ```text
-0.5819
+0.5791
 ```
 
 ## Reading the segment statistics

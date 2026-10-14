@@ -51,7 +51,7 @@ mtexColorbar()
 
 ## Random sampling
 
-[discreteSample](S2Fun.discreteSample.html) draws independent directions with probability
+[discreteSample](S2Fun.discreteSample_py.html) draws independent directions with probability
 proportional to the function value. It is fast and unbiased, but a finite random sample
 contains clusters and empty patches.
 
@@ -71,7 +71,7 @@ rather than low-density parts of the original function.
 
 ## Optimizing the directions
 
-[optimalSample](S2Fun.optimalSample.html) moves the directions until their discrete
+[optimalSample](S2Fun.optimalSample_py.html) moves the directions until their discrete
 measure is close to the density. This optimization costs more time than independent
 sampling. In return, the directions spread evenly along every feature and become denser
 where the function is large.
@@ -139,7 +139,7 @@ that the weights in a measured run ranged only from 0.0019605 to 0.0019609.
 ## Comparing the recovered densities
 
 To compare equal point counts, we estimate a density from every sample with
-[calcDensity](vector3d.calcDensity.html). The weighted sample passes its volume fractions
+[calcDensity](vector3d.calcDensity_py.html). The weighted sample passes its volume fractions
 to the estimator. All three estimates use the same kernel halfwidth, so their smoothing is
 identical.
 
@@ -187,11 +187,11 @@ for row in zip(M, densRnd, densOpt, densWgt, momRnd, momOpt, momWgt):
 
 ```text
            points    densityRandom   densityOptimal  densityWeighted     momentRandom    momentOptimal   momentWeighted
-               50           1.8483           1.0790           1.0738           2.4475           2.0445           2.0861
-              100           1.4049           0.6570           0.5339           1.7759           0.9897           0.9171
-              200           1.0007           0.4387           0.3058           1.2691           0.5699           0.3510
-              400           0.7053           0.3017           0.2536           0.9066           0.3307           0.2280
-              800           0.5510           0.2450           0.2343           0.6215           0.1784           0.0909
+               50           1.9184           1.0790           1.0738           2.4740           2.0445           2.0861
+              100           1.3177           0.6570           0.5339           1.7725           0.9897           0.9171
+              200           0.8558           0.4387           0.3058           1.1767           0.5699           0.3510
+              400           0.7230           0.3017           0.2536           0.8750           0.3307           0.2280
+              800           0.5470           0.2450           0.2343           0.6217           0.1784           0.0909
 ```
 
 ---
@@ -238,8 +238,8 @@ optimized sample.
 
 ## Choosing a sampling method
 
-Use [discreteSample](S2Fun.discreteSample.html) when you need many points quickly and
-their individual placement does not matter. Use [optimalSample](S2Fun.optimalSample.html)
+Use [discreteSample](S2Fun.discreteSample_py.html) when you need many points quickly and
+their individual placement does not matter. Use [optimalSample](S2Fun.optimalSample_py.html)
 when the number of points is limited. Ask for weights when the sample will be used for
 integration. For a kernel density estimate, optimized weights usually help less once the
 smoothing halfwidth becomes the main source of error.

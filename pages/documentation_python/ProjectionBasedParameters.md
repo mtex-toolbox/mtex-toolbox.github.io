@@ -80,7 +80,7 @@ grainDiameter
 ```
 
 ```text
-array([6925.8337])
+array([6924.009])
 ```
 
 A `caliper`, or Feret diameter, is the span of the grain after its vertices are
@@ -114,7 +114,7 @@ caliperExtrema
 ```
 
 ```text
-array([1631.7214, 6925.8337])
+array([1628.6433, 6924.009 ])
 ```
 
 ```python
@@ -274,7 +274,7 @@ parorMinimum
 ```
 
 ```text
-array([0.7118, 0.7238])
+array([0.7119, 0.7235])
 ```
 
 The forsterite and enstatite minima are 0.7118 and 0.7214, a difference of about 0.01.
@@ -297,7 +297,7 @@ harmonicDirectionsFo
 ```
 
 ```text
-array([71.2453, 74.4607])
+array([71.1322, 74.4831])
 ```
 
 ```python
@@ -310,7 +310,7 @@ harmonicDirectionsEn
 ```
 
 ```text
-array([87.1575, 88.7155])
+array([87.1555, 88.7281])
 ```
 
 For forsterite the two fitted directions are 71.5 and 74.5 degrees; for enstatite they
@@ -377,10 +377,10 @@ for name, mn, d in zip(pairName, surforMinimum, surforLongDirection):
 
 ```text
   boundaryPair  minimumToMaximum  longDirectionDegree
-         Fo-Fo           0.76161                   63
-         Fo-En           0.72393                   83
-         Fo-Di           0.67923                   74
-         En-Di           0.87224                   85
+         Fo-Fo           0.76225                   63
+         Fo-En           0.72416                   84
+         Fo-Di           0.68166                   74
+         En-Di           0.87602                   83
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ProjectionBasedParameters-17.png"></center>
@@ -434,7 +434,7 @@ characteristicCaliperAngle
 ```
 
 ```text
-array([79.4633, 79.2353, 88.5263])
+array([79.6442, 81.1164, 88.9668])
 ```
 
 The two single-phase shapes both give 79.3 degrees. Each is skewed by about 10.7

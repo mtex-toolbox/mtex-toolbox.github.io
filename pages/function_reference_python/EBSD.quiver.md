@@ -1,0 +1,27 @@
+---
+title: 'EBSD.quiver'
+sidebar: function_reference_sidebar
+permalink: EBSD.quiver_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+counterpart: EBSD.quiver.html
+status: Reference
+---
+{% raw %}
+A method of [EBSD](EBSD_index_py.html).
+
+quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field,
+or arrows at orientations in the sections of the current figure
+
+## Syntax
+
+```python
+EBSD.quiver(v, w=None, resolution=10*degree, **kw)
+```
+
+MATLAB's [EBSD.quiver](EBSD.quiver.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1158">source</a></font>
+{% endraw %}

@@ -20,7 +20,7 @@ geometry.
 
 The fourth-order stiffness tensor $$C$$ collects the complete linear elastic
 response. MTEX represents it as a
-[stiffnessTensor](stiffnessTensor.stiffnessTensor.html).
+[stiffnessTensor](stiffnessTensor.stiffnessTensor_py.html).
 This page loads one measured tensor, applies Hooke's law, and then queries
 its response for chosen directions and planes.
 
@@ -169,7 +169,7 @@ U_Hooke
 ratio of axial stress to axial strain.
 In an anisotropic crystal it depends on the loading direction $$d$$.
 Passing one direction to
-[YoungsModulus](stiffnessTensor.YoungsModulus.html) returns one value.
+[YoungsModulus](stiffnessTensor.YoungsModulus_py.html) returns one value.
 
 ```python
 d = vector3d.X
@@ -227,7 +227,7 @@ caused by an increase in hydrostatic pressure.
 Contracting the compliance tensor with the pressure gives a second-rank
 tensor, whose directional values form another spherical function.
 
-[linearCompressibility](stiffnessTensor.linearCompressibility.html)
+[linearCompressibility](stiffnessTensor.linearCompressibility_py.html)
 returns that function when the direction is omitted.
 
 ```python
@@ -288,7 +288,7 @@ nu_xy
 array([0.1515, 0.3383])
 ```
 
-Omitting $$n$$ from [PoissonRatio](stiffnessTensor.PoissonRatio.html)
+Omitting $$n$$ from [PoissonRatio](stiffnessTensor.PoissonRatio_py.html)
 leaves a spherical function of possible transverse directions.
 
 ```python
@@ -303,7 +303,7 @@ S2FunHandle (Olivine)
 ```
 
 Only directions perpendicular to $$p$$ are physically meaningful.
-A [section plot](S2Fun.plotSection.html) restricts the function to that
+A [section plot](S2Fun.plotSection_py.html) restricts the function to that
 plane, which is the $$xy$$ plane for the chosen $$z$$ pulling direction.
 
 ```python
@@ -328,7 +328,7 @@ An anisotropic value needs the normal $$h$$ of the shear plane and a shear
 direction $$u$$ within that plane.
 
 Passing both directions to
-[shearModulus](stiffnessTensor.shearModulus.html) returns one number.
+[shearModulus](stiffnessTensor.shearModulus_py.html) returns one number.
 
 ```python
 # unit shear-plane normal

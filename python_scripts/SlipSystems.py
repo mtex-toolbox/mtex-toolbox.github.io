@@ -38,7 +38,7 @@ n
 
 # %% [markdown]
 # Passing the two directions to the
-# [`slipSystem`](https://mtex-toolbox.github.io/slipSystem.slipSystem.html) constructor keeps them together
+# [`slipSystem`](https://mtex-toolbox.github.io/slipSystem.slipSystem_py.html) constructor keeps them together
 # as one physical shear mode. The constructor also checks orthogonality.
 
 # %%

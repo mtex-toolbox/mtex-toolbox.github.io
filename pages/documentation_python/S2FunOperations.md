@@ -79,7 +79,7 @@ without changing the pattern.
 ## Pointwise operations
 
 The basic operations `-`, `*`, `**` and `/` also work with `S2Fun` objects. Functions such
-as [min](S2Fun.min.html), [max](S2Fun.max.html), [abs](S2Fun.abs.html) and
+as [min](S2Fun.min_py.html), [max](S2Fun.max_py.html), [abs](S2Fun.abs.html) and
 [sqrt](S2Fun.sqrt.html) likewise return spherical functions when used pointwise.
 
 For two functions, `*` and `/` act pointwise; with a number, `*` scales a function and
@@ -107,7 +107,7 @@ functions in complementary ways.
 
 ## Global and local extrema
 
-[min](S2Fun.min.html) and [max](S2Fun.max.html) select their behaviour from their inputs:
+[min](S2Fun.min_py.html) and [max](S2Fun.max_py.html) select their behaviour from their inputs:
 
 * Two spherical functions produce their pointwise minimum or maximum.
 * A spherical function and one number produce its pointwise minimum or maximum with that
@@ -147,7 +147,7 @@ times the eyes' depth of -0.5.
 
 ## Integration and norms
 
-[sum](S2Fun.sum.html) returns the surface integral over the sphere. Thus the constant
+[sum](S2Fun.sum_py.html) returns the surface integral over the sphere. Thus the constant
 function one integrates to $$4\pi$$. [mean](S2Fun.mean.html) divides that integral by
 $$4\pi$$, so the constant function one has mean value one. These two normalisations
 therefore give the same result for any function.
@@ -198,7 +198,7 @@ maximum value.
 ## Differentiation
 
 The differential at one direction is the tangential gradient. MTEX returns it as a
-[three-dimensional vector](vector3d.vector3d.html) with [grad](S2Fun.grad.html).
+[three-dimensional vector](vector3d.vector3d_py.html) with [grad](S2Fun.grad.html).
 
 ```python
 gradientAtX = grad(sF1, xvector)
@@ -249,7 +249,7 @@ function is nearly constant.
 
 ## Rotate a function
 
-[rotate](S2Fun.rotate.html) moves a spherical function by a specified rotation.
+[rotate](S2Fun.rotate_py.html) moves a spherical function by a specified rotation.
 
 ```python
 # define a rotation

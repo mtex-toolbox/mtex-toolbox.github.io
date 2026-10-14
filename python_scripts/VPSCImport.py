@@ -30,7 +30,7 @@ from mtex import *
 cs = crystalFrame('222', [4.762, 10.225, 5.994], mineral='olivine')
 
 # %% [markdown]
-# [`SO3Fun.load`](https://mtex-toolbox.github.io/SO3Fun.load.html) reads each block and estimates an
+# [`SO3Fun.load`](https://mtex-toolbox.github.io/SO3Fun.load_py.html) reads each block and estimates an
 # [orientation distribution function](https://mtex-toolbox.github.io/ODFTheory_py.html) (ODF) from its weighted
 # orientations. The `halfwidth` is the smoothing width of that estimate; it is not a
 # parameter read from VPSC.

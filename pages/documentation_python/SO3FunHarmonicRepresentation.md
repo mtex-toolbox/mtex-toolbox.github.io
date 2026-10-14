@@ -198,7 +198,7 @@ positivity, and normalization checks still apply in orientation space.
 
 ## Reading a Spectrum
 
-[plotSpectrum](SO3Fun.plotSpektra.html) groups the coefficients by degree. At each degree
+[plotSpectrum](SO3Fun.plotSpektra_py.html) groups the coefficients by degree. At each degree
 it plots the square root of their summed squared magnitudes, not the individual
 coefficients.
 
@@ -226,7 +226,7 @@ oriRef = orientation.byEuler(30 * degree, 50 * degree, 10 * degree, cs)
 fAngle = SO3FunHandle(lambda ori: angle(ori, oriRef) / degree, cs)
 ```
 
-[quadrature](SO3FunHarmonic.quadrature.html) evaluates the function on a quadrature
+[quadrature](SO3FunHarmonic.quadrature_py.html) evaluates the function on a quadrature
 grid and computes its Fourier coefficients. Request the same bandwidth 32 used above.
 
 ```python
@@ -244,7 +244,7 @@ maxApproximationError
 ```
 
 ```text
-1.0252
+1.0455
 ```
 
 The nonzero error is a truncation effect. The angle function has a cusp at `oriRef`

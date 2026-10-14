@@ -89,7 +89,7 @@ boundaryFitQuantiles
 
 ```text
  optimizing parent to child orientation relationship
-  scanning 406 orientations
+  scanning 398 orientations
   (347.67°, 10.01°, 56.44°)  2.876
   (347.64°,  9.98°, 56.50°)  2.876
   (347.67°,  9.97°, 56.49°)  2.875
@@ -97,7 +97,7 @@ boundaryFitQuantiles
   (347.16°,  9.42°, 57.06°)  2.731
   (347.57°,  9.13°, 56.58°)  2.694
   (347.79°,  9.11°, 56.34°)  2.694
-3.424663840367343
+3.4246638403673697
 array([1.204 , 1.6668, 2.0743, 3.8395])
 ```
 

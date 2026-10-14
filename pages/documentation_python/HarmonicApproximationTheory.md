@@ -50,8 +50,8 @@ without chasing those point-to-point changes.
 
 ## Start with bandwidth
 
-[interp](rotation.interp.html) selects a harmonic fit with the flag `'harmonic'`.
-Internally it calls [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate.html). The
+[interp](rotation.interp_py.html) selects a harmonic fit with the flag `'harmonic'`.
+Internally it calls [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate_py.html). The
 bandwidth is the largest harmonic degree in the fitted series. A low bandwidth limits the
 number of unknown coefficients and therefore limits how quickly the function can vary.
 
@@ -166,7 +166,7 @@ rather than the optimum of the least-squares problem.
 
 ## Read the spectrum
 
-[plotSpectrum](SO3Fun.plotSpektra.html) summarizes the coefficient energy at each harmonic
+[plotSpectrum](SO3Fun.plotSpektra_py.html) summarizes the coefficient energy at each harmonic
 degree. It reveals high-frequency content that can be difficult to distinguish in a
 section plot.
 

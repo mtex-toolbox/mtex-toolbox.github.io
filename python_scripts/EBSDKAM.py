@@ -58,7 +58,7 @@ hold(False)
 # %% [markdown]
 # ## The nearest-neighbour KAM
 #
-# [ebsd.KAM](https://mtex-toolbox.github.io/EBSD.KAM.html) returns an angle in radians. Dividing by `degree` converts it
+# [ebsd.KAM](https://mtex-toolbox.github.io/EBSD.KAM_py.html) returns an angle in radians. Dividing by `degree` converts it
 # to degrees. The default uses first-order neighbours, applies no angular threshold, and
 # excludes pairs in different grains when `ebsd.grainId` is present.
 

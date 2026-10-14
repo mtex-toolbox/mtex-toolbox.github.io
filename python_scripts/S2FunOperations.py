@@ -58,7 +58,7 @@ plot(combined, upper=True)
 # ## Pointwise operations
 #
 # The basic operations `-`, `*`, `**` and `/` also work with `S2Fun` objects. Functions such
-# as [min](https://mtex-toolbox.github.io/S2Fun.min.html), [max](https://mtex-toolbox.github.io/S2Fun.max.html), [abs](https://mtex-toolbox.github.io/S2Fun.abs.html) and
+# as [min](https://mtex-toolbox.github.io/S2Fun.min_py.html), [max](https://mtex-toolbox.github.io/S2Fun.max_py.html), [abs](https://mtex-toolbox.github.io/S2Fun.abs.html) and
 # [sqrt](https://mtex-toolbox.github.io/S2Fun.sqrt.html) likewise return spherical functions when used pointwise.
 #
 # For two functions, `*` and `/` act pointwise; with a number, `*` scales a function and
@@ -84,7 +84,7 @@ mtexTitle('Pointwise minimum')
 #
 # ## Global and local extrema
 #
-# [min](https://mtex-toolbox.github.io/S2Fun.min.html) and [max](https://mtex-toolbox.github.io/S2Fun.max.html) select their behaviour from their inputs:
+# [min](https://mtex-toolbox.github.io/S2Fun.min_py.html) and [max](https://mtex-toolbox.github.io/S2Fun.max_py.html) select their behaviour from their inputs:
 #
 # * Two spherical functions produce their pointwise minimum or maximum.
 # * A spherical function and one number produce its pointwise minimum or maximum with that
@@ -117,7 +117,7 @@ print(f'Global maximum: {maxValue:.3f}\nlocal minima  : {minValue[0]:.3f} and {m
 #
 # ## Integration and norms
 #
-# [sum](https://mtex-toolbox.github.io/S2Fun.sum.html) returns the surface integral over the sphere. Thus the constant
+# [sum](https://mtex-toolbox.github.io/S2Fun.sum_py.html) returns the surface integral over the sphere. Thus the constant
 # function one integrates to $4\pi$. [mean](https://mtex-toolbox.github.io/S2Fun.mean.html) divides that integral by
 # $4\pi$, so the constant function one has mean value one. These two normalisations
 # therefore give the same result for any function.
@@ -159,7 +159,7 @@ print(f'From integral: {normFromIntegral:.4f}; norm: {directNorm:.4f}; '
 # ## Differentiation
 #
 # The differential at one direction is the tangential gradient. MTEX returns it as a
-# [three-dimensional vector](https://mtex-toolbox.github.io/vector3d.vector3d.html) with [grad](https://mtex-toolbox.github.io/S2Fun.grad.html).
+# [three-dimensional vector](https://mtex-toolbox.github.io/vector3d.vector3d_py.html) with [grad](https://mtex-toolbox.github.io/S2Fun.grad.html).
 
 # %%
 gradientAtX = grad(sF1, xvector)
@@ -198,7 +198,7 @@ hold(False)
 #
 # ## Rotate a function
 #
-# [rotate](https://mtex-toolbox.github.io/S2Fun.rotate.html) moves a spherical function by a specified rotation.
+# [rotate](https://mtex-toolbox.github.io/S2Fun.rotate_py.html) moves a spherical function by a specified rotation.
 
 # %%
 # define a rotation

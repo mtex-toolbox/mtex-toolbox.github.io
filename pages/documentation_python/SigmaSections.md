@@ -80,7 +80,7 @@ hexagonal crystal, the polar coordinates $$(\Phi,\varphi_1)$$ locate $$g\vec c^*
 specimen pole figure. The third Euler angle controls the remaining rotation about this
 transformed axis.
 
-[sigmaSections](sigmaSections.html) uses $$\vec h_1=\vec c^*$$ for the pole position and
+[sigmaSections](sigmaSections_py.html) uses $$\vec h_1=\vec c^*$$ for the pole position and
 $$\vec h_2=\vec a$$ for the remaining rotation. Direct $$\vec c$$ and reciprocal $$\vec c^*$$
 are parallel in this example. The distinction matters for a general lattice.
 
@@ -106,7 +106,7 @@ Each position in the disc gives the specimen direction of $$\vec c^*$$. The smal
 background arrow gives the local reference direction for $$\vec a$$. Together, the
 position and arrow specify an orientation.
 
-[orientation.map](orientation.map.html) constructs two orientations with known axis
+[orientation.map](orientation.map_py.html) constructs two orientations with known axis
 alignments. The first maps $$\vec c$$ to specimen Z and $$\vec a$$ to specimen X.
 
 ```python

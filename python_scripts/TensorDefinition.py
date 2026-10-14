@@ -10,7 +10,7 @@
 # before physical and crystal symmetries are applied.
 # Rank is therefore not the size of a matrix.
 #
-# MTEX represents every rank with [tensor](https://mtex-toolbox.github.io/tensor.tensor.html).
+# MTEX represents every rank with [tensor](https://mtex-toolbox.github.io/tensor.tensor_py.html).
 # Physically specific subclasses add units, conventions, and operations.
 # Read [Vectors](https://mtex-toolbox.github.io/VectorDefinition_py.html) first if vector components are new.
 # [Crystal Reference System](https://mtex-toolbox.github.io/CrystalReferenceSystem_py.html) explains how a
@@ -48,7 +48,7 @@ T1 = tensor([1, 2, 3], rank=1)
 T1
 
 # %% [markdown]
-# Rank one tensors and [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html) objects can be converted into
+# Rank one tensors and [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html) objects can be converted into
 # each other. The output below is a `vector3d` rather than a `tensor`.
 
 # %%
@@ -163,7 +163,7 @@ C
 # %% [markdown]
 # ## Seeing the cubic symmetry
 #
-# [YoungsModulus](https://mtex-toolbox.github.io/stiffnessTensor.YoungsModulus.html) evaluates the tensile
+# [YoungsModulus](https://mtex-toolbox.github.io/stiffnessTensor.YoungsModulus_py.html) evaluates the tensile
 # stiffness of a rod cut along every crystal direction.
 
 # %%
@@ -187,20 +187,20 @@ youngsModulusRange
 #
 # | class | rank | physical meaning |
 # |---|---|---|
-# | [strainTensor](https://mtex-toolbox.github.io/strainTensor.strainTensor.html) | 2 | strain $\varepsilon$ |
-# | [stressTensor](https://mtex-toolbox.github.io/stressTensor.stressTensor.html) | 2 | stress $\sigma$ |
-# | [strainRateTensor](https://mtex-toolbox.github.io/strainRateTensor.strainRateTensor.html) | 2 | strain rate $E$ |
-# | [velocityGradientTensor](https://mtex-toolbox.github.io/velocityGradientTensor.velocityGradientTensor.html) | 2 | velocity gradient $L$ |
-# | [deformationGradientTensor](https://mtex-toolbox.github.io/deformationGradientTensor.deformationGradientTensor.html) | 2 | deformation gradient $F$ |
-# | [spinTensor](https://mtex-toolbox.github.io/spinTensor.spinTensor.html) | 2 | spin $\Omega$ |
-# | [curvatureTensor](https://mtex-toolbox.github.io/curvatureTensor.curvatureTensor.html) | 2 | lattice curvature $\kappa$ |
-# | [dislocationDensityTensor](https://mtex-toolbox.github.io/dislocationDensityTensor.dislocationDensityTensor.html) | 2 | dislocation density $\alpha$ |
-# | [refractiveIndexTensor](https://mtex-toolbox.github.io/refractiveIndexTensor.refractiveIndexTensor.html) | 2 | refractive index |
-# | [ChristoffelTensor](https://mtex-toolbox.github.io/ChristoffelTensor.ChristoffelTensor.html) | 2 | elastic wave propagation |
-# | [stiffnessTensor](https://mtex-toolbox.github.io/stiffnessTensor.stiffnessTensor.html) | 4 | elastic stiffness $C$ |
-# | [complianceTensor](https://mtex-toolbox.github.io/complianceTensor.complianceTensor.html) | 4 | elastic compliance $S$ |
+# | [strainTensor](https://mtex-toolbox.github.io/strainTensor.strainTensor_py.html) | 2 | strain $\varepsilon$ |
+# | [stressTensor](https://mtex-toolbox.github.io/stressTensor.stressTensor_py.html) | 2 | stress $\sigma$ |
+# | [strainRateTensor](https://mtex-toolbox.github.io/strainRateTensor.strainRateTensor_py.html) | 2 | strain rate $E$ |
+# | [velocityGradientTensor](https://mtex-toolbox.github.io/velocityGradientTensor.velocityGradientTensor_py.html) | 2 | velocity gradient $L$ |
+# | [deformationGradientTensor](https://mtex-toolbox.github.io/deformationGradientTensor.deformationGradientTensor_py.html) | 2 | deformation gradient $F$ |
+# | [spinTensor](https://mtex-toolbox.github.io/spinTensor.spinTensor_py.html) | 2 | spin $\Omega$ |
+# | [curvatureTensor](https://mtex-toolbox.github.io/curvatureTensor.curvatureTensor_py.html) | 2 | lattice curvature $\kappa$ |
+# | [dislocationDensityTensor](https://mtex-toolbox.github.io/dislocationDensityTensor.dislocationDensityTensor_py.html) | 2 | dislocation density $\alpha$ |
+# | [refractiveIndexTensor](https://mtex-toolbox.github.io/refractiveIndexTensor.refractiveIndexTensor_py.html) | 2 | refractive index |
+# | [ChristoffelTensor](https://mtex-toolbox.github.io/ChristoffelTensor.ChristoffelTensor_py.html) | 2 | elastic wave propagation |
+# | [stiffnessTensor](https://mtex-toolbox.github.io/stiffnessTensor.stiffnessTensor_py.html) | 4 | elastic stiffness $C$ |
+# | [complianceTensor](https://mtex-toolbox.github.io/complianceTensor.complianceTensor_py.html) | 4 | elastic compliance $S$ |
 #
-# [SchmidTensor](https://mtex-toolbox.github.io/SchmidTensor.html) constructs a rank two tensor from a slip-plane normal
+# [SchmidTensor](https://mtex-toolbox.github.io/SchmidTensor_py.html) constructs a rank two tensor from a slip-plane normal
 # and a slip direction.
 #
 # A component matrix constructs a typed tensor directly.
@@ -223,7 +223,7 @@ sigma
 
 # %% [markdown]
 # Specialized operations belong to the corresponding class.
-# For example, [calcShearStress](https://mtex-toolbox.github.io/stressTensor.calcShearStress.html) acts on
+# For example, [calcShearStress](https://mtex-toolbox.github.io/stressTensor.calcShearStress_py.html) acts on
 # a stress tensor and a slip system.
 
 # %% [markdown]

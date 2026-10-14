@@ -1,0 +1,23 @@
+---
+title: 'SO3VectorFieldHarmonic.component'
+sidebar: function_reference_sidebar
+permalink: SO3VectorFieldHarmonic.component_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+status: Reference
+---
+{% raw %}
+A method of [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html).
+
+one component as a function on the component frames
+
+## Syntax
+
+```python
+SO3VectorFieldHarmonic.component(self, i)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L408">source</a></font>
+{% endraw %}

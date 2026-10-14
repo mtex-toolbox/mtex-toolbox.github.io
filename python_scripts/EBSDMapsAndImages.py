@@ -7,9 +7,9 @@
 # Comparing the two requires two independent questions to be answered:
 #
 # * where on the specimen each raster sits - its
-#   [reference frame](https://mtex-toolbox.github.io/referenceFrame.referenceFrame.html)
+#   [reference frame](https://mtex-toolbox.github.io/referenceFrame.referenceFrame_py.html)
 # * which specimen direction each array index follows - its
-#   [layout](https://mtex-toolbox.github.io/gridLayout.gridLayout.html)
+#   [layout](https://mtex-toolbox.github.io/gridLayout.gridLayout_py.html)
 #
 # A reference frame is the coordinate system in which data are expressed. Its identity,
 # basis and plotting convention say what the axes mean and how they are drawn. A layout
@@ -41,7 +41,7 @@ img = ebsd.meta['trueEbsdImgs']
 # %% [markdown]
 # ## Put the Map and Images in One Sequence
 #
-# A [mapImage](https://mtex-toolbox.github.io/mapImage.mapImage.html) combines a raster with the geometry that locates it.
+# A [mapImage](https://mtex-toolbox.github.io/mapImage.mapImage_py.html) combines a raster with the geometry that locates it.
 # The geometry consists of the centre position of pixel `(0, 0)`, one step vector for each
 # array dimension and a reference frame.
 #
@@ -134,9 +134,9 @@ plot(imgList, layout=[1, 3])
 # established how the two frames appear on screen. It has not yet expressed the images in
 # the map frame.
 #
-# [byScreenAlignment](https://mtex-toolbox.github.io/orientation.byScreenAlignment.html) records the assertion that the
+# [byScreenAlignment](https://mtex-toolbox.github.io/orientation.byScreenAlignment_py.html) records the assertion that the
 # plotted frames are physically aligned.
-# [transformReferenceFrame](https://mtex-toolbox.github.io/mapImage.transformReferenceFrame.html) then re-expresses every
+# [transformReferenceFrame](https://mtex-toolbox.github.io/mapImage.transformReferenceFrame_py.html) then re-expresses every
 # entry in the map frame.
 
 # %%
@@ -163,7 +163,7 @@ plot(imgList, layout=[1, 3])
 # map frame is drawn in, so it kept its array. This is the second question, and it is
 # independent of the specimen frame.
 #
-# A [gridLayout](https://mtex-toolbox.github.io/gridLayout.gridLayout.html) contains two directions. The first is the
+# A [gridLayout](https://mtex-toolbox.github.io/gridLayout.gridLayout_py.html) contains two directions. The first is the
 # direction in which the row index advances, and the second is the direction in which the
 # column index advances.
 
@@ -179,7 +179,7 @@ ebsd.layout
 # %% [markdown]
 # ## Put a Map in an Image Layout
 #
-# [gridify](https://mtex-toolbox.github.io/EBSD.gridify.html) accepts a layout and stores a square-grid map in that
+# [gridify](https://mtex-toolbox.github.io/EBSD.gridify_py.html) accepts a layout and stores a square-grid map in that
 # order. [Gridded EBSD Data](https://mtex-toolbox.github.io/EBSDGrid_py.html) introduces the named layouts `'columnMajor'`
 # and `'rowMajor'`. Give any other signed pair of axis directions as a `gridLayout`.
 #
@@ -238,7 +238,7 @@ mtexTitle('row ||-x, col ||y')
 # operations also require one common grid. The EBSD spacing is 0.159 micron here, whereas
 # the image spacing is 0.0795 micron.
 #
-# [interp](https://mtex-toolbox.github.io/mapImage.interp.html) samples an image at arbitrary positions. A bare array
+# [interp](https://mtex-toolbox.github.io/mapImage.interp_py.html) samples an image at arbitrary positions. A bare array
 # carries no physical origin, so state where the centre of its first pixel lies. The origin
 # and pixel size must use the same length unit as the EBSD positions.
 

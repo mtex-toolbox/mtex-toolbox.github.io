@@ -29,7 +29,7 @@ split into three-segment junctions. The grid contact on this page is instead a
 digital-topology ambiguity introduced by sampling. In three dimensions, a physical
 quadruple point has a different meaning.
 
-The `removeQuadruplePoints` option to [calcGrains](EBSD.calcGrains.html) resolves this
+The `removeQuadruplePoints` option to [calcGrains](EBSD.calcGrains_py.html) resolves this
 ambiguity during reconstruction. This page assumes the reconstruction concepts
 introduced in [Grain Reconstruction](GrainReconstruction_py.html).
 
@@ -144,11 +144,11 @@ that distinction.
 ## Separate the coincident junctions for display
 
 The two replacement junctions initially have identical coordinates.
-[smoothBoundary](grain2d.smoothBoundary.html) normally fixes every junction. Its
+[smoothBoundary](grain2d.smoothBoundary_py.html) normally fixes every junction. Its
 `moveTriplePoints` option releases every interior junction, despite the narrower name,
 and lets the two points move apart.
 
-A [taubinFilter](taubinFilter.html) suppresses the pixel staircase while limiting the
+A [taubinFilter](taubinFilter_py.html) suppresses the pixel staircase while limiting the
 systematic area loss of Laplacian smoothing.
 
 ```python
@@ -165,7 +165,7 @@ for display; it did not perform the topological correction.
 
 ## Curvature at the opened contact
 
-Signed [curvature](grainBoundary.curvature.html) makes the opened pinch visible as
+Signed [curvature](grainBoundary.curvature_py.html) makes the opened pinch visible as
 neighbouring bends in opposite directions.
 
 ```python

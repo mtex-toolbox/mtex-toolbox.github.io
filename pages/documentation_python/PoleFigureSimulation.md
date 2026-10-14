@@ -79,13 +79,13 @@ adds their pole figures from left to right.
 h = Miller([[1, 1, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 0, 0], [0, 1, 0], [0, 0, 1]], cs)
 ```
 
-They are sampled on a [regular grid](regularS2Grid.html) with 5 degree spacing.
+They are sampled on a [regular grid](regularS2Grid_py.html) with 5 degree spacing.
 
 ```python
 r = regularS2Grid(resolution=5 * degree)
 ```
 
-[calcPoleFigure](SO3Fun.calcPoleFigure.html) evaluates the ODF for every lattice
+[calcPoleFigure](SO3Fun.calcPoleFigure_py.html) evaluates the ODF for every lattice
 direction and specimen direction. Its printed summary confirms the seven pole figures
 and their sampling grids.
 
@@ -113,7 +113,7 @@ density $$P_h(r)$$, the call below draws a count with mean $$1000 P_h(r)$$. Thus
 intensity scale, not the same mean count at every point. No background is added in this
 example.
 
-[noisepf](PoleFigure.noisepf.html) makes the absolute fluctuations larger at bright
+[noisepf](PoleFigure.noisepf_py.html) makes the absolute fluctuations larger at bright
 points but their relative size smaller.
 
 ```python
@@ -145,7 +145,7 @@ Compared with the model sections above, the compact maxima and fibre bands are i
 same places and have similar shapes. The minimum and maximum labels expose differences
 in amplitude that independent colour scales could hide.
 
-[calcError](SO3Fun.calcError.html) compares the two normalized ODFs on a 5 degree
+[calcError](SO3Fun.calcError_py.html) compares the two normalized ODFs on a 5 degree
 orientation grid. Its default ODF-to-ODF measure is the L1 distance divided by two,
 which is the minimum volume fraction that would have to be moved to turn one
 distribution into the other.

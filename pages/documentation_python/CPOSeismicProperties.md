@@ -101,7 +101,7 @@ before interpreting a fast direction as a geological lineation.
 Abramson et al. (1997) reported the following olivine stiffness coefficients
 in GPa. The crystal symmetry records the lattice parameters and the crystal
 reference frame in which those coefficients were measured. The density is
-in $$\mathrm{g/cm}^3$$ so that [velocity](stiffnessTensor.velocity.html)
+in $$\mathrm{g/cm}^3$$ so that [velocity](stiffnessTensor.velocity_py.html)
 returns km/s.
 
 ```python
@@ -170,12 +170,12 @@ C_cpx = stiffnessTensor(Cij, cs_Tensor_cpx, density=rho_cpx)
 ## Match the tensor and EBSD crystal frames
 
 The published Diopside lattice parameters differ from those of the measured
-phase by about 2%. [calcTensor](EBSD.calcTensor.html) matches a phase tensor
+phase by about 2%. [calcTensor](EBSD.calcTensor_py.html) matches a phase tensor
 by mineral name, Laue group, and lattice parameters. It accepts at most 1%
 relative deviation in the lattice axes and 0.01 rad in the lattice angles,
 so it deliberately rejects this near match.
 
-The remedy is [transformReferenceFrame](tensor.transformReferenceFrame.html).
+The remedy is [transformReferenceFrame](tensor.transformReferenceFrame_py.html).
 A frame change re-expresses the same physical tensor in the crystal frame of
 the measured phase; it does not rotate the crystal or change its elastic
 response.
@@ -191,7 +191,7 @@ tensor frames already match their measured phases within the tolerances.
 
 [Wave Velocities](WaveVelocities_py.html) develops the three wave modes and
 their polarization directions. Here
-[plotSeismicVelocities](stiffnessTensor.plotSeismicVelocities.html)
+[plotSeismicVelocities](stiffnessTensor.plotSeismicVelocities_py.html)
 summarizes the Forsterite result.
 
 ```python

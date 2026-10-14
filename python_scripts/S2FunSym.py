@@ -34,7 +34,7 @@ sF = S2Fun.smiley()
 ss = specimenFrame('222', sF.how2plot)
 
 # %% [markdown]
-# [symmetrise](https://mtex-toolbox.github.io/S2FunHarmonic.symmetrise.html) attaches the symmetry and its frame, averages
+# [symmetrise](https://mtex-toolbox.github.io/S2FunHarmonic.symmetrise_py.html) attaches the symmetry and its frame, averages
 # symmetry-related directions and so enforces the constraint.
 
 # %%
@@ -70,7 +70,7 @@ plot(sFs1, complete=True, upper=True)
 # ## Construct from a function
 #
 # A Python function is convenient when values can be computed for every direction. It must
-# accept a [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html) array and return one real scalar per
+# accept a [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html) array and return one real scalar per
 # direction. Here the directions belong to the crystal frame, so the requested point group
 # is crystal symmetry `6/m`.
 
@@ -79,7 +79,7 @@ valueFunction = lambda v: 0.1 * (v.theta + np.sin(8 * v.x) * np.sin(8 * v.y))
 cs = crystalFrame('6/m')
 
 # %% [markdown]
-# [quadrature](https://mtex-toolbox.github.io/S2FunHarmonic.quadrature.html) computes the harmonic coefficients and
+# [quadrature](https://mtex-toolbox.github.io/S2FunHarmonic.quadrature_py.html) computes the harmonic coefficients and
 # enforces the supplied symmetry. The `bandwidth` option keeps spherical harmonic degrees
 # through 16.
 

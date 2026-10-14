@@ -49,7 +49,7 @@ odfMeasured = mtexdata('dubnaODF')
 # ## The Modal Orientation
 #
 # A *mode* is a local maximum of the ODF. Its value is a density in mrd, not a percentage
-# of material. [max](https://mtex-toolbox.github.io/SO3Fun.max.html) returns the global maximum and the orientation
+# of material. [max](https://mtex-toolbox.github.io/SO3Fun.max_py.html) returns the global maximum and the orientation
 # where it is attained.
 
 # %%
@@ -79,7 +79,7 @@ mtexColorbar(title='mrd')
 # Peak values are especially sensitive to the halfwidth and resolution used to estimate
 # an ODF. Compare them only when those choices are comparable.
 # [Density Estimation](https://mtex-toolbox.github.io/DensityEstimation_py.html) explains the halfwidth choice.
-# [max(odf, numLocal=n)](https://mtex-toolbox.github.io/SO3Fun.max.html) returns several local modes;
+# [max(odf, numLocal=n)](https://mtex-toolbox.github.io/SO3Fun.max_py.html) returns several local modes;
 # [Component Analysis](https://mtex-toolbox.github.io/ODFComponents_py.html) explains how to interpret them.
 
 # %% [markdown]
@@ -138,7 +138,7 @@ fibreEntropy
 #
 # A volume fraction asks a more local question: what fraction of the material lies within
 # a chosen disorientation angle of an orientation or a fibre?
-# [volume](https://mtex-toolbox.github.io/SO3Fun.volume.html) integrates the normalized ODF over either region.
+# [volume](https://mtex-toolbox.github.io/SO3Fun.volume_py.html) integrates the normalized ODF over either region.
 
 # %%
 preferredVolumePercent = 100 * volume(odfMeasured, preferredOrientation, 30 * degree)

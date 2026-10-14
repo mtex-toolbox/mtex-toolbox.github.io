@@ -22,7 +22,7 @@ plottingConvention.default('y↑→x')
 # %% [markdown]
 # ## Colour scales for numerical data
 #
-# [mtexColorbar](https://mtex-toolbox.github.io/mtexColorbar.html) differs from matplotlib's `colorbar` in
+# [mtexColorbar](https://mtex-toolbox.github.io/mtexColorbar_py.html) differs from matplotlib's `colorbar` in
 # that it addresses the whole MTEX figure. Every axis in a multi-plot gets a
 # colourbar. The example uses two model components so that the plotted pole
 # densities have recognisable maxima.
@@ -69,7 +69,7 @@ mtexColorbar()               # create one colourbar for the figure
 # %% [markdown]
 # ## Marking directions and orientations
 #
-# [annotate](https://mtex-toolbox.github.io/annotate.html) adds to an existing figure without disturbing
+# [annotate](https://mtex-toolbox.github.io/annotate_py.html) adds to an existing figure without disturbing
 # it. It needs no `hold(True)` and does not change the colour range. First mark
 # a specimen direction on both pole figures above. A specimen direction is a
 # direction expressed in the specimen frame. The text passed through `label`

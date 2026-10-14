@@ -257,7 +257,7 @@ fitIter
 misorientation (Austenite → Ferrite, bcc)
   (111) || (011)   [1̅10] || [100]
  optimizing parent to child orientation relationship
-  scanning 406 orientations
+  scanning 398 orientations
   (108.25°,  8.49°,207.88°)  2.587
   (108.24°,  8.49°,207.89°)  2.587
 misorientation (Austenite → Ferrite, bcc)

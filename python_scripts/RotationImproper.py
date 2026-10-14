@@ -11,7 +11,7 @@
 #
 # Proper and improper transformations together form the orthogonal group O(3). Its proper
 # part is the rotation group SO(3). MTEX stores both: a proper element is a
-# [rotation](https://mtex-toolbox.github.io/rotation.rotation.html), and an [orthogonalTransform](https://mtex-toolbox.github.io/orthogonalTransform.html)
+# [rotation](https://mtex-toolbox.github.io/rotation.rotation_py.html), and an [orthogonalTransform](https://mtex-toolbox.github.io/orthogonalTransform.html)
 # records which part an element belongs to with an inversion flag.
 
 # %%
@@ -27,7 +27,7 @@ plottingConvention.default('y↑→x')
 # ## The Inversion
 #
 # The inversion sends every direction to its opposite. The named constructor is
-# [rotation.inversion](https://mtex-toolbox.github.io/rotation.inversion.html).
+# [rotation.inversion](https://mtex-toolbox.github.io/rotation.inversion_py.html).
 
 # %%
 I = rotation.inversion
@@ -43,7 +43,7 @@ I * vector3d.X
 I == -rotation.id
 
 # %% [markdown]
-# Do not confuse unary minus with [inv](https://mtex-toolbox.github.io/quaternion.inv.html). `inv(turn)` undoes a turn,
+# Do not confuse unary minus with [inv](https://mtex-toolbox.github.io/quaternion.inv_py.html). `inv(turn)` undoes a turn,
 # whereas `-turn` combines the same proper part with the inversion. The first result below
 # is proper and the second is improper.
 
@@ -57,7 +57,7 @@ cat(inv(turn), -turn).isImproper
 # ## Reflection in a Plane
 #
 # A reflection leaves every direction in its mirror plane fixed and reverses the component
-# normal to the plane. In MTEX, [reflection](https://mtex-toolbox.github.io/reflection.html) takes the plane normal as its
+# normal to the plane. In MTEX, [reflection](https://mtex-toolbox.github.io/reflection_py.html) takes the plane normal as its
 # argument.
 
 # %%
@@ -104,7 +104,7 @@ hold(False)
 # %% [markdown]
 # ## Parity under Composition
 #
-# [isImproper](https://mtex-toolbox.github.io/orthogonalTransform.isImproper.html) reports whether a transformation
+# [isImproper](https://mtex-toolbox.github.io/orthogonalTransform.isImproper_py.html) reports whether a transformation
 # reverses handedness. A single reflection is improper, whereas composing two reflections
 # restores handedness.
 
@@ -139,8 +139,8 @@ improperFlags = ops.isImproper
 
 # %% [markdown]
 # Only the proper operations are physical turns that superpose the crystal on itself.
-# [properSubGroup](https://mtex-toolbox.github.io/symmetry.properSubGroup.html) retains those four operations. Do not
-# confuse it with [properGroup](https://mtex-toolbox.github.io/symmetry.properGroup.html), which returns the associated
+# [properSubGroup](https://mtex-toolbox.github.io/symmetry.properSubGroup_py.html) retains those four operations. Do not
+# confuse it with [properGroup](https://mtex-toolbox.github.io/symmetry.properGroup_py.html), which returns the associated
 # enantiomorphic group and has eight operations in this example.
 
 # %%
@@ -162,7 +162,7 @@ np.array([det(matrix(proper)), det(matrix(improper))])
 # %% [markdown]
 # MTEX stores an improper transformation as a proper quaternion together with the
 # inversion flag. Axis-angle and Euler values therefore describe only that stored proper
-# part. Use `isImproper` or [matrix](https://mtex-toolbox.github.io/rotation.matrix.html) when the handedness of the full
+# part. Use `isImproper` or [matrix](https://mtex-toolbox.github.io/rotation.matrix_py.html) when the handedness of the full
 # transformation matters.
 
 # %% [markdown]

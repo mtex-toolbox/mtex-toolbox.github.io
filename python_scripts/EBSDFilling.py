@@ -103,7 +103,7 @@ hold(False)
 # %% [markdown]
 # ## Filling within the grains
 #
-# [fill](https://mtex-toolbox.github.io/EBSD.fill.html) estimates the missing orientations. Pass the reconstructed grains
+# [fill](https://mtex-toolbox.github.io/EBSD.fill_py.html) estimates the missing orientations. Pass the reconstructed grains
 # whenever boundaries are known. MTEX then rejects positions outside every grain and
 # prevents an orientation from being carried across a grain boundary: a position is filled
 # only from the grain whose polygon holds it, and where the measurements of that grain do
@@ -131,7 +131,7 @@ hold(False)
 #
 # A denoising filter can estimate the missing orientations while smoothing the
 # orientation field. Supply the option `fill` and the grains to
-# [smooth](https://mtex-toolbox.github.io/EBSD.smooth.html). The `halfQuadraticFilter` used here is a
+# [smooth](https://mtex-toolbox.github.io/EBSD.smooth_py.html). The `halfQuadraticFilter` used here is a
 # total-variation method for rotation-valued data; its mathematical basis is described by
 # [Bergmann et al. (2016)](https://doi.org/10.3934/ipi.2016001).
 #
@@ -197,7 +197,7 @@ print(f'{np.sum(hasNoMeasuredCI)} of {ebsdSub_filled.size} positions have no mea
 # ## Filling is not resampling
 #
 # If all per-pixel properties are needed at arbitrary query positions, use
-# [interp](https://mtex-toolbox.github.io/EBSD.interp.html). It transfers the complete record of the nearest existing
+# [interp](https://mtex-toolbox.github.io/EBSD.interp_py.html). It transfers the complete record of the nearest existing
 # measurement to a requested position. The page
 # [Interpolating EBSD Data](https://mtex-toolbox.github.io/EBSDInter_py.html) develops that operation.
 #

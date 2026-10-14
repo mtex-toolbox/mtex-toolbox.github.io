@@ -15,7 +15,7 @@ status: Checked
 <!--introduction-->
 
 A map-processing method is easiest to test on a map whose answer is known in advance.
-The [simulateEBSD](simulateEBSD.simulateEBSD.html) class constructs such a map one
+The [simulateEBSD](simulateEBSD.simulateEBSD_py.html) class constructs such a map one
 feature at a time. It can add orientation noise, a low-angle boundary, or an orientation
 gradient to a uniform field.
 

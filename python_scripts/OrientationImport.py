@@ -23,7 +23,7 @@ cs = crystalFrame.load('quartz.cif')
 # ## Name the Columns
 #
 # The file contains three numeric columns but no header. Their names tell
-# [orientation.load](https://mtex-toolbox.github.io/orientation.load.html) that the columns are the Bunge angles
+# [orientation.load](https://mtex-toolbox.github.io/orientation.load_py.html) that the columns are the Bunge angles
 # $(\varphi_1,\Phi,\varphi_2)$. The file is one of the sample data sets, fetched on first
 # use.
 
@@ -33,7 +33,7 @@ ori = orientation.load(fname, cs, columnNames=['phi1', 'Phi', 'phi2'])
 ori
 
 # %% [markdown]
-# The display reports a list of 382 [orientations](https://mtex-toolbox.github.io/orientation.orientation.html). It also
+# The display reports a list of 382 [orientations](https://mtex-toolbox.github.io/orientation.orientation_py.html). It also
 # identifies the quartz crystal symmetry and the specimen frame. MTEX stores all 382
 # orientations in this one vectorized object.
 #
@@ -84,7 +84,7 @@ plotPF(ori, Miller([[0, 0, 0, 1], [1, 0, -1, 0]], cs))
 # * *Which Euler-angle convention?* This example uses the Bunge column names; the columns
 #   `alpha`, `beta`, `gamma` are read as Matthies angles. Equal angle triplets in other
 #   conventions describe different orientations. Import those numeric columns and pass them
-#   to [orientation.byEuler](https://mtex-toolbox.github.io/orientation.byEuler.html) with the convention named
+#   to [orientation.byEuler](https://mtex-toolbox.github.io/orientation.byEuler_py.html) with the convention named
 #   explicitly; see [Defining Rotations](https://mtex-toolbox.github.io/RotationDefinition_py.html).
 #
 # * *Degrees or radians?* The importer reads degrees unless `radians=True` is passed; it

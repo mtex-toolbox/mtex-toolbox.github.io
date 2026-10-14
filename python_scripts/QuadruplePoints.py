@@ -16,7 +16,7 @@
 # digital-topology ambiguity introduced by sampling. In three dimensions, a physical
 # quadruple point has a different meaning.
 #
-# The `removeQuadruplePoints` option to [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html) resolves this
+# The `removeQuadruplePoints` option to [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains_py.html) resolves this
 # ambiguity during reconstruction. This page assumes the reconstruction concepts
 # introduced in [Grain Reconstruction](https://mtex-toolbox.github.io/GrainReconstruction_py.html).
 
@@ -117,11 +117,11 @@ hold(False)
 # ## Separate the coincident junctions for display
 #
 # The two replacement junctions initially have identical coordinates.
-# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary.html) normally fixes every junction. Its
+# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary_py.html) normally fixes every junction. Its
 # `moveTriplePoints` option releases every interior junction, despite the narrower name,
 # and lets the two points move apart.
 #
-# A [taubinFilter](https://mtex-toolbox.github.io/taubinFilter.html) suppresses the pixel staircase while limiting the
+# A [taubinFilter](https://mtex-toolbox.github.io/taubinFilter_py.html) suppresses the pixel staircase while limiting the
 # systematic area loss of Laplacian smoothing.
 
 # %%
@@ -137,7 +137,7 @@ plot(grains, grainColors, lineWidth=2, micronbar='off')
 # %% [markdown]
 # ## Curvature at the opened contact
 #
-# Signed [curvature](https://mtex-toolbox.github.io/grainBoundary.curvature.html) makes the opened pinch visible as
+# Signed [curvature](https://mtex-toolbox.github.io/grainBoundary.curvature_py.html) makes the opened pinch visible as
 # neighbouring bends in opposite directions.
 
 # %%

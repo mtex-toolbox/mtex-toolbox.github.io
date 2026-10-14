@@ -1,0 +1,21 @@
+---
+title: 'curl'
+sidebar: function_reference_sidebar
+permalink: curl_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+status: Reference
+---
+{% raw %}
+the curl, the dual of the exterior derivative, a field of the same side
+
+## Syntax
+
+```python
+curl(v, x=None)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L566">source</a></font>
+{% endraw %}

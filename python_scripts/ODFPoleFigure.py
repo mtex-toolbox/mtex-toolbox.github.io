@@ -56,7 +56,7 @@ odf = 0.2 * unimodalODF(mod1) + 0.3 * unimodalODF(mod2) + 0.5 * fibreODF(Miller(
 h = Miller([[1, 0, -1, 0], [0, 0, 0, 1], [1, 1, -2, 1]], cs)
 
 # %% [markdown]
-# [plotPF](https://mtex-toolbox.github.io/SO3Fun.plotPDF.html) fixes each crystal direction in `h` and draws its pole
+# [plotPF](https://mtex-toolbox.github.io/SO3Fun.plotPDF_py.html) fixes each crystal direction in `h` and draws its pole
 # density over specimen directions. The panels use the
 # [default spherical projection](https://mtex-toolbox.github.io/SphericalProjections_py.html).
 
@@ -140,7 +140,7 @@ meanDensity
 #
 # A pole-figure maximum still represents a whole orientation fibre. Find the strongest
 # specimen direction for the third pole figure, then inspect the ODF along the
-# corresponding fibre with [plotFibre](https://mtex-toolbox.github.io/SO3Fun.plotFibre.html).
+# corresponding fibre with [plotFibre](https://mtex-toolbox.github.io/SO3Fun.plotFibre_py.html).
 
 # %%
 pdfPeak = radon(odf, h[2])

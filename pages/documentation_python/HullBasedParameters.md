@@ -120,18 +120,18 @@ for k in range(grains.size):
 
 ```text
  grainId  hasHole   deltaP    paris   deltaA  radiusD
-       2     True    0.350    0.703    8.840    8.847
-       3     True    0.350    0.703   33.238   33.240
-       5    False    0.637    1.283    1.229    1.385
-       6    False    0.566    1.138    2.376    2.442
-       8    False   22.548   58.225    3.080   22.757
-       9    False    2.206    4.512    5.949    6.345
-      10    False    4.326    9.042    6.972    8.205
+       2     True    0.324    0.650    8.947    8.953
+       3     True    0.324    0.650   33.319   33.321
+       5    False    0.919    1.854    1.473    1.736
+       6    False    0.718    1.446    2.567    2.666
+       8    False   22.817   59.125    3.176   23.037
+       9    False    2.501    5.130    6.223    6.706
+      10    False    4.898   10.300    7.203    8.710
       11    False    0.000    0.000    0.000    0.000
       12    False    8.307   18.119   22.476   23.962
-      13    False    1.353    2.744    4.283    4.491
-      14    False    1.355    2.748    3.110    3.392
-      15    False    8.202   17.870   17.758   19.561
+      13    False    1.487    3.019    4.203    4.459
+      14    False    1.491    3.026    3.213    3.542
+      15    False    8.588   18.789   18.130   20.061
 ```
 
 Drawn side by side on the same shapes, the measures separate narrow from broad

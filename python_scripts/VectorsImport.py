@@ -2,8 +2,8 @@
 # # Importing Vectors
 #
 # A direction file is only a table of numbers until its coordinate columns are identified.
-# [vector3d.load](https://mtex-toolbox.github.io/vector3d.load.html) turns those columns into a
-# [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html) array.
+# [vector3d.load](https://mtex-toolbox.github.io/vector3d.load_py.html) turns those columns into a
+# [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html) array.
 #
 # This page assumes that polar angle and azimuth are familiar. See
 # [Defining Three-Dimensional Vectors](https://mtex-toolbox.github.io/VectorDefinition_py.html) for their definitions and for

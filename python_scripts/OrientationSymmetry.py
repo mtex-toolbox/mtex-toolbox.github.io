@@ -73,7 +73,7 @@ allEquivalents = ss * ori * cs
 allEquivalents
 
 # %% [markdown]
-# [symmetrise](https://mtex-toolbox.github.io/orientation.symmetrise.html) is the shortcut for this product. It returns a
+# [symmetrise](https://mtex-toolbox.github.io/orientation.symmetrise_py.html) is the shortcut for this product. It returns a
 # new orientation array; it does not alter `ori`.
 
 # %%
@@ -167,13 +167,13 @@ rawAngles = angle(probe, referenceEquivalents, symmetry=False) / degree
 rawAngles
 
 # %% [markdown]
-# The `symmetry=False` flag is implemented by [angle](https://mtex-toolbox.github.io/orientation.angle.html),
-# [dot](https://mtex-toolbox.github.io/orientation.dot.html), and [unique](https://mtex-toolbox.github.io/orientation.unique.html), among other
+# The `symmetry=False` flag is implemented by [angle](https://mtex-toolbox.github.io/orientation.angle_py.html),
+# [dot](https://mtex-toolbox.github.io/orientation.dot_py.html), and [unique](https://mtex-toolbox.github.io/orientation.unique_py.html), among other
 # orientation methods. Reach for it when an angle or dot product comes out smaller than
 # expected. Leave it alone otherwise, because the symmetry-aware answer is normally the
 # physically meaningful one.
 #
-# Do not pass `symmetry=False` to [calcCluster](https://mtex-toolbox.github.io/orientation.calcCluster.html). That
+# Do not pass `symmetry=False` to [calcCluster](https://mtex-toolbox.github.io/orientation.calcCluster_py.html). That
 # method does not define the flag, and an unknown option can be ignored silently.
 
 # %% [markdown]

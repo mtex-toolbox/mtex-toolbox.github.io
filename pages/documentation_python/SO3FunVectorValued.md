@@ -75,7 +75,7 @@ y = np.stack([SO3Fun.dubna(rotation(nodes)), (nodes.a * nodes.b).astype(complex)
 nodes = orientation(rotation(nodes), SO3Fun.dubna().CS, nodes.SS)
 ```
 
-[SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate.html) fits both columns in one
+[SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate_py.html) fits both columns in one
 call. The result is an array of two harmonic functions. Here the bandwidth is 48 and LSQR
 is limited to 10 iterations.
 
@@ -105,8 +105,8 @@ SO3F1.eval(nodes[:4]).shape
 (4, 2)
 ```
 
-The generic [interp](rotation.interp.html) route can instead build an
-[SO3FunRBF](SO3FunRBF.SO3FunRBF.html) from one value column.
+The generic [interp](rotation.interp_py.html) route can instead build an
+[SO3FunRBF](SO3FunRBF.SO3FunRBF_py.html) from one value column.
 
 ```python
 SO3F2 = interp(nodes, np.real(y[:, 0]))
@@ -148,7 +148,7 @@ f = lambda rot: np.stack([np.exp(rot.a + rot.b + rot.c) + 50 * (rot.b - np.cos(n
                           rot.a, rot.b, rot.c], axis=-1)
 ```
 
-[SO3FunHarmonic.quadrature](SO3FunHarmonic.quadrature.html) evaluates the function on a
+[SO3FunHarmonic.quadrature](SO3FunHarmonic.quadrature_py.html) evaluates the function on a
 quadrature grid. It creates an array of four harmonic functions with bandwidth 50 and the
 same crystal symmetry as `SO3F1`.
 
@@ -166,7 +166,7 @@ SO3FunHarmonic (Quartz → y↑→x)
 ## Construct a function from Fourier coefficients
 
 Known Fourier coefficients can be passed directly to the
-[SO3FunHarmonic](SO3FunHarmonic.SO3FunHarmonic.html) constructor. Each row of the
+[SO3FunHarmonic](SO3FunHarmonic.SO3FunHarmonic_py.html) constructor. Each row of the
 coefficient matrix becomes one component.
 
 ```python
@@ -357,7 +357,7 @@ SO3FunHarmonic (1 → y↑→x)
 
 ## Inspect all components
 
-[plotSpectrum](SO3Fun.plotSpektra.html) draws the harmonic power spectrum of every
+[plotSpectrum](SO3Fun.plotSpektra_py.html) draws the harmonic power spectrum of every
 component. The four curves show that components of one function array may have different
 distributions over harmonic degree.
 

@@ -28,7 +28,7 @@ from mtex import *
 # reference-frame selectors. Check all four before asking the wizard to generate the
 # script.
 #
-# The generated script ultimately calls [EBSD.load](https://mtex-toolbox.github.io/EBSD.load.html). Here the file and its
+# The generated script ultimately calls [EBSD.load](https://mtex-toolbox.github.io/EBSD.load_py.html). Here the file and its
 # Euler correction are known because both are packaged with MTEX:
 
 # %%
@@ -41,7 +41,7 @@ ebsd
 
 # %% [markdown]
 # The correction above is specific to this file; do not copy it blindly to another data
-# set. The displayed [EBSD](https://mtex-toolbox.github.io/EBSD.EBSD.html) summary is the import audit: it lists the
+# set. The displayed [EBSD](https://mtex-toolbox.github.io/EBSD.EBSD_py.html) summary is the import audit: it lists the
 # phases, counts, crystal symmetries, scan extent, and stored columns.
 #
 # An `EBSD` object is a vectorized list with one entry per measurement, not an image. Its
@@ -102,7 +102,7 @@ plot(ebsd['Forsterite'], ebsd['Forsterite'].orientations, micronbar='off')
 # first. [Denoising](https://mtex-toolbox.github.io/EBSDDenoising_py.html) and [Filling Missing Data](https://mtex-toolbox.github.io/EBSDFilling_py.html)
 # change the map and need a specimen-specific justification.
 #
-# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html) segments the measurement list into regions. A grain
+# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains_py.html) segments the measurement list into regions. A grain
 # is a phase-homogeneous, spatially connected region of EBSD pixels produced by
 # segmentation. A phase change is always a grain boundary, while same-phase neighbours are
 # separated here when their misorientation exceeds the chosen angle. A connected
@@ -122,9 +122,9 @@ grains
 grains = smoothBoundary(grains, 5)
 
 # %% [markdown]
-# The returned [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d.html) object is a vectorized list of grains. Its
+# The returned [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d_py.html) object is a vectorized list of grains. Its
 # display reports the count by phase and the available grain properties.
-# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary.html) removes the pixel staircase from the
+# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary_py.html) removes the pixel staircase from the
 # outlines; it does not change which measurements belong together. See
 # [Grain Reconstruction](https://mtex-toolbox.github.io/GrainReconstruction_py.html) for choosing and testing segmentation
 # criteria.
@@ -175,7 +175,7 @@ hold(False)
 #
 # A [pole figure](https://mtex-toolbox.github.io/OrientationPoleFigure_py.html) asks where a chosen crystal direction points
 # in the specimen for every measured orientation. The command is
-# [plotPF](https://mtex-toolbox.github.io/orientation.plotPDF.html). Here the three crystallographic axes are plotted as
+# [plotPF](https://mtex-toolbox.github.io/orientation.plotPDF_py.html). Here the three crystallographic axes are plotted as
 # filled density contours.
 
 # %%
@@ -201,7 +201,7 @@ mtexColorbar()
 #
 # An [inverse pole figure](https://mtex-toolbox.github.io/OrientationInversePoleFigure_py.html) asks the complementary
 # question: which crystal direction points along a chosen specimen direction? The command
-# is [plotIPF](https://mtex-toolbox.github.io/orientation.plotIPDF.html).
+# is [plotIPF](https://mtex-toolbox.github.io/orientation.plotIPDF_py.html).
 
 # %%
 # select the specimen axes

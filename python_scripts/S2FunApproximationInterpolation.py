@@ -18,7 +18,7 @@ plottingConvention.default('y↑→x')
 #
 # The example data contain directions on the sphere and one scalar value at each direction.
 # The first three columns are Cartesian components of the directions. The fourth column
-# contains the values. We import them with [loadVector3d](https://mtex-toolbox.github.io/vector3d.load.html), whose second
+# contains the values. We import them with [loadVector3d](https://mtex-toolbox.github.io/vector3d.load_py.html), whose second
 # output `S` is a dict with an entry `S['values']` holding that fourth column.
 
 # %%
@@ -123,7 +123,7 @@ harmonicError
 # $$ \min_g \sum_{n=1}^N \left|f(x_n)-g(x_n)\right|^2. $$
 #
 # This equation states the basic unweighted strategy. By default,
-# [S2FunHarmonic.interpolate](https://mtex-toolbox.github.io/S2FunHarmonic.interpolate.html) applies spherical Voronoi
+# [S2FunHarmonic.interpolate](https://mtex-toolbox.github.io/S2FunHarmonic.interpolate_py.html) applies spherical Voronoi
 # weights so that densely sampled areas do not dominate the fit merely because they contain
 # more nodes.
 #

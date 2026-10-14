@@ -33,9 +33,9 @@ Typical examples are
 
 ## Start from an explicit formula
 
-MTEX offers two complementary representations. An [S1FunHandle](S1FunHandle.S1FunHandle.html)
+MTEX offers two complementary representations. An [S1FunHandle](S1FunHandle.S1FunHandle_py.html)
 evaluates an explicit formula whenever a value is requested. An
-[S1FunHarmonic](S1FunHarmonic.S1FunHarmonic.html) stores a finite set of Fourier
+[S1FunHarmonic](S1FunHarmonic.S1FunHarmonic_py.html) stores a finite set of Fourier
 coefficients.
 
 Begin with the formula
@@ -192,7 +192,7 @@ at the scale of floating-point round-off.
 ## Fit values sampled at angles
 
 A function is often known only at a finite set of angles.
-[S1FunHarmonic.interpolate](S1FunHarmonic.interpolate.html) constructs a periodic
+[S1FunHarmonic.interpolate](S1FunHarmonic.interpolate_py.html) constructs a periodic
 trigonometric polynomial from those samples. The result can be evaluated at arbitrary
 angles, plotted, differentiated, or used in later computations.
 
@@ -248,8 +248,8 @@ sharp changes.
 ## Smooth small-scale oscillations
 
 A harmonic function obtained from measured or interpolated data can contain small-scale
-oscillations or noise. [smooth](S1Fun.smooth.html) reduces those variations by
-convolution with an [S1DeLaValleePoussinKernel](S1DeLaValleePoussinKernel.html).
+oscillations or noise. [smooth](S1Fun.smooth_py.html) reduces those variations by
+convolution with an [S1DeLaValleePoussinKernel](S1DeLaValleePoussinKernel_py.html).
 
 The kernel halfwidth sets the angular scale of the smoothing. A small halfwidth preserves
 more local detail. A larger halfwidth produces a smoother function.
@@ -279,8 +279,8 @@ density.
 ## Compute integrals and extrema
 
 Standard operations apply directly to an `S1FunHarmonic`. Here `S1FH` is still the
-bandwidth-20 approximation of $$\exp(\cos\rho)$$. [mean](S1Fun.mean.html) returns its mean
-value, while [sum](S1Fun.sum.html) returns its integral over the circle.
+bandwidth-20 approximation of $$\exp(\cos\rho)$$. [mean](S1Fun.mean_py.html) returns its mean
+value, while [sum](S1Fun.sum_py.html) returns its integral over the circle.
 
 ```python
 meanValue = mean(S1FH)
@@ -302,7 +302,7 @@ integralValue
 7.9549
 ```
 
-[max](S1Fun.max.html) and [min](S1Fun.min.html) return both the extreme value and its
+[max](S1Fun.max_py.html) and [min](S1Fun.min_py.html) return both the extreme value and its
 angular position.
 
 ```python
@@ -326,7 +326,7 @@ degrees.
 
 Periodic functions also arise after density estimation from circular data. For example,
 `rho` is the azimuth angle of a three-dimensional direction. Passing these angles with the
-`periodic` option makes [calcDensity](calcDensity.html) return an `S1FunHarmonic`.
+`periodic` option makes [calcDensity](calcDensity_py.html) return an `S1FunHarmonic`.
 
 ```python
 v = vector3d.rand(1000, rng=np.random.default_rng(1))

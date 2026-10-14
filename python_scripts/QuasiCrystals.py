@@ -96,7 +96,7 @@ plt.gca().set_axis_off()
 # %% [markdown]
 # ## Build an Inverse Pole Figure Colour Key
 #
-# An [ipfHSVKey](https://mtex-toolbox.github.io/ipfHSVKey.html) assigns a colour to each direction in the fundamental
+# An [ipfHSVKey](https://mtex-toolbox.github.io/ipfHSVKey_py.html) assigns a colour to each direction in the fundamental
 # sector. For an EBSD orientation, the key first expresses its chosen specimen direction
 # in the crystal frame and then colours the resulting crystal direction.
 
@@ -146,7 +146,7 @@ plot(cs, symbolSize=0.5, projection='eangle', grid=True)
 # ## Add Inversion
 #
 # Many commonly studied icosahedral quasicrystals are centrosymmetric. Adding
-# [rotation.inversion](https://mtex-toolbox.github.io/rotation.inversion.html) combines every proper rotation with
+# [rotation.inversion](https://mtex-toolbox.github.io/rotation.inversion_py.html) combines every proper rotation with
 # inversion.
 
 # %%

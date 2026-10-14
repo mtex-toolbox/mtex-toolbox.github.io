@@ -101,7 +101,7 @@ changeFromKS
 
 ```text
  optimizing parent to child orientation relationship
-  scanning 406 orientations
+  scanning 398 orientations
   ( 77.29°,  9.48°,238.25°)  2.824
   ( 77.48°,  9.47°,238.07°)  2.824
 parentGrainReconstructor

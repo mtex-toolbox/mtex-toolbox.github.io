@@ -83,7 +83,7 @@ mtexColorbar(title='pole density (mrd)')
 # ## Evaluate directions in the sheet plane
 #
 # The field turns from RD to TD in 5 degree steps. Each
-# [orientation](https://mtex-toolbox.github.io/orientation.orientation.html) maps crystal coordinates into specimen
+# [orientation](https://mtex-toolbox.github.io/orientation.orientation_py.html) maps crystal coordinates into specimen
 # coordinates, so its inverse maps the specimen field direction into the crystal frame.
 # The code operates on all 10000 sampled orientations at once; only the list of field
 # directions needs a loop.
@@ -115,7 +115,7 @@ for k in range(len(fieldAngle)):
 # ## Average the texture and estimate J50
 #
 # The arithmetic mean approximates the ODF-weighted material-volume average because
-# [discreteSample](https://mtex-toolbox.github.io/SO3Fun.discreteSample.html) drew equal-weight orientations from the
+# [discreteSample](https://mtex-toolbox.github.io/SO3Fun.discreteSample_py.html) drew equal-weight orientations from the
 # ODF. Yonamine et al. fitted the second line below to electrical-steel measurements.
 
 # %%
@@ -170,7 +170,7 @@ plt.grid(True)
 # symmetry permutes or reverses those axes.
 #
 # The three cosines still have to be evaluated separately. Without `symmetry=False`,
-# [dot](https://mtex-toolbox.github.io/vector3d.dot.html) compares a direction with symmetrically equivalent Miller
+# [dot](https://mtex-toolbox.github.io/vector3d.dot_py.html) compares a direction with symmetrically equivalent Miller
 # directions and returns the best match. That would replace the three components
 # required by the equation with three symmetry-reduced comparisons.
 

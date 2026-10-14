@@ -11,7 +11,7 @@
 # [Orientations](https://mtex-toolbox.github.io/OrientationDefinition_py.html) explains how an orientation relates the
 # crystal and specimen frames.
 #
-# [EBSD.load](https://mtex-toolbox.github.io/EBSD.load.html) chooses the interface from the file extension. The first
+# [EBSD.load](https://mtex-toolbox.github.io/EBSD.load_py.html) chooses the interface from the file extension. The first
 # import needs only a filename. The file is one of the sample data files, fetched on first
 # use.
 
@@ -160,12 +160,12 @@ plot(ebsd['Fe(gamma-iron)'], ebsd['Fe(gamma-iron)'].orientations, ipfDirection=z
 #
 # | | |
 # |---|---|
-# | [.ang](https://mtex-toolbox.github.io/loadEBSD_ang.html) | EDAX and EMSphInx text files |
-# | [.ctf](https://mtex-toolbox.github.io/loadEBSD_ctf.html) | Oxford / HKL text files |
-# | [.osc](https://mtex-toolbox.github.io/loadEBSD_osc.html) | EDAX binary files |
-# | [.crc, .cpr](https://mtex-toolbox.github.io/loadEBSD_crc.html) | Oxford binary files |
-# | [HDF5](https://mtex-toolbox.github.io/loadEBSD_h5.html) | .h5, .hdf5, .oh5, .h5oina, .edaxh5 and .dream3d |
-# | [generic text](https://mtex-toolbox.github.io/loadEBSD_generic.html) | columns in a user-defined order |
+# | [.ang](https://mtex-toolbox.github.io/loadEBSD_ang_py.html) | EDAX and EMSphInx text files |
+# | [.ctf](https://mtex-toolbox.github.io/loadEBSD_ctf_py.html) | Oxford / HKL text files |
+# | [.osc](https://mtex-toolbox.github.io/loadEBSD_osc_py.html) | EDAX binary files |
+# | [.crc, .cpr](https://mtex-toolbox.github.io/loadEBSD_crc_py.html) | Oxford binary files |
+# | [HDF5](https://mtex-toolbox.github.io/loadEBSD_h5_py.html) | .h5, .hdf5, .oh5, .h5oina, .edaxh5 and .dream3d |
+# | [generic text](https://mtex-toolbox.github.io/loadEBSD_generic_py.html) | columns in a user-defined order |
 #
 # The HDF5 interface reads Bruker, EDAX, Oxford, ThermoFisher, EMsoft and EMSphInx
 # layouts. Prefer a documented, non-proprietary format when the acquisition software

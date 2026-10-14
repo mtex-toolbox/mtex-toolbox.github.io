@@ -119,7 +119,7 @@ job
 ```text
 [2.5145 3.4875 4.4144 5.3474]
  optimizing parent to child orientation relationship
-  scanning 406 orientations
+  scanning 398 orientations
   (102.23°,  8.99°,303.54°)  2.291
   (102.35°,  8.96°,303.47°)  2.287
   (102.36°,  8.96°,303.47°)  2.287

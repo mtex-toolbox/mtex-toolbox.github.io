@@ -40,7 +40,7 @@ ebsd = mtexdata('ferrite')
 # 10 degrees the low-angle walls are missed. At 1 degree the same walls divide the map
 # into many separate grains.
 #
-# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html) accepts both thresholds at once. The first value
+# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains_py.html) accepts both thresholds at once. The first value
 # separates grains, while the second records boundaries whose two pixels remain in the
 # same grain as `innerBoundary`.
 
@@ -111,7 +111,7 @@ hold(False)
 # %% [markdown]
 # ## Normalize the amount within each grain
 #
-# [subBoundarySize](https://mtex-toolbox.github.io/grain2d.subBoundarySize.html) counts inner-boundary segments belonging
+# [subBoundarySize](https://mtex-toolbox.github.io/grain2d.subBoundarySize_py.html) counts inner-boundary segments belonging
 # to each grain. Its optional logical selection keeps only the strict low-angle
 # population. Dividing by the number of pixels removes most of the effect of grain size
 # within this one map.
@@ -126,8 +126,8 @@ mtexColorbar(title='segments per pixel')
 # is useful within one regular grid, but it changes with pixel spacing and should not be
 # compared between acquisitions.
 #
-# The physical-unit alternative uses [subBoundaryLength](https://mtex-toolbox.github.io/grain2d.subBoundaryLength.html).
-# Dividing the selected length by [area](https://mtex-toolbox.github.io/grain2d.area.html) gives boundary length per
+# The physical-unit alternative uses [subBoundaryLength](https://mtex-toolbox.github.io/grain2d.subBoundaryLength_py.html).
+# Dividing the selected length by [area](https://mtex-toolbox.github.io/grain2d.area_py.html) gives boundary length per
 # area, here in inverse micrometres.
 
 # %%

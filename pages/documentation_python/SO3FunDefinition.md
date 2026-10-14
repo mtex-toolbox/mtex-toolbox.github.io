@@ -26,12 +26,12 @@ available data rather than by the operation you plan next.
 
 | starting point | representation | constructor or guide |
 |---|---|---|
-| an explicit formula or algorithm | formula evaluated on demand | [SO3FunHandle](SO3FunHandle.SO3FunHandle.html) |
+| an explicit formula or algorithm | formula evaluated on demand | [SO3FunHandle](SO3FunHandle.SO3FunHandle_py.html) |
 | a general function or harmonic coefficients | harmonic series | [SO3FunHarmonic](SO3FunHarmonicRepresentation_py.html) |
 | centres with radial peaks | radial basis functions | [SO3FunRBF](RadialODFs_py.html) |
 | preferred orientation fibres | fibre components | [SO3FunCBF](FibreODFs_py.html) |
 | an elliptic distribution on the quaternion sphere | Bingham distribution | [SO3FunBingham](BinghamODFs_py.html) |
-| existing functions that should remain separate | arbitrary sum | [SO3FunComposition](SO3FunComposition.SO3FunComposition.html) |
+| existing functions that should remain separate | arbitrary sum | [SO3FunComposition](SO3FunComposition.SO3FunComposition_py.html) |
 
 The harmonic representation is the most general numerical representation. Any `SO3Fun`
 can be converted with `SO3FunHarmonic(SO3F)`. This conversion is the
@@ -253,7 +253,7 @@ fibre. See [Fibre ODFs](FibreODFs_py.html) for further constructions.
 
 ## From a Bingham Distribution
 
-A [Bingham distribution](SO3FunBingham.SO3FunBingham.html) is described by four
+A [Bingham distribution](SO3FunBingham.SO3FunBingham_py.html) is described by four
 orientation axes `U` and four concentration values `kappa`. Together they specify the
 directions and relative lengths of the half-axes of a four-dimensional ellipsoid.
 

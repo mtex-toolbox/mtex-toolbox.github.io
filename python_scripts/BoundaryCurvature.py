@@ -14,7 +14,7 @@
 # [Grain Boundary Properties](https://mtex-toolbox.github.io/BoundaryProperties_py.html) introduces segments, chains, and
 # the two grain IDs stored beside each segment.
 #
-# The [curvature](https://mtex-toolbox.github.io/grainBoundary.curvature.html) is the reciprocal of a local circle
+# The [curvature](https://mtex-toolbox.github.io/grainBoundary.curvature_py.html) is the reciprocal of a local circle
 # radius. Its unit is therefore the inverse of the EBSD coordinate unit, usually 1/µm. A
 # circle of radius 2 has constant curvature magnitude 1/2. The closing maths section gives
 # the precise three-point definition.
@@ -81,7 +81,7 @@ grainIdPairs
 # first column.
 #
 # The column order is not an intrinsic property of an unoriented boundary. It follows from
-# the direction in which each chain is walked. The [flip](https://mtex-toolbox.github.io/grainBoundary.flip.html) command
+# the direction in which each chain is walked. The [flip](https://mtex-toolbox.github.io/grainBoundary.flip_py.html) command
 # reverses the walk, swaps the two columns, and changes the sign of the curvature.
 
 # %%
@@ -149,7 +149,7 @@ numberUndefined
 
 # %% [markdown]
 # Two different operations are called smoothing here. The earlier
-# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary.html) call changed the boundary geometry to
+# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary_py.html) call changed the boundary geometry to
 # suppress its pixel staircase. That step matters because local curvature amplifies small
 # geometric irregularities.
 #

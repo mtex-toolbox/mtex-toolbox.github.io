@@ -12,7 +12,7 @@
 # about the horizontal and vertical specimen axes. A slightly tilted mounting moves the
 # symmetry axes without removing the symmetry of the material.
 #
-# [centerSpecimen](https://mtex-toolbox.github.io/SO3Fun.centerSpecimen.html) searches an
+# [centerSpecimen](https://mtex-toolbox.github.io/SO3Fun.centerSpecimen_py.html) searches an
 # [orientation distribution function](https://mtex-toolbox.github.io/ODFTheory_py.html) (ODF) for two perpendicular twofold
 # axes. It then rotates those axes onto the nearest specimen axes. The method aligns an
 # assumed orthotropic texture; it does not prove that the specimen has orthotropic

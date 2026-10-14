@@ -20,9 +20,9 @@ area of a specimen. Each is a raster: a rectangular array whose entries sample t
 Comparing the two requires two independent questions to be answered:
 
 * where on the specimen each raster sits - its
-  [reference frame](referenceFrame.referenceFrame.html)
+  [reference frame](referenceFrame.referenceFrame_py.html)
 * which specimen direction each array index follows - its
-  [layout](gridLayout.gridLayout.html)
+  [layout](gridLayout.gridLayout_py.html)
 
 A reference frame is the coordinate system in which data are expressed. Its identity,
 basis and plotting convention say what the axes mean and how they are drawn. A layout
@@ -58,7 +58,7 @@ img = ebsd.meta['trueEbsdImgs']
 
 ## Put the Map and Images in One Sequence
 
-A [mapImage](mapImage.mapImage.html) combines a raster with the geometry that locates it.
+A [mapImage](mapImage.mapImage_py.html) combines a raster with the geometry that locates it.
 The geometry consists of the centre position of pixel `(0, 0)`, one step vector for each
 array dimension and a reference frame.
 
@@ -183,9 +183,9 @@ The corresponding grain outlines are now the same way up. Changing `how2plot` on
 established how the two frames appear on screen. It has not yet expressed the images in
 the map frame.
 
-[byScreenAlignment](orientation.byScreenAlignment.html) records the assertion that the
+[byScreenAlignment](orientation.byScreenAlignment_py.html) records the assertion that the
 plotted frames are physically aligned.
-[transformReferenceFrame](mapImage.transformReferenceFrame.html) then re-expresses every
+[transformReferenceFrame](mapImage.transformReferenceFrame_py.html) then re-expresses every
 entry in the map frame.
 
 ```python
@@ -223,7 +223,7 @@ In MATLAB the transformed table also shows that the map changed from 128 × 96 b
 map frame is drawn in, so it kept its array. This is the second question, and it is
 independent of the specimen frame.
 
-A [gridLayout](gridLayout.gridLayout.html) contains two directions. The first is the
+A [gridLayout](gridLayout.gridLayout_py.html) contains two directions. The first is the
 direction in which the row index advances, and the second is the direction in which the
 column index advances.
 
@@ -251,7 +251,7 @@ gridLayout
 
 ## Put a Map in an Image Layout
 
-[gridify](EBSD.gridify.html) accepts a layout and stores a square-grid map in that
+[gridify](EBSD.gridify_py.html) accepts a layout and stores a square-grid map in that
 order. [Gridded EBSD Data](EBSDGrid_py.html) introduces the named layouts `'columnMajor'`
 and `'rowMajor'`. Give any other signed pair of axis directions as a `gridLayout`.
 
@@ -330,7 +330,7 @@ Agreeing frames and layouts makes the rasters geometrically comparable, but pixe
 operations also require one common grid. The EBSD spacing is 0.159 micron here, whereas
 the image spacing is 0.0795 micron.
 
-[interp](mapImage.interp.html) samples an image at arbitrary positions. A bare array
+[interp](mapImage.interp_py.html) samples an image at arbitrary positions. A bare array
 carries no physical origin, so state where the centre of its first pixel lies. The origin
 and pixel size must use the same length unit as the EBSD positions.
 

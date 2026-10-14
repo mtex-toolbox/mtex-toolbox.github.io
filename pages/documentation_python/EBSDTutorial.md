@@ -41,7 +41,7 @@ Notice the separate phase table, file header, map preview, and map and Euler
 reference-frame selectors. Check all four before asking the wizard to generate the
 script.
 
-The generated script ultimately calls [EBSD.load](EBSD.load.html). Here the file and its
+The generated script ultimately calls [EBSD.load](EBSD.load_py.html). Here the file and its
 Euler correction are known because both are packaged with MTEX:
 
 ```python
@@ -68,7 +68,7 @@ EBSD (y↓→x)
 ```
 
 The correction above is specific to this file; do not copy it blindly to another data
-set. The displayed [EBSD](EBSD.EBSD.html) summary is the import audit: it lists the
+set. The displayed [EBSD](EBSD.EBSD_py.html) summary is the import audit: it lists the
 phases, counts, crystal symmetries, scan extent, and stored columns.
 
 An `EBSD` object is a vectorized list with one entry per measurement, not an image. Its
@@ -159,7 +159,7 @@ its quality properties and use [Select](EBSDSelect_py.html) to isolate suspect m
 first. [Denoising](EBSDDenoising_py.html) and [Filling Missing Data](EBSDFilling_py.html)
 change the map and need a specimen-specific justification.
 
-[calcGrains](EBSD.calcGrains.html) segments the measurement list into regions. A grain
+[calcGrains](EBSD.calcGrains_py.html) segments the measurement list into regions. A grain
 is a phase-homogeneous, spatially connected region of EBSD pixels produced by
 segmentation. A phase change is always a grain boundary, while same-phase neighbours are
 separated here when their misorientation exceeds the chosen angle. A connected
@@ -191,9 +191,9 @@ grain2d (y↓→x)
 grains = smoothBoundary(grains, 5)
 ```
 
-The returned [grain2d](grain2d.grain2d.html) object is a vectorized list of grains. Its
+The returned [grain2d](grain2d.grain2d_py.html) object is a vectorized list of grains. Its
 display reports the count by phase and the available grain properties.
-[smoothBoundary](grain2d.smoothBoundary.html) removes the pixel staircase from the
+[smoothBoundary](grain2d.smoothBoundary_py.html) removes the pixel staircase from the
 outlines; it does not change which measurements belong together. See
 [Grain Reconstruction](GrainReconstruction_py.html) for choosing and testing segmentation
 criteria.
@@ -232,7 +232,7 @@ grain2d (y↓→x)
   size: 262
   Phase  Grains               Mineral     Color         Symmetry  Crystal reference frame
   1      262 (142943 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
-  boundary segments: 24855, inner: 163, triple points: 1333
+  boundary segments: 25134, inner: 162, triple points: 1333
 ```
 
 ```python
@@ -255,7 +255,7 @@ shape is idealized and its linear scale follows the square root of grain area. S
 
 A [pole figure](OrientationPoleFigure_py.html) asks where a chosen crystal direction points
 in the specimen for every measured orientation. The command is
-[plotPF](orientation.plotPDF.html). Here the three crystallographic axes are plotted as
+[plotPF](orientation.plotPDF_py.html). Here the three crystallographic axes are plotted as
 filled density contours.
 
 ```python
@@ -282,7 +282,7 @@ represent the specimen.
 
 An [inverse pole figure](OrientationInversePoleFigure_py.html) asks the complementary
 question: which crystal direction points along a chosen specimen direction? The command
-is [plotIPF](orientation.plotIPDF.html).
+is [plotIPF](orientation.plotIPDF_py.html).
 
 ```python
 # select the specimen axes

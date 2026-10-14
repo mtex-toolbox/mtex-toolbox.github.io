@@ -1,0 +1,23 @@
+---
+title: 'quadratureS2Grid.nodes'
+sidebar: function_reference_sidebar
+permalink: quadratureS2Grid.nodes_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+status: Reference
+---
+{% raw %}
+A method of [quadratureS2Grid](quadratureS2Grid_index_py.html).
+
+the nodes as a plain list of directions
+
+## Syntax
+
+```python
+quadratureS2Grid.nodes(self)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L285">source</a></font>
+{% endraw %}

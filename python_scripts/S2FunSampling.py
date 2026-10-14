@@ -35,7 +35,7 @@ mtexColorbar()
 # %% [markdown]
 # ## Random sampling
 #
-# [discreteSample](https://mtex-toolbox.github.io/S2Fun.discreteSample.html) draws independent directions with probability
+# [discreteSample](https://mtex-toolbox.github.io/S2Fun.discreteSample_py.html) draws independent directions with probability
 # proportional to the function value. It is fast and unbiased, but a finite random sample
 # contains clusters and empty patches.
 
@@ -53,7 +53,7 @@ hold(False)
 #
 # ## Optimizing the directions
 #
-# [optimalSample](https://mtex-toolbox.github.io/S2Fun.optimalSample.html) moves the directions until their discrete
+# [optimalSample](https://mtex-toolbox.github.io/S2Fun.optimalSample_py.html) moves the directions until their discrete
 # measure is close to the density. This optimization costs more time than independent
 # sampling. In return, the directions spread evenly along every feature and become denser
 # where the function is large.
@@ -113,7 +113,7 @@ hold(False)
 # ## Comparing the recovered densities
 #
 # To compare equal point counts, we estimate a density from every sample with
-# [calcDensity](https://mtex-toolbox.github.io/vector3d.calcDensity.html). The weighted sample passes its volume fractions
+# [calcDensity](https://mtex-toolbox.github.io/vector3d.calcDensity_py.html). The weighted sample passes its volume fractions
 # to the estimator. All three estimates use the same kernel halfwidth, so their smoothing is
 # identical.
 #
@@ -199,8 +199,8 @@ plt.ylabel('error of the harmonic coefficients up to degree 32')
 #
 # ## Choosing a sampling method
 #
-# Use [discreteSample](https://mtex-toolbox.github.io/S2Fun.discreteSample.html) when you need many points quickly and
-# their individual placement does not matter. Use [optimalSample](https://mtex-toolbox.github.io/S2Fun.optimalSample.html)
+# Use [discreteSample](https://mtex-toolbox.github.io/S2Fun.discreteSample_py.html) when you need many points quickly and
+# their individual placement does not matter. Use [optimalSample](https://mtex-toolbox.github.io/S2Fun.optimalSample_py.html)
 # when the number of points is limited. Ask for weights when the sample will be used for
 # integration. For a kernel density estimate, optimized weights usually help less once the
 # smoothing halfwidth becomes the main source of error.

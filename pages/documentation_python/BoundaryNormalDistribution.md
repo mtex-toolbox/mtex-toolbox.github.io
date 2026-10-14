@@ -17,7 +17,7 @@ note: 'Parts of this page are not yet available in Python; the MATLAB page has t
 
 A polished two-dimensional section reveals a grain boundary trace, but not the
 inclination of the boundary plane. This page shows how
-[calcGBND](grainBoundary.calcGBND.html) combines many traces with the orientations on
+[calcGBND](grainBoundary.calcGBND_py.html) combines many traces with the orientations on
 their two sides to estimate preferred boundary planes. It then contrasts that
 stereological estimate with normals measured directly from three-dimensional grains.
 
@@ -40,7 +40,7 @@ A reference frame is the coordinate system in which data are expressed. The *spe
 frame* is fixed to the sample, while a *crystal frame* is fixed to the lattice basis of
 one phase.
 
-[calcGBND](grainBoundary.calcGBND.html) estimates two grain boundary normal
+[calcGBND](grainBoundary.calcGBND_py.html) estimates two grain boundary normal
 distributions (GBNDs) and one conditional distribution:
 
 * The *specimen GBND* is the distribution of boundary normals in the specimen frame. It
@@ -80,7 +80,7 @@ The two-dimensional estimator looks up the orientations beside each segment thro
 `gB.ebsdId`. That property is meaningful only while every segment still lies between
 one specific pair of pixels.
 
-[smoothBoundary](grain2d.smoothBoundary.html) normally simplifies and resamples the
+[smoothBoundary](grain2d.smoothBoundary_py.html) normally simplifies and resamples the
 segment list. The options `simplify=False` and `refine=False` smooth the vertex positions
 without changing that list.
 
@@ -187,7 +187,7 @@ remainingSummary
 ```
 
 ```text
-{'minimumDensity': 0.8590915918782432, 'maximumDensity': 1.0848686147087483}
+{'minimumDensity': 0.8590915918782431, 'maximumDensity': 1.0848686147087483}
 ```
 
 The peak lies 5.6 degrees from the nearest tension-twin plane. The remaining
@@ -263,7 +263,7 @@ GBND.
 ## The specimen GBND
 
 With a three-dimensional boundary as its only argument,
-[calcGBND](grain3Boundary.calcGBND.html) uses the measured normals in the specimen frame.
+[calcGBND](grain3Boundary.calcGBND_py.html) uses the measured normals in the specimen frame.
 Each triangular face is weighted by its area.
 
 ```python
@@ -287,7 +287,7 @@ specimenSummary
 ```
 
 ```text
-{'minimumDensity': 0.6112683632589166, 'maximumDensity': 1.7424354059310012}
+{'minimumDensity': 0.6112683632589165, 'maximumDensity': 1.7424354059310017}
 ```
 
 ## The crystal GBND
@@ -316,7 +316,7 @@ crystalSummary
 ```
 
 ```text
-{'minimumDensity': 0.7411072299996191, 'maximumDensity': 2.004265757082114}
+{'minimumDensity': 0.7411072299996189, 'maximumDensity': 2.004265757082114}
 ```
 
 ## The GBCD in three dimensions
@@ -377,7 +377,7 @@ sigma3GBCDSummary
 ```
 
 ```text
-{'peakDensity': 16.30684787994216, 'distanceToSigma3PlaneDegree': 0.011782645270847976}
+{'peakDensity': 16.306847879941838, 'distanceToSigma3PlaneDegree': 0.011782645270850784}
 ```
 
 The peak density is 16.3, about 0.01 degrees from the plane, eight times the maximum of

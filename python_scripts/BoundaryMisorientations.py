@@ -57,7 +57,7 @@ hold(False)
 # the black lines are all boundary segments in the cropped map. The analysis below uses
 # only boundaries between two forsterite grains.
 #
-# The [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary.html) flags `simplify=False` and `refine=False` are
+# The [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary_py.html) flags `simplify=False` and `refine=False` are
 # important here. Simplification and refinement change which segments lie between specific
 # pixel pairs. Their `ebsdId` values can then no longer supply the two orientations used
 # below.

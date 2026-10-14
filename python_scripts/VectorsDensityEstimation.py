@@ -50,7 +50,7 @@ plot(cAxes, upper=True, markerFaceColor='none', markerEdgeAlpha=0.01, markerSize
 # The projected sphere is almost covered by markers. Some concentrations are visible, but
 # their relative strengths cannot be read from this overlap.
 #
-# [calcDensity](https://mtex-toolbox.github.io/vector3d.calcDensity.html) replaces the point cloud by a continuous
+# [calcDensity](https://mtex-toolbox.github.io/vector3d.calcDensity_py.html) replaces the point cloud by a continuous
 # spherical function. Given no halfwidth, it selects one from the data, which assumes
 # independent observations; the pixel axes of a map are not, as the section *Letting the
 # Data Choose the Halfwidth* shows. So this page names MATLAB's default, 10 degrees.
@@ -284,7 +284,7 @@ localPos
 
 # %% [markdown]
 # The first local maximum is the global one. Integrate the density within 20 degrees of
-# that axis using [volume](https://mtex-toolbox.github.io/S2Fun.volume.html).
+# that axis using [volume](https://mtex-toolbox.github.io/S2Fun.volume_py.html).
 
 # %%
 smoothedFraction = volume(pdf, localPos[0], 20 * degree)
@@ -343,7 +343,7 @@ h = inv(ebsd['Fo'].orientations) * vector3d.Z
 
 # %% [markdown]
 # The result is a list of crystal directions carrying the Forsterite crystal symmetry.
-# [calcDensity](https://mtex-toolbox.github.io/vector3d.calcDensity.html) transfers that symmetry to the density
+# [calcDensity](https://mtex-toolbox.github.io/vector3d.calcDensity_py.html) transfers that symmetry to the density
 # automatically.
 
 # %%
@@ -368,11 +368,11 @@ mtexColorbar()
 # ## Choosing a Different Kernel
 #
 # The default is the non-negative
-# [de la Vallee Poussin kernel](https://mtex-toolbox.github.io/S2DeLaValleePoussinKernel.html). Its finite harmonic
+# [de la Vallee Poussin kernel](https://mtex-toolbox.github.io/S2DeLaValleePoussinKernel_py.html). Its finite harmonic
 # expansion avoids truncation ringing. The `kernel` option also accepts other
 # [spherical kernels](https://mtex-toolbox.github.io/S2Kernels_py.html).
 #
-# Compare the default 10 degree kernel with a [Dirichlet kernel](https://mtex-toolbox.github.io/S2DirichletKernel.html)
+# Compare the default 10 degree kernel with a [Dirichlet kernel](https://mtex-toolbox.github.io/S2DirichletKernel_py.html)
 # truncated at bandwidth 12.
 
 # %%
@@ -420,7 +420,7 @@ mtexColorbar()
 
 # %% [markdown]
 # This 5 degree plot is sharper than the explicit 10 degree estimate `pdf`. Use
-# [calcDensity](https://mtex-toolbox.github.io/vector3d.calcDensity.html) explicitly when the density itself, its
+# [calcDensity](https://mtex-toolbox.github.io/vector3d.calcDensity_py.html) explicitly when the density itself, its
 # weights, its kernel, or a reproducible smoothing choice matters.
 
 # %% [markdown]

@@ -15,7 +15,7 @@ status: Checked
 <!--introduction-->
 
 A measured pole figure stores an intensity at every sampled specimen direction for one
-family of crystal-plane normals. [plot](PoleFigure.plot.html) places those samples on a
+family of crystal-plane normals. [plot](PoleFigure.plot_py.html) places those samples on a
 projection of the specimen hemisphere. It does not turn the measurements into a
 continuous function.
 
@@ -102,7 +102,7 @@ shown below.
 ## One colour range for all
 
 Comparing pole figures by eye only works when they share a colour range.
-[setColorRange](setColorRange.html) with `'equal'` gives all axes of the figure the
+[setColorRange](setColorRange_py.html) with `'equal'` gives all axes of the figure the
 union of their ranges. A single colorbar then applies to every panel.
 
 ```python
@@ -142,7 +142,7 @@ measured. Reconstructing the ODF from measured pole figures is the subject of
 odf = calcODF(pf)
 ```
 
-[plotPF](SO3Fun.plotPDF.html) recalculates the same three pole figures. Diffraction
+[plotPF](SO3Fun.plotPDF_py.html) recalculates the same three pole figures. Diffraction
 identifies a plane normal with its opposite, so `antipodal` folds the two directions
 into the same hemisphere.
 

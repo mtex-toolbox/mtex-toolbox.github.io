@@ -98,7 +98,7 @@ rot2 = rotation.byEuler(0, 60 * degree, 0, 'Bunge')
 rot = rot2 * rot1
 ```
 
-The order matters. [==](quaternion.eq.html) tests rotation equality within an angular
+The order matters. [==](quaternion.eq_py.html) tests rotation equality within an angular
 tolerance, rather than comparing printed Euler angles. Reversing these two rotations does
 not give the same result.
 
@@ -145,7 +145,7 @@ useful whenever the intended order might otherwise be misread.
 
 ## Axis and Angle
 
-[angle](quaternion.angle.html) and [axis](quaternion.axis.html) read the axis--angle
+[angle](quaternion.angle_py.html) and [axis](quaternion.axis_py.html) read the axis--angle
 description from the composed rotation, however it was built.
 
 ```python
@@ -173,7 +173,7 @@ the two input angles because rotations about different axes do not add like vect
 
 ## The Inverse Rotation
 
-[inv](quaternion.inv.html) reverses a rotation. For a nonzero turn below 180 degrees,
+[inv](quaternion.inv_py.html) reverses a rotation. For a nonzero turn below 180 degrees,
 the inverse has the opposite axis and the same canonical, nonnegative angle.
 
 ```python
@@ -233,7 +233,7 @@ np.array([relativeRot.angle(), angle(rot, rot1)]) / degree
 array([60., 60.])
 ```
 
-Both entries are 60 degrees. The second is the direct [angle(rot,rot1)](quaternion.angle.html)
+Both entries are 60 degrees. The second is the direct [angle(rot,rot1)](quaternion.angle_py.html)
 call, so there is usually no need to construct the relative rotation explicitly.
 
 This angular distance is used throughout MTEX to compare a fit with a measurement and to
@@ -280,12 +280,12 @@ constructed.
 
 | | |
 |---|---|
-| [Euler(rot)](quaternion.Euler.html) | the three Euler angles |
-| [Rodrigues(rot)](quaternion.Rodrigues.html) | the Rodrigues--Frank vector |
-| [matrix(rot)](quaternion.matrix.html) | the rotation matrix |
-| [homochoric(rot)](quaternion.homochoric.html) | the homochoric vector |
-| [cubochoric(rot)](quaternion.cubochoric.html) | the cubochoric vector |
-| [axis(rot)](quaternion.axis.html), [angle(rot)](quaternion.angle.html) | axis and angle |
+| [Euler(rot)](quaternion.Euler_py.html) | the three Euler angles |
+| [Rodrigues(rot)](quaternion.Rodrigues_py.html) | the Rodrigues--Frank vector |
+| [matrix(rot)](quaternion.matrix_py.html) | the rotation matrix |
+| [homochoric(rot)](quaternion.homochoric_py.html) | the homochoric vector |
+| [cubochoric(rot)](quaternion.cubochoric_py.html) | the cubochoric vector |
+| [axis(rot)](quaternion.axis_py.html), [angle(rot)](quaternion.angle_py.html) | axis and angle |
 
 Euler angles depend on a convention. Naming Matthies here makes the result independent
 of the user's display preference.

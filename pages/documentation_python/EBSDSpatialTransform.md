@@ -24,7 +24,7 @@ the orientations stored at those positions. Use
 [Reference Frame Alignment](EBSDReferenceFrame_py.html) when the map coordinates and Euler
 angles do not refer to the same specimen frame.
 
-A function can move positions too. A [spatialTransform](spatialTransform.html) also
+A function can move positions too. A [spatialTransform](spatialTransform_py.html) also
 composes, inverts, displays itself, fits measured point pairs, and can be stored for
 another data set. [Maps and Images](EBSDMapsAndImages_py.html) explains how two images first
 come to share a specimen coordinate system and array layout.
@@ -84,25 +84,25 @@ array([[0. , 5. ],
 Each class represents a different amount and pattern of spatial freedom. The names are
 historical, so read their meanings rather than guessing from them:
 
-* [spatialTransformId](spatialTransformId.html) means that nothing separates the two
+* [spatialTransformId](spatialTransformId_py.html) means that nothing separates the two
   coordinate systems.
-* [spatialTransformRigid](spatialTransformRigid.html) is one translation, the same
+* [spatialTransformRigid](spatialTransformRigid_py.html) is one translation, the same
   everywhere. It does not include a rotation.
-* [spatialTransformShift](spatialTransformShift.html) is a full 2D affine map:
+* [spatialTransformShift](spatialTransformShift_py.html) is a full 2D affine map:
   translation, rotation, scale, and shear in one homogeneous matrix.
-* [spatialTransformProjective](spatialTransformProjective.html) is a homography. It keeps
+* [spatialTransformProjective](spatialTransformProjective_py.html) is a homography. It keeps
   lines straight, but parallel lines need not remain parallel, as in a perspective view
   of a tilted plane.
-* [spatialTransformTilt](spatialTransformTilt.html) is the staged model used to recover
+* [spatialTransformTilt](spatialTransformTilt_py.html) is the staged model used to recover
   specimen tilt from repeatedly correlated image pairs.
-* [spatialTransformPoly](spatialTransformPoly.html) describes a displacement that varies
+* [spatialTransformPoly](spatialTransformPoly_py.html) describes a displacement that varies
   polynomially across the coordinate system.
-* [spatialTransformDrift](spatialTransformDrift.html) varies only along the slow scan
+* [spatialTransformDrift](spatialTransformDrift_py.html) varies only along the slow scan
   direction. It models rolling-shutter-like scan drift rather than an arbitrary smooth
   field.
-* [spatialTransformField](spatialTransformField.html) stores measured displacements and
+* [spatialTransformField](spatialTransformField_py.html) stores measured displacements and
   interpolates between their positions without imposing a parametric model.
-* [spatialTransformHandle](spatialTransformHandle.html) wraps a function when none of the
+* [spatialTransformHandle](spatialTransformHandle_py.html) wraps a function when none of the
   fitted models applies.
 
 Start with the least flexible model that has a physical reason to be present. A flexible
@@ -234,7 +234,7 @@ spatialTransformComposite
 
 Use `+` for a distortion model that is about to be fitted, and `*` for transforms whose
 coefficients are already known. Here `+` chains maps; it does not add displacements as
-`+` on a [vector3d](vector3d.vector3d.html) would.
+`+` on a [vector3d](vector3d.vector3d_py.html) would.
 
 Both operations flatten composites rather than nesting them, and their application order
 is consistent.
@@ -266,7 +266,7 @@ spatialTransformProjective
 ```
 
 A degree-two polynomial, drift spline, or scattered field has no general closed-form
-inverse. Its inverse is a [spatialTransformInverse](spatialTransformInverse.html), which
+inverse. Its inverse is a [spatialTransformInverse](spatialTransformInverse_py.html), which
 solves for each source position iteratively.
 
 ```python
@@ -300,8 +300,8 @@ wrong position.
 ## Collapse a Chain at Chosen Positions
 
 Evaluating every stage repeatedly is wasted work when the chain will be applied to many
-pixels. [discretize](spatialTransform.html) samples a chain at chosen positions and
-returns one [spatialTransformField](spatialTransformField.html).
+pixels. [discretize](spatialTransform_py.html) samples a chain at chosen positions and
+returns one [spatialTransformField](spatialTransformField_py.html).
 
 ```python
 F = discretize(R + S, posA)
@@ -328,7 +328,7 @@ np.max(norm(F * posA - (R + S) * posA))
 
 ## Apply a Transform to an EBSD Map
 
-[transform](EBSD.transform.html) moves every pixel and carries its unit cell with it.
+[transform](EBSD.transform_py.html) moves every pixel and carries its unit cell with it.
 Orientations, phase labels, and all per-pixel properties remain untouched. A spatial
 transform therefore corrects map geometry, not an orientation or
 specimen-reference-frame error.
@@ -371,7 +371,7 @@ np.max(norm(ebsdBack.pos - ebsd.pos))
 
 Nothing above measured a distortion: `posA` and `posB` were manufactured. In practice,
 pairs often come from correlating two images of the same area.
-[xcfShift](xcfShift.html) divides their shared region into tiles, phase correlates each
+[xcfShift](xcfShift_py.html) divides their shared region into tiles, phase correlates each
 tile with its counterpart, and returns a displacement and correlation-peak height for every
 tile.
 

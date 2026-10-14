@@ -14,8 +14,8 @@ status: Checked
 
 <!--introduction-->
 
-An [orientation](orientation.orientation.html) answers one question: how is this crystal
-placed in this specimen? In MTEX it is a [rotation](rotation.rotation.html) that maps
+An [orientation](orientation.orientation_py.html) answers one question: how is this crystal
+placed in this specimen? In MTEX it is a [rotation](rotation.rotation_py.html) that maps
 coordinates from the crystal reference frame into the specimen reference frame. It also
 carries the symmetry attached to each frame.
 
@@ -23,7 +23,7 @@ This page assumes the three-dimensional directions introduced in
 [Defining Three-Dimensional Vectors](VectorDefinition_py.html), the plane and direction
 notation from [Miller Indices](CrystalDirections_py.html), and basic matrix algebra. The
 constructors are the same as on [Defining Rotations](RotationDefinition_py.html), with a
-[crystalFrame](crystalFrame.crystalFrame.html) supplied as an extra argument.
+[crystalFrame](crystalFrame.crystalFrame_py.html) supplied as an extra argument.
 
 What this mapping means is developed in
 [Theory](DefinitionAsCoordinateTransform_py.html) and compared with other conventions in
@@ -112,7 +112,7 @@ changes the coordinate description without moving the crystal; see
 Metallurgy often names an orientation by two crystal quantities: the lattice plane
 facing the specimen Z axis and the lattice direction pointing along specimen X. The
 inputs must describe an orthogonal plane normal and direction. That is what
-[orientation.byMiller](orientation.byMiller.html) takes, here for the Goss orientation
+[orientation.byMiller](orientation.byMiller_py.html) takes, here for the Goss orientation
 $$(011)[100]$$.
 
 ```python
@@ -178,7 +178,7 @@ len(ori)
 ## Symmetrically Equivalent Orientations
 
 A crystal cannot distinguish its symmetrically equivalent settings, so an orientation
-represents a whole class of rotations. [symmetrise](orientation.symmetrise.html) lists
+represents a whole class of rotations. [symmetrise](orientation.symmetrise_py.html) lists
 that class.
 
 ```python
@@ -213,7 +213,7 @@ the `symmetry=False` option.
 A specimen may have symmetry of its own. A rolled sheet, for example, is commonly
 modelled with orthorhombic symmetry: three mutually perpendicular twofold axes, or
 equivalently three mirror planes in the full point group. It is represented by a
-[specimenFrame](specimenFrame.specimenFrame.html) and passed alongside the crystal
+[specimenFrame](specimenFrame.specimenFrame_py.html) and passed alongside the crystal
 symmetry.
 
 ```python

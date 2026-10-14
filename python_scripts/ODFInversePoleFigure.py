@@ -59,7 +59,7 @@ odf = SO3FunHarmonic(odf, bandwidth=32)
 # %% [markdown]
 # ## Plotting Specimen Directions
 #
-# [plotIPF](https://mtex-toolbox.github.io/SO3Fun.plotIPDF.html) works like `plotPF`, except that its input directions
+# [plotIPF](https://mtex-toolbox.github.io/SO3Fun.plotIPDF_py.html) works like `plotPF`, except that its input directions
 # belong to the specimen frame. The coordinates inside each panel are crystal directions.
 # This frame reversal is the point of an inverse pole figure.
 

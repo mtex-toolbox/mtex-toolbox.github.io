@@ -81,7 +81,7 @@ plt.title('two coordinate distances')
 
 In the first two panels, points near the left edge can still have a large coordinate
 distance. The third panel shows that matrix and
-[Rodrigues Frank](rotation.byRodrigues.html) coordinates jump differently. Neither
+[Rodrigues Frank](rotation.byRodrigues_py.html) coordinates jump differently. Neither
 Euclidean coordinate distance is the geometry of orientation space.
 
 This is why averaging fundamental-region coordinates is unsafe. Consider the
@@ -105,7 +105,7 @@ orientation (432 → y↓→x)
 
 The displayed result is the identity orientation. It is $$45^{\circ}$$ from the expected
 mean because the two selected Rodrigues vectors lie on opposite sides of a
-fundamental-region boundary. In contrast, [mean](orientation.mean.html) handles crystal
+fundamental-region boundary. In contrast, [mean](orientation.mean_py.html) handles crystal
 symmetry.
 
 ```python
@@ -173,7 +173,7 @@ difference between an ambient chord and a geodesic on orientation space.
 
 An arithmetic mean of embeddings lies in the ambient Euclidean space and generally is
 not itself the embedding of an orientation. Project it back with
-[orientation](embedding.orientation.html).
+[orientation](embedding.orientation_py.html).
 
 ```python
 e = embedding(ori)
@@ -323,15 +323,15 @@ a single distribution family.
 Embeddings support the following linear-space operations:
 
 * `+`, `-`, `*` and `/`
-* [mean](embedding.mean.html)
-* [norm](embedding.norm.html)
-* [dot](embedding.dot.html)
-* [rotate](embedding.rotate.html)
+* [mean](embedding.mean_py.html)
+* [norm](embedding.norm_py.html)
+* [dot](embedding.dot_py.html)
+* [rotate](embedding.rotate_py.html)
 
 ## Packed Numeric Coordinates
 
 The tensor representation stores repeated components. The
-[double](embedding.double.html) method packs the independent components into a numeric
+[double](embedding.double_py.html) method packs the independent components into a numeric
 matrix while preserving Euclidean distances exactly. For cubic symmetry the following
 output compares the full tensor component count with the packed dimension.
 

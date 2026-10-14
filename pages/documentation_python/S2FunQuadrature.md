@@ -36,7 +36,7 @@ rule for one or many `vector3d` directions.
 fun = lambda v: v.x * v.y
 ```
 
-[S2FunHarmonic.quadrature](S2FunHarmonic.quadrature.html) evaluates the function on a
+[S2FunHarmonic.quadrature](S2FunHarmonic.quadrature_py.html) evaluates the function on a
 quadrature grid and applies the corresponding weights. The `bandwidth` is the largest
 harmonic degree retained in the result. Because this example is a quadratic polynomial,
 degree 2 is sufficient.

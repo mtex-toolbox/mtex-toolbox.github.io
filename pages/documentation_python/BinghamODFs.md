@@ -63,7 +63,7 @@ SO3FunBingham (1 → y↑→x)
 ```
 
 The printed summary identifies a Bingham component and reports its four shape
-parameters. [BinghamODF](BinghamODF.html) normalizes the component, so its mean is 1
+parameters. [BinghamODF](BinghamODF_py.html) normalizes the component, so its mean is 1
 multiple of a random distribution (mrd).
 
 Pole figures project the ODF onto specimen directions. The unequal shape parameters
@@ -88,7 +88,7 @@ plot(odf, sections=6)
 
 ## Estimating the Parameters
 
-[calcBinghamODF](orientation.calcBinghamODF.html) estimates a Bingham model from
+[calcBinghamODF](orientation.calcBinghamODF_py.html) estimates a Bingham model from
 individual orientations. Those orientations may come from EBSD or from a simulation.
 This compact fit can work with far fewer measurements than a kernel estimate. It also
 assumes that one Bingham component is adequate.
@@ -107,7 +107,7 @@ Each pole figure contains the ring expected from a fibre texture. The ring posit
 differs between crystal directions, but it belongs to the same orientation-space fibre.
 
 Draw 2000 orientations from that ODF and add their pole points to all three panels with
-[discreteSample](SO3Fun.discreteSample.html).
+[discreteSample](SO3Fun.discreteSample_py.html).
 
 ```python
 ori = discreteSample(odfTrue, 2000)
@@ -128,7 +128,7 @@ odf
 
 ```text
 SO3FunBingham (1 → y↑→x)
-  kappa : [100.291 100.268   4.537   0.   ]
+  kappa : [95.628 95.603  7.619  0.   ]
   weight: 1
 ```
 
@@ -161,7 +161,7 @@ maxima on the quaternion sphere; it does not mean a uniform ODF.
 ## A Bipolar or Unimodal Distribution
 
 A scalar shape parameter and a reference orientation define a unimodal Bingham
-distribution. [BinghamODF](BinghamODF.html) expands the scalar `20` to `[20, 0, 0, 0]`.
+distribution. [BinghamODF](BinghamODF_py.html) expands the scalar `20` to `[20, 0, 0, 0]`.
 The reference orientation is the unique maximum, apart from its antipode and
 symmetry-equivalent descriptions.
 

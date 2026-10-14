@@ -14,7 +14,7 @@ status: Checked
 
 <!--introduction-->
 
-A [vector3d](vector3d.vector3d.html) stores one or more vectors through their Cartesian
+A [vector3d](vector3d.vector3d_py.html) stores one or more vectors through their Cartesian
 components $$x$$, $$y$$ and $$z$$. A reference frame identifies the coordinate system in which
 data are expressed. It includes an identity, basis and default plotting convention. The
 components are coordinates in that frame.
@@ -64,7 +64,7 @@ inside the rim because $$z$$ is positive. Multiplying all three components by th
 positive number would not move this point. [Spherical Projections](SphericalProjections_py.html)
 explains how the sphere is mapped onto the page.
 
-The [norm](vector3d.norm.html) is the stored vector's length.
+The [norm](vector3d.norm_py.html) is the stored vector's length.
 
 ```python
 norm(v)
@@ -75,7 +75,7 @@ norm(v)
 ```
 
 For $$(1,2,3)$$ the result is $$\sqrt{14}$$, displayed here as 3.7417.
-[normalize](vector3d.normalize.html) divides each component by that length, so the
+[normalize](vector3d.normalize_py.html) divides each component by that length, so the
 result has length one without changing direction.
 
 ```python
@@ -131,7 +131,7 @@ length nor the previous direction.
 
 A direction can also be described by two angles. The *polar angle* $$\theta$$ is measured
 away from the Z axis. The *azimuth angle* $$\rho$$ is measured in the XY plane away from
-the X axis. [vector3d.byPolar](vector3d.byPolar.html) takes the angles in that order and
+the X axis. [vector3d.byPolar](vector3d.byPolar_py.html) takes the angles in that order and
 returns a unit vector.
 
 ```python
@@ -266,7 +266,7 @@ The three output rows match the three matrix rows. Prefer `byXYZ` when the row c
 matters. The constructor also accepts coordinate matrices and reads them by rows as well,
 one vector per row of three components.
 
-[vector3d.rand](vector3d.rand.html) creates uniformly distributed random unit
+[vector3d.rand](vector3d.rand_py.html) creates uniformly distributed random unit
 directions. The following call creates 100 directions. Its long object summary is not
 useful here, so the assignment keeps it out of the page.
 
@@ -285,7 +285,7 @@ appear because of `upper`; the option does not identify a direction with its neg
 
 ## Plotting Conventions
 
-A [plotting convention](plottingConvention.html) states how a reference frame is laid
+A [plotting convention](plottingConvention_py.html) states how a reference frame is laid
 out on screen. It does not change the vector or re-express it in another frame. Pass
 `how2plot` to change one plot.
 

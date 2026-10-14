@@ -459,7 +459,7 @@ hold(False)
 ```
 
 ```text
-[1.1632 2.0592 3.1597]
+[1.1632 2.0591 3.1597]
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/LowLevelParentGrainReconstruction-21.png"></center>

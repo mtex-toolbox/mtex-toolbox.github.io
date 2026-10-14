@@ -160,7 +160,7 @@ functions.
 
 ## Pointwise Minimum and Maximum
 
-With two function arguments, [max](SO3Fun.max.html) and [min](SO3Fun.min.html) compare
+With two function arguments, [max](SO3Fun.max_py.html) and [min](SO3Fun.min_py.html) compare
 values independently at every orientation.
 
 ```python
@@ -272,7 +272,7 @@ maximum, while the second is the next distinct local maximum.
 ## Integration and Norms
 
 [mean](SO3Fun.mean.html) returns the normalized integral over $$SO(3)$$. It assigns the
-constant function one an integral of one. [sum](SO3Fun.sum.html) uses the full
+constant function one an integral of one. [sum](SO3Fun.sum_py.html) uses the full
 rotation-group volume $$8\pi^2$$.
 
 ```python
@@ -281,7 +281,7 @@ normalizedIntegral
 ```
 
 ```text
-1.0000
+1
 ```
 
 ---
@@ -292,7 +292,7 @@ integralFromSum
 ```
 
 ```text
-1.0000
+1
 ```
 
 These two values agree because dividing `sum` by $$8\pi^2$$ gives the same normalization as
@@ -331,7 +331,7 @@ directNorm
 ## Differentiation at One Orientation
 
 The gradient at a particular orientation belongs to the tangent space of $$SO(3)$$ at that
-orientation. MTEX represents it by an [SO3TangentVector](SO3TangentVector.SO3TangentVector.html).
+orientation. MTEX represents it by an [SO3TangentVector](SO3TangentVector.SO3TangentVector_py.html).
 
 ```python
 gradientAtR = grad(SO3F1, R)
@@ -383,7 +383,7 @@ direction of steepest ascent represented in that section.
 
 ## Rotating a Function
 
-[rotate](SO3Fun.rotate.html) moves an orientation-dependent function by a specified
+[rotate](SO3Fun.rotate_py.html) moves an orientation-dependent function by a specified
 rotation. This changes where its features occur. It is not a frame change, which would
 re-express the same physical function in a different reference frame.
 

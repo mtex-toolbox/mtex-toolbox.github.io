@@ -27,7 +27,7 @@ where they do not agree.
 This page assumes the pole-figure idea from [Pole Figures](PoleFigureAnalysis.html) and
 corrected measurements from [Data Correction](PoleFigureCorrection_py.html). The definition
 and units of an ODF are introduced in [ODF Theory](ODFTheory_py.html). Here the
-reconstruction uses [calcODF](PoleFigure.calcODF.html).
+reconstruction uses [calcODF](PoleFigure.calcODF_py.html).
 [The Ghost Effect](PoleFigure2ODFAmbiguity_py.html) explains what the measurements can
 never determine.
 
@@ -101,7 +101,7 @@ SO3FunRBF (Quartz → y↑→x)
     67.5  97.1   308  5.68e-06
 ```
 
-The result is an [SO3FunRBF](SO3FunRBF.SO3FunRBF.html). It represents the ODF as a
+The result is an [SO3FunRBF](SO3FunRBF.SO3FunRBF_py.html). It represents the ODF as a
 weighted superposition of unimodal kernel functions on a grid in orientation space. The
 display reports 20,224 grid centres for this reconstruction. The object can be analysed
 like any other ODF; continue to [ODF Analysis](ODFAnalysis.html) after validating the
@@ -122,7 +122,7 @@ The maxima appear in the same regions and reach comparable intensities. The reca
 pole figures are smoother because the finite-width kernels do not reproduce every
 fluctuation in the measurement.
 
-[calcError](PoleFigure.calcError.html) makes the same comparison one pole figure at a
+[calcError](PoleFigure.calcError_py.html) makes the same comparison one pole figure at a
 time. The `'RP'` measure divides the absolute difference by the recalculated intensity,
 but only where that intensity exceeds the threshold supplied as `epsilon`. The default
 threshold is 1.
@@ -157,7 +157,7 @@ answer a different question. Compare reconstructions with the same measure and t
 throughout. The other available measures are `'l1'` and `'l2'`.
 
 A single error vector hides where the mismatch occurs.
-[plotDiff](PoleFigure.plotDiff.html) plots the relative difference for every measured
+[plotDiff](PoleFigure.plotDiff_py.html) plots the relative difference for every measured
 direction.
 
 ```python
@@ -177,7 +177,7 @@ diagnostic clue, not proof of any one cause.
 
 ## Comparing two ODFs
 
-The [calcError](SO3Fun.calcError.html) overload also compares two ODFs. This is a
+The [calcError](SO3Fun.calcError_py.html) overload also compares two ODFs. This is a
 different calculation from comparing an ODF with pole-figure measurements. To make the
 distinction visible, build one broad component at the strongest orientation of the
 reconstruction.
@@ -231,7 +231,7 @@ print(f'Default: {defaultTime:.2f} s, peak {defaultPeak:.1f} mrd, mean RP {meanD
 ```
 
 ```text
-Default: 1.36 s, peak 94.4 mrd, mean RP 0.59; 15 degree: 0.19 s, peak 26.3 mrd, mean RP 0.75
+Default: 1.98 s, peak 94.4 mrd, mean RP 0.59; 15 degree: 0.19 s, peak 26.3 mrd, mean RP 0.75
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODF-9.png"></center>
@@ -267,7 +267,7 @@ print(f'Zero range: {zeroTime:.2f} s, peak {zeroPeak:.1f} mrd, mean RP {meanZero
 ```
 
 ```text
-Zero range: 0.76 s, peak 106.9 mrd, mean RP 0.51; default: 1.36 s, peak 94.4 mrd, mean RP 0.59
+Zero range: 0.70 s, peak 106.9 mrd, mean RP 0.51; default: 1.98 s, peak 94.4 mrd, mean RP 0.59
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigure2ODF-10.png"></center>
@@ -277,7 +277,7 @@ On this data set the method does change the reconstruction. The peak rises from 
 that it also runs faster here, because the solver keeps far fewer grid nodes. The
 sharper recalculated maxima are the visible difference to look for. Try the method
 rather than assuming it will help. The
-[zeroRangeMethod](zeroRangeMethod.zeroRangeMethod.html) reference lists the threshold
+[zeroRangeMethod](zeroRangeMethod.zeroRangeMethod_py.html) reference lists the threshold
 and smoothing options that decide what counts as zero.
 
 ## Ghost correction

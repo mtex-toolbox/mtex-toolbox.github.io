@@ -132,7 +132,7 @@ orientation (6 → y↑→x)
    190   20   330
 ```
 
-[symmetrise](orientation.symmetrise.html) is the shortcut for this product. It returns a
+[symmetrise](orientation.symmetrise_py.html) is the shortcut for this product. It returns a
 new orientation array; it does not alter `ori`.
 
 ```python
@@ -250,13 +250,13 @@ rawAngles
 array([ 55.3931,  28.9235,  75.3016, 132.464 , 169.2501, 111.1564])
 ```
 
-The `symmetry=False` flag is implemented by [angle](orientation.angle.html),
-[dot](orientation.dot.html), and [unique](orientation.unique.html), among other
+The `symmetry=False` flag is implemented by [angle](orientation.angle_py.html),
+[dot](orientation.dot_py.html), and [unique](orientation.unique_py.html), among other
 orientation methods. Reach for it when an angle or dot product comes out smaller than
 expected. Leave it alone otherwise, because the symmetry-aware answer is normally the
 physically meaningful one.
 
-Do not pass `symmetry=False` to [calcCluster](orientation.calcCluster.html). That
+Do not pass `symmetry=False` to [calcCluster](orientation.calcCluster_py.html). That
 method does not define the flag, and an unknown option can be ignored silently.
 
 ## Technical Details

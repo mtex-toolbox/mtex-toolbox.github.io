@@ -70,7 +70,7 @@ odf = 0.1 * unimodalODF(mod1) + 0.2 * unimodalODF(mod2) + 0.7 * fibreODF(Miller(
 
 ## Three-Dimensional Bunge Plot
 
-[plot3d](SO3Fun.plot3d.html) with `'Bunge'` uses the Euler angles
+[plot3d](SO3Fun.plot3d_py.html) with `'Bunge'` uses the Euler angles
 $$(\varphi_1,\Phi,\varphi_2)$$ as Cartesian plot coordinates.
 
 ```python
@@ -114,7 +114,7 @@ Rodrigues, homochoric, and cubochoric coordinates.
 
 ## Classical Euler Sections
 
-[plotSection](SO3Fun.plotSection.html) evaluates the ODF on a stack of two-dimensional
+[plotSection](SO3Fun.plotSection_py.html) evaluates the ODF on a stack of two-dimensional
 slices. The explicit `'phi2'` flag selects the classical sections of constant third
 Bunge Euler angle $$\varphi_2$$. By default the sections are at constant angles of
 $$\varphi_2$$.
@@ -215,7 +215,7 @@ box, not the fundamental region itself. For cubic symmetry the box has about thr
 times the volume needed for one representative, which explains the repeated
 appearances in the first figure.
 
-Given an arbitrary orientation, [projectIntoEulerRegion](orientation.project2EulerFR.html)
+Given an arbitrary orientation, [projectIntoEulerRegion](orientation.project2EulerFR_py.html)
 selects a symmetry-equivalent representative inside this Euler box.
 
 ```python
@@ -226,7 +226,7 @@ projectedEuler
 ```
 
 ```text
-array([34.74  , 60.6161, 86.178 ])
+array([63.1233, 10.5199, 52.8776])
 ```
 
 All three displayed coordinates lie between $$0^{\circ}$$ and $$90^{\circ}$$. This

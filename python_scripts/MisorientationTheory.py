@@ -106,7 +106,7 @@ rawRepresentativeAngle = angle(mori, symmetry=False) / degree
 rawRepresentativeAngle
 
 # %% [markdown]
-# [projectIntoFundamentalRegion](https://mtex-toolbox.github.io/orientation.project2FundamentalRegion.html) chooses the
+# [projectIntoFundamentalRegion](https://mtex-toolbox.github.io/orientation.project2FundamentalRegion_py.html) chooses the
 # representative in the fundamental region, where each physical relationship appears once.
 
 # %%
@@ -328,7 +328,7 @@ CS_Hem = loadCIF('Hematite')
 # %% [markdown]
 # A reported magnetite-to-hematite relationship has $\{111\}_{m} \parallel \{0001\}_{h}$
 # and $\{\bar101\}_{m} \parallel \{10\bar10\}_{h}$. These two parallelisms are exactly the
-# input expected by [orientation.map](https://mtex-toolbox.github.io/orientation.map.html).
+# input expected by [orientation.map](https://mtex-toolbox.github.io/orientation.map_py.html).
 
 # %%
 Mag2Hem = orientation.map(Miller(1, 1, 1, CS_Mag), Miller(0, 0, 0, 1, CS_Hem),
@@ -355,7 +355,7 @@ variantCounts
 # %% [markdown]
 # A *variant* is one crystallographically equivalent child orientation predicted from a
 # single parent orientation through a known orientation relationship.
-# [variants](https://mtex-toolbox.github.io/orientation.variants.html) removes duplicate descriptions directly.
+# [variants](https://mtex-toolbox.github.io/orientation.variants_py.html) removes duplicate descriptions directly.
 
 # %%
 childVariants = variants(Mag2Hem, ori_Mag)

@@ -79,7 +79,7 @@ texture.
 ## Finding the specimen axis
 
 If the $$(100)$$ poles lie on a great circle, there is a specimen axis orthogonal to all
-of them. [perp](vector3d.perp.html) finds the axis that is closest to being orthogonal
+of them. [perp](vector3d.perp_py.html) finds the axis that is closest to being orthogonal
 to the measured poles in a least-squares sense.
 
 ```python
@@ -178,9 +178,9 @@ addition that the $$b$$ axis points towards `rOrth`. Every orientation on this f
 in the girdle, but most orientations in the girdle do not lie on the fibre.
 
 The exact fibre is a one-dimensional curve and has zero volume in orientation space.
-[volume](orientation.volume.html) reports the fraction of measured orientations inside
+[volume](orientation.volume_py.html) reports the fraction of measured orientations inside
 the specified 10° tube around that curve. The radius is therefore part of the result.
-For an unknown direction pair, [fibre.fit](fibre.fit.html) can search for a candidate,
+For an unknown direction pair, [fibre.fit](fibre.fit_py.html) can search for a candidate,
 but the same geometrical and sampling checks are still required.
 
 ## What the ODF says

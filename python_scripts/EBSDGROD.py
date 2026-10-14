@@ -58,7 +58,7 @@ hold(False)
 # %% [markdown]
 # ## The deviation angle
 #
-# [calcGROD](https://mtex-toolbox.github.io/EBSD.calcGROD.html) computes the deviation as a misorientation, one per
+# [calcGROD](https://mtex-toolbox.github.io/EBSD.calcGROD_py.html) computes the deviation as a misorientation, one per
 # measurement. It needs the reconstructed grains as a second argument. It also needs
 # `ebsd.grainId`, which `calcGrains` set.
 
@@ -98,7 +98,7 @@ print(f'GROD angle: median {np.nanmedian(grodAngle):.2f} degree; maximum {np.nan
 # ## Grain orientation spread
 #
 # Averaging the deviation angle over each grain gives the grain orientation spread.
-# [grainMean](https://mtex-toolbox.github.io/EBSD.grainMean.html) performs that averaging.
+# [grainMean](https://mtex-toolbox.github.io/EBSD.grainMean_py.html) performs that averaging.
 #
 # Although `calcGrains` stored `grains.GOS`, that value belongs to the raw orientations.
 # The calculation below deliberately uses the denoised data.
@@ -124,7 +124,7 @@ print(f'GOS for {len(grains)} grains: median {np.nanmedian(GOS / degree):.2f} de
 #
 # Every deviation also has an axis, and it matters in which reference frame that axis is
 # expressed. The crystal frame is attached to the lattice of the phase. In this frame the
-# axis is an $(hk\ell)$ crystal direction, obtained with [axis](https://mtex-toolbox.github.io/orientation.axis.html).
+# axis is an $(hk\ell)$ crystal direction, obtained with [axis](https://mtex-toolbox.github.io/orientation.axis_py.html).
 
 # %%
 axCrystal = grod.axis()
@@ -245,7 +245,7 @@ hold(False)
 # ## Choosing another reference orientation
 #
 # The grain mean is convenient, but it removes a rigid rotation shared by the whole
-# grain. [calcGROD](https://mtex-toolbox.github.io/EBSD.calcGROD.html) accepts a third argument: one reference rotation
+# grain. [calcGROD](https://mtex-toolbox.github.io/EBSD.calcGROD_py.html) accepts a third argument: one reference rotation
 # for every grain ID, or one scalar for all grains.
 #
 # A registered map of the undeformed specimen can supply one initial orientation per

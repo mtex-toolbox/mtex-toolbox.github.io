@@ -65,13 +65,13 @@ plot(model_odf, 'sigma', sections=6, verbose=False, minmax=True)
 h = Miller([[1, 1, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 0, 0], [0, 1, 0], [0, 0, 1]], cs)
 
 # %% [markdown]
-# They are sampled on a [regular grid](https://mtex-toolbox.github.io/regularS2Grid.html) with 5 degree spacing.
+# They are sampled on a [regular grid](https://mtex-toolbox.github.io/regularS2Grid_py.html) with 5 degree spacing.
 
 # %%
 r = regularS2Grid(resolution=5 * degree)
 
 # %% [markdown]
-# [calcPoleFigure](https://mtex-toolbox.github.io/SO3Fun.calcPoleFigure.html) evaluates the ODF for every lattice
+# [calcPoleFigure](https://mtex-toolbox.github.io/SO3Fun.calcPoleFigure_py.html) evaluates the ODF for every lattice
 # direction and specimen direction. Its printed summary confirms the seven pole figures
 # and their sampling grids.
 
@@ -88,7 +88,7 @@ pf
 # intensity scale, not the same mean count at every point. No background is added in this
 # example.
 #
-# [noisepf](https://mtex-toolbox.github.io/PoleFigure.noisepf.html) makes the absolute fluctuations larger at bright
+# [noisepf](https://mtex-toolbox.github.io/PoleFigure.noisepf_py.html) makes the absolute fluctuations larger at bright
 # points but their relative size smaller.
 
 # %%
@@ -117,7 +117,7 @@ plot(odf, 'sigma', sections=6, verbose=False, minmax=True)
 # same places and have similar shapes. The minimum and maximum labels expose differences
 # in amplitude that independent colour scales could hide.
 #
-# [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError.html) compares the two normalized ODFs on a 5 degree
+# [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError_py.html) compares the two normalized ODFs on a 5 degree
 # orientation grid. Its default ODF-to-ODF measure is the L1 distance divided by two,
 # which is the minimum volume fraction that would have to be moved to turn one
 # distribution into the other.

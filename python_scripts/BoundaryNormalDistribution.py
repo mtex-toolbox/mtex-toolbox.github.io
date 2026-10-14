@@ -3,7 +3,7 @@
 #
 # A polished two-dimensional section reveals a grain boundary trace, but not the
 # inclination of the boundary plane. This page shows how
-# [calcGBND](https://mtex-toolbox.github.io/grainBoundary.calcGBND.html) combines many traces with the orientations on
+# [calcGBND](https://mtex-toolbox.github.io/grainBoundary.calcGBND_py.html) combines many traces with the orientations on
 # their two sides to estimate preferred boundary planes. It then contrasts that
 # stereological estimate with normals measured directly from three-dimensional grains.
 #
@@ -26,7 +26,7 @@ from mtex import *
 # frame* is fixed to the sample, while a *crystal frame* is fixed to the lattice basis of
 # one phase.
 #
-# [calcGBND](https://mtex-toolbox.github.io/grainBoundary.calcGBND.html) estimates two grain boundary normal
+# [calcGBND](https://mtex-toolbox.github.io/grainBoundary.calcGBND_py.html) estimates two grain boundary normal
 # distributions (GBNDs) and one conditional distribution:
 #
 # * The *specimen GBND* is the distribution of boundary normals in the specimen frame. It
@@ -67,7 +67,7 @@ grains = calcGrains(ebsd, angle=5 * degree, minPixel=3)
 # `gB.ebsdId`. That property is meaningful only while every segment still lies between
 # one specific pair of pixels.
 #
-# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary.html) normally simplifies and resamples the
+# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary_py.html) normally simplifies and resamples the
 # segment list. The options `simplify=False` and `refine=False` smooth the vertex positions
 # without changing that list.
 
@@ -231,7 +231,7 @@ surfaceFaceSummary
 # ## The specimen GBND
 #
 # With a three-dimensional boundary as its only argument,
-# [calcGBND](https://mtex-toolbox.github.io/grain3Boundary.calcGBND.html) uses the measured normals in the specimen frame.
+# [calcGBND](https://mtex-toolbox.github.io/grain3Boundary.calcGBND_py.html) uses the measured normals in the specimen frame.
 # Each triangular face is weighted by its area.
 
 # %%

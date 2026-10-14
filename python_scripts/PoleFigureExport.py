@@ -1,7 +1,7 @@
 # %% [markdown]
 # # Export Pole Figure Data
 #
-# [export](https://mtex-toolbox.github.io/PoleFigure.export.html) writes the sampled directions and intensities of a
+# [export](https://mtex-toolbox.github.io/PoleFigure.export_py.html) writes the sampled directions and intensities of a
 # `PoleFigure` to plain ASCII tables. This page exports measured data, reads it back, and
 # then exports pole figures recalculated from an orientation distribution function (ODF).
 #
@@ -39,7 +39,7 @@ pf
 # ## Write one file per entry
 #
 # Different pole figures may be measured on different specimen grids.
-# [export](https://mtex-toolbox.github.io/PoleFigure.export.html) therefore writes each entry to a separate file instead
+# [export](https://mtex-toolbox.github.io/PoleFigure.export_py.html) therefore writes each entry to a separate file instead
 # of assuming one common list of specimen directions. The file name combines the base name
 # below with the entry's Miller indices.
 
@@ -79,8 +79,8 @@ print(preview[[0, 1, 2]])
 # ## Read the data back
 #
 # The three columns are exactly those understood by
-# the generic reader of [loadPoleFigure](https://mtex-toolbox.github.io/loadPoleFigure_generic.html). To reconstruct the object,
-# [PoleFigure.load](https://mtex-toolbox.github.io/PoleFigure.load.html) also needs the Miller indices, crystal and
+# the generic reader of [loadPoleFigure](https://mtex-toolbox.github.io/loadPoleFigure_generic_py.html). To reconstruct the object,
+# [PoleFigure.load](https://mtex-toolbox.github.io/PoleFigure.load_py.html) also needs the Miller indices, crystal and
 # specimen symmetries, and superposition coefficients that were not stored in the tables.
 
 # %%
@@ -125,7 +125,7 @@ plot(pf2, figSize='small')
 # ## Export recalculated pole figures
 #
 # The same command exports pole figures computed from an ODF with
-# [calcPoleFigure](https://mtex-toolbox.github.io/SO3Fun.calcPoleFigure.html). This is useful when another program needs
+# [calcPoleFigure](https://mtex-toolbox.github.io/SO3Fun.calcPoleFigure_py.html). This is useful when another program needs
 # directional pole-density samples rather than the ODF itself.
 
 # %%

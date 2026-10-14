@@ -35,7 +35,7 @@ plottingConvention.default('y↑→x')
 ## Evaluate all orders of one degree
 
 A spherical harmonic is identified by its *degree* $$m$$ and its *order* $$l$$. For a fixed
-degree $$m$$, the order runs from $$-m$$ to $$m$$. [sphericalY](sphericalY.html) evaluates all
+degree $$m$$, the order runs from $$-m$$ to $$m$$. [sphericalY](sphericalY_py.html) evaluates all
 $$2m+1$$ orders at once and returns them in ascending order.
 
 Here the evaluation direction is the specimen X direction. The three entries are

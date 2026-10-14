@@ -115,14 +115,14 @@ head(T)
 
 ```text
                   id               phase             mineral          isBoundary            numPixel            area_um2        perimeter_um equivalentRadius_um          GOS_degree
-                   1                   1          Forsterite                True                2550          6.4974e+06               11789              1438.1             0.56822
-                   2                   1          Forsterite                True                  87          2.1425e+05              2146.5              261.15             0.87692
-                   3                   2           Enstatite                True                  15               42579              994.75              116.42             0.24992
-                   5                   1          Forsterite                True                 427          1.2098e+06              4570.2              620.55             0.53336
-                   6                   1          Forsterite                True                  66          2.4026e+05              2329.4              276.54             0.52244
-                   8                   1          Forsterite                True                 121          3.4983e+05              2738.2               333.7              1.9631
-                   9                   1          Forsterite                True                 700          1.9734e+06              6191.5              792.56              2.0452
-                  10                   1          Forsterite                True                  12               27491              876.24              93.544             0.21636
+                   1                   1          Forsterite                True                2550          6.4952e+06               11839              1437.9             0.56822
+                   2                   1          Forsterite                True                  87          2.1421e+05              2146.7              261.12             0.87692
+                   3                   2           Enstatite                True                  15               42518              996.05              116.33             0.24992
+                   5                   1          Forsterite                True                 427          1.2105e+06              4560.9              620.74             0.53336
+                   6                   1          Forsterite                True                  66           2.417e+05              2350.9              277.37             0.52244
+                   8                   1          Forsterite                True                 121          3.4932e+05                2743              333.46              1.9631
+                   9                   1          Forsterite                True                 700          1.9743e+06              6209.3              792.74              2.0452
+                  10                   1          Forsterite                True                  12               27635              877.76              93.789             0.21636
 ```
 
 ## Add mean orientations
@@ -156,14 +156,14 @@ head({k: [float(r[i]) if k not in ('mineral', 'isBoundary') else r[i] for r in r
 
 ```text
                   id               phase             mineral          isBoundary            numPixel            area_um2        perimeter_um equivalentRadius_um          GOS_degree   phi1_Bunge_degree    Phi_Bunge_degree   phi2_Bunge_degree
-                   1                   1          Forsterite                True                2550          6.4974e+06               11789              1438.1             0.56822              95.892              42.532              292.81
-                   2                   1          Forsterite                True                  87          2.1425e+05              2146.5              261.15             0.87692              170.36              153.19              279.13
-                   5                   1          Forsterite                True                 427          1.2098e+06              4570.2              620.55             0.53336              168.19              58.055              242.61
-                   6                   1          Forsterite                True                  66          2.4026e+05              2329.4              276.54             0.52244              175.12              31.094              263.33
-                   8                   1          Forsterite                True                 121          3.4983e+05              2738.2               333.7              1.9631              158.97              110.06              265.58
-                   9                   1          Forsterite                True                 700          1.9734e+06              6191.5              792.56              2.0452               57.41              162.62              335.06
-                  10                   1          Forsterite                True                  12               27491              876.24              93.544             0.21636               137.2              161.48              224.95
-                  11                   1          Forsterite                True                 291          7.6292e+05              4469.1              492.79              3.9132              137.45              88.411              238.52
+                   1                   1          Forsterite                True                2550          6.4952e+06               11839              1437.9             0.56822              95.892              42.532              292.81
+                   2                   1          Forsterite                True                  87          2.1421e+05              2146.7              261.12             0.87692              170.36              153.19              279.13
+                   5                   1          Forsterite                True                 427          1.2105e+06              4560.9              620.74             0.53336              168.19              58.055              242.61
+                   6                   1          Forsterite                True                  66           2.417e+05              2350.9              277.37             0.52244              175.12              31.094              263.33
+                   8                   1          Forsterite                True                 121          3.4932e+05                2743              333.46              1.9631              158.97              110.06              265.58
+                   9                   1          Forsterite                True                 700          1.9743e+06              6209.3              792.74              2.0452               57.41              162.62              335.06
+                  10                   1          Forsterite                True                  12               27635              877.76              93.789             0.21636               137.2              161.48              224.95
+                  11                   1          Forsterite                True                 291          7.6353e+05              4484.7              492.99              3.9132              137.45              88.411              238.52
 ```
 
 The reloaded rows retain their values and descriptive headings. Adding the orientation
@@ -215,8 +215,8 @@ with open(orientationFile) as f:
 
 ```text
     phi1     Phi    phi2    area_um2 GOS_degree
- 95.8915  42.532 292.806 6.49744e+06   0.568221
- 170.361 153.188 279.133      214249   0.876925
+ 95.8915  42.532 292.806  6.4952e+06   0.568221
+ 170.361 153.188 279.133      214213   0.876925
 ```
 
 ## Export a VPSC texture
@@ -275,9 +275,9 @@ xy[:5]
 
 ```text
 array([[7475.    ,  325.    ],
-       [7426.2581,  308.1027],
-       [7380.7299,  288.8891],
-       [7345.63  ,  262.1592],
+       [7425.65  ,  307.9   ],
+       [7379.6875,  288.5417],
+       [7344.7174,  261.8551],
        [7325.    ,  225.    ]])
 ```
 
@@ -317,8 +317,8 @@ with open(polygonFile) as f:
 ```text
 % grainId loopId x_um y_um
 1 1 175 1975
-1 1 174.45224984103342 1927.1833265946593
-1 1 171.12864075392213 1881.9822734065222
+1 1 174.37286376953125 1925.6027221679688
+1 1 170.58982849121094 1879.0847778320312
 ```
 
 ## Export the boundary network

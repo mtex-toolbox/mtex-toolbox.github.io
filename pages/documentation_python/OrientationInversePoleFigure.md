@@ -72,7 +72,7 @@ vector3d (321)
 ```
 
 The displayed Miller indices are the crystal-frame coordinates of the specimen Z
-direction. [symmetrise](vector3d.symmetrise.html) applies the crystal point group. It
+direction. [symmetrise](vector3d.symmetrise_py.html) applies the crystal point group. It
 returns every equivalent description.
 
 ```python
@@ -103,7 +103,7 @@ orientations.
 
 ## The Shortcut
 
-[plotIPF](orientation.plotIPDF.html) performs the inverse map, symmetrisation,
+[plotIPF](orientation.plotIPDF_py.html) performs the inverse map, symmetrisation,
 reduction, and projection for several specimen directions at once.
 
 ```python

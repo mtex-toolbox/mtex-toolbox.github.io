@@ -59,7 +59,7 @@ np.max(np.abs(tangentLeft - tangentRight))
 # ## Tangent Vectors in MTEX
 #
 # MTEX stores the coordinates, the base point, and the left or right representation in an
-# [SO3TangentVector](https://mtex-toolbox.github.io/SO3TangentVector.SO3TangentVector.html). The base point is an
+# [SO3TangentVector](https://mtex-toolbox.github.io/SO3TangentVector.SO3TangentVector_py.html). The base point is an
 # orientation, so it is also the single source of any crystal and specimen symmetries
 # carried by the tangent vector.
 
@@ -98,7 +98,7 @@ vSameCoordinates
 
 # %% [markdown]
 # The `right` label in the display is the essential difference. To express `vLeft` itself
-# in right coordinates, use [right](https://mtex-toolbox.github.io/SO3TangentVector.right.html).
+# in right coordinates, use [right](https://mtex-toolbox.github.io/SO3TangentVector.right_py.html).
 
 # %%
 vRight = right(vLeft)
@@ -128,11 +128,11 @@ vLeft + vRight
 # base point:
 #
 # * sums, differences, scaling, and division
-# * inner products with [dot(v1,v2)](https://mtex-toolbox.github.io/SO3TangentVector.dot.html)
-# * cross products with [cross(v1,v2)](https://mtex-toolbox.github.io/SO3TangentVector.cross.html)
-# * lengths with [norm(v1)](https://mtex-toolbox.github.io/vector3d.norm.html)
-# * normalization with [normalize(v1)](https://mtex-toolbox.github.io/vector3d.normalize.html)
-# * averages with [mean(v1)](https://mtex-toolbox.github.io/SO3TangentVector.mean.html)
+# * inner products with [dot(v1,v2)](https://mtex-toolbox.github.io/SO3TangentVector.dot_py.html)
+# * cross products with [cross(v1,v2)](https://mtex-toolbox.github.io/SO3TangentVector.cross_py.html)
+# * lengths with [norm(v1)](https://mtex-toolbox.github.io/vector3d.norm_py.html)
+# * normalization with [normalize(v1)](https://mtex-toolbox.github.io/vector3d.normalize_py.html)
+# * averages with [mean(v1)](https://mtex-toolbox.github.io/SO3TangentVector.mean_py.html)
 #
 # The last three operations use the vector operations inherited by `SO3TangentVector`.
 # Arithmetic is defined only for tangent vectors at the same base point and with
@@ -149,7 +149,7 @@ R2 = exp(vLeft)
 
 # %% [markdown]
 # The logarithm map reverses this construction. Given the endpoint first and the base
-# point second, [log](https://mtex-toolbox.github.io/quaternion.log.html) returns the tangent vector at the base point
+# point second, [log](https://mtex-toolbox.github.io/quaternion.log_py.html) returns the tangent vector at the base point
 # that leads to the endpoint.
 
 # %%

@@ -1,0 +1,21 @@
+---
+title: 'fitEllipse'
+sidebar: function_reference_sidebar
+permalink: fitEllipse_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+status: Reference
+---
+{% raw %}
+fitEllipse(x, ...) is x.fitEllipse(...), the method of the object passed
+
+## Syntax
+
+```python
+fitEllipse(x, *args, **kwargs)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+{% endraw %}

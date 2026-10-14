@@ -73,7 +73,7 @@ mtexColorbar(title='intensity')
 #
 # The object exposes the measured intensities, crystal-plane normals, and specimen
 # directions as ordinary arrays. Different pole figures can use different direction grids,
-# so [PoleFigure](https://mtex-toolbox.github.io/PoleFigure.PoleFigure.html) also provides the list-valued properties
+# so [PoleFigure](https://mtex-toolbox.github.io/PoleFigure.PoleFigure_py.html) also provides the list-valued properties
 # `allI`, `allH`, and `allR`.
 
 # %%
@@ -92,7 +92,7 @@ for label, lo, hi in zip(poleFigureLabel, min(pf), max(pf)):
   print(f'{label:20s}{lo:10.1f}{hi:10.1f}')
 
 # %% [markdown]
-# [isOutlier](https://mtex-toolbox.github.io/PoleFigure.isOutlier.html) compares every measurement with its
+# [isOutlier](https://mtex-toolbox.github.io/PoleFigure.isOutlier_py.html) compares every measurement with its
 # neighbourhood. Use it to create a mask for inspection:
 #
 #     outlierMask = isOutlier(pf)
@@ -128,7 +128,7 @@ mtexColorbar(title='intensity')
 # %% [markdown]
 # ## Rotate the measured directions
 #
-# [rotate](https://mtex-toolbox.github.io/PoleFigure.rotate.html) actively moves every measured specimen direction while
+# [rotate](https://mtex-toolbox.github.io/PoleFigure.rotate_py.html) actively moves every measured specimen direction while
 # leaving its intensity unchanged. This is not a frame change and not a plotting
 # convention. If import assigned the wrong specimen reference frame, correct the import
 # whenever possible.
@@ -183,7 +183,7 @@ mtexColorbar(title='mrd')
 rec = calcODF(pf)
 
 # %% [markdown]
-# [calcError](https://mtex-toolbox.github.io/PoleFigure.calcError.html) returns one regularised relative residual per
+# [calcError](https://mtex-toolbox.github.io/PoleFigure.calcError_py.html) returns one regularised relative residual per
 # measured pole figure. Label the values so the superposed measurement remains
 # identifiable.
 
@@ -201,7 +201,7 @@ for label, e in zip(poleFigureLabel, regularisedRelativeResidual):
 # %% [markdown]
 # ## Locate the remaining mismatch
 #
-# [plotDiff](https://mtex-toolbox.github.io/PoleFigure.plotDiff.html) shows the same regularised relative residual at
+# [plotDiff](https://mtex-toolbox.github.io/PoleFigure.plotDiff_py.html) shows the same regularised relative residual at
 # every measured direction.
 
 # %%
@@ -221,7 +221,7 @@ mtexColorbar(title='relative residual')
 #
 # 1. inspect the raw pole figures and identify measurements you would not trust;
 # 2. remove only values for which you have a physical reason, reconstruct the ODF, and
-#    compare the [calcError](https://mtex-toolbox.github.io/PoleFigure.calcError.html) values;
+#    compare the [calcError](https://mtex-toolbox.github.io/PoleFigure.calcError_py.html) values;
 # 3. reconstruct from fewer pole figures and find the smallest set that still gives a
 #    recognisable texture; and
 # 4. compare reconstructions with and without

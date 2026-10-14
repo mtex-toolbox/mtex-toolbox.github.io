@@ -83,7 +83,7 @@ setMTEXpref('UTF8Output', oldUTF8Output)
 # ## Plot alignment is not an ordinary preference
 #
 # The alignment of plots is no longer an ordinary preference. It belongs to the
-# [reference frame](https://mtex-toolbox.github.io/referenceFrame.referenceFrame.html) in which the data is expressed. A
+# [reference frame](https://mtex-toolbox.github.io/referenceFrame.referenceFrame_py.html) in which the data is expressed. A
 # reference frame identifies the coordinate system and basis of the data; it is distinct
 # from the symmetry attached to that frame.
 #

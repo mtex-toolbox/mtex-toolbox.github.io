@@ -37,7 +37,7 @@ from mtex import *
 # 222, 3, 32, 4, 422, 6, 622, 23, and 432. They are also called the enantiomorphic point
 # groups.
 #
-# [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame.html) accepts either a Hermann--Mauguin symbol
+# [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame_py.html) accepts either a Hermann--Mauguin symbol
 
 # %%
 cs = crystalFrame('432')
@@ -65,8 +65,8 @@ plot(cs)
 # %% [markdown]
 # ## Laue Groups
 #
-# Adding [rotation.inversion](https://mtex-toolbox.github.io/rotation.inversion.html) to a proper-rotation group gives
-# its Laue group. [union](https://mtex-toolbox.github.io/referenceFrame.union.html) performs that construction here.
+# Adding [rotation.inversion](https://mtex-toolbox.github.io/rotation.inversion_py.html) to a proper-rotation group gives
+# its Laue group. [union](https://mtex-toolbox.github.io/referenceFrame.union_py.html) performs that construction here.
 
 # %%
 csLaue = union(cs, rotation.inversion)
@@ -76,7 +76,7 @@ plot(csLaue)
 
 # %% [markdown]
 # The hollow circle at the centre is the inversion. The result is also available from the
-# [Laue](https://mtex-toolbox.github.io/symmetry.Laue.html) method. Its summary shows that 432 has become $m\bar{3}m$
+# [Laue](https://mtex-toolbox.github.io/symmetry.Laue_py.html) method. Its summary shows that 432 has become $m\bar{3}m$
 # with 48 operations.
 
 # %%
@@ -141,7 +141,7 @@ plot(cs)
 cs = crystalFrame('-4m2')
 
 # %% [markdown]
-# [properGroup](https://mtex-toolbox.github.io/symmetry.properGroup.html) replaces every improper operation by the proper
+# [properGroup](https://mtex-toolbox.github.io/symmetry.properGroup_py.html) replaces every improper operation by the proper
 # rotation with the same stored axis and angle. The result is 422 with eight operations.
 
 # %%
@@ -149,7 +149,7 @@ properGroup = cs.properGroup()
 properGroup
 
 # %% [markdown]
-# [properSubGroup](https://mtex-toolbox.github.io/symmetry.properSubGroup.html) instead retains only the operations of
+# [properSubGroup](https://mtex-toolbox.github.io/symmetry.properSubGroup_py.html) instead retains only the operations of
 # the original group that are proper. The result is 222 with four operations.
 
 # %%
@@ -243,8 +243,8 @@ plot(cs)
 # %% [markdown]
 # ## Computing with Symmetries
 #
-# [union](https://mtex-toolbox.github.io/referenceFrame.union.html) combines compatible symmetry operations, while
-# [disjoint](https://mtex-toolbox.github.io/referenceFrame.disjoint.html) retains the operations common to two
+# [union](https://mtex-toolbox.github.io/referenceFrame.union_py.html) combines compatible symmetry operations, while
+# [disjoint](https://mtex-toolbox.github.io/referenceFrame.disjoint_py.html) retains the operations common to two
 # symmetries.
 
 # %%

@@ -8,7 +8,7 @@
 #
 # There is no universally optimal halfwidth. The useful value depends on both the number of
 # independent observations and the smoothness of the unknown density. This page compares the
-# selection methods provided by [calcKernel](https://mtex-toolbox.github.io/orientation.calcKernel.html) and shows how to
+# selection methods provided by [calcKernel](https://mtex-toolbox.github.io/orientation.calcKernel_py.html) and shows how to
 # check their choices against a known model.
 
 # %%
@@ -71,7 +71,7 @@ selectedHalfwidth = psi.halfwidth() / degree
 selectedHalfwidth
 
 # %% [markdown]
-# Pass that kernel to [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity.html). The same `psi` can therefore be
+# Pass that kernel to [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity_py.html). The same `psi` can therefore be
 # reused for another sample that represents the same population and sampling process.
 
 # %%

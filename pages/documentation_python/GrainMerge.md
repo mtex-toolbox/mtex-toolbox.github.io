@@ -80,9 +80,9 @@ twinBoundary
 
 ```text
 grainBoundary (y↑→x)
-  size: 1408 segments, 67 chains
+  size: 1379 segments, 67 chains
   segments  length  mineral 1  mineral 2
-      1408  356 µm  Magnesium  Magnesium
+      1379  358 µm  Magnesium  Magnesium
 ```
 
 ```python
@@ -91,7 +91,7 @@ print(f'Mg-Mg segments: {len(gB)}, candidate twin segments: {len(twinBoundary)},
 ```
 
 ```text
-Mg-Mg segments: 2698, candidate twin segments: 1408, percent: 52.187
+Mg-Mg segments: 2663, candidate twin segments: 1379, percent: 51.784
 ```
 
 ```python
@@ -168,7 +168,7 @@ grain2d (y↑→x)
   size: 6
   Phase  Grains           Mineral    Color         Symmetry  Crystal reference frame
   1      6 (1512 pixels)  Magnesium  LightSkyBlue  6/mmm     Magnesium
-  boundary segments: 302, inner: 0, triple points: 20
+  boundary segments: 298, inner: 0, triple points: 20
   properties       : parentId
         Id   Phase  Pixels        meanRotation         GOS
         42       1     346     (72°,168°,202°)     0.00997
@@ -212,7 +212,7 @@ twinAreaPercent
 ```
 
 ```text
-16.6267
+16.6372
 ```
 
 ```python
@@ -288,7 +288,7 @@ print(f'weighted value higher in {np.count_nonzero(weightedGOS > unweightedGOS)}
 ```
 
 ```text
-weighted value higher in 14 of 28 parents, maximum increase 0.57888 degrees
+weighted value higher in 14 of 28 parents, maximum increase 0.57867 degrees
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/GrainMerge-13.png"></center>

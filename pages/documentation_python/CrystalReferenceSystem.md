@@ -25,7 +25,7 @@ are embedded in an orthonormal crystal frame $$\vec x$$, $$\vec y$$, $$\vec z$$.
 [Lattice Metric and Plane Geometry](LatticeMetric_py.html) first if direct and reciprocal
 lattice axes are new to you.
 
-A [crystalFrame](crystalFrame.crystalFrame.html) stores the point symmetry and lattice
+A [crystalFrame](crystalFrame.crystalFrame_py.html) stores the point symmetry and lattice
 metric of a phase and carries its crystal frame. The display below therefore reports
 both the metric and the frame alignment.
 
@@ -122,7 +122,7 @@ The red lattice-axis markers stay in the same screen positions, but the green Ca
 markers move. Each crystal frame supplies a plotting convention that lays out a crystal
 plot by its lattice axes.
 
-The [transformationMatrix](crystalFrame.transformationMatrix.html) between the two
+The [transformationMatrix](crystalFrame.transformationMatrix_py.html) between the two
 frames exposes the Cartesian offset.
 
 ```python
@@ -251,7 +251,7 @@ caused an error.
 
 A *frame change* re-expresses the same physical object in another reference frame. It
 leaves the object itself untouched and is distinct from rotating it. For orientations,
-[transformReferenceFrame](orientation.transformReferenceFrame.html) performs that change
+[transformReferenceFrame](orientation.transformReferenceFrame_py.html) performs that change
 explicitly.
 
 ```python

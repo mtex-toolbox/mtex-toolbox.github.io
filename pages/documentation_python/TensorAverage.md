@@ -113,7 +113,7 @@ Cij = [[211.50,  65.60,  43.20,  0.00,  -6.50,  0.00],
 C_epidote = stiffnessTensor(Cij, CS_Tensor_epidote, density=rho_epidote)
 ```
 
-[stiffnessTensor](stiffnessTensor.stiffnessTensor.html) records the unit, crystal
+[stiffnessTensor](stiffnessTensor.stiffnessTensor_py.html) records the unit, crystal
 frame, and density with each coefficient array.
 
 ## Average the EBSD measurements
@@ -133,7 +133,7 @@ phaseFractions
 {'Epidote': 0.2465963147246979, 'Glaucophane': 0.7534036852753021}
 ```
 
-[calcTensor](EBSD.calcTensor.html) matches each phase to a compatible tensor by the
+[calcTensor](EBSD.calcTensor_py.html) matches each phase to a compatible tensor by the
 attached symmetry and lattice parameters. The argument order does not define that
 mapping. MTEX then rotates every tensor into the specimen frame, the reference frame
 of the map, and averages the pixels. The flag `'all'` asks for the three estimates at
@@ -186,7 +186,7 @@ CVoigt_glaucophane_ebsd, CReuss_glaucophane_ebsd, CHill_glaucophane_ebsd = calcT
 
 Spatial positions are not required once the orientations have been reduced to an
 orientation distribution function (ODF). The `halfwidth` controls the smoothing used
-by [calcDensity](rotation.calcDensity.html).
+by [calcDensity](rotation.calcDensity_py.html).
 
 ```python
 odf_glaucophane = calcDensity(ebsd['Glaucophane'].orientations, halfwidth=10 * degree)
@@ -219,7 +219,7 @@ tensors with independently justified volume fractions.
 ## Use the aggregate tensor
 
 An averaged stiffness tensor predicts elastic wave propagation through the aggregate.
-[plotSeismicVelocities](stiffnessTensor.plotSeismicVelocities.html) maps several
+[plotSeismicVelocities](stiffnessTensor.plotSeismicVelocities_py.html) maps several
 velocities and polarizations.
 
 ```python

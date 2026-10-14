@@ -23,7 +23,7 @@ ruler.
 In MTEX the boundary network comes from [grain reconstruction](GrainReconstruction_py.html).
 A grain boundary starts as a list of short segments. Each segment lies between
 neighbouring EBSD pixels assigned to different grains. The
-[intersect](grainBoundary.intersect.html) command finds where a test line crosses that
+[intersect](grainBoundary.intersect_py.html) command finds where a test line crosses that
 reconstructed boundary network.
 
 We use a magnesium map containing thin twin lamellae.
@@ -104,7 +104,7 @@ nIntersections
 ```
 
 ```text
-18
+24
 ```
 
 ---
@@ -126,7 +126,7 @@ meanIntercept
 ```
 
 ```text
-2.4356
+1.8267
 ```
 
 This 43.84 µm traverse crosses 18 boundary segments. Its mean lineal intercept is

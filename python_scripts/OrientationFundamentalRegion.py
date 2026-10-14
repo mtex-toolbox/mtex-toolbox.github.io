@@ -84,7 +84,7 @@ hold(False)
 # has four such operations.
 #
 # Crystal point groups can also contain reflections or inversion. Those improper
-# operations do not create additional rotations, so [fundamentalRegion](https://mtex-toolbox.github.io/fundamentalRegion.html)
+# operations do not create additional rotations, so [fundamentalRegion](https://mtex-toolbox.github.io/fundamentalRegion_py.html)
 # uses the proper rotation group by default.
 
 # %%
@@ -120,7 +120,7 @@ plot(ebsd['Fo'].orientations, 'axisAngle')
 # only the figure, not the data or the fundamental region.
 #
 # Apply the same selection explicitly with
-# [projectIntoFundamentalRegion](https://mtex-toolbox.github.io/orientation.project2FundamentalRegion.html). The method
+# [projectIntoFundamentalRegion](https://mtex-toolbox.github.io/orientation.project2FundamentalRegion_py.html). The method
 # returns a new orientation array.
 
 # %%

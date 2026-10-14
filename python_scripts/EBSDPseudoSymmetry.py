@@ -9,7 +9,7 @@
 #
 # This is an indexing failure, not ordinary orientation noise. It also is not proof of a
 # physical domain or twin: a real boundary can have the same misorientation. The command
-# [cleanUpPseudoSym](https://mtex-toolbox.github.io/cleanUpPseudoSym.html) combines crystallography with a spatial
+# [cleanUpPseudoSym](https://mtex-toolbox.github.io/cleanUpPseudoSym_py.html) combines crystallography with a spatial
 # heuristic to tell them apart.
 #
 # The page assumes the grain structure has been reconstructed as described in
@@ -85,7 +85,7 @@ mtexColorbar()
 # %% [markdown]
 # The sharp maximum at [100] establishes both parts of the candidate: a rotation of about 60
 # degrees around [100]. Define that operation as a misorientation with
-# [byAxisAngle](https://mtex-toolbox.github.io/orientation.byAxisAngle.html).
+# [byAxisAngle](https://mtex-toolbox.github.io/orientation.byAxisAngle_py.html).
 
 # %%
 cs = ebsd['Fo'].CS
@@ -241,7 +241,7 @@ plt.ylim(region[1], region[1] + region[3])
 # boundaries remain.
 #
 # Only now, with the pseudo-symmetric boundaries removed, does it make sense to smooth the
-# grain boundaries with [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary.html).
+# grain boundaries with [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary_py.html).
 #
 #     grainsC = smoothBoundary(grainsC, 5)
 #

@@ -57,7 +57,7 @@ plot(psi)
 # %% [markdown]
 # ## From a kernel to a radial orientation function
 #
-# An [`SO3FunRBF`](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF.html) places a copy of a kernel at a
+# An [`SO3FunRBF`](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF_py.html) places a copy of a kernel at a
 # chosen centre orientation. Here a de la Vallee Poussin kernel with
 # $20^\circ$ halfwidth produces one localized rotational function.
 
@@ -83,8 +83,8 @@ plot(SO3F)
 # how its value falls with angular distance; the `SO3FunRBF` supplies the
 # centre and any symmetry-equivalent copies.
 #
-# Pass a kernel to [`unimodalODF`](https://mtex-toolbox.github.io/unimodalODF.html) to choose the profile of
-# a model ODF. [`uniformODF`](https://mtex-toolbox.github.io/uniformODF.html) uses a kernel internally to
+# Pass a kernel to [`unimodalODF`](https://mtex-toolbox.github.io/unimodalODF_py.html) to choose the profile of
+# a model ODF. [`uniformODF`](https://mtex-toolbox.github.io/uniformODF_py.html) uses a kernel internally to
 # represent its constant value, but does not require a kernel argument.
 # Kernels are also used when estimating an ODF from EBSD orientations.
 
@@ -120,15 +120,15 @@ plot(psi)
 # The available families emphasize different properties:
 #
 # |` family `` main characteristic `` typical use `|
-# |` [de la Vallee Poussin](https://mtex-toolbox.github.io/SO3DeLaValleePoussinKernel.html) `` nonnegative and finite for integer $\kappa$ `` ODFs, misorientation distributions and pole figures `|
-# |` [Dirichlet](https://mtex-toolbox.github.io/SO3DirichletKernel.html) `` exact spectral cutoff with unit Fourier coefficients `` physical-property calculations `|
-# |` [Abel--Poisson](https://mtex-toolbox.github.io/SO3AbelPoissonKernel.html) `` nonnegative with geometric spectral decay `` smooth radial peaks `|
-# |` [von Mises--Fisher](https://mtex-toolbox.github.io/SO3vonMisesFisherKernel.html) `` nonnegative exponential angular profile `` smooth radial peaks `|
-# |` [Gauss--Weierstrass](https://mtex-toolbox.github.io/SO3GaussWeierstrassKernel.html) `` heat-kernel spectral decay `` smoothing by harmonic degree `|
-# |` [Sobolev](https://mtex-toolbox.github.io/SO3SobolevKernel.html) `` coefficients weighted by derivative order `` Sobolev operators rather than densities `|
-# |` [Laplace](https://mtex-toolbox.github.io/SO3LaplaceKernel.html) `` inverse-power spectral decay `` inverse differential operators `|
-# |` [squared singularity](https://mtex-toolbox.github.io/SO3SquareSingularityKernel.html) `` nonnegative rational singularity family `` alternative radial profile `|
-# |` [bump](https://mtex-toolbox.github.io/SO3BumpKernel.html) `` constant inside a strict angular cutoff `` compact support `|
+# |` [de la Vallee Poussin](https://mtex-toolbox.github.io/SO3DeLaValleePoussinKernel_py.html) `` nonnegative and finite for integer $\kappa$ `` ODFs, misorientation distributions and pole figures `|
+# |` [Dirichlet](https://mtex-toolbox.github.io/SO3DirichletKernel_py.html) `` exact spectral cutoff with unit Fourier coefficients `` physical-property calculations `|
+# |` [Abel--Poisson](https://mtex-toolbox.github.io/SO3AbelPoissonKernel_py.html) `` nonnegative with geometric spectral decay `` smooth radial peaks `|
+# |` [von Mises--Fisher](https://mtex-toolbox.github.io/SO3vonMisesFisherKernel_py.html) `` nonnegative exponential angular profile `` smooth radial peaks `|
+# |` [Gauss--Weierstrass](https://mtex-toolbox.github.io/SO3GaussWeierstrassKernel_py.html) `` heat-kernel spectral decay `` smoothing by harmonic degree `|
+# |` [Sobolev](https://mtex-toolbox.github.io/SO3SobolevKernel_py.html) `` coefficients weighted by derivative order `` Sobolev operators rather than densities `|
+# |` [Laplace](https://mtex-toolbox.github.io/SO3LaplaceKernel_py.html) `` inverse-power spectral decay `` inverse differential operators `|
+# |` [squared singularity](https://mtex-toolbox.github.io/SO3SquareSingularityKernel_py.html) `` nonnegative rational singularity family `` alternative radial profile `|
+# |` [bump](https://mtex-toolbox.github.io/SO3BumpKernel_py.html) `` constant inside a strict angular cutoff `` compact support `|
 #
 # The profile plot in each section answers what the kernel looks like in
 # orientation space. The spectrum beside it shows

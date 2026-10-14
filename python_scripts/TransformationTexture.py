@@ -43,7 +43,7 @@ oriA
 # %% [markdown]
 # Symmetry means that the OR does not predict only one ferrite orientation.
 # [Parent and Child Variants](https://mtex-toolbox.github.io/ParentChildVariants_py.html) defines a variant and derives how
-# [`variants`](https://mtex-toolbox.github.io/orientation.variants.html) removes equivalent candidates. Applying it here
+# [`variants`](https://mtex-toolbox.github.io/orientation.variants_py.html) removes equivalent candidates. Applying it here
 # returns all distinct NW child variants.
 
 # %%
@@ -106,7 +106,7 @@ numSimulatedChildren
 
 # %% [markdown]
 # The 120,000 child orientations approximate the transformed texture.
-# [`calcDensity`](https://mtex-toolbox.github.io/calcDensity.html) turns that discrete set back into an ODF.
+# [`calcDensity`](https://mtex-toolbox.github.io/calcDensity_py.html) turns that discrete set back into an ODF.
 
 # %%
 odfBSim = calcDensity(oriBSim, halfwidth=10 * degree)
@@ -122,7 +122,7 @@ mtexColorbar(title='mrd')
 #
 # ## Transform the ODF directly
 #
-# The direct route passes `odfA` to [`variants`](https://mtex-toolbox.github.io/orientation.variants.html). MTEX averages the
+# The direct route passes `odfA` to [`variants`](https://mtex-toolbox.github.io/orientation.variants_py.html). MTEX averages the
 # parent density over the 12 candidate-parent branches. This calculation therefore assumes
 # equal population of all child variants.
 

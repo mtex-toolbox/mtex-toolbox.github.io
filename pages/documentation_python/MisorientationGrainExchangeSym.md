@@ -105,7 +105,7 @@ The symmetry-aware distance is now zero because the inverse belongs to the same
 equivalence class. This does not say that the misorientation is the identity; its
 rotation angle is still $$40^\circ$$.
 
-For this generic example, [symmetrise](orientation.symmetrise.html) now includes the
+For this generic example, [symmetrise](orientation.symmetrise_py.html) now includes the
 inverse of every crystal-symmetry equivalent. The displayed list therefore doubles from
 144 to 288 descriptions.
 

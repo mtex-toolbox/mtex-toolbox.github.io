@@ -207,7 +207,7 @@ The bulk modulus $$K$$ measures resistance to a uniform volume change.
 Young's modulus $$E$$ relates axial stress to axial strain.
 Poisson's ratio $$\nu$$ is minus transverse strain divided by axial strain.
 
-[YoungsModulus](stiffnessTensor.YoungsModulus.html) asks for a direction.
+[YoungsModulus](stiffnessTensor.YoungsModulus_py.html) asks for a direction.
 An isotropic tensor gives the same answer in every direction.
 That equality is a useful check that the average really is isotropic.
 
@@ -242,7 +242,7 @@ Go = np.linspace(GMin, GMax, 300)
 G0Mesh, K0Mesh = np.meshgrid(Go, Ko)
 ```
 
-For every candidate, [HashinShtrikmanModulus](stiffnessTensor.HashinShtrikmanModulus.html)
+For every candidate, [HashinShtrikmanModulus](stiffnessTensor.HashinShtrikmanModulus_py.html)
 computes effective bulk and shear moduli.
 It also tests the residual stiffness tensor.
 A positive definite residual identifies a lower-bound candidate.
@@ -448,9 +448,9 @@ sigma_contraction
 ```text
 stressTensor (y↓→x)
   rank: 2 (3 × 3)
-  -77.6652   75.3156  73.4026
-   75.3156  -77.8147  -1.7231
-   73.4026   -1.7231  -8.9174
+  145.0929   56.6841  31.5772
+   56.6841  102.0162  44.8796
+   31.5772   44.8796  93.4893
 ```
 
 The Lame form gives exactly the same stress.
@@ -463,9 +463,9 @@ sigma_Lame
 ```text
 stressTensor (An0 Albite 2016)
   rank: 2 (3 × 3)
-  -77.6652   75.3156  73.4026
-   75.3156  -77.8147  -1.7231
-   73.4026   -1.7231  -8.9174
+  145.0929   56.6841  31.5772
+   56.6841  102.0162  44.8796
+   31.5772   44.8796  93.4893
 ```
 
 ## References

@@ -43,7 +43,7 @@ region = [19000, 1500, 4000, 1500]
 plt.gca().add_patch(plt.Rectangle(region[:2], region[2], region[3], edgecolor='black', linewidth=2, fill=False))
 
 # %% [markdown]
-# [inpolygon](https://mtex-toolbox.github.io/EBSD.inpolygon.html) selects the measurements inside the rectangle. Its
+# [inpolygon](https://mtex-toolbox.github.io/EBSD.inpolygon_py.html) selects the measurements inside the rectangle. Its
 # displayed summary confirms the new extent and phase counts.
 
 # %%
@@ -60,7 +60,7 @@ ebsdRegion
 # segmentation criterion. Grain outlines follow the cell interfaces left between different
 # linked groups.
 #
-# For neighbours of the same phase, [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html) draws a boundary
+# For neighbours of the same phase, [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains_py.html) draws a boundary
 # when their minimum symmetry-equivalent misorientation reaches the chosen angle. The test
 # is local between neighbours. Consequently, a gradual orientation gradient can connect two
 # ends of one grain even when those ends differ by more than the threshold.
@@ -153,7 +153,7 @@ hold(False)
 # ## Selecting and measuring grains
 #
 # Grain properties are arrays with one value per grain. Here `numPixel` records the number
-# of measurements assigned to a grain, while [area](https://mtex-toolbox.github.io/grain2d.area.html) measures its
+# of measurements assigned to a grain, while [area](https://mtex-toolbox.github.io/grain2d.area_py.html) measures its
 # sectional area in the scan unit.
 #
 # The next selection keeps quartz grains with at least ten measurements and removes grains
@@ -165,7 +165,7 @@ selectedQuartz = grains['Quartz', (grains.numPixel >= 10) & ~grains.isBoundary]
 selectedQuartz
 
 # %% [markdown]
-# The displayed [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d.html) summary reports what the selection
+# The displayed [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d_py.html) summary reports what the selection
 # retained. Because `calcGrains` gave `ebsdRegion` a `grainId` property, the selection also
 # leads back to its measurements.
 
@@ -232,7 +232,7 @@ hold(False)
 # therefore neither a count of interfaces nor a set of independent observations.
 
 # %% [markdown]
-# Weighting by [segLength](https://mtex-toolbox.github.io/grainBoundary.segLength.html) gives longer interfaces
+# Weighting by [segLength](https://mtex-toolbox.github.io/grainBoundary.segLength_py.html) gives longer interfaces
 # proportionally more influence. It avoids weighting every tessellation segment equally.
 
 # %%

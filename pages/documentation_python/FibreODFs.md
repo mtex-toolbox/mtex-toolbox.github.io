@@ -64,7 +64,7 @@ fibre (432 → y↑→x)
 
 The displayed h parallel r row puts the two directions in different reference frames:
 `f.h` belongs to the crystal frame and `f.r` to the specimen frame. The beta object also
-has two endpoints. [fibreODF](fibreODF.html) uses only the direction pair, so the
+has two endpoints. [fibreODF](fibreODF_py.html) uses only the direction pair, so the
 density continues around the corresponding full fibre.
 
 The `halfwidth` option controls how quickly the density decays away from that fibre.
@@ -149,8 +149,8 @@ A ring is therefore a projection of the fibre, not a second component.
 
 This example uses the default de la Vallee Poussin kernel. Its halfwidth is the angular
 distance at which density falls to half its ridge value. It is a spread parameter, not
-a cutoff: the density continues beyond that angle. [fibreODF](fibreODF.html) also
-accepts a custom [S2Kernel](S2Kernel.S2Kernel.html) when halfwidth alone does not
+a cutoff: the density continues beyond that angle. [fibreODF](fibreODF_py.html) also
+accepts a custom [S2Kernel](S2Kernel.S2Kernel_py.html) when halfwidth alone does not
 describe the required shape. [ODF Shapes](ODFShapes_py.html) compares the kernels.
 
 Each component below remains normalized with mean 1 mrd. Narrower fibres concentrate
@@ -192,7 +192,7 @@ mtexColorbar(title='mrd')
 ## Fitting a Fibre to Data
 
 The inverse problem asks which fibre best describes an ODF or a set of orientations.
-[fibre.fit](fibre.fit.html) returns a candidate centreline. Start with a low-symmetry
+[fibre.fit](fibre.fit_py.html) returns a candidate centreline. Start with a low-symmetry
 fibre so that every sampled orientation has one consistent representative. The
 `'local'` branch then reads the fibre from the orientation tensor without a global grid
 search. The sampling step is developed separately in
@@ -222,7 +222,7 @@ meanDistanceDegrees
 ```
 
 ```text
-array([10.5055, 10.5067])
+array([10.6051, 10.5995])
 ```
 
 The eigenvalues returned by the local branch test whether a fibre is a sensible model.
@@ -236,7 +236,7 @@ linearityRatio
 ```
 
 ```text
-88.5880
+86.2018
 ```
 
 Two warnings are essential. First, the fit always returns a fibre even when the data do

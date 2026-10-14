@@ -48,7 +48,7 @@ fibre_odf = 0.5 * uniformODF(cs) + 0.5 * fibreODF(fibre.rand(cs), halfwidth=20 *
 
 ## Draw a Random Sample
 
-[discreteSample](SO3Fun.discreteSample.html) draws orientations with probability
+[discreteSample](SO3Fun.discreteSample_py.html) draws orientations with probability
 proportional to the ODF. Each orientation in the returned list has the same implicit
 weight, $$1/500$$ in this example.
 
@@ -95,7 +95,7 @@ is only one realization of 500 points.
 
 A reconstruction converts the point set back to an ODF. Comparing it with the known
 model measures how well the sample represents the original. Here
-[calcError](SO3Fun.calcError.html) is asked explicitly for the $$L^1$$ error. The
+[calcError](SO3Fun.calcError_py.html) is asked explicitly for the $$L^1$$ error. The
 sample-size experiment below uses relative $$L^2$$ error because that norm is cheap for
 harmonic ODFs. Compare errors within each experiment, not across the two different
 norms.
@@ -116,7 +116,7 @@ print(f'L1 error, random sample, 10 degree: {errRandom10:.3f}')
 ```
 
 ```text
-L1 error, random sample, 10 degree: 0.161
+L1 error, random sample, 10 degree: 0.165
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-6.png"></center>
@@ -137,7 +137,7 @@ print(f'L1 error, random sample, 20 degree: {errRandom20:.3f}')
 ```
 
 ```text
-L1 error, random sample, 20 degree: 0.110
+L1 error, random sample, 20 degree: 0.105
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-7.png"></center>
@@ -153,15 +153,15 @@ print(f'texture index, random reconstruction: {norm(odf_rec) ** 2:.3f}')
 ```
 
 ```text
-texture index, original ODF: 1.258
-texture index, random reconstruction: 1.104
+texture index, original ODF: 1.304
+texture index, random reconstruction: 1.137
 ```
 
 ## Place an Optimized Sample
 
 Random points are appropriate when the realization itself is part of the experiment,
 such as a bootstrap study of measurement accuracy. When the aim is instead a compact
-numerical representation, use [optimalSample](SO3Fun.optimalSample.html). It moves the
+numerical representation, use [optimalSample](SO3Fun.optimalSample_py.html). It moves the
 orientations to reduce their discrepancy from the ODF rather than drawing independent
 observations.
 
@@ -183,7 +183,7 @@ print(f'L1 error, optimized sample, 10 degree: {errOptimal10:.3f}')
 ```
 
 ```text
-L1 error, optimized sample, 10 degree: 0.041
+L1 error, optimized sample, 10 degree: 0.039
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-10.png"></center>
@@ -199,8 +199,8 @@ print(f'texture index, optimized reconstruction: {norm(odf_rec) ** 2:.3f}')
 ```
 
 ```text
-texture index, original ODF: 1.258
-texture index, optimized reconstruction: 1.169
+texture index, original ODF: 1.304
+texture index, optimized reconstruction: 1.230
 ```
 
 ## Optimizing the Weights Too
@@ -218,7 +218,7 @@ freedom, so fewer orientations can represent the same ODF to a given accuracy.
 Whether weighted points help depends on the reconstruction halfwidth and on the
 harmonic `bandwidth` used by `optimalSample`. The bandwidth says which harmonic degrees
 the optimization controls. Choose it for the intended use of the points; the
-[optimalSample](SO3Fun.optimalSample.html) reference gives the details.
+[optimalSample](SO3Fun.optimalSample_py.html) reference gives the details.
 
 ## How Sample Size Changes the Best Halfwidth
 
@@ -281,8 +281,8 @@ print(f'halfwidth for optimalSample: {np.exp(pHwOpt[1]):.1f} degree * M^{pHwOpt[
 ```
 
 ```text
-halfwidth for discreteSample: 143.4 degree * M^-0.368
-halfwidth for optimalSample: 47.0 degree * M^-0.261
+halfwidth for discreteSample: 97.8 degree * M^-0.288
+halfwidth for optimalSample: 48.8 degree * M^-0.264
 ```
 
 Plot the measured halfwidths with their fitted laws. The circles are the means of five
@@ -319,13 +319,13 @@ print(f'ratio of optimized to random halfwidth: {hwOpt[0] / np.mean(hwRand[0]):.
 ```
 
 ```text
-ratio of optimized to random halfwidth: 0.39 at M = 32 and 0.58 at M = 512
+ratio of optimized to random halfwidth: 0.52 at M = 32 and 0.56 at M = 512
 ```
 
 ## The Asymptotic Halfwidth Rule
 
-For comparison, the `'magicRule'` in [calcKernel](orientation.calcKernel.html) sets the
-parameter of the [de la Vallee Poussin kernel](SO3DeLaValleePoussinKernel.html) to
+For comparison, the `'magicRule'` in [calcKernel](orientation.calcKernel_py.html) sets the
+parameter of the [de la Vallee Poussin kernel](SO3DeLaValleePoussinKernel_py.html) to
 $$\kappa \sim M^{2/7}$$. Since its halfwidth behaves like $$\delta \sim \kappa^{-1/2}$$,
 the rule corresponds to $$\delta \sim M^{-1/7} \approx M^{-0.14}$$.
 
@@ -362,8 +362,8 @@ print(f'error for optimalSample: {np.exp(pEOpt[1]):.2f} * M^{pEOpt[0]:.3f}')
 ```
 
 ```text
-error for discreteSample: 0.73 * M^-0.155
-error for optimalSample: 0.83 * M^-0.340
+error for discreteSample: 0.75 * M^-0.171
+error for optimalSample: 0.74 * M^-0.335
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-16.png"></center>
@@ -382,11 +382,11 @@ for m in M:
 ```
 
 ```text
-32 optimized orientations correspond to 884 random ones
-64 optimized orientations correspond to 4036 random ones
-128 optimized orientations correspond to 18421 random ones
-256 optimized orientations correspond to 84083 random ones
-512 optimized orientations correspond to 383806 random ones
+32 optimized orientations correspond to 880 random ones
+64 optimized orientations correspond to 3408 random ones
+128 optimized orientations correspond to 13196 random ones
+256 optimized orientations correspond to 51090 random ones
+512 optimized orientations correspond to 197806 random ones
 ```
 
 ## Limits of the Comparison
@@ -405,9 +405,9 @@ other again.
 ## Exporting the Orientations
 
 A sampled orientation list can be exported as [Euler angles](RotationDefinition_py.html)
-with [export](quaternion.export.html). Crystal-plasticity programs often require a
+with [export](quaternion.export_py.html). Crystal-plasticity programs often require a
 particular convention and a weight in every row. Use
-[export](orientation.export_VPSC.html) with `interface='VPSC'` for the VPSC format.
+[export](orientation.export_VPSC_py.html) with `interface='VPSC'` for the VPSC format.
 
 The broader choice between exact ODF storage, tabulated function values, and weighted
 orientation lists is covered in [ODF Export](ODFExport_py.html).

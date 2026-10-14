@@ -43,7 +43,7 @@ f
 # %% [markdown]
 # The displayed h parallel r row puts the two directions in different reference frames:
 # `f.h` belongs to the crystal frame and `f.r` to the specimen frame. The beta object also
-# has two endpoints. [fibreODF](https://mtex-toolbox.github.io/fibreODF.html) uses only the direction pair, so the
+# has two endpoints. [fibreODF](https://mtex-toolbox.github.io/fibreODF_py.html) uses only the direction pair, so the
 # density continues around the corresponding full fibre.
 #
 # The `halfwidth` option controls how quickly the density decays away from that fibre.
@@ -112,8 +112,8 @@ mtexColorbar(title='mrd')
 #
 # This example uses the default de la Vallee Poussin kernel. Its halfwidth is the angular
 # distance at which density falls to half its ridge value. It is a spread parameter, not
-# a cutoff: the density continues beyond that angle. [fibreODF](https://mtex-toolbox.github.io/fibreODF.html) also
-# accepts a custom [S2Kernel](https://mtex-toolbox.github.io/S2Kernel.S2Kernel.html) when halfwidth alone does not
+# a cutoff: the density continues beyond that angle. [fibreODF](https://mtex-toolbox.github.io/fibreODF_py.html) also
+# accepts a custom [S2Kernel](https://mtex-toolbox.github.io/S2Kernel.S2Kernel_py.html) when halfwidth alone does not
 # describe the required shape. [ODF Shapes](https://mtex-toolbox.github.io/ODFShapes_py.html) compares the kernels.
 #
 # Each component below remains normalized with mean 1 mrd. Narrower fibres concentrate
@@ -147,7 +147,7 @@ mtexColorbar(title='mrd')
 # ## Fitting a Fibre to Data
 #
 # The inverse problem asks which fibre best describes an ODF or a set of orientations.
-# [fibre.fit](https://mtex-toolbox.github.io/fibre.fit.html) returns a candidate centreline. Start with a low-symmetry
+# [fibre.fit](https://mtex-toolbox.github.io/fibre.fit_py.html) returns a candidate centreline. Start with a low-symmetry
 # fibre so that every sampled orientation has one consistent representative. The
 # `'local'` branch then reads the fibre from the orientation tensor without a global grid
 # search. The sampling step is developed separately in

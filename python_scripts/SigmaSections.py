@@ -63,7 +63,7 @@ plotSection(odf)
 # specimen pole figure. The third Euler angle controls the remaining rotation about this
 # transformed axis.
 #
-# [sigmaSections](https://mtex-toolbox.github.io/sigmaSections.html) uses $\vec h_1=\vec c^*$ for the pole position and
+# [sigmaSections](https://mtex-toolbox.github.io/sigmaSections_py.html) uses $\vec h_1=\vec c^*$ for the pole position and
 # $\vec h_2=\vec a$ for the remaining rotation. Direct $\vec c$ and reciprocal $\vec c^*$
 # are parallel in this example. The distinction matters for a general lattice.
 #
@@ -87,7 +87,7 @@ plot(oS)
 # background arrow gives the local reference direction for $\vec a$. Together, the
 # position and arrow specify an orientation.
 #
-# [orientation.map](https://mtex-toolbox.github.io/orientation.map.html) constructs two orientations with known axis
+# [orientation.map](https://mtex-toolbox.github.io/orientation.map_py.html) constructs two orientations with known axis
 # alignments. The first maps $\vec c$ to specimen Z and $\vec a$ to specimen X.
 
 # %%

@@ -13,7 +13,7 @@
 # On a spatial EBSD map, it may also interpolate between neighbouring pixels. That
 # interpolation can invent colours which are absent from the data.
 #
-# [saveFigure](https://mtex-toolbox.github.io/saveFigure.html) handles these details for MTEX figures and
+# [saveFigure](https://mtex-toolbox.github.io/saveFigure_py.html) handles these details for MTEX figures and
 # produces cropped, publication-ready files. Complete the workflow from
 # [Annotations](https://mtex-toolbox.github.io/Annotations_py.html) before calling it.
 #
@@ -66,7 +66,7 @@ assert os.path.isfile(outMap), 'The orientation-map export was not created.'
 # ## Vector graphics and bitmaps
 #
 # A vector file stores drawn objects as paths and text. A bitmap stores a
-# fixed grid of coloured pixels. [saveFigure](https://mtex-toolbox.github.io/saveFigure.html) treats the
+# fixed grid of coloured pixels. [saveFigure](https://mtex-toolbox.github.io/saveFigure_py.html) treats the
 # two groups differently. Choose a vector file when paths and text should
 # remain sharp at any magnification. Choose a bitmap when the figure contains
 # many cells or patches and a compact, fixed-resolution image is preferable.
@@ -131,9 +131,9 @@ assert os.path.isfile(outPole), 'The pole-figure export was not created.'
 # A figure file stores the visual result, not the numerical values behind it.
 # When those values are the required result, use a class-specific export
 # method instead. Most MTEX classes provide one. Examples are
-# [export](https://mtex-toolbox.github.io/quaternion.export.html) for orientations,
-# [export](https://mtex-toolbox.github.io/PoleFigure.export.html) for pole-figure data, and
-# [export](https://mtex-toolbox.github.io/SO3Fun.export.html) for ODFs. Their corresponding chapters
+# [export](https://mtex-toolbox.github.io/quaternion.export_py.html) for orientations,
+# [export](https://mtex-toolbox.github.io/PoleFigure.export_py.html) for pole-figure data, and
+# [export](https://mtex-toolbox.github.io/SO3Fun.export_py.html) for ODFs. Their corresponding chapters
 # describe the data formats. This distinction avoids treating pixels in a
 # saved picture as though they were the original measurements.
 

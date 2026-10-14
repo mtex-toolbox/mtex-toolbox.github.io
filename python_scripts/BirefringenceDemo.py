@@ -54,7 +54,7 @@ hold(False)
 #
 # The refractive index is $n=c/v$, so a larger index means a slower wave. A symmetric
 # rank-two tensor stores its directional dependence.
-# [refractiveIndexTensor](https://mtex-toolbox.github.io/refractiveIndexTensor.refractiveIndexTensor.html) attaches that
+# [refractiveIndexTensor](https://mtex-toolbox.github.io/refractiveIndexTensor.refractiveIndexTensor_py.html) attaches that
 # tensor to the crystal frame.
 #
 # Orthorhombic olivine is optically biaxial. Its three principal indices are
@@ -121,7 +121,7 @@ deltaN, pMin, pMax
 # %% [markdown]
 # ## Birefringence over every propagation direction
 #
-# Omitting `vProp` makes [birefringence](https://mtex-toolbox.github.io/refractiveIndexTensor.birefringence.html) return
+# Omitting `vProp` makes [birefringence](https://mtex-toolbox.github.io/refractiveIndexTensor.birefringence_py.html) return
 # a spherical function and two spherical axis fields.
 
 # %%
@@ -175,7 +175,7 @@ hold(False)
 # polarization into fast and slow components. Their retardation depends on $\Delta n$,
 # thickness, and wavelength.
 #
-# [spectralTransmission](https://mtex-toolbox.github.io/refractiveIndexTensor.spectralTransmission.html) integrates the
+# [spectralTransmission](https://mtex-toolbox.github.io/refractiveIndexTensor.spectralTransmission_py.html) integrates the
 # transmitted visible spectrum into an RGB triplet. Thickness is specified in nanometres,
 # so 30000 corresponds to 30 micrometres.
 
@@ -281,7 +281,7 @@ plot(olivine, rgbTensorRoute)
 # %% [markdown]
 # ## Verify the equivalent direction route
 #
-# An [orientation](https://mtex-toolbox.github.io/orientation.orientation.html) maps crystal coordinates into specimen
+# An [orientation](https://mtex-toolbox.github.io/orientation.orientation_py.html) maps crystal coordinates into specimen
 # coordinates. Its inverse therefore maps each specimen direction into the corresponding
 # crystal frame before applying the original tensor.
 
@@ -304,7 +304,7 @@ maxRouteDifference
 # %% [markdown]
 # ## Package the model as a colour key
 #
-# A [spectralTransmissionColorKey](https://mtex-toolbox.github.io/spectralTransmissionColorKey.html) stores the tensor,
+# A [spectralTransmissionColorKey](https://mtex-toolbox.github.io/spectralTransmissionColorKey_py.html) stores the tensor,
 # thickness, propagation direction, polarizer, and analyser angle. Its defaults reproduce
 # the specimen-frame setup above.
 

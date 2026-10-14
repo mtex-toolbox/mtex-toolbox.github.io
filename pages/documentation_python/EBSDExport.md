@@ -19,7 +19,7 @@ Exporting writes an `EBSD` map to another file. Begin with a map whose phases an
 [Importing EBSD Data](EBSDImport_py.html) introduces the properties, scan-level options
 and header information discussed below.
 
-[export](EBSD.export.html) chooses the exporter from the filename extension.
+[export](EBSD.export_py.html) chooses the exporter from the filename extension.
 
     # write an Oxford text file
     export(ebsd, 'myFile.ctf')
@@ -160,7 +160,7 @@ the changed values into that copy. The output remains in the vendor's layout.
     # copy myfile.h5oina and replace its orientations
     export(ebsd, 'denoised.h5oina')
 
-[EBSD.load](EBSD.load.html) records the source file and resolved data-set paths in the
+[EBSD.load](EBSD.load_py.html) records the source file and resolved data-set paths in the
 scan-level option `ebsd.meta['h5']`. A different reference file can be named
 explicitly, but the `EBSD` variable must still carry that HDF5 provenance. The named
 file must contain the recorded paths.

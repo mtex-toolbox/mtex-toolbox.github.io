@@ -51,7 +51,7 @@ plot(titanium, ipfKey.orientation2color(ori))
 # speckles. Neighbouring EBSD pixels are spatially correlated because many sample the same
 # crystal.
 #
-# [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity.html) uses kernel density estimation. It places a
+# [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity_py.html) uses kernel density estimation. It places a
 # smooth kernel at every orientation and adds the kernels. The halfwidth controls how far
 # each measurement is spread in orientation space; here it is set explicitly to 10 degrees.
 
@@ -63,7 +63,7 @@ odfFromOrientations
 # %% [markdown]
 # ## Reading the ODF summary
 #
-# The summary identifies an [SO3FunHarmonic](https://mtex-toolbox.github.io/SO3FunHarmonic.SO3FunHarmonic.html) with
+# The summary identifies an [SO3FunHarmonic](https://mtex-toolbox.github.io/SO3FunHarmonic.SO3FunHarmonic_py.html) with
 # bandwidth 25 and weight 1. Harmonic coefficients are its numerical representation, while
 # the weight confirms that the ODF is normalized as one complete texture.
 #
@@ -118,7 +118,7 @@ mtexColorbar(title='measured intensity')
 # values in total. The three plots have distinct spot patterns because each reflection
 # places a different constraint on the unknown ODF.
 #
-# [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF.html) finds an ODF whose recalculated pole figures fit those
+# [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF_py.html) finds an ODF whose recalculated pole figures fit those
 # measurements. The `silent` flag hides the solver iteration table but leaves the returned
 # ODF summary visible.
 
@@ -129,7 +129,7 @@ odfFromPoleFigures
 # %% [markdown]
 # ## Reading the reconstructed ODF summary
 #
-# This result is an [SO3FunRBF](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF.html), represented as a weighted sum of
+# This result is an [SO3FunRBF](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF_py.html), represented as a weighted sum of
 # kernels on an orientation grid. It is the same scientific quantity as the harmonic ODF
 # above despite the different representation.
 
@@ -213,7 +213,7 @@ mtexColorbar(title='orientation density (mrd)')
 #
 # The three displays above report `SO3FunHarmonic`, `SO3FunRBF`, and `SO3FunCBF`. These
 # class names describe storage and approximation strategies, not three definitions of
-# texture. All implement the [SO3Fun](https://mtex-toolbox.github.io/SO3Fun.SO3Fun.html) interface for evaluation,
+# texture. All implement the [SO3Fun](https://mtex-toolbox.github.io/SO3Fun.SO3Fun_py.html) interface for evaluation,
 # plotting, integration, extrema, rotation, arithmetic, and random sampling.
 #
 # This common interface is how MTEX connects EBSD, pole figures, texture models,

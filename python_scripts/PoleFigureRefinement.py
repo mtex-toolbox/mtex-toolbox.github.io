@@ -7,7 +7,7 @@
 # reconstruction can represent.
 #
 # This page refines two different parts of that workflow. First,
-# [calcODFIterative](https://mtex-toolbox.github.io/PoleFigure.calcODFIterative.html) keeps the measurements fixed while
+# [calcODFIterative](https://mtex-toolbox.github.io/PoleFigure.calcODFIterative_py.html) keeps the measurements fixed while
 # it successively narrows the kernel. Second, a simulation keeps the reconstruction method
 # fixed while it adds measurements where the current ODF predicts high pole density.
 #
@@ -142,7 +142,7 @@ plot(r, markerSize=12, upper=True)
 #
 # Each round measures the current directions and merges them with all earlier
 # measurements. An ordinary reconstruction then predicts the pole density at the
-# directions inserted by [refine](https://mtex-toolbox.github.io/vector3d.refine.html). Only the quarter with the highest
+# directions inserted by [refine](https://mtex-toolbox.github.io/vector3d.refine_py.html). Only the quarter with the highest
 # predicted intensity is measured in the next round. Five rounds are used here.
 #
 # This highest-intensity rule is deliberately naive. It exploits the current estimate but

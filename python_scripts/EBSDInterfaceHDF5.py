@@ -5,7 +5,7 @@
 # at `/EBSD/Data/Euler` and another at `/Site/EBSD/EulerAngles`. Each may also store much
 # that MTEX does not read.
 #
-# MTEX therefore uses one importer, [loadEBSD](https://mtex-toolbox.github.io/loadEBSD_h5.html) of an HDF5 file, and a JSON
+# MTEX therefore uses one importer, [loadEBSD](https://mtex-toolbox.github.io/loadEBSD_h5_py.html) of an HDF5 file, and a JSON
 # configuration for each supported layout. The configurations are in
 # `mtex/io/hdf5_config/`: Bruker, EDAX, EDAXh5, EMSphInx, Oxford and ThermoFisher, the
 # same files as MATLAB's `interfaces/hdf5_config/`. Supporting another HDF5 layout

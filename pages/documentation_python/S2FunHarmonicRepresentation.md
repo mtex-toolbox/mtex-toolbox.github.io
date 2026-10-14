@@ -106,7 +106,7 @@ degrees.
 valueFunction = lambda v: dot(v, vector3d.X) ** 9
 ```
 
-[S2FunHarmonic.quadrature](S2FunHarmonic.quadrature.html) evaluates this function on a
+[S2FunHarmonic.quadrature](S2FunHarmonic.quadrature_py.html) evaluates this function on a
 weighted spherical grid and computes its coefficients. Without an explicit `bandwidth`
 option, it computes through the degree of the preference `defaultS2Bandwidth`.
 
@@ -149,7 +149,7 @@ stores many degrees, this polynomial needs no degree above 9.
 
 ## Inspect the harmonic spectrum
 
-[plotSpectrum](S2FunHarmonic.plotSpektra.html) groups coefficients by degree. At degree
+[plotSpectrum](S2FunHarmonic.plotSpektra_py.html) groups coefficients by degree. At degree
 $$m$$, it plots $$\left(\sum_{k=-m}^{m}|\hat f_m^k|^2\right)^{1/2}$$.
 
 ```python
@@ -167,7 +167,7 @@ numerical quadrature noise.
 
 ## Remove negligible degrees
 
-[truncate](S2FunHarmonic.truncate.html) removes trailing degrees whose coefficients are
+[truncate](S2FunHarmonic.truncate_py.html) removes trailing degrees whose coefficients are
 negligible relative to the spectrum. It does not refit the function. Here it reduces the
 stored bandwidth to 9.
 

@@ -486,7 +486,7 @@ hold(False)
 # * R. Hielscher and H. Schaeben,
 #   [A novel pole figure inversion method: specification of the MTEX algorithm](https://doi.org/10.1107/S0021889808030112),
 #   _Journal of Applied Crystallography_ 41, 1024-1037, 2008. This specifies the
-#   component method implemented by [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF.html).
+#   component method implemented by [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF_py.html).
 # * H.-J. Bunge and C. Esling,
 #   [Determination of the odd part of the texture function by anomalous scattering](https://doi.org/10.1107/S0021889881009308),
 #   _Journal of Applied Crystallography_ 14, 253-255, 1981. This explains the

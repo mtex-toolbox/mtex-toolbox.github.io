@@ -27,11 +27,11 @@ A typical script follows five steps.
 
 During these steps, Python stores data under names called variables. Each variable has a
 type, called its class, which determines the operations that can be applied to it. MTEX
-provides classes for objects such as [vectors](vector3d.vector3d.html),
-[rotations](rotation.rotation.html), [EBSD data](EBSD.EBSD.html),
-[grains](grain2d.grain2d.html), and
-[orientation distribution functions (ODFs)](SO3Fun.SO3Fun.html). The
-[Function Reference](FunctionReference.html) lists all MTEX classes and functions.
+provides classes for objects such as [vectors](vector3d.vector3d_py.html),
+[rotations](rotation.rotation_py.html), [EBSD data](EBSD.EBSD_py.html),
+[grains](grain2d.grain2d_py.html), and
+[orientation distribution functions (ODFs)](SO3Fun.SO3Fun_py.html). The
+[Function Reference](FunctionReference_py.html) lists all MTEX classes and functions.
 
 ```python
 from mtex import *
@@ -105,7 +105,7 @@ grain2d (y↓→x)
   boundary segments: 36604, inner: 282, triple points: 1579
 ```
 
-The returned [grain2d](grain2d.grain2d.html) object is stored in `grains`. Its summary
+The returned [grain2d](grain2d.grain2d_py.html) object is stored in `grains`. Its summary
 reports the number of grains in each phase and information about their boundaries.
 
 ## Add the grain boundaries

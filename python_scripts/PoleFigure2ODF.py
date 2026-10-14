@@ -14,7 +14,7 @@
 # This page assumes the pole-figure idea from [Pole Figures](https://mtex-toolbox.github.io/PoleFigureAnalysis.html) and
 # corrected measurements from [Data Correction](https://mtex-toolbox.github.io/PoleFigureCorrection_py.html). The definition
 # and units of an ODF are introduced in [ODF Theory](https://mtex-toolbox.github.io/ODFTheory_py.html). Here the
-# reconstruction uses [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF.html).
+# reconstruction uses [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF_py.html).
 # [The Ghost Effect](https://mtex-toolbox.github.io/PoleFigure2ODFAmbiguity_py.html) explains what the measurements can
 # never determine.
 
@@ -58,7 +58,7 @@ defaultTime = time.perf_counter() - tic
 odf
 
 # %% [markdown]
-# The result is an [SO3FunRBF](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF.html). It represents the ODF as a
+# The result is an [SO3FunRBF](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF_py.html). It represents the ODF as a
 # weighted superposition of unimodal kernel functions on a grid in orientation space. The
 # display reports 20,224 grid centres for this reconstruction. The object can be analysed
 # like any other ODF; continue to [ODF Analysis](https://mtex-toolbox.github.io/ODFAnalysis.html) after validating the
@@ -78,7 +78,7 @@ plotPF(odf, pf.allH, antipodal=True, superposition=pf.c)
 # pole figures are smoother because the finite-width kernels do not reproduce every
 # fluctuation in the measurement.
 #
-# [calcError](https://mtex-toolbox.github.io/PoleFigure.calcError.html) makes the same comparison one pole figure at a
+# [calcError](https://mtex-toolbox.github.io/PoleFigure.calcError_py.html) makes the same comparison one pole figure at a
 # time. The `'RP'` measure divides the absolute difference by the recalculated intensity,
 # but only where that intensity exceeds the threshold supplied as `epsilon`. The default
 # threshold is 1.
@@ -105,7 +105,7 @@ regularisedError
 # throughout. The other available measures are `'l1'` and `'l2'`.
 #
 # A single error vector hides where the mismatch occurs.
-# [plotDiff](https://mtex-toolbox.github.io/PoleFigure.plotDiff.html) plots the relative difference for every measured
+# [plotDiff](https://mtex-toolbox.github.io/PoleFigure.plotDiff_py.html) plots the relative difference for every measured
 # direction.
 
 # %%
@@ -124,7 +124,7 @@ plotDiff(pf, odf)
 # %% [markdown]
 # ## Comparing two ODFs
 #
-# The [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError.html) overload also compares two ODFs. This is a
+# The [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError_py.html) overload also compares two ODFs. This is a
 # different calculation from comparing an ODF with pole-figure measurements. To make the
 # distinction visible, build one broad component at the strongest orientation of the
 # reconstruction.
@@ -208,7 +208,7 @@ print(f'Zero range: {zeroTime:.2f} s, peak {zeroPeak:.1f} mrd, mean RP {meanZero
 # that it also runs faster here, because the solver keeps far fewer grid nodes. The
 # sharper recalculated maxima are the visible difference to look for. Try the method
 # rather than assuming it will help. The
-# [zeroRangeMethod](https://mtex-toolbox.github.io/zeroRangeMethod.zeroRangeMethod.html) reference lists the threshold
+# [zeroRangeMethod](https://mtex-toolbox.github.io/zeroRangeMethod.zeroRangeMethod_py.html) reference lists the threshold
 # and smoothing options that decide what counts as zero.
 
 # %% [markdown]

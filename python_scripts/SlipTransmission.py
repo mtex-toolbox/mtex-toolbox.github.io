@@ -232,7 +232,7 @@ mtexColorbar()
 #   (\mathbf b_{\mathrm{in}}\cdot\mathbf b_{\mathrm{out}})\right|.$$
 #
 # The absolute value makes reversed normal or Burgers-vector signs
-# equivalent. The [`mPrime`](https://mtex-toolbox.github.io/slipSystem.mPrime.html) method applies this
+# equivalent. The [`mPrime`](https://mtex-toolbox.github.io/slipSystem.mPrime_py.html) method applies this
 # expression element by element to paired systems.
 
 # %% [markdown]

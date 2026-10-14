@@ -75,8 +75,8 @@ componentNames = ['Goss', 'Brass', 'Cube', 'CubeND22', 'CubeND45', 'CubeRD', 'Co
 # Each legend entry below is generated in the conventional form $(hkl)[uvw]$. The plane
 # $(hkl)$ faces the sheet normal, and the direction $[uvw]$ points along the rolling
 # direction. Equivalently, the orientation maps the plane normal to ND and the lattice
-# direction to RD. [orientation.byMiller](https://mtex-toolbox.github.io/orientation.byMiller.html) uses this argument
-# order. [round2Miller](https://mtex-toolbox.github.io/orientation.round2Miller.html) reads those two indices back off an
+# direction to RD. [orientation.byMiller](https://mtex-toolbox.github.io/orientation.byMiller_py.html) uses this argument
+# order. [round2Miller](https://mtex-toolbox.github.io/orientation.round2Miller_py.html) reads those two indices back off an
 # orientation.
 
 # %%
@@ -110,7 +110,7 @@ bestDifference = componentDistance[bestId]
 bestDifference
 
 # %% [markdown]
-# The closest entry is Copper at $5^\circ$. [angle](https://mtex-toolbox.github.io/orientation.angle.html) uses the
+# The closest entry is Copper at $5^\circ$. [angle](https://mtex-toolbox.github.io/orientation.angle_py.html) uses the
 # attached crystal and specimen symmetries. It therefore compares physical components
 # rather than arbitrary stored representatives. A real analysis must also state the
 # angular tolerance used to call an orientation part of a component.

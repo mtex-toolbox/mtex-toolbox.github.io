@@ -52,7 +52,7 @@ S2FunHandle (432)
 ```
 
 Like any spherical function, `adf` can be plotted, evaluated, and integrated. The
-convenience command [plotAxisDistribution](plotAxisDistribution.html) draws the same
+convenience command [plotAxisDistribution](plotAxisDistribution_py.html) draws the same
 density. Passing both symmetries describes a same-phase pair, while `antipodal` applies
 [grain exchange symmetry](MisorientationGrainExchangeSym_py.html).
 
@@ -102,7 +102,7 @@ gB = grains.boundary['Magnesium', 'Magnesium']
 mori = gB.misorientation
 ```
 
-[axis](orientation.axis.html) selects the smallest-angle symmetry-equivalent
+[axis](orientation.axis_py.html) selects the smallest-angle symmetry-equivalent
 representative and returns its axis in the crystal frame. The summary reports one axis
 for each of the 2803 boundary segments.
 
@@ -113,19 +113,19 @@ axesCrystal
 
 ```text
 vector3d (Magnesium)
-  size: 2808
-       h       k        i       l
-  2.2869  0.7481   -3.035  0.8841
-  2.2657  0.7759  -3.0416  0.8978
-  1.6211  1.5877  -3.2088  0.0292
-  1.6054  1.6034  -3.2089  0.0142
-  1.5557  0.0844  -1.6401  4.2605
-       ⋮       ⋮        ⋮       ⋮
-  1.6377  1.5704  -3.2081  0.0986
-   1.656  1.5521  -3.2081  0.0642
-  1.6592  1.5489  -3.2081  0.0483
-  1.6592  1.5489  -3.2081  0.0483
-  1.6054   1.603  -3.2084  0.0944
+  size: 2772
+       h        k        i       l
+   3.035  -0.7481  -2.2869  0.8841
+  3.0416  -0.7759  -2.2657  0.8978
+  3.2088  -1.5877  -1.6211  0.0292
+  3.2089  -1.6034  -1.6054  0.0142
+  1.6401  -0.0844  -1.5557  4.2605
+       ⋮        ⋮        ⋮       ⋮
+  3.2081  -1.5704  -1.6377  0.0986
+  3.2081  -1.5521   -1.656  0.0642
+  3.2081  -1.5489  -1.6592  0.0483
+  3.2081  -1.5489  -1.6592  0.0483
+  3.2084   -1.603  -1.6054  0.0944
 ```
 
 Each boundary segment contributes once by default. Passing its `segLength` as a weight
@@ -150,7 +150,7 @@ peakDensity
 ```
 
 ```text
-30.8638
+30.9062
 ```
 
 ---
@@ -230,7 +230,7 @@ independently.
 
 Estimate the magnesium ODF from grain mean orientations. Area weights make this a
 sampled-area texture rather than a one-grain-one-vote texture. The `Fourier` flag selects
-the harmonic representation used efficiently by [calcMDF](SO3Fun.calcMDF.html).
+the harmonic representation used efficiently by [calcMDF](SO3Fun.calcMDF_py.html).
 
 ```python
 mgGrains = grains['Magnesium']
@@ -264,7 +264,7 @@ Here $$\mathbf{h}$$ is the axis, $$\omega$$ is the angle, and $$N$$ accounts for
 copies represented by the fundamental region. The upper limit $$\omega_{\max}(\mathbf{h})$$
 is why a uniform MDF has a non-constant ADF.
 
-[calcAxisDistribution](SO3Fun.calcAxisDistribution.html) accepts `minAngle` and
+[calcAxisDistribution](SO3Fun.calcAxisDistribution_py.html) accepts `minAngle` and
 `maxAngle` to study an angle window. Its `resolution` option is the angular quadrature
 step; reduce it when a narrow window must be integrated to better than percent accuracy.
 

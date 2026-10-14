@@ -74,7 +74,7 @@ orientation for each measurement.
 
 ## The deviation angle
 
-[calcGROD](EBSD.calcGROD.html) computes the deviation as a misorientation, one per
+[calcGROD](EBSD.calcGROD_py.html) computes the deviation as a misorientation, one per
 measurement. It needs the reconstructed grains as a second argument. It also needs
 `ebsd.grainId`, which `calcGrains` set.
 
@@ -119,7 +119,7 @@ GROD jump is not its definition.
 ## Grain orientation spread
 
 Averaging the deviation angle over each grain gives the grain orientation spread.
-[grainMean](EBSD.grainMean.html) performs that averaging.
+[grainMean](EBSD.grainMean_py.html) performs that averaging.
 
 Although `calcGrains` stored `grains.GOS`, that value belongs to the raw orientations.
 The calculation below deliberately uses the denoised data.
@@ -150,7 +150,7 @@ Comparisons require the same choices.
 
 Every deviation also has an axis, and it matters in which reference frame that axis is
 expressed. The crystal frame is attached to the lattice of the phase. In this frame the
-axis is an $$(hk\ell)$$ crystal direction, obtained with [axis](orientation.axis.html).
+axis is an $$(hk\ell)$$ crystal direction, obtained with [axis](orientation.axis_py.html).
 
 ```python
 axCrystal = grod.axis()
@@ -290,7 +290,7 @@ hold(False)
 ## Choosing another reference orientation
 
 The grain mean is convenient, but it removes a rigid rotation shared by the whole
-grain. [calcGROD](EBSD.calcGROD.html) accepts a third argument: one reference rotation
+grain. [calcGROD](EBSD.calcGROD_py.html) accepts a third argument: one reference rotation
 for every grain ID, or one scalar for all grains.
 
 A registered map of the undeformed specimen can supply one initial orientation per

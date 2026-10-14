@@ -38,7 +38,7 @@ hold(False)
 # %% [markdown]
 # ## How MTEX Stores the Sector
 #
-# [sphericalRegion](https://mtex-toolbox.github.io/sphericalRegion.sphericalRegion.html) represents the sector as an
+# [sphericalRegion](https://mtex-toolbox.github.io/sphericalRegion.sphericalRegion_py.html) represents the sector as an
 # intersection of spherical half-spaces.
 
 # %%
@@ -66,7 +66,7 @@ sR.N
 v = Miller(2, 3, 1, cs)
 
 # %% [markdown]
-# [checkInside](https://mtex-toolbox.github.io/sphericalRegion.checkInside.html) tests it against all three half-spaces.
+# [checkInside](https://mtex-toolbox.github.io/sphericalRegion.checkInside_py.html) tests it against all three half-spaces.
 
 # %%
 isInside = sR.checkInside(v)
@@ -76,7 +76,7 @@ isInside
 # The false result means that $(231)$ is outside the chosen sector. It does not mean that
 # its symmetry-equivalent family is absent.
 #
-# [projectIntoFundamentalRegion](https://mtex-toolbox.github.io/vector3d.project2FundamentalRegion.html) selects an
+# [projectIntoFundamentalRegion](https://mtex-toolbox.github.io/vector3d.project2FundamentalRegion_py.html) selects an
 # equivalent representative inside the sector.
 
 # %%
@@ -168,7 +168,7 @@ for lId in range(2, 12):
 #
 # A sector is a purely geometric object and carries no orientation information. Its
 # counterpart for orientations is the [Fundamental Region](https://mtex-toolbox.github.io/OrientationFundamentalRegion_py.html),
-# represented by an [orientationRegion](https://mtex-toolbox.github.io/orientationRegion.orientationRegion.html). The
+# represented by an [orientationRegion](https://mtex-toolbox.github.io/orientationRegion.orientationRegion_py.html). The
 # sector is also what an [inverse pole figure](https://mtex-toolbox.github.io/OrientationInversePoleFigure_py.html) is drawn
 # on.
 #

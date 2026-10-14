@@ -138,7 +138,7 @@ initialTextureIndex
 ```
 
 ```text
-1.0010
+1.0011
 ```
 
 ## Step through the strain history
@@ -196,10 +196,10 @@ for s, t in zip([0, 20, 40, 60], textureIndex):
 
 ```text
 StrainPercent  TextureIndex
-            0        1.0010
-           20        1.1857
-           40        1.5974
-           60        2.0737
+            0        1.0011
+           20        1.1765
+           40        1.5808
+           60        2.0535
 ```
 
 The index rises from 1.0010 initially to 1.1499, 1.4984, and 1.9160. This steady

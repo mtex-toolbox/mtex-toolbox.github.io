@@ -14,11 +14,11 @@
 #
 # During these steps, Python stores data under names called variables. Each variable has a
 # type, called its class, which determines the operations that can be applied to it. MTEX
-# provides classes for objects such as [vectors](https://mtex-toolbox.github.io/vector3d.vector3d.html),
-# [rotations](https://mtex-toolbox.github.io/rotation.rotation.html), [EBSD data](https://mtex-toolbox.github.io/EBSD.EBSD.html),
-# [grains](https://mtex-toolbox.github.io/grain2d.grain2d.html), and
-# [orientation distribution functions (ODFs)](https://mtex-toolbox.github.io/SO3Fun.SO3Fun.html). The
-# [Function Reference](https://mtex-toolbox.github.io/FunctionReference.html) lists all MTEX classes and functions.
+# provides classes for objects such as [vectors](https://mtex-toolbox.github.io/vector3d.vector3d_py.html),
+# [rotations](https://mtex-toolbox.github.io/rotation.rotation_py.html), [EBSD data](https://mtex-toolbox.github.io/EBSD.EBSD_py.html),
+# [grains](https://mtex-toolbox.github.io/grain2d.grain2d_py.html), and
+# [orientation distribution functions (ODFs)](https://mtex-toolbox.github.io/SO3Fun.SO3Fun_py.html). The
+# [Function Reference](https://mtex-toolbox.github.io/FunctionReference_py.html) lists all MTEX classes and functions.
 
 # %%
 from mtex import *
@@ -65,7 +65,7 @@ grains = calcGrains(ebsd, minPixel=3)
 grains
 
 # %% [markdown]
-# The returned [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d.html) object is stored in `grains`. Its summary
+# The returned [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d_py.html) object is stored in `grains`. Its summary
 # reports the number of grains in each phase and information about their boundaries.
 #
 # ## Add the grain boundaries

@@ -6,7 +6,7 @@
 #
 # This page assumes the axis--angle and quaternion descriptions introduced in
 # [Defining Rotations](https://mtex-toolbox.github.io/RotationDefinition_py.html). MTEX stores the proper part of every
-# [rotation](https://mtex-toolbox.github.io/rotation.rotation.html) as a unit [quaternion](https://mtex-toolbox.github.io/quaternion.quaternion.html).
+# [rotation](https://mtex-toolbox.github.io/rotation.rotation_py.html) as a unit [quaternion](https://mtex-toolbox.github.io/quaternion.quaternion_py.html).
 # The coordinates below are computed from that quaternion on demand.
 #
 # Rodrigues and homochoric coordinates are *scaled-axis* representations. Their direction
@@ -32,7 +32,7 @@ rot = rotation.rand(100000)
 # ## Rodrigues--Frank Coordinates
 #
 # The Rodrigues--Frank vector scales the axis by $f(\omega)=\tan(\omega/2)$. MTEX computes
-# it with [Rodrigues](https://mtex-toolbox.github.io/quaternion.Rodrigues.html).
+# it with [Rodrigues](https://mtex-toolbox.github.io/quaternion.Rodrigues_py.html).
 #
 # The following output puts the angle in degrees in the first column and the length of its
 # Rodrigues vector in the second.
@@ -53,7 +53,7 @@ np.column_stack([sampleAngle / degree, rodriguesLength])
 # properties make Rodrigues coordinates useful for visualizing
 # [fundamental regions](https://mtex-toolbox.github.io/OrientationFundamentalRegion_py.html).
 #
-# [rotation.byRodrigues](https://mtex-toolbox.github.io/rotation.byRodrigues.html) performs the inverse conversion. The
+# [rotation.byRodrigues](https://mtex-toolbox.github.io/rotation.byRodrigues_py.html) performs the inverse conversion. The
 # displayed angular error confirms the round trip.
 
 # %%
@@ -68,7 +68,7 @@ np.max(angle(sampleRot, rotFromRodrigues)) / degree
 #
 # $$ f(\omega) = \left(\frac{3}{4}\left(\omega-\sin\omega\right)\right)^{1/3}. $$
 #
-# [homochoric](https://mtex-toolbox.github.io/quaternion.homochoric.html) maps all rotations into a ball. Its radius is
+# [homochoric](https://mtex-toolbox.github.io/quaternion.homochoric_py.html) maps all rotations into a ball. Its radius is
 # $R=(3\pi/4)^{1/3}$, reached by the half turns.
 
 # %%
@@ -82,7 +82,7 @@ np.array([norm(halfTurn.homochoric()), R])
 # %% [markdown]
 # ## A volume check
 #
-# [rotation.rand](https://mtex-toolbox.github.io/rotation.rand.html) samples the uniform, or Haar, distribution on the
+# [rotation.rand](https://mtex-toolbox.github.io/rotation.rand_py.html) samples the uniform, or Haar, distribution on the
 # rotation group. Equal-volume homochoric coordinates turn that sample into a uniform
 # distribution in the ball.
 #
@@ -113,7 +113,7 @@ plt.ylabel('probability density')
 # to a cube. The cube has edge length $\pi^{2/3}$ and the same volume, $\pi^2$, as the
 # homochoric ball.
 #
-# MTEX computes these coordinates with [cubochoric](https://mtex-toolbox.github.io/quaternion.cubochoric.html). The next
+# MTEX computes these coordinates with [cubochoric](https://mtex-toolbox.github.io/quaternion.cubochoric_py.html). The next
 # figure maps the same half turns first to the homochoric boundary and then to the
 # cubochoric boundary.
 
@@ -154,8 +154,8 @@ ax.set_title('cubochoric boundary')
 # ## Inverting Cubochoric Coordinates
 #
 # MATLAB has no `rotation.byCubochoric` constructor: it first maps the cube back to the
-# homochoric ball with [cubo2homo](https://mtex-toolbox.github.io/cubo2homo.html), then uses
-# [rotation.byHomochoric](https://mtex-toolbox.github.io/rotation.byHomochoric.html). The same route works here.
+# homochoric ball with [cubo2homo](https://mtex-toolbox.github.io/cubo2homo_py.html), then uses
+# [rotation.byHomochoric](https://mtex-toolbox.github.io/rotation.byHomochoric_py.html). The same route works here.
 
 # %%
 vCubochoric = rot.cubochoric()
@@ -174,17 +174,17 @@ np.max(angle(rot, rotFromCubochoric)) / degree
 #
 # | representation | coordinate domain | preserves volume | useful feature |
 # |---|---|---|---|
-# | [Rodrigues--Frank](https://mtex-toolbox.github.io/quaternion.Rodrigues.html) | unbounded $\mathbb R^3$ | no | straight fixed-axis lines and planar symmetry boundaries |
-# | [homochoric](https://mtex-toolbox.github.io/quaternion.homochoric.html) | ball of radius $(3\pi/4)^{1/3}$ | yes | radial coordinates for density and integration |
-# | [cubochoric](https://mtex-toolbox.github.io/quaternion.cubochoric.html) | cube of edge $\pi^{2/3}$ | yes | uniform Cartesian grids |
+# | [Rodrigues--Frank](https://mtex-toolbox.github.io/quaternion.Rodrigues_py.html) | unbounded $\mathbb R^3$ | no | straight fixed-axis lines and planar symmetry boundaries |
+# | [homochoric](https://mtex-toolbox.github.io/quaternion.homochoric_py.html) | ball of radius $(3\pi/4)^{1/3}$ | yes | radial coordinates for density and integration |
+# | [cubochoric](https://mtex-toolbox.github.io/quaternion.cubochoric_py.html) | cube of edge $\pi^{2/3}$ | yes | uniform Cartesian grids |
 #
 # Equal volume refers to the invariant volume measure on the rotation group. It is not a
-# claim about Euclidean distance. Use [angle](https://mtex-toolbox.github.io/quaternion.angle.html), rather than
+# claim about Euclidean distance. Use [angle](https://mtex-toolbox.github.io/quaternion.angle_py.html), rather than
 # coordinate-vector distance, when the physical angular separation between two rotations
 # is required.
 #
 # Do not average any of these vectors to obtain a mean rotation. The mean must respect
-# rotation geometry; use [mean](https://mtex-toolbox.github.io/quaternion.mean.html) on the rotations themselves.
+# rotation geometry; use [mean](https://mtex-toolbox.github.io/quaternion.mean_py.html) on the rotations themselves.
 
 # %% [markdown]
 # ## The Maths Behind Equal Volume

@@ -68,7 +68,7 @@ rot2 = rotation.byEuler(0, 60 * degree, 0, 'Bunge')
 rot = rot2 * rot1
 
 # %% [markdown]
-# The order matters. [==](https://mtex-toolbox.github.io/quaternion.eq.html) tests rotation equality within an angular
+# The order matters. [==](https://mtex-toolbox.github.io/quaternion.eq_py.html) tests rotation equality within an angular
 # tolerance, rather than comparing printed Euler angles. Reversing these two rotations does
 # not give the same result.
 
@@ -105,7 +105,7 @@ hold(False)
 # %% [markdown]
 # ## Axis and Angle
 #
-# [angle](https://mtex-toolbox.github.io/quaternion.angle.html) and [axis](https://mtex-toolbox.github.io/quaternion.axis.html) read the axis--angle
+# [angle](https://mtex-toolbox.github.io/quaternion.angle_py.html) and [axis](https://mtex-toolbox.github.io/quaternion.axis_py.html) read the axis--angle
 # description from the composed rotation, however it was built.
 
 # %%
@@ -124,7 +124,7 @@ rot.axis()
 # %% [markdown]
 # ## The Inverse Rotation
 #
-# [inv](https://mtex-toolbox.github.io/quaternion.inv.html) reverses a rotation. For a nonzero turn below 180 degrees,
+# [inv](https://mtex-toolbox.github.io/quaternion.inv_py.html) reverses a rotation. For a nonzero turn below 180 degrees,
 # the inverse has the opposite axis and the same canonical, nonnegative angle.
 
 # %%
@@ -159,7 +159,7 @@ relativeRot = rot * inv(rot1)
 np.array([relativeRot.angle(), angle(rot, rot1)]) / degree
 
 # %% [markdown]
-# Both entries are 60 degrees. The second is the direct [angle(rot,rot1)](https://mtex-toolbox.github.io/quaternion.angle.html)
+# Both entries are 60 degrees. The second is the direct [angle(rot,rot1)](https://mtex-toolbox.github.io/quaternion.angle_py.html)
 # call, so there is usually no need to construct the relative rotation explicitly.
 #
 # This angular distance is used throughout MTEX to compare a fit with a measurement and to
@@ -199,12 +199,12 @@ directions = cat(vector3d.X, vector3d.Y, vector3d.Z)
 #
 # | | |
 # |---|---|
-# | [Euler(rot)](https://mtex-toolbox.github.io/quaternion.Euler.html) | the three Euler angles |
-# | [Rodrigues(rot)](https://mtex-toolbox.github.io/quaternion.Rodrigues.html) | the Rodrigues--Frank vector |
-# | [matrix(rot)](https://mtex-toolbox.github.io/quaternion.matrix.html) | the rotation matrix |
-# | [homochoric(rot)](https://mtex-toolbox.github.io/quaternion.homochoric.html) | the homochoric vector |
-# | [cubochoric(rot)](https://mtex-toolbox.github.io/quaternion.cubochoric.html) | the cubochoric vector |
-# | [axis(rot)](https://mtex-toolbox.github.io/quaternion.axis.html), [angle(rot)](https://mtex-toolbox.github.io/quaternion.angle.html) | axis and angle |
+# | [Euler(rot)](https://mtex-toolbox.github.io/quaternion.Euler_py.html) | the three Euler angles |
+# | [Rodrigues(rot)](https://mtex-toolbox.github.io/quaternion.Rodrigues_py.html) | the Rodrigues--Frank vector |
+# | [matrix(rot)](https://mtex-toolbox.github.io/quaternion.matrix_py.html) | the rotation matrix |
+# | [homochoric(rot)](https://mtex-toolbox.github.io/quaternion.homochoric_py.html) | the homochoric vector |
+# | [cubochoric(rot)](https://mtex-toolbox.github.io/quaternion.cubochoric_py.html) | the cubochoric vector |
+# | [axis(rot)](https://mtex-toolbox.github.io/quaternion.axis_py.html), [angle(rot)](https://mtex-toolbox.github.io/quaternion.angle_py.html) | axis and angle |
 #
 # Euler angles depend on a convention. Naming Matthies here makes the result independent
 # of the user's display preference.

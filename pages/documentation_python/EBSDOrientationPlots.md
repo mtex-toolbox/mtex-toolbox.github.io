@@ -88,7 +88,7 @@ commands, not a statement about the data.
 
 A pole figure fixes a crystal direction and asks where it points in the specimen. Each
 sampled orientation maps the $$(100)$$ pole into the specimen frame.
-[plotPF](orientation.plotPDF.html) also accounts for the crystallographically
+[plotPF](orientation.plotPDF_py.html) also accounts for the crystallographically
 equivalent poles.
 
 ```python
@@ -116,7 +116,7 @@ construction and its symmetry rules.
 ## Inverse pole figures
 
 An inverse pole figure fixes a specimen direction and asks which crystal direction
-points along it. [plotIPF](orientation.plotIPDF.html) draws the answer in a
+points along it. [plotIPF](orientation.plotIPDF_py.html) draws the answer in a
 fundamental sector, which contains one representative of each family of
 crystal-symmetry-equivalent directions.
 
@@ -141,7 +141,7 @@ full construction is developed in
 Orientation space has three dimensions. A section plot replaces it with a stack of
 two-dimensional slices, so it retains all three orientation coordinates across the
 stack rather than projecting away one rotation.
-[plotSection](orientation.plotSection.html) draws points within a finite tolerance of
+[plotSection](orientation.plotSection_py.html) draws points within a finite tolerance of
 each slice. An orientation can therefore miss every panel, and a symmetry-equivalent
 representative can appear more than once.
 

@@ -65,7 +65,7 @@ The filename identifies `P` as the right-handed form.
 
 ## The signed longitudinal response
 
-[directionalMagnitude](tensor.directionalMagnitude.html) contracts the same unit
+[directionalMagnitude](tensor.directionalMagnitude_py.html) contracts the same unit
 direction $$n$$ into all three indices:
 
 $$ q(n) = d_{ijk}\,n_i n_j n_k. $$
@@ -102,7 +102,7 @@ antipodal directions. This is the sign reversal expected for an odd-rank tensor.
 
 ## A radial surface
 
-[surf](S2Fun.surf.html) can use the absolute response as distance from the origin and
+[surf](S2Fun.surf_py.html) can use the absolute response as distance from the origin and
 the colour as its sign. The `scaling=False` option keeps the physical zero and the original
 pC/N values.
 
@@ -119,7 +119,7 @@ response is zero.
 
 ## Planar sections
 
-[plotSection](S2Fun.plotSection.html) draws the signed response as a polar radius in a
+[plotSection](S2Fun.plotSection_py.html) draws the signed response as a polar radius in a
 chosen plane. A negative radius is placed in the opposite direction, so each curve is
 traced twice. Use the coloured hemisphere plots above, rather than these outlines, to
 read the sign.
@@ -167,7 +167,7 @@ orientationCount
 ```
 
 The calculation below is still instructive as a counterexample. It uses
-[calcTensor](orientation.calcTensor.html) to rotate the right-handed tensor by every
+[calcTensor](orientation.calcTensor_py.html) to rotate the right-handed tensor by every
 orientation and take their unweighted arithmetic mean. The result is an *apparent*
 aggregate in which all 382 grains have been assumed to be right-handed. It is not a
 prediction for the rock.

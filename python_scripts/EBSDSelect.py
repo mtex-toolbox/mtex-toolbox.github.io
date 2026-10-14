@@ -44,7 +44,7 @@ ebsd['Forsterite']
 # full rectangular grid, although every retained measurement still has its original
 # position.
 #
-# Use [gridify](https://mtex-toolbox.github.io/EBSD.gridify.html) when later code explicitly needs a matrix-shaped map.
+# Use [gridify](https://mtex-toolbox.github.io/EBSD.gridify_py.html) when later code explicitly needs a matrix-shaped map.
 # Many spatial MTEX operations reconstruct the virtual lattice internally;
 # [Square and Hex Grids](https://mtex-toolbox.github.io/EBSDGrid_py.html) explains when the stored grid shape matters.
 #
@@ -91,7 +91,7 @@ plt.gca().add_patch(Rectangle(region[:2], region[2], region[3], edgecolor='red',
 
 # %% [markdown]
 # The red rectangle crosses all three indexed phases and many notIndexed points.
-# [inpolygon](https://mtex-toolbox.github.io/EBSD.inpolygon.html) tests every measurement and returns one `True` or
+# [inpolygon](https://mtex-toolbox.github.io/EBSD.inpolygon_py.html) tests every measurement and returns one `True` or
 # `False` for each point.
 
 # %%

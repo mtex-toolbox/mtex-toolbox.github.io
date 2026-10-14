@@ -89,7 +89,7 @@ assert np.allclose(saved.eval(cat(mod1, mod2)), model_odf.eval(cat(mod1, mod2)))
 
 ## Export Values on a Generic Grid
 
-By default, [export](SO3Fun.export.html) writes four columns. The first three are
+By default, [export](SO3Fun.export_py.html) writes four columns. The first three are
 [Bunge Euler angles](RotationRepresentations_py.html) on a regular $$5^\circ$$ grid, in
 degrees, and the fourth is the ODF value at that orientation. These values are density
 values in multiples of a uniform distribution, not volume fractions.
@@ -142,7 +142,7 @@ The `'mtex'` interface writes a human-readable description of the ODF components
 records the components themselves instead of replacing them by grid samples, and it is
 not a general interchange format.
 
-The current source tree has no matching reader: [SO3Fun.load](SO3Fun.load.html) offers
+The current source tree has no matching reader: [SO3Fun.load](SO3Fun.load_py.html) offers
 loaders for generic and VPSC ODF files only, so this format is write-only. Use `pickle`
 when an exact round trip matters. Not every representation is supported either, and
 the exporter records that harmonic components cannot be written in this format.
@@ -203,8 +203,8 @@ texture exported by MTEX
 
 
 B 5000
- 191.51   58.01  161.33   0.0002000
- 133.24  142.42   21.10   0.0002000
+ 359.35   65.18  293.87   0.0002000
+ 354.68   68.86   28.65   0.0002000
 ```
 
 The `points` option controls the number of orientations and defaults to 10000. More

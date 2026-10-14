@@ -6,7 +6,7 @@
 # Reversing the axis of a twofold rotation likewise describes the same $180^\circ$
 # rotation.
 #
-# MTEX represents directions and axes with [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html). The logical
+# MTEX represents directions and axes with [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html). The logical
 # property `antipodal` records the difference. When it is true, `v` and `-v` represent the
 # same axis.
 #
@@ -51,7 +51,7 @@ plot(cat(v1, v2), label=['v_1', 'v_2'], antipodal=True, grid=True)
 # %% [markdown]
 # ## Angles and Axial Means
 #
-# The [angle](https://mtex-toolbox.github.io/vector3d.angle.html) between directed vectors ranges from $0^\circ$ to
+# The [angle](https://mtex-toolbox.github.io/vector3d.angle_py.html) between directed vectors ranges from $0^\circ$ to
 # $180^\circ$. The angle between axes is measured to whichever end is closer and is
 # therefore never greater than $90^\circ$.
 
@@ -87,7 +87,7 @@ axisMeanMisfit
 
 # %% [markdown]
 # The directed mean has length 0. The axial mean is aligned with the X axis, so its axial
-# misfit is $0^\circ$. The [mean](https://mtex-toolbox.github.io/vector3d.mean.html) of axes uses their unoriented lines
+# misfit is $0^\circ$. The [mean](https://mtex-toolbox.github.io/vector3d.mean_py.html) of axes uses their unoriented lines
 # rather than averaging signed components.
 
 # %% [markdown]

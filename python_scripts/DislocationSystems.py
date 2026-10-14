@@ -10,7 +10,7 @@
 # $\mathbf l$ gives the direction of the defect line.
 #
 # MTEX represents a pure edge or screw geometry with a
-# [`dislocationSystem`](https://mtex-toolbox.github.io/dislocationSystem.dislocationSystem.html). This page
+# [`dislocationSystem`](https://mtex-toolbox.github.io/dislocationSystem.dislocationSystem_py.html). This page
 # constructs both types and then prepares the systems used to estimate
 # geometrically necessary dislocations from an EBSD map.
 

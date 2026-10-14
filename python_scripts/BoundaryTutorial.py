@@ -11,7 +11,7 @@
 #
 # A grain boundary is a segment between two neighbouring EBSD pixels that belong to
 # different grains. MTEX stores the complete boundary network as a
-# [grainBoundary](https://mtex-toolbox.github.io/grainBoundary.grainBoundary.html) object with one entry per segment.
+# [grainBoundary](https://mtex-toolbox.github.io/grainBoundary.grainBoundary_py.html) object with one entry per segment.
 
 # %%
 import matplotlib.pyplot as plt
@@ -40,7 +40,7 @@ grains
 # threshold is an example parameter, not a universal grain definition.
 # [Grain Reconstruction](https://mtex-toolbox.github.io/GrainReconstruction_py.html) explains how to choose and report it.
 #
-# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary.html) simplifies, refines, and smooths the pixel
+# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary_py.html) simplifies, refines, and smooths the pixel
 # staircase by default. This improves trace geometry but changes the number and length of
 # segments. [Grain Smoothing](https://mtex-toolbox.github.io/GrainSmoothing_py.html) develops that choice.
 

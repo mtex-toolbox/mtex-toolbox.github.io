@@ -45,8 +45,8 @@ sF2 = S2FunHarmonic.quadrature(f, bandwidth=150)
 
 ## Smooth colour plot
 
-[pcolor](S2Fun.pcolor.html) draws function values as colour without contour lines. The
-more general [plot](S2Fun.plot.html) command produces the same default view.
+[pcolor](S2Fun.pcolor_py.html) draws function values as colour without contour lines. The
+more general [plot](S2Fun.plot_py.html) command produces the same default view.
 
 ```python
 plot(sF1)
@@ -61,7 +61,7 @@ not mark particular value levels.
 
 ## Contour plots
 
-[contour](S2Fun.contour.html) draws level lines. [contourf](S2Fun.contourf.html) fills
+[contour](S2Fun.contour_py.html) draws level lines. [contourf](S2Fun.contourf_py.html) fills
 the regions between those lines.
 
 ```python
@@ -80,7 +80,7 @@ ordering easier to read, while the line view leaves the underlying area unobscur
 
 ## Freely rotatable 3D plot
 
-[plot3d](S2Fun.plot3d.html) draws a three-dimensional view that can be rotated freely
+[plot3d](S2Fun.plot3d_py.html) draws a three-dimensional view that can be rotated freely
 with the mouse in an interactive figure.
 
 ```python
@@ -95,7 +95,7 @@ features continue around the sphere without changing the geometry to encode ampl
 
 ## Set the 3D camera
 
-A [plotting convention](plottingConvention.html) specifies how a reference frame is laid
+A [plotting convention](plottingConvention_py.html) specifies how a reference frame is laid
 out on screen. Its `north` and `outOfScreen` directions provide a reproducible camera for
 the static published view.
 
@@ -113,7 +113,7 @@ combination of the $$x$$ and $$z$$ directions. The function itself has not been 
 
 ## Radial surface plot
 
-[surf](S2Fun.surf.html) transforms the radius of the sphere according to the function
+[surf](S2Fun.surf_py.html) transforms the radius of the sphere according to the function
 value. Colour and radial displacement therefore encode the same value. By default MTEX
 rescales a real scalar function before using it as radius. The rescaling keeps relative
 variation visible.
@@ -137,7 +137,7 @@ surface.
 
 ## Planar section
 
-[plotSection](S2Fun.plotSection.html) draws the intersection of the radial surface with a
+[plotSection](S2Fun.plotSection_py.html) draws the intersection of the radial surface with a
 plane. The normal vector `N` selects that plane.
 
 ```python
@@ -154,7 +154,7 @@ oscillation from the sine factors more clearly than a single projected hemispher
 
 ## Harmonic spectrum
 
-[plotSpectrum](S2FunHarmonic.plotSpektra.html) groups the spherical harmonic coefficients
+[plotSpectrum](S2FunHarmonic.plotSpektra_py.html) groups the spherical harmonic coefficients
 by degree. This view describes frequency content rather than position on the sphere.
 
 ```python

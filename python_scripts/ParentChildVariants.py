@@ -34,7 +34,7 @@ oriParent = orientation.rand(csBeta)
 
 # %% [markdown]
 # The dominant OR between beta and alpha titanium is the Burgers OR. MTEX stores it as a
-# parent-to-child [orientation](https://mtex-toolbox.github.io/orientation.orientation.html).
+# parent-to-child [orientation](https://mtex-toolbox.github.io/orientation.orientation_py.html).
 
 # %%
 beta2alpha = orientation.Burgers(csBeta, csAlpha)
@@ -84,7 +84,7 @@ gcm().drawNow()
 # ## Define an OR from parallel features
 #
 # The same alignment rules can define the OR directly with
-# [`orientation.map`](https://mtex-toolbox.github.io/orientation.map.html).
+# [`orientation.map`](https://mtex-toolbox.github.io/orientation.map_py.html).
 
 # %%
 beta2alpha = orientation.map(Miller(1, 1, 0, csBeta), Miller(0, 0, 0, 1, csAlpha),
@@ -124,7 +124,7 @@ oriChild.size
 plotIPF(oriChild, vector3d.Z)
 
 # %% [markdown]
-# [`variants`](https://mtex-toolbox.github.io/orientation.variants.html) removes the symmetry-equivalent duplicates
+# [`variants`](https://mtex-toolbox.github.io/orientation.variants_py.html) removes the symmetry-equivalent duplicates
 # directly. It returns the 12 child variants for this OR.
 
 # %%
@@ -169,7 +169,7 @@ plotIPF(oriChildPerturbed, vector3d.Z)
 # ## Identify an observed variant
 #
 # The inverse task is to determine a variant ID from a parent-child pair or from two child
-# orientations. The [`calcVariants`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariants.html) method does
+# orientations. The [`calcVariants`](https://mtex-toolbox.github.io/parentGrainReconstructor.calcVariants_py.html) method does
 # this after a parent grain reconstruction has been computed.
 #
 # That workflow is demonstrated in [Parent Austenite Reconstruction](https://mtex-toolbox.github.io/MaParentGrainReconstruction_py.html).
@@ -177,7 +177,7 @@ plotIPF(oriChildPerturbed, vector3d.Z)
 # ## Parent variants
 #
 # The same ambiguity occurs in the opposite direction. Given one child orientation, several
-# parent orientations could have produced it. [`variants`](https://mtex-toolbox.github.io/orientation.variants.html)
+# parent orientations could have produced it. [`variants`](https://mtex-toolbox.github.io/orientation.variants_py.html)
 # returns them with `'parent'`.
 
 # %%
@@ -201,7 +201,7 @@ oriParents.size
 np.min(angle(oriParents, oriParent)) / degree
 
 # %% [markdown]
-# The [`parents`](https://mtex-toolbox.github.io/orientation.parents.html) method returns the same set of OR variants.
+# The [`parents`](https://mtex-toolbox.github.io/orientation.parents_py.html) method returns the same set of OR variants.
 # Multiplying the child orientation by them produces the six candidate parent orientations.
 
 # %%

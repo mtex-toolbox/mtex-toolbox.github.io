@@ -7,9 +7,9 @@
 # of them plus a three-dimensional view, and this page works through the four
 # that come up in texture analysis: equal area, equal distance, equal angle,
 # and plain. They are available on every spherical plot:
-# [pole figures](https://mtex-toolbox.github.io/SO3Fun.plotPDF.html),
-# [inverse pole figures](https://mtex-toolbox.github.io/SO3Fun.plotIPDF.html),
-# [ODF sections](https://mtex-toolbox.github.io/SO3Fun.plotSection.html).
+# [pole figures](https://mtex-toolbox.github.io/SO3Fun.plotPDF_py.html),
+# [inverse pole figures](https://mtex-toolbox.github.io/SO3Fun.plotIPDF_py.html),
+# [ODF sections](https://mtex-toolbox.github.io/SO3Fun.plotSection_py.html).
 #
 # Make three choices in order. First decide whether opposite directions must
 # remain distinct. Then decide how the reference frame is laid out on screen.

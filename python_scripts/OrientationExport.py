@@ -42,7 +42,7 @@ numOrientations
 #
 # ## Exporting Euler Angles
 #
-# [export](https://mtex-toolbox.github.io/quaternion.export.html) writes one orientation per row. Here we name the Bunge
+# [export](https://mtex-toolbox.github.io/quaternion.export_py.html) writes one orientation per row. Here we name the Bunge
 # convention explicitly, so a session preference cannot change the file. The angles are
 # written in degree unless `radians=True` is passed.
 
@@ -97,7 +97,7 @@ with open(fname) as f:
 # ## Exporting Additional Columns
 #
 # Often an orientation needs an associated weight, grain size, or another quantity. A
-# dictionary passed to [export](https://mtex-toolbox.github.io/quaternion.export.html) appends one column per entry and
+# dictionary passed to [export](https://mtex-toolbox.github.io/quaternion.export_py.html) appends one column per entry and
 # uses the keys as column headers. Every entry must supply one value per orientation.
 
 # %%
@@ -115,7 +115,7 @@ with open(fname) as f:
 #
 # ## The VPSC Format
 #
-# [export](https://mtex-toolbox.github.io/orientation.export_VPSC.html) with `interface='VPSC'` writes individual orientations in the
+# [export](https://mtex-toolbox.github.io/orientation.export_VPSC_py.html) with `interface='VPSC'` writes individual orientations in the
 # texture format expected by the VPSC crystal plasticity code. It writes three Euler
 # angles and one relative volume fraction per row.
 #

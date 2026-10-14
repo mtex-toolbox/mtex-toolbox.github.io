@@ -86,7 +86,7 @@ peak.
 
 ## Background and defocusing
 
-[correct](PoleFigure.correct.html) applies correction measurements that have already
+[correct](PoleFigure.correct_py.html) applies correction measurements that have already
 been obtained. It does not infer background or defocusing from the measured pole figure.
 
 With `background`, MTEX interpolates each sparse background scan onto the directions of
@@ -130,7 +130,7 @@ physically; interpolation only adapts their sampled directions.
 ## Normalization
 
 Pole density is reported in multiples of a random distribution (mrd). Its mean over a
-complete pole figure is 1, so [normalize](PoleFigure.normalize.html) divides each
+complete pole figure is 1, so [normalize](PoleFigure.normalize_py.html) divides each
 complete scan by its quadrature-weighted mean.
 
 ```python
@@ -194,7 +194,7 @@ the two procedures need not agree.
 ## Outliers
 
 A single bad measurement can distort a reconstruction because the solver has no reason
-to distrust it. [isOutlier](PoleFigure.isOutlier.html) marks values that disagree with
+to distrust it. [isOutlier](PoleFigure.isOutlier_py.html) marks values that disagree with
 the mean of their neighbourhood.
 
 The default threshold is two standard deviations for each pole figure. Review the
@@ -314,7 +314,7 @@ mtexColorbar()
 
 <center class="mtex-figure"><img class="inline" src="figures/python/PoleFigureCorrection-13.png"></center>
 
-[rotate](PoleFigure.rotate.html) leaves the intensities unchanged and applies the
+[rotate](PoleFigure.rotate_py.html) leaves the intensities unchanged and applies the
 rotation to their measured directions. The measured cap tips across the equator, and
 `antipodal` folds the part below the equator back into the same disc.
 

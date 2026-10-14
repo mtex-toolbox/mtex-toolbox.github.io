@@ -51,7 +51,7 @@ setMTEXpref('defaultColorMap', blue2redColorMap)
 # %% [markdown]
 # ## The signed longitudinal response
 #
-# [directionalMagnitude](https://mtex-toolbox.github.io/tensor.directionalMagnitude.html) contracts the same unit
+# [directionalMagnitude](https://mtex-toolbox.github.io/tensor.directionalMagnitude_py.html) contracts the same unit
 # direction $n$ into all three indices:
 #
 # $$ q(n) = d_{ijk}\,n_i n_j n_k. $$
@@ -85,7 +85,7 @@ mtexColorbar(title='longitudinal coefficient (pC/N)')
 # %% [markdown]
 # ## A radial surface
 #
-# [surf](https://mtex-toolbox.github.io/S2Fun.surf.html) can use the absolute response as distance from the origin and
+# [surf](https://mtex-toolbox.github.io/S2Fun.surf_py.html) can use the absolute response as distance from the origin and
 # the colour as its sign. The `scaling=False` option keeps the physical zero and the original
 # pC/N values.
 
@@ -101,7 +101,7 @@ mtexColorbar(title='longitudinal coefficient (pC/N)')
 # %% [markdown]
 # ## Planar sections
 #
-# [plotSection](https://mtex-toolbox.github.io/S2Fun.plotSection.html) draws the signed response as a polar radius in a
+# [plotSection](https://mtex-toolbox.github.io/S2Fun.plotSection_py.html) draws the signed response as a polar radius in a
 # chosen plane. A negative radius is placed in the opposite direction, so each curve is
 # traced twice. Use the coloured hemisphere plots above, rather than these outlines, to
 # read the sign.
@@ -142,7 +142,7 @@ orientationCount
 
 # %% [markdown]
 # The calculation below is still instructive as a counterexample. It uses
-# [calcTensor](https://mtex-toolbox.github.io/orientation.calcTensor.html) to rotate the right-handed tensor by every
+# [calcTensor](https://mtex-toolbox.github.io/orientation.calcTensor_py.html) to rotate the right-handed tensor by every
 # orientation and take their unweighted arithmetic mean. The result is an *apparent*
 # aggregate in which all 382 grains have been assumed to be right-handed. It is not a
 # prediction for the rock.

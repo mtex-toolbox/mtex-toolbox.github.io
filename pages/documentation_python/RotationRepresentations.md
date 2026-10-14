@@ -19,7 +19,7 @@ whether the coordinates will be plotted, sampled, or used to build a grid.
 
 This page assumes the axis--angle and quaternion descriptions introduced in
 [Defining Rotations](RotationDefinition_py.html). MTEX stores the proper part of every
-[rotation](rotation.rotation.html) as a unit [quaternion](quaternion.quaternion.html).
+[rotation](rotation.rotation_py.html) as a unit [quaternion](quaternion.quaternion_py.html).
 The coordinates below are computed from that quaternion on demand.
 
 Rodrigues and homochoric coordinates are *scaled-axis* representations. Their direction
@@ -47,7 +47,7 @@ rot = rotation.rand(100000)
 ## Rodrigues--Frank Coordinates
 
 The Rodrigues--Frank vector scales the axis by $$f(\omega)=\tan(\omega/2)$$. MTEX computes
-it with [Rodrigues](quaternion.Rodrigues.html).
+it with [Rodrigues](quaternion.Rodrigues_py.html).
 
 The following output puts the angle in degrees in the first column and the length of its
 Rodrigues vector in the second.
@@ -77,7 +77,7 @@ axis nevertheless form a straight line, and symmetry boundaries become planes. T
 properties make Rodrigues coordinates useful for visualizing
 [fundamental regions](OrientationFundamentalRegion_py.html).
 
-[rotation.byRodrigues](rotation.byRodrigues.html) performs the inverse conversion. The
+[rotation.byRodrigues](rotation.byRodrigues_py.html) performs the inverse conversion. The
 displayed angular error confirms the round trip.
 
 ```python
@@ -96,7 +96,7 @@ instead scale the rotation axis by
 
 $$ f(\omega) = \left(\frac{3}{4}\left(\omega-\sin\omega\right)\right)^{1/3}. $$
 
-[homochoric](quaternion.homochoric.html) maps all rotations into a ball. Its radius is
+[homochoric](quaternion.homochoric_py.html) maps all rotations into a ball. Its radius is
 $$R=(3\pi/4)^{1/3}$$, reached by the half turns.
 
 ```python
@@ -115,7 +115,7 @@ array([1.3307, 1.3307])
 
 ## A volume check
 
-[rotation.rand](rotation.rand.html) samples the uniform, or Haar, distribution on the
+[rotation.rand](rotation.rand_py.html) samples the uniform, or Haar, distribution on the
 rotation group. Equal-volume homochoric coordinates turn that sample into a uniform
 distribution in the ball.
 
@@ -147,7 +147,7 @@ Cubochoric coordinates compose the homochoric map with an equal-volume map from 
 to a cube. The cube has edge length $$\pi^{2/3}$$ and the same volume, $$\pi^2$$, as the
 homochoric ball.
 
-MTEX computes these coordinates with [cubochoric](quaternion.cubochoric.html). The next
+MTEX computes these coordinates with [cubochoric](quaternion.cubochoric_py.html). The next
 figure maps the same half turns first to the homochoric boundary and then to the
 cubochoric boundary.
 
@@ -190,8 +190,8 @@ grid in cubochoric coordinates despite the class name.
 ## Inverting Cubochoric Coordinates
 
 MATLAB has no `rotation.byCubochoric` constructor: it first maps the cube back to the
-homochoric ball with [cubo2homo](cubo2homo.html), then uses
-[rotation.byHomochoric](rotation.byHomochoric.html). The same route works here.
+homochoric ball with [cubo2homo](cubo2homo_py.html), then uses
+[rotation.byHomochoric](rotation.byHomochoric_py.html). The same route works here.
 
 ```python
 vCubochoric = rot.cubochoric()
@@ -204,7 +204,7 @@ np.max(angle(rot, rotFromCubochoric)) / degree
 ```
 
 ```text
-4.1443e-13
+3.6184e-13
 ```
 
 The displayed maximum is the angular round-trip error in degrees. Its small nonzero value
@@ -214,17 +214,17 @@ comes from floating-point evaluation of the two nonlinear maps.
 
 | representation | coordinate domain | preserves volume | useful feature |
 |---|---|---|---|
-| [Rodrigues--Frank](quaternion.Rodrigues.html) | unbounded $$\mathbb R^3$$ | no | straight fixed-axis lines and planar symmetry boundaries |
-| [homochoric](quaternion.homochoric.html) | ball of radius $$(3\pi/4)^{1/3}$$ | yes | radial coordinates for density and integration |
-| [cubochoric](quaternion.cubochoric.html) | cube of edge $$\pi^{2/3}$$ | yes | uniform Cartesian grids |
+| [Rodrigues--Frank](quaternion.Rodrigues_py.html) | unbounded $$\mathbb R^3$$ | no | straight fixed-axis lines and planar symmetry boundaries |
+| [homochoric](quaternion.homochoric_py.html) | ball of radius $$(3\pi/4)^{1/3}$$ | yes | radial coordinates for density and integration |
+| [cubochoric](quaternion.cubochoric_py.html) | cube of edge $$\pi^{2/3}$$ | yes | uniform Cartesian grids |
 
 Equal volume refers to the invariant volume measure on the rotation group. It is not a
-claim about Euclidean distance. Use [angle](quaternion.angle.html), rather than
+claim about Euclidean distance. Use [angle](quaternion.angle_py.html), rather than
 coordinate-vector distance, when the physical angular separation between two rotations
 is required.
 
 Do not average any of these vectors to obtain a mean rotation. The mean must respect
-rotation geometry; use [mean](quaternion.mean.html) on the rotations themselves.
+rotation geometry; use [mean](quaternion.mean_py.html) on the rotations themselves.
 
 ## The Maths Behind Equal Volume
 

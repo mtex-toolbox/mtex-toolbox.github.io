@@ -20,9 +20,9 @@
 #
 # ## Start from an explicit formula
 #
-# MTEX offers two complementary representations. An [S1FunHandle](https://mtex-toolbox.github.io/S1FunHandle.S1FunHandle.html)
+# MTEX offers two complementary representations. An [S1FunHandle](https://mtex-toolbox.github.io/S1FunHandle.S1FunHandle_py.html)
 # evaluates an explicit formula whenever a value is requested. An
-# [S1FunHarmonic](https://mtex-toolbox.github.io/S1FunHarmonic.S1FunHarmonic.html) stores a finite set of Fourier
+# [S1FunHarmonic](https://mtex-toolbox.github.io/S1FunHarmonic.S1FunHarmonic_py.html) stores a finite set of Fourier
 # coefficients.
 #
 # Begin with the formula
@@ -148,7 +148,7 @@ legend('S1FunHandle', 'S1FunHarmonic')
 # ## Fit values sampled at angles
 #
 # A function is often known only at a finite set of angles.
-# [S1FunHarmonic.interpolate](https://mtex-toolbox.github.io/S1FunHarmonic.interpolate.html) constructs a periodic
+# [S1FunHarmonic.interpolate](https://mtex-toolbox.github.io/S1FunHarmonic.interpolate_py.html) constructs a periodic
 # trigonometric polynomial from those samples. The result can be evaluated at arbitrary
 # angles, plotted, differentiated, or used in later computations.
 #
@@ -192,8 +192,8 @@ legend()
 # ## Smooth small-scale oscillations
 #
 # A harmonic function obtained from measured or interpolated data can contain small-scale
-# oscillations or noise. [smooth](https://mtex-toolbox.github.io/S1Fun.smooth.html) reduces those variations by
-# convolution with an [S1DeLaValleePoussinKernel](https://mtex-toolbox.github.io/S1DeLaValleePoussinKernel.html).
+# oscillations or noise. [smooth](https://mtex-toolbox.github.io/S1Fun.smooth_py.html) reduces those variations by
+# convolution with an [S1DeLaValleePoussinKernel](https://mtex-toolbox.github.io/S1DeLaValleePoussinKernel_py.html).
 #
 # The kernel halfwidth sets the angular scale of the smoothing. A small halfwidth preserves
 # more local detail. A larger halfwidth produces a smoother function.
@@ -221,8 +221,8 @@ legend()
 # ## Compute integrals and extrema
 #
 # Standard operations apply directly to an `S1FunHarmonic`. Here `S1FH` is still the
-# bandwidth-20 approximation of $\exp(\cos\rho)$. [mean](https://mtex-toolbox.github.io/S1Fun.mean.html) returns its mean
-# value, while [sum](https://mtex-toolbox.github.io/S1Fun.sum.html) returns its integral over the circle.
+# bandwidth-20 approximation of $\exp(\cos\rho)$. [mean](https://mtex-toolbox.github.io/S1Fun.mean_py.html) returns its mean
+# value, while [sum](https://mtex-toolbox.github.io/S1Fun.sum_py.html) returns its integral over the circle.
 
 # %%
 meanValue = mean(S1FH)
@@ -236,7 +236,7 @@ integralValue = sum(S1FH)
 integralValue
 
 # %% [markdown]
-# [max](https://mtex-toolbox.github.io/S1Fun.max.html) and [min](https://mtex-toolbox.github.io/S1Fun.min.html) return both the extreme value and its
+# [max](https://mtex-toolbox.github.io/S1Fun.max_py.html) and [min](https://mtex-toolbox.github.io/S1Fun.min_py.html) return both the extreme value and its
 # angular position.
 
 # %%
@@ -256,7 +256,7 @@ print(f'max {maxValue:.4f} at {extremePositionsDegree[0]:.1f}, min {minValue:.4f
 #
 # Periodic functions also arise after density estimation from circular data. For example,
 # `rho` is the azimuth angle of a three-dimensional direction. Passing these angles with the
-# `periodic` option makes [calcDensity](https://mtex-toolbox.github.io/calcDensity.html) return an `S1FunHarmonic`.
+# `periodic` option makes [calcDensity](https://mtex-toolbox.github.io/calcDensity_py.html) return an `S1FunHarmonic`.
 
 # %%
 v = vector3d.rand(1000, rng=np.random.default_rng(1))

@@ -58,8 +58,8 @@ unknown experimental response.
 
 ## Fit a density
 
-[interp](rotation.interp.html) uses an RBF model by default and calls
-[SO3FunRBF.interpolate](SO3FunRBF.interpolate.html). The `'density'` flag selects modified
+[interp](rotation.interp_py.html) uses an RBF model by default and calls
+[SO3FunRBF.interpolate](SO3FunRBF.interpolate_py.html). The `'density'` flag selects modified
 least squares, `'mlsq'`. This solver constrains the kernel weights to be nonnegative, and
 MTEX normalizes the fitted function to mean 1.
 
@@ -425,7 +425,7 @@ centres, a stronger constraint, or additional smoothness assumptions.
 
 ## Choose another kernel
 
-`halfwidth` constructs a [SO3DeLaValleePoussinKernel](SO3DeLaValleePoussinKernel.html).
+`halfwidth` constructs a [SO3DeLaValleePoussinKernel](SO3DeLaValleePoussinKernel_py.html).
 Pass `kernel` to use another [rotational kernel function](SO3Kernels_py.html).
 
 ```python

@@ -1,0 +1,21 @@
+---
+title: 'projectRight'
+sidebar: function_reference_sidebar
+permalink: projectRight_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+status: Reference
+---
+{% raw %}
+the coefficients projected in place on the right, the crystal side, by the projection Q
+
+## Syntax
+
+```python
+projectRight(fhat, Q)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L419">source</a></font>
+{% endraw %}

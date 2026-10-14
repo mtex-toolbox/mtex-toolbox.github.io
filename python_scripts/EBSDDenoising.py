@@ -90,7 +90,7 @@ print(f'Raw mean deviation from the grain mean: {np.nanmean(rawDeviation) / degr
 # %% [markdown]
 # ## How `smooth` uses the grain structure
 #
-# Every filter on this page is applied with [smooth](https://mtex-toolbox.github.io/EBSD.smooth.html). Because
+# Every filter on this page is applied with [smooth](https://mtex-toolbox.github.io/EBSD.smooth_py.html). Because
 # `calcGrains` assigned `ebsd.grainId`, `smooth` treats each grain separately. It
 # therefore does not average orientations across a reconstructed grain boundary. An
 # abrupt change inside one reconstructed grain is a subgrain boundary, and whether it

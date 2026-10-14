@@ -151,7 +151,7 @@ merges the two source modes and lowers their peaks. The middle curve balances sa
 variation against lost structure. This is the bias--variance trade-off behind kernel
 selection.
 
-For one-dimensional real data, [calcDensity](calcDensity.html) selects a smoothing width
+For one-dimensional real data, [calcDensity](calcDensity_py.html) selects a smoothing width
 automatically. The estimate carries the width it chose as `bandwidth`.
 
 ```python

@@ -7,7 +7,7 @@
 #
 # The fourth-order stiffness tensor $C$ collects the complete linear elastic
 # response. MTEX represents it as a
-# [stiffnessTensor](https://mtex-toolbox.github.io/stiffnessTensor.stiffnessTensor.html).
+# [stiffnessTensor](https://mtex-toolbox.github.io/stiffnessTensor.stiffnessTensor_py.html).
 # This page loads one measured tensor, applies Hooke's law, and then queries
 # its response for chosen directions and planes.
 
@@ -105,7 +105,7 @@ U_Hooke
 # ratio of axial stress to axial strain.
 # In an anisotropic crystal it depends on the loading direction $d$.
 # Passing one direction to
-# [YoungsModulus](https://mtex-toolbox.github.io/stiffnessTensor.YoungsModulus.html) returns one value.
+# [YoungsModulus](https://mtex-toolbox.github.io/stiffnessTensor.YoungsModulus_py.html) returns one value.
 
 # %%
 d = vector3d.X
@@ -147,7 +147,7 @@ mtexColorbar(title="Young's modulus in GPa")
 # Contracting the compliance tensor with the pressure gives a second-rank
 # tensor, whose directional values form another spherical function.
 #
-# [linearCompressibility](https://mtex-toolbox.github.io/stiffnessTensor.linearCompressibility.html)
+# [linearCompressibility](https://mtex-toolbox.github.io/stiffnessTensor.linearCompressibility_py.html)
 # returns that function when the direction is omitted.
 
 # %%
@@ -191,7 +191,7 @@ nu_xy = C.PoissonRatio(p, n)
 nu_xy
 
 # %% [markdown]
-# Omitting $n$ from [PoissonRatio](https://mtex-toolbox.github.io/stiffnessTensor.PoissonRatio.html)
+# Omitting $n$ from [PoissonRatio](https://mtex-toolbox.github.io/stiffnessTensor.PoissonRatio_py.html)
 # leaves a spherical function of possible transverse directions.
 
 # %%
@@ -200,7 +200,7 @@ nu
 
 # %% [markdown]
 # Only directions perpendicular to $p$ are physically meaningful.
-# A [section plot](https://mtex-toolbox.github.io/S2Fun.plotSection.html) restricts the function to that
+# A [section plot](https://mtex-toolbox.github.io/S2Fun.plotSection_py.html) restricts the function to that
 # plane, which is the $xy$ plane for the chosen $z$ pulling direction.
 
 # %%
@@ -224,7 +224,7 @@ mtexColorbar(title="Poisson's ratio")
 # direction $u$ within that plane.
 #
 # Passing both directions to
-# [shearModulus](https://mtex-toolbox.github.io/stiffnessTensor.shearModulus.html) returns one number.
+# [shearModulus](https://mtex-toolbox.github.io/stiffnessTensor.shearModulus_py.html) returns one number.
 
 # %%
 # unit shear-plane normal

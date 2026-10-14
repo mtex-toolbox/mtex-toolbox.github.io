@@ -1,8 +1,8 @@
 # %% [markdown]
 # # Defining Orientations
 #
-# An [orientation](https://mtex-toolbox.github.io/orientation.orientation.html) answers one question: how is this crystal
-# placed in this specimen? In MTEX it is a [rotation](https://mtex-toolbox.github.io/rotation.rotation.html) that maps
+# An [orientation](https://mtex-toolbox.github.io/orientation.orientation_py.html) answers one question: how is this crystal
+# placed in this specimen? In MTEX it is a [rotation](https://mtex-toolbox.github.io/rotation.rotation_py.html) that maps
 # coordinates from the crystal reference frame into the specimen reference frame. It also
 # carries the symmetry attached to each frame.
 #
@@ -10,7 +10,7 @@
 # [Defining Three-Dimensional Vectors](https://mtex-toolbox.github.io/VectorDefinition_py.html), the plane and direction
 # notation from [Miller Indices](https://mtex-toolbox.github.io/CrystalDirections_py.html), and basic matrix algebra. The
 # constructors are the same as on [Defining Rotations](https://mtex-toolbox.github.io/RotationDefinition_py.html), with a
-# [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame.html) supplied as an extra argument.
+# [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame_py.html) supplied as an extra argument.
 #
 # What this mapping means is developed in
 # [Theory](https://mtex-toolbox.github.io/DefinitionAsCoordinateTransform_py.html) and compared with other conventions in
@@ -84,7 +84,7 @@ ori
 # Metallurgy often names an orientation by two crystal quantities: the lattice plane
 # facing the specimen Z axis and the lattice direction pointing along specimen X. The
 # inputs must describe an orthogonal plane normal and direction. That is what
-# [orientation.byMiller](https://mtex-toolbox.github.io/orientation.byMiller.html) takes, here for the Goss orientation
+# [orientation.byMiller](https://mtex-toolbox.github.io/orientation.byMiller_py.html) takes, here for the Goss orientation
 # $(011)[100]$.
 
 # %%
@@ -131,7 +131,7 @@ len(ori)
 # ## Symmetrically Equivalent Orientations
 #
 # A crystal cannot distinguish its symmetrically equivalent settings, so an orientation
-# represents a whole class of rotations. [symmetrise](https://mtex-toolbox.github.io/orientation.symmetrise.html) lists
+# represents a whole class of rotations. [symmetrise](https://mtex-toolbox.github.io/orientation.symmetrise_py.html) lists
 # that class.
 
 # %%
@@ -162,7 +162,7 @@ len(ori.symmetrise())
 # A specimen may have symmetry of its own. A rolled sheet, for example, is commonly
 # modelled with orthorhombic symmetry: three mutually perpendicular twofold axes, or
 # equivalently three mirror planes in the full point group. It is represented by a
-# [specimenFrame](https://mtex-toolbox.github.io/specimenFrame.specimenFrame.html) and passed alongside the crystal
+# [specimenFrame](https://mtex-toolbox.github.io/specimenFrame.specimenFrame_py.html) and passed alongside the crystal
 # symmetry.
 
 # %%

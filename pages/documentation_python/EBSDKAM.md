@@ -74,7 +74,7 @@ smoothing the drawn outlines does not change which measurement belongs to which 
 
 ## The nearest-neighbour KAM
 
-[ebsd.KAM](EBSD.KAM.html) returns an angle in radians. Dividing by `degree` converts it
+[ebsd.KAM](EBSD.KAM_py.html) returns an angle in radians. Dividing by `degree` converts it
 to degrees. The default uses first-order neighbours, applies no angular threshold, and
 excludes pairs in different grains when `ebsd.grainId` is present.
 

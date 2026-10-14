@@ -44,7 +44,7 @@ rot = rotation.rand(500)
 
 ## Euler Angle Space
 
-[scatter](quaternion.scatter.html) places each rotation at its three Bunge Euler angles.
+[scatter](quaternion.scatter_py.html) places each rotation at its three Bunge Euler angles.
 This is the default for rotations without crystal symmetry. The complete box spans
 $$0\leq\varphi_1,\varphi_2\leq2\pi$$ and $$0\leq\Phi\leq\pi$$.
 
@@ -93,7 +93,7 @@ This domain makes fixed-axis rotations and symmetry boundaries simple, but it do
 preserve volume.
 
 In all three plots, coordinate distance should not be read as the angular distance
-between arbitrary rotations. Use [angle](quaternion.angle.html) for that comparison.
+between arbitrary rotations. Use [angle](quaternion.angle_py.html) for that comparison.
 Homochoric and cubochoric coordinates preserve volume instead; see
 [Rotation Representations](RotationRepresentations_py.html).
 
@@ -126,7 +126,7 @@ numSmall, empiricalPercent
 ```
 
 ```text
-(30, 6.0)
+(27, 5.4)
 ```
 
 MATLAB's page quotes 20 of 500 rotations, or 4%, for its draw; the count above is this
@@ -157,7 +157,7 @@ exactPercent
 
 The result is 5.7669%. Even this broad $$60^\circ$$ ball occupies only a small part of
 rotation space. A scatter plot shows sampled coordinates; estimating a continuous texture
-density requires [calcDensity](rotation.calcDensity.html).
+density requires [calcDensity](rotation.calcDensity_py.html).
 
 ## Further Reading
 

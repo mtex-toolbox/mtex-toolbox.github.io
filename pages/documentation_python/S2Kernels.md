@@ -78,22 +78,22 @@ The main kernel families emphasize different properties:
 
 | family | main characteristic | typical use |
 |---|---|---|
-| [de la Vallee Poussin](S2DeLaValleePoussinKernel.html) | nonnegative and finite for integer $$\kappa$$ | directional density estimation and texture analysis |
-| [Dirichlet](S2DirichletKernel.html) | exact cutoff with unit Fourier coefficients | physical-property calculations |
-| [bump](S2BumpKernel.html) | constant inside a strict angular cutoff | compact spatial support |
-| [Schulz defocusing](SchulzDefocusingKernel.html) | diffraction-instrument correction profile | XRD defocusing correction |
-| [restricted distance](S2RestrictedDistanceKernel.html) | negative distance-based interaction | point repulsion in spherical sampling |
+| [de la Vallee Poussin](S2DeLaValleePoussinKernel_py.html) | nonnegative and finite for integer $$\kappa$$ | directional density estimation and texture analysis |
+| [Dirichlet](S2DirichletKernel_py.html) | exact cutoff with unit Fourier coefficients | physical-property calculations |
+| [bump](S2BumpKernel_py.html) | constant inside a strict angular cutoff | compact spatial support |
+| [Schulz defocusing](SchulzDefocusingKernel_py.html) | diffraction-instrument correction profile | XRD defocusing correction |
+| [restricted distance](S2RestrictedDistanceKernel_py.html) | negative distance-based interaction | point repulsion in spherical sampling |
 
 MTEX uses these kernels for several tasks. Pass one to
-[calcDensity](vector3d.calcDensity.html) for directional density estimation or to
+[calcDensity](vector3d.calcDensity_py.html) for directional density estimation or to
 [smooth](S2Fun.smooth.html) for spherical smoothing. The Schulz kernel corrects XRD
-defocusing. The [calcGBND](grainBoundary.calcGBND.html) method uses a kernel to estimate
-a habit-plane normal distribution, and [fibreODF](fibreODF.html) uses one to set the
+defocusing. The [calcGBND](grainBoundary.calcGBND_py.html) method uses a kernel to estimate
+a habit-plane normal distribution, and [fibreODF](fibreODF_py.html) uses one to set the
 profile around a fibre.
 
 ## De la Vallee Poussin: a nonnegative peak
 
-Compare two [de la Vallee Poussin kernels](S2DeLaValleePoussinKernel.html). The
+Compare two [de la Vallee Poussin kernels](S2DeLaValleePoussinKernel_py.html). The
 constructor converts each requested halfwidth to its concentration parameter $$\kappa$$.
 
 ```python
@@ -157,7 +157,7 @@ remain nonnegative.
 
 ## Dirichlet: an exact spectral cutoff
 
-The [Dirichlet kernel](S2DirichletKernel.html) keeps every Fourier coefficient through its
+The [Dirichlet kernel](S2DirichletKernel_py.html) keeps every Fourier coefficient through its
 requested bandwidth. Compare bandwidths 10 and 5 in real and harmonic space.
 
 ```python
@@ -211,7 +211,7 @@ calculating physical properties.
 
 ## Bump: an exact spatial cutoff
 
-The [bump kernel](S2BumpKernel.html) is constant inside its halfwidth and zero outside.
+The [bump kernel](S2BumpKernel_py.html) is constant inside its halfwidth and zero outside.
 Compare two cutoffs using bandwidth 128 for their stored Legendre expansions.
 
 ```python
@@ -280,9 +280,9 @@ $$ \psi(t)=\sum_{n=0}^{\infty}(2n+1)\,\widehat\psi_n\,
 \mathcal P_n(t). $$
 
 A general `S2FunHarmonic` has $$2n+1$$ spherical harmonic coefficients at degree $$n$$.
-Radial symmetry leaves only the zonal coefficient. An [S2Kernel](S2Kernel.S2Kernel.html)
+Radial symmetry leaves only the zonal coefficient. An [S2Kernel](S2Kernel.S2Kernel_py.html)
 stores the scaled coefficients $$(2n+1)\widehat\psi_n$$ in its `A` property. The
-[plotSpectrum](S2Kernel.plotSpektra.html) method divides by $$2n+1$$ and plots
+[plotSpectrum](S2Kernel.plotSpektra_py.html) method divides by $$2n+1$$ and plots
 $$\widehat\psi_n$$.
 
 This degree-by-degree representation makes radial convolution cheap. The

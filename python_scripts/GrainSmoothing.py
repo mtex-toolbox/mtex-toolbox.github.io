@@ -8,12 +8,12 @@
 # and their links to the neighbouring pixels.
 #
 # EBSD data is measured on a regular grid, so a grain boundary comes out of
-# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains.html) as a staircase of pixel edges. Every segment runs
+# [calcGrains](https://mtex-toolbox.github.io/EBSD.calcGrains_py.html) as a staircase of pixel edges. Every segment runs
 # along one of the grid axes, whatever direction the boundary actually has. The staircase
 # makes the boundary too long, quantizes its direction to a few values, and makes its
 # curvature meaningless.
 #
-# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary.html) repairs this geometry.
+# [smoothBoundary](https://mtex-toolbox.github.io/grain2d.smoothBoundary_py.html) repairs this geometry.
 
 # %%
 import matplotlib.pyplot as plt
@@ -119,14 +119,14 @@ legend()
 # %% [markdown]
 # ## Which algorithm - the short version
 #
-# A [boundaryFilter](https://mtex-toolbox.github.io/boundaryFilter.html) selects the algorithm used for the final
+# A [boundaryFilter](https://mtex-toolbox.github.io/boundaryFilter_py.html) selects the algorithm used for the final
 # smoothing stage. Two choices cover most practical work.
 #
 # *Use the default* when the smoothed boundary is for plotting or for measuring directions
 # and lengths. It is a fast Laplacian, and it is what `smoothBoundary(grains, 5)` selects
 # without being asked.
 #
-# *Use [taubinFilter](https://mtex-toolbox.github.io/taubinFilter.html) when grain areas or shape parameters matter.* A
+# *Use [taubinFilter](https://mtex-toolbox.github.io/taubinFilter_py.html) when grain areas or shape parameters matter.* A
 # Laplacian shrinks. Every iteration pulls a convex region inward, and nothing bounds how
 # far. Taubin follows every smoothing pass with a slightly larger unshrinking pass, which
 # stops the systematic drift.
@@ -178,7 +178,7 @@ legend()
 # %% [markdown]
 # ## A physical smoothing length
 #
-# [curvatureFilter](https://mtex-toolbox.github.io/curvatureFilter.html) replaces the iteration count with a length: the
+# [curvatureFilter](https://mtex-toolbox.github.io/curvatureFilter_py.html) replaces the iteration count with a length: the
 # wavelength whose amplitude is reduced by half. Finer detail is attenuated more strongly,
 # while coarser detail is preserved more strongly. Because the parameter is a length, it
 # has the same meaning for scans made at different step sizes.
@@ -198,7 +198,7 @@ legend()
 # boundary. Use one physical smoothing length across scans when their spatial resolutions
 # differ.
 #
-# [huberFilter](https://mtex-toolbox.github.io/huberFilter.html) is available for faceted materials. It keeps genuine
+# [huberFilter](https://mtex-toolbox.github.io/huberFilter_py.html) is available for faceted materials. It keeps genuine
 # corners sharp instead of rounding them off. It is not a good default; see
 # [Smoothing Algorithms](https://mtex-toolbox.github.io/GrainSmoothingAdvanced_py.html).
 

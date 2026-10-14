@@ -31,7 +31,7 @@ scatter(v, markerAlpha=0.2, markerSize=2)
 # %% [markdown]
 # ## Read the cluster result
 #
-# For directions, [calcCluster](https://mtex-toolbox.github.io/vector3d.calcCluster.html) uses CLASSIX by default. The array
+# For directions, [calcCluster](https://mtex-toolbox.github.io/vector3d.calcCluster_py.html) uses CLASSIX by default. The array
 # `cInd` has one integer cluster label for every input direction, counted from zero. The
 # entries of `center` are the corresponding mean directions.
 #

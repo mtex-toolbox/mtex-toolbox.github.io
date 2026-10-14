@@ -35,7 +35,7 @@ mtexColorbar()
 # The warm colours are confined to one neighbourhood on the upper hemisphere. This
 # localized maximum is the feature to follow through the transform.
 #
-# Compute the spherical Radon transform with [radon](https://mtex-toolbox.github.io/S2FunHarmonic.radon.html).
+# Compute the spherical Radon transform with [radon](https://mtex-toolbox.github.io/S2FunHarmonic.radon_py.html).
 
 # %%
 rF = radon(sF)
@@ -123,7 +123,7 @@ mtexColorbar()
 #
 # ## Inverting the transform
 #
-# [invRadon](https://mtex-toolbox.github.io/S2FunHarmonic.invRadon.html) reverses the transform in the spherical harmonic
+# [invRadon](https://mtex-toolbox.github.io/S2FunHarmonic.invRadon_py.html) reverses the transform in the spherical harmonic
 # basis. A round trip recovers an antipodally symmetric function exactly within its harmonic
 # representation, up to floating-point error.
 

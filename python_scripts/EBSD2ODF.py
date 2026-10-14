@@ -111,7 +111,7 @@ mtexColorbar(title='mrd')
 # %% [markdown]
 # ## Estimate the density explicitly
 #
-# [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity.html) performs the same construction in orientation
+# [calcDensity](https://mtex-toolbox.github.io/rotation.calcDensity_py.html) performs the same construction in orientation
 # space and returns the result as an object. An *orientation distribution function* (ODF)
 # is a density over the orientations of one phase, normalized so that a uniform texture
 # is 1 mrd.
@@ -211,7 +211,7 @@ mtexColorbar(title='mrd')
 # %% [markdown]
 # ## Letting the data choose the halfwidth
 #
-# [calcKernel](https://mtex-toolbox.github.io/orientation.calcKernel.html) with `method='KLCV'`, MATLAB's default, selects a
+# [calcKernel](https://mtex-toolbox.github.io/orientation.calcKernel_py.html) with `method='KLCV'`, MATLAB's default, selects a
 # halfwidth by cross-validation. It
 # leaves one orientation out, estimates a density from the rest, and scores how well that
 # estimate predicts the omitted one. The halfwidth with the best score over the whole
@@ -317,7 +317,7 @@ for name, f in [('every pixel', odf), ('every grain', odfEqualGrain), ('grain me
 # where a five-pixel grain counts as much as a several-hundred-pixel one; its peak is
 # the weakest of the three. Weighting the grain means by grain area restores area
 # weighting and comes back close to the pixel estimate:
-# [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError.html) measures about 0.02 against it, where equal grain
+# [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError_py.html) measures about 0.02 against it, where equal grain
 # weights measure 0.16.
 #
 # The two grain-based estimates share a cost that the table does not show. Each grain

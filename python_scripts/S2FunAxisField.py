@@ -11,7 +11,7 @@
 #
 # $$ f\colon \mathrm{S}^2\to\mathbb{R}^3/\{\vec v\sim-\vec v\}. $$
 #
-# The class [S2AxisFieldHarmonic](https://mtex-toolbox.github.io/S2AxisFieldHarmonic.S2AxisFieldHarmonic.html) stores such a
+# The class [S2AxisFieldHarmonic](https://mtex-toolbox.github.io/S2AxisFieldHarmonic.S2AxisFieldHarmonic_py.html) stores such a
 # field as a spherical harmonic expansion. This page constructs that representation from
 # sampled values and from a function.
 
@@ -40,7 +40,7 @@ nodes = nodes.flatten()
 values = vector3d(np.sin(5 * nodes.x), np.ones(nodes.size), nodes.y, antipodal=True)
 
 # %% [markdown]
-# [interpolate](https://mtex-toolbox.github.io/S2AxisFieldHarmonic.interpolate.html) fits the six components of the
+# [interpolate](https://mtex-toolbox.github.io/S2AxisFieldHarmonic.interpolate_py.html) fits the six components of the
 # sign-independent dyadic product described below. Limiting the bandwidth keeps only
 # spherical harmonic degrees up to 6. Equal weights are appropriate for this uniformly spaced
 # example grid.
@@ -83,7 +83,7 @@ quiver(sAF2, resolution=20 * degree)
 #
 # ## Evaluate the field
 #
-# Use [eval](https://mtex-toolbox.github.io/S2AxisFieldHarmonic.eval.html) to obtain the fitted axis at any direction. The
+# Use [eval](https://mtex-toolbox.github.io/S2AxisFieldHarmonic.eval_py.html) to obtain the fitted axis at any direction. The
 # result remains antipodal, so code that consumes it must not attach meaning to its
 # displayed sign.
 

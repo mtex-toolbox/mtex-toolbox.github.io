@@ -16,7 +16,7 @@
 # Matthies' remedy is to estimate the uniform portion of the ODF first. He called this
 # portion the *phon*. MTEX estimates it from the low-intensity tail of the pole figures,
 # subtracts it, and reconstructs the sharper remainder. Non-negativity then constrains the
-# missing odd-order coefficients more strongly. [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF.html)
+# missing odd-order coefficients more strongly. [calcODF](https://mtex-toolbox.github.io/PoleFigure.calcODF_py.html)
 # applies this correction by default.
 #
 # Ghost correction adds a physical preference; it does not recover information that
@@ -82,7 +82,7 @@ recCor = calcODF(pf)
 # %% [markdown]
 # ## Compare the fits to the pole figures
 #
-# [calcError](https://mtex-toolbox.github.io/PoleFigure.calcError.html) returns one RP error per pole figure. First
+# [calcError](https://mtex-toolbox.github.io/PoleFigure.calcError_py.html) returns one RP error per pole figure. First
 # evaluate the reconstruction without correction.
 
 # %%
@@ -106,7 +106,7 @@ rpCorrected
 # ## Compare the reconstructions with the truth
 #
 # A measured texture has no known true ODF. This synthetic example does, so
-# [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError.html) can compare the functions directly. First compute the
+# [calcError](https://mtex-toolbox.github.io/SO3Fun.calcError_py.html) can compare the functions directly. First compute the
 # L1 error without correction.
 
 # %%

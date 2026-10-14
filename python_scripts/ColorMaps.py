@@ -102,7 +102,7 @@ mtexColorbar()
 # %% [markdown]
 # ## Change the range after plotting
 #
-# [setColorRange](https://mtex-toolbox.github.io/setColorRange.html) adjusts a figure that has already
+# [setColorRange](https://mtex-toolbox.github.io/setColorRange_py.html) adjusts a figure that has already
 # been drawn. This is convenient when the useful limits become clear only
 # after inspecting the data.
 
@@ -136,7 +136,7 @@ mtexColorbar()
 # ## Choose a colormap
 #
 # A colormap is the ordered set of colours assigned across the colour range.
-# [mtexColorMap](https://mtex-toolbox.github.io/mtexColorMap.html) sets it for a figure. MTEX supplies
+# [mtexColorMap](https://mtex-toolbox.github.io/mtexColorMap_py.html) sets it for a figure. MTEX supplies
 # `white2black`, `blue2red`, and `LaboTeX` in addition to matplotlib's colormaps.
 
 # %%

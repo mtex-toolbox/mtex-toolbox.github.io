@@ -16,9 +16,9 @@
 # and defines its bandwidth.
 #
 # This page compares kernels for point-centred radial components. Pass an `SO3Kernel`
-# object to [unimodalODF](https://mtex-toolbox.github.io/unimodalODF.html), or use its `halfwidth` option to select the
+# object to [unimodalODF](https://mtex-toolbox.github.io/unimodalODF_py.html), or use its `halfwidth` option to select the
 # default de la Vallee Poussin kernel. A [fibre ODF](https://mtex-toolbox.github.io/FibreODFs_py.html) is different: current
-# [fibreODF](https://mtex-toolbox.github.io/fibreODF.html) accepts an `S2Kernel` because its density decays across a
+# [fibreODF](https://mtex-toolbox.github.io/fibreODF_py.html) accepts an `S2Kernel` because its density decays across a
 # curve rather than from one orientation.
 
 # %%

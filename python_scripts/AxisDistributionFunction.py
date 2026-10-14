@@ -33,7 +33,7 @@ adf
 
 # %% [markdown]
 # Like any spherical function, `adf` can be plotted, evaluated, and integrated. The
-# convenience command [plotAxisDistribution](https://mtex-toolbox.github.io/plotAxisDistribution.html) draws the same
+# convenience command [plotAxisDistribution](https://mtex-toolbox.github.io/plotAxisDistribution_py.html) draws the same
 # density. Passing both symmetries describes a same-phase pair, while `antipodal` applies
 # [grain exchange symmetry](https://mtex-toolbox.github.io/MisorientationGrainExchangeSym_py.html).
 
@@ -77,7 +77,7 @@ gB = grains.boundary['Magnesium', 'Magnesium']
 mori = gB.misorientation
 
 # %% [markdown]
-# [axis](https://mtex-toolbox.github.io/orientation.axis.html) selects the smallest-angle symmetry-equivalent
+# [axis](https://mtex-toolbox.github.io/orientation.axis_py.html) selects the smallest-angle symmetry-equivalent
 # representative and returns its axis in the crystal frame. The summary reports one axis
 # for each of the 2803 boundary segments.
 
@@ -171,7 +171,7 @@ mtexColorbar()
 #
 # Estimate the magnesium ODF from grain mean orientations. Area weights make this a
 # sampled-area texture rather than a one-grain-one-vote texture. The `Fourier` flag selects
-# the harmonic representation used efficiently by [calcMDF](https://mtex-toolbox.github.io/SO3Fun.calcMDF.html).
+# the harmonic representation used efficiently by [calcMDF](https://mtex-toolbox.github.io/SO3Fun.calcMDF_py.html).
 
 # %%
 mgGrains = grains['Magnesium']
@@ -203,7 +203,7 @@ mtexColorbar()
 # copies represented by the fundamental region. The upper limit $\omega_{\max}(\mathbf{h})$
 # is why a uniform MDF has a non-constant ADF.
 #
-# [calcAxisDistribution](https://mtex-toolbox.github.io/SO3Fun.calcAxisDistribution.html) accepts `minAngle` and
+# [calcAxisDistribution](https://mtex-toolbox.github.io/SO3Fun.calcAxisDistribution_py.html) accepts `minAngle` and
 # `maxAngle` to study an angle window. Its `resolution` option is the angular quadrature
 # step; reduce it when a narrow window must be integrated to better than percent accuracy.
 #

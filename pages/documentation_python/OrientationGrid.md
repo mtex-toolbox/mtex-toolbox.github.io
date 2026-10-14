@@ -43,7 +43,7 @@ cs = crystalFrame('432')
 
 ## The Equispaced Grid
 
-[equispacedSO3Grid](equispacedSO3Grid.html) covers the fundamental region of the
+[equispacedSO3Grid](equispacedSO3Grid_py.html) covers the fundamental region of the
 supplied crystal and specimen symmetries with nearly constant node spacing. Here the
 specimen symmetry is the trivial default. Both global constructors accept a second
 symmetry. For an orientation it is a specimen symmetry; for a
@@ -80,7 +80,7 @@ in orientation space.
 
 ## The Regular Euler Grid
 
-[regularSO3Grid](regularSO3Grid.html) instead takes regular steps in the three Euler
+[regularSO3Grid](regularSO3Grid_py.html) instead takes regular steps in the three Euler
 angles. The same nominal resolution creates many more nodes.
 
 ```python
@@ -170,7 +170,7 @@ see [Quadrature of Rotational Functions](SO3FunQuadrature_py.html).
 
 ## Grids Around a Given Orientation
 
-[localOrientationGrid](localOrientationGrid.html) covers a ball around one orientation
+[localOrientationGrid](localOrientationGrid_py.html) covers a ball around one orientation
 rather than the full symmetry-reduced region. This is the useful construction for a
 local search or a perturbation study.
 

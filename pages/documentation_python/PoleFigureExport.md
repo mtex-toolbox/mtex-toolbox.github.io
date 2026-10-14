@@ -14,7 +14,7 @@ status: Checked
 
 <!--introduction-->
 
-[export](PoleFigure.export.html) writes the sampled directions and intensities of a
+[export](PoleFigure.export_py.html) writes the sampled directions and intensities of a
 `PoleFigure` to plain ASCII tables. This page exports measured data, reads it back, and
 then exports pole figures recalculated from an orientation distribution function (ODF).
 
@@ -62,7 +62,7 @@ individual reflections.
 ## Write one file per entry
 
 Different pole figures may be measured on different specimen grids.
-[export](PoleFigure.export.html) therefore writes each entry to a separate file instead
+[export](PoleFigure.export_py.html) therefore writes each entry to a separate file instead
 of assuming one common list of specimen directions. The file name combines the base name
 below with the entry's Miller indices.
 
@@ -116,8 +116,8 @@ correspond to the physical sample.
 ## Read the data back
 
 The three columns are exactly those understood by
-the generic reader of [loadPoleFigure](loadPoleFigure_generic.html). To reconstruct the object,
-[PoleFigure.load](PoleFigure.load.html) also needs the Miller indices, crystal and
+the generic reader of [loadPoleFigure](loadPoleFigure_generic_py.html). To reconstruct the object,
+[PoleFigure.load](PoleFigure.load_py.html) also needs the Miller indices, crystal and
 specimen symmetries, and superposition coefficients that were not stored in the tables.
 
 ```python
@@ -177,7 +177,7 @@ values themselves are unchanged.
 ## Export recalculated pole figures
 
 The same command exports pole figures computed from an ODF with
-[calcPoleFigure](SO3Fun.calcPoleFigure.html). This is useful when another program needs
+[calcPoleFigure](SO3Fun.calcPoleFigure_py.html). This is useful when another program needs
 directional pole-density samples rather than the ODF itself.
 
 ```python

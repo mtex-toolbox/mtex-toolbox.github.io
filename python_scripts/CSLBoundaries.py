@@ -35,7 +35,7 @@ from mtex import *
 # %% [markdown]
 # ## Reconstruct the boundary network
 #
-# The example is a single-phase cubic iron map. MTEX's [`CSL`](https://mtex-toolbox.github.io/CSL.html) generator is for
+# The example is a single-phase cubic iron map. MTEX's [`CSL`](https://mtex-toolbox.github.io/CSL_py.html) generator is for
 # cubic symmetry. The plotting convention below matches the specimen frame stored with this
 # data set.
 
@@ -84,7 +84,7 @@ hold(False)
 # %% [markdown]
 # ## Detect the Sigma 3 boundaries
 #
-# [`angle`](https://mtex-toolbox.github.io/orientation.angle.html) measures the smallest distance between a boundary
+# [`angle`](https://mtex-toolbox.github.io/orientation.angle_py.html) measures the smallest distance between a boundary
 # misorientation and the symmetrically equivalent ideal relationships. Here the fixed
 # tolerance is 3 degrees.
 
@@ -128,7 +128,7 @@ hold(False)
 # grains. Its `boundaryId` property gives the three incident segments. The condition below
 # selects points where at least two of them match the $\Sigma 3$ relationship.
 #
-# [`isTwinning`](https://mtex-toolbox.github.io/grainBoundary.isTwinning.html) is the convenience form of the angular
+# [`isTwinning`](https://mtex-toolbox.github.io/grainBoundary.isTwinning_py.html) is the convenience form of the angular
 # comparison used above. It also checks the phases on the two sides of each segment.
 
 # %%
@@ -158,7 +158,7 @@ hold(False)
 # ## Merge across the twins
 #
 # A twin belongs to the grain in which it grew. Passing the selected segments to
-# [`merge`](https://mtex-toolbox.github.io/grain2d.merge.html) dissolves those interfaces and groups the grains on their
+# [`merge`](https://mtex-toolbox.github.io/grain2d.merge_py.html) dissolves those interfaces and groups the grains on their
 # two sides. See [Merging Grains](https://mtex-toolbox.github.io/GrainMerge_py.html) for the bookkeeping after this operation.
 
 # %%
@@ -224,7 +224,7 @@ hold(False)
 # %% [markdown]
 # ## The coincidences belong to the lattice
 #
-# [`CSL`](https://mtex-toolbox.github.io/CSL.html) accepts a list of $\Sigma$ values and returns their misorientations
+# [`CSL`](https://mtex-toolbox.github.io/CSL_py.html) accepts a list of $\Sigma$ values and returns their misorientations
 # ordered by $\Sigma$ and, within one $\Sigma$, by angle.
 
 # %%
@@ -336,7 +336,7 @@ peakAxes
 # %% [markdown]
 # ## Count segments near an ideal relationship directly
 #
-# [`volume`](https://mtex-toolbox.github.io/orientation.volume.html) gives the fraction of sampled segment misorientations
+# [`volume`](https://mtex-toolbox.github.io/orientation.volume_py.html) gives the fraction of sampled segment misorientations
 # within a chosen radius. It does not require an MDF.
 
 # %%

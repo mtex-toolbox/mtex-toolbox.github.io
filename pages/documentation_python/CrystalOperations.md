@@ -14,7 +14,7 @@ status: Checked
 
 <!--introduction-->
 
-A Miller represents either a direct-lattice vector $$[uvw]$$ or a
+A [Miller](Miller_py.html) represents either a direct-lattice vector $$[uvw]$$ or a
 reciprocal-lattice normal $$(hkl)$$ in a crystal frame. It supports ordinary vector
 geometry, but comparisons have one extra input: crystal symmetry.
 
@@ -47,7 +47,7 @@ plottingConvention.default('y↑→x')
 A simulated spherical Kikuchi pattern of quartz makes the operations visible. This is a
 master pattern on the sphere, not a raw planar detector image. The left plot shows the
 pattern, and the right plot shows its
-[spherical Radon transform](S2FunHarmonic.radon.html).
+[spherical Radon transform](S2FunHarmonic.radon_py.html).
 
 A band centre is a great circle on the pattern. The transform maps that great circle to
 the point representing its plane normal.
@@ -104,7 +104,7 @@ cannot distinguish the corresponding settings.
 
 The family of directions equivalent to $$[uvw]$$ is written $$\langle uvw\rangle$$. The
 family of planes equivalent to $$(hkl)$$ is written $$\{hkl\}$$.
-[symmetrise](vector3d.symmetrise.html) lists the orbit as directed vectors.
+[symmetrise](vector3d.symmetrise_py.html) lists the orbit as directed vectors.
 
 ```python
 symmetrise(r)
@@ -296,7 +296,7 @@ circle(d1, parent=ax2, lineColor='lightgreen')
 <center class="mtex-figure"><img class="inline" src="figures/python/CrystalOperations-20.png"></center>
 
 The output uses `UVTW` because a cross product of two reciprocal normals is a
-direct-lattice direction. [round](vector3d.round.html) rescales it to small integer
+direct-lattice direction. [round](vector3d.round_py.html) rescales it to small integer
 indices.
 
 The green square lies where the two corresponding bands cross in the pattern. In the
@@ -350,7 +350,7 @@ normal lies where the green and orange great circles intersect.
 
 ## Symmetry-Reduced and Geometric Angles
 
-By default, [angle](vector3d.angle.html) returns the smallest angle between the first
+By default, [angle](vector3d.angle_py.html) returns the smallest angle between the first
 vector and the symmetry orbit of the second. The result is independent of which
 equivalent index triplet was supplied.
 
@@ -450,7 +450,7 @@ the family represented by `d1`.
 
 ## Cartesian Components Without Crystal Metadata
 
-Building a [vector3d](vector3d.vector3d.html) from the Cartesian components of a
+Building a [vector3d](vector3d.vector3d_py.html) from the Cartesian components of a
 `Miller` drops the crystal symmetry and crystal frame. The result is *frame-free*: it
 has an empty frame and resolves against the session default when it is rendered.
 

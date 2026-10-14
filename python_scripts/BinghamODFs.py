@@ -43,7 +43,7 @@ odf
 
 # %% [markdown]
 # The printed summary identifies a Bingham component and reports its four shape
-# parameters. [BinghamODF](https://mtex-toolbox.github.io/BinghamODF.html) normalizes the component, so its mean is 1
+# parameters. [BinghamODF](https://mtex-toolbox.github.io/BinghamODF_py.html) normalizes the component, so its mean is 1
 # multiple of a random distribution (mrd).
 #
 # Pole figures project the ODF onto specimen directions. The unequal shape parameters
@@ -64,7 +64,7 @@ plot(odf, sections=6)
 # %% [markdown]
 # ## Estimating the Parameters
 #
-# [calcBinghamODF](https://mtex-toolbox.github.io/orientation.calcBinghamODF.html) estimates a Bingham model from
+# [calcBinghamODF](https://mtex-toolbox.github.io/orientation.calcBinghamODF_py.html) estimates a Bingham model from
 # individual orientations. Those orientations may come from EBSD or from a simulation.
 # This compact fit can work with far fewer measurements than a kernel estimate. It also
 # assumes that one Bingham component is adequate.
@@ -81,7 +81,7 @@ plotPF(odfTrue, h, antipodal=True, verbose=False)
 # differs between crystal directions, but it belongs to the same orientation-space fibre.
 #
 # Draw 2000 orientations from that ODF and add their pole points to all three panels with
-# [discreteSample](https://mtex-toolbox.github.io/SO3Fun.discreteSample.html).
+# [discreteSample](https://mtex-toolbox.github.io/SO3Fun.discreteSample_py.html).
 
 # %%
 ori = discreteSample(odfTrue, 2000)
@@ -127,7 +127,7 @@ plotPF(odf, h, antipodal=True, verbose=False)
 # ## A Bipolar or Unimodal Distribution
 #
 # A scalar shape parameter and a reference orientation define a unimodal Bingham
-# distribution. [BinghamODF](https://mtex-toolbox.github.io/BinghamODF.html) expands the scalar `20` to `[20, 0, 0, 0]`.
+# distribution. [BinghamODF](https://mtex-toolbox.github.io/BinghamODF_py.html) expands the scalar `20` to `[20, 0, 0, 0]`.
 # The reference orientation is the unique maximum, apart from its antipode and
 # symmetry-equivalent descriptions.
 

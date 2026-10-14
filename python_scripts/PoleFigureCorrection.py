@@ -63,7 +63,7 @@ pf_weighted = 2 * pf[0] + 3 * pf[2]
 # %% [markdown]
 # ## Background and defocusing
 #
-# [correct](https://mtex-toolbox.github.io/PoleFigure.correct.html) applies correction measurements that have already
+# [correct](https://mtex-toolbox.github.io/PoleFigure.correct_py.html) applies correction measurements that have already
 # been obtained. It does not infer background or defocusing from the measured pole figure.
 #
 # With `background`, MTEX interpolates each sparse background scan onto the directions of
@@ -102,7 +102,7 @@ print(f'Corrected counts: min {np.min(correctedI):.0f}, mean {np.mean(correctedI
 # ## Normalization
 #
 # Pole density is reported in multiples of a random distribution (mrd). Its mean over a
-# complete pole figure is 1, so [normalize](https://mtex-toolbox.github.io/PoleFigure.normalize.html) divides each
+# complete pole figure is 1, so [normalize](https://mtex-toolbox.github.io/PoleFigure.normalize_py.html) divides each
 # complete scan by its quadrature-weighted mean.
 
 # %%
@@ -156,7 +156,7 @@ print(f'Largest ODF-based scale difference: {normalizationDifference:.2f} percen
 # ## Outliers
 #
 # A single bad measurement can distort a reconstruction because the solver has no reason
-# to distrust it. [isOutlier](https://mtex-toolbox.github.io/PoleFigure.isOutlier.html) marks values that disagree with
+# to distrust it. [isOutlier](https://mtex-toolbox.github.io/PoleFigure.isOutlier_py.html) marks values that disagree with
 # the mean of their neighbourhood.
 #
 # The default threshold is two standard deviations for each pole figure. Review the
@@ -256,7 +256,7 @@ plot(pf_rotated, antipodal=True)
 mtexColorbar()
 
 # %% [markdown]
-# [rotate](https://mtex-toolbox.github.io/PoleFigure.rotate.html) leaves the intensities unchanged and applies the
+# [rotate](https://mtex-toolbox.github.io/PoleFigure.rotate_py.html) leaves the intensities unchanged and applies the
 # rotation to their measured directions. The measured cap tips across the equator, and
 # `antipodal` folds the part below the equator back into the same disc.
 #

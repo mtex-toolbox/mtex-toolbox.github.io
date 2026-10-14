@@ -33,7 +33,7 @@ ori = orientation.rand(100, cs, ss)
 # ## How a Point Enters a Section
 #
 # A mathematical slice has zero thickness, so a finite random sample would almost never
-# land on one exactly. [plotSection](https://mtex-toolbox.github.io/orientation.plotSection.html) therefore draws an
+# land on one exactly. [plotSection](https://mtex-toolbox.github.io/orientation.plotSection_py.html) therefore draws an
 # orientation when its section coordinate lies within a tolerance of the panel value. The
 # `tolerance` option sets this half-width; its default is $5^\circ$, and MTEX narrows it
 # when the requested panels are closer together.

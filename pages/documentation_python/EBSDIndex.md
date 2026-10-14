@@ -160,7 +160,7 @@ list and matrix storage.
 ## Square-grid subscripts
 
 Although the crop is a list, its measurements lie on a regular grid.
-[gridify](EBSD.gridify.html) restores the matrix shape. The shape confirms that this
+[gridify](EBSD.gridify_py.html) restores the matrix shape. The shape confirms that this
 crop has 7 rows and 14 columns.
 
 ```python
@@ -195,7 +195,7 @@ hold(False)
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDIndex-12.png"></center>
 
-[gridify](EBSD.gridify.html) is allowed to reorder a plain list so that dimension 0
+[gridify](EBSD.gridify_py.html) is allowed to reorder a plain list so that dimension 0
 follows increasing specimen y and dimension 1 increasing x. This crop is a special case:
 it already inherited that order from the full gridded map, so its sequence does not
 change. For a general list, use `oldId`, which relates input order to raster order.

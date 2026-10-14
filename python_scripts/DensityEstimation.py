@@ -128,7 +128,7 @@ plt.legend(['$f$', '$f_{0.01}$', '$f_{0.05}$', '$f_{0.25}$'])
 # variation against lost structure. This is the bias--variance trade-off behind kernel
 # selection.
 #
-# For one-dimensional real data, [calcDensity](https://mtex-toolbox.github.io/calcDensity.html) selects a smoothing width
+# For one-dimensional real data, [calcDensity](https://mtex-toolbox.github.io/calcDensity_py.html) selects a smoothing width
 # automatically. The estimate carries the width it chose as `bandwidth`.
 
 # %%

@@ -60,7 +60,7 @@ orientation, not additional components.
 ## The Strongest Mode
 
 A *mode* is a local maximum of the ODF. The largest mode is the preferred orientation of
-the whole texture. [max](SO3Fun.max.html) returns its density and its orientation.
+the whole texture. [max](SO3Fun.max_py.html) returns its density and its orientation.
 
 ```python
 peakValue, peakOri = max(odf)
@@ -129,7 +129,7 @@ explains those choices.
 Peak density is not a measure of component importance. A sharp component can reach a
 large value while occupying little volume. A reproducible alternative is the fraction
 of material within a stated disorientation angle of the mode.
-[volume(odf, ori, delta)](SO3Fun.volume.html) integrates the ODF over that
+[volume(odf, ori, delta)](SO3Fun.volume_py.html) integrates the ODF over that
 orientation-space ball.
 
 ```python
@@ -198,7 +198,7 @@ neighbourhood measurements, not volume fractions of disjoint components.
 
 One radius for every component is a strong assumption. Real components need not be
 spherical, and neighbouring ones can run into each other.
-[calcComponents](SO3Fun.calcComponents.html) instead lets seed orientations climb the
+[calcComponents](SO3Fun.calcComponents_py.html) instead lets seed orientations climb the
 ODF gradient and groups seeds that reach the same mode.
 
 For this radial-basis ODF, the seeds are its kernel centres and their positive weights.

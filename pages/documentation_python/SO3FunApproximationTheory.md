@@ -35,7 +35,7 @@ plottingConvention.default('y↑→x')
 ## Importing the samples
 
 An ASCII file can contain one orientation and one or more measured values per row.
-[loadOrientation](orientation.load.html) needs the columns of the Euler angles and the
+[loadOrientation](orientation.load_py.html) needs the columns of the Euler angles and the
 names of the additional columns.
 
 ```python
@@ -63,7 +63,7 @@ Approximation finds a function that agrees reasonably well with the data. Interp
 the special case in which it agrees exactly at the sample orientations. Noise, incomplete
 sampling, or regularisation often makes approximation the more useful goal.
 
-[interp](rotation.interp.html) provides three approximation schemes:
+[interp](rotation.interp_py.html) provides three approximation schemes:
 
 * A harmonic expansion is a global series model. Prefer it for a general
   orientation-dependent relationship, especially with many nodes, outliers, or noise.
@@ -80,7 +80,7 @@ useful, but it cannot by itself reveal oscillations or overfitting between them.
 ## Harmonic approximation
 
 The flag `'harmonic'` selects a harmonic expansion. Internally, `interp` calls
-[SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate.html). The default fit includes
+[SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate_py.html). The default fit includes
 regularisation, which suppresses rapidly varying harmonic coefficients.
 
 ```python
@@ -206,7 +206,7 @@ minimumHarmonicValue
 ## Density-constrained RBF approximation
 
 Without a method flag, `interp` uses an RBF model and internally calls
-[SO3FunRBF.interpolate](SO3FunRBF.interpolate.html). The `'density'` flag constrains the
+[SO3FunRBF.interpolate](SO3FunRBF.interpolate_py.html). The `'density'` flag constrains the
 weights so that the result is nonnegative and then normalizes its mean to 1.
 
 ```python
@@ -324,7 +324,7 @@ warning applies here: validate convergence before comparing residuals.
 
 ## Fitting a Bingham distribution
 
-[SO3FunBingham.interpolate](SO3FunBingham.interpolate.html) fits the samples with one
+[SO3FunBingham.interpolate](SO3FunBingham.interpolate_py.html) fits the samples with one
 Bingham distribution. The flag `'bingham'` selects it through `interp`. The following
 controlled example begins with a fibre ODF and samples it on a coarse grid.
 

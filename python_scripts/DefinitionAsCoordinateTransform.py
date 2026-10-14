@@ -24,8 +24,8 @@ plottingConvention.default('y↑→x')
 # %% [markdown]
 # ## The Two Ingredients
 #
-# An orientation combines a [rotation](https://mtex-toolbox.github.io/rotation.rotation.html) with the symmetry, lattice
-# metric, and crystal frame stored by a [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame.html).
+# An orientation combines a [rotation](https://mtex-toolbox.github.io/rotation.rotation_py.html) with the symmetry, lattice
+# metric, and crystal frame stored by a [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame_py.html).
 
 # %%
 rot = rotation.byEuler(10 * degree, 20 * degree, 30 * degree, 'Bunge')
@@ -105,12 +105,12 @@ Cspecimen
 # %% [markdown]
 # Everything defined in the crystal frame travels in the same direction:
 #
-# * [crystal directions](https://mtex-toolbox.github.io/Miller.html)
-# * [tensors](https://mtex-toolbox.github.io/tensor.tensor.html)
-# * [slip systems](https://mtex-toolbox.github.io/slipSystem.slipSystem.html)
+# * [crystal directions](https://mtex-toolbox.github.io/Miller_py.html)
+# * [tensors](https://mtex-toolbox.github.io/tensor.tensor_py.html)
+# * [slip systems](https://mtex-toolbox.github.io/slipSystem.slipSystem_py.html)
 # * [twinning systems](https://mtex-toolbox.github.io/twinningSystem.twinningSystem.html)
-# * [dislocation systems](https://mtex-toolbox.github.io/dislocationSystem.dislocationSystem.html)
-# * [crystal shapes](https://mtex-toolbox.github.io/crystalShape.crystalShape.html)
+# * [dislocation systems](https://mtex-toolbox.github.io/dislocationSystem.dislocationSystem_py.html)
+# * [crystal shapes](https://mtex-toolbox.github.io/crystalShape.crystalShape_py.html)
 
 # %% [markdown]
 # ## And Back Again
@@ -177,7 +177,7 @@ rightDifference
 #
 # Right multiplication has a second, symmetry-aware meaning. A point-group operation
 # changes the crystal-frame representative but not the physical crystal setting.
-# [symmetrise](https://mtex-toolbox.github.io/orientation.symmetrise.html) lists those equivalent descriptions.
+# [symmetrise](https://mtex-toolbox.github.io/orientation.symmetrise_py.html) lists those equivalent descriptions.
 
 # %%
 equivalentCount = len(ori.symmetrise())
@@ -202,7 +202,7 @@ symmetryResidual
 # The stage rotation above moves the physical object in a fixed frame. A *frame change*
 # instead re-expresses the same physical object in another reference frame and leaves the
 # object untouched. Use
-# [transformReferenceFrame](https://mtex-toolbox.github.io/orientation.transformReferenceFrame.html) when crystal data
+# [transformReferenceFrame](https://mtex-toolbox.github.io/orientation.transformReferenceFrame_py.html) when crystal data
 # use a different Cartesian crystal frame. Orientations also depend on how the Cartesian
 # crystal frame $\vec x$, $\vec y$, $\vec z$ is inscribed into the crystal axes $\vec a$,
 # $\vec b$, $\vec c$.

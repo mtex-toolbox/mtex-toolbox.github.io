@@ -116,9 +116,9 @@ gB
 
 ```text
 grainBoundary (y↓→x)
-  size: 17566 segments, 2423 chains
+  size: 17505 segments, 2423 chains
   segments    length  mineral 1  mineral 2
-     17566  16290 µm       iron       iron
+     17505  16309 µm       iron       iron
 ```
 
 ```python
@@ -134,7 +134,7 @@ sigma3SegmentPercent
 ```
 
 ```text
-42.5880
+42.5364
 ```
 
 ```python
@@ -390,7 +390,7 @@ peakMRD
 ```
 
 ```text
-array([54.2407,  1.6606])
+array([54.1748,  1.6664])
 ```
 
 ```python
@@ -431,7 +431,7 @@ sigma3WithinTwoDegrees
 ```
 
 ```text
-40.7150
+40.6512
 ```
 
 ```python
@@ -440,7 +440,7 @@ sigma9WithinTwoDegrees
 ```
 
 ```text
-2.0494
+2.0566
 ```
 
 ## Compare the direct segment fractions
@@ -493,7 +493,7 @@ testMisorientationMRD
 ```
 
 ```text
-1.5305
+1.5359
 ```
 
 ```python
@@ -502,7 +502,7 @@ sigma3MRD
 ```
 
 ```text
-array([54.2521])
+array([54.1862])
 ```
 
 ## Compare the two density values

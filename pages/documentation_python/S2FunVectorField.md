@@ -22,7 +22,7 @@ The output need not lie in the plane tangent to the sphere. For example, a gener
 may have radial and tangential parts. The gradient of a scalar `S2Fun` is a special case
 whose values are tangential.
 
-MTEX represents this mapping with [S2VectorField](S2VectorField.S2VectorField.html). This
+MTEX represents this mapping with [S2VectorField](S2VectorField.S2VectorField_py.html). This
 page constructs a harmonic representation, evaluates it, combines fields, and reads its
 two- and three-dimensional plots.
 
@@ -52,7 +52,7 @@ S2VectorFieldHarmonic
   bandwidth: 4
 ```
 
-The explicit [quadrature](S2VectorFieldHarmonic.quadrature.html) call is equivalent.
+The explicit [quadrature](S2VectorFieldHarmonic.quadrature_py.html) call is equivalent.
 
 ```python
 sVF2q = S2VectorFieldHarmonic.quadrature(f, bandwidth=4)
@@ -76,7 +76,7 @@ vector3d (y↓→x)
 ## Constructing a field from sampled values
 
 If directions and their vector values are already available, use
-[interpolate](S2VectorFieldHarmonic.interpolate.html). Here the samples come from the same
+[interpolate](S2VectorFieldHarmonic.interpolate_py.html). Here the samples come from the same
 function so that the two construction routes can be compared.
 
 ```python
@@ -187,8 +187,8 @@ fieldCross = cross(sVF1, sVF2)
 crossWithZ = cross(sVF1, vector3d(0, 0, 1))
 ```
 
-[mean](S2VectorFieldHarmonic.mean.html) returns one mean `vector3d`.
-[norm](S2VectorFieldHarmonic.norm.html) returns the scalar function of pointwise vector
+[mean](S2VectorFieldHarmonic.mean_py.html) returns one mean `vector3d`.
+[norm](S2VectorFieldHarmonic.norm_py.html) returns the scalar function of pointwise vector
 lengths.
 
 ```python
@@ -225,8 +225,8 @@ rotatedField = rotate(sVF1, r)
 ## Visualizing direction and magnitude
 
 Fix the plotting convention so specimen X points right and specimen Y points up. The
-default [plot](S2VectorField.plot.html) command draws a projected quiver plot;
-[quiver](S2VectorField.quiver.html) is an alias.
+default [plot](S2VectorField.plot_py.html) command draws a projected quiver plot;
+[quiver](S2VectorField.quiver_py.html) is an alias.
 
 ```python
 plottingConvention.default('y↑→x')
@@ -238,7 +238,7 @@ plot(sVF2, upper=True, resolution=15 * degree)
 Arrows are shortest near specimen Z and lengthen towards the equator. Their length shows
 the field magnitude, while their arrowhead shows the sense of each vector.
 
-[quiver3d](S2VectorField.quiver3.html) attaches the same arrows to a three-dimensional
+[quiver3d](S2VectorField.quiver3_py.html) attaches the same arrows to a three-dimensional
 sphere.
 
 ```python

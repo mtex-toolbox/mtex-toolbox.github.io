@@ -77,7 +77,7 @@ The slide sets the published views along $$\vec a$$, $$\vec b$$ and $$\vec c$$ b
 Smorf drawing of the same views, with the interfacial angles to compare against. The
 equal-distance drawing in the previous screenshot is only a starting block: at distance
 1 the (010), (001) and (110) forms do not reach the surface at all. The same six plane
-normals are a list of Miller indices in MTEX.
+normals are a list of [Miller](Miller_py.html) indices in MTEX.
 
 ```python
 N = Miller([[0, 1, 0], [0, 0, 1], [0, 2, 1], [1, 1, 0], [1, 0, 1], [1, 2, 0]], cs)
@@ -106,7 +106,7 @@ shape unchanged.
 
 ## Transfer the Distances to MTEX
 
-[crystalShape](crystalShape.crystalShape.html) describes each limiting plane by a normal
+[crystalShape](crystalShape.crystalShape_py.html) describes each limiting plane by a normal
 $$\mathbf{n}$$ and the half-space $$\mathbf{x}\cdot\mathbf{n}\leq 1$$. A longer normal
 therefore moves its plane inward. To preserve the distances entered in Smorf, divide
 each Miller normal by its corresponding distance:

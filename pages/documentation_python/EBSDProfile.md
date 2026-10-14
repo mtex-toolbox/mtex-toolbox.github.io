@@ -95,7 +95,7 @@ plt.plot(lineSec[:, 0], lineSec[:, 1], linewidth=2)
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDProfile-6.png"></center>
 
-[spatialProfile](EBSD.spatialProfile.html) returns the measurements near the segment
+[spatialProfile](EBSD.spatialProfile_py.html) returns the measurements near the segment
 in traversal order. Its second output is their projected distance from the first
 endpoint. The object summary shows that this profile contains 86 measurements.
 

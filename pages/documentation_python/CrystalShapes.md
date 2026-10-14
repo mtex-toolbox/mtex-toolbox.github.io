@@ -71,7 +71,7 @@ plot(cS, faceAlpha=0.2)
 The display reports 12 vertices and 8 faces. The translucent drawing shows the six
 prism faces between the two basal faces.
 
-A [crystalShape](crystalShape.crystalShape.html) stores the vertices in `cS.V`,
+A [crystalShape](crystalShape.crystalShape_py.html) stores the vertices in `cS.V`,
 face-to-vertex indices in `cS.F`, and edges in `cS.E`. The vertex coordinates printed
 below are expressed in the crystal frame.
 
@@ -100,8 +100,8 @@ vector3d (Titanium (Alpha))
 ## Planes and Slip Systems Inside the Shape
 
 A slip system combines a lattice plane with a lattice direction in that plane.
-[plotInnerFace](crystalShape.plotInnerFace.html) and
-[plotInnerDirection](crystalShape.plotInnerDirection.html) draw these parts separately.
+[plotInnerFace](crystalShape.plotInnerFace_py.html) and
+[plotInnerDirection](crystalShape.plotInnerDirection_py.html) draw these parts separately.
 Passing a slip system directly to `plot` draws both.
 
 ```python
@@ -204,7 +204,7 @@ boundaries.
 
 ## Plotting Grain Glyphs Directly
 
-The [plot](grain2d.plot.html) overload performs the rotation, scaling, and positioning
+The [plot](grain2d.plot_py.html) overload performs the rotation, scaling, and positioning
 from the previous section. It scales each glyph by the square root of grain area and
 places it at the grain centroid.
 

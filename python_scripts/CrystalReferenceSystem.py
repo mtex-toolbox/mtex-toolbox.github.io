@@ -12,7 +12,7 @@
 # [Lattice Metric and Plane Geometry](https://mtex-toolbox.github.io/LatticeMetric_py.html) first if direct and reciprocal
 # lattice axes are new to you.
 #
-# A [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame.html) stores the point symmetry and lattice
+# A [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame_py.html) stores the point symmetry and lattice
 # metric of a phase and carries its crystal frame. The display below therefore reports
 # both the metric and the frame alignment.
 
@@ -93,7 +93,7 @@ annotate(-vector3d.X, markerFaceColor='green', label='-x', backgroundColor='w')
 # markers move. Each crystal frame supplies a plotting convention that lays out a crystal
 # plot by its lattice axes.
 #
-# The [transformationMatrix](https://mtex-toolbox.github.io/crystalFrame.transformationMatrix.html) between the two
+# The [transformationMatrix](https://mtex-toolbox.github.io/crystalFrame.transformationMatrix_py.html) between the two
 # frames exposes the Cartesian offset.
 
 # %%
@@ -200,7 +200,7 @@ symmetryReducedDifference
 #
 # A *frame change* re-expresses the same physical object in another reference frame. It
 # leaves the object itself untouched and is distinct from rotating it. For orientations,
-# [transformReferenceFrame](https://mtex-toolbox.github.io/orientation.transformReferenceFrame.html) performs that change
+# [transformReferenceFrame](https://mtex-toolbox.github.io/orientation.transformReferenceFrame_py.html) performs that change
 # explicitly.
 
 # %%

@@ -265,8 +265,8 @@ cannot reveal this frame error. Only a quantity with directional shape can do so
 Rotating both parts keeps the data self-consistent and moves the map as a whole. This
 active rotation is appropriate when the specimen really is to be reoriented by a known
 amount, for example to correct different mounting angles before several maps are
-compared. Translation is handled by [shift](EBSD.shift.html) and rotation by
-[rotate](EBSD.rotate.html).
+compared. Translation is handled by [shift](EBSD.shift_py.html) and rotation by
+[rotate](EBSD.rotate_py.html).
 
 This is distinct from a *frame change*, which re-expresses the same physical object in
 another reference frame without moving it. Naming an already calibrated frame and

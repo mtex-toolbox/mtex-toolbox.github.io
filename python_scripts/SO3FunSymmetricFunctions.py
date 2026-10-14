@@ -45,7 +45,7 @@ ss
 # $$ f(s_L R s_R)=f(R). $$
 #
 # Rotation composition is not commutative, so the two point groups cannot be exchanged.
-# [symmetrise](https://mtex-toolbox.github.io/orientation.symmetrise.html) constructs the complete orbit $s_L R s_R$ of an
+# [symmetrise](https://mtex-toolbox.github.io/orientation.symmetrise_py.html) constructs the complete orbit $s_L R s_R$ of an
 # orientation.
 
 # %%
@@ -147,7 +147,7 @@ plot(SO3F2)
 #
 # ## Project onto symmetric functions
 #
-# [SO3FunHarmonic.symmetrise](https://mtex-toolbox.github.io/SO3FunHarmonic.symmetrise.html) averages the function over
+# [SO3FunHarmonic.symmetrise](https://mtex-toolbox.github.io/SO3FunHarmonic.symmetrise_py.html) averages the function over
 # its left and right point groups. In coefficient space this projects the Fourier
 # coefficients onto the subspace with the requested invariance.
 

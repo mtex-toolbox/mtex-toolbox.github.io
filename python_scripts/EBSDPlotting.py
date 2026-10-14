@@ -22,7 +22,7 @@ ebsd = mtexdata('forsterite')
 # %% [markdown]
 # ## Phase maps
 #
-# Calling [plot](https://mtex-toolbox.github.io/EBSD.plot.html) without a second argument colours the map by phase. This
+# Calling [plot](https://mtex-toolbox.github.io/EBSD.plot_py.html) without a second argument colours the map by phase. This
 # is the quickest way to see what is in the specimen and where.
 
 # %%
@@ -43,7 +43,7 @@ plot(ebsd)
 ebsd['Diopside'].color
 
 # %% [markdown]
-# Any RGB triplet can replace it. The function [str2rgb](https://mtex-toolbox.github.io/str2rgb.html) saves you looking
+# Any RGB triplet can replace it. The function [str2rgb](https://mtex-toolbox.github.io/str2rgb_py.html) saves you looking
 # one up because it turns a colour name into the triplet.
 
 # %%

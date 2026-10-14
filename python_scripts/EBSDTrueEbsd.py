@@ -15,8 +15,8 @@
 # This page runs the whole workflow on a cut-down WC-Co dataset in well under a minute.
 # First read [Maps and Images](https://mtex-toolbox.github.io/EBSDMapsAndImages_py.html) to prepare a common specimen frame,
 # array layout and length unit. See [Spatial Transforms](https://mtex-toolbox.github.io/EBSDSpatialTransform_py.html) for
-# choosing a distortion model, [trueEbsd](https://mtex-toolbox.github.io/trueEbsd.trueEbsd.html) for the workflow class and
-# [mapImage](https://mtex-toolbox.github.io/mapImage.mapImage.html) for its image container.
+# choosing a distortion model, [trueEbsd](https://mtex-toolbox.github.io/trueEbsd.trueEbsd_py.html) for the workflow class and
+# [mapImage](https://mtex-toolbox.github.io/mapImage.mapImage_py.html) for its image container.
 #
 # TrueEBSD corrects map positions. It does not repair an incorrect relation between Euler
 # angles and the specimen frame, and it does not correct an orientation error caused during
@@ -138,7 +138,7 @@ job.resizedList
 # ## Adjust the Matching Windows
 #
 # Distortions are measured by cutting both images of a pair into small boxes and
-# cross-correlating each box with its partner - see [xcfShift](https://mtex-toolbox.github.io/xcfShift.html). That gives a
+# cross-correlating each box with its partner - see [xcfShift](https://mtex-toolbox.github.io/xcfShift_py.html). That gives a
 # local shift at each box, and those shifts are fitted to the distortion model.
 #
 # Almost none of it has to be specified. The box width `roiSize` and the `edgeWidth` below

@@ -47,7 +47,7 @@ setMTEXpref('defaultColorMap', blue2redColorMap)
 
 The simplest tensor plot assigns one scalar to every unit direction.
 MTEX calls this scalar the *directional magnitude*.
-[plot](tensor.plot.html) draws it as a spherical function.
+[plot](tensor.plot_py.html) draws it as a spherical function.
 
 The example is the stiffness tensor of olivine measured by Abramson et
 al. (1997). Its printed summary records the rank, unit, crystal frame, and
@@ -89,12 +89,12 @@ instead of only the symmetry-reduced sector.
 
 This plot shows the self-contraction of `C`. It is not Young's modulus or
 a complete picture of the stiffness tensor. Use
-[YoungsModulus](stiffnessTensor.YoungsModulus.html) when that physical
+[YoungsModulus](stiffnessTensor.YoungsModulus_py.html) when that physical
 property is the question.
 
 ## Inspecting the spherical function
 
-[directionalMagnitude](tensor.directionalMagnitude.html) returns the
+[directionalMagnitude](tensor.directionalMagnitude_py.html) returns the
 spherical function used by `plot`. The object display identifies its
 representation, symmetry, bandwidth, and antipodal character.
 
@@ -111,7 +111,7 @@ S2FunHarmonic (Olivine)
 ```
 
 Spherical-function operations can now be applied directly. For example,
-[max](S2Fun.max.html) finds the largest value and its direction.
+[max](S2Fun.max_py.html) finds the largest value and its direction.
 
 ```python
 maxValue, maxDirection = max(sF)
@@ -145,7 +145,7 @@ direction in the first figure. The
 
 For a symmetric rank-two tensor, the directional magnitude is a quadratic
 form. Its extrema lie along the principal axes, which are the eigenvectors
-returned by [eig](tensor.eig.html) after the eigenvalues.
+returned by [eig](tensor.eig_py.html) after the eigenvalues.
 
 ```python
 T = tensor(np.diag([3, 1, -1]), rank=2)
@@ -195,7 +195,7 @@ The transverse direction must be perpendicular to the loading direction.
 
 Fix the loading direction `p` along z. The admissible transverse
 directions then form the great circle normal to `p`, so
-[plotSection](S2Fun.plotSection.html) is the natural display.
+[plotSection](S2Fun.plotSection_py.html) is the natural display.
 
 ```python
 p = vector3d.Z

@@ -74,7 +74,7 @@ plt.gca().add_patch(plt.Rectangle(region[:2], region[2], region[3], edgecolor='b
 
 <center class="mtex-figure"><img class="inline" src="figures/python/GrainTutorial-3.png"></center>
 
-[inpolygon](EBSD.inpolygon.html) selects the measurements inside the rectangle. Its
+[inpolygon](EBSD.inpolygon_py.html) selects the measurements inside the rectangle. Its
 displayed summary confirms the new extent and phase counts.
 
 ```python
@@ -104,7 +104,7 @@ MTEX gives each measurement a spatial cell and links neighbouring cells that mee
 segmentation criterion. Grain outlines follow the cell interfaces left between different
 linked groups.
 
-For neighbours of the same phase, [calcGrains](EBSD.calcGrains.html) draws a boundary
+For neighbours of the same phase, [calcGrains](EBSD.calcGrains_py.html) draws a boundary
 when their minimum symmetry-equivalent misorientation reaches the chosen angle. The test
 is local between neighbours. Consequently, a gradual orientation gradient can connect two
 ends of one grain even when those ends differ by more than the threshold.
@@ -215,7 +215,7 @@ explicitly.
 ## Selecting and measuring grains
 
 Grain properties are arrays with one value per grain. Here `numPixel` records the number
-of measurements assigned to a grain, while [area](grain2d.area.html) measures its
+of measurements assigned to a grain, while [area](grain2d.area_py.html) measures its
 sectional area in the scan unit.
 
 The next selection keeps quartz grains with at least ten measurements and removes grains
@@ -249,7 +249,7 @@ grain2d (y↑→x)
        620       2      12      (153°,117°,8°)      0.0574
 ```
 
-The displayed [grain2d](grain2d.grain2d.html) summary reports what the selection
+The displayed [grain2d](grain2d.grain2d_py.html) summary reports what the selection
 retained. Because `calcGrains` gave `ebsdRegion` a `grainId` property, the selection also
 leads back to its measurements.
 
@@ -337,7 +337,7 @@ every andesina to orthoclase contact a boundary.
 One physical interface is represented by many connected segments. A segment count is
 therefore neither a count of interfaces nor a set of independent observations.
 
-Weighting by [segLength](grainBoundary.segLength.html) gives longer interfaces
+Weighting by [segLength](grainBoundary.segLength_py.html) gives longer interfaces
 proportionally more influence. It avoids weighting every tessellation segment equally.
 
 ```python

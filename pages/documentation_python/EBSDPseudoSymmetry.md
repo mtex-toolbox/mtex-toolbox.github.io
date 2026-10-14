@@ -22,7 +22,7 @@ misorientation.
 
 This is an indexing failure, not ordinary orientation noise. It also is not proof of a
 physical domain or twin: a real boundary can have the same misorientation. The command
-[cleanUpPseudoSym](cleanUpPseudoSym.html) combines crystallography with a spatial
+[cleanUpPseudoSym](cleanUpPseudoSym_py.html) combines crystallography with a spatial
 heuristic to tell them apart.
 
 The page assumes the grain structure has been reconstructed as described in
@@ -104,7 +104,7 @@ mtexColorbar()
 
 The sharp maximum at [100] establishes both parts of the candidate: a rotation of about 60
 degrees around [100]. Define that operation as a misorientation with
-[byAxisAngle](orientation.byAxisAngle.html).
+[byAxisAngle](orientation.byAxisAngle_py.html).
 
 ```python
 cs = ebsd['Fo'].CS
@@ -289,7 +289,7 @@ forsterite grain now has one consistent orientation colour, while unrelated grai
 boundaries remain.
 
 Only now, with the pseudo-symmetric boundaries removed, does it make sense to smooth the
-grain boundaries with [smoothBoundary](grain2d.smoothBoundary.html).
+grain boundaries with [smoothBoundary](grain2d.smoothBoundary_py.html).
 
     grainsC = smoothBoundary(grainsC, 5)
 

@@ -117,7 +117,7 @@ scatter(mori)
 # compact cloud is the evidence for one complete relationship.
 #
 # The robust mean locates the centre without giving isolated measurements undue influence.
-# [`round2Miller`](https://mtex-toolbox.github.io/orientation.round2Miller.html) then finds low-index planes and
+# [`round2Miller`](https://mtex-toolbox.github.io/orientation.round2Miller_py.html) then finds low-index planes and
 # directions that the measured mean makes parallel.
 
 # %%
@@ -150,7 +150,7 @@ twinDisorientationAngle
 
 # %% [markdown]
 # The same twin law also has a 180 degree representative about a twin axis. The `max`
-# option of [`angle`](https://mtex-toolbox.github.io/orientation.angle.html) and [`axis`](https://mtex-toolbox.github.io/orientation.axis.html) selects
+# option of [`angle`](https://mtex-toolbox.github.io/orientation.angle_py.html) and [`axis`](https://mtex-toolbox.github.io/orientation.axis_py.html) selects
 # that representative.
 
 # %%

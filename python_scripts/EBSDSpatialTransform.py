@@ -11,7 +11,7 @@
 # [Reference Frame Alignment](https://mtex-toolbox.github.io/EBSDReferenceFrame_py.html) when the map coordinates and Euler
 # angles do not refer to the same specimen frame.
 #
-# A function can move positions too. A [spatialTransform](https://mtex-toolbox.github.io/spatialTransform.html) also
+# A function can move positions too. A [spatialTransform](https://mtex-toolbox.github.io/spatialTransform_py.html) also
 # composes, inverts, displays itself, fits measured point pairs, and can be stored for
 # another data set. [Maps and Images](https://mtex-toolbox.github.io/EBSDMapsAndImages_py.html) explains how two images first
 # come to share a specimen coordinate system and array layout.
@@ -57,25 +57,25 @@ np.column_stack([pos.x.ravel(), posMoved.x.ravel()])
 # Each class represents a different amount and pattern of spatial freedom. The names are
 # historical, so read their meanings rather than guessing from them:
 #
-# * [spatialTransformId](https://mtex-toolbox.github.io/spatialTransformId.html) means that nothing separates the two
+# * [spatialTransformId](https://mtex-toolbox.github.io/spatialTransformId_py.html) means that nothing separates the two
 #   coordinate systems.
-# * [spatialTransformRigid](https://mtex-toolbox.github.io/spatialTransformRigid.html) is one translation, the same
+# * [spatialTransformRigid](https://mtex-toolbox.github.io/spatialTransformRigid_py.html) is one translation, the same
 #   everywhere. It does not include a rotation.
-# * [spatialTransformShift](https://mtex-toolbox.github.io/spatialTransformShift.html) is a full 2D affine map:
+# * [spatialTransformShift](https://mtex-toolbox.github.io/spatialTransformShift_py.html) is a full 2D affine map:
 #   translation, rotation, scale, and shear in one homogeneous matrix.
-# * [spatialTransformProjective](https://mtex-toolbox.github.io/spatialTransformProjective.html) is a homography. It keeps
+# * [spatialTransformProjective](https://mtex-toolbox.github.io/spatialTransformProjective_py.html) is a homography. It keeps
 #   lines straight, but parallel lines need not remain parallel, as in a perspective view
 #   of a tilted plane.
-# * [spatialTransformTilt](https://mtex-toolbox.github.io/spatialTransformTilt.html) is the staged model used to recover
+# * [spatialTransformTilt](https://mtex-toolbox.github.io/spatialTransformTilt_py.html) is the staged model used to recover
 #   specimen tilt from repeatedly correlated image pairs.
-# * [spatialTransformPoly](https://mtex-toolbox.github.io/spatialTransformPoly.html) describes a displacement that varies
+# * [spatialTransformPoly](https://mtex-toolbox.github.io/spatialTransformPoly_py.html) describes a displacement that varies
 #   polynomially across the coordinate system.
-# * [spatialTransformDrift](https://mtex-toolbox.github.io/spatialTransformDrift.html) varies only along the slow scan
+# * [spatialTransformDrift](https://mtex-toolbox.github.io/spatialTransformDrift_py.html) varies only along the slow scan
 #   direction. It models rolling-shutter-like scan drift rather than an arbitrary smooth
 #   field.
-# * [spatialTransformField](https://mtex-toolbox.github.io/spatialTransformField.html) stores measured displacements and
+# * [spatialTransformField](https://mtex-toolbox.github.io/spatialTransformField_py.html) stores measured displacements and
 #   interpolates between their positions without imposing a parametric model.
-# * [spatialTransformHandle](https://mtex-toolbox.github.io/spatialTransformHandle.html) wraps a function when none of the
+# * [spatialTransformHandle](https://mtex-toolbox.github.io/spatialTransformHandle_py.html) wraps a function when none of the
 #   fitted models applies.
 #
 # Start with the least flexible model that has a physical reason to be present. A flexible
@@ -171,7 +171,7 @@ spatialTransformShift() + spatialTransformDrift()
 # %% [markdown]
 # Use `+` for a distortion model that is about to be fitted, and `*` for transforms whose
 # coefficients are already known. Here `+` chains maps; it does not add displacements as
-# `+` on a [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html) would.
+# `+` on a [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html) would.
 #
 # Both operations flatten composites rather than nesting them, and their application order
 # is consistent.
@@ -193,7 +193,7 @@ inv(T)
 
 # %% [markdown]
 # A degree-two polynomial, drift spline, or scattered field has no general closed-form
-# inverse. Its inverse is a [spatialTransformInverse](https://mtex-toolbox.github.io/spatialTransformInverse.html), which
+# inverse. Its inverse is a [spatialTransformInverse](https://mtex-toolbox.github.io/spatialTransformInverse_py.html), which
 # solves for each source position iteratively.
 
 # %%
@@ -217,8 +217,8 @@ np.max(norm(Pinv.eval(P * posA) - posA))
 # ## Collapse a Chain at Chosen Positions
 #
 # Evaluating every stage repeatedly is wasted work when the chain will be applied to many
-# pixels. [discretize](https://mtex-toolbox.github.io/spatialTransform.html) samples a chain at chosen positions and
-# returns one [spatialTransformField](https://mtex-toolbox.github.io/spatialTransformField.html).
+# pixels. [discretize](https://mtex-toolbox.github.io/spatialTransform_py.html) samples a chain at chosen positions and
+# returns one [spatialTransformField](https://mtex-toolbox.github.io/spatialTransformField_py.html).
 
 # %%
 F = discretize(R + S, posA)
@@ -235,7 +235,7 @@ np.max(norm(F * posA - (R + S) * posA))
 # %% [markdown]
 # ## Apply a Transform to an EBSD Map
 #
-# [transform](https://mtex-toolbox.github.io/EBSD.transform.html) moves every pixel and carries its unit cell with it.
+# [transform](https://mtex-toolbox.github.io/EBSD.transform_py.html) moves every pixel and carries its unit cell with it.
 # Orientations, phase labels, and all per-pixel properties remain untouched. A spatial
 # transform therefore corrects map geometry, not an orientation or
 # specimen-reference-frame error.
@@ -272,7 +272,7 @@ np.max(norm(ebsdBack.pos - ebsd.pos))
 #
 # Nothing above measured a distortion: `posA` and `posB` were manufactured. In practice,
 # pairs often come from correlating two images of the same area.
-# [xcfShift](https://mtex-toolbox.github.io/xcfShift.html) divides their shared region into tiles, phase correlates each
+# [xcfShift](https://mtex-toolbox.github.io/xcfShift_py.html) divides their shared region into tiles, phase correlates each
 # tile with its counterpart, and returns a displacement and correlation-peak height for every
 # tile.
 #

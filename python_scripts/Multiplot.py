@@ -1,7 +1,7 @@
 # %% [markdown]
 # # Align Plots in a Grid
 #
-# MTEX manages multiple axes through [mtexFigure](https://mtex-toolbox.github.io/mtexFigure.mtexFigure.html).
+# MTEX manages multiple axes through [mtexFigure](https://mtex-toolbox.github.io/mtexFigure.mtexFigure_py.html).
 # It keeps their sizes and spacing consistent. It also
 # coordinates figure-wide tools such as colour ranges and colorbars.
 #

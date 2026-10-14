@@ -133,7 +133,7 @@ mtexColorbar()
 
 ## Change the range after plotting
 
-[setColorRange](setColorRange.html) adjusts a figure that has already
+[setColorRange](setColorRange_py.html) adjusts a figure that has already
 been drawn. This is convenient when the useful limits become clear only
 after inspecting the data.
 
@@ -171,7 +171,7 @@ making weak structure visible.
 ## Choose a colormap
 
 A colormap is the ordered set of colours assigned across the colour range.
-[mtexColorMap](mtexColorMap.html) sets it for a figure. MTEX supplies
+[mtexColorMap](mtexColorMap_py.html) sets it for a figure. MTEX supplies
 `white2black`, `blue2red`, and `LaboTeX` in addition to matplotlib's colormaps.
 
 ```python

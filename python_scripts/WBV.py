@@ -12,7 +12,7 @@
 # vector without choosing systems, but it cannot by itself separate the
 # contributing dislocation types or their cancelling densities.
 #
-# [`weightedBurgersVec`](https://mtex-toolbox.github.io/EBSD.weightedBurgersVec.html) offers an integral
+# [`weightedBurgersVec`](https://mtex-toolbox.github.io/EBSD.weightedBurgersVec_py.html) offers an integral
 # method and a gradient method. This page computes both, shows their noise
 # controls, and explains what their different spatial scales mean.
 
@@ -56,7 +56,7 @@ ebsd = smooth(ebsd, F, fill=grains)
 # one half. The default `windowSize=1` gives a 3-by-3 loop.
 #
 # A raster loop needs matrix-form data. This map is already gridded; a list
-# of measurements is gridded first with [`gridify`](https://mtex-toolbox.github.io/EBSD.gridify.html).
+# of measurements is gridded first with [`gridify`](https://mtex-toolbox.github.io/EBSD.gridify_py.html).
 
 # %%
 wbvIntegral = weightedBurgersVec(ebsd)
@@ -224,7 +224,7 @@ mtexTitle('direction distribution')
 # %% [markdown]
 # ## Choose the gradient stencil
 #
-# The `stencil` option is passed to [`ebsd.gradient`](https://mtex-toolbox.github.io/EBSD.gradient.html).
+# The `stencil` option is passed to [`ebsd.gradient`](https://mtex-toolbox.github.io/EBSD.gradient_py.html).
 # All choices use only the immediate lattice neighbourhood, but trade
 # locality against robustness.
 #

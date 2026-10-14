@@ -2,7 +2,7 @@
 # # Plotting Pole Figures
 #
 # A measured pole figure stores an intensity at every sampled specimen direction for one
-# family of crystal-plane normals. [plot](https://mtex-toolbox.github.io/PoleFigure.plot.html) places those samples on a
+# family of crystal-plane normals. [plot](https://mtex-toolbox.github.io/PoleFigure.plot_py.html) places those samples on a
 # projection of the specimen hemisphere. It does not turn the measurements into a
 # continuous function.
 #
@@ -78,7 +78,7 @@ mtexColorbar(title='intensity')
 # ## One colour range for all
 #
 # Comparing pole figures by eye only works when they share a colour range.
-# [setColorRange](https://mtex-toolbox.github.io/setColorRange.html) with `'equal'` gives all axes of the figure the
+# [setColorRange](https://mtex-toolbox.github.io/setColorRange_py.html) with `'equal'` gives all axes of the figure the
 # union of their ranges. A single colorbar then applies to every panel.
 
 # %%
@@ -117,7 +117,7 @@ mtexColorbar(title='intensity')  # add a single colorbar
 odf = calcODF(pf)
 
 # %% [markdown]
-# [plotPF](https://mtex-toolbox.github.io/SO3Fun.plotPDF.html) recalculates the same three pole figures. Diffraction
+# [plotPF](https://mtex-toolbox.github.io/SO3Fun.plotPDF_py.html) recalculates the same three pole figures. Diffraction
 # identifies a plane normal with its opposite, so `antipodal` folds the two directions
 # into the same hemisphere.
 

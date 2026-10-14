@@ -12,8 +12,8 @@
 # [Defining Three-Dimensional Vectors](https://mtex-toolbox.github.io/VectorDefinition_py.html) and basic matrix algebra.
 #
 # MTEX can build a rotation from Euler angles, an axis and angle, a matrix, or the action
-# on directions. Every constructor returns a [rotation](https://mtex-toolbox.github.io/rotation.rotation.html) array. MTEX
-# stores its proper part internally as a [unit quaternion](https://mtex-toolbox.github.io/quaternion.quaternion.html).
+# on directions. Every constructor returns a [rotation](https://mtex-toolbox.github.io/rotation.rotation_py.html) array. MTEX
+# stores its proper part internally as a [unit quaternion](https://mtex-toolbox.github.io/quaternion.quaternion_py.html).
 
 # %%
 import numpy as np
@@ -71,7 +71,7 @@ np.array(Euler(rotRoe, 'Bunge')) / degree
 # These are two descriptions of the same rotation. The separate question of which way an
 # orientation maps coordinates is covered in [MTEX vs. Bunge Convention](https://mtex-toolbox.github.io/MTEXvsBungeConvention_py.html).
 #
-# For interactive work, [setMTEXpref](https://mtex-toolbox.github.io/setMTEXpref.html) changes the session's default
+# For interactive work, [setMTEXpref](https://mtex-toolbox.github.io/setMTEXpref_py.html) changes the session's default
 # Euler convention. Explicit conventions remain safer in files that must be reproducible.
 
 # %% [markdown]
@@ -174,7 +174,7 @@ M
 rot * vector3d.Y
 
 # %% [markdown]
-# [rotation.byMatrix](https://mtex-toolbox.github.io/rotation.byMatrix.html) reconstructs the rotation.
+# [rotation.byMatrix](https://mtex-toolbox.github.io/rotation.byMatrix_py.html) reconstructs the rotation.
 
 # %%
 rotFromM = rotation.byMatrix(M)
@@ -206,7 +206,7 @@ cat(rot * u1, rot * u2)
 # angles within the pairs disagree or if the input directions are collinear.
 #
 # One pair leaves a rotation about the target direction undetermined.
-# [rotation.map](https://mtex-toolbox.github.io/rotation.map.html) then returns the smallest-angle rotation taking the
+# [rotation.map](https://mtex-toolbox.github.io/rotation.map_py.html) then returns the smallest-angle rotation taking the
 # first direction to the second.
 
 # %%
@@ -221,7 +221,7 @@ rot * vector3d.Z
 # ## Fitting Measured Directions
 #
 # More than two measured pairs will usually not agree exactly. The least-squares solution
-# from [rotation.fit](https://mtex-toolbox.github.io/rotation.fit.html) makes `rotFit * left` as close as possible to
+# from [rotation.fit](https://mtex-toolbox.github.io/rotation.fit_py.html) makes `rotFit * left` as close as possible to
 # `right`.
 
 # %%
@@ -240,7 +240,7 @@ angle(rot, rotFit) / degree
 # %% [markdown]
 # ## Random Rotations
 #
-# [rotation.rand](https://mtex-toolbox.github.io/rotation.rand.html) samples the uniform, or Haar, distribution on the
+# [rotation.rand](https://mtex-toolbox.github.io/rotation.rand_py.html) samples the uniform, or Haar, distribution on the
 # rotation group. Its size arguments create an array of rotations, just as size arguments
 # do for NumPy arrays.
 
@@ -286,18 +286,18 @@ angle(rotQ, rotMinusQ) / degree
 #
 # | input | constructor |
 # |---|---|
-# | Euler angles | [rotation.byEuler](https://mtex-toolbox.github.io/rotation.byEuler.html) |
-# | axis and angle | [rotation.byAxisAngle](https://mtex-toolbox.github.io/rotation.byAxisAngle.html) |
-# | matrix | [rotation.byMatrix](https://mtex-toolbox.github.io/rotation.byMatrix.html) |
-# | Rodrigues--Frank vector | [rotation.byRodrigues](https://mtex-toolbox.github.io/rotation.byRodrigues.html) |
-# | homochoric vector | [rotation.byHomochoric](https://mtex-toolbox.github.io/rotation.byHomochoric.html) |
-# | unit quaternion | [rotation(q)](https://mtex-toolbox.github.io/rotation.rotation.html) |
-# | exact direction pairs | [rotation.map](https://mtex-toolbox.github.io/rotation.map.html) |
-# | noisy direction pairs | [rotation.fit](https://mtex-toolbox.github.io/rotation.fit.html) |
-# | identity, random, or missing | [rotation.id](https://mtex-toolbox.github.io/rotation.id.html), [rotation.rand](https://mtex-toolbox.github.io/rotation.rand.html), [rotation.nan](https://mtex-toolbox.github.io/rotation.nan.html) |
+# | Euler angles | [rotation.byEuler](https://mtex-toolbox.github.io/rotation.byEuler_py.html) |
+# | axis and angle | [rotation.byAxisAngle](https://mtex-toolbox.github.io/rotation.byAxisAngle_py.html) |
+# | matrix | [rotation.byMatrix](https://mtex-toolbox.github.io/rotation.byMatrix_py.html) |
+# | Rodrigues--Frank vector | [rotation.byRodrigues](https://mtex-toolbox.github.io/rotation.byRodrigues_py.html) |
+# | homochoric vector | [rotation.byHomochoric](https://mtex-toolbox.github.io/rotation.byHomochoric_py.html) |
+# | unit quaternion | [rotation(q)](https://mtex-toolbox.github.io/rotation.rotation_py.html) |
+# | exact direction pairs | [rotation.map](https://mtex-toolbox.github.io/rotation.map_py.html) |
+# | noisy direction pairs | [rotation.fit](https://mtex-toolbox.github.io/rotation.fit_py.html) |
+# | identity, random, or missing | [rotation.id](https://mtex-toolbox.github.io/rotation.id_py.html), [rotation.rand](https://mtex-toolbox.github.io/rotation.rand_py.html), [rotation.nan](https://mtex-toolbox.github.io/rotation.nan_py.html) |
 # | file | [rotation.load](https://mtex-toolbox.github.io/rotation.load.html) |
-# | distribution | [odf.discreteSample](https://mtex-toolbox.github.io/SO3Fun.discreteSample.html) |
-# | inversion or reflection | [rotation.inversion](https://mtex-toolbox.github.io/rotation.inversion.html), [reflection](https://mtex-toolbox.github.io/reflection.html) |
+# | distribution | [odf.discreteSample](https://mtex-toolbox.github.io/SO3Fun.discreteSample_py.html) |
+# | inversion or reflection | [rotation.inversion](https://mtex-toolbox.github.io/rotation.inversion_py.html), [reflection](https://mtex-toolbox.github.io/reflection_py.html) |
 
 # %% [markdown]
 # ## References

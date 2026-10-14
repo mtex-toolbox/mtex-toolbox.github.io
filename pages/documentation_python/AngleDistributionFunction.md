@@ -144,7 +144,7 @@ per neighbouring grain pair, so a longer boundary contributes more samples. The 
 [Grain Exchange Symmetry](MisorientationGrainExchangeSym_py.html) for why reversing the
 grains gives an equivalent inverse.
 
-[plotAngleDistribution](plotAngleDistribution.html) displays the measured angles as a
+[plotAngleDistribution](plotAngleDistribution_py.html) displays the measured angles as a
 histogram. Adding the random baseline makes the deviation from symmetry alone visible.
 
 ```python
@@ -166,7 +166,7 @@ same percent-per-bin scale. A standalone smooth curve uses multiples of a random
 distribution (mrd) instead.
 
 The numbers behind the histogram are returned by
-[calcAngleDistribution](orientation.calcAngleDistribution.html).
+[calcAngleDistribution](orientation.calcAngleDistribution_py.html).
 
 ```python
 density, omega = calcAngleDistribution(mori)
@@ -198,7 +198,7 @@ odf = calcDensity(grains['Magnesium'].meanOrientation, halfwidth=10 * degree)
 mdf = calcMDF(SO3FunHarmonic(odf))
 ```
 
-[calcMDF](SO3Fun.calcMDF.html) pairs the texture with itself to obtain the uncorrelated
+[calcMDF](SO3Fun.calcMDF_py.html) pairs the texture with itself to obtain the uncorrelated
 MDF. Plot its angle marginal between the boundary histogram and the symmetry-only
 reference.
 

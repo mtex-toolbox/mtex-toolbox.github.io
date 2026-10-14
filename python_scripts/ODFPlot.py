@@ -55,7 +55,7 @@ odf = 0.1 * unimodalODF(mod1) + 0.2 * unimodalODF(mod2) + 0.7 * fibreODF(Miller(
 # %% [markdown]
 # ## Three-Dimensional Bunge Plot
 #
-# [plot3d](https://mtex-toolbox.github.io/SO3Fun.plot3d.html) with `'Bunge'` uses the Euler angles
+# [plot3d](https://mtex-toolbox.github.io/SO3Fun.plot3d_py.html) with `'Bunge'` uses the Euler angles
 # $(\varphi_1,\Phi,\varphi_2)$ as Cartesian plot coordinates.
 
 # %%
@@ -97,7 +97,7 @@ mtexColorbar(title='mrd')
 # %% [markdown]
 # ## Classical Euler Sections
 #
-# [plotSection](https://mtex-toolbox.github.io/SO3Fun.plotSection.html) evaluates the ODF on a stack of two-dimensional
+# [plotSection](https://mtex-toolbox.github.io/SO3Fun.plotSection_py.html) evaluates the ODF on a stack of two-dimensional
 # slices. The explicit `'phi2'` flag selects the classical sections of constant third
 # Bunge Euler angle $\varphi_2$. By default the sections are at constant angles of
 # $\varphi_2$.
@@ -191,7 +191,7 @@ eulerBounds
 # times the volume needed for one representative, which explains the repeated
 # appearances in the first figure.
 #
-# Given an arbitrary orientation, [projectIntoEulerRegion](https://mtex-toolbox.github.io/orientation.project2EulerFR.html)
+# Given an arbitrary orientation, [projectIntoEulerRegion](https://mtex-toolbox.github.io/orientation.project2EulerFR_py.html)
 # selects a symmetry-equivalent representative inside this Euler box.
 
 # %%

@@ -28,7 +28,7 @@ This page assumes that grains have already been reconstructed as in
 [Grain Boundary Properties](BoundaryProperties_py.html) introduces segments, chains, and
 the two grain IDs stored beside each segment.
 
-The [curvature](grainBoundary.curvature.html) is the reciprocal of a local circle
+The [curvature](grainBoundary.curvature_py.html) is the reciprocal of a local circle
 radius. Its unit is therefore the inverse of the EBSD coordinate unit, usually 1/µm. A
 circle of radius 2 has constant curvature magnitude 1/2. The closing maths section gives
 the precise three-point definition.
@@ -104,7 +104,7 @@ ring-shaped grain 3 and is stored the other way around, with the enclosed grain 
 first column.
 
 The column order is not an intrinsic property of an unoriented boundary. It follows from
-the direction in which each chain is walked. The [flip](grainBoundary.flip.html) command
+the direction in which each chain is walked. The [flip](grainBoundary.flip_py.html) command
 reverses the walk, swaps the two columns, and changes the sign of the curvature.
 
 ```python
@@ -117,7 +117,7 @@ turnsBeforeAfterFlip
 ```
 
 ```text
-array([-1.0244,  1.0244])
+array([-1.0255,  1.0255])
 ```
 
 The normalized sums are about -1.02 and 1.02. Reversing the walk changes only the sign.
@@ -180,7 +180,7 @@ numberUndefined
 ```
 
 Two different operations are called smoothing here. The earlier
-[smoothBoundary](grain2d.smoothBoundary.html) call changed the boundary geometry to
+[smoothBoundary](grain2d.smoothBoundary_py.html) call changed the boundary geometry to
 suppress its pixel staircase. That step matters because local curvature amplifies small
 geometric irregularities.
 

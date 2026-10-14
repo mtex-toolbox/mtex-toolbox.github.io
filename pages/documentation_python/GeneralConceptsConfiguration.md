@@ -104,7 +104,7 @@ configuration.
 ## Plot alignment is not an ordinary preference
 
 The alignment of plots is no longer an ordinary preference. It belongs to the
-[reference frame](referenceFrame.referenceFrame.html) in which the data is expressed. A
+[reference frame](referenceFrame.referenceFrame_py.html) in which the data is expressed. A
 reference frame identifies the coordinate system and basis of the data; it is distinct
 from the symmetry attached to that frame.
 

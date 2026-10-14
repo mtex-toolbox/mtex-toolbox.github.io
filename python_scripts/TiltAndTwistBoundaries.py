@@ -135,7 +135,7 @@ oriGB
 
 # %% [markdown]
 # The displayed size has one row per segment and two columns for its two sides.
-# [`axis`](https://mtex-toolbox.github.io/orientation.axis.html) computes their axes in the specimen frame.
+# [`axis`](https://mtex-toolbox.github.io/orientation.axis_py.html) computes their axes in the specimen frame.
 
 # %%
 axS = axis(oriGB[:, 0], oriGB[:, 1], antipodal=True)

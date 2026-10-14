@@ -1,0 +1,33 @@
+---
+title: 'Miller.project2FundamentalRegion'
+sidebar: function_reference_sidebar
+permalink: Miller.project2FundamentalRegion_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+counterpart: Miller.project2FundamentalRegion.html
+status: Reference
+---
+{% raw %}
+A method of [vector3d](vector3d_index_py.html).
+
+the directions folded into the fundamental sector of their frame, with antipodal=True into
+that of the Laue group; given a centre, the equivalent nearest it instead
+(MATLAB's vector3d.project2FundamentalRegion, Miller.project2FundamentalRegion)
+
+## Syntax
+
+```python
+vector3d.project2FundamentalRegion(self, center=None, antipodal=False)
+```
+
+```python
+v.projectIntoFundamentalRegion()
+v.projectIntoFundamentalRegion(center)
+```
+
+MATLAB's [Miller.project2FundamentalRegion](Miller.project2FundamentalRegion.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L786">source</a></font>
+{% endraw %}

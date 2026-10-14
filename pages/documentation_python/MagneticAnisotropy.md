@@ -102,7 +102,7 @@ orientations, while a field along TD lies between easy axes.
 ## Evaluate directions in the sheet plane
 
 The field turns from RD to TD in 5 degree steps. Each
-[orientation](orientation.orientation.html) maps crystal coordinates into specimen
+[orientation](orientation.orientation_py.html) maps crystal coordinates into specimen
 coordinates, so its inverse maps the specimen field direction into the crystal frame.
 The code operates on all 10000 sampled orientations at once; only the list of field
 directions needs a loop.
@@ -134,7 +134,7 @@ for k in range(len(fieldAngle)):
 ## Average the texture and estimate J50
 
 The arithmetic mean approximates the ODF-weighted material-volume average because
-[discreteSample](SO3Fun.discreteSample.html) drew equal-weight orientations from the
+[discreteSample](SO3Fun.discreteSample_py.html) drew equal-weight orientations from the
 ODF. Yonamine et al. fitted the second line below to electrical-steel measurements.
 
 ```python
@@ -150,10 +150,10 @@ directionalResults
 ```
 
 ```text
-array([[ 0.    ,  0.1596,  1.9107],
-       [45.    ,  1.1905,  1.5248],
-       [55.    ,  1.2576,  1.4997],
-       [90.    ,  0.9822,  1.6028]])
+array([[ 0.    ,  0.1585,  1.9112],
+       [45.    ,  1.1913,  1.5245],
+       [55.    ,  1.2586,  1.4993],
+       [90.    ,  0.9826,  1.6026]])
 ```
 
 At RD the mean energy is 0.1628 in units of $$10^4$$ J/m$$^3$$, and the predicted $$J_{50}$$
@@ -196,7 +196,7 @@ magnetization and the three crystal axes. The expression is invariant when cubic
 symmetry permutes or reverses those axes.
 
 The three cosines still have to be evaluated separately. Without `symmetry=False`,
-[dot](vector3d.dot.html) compares a direction with symmetrically equivalent Miller
+[dot](vector3d.dot_py.html) compares a direction with symmetrically equivalent Miller
 directions and returns the best match. That would replace the three components
 required by the equation with three symmetry-reduced comparisons.
 

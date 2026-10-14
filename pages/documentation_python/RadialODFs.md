@@ -50,7 +50,7 @@ $$f(g) = 1,\quad g \in SO(3).$$
 
 It represents an untextured specimen at 1 multiple of a random distribution (mrd)
 everywhere. Only the crystal and specimen symmetries are needed by
-[uniformODF](uniformODF.html). The printed summary is useful here because it records
+[uniformODF](uniformODF_py.html). The printed summary is useful here because it records
 both.
 
 ```python
@@ -97,7 +97,7 @@ SO3FunRBF (432 → y↑→x)
 
 The kernel halfwidth is the angular distance at which the peak has fallen to half its
 maximum. It is a spread parameter, not a cutoff. If the kernel is omitted,
-[unimodalODF](unimodalODF.html) uses the de la Vallee Poussin kernel with a halfwidth
+[unimodalODF](unimodalODF_py.html) uses the de la Vallee Poussin kernel with a halfwidth
 of $$10^\circ$$.
 
 ## Several Radial Components

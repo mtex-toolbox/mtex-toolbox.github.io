@@ -19,7 +19,7 @@ plane normal is an axis when the two sides of the plane are physically equivalen
 Reversing the axis of a twofold rotation likewise describes the same $$180^\circ$$
 rotation.
 
-MTEX represents directions and axes with [vector3d](vector3d.vector3d.html). The logical
+MTEX represents directions and axes with [vector3d](vector3d.vector3d_py.html). The logical
 property `antipodal` records the difference. When it is true, `v` and `-v` represent the
 same axis.
 
@@ -69,7 +69,7 @@ This option affects this plot only; it does not change either input variable.
 
 ## Angles and Axial Means
 
-The [angle](vector3d.angle.html) between directed vectors ranges from $$0^\circ$$ to
+The [angle](vector3d.angle_py.html) between directed vectors ranges from $$0^\circ$$ to
 $$180^\circ$$. The angle between axes is measured to whichever end is closer and is
 therefore never greater than $$90^\circ$$.
 
@@ -121,7 +121,7 @@ axisMeanMisfit
 ```
 
 The directed mean has length 0. The axial mean is aligned with the X axis, so its axial
-misfit is $$0^\circ$$. The [mean](vector3d.mean.html) of axes uses their unoriented lines
+misfit is $$0^\circ$$. The [mean](vector3d.mean_py.html) of axes uses their unoriented lines
 rather than averaging signed components.
 
 ## Attaching the Flag to the Data

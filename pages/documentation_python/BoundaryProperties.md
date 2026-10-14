@@ -30,8 +30,8 @@ trace in a two-dimensional section.
 | `ebsdId` | neighbouring pixel IDs | `grainId` | neighbouring grain IDs |
 | `phaseId` | neighbouring phase IDs | `misorientation` | rotation across the segment |
 | `F` | endpoint vertex IDs | `direction` | segment direction |
-| `midPoint` | segment midpoint | [segLength](grainBoundary.segLength.html) | segment length |
-| [curvature](grainBoundary.curvature.html) | signed segment curvature | `triplePoints` | triple-point list |
+| `midPoint` | segment midpoint | [segLength](grainBoundary.segLength_py.html) | segment length |
+| [curvature](grainBoundary.curvature_py.html) | signed segment curvature | `triplePoints` | triple-point list |
 | `chainId` | chain label | `chainSize` | number of segments in the chain |
 | `arcLength` | distance along the chain | `chainLength` | total chain length |
 | `isClosed` | whether the chain closes | `junctionId` | junction vertex IDs |
@@ -58,7 +58,7 @@ grains = calcGrains(ebsd, angle=10 * degree, minPixel=3)
 This page uses `ebsdId` to inspect the pixel pair beside each segment. Boundary
 simplification and refinement change the segment count, and a resampled segment no
 longer lies between one specific pixel pair. The
-[smoothBoundary](grain2d.smoothBoundary.html) options `simplify=False` and `refine=False`
+[smoothBoundary](grain2d.smoothBoundary_py.html) options `simplify=False` and `refine=False`
 preserve that relation while smoothing.
 
 ```python
@@ -301,7 +301,7 @@ The colour flickers along boundaries that are straight on the scale of several p
 This is the pixel staircase: one segment has only a few possible grid directions,
 regardless of the direction of the underlying boundary.
 
-[calcMeanDirection](grainBoundary.calcMeanDirection.html) uses a window along each chain
+[calcMeanDirection](grainBoundary.calcMeanDirection_py.html) uses a window along each chain
 and never crosses a junction. An argument of 4 includes four neighbouring segments on
 each side of the segment.
 
@@ -336,7 +336,7 @@ boundary. A large angle to the trace settles nothing on its own.
 
 ## Where a segment is
 
-`midPoint` gives the segment position as a [vector3d](vector3d.vector3d.html). It
+`midPoint` gives the segment position as a [vector3d](vector3d.vector3d_py.html). It
 supplies the anchor for quantities drawn at a segment, such as the misorientation axes
 computed above.
 
@@ -373,7 +373,7 @@ Red marks segments above $$y = 30$$ micrometres, and blue marks the rest.
 per-segment properties.
 
 Two lengths are easy to confuse. `len(gB_Mg)` is the number of segments, whereas
-[segLength](grainBoundary.segLength.html) contains the length of each segment in µm.
+[segLength](grainBoundary.segLength_py.html) contains the length of each segment in µm.
 Their sum is the total length of the selected boundary list.
 
 ```python

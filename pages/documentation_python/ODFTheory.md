@@ -92,7 +92,7 @@ compared in [3D Plots](OrientationVisualization3d_py.html).
 
 ## From Orientations to a Density
 
-[calcDensity](rotation.calcDensity.html) places a kernel at every orientation and adds
+[calcDensity](rotation.calcDensity_py.html) places a kernel at every orientation and adds
 the kernels. The full indexed pixel list is used here, so equal-area pixels have equal
 statistical weight.
 

@@ -166,7 +166,7 @@ change when specimen symmetry is imposed.
 
 ## Specimen Symmetry and the Specimen Frame
 
-A [reference frame](referenceFrame.referenceFrame.html) is the coordinate system in which
+A [reference frame](referenceFrame.referenceFrame_py.html) is the coordinate system in which
 data are expressed. A symmetry is the point group under which those data are invariant.
 The two are attached, but they are not the same concept.
 

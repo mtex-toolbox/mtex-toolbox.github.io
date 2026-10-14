@@ -35,8 +35,8 @@ plotSection(ori, val, 'sigma', all=True)
 #
 # ## Start with bandwidth
 #
-# [interp](https://mtex-toolbox.github.io/rotation.interp.html) selects a harmonic fit with the flag `'harmonic'`.
-# Internally it calls [SO3FunHarmonic.interpolate](https://mtex-toolbox.github.io/SO3FunHarmonic.interpolate.html). The
+# [interp](https://mtex-toolbox.github.io/rotation.interp_py.html) selects a harmonic fit with the flag `'harmonic'`.
+# Internally it calls [SO3FunHarmonic.interpolate](https://mtex-toolbox.github.io/SO3FunHarmonic.interpolate_py.html). The
 # bandwidth is the largest harmonic degree in the fitted series. A low bandwidth limits the
 # number of unknown coefficients and therefore limits how quickly the function can vary.
 #
@@ -115,7 +115,7 @@ plot(SO3F2, 'sigma')
 #
 # ## Read the spectrum
 #
-# [plotSpectrum](https://mtex-toolbox.github.io/SO3Fun.plotSpektra.html) summarizes the coefficient energy at each harmonic
+# [plotSpectrum](https://mtex-toolbox.github.io/SO3Fun.plotSpektra_py.html) summarizes the coefficient energy at each harmonic
 # degree. It reveals high-frequency content that can be difficult to distinguish in a
 # section plot.
 

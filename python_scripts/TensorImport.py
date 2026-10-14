@@ -24,7 +24,7 @@ plottingConvention.default('y↑→x')
 # %% [markdown]
 # ## Load a generic tensor
 #
-# [tensor.load](https://mtex-toolbox.github.io/tensor.load.html) reads the coefficient table of a text file.
+# [tensor.load](https://mtex-toolbox.github.io/tensor.load_py.html) reads the coefficient table of a text file.
 # Reading the table does not establish what the coefficients mean.
 #
 # The bundled quartz file contains descriptive header lines, but only its
@@ -72,7 +72,7 @@ P
 # ## Load a physically specific tensor
 #
 # Common physical tensors have dedicated loaders. The
-# [stiffnessTensor.load](https://mtex-toolbox.github.io/stiffnessTensor.stiffnessTensor.html) method returns
+# [stiffnessTensor.load](https://mtex-toolbox.github.io/stiffnessTensor.stiffnessTensor_py.html) method returns
 # the physically typed class, fixes rank 4, uses the stiffness form of the
 # Voigt convention, and supplies GPa as the default unit label.
 #
@@ -104,7 +104,7 @@ C
 # %% [markdown]
 # ## Check compatibility with crystal symmetry
 #
-# [checkSymmetry](https://mtex-toolbox.github.io/tensor.checkSymmetry.html) tests whether each imported
+# [checkSymmetry](https://mtex-toolbox.github.io/tensor.checkSymmetry_py.html) tests whether each imported
 # tensor is invariant under its attached crystal point group.
 # The two logical values below correspond to quartz and olivine.
 

@@ -22,7 +22,7 @@ plottingConvention.default('y↑→x')
 # ## The Lattice and Its Crystal Frame
 #
 # Miller indices have meaning only together with the lattice they refer to. A
-# [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame.html) stores the point symmetry, lattice metric
+# [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame_py.html) stores the point symmetry, lattice metric
 # and crystal frame of a phase.
 #
 # A reference frame is the coordinate system in which data are expressed. The crystal
@@ -60,7 +60,7 @@ metricAngleAC
 #
 # $$\vec m=u\vec a+v\vec b+w\vec c.$$
 #
-# Its direction is written $[uvw]$. In MTEX it is represented by a [Miller](https://mtex-toolbox.github.io/Miller.html)
+# Its direction is written $[uvw]$. In MTEX it is represented by a [Miller](https://mtex-toolbox.github.io/Miller_py.html)
 # with display style `'uvw'`.
 
 # %%
@@ -79,7 +79,7 @@ annotate(directAxes, label=['a', 'b', 'c'], backgroundColor='w', textAboveMarker
 # The marker is the direction of $\vec a+\vec c$. The labelled axes show how its position
 # must be read in this non-orthogonal lattice.
 #
-# A [plotting convention](https://mtex-toolbox.github.io/plottingConvention.html) controls how a reference frame is laid
+# A [plotting convention](https://mtex-toolbox.github.io/plottingConvention_py.html) controls how a reference frame is laid
 # out on screen. Changing it does not rotate the direction or alter its indices.
 
 # %%
@@ -194,7 +194,7 @@ mThreeIndex = m
 mThreeIndex
 
 # %% [markdown]
-# [round](https://mtex-toolbox.github.io/vector3d.round.html) rescales the same direction to an equivalent small integer
+# [round](https://mtex-toolbox.github.io/vector3d.round_py.html) rescales the same direction to an equivalent small integer
 # triplet.
 
 # %%
@@ -215,7 +215,7 @@ nThreeIndex
 
 # %% [markdown]
 # Internally, each `Miller` stores Cartesian components like a
-# [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html). Its crystal frame and `dispStyle` retain how those
+# [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html). Its crystal frame and `dispStyle` retain how those
 # components should be interpreted and displayed. A direct vector stays direct when
 # switching from `UVTW` to `uvw`, and a reciprocal normal stays reciprocal when switching
 # from `hkil` to `hkl`.

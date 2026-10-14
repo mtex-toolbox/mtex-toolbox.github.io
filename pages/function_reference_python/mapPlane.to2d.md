@@ -1,0 +1,23 @@
+---
+title: 'mapPlane.to2d'
+sidebar: function_reference_sidebar
+permalink: mapPlane.to2d_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+status: Reference
+---
+{% raw %}
+A method of [mapPlane](mapPlane_index_py.html).
+
+the coordinates in the plane of positions of shape (..., 3), as (..., 2)
+
+## Syntax
+
+```python
+mapPlane.to2d(self, xyz)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L83">source</a></font>
+{% endraw %}

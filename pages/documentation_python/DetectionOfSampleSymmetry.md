@@ -25,7 +25,7 @@ The symmetry is easy to recognize only when its axes agree with the
 about the horizontal and vertical specimen axes. A slightly tilted mounting moves the
 symmetry axes without removing the symmetry of the material.
 
-[centerSpecimen](SO3Fun.centerSpecimen.html) searches an
+[centerSpecimen](SO3Fun.centerSpecimen_py.html) searches an
 [orientation distribution function](ODFTheory_py.html) (ODF) for two perpendicular twofold
 axes. It then rotates those axes onto the nearest specimen axes. The method aligns an
 assumed orthotropic texture; it does not prove that the specimen has orthotropic
@@ -122,7 +122,7 @@ print(f'difference between applied and recovered rotation: {recoveryError:.3f} d
 ```
 
 ```text
-difference between applied and recovered rotation: 0.547 degree
+difference between applied and recovered rotation: 0.815 degree
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/DetectionOfSampleSymmetry-4.png"></center>

@@ -200,7 +200,7 @@ np.mean(boundaryAlpha == 1)
 ```
 
 ```text
-0.8162
+0.8172
 ```
 
 ## Look through transparent surfaces

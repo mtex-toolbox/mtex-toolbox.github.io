@@ -59,7 +59,7 @@ later on must agree with this value.
 
 ## Exporting Euler Angles
 
-[export](quaternion.export.html) writes one orientation per row. Here we name the Bunge
+[export](quaternion.export_py.html) writes one orientation per row. Here we name the Bunge
 convention explicitly, so a session preference cannot change the file. The angles are
 written in degree unless `radians=True` is passed.
 
@@ -78,10 +78,10 @@ with open(fname) as f:
 ```
 
 ```text
-   phi1     Phi    phi2
-33.0709 51.5611 249.956
-37.7874 48.2797 136.118
-214.763 124.146 339.861
+   phi1     Phi       phi2
+218.887  128.13    7.85836
+ 199.86 129.784    98.3586
+192.146 113.646    224.277
 ```
 
 ## Other Conventions and Units
@@ -98,10 +98,10 @@ with open(fname) as f:
 ```
 
 ```text
-  alpha     beta   gamma
-5.28958 0.899911 5.93335
- 5.3719  0.84264  3.9465
-2.17753  2.16676 1.21931
+  alpha     beta    gamma
+2.24951  2.23629  1.70795
+1.91741  2.26516  3.28748
+1.78278   1.9835  5.48518
 ```
 
 The new header and values describe the same orientations in a different convention and
@@ -121,9 +121,9 @@ with open(fname) as f:
 ```
 
 ```text
-         a          b          c          d
- -0.704842  -0.137589  -0.412588    0.56039
-  0.048513   0.267414  -0.309422   0.911259
+          a          b           c         d
+   0.173502   0.240543   -0.866524 -0.401463
+  -0.364134   0.572915    0.701225  0.217851
 ```
 
 MTEX writes the scalar component first, in the order `a`, `b`, `c`, `d`. Other programs
@@ -134,7 +134,7 @@ columns.
 ## Exporting Additional Columns
 
 Often an orientation needs an associated weight, grain size, or another quantity. A
-dictionary passed to [export](quaternion.export.html) appends one column per entry and
+dictionary passed to [export](quaternion.export_py.html) appends one column per entry and
 uses the keys as column headers. Every entry must supply one value per orientation.
 
 ```python
@@ -148,9 +148,9 @@ with open(fname) as f:
 ```
 
 ```text
-   phi1     Phi    phi2   angle weight
-33.0709 51.5611 249.956 66.1969   0.01
-37.7874 48.2797 136.118 71.1351   0.01
+   phi1     Phi       phi2   angle weight
+218.887  128.13    7.85836 59.8857   0.01
+ 199.86 129.784    98.3586 64.2756   0.01
 ```
 
 The preview shows that `angle` and `weight` remain aligned with the Euler angles on each
@@ -158,7 +158,7 @@ row.
 
 ## The VPSC Format
 
-[export](orientation.export_VPSC.html) with `interface='VPSC'` writes individual orientations in the
+[export](orientation.export_VPSC_py.html) with `interface='VPSC'` writes individual orientations in the
 texture format expected by the VPSC crystal plasticity code. It writes three Euler
 angles and one relative volume fraction per row.
 
@@ -179,8 +179,8 @@ texture exported by MTEX
 
 
 B 100
-  33.07   51.56  249.96   0.0100000
-  37.79   48.28  136.12   0.0100000
+ 218.89  128.13    7.86   0.0100000
+ 199.86  129.78   98.36   0.0100000
 ```
 
 The line `B 100` identifies Bunge angles and the 100 orientations. The following rows
@@ -209,8 +209,8 @@ texture exported by MTEX
 
 
 B 100
-  33.07   51.56  249.96   0.0001980
-  37.79   48.28  136.12   0.0003960
+ 218.89  128.13    7.86   0.0001980
+ 199.86  129.78   98.36   0.0003960
 1.0000
 ```
 

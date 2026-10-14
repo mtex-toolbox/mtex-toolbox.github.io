@@ -25,8 +25,8 @@ This page assumes the three-dimensional directions introduced in
 [Defining Three-Dimensional Vectors](VectorDefinition_py.html) and basic matrix algebra.
 
 MTEX can build a rotation from Euler angles, an axis and angle, a matrix, or the action
-on directions. Every constructor returns a [rotation](rotation.rotation.html) array. MTEX
-stores its proper part internally as a [unit quaternion](quaternion.quaternion.html).
+on directions. Every constructor returns a [rotation](rotation.rotation_py.html) array. MTEX
+stores its proper part internally as a [unit quaternion](quaternion.quaternion_py.html).
 
 ```python
 import numpy as np
@@ -99,7 +99,7 @@ array([120.,  50., 280.])
 These are two descriptions of the same rotation. The separate question of which way an
 orientation maps coordinates is covered in [MTEX vs. Bunge Convention](MTEXvsBungeConvention_py.html).
 
-For interactive work, [setMTEXpref](setMTEXpref.html) changes the session's default
+For interactive work, [setMTEXpref](setMTEXpref_py.html) changes the session's default
 Euler convention. Explicit conventions remain safer in files that must be reproducible.
 
 ## Euler Angles Are Not Unique
@@ -243,7 +243,7 @@ vector3d (y↑→x)
   0  0.866  0.5
 ```
 
-[rotation.byMatrix](rotation.byMatrix.html) reconstructs the rotation.
+[rotation.byMatrix](rotation.byMatrix_py.html) reconstructs the rotation.
 
 ```python
 rotFromM = rotation.byMatrix(M)
@@ -287,7 +287,7 @@ The output reproduces the two target directions Y and Z. MTEX raises an error if
 angles within the pairs disagree or if the input directions are collinear.
 
 One pair leaves a rotation about the target direction undetermined.
-[rotation.map](rotation.map.html) then returns the smallest-angle rotation taking the
+[rotation.map](rotation.map_py.html) then returns the smallest-angle rotation taking the
 first direction to the second.
 
 ```python
@@ -307,7 +307,7 @@ Supply a second pair when the particular half turn matters.
 ## Fitting Measured Directions
 
 More than two measured pairs will usually not agree exactly. The least-squares solution
-from [rotation.fit](rotation.fit.html) makes `rotFit * left` as close as possible to
+from [rotation.fit](rotation.fit_py.html) makes `rotFit * left` as close as possible to
 `right`.
 
 ```python
@@ -321,7 +321,7 @@ angle(rot, rotFit) / degree
 ```
 
 ```text
-2.0085
+0.9974
 ```
 
 The nonzero error comes from the added perturbations. By default, `rotation.fit` uses
@@ -330,7 +330,7 @@ method.
 
 ## Random Rotations
 
-[rotation.rand](rotation.rand.html) samples the uniform, or Haar, distribution on the
+[rotation.rand](rotation.rand_py.html) samples the uniform, or Haar, distribution on the
 rotation group. Its size arguments create an array of rotations, just as size arguments
 do for NumPy arrays.
 
@@ -387,18 +387,18 @@ imported, and improper rotations.
 
 | input | constructor |
 |---|---|
-| Euler angles | [rotation.byEuler](rotation.byEuler.html) |
-| axis and angle | [rotation.byAxisAngle](rotation.byAxisAngle.html) |
-| matrix | [rotation.byMatrix](rotation.byMatrix.html) |
-| Rodrigues--Frank vector | [rotation.byRodrigues](rotation.byRodrigues.html) |
-| homochoric vector | [rotation.byHomochoric](rotation.byHomochoric.html) |
-| unit quaternion | [rotation(q)](rotation.rotation.html) |
-| exact direction pairs | [rotation.map](rotation.map.html) |
-| noisy direction pairs | [rotation.fit](rotation.fit.html) |
-| identity, random, or missing | [rotation.id](rotation.id.html), [rotation.rand](rotation.rand.html), [rotation.nan](rotation.nan.html) |
+| Euler angles | [rotation.byEuler](rotation.byEuler_py.html) |
+| axis and angle | [rotation.byAxisAngle](rotation.byAxisAngle_py.html) |
+| matrix | [rotation.byMatrix](rotation.byMatrix_py.html) |
+| Rodrigues--Frank vector | [rotation.byRodrigues](rotation.byRodrigues_py.html) |
+| homochoric vector | [rotation.byHomochoric](rotation.byHomochoric_py.html) |
+| unit quaternion | [rotation(q)](rotation.rotation_py.html) |
+| exact direction pairs | [rotation.map](rotation.map_py.html) |
+| noisy direction pairs | [rotation.fit](rotation.fit_py.html) |
+| identity, random, or missing | [rotation.id](rotation.id_py.html), [rotation.rand](rotation.rand_py.html), [rotation.nan](rotation.nan_py.html) |
 | file | [rotation.load](rotation.load.html) |
-| distribution | [odf.discreteSample](SO3Fun.discreteSample.html) |
-| inversion or reflection | [rotation.inversion](rotation.inversion.html), [reflection](reflection.html) |
+| distribution | [odf.discreteSample](SO3Fun.discreteSample_py.html) |
+| inversion or reflection | [rotation.inversion](rotation.inversion_py.html), [reflection](reflection_py.html) |
 
 ## References
 

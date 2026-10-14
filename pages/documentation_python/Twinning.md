@@ -55,7 +55,7 @@ twinDirection = Miller(1, -1, 0, 1, CS, 'uvw')
 twinning = orientation.map(parentPlane, twinPlane, parentDirection, twinDirection)
 ```
 
-[round2Miller](orientation.round2Miller.html) recovers one low-index description of the
+[round2Miller](orientation.round2Miller_py.html) recovers one low-index description of the
 relationship. Crystal symmetry permits several equally valid descriptions. The reported
 indices therefore need not repeat the input representatives.
 
@@ -92,7 +92,7 @@ physical interface.
 ## Why 86.3 Degrees and 180 Degrees Are Both Correct
 
 A twin law is an equivalence class of rotations under crystal symmetry.
-[angle](orientation.angle.html) returns the smallest-angle representative by default,
+[angle](orientation.angle_py.html) returns the smallest-angle representative by default,
 while the `max` option returns the largest-angle representative.
 
 ```python
@@ -198,7 +198,7 @@ candidateTracePercent
 ```
 
 ```text
-49.0569
+49.0986
 ```
 
 With this segmentation, smoothing, and tolerance, candidates account for about 49 percent

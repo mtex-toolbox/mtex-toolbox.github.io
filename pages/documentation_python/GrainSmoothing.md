@@ -21,12 +21,12 @@ segmentation. This page assumes that the grains have already been reconstructed 
 and their links to the neighbouring pixels.
 
 EBSD data is measured on a regular grid, so a grain boundary comes out of
-[calcGrains](EBSD.calcGrains.html) as a staircase of pixel edges. Every segment runs
+[calcGrains](EBSD.calcGrains_py.html) as a staircase of pixel edges. Every segment runs
 along one of the grid axes, whatever direction the boundary actually has. The staircase
 makes the boundary too long, quantizes its direction to a few values, and makes its
 curvature meaningless.
 
-[smoothBoundary](grain2d.smoothBoundary.html) repairs this geometry.
+[smoothBoundary](grain2d.smoothBoundary_py.html) repairs this geometry.
 
 ```python
 import matplotlib.pyplot as plt
@@ -83,7 +83,7 @@ print(f'total boundary length: {lenRaw:.0f} {grains.scanUnit} measured, {lenSmoo
 ```
 
 ```text
-total boundary length: 19417 um measured, 15647 um smoothed - 19% shorter
+total boundary length: 19417 um measured, 15672 um smoothed - 19% shorter
 ```
 
 The direction distribution shows the same grid artifact. The raw boundary follows two
@@ -141,14 +141,14 @@ This is the shrinkage discussed next.
 
 ## Which algorithm - the short version
 
-A [boundaryFilter](boundaryFilter.html) selects the algorithm used for the final
+A [boundaryFilter](boundaryFilter_py.html) selects the algorithm used for the final
 smoothing stage. Two choices cover most practical work.
 
 *Use the default* when the smoothed boundary is for plotting or for measuring directions
 and lengths. It is a fast Laplacian, and it is what `smoothBoundary(grains, 5)` selects
 without being asked.
 
-*Use [taubinFilter](taubinFilter.html) when grain areas or shape parameters matter.* A
+*Use [taubinFilter](taubinFilter_py.html) when grain areas or shape parameters matter.* A
 Laplacian shrinks. Every iteration pulls a convex region inward, and nothing bounds how
 far. Taubin follows every smoothing pass with a slightly larger unshrinking pass, which
 stops the systematic drift.
@@ -174,8 +174,8 @@ print(f'  taubinFilter            {100 * np.mean((aT - A0) / A0):+6.2f}% on aver
 
 ```text
 grain area after 25 iterations
-  laplaceFilter (default)  -2.44% on average,  -61.5% for the worst grain
-  taubinFilter             -0.08% on average,   -6.9% for the worst grain
+  laplaceFilter (default)  -2.49% on average,  -61.5% for the worst grain
+  taubinFilter             -0.10% on average,   -6.6% for the worst grain
 ```
 
 The reference has passed through simplification and resampling but has zero smoothing
@@ -207,7 +207,7 @@ much closer to the measured outline.
 
 ## A physical smoothing length
 
-[curvatureFilter](curvatureFilter.html) replaces the iteration count with a length: the
+[curvatureFilter](curvatureFilter_py.html) replaces the iteration count with a length: the
 wavelength whose amplitude is reduced by half. Finer detail is attenuated more strongly,
 while coarser detail is preserved more strongly. Because the parameter is a length, it
 has the same meaning for scans made at different step sizes.
@@ -229,7 +229,7 @@ The orange curve removes pixel-scale turns but follows the larger bends of the m
 boundary. Use one physical smoothing length across scans when their spatial resolutions
 differ.
 
-[huberFilter](huberFilter.html) is available for faceted materials. It keeps genuine
+[huberFilter](huberFilter_py.html) is available for faceted materials. It keeps genuine
 corners sharp instead of rounding them off. It is not a good default; see
 [Smoothing Algorithms](GrainSmoothingAdvanced_py.html).
 
@@ -248,7 +248,7 @@ print(f'boundary segments: {len(grains.boundary)} measured, {len(grainsSmooth.bo
 ```
 
 ```text
-boundary segments: 21296 measured, 18453 after smoothing, 21296 with both steps off
+boundary segments: 21296 measured, 18424 after smoothing, 21296 with both steps off
 ```
 
 Only the last count remains equal to the measured count. It therefore keeps one valid

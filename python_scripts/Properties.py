@@ -6,9 +6,9 @@
 # object and its per-element data makes a property useful for filtering, colouring, and later
 # calculations.
 #
-# List-like classes include [EBSD](https://mtex-toolbox.github.io/EBSD.EBSD.html), [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d.html),
-# [grainBoundary](https://mtex-toolbox.github.io/grainBoundary.grainBoundary.html), and
-# [PoleFigure](https://mtex-toolbox.github.io/PoleFigure.PoleFigure.html). For an EBSD map, a property has one value per
+# List-like classes include [EBSD](https://mtex-toolbox.github.io/EBSD.EBSD_py.html), [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d_py.html),
+# [grainBoundary](https://mtex-toolbox.github.io/grainBoundary.grainBoundary_py.html), and
+# [PoleFigure](https://mtex-toolbox.github.io/PoleFigure.PoleFigure_py.html). For an EBSD map, a property has one value per
 # measurement point. The expression `ebsd[condition].mad` therefore returns exactly the MAD
 # values at the selected points.
 #
@@ -99,7 +99,7 @@ mtexColorbar(title='my quality')
 # ## Properties may store MTEX objects
 #
 # A property does not have to be numeric. Any value that supports indexing can be stored. The
-# next property contains one [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html) per forsterite point. Each
+# next property contains one [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html) per forsterite point. Each
 # vector is the specimen direction of that point's crystallographic $c$ axis.
 
 # %%

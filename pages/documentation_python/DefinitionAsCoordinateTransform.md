@@ -38,8 +38,8 @@ plottingConvention.default('y↑→x')
 
 ## The Two Ingredients
 
-An orientation combines a [rotation](rotation.rotation.html) with the symmetry, lattice
-metric, and crystal frame stored by a [crystalFrame](crystalFrame.crystalFrame.html).
+An orientation combines a [rotation](rotation.rotation_py.html) with the symmetry, lattice
+metric, and crystal frame stored by a [crystalFrame](crystalFrame.crystalFrame_py.html).
 
 ```python
 rot = rotation.byEuler(10 * degree, 20 * degree, 30 * degree, 'Bunge')
@@ -170,12 +170,12 @@ stiffnessTensor (y↑→x)
 
 Everything defined in the crystal frame travels in the same direction:
 
-* crystal directions
-* [tensors](tensor.tensor.html)
-* [slip systems](slipSystem.slipSystem.html)
+* [crystal directions](Miller_py.html)
+* [tensors](tensor.tensor_py.html)
+* [slip systems](slipSystem.slipSystem_py.html)
 * twinning systems
-* [dislocation systems](dislocationSystem.dislocationSystem.html)
-* [crystal shapes](crystalShape.crystalShape.html)
+* [dislocation systems](dislocationSystem.dislocationSystem_py.html)
+* [crystal shapes](crystalShape.crystalShape_py.html)
 
 ## And Back Again
 
@@ -259,7 +259,7 @@ multiplication.
 
 Right multiplication has a second, symmetry-aware meaning. A point-group operation
 changes the crystal-frame representative but not the physical crystal setting.
-[symmetrise](orientation.symmetrise.html) lists those equivalent descriptions.
+[symmetrise](orientation.symmetrise_py.html) lists those equivalent descriptions.
 
 ```python
 equivalentCount = len(ori.symmetrise())
@@ -292,7 +292,7 @@ symmetryResidual
 The stage rotation above moves the physical object in a fixed frame. A *frame change*
 instead re-expresses the same physical object in another reference frame and leaves the
 object untouched. Use
-[transformReferenceFrame](orientation.transformReferenceFrame.html) when crystal data
+[transformReferenceFrame](orientation.transformReferenceFrame_py.html) when crystal data
 use a different Cartesian crystal frame. Orientations also depend on how the Cartesian
 crystal frame $$\vec x$$, $$\vec y$$, $$\vec z$$ is inscribed into the crystal axes $$\vec a$$,
 $$\vec b$$, $$\vec c$$.

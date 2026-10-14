@@ -28,7 +28,7 @@ plottingConvention.default('y↑→x')
 # %% [markdown]
 # ## Read the Crystal Frame from the Summary
 #
-# [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame.html) stores the point group, lattice metric
+# [crystalFrame](https://mtex-toolbox.github.io/crystalFrame.crystalFrame_py.html) stores the point group, lattice metric
 # and crystal frame together. Its printed summary is therefore the first place to check a
 # convention. For this monoclinic example, MTEX uses $\vec x\parallel\vec a^*$ and
 # $\vec z\parallel\vec c$ by default.
@@ -79,7 +79,7 @@ C
 # %% [markdown]
 # The printed Voigt matrix is useful here because its components are the quantities that
 # a frame change must rewrite. The plot below shows the
-# [directional magnitude](https://mtex-toolbox.github.io/tensor.directionalMagnitude.html) $C_{ijkl}n_i n_j n_k n_l$.
+# [directional magnitude](https://mtex-toolbox.github.io/tensor.directionalMagnitude_py.html) $C_{ijkl}n_i n_j n_k n_l$.
 # It is a compact view of the component permutation, not Young's modulus or a complete
 # elastic response.
 
@@ -100,7 +100,7 @@ csTarget
 #
 # A *frame change* re-expresses the same physical object in another reference frame. It
 # does not move the object. For a tensor,
-# [transformReferenceFrame](https://mtex-toolbox.github.io/tensor.transformReferenceFrame.html) applies the required
+# [transformReferenceFrame](https://mtex-toolbox.github.io/tensor.transformReferenceFrame_py.html) applies the required
 # basis change to every component and attaches the target crystal frame.
 
 # %%
@@ -132,7 +132,7 @@ sameDirectionalValue
 # ## Avoid Three Common Mistakes
 #
 # Do not attach `csTarget` to the unmodified component matrix. That would describe a
-# different physical tensor. Use [rotate](https://mtex-toolbox.github.io/tensor.rotate.html) only when the material
+# different physical tensor. Use [rotate](https://mtex-toolbox.github.io/tensor.rotate_py.html) only when the material
 # property itself moves; use `transformReferenceFrame` when only its coordinates change.
 #
 # Do not infer an axis mapping by sorting lattice lengths. Record the old and new basis
@@ -144,7 +144,7 @@ sameDirectionalValue
 # cannot repair a wrong crystal frame. When importing a tensor, also record its units and
 # compact-matrix convention; the complete audit is developed in
 # [Importing Tensor Data](https://mtex-toolbox.github.io/TensorImport_py.html). Orientations use the analogous
-# [transformReferenceFrame](https://mtex-toolbox.github.io/orientation.transformReferenceFrame.html) method.
+# [transformReferenceFrame](https://mtex-toolbox.github.io/orientation.transformReferenceFrame_py.html) method.
 
 # %% [markdown]
 # ## Further Reading

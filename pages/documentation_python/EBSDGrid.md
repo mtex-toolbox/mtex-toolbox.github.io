@@ -15,7 +15,7 @@ status: Checked
 <!--introduction-->
 
 Most EBSD maps are measured on a square or hexagonal scan lattice. By default,
-[EBSD.load](EBSD.load.html) keeps that structure: it returns a map on its square or
+[EBSD.load](EBSD.load_py.html) keeps that structure: it returns a map on its square or
 hexagonal grid whenever every measurement fits on one lattice. Otherwise it keeps the
 measurements as a plain `EBSD` list and explains why.
 
@@ -116,8 +116,8 @@ This layout belongs to the map, not to the file traversal order. It is the same
 whichever corner the acquisition started from.
 
 A stored matrix is not required nearly as often as it once was. The
-[orientation gradient](EBSD.gradientX.html), [curvature](EBSD.curvature.html),
-[GND](EBSD.calcGND.html), and [fill](EBSD.fill.html) operate on the virtual lattice
+[orientation gradient](EBSD.gradientX_py.html), [curvature](EBSD.curvature_py.html),
+[GND](EBSD.calcGND_py.html), and [fill](EBSD.fill_py.html) operate on the virtual lattice
 derived by [lattice](EBSD.lattice.html). They also work on plain lists, phase subsets,
 and arbitrarily aligned maps.
 
@@ -129,7 +129,7 @@ pixels. That order need not match the map. [Maps and Images](EBSDMapsAndImages_p
 compares a real map with SEM images of the same area.
 
 `'columnMajor'` and `'rowMajor'` are the two layouts aligned with x and y. Both are
-[gridLayout](gridLayout.gridLayout.html) objects. A layout names the row direction
+[gridLayout](gridLayout.gridLayout_py.html) objects. A layout names the row direction
 first, in the same order as the shape of the array. Suppose an image's rows run against
 x and its columns run along y, as for a detector mounted a quarter turn from the scan.
 
@@ -247,7 +247,7 @@ or for the whole session.
     setMTEXpref('gridifyOnImport', False)
 
 You may change representation later. `ebsd.flatten()` flattens a gridded map into a
-list, while [gridify](EBSD.gridify.html) puts a list on its grid.
+list, while [gridify](EBSD.gridify_py.html) puts a list on its grid.
 
 ## Selecting a Subset Drops the Matrix Shape
 
@@ -273,7 +273,7 @@ EBSD (y↑→x)
   square lattice: spacing 0.3
 ```
 
-Reapplying [gridify](EBSD.gridify.html) restores the matrix shape.
+Reapplying [gridify](EBSD.gridify_py.html) restores the matrix shape.
 
 ```python
 ebsdMg = ebsd['Magnesium'].gridify()
@@ -319,7 +319,7 @@ plot(ebsdMg[49:100, 4:100], ebsdMg[49:100, 4:100].orientations)
 
 ## Gridding Reorders the Measurements
 
-[gridify](EBSD.gridify.html) does not preserve input order, and generally cannot. The
+[gridify](EBSD.gridify_py.html) does not preserve input order, and generally cannot. The
 layout fixes the first matrix dimension to y, whereas `.ctf` and `.ang` files usually
 write x fastest. Consequently, the k-th entry of the flattened grid is generally not
 line k of the input file.
@@ -354,7 +354,7 @@ True
 
 
 This distinction matters only to code that depends on input order. Grain reconstruction
-does not: [calcGrains](EBSD.calcGrains.html) returns the same grains from the list and
+does not: [calcGrains](EBSD.calcGrains_py.html) returns the same grains from the list and
 from the map.
 
 ## The Gradient
@@ -417,7 +417,7 @@ matrix is rectangular even though its pixel footprints are hexagons.
 ## Switching from a Hexagonal to a Square Grid
 
 Some external image-processing tools require square pixels. Passing a square `unitCell`
-to [gridify](EBSD.gridify.html) resamples the hexagonal measurements onto such a grid.
+to [gridify](EBSD.gridify_py.html) resamples the hexagonal measurements onto such a grid.
 
 ```python
 # define a square unit cell
@@ -496,8 +496,8 @@ resolution: every new orientation still comes from a nearest measured hexagon.
 [Regridding and Interpolation](EBSDInter_py.html) develops this distinction in detail.
 
 Pixels that remain notIndexed correspond to measurements that were not indexed in the
-source map. [fill](EBSD.fill.html) may replace them by interpolation;
-[smooth](EBSD.smooth.html) offers more sophisticated methods; see
+source map. [fill](EBSD.fill_py.html) may replace them by interpolation;
+[smooth](EBSD.smooth_py.html) offers more sophisticated methods; see
 [Filling Missing Data](EBSDFilling_py.html).
 
 ## Rotated Grids
@@ -554,8 +554,8 @@ EBSD (y↑→x)
 EBSD is measured on a tilted specimen. Seen from a finite working distance, the far
 edge is farther away and appears smaller. The measured positions can therefore depart
 smoothly from any single rigid lattice. MTEX still reconstructs the underlying grid
-indices of an [EBSD](EBSD.EBSD.html) object. This matters to `gridify` and to every
-operation that needs neighbours, including [calcGrains](EBSD.calcGrains.html) and the
+indices of an [EBSD](EBSD.EBSD_py.html) object. This matters to `gridify` and to every
+operation that needs neighbours, including [calcGrains](EBSD.calcGrains_py.html) and the
 cell drawing of a map.
 
 Grid reconstruction uses a local deformation model. MTEX first fits an ideal affine
@@ -577,9 +577,9 @@ misindex a wide map.
 ebsd = mtexdata('small')
 ```
 
-[transform](EBSD.transform.html) moves every pixel and its unit cell. It leaves
+[transform](EBSD.transform_py.html) moves every pixel and its unit cell. It leaves
 orientations and all other per-pixel properties untouched. The command takes a
-[spatialTransform](spatialTransform.html), which records the mapping as an object; see
+[spatialTransform](spatialTransform_py.html), which records the mapping as an object; see
 [Spatial Transforms](EBSDSpatialTransform_py.html).
 
 A tilt is a projective transform. Straight lines remain straight, but parallel lines need
@@ -589,7 +589,7 @@ tilt angle foreshortens the map across that axis, along y. The working distance 
 perspective, which vanishes as that distance grows.
 
 Here the tilt is known and imposed. Recovering an unknown tilt from two measured images
-is the inverse problem. [spatialTransformTilt](spatialTransformTilt.html) fits it in
+is the inverse problem. [spatialTransformTilt](spatialTransformTilt_py.html) fits it in
 stages.
 
 ```python
@@ -660,7 +660,7 @@ True
 Drawing each measurement as its unit cell shows the result. The cells form one
 continuous deformed mesh, with no cell sheared independently of its neighbours. A rigid
 reconstruction would make the mesh wavy and would give
-[calcGrains](EBSD.calcGrains.html) the wrong neighbours.
+[calcGrains](EBSD.calcGrains_py.html) the wrong neighbours.
 
 ```python
 plot(ebsdDistorted['Fo'], ebsdDistorted['Fo'].orientations, edgeColor='black')
@@ -684,7 +684,7 @@ grain2d (y↑→x)
   1      15 (1943 pixels)  Forsterite  LightSkyBlue  mmm       Forsterite
   2      3 (284 pixels)    Enstatite   DarkSeaGreen  mmm       Enstatite
   3      6 (240 pixels)    Diopside    Goldenrod     12/m1     Diopside
-  boundary segments: 1091, inner: 30, triple points: 22
+  boundary segments: 1293, inner: 35, triple points: 22
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDGrid-35.png"></center>

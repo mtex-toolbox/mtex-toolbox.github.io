@@ -78,8 +78,8 @@ hold('off')
 
 The arrows point uphill towards the nearest local maximum. Their lengths increase where the
 ODF changes more steeply. This ascent direction is the basis of the
-[steepest-descent algorithm](SO3Fun.steepestDescent.html) used by [max](SO3Fun.max.html)
-and [calcComponents](SO3Fun.calcComponents.html).
+[steepest-descent algorithm](SO3Fun.steepestDescent.html) used by [max](SO3Fun.max_py.html)
+and [calcComponents](SO3Fun.calcComponents_py.html).
 
 ## Three representations
 
@@ -89,17 +89,17 @@ scalar component functions using the array convention introduced in
 
 | representation | class | when to use it |
 |---|---|---|
-| three harmonic component functions | [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html) | differentiation and global spectral approximation |
-| three radial-basis component functions | [SO3VectorFieldRBF](SO3VectorFieldRBF.SO3VectorFieldRBF.html) | approximation by local kernels |
-| an evaluation formula | [SO3VectorFieldHandle](SO3VectorFieldHandle.SO3VectorFieldHandle.html) | an explicit rule that can be evaluated at any orientation |
+| three harmonic component functions | [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic.SO3VectorFieldHarmonic_py.html) | differentiation and global spectral approximation |
+| three radial-basis component functions | [SO3VectorFieldRBF](SO3VectorFieldRBF.SO3VectorFieldRBF_py.html) | approximation by local kernels |
+| an evaluation formula | [SO3VectorFieldHandle](SO3VectorFieldHandle.SO3VectorFieldHandle_py.html) | an explicit rule that can be evaluated at any orientation |
 
 All three representations support the common `SO3VectorField` operations.
 
 ## Left and right tangent-vector coordinates
 
 An `SO3VectorField` has a requested tangent-space representation and two associated
-symmetries. Left coordinates are the default. The [right](SO3VectorField.right.html) and
-[left](SO3VectorField.left.html) methods re-express the same geometric vectors; they do
+symmetries. Left coordinates are the default. The [right](SO3VectorField.right_py.html) and
+[left](SO3VectorField.left_py.html) methods re-express the same geometric vectors; they do
 not change the vectors or their base orientations.
 
 ```python
@@ -194,12 +194,12 @@ of each side carry the symmetry that side leaves them.
 The following operations apply to vector fields `VF`, `VF1` and `VF2`:
 
 * sums, differences, scaling and division
-* inner products with [dot(VF1, VF2)](SO3VectorField.dot.html)
-* cross products with [cross(VF1, VF2)](SO3VectorField.cross.html)
-* norms with [norm(VF)](SO3VectorField.norm.html)
-* normalization with [normalize(VF)](SO3VectorField.normalize.html)
-* rotation with [rotate(VF, rot)](SO3VectorField.rotate.html)
-* averages with [mean(VF)](SO3VectorField.mean.html)
+* inner products with [dot(VF1, VF2)](SO3VectorField.dot_py.html)
+* cross products with [cross(VF1, VF2)](SO3VectorField.cross_py.html)
+* norms with [norm(VF)](SO3VectorField.norm_py.html)
+* normalization with [normalize(VF)](SO3VectorField.normalize_py.html)
+* rotation with [rotate(VF, rot)](SO3VectorField.rotate_py.html)
+* averages with [mean(VF)](SO3VectorField.mean_py.html)
 
 Since a gradient is itself a vector field, MTEX can also compute its divergence, curl and
 scalar antiderivative.
@@ -238,7 +238,7 @@ plot(G.curl(), 'sigma')
 <center class="mtex-figure"><img class="inline" src="figures/python/SO3FunVectorField-11.png"></center>
 
 Vanishing curl identifies a conservative field: a field that is the gradient of a scalar
-potential. The [antiderivative](SO3VectorField.antiderivative.html) method reconstructs
+potential. The [antiderivative](SO3VectorField.antiderivative_py.html) method reconstructs
 that potential.
 
 ```python
@@ -406,7 +406,7 @@ SO3VectorFieldHarmonic (1 → y↑→x)
 Taylor theory accommodates a prescribed strain by activating slip systems in each crystal.
 The antisymmetric part of the resulting deformation describes the local lattice spin, and
 therefore the local misorientation predicted for each orientation. Without an input
-orientation, [calcTaylor](strainTensor.calcTaylor.html) returns this spin as an
+orientation, [calcTaylor](strainTensor.calcTaylor_py.html) returns this spin as an
 `SO3VectorField`.
 
 ```python

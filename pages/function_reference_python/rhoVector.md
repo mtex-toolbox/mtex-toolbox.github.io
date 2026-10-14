@@ -1,0 +1,21 @@
+---
+title: 'rhoVector'
+sidebar: function_reference_sidebar
+permalink: rhoVector_py.html
+folder: function_reference
+toc: false
+search: exclude
+lang: python
+status: Reference
+---
+{% raw %}
+the unit vector along the azimuth at a direction, the second vector of the polar basis
+
+## Syntax
+
+```python
+rhoVector(v)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L510">source</a></font>
+{% endraw %}

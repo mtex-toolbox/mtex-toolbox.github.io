@@ -105,7 +105,7 @@ operations therefore cuts it into $$n$$ equal-volume regions. Orthorhombic `222`
 has four such operations.
 
 Crystal point groups can also contain reflections or inversion. Those improper
-operations do not create additional rotations, so [fundamentalRegion](fundamentalRegion.html)
+operations do not create additional rotations, so [fundamentalRegion](fundamentalRegion_py.html)
 uses the proper rotation group by default.
 
 ```python
@@ -149,7 +149,7 @@ representative inside it. This selection does not change the orientations stored
 only the figure, not the data or the fundamental region.
 
 Apply the same selection explicitly with
-[projectIntoFundamentalRegion](orientation.project2FundamentalRegion.html). The method
+[projectIntoFundamentalRegion](orientation.project2FundamentalRegion_py.html). The method
 returns a new orientation array.
 
 ```python

@@ -62,7 +62,7 @@ y = np.stack([SO3Fun.dubna(rotation(nodes)), (nodes.a * nodes.b).astype(complex)
 nodes = orientation(rotation(nodes), SO3Fun.dubna().CS, nodes.SS)
 
 # %% [markdown]
-# [SO3FunHarmonic.interpolate](https://mtex-toolbox.github.io/SO3FunHarmonic.interpolate.html) fits both columns in one
+# [SO3FunHarmonic.interpolate](https://mtex-toolbox.github.io/SO3FunHarmonic.interpolate_py.html) fits both columns in one
 # call. The result is an array of two harmonic functions. Here the bandwidth is 48 and LSQR
 # is limited to 10 iterations.
 
@@ -81,8 +81,8 @@ SO3F1
 SO3F1.eval(nodes[:4]).shape
 
 # %% [markdown]
-# The generic [interp](https://mtex-toolbox.github.io/rotation.interp.html) route can instead build an
-# [SO3FunRBF](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF.html) from one value column.
+# The generic [interp](https://mtex-toolbox.github.io/rotation.interp_py.html) route can instead build an
+# [SO3FunRBF](https://mtex-toolbox.github.io/SO3FunRBF.SO3FunRBF_py.html) from one value column.
 
 # %%
 SO3F2 = interp(nodes, np.real(y[:, 0]))
@@ -103,7 +103,7 @@ f = lambda rot: np.stack([np.exp(rot.a + rot.b + rot.c) + 50 * (rot.b - np.cos(n
                           rot.a, rot.b, rot.c], axis=-1)
 
 # %% [markdown]
-# [SO3FunHarmonic.quadrature](https://mtex-toolbox.github.io/SO3FunHarmonic.quadrature.html) evaluates the function on a
+# [SO3FunHarmonic.quadrature](https://mtex-toolbox.github.io/SO3FunHarmonic.quadrature_py.html) evaluates the function on a
 # quadrature grid. It creates an array of four harmonic functions with bandwidth 50 and the
 # same crystal symmetry as `SO3F1`.
 
@@ -115,7 +115,7 @@ SO3F3
 # ## Construct a function from Fourier coefficients
 #
 # Known Fourier coefficients can be passed directly to the
-# [SO3FunHarmonic](https://mtex-toolbox.github.io/SO3FunHarmonic.SO3FunHarmonic.html) constructor. Each row of the
+# [SO3FunHarmonic](https://mtex-toolbox.github.io/SO3FunHarmonic.SO3FunHarmonic_py.html) constructor. Each row of the
 # coefficient matrix becomes one component.
 
 # %%
@@ -229,7 +229,7 @@ SO3F1.reshape(2, 1) * SO3F4
 # %% [markdown]
 # ## Inspect all components
 #
-# [plotSpectrum](https://mtex-toolbox.github.io/SO3Fun.plotSpektra.html) draws the harmonic power spectrum of every
+# [plotSpectrum](https://mtex-toolbox.github.io/SO3Fun.plotSpektra_py.html) draws the harmonic power spectrum of every
 # component. The four curves show that components of one function array may have different
 # distributions over harmonic degree.
 

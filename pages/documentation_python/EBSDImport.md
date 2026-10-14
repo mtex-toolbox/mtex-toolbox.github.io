@@ -24,7 +24,7 @@ parameters and crystal-axis alignments reported by the acquisition software.
 [Orientations](OrientationDefinition_py.html) explains how an orientation relates the
 crystal and specimen frames.
 
-[EBSD.load](EBSD.load.html) chooses the interface from the file extension. The first
+[EBSD.load](EBSD.load_py.html) chooses the interface from the file extension. The first
 import needs only a filename. The file is one of the sample data files, fetched on first
 use.
 
@@ -195,12 +195,12 @@ that.
 
 | | |
 |---|---|
-| [.ang](loadEBSD_ang.html) | EDAX and EMSphInx text files |
-| [.ctf](loadEBSD_ctf.html) | Oxford / HKL text files |
-| [.osc](loadEBSD_osc.html) | EDAX binary files |
-| [.crc, .cpr](loadEBSD_crc.html) | Oxford binary files |
-| [HDF5](loadEBSD_h5.html) | .h5, .hdf5, .oh5, .h5oina, .edaxh5 and .dream3d |
-| [generic text](loadEBSD_generic.html) | columns in a user-defined order |
+| [.ang](loadEBSD_ang_py.html) | EDAX and EMSphInx text files |
+| [.ctf](loadEBSD_ctf_py.html) | Oxford / HKL text files |
+| [.osc](loadEBSD_osc_py.html) | EDAX binary files |
+| [.crc, .cpr](loadEBSD_crc_py.html) | Oxford binary files |
+| [HDF5](loadEBSD_h5_py.html) | .h5, .hdf5, .oh5, .h5oina, .edaxh5 and .dream3d |
+| [generic text](loadEBSD_generic_py.html) | columns in a user-defined order |
 
 The HDF5 interface reads Bruker, EDAX, Oxford, ThermoFisher, EMsoft and EMSphInx
 layouts. Prefer a documented, non-proprietary format when the acquisition software

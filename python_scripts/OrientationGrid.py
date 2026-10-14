@@ -30,7 +30,7 @@ cs = crystalFrame('432')
 # %% [markdown]
 # ## The Equispaced Grid
 #
-# [equispacedSO3Grid](https://mtex-toolbox.github.io/equispacedSO3Grid.html) covers the fundamental region of the
+# [equispacedSO3Grid](https://mtex-toolbox.github.io/equispacedSO3Grid_py.html) covers the fundamental region of the
 # supplied crystal and specimen symmetries with nearly constant node spacing. Here the
 # specimen symmetry is the trivial default. Both global constructors accept a second
 # symmetry. For an orientation it is a specimen symmetry; for a
@@ -59,7 +59,7 @@ plot(equiGrid, 'axisAngle', all=True, markerSize=2)
 #
 # ## The Regular Euler Grid
 #
-# [regularSO3Grid](https://mtex-toolbox.github.io/regularSO3Grid.html) instead takes regular steps in the three Euler
+# [regularSO3Grid](https://mtex-toolbox.github.io/regularSO3Grid_py.html) instead takes regular steps in the three Euler
 # angles. The same nominal resolution creates many more nodes.
 
 # %%
@@ -139,7 +139,7 @@ mtexColorbar()
 #
 # ## Grids Around a Given Orientation
 #
-# [localOrientationGrid](https://mtex-toolbox.github.io/localOrientationGrid.html) covers a ball around one orientation
+# [localOrientationGrid](https://mtex-toolbox.github.io/localOrientationGrid_py.html) covers a ball around one orientation
 # rather than the full symmetry-reduced region. This is the useful construction for a
 # local search or a perturbation study.
 

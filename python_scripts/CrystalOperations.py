@@ -1,7 +1,7 @@
 # %% [markdown]
 # # Operations on Crystal Directions and Planes
 #
-# A [Miller](https://mtex-toolbox.github.io/Miller.html) represents either a direct-lattice vector $[uvw]$ or a
+# A [Miller](https://mtex-toolbox.github.io/Miller_py.html) represents either a direct-lattice vector $[uvw]$ or a
 # reciprocal-lattice normal $(hkl)$ in a crystal frame. It supports ordinary vector
 # geometry, but comparisons have one extra input: crystal symmetry.
 #
@@ -32,7 +32,7 @@ plottingConvention.default('y↑→x')
 # A simulated spherical Kikuchi pattern of quartz makes the operations visible. This is a
 # master pattern on the sphere, not a raw planar detector image. The left plot shows the
 # pattern, and the right plot shows its
-# [spherical Radon transform](https://mtex-toolbox.github.io/S2FunHarmonic.radon.html).
+# [spherical Radon transform](https://mtex-toolbox.github.io/S2FunHarmonic.radon_py.html).
 #
 # A band centre is a great circle on the pattern. The transform maps that great circle to
 # the point representing its plane normal.
@@ -85,7 +85,7 @@ plot(z, **opt, markerEdgeColor='yellow')
 #
 # The family of directions equivalent to $[uvw]$ is written $\langle uvw\rangle$. The
 # family of planes equivalent to $(hkl)$ is written $\{hkl\}$.
-# [symmetrise](https://mtex-toolbox.github.io/vector3d.symmetrise.html) lists the orbit as directed vectors.
+# [symmetrise](https://mtex-toolbox.github.io/vector3d.symmetrise_py.html) lists the orbit as directed vectors.
 
 # %%
 symmetrise(r)
@@ -228,7 +228,7 @@ circle(d1, parent=ax2, lineColor='lightgreen')
 
 # %% [markdown]
 # The output uses `UVTW` because a cross product of two reciprocal normals is a
-# direct-lattice direction. [round](https://mtex-toolbox.github.io/vector3d.round.html) rescales it to small integer
+# direct-lattice direction. [round](https://mtex-toolbox.github.io/vector3d.round_py.html) rescales it to small integer
 # indices.
 #
 # The green square lies where the two corresponding bands cross in the pattern. In the
@@ -267,7 +267,7 @@ plot(n, **opt, markerEdgeColor='white')
 # %% [markdown]
 # ## Symmetry-Reduced and Geometric Angles
 #
-# By default, [angle](https://mtex-toolbox.github.io/vector3d.angle.html) returns the smallest angle between the first
+# By default, [angle](https://mtex-toolbox.github.io/vector3d.angle_py.html) returns the smallest angle between the first
 # vector and the symmetry orbit of the second. The result is independent of which
 # equivalent index triplet was supplied.
 
@@ -345,7 +345,7 @@ hold(False)
 # %% [markdown]
 # ## Cartesian Components Without Crystal Metadata
 #
-# Building a [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d.html) from the Cartesian components of a
+# Building a [vector3d](https://mtex-toolbox.github.io/vector3d.vector3d_py.html) from the Cartesian components of a
 # `Miller` drops the crystal symmetry and crystal frame. The result is *frame-free*: it
 # has an empty frame and resolves against the session default when it is rendered.
 

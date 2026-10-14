@@ -36,7 +36,7 @@ ori = orientation.rand(cs)
 h = Miller(1, 0, 0, cs)
 
 # %% [markdown]
-# [symmetrise](https://mtex-toolbox.github.io/vector3d.symmetrise.html) applies the crystal point group to the pole. The
+# [symmetrise](https://mtex-toolbox.github.io/vector3d.symmetrise_py.html) applies the crystal point group to the pole. The
 # orientation then maps every returned pole into the specimen frame.
 
 # %%
@@ -61,7 +61,7 @@ plot(r)
 #
 # ## The Shortcut
 #
-# [plotPF](https://mtex-toolbox.github.io/orientation.plotPDF.html) performs the symmetrisation, coordinate map, and
+# [plotPF](https://mtex-toolbox.github.io/orientation.plotPDF_py.html) performs the symmetrisation, coordinate map, and
 # projection for several poles at once.
 
 # %%

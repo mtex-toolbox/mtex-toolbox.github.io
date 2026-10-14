@@ -29,7 +29,7 @@ inversion artefacts are called *ghosts*; they are not measurement noise.
 Matthies' remedy is to estimate the uniform portion of the ODF first. He called this
 portion the *phon*. MTEX estimates it from the low-intensity tail of the pole figures,
 subtracts it, and reconstructs the sharper remainder. Non-negativity then constrains the
-missing odd-order coefficients more strongly. [calcODF](PoleFigure.calcODF.html)
+missing odd-order coefficients more strongly. [calcODF](PoleFigure.calcODF_py.html)
 applies this correction by default.
 
 Ghost correction adds a physical preference; it does not recover information that
@@ -96,7 +96,7 @@ recCor = calcODF(pf)
 
 ## Compare the fits to the pole figures
 
-[calcError](PoleFigure.calcError.html) returns one RP error per pole figure. First
+[calcError](PoleFigure.calcError_py.html) returns one RP error per pole figure. First
 evaluate the reconstruction without correction.
 
 ```python
@@ -127,7 +127,7 @@ the pole figures alone, the uncorrected reconstruction wins.
 ## Compare the reconstructions with the truth
 
 A measured texture has no known true ODF. This synthetic example does, so
-[calcError](SO3Fun.calcError.html) can compare the functions directly. First compute the
+[calcError](SO3Fun.calcError_py.html) can compare the functions directly. First compute the
 L1 error without correction.
 
 ```python

@@ -50,9 +50,9 @@ vector3d (y↑→x)
   1  2  0
 ```
 
-[+](vector3d.plus.html) and [-](vector3d.minus.html) add or subtract Cartesian
-components. [*](vector3d.mtimes.html) scales a vector by a scalar. The inner product
-[dot](vector3d.dot.html) and cross product [cross](vector3d.cross.html) have their usual
+[+](vector3d.plus_py.html) and [-](vector3d.minus_py.html) add or subtract Cartesian
+components. [*](vector3d.mtimes_py.html) scales a vector by a scalar. The inner product
+[dot](vector3d.dot_py.html) and cross product [cross](vector3d.cross_py.html) have their usual
 linear-algebra meanings. The order of the cross product matters.
 
 ```python
@@ -82,7 +82,7 @@ hold(False)
 
 ## Angles
 
-The [angle](vector3d.angle.html) between two directions is a central measurement in
+The [angle](vector3d.angle_py.html) between two directions is a central measurement in
 texture analysis. One example is the tilt of a lattice-plane normal away from the sheet
 normal. The angle between complete crystal orientations is a different operation,
 introduced in [Misorientations](MisorientationTheory_py.html).
@@ -101,8 +101,8 @@ the answer is never obtuse; see [Axes and Antipodal Symmetry](VectorsAxes_py.htm
 
 ## Length and Normalization
 
-[norm](vector3d.norm.html) returns the length of each vector.
-[normalize](vector3d.normalize.html) divides each vector by its length.
+[norm](vector3d.norm_py.html) returns the length of each vector.
+[normalize](vector3d.normalize_py.html) divides each vector by its length.
 
 ```python
 norm(u)
@@ -173,8 +173,8 @@ vector3d (y↑→x)
 ```
 
 When both inputs are lists of the same size, binary operations pair their entries by
-position. The keyword `outer=True` of [angle](vector3d.angle_outer.html) and
-[dot](vector3d.dot_outer.html) compares every entry of one list with every entry of
+position. The keyword `outer=True` of [angle](vector3d.angle_outer_py.html) and
+[dot](vector3d.dot_outer_py.html) compares every entry of one list with every entry of
 another.
 
 ## Selecting from a List
@@ -230,7 +230,7 @@ Thus, 236 of the 1,000 directions lie at least $$60^\circ$$ away from the Z axis
 
 ## Averaging a List
 
-[mean](vector3d.mean.html) averages the Cartesian components. The result is a mean
+[mean](vector3d.mean_py.html) averages the Cartesian components. The result is a mean
 vector, which generally is not a unit vector.
 
 ```python
@@ -283,22 +283,22 @@ These methods operate elementwise unless their description says otherwise.
 
 | | |
 |---|---|
-| [angle(v1,v2)](vector3d.angle.html) | pointwise angle between vectors |
-| [angle(v1,v2,outer=True)](vector3d.angle_outer.html) | all pairwise angles |
-| [dot(v1,v2)](vector3d.dot.html) | pointwise inner product |
-| [dot(v1,v2,outer=True)](vector3d.dot_outer.html) | all pairwise inner products |
-| [cross(v1,v2)](vector3d.cross.html) | pointwise cross product |
-| [a*v](vector3d.mtimes.html) | multiplication by a scalar |
-| [a*v](vector3d.times.html) | componentwise scaling by an array of the same size |
-| [norm(v)](vector3d.norm.html) | length of every vector |
-| [normalize(v)](vector3d.normalize.html) | length scaled to one |
-| [orth(v)](vector3d.orth.html) | an arbitrary orthogonal unit vector |
-| [orthProj(v,N)](vector3d.orthProj.html) | component orthogonal to `N` |
-| [perp(v)](vector3d.perp.html) | best-fit direction orthogonal to a list |
-| [v.sum()](vector3d.sum.html) | componentwise sum over a list |
-| [mean(v)](vector3d.mean.html) | mean vector, or mean axis for antipodal data |
-| [polar(v)](vector3d.polar.html) | polar angle, azimuth, and length |
-| [rotate(v,rot)](vector3d.rotate.html) | turn by a rotation |
+| [angle(v1,v2)](vector3d.angle_py.html) | pointwise angle between vectors |
+| [angle(v1,v2,outer=True)](vector3d.angle_outer_py.html) | all pairwise angles |
+| [dot(v1,v2)](vector3d.dot_py.html) | pointwise inner product |
+| [dot(v1,v2,outer=True)](vector3d.dot_outer_py.html) | all pairwise inner products |
+| [cross(v1,v2)](vector3d.cross_py.html) | pointwise cross product |
+| [a*v](vector3d.mtimes_py.html) | multiplication by a scalar |
+| [a*v](vector3d.times_py.html) | componentwise scaling by an array of the same size |
+| [norm(v)](vector3d.norm_py.html) | length of every vector |
+| [normalize(v)](vector3d.normalize_py.html) | length scaled to one |
+| [orth(v)](vector3d.orth_py.html) | an arbitrary orthogonal unit vector |
+| [orthProj(v,N)](vector3d.orthProj_py.html) | component orthogonal to `N` |
+| [perp(v)](vector3d.perp_py.html) | best-fit direction orthogonal to a list |
+| [v.sum()](vector3d.sum_py.html) | componentwise sum over a list |
+| [mean(v)](vector3d.mean_py.html) | mean vector, or mean axis for antipodal data |
+| [polar(v)](vector3d.polar_py.html) | polar angle, azimuth, and length |
+| [rotate(v,rot)](vector3d.rotate_py.html) | turn by a rotation |
 
 ## Further Reading
 

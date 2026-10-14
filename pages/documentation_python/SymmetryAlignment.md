@@ -43,7 +43,7 @@ plottingConvention.default('y↑→x')
 
 ## Read the Crystal Frame from the Summary
 
-[crystalFrame](crystalFrame.crystalFrame.html) stores the point group, lattice metric
+[crystalFrame](crystalFrame.crystalFrame_py.html) stores the point group, lattice metric
 and crystal frame together. Its printed summary is therefore the first place to check a
 convention. For this monoclinic example, MTEX uses $$\vec x\parallel\vec a^*$$ and
 $$\vec z\parallel\vec c$$ by default.
@@ -131,7 +131,7 @@ stiffnessTensor (Olivine)
 
 The printed Voigt matrix is useful here because its components are the quantities that
 a frame change must rewrite. The plot below shows the
-[directional magnitude](tensor.directionalMagnitude.html) $$C_{ijkl}n_i n_j n_k n_l$$.
+[directional magnitude](tensor.directionalMagnitude_py.html) $$C_{ijkl}n_i n_j n_k n_l$$.
 It is a compact view of the component permutation, not Young's modulus or a complete
 elastic response.
 
@@ -162,7 +162,7 @@ crystalFrame (⊙c→a)
 
 A *frame change* re-expresses the same physical object in another reference frame. It
 does not move the object. For a tensor,
-[transformReferenceFrame](tensor.transformReferenceFrame.html) applies the required
+[transformReferenceFrame](tensor.transformReferenceFrame_py.html) applies the required
 basis change to every component and attaches the target crystal frame.
 
 ```python
@@ -214,7 +214,7 @@ array([320.5, 320.5])
 ## Avoid Three Common Mistakes
 
 Do not attach `csTarget` to the unmodified component matrix. That would describe a
-different physical tensor. Use [rotate](tensor.rotate.html) only when the material
+different physical tensor. Use [rotate](tensor.rotate_py.html) only when the material
 property itself moves; use `transformReferenceFrame` when only its coordinates change.
 
 Do not infer an axis mapping by sorting lattice lengths. Record the old and new basis
@@ -226,7 +226,7 @@ Finally, a plotting convention only lays a reference frame out on screen. Changi
 cannot repair a wrong crystal frame. When importing a tensor, also record its units and
 compact-matrix convention; the complete audit is developed in
 [Importing Tensor Data](TensorImport_py.html). Orientations use the analogous
-[transformReferenceFrame](orientation.transformReferenceFrame.html) method.
+[transformReferenceFrame](orientation.transformReferenceFrame_py.html) method.
 
 ## Further Reading
 

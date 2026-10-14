@@ -23,7 +23,7 @@ plottingConvention.default('y↑→x')
 fun = lambda v: v.x * v.y
 
 # %% [markdown]
-# [S2FunHarmonic.quadrature](https://mtex-toolbox.github.io/S2FunHarmonic.quadrature.html) evaluates the function on a
+# [S2FunHarmonic.quadrature](https://mtex-toolbox.github.io/S2FunHarmonic.quadrature_py.html) evaluates the function on a
 # quadrature grid and applies the corresponding weights. The `bandwidth` is the largest
 # harmonic degree retained in the result. Because this example is a quadratic polynomial,
 # degree 2 is sufficient.
