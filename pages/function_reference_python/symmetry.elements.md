@@ -62,5 +62,5 @@ about it, and its antipode with the same order, as MATLAB lists them.
 
 MATLAB's [symmetry.elements](symmetry.elements.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L328">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L336">source</a></font>
 {% endraw %}

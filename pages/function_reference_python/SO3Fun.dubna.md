@@ -70,5 +70,5 @@ SO3Fun.dubna(ori=None)
 
 MATLAB's [SO3Fun.dubna](SO3Fun.dubna.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3funclass.py#L20">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3funclass.py#L35">source</a></font>
 {% endraw %}

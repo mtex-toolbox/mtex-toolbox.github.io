@@ -78,5 +78,5 @@ parentGrainReconstructor.revert(self, ind=None)
 
 MATLAB's [parentGrainReconstructor.revert](parentGrainReconstructor.revert.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1060">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1064">source</a></font>
 {% endraw %}

@@ -12,9 +12,13 @@ status: Reference
 two measurements belong together when the values of a property agree, which is how a
 segmentation by variant, by parent grain or by any imported label is done
 
+## Input
+
+| `key` | name of an EBSD property whose equal labels define connected measurements |
+
 ## Members
 
 | [evaluate](gbcEqual.evaluate_py.html) | the connectivity of the pairs i[k], j[k]: 1 where the property agrees, 0 where it differs |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L248">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L257">source</a></font>
 {% endraw %}

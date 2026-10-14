@@ -23,6 +23,12 @@ voxelLattice.fromPositions(P)
 
 </div>
 
+## Input
+
+| `origin` | Cartesian centre of the voxel with index (0, 0, 0) |
+| `D` | 3-by-3 array of voxel step vectors as rows |
+| `ijk` | integer voxel indices of shape (n, 3); position is origin + ijk @ D |
+
 ## Members
 
 | [fromPositions](voxelLattice.fromPositions_py.html) | the lattice of voxels positions lie on |

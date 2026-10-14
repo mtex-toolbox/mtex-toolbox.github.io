@@ -112,6 +112,15 @@ symmetrise=False.
 
 | `SO3F` | SO3FunHarmonic |
 
+## Properties
+
+| `fhat` | Wigner coefficients in MTEX's public basis |
+| `bandwidth` | largest harmonic degree; assignment truncates or pads the expansion |
+| `CS, SS` | crystal and specimen reference frames |
+| `isReal` | whether the function takes real values; setting True projects onto the real part |
+| `antipodal` | whether grain exchange symmetry f(g)=f(inv(g)) is imposed |
+| `shape` | shape of a function list, excluding the coefficient axis |
+
 ## See also
 
 [SO3FunHarmonic.quadrature](SO3FunHarmonic.quadrature_py.html), [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate_py.html), [SO3FunRBF](SO3FunRBF_index_py.html), [SO3FunHandle](SO3FunHandle_index_py.html), [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html), [SO3FunHarmonicRepresentation](SO3FunHarmonicRepresentation_py.html)

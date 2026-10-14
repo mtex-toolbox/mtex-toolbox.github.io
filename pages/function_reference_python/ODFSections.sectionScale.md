@@ -23,5 +23,5 @@ ODFSections.sectionScale(self, k)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L132">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L137">source</a></font>
 {% endraw %}

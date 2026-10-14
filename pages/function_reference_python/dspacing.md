@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-dspacing(x, ...) is x.dspacing(...), the method of the object passed
+return the separation of lattice planes from their Miller normals.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+d = dspacing(h)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, dspacing(x, ...) calls x.dspacing(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -23,11 +40,11 @@ dspacing(x, *args, **kwargs)
 
 ## Methods it calls
 
-| [vector3d](Miller.dspacing_py.html) | the distance between the lattice planes with this normal, in the units of the cell |
+| [vector3d](Miller.dspacing_py.html) | return the spacing of the lattice planes represented by each Miller normal |
 
 ## Used on
 
 [LatticeMetric](LatticeMetric_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

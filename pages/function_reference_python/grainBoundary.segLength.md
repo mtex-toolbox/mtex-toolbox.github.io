@@ -16,5 +16,5 @@ the length of every segment
 
 MATLAB's [grainBoundary.segLength](grainBoundary.segLength.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L118">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L154">source</a></font>
 {% endraw %}

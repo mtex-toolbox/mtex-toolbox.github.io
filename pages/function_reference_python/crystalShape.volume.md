@@ -11,7 +11,7 @@ status: Reference
 {% raw %}
 A property of [crystalShape](crystalShape_index_py.html).
 
-a third of the face areas times their distance from the centre
+enclosed polyhedron volume in cubed vertex-length units, returned once per shape; requires a closed set of faces.
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L318">source</a></font>
 {% endraw %}

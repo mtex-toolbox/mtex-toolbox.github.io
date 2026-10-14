@@ -25,6 +25,33 @@ grain3d.load('grains.dream3d')
 
 </div>
 
+## Input
+
+| `id` | persistent grain ids |
+| `phaseId` | phase-list index of every grain |
+| `CSList` | phaseList or list of crystal frames |
+| `numPixel` | voxel count of every grain |
+| `meanRotation` | rotation representing each grain mean |
+| `GOS` | grain orientation spread in radians |
+| `I_GF` | sparse signed grain-by-face incidence matrix |
+| `boundary` | grain3Boundary mesh shared by the grains |
+| `frame` | specimen reference frame |
+| `prop` | optional dictionary of per-grain properties |
+| `phaseMap` | optional mapping from phase-list entries to original file phase numbers |
+
+## Properties
+
+| `id` | grain ids, which need not equal positions in a selected list |
+| `phaseId` | phase-list index of each grain |
+| `numPixel` | number of voxels assigned to each grain |
+| `meanOrientation` | mean orientations for grains of one phase |
+| `GOS` | grain orientation spread in radians |
+| `boundary` | grain3Boundary mesh separating the grains |
+| `I_GF` | sparse signed incidence matrix, grain rows by boundary-face columns |
+| `volume` | enclosed volume of each grain in cubed spatial units |
+| `surfaceArea` | surface area of each grain in squared spatial units |
+| `frame` | specimenFrame of the geometry |
+
 ## Signature
 
 <div class="mx-form" markdown="1">

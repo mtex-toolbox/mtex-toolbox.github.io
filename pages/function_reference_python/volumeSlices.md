@@ -73,5 +73,5 @@ not indexed or have no value are white.
 
 [grainMesh](grainMesh_py.html), [scene3d](scene3d_index_py.html), [plot3d](S2Fun.plot3d_py.html), [EBSD3Plotting](EBSD3Plotting_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L401">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L440">source</a></font>
 {% endraw %}

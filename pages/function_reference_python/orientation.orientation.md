@@ -97,6 +97,16 @@ orientations, an embedding projected back onto the orientations.
 
 | `ori` | orientation |
 
+## Properties
+
+| `frameA` | source frame of the mapping, usually the crystal frame |
+| `frameB` | target frame, usually the specimen or a second crystal frame |
+| `CS, SS` | aliases for frameA and frameB |
+| `antipodal` | grain exchange symmetry for misorientations between the same crystal frame |
+| `notIID` | whether the orientations come from spatially dependent map measurements |
+| `data` | unit quaternion coefficients, with shape ori.shape + (4,) |
+| `phi1, Phi, phi2` | Bunge Euler angles in radians |
+
 ## See also
 
 [orientation.byEuler](orientation.byEuler_py.html), [orientation.byAxisAngle](orientation.byAxisAngle_py.html), [orientation.byMiller](orientation.byMiller_py.html), [orientation.byMatrix](orientation.byMatrix_py.html), [orientation.map](orientation.map_py.html), [rotation](rotation_index_py.html), [crystalFrame](crystalFrame_index_py.html), [OrientationDefinition](OrientationDefinition_py.html), [MisorientationTheory](MisorientationTheory_py.html)

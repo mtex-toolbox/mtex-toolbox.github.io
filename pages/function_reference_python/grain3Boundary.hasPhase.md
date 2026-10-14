@@ -82,5 +82,5 @@ indexed region.
 
 [grain3Boundary.hasGrain](grain3Boundary.hasGrain_py.html), [grainBoundary.hasPhase](grainBoundary.hasPhase_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L130">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L165">source</a></font>
 {% endraw %}

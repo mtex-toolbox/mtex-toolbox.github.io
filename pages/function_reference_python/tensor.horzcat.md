@@ -72,5 +72,5 @@ what a weighted mean averages; tensors with and without a density are refused.
 
 MATLAB's [tensor.horzcat](tensor.horzcat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L793">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L881">source</a></font>
 {% endraw %}

@@ -95,5 +95,5 @@ angle sections; any other keyword is dropped, so the options of a plot can be pa
 
 MATLAB's [newODFSectionPlot](newODFSectionPlot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L655">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L740">source</a></font>
 {% endraw %}

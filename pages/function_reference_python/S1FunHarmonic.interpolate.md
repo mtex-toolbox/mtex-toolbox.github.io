@@ -82,5 +82,5 @@ set by hand may undersample the data.
 
 MATLAB's [S1FunHarmonic.interpolate](S1FunHarmonic.interpolate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L96">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L102">source</a></font>
 {% endraw %}

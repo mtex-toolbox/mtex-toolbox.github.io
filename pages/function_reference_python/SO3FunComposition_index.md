@@ -13,6 +13,10 @@ status: Reference
 a sum of functions of different representations: evaluation adds the values, the harmonic
 form adds the harmonic forms
 
+## Input
+
+| `terms` | functions on SO(3) to add, with compatible crystal and specimen frames |
+
 ## Members
 
 | [bandwidth](SO3FunComposition.bandwidth_py.html) | the largest bandwidth of the components |
@@ -31,5 +35,5 @@ form adds the harmonic forms
 
 MATLAB's [SO3FunComposition_index](SO3FunComposition_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L318">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L334">source</a></font>
 {% endraw %}

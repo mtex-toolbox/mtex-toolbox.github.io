@@ -99,5 +99,5 @@ kmax, startingNodes, tolerance and maxStepSize are not taken.
 
 MATLAB's [S1Fun.max](S1Fun.max.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L434">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L480">source</a></font>
 {% endraw %}

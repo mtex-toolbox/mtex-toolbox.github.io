@@ -33,6 +33,19 @@ at a nearly steady rate over the sector. hueLightness, from 0 to 1, lets the lig
 the boundary follow the hue towards where each hue is brightest: yellow comes back as
 yellow, and the key comes closer to MTEX's and less even.
 
+## Input
+
+| `CS` | referenceFrame, symmetry, or vector3d supplying its frame; default specimen frame |
+| `whiteCenter` | unit direction at the white centre; None uses the sector centre |
+| `maxAngle` | angular radius in radians of concentrated colouring; default infinity uses the whole sector |
+| `sR` | sphericalRegion to colour; None uses the conventional fundamental sector |
+| `colorStretching` | exponent controlling how the colour varies with polar distance; default 1 |
+| `grayValue` | pair giving the gray contribution at the white and black centres |
+| `grayGradient` | pair controlling how rapidly gray fades away from those centres |
+| `antipodal` | colour opposite directions alike by using the Laue group; default False |
+| `perceptual` | use the OKLab colour construction; default False |
+| `hueLightness` | hue-dependent boundary lightness in the perceptual construction, from 0 to 1 |
+
 ## Members
 
 | [direction2color](HSVDirectionKey.direction2color_py.html) | the colours of directions under the key |
@@ -41,5 +54,5 @@ yellow, and the key comes closer to MTEX's and less even.
 
 [EBSDGROD](EBSDGROD_py.html), [BoundaryPlots](BoundaryPlots_py.html), [GrainOrientationParameters](GrainOrientationParameters_py.html), [WBV](WBV_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L300">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L312">source</a></font>
 {% endraw %}

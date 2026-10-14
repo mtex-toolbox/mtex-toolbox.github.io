@@ -13,5 +13,5 @@ A property of [grainBoundary](grainBoundary_index_py.html).
 
 the number of segments of the chain of every segment
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L181">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L217">source</a></font>
 {% endraw %}

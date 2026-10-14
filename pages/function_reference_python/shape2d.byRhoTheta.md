@@ -27,5 +27,5 @@ shape2d.byRhoTheta(rho, theta, **kw)
 
 MATLAB's [shape2d.byRhoTheta](shape2d.byRhoTheta.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L429">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L470">source</a></font>
 {% endraw %}

@@ -18,9 +18,27 @@ a projection of the sphere to the plane, restricted to a region and a hemisphere
 
 ```python
 sphericalProjection(sR, pC, antipodal=False, upper=True)
-proj.project(v)        the plane coordinates, NaN outside the region
-proj.iproject(x, y)    the direction drawn at a point of the plane
 ```
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+proj.project(v)
+```
+
+The plane coordinates, NaN outside the region.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+proj.iproject(x, y)
+```
+
+The direction drawn at a point of the plane.
 
 </div>
 
@@ -29,6 +47,13 @@ proj.iproject(x, y)    the direction drawn at a point of the plane
 Fields: sR, the region shown; pC, the plotting convention; antipodal, whether v and -v
 are one point; upper, whether the chart shows the hemisphere out of the screen;
 symmetric, whether the data carry the symmetry of the frame, as a function does.
+
+## Input
+
+| `sR` | sphericalRegion to display; None selects the whole sphere before hemisphere restriction |
+| `pC` | plottingConvention defining screen axes; None uses the current default |
+| `antipodal` | identify opposite directions; default False |
+| `upper` | show the hemisphere pointing out of the screen; False selects the opposite hemisphere |
 
 ## Members
 

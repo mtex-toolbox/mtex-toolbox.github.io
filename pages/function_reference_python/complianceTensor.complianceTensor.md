@@ -22,11 +22,17 @@ complianceTensor(M, *args, **kwargs)
 
 </div>
 
+## Input
+
+| `M` | 6-by-6 compliance matrix in engineering Voigt notation, full rank-four coefficients, or another tensor |
+| `args` | optional reference frame |
+| `kwargs` | tensor constructor options; unit defaults to '1/GPa' and doubleConvention to True |
+
 ## Used on
 
 [IsotropicTheory](IsotropicTheory_py.html)
 
 MATLAB's [complianceTensor.complianceTensor](complianceTensor.complianceTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1218">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1338">source</a></font>
 {% endraw %}

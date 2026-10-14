@@ -24,5 +24,5 @@ boundaryFilter.solveDirichlet(M, V, fixed)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L121">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L126">source</a></font>
 {% endraw %}

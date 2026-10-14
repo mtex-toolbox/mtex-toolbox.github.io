@@ -9,9 +9,28 @@ lang: python
 status: Reference
 ---
 {% raw %}
-isnan(x, ...) is x.isnan(...), the method of the object passed; NumPy's isnan for an array
+identify objects containing missing coordinates or coefficients.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+missing = isnan(x)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, isnan(x, ...) calls x.isnan(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+For numeric arrays without an MTEX method, this calls numpy.isnan.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +45,5 @@ isnan(x, *args, **kwargs)
 | [quaternion](quaternion.isnan_py.html) | whether a quaternion has a NaN coefficient |
 | [vector3d](vector3d.isnan_py.html) | whether a vector has a NaN coordinate |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

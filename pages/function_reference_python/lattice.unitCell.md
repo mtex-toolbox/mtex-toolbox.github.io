@@ -13,5 +13,5 @@ A property of [lattice](lattice_index_py.html).
 
 the corners of the cell around a site, relative to it, anticlockwise, shape (k, 3)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L149">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L158">source</a></font>
 {% endraw %}

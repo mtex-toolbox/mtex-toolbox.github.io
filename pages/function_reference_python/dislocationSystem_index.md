@@ -15,6 +15,12 @@ slip systems, the edge dislocations of every system and the screw ones of every 
 Burgers vector. The line energy u is |b|^2 for an edge and 0.7 |b|^2 for a screw
 dislocation unless given, the isotropic line energy with Poisson ratio 0.3
 
+## Input
+
+| `b` | Burgers vectors, or slipSystem objects from which edge and screw systems are constructed |
+| `l` | line directions as vector3d; required when b supplies Burgers vectors |
+| `u` | relative line energies; default \|b\|**2 for edge and 0.7*\|b\|**2 for screw systems |
+
 ## Members
 
 | [bcc](dislocationSystem.bcc_py.html) | the edge and screw dislocations of the symmetrised body-centred cubic slip systems |
@@ -38,5 +44,5 @@ dislocation unless given, the isotropic line energy with Poisson ratio 0.3
 
 MATLAB's [dislocationSystem_index](dislocationSystem_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L612">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L625">source</a></font>
 {% endraw %}

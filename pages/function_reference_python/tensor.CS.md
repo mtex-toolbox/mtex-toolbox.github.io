@@ -13,5 +13,5 @@ A property of [tensor](tensor_index_py.html).
 
 the frame the tensor is written in, MATLAB's T.CS
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L263">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L300">source</a></font>
 {% endraw %}

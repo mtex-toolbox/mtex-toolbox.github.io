@@ -13,5 +13,5 @@ A property of [grainBoundary](grainBoundary_index_py.html).
 
 the connected component each segment lies in, junctions included, and its size
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L243">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L279">source</a></font>
 {% endraw %}

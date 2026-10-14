@@ -13,5 +13,5 @@ A property of [parentGrainReconstructor](parentGrainReconstructor_index_py.html)
 
 the order the variants are numbered in, kept across a refit of the relationship
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L407">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L411">source</a></font>
 {% endraw %}

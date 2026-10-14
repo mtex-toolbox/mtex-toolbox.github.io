@@ -13,6 +13,12 @@ status: Reference
 a smooth transition instead of a threshold, so a pair near the threshold is joined or
 not by how far it is from it rather than by which side it fell on
 
+## Input
+
+| `threshold` | centre angle of the smooth boundary transition in radians; default 10*degree |
+| `width` | angular width of the transition in radians; None uses half the threshold, or the second entry of a threshold/width pair |
+| `byPhase` | dictionary of threshold/width settings keyed by phase name |
+
 ## Members
 
 | [evaluate](gbcSoft.evaluate_py.html) | the connectivity of the pairs i[k], j[k]: one minus the error function step of width w about the threshold at their misorientation angle, 0 across phases |
@@ -24,5 +30,5 @@ not by how far it is from it rather than by which side it fell on
 
 MATLAB's [gbcSoft](gbcSoft.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L211">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L215">source</a></font>
 {% endraw %}

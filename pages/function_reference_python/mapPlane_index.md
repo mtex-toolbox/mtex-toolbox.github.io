@@ -23,6 +23,11 @@ plane.to2d(xyz), plane.from2d(xy)
 
 </div>
 
+## Input
+
+| `pts` | Cartesian positions as an (n, 3) array, defining the fitted map plane |
+| `e1` | preferred first in-plane direction, projected onto the plane; default x direction |
+
 ## Members
 
 | [dtype](mapPlane.dtype_py.html) | the floating point type the plane computes in |

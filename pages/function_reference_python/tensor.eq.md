@@ -63,5 +63,5 @@ one answer for the whole list. T1 == T2 is the exact equality, of the frame too.
 
 MATLAB's [tensor.eq](tensor.eq.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L393">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L446">source</a></font>
 {% endraw %}

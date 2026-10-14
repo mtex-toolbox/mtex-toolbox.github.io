@@ -63,5 +63,5 @@ the form of plottingConvention.char is returned.
 
 MATLAB's [crystalFrame.conventionChar](crystalFrame.conventionChar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L977">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1051">source</a></font>
 {% endraw %}

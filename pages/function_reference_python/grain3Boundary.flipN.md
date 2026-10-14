@@ -60,5 +60,5 @@ exchanges those. Unlike MATLAB, which turns only triangulated faces, any polygon
 
 [grain3Boundary.flip](grain3Boundary.flip_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L189">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L224">source</a></font>
 {% endraw %}

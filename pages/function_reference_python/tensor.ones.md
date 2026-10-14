@@ -63,5 +63,5 @@ other keywords go to the constructor of the class (unit, name, ...).
 
 [OrientationExport](OrientationExport_py.html), [EBSDGrid](EBSDGrid_py.html), [QuadruplePoints](QuadruplePoints_py.html), [GrainMerge](GrainMerge_py.html), [TransformationTexture](TransformationTexture_py.html), [SlipTransmission](SlipTransmission_py.html), [S2FunAxisField](S2FunAxisField_py.html), [S2FunSampling](S2FunSampling_py.html), [TensorDefinition](TensorDefinition_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L861">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L949">source</a></font>
 {% endraw %}

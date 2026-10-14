@@ -58,5 +58,5 @@ A misorientation with grain exchange.
 
 MATLAB's [orientation.byRodrigues](orientation.byRodrigues.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L238">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L254">source</a></font>
 {% endraw %}

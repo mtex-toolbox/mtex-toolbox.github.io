@@ -12,10 +12,29 @@ status: Reference
 {% raw %}
 A method of [orientation](orientation_index_py.html).
 
-the orientation between two frames that are drawn alike on the screen, from their plotting
-conventions
+construct the orientation that makes two frames appear aligned on screen.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+relation = orientation.byScreenAlignment(frameA, frameB)
+```
+
+</div>
+
+## Description
+
+The rotation is inferred from the east and out-of-screen directions of the frames'
+plotting conventions. The result maps frameA to frameB. Use [`orientation.align`](orientation.align_py.html) when
+the relation should be determined from the lattice bases instead.
+
+## See also
+
+[plottingConvention](plottingConvention_index_py.html), [orientation.align](orientation.align_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -27,5 +46,5 @@ orientation.byScreenAlignment(frA, frB)
 
 MATLAB's [orientation.byScreenAlignment](orientation.byScreenAlignment.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L903">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L973">source</a></font>
 {% endraw %}

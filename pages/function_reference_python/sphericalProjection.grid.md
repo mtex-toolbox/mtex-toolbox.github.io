@@ -62,5 +62,5 @@ V, X, Y = proj.grid(resolution=(5*degree, 2*degree))
 
 [plotS2Grid](plotS2Grid_py.html), [makeSphericalProjection](makeSphericalProjection_py.html), [contourf](S2Fun.contourf_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L128">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L133">source</a></font>
 {% endraw %}

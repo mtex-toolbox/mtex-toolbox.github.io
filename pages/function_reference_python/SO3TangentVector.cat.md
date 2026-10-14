@@ -61,5 +61,5 @@ The vectors are brought to the side of the first operand.
 
 MATLAB's [SO3TangentVector.cat](SO3TangentVector.cat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L208">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L231">source</a></font>
 {% endraw %}

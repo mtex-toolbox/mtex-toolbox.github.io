@@ -16,5 +16,5 @@ the centroid of every grain, the centre of mass of the polyhedron
 
 MATLAB's [grain3d.centroid](grain3d.centroid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L305">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L330">source</a></font>
 {% endraw %}

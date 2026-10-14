@@ -12,9 +12,37 @@ status: Reference
 {% raw %}
 A method of [grain2d](grain2d_index_py.html).
 
-the ellipse of the same second moments: its centre and its two half axes
+describe each outline by the ellipse with the same central second area moments
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+center, longAxis, shortAxis = grains.fitEllipse()
+```
+
+</div>
+
+## Description
+
+The centre is the polygon's area centroid. The two antipodal vector3d axes point along
+the principal directions in the specimen frame; their lengths are the ellipse's semi-axis
+lengths, with the longer axis first. Holes subtract from the area moments. This is a moment
+equivalent ellipse, rather than a least-squares fit to boundary vertices, and its area need
+not equal the polygon area.
+
+## Output
+
+| `center` | vector3d area centroid of every outline |
+| `longAxis` | long semi-axis vectors |
+| `shortAxis` | short semi-axis vectors |
+
+## See also
+
+[principalComponents](principalComponents_py.html), [aspectRatio](aspectRatio_py.html), [longAxis](longAxis_py.html), [shortAxis](shortAxis_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 

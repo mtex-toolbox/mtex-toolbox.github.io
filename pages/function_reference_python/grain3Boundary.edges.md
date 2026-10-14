@@ -27,5 +27,5 @@ grain3Boundary.edges(self)
 
 MATLAB's [grain3Boundary.edges](grain3Boundary.edges.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L275">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L310">source</a></font>
 {% endraw %}

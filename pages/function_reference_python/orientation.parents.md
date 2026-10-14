@@ -12,10 +12,30 @@ status: Reference
 {% raw %}
 A method of [orientation](orientation_index_py.html).
 
-the distinct relationships c p2c over the child group c: a child times them is every
-parent it can come from, MATLAB's parents
+return the distinct parent variants of a parent-to-child relationship.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+relationships = p2c.parents()
+```
+
+</div>
+
+## Description
+
+Child symmetry operations generate the distinct relationship variants, with duplicates
+removed under the parent symmetry. This is p2c.variants(parent=True); the result still
+maps parent coordinates to child coordinates. Use variants with a child orientation
+to calculate its possible parent orientations.
+
+## See also
+
+[orientation.variants](orientation.variants_py.html), [variants](variants_py.html), [ParentChildVariants](ParentChildVariants_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -31,5 +51,5 @@ orientation.parents(self)
 
 MATLAB's [orientation.parents](orientation.parents.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L859">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L920">source</a></font>
 {% endraw %}

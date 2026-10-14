@@ -77,5 +77,5 @@ ODF is not taken. The result is a full fibre, with r in the upper hemisphere.
 
 MATLAB's [fibre.fit](fibre.fit.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L382">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L388">source</a></font>
 {% endraw %}

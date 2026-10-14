@@ -54,5 +54,5 @@ Between cs and ss, from a generator.
 
 [orientation.rand](orientation.rand_py.html), [vector3d.rand](vector3d.rand_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L360">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L366">source</a></font>
 {% endraw %}

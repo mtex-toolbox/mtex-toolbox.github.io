@@ -13,5 +13,5 @@ A property of [fibre](fibre_index_py.html).
 
 the specimen direction of the fibre, o1 * h
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L88">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L94">source</a></font>
 {% endraw %}

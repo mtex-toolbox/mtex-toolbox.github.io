@@ -10,8 +10,7 @@ counterpart: spatialTransformPoly.html
 status: Reference
 ---
 {% raw %}
-a polynomial displacement of degree 1 or 2, the coefficients c one column per coordinate over
-the basis [1 x y] or [1 x y x^2 xy y^2]
+a scan distortion described by a polynomial displacement in x and y
 
 ## Syntax
 
@@ -19,10 +18,37 @@ the basis [1 x y] or [1 x y x^2 xy y^2]
 
 ```python
 T = spatialTransformPoly(c, 2)
-T = spatialTransformPoly.fit(posA, posB, degree=2, weights=w)
+T = spatialTransformPoly.fit(posA, posB, degree=2)
+pos2 = T * pos
 ```
 
 </div>
+
+## Description
+
+The output is the input position plus the polynomial displacement. Rows of c multiply
+the terms [1, x, y] for degree 1, or `[1, x, y, x**2, x*y, y**2]` for degree 2.
+Its two columns give the x and y displacements. The z coordinate is unchanged.
+A degree-1 displacement is an affine map and has an exact matrix inverse; degree 2
+uses a numerical inverse. With no coefficients the transform is the identity.
+
+## Input
+
+| `c` | coefficient array of shape (3, 2) or (6, 2) |
+| `degree` | 1 or 2; inferred from the number of coefficient rows when omitted |
+
+## Output
+
+| `T` | spatialTransformPoly |
+
+## Properties
+
+| `c` | displacement coefficients |
+| `degree` | polynomial degree |
+
+## See also
+
+[spatialTransformPoly.fit](spatialTransformPoly.fit_py.html), [spatialTransformPoly.shiftMatrix](spatialTransformPoly.shiftMatrix_py.html), [spatialTransformInverse](spatialTransformInverse_index_py.html)
 
 ## Members
 
@@ -41,5 +67,5 @@ T = spatialTransformPoly.fit(posA, posB, degree=2, weights=w)
 
 MATLAB's [spatialTransformPoly](spatialTransformPoly.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L480">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L530">source</a></font>
 {% endraw %}

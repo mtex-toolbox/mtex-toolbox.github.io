@@ -13,5 +13,5 @@ A property of [SO3FunRBF](SO3FunRBF_index_py.html).
 
 the crystal frame of the function, that of its centres
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L250">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L257">source</a></font>
 {% endraw %}

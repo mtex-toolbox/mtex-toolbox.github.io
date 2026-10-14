@@ -63,5 +63,5 @@ spacing, which a kernel of bandwidth L hardly sees. MATLAB's SO3FunHarmonic.adjo
 
 [wignerSeriesAdjoint](wignerSeriesAdjoint_py.html), SO3FunHarmonic.adjoint
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1044">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1089">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [SO3FunHarmonic](SO3FunHarmonic_index_py.html).
 
 the bandwidth, the largest degree of the expansion; assigning it cuts or pads the coefficients
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L345">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L352">source</a></font>
 {% endraw %}

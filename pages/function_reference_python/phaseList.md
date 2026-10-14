@@ -19,10 +19,23 @@ index 0, so that a phase id is an index into the list
 
 ```python
 phaseList(cs1, cs2)
-phaseList(['notIndexed', cs1, cs2])      a string names a not indexed frame
 ```
 
 </div>
+
+<div class="mx-form" markdown="1">
+
+```python
+phaseList(['notIndexed', cs1, cs2])
+```
+
+A string names a not indexed frame.
+
+</div>
+
+## Input
+
+| `frames` | crystal frames as separate arguments or a list; 'notIndexed' or a notIndexedFrame denotes phase zero |
 
 ## Members
 

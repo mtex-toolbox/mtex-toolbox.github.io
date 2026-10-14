@@ -10,29 +10,74 @@ counterpart: PoleFigure_index.html
 status: Reference
 ---
 {% raw %}
-measured pole figure intensities, one or several pole figures of one specimen
+measured pole figure intensities with their crystal and specimen directions
 
 ## Syntax
 
 <div class="mx-form" markdown="1">
 
 ```python
-PoleFigure(h, r, I)                          h a Miller, one or several superposed directions
-PoleFigure([h1, h23], [r1, r2], [I1, I2])    one pole figure per entry
-PoleFigure(h, r, I, cs, ss, superposition=c, complete=True)
+pf = PoleFigure(h, r, I)
+pf = PoleFigure([h1, h23], [r1, r2], [I1, I2])
+pf = PoleFigure(h, r, I, cs, ss, superposition=c, complete=True)
 ```
 
 </div>
+
+## Description
+
+Each pole figure records intensities for one crystal direction, or for several superposed
+reflections, at a set of specimen directions. Store several pole figures as parallel lists
+of crystal directions, specimen directions and intensity arrays. An intensity array must
+have one value per specimen direction; all pole figures share their crystal and specimen
+frames.
+
+By default specimen directions are antipodal axes because diffraction does not distinguish
+r and -r. Use complete=True for directional measurements that do distinguish them.
+Index by a pole-figure number to select a reflection, or use a measurement mask to filter
+its measured directions. Angles and corrections use radians unless stated otherwise.
+
+## Input
+
+| `h` | Miller crystal direction or directions contributing to one pole figure; a list supplies one direction set per pole figure |
+| `r` | vector3d specimen directions, or a list of direction sets |
+| `intensities` | numeric intensity array, or a list with one array per pole figure |
+| `frames` | optional crystalFrame and specimenFrame overriding the direction frames |
+
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `superposition` |  | coefficients for superposed crystal directions, or one coefficient array per pole figure; default equal coefficients summing to one within each figure |
+| `complete` |  | keep specimen directions oriented rather than antipodal; default False |
+
+## Output
+
+| `pf` | PoleFigure data set |
+
+## Properties
+
+| `allH` | list of Miller direction sets, one per pole figure |
+| `allR` | list of specimen direction sets |
+| `allI` | list of intensity arrays matching allR |
+| `c` | superposition coefficients for each entry of allH |
+| `CS, SS` | crystal and specimen reference frames |
+| `numPF` | number of pole figures |
+| `antipodal` | whether specimen directions identify r with -r |
+
+## See also
+
+[loadPoleFigure](loadPoleFigure_aachen_py.html), [calcODF](calcODF_py.html), [PoleFigure.normalize](PoleFigure.normalize_py.html), [PoleFigure.correct](PoleFigure.correct_py.html)
 
 ## Members
 
 | [antipodal](PoleFigure.antipodal_py.html) | whether the specimen directions are axes, r not told from -r |
 | [calcError](PoleFigure.calcError_py.html) | the mean deviation, one number per pole figure, from a recalculation by an ODF or from other pole figures on the same directions |
 | [calcErrorPF](PoleFigure.calcErrorPF_py.html) | the pole figures of the deviation from a recalculation: the difference between measured intensities and those an ODF predicts, or another pole figure on the same directions |
-| [calcNormalization](PoleFigure.calcNormalization_py.html) | the factor the second pole figure is scaled by to carry the mass of the first |
+| [calcNormalization](PoleFigure.calcNormalization_py.html) | find intensity scale factors matching a recalculation to the measured pole figures |
 | [calcODF](PoleFigure.calcODF_py.html) | calcODF(pf, ...): an ODF reconstructed from the pole figure intensities, an SO3FunRBF |
 | [calcODFIterative](PoleFigure.calcODFIterative_py.html) | calcODFIterative(pf, ...): the reconstruction refined successively over a ladder of halfwidths |
-| [calcPoleFigure](PoleFigure.calcPoleFigure_py.html) | the pole figures an ODF predicts on the measured directions |
+| [calcPoleFigure](PoleFigure.calcPoleFigure_py.html) | recalculate this data set's pole figures from an orientation distribution |
 | [cat](PoleFigure.cat_py.html) | the pole figures of several data sets in one, in order |
 | [correct](PoleFigure.correct_py.html) | the pole figures corrected for background and defocusing |
 | [CS](PoleFigure.CS_py.html) | the crystal frame, that of the crystal directions allH |
@@ -57,7 +102,7 @@ PoleFigure(h, r, I, cs, ss, superposition=c, complete=True)
 | [plot](PoleFigure.plot_py.html) | measured pole figures in a row, the specimen directions as markers coloured by intensity |
 | [plotDiff](PoleFigure.plotDiff_py.html) | the difference between measured pole figures and recalculated ones, or two measurements, drawn as pole figures of the error |
 | [plus](PoleFigure.plus_py.html) |  |
-| [PoleFigure](PoleFigure.PoleFigure_py.html) | measured pole figure intensities, one or several pole figures of one specimen |
+| [PoleFigure](PoleFigure.PoleFigure_py.html) | measured pole figure intensities with their crystal and specimen directions |
 | [r](PoleFigure.r_py.html) | the specimen directions of all pole figures in one vector |
 | [rdivide](PoleFigure.rdivide_py.html) |  |
 | [resolution](PoleFigure.resolution_py.html) | the resolution of the measurement, the finest over the pole figures |

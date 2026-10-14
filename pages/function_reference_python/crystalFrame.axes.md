@@ -13,5 +13,5 @@ A property of [crystalFrame](crystalFrame_index_py.html).
 
 the crystal axes a, b, c in Euclidean coordinates, the basis
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L878">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L944">source</a></font>
 {% endraw %}

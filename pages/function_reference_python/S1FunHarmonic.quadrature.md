@@ -79,5 +79,5 @@ same function.
 
 MATLAB's [S1FunHarmonic.quadrature](S1FunHarmonic.quadrature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L154">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L160">source</a></font>
 {% endraw %}

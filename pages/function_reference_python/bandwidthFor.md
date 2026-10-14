@@ -57,5 +57,5 @@ Euler angle; a bandwidth whose 2L+2 the folds divide lets the grid follow the sy
 
 [folds](folds_py.html), [quadratureSO3Grid](quadratureSO3Grid_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L96">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L123">source</a></font>
 {% endraw %}

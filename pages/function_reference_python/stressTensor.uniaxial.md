@@ -67,5 +67,5 @@ The tensor is in the frame of v, the default specimen frame for a direction with
 
 [SchmidFactor](mtex.SchmidFactor_py.html), [velocityGradientTensor.uniaxial](velocityGradientTensor.uniaxial_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1271">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1424">source</a></font>
 {% endraw %}

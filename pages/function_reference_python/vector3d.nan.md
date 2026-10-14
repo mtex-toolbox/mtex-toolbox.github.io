@@ -12,9 +12,25 @@ status: Reference
 {% raw %}
 A method of [vector3d](vector3d_index_py.html).
 
-the vectors of a shape with NaN coordinates
+construct vectors with missing Cartesian coordinates.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+v = vector3d.nan(10)
+v = vector3d.nan(2, 3)
+```
+
+</div>
+
+## Description
+
+Every coordinate is NaN. Sizes may be supplied as separate integers or one tuple;
+without a size, return one scalar vector. Use [`vector3d.isnan`](vector3d.isnan_py.html) to identify missing vectors.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +42,5 @@ vector3d.nan(*shape)
 
 MATLAB's [vector3d.nan](vector3d.nan.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L490">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L560">source</a></font>
 {% endraw %}

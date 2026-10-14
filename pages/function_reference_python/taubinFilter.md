@@ -15,6 +15,12 @@ unshrinking one with a negative step, so the gain over the pair, (1 - lk)(1 - mk
 about one over the low frequencies and the area is given back. This is approximate; the
 areas move, only not systematically one way (Taubin, SIGGRAPH 1995)
 
+## Input
+
+| `iter` | number of smoothing and unshrinking step pairs; default 5 |
+| `lambda_` | positive smoothing parameter; default 0.5 |
+| `mu` | negative unshrinking parameter; default -0.53 |
+
 ## Members
 
 | [smooth](taubinFilter.smooth_py.html) | the vertices after iter pairs of a smoothing step lambda_ and an unshrinking step mu, the fixed ones kept |
@@ -25,5 +31,5 @@ areas move, only not systematically one way (Taubin, SIGGRAPH 1995)
 
 MATLAB's [taubinFilter](taubinFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L165">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L174">source</a></font>
 {% endraw %}

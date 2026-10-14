@@ -98,5 +98,5 @@ SO3FunHarmonic.approximate is the same function.
 
 MATLAB's [SO3FunHarmonic.approximate](SO3FunHarmonic.approximate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L248">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L255">source</a></font>
 {% endraw %}

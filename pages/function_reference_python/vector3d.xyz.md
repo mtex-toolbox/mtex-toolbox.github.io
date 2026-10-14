@@ -11,7 +11,7 @@ status: Reference
 {% raw %}
 A property of [vector3d](vector3d_index_py.html).
 
-the coordinates, an array of shape (..., 3)
+Cartesian coordinates as a numeric array of shape v.shape + (3,); the array shares storage with v.
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L546">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L622">source</a></font>
 {% endraw %}

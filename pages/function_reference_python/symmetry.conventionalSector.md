@@ -64,5 +64,5 @@ convention.
 
 [fundamentalSector](fundamentalSector_py.html), [dirichletSector](dirichletSector_py.html), [tilesSphere](tilesSphere_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L509">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L559">source</a></font>
 {% endraw %}

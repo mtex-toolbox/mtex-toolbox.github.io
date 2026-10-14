@@ -71,5 +71,5 @@ pole figure.
 
 MATLAB's [PoleFigure.isOutlier](PoleFigure.isOutlier.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L479">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L512">source</a></font>
 {% endraw %}

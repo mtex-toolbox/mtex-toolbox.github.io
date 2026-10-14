@@ -12,10 +12,33 @@ status: Reference
 {% raw %}
 A method of [curvatureTensor](curvatureTensor_index_py.html).
 
-a diagonal entry of the density is minus the sum of the other two diagonal entries of the
-curvature, so the entry a map cannot measure drops out of alpha_33
+convert lattice curvature to the Nye dislocation density tensor
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+alpha = dislocationDensity(kappa)
+```
+
+</div>
+
+## Description
+
+Use `alpha = kappa.transpose() - trace(kappa)*I`. In particular, each diagonal component
+of alpha is minus the sum of the other two diagonal components of kappa. This can retain
+a measurable alpha[2,2] even when a surface map cannot determine kappa[2,2].
+
+Return dislocationDensityTensor in the input frame, preserving its unit and array shape.
+The coefficients describe net dislocation content; fitting individual dislocation-system
+densities is a separate step performed by fitDislocationSystems or calcGND.
+
+## See also
+
+[curvature](curvature_py.html), [curvatureTensor](curvatureTensor_index_py.html), [calcGND](calcGND_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -31,5 +54,5 @@ curvatureTensor.dislocationDensity(kappa)
 
 MATLAB's [curvatureTensor.dislocationDensity](curvatureTensor.dislocationDensity.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L348">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L471">source</a></font>
 {% endraw %}

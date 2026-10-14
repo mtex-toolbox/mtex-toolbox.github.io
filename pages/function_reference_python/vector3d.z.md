@@ -11,7 +11,7 @@ status: Reference
 {% raw %}
 A property of [vector3d](vector3d_index_py.html).
 
-the z coordinates
+Cartesian z coordinate of each vector; assignment changes the coordinates and clears isNormalized.
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L535">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L611">source</a></font>
 {% endraw %}

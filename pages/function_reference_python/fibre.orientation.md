@@ -57,5 +57,5 @@ ori = f.orientation(points=10)
 
 MATLAB's [fibre.orientation](fibre.orientation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L199">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L205">source</a></font>
 {% endraw %}

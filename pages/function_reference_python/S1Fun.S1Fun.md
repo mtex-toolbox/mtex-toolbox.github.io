@@ -79,6 +79,14 @@ c_{-k} = conj(c_k), which is checked from the coefficients unless real says it.
 
 | `sF` | S1FunHarmonic |
 
+## Properties
+
+| `fhat` | complex coefficients ordered from Fourier mode -L through L |
+| `bandwidth` | largest Fourier mode L |
+| `isReal` | whether the function is constrained to have real values |
+| `antipodal` | whether f(x+pi)=f(x), read from its coefficients |
+| `even, odd` | boolean symmetry tests under x -> -x |
+
 ## See also
 
 [S1FunHarmonic.quadrature](S1FunHarmonic.quadrature_py.html), [S1FunHarmonic.interpolate](S1FunHarmonic.interpolate_py.html), [S1FunHandle](S1FunHandle_index_py.html), [S1Grid](S1Grid_index_py.html)

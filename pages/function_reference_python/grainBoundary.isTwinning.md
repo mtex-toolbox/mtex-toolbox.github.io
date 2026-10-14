@@ -78,5 +78,5 @@ symmetry reduced misorientation angle.
 
 MATLAB's [grainBoundary.isTwinning](grainBoundary.isTwinning.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L439">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L475">source</a></font>
 {% endraw %}

@@ -24,6 +24,10 @@ T = spatialTransformProjective.fit(posA, posB, weights=w)
 
 </div>
 
+## Input
+
+| `H` | 3-by-3 homogeneous projective matrix, normalised by H[2,2]; None gives identity |
+
 ## Members
 
 | [byTilt](spatialTransformProjective.byTilt_py.html) | the specimen tilted by theta about an axis along x through centre, seen from the working distance wd: the far side shrinks and straight lines stay straight |
@@ -38,5 +42,5 @@ T = spatialTransformProjective.fit(posA, posB, weights=w)
 
 [EBSDSpatialTransform](EBSDSpatialTransform_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L365">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L412">source</a></font>
 {% endraw %}

@@ -25,6 +25,10 @@ B = sT.barycentric(w)
 
 </div>
 
+## Input
+
+| `vertices` | vector3d directions surrounding the origin; vertices are normalised to the unit sphere |
+
 ## Signature
 
 <div class="mx-form" markdown="1">

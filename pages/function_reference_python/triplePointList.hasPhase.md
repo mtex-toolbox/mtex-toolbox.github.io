@@ -23,5 +23,5 @@ triplePointList.hasPhase(self, *names)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L680">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L727">source</a></font>
 {% endraw %}

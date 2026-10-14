@@ -66,5 +66,5 @@ session's specimen frame.
 
 MATLAB's [orientation.fit](orientation.fit.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L310">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L326">source</a></font>
 {% endraw %}

@@ -26,5 +26,5 @@ a * b
 
 MATLAB's [embedding.times](embedding.times.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L333">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L336">source</a></font>
 {% endraw %}

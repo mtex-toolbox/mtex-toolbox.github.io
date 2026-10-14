@@ -13,5 +13,5 @@ A property of [phaseList](phaseList_index_py.html).
 
 the colours the frames of the phases carry, None where they carry none
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L95">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L98">source</a></font>
 {% endraw %}

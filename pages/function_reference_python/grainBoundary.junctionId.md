@@ -13,5 +13,5 @@ A property of [grainBoundary](grainBoundary_index_py.html).
 
 the indices of the junctions, the vertices where a number of segments other than two meet
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L161">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L197">source</a></font>
 {% endraw %}

@@ -62,5 +62,5 @@ quaternion.angle_outer(self, other=None)
 
 MATLAB's [quaternion.angle_outer](quaternion.angle_outer.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L241">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L287">source</a></font>
 {% endraw %}

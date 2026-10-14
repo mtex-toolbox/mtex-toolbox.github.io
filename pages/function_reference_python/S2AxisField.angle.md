@@ -48,5 +48,5 @@ S2AxisFieldHarmonic.angle(self, x)
 
 MATLAB's [S2AxisField.angle](S2AxisField.angle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L280">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L285">source</a></font>
 {% endraw %}

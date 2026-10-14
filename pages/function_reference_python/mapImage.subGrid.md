@@ -73,5 +73,5 @@ must be contiguous and ascending.
 
 MATLAB's [mapImage.subGrid](mapImage.subGrid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L315">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L323">source</a></font>
 {% endraw %}

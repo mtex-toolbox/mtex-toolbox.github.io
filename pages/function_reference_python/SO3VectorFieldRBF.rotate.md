@@ -64,5 +64,5 @@ kernels. A symmetry the rotation does not map onto itself is dropped with a warn
 
 MATLAB's [SO3VectorFieldRBF.rotate](SO3VectorFieldRBF.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1148">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1153">source</a></font>
 {% endraw %}

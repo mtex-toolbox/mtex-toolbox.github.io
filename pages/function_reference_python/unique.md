@@ -9,9 +9,28 @@ lang: python
 status: Reference
 ---
 {% raw %}
-unique(x, ...) is x.unique(...), the method of the object passed; NumPy's unique for an array
+remove duplicate geometric objects, respecting their symmetry and tolerance.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+distinct = unique(x)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, unique(x, ...) calls x.unique(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+For numeric arrays without an MTEX method, this calls numpy.unique.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -35,5 +54,5 @@ unique(x, *args, **kwargs)
 
 [MisorientationTheory](MisorientationTheory_py.html), [ParentChildVariants](ParentChildVariants_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

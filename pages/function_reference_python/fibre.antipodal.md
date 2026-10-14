@@ -13,5 +13,5 @@ A property of [fibre](fibre_index_py.html).
 
 whether the fibre is antipodal, read off its crystal direction
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L103">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L109">source</a></font>
 {% endraw %}

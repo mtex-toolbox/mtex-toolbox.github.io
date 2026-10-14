@@ -22,9 +22,20 @@ oS = alphaSections(cs, ss, alpha=np.arange(0, 91, 15)*degree)
 
 </div>
 
+## Input
+
+| `frameA` | crystal reference frame |
+| `frameB` | specimen reference frame; None uses the default |
+| `sections` | number of sections when explicit angle values are omitted; default 6 |
+| `values` | explicit section angles in radians, overriding the section count |
+| `tol` | maximum angular assignment tolerance in radians; default 5*degree |
+| `maxPhi` | upper limit of the middle Euler angle in radians; None uses the symmetry-dependent limit |
+| `maxAzimuth` | upper limit of the in-section azimuth in radians; None uses its symmetry-dependent limit |
+| `kwargs` | section angles may also be supplied as alpha=values |
+
 ## Members
 
 | [alpha](alphaSections.alpha_py.html) | the alpha values of the sections |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L352">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L396">source</a></font>
 {% endraw %}

@@ -57,5 +57,5 @@ The pairs are those a boundary selection takes, gB['Forsterite', 'Enstatite'].
 
 [phaseList.phaseId](phaseList.phaseId_py.html), EBSD.select
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L150">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L153">source</a></font>
 {% endraw %}

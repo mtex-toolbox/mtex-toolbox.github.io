@@ -10,7 +10,25 @@ counterpart: SO3Fun_index.html
 status: Reference
 ---
 {% raw %}
-the functions on SO(3): SO3FunHarmonic, SO3FunRBF, SO3FunCBF, SO3FunBingham, SO3FunHandle, SO3FunComposition
+base class for scalar functions on orientation space SO(3)
+
+## Description
+
+Represent an orientation distribution or another orientation-dependent property with
+SO3FunHarmonic coefficients, SO3FunRBF kernel sums, SO3FunCBF fibre sums,
+SO3FunBingham distributions or SO3FunHandle callables. Evaluate a concrete function
+at rotations or orientations using f(ori). Its crystal and specimen frames define the
+symmetry-equivalent orientations at which values agree.
+
+An orientation distribution of mean one uses multiples of a uniform distribution as its
+units: a value of two means twice the uniform density. General SO3Fun objects can also
+represent signed or complex functions and are not automatically normalised densities.
+
+This base class provides the common interface; construct one of its representations.
+
+## See also
+
+[SO3FunHarmonic](SO3FunHarmonic_index_py.html), [SO3FunRBF](SO3FunRBF_index_py.html), [SO3FunHandle](SO3FunHandle_index_py.html), [calcDensity](calcDensity_py.html), [unimodalODF](unimodalODF_py.html)
 
 ## Members
 
@@ -44,7 +62,7 @@ the functions on SO(3): SO3FunHarmonic, SO3FunRBF, SO3FunCBF, SO3FunBingham, SO3
 | [plotSection](SO3Fun.plotSection_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
 | [plotSpektra](SO3Fun.plotSpektra_py.html) | the Chebyshev coefficients of a kernel, or the harmonic power of a function, per degree |
 | [rotate](SO3Fun.rotate_py.html) | rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method |
-| [SO3Fun](SO3Fun.SO3Fun_py.html) | the functions on SO(3): SO3FunHarmonic, SO3FunRBF, SO3FunCBF, SO3FunBingham, SO3FunHandle, SO3FunComposition |
+| [SO3Fun](SO3Fun.SO3Fun_py.html) | base class for scalar functions on orientation space SO(3) |
 | [sum](SO3Fun.sum_py.html) | sum(x) of an MTEX object by its own sum, of an array or with an axis as NumPy sums, of any other iterable as Python sums, so that from mtex import * keeps Python's sum |
 | [times](SO3Fun.times_py.html) | times(A, B) is A.times(B): the product of corresponding coefficients, MATLAB's A .* B |
 | [volume](SO3Fun.volume_py.html) | the share of orientations within a radius of a centre: the integral of f over the ball, int_{angle(g, c) < r} f(g) dg, relative to the integral over all orientations |

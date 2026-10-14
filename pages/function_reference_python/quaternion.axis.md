@@ -12,17 +12,27 @@ status: Reference
 {% raw %}
 A method of [quaternion](quaternion_index_py.html).
 
-the rotational axis, a unit vector
+return a unit vector along the rotation axis of each quaternion.
 
 ## Syntax
 
 <div class="mx-form" markdown="1">
 
 ```python
-v = axis(q)
+a = q.axis()
 ```
 
 </div>
+
+## Description
+
+The result is a vector3d with the same shape as q. The axis of the identity rotation
+is not geometrically unique; use [`quaternion.angle`](quaternion.angle_py.html) when only the rotation magnitude
+is needed.
+
+## See also
+
+[rotation.byAxisAngle](rotation.byAxisAngle_py.html), [quaternion.angle](quaternion.angle_py.html)
 
 ## Signature
 
@@ -36,5 +46,5 @@ quaternion.axis(self)
 
 MATLAB's [quaternion.axis](quaternion.axis.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L260">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L306">source</a></font>
 {% endraw %}

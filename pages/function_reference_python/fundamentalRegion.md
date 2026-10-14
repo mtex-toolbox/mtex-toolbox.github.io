@@ -10,9 +10,26 @@ counterpart: fundamentalRegion.html
 status: Reference
 ---
 {% raw %}
-fundamentalRegion(x, ...) is x.fundamentalRegion(...), the method of the object passed
+return the region representing distinct orientations under the given symmetries.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+region = fundamentalRegion(cs, ss)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, fundamentalRegion(x, ...) calls x.fundamentalRegion(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -24,7 +41,7 @@ fundamentalRegion(x, *args, **kwargs)
 
 ## Methods it calls
 
-| [orientation](orientation.fundamentalRegion_py.html) | the fundamental region of the orientations, the orientationRegion of the groups of CS and SS |
+| [orientation](orientation.fundamentalRegion_py.html) | return the region of symmetry-distinct orientations for the input frames |
 | [referenceFrame](referenceFrame.fundamentalRegion_py.html) | the fundamental region in orientation space of this group, or of the pair with another frame |
 | [symmetry](symmetry.fundamentalRegion_py.html) | the fundamental region of orientations of this group and another one, the Dirichlet domain of the identity |
 
@@ -34,5 +51,5 @@ fundamentalRegion(x, *args, **kwargs)
 
 MATLAB's [fundamentalRegion](fundamentalRegion.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

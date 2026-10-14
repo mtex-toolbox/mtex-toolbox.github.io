@@ -26,5 +26,5 @@ a[ind]
 
 MATLAB's [grain3Boundary.subsref](grain3Boundary.subsref.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L119">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L154">source</a></font>
 {% endraw %}

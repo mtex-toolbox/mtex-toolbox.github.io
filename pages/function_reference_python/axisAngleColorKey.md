@@ -30,6 +30,14 @@ rgb = key.orientation2color(ori, oriRef)
 The saturation is full at maxAngle, by default the 80th percentile of the angles, and the
 colour is NaN above thresholdAngle. Without a reference the identity is the reference.
 
+## Input
+
+| `x` | crystalFrame, orientation, or single-phase map supplying the frames; None uses a trivial crystal group |
+| `frameB` | specimen reference frame when supplied separately |
+| `oriRef` | reference orientation; None compares with identity |
+| `maxAngle` | angle in radians at which saturation is full; None uses the 80th percentile of input angles |
+| `thresholdAngle` | orientations beyond this angle in radians receive NaN colours; default infinity |
+
 ## Members
 
 | [orientation2color](axisAngleColorKey.orientation2color_py.html) | the colours of orientations: the axis of the rotation from the reference through the key of the sphere, its angle as the saturation, NaN above thresholdAngle |
@@ -40,5 +48,5 @@ colour is NaN above thresholdAngle. Without a reference the identity is the refe
 
 MATLAB's [axisAngleColorKey](axisAngleColorKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L261">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L334">source</a></font>
 {% endraw %}

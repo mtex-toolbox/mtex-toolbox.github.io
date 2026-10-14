@@ -26,5 +26,5 @@ grain3d.id2ind(self, ids)
 
 MATLAB's [grain3d.id2ind](grain3d.id2ind.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L197">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L222">source</a></font>
 {% endraw %}

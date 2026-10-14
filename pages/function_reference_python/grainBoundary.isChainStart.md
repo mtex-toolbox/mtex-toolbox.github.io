@@ -13,5 +13,5 @@ A property of [grainBoundary](grainBoundary_index_py.html).
 
 whether a segment is the first of its chain
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L187">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L223">source</a></font>
 {% endraw %}

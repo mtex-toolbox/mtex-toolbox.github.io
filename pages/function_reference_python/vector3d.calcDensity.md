@@ -12,10 +12,32 @@ status: Reference
 {% raw %}
 A method of [vector3d](vector3d_index_py.html).
 
-v.calcDensity(): the kernel density estimate of a list of directions, by the function
-spaces above this layer, vector3d/calcDensity
+estimate a smooth density of directions or axes on the sphere.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+f = v.calcDensity()
+f = v.calcDensity(halfwidth=10*degree)
+f = v.calcDensity(weights=w, antipodal=True)
+```
+
+</div>
+
+## Description
+
+The result is an S2FunHarmonic with mean one: a value of two represents twice the
+uniform directional density. The input's crystal symmetry and antipodal state are
+respected. Without a kernel or halfwidth, the smoothing width is selected from the data.
+Evaluate the density with f(queryDirections). All options are those of [`calcDensity`](calcDensity_py.html).
+
+## See also
+
+[calcDensity](calcDensity_py.html), [calcKernel](EBSD.calcKernel_py.html), [vector3d.interp](vector3d.interp_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -31,5 +53,5 @@ vector3d.calcDensity(self, *args, **kwargs)
 
 MATLAB's [vector3d.calcDensity](vector3d.calcDensity.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L385">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L413">source</a></font>
 {% endraw %}

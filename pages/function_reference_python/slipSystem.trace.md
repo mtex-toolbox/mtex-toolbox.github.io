@@ -66,5 +66,5 @@ slipSystem.trace(self, nrm=None)
 
 MATLAB's [slipSystem.trace](slipSystem.trace.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L251">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L264">source</a></font>
 {% endraw %}

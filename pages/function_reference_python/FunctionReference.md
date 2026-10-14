@@ -17,7 +17,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 ### Classes
 
 | [crystalFrame](crystalFrame_index_py.html) | the reference frame glued to the lattice basis of a phase, with the point group of the crystal |
-| [crystalShape](crystalShape_index_py.html) | a crystal shape, the polyhedron bounded by the lattice planes of the face normals N |
+| [crystalShape](crystalShape_index_py.html) | construct a convex crystal morphology from symmetry-related lattice planes |
 | [dislocationSystem](dislocationSystem_index_py.html) | a Burgers vector with a line vector, edge when orthogonal and screw when parallel |
 | [fibonacciS2Grid](fibonacciS2Grid_index_py.html) | the spherical Fibonacci grid: N = 2n + 1 points along a spiral, z linear in the index and the azimuth advancing by the golden angle |
 | [fibre](fibre_index_py.html) | a fibre in orientation space: the orientations mapping the crystal direction h onto the specimen direction r, or the arc of them between two orientations |
@@ -27,30 +27,30 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [orientation](orientation_index_py.html) | orientations and misorientations, rotations taking coordinates in the frame CS to coordinates in the frame SS |
 | [orientationRegion](orientationRegion_index_py.html) | a region of orientation space bounded by planes in the quaternions, mostly the fundamental region of a pair of frames |
 | [orthogonalTransform](orthogonalTransform_index_py.html) | orthogonal transforms, a rotation and a parity as a fifth coordinate, -1 for an improper one, the rotation followed by the inversion |
-| [plane3d](plane3d_index_py.html) | a plane <N, v> = d, or a list of them |
-| [plottingConvention](plottingConvention_index_py.html) | how a reference frame is laid out on screen: one rotation taking the screen axes to the reference axes, east = rot * x, north = rot * y, outOfScreen = rot * z |
-| [quaternion](quaternion_index_py.html) | quaternions a + b i + c j + d k, the coefficients along the last axis |
+| [plane3d](plane3d_index_py.html) | planes in three-dimensional space, stored by unit normals and signed offsets |
+| [plottingConvention](plottingConvention_index_py.html) | how a reference frame is laid out on screen: one rotation taking the screen axes to the reference axes, `east = rot * x`, `north = rot * y`, `outOfScreen = rot * z` |
+| [quaternion](quaternion_index_py.html) | quaternions stored as `a + b*i + c*j + d*k`, with one coefficient tuple per element |
 | [referenceFrame](referenceFrame_index_py.html) | a reference frame, the coordinate system data is expressed in: an identity, a basis, the point group the data is invariant under and the default plotting convention |
-| [rotation](rotation_index_py.html) | rotations, unit quaternions with q and -q one rotation |
+| [rotation](rotation_index_py.html) | proper rotations represented by unit quaternions, with opposite signs identified |
 | [S1Grid](S1Grid_index_py.html) | a sorted list of angles on an interval [min, max], periodic or not, the nearest neighbour and radius search of the tensor product grids S2Grid and SO3Grid |
 | [S2Grid](S2Grid_index_py.html) | a grid on the sphere with ring structure, a ladder of polar angles theta and one azimuth grid per ring, whose nearest and radius searches use that structure |
 | [S2Triangulation](S2Triangulation_index_py.html) | the Delaunay triangulation of directions on the sphere, their convex hull: the triangles T, counterclockwise from outside, and the triangle opposite each vertex |
 | [slipSystem](slipSystem_index_py.html) | slip systems: slip directions b with plane normals n orthogonal to them and a critical resolved shear stress each, in crystal coordinates while Miller indexed, in specimen coordinates once an orientation has rotated them |
 | [SO3FibonacciGrid](SO3FibonacciGrid_index_py.html) | the super-Fibonacci grid of orientations, a low-discrepancy quaternion spiral trimmed to one fundamental region of the frame pair, searched through the quaternion k-d tree |
 | [SO3Grid](SO3Grid_index_py.html) | the equispaced grid of orientations over one fundamental region of its frame pair, MATLAB's SO3Grid: an S2 grid of the images of z with a ladder of gamma per node, so a search costs three binary searches |
-| [SO3TangentVector](SO3TangentVector_index_py.html) | a tangent vector of SO(3), a rotation vector v at a reference rotation or orientation, on the left, exp(v) * oriRef, or on the right, oriRef * exp(v) |
-| [spatialTransform](spatialTransform_index_py.html) | the base of the spatial transforms, maps of the plane of a scan onto itself that move x and y and leave z |
-| [spatialTransformComposite](spatialTransformComposite_index_py.html) | stages applied in order, the first given first |
-| [spatialTransformDrift](spatialTransformDrift_index_py.html) | a displacement along the slow scan direction: linear between the knots s, the displacements u one row each, NaN beyond them unless extrapolate=True continues the end segments |
-| [spatialTransformField](spatialTransformField_index_py.html) | a displacement interpolated between points: linear over their triangulation, the nearest point's beyond it, where MATLAB takes natural neighbours and extrapolates linearly |
-| [spatialTransformHandle](spatialTransformHandle_index_py.html) | a transform given by a function of the positions and, for the inverse, a second one |
+| [SO3TangentVector](SO3TangentVector_index_py.html) | a tangent vector of SO(3), a rotation vector v at a reference rotation or orientation, on the left, `exp(v) * oriRef`, or on the right, `oriRef * exp(v)` |
+| [spatialTransform](spatialTransform_index_py.html) | a transformation of scan positions in the xy plane |
+| [spatialTransformComposite](spatialTransformComposite_index_py.html) | a sequence of spatial transforms applied in the supplied order |
+| [spatialTransformDrift](spatialTransformDrift_index_py.html) | a displacement that varies along the slow scan direction |
+| [spatialTransformField](spatialTransformField_index_py.html) | a scan distortion interpolated from measured displacement vectors |
+| [spatialTransformHandle](spatialTransformHandle_index_py.html) | a spatial transform defined by a callable and an optional inverse callable |
 | [spatialTransformId](spatialTransformId_index_py.html) | the identity transform, which leaves every position where it is |
-| [spatialTransformInverse](spatialTransformInverse_index_py.html) | the inverse of a transform that knows none in closed form, each preimage found by fixed point iteration to the tolerance tol relative to the extent of the positions |
+| [spatialTransformInverse](spatialTransformInverse_index_py.html) | a numerical inverse of a spatial transform without a closed-form inverse |
 | [spatialTransformList](spatialTransformList_index_py.html) | a list of transforms, one hop each, displayed as MATLAB's table of a spatialTransform array |
-| [spatialTransformPoly](spatialTransformPoly_index_py.html) | a polynomial displacement of degree 1 or 2, the coefficients c one column per coordinate over the basis [1 x y] or [1 x y x^2 xy y^2] |
+| [spatialTransformPoly](spatialTransformPoly_index_py.html) | a scan distortion described by a polynomial displacement in x and y |
 | [spatialTransformProjective](spatialTransformProjective_index_py.html) | a projective transform of the plane, a homography given by a 3 x 3 matrix normalised to H[2, 2] = 1 |
 | [spatialTransformRigid](spatialTransformRigid_index_py.html) | a translation of the plane by the vector3d u |
-| [spatialTransformShift](spatialTransformShift_index_py.html) | an affine transform of the plane, given by a 3 x 3 homogeneous matrix with last row [0 0 1] |
+| [spatialTransformShift](spatialTransformShift_index_py.html) | an affine map of scan positions, including translation, rotation, scale and shear |
 | [spatialTransformTilt](spatialTransformTilt_index_py.html) | specimen tilt, fitted in stages against a re-measured residual: a projective stage takes the bulk, then an affine and a quadratic polynomial what is left |
 | [specimenFrame](specimenFrame_index_py.html) | the reference frame a sample is expressed in, with the sample symmetry it claims |
 | [sphericalRegion](sphericalRegion_index_py.html) | a region on the sphere bounded by small circles: all directions v with dot(v, N_i) >= alpha_i for every normal N_i |
@@ -60,237 +60,237 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 ### Functions
 
 | [align](align_py.html) | the orientation two frames stand in by their axes, MATLAB's orientation.align |
-| [alignment](alignment_py.html) | alignment(x, ...) is x.alignment(...), the method of the object passed |
+| [alignment](alignment_py.html) | describe how the Cartesian axes align with the axes of a crystal lattice |
 | [alignmentSetups](alignmentSetups_py.html) | the twelve alignment pairs ['X\|\|a', 'Z\|\|b*'], .. |
 | [allHKL](allHKL_py.html) | every index triple up to maxIndex, coprime, without (0, 0, 0) |
-| [angle](angle_py.html) | angle(x, ...) is x.angle(...), the method of the object passed |
-| [aspectRatio](aspectRatio_py.html) | aspectRatio(x, ...) is x.aspectRatio(...), the method of the object passed |
-| [axis](axis_py.html) | axis(x, ...) is x.axis(...), the method of the object passed |
+| [angle](angle_py.html) | measure angles between geometric objects, or the phase of numeric values |
+| [aspectRatio](aspectRatio_py.html) | measure the ratio of the longest to shortest fitted half axis of each grain |
+| [axis](axis_py.html) | return the axis of a rotation or misorientation |
 | [bainPlanes](bainPlanes_py.html) | the three {100} directions of the parent phase cs that the Bain groups of the variants are sorted by |
 | [byScreenAlignment](byScreenAlignment_py.html) | the orientation implied by two frames rendering alike: a point at v renders at inv(rot) * v in screen coordinates, so vB = rotB * inv(rotA) * vA |
-| [calcDistortion](calcDistortion_py.html) | calcDistortion(x, ...) is x.calcDistortion(...), the method of the object passed |
-| [calcFourier](calcFourier_py.html) | calcFourier(x, ...) is x.calcFourier(...), the method of the object passed |
-| [calcGND](calcGND_py.html) | calcGND(x, ...) is x.calcGND(...), the method of the object passed |
-| [calcGROD](calcGROD_py.html) | calcGROD(x, ...) is x.calcGROD(...), the method of the object passed |
-| [calcMisorientation](calcMisorientation_py.html) | calcMisorientation(x, ...) is x.calcMisorientation(...), the method of the object passed |
+| [calcDistortion](calcDistortion_py.html) | fit the spatial distortion between the maps of a registration job |
+| [calcFourier](calcFourier_py.html) | return the harmonic coefficients of a kernel |
+| [calcGND](calcGND_py.html) | estimate geometrically necessary dislocation content from orientation gradients |
+| [calcGROD](calcGROD_py.html) | compare every measurement with the reference orientation of its grain |
+| [calcMisorientation](calcMisorientation_py.html) | sample uncorrelated misorientations from separated pairs of map measurements |
 | [calcParent](calcParent_py.html) | the parent orientations of child orientations under a parent to child orientation relationship, with their fit |
 | [calcParent2Child](calcParent2Child_py.html) | the parent to child orientation relationship that fits child to child misorientations best, refined from an initial guess |
 | [calcVariantId](calcVariantId_py.html) | the variant, packet and Bain group of every child orientation with respect to its parent, MATLAB's calcVariantId |
-| [caliper](caliper_py.html) | caliper(x, ...) is x.caliper(...), the method of the object passed |
+| [caliper](caliper_py.html) | measure the Feret width of each grain outline along a direction or at its extrema |
 | [cat](S1FunHarmonic.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |
-| [characteristicShape](characteristicShape_py.html) | characteristicShape(x, ...) is x.characteristicShape(...), the method of the object passed |
+| [characteristicShape](characteristicShape_py.html) | combine grain boundary segments into a characteristic particle shape |
 | [checkInside](checkInside_py.html) | whether x lies in the region, region.checkInside(x) |
 | [closestAlignment](closestAlignment_py.html) | the alignment setup a crystal frame is reported in: of the twelve setups the one whose frame lies nearest its basis |
 | [closestConvention](closestConvention_py.html) | the entry of AXIS_CONVENTIONS nearest a rotation, and how far it is from it in radians |
-| [conj](conj_py.html) | conj(x, ...) is x.conj(...), the method of the object passed |
-| [conv](conv_py.html) | conv(x, ...) is x.conv(...), the method of the object passed |
-| [conventionalSector](conventionalSector_py.html) | conventionalSector(x, ...) is x.conventionalSector(...), the method of the object passed |
+| [conj](conj_py.html) | take the quaternion or complex conjugate of an object |
+| [conv](conv_py.html) | convolve functions or kernels on their domain |
+| [conventionalSector](conventionalSector_py.html) | return the conventional spherical sector used to display crystal directions |
 | [conventionNames](conventionNames_py.html) | the eight written in the axis names of a frame, 'Y1↑→X1' for an Oxford file |
 | [convexHull](convexHull_py.html) | the indices of the convex hull of points in the plane, anticlockwise, by Andrew's monotone chain |
 | [convexHullLoops](convexHullLoops_py.html) | the convex hulls of many loops of indices into the (n, 2) vertices V in one pass, a list of index arrays into V |
-| [convexity](convexity_py.html) | convexity(x, ...) is x.convexity(...), the method of the object passed |
-| [cross](cross_py.html) | cross(x, ...) is x.cross(...), the method of the object passed |
+| [convexity](convexity_py.html) | compare each grain area with the area of its convex hull |
+| [cross](cross_py.html) | form the cross product of vectors or vector fields |
 | [crystalAxes](crystalAxes_py.html) | the crystal axes a, b, c in Cartesian coordinates, from the cell of a lattice |
 | [CSL](CSL_py.html) | the coincidence site lattice misorientations of order sigma of the lattice of the crystal frame cs, MATLAB's CSL |
-| [cubo2homo](cubo2homo_py.html) | cubo2homo |
-| [cubochoric](cubochoric_py.html) | cubochoric(x, ...) is x.cubochoric(...), the method of the object passed |
-| [curvature](curvature_py.html) | curvature(x, ...) is x.curvature(...), the method of the object passed |
-| [det](det_py.html) | det(x, ...) is x.det(...), the method of the object passed |
-| [diff](diff_py.html) | diff(x, ...) is x.diff(...), the method of the object passed |
+| [cubo2homo](cubo2homo_py.html) | map cubochoric coordinates from a cube to the equal-volume homochoric ball |
+| [cubochoric](cubochoric_py.html) | express rotations in equal-volume cubochoric coordinates |
+| [curvature](curvature_py.html) | calculate the lattice curvature tensor from spatial orientation derivatives |
+| [det](det_py.html) | calculate tensor determinants or vector triple products |
+| [diff](diff_py.html) | differentiate a function on the circle |
 | [dirichletSector](dirichletSector_py.html) | the Dirichlet domain of a point group about a centre, a fundamental domain for every group, whatever axes it is written in |
-| [discretize](discretize_py.html) | discretize(x, ...) is x.discretize(...), the method of the object passed |
-| [disjoint](disjoint_py.html) | disjoint(x, ...) is x.disjoint(...), the method of the object passed |
-| [displacement](displacement_py.html) | displacement(x, ...) is x.displacement(...), the method of the object passed |
+| [discretize](discretize_py.html) | sample a spatial transform as a displacement field at given positions |
+| [disjoint](disjoint_py.html) | find the symmetry elements shared by two point groups or frames |
+| [displacement](displacement_py.html) | evaluate the displacement produced by a spatial transform |
 | [dist](dist_py.html) | dist(plane, v), dist(plane, plane2): the signed distance to the plane |
-| [dot](dot_py.html) | dot(x, ...) is x.dot(...), the method of the object passed |
-| [dspacing](dspacing_py.html) | dspacing(x, ...) is x.dspacing(...), the method of the object passed |
+| [dot](dot_py.html) | calculate an inner product, with the symmetry conventions of its operands |
+| [dspacing](dspacing_py.html) | return the separation of lattice planes from their Miller normals |
 | [equispacedS2Grid](equispacedS2Grid_py.html) | an equispaced spherical grid, nearly equidistant directions on rings of constant polar angle |
 | [equispacedSO3Grid](equispacedSO3Grid_py.html) | nearly equidistant orientations covering one fundamental region of the frame pair |
-| [Euler](Euler_py.html) | Euler(x, ...) is x.Euler(...), the method of the object passed |
+| [Euler](Euler_py.html) | express rotations as Euler angles in radians |
 | [eulerRegion](eulerRegion_py.html) | the ranges (phi1, Phi, phi2) of the Bunge Euler angles covering the fundamental region of two frames, the specimen frame the default second |
-| [even](even_py.html) | even(x, ...) is x.even(...), the method of the object passed |
-| [exp](exp_py.html) | exp(x, ...) is x.exp(...), the method of the object passed |
-| [extent](extent_py.html) | extent(x, ...) is x.extent(...), the method of the object passed |
-| [factor](factor_py.html) | factor(x, ...) is x.factor(...), the method of the object passed |
+| [even](even_py.html) | extract the part of a function unchanged by reversal of its argument |
+| [exp](exp_py.html) | take the pointwise exponential or the exponential map of an object |
+| [extent](extent_py.html) | return the spatial bounding box of a map or image |
+| [factor](factor_py.html) | factor two point groups relative to their common symmetry elements |
 | [fibonacciSO3Grid](fibonacciSO3Grid_py.html) | a low discrepancy grid of orientations from a super-Fibonacci spiral, restricted to the fundamental region of the frame pair |
-| [fill](fill_py.html) | fill(x, ...) is x.fill(...), the method of the object passed |
-| [fillByGrainId](fillByGrainId_py.html) | fillByGrainId(x, ...) is x.fillByGrainId(...), the method of the object passed |
-| [find](find_py.html) | find(x, ...) is x.find(...), the method of the object passed |
-| [findByLocation](findByLocation_py.html) | findByLocation(x, ...) is x.findByLocation(...), the method of the object passed |
-| [findByOrientation](findByOrientation_py.html) | findByOrientation(x, ...) is x.findByOrientation(...), the method of the object passed |
+| [fill](fill_py.html) | fill missing measurements in a map using nearby data or grain information |
+| [fillByGrainId](fillByGrainId_py.html) | replace map measurements by the mean orientations assigned to their grain ids |
+| [find](find_py.html) | search geometric data for neighbours, or find nonzero entries of numeric data |
+| [findByLocation](findByLocation_py.html) | locate map measurements or grains at specified spatial positions |
+| [findByOrientation](findByOrientation_py.html) | select measurements or grains close to an orientation or fibre |
 | [findPointGroup](findPointGroup_py.html) | the symbol a name stands for, findsymmetry: an exact name, then a space group symbol, then a name contained in the string, later entries first |
-| [fitEllipse](fitEllipse_py.html) | fitEllipse(x, ...) is x.fitEllipse(...), the method of the object passed |
-| [fitStage](fitStage_py.html) | fitStage(x, ...) is x.fitStage(...), the method of the object passed |
-| [flip](flip_py.html) | flip(x, ...) is x.flip(...), the method of the object passed |
-| [fullSym](fullSym_py.html) | fullSym(x, ...) is x.fullSym(...), the method of the object passed |
-| [fundamentalRegion](fundamentalRegion_py.html) | fundamentalRegion(x, ...) is x.fundamentalRegion(...), the method of the object passed |
+| [fitEllipse](fitEllipse_py.html) | fit an ellipse to each grain outline using its second area moments |
+| [fitStage](fitStage_py.html) | fit one stage of a composite spatial transform to supplied point pairs |
+| [flip](flip_py.html) | exchange the two grain sides of boundary segments or faces |
+| [fullSym](fullSym_py.html) | return the largest registered symmetry group for the same frame basis |
+| [fundamentalRegion](fundamentalRegion_py.html) | return the region representing distinct orientations under the given symmetries |
 | [fundamentalRegionEuler](symmetry.fundamentalRegionEuler_py.html) | the box in Euler angles that carries every orientation at least once (fundamentalRegionEuler): the two-folds perpendicular to z halve Phi, and one of the reflections they make on phi1 or phi2 halves that angle when it folds its turn about zero fundamentalRegionEuler(cs, ss): MATLAB's name of the Euler plotting box |
-| [fundamentalSector](fundamentalSector_py.html) | fundamentalSector(x, ...) is x.fundamentalSector(...), the method of the object passed |
+| [fundamentalSector](fundamentalSector_py.html) | return a spherical region containing one representative of each symmetry orbit |
 | [geodesic](geodesic_py.html) | the geodesic from a to b: exp(s * log(b, a)), s in [0, 1] |
 | [getMTEXpref](getMTEXpref_py.html) | one preference, or with no name all of them as a new dict, MATLAB's struct |
-| [grad](grad_py.html) | grad(x, ...) is x.grad(...), the method of the object passed |
-| [gradient](gradient_py.html) | gradient(x, ...) is x.gradient(...), the method of the object passed |
-| [gradientX](gradientX_py.html) | gradientX(x, ...) is x.gradientX(...), the method of the object passed |
-| [gradientY](gradientY_py.html) | gradientY(x, ...) is x.gradientY(...), the method of the object passed |
-| [gradientZ](gradientZ_py.html) | gradientZ(x, ...) is x.gradientZ(...), the method of the object passed |
-| [grainMean](grainMean_py.html) | grainMean(x, ...) is x.grainMean(...), the method of the object passed |
-| [gridify](gridify_py.html) | gridify(x, ...) is x.gridify(...), the method of the object passed |
-| [halfwidth](halfwidth_py.html) | halfwidth(x, ...) is x.halfwidth(...), the method of the object passed |
+| [grad](grad_py.html) | differentiate a scalar function or a smoothing kernel |
+| [gradient](gradient_py.html) | calculate spatial orientation derivatives of a map |
+| [gradientX](gradientX_py.html) | differentiate map orientations along the x direction |
+| [gradientY](gradientY_py.html) | differentiate map orientations along the y direction |
+| [gradientZ](gradientZ_py.html) | differentiate map orientations along the z direction |
+| [grainMean](grainMean_py.html) | average a map property separately within each grain |
+| [gridify](gridify_py.html) | arrange measurements on the cells of their spatial lattice |
+| [halfwidth](halfwidth_py.html) | return the angular halfwidth of a kernel in radians |
 | [HEALPixS2Grid](HEALPixS2Grid_py.html) | the HEALPix nodes of the sphere as a list of directions |
 | [hm2point](hm2point_py.html) | a Hermann-Mauguin space group symbol reduced to its point group, hms2point |
-| [homo2cubo](homo2cubo_py.html) | homo2cubo |
-| [homochoric](homochoric_py.html) | homochoric(x, ...) is x.homochoric(...), the method of the object passed |
+| [homo2cubo](homo2cubo_py.html) | map equal-volume homochoric coordinates from a ball to the cubochoric cube |
+| [homochoric](homochoric_py.html) | express rotations as equal-volume coordinates inside the homochoric ball |
 | [homochoricRadius](homochoricRadius_py.html) | the radius (3 pi / 4)^(1/3) of the homochoric ball, the image of the rotations of angle pi |
-| [hull](hull_py.html) | hull(x, ...) is x.hull(...), the method of the object passed |
+| [hull](hull_py.html) | replace particle outlines by their convex hulls |
 | [identifyGroup](identifyGroup_py.html) | the symbol of a list of elements written in the given axes, '' when it names no group |
 | [innerFace](innerFace_py.html) | innerFace(cS, n): the section of the shape by the plane through its centre |
-| [inpolygon](inpolygon_py.html) | inpolygon(x, ...) is x.inpolygon(...), the method of the object passed |
-| [interp](interp_py.html) | interp(x, ...) is x.interp(...), the method of the object passed |
+| [inpolygon](inpolygon_py.html) | test whether map positions or grain centroids lie inside a polygon |
+| [interp](interp_py.html) | read a map or spherical data at new sample positions |
 | [intersect](intersect_py.html) | intersect(plane, v1, v2): where the segments cross the plane |
-| [inv](inv_py.html) | inv(x, ...) is x.inv(...), the method of the object passed |
-| [invRadon](invRadon_py.html) | invRadon(x, ...) is x.invRadon(...), the method of the object passed |
-| [isAligned](isAligned_py.html) | isAligned(x, ...) is x.isAligned(...), the method of the object passed |
-| [isclose](isclose_py.html) | isclose(x, ...) is x.isclose(...), the method of the object passed |
-| [isCompatible](isCompatible_py.html) | isCompatible(x, ...) is x.isCompatible(...), the method of the object passed |
+| [inv](inv_py.html) | invert a rotation, tensor or spatial transform |
+| [invRadon](invRadon_py.html) | invert the spherical Funk transform on its even modes |
+| [isAligned](isAligned_py.html) | test whether two reference frames have aligned basis vectors |
+| [isclose](isclose_py.html) | compare objects within the numerical tolerances of their type |
+| [isCompatible](isCompatible_py.html) | check whether a coordinate transition between two frames is available |
 | [isCrystalDirection](isCrystalDirection_py.html) | whether v is a vector given in a crystal frame |
-| [isnan](isnan_py.html) | isnan(x, ...) is x.isnan(...), the method of the object passed |
+| [isnan](isnan_py.html) | identify objects containing missing coordinates or coefficients |
 | [isPointGroupName](isPointGroupName_py.html) | whether a string names a point group exactly, by one of its symbols or names, never a substring: the specimen frame 'measurement' is no group m |
-| [KAM](KAM_py.html) | KAM(x, ...) is x.KAM(...), the method of the object passed |
-| [laplace](laplace_py.html) | laplace(x, ...) is x.laplace(...), the method of the object passed |
-| [Laue](Laue_py.html) | Laue(x, ...) is x.Laue(...), the method of the object passed |
-| [LaueName](LaueName_py.html) | LaueName(x, ...) is x.LaueName(...), the method of the object passed |
+| [KAM](KAM_py.html) | measure the mean misorientation angle from each map measurement to its neighbours |
+| [laplace](laplace_py.html) | apply the Laplace-Beltrami operator to a harmonic function |
+| [Laue](Laue_py.html) | add inversion symmetry to a point group or reference frame |
+| [LaueName](LaueName_py.html) | return the Hermann-Mauguin symbol of the corresponding Laue group |
 | [layoutIndex](gridLayout.layoutIndex_py.html) | the index that lays out an array whose first and second index run along d = (d1, d2) as gL asks, new[r, c] = old.flat[lin[r, c]] |
 | [left](left_py.html) | left(t) is t.left(): the tangent vectors on the left side |
 | [lineIntersect](vector3d.lineIntersect_py.html) | where the segments from a to b cross the planes <n, v> = d, NaN where they do not, MATLAB's lineIntersect |
 | [loadSettings](loadSettings_py.html) | applies the saved settings to the session: the key plottingConvention sets the default convention, every other key the preference of that name |
 | [localOrientationGrid](localOrientationGrid_py.html) | an equispaced grid of orientations in a ball about a centre |
 | [localS2Grid](localS2Grid_py.html) | an equispaced grid of directions in a spherical cap about a centre |
-| [log](log_py.html) | log(x, ...) is x.log(...), the method of the object passed |
-| [longAxis](longAxis_py.html) | longAxis(x, ...) is x.longAxis(...), the method of the object passed |
-| [matrix](matrix_py.html) | matrix(x, ...) is x.matrix(...), the method of the object passed |
+| [log](log_py.html) | take a pointwise logarithm or map rotations to tangent vectors |
+| [longAxis](longAxis_py.html) | return the longest fitted half axis of each grain outline |
+| [matrix](matrix_py.html) | express rotations, transforms or tensors as numeric matrices |
 | [maxAngle](symmetry.maxAngle_py.html) | maxAngle(cs), maxAngle(cs1, cs2): the largest rotation angle of the fundamental region of the frames, MATLAB's maxAngle of a symmetry |
-| [mean](mean_py.html) | mean(x, ...) is x.mean(...), the method of the object passed |
-| [merge](merge_py.html) | merge(x, ...) is x.merge(...), the method of the object passed |
+| [mean](mean_py.html) | average objects using the mean defined for their type |
+| [merge](merge_py.html) | join grains that meet the specified boundary, label or orientation criteria |
 | [Miller](Miller_py.html) | crystal directions and lattice plane normals, a vector3d in a crystal frame |
 | [misfit](misfit_py.html) | misfit(mori, p2c): the angle of every child to child misorientation to the nearest one the relationship predicts |
 | [monoclinicSetting](monoclinicSetting_py.html) | '2', 'm', '2/m' with lattice angles: the unique axis is the one whose angle is not 90 degree |
 | [mPrime](mPrime_py.html) | mPrime(sS1, sS2) is sS1.mPrime(sS2): the Luster-Morris parameter \|(n1  |
-| [multiplicity](multiplicity_py.html) | multiplicity(x, ...) is x.multiplicity(...), the method of the object passed |
-| [nfold](nfold_py.html) | nfold(x, ...) is x.nfold(...), the method of the object passed |
-| [norm](norm_py.html) | norm(x, ...) is x.norm(...), the method of the object passed |
-| [normalize](normalize_py.html) | normalize(x, ...) is x.normalize(...), the method of the object passed |
-| [numProper](numProper_py.html) | numProper(x, ...) is x.numProper(...), the method of the object passed |
-| [numSym](numSym_py.html) | numSym(x, ...) is x.numSym(...), the method of the object passed |
-| [orth](orth_py.html) | orth(x, ...) is x.orth(...), the method of the object passed |
-| [orthProj](orthProj_py.html) | orthProj(x, ...) is x.orthProj(...), the method of the object passed |
+| [multiplicity](multiplicity_py.html) | count distinct symmetry-equivalent directions or fibres |
+| [nfold](nfold_py.html) | return the order of the rotational symmetry axes of a point group |
+| [norm](norm_py.html) | measure vector lengths, tensor magnitudes or function L2 norms |
+| [normalize](normalize_py.html) | scale vectors, tensors or densities to the normalisation of their type |
+| [numProper](numProper_py.html) | count the proper rotations in a point group |
+| [numSym](numSym_py.html) | count all operations in a point group |
+| [orth](orth_py.html) | choose a unit direction perpendicular to each vector |
+| [orthProj](orthProj_py.html) | project vectors onto the plane perpendicular to a given normal |
 | [packetPlanes](packetPlanes_py.html) | the four {111} planes of the parent phase cs that the packets of the variants are sorted by |
-| [paris](paris_py.html) | paris(x, ...) is x.paris(...), the method of the object passed |
-| [paror](paror_py.html) | paror(x, ...) is x.paror(...), the method of the object passed |
-| [perp](perp_py.html) | perp(x, ...) is x.perp(...), the method of the object passed |
-| [pixelSizeMatch](pixelSizeMatch_py.html) | pixelSizeMatch(x, ...) is x.pixelSizeMatch(...), the method of the object passed |
-| [polar](polar_py.html) | polar(x, ...) is x.polar(...), the method of the object passed |
-| [pos2ind](pos2ind_py.html) | pos2ind(x, ...) is x.pos2ind(...), the method of the object passed |
-| [principalComponents](principalComponents_py.html) | principalComponents(x, ...) is x.principalComponents(...), the method of the object passed |
-| [project](project_py.html) | project(x, ...) is x.project(...), the method of the object passed |
+| [paris](paris_py.html) | measure outline indentation relative to the convex hull, in percent |
+| [paror](paror_py.html) | calculate the cumulative particle projection function of grain outlines |
+| [perp](perp_py.html) | fit an axis perpendicular to a collection of directions |
+| [pixelSizeMatch](pixelSizeMatch_py.html) | resample the maps and images of a registration job to a common pixel spacing |
+| [polar](polar_py.html) | return polar vector coordinates or a tensor polar decomposition |
+| [pos2ind](pos2ind_py.html) | convert physical image positions to pixel indices |
+| [principalComponents](principalComponents_py.html) | return the principal half axes of grain outlines or volumes |
+| [project](project_py.html) | project directions to a plane or embeddings back to orientations |
 | [projectIntoEulerRegion](quaternion.project2EulerFR_py.html) | the Bunge Euler angles of the representative of every orientation inside the Euler box of its frames, as MATLAB's project2EulerFR: three arrays in the shape of the list |
-| [projectIntoFundamentalRegion](projectIntoFundamentalRegion_py.html) | projectIntoFundamentalRegion(x, ...) is x.projectIntoFundamentalRegion(...), the method of the object passed |
+| [projectIntoFundamentalRegion](projectIntoFundamentalRegion_py.html) | choose symmetry-equivalent representatives in a fundamental region |
 | [projectIntoRegion](projectIntoRegion_py.html) | the image of a direction that lies in a region, under the group |
-| [properGroup](properGroup_py.html) | properGroup(x, ...) is x.properGroup(...), the method of the object passed |
-| [properSubGroup](properSubGroup_py.html) | properSubGroup(x, ...) is x.properSubGroup(...), the method of the object passed |
-| [radon](radon_py.html) | radon(x, ...) is x.radon(...), the method of the object passed |
-| [reciprocalAxes](reciprocalAxes_py.html) | the reciprocal axes a*, b*, c* |
-| [reduce](reduce_py.html) | reduce(x, ...) is x.reduce(...), the method of the object passed |
-| [reduceBoundary](reduceBoundary_py.html) | reduceBoundary(x, ...) is x.reduceBoundary(...), the method of the object passed |
-| [refineBoundary](refineBoundary_py.html) | refineBoundary(x, ...) is x.refineBoundary(...), the method of the object passed |
+| [properGroup](properGroup_py.html) | form a proper rotation group from all rotational parts of a point group |
+| [properSubGroup](properSubGroup_py.html) | retain only the proper rotations already present in a point group |
+| [radon](radon_py.html) | apply an orientation Radon transform or a spherical Funk transform |
+| [reciprocalAxes](reciprocalAxes_py.html) | compute reciprocal basis vectors from a direct crystal basis |
+| [reduce](reduce_py.html) | coarsen a map lattice or a boundary discretisation |
+| [reduceBoundary](reduceBoundary_py.html) | coarsen the boundary discretisation of grains |
+| [refineBoundary](refineBoundary_py.html) | subdivide boundary segments or triangular faces |
 | [reflection](reflection_py.html) | a reflection at the plane with normal n |
 | [regularS2Grid](regularS2Grid_py.html) | a regular spherical grid, the tensor product of a ladder of polar angles and a ladder of azimuths, the layout of pole figure files |
 | [regularSO3Grid](regularSO3Grid_py.html) | the regular raster of Euler angles over the Euler box of the frames, as the ODF sections show it |
 | [reset](reset_py.html) | a fresh session: the preferences, the register and the default frame |
 | [right](right_py.html) | right(t) is t.right(): the tangent vectors on the right side |
-| [Rodrigues](Rodrigues_py.html) | Rodrigues(x, ...) is x.Rodrigues(...), the method of the object passed |
+| [Rodrigues](Rodrigues_py.html) | express rotations as axes scaled by the tangent of half the rotation angle |
 | [rotate](S2Fun.rotate_py.html) | rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method |
 | [round](round_py.html) | round(x) of an MTEX object by its own round, of an array, a list or with an axis as NumPy rounds, of a number as Python rounds, so that from mtex import * keeps Python's round |
 | [round2Miller](orientation.round2Miller_py.html) | the lattice planes and directions of low indices an orientation or a misorientation aligns |
 | [sectorCenter](sectorCenter_py.html) | the centre of the Dirichlet domain: the barycentre of the conventional sector - the triangle c, a, tertiary for the tetragonal and hexagonal systems, [001], [101], [111] for the cubic one - in the axes the group is written in |
 | [setMTEXpref](setMTEXpref_py.html) | sets a preference of the session |
-| [setOptions](setOptions_py.html) | setOptions(x, ...) is x.setOptions(...), the method of the object passed |
+| [setOptions](setOptions_py.html) | set registration options for a job or one of its maps |
 | [settingsFile](settingsFile_py.html) | the path of the user's settings file, whether or not it exists: MTEX_SETTINGS when set, else mtex_settings.json in the user's configuration folder, %APPDATA%/mtex on Windows and $XDG_CONFIG_HOME/mtex or ~/.config/mtex elsewhere |
-| [shapeFactor](shapeFactor_py.html) | shapeFactor(x, ...) is x.shapeFactor(...), the method of the object passed |
-| [shift](shift_py.html) | shift(x, ...) is x.shift(...), the method of the object passed |
-| [shortAxis](shortAxis_py.html) | shortAxis(x, ...) is x.shortAxis(...), the method of the object passed |
-| [sim](sim_py.html) | sim(x, ...) is x.sim(...), the method of the object passed |
-| [simplifyBoundary](simplifyBoundary_py.html) | simplifyBoundary(x, ...) is x.simplifyBoundary(...), the method of the object passed |
-| [smooth](smooth_py.html) | smooth(x, ...) is x.smooth(...), the method of the object passed |
-| [smoothBoundary](smoothBoundary_py.html) | smoothBoundary(x, ...) is x.smoothBoundary(...), the method of the object passed |
-| [spaceGroupToPointGroup](spaceGroupToPointGroup_py.html) | the Hermann-Mauguin symbol of the point group of a space group given by its number, 1 to 230 |
-| [spatialProfile](spatialProfile_py.html) | spatialProfile(x, ...) is x.spatialProfile(...), the method of the object passed |
-| [sqrt](sqrt_py.html) | sqrt(x, ...) is x.sqrt(...), the method of the object passed |
-| [std](std_py.html) | std(x, ...) is x.std(...), the method of the object passed |
-| [stripSym](stripSym_py.html) | stripSym(x, ...) is x.stripSym(...), the method of the object passed |
-| [subGrid](subGrid_py.html) | subGrid(x, ...) is x.subGrid(...), the method of the object passed |
-| [subsample](subsample_py.html) | subsample(x, ...) is x.subsample(...), the method of the object passed |
+| [shapeFactor](shapeFactor_py.html) | compare grain perimeters with circles of the same area |
+| [shift](shift_py.html) | translate map positions by a spatial displacement |
+| [shortAxis](shortAxis_py.html) | return the shortest fitted half axis of each grain outline |
+| [sim](sim_py.html) | compare the symmetry classes of reference frames without requiring aligned axes |
+| [simplifyBoundary](simplifyBoundary_py.html) | remove boundary vertices while limiting the change in outline shape |
+| [smooth](smooth_py.html) | smooth sampled orientations, boundaries or harmonic functions |
+| [smoothBoundary](smoothBoundary_py.html) | smooth grain boundary curves or surfaces |
+| [spaceGroupToPointGroup](spaceGroupToPointGroup_py.html) | return the crystallographic point-group symbol for a space-group number |
+| [spatialProfile](spatialProfile_py.html) | sample map measurements along a spatial polyline |
+| [sqrt](sqrt_py.html) | take the pointwise square root of a function or numeric array |
+| [std](std_py.html) | measure the angular spread of rotations about their mean |
+| [stripSym](stripSym_py.html) | return the same frame basis with the trivial symmetry group |
+| [subGrid](subGrid_py.html) | select grid points by indices or by a geometric neighbourhood |
+| [subsample](subsample_py.html) | keep every n-th map measurement along each lattice direction |
 | [sum](S2Fun.sum_py.html) | sum(x) of an MTEX object by its own sum, of an array or with an axis as NumPy sums, of any other iterable as Python sums, so that from mtex import * keeps Python's sum |
 | [superfibonacciSO3Grid](superfibonacciSO3Grid_py.html) | a super-Fibonacci grid of orientations covering one fundamental region of the frame pair, its resolution the mean spacing of nearest neighbours |
-| [surfor](surfor_py.html) | surfor(x, ...) is x.surfor(...), the method of the object passed |
-| [symmetrise](symmetrise_py.html) | symmetrise(x, ...) is x.symmetrise(...), the method of the object passed |
+| [surfor](surfor_py.html) | calculate the cumulative directional projection length of boundary segments |
+| [symmetrise](symmetrise_py.html) | apply the symmetry action appropriate to directions, tensors or fields |
 | [tilesSphere](tilesSphere_py.html) | whether the region is a fundamental domain of the point group: n evenly spread directions folded into it all land inside, and it covers the share of one element |
-| [transform](transform_py.html) | transform(x, ...) is x.transform(...), the method of the object passed |
-| [transformationMatrix](transformationMatrix_py.html) | transformationMatrix(x, ...) is x.transformationMatrix(...), the method of the object passed |
-| [transformReferenceFrame](transformReferenceFrame_py.html) | transformReferenceFrame(x, ...) is x.transformReferenceFrame(...), the method of the object passed |
-| [truncate](truncate_py.html) | truncate(x, ...) is x.truncate(...), the method of the object passed |
-| [undistort](undistort_py.html) | undistort(x, ...) is x.undistort(...), the method of the object passed |
-| [union](union_py.html) | union(x, ...) is x.union(...), the method of the object passed |
-| [unique](unique_py.html) | unique(x, ...) is x.unique(...), the method of the object passed |
+| [transform](transform_py.html) | apply a spatial transform to map positions |
+| [transformationMatrix](transformationMatrix_py.html) | return the coordinate transition between two reference frames |
+| [transformReferenceFrame](transformReferenceFrame_py.html) | express the same geometric data in another reference frame |
+| [truncate](truncate_py.html) | cut or pad a harmonic expansion to a specified maximum degree |
+| [undistort](undistort_py.html) | resample a registration job onto its reference grid using the fitted transforms |
+| [union](union_py.html) | combine point groups or compatible pole figure data sets |
+| [unique](unique_py.html) | remove duplicate geometric objects, respecting their symmetry and tolerance |
 | [variants](variants_py.html) | the variants of a parent to child orientation relationship, and the child or parent orientations they give |
-| [weightedBurgersVec](weightedBurgersVec_py.html) | weightedBurgersVec(x, ...) is x.weightedBurgersVec(...), the method of the object passed |
-| [withExchange](withExchange_py.html) | withExchange(x, ...) is x.withExchange(...), the method of the object passed |
+| [weightedBurgersVec](weightedBurgersVec_py.html) | estimate net Burgers vector per unit area from an orientation map |
+| [withExchange](withExchange_py.html) | impose grain exchange symmetry f(g) = f(inv(g)) on an orientation function |
 
 ## Function spaces
 
 ### Classes
 
 | [fibreVonMisesFisherKernel](fibreVonMisesFisherKernel_index_py.html) | the von Mises Fisher kernel of a fibre, what fibreODF convolves with |
-| [griddedDensity](griddedDensity_index_py.html) | a density on a regular grid, evaluated by its tensor product spline as MATLAB's griddedInterpolant(..., 'spline'), extrapolating beyond the grid |
-| [InvariantProjection](InvariantProjection_index_py.html) | the same projection, held and kept in its support |
-| [PoleFigure](PoleFigure_index_py.html) | measured pole figure intensities, one or several pole figures of one specimen |
-| [quadratureS1Grid](quadratureS1Grid_index_py.html) | the circle: 2L+2 equispaced nodes with equal weights integrate degree 2L+1 exactly |
-| [quadratureS2Grid](quadratureS2Grid_index_py.html) | the nodes of a quadrature rule on the sphere, a list of directions as in MATLAB, rho slowest and theta fastest over the axes thetaGrid and rhoGrid, with its weights |
+| [griddedDensity](griddedDensity_index_py.html) | a density tabulated on a Cartesian grid and evaluated by cubic interpolation |
+| [InvariantProjection](InvariantProjection_index_py.html) | symmetry projection blocks for harmonic coefficients, stored on their nonzero index support |
+| [PoleFigure](PoleFigure_index_py.html) | measured pole figure intensities with their crystal and specimen directions |
+| [quadratureS1Grid](quadratureS1Grid_index_py.html) | equally spaced angles and weights for Fourier quadrature on the circle |
+| [quadratureS2Grid](quadratureS2Grid_index_py.html) | nodes and surface-area weights for integrating functions on the unit sphere |
 | [quadratureSO3Grid](quadratureSO3Grid_index_py.html) | the quadrature grid on SO(3) of a bandwidth: the nodes and weights that integrate every harmonic function up to that degree exactly |
 | [S1BumpKernel](S1BumpKernel_index_py.html) | the indicator of the interval \|x\| < delta scaled to a density |
 | [S1DeLaValleePoussinKernel](S1DeLaValleePoussinKernel_index_py.html) | the n-th de la Vallee Poussin kernel on the circle, 2 F_(2n-1) - F_(n-1) with F the Fejer kernels: coefficients one up to n, falling to zero at 2n |
 | [S1DirichletKernel](S1DirichletKernel_index_py.html) | the Dirichlet kernel on the circle, sum_(k = -n . |
 | [S1FejerKernel](S1FejerKernel_index_py.html) | the Fejer kernel on the circle, the mean of the Dirichlet kernels D_0 . |
 | [S1FourierPlan](S1FourierPlan_index_py.html) | the circle: f(x) = sum_{k=-L}^{L} c_k e^{ikx} |
-| [S1FunHandle](S1FunHandle_index_py.html) | a function on the circle given by a callable that receives angles |
+| [S1FunHandle](S1FunHandle_index_py.html) | represent a periodic circular function by a vectorised callable |
 | [S1FunHarmonic](S1FunHarmonic_index_py.html) | a function on the circle by its Fourier coefficients fhat, k = -L..L, over e^{-ikx} as MATLAB's |
 | [S1GaussKernel](S1GaussKernel_index_py.html) | the heat kernel of the circle, a wrapped Gaussian: what smooths a density of angles |
-| [S1Kernel](S1Kernel_index_py.html) | a kernel on the circle given by its Fourier coefficients fhat, degrees -N . |
-| [S1KernelHandle](S1KernelHandle_index_py.html) | a kernel on the circle given by a function of the angle, its Fourier coefficients by the trapezoidal rule |
+| [S1Kernel](S1Kernel_index_py.html) | an even kernel on the circle represented by a finite Fourier series |
+| [S1KernelHandle](S1KernelHandle_index_py.html) | wrap a callable formula as a S1Kernel |
 | [S2AxisFieldHandle](S2AxisFieldHandle_index_py.html) | an axis field on the sphere given by a function of the directions, with a bandwidth hint for its expansion |
 | [S2AxisFieldHarmonic](S2AxisFieldHarmonic_index_py.html) | an axis field on the sphere by a harmonic series: an axis without sign at every direction, as the principal directions of a stress or the polarisations of a wave |
 | [S2BumpKernel](S2BumpKernel_index_py.html) | the bump kernel on the sphere: 2 / (1 - cos delta) on the cap of radius delta, zero beyond, a density of mean one |
 | [S2DeLaValleePoussinKernel](S2DeLaValleePoussinKernel_index_py.html) | the de la Vallee Poussin kernel on the sphere, (1 + kappa) ((1 + t) / 2)^kappa: nonnegative and a finite series, the kernel recommended for texture analysis |
-| [S2DirichletKernel](S2DirichletKernel_index_py.html) | the Dirichlet kernel on the sphere, sum_n (2n+1) P_n(t) up to the degree N, of integral one |
+| [S2DirichletKernel](S2DirichletKernel_index_py.html) | the Dirichlet kernel on the sphere, sum_n (2n+1) P_n(t) up to the degree N, of mean one |
 | [S2FourierPlan](S2FourierPlan_index_py.html) | the NUFFT plan of a spherical harmonic series at arbitrary directions v up to bandwidth L, reusable across coefficient vectors: plan(fhat) evaluates, plan.adjoint(values, weights) |
-| [S2Fun](S2Fun_index_py.html) | the functions on the sphere: S2FunHarmonic, S2FunHandle, S2FunBingham |
-| [S2FunBingham](S2FunBingham_index_py.html) | the Bingham distribution on the sphere: the density exp(v' a diag(Z) a' v) of the axes v, with three shape parameters Z and three orthonormal principal axes a, symmetrised over a frame |
+| [S2Fun](S2Fun_index_py.html) | base class for scalar functions of a direction on the unit sphere |
+| [S2FunBingham](S2FunBingham_index_py.html) | an antipodally symmetric Bingham density on the unit sphere |
 | [S2FunHandle](S2FunHandle_index_py.html) | a function on the sphere given by a callable that receives directions |
 | [S2FunHarmonic](S2FunHarmonic_index_py.html) | a function on the sphere by its spherical harmonic series, or a list of such functions |
 | [S2FunSum](S2FunSum_index_py.html) | a sum of functions on the sphere of different representations: evaluation adds the values, the harmonic form adds the harmonic forms |
-| [S2FunTri](S2FunTri_index_py.html) | a function on the sphere by its values at the vertices of a spherical triangulation, linear in between |
+| [S2FunTri](S2FunTri_index_py.html) | interpolate sampled spherical data linearly over a triangulation |
 | [S2GridPlan](S2GridPlan_index_py.html) | the sphere: f(theta, rho) = sum G[m, j] e^{i(m rho - j theta)}, theta a transform of length 4Lg cut to the grid's rows, rho one of the grid's length, real valued for a real function |
-| [S2Kernel](S2Kernel_index_py.html) | a kernel on the sphere given by its Legendre coefficients A |
-| [S2KernelHandle](S2KernelHandle_index_py.html) | a kernel on the sphere given by a function of the cosine of the polar angle, its Legendre coefficients by Gauss-Legendre quadrature |
+| [S2Kernel](S2Kernel_index_py.html) | a radially symmetric spherical kernel represented by Legendre coefficients |
+| [S2KernelHandle](S2KernelHandle_index_py.html) | wrap a callable formula as a S2Kernel |
 | [S2RestrictedDistanceKernel](S2RestrictedDistanceKernel_index_py.html) | the restricted distance kernel on the sphere, -2 sin(acos(t) / 2), cut at the degree N: negative, a distance between directions that makes points repel each other |
 | [S2VectorFieldHandle](S2VectorFieldHandle_index_py.html) | a vector field on the sphere given by a callable of the directions, the bandwidth a hint for its harmonic expansion |
 | [S2VectorFieldHarmonic](S2VectorFieldHarmonic_index_py.html) | a vector field on the sphere by the spherical harmonic expansions of its three Cartesian components |
-| [SchulzDefocusingKernel](SchulzDefocusingKernel_index_py.html) | the defocusing of a Bragg-Brentano goniometer (MATLAB SchulzDefocusingKernel): the beam of width r is smeared over the receiving slit of width w at the distance d as the sample tilts by alpha, and the measured intensity drops by the factor the kernel gives |
+| [SchulzDefocusingKernel](SchulzDefocusingKernel_index_py.html) | model the intensity correction for defocusing in a tilted Bragg–Brentano measurement |
 | [SO3AbelPoissonKernel](SO3AbelPoissonKernel_index_py.html) | the Abel Poisson kernel on SO(3), sum_n (2n+1) kappa^(2n) U_2n(t), kappa in (0, 1) |
 | [SO3BumpKernel](SO3BumpKernel_index_py.html) | the bump kernel on SO(3): constant on the rotations of angle below delta, zero beyond, of mean one |
-| [SO3DeLaValleePoussinKernel](SO3DeLaValleePoussinKernel_index_py.html) | the de la Vallee Poussin kernel on SO(3), B(3/2, 1/2) / B(3/2, kappa + 1/2) t^(2 kappa): nonnegative and a finite series, the kernel recommended for texture analysis |
-| [SO3DirichletKernel](SO3DirichletKernel_index_py.html) | the Dirichlet kernel on SO(3), sum_n (2n+1) U_2n(t) up to the degree N, of integral one: the kernel for physical properties |
-| [SO3FourierPlan](SO3FourierPlan_index_py.html) | on SO(3): folds says that the function is invariant under those z folds on the two sides: in the forward its coefficients outside them are zero, in the adjoint the projection of H5 is about to zero them |
-| [SO3Fun](SO3Fun_index_py.html) | the functions on SO(3): SO3FunHarmonic, SO3FunRBF, SO3FunCBF, SO3FunBingham, SO3FunHandle, SO3FunComposition |
+| [SO3DeLaValleePoussinKernel](SO3DeLaValleePoussinKernel_index_py.html) | the de la Vallee Poussin kernel on SO(3), B(3/2, 1/2) / B(3/2, kappa + 1/2) t^(2 kappa): nonnegative and concentrated at zero, the kernel recommended for texture analysis |
+| [SO3DirichletKernel](SO3DirichletKernel_index_py.html) | the Dirichlet kernel on SO(3), sum_n (2n+1) U_2n(t) up to the degree N, of mean one: the kernel for physical properties |
+| [SO3FourierPlan](SO3FourierPlan_index_py.html) | reusable transform plan for a Wigner series at arbitrary rotations |
+| [SO3Fun](SO3Fun_index_py.html) | base class for scalar functions on orientation space SO(3) |
 | [SO3FunBingham](SO3FunBingham_index_py.html) | the Bingham distribution on SO(3): the density exp(q' A diag(kappa) A' q) on the quaternions, symmetrised over the crystal and specimen frames, with four concentrations kappa and four orthonormal quaternion axes A |
 | [SO3FunCBF](SO3FunCBF_index_py.html) | a fibre ODF: a sum over fibres h \|\| r of a kernel on the sphere of the angle between g h and r |
 | [SO3FunComposition](SO3FunComposition_index_py.html) | a sum of functions of different representations: evaluation adds the values, the harmonic form adds the harmonic forms |
@@ -299,8 +299,8 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [SO3FunRBF](SO3FunRBF_index_py.html) | a function on SO(3) as a sum of radial kernels at centre orientations, plus a constant: a radial basis function ODF |
 | [SO3GaussWeierstrassKernel](SO3GaussWeierstrassKernel_index_py.html) | the Gauss Weierstrass kernel on SO(3), sum_n (2n+1) e^(-n(n+1) kappa) U_2n(t), kappa > 0 |
 | [SO3GridPlan](SO3GridPlan_index_py.html) | the plan of a Wigner series on a Clenshaw-Curtis quadrature grid of SO(3) up to bandwidth L, a sequence of FFTs one axis at a time: plan(fhat) evaluates, plan.adjoint(values, weights) |
-| [SO3Kernel](SO3Kernel_index_py.html) | a kernel on SO(3) given by its Chebyshev coefficients A |
-| [SO3KernelHandle](SO3KernelHandle_index_py.html) | a kernel given by a closed form, its coefficients by Gauss-Legendre quadrature |
+| [SO3Kernel](SO3Kernel_index_py.html) | a rotationally symmetric kernel represented by Chebyshev coefficients |
+| [SO3KernelHandle](SO3KernelHandle_index_py.html) | wrap a callable formula as a SO3Kernel |
 | [SO3LaplaceKernel](SO3LaplaceKernel_index_py.html) | the Laplace kernel on SO(3), sum_n (2n+1) / (4 n^2 (2n+2)^2) U_2n(t), without a constant term |
 | [SO3RestrictedDistanceKernel](SO3RestrictedDistanceKernel_index_py.html) | the restricted distance kernel on SO(3), -sqrt(8) sin(acos(t)), cut at the degree N: negative, a distance between orientations that makes points repel each other |
 | [SO3SobolevKernel](SO3SobolevKernel_index_py.html) | the Sobolev kernel on SO(3), sum_n (2n+1) (n(n+1))^s U_2n(t) up to the bandwidth |
@@ -316,12 +316,12 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [angularDerivatives](angularDerivatives_py.html) | L_i f, the derivative under the rotation about e_i, on the coefficients: the ladder operators as shifts of the coefficient vector, the degrees never mixing |
 | [antiderivative](antiderivative_py.html) | the antiderivative of a gradient field, the function of mean zero whose gradient it is |
 | [bandwidthFor](bandwidthFor_py.html) | the smallest bandwidth at least L whose 2L+2 the folds divide |
-| [BinghamODF](BinghamODF_py.html) | a Bingham distributed ODF |
+| [BinghamODF](BinghamODF_py.html) | construct an orientation distribution from Bingham concentrations and quaternion axes |
 | [calcAngleDistribution](SO3Fun.calcAngleDistribution_py.html) | the distribution of the misorientation angle: of a misorientation density, of a list of misorientations, or of the uniform density of two crystal frames |
 | [calcAxisDistribution](SO3Fun.calcAxisDistribution_py.html) | the axis distribution of an SO(3) function, an S2 function of the rotation axes symmetric under the rotations the two frames share |
 | [calcBinghamODF](orientation.calcBinghamODF_py.html) | the Bingham distribution estimated from orientations |
 | [calcComponents](SO3Fun.calcComponents_py.html) | the modal orientations of an orientation density, the components: their orientations, their volumes and the mode every seed flowed into |
-| [calcDensity](calcDensity_py.html) | the density estimate of a sample: an ODF of orientations, a function on the sphere of directions or axes, a function on the circle of angles or a density of real values |
+| [calcDensity](calcDensity_py.html) | estimate a smooth density from orientations, directions, angles or real-valued samples |
 | [calcError](SO3Fun.calcError_py.html) | the error between a measurement and a recalculation, or between two SO(3) functions |
 | [calcErrorPF](calcErrorPF_py.html) | the pole figures of the deviation from a recalculation |
 | [calcKernel](EBSD.calcKernel_py.html) | the kernel a density estimate of orientations or directions should use, a de la Vallee Poussin kernel of the halfwidth chosen from the sample |
@@ -333,7 +333,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [centerSpecimen](SO3Fun.centerSpecimen_py.html) | an orientation density of an assumed orthotropic texture rotated so that its two fold axes lie on the specimen axes |
 | [clebschGordan](clebschGordan_py.html) | <j1 m1 j2 m2 \| J M> by the Racah formula in exact rational arithmetic |
 | [clebschGordanTensor](clebschGordanTensor_py.html) | the array C[m1, m2, M] of degrees l1, l2 coupled to J |
-| [clenshawCurtis](clenshawCurtis_py.html) | Clenshaw-Curtis nodes cos(pi b/(n-1)), b = 0..n-1, and weights exact to degree n-1 |
+| [clenshawCurtis](clenshawCurtis_py.html) | construct an n-point Clenshaw–Curtis quadrature rule on [-1, 1] |
 | [component](component_py.html) | component(v, i) is the i-th component of the field v, a function on its component frames |
 | [componentFrames](componentFrames_py.html) | the frames the components are functions on: the group on the tangent side is stripped |
 | [correct](correct_py.html) | correct(pf, ...) is pf.correct(...): the background subtracted and the defocusing divided out |
@@ -356,7 +356,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [fourierSeries](fourierSeries_py.html) | the Fourier series sum of chat_k e^{ikx} at the angles x, directly or by NUFFT |
 | [fourierSeriesAdjoint](fourierSeriesAdjoint_py.html) | the Fourier coefficients c_{-L} . |
 | [Gaussian](Gaussian_py.html) | the normal density of mean m and width delta, the standard deviation times sqrt(2) |
-| [gaussLegendre](gaussLegendre_py.html) | nodes and weights of the n point Gauss-Legendre rule on [-1, 1] |
+| [gaussLegendre](gaussLegendre_py.html) | construct an n-point Gauss–Legendre quadrature rule on [-1, 1] |
 | [halfPiDegrees](halfPiDegrees_py.html) | the Wigner-d matrices d_0(pi/2) . |
 | [interpolate](SO3VectorFieldHarmonic.interpolate_py.html) | the function in harmonic form fitted by least squares to values at nodes: on SO(3) at orientations, on the sphere at directions, a vector field for vector values or tangent vectors |
 | [interpolateRBF](interpolateRBF_py.html) | an SO3FunRBF, a weighted sum of radial kernels, through values at orientations |
@@ -383,7 +383,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [rhoVector](rhoVector_py.html) | the unit vector along the azimuth at a direction, the second vector of the polar basis |
 | [rotationalDiscrepancy](rotationalDiscrepancy_py.html) | the discrepancy between two measures on SO(3), densities or weighted orientation sets in any pairing: D_2, D_ball or a bandlimited L2 norm |
 | [SantaFe](SantaFe_py.html) | the Santa Fe sample ODF (MATLAB SantaFe): cubic crystal and orthorhombic specimen symmetry, a uniform portion of 0.73 and a von Mises Fisher component of 10 degree halfwidth at (122)[221] carrying the other 0.27 |
-| [silvermanWidth](silvermanWidth_py.html) | the width of Silverman's rule, on the smaller of the standard deviation and the scaled interquartile range |
+| [silvermanWidth](silvermanWidth_py.html) | choose a Gaussian smoothing width from the spread and size of a numeric sample |
 | [sphericalDiscrepancy](sphericalDiscrepancy_py.html) | the discrepancy between two measures on the sphere, densities or weighted point sets in any pairing: D_2, D_cap or a bandlimited L2 norm |
 | [sphericalPlan](sphericalPlan_py.html) | the plan for a node set on the sphere: the FFT on a Clenshaw-Curtis grid, the NUFFT otherwise |
 | [sphericalSeries](sphericalSeries_py.html) | the spherical harmonic series fhat at directions or on a quadrature grid, the trigonometric sum or the NUFFT by the number of nodes |
@@ -415,7 +415,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| [ChristoffelTensor](ChristoffelTensor_index_py.html) | ChristoffelTensor(C, n): E_ik = C_ijkl n_j n_l of a stiffness and a direction |
+| [ChristoffelTensor](ChristoffelTensor_index_py.html) | the elastic Christoffel tensor for a wave propagation direction |
 | [complianceTensor](complianceTensor_index_py.html) | the elastic compliance S = inv(C), its Voigt matrix carrying the factors of the double convention |
 | [curvatureTensor](curvatureTensor_index_py.html) | the lattice curvature tensor, the rank two tensor of the spatial derivatives of the orientation field |
 | [deformationGradientTensor](deformationGradientTensor_index_py.html) | a deformation gradient tensor F, the rank two tensor carrying a line segment dX of the undeformed body into dx = F dX of the deformed one |
@@ -441,14 +441,14 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [eig](S2FunHarmonic.eig_py.html) | eig(T) is T.eig(): the eigenvalues in ascending order and the eigenvectors |
 | [EinsteinSum](EinsteinSum_py.html) | the contraction of tensors, vectors, rotations or arrays over the indices they share |
 | [expm](expm_py.html) | expm(T) is T.expm(): the matrix exponential |
-| [Kelvin](Kelvin_py.html) | the Kelvin matrix, the factor sqrt(2) on every off diagonal side |
+| [Kelvin](Kelvin_py.html) | convert tensor coefficients to orthonormal Kelvin (Mandel) notation |
 | [logm](orientation.logm_py.html) | logm(T) is T.logm(): the matrix logarithm |
 | [sqrtm](sqrtm_py.html) | sqrtm(T) is T.sqrtm(): the matrix square root |
 | [svd](svd_py.html) | svd(T) is T.svd(): the singular value decomposition, u, s, v of a rank two tensor |
 | [sym](embedding.sym_py.html) | sym(T) is T.sym(): the symmetric part, the mean over the permutations of the indices |
 | [times](S2Fun.times_py.html) | times(A, B) is A.times(B): the product of corresponding coefficients, MATLAB's A .* B |
 | [trace](trace_py.html) | trace(T) is T.trace(): the trace of a rank two tensor, or of the Voigt matrix of a rank four |
-| [Voigt](tensor.Voigt_py.html) | the Voigt matrix of a tensor: 6 x 6 for rank four, 3 x 6 for rank three, six components for rank two, the off diagonal entries doubled where the class prescribes it |
+| [Voigt](tensor.Voigt_py.html) | convert tensor coefficients to compact Voigt notation |
 
 ## Maps
 
@@ -465,9 +465,9 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [gbcFMC](gbcFMC_index_py.html) | the grain boundary criterion of fast multiscale clustering |
 | [gbcSoft](gbcSoft_index_py.html) | a smooth transition instead of a threshold, so a pair near the threshold is joined or not by how far it is from it rather than by which side it fell on |
 | [grain2d](grain2d_index_py.html) | the grains of a map: a table of ids, phases, pixel counts, mean orientations and properties, with the boundary, the inner boundary and the polygon of every grain |
-| [grainBoundary](grainBoundary_index_py.html) | the grain boundary of a map: the segments F between the vertices V in walk order, each with its two grains, pixels, phases and misrotation, the grain in grainId[:, 0] to the left of the walk |
+| [grainBoundary](grainBoundary_index_py.html) | a list of line segments separating neighbouring grains in a two-dimensional map |
 | [grainBoundaryCriterion](grainBoundaryCriterion_index_py.html) | the base of the grain boundary criteria: how connected pairs of neighbouring measurements are, 1 no boundary, 0.5 a low angle boundary inside a grain, 0 a boundary |
-| [huberFilter](huberFilter_index_py.html) | the same, with an l1/l2 penalty that leaves a faceted boundary faceted: the quadratic penalty of the curvature filter rounds every corner |
+| [huberFilter](huberFilter_index_py.html) | smooth grain boundaries with a Huber curvature penalty that preserves sharp corners |
 | [laplaceFilter](laplaceFilter_index_py.html) | repeated local averaging, the default |
 | [lattice](lattice_index_py.html) | the lattice an EBSD map is measured on: the basis of the two shortest translations, the cell shape 'square' or 'hex', the plane and the integer index of every position, inferred from the positions or fitted to a known basis |
 | [mapImage](mapImage_index_py.html) | an image that knows where on the specimen it sits: a raster of values on a regular grid of an origin and two perpendicular steps |
@@ -514,7 +514,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 ### Classes
 
 | [EBSD3](EBSD3_index_py.html) | the measurements of a volume: positions, rotations and phase ids of voxels with the list of the phases' frames and the properties of every measurement |
-| [grain3Boundary](grain3Boundary_index_py.html) | the faces between the grains of a volume, triangles or polygons over the vertices allV, with the grains, voxels and phases on their two sides and the misrotation across: grains.boundary |
+| [grain3Boundary](grain3Boundary_index_py.html) | polygonal faces separating neighbouring grains in a three-dimensional volume |
 | [grain3d](grain3d_index_py.html) | the grains of a volume as closed polyhedra, given by the incidence I_GF of grains and the faces of a grain3Boundary: what calcGrains returns for a volume, the counterpart of grain2d |
 | [neper](neper_index_py.html) | the interface to Neper, the tessellation program, one per session with its settings: the geometry, the morphology, the iterations and the file path the tessellation is written to |
 | [voxelLattice](voxelLattice_index_py.html) | the lattice a volume is measured on: the origin, the translations d1, d2, d3 as the rows of D and the integer index of every voxel, voxel n at origin + ijk[n] @ D |
@@ -539,15 +539,15 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [meanFilter](meanFilter_index_py.html) | the mean of the neighbourhood, the fastest filter and the one that blurs a boundary most |
 | [medianFilter](medianFilter_index_py.html) | the componentwise median of the neighbourhood, which takes a wild pixel out without pulling the boundary after it |
 | [MLSSolver](MLSSolver_index_py.html) | the modified least squares solver of the pole figure inversion, an ODF as a weighted sum of unimodal components fitted to scattered pole figure intensities |
-| [OptimalSampleResult](OptimalSampleResult_index_py.html) | OptimalSampleResult(nodes, weights, discrepancy, history, iterations, converged, reason, bandwidth) |
+| [OptimalSampleResult](OptimalSampleResult_index_py.html) | sampling result and convergence diagnostics from optimalSample |
 | [splineFilter](splineFilter_index_py.html) | the smoothing spline: the field of least \|u - f\|^2 + alpha \|L u\|^2, with L the Laplacian of the neighbour graph |
 | [TaylorModel](TaylorModel_index_py.html) | the slip systems prepared for the Taylor solve: the distinct signed systems with their critical resolved shear stresses, the strain each shear produces and its spin |
 | [zeroRangeMethod](zeroRangeMethod_index_py.html) | the zero range method of the pole figure inversion: where a pole figure vanishes, the ODF vanishes on every fibre through it |
 
 ### Functions
 
-| [angularVelocityVector](velocityGradientTensor.angularVelocityVector_py.html) | the angular velocity of a velocity gradient, the axial vector of its antisymmetric part |
-| [axisRatios](strainTensor.axisRatios_py.html) | the differences of the principal values, largest first |
+| [angularVelocityVector](velocityGradientTensor.angularVelocityVector_py.html) | return the angular velocity represented by the antisymmetric part of a velocity gradient |
+| [axisRatios](strainTensor.axisRatios_py.html) | return signed differences between the principal values of a rank-two tensor |
 | [birefringence](refractiveIndexTensor.birefringence_py.html) | the birefringence for light propagating along vprop, the difference of the two refractive indices, and the polarisation axes of the fast and the slow wave |
 | [bulkModulus](complianceTensor.bulkModulus_py.html) | the bulk modulus of an isotropic polycrystal, the Voigt and Reuss bounds |
 | [calcCluster](orientation.calcCluster_py.html) | the clusters of directions or orientations: one cluster id per element, counted from zero, and the centre of every cluster |
@@ -557,22 +557,22 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [calcLankford](calcLankford_py.html) | the Lankford coefficients, the R-values, of a sheet from its orientations or its ODF |
 | [calcODF](calcODF_py.html) | an ODF reconstructed from pole figure intensities by the modified least squares method, with ghost correction and, on request, the zero range method |
 | [calcODFIterative](calcODFIterative_py.html) | an ODF reconstructed from pole figures by a ladder of kernel widths, from wide to the target, each step started from the last |
-| [calcShearStress](stressTensor.calcShearStress_py.html) | the shear stress the stress tensor resolves on each slip system, and the index of the system carrying the largest one |
+| [calcShearStress](stressTensor.calcShearStress_py.html) | resolve a stress tensor on slip systems and identify the most highly stressed system |
 | [calcTaylor](strainTensor.calcTaylor_py.html) | the Taylor factor, the shears of the slip systems and the plastic spin of a strain the crystal accommodates by slip alone |
 | [calcTensor](EBSD.calcTensor_py.html) | the texture average of a single crystal tensor over an ODF, a list of orientations or a map |
-| [CauchyStrain](deformationGradientTensor.CauchyStrain_py.html) | the Cauchy (small) strain of a deformation gradient, its symmetric part less the identity |
+| [CauchyStrain](deformationGradientTensor.CauchyStrain_py.html) | compute the small-strain approximation from a deformation gradient |
 | [classix](classix_py.html) | CLASSIX, fast and explainable clustering based on sorting: one cluster label per row of X, counted from zero |
-| [deviatoric](strainTensor.deviatoricStrain_py.html) | the deviatoric part, the tensor less a third of its trace on the diagonal |
-| [deviatoricStrain](strainTensor.deviatoricStrain_py.html) | the deviatoric part, the tensor less a third of its trace on the diagonal |
-| [deviatoricStress](strainTensor.deviatoricStrain_py.html) | the deviatoric part, the tensor less a third of its trace on the diagonal |
-| [dislocationDensity](curvatureTensor.dislocationDensity_py.html) | a diagonal entry of the density is minus the sum of the other two diagonal entries of the curvature, so the entry a map cannot measure drops out of alpha_33 |
+| [deviatoric](strainTensor.deviatoricStrain_py.html) | remove the isotropic part of a rank-two stress or strain tensor |
+| [deviatoricStrain](strainTensor.deviatoricStrain_py.html) | remove the isotropic part of a rank-two stress or strain tensor |
+| [deviatoricStress](strainTensor.deviatoricStrain_py.html) | remove the isotropic part of a rank-two stress or strain tensor |
+| [dislocationDensity](curvatureTensor.dislocationDensity_py.html) | convert lattice curvature to the Nye dislocation density tensor |
 | [doEulerStep](doEulerStep_py.html) | the orientations or the density after unit time in n Euler steps under the rotation velocity field spin |
 | [double](S1Grid.double_py.html) | the coordinates of the images of an embedding in their orthonormal basis, one row per orientation, e.double() |
 | [energyVector](stiffnessTensor.energyVector_py.html) | the energy velocity of a lossless elastic plane wave, the vector C_ijkl p_j n_k p_l / (rho v) |
-| [equivalentStrain](strainTensor.equivalentStrain_py.html) | the von Mises equivalent strain, sqrt(2/3 e:e) of the deviatoric strain e |
-| [equivalentStress](stressTensor.equivalentStress_py.html) | the von Mises equivalent stress, sqrt(3/2 s:s) of the deviatoric stress s |
+| [equivalentStrain](strainTensor.equivalentStrain_py.html) | compute the von Mises equivalent strain |
+| [equivalentStress](stressTensor.equivalentStress_py.html) | compute the von Mises equivalent stress |
 | [fitDislocationSystems](curvatureTensor.fitDislocationSystems_py.html) | rho, factor = fitDislocationSystems(kappa, dS): the dislocation densities that account for the curvature with the least total line energy, one signed density per system, NaN where no combination of them reproduces it |
-| [GreenStrain](deformationGradientTensor.GreenStrain_py.html) | the Green-Lagrange strain of a deformation gradient, (F^T F - I) / 2 |
+| [GreenStrain](deformationGradientTensor.GreenStrain_py.html) | compute the Green–Lagrange finite strain of a deformation gradient |
 | [hashinShtrikmanBounds](complianceTensor.hashinShtrikmanBounds_py.html) | the Hashin-Shtrikman bounds of the isotropic moduli, the tightest pair for a quasihomogeneous polycrystal: (lower=(K, G), upper=(K, G)), each the extreme estimate over the references whose residual is semidefinite, found on the boundary of that convex set by a golden section over the shear and a bisection over the bulk modulus |
 | [HashinShtrikmanModulus](stiffnessTensor.HashinShtrikmanModulus_py.html) | the Hashin-Shtrikman estimate of the isotropic moduli of a polycrystal from a reference medium K0, G0, over arrays of references: the bulk and shear moduli, and the definiteness of C - C0 (1 where the estimate is a lower bound, -1 an upper one, 0 where it is neither and the moduli are NaN) |
 | [isotropicShearModulus](isotropicShearModulus_py.html) | the isotropic shear modulus of a polycrystal, the Voigt, Reuss and Hill bounds |
@@ -580,9 +580,9 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [linearCompressibility](complianceTensor.linearCompressibility_py.html) | the linear compressibility, the length change per pressure in the direction v, S_ijkk v_i v_j |
 | [linearProgram](linearProgram_py.html) | the minimiser of a linear program in standard form, min c.x under A x = b, x >= 0 |
 | [linprogCentre](linprogCentre_py.html) | the solutions of many linear programs min c.x under A x = y, x >= 0 at once, each the analytic centre of its optimal face |
-| [maxStrain](maxStrain_py.html) | the magnitude of a strain is its largest principal value, which the Taylor factor is measured against |
-| [meanStress](stressTensor.meanStress_py.html) | the mean stress, a third of the trace of the stress tensor |
-| [octahedralStrain](strainTensor.octahedralStrain_py.html) | the octahedral shear and normal strain, from the principal stretches |
+| [maxStrain](maxStrain_py.html) | return the largest absolute principal strain of each tensor |
+| [meanStress](stressTensor.meanStress_py.html) | compute the mean normal stress, trace(sigma) / 3 |
+| [octahedralStrain](strainTensor.octahedralStrain_py.html) | compute octahedral shear and normal strain from Green–Lagrange strain |
 | [opticalAxis](refractiveIndexTensor.opticalAxis_py.html) | the optical axes of a refractive index tensor, the directions along which the two refractive indices coincide and the birefringence vanishes |
 | [optimalSample](S2Fun.optimalSample_py.html) | the sample of n nodes that reproduces a density best up to the bandwidth, on the sphere or the rotation group |
 | [PoissonRatio](complianceTensor.PoissonRatio_py.html) | the Poisson ratio of the tension direction x and the transverse direction y, minus the transverse over the longitudinal strain, -S_ijkl x_i x_j y_k y_l / S_mnop x_m x_n x_o x_p |
@@ -593,9 +593,9 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [shearModulus](complianceTensor.shearModulus_py.html) | the shear modulus of the plane h and the shear direction u, 1 / (4 S_ijkl h_i u_j h_k u_l) |
 | [SO3FunSBF](SO3FunSBF_py.html) | the shear banding function of a slip system and a strain (rate) tensor: the closed form ODF of Schaeben that a single slip system produces under that strain, as a handle |
 | [spectralTransmission](refractiveIndexTensor.spectralTransmission_py.html) | the colour of white light passing a birefringent plate between a polariser and an analyser, as a thin section shows it under the microscope |
-| [spin](spin_py.html) | the spin tensor of a velocity gradient, its antisymmetric part |
+| [spin](spin_py.html) | extract the antisymmetric spin tensor from a velocity gradient |
 | [spinTensorOf](spinTensorOf_py.html) | the spin tensor of an axial vector v, the antisymmetric tensor W with W u = v x u |
-| [strainRate](velocityGradientTensor.strainRate_py.html) | the symmetric part of a velocity gradient is the strain rate, the antisymmetric one the spin, whose axial vector is the angular velocity |
+| [strainRate](velocityGradientTensor.strainRate_py.html) | extract the symmetric strain-rate tensor from a velocity gradient |
 | [velocity](complianceTensor.velocity_py.html) | the speeds of the three elastic plane waves in a direction and their polarisations, the eigenvalues and eigenvectors of the Christoffel tensor |
 | [volumeCompressibility](complianceTensor.volumeCompressibility_py.html) | the volume change per pressure, S_iikk |
 | [vorticity](velocityGradientTensor.vorticity_py.html) | the vorticity of a velocity gradient, its rotation rate over the magnitude of its strain rate |
@@ -605,7 +605,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| [EBSDFileInfo](EBSDFileInfo_index_py.html) | what an EBSD file says about itself from its header alone: format, vendor, phases, properties, data sets, grid, step and Euler correction, as inspectEBSD returns it |
+| [EBSDFileInfo](EBSDFileInfo_index_py.html) | metadata describing an EBSD file before its measurement arrays are imported |
 
 ### Functions
 
@@ -649,9 +649,9 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [alphaSections](alphaSections_index_py.html) | sections of constant alpha in the Matthies (ZYZ) convention |
 | [axisAngleColorKey](axisAngleColorKey_index_py.html) | the rotation from a reference orientation as a colour: its axis in the specimen frame through the key of the whole sphere, its angle through the saturation (Thomsen et al.) |
 | [axisAngleSections](axisAngleSections_index_py.html) | sections of constant rotation angle, each on the axis sector the region allows there |
-| [BungeColorKey](BungeColorKey_index_py.html) | the three Euler angles of the representative inside the Euler box, scaled to red, green and blue |
+| [BungeColorKey](BungeColorKey_index_py.html) | colour orientations by their three Bunge Euler angles |
 | [colorGrid](colorGrid_index_py.html) | a direction key evaluated once on a cube map of the sphere at the resolution, its colours then looked up at the node nearest a direction |
-| [directionColorKey](directionColorKey_index_py.html) | a colour key turning directions into colours |
+| [directionColorKey](directionColorKey_index_py.html) | base class for assigning colours to directions with crystal symmetry |
 | [eangleProjection](eangleProjection_index_py.html) | the equal angle, stereographic, projection: r = tan(theta / 2) |
 | [eareaProjection](eareaProjection_index_py.html) | the equal area, Schmidt, projection: r = 2 sin(theta / 2) |
 | [edistProjection](edistProjection_index_py.html) | the equidistant projection: r = theta |
@@ -660,9 +660,9 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [gnomonicProjection](gnomonicProjection_index_py.html) | the gnomonic projection: r = tan(theta), great circles drawn as straight lines |
 | [HKLDirectionKey](HKLDirectionKey_index_py.html) | the HKL vendor key on the Laue group: the three primaries blended linearly over the polar angle and the azimuth of the fundamental sector |
 | [HSVDirectionKey](HSVDirectionKey_index_py.html) | MTEX's default direction key: white at the centre of the fundamental sector, the primary colours at its vertices |
-| [ipfColorKey](ipfColorKey_index_py.html) | an orientation coloured by the crystal direction it carries along a specimen direction |
+| [ipfColorKey](ipfColorKey_index_py.html) | colour orientations by the crystal direction parallel to a chosen specimen direction |
 | [ipfHKLKey](ipfHKLKey_index_py.html) | the inverse pole figure key of HKL Channel 5, the HKLDirectionKey on the Laue group |
-| [ipfHSVKey](ipfHSVKey_index_py.html) | the MTEX default inverse pole figure key, white at the centre of the sector |
+| [ipfHSVKey](ipfHSVKey_index_py.html) | the default MTEX inverse pole figure colour key |
 | [ipfSpotKey](ipfSpotKey_index_py.html) | single spots of the inverse pole figure in their own colours |
 | [ipfTSLKey](ipfTSLKey_index_py.html) | the inverse pole figure key of TSL / OIM, the TSLDirectionKey on the Laue group |
 | [lines3d](lines3d_index_py.html) | line segments (k, 2, 3), a colour per segment (k, 3) or one for all, their width |
@@ -670,7 +670,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [mesh3d](mesh3d_index_py.html) | polygons over vertices: V (n, 3), the faces as ptr/idx (face k is idx[ptr[k]:ptr[k+1]]), a colour per face (m, 3) in [0, 1] or one colour for all, the face and edge transparency |
 | [mtexFigure](mtexFigure_index_py.html) | a figure of MTEX plots: equally sized axes in a grid, with colour bars and legends that follow them |
 | [ODFSections](ODFSections_index_py.html) | sections through orientation space |
-| [orientationColorKey](orientationColorKey_index_py.html) | a colour key turning orientations into colours |
+| [orientationColorKey](orientationColorKey_index_py.html) | base class for mapping crystal orientations to RGB colours |
 | [orthographicProjection](orthographicProjection_index_py.html) | the orthographic projection: r = sin(theta) |
 | [PatalaColorKey](PatalaColorKey_index_py.html) | the misorientation key of Patala, Mason and Schuh for m-3m, m-3, mmm, 4/mmm and 6/mmm |
 | [pfSections](pfSections_index_py.html) | pole figure sections: the pole figure of h1, split by the twist of h2 about it |
@@ -678,7 +678,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [phi2Sections](phi2Sections_index_py.html) | sections of constant phi2 in the Bunge convention, MTEX's default ODF sections |
 | [picture3d](picture3d_index_py.html) | a picture on a rectangle in space: RGBA (rows, cols, 4) in [0, 1] with its first row at the bottom, and the corners of the rectangle at the bottom left, the bottom right, the top left and the top right |
 | [plainProjection](plainProjection_index_py.html) | rho over theta in degrees: the polar angles of the frame itself, no convention |
-| [planarColorKey](planarColorKey_index_py.html) | a colour key of two properties: hue by the first, saturation by the second |
+| [planarColorKey](planarColorKey_index_py.html) | encode two scalar properties in one RGB colour |
 | [points3d](points3d_index_py.html) | markers at positions (k, 3), a colour per marker (k, 3) or one for all, their size in points |
 | [scene3d](scene3d_index_py.html) | the items of a three dimensional plot and the plotting convention it is seen by |
 | [sigmaSections](sigmaSections_index_py.html) | pole figure sections of the c axis split by the twist sigma of the a axis about it, the sections MATLAB's sigma sections draw |
@@ -687,7 +687,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [spectralTransmissionColorKey](spectralTransmissionColorKey_index_py.html) | the colour of a thin section of an anisotropic crystal between polariser and analyser: light along the propagation direction of the specimen through a plate of the given thickness in nanometres |
 | [sphericalPlot](sphericalPlot_index_py.html) | the spherical plot of one axes: its projection, boundary, grid and labels |
 | [sphericalProjection](sphericalProjection_index_py.html) | a projection of the sphere to the plane, restricted to a region and a hemisphere |
-| [spotColorKey](spotColorKey_index_py.html) | each centre orientation given its colour, fading to white with the kernel of the disorientation to it |
+| [spotColorKey](spotColorKey_index_py.html) | highlight selected orientations with colours that fade to white with disorientation |
 | [spotDirectionKey](spotDirectionKey_index_py.html) | each centre, a crystal direction, given its colour, fading to white with the kernel of the angular distance to the nearest symmetric equivalent |
 | [TSLDirectionKey](TSLDirectionKey_index_py.html) | the vendors' keys, both on the Laue group whatever the frame carries (MATLAB TSLDirectionKey, HKLDirectionKey): TSL reads the polar coordinates of the sector from its centre, unfolded and without the hue correction |
 

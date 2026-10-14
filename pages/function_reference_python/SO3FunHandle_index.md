@@ -90,6 +90,14 @@ Exchange symmetry needs the same frame on both sides.
 
 | `SO3F` | SO3FunHandle |
 
+## Properties
+
+| `fun` | callable used for evaluation, including requested symmetry averaging |
+| `bandwidth` | degree used when a harmonic approximation is needed |
+| `CS, SS` | crystal and specimen frames passed to orientation queries |
+| `isReal` | whether evaluation discards imaginary values |
+| `antipodal` | whether grain exchange symmetry is requested |
+
 ## See also
 
 [SO3Fun](SO3Fun_index_py.html), [SO3FunHarmonic](SO3FunHarmonic_index_py.html), [S2FunHandle](S2FunHandle_index_py.html), [SO3FunOperations](SO3FunOperations_py.html)
@@ -97,7 +105,7 @@ Exchange symmetry needs the same frame on both sides.
 ## Members
 
 | [cat](SO3FunHandle.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |
-| [eval](SO3FunHandle.eval_py.html) | the callable receives orientations in the frames of the function |
+| [eval](SO3FunHandle.eval_py.html) | evaluate the callable at orientations in the function's reference frames |
 | [rotate](SO3FunHandle.rotate_py.html) | the function rotated by r from the left or the right, through the harmonic form |
 | [SO3FunHandle](SO3FunHandle.SO3FunHandle_py.html) | a function on SO(3) given by a callable that receives orientations |
 

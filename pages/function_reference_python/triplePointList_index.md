@@ -24,6 +24,18 @@ tP('Iron bcc', 'Iron bcc', 'Iron bcc')
 
 </div>
 
+## Input
+
+| `V` | array of triple-point coordinates in the map plane |
+| `grainId` | three grain ids at each junction |
+| `phaseId` | three phase-list indices at each junction |
+| `boundaryId` | indices of the three incident boundary segments |
+| `angles` | three enclosed angles at each junction, in radians |
+| `CSList` | phase frames |
+| `plane` | coordinate system of the map plane |
+| `frame` | specimen reference frame |
+| `vertexId` | optional ids into the full boundary vertex table |
+
 ## Members
 
 | [allV](triplePointList.allV_py.html) | the positions of the triple points as framed points of the specimen |
@@ -37,5 +49,5 @@ tP('Iron bcc', 'Iron bcc', 'Iron bcc')
 
 MATLAB's [triplePointList_index](triplePointList_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L649">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L685">source</a></font>
 {% endraw %}

@@ -97,6 +97,16 @@ orientations, an embedding projected back onto the orientations.
 
 | `ori` | orientation |
 
+## Properties
+
+| `frameA` | source frame of the mapping, usually the crystal frame |
+| `frameB` | target frame, usually the specimen or a second crystal frame |
+| `CS, SS` | aliases for frameA and frameB |
+| `antipodal` | grain exchange symmetry for misorientations between the same crystal frame |
+| `notIID` | whether the orientations come from spatially dependent map measurements |
+| `data` | unit quaternion coefficients, with shape ori.shape + (4,) |
+| `phi1, Phi, phi2` | Bunge Euler angles in radians |
+
 ## See also
 
 [orientation.byEuler](orientation.byEuler_py.html), [orientation.byAxisAngle](orientation.byAxisAngle_py.html), [orientation.byMiller](orientation.byMiller_py.html), [orientation.byMatrix](orientation.byMatrix_py.html), [orientation.map](orientation.map_py.html), [rotation](rotation_index_py.html), [crystalFrame](crystalFrame_index_py.html), [OrientationDefinition](OrientationDefinition_py.html), [MisorientationTheory](MisorientationTheory_py.html)
@@ -117,7 +127,7 @@ orientations, an embedding projected back onto the orientations.
 | [byMatrix](orientation.byMatrix_py.html) | the orientations of rotation matrices |
 | [byMiller](orientation.byMiller_py.html) | the orientation that takes the crystal plane hkl to z and the crystal direction uvw to x |
 | [byRodrigues](orientation.byRodrigues_py.html) | the orientations of Rodrigues vectors, the axes scaled by tan(omega/2) |
-| [byScreenAlignment](orientation.byScreenAlignment_py.html) | the orientation between two frames that are drawn alike on the screen, from their plotting conventions |
+| [byScreenAlignment](orientation.byScreenAlignment_py.html) | construct the orientation that makes two frames appear aligned on screen |
 | [calcAngleDistribution](orientation.calcAngleDistribution_py.html) | the distribution of the misorientation angle: of a misorientation density, of a list of misorientations, or of the uniform density of two crystal frames |
 | [calcBinghamODF](orientation.calcBinghamODF_py.html) | the Bingham distribution estimated from orientations |
 | [calcCluster](orientation.calcCluster_py.html) | the clusters of directions or orientations: one cluster id per element, counted from zero, and the centre of every cluster |
@@ -141,25 +151,25 @@ orientations, an embedding projected back onto the orientations.
 | [fibreVolume](orientation.fibreVolume_py.html) | the volume of a fibre: the share of an orientation density within a radius of the fibre of the orientations that map the crystal direction h onto the specimen direction r |
 | [find](orientation.find_py.html) | the orientations of ori nearest to w up to symmetry, MATLAB's orientation.find |
 | [fit](orientation.fit_py.html) | the orientation that maps the directions u best onto the directions v in the least squares sense |
-| [fundamentalRegion](orientation.fundamentalRegion_py.html) | the fundamental region of the orientations, the orientationRegion of the groups of CS and SS |
+| [fundamentalRegion](orientation.fundamentalRegion_py.html) | return the region of symmetry-distinct orientations for the input frames |
 | [goss](orientation.goss_py.html) | the goss component, Bunge Euler angles (0°, 45°, 0°), in cs and the specimen frame |
 | [GreningerTrojano](orientation.GreningerTrojano_py.html) | the Greninger-Trojano orientation relationship from fcc to bcc, by the Bunge Euler angles (2.7, 46.6, 7.5) degrees of the inverse, a misorientation from csG to csA |
-| [id](orientation.id_py.html) | the identical orientations between the frames given, of the shape given (MATLAB's id and eye) |
-| [inv](orientation.inv_py.html) | the inverse maps the other way: the frames swap |
+| [id](orientation.id_py.html) | construct identity rotations between specified reference frames |
+| [inv](orientation.inv_py.html) | reverse the direction of an orientation mapping |
 | [invGoss](orientation.invGoss_py.html) | the invGoss component, Bunge Euler angles (90°, 45°, 0°), in cs and the specimen frame |
 | [isclose](orientation.isclose_py.html) | equal up to the symmetry of the frames within the angular tolerance tol, between the same frames |
 | [isMisorientation](orientation.isMisorientation_py.html) | whether both frames are crystal frames, so the orientation is a misorientation |
 | [KurdjumovSachs](orientation.KurdjumovSachs_py.html) | the Kurdjumov-Sachs orientation relationship from fcc to bcc, (111) \|\| (011) and [-101] \|\| [-1-11], a misorientation from the parent frame csG to the child frame csA |
-| [load](orientation.load_py.html) | orientation.load(fname, cs, columnNames=['phi1', 'Phi', 'phi2']): the orientations of a text table |
+| [load](orientation.load_py.html) | read orientations from a text table |
 | [log](orientation.log_py.html) | the logarithm of an orientation, the tangent vector at a reference pointing to it |
 | [logm](orientation.logm_py.html) | logm(T) is T.logm(): the matrix logarithm |
 | [map](orientation.map_py.html) | the orientation that maps one or two pairs of directions |
 | [mean](orientation.mean_py.html) | the mean of a list of orientations, with the principal moments and axes of inertia |
 | [mtimes](orientation.mtimes_py.html) |  |
-| [nan](orientation.nan_py.html) | the orientations of NaN coefficients between the frames given, of the shape given |
+| [nan](orientation.nan_py.html) | construct missing orientations with their reference frames preserved |
 | [NishiyamaWassermann](orientation.NishiyamaWassermann_py.html) | the Nishiyama-Wassermann orientation relationship from fcc to bcc, (111) \|\| (011) and [11-2] \|\| [0-11], a misorientation from the parent frame csG to the child frame csA |
 | [orientation](orientation.orientation_py.html) | orientations and misorientations, rotations taking coordinates in the frame CS to coordinates in the frame SS |
-| [parents](orientation.parents_py.html) | the distinct relationships c p2c over the child group c: a child times them is every parent it can come from, MATLAB's parents |
+| [parents](orientation.parents_py.html) | return the distinct parent variants of a parent-to-child relationship |
 | [Pitsch](orientation.Pitsch_py.html) | the Pitsch orientation relationship from fcc to bcc, (010) \|\| (101) and [101] \|\| [-111], a misorientation from the parent frame csG to the child frame csA |
 | [PitschSchrader](orientation.PitschSchrader_py.html) | the Pitsch-Schrader orientation relationship between bcc and hcp, (011) \|\| (0001) and [100] \|\| [2-1-10], a misorientation from csParent to csChild |
 | [PLage2](orientation.PLage2_py.html) | the PLage2 component, Bunge Euler angles (245°, 45°, 0°), in cs and the specimen frame |
@@ -169,7 +179,7 @@ orientations, an embedding projected back onto the orientations.
 | [plotPDF](orientation.plotPDF_py.html) | pole figures, one per crystal direction: of an ODF, of a list of orientations or of a measured PoleFigure |
 | [plotSection](orientation.plotSection_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
 | [Potter](orientation.Potter_py.html) | the Potter orientation relationship between bcc and hcp, (011) \|\| (01-11) and [11-1] \|\| [2-1-10], a misorientation from csParent to csChild |
-| [project2EulerFR](orientation.project2EulerFR_py.html) | the Bunge Euler angles of the representative inside the Euler plotting box |
+| [project2EulerFR](orientation.project2EulerFR_py.html) | return Bunge Euler angles of symmetry-equivalent representatives in the plotting box |
 | [project2FundamentalRegion](orientation.project2FundamentalRegion_py.html) | the symmetric equivalents in the fundamental region, or those closest to the reference ref (MATLAB's orientation.project2FundamentalRegion, quaternion.project2FundamentalRegion, rotation.project2FundamentalRegion) |
 | [QLage2](orientation.QLage2_py.html) | the QLage2 component, Bunge Euler angles (245°, 20°, 0°), in cs and the specimen frame |
 | [QLage3](orientation.QLage3_py.html) | the QLage3 component, Bunge Euler angles (115°, 160°, 0°), in cs and the specimen frame |

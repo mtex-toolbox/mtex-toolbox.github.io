@@ -62,7 +62,7 @@ S2FunHarmonic uses them.
 
 | keyword | default | description |
 |---|---|---|
-| `dtype` | `<class 'numpy.float64'>` | the real precision of the matrices, which are complex of that precision |
+| `dtype` | `np.float64` | the real precision of the matrices, which are complex of that precision |
 | `proper` | `False` | project onto the functions invariant under the proper elements alone, which the sphere needs beside the rotation parts of all elements |
 
 ## Output
@@ -73,5 +73,5 @@ S2FunHarmonic uses them.
 
 [WignerD](WignerD_py.html), [SO3FunHarmonic.symmetrise](SO3FunHarmonic.symmetrise_py.html), [S2FunHarmonic.symmetrise](S2FunHarmonic.symmetrise_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L384">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L397">source</a></font>
 {% endraw %}

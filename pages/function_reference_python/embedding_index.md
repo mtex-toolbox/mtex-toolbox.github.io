@@ -125,5 +125,5 @@ the keywords spec and u.
 
 MATLAB's [embedding_index](embedding_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L229">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L232">source</a></font>
 {% endraw %}

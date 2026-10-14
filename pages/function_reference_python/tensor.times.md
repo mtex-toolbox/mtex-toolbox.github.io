@@ -26,5 +26,5 @@ tensor.times(self, other)
 
 MATLAB's [tensor.times](tensor.times.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L373">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L426">source</a></font>
 {% endraw %}

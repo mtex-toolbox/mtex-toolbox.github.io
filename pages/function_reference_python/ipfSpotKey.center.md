@@ -13,5 +13,5 @@ A property of [ipfSpotKey](ipfSpotKey_index_py.html).
 
 the centres of the spots, crystal directions
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L228">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L301">source</a></font>
 {% endraw %}

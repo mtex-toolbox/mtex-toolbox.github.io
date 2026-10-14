@@ -71,7 +71,7 @@ transformationMatrix gives the change of coordinates between two frames.
 | [basis](referenceFrame.basis_py.html) | the basis vectors of the frame in the canonical Euclidean coordinates, one per row |
 | [byName](referenceFrame.byName_py.html) | the specimen frame registered under a name |
 | [char](referenceFrame.char_py.html) | the name of the frame, or its class name |
-| [clone](referenceFrame.clone_py.html) | an unsealed copy of the frame, not registered |
+| [clone](referenceFrame.clone_py.html) | make an editable, unregistered copy of a reference frame |
 | [conventionalSector](referenceFrame.conventionalSector_py.html) | the conventional sector of the group, the one MTEX draws, oriented by the up and east directions of the frame's plotting convention |
 | [conventionChar](referenceFrame.conventionChar_py.html) | the plotting convention in the frame's own axes names, e.g |
 | [disjoint](referenceFrame.disjoint_py.html) | the sibling frame carrying the intersection of the two groups |
@@ -81,7 +81,7 @@ transformationMatrix gives the change of coordinates between two frames.
 | [fundamentalRegion](referenceFrame.fundamentalRegion_py.html) | the fundamental region in orientation space of this group, or of the pair with another frame |
 | [fundamentalSector](referenceFrame.fundamentalSector_py.html) | the fundamental sector of the group of the frame on the sphere, the region an inverse pole figure shows |
 | [how2plot](referenceFrame.how2plot_py.html) | the default plotting convention the frame is drawn with, a plottingConvention or None |
-| [id](referenceFrame.id_py.html) | the group questions a frame answers, read through the frame |
+| [id](referenceFrame.id_py.html) | numeric identifier of the point group carried by the frame |
 | [intern](referenceFrame.intern_py.html) | the session instance of a frame: the registered one when it agrees by key, otherwise this one, registered and sealed from now on |
 | [isAligned](referenceFrame.isAligned_py.html) | whether two frames have the same basis, up to a relative tolerance on the basis vectors |
 | [isclose](referenceFrame.isclose_py.html) | whether two frames may be treated as one: the same class of group and aligned bases, and for crystal frames the same mineral (MATLAB's eqTol) |
@@ -100,19 +100,19 @@ transformationMatrix gives the change of coordinates between two frames.
 | [numSym](referenceFrame.numSym_py.html) | the number of elements of the point group |
 | [plot](referenceFrame.plot_py.html) | the elements of the point group of a frame drawn on the upper hemisphere, as the international tables draw them |
 | [pointGroup](referenceFrame.pointGroup_py.html) | the Hermann-Mauguin symbol of the point group |
-| [properGroup](referenceFrame.properGroup_py.html) | the sibling frame carrying the proper point group, the elements with their parity dropped |
-| [properSubGroup](referenceFrame.properSubGroup_py.html) | the sibling frame carrying only the proper rotations of this group |
+| [properGroup](referenceFrame.properGroup_py.html) | replace each point-group operation by its proper rotational part |
+| [properSubGroup](referenceFrame.properSubGroup_py.html) | return a sibling frame containing only the group's proper rotations |
 | [referenceFrame](referenceFrame.referenceFrame_py.html) | a reference frame, the coordinate system data is expressed in: an identity, a basis, the point group the data is invariant under and the default plotting convention |
-| [reset](referenceFrame.reset_py.html) | empties the frame register, the named frames and the default frame of the session |
+| [reset](referenceFrame.reset_py.html) | clear the session's frame register, named frames and default frame |
 | [rot](referenceFrame.rot_py.html) | the elements of the point group, an orthogonalTransform |
-| [rotations](referenceFrame.rotations_py.html) | the proper rotations of the point group |
+| [rotations](referenceFrame.rotations_py.html) | return only the proper rotations in this frame's point group |
 | [Schoenflies](referenceFrame.Schoenflies_py.html) | the Schoenflies symbol of the point group |
 | [sibling](referenceFrame.sibling_py.html) | this frame with another group in it, from the register |
 | [sim](referenceFrame.sim_py.html) | whether two frames describe the same symmetry, without requiring aligned bases |
-| [stripSym](referenceFrame.stripSym_py.html) | the sibling frame carrying the trivial group |
+| [stripSym](referenceFrame.stripSym_py.html) | return an interned sibling frame with the same basis and no nontrivial symmetry |
 | [sym](referenceFrame.sym_py.html) | the point group the frame carries, a symmetry |
 | [transformationMatrix](referenceFrame.transformationMatrix_py.html) | the transition matrix taking coordinates in this frame to coordinates in the other, on normalised bases: with the unit axes as rows, inv(B) A is the rotation between the two settings of one lattice |
-| [union](referenceFrame.union_py.html) | the same frame with the group generated by a rotation added, or with another frame's group joined |
+| [union](referenceFrame.union_py.html) | return a frame whose group is generated by this group and another group or operation |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L42">source</a></font>
 {% endraw %}

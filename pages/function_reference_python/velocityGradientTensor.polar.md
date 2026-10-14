@@ -12,10 +12,35 @@ status: Reference
 {% raw %}
 A method of [velocityGradientTensor](velocityGradientTensor_index_py.html).
 
-the polar decomposition T = R SR = SL R of a rank two tensor, R orthogonal, SL and SR
-symmetric
+factor a rank-two tensor into an orthogonal part and symmetric stretch tensors
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+R, SL, SR = T.polar()
+```
+
+</div>
+
+## Description
+
+The factors satisfy `T = R * SR = SL * R`. SR acts before the rotation and SL after it.
+The decomposition uses a singular value decomposition; for a deformation with positive
+determinant R is a proper rotation matrix. Factors retain the tensor frame and array shape.
+
+## Output
+
+| `R` | orthogonal rank-two tensor |
+| `SL` | left symmetric stretch tensor |
+| `SR` | right symmetric stretch tensor |
+
+## See also
+
+[tensor.svd](tensor.svd_py.html), [deformationGradientTensor](deformationGradientTensor_index_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -27,5 +52,5 @@ velocityGradientTensor.polar(self)
 
 MATLAB's [velocityGradientTensor.polar](velocityGradientTensor.polar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L566">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L642">source</a></font>
 {% endraw %}

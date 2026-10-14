@@ -63,5 +63,5 @@ other display style, a zone axis of planes.
 
 MATLAB's [Miller.perp](Miller.perp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L838">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L945">source</a></font>
 {% endraw %}

@@ -26,5 +26,5 @@ tensor.ctranspose(self)
 
 MATLAB's [tensor.ctranspose](tensor.ctranspose.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L439">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L492">source</a></font>
 {% endraw %}

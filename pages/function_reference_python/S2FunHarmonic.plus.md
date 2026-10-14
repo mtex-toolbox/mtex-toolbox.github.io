@@ -26,5 +26,5 @@ a + b
 
 MATLAB's [S2FunHarmonic.plus](S2FunHarmonic.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L482">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L498">source</a></font>
 {% endraw %}

@@ -58,7 +58,7 @@ The same.
 
 ## See also
 
-[plottingConvention.default](plotx2east_py.html), [setMTEXpref](setMTEXpref_py.html)
+[plottingConvention.default](plottingConvention.default_py.html), [setMTEXpref](setMTEXpref_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L94">source</a></font>
 {% endraw %}

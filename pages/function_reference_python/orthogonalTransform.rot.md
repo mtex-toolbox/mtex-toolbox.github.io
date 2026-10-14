@@ -13,5 +13,5 @@ A property of [orthogonalTransform](orthogonalTransform_index_py.html).
 
 the rotational part, a rotation
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L937">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1118">source</a></font>
 {% endraw %}

@@ -42,5 +42,5 @@ grain3d.surface(self)
 
 MATLAB's [grain3d.surface](grain3d.surface.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L315">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L340">source</a></font>
 {% endraw %}

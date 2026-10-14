@@ -87,5 +87,5 @@ rotation.interp(self, values=None, *flags, **kwargs)
 
 MATLAB's [rotation.interp](rotation.interp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L452">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L552">source</a></font>
 {% endraw %}

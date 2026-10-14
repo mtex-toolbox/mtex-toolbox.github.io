@@ -88,5 +88,5 @@ votes. Votes that are NaN and ids below 1 are left out.
 
 MATLAB's [majorityVote](majorityVote.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L167">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L171">source</a></font>
 {% endraw %}

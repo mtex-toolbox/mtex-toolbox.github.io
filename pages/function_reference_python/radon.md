@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-radon(x, ...) is x.radon(...), the method of the object passed
+apply an orientation Radon transform or a spherical Funk transform.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+poleDensity = radon(odf, h)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, radon(x, ...) calls x.radon(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -43,5 +60,5 @@ radon(x, *args, **kwargs)
 
 [ODFInversePoleFigure](ODFInversePoleFigure_py.html), [ODFPoleFigure](ODFPoleFigure_py.html), [S2FunRadon](S2FunRadon_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

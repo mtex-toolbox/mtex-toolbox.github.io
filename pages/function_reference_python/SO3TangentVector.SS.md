@@ -13,5 +13,5 @@ A property of [SO3TangentVector](SO3TangentVector_index_py.html).
 
 the specimen frame of the reference, None for a rotation
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L145">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L168">source</a></font>
 {% endraw %}

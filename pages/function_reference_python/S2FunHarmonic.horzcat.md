@@ -63,5 +63,5 @@ lists must agree in every other axis.
 
 MATLAB's [S2FunHarmonic.horzcat](S2FunHarmonic.horzcat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L338">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L346">source</a></font>
 {% endraw %}

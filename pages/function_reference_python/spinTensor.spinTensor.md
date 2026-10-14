@@ -22,11 +22,17 @@ spinTensor(M, *args, **kwargs)
 
 </div>
 
+## Input
+
+| `M` | vector3d axial vectors, numeric (..., 3) vector coordinates, or (..., 3, 3) matrices |
+| `args` | optional reference frame |
+| `kwargs` | tensor constructor options, including frame and unit |
+
 ## Used on
 
 [SingleSlipModel](SingleSlipModel_py.html), [RotationSpinTensor](RotationSpinTensor_py.html), [RotationTangentSpace](RotationTangentSpace_py.html)
 
 MATLAB's [spinTensor.spinTensor](spinTensor.spinTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1443">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1602">source</a></font>
 {% endraw %}

@@ -64,5 +64,5 @@ nmax, which keeps its extent.
 
 MATLAB's [grainBoundary.characteristicShape](grainBoundary.characteristicShape.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L375">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L416">source</a></font>
 {% endraw %}

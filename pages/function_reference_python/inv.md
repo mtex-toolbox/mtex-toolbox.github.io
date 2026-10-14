@@ -9,9 +9,28 @@ lang: python
 status: Reference
 ---
 {% raw %}
-inv(x, ...) is x.inv(...), the method of the object passed; NumPy's inv for an array
+invert a rotation, tensor or spatial transform.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+inverse = inv(x)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, inv(x, ...) calls x.inv(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+For numeric arrays without an MTEX method, this calls numpy.linalg.inv.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -24,11 +43,11 @@ inv(x, *args, **kwargs)
 ## Methods it calls
 
 | [complianceTensor](complianceTensor.inv_py.html) | the inverse: rank two by the matrix, rank four through the Voigt matrix, which swaps the convention and with it the class, a stiffness inverting to a compliance |
-| [orientation](orientation.inv_py.html) | the inverse maps the other way: the frames swap |
+| [orientation](orientation.inv_py.html) | reverse the direction of an orientation mapping |
 | [orthogonalTransform](orthogonalTransform.inv_py.html) | the inverse transform, the inverse rotation with the same parity |
-| [quaternion](quaternion.inv_py.html) | the inverse quaternion, the conjugate over the squared norm |
-| [rotation](rotation.inv_py.html) | the inverse rotation, the conjugate quaternion |
-| [SO3FunHarmonic](SO3FunHarmonic.inv_py.html) | the function of the inverse rotations, f(g^-1), its crystal and specimen frame exchanged |
+| [quaternion](quaternion.inv_py.html) | return the multiplicative inverse of each quaternion |
+| [rotation](rotation.inv_py.html) | return the rotation that reverses each input rotation |
+| [SO3FunHarmonic](SO3FunHarmonic.inv_py.html) | form the function evaluated at inverse rotations |
 | [SO3FunRBF](SO3FunRBF.inv_py.html) | the inverse function f(g^-1), the centres inverted, crystal and specimen sides exchanged |
 | [SO3VectorFieldHarmonic](SO3VectorField.inv_py.html) | the push-forward under R -> R^-1: a left vector v at R becomes the right vector -v at R^-1, so inv(grad f) = grad(inv f) |
 | [spatialTransform](spatialTransform.inv_py.html) | the inverse transform |
@@ -50,5 +69,5 @@ inv(x, *args, **kwargs)
 
 [DefinitionAsCoordinateTransform](DefinitionAsCoordinateTransform_py.html), [MTEXvsBungeConvention](MTEXvsBungeConvention_py.html), [OrientationInversePoleFigure](OrientationInversePoleFigure_py.html), [EBSDSharpPlot](EBSDSharpPlot_py.html), [EBSDSpatialTransform](EBSDSpatialTransform_py.html), [AnisotropicTheory](AnisotropicTheory_py.html), [IsotropicTheory](IsotropicTheory_py.html), [NotationAndConventions](NotationAndConventions_py.html), [BoundaryProperties](BoundaryProperties_py.html), [BoundarySelect](BoundarySelect_py.html), [MisorientationGrainExchangeSym](MisorientationGrainExchangeSym_py.html), [MisorientationTheory](MisorientationTheory_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

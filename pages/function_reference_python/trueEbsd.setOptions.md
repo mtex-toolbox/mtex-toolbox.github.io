@@ -101,5 +101,5 @@ pair already sharing its contrast.
 
 MATLAB's [trueEbsd.setOptions](trueEbsd.setOptions.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/trueebsd.py#L134">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/trueebsd.py#L138">source</a></font>
 {% endraw %}

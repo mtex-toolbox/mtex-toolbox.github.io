@@ -11,7 +11,7 @@ status: Reference
 ---
 {% raw %}
 a tangent vector of SO(3), a rotation vector v at a reference rotation or orientation, on the
-left, exp(v) * oriRef, or on the right, oriRef * exp(v); from vectors or skew matrices
+left, `exp(v) * oriRef`, or on the right, `oriRef * exp(v)`; from vectors or skew matrices
 
 ## Syntax
 
@@ -20,10 +20,25 @@ left, exp(v) * oriRef, or on the right, oriRef * exp(v); from vectors or skew ma
 ```python
 SO3TangentVector(v, oriRef)
 SO3TangentVector(v, oriRef, 'right')
-SO3TangentVector(S, oriRef, side)      from skew matrices of shape (..., 3, 3)
 ```
 
 </div>
+
+<div class="mx-form" markdown="1">
+
+```python
+SO3TangentVector(S, oriRef, side)
+```
+
+From skew matrices of shape (..., 3, 3).
+
+</div>
+
+## Input
+
+| `v` | rotation-vector components as vector3d or numeric arrays, or skew-symmetric matrices |
+| `oriRef` | reference rotation or orientation at which the tangent vectors are based |
+| `side` | 'left' for exp(v)*oriRef or 'right' for oriRef*exp(v); default 'left' |
 
 ## Signature
 
@@ -41,5 +56,5 @@ SO3TangentVector(v, oriRef, side='left')
 
 MATLAB's [SO3TangentVector.SO3TangentVector](SO3TangentVector.SO3TangentVector.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L93">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L111">source</a></font>
 {% endraw %}

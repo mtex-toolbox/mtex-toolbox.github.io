@@ -91,6 +91,14 @@ fun becomes the handle of its evaluation.
 
 | `sF` | S2FunHandle |
 
+## Properties
+
+| `fun` | callable used for evaluation, including requested symmetry averaging |
+| `bandwidth` | degree used when a harmonic approximation is needed |
+| `frame` | reference frame passed to directional queries |
+| `isReal` | whether evaluation discards imaginary values |
+| `antipodal` | whether opposite directions are identified |
+
 ## See also
 
 [S2Fun](S2Fun_index_py.html), [S2FunHarmonic](S2FunHarmonic_index_py.html), [SO3FunHandle](SO3FunHandle_index_py.html), [S2FunOperations](S2FunOperations_py.html)
@@ -101,5 +109,5 @@ fun becomes the handle of its evaluation.
 
 MATLAB's [S2FunHandle.S2FunHandle](S2FunHandle.S2FunHandle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L479">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L498">source</a></font>
 {% endraw %}

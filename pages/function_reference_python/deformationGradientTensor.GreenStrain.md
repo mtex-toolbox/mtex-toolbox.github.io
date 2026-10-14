@@ -12,9 +12,29 @@ status: Reference
 {% raw %}
 A method of [deformationGradientTensor](deformationGradientTensor_index_py.html).
 
-the Green-Lagrange strain of a deformation gradient, (F^T F - I) / 2
+compute the Green–Lagrange finite strain of a deformation gradient
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+eps = GreenStrain(F)
+```
+
+</div>
+
+## Description
+
+Return `(F.transpose() * F - I)/2` as a strainTensor in the frame of F. This measures strain
+relative to the undeformed configuration and gives zero for a rigid rotation. Leading
+array dimensions are retained.
+
+## See also
+
+[CauchyStrain](deformationGradientTensor.CauchyStrain_py.html), [deformationGradientTensor](deformationGradientTensor_index_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +46,5 @@ deformationGradientTensor.GreenStrain(F)
 
 MATLAB's [deformationGradientTensor.GreenStrain](deformationGradientTensor.GreenStrain.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L241">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L330">source</a></font>
 {% endraw %}

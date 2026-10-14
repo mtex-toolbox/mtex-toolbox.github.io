@@ -61,5 +61,5 @@ reads the radius off the angle to it. Directions of zero or undefined length are
 
 [sphereColor](sphereColor_py.html), [ipfHSVKey](ipfHSVKey_index_py.html), [plotKey](plotKey_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L345">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L368">source</a></font>
 {% endraw %}

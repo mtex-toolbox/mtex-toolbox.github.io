@@ -28,5 +28,5 @@ the identity transform, which leaves every position where it is
 
 MATLAB's [spatialTransformId](spatialTransformId.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L209">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L225">source</a></font>
 {% endraw %}

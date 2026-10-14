@@ -62,5 +62,5 @@ indices, so every index is nonnegative.
 
 [voxelLattice.positions](voxelLattice.positions_py.html), [EBSD3.gridify](EBSD3.gridify_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L109">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L114">source</a></font>
 {% endraw %}

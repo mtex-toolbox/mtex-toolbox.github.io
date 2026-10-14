@@ -61,5 +61,5 @@ opposite values. rotation.dot takes its absolute value by default.
 
 MATLAB's [quaternion.dot](quaternion.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L221">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L267">source</a></font>
 {% endraw %}

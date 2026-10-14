@@ -12,9 +12,29 @@ status: Reference
 {% raw %}
 A method of [grain2d](grain2d_index_py.html).
 
-how much the outline is indented against its convex hull, in percent
+measure how strongly an outline is indented relative to its convex hull
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+p = grains.paris()
+```
+
+</div>
+
+## Description
+
+Return `200*(perimeter-hullPerimeter)/hullPerimeter`, in percent, for every outline.
+Convex outlines give zero; concave outlines give positive values. A hull of zero perimeter
+returns zero. Results depend on boundary resolution, so compare consistently sampled outlines.
+
+## See also
+
+[convexity](convexity_py.html), [shapeFactor](shapeFactor_py.html), hullPerimeter
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -30,5 +50,5 @@ grain2d.paris(self)
 
 MATLAB's [grain2d.paris](grain2d.paris.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L168">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L183">source</a></font>
 {% endraw %}

@@ -10,7 +10,7 @@ counterpart: plane3d.plane3d.html
 status: Reference
 ---
 {% raw %}
-a plane <N, v> = d, or a list of them
+planes in three-dimensional space, stored by unit normals and signed offsets
 
 ## Syntax
 
@@ -20,7 +20,7 @@ a plane <N, v> = d, or a list of them
 plane = plane3d(N, d)
 ```
 
-<N, v> = d.
+Planes satisfying dot(N, v) = d.
 
 </div>
 
@@ -30,7 +30,7 @@ plane = plane3d(N, d)
 plane = plane3d(N, v0)
 ```
 
-Through the point v0.
+Planes with normal N through v0.
 
 </div>
 
@@ -40,9 +40,36 @@ Through the point v0.
 plane = plane3d.byPoints(v)
 ```
 
-Fitted through the points v.
+Least-squares plane through a point cloud.
 
 </div>
+
+## Description
+
+Normals are normalised internally. A numeric offset is divided by the original normal
+length, so rescaling both N and d describes the same plane. With unit N, d is the signed
+distance from the origin, in the units of the positions. Arrays of normals and offsets
+represent arrays of planes. The normals carry the coordinate frame.
+
+## Input
+
+| `N` | vector3d plane normals, coordinate arrays, or a plane3d to copy |
+| `d` | numeric offsets, or vector3d positions through which the planes pass; default 0 |
+
+## Output
+
+| `plane` | plane3d |
+
+## Properties
+
+| `N` | unit normals as vector3d |
+| `d` | signed distances from the origin |
+| `frame` | coordinate frame of the normals |
+| `shape` | shape of the plane array |
+
+## See also
+
+[plane3d.byPoints](plane3d.byPoints_py.html), [plane3d.dist](plane3d.dist_py.html), [plane3d.project](plane3d.project_py.html), [plane3d.intersect](plane3d.intersect_py.html)
 
 ## Signature
 

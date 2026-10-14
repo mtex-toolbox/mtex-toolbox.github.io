@@ -65,5 +65,5 @@ theta and rho broadcast against each other.
 
 MATLAB's [vector3d.byPolar](vector3d.byPolar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L403">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L463">source</a></font>
 {% endraw %}

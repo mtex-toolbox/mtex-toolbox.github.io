@@ -13,5 +13,5 @@ A property of [embedding](embedding_index_py.html).
 
 the number of images
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L306">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L309">source</a></font>
 {% endraw %}

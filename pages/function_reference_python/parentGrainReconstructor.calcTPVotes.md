@@ -81,5 +81,5 @@ small and its second best large, which minFit and maxFit ask for.
 
 MATLAB's [parentGrainReconstructor.calcTPVotes](parentGrainReconstructor.calcTPVotes.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L888">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L892">source</a></font>
 {% endraw %}

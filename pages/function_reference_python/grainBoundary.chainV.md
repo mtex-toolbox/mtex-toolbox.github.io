@@ -13,5 +13,5 @@ A property of [grainBoundary](grainBoundary_index_py.html).
 
 the vertices of every chain in walk order, the chains separated by -1
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L225">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L261">source</a></font>
 {% endraw %}

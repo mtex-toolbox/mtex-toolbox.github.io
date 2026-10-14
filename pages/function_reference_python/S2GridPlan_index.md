@@ -12,9 +12,15 @@ status: Reference
 the sphere: f(theta, rho) = sum G[m, j] e^{i(m rho - j theta)}, theta a transform of length
 4Lg cut to the grid's rows, rho one of the grid's length, real valued for a real function
 
+## Input
+
+| `g` | quadratureS2Grid at which to evaluate the series |
+| `L` | maximum harmonic degree; default the grid bandwidth |
+| `real` | whether the represented function is real-valued; default False |
+
 ## Members
 
 | [adjoint](S2GridPlan.adjoint_py.html) | the spherical coefficients from weighted values on the grid, the FFTs taken backwards |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L842">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L882">source</a></font>
 {% endraw %}

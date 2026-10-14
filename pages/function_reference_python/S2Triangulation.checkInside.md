@@ -26,5 +26,5 @@ S2Triangulation.checkInside(self, v, t)
 
 MATLAB's [S2Triangulation.checkInside](S2Triangulation.checkInside.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/s2triangulation.py#L84">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/s2triangulation.py#L87">source</a></font>
 {% endraw %}

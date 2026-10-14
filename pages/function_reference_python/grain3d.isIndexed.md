@@ -13,5 +13,5 @@ A property of [grain3d](grain3d_index_py.html).
 
 whether the phase of every grain is indexed
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L121">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L146">source</a></font>
 {% endraw %}

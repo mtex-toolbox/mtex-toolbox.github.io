@@ -26,5 +26,5 @@ a[ind]
 
 MATLAB's [PoleFigure.subsref](PoleFigure.subsref.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L278">source</a></font>
 {% endraw %}

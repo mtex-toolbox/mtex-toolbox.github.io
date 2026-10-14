@@ -26,5 +26,5 @@ a + b
 
 MATLAB's [SO3FunHarmonic.plus](SO3FunHarmonic.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L456">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L507">source</a></font>
 {% endraw %}

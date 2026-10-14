@@ -61,5 +61,5 @@ Every component is rotated in its own representation.
 
 MATLAB's [SO3FunComposition.rotate](SO3FunComposition.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L359">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L378">source</a></font>
 {% endraw %}

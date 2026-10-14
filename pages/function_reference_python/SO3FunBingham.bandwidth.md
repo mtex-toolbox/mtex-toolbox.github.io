@@ -13,5 +13,5 @@ A property of [SO3FunBingham](SO3FunBingham_index_py.html).
 
 the bandwidth of the harmonic expansion, the preference maxSO3Bandwidth
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L143">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L150">source</a></font>
 {% endraw %}

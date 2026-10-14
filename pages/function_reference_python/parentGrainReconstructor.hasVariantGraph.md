@@ -13,5 +13,5 @@ A property of [parentGrainReconstructor](parentGrainReconstructor_index_py.html)
 
 whether the graph is a variant graph, one node per grain and parent variant
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L521">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L525">source</a></font>
 {% endraw %}

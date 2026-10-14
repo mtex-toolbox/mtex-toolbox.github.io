@@ -10,9 +10,26 @@ counterpart: characteristicShape.html
 status: Reference
 ---
 {% raw %}
-characteristicShape(x, ...) is x.characteristicShape(...), the method of the object passed
+combine grain boundary segments into a characteristic particle shape.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+outline = characteristicShape(grains)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, characteristicShape(x, ...) calls x.characteristicShape(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -32,5 +49,5 @@ characteristicShape(x, *args, **kwargs)
 
 MATLAB's [characteristicShape](characteristicShape.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

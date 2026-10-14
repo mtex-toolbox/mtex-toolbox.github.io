@@ -17,10 +17,16 @@ its harmonic expansion
 <div class="mx-form" markdown="1">
 
 ```python
-vF = S2VectorFieldHandle(lambda v: v.cross(vector3d.Z()))
+vF = S2VectorFieldHandle(lambda v: v.cross(vector3d.Z))
 ```
 
 </div>
+
+## Input
+
+| `fun` | callable receiving unit vector3d directions and returning one vector per direction |
+| `frame` | referenceFrame of the query directions, or None for frame-free directions |
+| `bandwidth` | harmonic degree used when approximating the callable; default defaultS2Bandwidth preference |
 
 ## Members
 

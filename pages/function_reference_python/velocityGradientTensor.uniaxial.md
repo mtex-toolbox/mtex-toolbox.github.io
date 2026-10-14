@@ -82,5 +82,5 @@ is kept; q = 0.5 is axisymmetric. A strain rate r multiplies the tensor, r * L.
 
 MATLAB's [velocityGradientTensor.uniaxial](velocityGradientTensor.uniaxial.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L246">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L344">source</a></font>
 {% endraw %}

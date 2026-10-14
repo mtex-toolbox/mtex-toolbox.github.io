@@ -23,5 +23,5 @@ lattice.position(self, ij)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L144">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L153">source</a></font>
 {% endraw %}

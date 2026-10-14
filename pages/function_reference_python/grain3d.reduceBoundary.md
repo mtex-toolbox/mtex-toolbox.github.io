@@ -38,5 +38,5 @@ grain3d.reduceBoundary(self, *args, **kwargs)
 
 MATLAB's [grain3d.reduceBoundary](grain3d.reduceBoundary.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L423">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L448">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [S2FunTri](S2FunTri_index_py.html).
 
 the frame of the vertices
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L57">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L78">source</a></font>
 {% endraw %}

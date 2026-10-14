@@ -24,6 +24,11 @@ S2G = fibonacciS2Grid(resolution=2*degree)
 
 </div>
 
+## Input
+
+| `N` | requested number of nodes, rounded to a nearby odd count |
+| `resolution` | target angular spacing in radians when N is omitted; default 5*degree |
+
 ## Signature
 
 <div class="mx-form" markdown="1">

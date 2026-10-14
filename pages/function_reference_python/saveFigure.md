@@ -72,5 +72,5 @@ MATLAB's file dialog without a name has no counterpart.
 
 MATLAB's [saveFigure](saveFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L741">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L754">source</a></font>
 {% endraw %}

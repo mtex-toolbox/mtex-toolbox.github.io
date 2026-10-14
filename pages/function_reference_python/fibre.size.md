@@ -13,5 +13,5 @@ A property of [fibre](fibre_index_py.html).
 
 the number of fibres in the list
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L129">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L135">source</a></font>
 {% endraw %}

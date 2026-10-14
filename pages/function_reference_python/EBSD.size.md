@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the number of measurements, the padding of a grid included
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L142">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L155">source</a></font>
 {% endraw %}

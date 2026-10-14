@@ -13,5 +13,5 @@ A property of [grain3Boundary](grain3Boundary_index_py.html).
 
 the indices into allV of the vertices the faces use, sorted
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L221">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L256">source</a></font>
 {% endraw %}

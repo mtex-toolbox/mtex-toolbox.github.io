@@ -23,5 +23,5 @@ fibonacciS2Grid.neighbourIndices(self, v, eps)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/fibonacci.py#L53">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/fibonacci.py#L57">source</a></font>
 {% endraw %}

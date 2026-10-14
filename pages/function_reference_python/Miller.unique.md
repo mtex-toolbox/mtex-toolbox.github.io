@@ -99,5 +99,5 @@ equivalent: they are projected to the fundamental sector first.
 
 MATLAB's [Miller.unique](Miller.unique.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L959">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1076">source</a></font>
 {% endraw %}

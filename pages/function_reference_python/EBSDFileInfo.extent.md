@@ -13,5 +13,5 @@ A property of [EBSDFileInfo](EBSDFileInfo_index_py.html).
 
 the lengths the grid spans along its axes, in the scan unit
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L62">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L88">source</a></font>
 {% endraw %}

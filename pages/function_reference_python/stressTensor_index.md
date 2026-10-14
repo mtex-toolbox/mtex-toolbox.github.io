@@ -78,10 +78,10 @@ are computed from it.
 
 ## Members
 
-| [calcShearStress](stressTensor.calcShearStress_py.html) | the shear stress the stress tensor resolves on each slip system, and the index of the system carrying the largest one |
-| [deviatoricStress](stressTensor.deviatoricStress_py.html) | the deviatoric part, the tensor less a third of its trace on the diagonal |
-| [equivalentStress](stressTensor.equivalentStress_py.html) | the von Mises equivalent stress, sqrt(3/2 s:s) of the deviatoric stress s |
-| [meanStress](stressTensor.meanStress_py.html) | the mean stress, a third of the trace of the stress tensor |
+| [calcShearStress](stressTensor.calcShearStress_py.html) | resolve a stress tensor on slip systems and identify the most highly stressed system |
+| [deviatoricStress](stressTensor.deviatoricStress_py.html) | remove the isotropic part of a rank-two stress or strain tensor |
+| [equivalentStress](stressTensor.equivalentStress_py.html) | compute the von Mises equivalent stress |
+| [meanStress](stressTensor.meanStress_py.html) | compute the mean normal stress, trace(sigma) / 3 |
 | [normalize](stressTensor.normalize_py.html) | the tensors divided by their Frobenius norms |
 | [stressTensor](stressTensor.stressTensor_py.html) | a rank two symmetric stress tensor, or a list of them |
 | [uniaxial](stressTensor.uniaxial_py.html) | the stress of a uniaxial tension along v, sigma v v^T |
@@ -92,5 +92,5 @@ are computed from it.
 
 MATLAB's [stressTensor_index](stressTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1242">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1395">source</a></font>
 {% endraw %}

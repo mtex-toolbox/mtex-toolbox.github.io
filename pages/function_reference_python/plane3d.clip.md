@@ -28,5 +28,5 @@ plane3d.clip(self, lo, hi)
 
 [MaParentGrainReconstruction](MaParentGrainReconstruction_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L146">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L176">source</a></font>
 {% endraw %}

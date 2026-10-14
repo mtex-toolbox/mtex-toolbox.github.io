@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-fitStage(x, ...) is x.fitStage(...), the method of the object passed
+fit one stage of a composite spatial transform to supplied point pairs.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+fitted = fitStage(T, stage, source, target)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, fitStage(x, ...) calls x.fitStage(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -23,7 +40,7 @@ fitStage(x, *args, **kwargs)
 
 ## Methods it calls
 
-| [spatialTransformComposite](spatialTransformComposite.fitStage_py.html) | the stage s, counted from zero, fitted to a residual measured after the ones before it |
+| [spatialTransformComposite](spatialTransformComposite.fitStage_py.html) | return a composite with one stage fitted to supplied point pairs |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

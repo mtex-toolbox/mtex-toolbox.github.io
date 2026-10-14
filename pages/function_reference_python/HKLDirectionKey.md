@@ -23,6 +23,10 @@ key = HKLDirectionKey(cs)
 
 </div>
 
+## Input
+
+| `CS` | crystalFrame or symmetry; colouring uses its Laue group |
+
 ## Members
 
 | [direction2color](HKLDirectionKey.direction2color_py.html) | the colours of directions under the HKL key |
@@ -30,5 +34,5 @@ key = HKLDirectionKey(cs)
 
 MATLAB's [HKLDirectionKey](HKLDirectionKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L440">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L466">source</a></font>
 {% endraw %}

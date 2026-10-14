@@ -115,5 +115,5 @@ the remaining keywords. noisepf turns the intensities into counts.
 
 MATLAB's [SO3Fun.calcPoleFigure](SO3Fun.calcPoleFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L880">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L942">source</a></font>
 {% endraw %}

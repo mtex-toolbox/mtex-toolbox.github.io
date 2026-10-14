@@ -13,5 +13,5 @@ A property of [grain2d](grain2d_index_py.html).
 
 the ids of the indexed phases present among the grains
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L153">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L165">source</a></font>
 {% endraw %}

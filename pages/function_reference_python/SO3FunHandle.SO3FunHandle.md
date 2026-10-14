@@ -90,6 +90,14 @@ Exchange symmetry needs the same frame on both sides.
 
 | `SO3F` | SO3FunHandle |
 
+## Properties
+
+| `fun` | callable used for evaluation, including requested symmetry averaging |
+| `bandwidth` | degree used when a harmonic approximation is needed |
+| `CS, SS` | crystal and specimen frames passed to orientation queries |
+| `isReal` | whether evaluation discards imaginary values |
+| `antipodal` | whether grain exchange symmetry is requested |
+
 ## See also
 
 [SO3Fun](SO3Fun_index_py.html), [SO3FunHarmonic](SO3FunHarmonic_index_py.html), [S2FunHandle](S2FunHandle_index_py.html), [SO3FunOperations](SO3FunOperations_py.html)

@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the floating point type of the rotations, single or double precision
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L160">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L173">source</a></font>
 {% endraw %}

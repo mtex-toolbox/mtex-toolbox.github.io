@@ -10,7 +10,24 @@ counterpart: S2Fun_index.html
 status: Reference
 ---
 {% raw %}
-the functions on the sphere: S2FunHarmonic, S2FunHandle, S2FunBingham
+base class for scalar functions of a direction on the unit sphere
+
+## Description
+
+Use S2FunHarmonic for spherical harmonic coefficients, S2FunHandle for a callable,
+S2FunTri for values on a triangulation, or S2FunBingham for an axial density.
+Evaluate a concrete function with f(v), where v is vector3d or Miller directions.
+A frame can impose crystal symmetry; antipodal functions satisfy f(v)=f(-v).
+
+Directional densities from calcDensity and S2FunBingham have spherical mean one,
+equivalent to integral `4*pi` with surface-area measure. General S2Fun objects may also
+represent signed or complex functions and are not automatically normalised densities.
+
+This base class supplies the common interface; construct one of its representations.
+
+## See also
+
+[S2FunHarmonic](S2FunHarmonic_index_py.html), [S2FunHandle](S2FunHandle_index_py.html), [S2FunTri](S2FunTri_index_py.html), [S2FunBingham](S2FunBingham_index_py.html), [calcDensity](calcDensity_py.html)
 
 ## Members
 
@@ -29,7 +46,7 @@ the functions on the sphere: S2FunHarmonic, S2FunHandle, S2FunBingham
 | [quiver3](S2Fun.quiver3_py.html) | arrows in space: tangent vectors in orientation space, a field on the sphere or SO(3), or arrows at positions |
 | [quiverSection](S2Fun.quiverSection_py.html) | arrows on a section plot: of a function on the sphere along one of its circles, or at orientations in the sections of orientation space |
 | [rotate](S2Fun.rotate_py.html) | rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method |
-| [S2Fun](S2Fun.S2Fun_py.html) | the functions on the sphere: S2FunHarmonic, S2FunHandle, S2FunBingham |
+| [S2Fun](S2Fun.S2Fun_py.html) | base class for scalar functions of a direction on the unit sphere |
 | [smiley](S2Fun.smiley_py.html) | the smiley, a test function on the sphere whose face shows where a plot puts the axes |
 | [sum](S2Fun.sum_py.html) | sum(x) of an MTEX object by its own sum, of an array or with an axis as NumPy sums, of any other iterable as Python sums, so that from mtex import * keeps Python's sum |
 | [surf](S2Fun.surf_py.html) | a function on the sphere as a surface in space, the sphere pushed out to \|f\| and coloured by f |

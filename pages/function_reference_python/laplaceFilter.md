@@ -17,6 +17,11 @@ measured at a finer step does something else. The averaging counts the vertex it
 the weight of its degree, (2V + Vl + Vr) / 4 for a degree of two, so lambda acts on half
 the Laplacian and the default of 0.5 is in truth a rate of 0.25
 
+## Input
+
+| `iter` | number of smoothing steps; default 1 |
+| `lambda_` | smoothing parameter, with each step moving by lambda_/2 towards the neighbour mean; default 0.5 |
+
 ## Members
 
 | [smooth](laplaceFilter.smooth_py.html) | the vertices after iter steps of local averaging at the rate lambda_ / 2, the fixed ones kept |
@@ -27,5 +32,5 @@ the Laplacian and the default of 0.5 is in truth a rate of 0.25
 
 MATLAB's [laplaceFilter](laplaceFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L142">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L147">source</a></font>
 {% endraw %}

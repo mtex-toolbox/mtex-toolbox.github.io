@@ -12,9 +12,29 @@ status: Reference
 {% raw %}
 A method of [S1FunHarmonic](S1FunHarmonic_index_py.html).
 
-the derivative multiplies c_k by -ik
+differentiate the circular function with respect to its angle in radians.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+derivative = f.diff()
+```
+
+</div>
+
+## Description
+
+For the convention `f(x)=sum(c[k]*exp(-1j*k*x))`, the derivative coefficient is
+`-1j*k*c[k]`. Return another S1FunHarmonic with the same bandwidth. Evaluate it at
+angles, or use grad(angles) to evaluate the derivative directly.
+
+## See also
+
+[S1FunHarmonic.grad](S1FunHarmonic.grad_py.html), [S1FunHarmonic.eval](S1FunHarmonic.eval_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +46,5 @@ S1FunHarmonic.diff(self)
 
 MATLAB's [S1FunHarmonic.diff](S1FunHarmonic.diff.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L221">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L248">source</a></font>
 {% endraw %}

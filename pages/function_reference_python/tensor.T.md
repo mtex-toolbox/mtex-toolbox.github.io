@@ -13,5 +13,5 @@ A property of [tensor](tensor_index_py.html).
 
 the transpose, the indices of a rank two and the index pairs of a rank four swapped
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L449">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L502">source</a></font>
 {% endraw %}

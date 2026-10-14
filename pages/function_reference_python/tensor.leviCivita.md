@@ -10,9 +10,11 @@ counterpart: tensor.leviCivita.html
 status: Reference
 ---
 {% raw %}
-A method of [tensor](tensor_index_py.html).
+A property of [tensor](tensor_index_py.html).
 
-a property of the class itself, vector3d.X
+the Levi-Civita symbol, the rank three tensor of the signs of the permutations of (1, 2, 3)
 
 MATLAB's [tensor.leviCivita](tensor.leviCivita.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1038">source</a></font>
 {% endraw %}

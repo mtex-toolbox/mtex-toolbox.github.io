@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-extent(x, ...) is x.extent(...), the method of the object passed
+return the spatial bounding box of a map or image.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+bounds = extent(ebsd)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, extent(x, ...) calls x.extent(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -31,5 +48,5 @@ extent(x, *args, **kwargs)
 | [mapImage](mapImage.extent_py.html) | [xmin, xmax, ymin, ymax, zmin, zmax] of the pixel centres |
 | [sphericalProjection](sphericalProjection.extent_py.html) | the radius of the whole hemisphere, the natural extent of a chart |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

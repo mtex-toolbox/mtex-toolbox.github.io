@@ -13,5 +13,5 @@ A property of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
 the frame of the function, MATLAB's sF.CS
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L270">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L278">source</a></font>
 {% endraw %}

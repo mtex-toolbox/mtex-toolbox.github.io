@@ -87,5 +87,5 @@ taken as the full fibre, its ends o1 and o2 do not count.
 
 MATLAB's [fibre.angle](fibre.angle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L225">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L231">source</a></font>
 {% endraw %}

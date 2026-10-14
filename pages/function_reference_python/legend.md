@@ -99,5 +99,5 @@ legend.
 
 [OrientationFibre](OrientationFibre_py.html), [OrientationStandard](OrientationStandard_py.html), [WaveVelocities](WaveVelocities_py.html), [BoundaryPlots](BoundaryPlots_py.html), [GrainSmoothing](GrainSmoothing_py.html), [AngleDistributionFunction](AngleDistributionFunction_py.html), [MisorientationDistributionFunction](MisorientationDistributionFunction_py.html), [MisorientationGrainExchangeSym](MisorientationGrainExchangeSym_py.html), [MisorientationTheory](MisorientationTheory_py.html), [SlipTransmission](SlipTransmission_py.html), [Annotations](Annotations_py.html), [CombinedPlots](CombinedPlots_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L853">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L866">source</a></font>
 {% endraw %}

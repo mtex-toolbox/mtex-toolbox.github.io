@@ -16,11 +16,22 @@ sections of constant Euler angle, the first or the third of a convention
 <div class="mx-form" markdown="1">
 
 ```python
-phi2Sections(cs, ss, sections=6), phi2Sections(cs, ss, phi2=(0:15:90)*degree)
+phi2Sections(cs, ss, sections=6), phi2Sections(cs, ss, phi2=np.arange(0, 91, 15)*degree)
 phi1Sections, alphaSections, gammaSections
 ```
 
 </div>
+
+## Input
+
+| `frameA` | crystal reference frame |
+| `frameB` | specimen reference frame; None uses the default |
+| `sections` | number of sections when explicit angle values are omitted; default 6 |
+| `values` | explicit section angles in radians, overriding the section count |
+| `tol` | maximum angular assignment tolerance in radians; default 5*degree |
+| `maxPhi` | upper limit of the middle Euler angle in radians; None uses the symmetry-dependent limit |
+| `maxAzimuth` | upper limit of the in-section azimuth in radians; None uses its symmetry-dependent limit |
+| `kwargs` | section angles may also be supplied as phi2=values |
 
 ## Members
 
@@ -32,5 +43,5 @@ phi1Sections, alphaSections, gammaSections
 | [sectionData](eulerSections.sectionData_py.html) | where the symmetric equivalents of orientations fall: the chart directions, the section of each and the index of the orientation it comes from |
 | [sectionLabel](eulerSections.sectionLabel_py.html) | the title of section k, the constant angle in degrees |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L214">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L219">source</a></font>
 {% endraw %}

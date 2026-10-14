@@ -102,6 +102,16 @@ with an inversion makes the function antipodal.
 
 | `sF` | S2FunHarmonic |
 
+## Properties
+
+| `fhat` | spherical harmonic coefficients in MTEX's public basis |
+| `bandwidth` | largest spherical harmonic degree |
+| `frame` | reference frame carrying the function symmetry |
+| `CS` | alias for the spherical reference frame |
+| `isReal` | whether the function is real-valued |
+| `antipodal` | whether f(v)=f(-v) |
+| `shape` | shape of a list of functions, excluding the coefficient axis |
+
 ## See also
 
 [S2FunHarmonic.quadrature](S2FunHarmonic.quadrature_py.html), [S2FunHarmonic.interpolate](S2FunHarmonic.interpolate_py.html), [S2FunHandle](S2FunHandle_index_py.html), [S2Kernel](S2Kernel_index_py.html), [SO3FunHarmonic](SO3FunHarmonic_index_py.html), [S2FunHarmonicRepresentation](S2FunHarmonicRepresentation_py.html)
@@ -115,22 +125,22 @@ with an inversion makes the function antipodal.
 | [bandwidth](S2FunHarmonic.bandwidth_py.html) | the bandwidth, the highest degree of the coefficients |
 | [cat](S2FunHarmonic.cat_py.html) | the functions joined into one list along an axis, padded to the largest bandwidth |
 | [conj](S2FunHarmonic.conj_py.html) | the complex conjugate function |
-| [conv](S2FunHarmonic.conv_py.html) | the convolution with a kernel or another function on the sphere |
+| [conv](S2FunHarmonic.conv_py.html) | convolve a spherical function with a kernel or another spherical function |
 | [CS](S2FunHarmonic.CS_py.html) | the frame of the function, MATLAB's sF.CS |
 | [dot](S2FunHarmonic.dot_py.html) | the inner product with another function of the same frame, for the normalised surface measure: int conj(f) g dS / 4 pi |
 | [eig](S2FunHarmonic.eig_py.html) | eig(T) is T.eig(): the eigenvalues in ascending order and the eigenvectors |
 | [entropy](S2FunHarmonic.entropy_py.html) | the entropy -int f log f of a function on SO(3) or on the sphere |
 | [eval](S2FunHarmonic.eval_py.html) | the function at directions, or at the nodes of a quadrature grid |
-| [even](S2FunHarmonic.even_py.html) | the even part, f(v) + f(-v) over two |
+| [even](S2FunHarmonic.even_py.html) | return the even part (f(v)+f(-v))/2 of a spherical function |
 | [exp](S2FunHarmonic.exp_py.html) | the exponential of the function, expanded by quadrature, or at the bandwidth given |
 | [fhat](S2FunHarmonic.fhat_py.html) | the coefficients in MTEX's basis, as MATLAB's sF.fhat reads and assigns them |
 | [grad](S2FunHarmonic.grad_py.html) | the surface gradient: a vector field, or its values at the directions x |
 | [horzcat](S2FunHarmonic.horzcat_py.html) | the functions joined into one list along an axis, padded to the largest bandwidth |
 | [how2plot](S2FunHarmonic.how2plot_py.html) | the plotting convention of the frame, or the session's |
 | [interpolate](S2FunHarmonic.interpolate_py.html) | S2FunHarmonic.interpolate(v, y) is interpolate(v, y): the function of least squares through the values y at the directions v |
-| [invRadon](S2FunHarmonic.invRadon_py.html) | the inverse of the Funk transform: the even function whose Funk transform this is |
+| [invRadon](S2FunHarmonic.invRadon_py.html) | invert the Funk transform on the even spherical harmonics |
 | [isclose](S2FunHarmonic.isclose_py.html) | whether the coefficients agree with those of g within the tolerances, relative to the norm of g |
-| [laplace](S2FunHarmonic.laplace_py.html) | the Laplace-Beltrami operator applied to the function, the degree l scaled by -l(l+1) |
+| [laplace](S2FunHarmonic.laplace_py.html) | apply the spherical Laplace-Beltrami operator |
 | [log](S2FunHarmonic.log_py.html) | the logarithm of the function, expanded by quadrature, or at the bandwidth given |
 | [mean](S2FunHarmonic.mean_py.html) | the mean over the sphere, int f dS / 4 pi, one per function |
 | [mtimes](S2FunHarmonic.mtimes_py.html) |  |

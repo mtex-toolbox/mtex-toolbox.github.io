@@ -15,5 +15,5 @@ the mean distance between the points (MATLAB vector3d.resolution): the whole cir
 for up to four points, the square root of the median Voronoi cell area up to fifty
 thousand, the equal area estimate beyond; a grid knows its own
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L569">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L655">source</a></font>
 {% endraw %}

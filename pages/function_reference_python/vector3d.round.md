@@ -114,5 +114,5 @@ keeps them where the rounding would turn it by more than the accuracy.
 
 MATLAB's [vector3d.round](vector3d.round.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L291">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L310">source</a></font>
 {% endraw %}

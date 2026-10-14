@@ -64,5 +64,5 @@ is kept when every function is real.
 
 MATLAB's [SO3FunHarmonic.vertcat](SO3FunHarmonic.vertcat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L212">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L219">source</a></font>
 {% endraw %}

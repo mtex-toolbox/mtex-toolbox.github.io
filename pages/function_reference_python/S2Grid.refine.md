@@ -28,5 +28,5 @@ S2Grid.refine(v)
 
 MATLAB's [S2Grid.refine](S2Grid.refine.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1088">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1153">source</a></font>
 {% endraw %}

@@ -62,5 +62,5 @@ degree l by (2l+1)^(2s). MATLAB's norm has no Sobolev index.
 
 MATLAB's [S2FunHarmonic.norm](S2FunHarmonic.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L627">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L643">source</a></font>
 {% endraw %}

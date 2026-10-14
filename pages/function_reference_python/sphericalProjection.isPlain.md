@@ -13,5 +13,5 @@ A property of [sphericalProjection](sphericalProjection_index_py.html).
 
 whether the chart draws the polar angles as plain coordinates, False here
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L72">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L77">source</a></font>
 {% endraw %}

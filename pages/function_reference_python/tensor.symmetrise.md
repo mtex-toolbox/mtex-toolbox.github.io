@@ -26,5 +26,5 @@ tensor.symmetrise(self)
 
 MATLAB's [tensor.symmetrise](tensor.symmetrise.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L620">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L708">source</a></font>
 {% endraw %}

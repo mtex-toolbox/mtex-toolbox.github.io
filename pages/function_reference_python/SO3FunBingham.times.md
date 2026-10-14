@@ -26,5 +26,5 @@ a * b
 
 MATLAB's [SO3FunBingham.times](SO3FunBingham.times.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L182">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L189">source</a></font>
 {% endraw %}

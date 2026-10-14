@@ -64,7 +64,7 @@ written when MTEX_SETTINGS is empty.
 
 ## See also
 
-[getMTEXpref](getMTEXpref_py.html), [loadSettings](loadSettings_py.html), [plottingConvention.default](plotx2east_py.html)
+[getMTEXpref](getMTEXpref_py.html), [loadSettings](loadSettings_py.html), [plottingConvention.default](plottingConvention.default_py.html)
 
 ## Used on
 

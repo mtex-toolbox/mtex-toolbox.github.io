@@ -27,5 +27,5 @@ positive one
 | [theta](shape2d.theta_py.html) | the angle of every vertex in polar coordinates of the plane, from the x axis |
 | [Vs](shape2d.Vs_py.html) | the outline as framed points, and in polar coordinates |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L408">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L449">source</a></font>
 {% endraw %}

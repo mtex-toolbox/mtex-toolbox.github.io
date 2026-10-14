@@ -62,5 +62,5 @@ are not close; rotation.isclose takes them as one. The operator == compares exac
 
 MATLAB's [quaternion.eq](quaternion.eq.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L272">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L325">source</a></font>
 {% endraw %}

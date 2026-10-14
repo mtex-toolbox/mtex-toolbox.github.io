@@ -13,5 +13,5 @@ A property of [shape2d](shape2d_index_py.html).
 
 the vertices of the outline as framed points, the same as Vs
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L484">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L525">source</a></font>
 {% endraw %}

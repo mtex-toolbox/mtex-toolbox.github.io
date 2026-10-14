@@ -94,6 +94,16 @@ value of its type, so an unsigned one lies in [0, 1].
 
 | `mg` | mapImage |
 
+## Properties
+
+| `img` | floating-point raster of shape (rows, columns) or (rows, columns, channels) |
+| `origin` | specimen position of the centre of pixel (0, 0) |
+| `d1, d2` | Cartesian step vectors for increasing row and column indices |
+| `frame` | specimenFrame of the image geometry |
+| `pos` | derived vector3d positions of pixel centres |
+| `ebsd` | associated EBSD map on the same grid, when supplied |
+| `name` | image or channel name used in displays and registration |
+
 ## See also
 
 [mapImageList](mapImageList_index_py.html), [trueEbsd](trueEbsd_index_py.html), [mapImage.rescale](mapImage.rescale_py.html), [xcfShift](xcfShift_py.html), [gridLayout](gridLayout_index_py.html), [EBSDMapsAndImages](EBSDMapsAndImages_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)

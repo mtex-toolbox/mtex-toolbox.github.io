@@ -24,5 +24,5 @@ logm(T)
 
 MATLAB's [orientation.logm](orientation.logm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1677">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1874">source</a></font>
 {% endraw %}

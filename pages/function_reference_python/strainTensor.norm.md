@@ -37,5 +37,5 @@ strainTensor.norm(self)
 
 MATLAB's [strainTensor.norm](strainTensor.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L414">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L467">source</a></font>
 {% endraw %}

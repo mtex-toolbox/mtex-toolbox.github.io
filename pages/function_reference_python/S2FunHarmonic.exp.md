@@ -59,5 +59,5 @@ function, at least 32.
 
 [mapFun](mapFun_py.html), [S2FunHarmonic.quadrature](S2FunHarmonic.quadrature_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L543">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L559">source</a></font>
 {% endraw %}

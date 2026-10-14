@@ -12,9 +12,29 @@ status: Reference
 {% raw %}
 A method of [stressTensor](stressTensor_index_py.html).
 
-the mean stress, a third of the trace of the stress tensor
+compute the mean normal stress, trace(sigma) / 3
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+pressureComponent = meanStress(sigma)
+```
+
+</div>
+
+## Description
+
+Return one scalar per stress tensor, in the same units as sigma. This uses the sign of
+the tensor's normal components; a positive tensile stress gives a positive mean stress.
+The complementary deviatoric stress has zero trace.
+
+## See also
+
+[deviatoricStress](strainTensor.deviatoricStrain_py.html), [equivalentStress](stressTensor.equivalentStress_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 

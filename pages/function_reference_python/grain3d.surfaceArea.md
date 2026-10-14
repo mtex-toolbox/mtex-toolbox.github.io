@@ -13,5 +13,5 @@ A property of [grain3d](grain3d_index_py.html).
 
 the surface area of every grain, the sum of the areas of its faces
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L310">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L335">source</a></font>
 {% endraw %}

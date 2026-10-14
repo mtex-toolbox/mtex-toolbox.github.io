@@ -12,9 +12,29 @@ status: Reference
 {% raw %}
 A method of [grain2d](grain2d_index_py.html).
 
-the perimeter against that of the circle of the same area, one for a circle
+compare an outline's perimeter with that of a circle of equal area
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+factor = grains.shapeFactor()
+```
+
+</div>
+
+## Description
+
+Return `perimeter/(2*sqrt(pi*area))`, one value per outline. A circle gives one; elongation
+or an irregular boundary increases the value. Areas subtract holes and perimeter includes
+the outline's loops. The ratio is dimensionless and sensitive to boundary resolution.
+
+## See also
+
+[aspectRatio](aspectRatio_py.html), [convexity](convexity_py.html), [grain2d.equivalentRadius](grain2d.equivalentRadius_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -30,5 +50,5 @@ grain2d.shapeFactor(self)
 
 MATLAB's [grain2d.shapeFactor](grain2d.shapeFactor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L175">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L199">source</a></font>
 {% endraw %}

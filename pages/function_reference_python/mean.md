@@ -9,9 +9,28 @@ lang: python
 status: Reference
 ---
 {% raw %}
-mean(x, ...) is x.mean(...), the method of the object passed; NumPy's mean for an array
+average objects using the mean defined for their type.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+average = mean(x)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, mean(x, ...) calls x.mean(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+For numeric arrays without an MTEX method, this calls numpy.mean.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -33,7 +52,7 @@ mean(x, *args, **kwargs)
 | [S2FunHandle](S2FunHandle.mean_py.html) | the mean over the sphere, through the harmonic form |
 | [S2FunHarmonic](S2FunHarmonic.mean_py.html) | the mean over the sphere, int f dS / 4 pi, one per function |
 | [S2FunSum](S2FunSum.mean_py.html) | the sum of the means of the summands |
-| [S2FunTri](S2FunTri.mean_py.html) | the mean by the area of the Voronoi cell of every vertex |
+| [S2FunTri](S2FunTri.mean_py.html) | estimate the spherical mean using Voronoi areas around the sample vertices |
 | [S2VectorFieldHarmonic](S2VectorFieldHarmonic.mean_py.html) | the mean vector of the field over the sphere, read off the coefficients of degree zero |
 | [SO3FunBingham](SO3FunBingham.mean_py.html) | the mean value of the function over SO(3), its weight |
 | [SO3FunCBF](SO3FunCBF.mean_py.html) | the mean of the function over SO(3), the sum of the weights times the kernel's mean |
@@ -49,5 +68,5 @@ mean(x, *args, **kwargs)
 
 [OrientationEmbeddings](OrientationEmbeddings_py.html), [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html), [EBSDGrid](EBSDGrid_py.html), [EBSDSharpPlot](EBSDSharpPlot_py.html), [CPOSeismicProperties](CPOSeismicProperties_py.html), [IsotropicTheory](IsotropicTheory_py.html), [WaveVelocities](WaveVelocities_py.html), [TwinningBoundaries](TwinningBoundaries_py.html), [Grain_dispersion_axes](Grain_dispersion_axes_py.html), [FibreODFs](FibreODFs_py.html), [ODFCharacteristics](ODFCharacteristics_py.html), [ODFImport](ODFImport_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

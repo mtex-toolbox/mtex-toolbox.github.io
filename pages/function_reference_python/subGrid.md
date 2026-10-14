@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-subGrid(x, ...) is x.subGrid(...), the method of the object passed
+select grid points by indices or by a geometric neighbourhood.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+selected = subGrid(grid, mask)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, subGrid(x, ...) calls x.subGrid(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -29,5 +46,5 @@ subGrid(x, *args, **kwargs)
 | [SO3FibonacciGrid](SO3FibonacciGrid.subGrid_py.html) | the grid of the orientations a mask or an index array selects |
 | [SO3Grid](SO3Grid.subGrid_py.html) | the rotations selected by a mask |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

@@ -17,11 +17,23 @@ sections of constant rotation angle, each on the axis sector the region allows t
 <div class="mx-form" markdown="1">
 
 ```python
-axisAngleSections(cs1, cs2, angles=(10:20:180)*degree)
+axisAngleSections(cs1, cs2, angles=np.arange(10, 181, 20)*degree)
 axisAngleSections(cs1, cs2, sections=5, volumeScaling=False, antipodal=True)
 ```
 
 </div>
+
+## Input
+
+| `frameA` | first reference frame |
+| `frameB` | second reference frame; None uses the default specimen frame |
+| `sections` | number of equally spaced angle bins; their midpoints set section angles when supplied |
+| `angles` | explicit rotation angles in radians; angles beyond the fundamental-region limit are dropped |
+| `values` | alternative explicit angle array, taking precedence over angles |
+| `tol` | angular assignment tolerance in radians; default 5*degree |
+| `antipodal` | impose grain-exchange symmetry; default False |
+| `volumeScaling` | rescale charts with angle to account for orientation-space volume; default True |
+| `axisAngle` | alternative angle array, taking precedence over values and angles |
 
 ## Members
 
@@ -39,5 +51,5 @@ axisAngleSections(cs1, cs2, sections=5, volumeScaling=False, antipodal=True)
 
 MATLAB's [axisAngleSections](axisAngleSections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L567">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L642">source</a></font>
 {% endraw %}

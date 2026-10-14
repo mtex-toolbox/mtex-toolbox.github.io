@@ -81,5 +81,5 @@ returned, the parent to child pairs first.
 
 MATLAB's [parentGrainReconstructor.calcGBFit](parentGrainReconstructor.calcGBFit.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L628">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L632">source</a></font>
 {% endraw %}

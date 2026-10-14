@@ -57,5 +57,5 @@ Up to 1e-3 of its norm.
 
 MATLAB's [tensor.checkSymmetry](tensor.checkSymmetry.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L630">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L718">source</a></font>
 {% endraw %}

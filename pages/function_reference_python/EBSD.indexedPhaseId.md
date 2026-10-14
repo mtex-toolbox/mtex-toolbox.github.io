@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the indexed phases at least one measurement belongs to
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L225">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L238">source</a></font>
 {% endraw %}

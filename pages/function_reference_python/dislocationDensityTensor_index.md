@@ -69,10 +69,10 @@ taken over as they are; dislocationDensity(kappa) computes the tensor from the c
 
 ## Members
 
-| [curvature](dislocationDensityTensor.curvature_py.html) | the curvature tensor of a dislocation density tensor by Nye's relation, kappa = alpha^T - tr(alpha) I / 2 |
+| [curvature](dislocationDensityTensor.curvature_py.html) | recover lattice curvature from a Nye dislocation density tensor |
 | [dislocationDensityTensor](dislocationDensityTensor.dislocationDensityTensor_py.html) | the dislocation density or Nye tensor, the rank two tensor derived from the curvature tensor of an orientation field |
 
 MATLAB's [dislocationDensityTensor_index](dislocationDensityTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1500">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1664">source</a></font>
 {% endraw %}

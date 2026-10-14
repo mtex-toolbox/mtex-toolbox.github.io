@@ -21,5 +21,5 @@ boundary network sampled at the spacing h, the fixed ones stay
 
 MATLAB's [boundaryFilter](boundaryFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L105">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L110">source</a></font>
 {% endraw %}

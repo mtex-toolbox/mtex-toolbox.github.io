@@ -12,10 +12,38 @@ status: Reference
 {% raw %}
 A method of [slipSystem](slipSystem_index_py.html).
 
-the Luster-Morris parameter |(n1 . n2)(b1 . b2)| and the residual Burgers vector of paired
-systems, entry by entry as NumPy broadcasts, MATLAB's element by element
+measure the geometric alignment of paired slip systems using the Luster–Morris parameter
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+m = sS1.mPrime(sS2)
+```
+
+</div>
+
+## Description
+
+The result is `abs((n1 dot n2) * (b1 dot b2))`, using unit plane normals and slip directions.
+It ranges from zero to one; one means both planes and directions are parallel. Express
+both systems in the same coordinate frame, for example by rotating each crystal's systems
+into the specimen frame. Arrays pair according to NumPy broadcasting.
+
+## Input
+
+| `other` | slipSystem, the systems to compare with this list |
+
+## Output
+
+| `m` | array of dimensionless alignment parameters |
+
+## See also
+
+[slipSystem.residualBurgersVector](slipSystem.residualBurgersVector_py.html), [slipSystem.rotate](slipSystem.rotate_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 

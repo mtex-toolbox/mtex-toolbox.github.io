@@ -75,5 +75,5 @@ map whose positions lie in the plane.
 
 MATLAB's [EBSD3.slice](EBSD3.slice.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L257">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L266">source</a></font>
 {% endraw %}

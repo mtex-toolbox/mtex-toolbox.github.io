@@ -26,5 +26,5 @@ PoleFigure.calcODFIterative(self, *args, **kwargs)
 
 MATLAB's [PoleFigure.calcODFIterative](PoleFigure.calcODFIterative.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L732">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L794">source</a></font>
 {% endraw %}

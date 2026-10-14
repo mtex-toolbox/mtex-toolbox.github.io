@@ -13,5 +13,5 @@ A property of [triplePointList](triplePointList_index_py.html).
 
 whether the list holds no triple point
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L670">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L717">source</a></font>
 {% endraw %}

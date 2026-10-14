@@ -26,5 +26,5 @@ a * b
 
 MATLAB's [SO3FunComposition.times](SO3FunComposition.times.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L352">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L371">source</a></font>
 {% endraw %}

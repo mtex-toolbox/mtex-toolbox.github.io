@@ -10,10 +10,38 @@ counterpart: tensor.Voigt.html
 status: Reference
 ---
 {% raw %}
-the Voigt matrix of a tensor: 6 x 6 for rank four, 3 x 6 for rank three, six components
-for rank two, the off diagonal entries doubled where the class prescribes it
+convert tensor coefficients to compact Voigt notation
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+V = Voigt(T)
+```
+
+</div>
+
+## Description
+
+The pair order is (11, 22, 33, 23, 13, 12). Rank-two tensors give six components,
+rank-three tensors give a 3-by-6 matrix, and rank-four tensors give a 6-by-6 matrix.
+Leading array dimensions are retained. Off-diagonal components acquire factors of two
+when T.doubleConvention is True, as for compliance and strain conventions.
+
+## Input
+
+| `T` | tensor of rank 2, 3 or 4 |
+
+## Output
+
+| `V` | numeric array in Voigt notation |
+
+## See also
+
+[Kelvin](Kelvin_py.html), [tensor](tensor_index_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 

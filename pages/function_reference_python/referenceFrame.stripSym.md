@@ -11,9 +11,28 @@ status: Reference
 {% raw %}
 A method of [referenceFrame](referenceFrame_index_py.html).
 
-the sibling frame carrying the trivial group
+return an interned sibling frame with the same basis and no nontrivial symmetry.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+plain = cs.stripSym()
+```
+
+</div>
+
+## Description
+
+The trivial group contains only the identity. Lattice axes, frame type and descriptive
+metadata are retained; the original frame is unchanged.
+
+## See also
+
+[referenceFrame.sibling](referenceFrame.sibling_py.html), [referenceFrame.Laue](referenceFrame.Laue_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -27,5 +46,5 @@ referenceFrame.stripSym(self)
 
 [SO3FunConvolution](SO3FunConvolution_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L289">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L306">source</a></font>
 {% endraw %}

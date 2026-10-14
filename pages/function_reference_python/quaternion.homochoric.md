@@ -12,9 +12,29 @@ status: Reference
 {% raw %}
 A method of [quaternion](quaternion_index_py.html).
 
-the homochoric vectors, the axes scaled by (3/4 (omega - sin omega))^(1/3)
+express rotations as equal-volume coordinates in a ball.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+h = rot.homochoric()
+```
+
+</div>
+
+## Description
+
+The vector points along the rotation axis and has length
+`(3*(omega - sin(omega))/4)**(1/3)`, with omega in radians. The identity maps to zero;
+rotations through pi reach the ball radius `(3*pi/4)**(1/3)`.
+
+## See also
+
+[rotation.byHomochoric](rotation.byHomochoric_py.html), [quaternion.cubochoric](quaternion.cubochoric_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -30,5 +50,5 @@ quaternion.homochoric(self)
 
 MATLAB's [quaternion.homochoric](quaternion.homochoric.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L345">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L416">source</a></font>
 {% endraw %}

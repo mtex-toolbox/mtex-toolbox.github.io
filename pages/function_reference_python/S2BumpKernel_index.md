@@ -23,6 +23,32 @@ S2BumpKernel(halfwidth=10*degree, bandwidth=64)
 
 </div>
 
+## Description
+
+A uniform kernel inside a spherical cap, with zero values on and outside its
+boundary. Its constant value is chosen so that the mean over the sphere is one.
+A finite harmonic representation approximates the discontinuity and can ring.
+
+Evaluate psi at t=cos(theta), the cosine of the angular distance on the sphere.
+Use psi.halfwidth() for the angular width in radians and psi.bandwidth for the
+maximum degree of its harmonic representation.
+
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `delta` |  | angular radius of the open support in radians |
+| `halfwidth` |  | angular halfwidth in radians, taking precedence over delta |
+| `bandwidth` |  | maximum harmonic degree; chosen by the coefficient cutoff when omitted |
+
+## Output
+
+| `psi` | S2BumpKernel |
+
+## See also
+
+[S2Kernel](S2Kernel_index_py.html), [calcDensity](calcDensity_py.html), [calcKernel](EBSD.calcKernel_py.html)
+
 ## Members
 
 | [grad](S2BumpKernel.grad_py.html) | the derivative of the bump kernel, zero wherever it exists |
@@ -32,5 +58,5 @@ S2BumpKernel(halfwidth=10*degree, bandwidth=64)
 
 [S2Kernels](S2Kernels_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L891">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1159">source</a></font>
 {% endraw %}

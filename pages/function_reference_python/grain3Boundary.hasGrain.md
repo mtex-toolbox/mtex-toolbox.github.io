@@ -69,5 +69,5 @@ faces of grains are there selected through grains.boundary.
 
 [grain3Boundary.hasPhase](grain3Boundary.hasPhase_py.html), [grain3d.neighbors](grain3d.neighbors_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L315">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L350">source</a></font>
 {% endraw %}

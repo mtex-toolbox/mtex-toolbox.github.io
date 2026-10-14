@@ -23,5 +23,5 @@ quadratureSO3Grid.fullValues(self, values)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L258">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L285">source</a></font>
 {% endraw %}

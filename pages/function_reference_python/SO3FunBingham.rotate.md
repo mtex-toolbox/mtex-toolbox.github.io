@@ -63,5 +63,5 @@ the rotation does not map onto itself is dropped, with a warning.
 
 MATLAB's [SO3FunBingham.rotate](SO3FunBingham.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L190">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L197">source</a></font>
 {% endraw %}

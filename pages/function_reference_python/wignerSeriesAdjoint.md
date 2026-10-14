@@ -72,5 +72,5 @@ real function.
 
 [wignerSeries](wignerSeries_py.html), [wignerSeriesAdjointGridded](wignerSeriesAdjointGridded_py.html), [wignerPlan](wignerPlan_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L989">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1034">source</a></font>
 {% endraw %}

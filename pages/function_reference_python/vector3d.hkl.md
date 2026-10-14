@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 the Miller indices of a plane normal, the coordinates in the dual basis of the crystal frame
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L214">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L224">source</a></font>
 {% endraw %}

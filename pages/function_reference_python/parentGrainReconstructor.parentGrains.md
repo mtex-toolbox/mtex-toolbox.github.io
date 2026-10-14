@@ -13,5 +13,5 @@ A property of [parentGrainReconstructor](parentGrainReconstructor_index_py.html)
 
 the parent grains at the current stage of the reconstruction
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L466">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L470">source</a></font>
 {% endraw %}

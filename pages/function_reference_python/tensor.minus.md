@@ -26,5 +26,5 @@ a - b
 
 MATLAB's [tensor.minus](tensor.minus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L332">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L369">source</a></font>
 {% endraw %}

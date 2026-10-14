@@ -28,6 +28,13 @@ eps.type
 
 </div>
 
+## Input
+
+| `M` | symmetric rank-two coefficients or six-component Voigt vectors, or another tensor |
+| `args` | optional reference frame |
+| `type` | 'Lagrange' for the reference configuration or 'Euler' for the current configuration |
+| `kwargs` | tensor constructor options; engineering Voigt convention is used by default |
+
 ## Signature
 
 <div class="mx-form" markdown="1">
@@ -44,5 +51,5 @@ strainTensor(M, *args, type=None, **kwargs)
 
 MATLAB's [strainTensor.strainTensor](strainTensor.strainTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1298">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1451">source</a></font>
 {% endraw %}

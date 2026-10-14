@@ -26,5 +26,5 @@ a ** n
 
 MATLAB's [S2FunTri.power](S2FunTri.power.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L128">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L158">source</a></font>
 {% endraw %}

@@ -78,5 +78,5 @@ the NUFFT, is chosen by the number of nodes. The result has the shape of the rot
 
 [wignerSeriesAdjoint](wignerSeriesAdjoint_py.html), [wignerPlan](wignerPlan_py.html), [SO3FunHarmonic.eval](SO3FunHarmonic.eval_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L949">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L994">source</a></font>
 {% endraw %}

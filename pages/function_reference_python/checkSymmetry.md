@@ -56,5 +56,5 @@ Up to 1e-3 of its norm.
 
 [TensorImport](TensorImport_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1606">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1803">source</a></font>
 {% endraw %}

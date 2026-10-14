@@ -63,5 +63,5 @@ S1FunHarmonic.quadrature.
 
 MATLAB's [S1FunHarmonic.sqrt](S1FunHarmonic.sqrt.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L321">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L367">source</a></font>
 {% endraw %}

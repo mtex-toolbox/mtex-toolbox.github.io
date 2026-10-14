@@ -12,10 +12,34 @@ status: Reference
 {% raw %}
 A method of [crystalShape](crystalShape_index_py.html).
 
-a rotation turns the shape where it is; an orientation takes it into its specimen; a
-list of them makes a list of shapes
+rotate crystal vertices, or place them in a specimen using an orientation.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+placed = ori*cS
+turned = cS.rotate(rot)
+```
+
+</div>
+
+## Description
+
+One rotation moves all vertices of a shape. A list of rotations or orientations makes
+a list of shapes with the same face connectivity. An orientation maps the vertices
+from the crystal frame to its target frame; CS continues to identify the original crystal.
+
+## Input
+
+| `rot` | rotation or orientation, scalar or a list |
+
+## See also
+
+[crystalShape.frame](crystalShape.frame_py.html), [crystalShape.CS](crystalShape.CS_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -27,5 +51,5 @@ crystalShape.rotate(self, rot)
 
 MATLAB's [crystalShape.rotate](crystalShape.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L302">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L375">source</a></font>
 {% endraw %}

@@ -76,5 +76,5 @@ strictly; a plane through vertices alone does not intersect.
 
 MATLAB's [grain3d.intersected](grain3d.intersected.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L440">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L465">source</a></font>
 {% endraw %}

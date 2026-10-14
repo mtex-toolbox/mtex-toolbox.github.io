@@ -75,5 +75,5 @@ as it is.
 
 MATLAB's [S1Fun.smooth](S1Fun.smooth.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L249">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L295">source</a></font>
 {% endraw %}

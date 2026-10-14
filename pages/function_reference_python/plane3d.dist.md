@@ -63,5 +63,5 @@ agree exactly and returns the first plane's d for planes that meet, the port NaN
 
 MATLAB's [plane3d.dist](plane3d.dist.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L95">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L112">source</a></font>
 {% endraw %}

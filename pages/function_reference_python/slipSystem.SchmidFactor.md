@@ -90,5 +90,5 @@ frame: both in crystal coordinates, or ori * sS and the stress as measured.
 
 MATLAB's [slipSystem.SchmidFactor](slipSystem.SchmidFactor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L390">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L534">source</a></font>
 {% endraw %}

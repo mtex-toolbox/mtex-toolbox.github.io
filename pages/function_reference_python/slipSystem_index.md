@@ -41,7 +41,7 @@ sS = slipSystem.fcc(cs)
 | [hcp](slipSystem.hcp_py.html) | there is no hcp default: raises an error naming the hexagonal families to choose from (basal, prismaticA, pyramidalCA, twinT1, ...) with their CRSS |
 | [horzcat](slipSystem.horzcat_py.html) | the list of several systems of one crystal, MATLAB's [sS1, sS2] |
 | [isCrystal](slipSystem.isCrystal_py.html) | whether the systems are in crystal coordinates |
-| [mPrime](slipSystem.mPrime_py.html) | the Luster-Morris parameter \|(n1  |
+| [mPrime](slipSystem.mPrime_py.html) | measure the geometric alignment of paired slip systems using the Luster–Morris parameter |
 | [primitiveCubic](slipSystem.primitiveCubic_py.html) | the slip system <100>{010} of a primitive cubic crystal |
 | [prismatic2A](slipSystem.prismatic2A_py.html) | the second prismatic a slip system <01-10>{2-1-10} of a hexagonal crystal |
 | [prismaticA](slipSystem.prismaticA_py.html) | the prismatic a slip system <2-1-10>{01-10} of a hexagonal crystal |

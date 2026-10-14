@@ -12,9 +12,28 @@ status: Reference
 {% raw %}
 A method of [symmetry](symmetry_index_py.html).
 
-the intersection of two groups, symmetry/disjoint
+return the intersection of two point groups in their current coordinate axes.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+common = group1.disjoint(group2)
+```
+
+</div>
+
+## Description
+
+Only operations present in both groups are retained. The inputs are not changed.
+To generate a group containing both inputs, use union.
+
+## See also
+
+[symmetry.union](symmetry.union_py.html), [symmetry.factor](symmetry.factor_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +45,5 @@ symmetry.disjoint(self, other)
 
 MATLAB's [symmetry.disjoint](symmetry.disjoint.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L445">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L470">source</a></font>
 {% endraw %}

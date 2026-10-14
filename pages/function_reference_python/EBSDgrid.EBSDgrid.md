@@ -78,6 +78,21 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 
 | `ebsd` | EBSD |
 
+## Properties
+
+| `pos` | vector3d measurement positions in the specimen frame |
+| `rotations` | rotation coefficients of the measured orientations |
+| `phaseId` | zero-based index into CSList for each measurement; zero is notIndexed |
+| `CSList` | phaseList containing the phase frames and mineral metadata |
+| `orientations` | orientation data for a selection containing one indexed phase |
+| `prop` | additional arrays such as band contrast or grainId, also accessible as attributes |
+| `id` | measurement ids, distinct from positional array indices after selection |
+| `lattice` | geometry and spacing of a regular scan, or None for scattered data |
+| `shape` | measurement-array shape: a list or a spatially gridded array |
+| `isPadding` | mask of grid cells without an original measurement |
+| `scanUnit` | unit of the spatial coordinates |
+| `grainId` | grain assignments, available after calcGrains has written them to the map |
+
 ## See also
 
 [loadEBSD](loadEBSD_ang_py.html), [EBSDsquare](EBSDsquare_py.html), [gridify](gridify_py.html), [simulateEBSD](simulateEBSD_index_py.html), [EBSDImport](EBSDImport_py.html), [EBSDSelect](EBSDSelect_py.html), [EBSDPlotting](EBSDPlotting_py.html), [GrainReconstruction](GrainReconstruction_py.html)

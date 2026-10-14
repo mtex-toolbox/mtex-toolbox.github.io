@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-caliper(x, ...) is x.caliper(...), the method of the object passed
+measure the Feret width of each grain outline along a direction or at its extrema.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+width = caliper(grains, direction)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, caliper(x, ...) calls x.caliper(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -29,5 +46,5 @@ caliper(x, *args, **kwargs)
 
 [EllipseBasedParameters](EllipseBasedParameters_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

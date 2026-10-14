@@ -12,9 +12,29 @@ status: Reference
 {% raw %}
 A method of [orientation](orientation_index_py.html).
 
-the Bunge Euler angles of the representative inside the Euler plotting box
+return Bunge Euler angles of symmetry-equivalent representatives in the plotting box.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+phi1, Phi, phi2 = ori.projectIntoEulerRegion()
+```
+
+</div>
+
+## Description
+
+The three numeric arrays are in radians and have the shape of ori. The bounds of the
+Euler box follow the input symmetries. This returns coordinates rather than a modified
+orientation container.
+
+## See also
+
+orientation.Euler, [orientation.projectIntoFundamentalRegion](orientation.project2FundamentalRegion_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +46,5 @@ orientation.project2EulerFR(self)
 
 MATLAB's [orientation.project2EulerFR](orientation.project2EulerFR.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L750">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L802">source</a></font>
 {% endraw %}

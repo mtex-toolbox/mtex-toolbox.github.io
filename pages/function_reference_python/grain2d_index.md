@@ -101,6 +101,20 @@ grains come from a segmentation alone.
 
 | `grains` | grain2d |
 
+## Properties
+
+| `id` | grain ids; these need not equal positions in a selected grain list |
+| `phaseId` | phase-list index of each grain |
+| `meanOrientation` | mean orientations for a single-phase grain selection |
+| `numPixel` | number of measurements assigned to each grain |
+| `GOS` | grain orientation spread in radians |
+| `boundary` | grainBoundary segments separating grains or bordering the map |
+| `innerBoundary` | low-angle segments within grains, when reconstructed |
+| `area` | area enclosed by each polygon, in squared spatial units |
+| `centroid` | geometric centroid of each grain outline |
+| `prop` | additional data with one value per grain |
+| `frame` | specimenFrame in which the geometry is expressed |
+
 ## See also
 
 [calcGrains](EBSD.calcGrains_py.html), [grain2d.merge](grain2d.merge_py.html), [grain2d.selectByGrainId](grain2d.selectByGrainId_py.html), [grainBoundary](grainBoundary_index_py.html), [GrainReconstruction](GrainReconstruction_py.html), [SelectingGrains](SelectingGrains_py.html), [GrainSpatialPlots](GrainSpatialPlots_py.html), [ShapeParameters](ShapeParameters_py.html)
@@ -123,8 +137,8 @@ grains come from a segmentation alone.
 | [equivalentPerimeter](grain2d.equivalentPerimeter_py.html) | the perimeter of the disc of the same area, 2 pi times the equivalent radius |
 | [equivalentRadius](grain2d.equivalentRadius_py.html) | the radius of the disc of the same area, sqrt(area / pi) |
 | [findByLocation](grain2d.findByLocation_py.html) | the positions of the outlines a point lies in the position of the outline holding each point, -1 for a point in none |
-| [findByOrientation](grain2d.findByOrientation_py.html) | the grains of the phase of ori whose mean orientation lies within epsilon of it, or of a fibre |
-| [fitEllipse](grain2d.fitEllipse_py.html) | the ellipse of the same second moments: its centre and its two half axes |
+| [findByOrientation](grain2d.findByOrientation_py.html) | select grains whose mean orientation is close to a reference orientation or fibre |
+| [fitEllipse](grain2d.fitEllipse_py.html) | describe each outline by the ellipse with the same central second area moments |
 | [grain2d](grain2d.grain2d_py.html) | the grains of a map: a table of ids, phases, pixel counts, mean orientations and properties, with the boundary, the inner boundary and the polygon of every grain |
 | [grainSize](grain2d.grainSize_py.html) | the number of pixels of every grain, grains.numPixel |
 | [hasHole](grain2d.hasHole_py.html) | whether an outline has holes, one entry per outline |
@@ -147,7 +161,7 @@ grains come from a segmentation alone.
 | [N](grain2d.N_py.html) | the normal of the plane the map lies in, as a direction of the specimen |
 | [neighbors](grain2d.neighbors_py.html) | the pairs of ids of grains sharing a boundary, both in the selection, or either with full |
 | [numNeighbors](grain2d.numNeighbors_py.html) | the number of grains every grain shares a boundary with, the neighbours outside the selection included |
-| [paris](grain2d.paris_py.html) | how much the outline is indented against its convex hull, in percent |
+| [paris](grain2d.paris_py.html) | measure how strongly an outline is indented relative to its convex hull |
 | [paror](grain2d.paror_py.html) | the cumulative particle projection function of the outlines (Panozzo 1983) |
 | [perimeter](grain2d.perimeter_py.html) | the length of the outer loop of an outline, as MATLAB's default |
 | [phase](grain2d.phase_py.html) | the phase number of every grain as the file numbered it |
@@ -161,7 +175,7 @@ grains come from a segmentation alone.
 | [scanUnit](grain2d.scanUnit_py.html) | the unit of the map the grains were reconstructed from, as their boundary carries it |
 | [selectByGrainId](grain2d.selectByGrainId_py.html) | the grains named by id, in the order asked for |
 | [shape](grain2d.shape_py.html) | the shape of the list of grains, (size,) |
-| [shapeFactor](grain2d.shapeFactor_py.html) | the perimeter against that of the circle of the same area, one for a circle |
+| [shapeFactor](grain2d.shapeFactor_py.html) | compare an outline's perimeter with that of a circle of equal area |
 | [sharedVertices](grain2d.sharedVertices_py.html) | the vertices both boundaries walk over: a vertex where an inner boundary ends on the outer one has degree two to either and would be dissolved, leaving the other hanging off a vertex its walk no longer reaches |
 | [shortAxis](grain2d.shortAxis_py.html) | the short half axis of the ellipse of every outline, the smaller principal component |
 | [simplifyBoundary](grain2d.simplifyBoundary_py.html) | the grains with the vertices of their boundary that carry no shape dropped, those whose removal moves the boundary by less than epsilon, the inner boundary kept on it |

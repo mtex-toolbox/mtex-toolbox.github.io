@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-even(x, ...) is x.even(...), the method of the object passed
+extract the part of a function unchanged by reversal of its argument.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+fEven = even(f)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, even(x, ...) calls x.even(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -23,8 +40,8 @@ even(x, *args, **kwargs)
 
 ## Methods it calls
 
-| [S1FunHarmonic](S1FunHarmonic.even_py.html) | f(x) = f(-x): c_{-k} = c_k |
-| [S2FunHarmonic](S2FunHarmonic.even_py.html) | the even part, f(v) + f(-v) over two |
+| [S1FunHarmonic](S1FunHarmonic.even_py.html) | whether f(x)=f(-x), tested from the Fourier coefficients |
+| [S2FunHarmonic](S2FunHarmonic.even_py.html) | return the even part (f(v)+f(-v))/2 of a spherical function |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

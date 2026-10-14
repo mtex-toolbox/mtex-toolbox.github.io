@@ -86,5 +86,5 @@ space, a specimen direction; with 'right' it is inv(oriRef) * ori, a crystal dir
 
 MATLAB's [orientation.log](orientation.log.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L715">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L758">source</a></font>
 {% endraw %}

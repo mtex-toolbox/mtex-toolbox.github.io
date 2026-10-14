@@ -58,5 +58,5 @@ The segment runs from the Euler angles (45, 0, 0) to (0, 54.7356, 45) degrees
 
 [fibre](fibre_index_py.html), [fibre.theta](fibre.theta_py.html), [fibre.orientation](fibre.orientation_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L609">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L615">source</a></font>
 {% endraw %}

@@ -11,9 +11,28 @@ status: Reference
 {% raw %}
 A method of [referenceFrame](referenceFrame_index_py.html).
 
-the proper rotations of the point group
+return only the proper rotations in this frame's point group.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+rotations = cs.rotations()
+```
+
+</div>
+
+## Description
+
+The result is a rotation container. Improper operations are omitted; use cs.rot to
+obtain all point-group operations with their parity.
+
+## See also
+
+[referenceFrame.rot](referenceFrame.rot_py.html), [referenceFrame.properGroup](referenceFrame.properGroup_py.html), [referenceFrame.properSubGroup](referenceFrame.properSubGroup_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 

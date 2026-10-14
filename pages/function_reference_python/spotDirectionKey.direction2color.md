@@ -59,5 +59,5 @@ the full colour at a centre, white far from all.
 
 [spotColorKey](spotColorKey_index_py.html), [HSVDirectionKey](HSVDirectionKey_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L525">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L559">source</a></font>
 {% endraw %}

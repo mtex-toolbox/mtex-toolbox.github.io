@@ -53,5 +53,5 @@ At a bandwidth of its own.
 
 [SO3FunHarmonic.log](SO3FunHarmonic.log_py.html), [SO3FunHarmonic.sqrt](SO3FunHarmonic.sqrt_py.html), [mapFun](mapFun_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L516">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L567">source</a></font>
 {% endraw %}

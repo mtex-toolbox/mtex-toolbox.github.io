@@ -102,6 +102,16 @@ with an inversion makes the function antipodal.
 
 | `sF` | S2FunHarmonic |
 
+## Properties
+
+| `fhat` | spherical harmonic coefficients in MTEX's public basis |
+| `bandwidth` | largest spherical harmonic degree |
+| `frame` | reference frame carrying the function symmetry |
+| `CS` | alias for the spherical reference frame |
+| `isReal` | whether the function is real-valued |
+| `antipodal` | whether f(v)=f(-v) |
+| `shape` | shape of a list of functions, excluding the coefficient axis |
+
 ## See also
 
 [S2FunHarmonic.quadrature](S2FunHarmonic.quadrature_py.html), [S2FunHarmonic.interpolate](S2FunHarmonic.interpolate_py.html), [S2FunHandle](S2FunHandle_index_py.html), [S2Kernel](S2Kernel_index_py.html), [SO3FunHarmonic](SO3FunHarmonic_index_py.html), [S2FunHarmonicRepresentation](S2FunHarmonicRepresentation_py.html)

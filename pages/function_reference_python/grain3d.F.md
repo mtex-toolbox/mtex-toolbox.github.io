@@ -13,5 +13,5 @@ A property of [grain3d](grain3d_index_py.html).
 
 the faces of the boundary, an (m, 3) array of triangles or a list of polygons
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L269">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L294">source</a></font>
 {% endraw %}

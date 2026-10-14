@@ -12,6 +12,13 @@ status: Reference
 {% raw %}
 rho over theta in degrees: the polar angles of the frame itself, no convention
 
+## Input
+
+| `sR` | sphericalRegion to display; None selects the whole sphere before hemisphere restriction |
+| `pC` | plottingConvention defining screen axes; None uses the current default |
+| `antipodal` | identify opposite directions; default False |
+| `upper` | show the hemisphere pointing out of the screen; default True |
+
 ## Members
 
 | [boundary](plainProjection.boundary_py.html) | the boundary of the region as plane coordinates, one pair of arrays per arc |
@@ -26,5 +33,5 @@ rho over theta in degrees: the polar angles of the frame itself, no convention
 
 MATLAB's [plainProjection](plainProjection.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L373">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L408">source</a></font>
 {% endraw %}

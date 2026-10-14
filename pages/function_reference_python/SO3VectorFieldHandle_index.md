@@ -23,6 +23,12 @@ SO3VectorFieldHandle(lambda ori: ..., cs, ss, 'left')
 
 </div>
 
+## Input
+
+| `fun` | callable receiving orientations and returning vector3d, coordinate arrays or SO3TangentVector values |
+| `args` | crystal frame, specimen frame and tangent-space side ('left' or 'right') |
+| `bandwidth` | harmonic degree used when approximating the callable; default defaultSO3Bandwidth preference |
+
 ## Members
 
 | [eval](SO3VectorFieldHandle.eval_py.html) | the tangent vectors of the field at orientations, by the callable |

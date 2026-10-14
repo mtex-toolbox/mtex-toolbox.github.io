@@ -14,6 +14,10 @@ specimen tilt, fitted in stages against a re-measured residual: a projective sta
 bulk, then an affine and a quadratic polynomial what is left; an unfitted stage is the
 identity, so a partly fitted tilt evaluates as far as it has got
 
+## Input
+
+| `stages` | optional spatialTransform stages in application order; by default projective, affine and quadratic stages, all initially identity |
+
 ## Members
 
 | [inv](spatialTransformTilt.inv_py.html) | the inverses of the stages in reverse order, a plain composite |
@@ -25,5 +29,5 @@ identity, so a partly fitted tilt evaluates as far as it has got
 
 MATLAB's [spatialTransformTilt](spatialTransformTilt.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L827">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L971">source</a></font>
 {% endraw %}

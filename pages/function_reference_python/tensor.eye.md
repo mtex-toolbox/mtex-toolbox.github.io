@@ -83,5 +83,5 @@ constructor of the class (unit, name, density, ...).
 
 [OrientationDefinition](OrientationDefinition_py.html), [IsotropicTheory](IsotropicTheory_py.html), [SO3FunHarmonicRepresentation](SO3FunHarmonicRepresentation_py.html), [SO3FunVectorValued](SO3FunVectorValued_py.html), [S2FunHarmonicRepresentation](S2FunHarmonicRepresentation_py.html), [S2FunVectorValued](S2FunVectorValued_py.html), [SphericalHarmonics](SphericalHarmonics_py.html), [TensorDefinition](TensorDefinition_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L830">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L918">source</a></font>
 {% endraw %}

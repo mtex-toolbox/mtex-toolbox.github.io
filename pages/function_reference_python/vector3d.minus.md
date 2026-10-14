@@ -26,5 +26,5 @@ a - b
 
 MATLAB's [vector3d.minus](vector3d.minus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L633">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L719">source</a></font>
 {% endraw %}

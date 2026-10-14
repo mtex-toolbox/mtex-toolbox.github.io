@@ -49,5 +49,5 @@ Widened.
 
 [sphericalProjection.bounds](sphericalProjection.bounds_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L439">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L480">source</a></font>
 {% endraw %}

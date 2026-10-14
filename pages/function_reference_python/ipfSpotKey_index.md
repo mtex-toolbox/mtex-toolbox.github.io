@@ -21,6 +21,14 @@ ipfSpotKey(cs, center=Miller(1, 0, 0, cs), color=(0, 0, 1), psi=S2DeLaValleePous
 
 </div>
 
+## Input
+
+| `x` | crystalFrame, orientation, or single-phase EBSD or grain data |
+| `ipfDirection` | specimen direction used for the inverse pole figure; default zvector |
+| `center` | Miller directions at the spot centres |
+| `color` | one RGB triplet per centre; default red for one centre |
+| `psi` | spherical colour kernel; default S2DeLaValleePoussinKernel with halfwidth 10*degree |
+
 ## Members
 
 | [center](ipfSpotKey.center_py.html) | the centres of the spots, crystal directions |
@@ -31,5 +39,5 @@ ipfSpotKey(cs, center=Miller(1, 0, 0, cs), color=(0, 0, 1), psi=S2DeLaValleePous
 
 [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L219">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L286">source</a></font>
 {% endraw %}

@@ -89,9 +89,9 @@ preserving deformation has det F = 1. Its strains are F.GreenStrain() and F.Cauc
 
 ## Members
 
-| [CauchyStrain](deformationGradientTensor.CauchyStrain_py.html) | the Cauchy (small) strain of a deformation gradient, its symmetric part less the identity |
+| [CauchyStrain](deformationGradientTensor.CauchyStrain_py.html) | compute the small-strain approximation from a deformation gradient |
 | [deformationGradientTensor](deformationGradientTensor.deformationGradientTensor_py.html) | a deformation gradient tensor F, the rank two tensor carrying a line segment dX of the undeformed body into dx = F dX of the deformed one |
-| [GreenStrain](deformationGradientTensor.GreenStrain_py.html) | the Green-Lagrange strain of a deformation gradient, (F^T F - I) / 2 |
+| [GreenStrain](deformationGradientTensor.GreenStrain_py.html) | compute the Green–Lagrange finite strain of a deformation gradient |
 | [logm](deformationGradientTensor.logm_py.html) | the matrix logarithm of a rank two tensor, or of a rank four one through its Kelvin matrix, the class kept |
 | [pureShear](deformationGradientTensor.pureShear_py.html) | the deformation gradient of a pure shear, stretched by lam along ext and shortened by 1 / lam along comp |
 | [simpleShear](deformationGradientTensor.simpleShear_py.html) | the deformation gradient of a simple shear along d on the plane n by the angle gamma, I + tan(gamma) d n^T |
@@ -99,5 +99,5 @@ preserving deformation has det F = 1. Its strains are F.GreenStrain() and F.Cauc
 
 MATLAB's [deformationGradientTensor_index](deformationGradientTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1363">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1522">source</a></font>
 {% endraw %}

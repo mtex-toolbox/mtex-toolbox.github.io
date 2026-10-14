@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-shortAxis(x, ...) is x.shortAxis(...), the method of the object passed
+return the shortest fitted half axis of each grain outline.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+a = shortAxis(grains)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, shortAxis(x, ...) calls x.shortAxis(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -25,5 +42,5 @@ shortAxis(x, *args, **kwargs)
 
 | [grain2d](grain2d.shortAxis_py.html) | the short half axis of the ellipse of every outline, the smaller principal component |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

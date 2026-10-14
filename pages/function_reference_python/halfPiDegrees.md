@@ -48,7 +48,7 @@ them one after the other without holding them.
 
 | keyword | default | description |
 |---|---|---|
-| `dtype` | `<class 'numpy.float64'>` | the floating point type of the matrices |
+| `dtype` | `np.float64` | the floating point type of the matrices |
 
 ## Output
 

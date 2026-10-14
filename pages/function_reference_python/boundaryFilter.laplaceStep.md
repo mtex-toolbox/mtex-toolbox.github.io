@@ -24,5 +24,5 @@ boundaryFilter.laplaceStep(V, L, free, rate)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L113">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L118">source</a></font>
 {% endraw %}

@@ -12,6 +12,16 @@ status: Reference
 the spatial decomposition of a map, one cell per site: the vertices V, the vertex pair F and
 the site pair of every face, the sites and the lattice
 
+## Input
+
+| `V` | planar vertex coordinates |
+| `F` | pairs of vertex indices describing faces between cells |
+| `cells` | pairs of adjacent site indices for every face |
+| `sites` | measurement sites represented by the cells |
+| `A` | lattice basis |
+| `plane` | mapPlane of the geometry |
+| `shape` | cell or map shape metadata |
+
 ## Members
 
 | [nSites](cellComplex.nSites_py.html) | the number of sites, the measurements, the holes and the outer rings |

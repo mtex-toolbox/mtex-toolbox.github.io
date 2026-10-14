@@ -101,6 +101,20 @@ grains come from a segmentation alone.
 
 | `grains` | grain2d |
 
+## Properties
+
+| `id` | grain ids; these need not equal positions in a selected grain list |
+| `phaseId` | phase-list index of each grain |
+| `meanOrientation` | mean orientations for a single-phase grain selection |
+| `numPixel` | number of measurements assigned to each grain |
+| `GOS` | grain orientation spread in radians |
+| `boundary` | grainBoundary segments separating grains or bordering the map |
+| `innerBoundary` | low-angle segments within grains, when reconstructed |
+| `area` | area enclosed by each polygon, in squared spatial units |
+| `centroid` | geometric centroid of each grain outline |
+| `prop` | additional data with one value per grain |
+| `frame` | specimenFrame in which the geometry is expressed |
+
 ## See also
 
 [calcGrains](EBSD.calcGrains_py.html), [grain2d.merge](grain2d.merge_py.html), [grain2d.selectByGrainId](grain2d.selectByGrainId_py.html), [grainBoundary](grainBoundary_index_py.html), [GrainReconstruction](GrainReconstruction_py.html), [SelectingGrains](SelectingGrains_py.html), [GrainSpatialPlots](GrainSpatialPlots_py.html), [ShapeParameters](ShapeParameters_py.html)

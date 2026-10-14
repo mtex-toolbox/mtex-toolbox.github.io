@@ -93,5 +93,5 @@ from within that grain. The map passed is not changed.
 
 MATLAB's [EBSD.fill](EBSD.fill.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L339">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L348">source</a></font>
 {% endraw %}

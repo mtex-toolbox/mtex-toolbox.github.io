@@ -10,9 +10,7 @@ counterpart: SchulzDefocusingKernel.html
 status: Reference
 ---
 {% raw %}
-the defocusing of a Bragg-Brentano goniometer (MATLAB SchulzDefocusingKernel): the
-beam of width r is smeared over the receiving slit of width w at the distance d as the
-sample tilts by alpha, and the measured intensity drops by the factor the kernel gives
+model the intensity correction for defocusing in a tilted Bragg–Brentano measurement
 
 ## Syntax
 
@@ -20,11 +18,36 @@ sample tilts by alpha, and the measured intensity drops by the factor the kernel
 
 ```python
 psi = SchulzDefocusingKernel(theta=45*degree, r=1, w=2, d=200, dtheta=0.5*degree)
-psi.eval(cos(alpha))                     the factor at the tilt alpha
-psi.defocusing(pf)                       the factor on the specimen directions of a pole figure
+factor = psi.eval(np.cos(alpha))
+factors = psi.defocusing(pf)
 ```
 
 </div>
+
+## Description
+
+Tilting the specimen spreads the diffracted beam relative to the receiving slit. The
+returned correction factor is one at zero tilt and increases as intensity is lost;
+it is infinite at tilts of 90 degrees or greater. Evaluation takes the cosine of the
+tilt angle, rather than the angle itself. The defocusing method evaluates the factor
+at the specimen directions of a PoleFigure.
+
+## Input
+
+| `mu_t` | absorption parameter retained for compatibility; the current defocusing formula does not use it |
+| `theta` | Bragg angle in radians; default 45*degree |
+| `r` | beam width parameter; default 1 |
+| `w` | receiving-slit width parameter; default 2 |
+| `d` | specimen-to-slit distance, in the same length unit as r; default 200 |
+| `dtheta` | angular broadening parameter in radians; default 0.5*degree |
+
+## Output
+
+| `psi` | SchulzDefocusingKernel |
+
+## See also
+
+[PoleFigure.correct](PoleFigure.correct_py.html), [SchulzDefocusingKernel.eval](SchulzDefocusingKernel.eval_py.html), [SchulzDefocusingKernel.defocusing](SchulzDefocusingKernel.defocusing_py.html)
 
 ## Members
 
@@ -33,5 +56,5 @@ psi.defocusing(pf)                       the factor on the specimen directions o
 
 MATLAB's [SchulzDefocusingKernel](SchulzDefocusingKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1109">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1174">source</a></font>
 {% endraw %}

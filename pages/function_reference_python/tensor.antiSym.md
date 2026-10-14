@@ -26,5 +26,5 @@ tensor.antiSym(self)
 
 MATLAB's [tensor.antiSym](tensor.antiSym.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L468">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L532">source</a></font>
 {% endraw %}

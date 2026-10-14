@@ -89,5 +89,5 @@ ori * sS and the stress as measured.
 
 [SchmidTensor](SchmidTensor_index_py.html), [calcShearStress](stressTensor.calcShearStress_py.html), [stressTensor.uniaxial](stressTensor.uniaxial_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L107">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L187">source</a></font>
 {% endraw %}

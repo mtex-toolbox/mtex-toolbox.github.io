@@ -164,5 +164,5 @@ for; here the keyword says it.
 
 MATLAB's [S2Fun.optimalSample](S2Fun.optimalSample.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/optimalsample.py#L378">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/optimalsample.py#L398">source</a></font>
 {% endraw %}

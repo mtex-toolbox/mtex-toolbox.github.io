@@ -11,9 +11,13 @@ status: Reference
 {% raw %}
 a list of mapImage, displayed as MATLAB's table of a mapImage array
 
+## Input
+
+| `iterable` | mapImage objects to collect in order |
+
 ## Used on
 
 [EBSDMapsAndImages](EBSDMapsAndImages_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L417">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L425">source</a></font>
 {% endraw %}

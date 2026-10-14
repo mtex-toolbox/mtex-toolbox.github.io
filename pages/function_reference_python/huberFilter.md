@@ -10,11 +10,41 @@ counterpart: huberFilter.html
 status: Reference
 ---
 {% raw %}
-the same, with an l1/l2 penalty that leaves a faceted boundary faceted: the quadratic
-penalty of the curvature filter rounds every corner; the Huber one is quadratic below a
-threshold and linear above it, so a vertex that turns by more than the threshold is paid
-for once rather than by its square. It is solved by reweighting the same system until
-nothing moves; maxIter is a safety limit, not a tuning knob
+smooth grain boundaries with a Huber curvature penalty that preserves sharp corners
+
+## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+F = huberFilter(smoothingLength=10, threshold=5*degree)
+smoothed = grains.smooth(F)
+```
+
+</div>
+
+## Description
+
+The penalty is quadratic for small boundary turns and linear for turns above threshold.
+This reduces small fluctuations while penalising large corners less strongly than
+curvatureFilter. Reweighted sparse solves minimise the smoothing energy. Fixed network
+vertices remain fixed; stopping uses tol or the maximum iteration count.
+
+## Input
+
+| `smoothingLength` | spatial wavelength controlling smoothing, in boundary coordinate units; defaults to four vertex spacings when alpha is omitted |
+| `threshold` | angular transition threshold in radians; default 5*degree |
+| `alpha` | dimensionless regularisation weight, overriding smoothingLength |
+| `maxIter` | maximum reweighting iterations; default 50 |
+| `tol` | maximum vertex movement below which iteration stops, in spatial units; default 1e-4 |
+
+## Output
+
+| `F` | huberFilter, used by grain and boundary smoothing methods |
+
+## See also
+
+[curvatureFilter](curvatureFilter_index_py.html), [laplaceFilter](laplaceFilter_index_py.html), [taubinFilter](taubinFilter_index_py.html), grain2d.smooth
 
 ## Members
 
@@ -26,5 +56,5 @@ nothing moves; maxIter is a safety limit, not a tuning knob
 
 MATLAB's [huberFilter](huberFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L229">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L248">source</a></font>
 {% endraw %}

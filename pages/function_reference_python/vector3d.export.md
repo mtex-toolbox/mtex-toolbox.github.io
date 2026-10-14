@@ -12,9 +12,31 @@ status: Reference
 {% raw %}
 A method of [vector3d](vector3d_index_py.html).
 
-v.export('vectors.txt'): the directions written as a text table
+write vector coordinates to a text table.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+v.export('vectors.txt')
+```
+
+</div>
+
+## Description
+
+The file-writing options are passed to [`exportVector3d`](exportVector3d_py.html). The input vectors are unchanged.
+
+## Input
+
+| `fname` | destination file path |
+
+## See also
+
+[exportVector3d](exportVector3d_py.html), [vector3d.load](vector3d.load_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +48,5 @@ vector3d.export(self, fname, *args, **kwargs)
 
 MATLAB's [vector3d.export](vector3d.export.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L398">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L449">source</a></font>
 {% endraw %}

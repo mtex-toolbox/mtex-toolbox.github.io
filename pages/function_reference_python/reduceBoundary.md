@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-reduceBoundary(x, ...) is x.reduceBoundary(...), the method of the object passed
+coarsen the boundary discretisation of grains.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+coarse = reduceBoundary(grains, 2)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, reduceBoundary(x, ...) calls x.reduceBoundary(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -30,5 +47,5 @@ reduceBoundary(x, *args, **kwargs)
 
 [EBSD3Analysis](EBSD3Analysis_py.html), [Grains3DBoundaries](Grains3DBoundaries_py.html), [Grains3DSmoothing](Grains3DSmoothing_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

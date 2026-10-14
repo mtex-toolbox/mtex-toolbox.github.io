@@ -11,19 +11,36 @@ status: Reference
 {% raw %}
 A method of [ipfColorKey](ipfColorKey_index_py.html).
 
-an orientation that was never measured has no colour, and a map shows nothing for it.
-From GRID_FROM orientations on the key goes through its grid, which it builds once
+convert orientations to inverse pole figure RGB colours
 
 ## Syntax
 
 <div class="mx-form" markdown="1">
 
 ```python
-rgb = ipfKey.orientation2color(ori)
-rgb = ipfKey.orientation2color(ebsd['Fo'].orientations)
+rgb = key.orientation2color(ori)
+rgb = key.orientation2color(ebsd['Fo'].orientations)
 ```
 
 </div>
+
+## Description
+
+Each orientation supplies the crystal direction parallel to key.ipfDirection. The key's
+direction map assigns its colour. A missing orientation gives NaN in all three channels.
+Large orientation arrays use a cached colour grid; precompute can build that grid explicitly.
+
+## Input
+
+| `ori` | orientation array compatible with the crystal and specimen frames of the key |
+
+## Output
+
+| `rgb` | numeric array of shape ori.shape + (3,), with channels in [0, 1] or NaN |
+
+## See also
+
+[ipfColorKey.crystalDirection](ipfColorKey.crystalDirection_py.html), [ipfColorKey.precompute](ipfColorKey.precompute_py.html), [plot](S1Grid.plot_py.html)
 
 ## Signature
 
@@ -35,5 +52,5 @@ ipfColorKey.orientation2color(self, ori)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L122">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L151">source</a></font>
 {% endraw %}

@@ -70,5 +70,5 @@ MATLAB's 'log' option is setColorScale('log'), its choice of the figures ('all',
 
 MATLAB's [setColorRange](setColorRange.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L808">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L821">source</a></font>
 {% endraw %}

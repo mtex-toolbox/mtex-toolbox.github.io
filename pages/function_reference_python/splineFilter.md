@@ -13,6 +13,11 @@ status: Reference
 the smoothing spline: the field of least |u - f|^2 + alpha |L u|^2, with L the Laplacian
 of the neighbour graph; one linear system, no iteration
 
+## Input
+
+| `smoothingLength` | spatial wavelength controlling smoothing; None uses the default length relative to the pixel spacing |
+| `alpha` | dimensionless regularisation weight, overriding smoothingLength |
+
 ## Used on
 
 [EBSDDenoising](EBSDDenoising_py.html)

@@ -26,5 +26,5 @@ PoleFigure.calcODF(self, *args, **kwargs)
 
 MATLAB's [PoleFigure.calcODF](PoleFigure.calcODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L727">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L789">source</a></font>
 {% endraw %}

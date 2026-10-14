@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-projectIntoFundamentalRegion(x, ...) is x.projectIntoFundamentalRegion(...), the method of the object passed
+choose symmetry-equivalent representatives in a fundamental region.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+representatives = projectIntoFundamentalRegion(ori)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, projectIntoFundamentalRegion(x, ...) calls x.projectIntoFundamentalRegion(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -31,5 +48,5 @@ projectIntoFundamentalRegion(x, *args, **kwargs)
 
 [OrientationEmbeddings](OrientationEmbeddings_py.html), [EBSDSharpPlot](EBSDSharpPlot_py.html), [GrainOrientationParameters](GrainOrientationParameters_py.html), [MisorientationTheory](MisorientationTheory_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

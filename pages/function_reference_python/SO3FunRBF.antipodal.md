@@ -13,5 +13,5 @@ A property of [SO3FunRBF](SO3FunRBF_index_py.html).
 
 whether the function is antipodal, symmetric under inversion, as its centres are
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L265">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L272">source</a></font>
 {% endraw %}

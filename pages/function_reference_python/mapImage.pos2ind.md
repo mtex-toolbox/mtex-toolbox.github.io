@@ -65,5 +65,5 @@ and not clipped to the grid; the linear index is -1 outside it, where MATLAB's i
 
 MATLAB's [mapImage.pos2ind](mapImage.pos2ind.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L235">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L243">source</a></font>
 {% endraw %}

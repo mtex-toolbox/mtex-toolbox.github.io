@@ -27,5 +27,5 @@ S2FunTri.eval(self, v)
 
 MATLAB's [S2FunTri.eval](S2FunTri.eval.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L70">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L91">source</a></font>
 {% endraw %}

@@ -16,10 +16,30 @@ what an EBSD file says about itself, read from its header alone
 <div class="mx-form" markdown="1">
 
 ```python
-inspectEBSD('map.ang')     the phases, the properties, the grid and the step, the Euler correction
-inspectEBSD('map.h5oina')  and the data sets a project file holds
-inspectEBSD('volume.dream3d')  the voxel grid of a volume, info.is3d telling it from a map
+inspectEBSD('map.ang')
 ```
+
+The phases, the properties, the grid and the step, the Euler correction.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+inspectEBSD('map.h5oina')
+```
+
+And the data sets a project file holds.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+inspectEBSD('volume.dream3d')
+```
+
+The voxel grid of a volume, info.is3d telling it from a map.
 
 </div>
 
@@ -33,5 +53,5 @@ inspectEBSD(path)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L132">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L158">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [SO3FibonacciGrid](SO3FibonacciGrid_index_py.html).
 
 the mean nearest-neighbour spacing the grid was built for, in radians
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/superfibonacci.py#L52">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/superfibonacci.py#L58">source</a></font>
 {% endraw %}

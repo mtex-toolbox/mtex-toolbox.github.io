@@ -38,5 +38,5 @@ grainBoundary.angle(self, x)
 
 MATLAB's [grainBoundary.angle](grainBoundary.angle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L547">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L583">source</a></font>
 {% endraw %}

@@ -59,5 +59,5 @@ returned two sided, beyond the bandwidth as zeros.
 
 [S1Kernel.grad](S1Kernel.grad_py.html), [SO3Kernel.calcFourier](SO3Kernel.calcFourier_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1038">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1374">source</a></font>
 {% endraw %}

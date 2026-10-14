@@ -9,9 +9,48 @@ lang: python
 status: Reference
 ---
 {% raw %}
-what an EBSD file says about itself from its header alone: format, vendor, phases,
-properties, data sets, grid, step and Euler correction, as inspectEBSD returns it; a volume
-has a grid and a step of three, and says what it holds of its grains
+metadata describing an EBSD file before its measurement arrays are imported
+
+## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+info = inspectEBSD('map.ctf')
+rows = info.describe()
+```
+
+</div>
+
+## Description
+
+inspectEBSD reads header information to identify the format, phases, properties and scan
+geometry. This result describes the file; it does not contain the loaded EBSD measurements.
+For a volume, grid and step have three entries. Metadata not available from the header
+remains unset.
+
+## Properties
+
+| `path` | source filename |
+| `format` | detected file interface |
+| `vendor` | instrument or software vendor |
+| `size` | file size in bytes |
+| `date` | modification time when available |
+| `phases` | phaseList of declared crystal phases |
+| `properties` | available per-measurement property names |
+| `dataSets` | available data sets, when the format stores several |
+| `points` | measurement count when known |
+| `grid` | scan dimensions when known |
+| `step` | scan spacing along each grid axis |
+| `eulerCorrection` | rotation used to interpret the vendor Euler convention |
+| `unit` | spatial scan unit |
+| `header` | remaining header metadata |
+| `grains` | available grain data sets for volume formats |
+| `is3d` | whether the grid has three spatial dimensions |
+
+## See also
+
+[inspectEBSD](inspectEBSD_py.html), [loadEBSD](loadEBSD_ang_py.html), [loadEBSD3](loadEBSD3_py.html)
 
 ## Members
 

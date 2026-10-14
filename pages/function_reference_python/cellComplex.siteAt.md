@@ -72,5 +72,5 @@ corners of a not indexed pixel to find the grain that absorbs it.
 
 [calcGrains](EBSD.calcGrains_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/decomposition.py#L70">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/decomposition.py#L79">source</a></font>
 {% endraw %}

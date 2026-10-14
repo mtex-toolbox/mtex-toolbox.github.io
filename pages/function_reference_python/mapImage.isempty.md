@@ -13,5 +13,5 @@ A property of [mapImage](mapImage_index_py.html).
 
 whether the image has no pixel
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L201">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L209">source</a></font>
 {% endraw %}

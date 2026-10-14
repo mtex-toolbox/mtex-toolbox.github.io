@@ -135,5 +135,5 @@ grains.merge(tP), is not provided.
 
 MATLAB's [grain2d.merge](grain2d.merge.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L511">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L537">source</a></font>
 {% endraw %}

@@ -58,5 +58,5 @@ The segments as the pairs V[..., 0], V[..., 1].
 
 MATLAB's [plane3d.intersect](plane3d.intersect.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L126">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L156">source</a></font>
 {% endraw %}

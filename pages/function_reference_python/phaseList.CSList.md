@@ -13,5 +13,5 @@ A property of [phaseList](phaseList_index_py.html).
 
 the frames of the phases as a list, the not indexed one first
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L85">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L88">source</a></font>
 {% endraw %}

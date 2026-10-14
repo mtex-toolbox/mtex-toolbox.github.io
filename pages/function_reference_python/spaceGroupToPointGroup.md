@@ -9,9 +9,31 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the Hermann-Mauguin symbol of the point group of a space group given by its number, 1 to 230
+return the crystallographic point-group symbol for a space-group number.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+symbol = spaceGroupToPointGroup(225)
+```
+
+</div>
+
+## Input
+
+| `number` | international space-group number from 1 through 230 |
+
+## Output
+
+| `symbol` | Hermann-Mauguin symbol of its point group |
+
+## See also
+
+[symmetry](symmetry_index_py.html), [crystalFrame](crystalFrame_index_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -21,5 +43,5 @@ spaceGroupToPointGroup(n)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L644">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L694">source</a></font>
 {% endraw %}

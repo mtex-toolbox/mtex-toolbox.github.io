@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-fill(x, ...) is x.fill(...), the method of the object passed
+fill missing measurements in a map using nearby data or grain information.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+filled = fill(ebsd)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, fill(x, ...) calls x.fill(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -30,5 +47,5 @@ fill(x, *args, **kwargs)
 
 [EBSDFilling](EBSDFilling_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

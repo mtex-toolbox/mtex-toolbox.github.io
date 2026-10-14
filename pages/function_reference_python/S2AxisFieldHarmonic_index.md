@@ -113,5 +113,5 @@ of axis fields, S2AxisFieldHandle the field of a function evaluated where it is 
 
 MATLAB's [S2AxisFieldHarmonic_index](S2AxisFieldHarmonic_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L99">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L104">source</a></font>
 {% endraw %}

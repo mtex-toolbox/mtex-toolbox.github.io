@@ -13,5 +13,5 @@ A property of [EBSD3](EBSD3_index_py.html).
 
 a volume has no measurement plane
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L124">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L133">source</a></font>
 {% endraw %}

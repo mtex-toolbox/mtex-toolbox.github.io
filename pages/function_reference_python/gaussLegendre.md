@@ -9,11 +9,38 @@ lang: python
 status: Reference
 ---
 {% raw %}
-nodes and weights of the n point Gauss-Legendre rule on [-1, 1]; scipy's Newton iteration
-on the asymptotic nodes, since NumPy's leggauss solves a dense eigenproblem, and scipy is
-loaded on first use
+construct an n-point Gauss–Legendre quadrature rule on [-1, 1]
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+x, w = gaussLegendre(n)
+integral = np.sum(w * fun(x))
+```
+
+</div>
+
+## Description
+
+The rule integrates polynomials of degree at most `2*n-1` exactly, apart from floating-point
+rounding. Weights sum to 2, so this approximates an integral rather than an interval mean.
+
+## Input
+
+| `n` | positive integer node count |
+
+## Output
+
+| `x` | one-dimensional array of nodes |
+| `w` | positive quadrature weights, one per node |
+
+## See also
+
+[clenshawCurtis](clenshawCurtis_py.html), [quadratureS2Grid](quadratureS2Grid_index_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 

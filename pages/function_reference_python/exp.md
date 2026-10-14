@@ -9,9 +9,28 @@ lang: python
 status: Reference
 ---
 {% raw %}
-exp(x, ...) is x.exp(...), the method of the object passed; NumPy's exp for an array
+take the pointwise exponential or the exponential map of an object.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+result = exp(x)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, exp(x, ...) calls x.exp(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+For numeric arrays without an MTEX method, this calls numpy.exp.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -30,7 +49,7 @@ exp(x, *args, **kwargs)
 | [SO3FunCBF](SO3FunCBF.exp_py.html) | the exponential of the function, pointwise, as a function handle |
 | [SO3FunHarmonic](SO3FunHarmonic.exp_py.html) | the exponential of the function, by quadrature at twice the bandwidth, or at the bandwidth given |
 | [SO3FunRBF](SO3FunRBF.exp_py.html) | the exponential of the function, pointwise, as a function handle |
-| [SO3TangentVector](SO3TangentVector.exp_py.html) | the rotation or orientation the vector points to, with the frames of the reference |
+| [SO3TangentVector](SO3TangentVector.exp_py.html) | return the rotations reached by the tangent vectors from their references |
 | [spinTensor](spinTensor.exp_py.html) | the rotation a spin tensor generates, the exponential of its axial vector, or the orientation a spin at a reference orientation leads to |
 | [vector3d](vector3d.exp_py.html) | the rotation vector to its rotation: at the identity, or at a reference as a tangent vector |
 
@@ -38,5 +57,5 @@ exp(x, *args, **kwargs)
 
 [RotationSpinTensor](RotationSpinTensor_py.html), [RotationTangentSpace](RotationTangentSpace_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

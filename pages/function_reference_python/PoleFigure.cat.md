@@ -58,5 +58,5 @@ Unlike union, pole figures of the same crystal direction stay separate; None is 
 
 MATLAB's [PoleFigure.cat](PoleFigure.cat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L739">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L801">source</a></font>
 {% endraw %}

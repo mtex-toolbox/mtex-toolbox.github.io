@@ -9,8 +9,7 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the base of the spatial transforms, maps of the plane of a scan onto itself that move x and y
-and leave z; T * pos moves positions, T1 * T2 is T2 followed by T1, T1 + T2 chains T1 first
+a transformation of scan positions in the xy plane
 
 ## Syntax
 
@@ -18,10 +17,29 @@ and leave z; T * pos moves positions, T1 * T2 is T2 followed by T1, T1 + T2 chai
 
 ```python
 pos2 = T * pos
-T.inv(), T.displacement(pos), T.discretize(pos), transform(ebsd, T)
+pos2 = T(pos)
+u = T.displacement(pos)
+Ti = T.inv()
 ```
 
 </div>
+
+## Description
+
+Transforms map vector3d positions to positions of the same shape. The supplied transform
+classes change x and y and preserve z and the coordinate frame. Positions and displacements
+use the same spatial units as the input data.
+
+Composition follows matrix order: `T1 * T2` applies T2 first, then T1. The expression
+T1 + T2 builds a sequence applying T1 first, then T2. Transforming EBSD data with
+transform(ebsd, T) also updates its spatial representation.
+
+This is the base class. Construct one of the affine, projective, polynomial, drift or
+interpolated-field subclasses, or wrap a callable with spatialTransformHandle.
+
+## See also
+
+[spatialTransformShift](spatialTransformShift_index_py.html), [spatialTransformProjective](spatialTransformProjective_index_py.html), [spatialTransformPoly](spatialTransformPoly_index_py.html), [spatialTransformDrift](spatialTransformDrift_index_py.html), [spatialTransformField](spatialTransformField_index_py.html), [spatialTransformComposite](spatialTransformComposite_index_py.html)
 
 ## Members
 

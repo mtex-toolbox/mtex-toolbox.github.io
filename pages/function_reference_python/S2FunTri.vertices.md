@@ -13,5 +13,5 @@ A property of [S2FunTri](S2FunTri_index_py.html).
 
 the vertices of the triangulation, the directions the values are given at
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L52">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L73">source</a></font>
 {% endraw %}

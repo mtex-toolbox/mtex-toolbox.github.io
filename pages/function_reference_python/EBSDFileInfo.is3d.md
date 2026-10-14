@@ -13,5 +13,5 @@ A property of [EBSDFileInfo](EBSDFileInfo_index_py.html).
 
 whether the file holds a volume, which EBSD3.load reads
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L52">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L78">source</a></font>
 {% endraw %}

@@ -15,6 +15,10 @@ TSLDirectionKey, HKLDirectionKey): TSL reads the polar coordinates of the sector
 centre, unfolded and without the hue correction; HKL blends the three primaries linearly
 over the polar angle and the azimuth of the sector
 
+## Input
+
+| `CS` | crystalFrame or symmetry; colouring uses its Laue group |
+
 ## Members
 
 | [direction2color](TSLDirectionKey.direction2color_py.html) | the colours of directions under the TSL key |
@@ -22,5 +26,5 @@ over the polar angle and the azimuth of the sector
 
 MATLAB's [TSLDirectionKey](TSLDirectionKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L397">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L420">source</a></font>
 {% endraw %}

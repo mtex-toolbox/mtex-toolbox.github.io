@@ -11,7 +11,7 @@ status: Reference
 {% raw %}
 A property of [crystalShape](crystalShape_index_py.html).
 
-the centre of every face, the mean of its vertices, per shape of a list
+mean of each face's vertices as vector3d positions in the current frame; this need not be the area centroid.
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L240">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L313">source</a></font>
 {% endraw %}

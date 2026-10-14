@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-grad(x, ...) is x.grad(...), the method of the object passed
+differentiate a scalar function or a smoothing kernel.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+gradient = grad(f)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, grad(x, ...) calls x.grad(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -40,5 +57,5 @@ grad(x, *args, **kwargs)
 
 [SO3FunOperations](SO3FunOperations_py.html), [S2FunOperations](S2FunOperations_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

@@ -68,5 +68,5 @@ The larger intensity of two pole figures on the same directions.
 
 MATLAB's [PoleFigure.max](PoleFigure.max.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L320">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L353">source</a></font>
 {% endraw %}

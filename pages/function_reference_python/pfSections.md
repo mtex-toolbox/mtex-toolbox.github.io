@@ -18,10 +18,31 @@ pole figure sections: the pole figure of h1, split by the twist of h2 about it
 
 ```python
 pfSections(cs, ss, h1=..., h2=..., sections=6, omega=values)
-sigmaSections(cs, ss, sections=6, sigma=values)   with h1 = c*, h2 = a
 ```
 
 </div>
+
+<div class="mx-form" markdown="1">
+
+```python
+sigmaSections(cs, ss, sections=6, sigma=values)
+```
+
+With h1 = c*, h2 = a.
+
+</div>
+
+## Input
+
+| `frameA` | crystal reference frame |
+| `frameB` | specimen reference frame; None uses the default |
+| `h1` | first crystal direction; default reciprocal c axis |
+| `h2` | second crystal direction, defining twist about h1; default a axis; must not be parallel to h1 |
+| `sections` | section count when explicit twist angles are omitted; default 6 |
+| `values` | explicit twist angles in radians |
+| `tol` | angular assignment tolerance in radians; default 5*degree |
+| `maxOmega` | maximum twist angle in radians; None uses the symmetry-dependent period |
+| `kwargs` | twist angles may also be supplied as omega=values |
 
 ## Members
 
@@ -38,5 +59,5 @@ sigmaSections(cs, ss, sections=6, sigma=values)   with h1 = c*, h2 = a
 
 MATLAB's [pfSections](pfSections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L377">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L431">source</a></font>
 {% endraw %}

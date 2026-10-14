@@ -12,10 +12,35 @@ status: Reference
 {% raw %}
 A method of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
-the convolution with a kernel or another function on the sphere; with a function on the
-sphere the result is a function on SO(3)
+convolve a spherical function with a kernel or another spherical function.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+smoothed = f.conv(psi)
+correlation = f.conv(g)
+```
+
+</div>
+
+## Description
+
+A radial kernel multiplies each spherical harmonic degree by its kernel multiplier
+and returns an S2FunHarmonic. With another S2Fun, convolution compares their relative
+rotations and returns an SO3FunHarmonic. The result therefore depends on the second
+argument's domain.
+
+## Input
+
+| `g` | S2Kernel, SO3Kernel or spherical function |
+
+## See also
+
+[SO3FunHarmonic.conv](SO3FunHarmonic.conv_py.html), [S2Kernel.conv](S2Kernel.conv_py.html), S2FunConvolution
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -27,5 +52,5 @@ S2FunHarmonic.conv(self, g)
 
 MATLAB's [S2FunHarmonic.conv](S2FunHarmonic.conv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L707">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L723">source</a></font>
 {% endraw %}

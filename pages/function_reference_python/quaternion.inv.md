@@ -12,9 +12,29 @@ status: Reference
 {% raw %}
 A method of [quaternion](quaternion_index_py.html).
 
-the inverse quaternion, the conjugate over the squared norm
+return the multiplicative inverse of each quaternion.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+inverse = q.inv()
+```
+
+</div>
+
+## Description
+
+The inverse is `conj(q)/norm(q)**2`, so `q*inverse` is the identity for nonzero q.
+The result is a quaternion, with the same array shape. Zero quaternions have no
+inverse and produce nonfinite coefficients.
+
+## See also
+
+[quaternion.conj](quaternion.conj_py.html), [rotation.inv](rotation.inv_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +46,5 @@ quaternion.inv(self)
 
 MATLAB's [quaternion.inv](quaternion.inv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L207">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L236">source</a></font>
 {% endraw %}

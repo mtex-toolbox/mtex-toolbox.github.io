@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-isAligned(x, ...) is x.isAligned(...), the method of the object passed
+test whether two reference frames have aligned basis vectors.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+aligned = isAligned(frame1, frame2)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, isAligned(x, ...) calls x.isAligned(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -25,5 +42,5 @@ isAligned(x, *args, **kwargs)
 
 | [referenceFrame](referenceFrame.isAligned_py.html) | whether two frames have the same basis, up to a relative tolerance on the basis vectors |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

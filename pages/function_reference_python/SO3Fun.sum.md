@@ -29,5 +29,5 @@ sum(x, *args, **kwargs)
 
 MATLAB's [SO3Fun.sum](SO3Fun.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L91">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L220">source</a></font>
 {% endraw %}

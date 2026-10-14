@@ -73,5 +73,5 @@ quaternion k-d tree.
 
 [superfibonacciSO3Grid](superfibonacciSO3Grid_py.html), [SO3Grid.find](SO3Grid.find_py.html), [orientation.find](orientation.find_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/superfibonacci.py#L61">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/superfibonacci.py#L67">source</a></font>
 {% endraw %}

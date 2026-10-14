@@ -59,5 +59,5 @@ The handle is expanded into its harmonic form, which is rotated.
 
 [SO3FunHarmonic.rotate](SO3FunHarmonic.rotate_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L287">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L303">source</a></font>
 {% endraw %}

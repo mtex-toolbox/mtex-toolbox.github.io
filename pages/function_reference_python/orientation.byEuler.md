@@ -85,5 +85,5 @@ convention and the frames follow the angles, in any order.
 
 MATLAB's [orientation.byEuler](orientation.byEuler.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L149">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L157">source</a></font>
 {% endraw %}

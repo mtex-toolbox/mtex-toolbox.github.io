@@ -69,5 +69,5 @@ other keywords go to the constructor of the class (unit, name, ...).
 
 [tensor.ones](tensor.ones_py.html), [tensor.eye](tensor.eye_py.html), [tensor.rand](tensor.rand_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L882">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L970">source</a></font>
 {% endraw %}

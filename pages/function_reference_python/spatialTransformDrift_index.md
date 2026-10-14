@@ -9,8 +9,7 @@ lang: python
 status: Reference
 ---
 {% raw %}
-a displacement along the slow scan direction: linear between the knots s, the displacements u
-one row each, NaN beyond them unless extrapolate=True continues the end segments
+a displacement that varies along the slow scan direction
 
 ## Syntax
 
@@ -18,10 +17,32 @@ one row each, NaN beyond them unless extrapolate=True continues the end segments
 
 ```python
 T = spatialTransformDrift(s, u, slowScan=vector3d(0, 1, 0))
-T = spatialTransformDrift.fit(posA, posB)          the median displacement of every scan line
+T = spatialTransformDrift.fit(posA, posB)
 ```
 
 </div>
+
+## Description
+
+Project each position onto the unit slow-scan direction, then interpolate the x and y
+displacement at that coordinate. The displacement varies linearly between supplied knots;
+knots and their displacements are sorted together. Outside their range, positions become
+NaN unless extrapolate=True continues the end segments. No knots gives the identity.
+
+## Input
+
+| `s` | one-dimensional array of knot coordinates in spatial units |
+| `u` | array of shape (len(s), 2), giving x and y displacements at the knots |
+| `slowScan` | vector3d direction, normalised internally; default is the y direction |
+| `extrapolate` | continue the end segments outside the knot range; default False |
+
+## Output
+
+| `T` | spatialTransformDrift |
+
+## See also
+
+[spatialTransformDrift.fit](spatialTransformDrift.fit_py.html), [spatialTransformField](spatialTransformField_index_py.html)
 
 ## Members
 
@@ -36,5 +57,5 @@ T = spatialTransformDrift.fit(posA, posB)          the median displacement of ev
 
 [EBSDSpatialTransform](EBSDSpatialTransform_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L562">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L629">source</a></font>
 {% endraw %}

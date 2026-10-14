@@ -63,5 +63,5 @@ scene3d.add, which the renderer of a 3D figure draws.
 
 [scene3d](scene3d_index_py.html), [quiver3d](S2AxisField.quiver3_py.html), [ellipsoids3d](ellipsoids3d_py.html), [OrientationVisualization3d](OrientationVisualization3d_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L136">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L166">source</a></font>
 {% endraw %}

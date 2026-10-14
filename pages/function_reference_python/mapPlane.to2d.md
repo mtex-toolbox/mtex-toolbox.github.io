@@ -23,5 +23,5 @@ mapPlane.to2d(self, xyz)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L83">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L87">source</a></font>
 {% endraw %}

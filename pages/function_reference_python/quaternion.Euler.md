@@ -63,5 +63,5 @@ it.
 
 MATLAB's [quaternion.Euler](quaternion.Euler.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L301">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L354">source</a></font>
 {% endraw %}

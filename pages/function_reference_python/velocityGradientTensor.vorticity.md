@@ -26,5 +26,5 @@ velocityGradientTensor.vorticity(L)
 
 MATLAB's [velocityGradientTensor.vorticity](velocityGradientTensor.vorticity.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L319">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L442">source</a></font>
 {% endraw %}

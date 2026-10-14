@@ -66,7 +66,7 @@ m = Miller('{111}', cs)
 <div class="mx-form" markdown="1">
 
 ```python
-m = Miller('[100]\[011]', cs)
+m = Miller(r'[100]\[011]', cs)
 ```
 
 The plane holding both directions, the zone law.
@@ -76,7 +76,7 @@ The plane holding both directions, the zone law.
 <div class="mx-form" markdown="1">
 
 ```python
-m = Miller('(100)\(011)', cs)
+m = Miller(r'(100)\(011)', cs)
 ```
 
 The direction both planes hold.

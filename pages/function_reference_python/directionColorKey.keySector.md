@@ -13,5 +13,5 @@ A property of [directionColorKey](directionColorKey_index_py.html).
 
 a sector the key is drawn over
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L277">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L289">source</a></font>
 {% endraw %}

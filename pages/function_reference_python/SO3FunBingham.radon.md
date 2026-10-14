@@ -104,5 +104,5 @@ superposed reflections, equally weighted unless superposition is given.
 
 MATLAB's [SO3FunBingham.radon](SO3FunBingham.radon.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L256">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L263">source</a></font>
 {% endraw %}

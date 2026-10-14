@@ -75,5 +75,5 @@ cuts no grain gives an empty grain2d.
 
 MATLAB's [grain3d.slice](grain3d.slice.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L472">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L497">source</a></font>
 {% endraw %}

@@ -26,5 +26,5 @@ the negative, the operator -a
 
 MATLAB's [S2FunTri.uminus](S2FunTri.uminus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L116">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L146">source</a></font>
 {% endraw %}

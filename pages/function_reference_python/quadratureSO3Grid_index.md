@@ -112,5 +112,5 @@ beta fastest, then alpha, then gamma, and G.weights their weights.
 
 [SO3FunQuadrature](SO3FunQuadrature_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L131">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L158">source</a></font>
 {% endraw %}

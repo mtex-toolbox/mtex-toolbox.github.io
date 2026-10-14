@@ -61,5 +61,5 @@ The search runs through a k-d tree of the grid points. On an antipodal grid a di
 
 [fibonacciS2Grid](fibonacciS2Grid_index_py.html), [S2Grid.find](S2Grid.find_py.html), [vector3d.find](vector3d.find_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/fibonacci.py#L59">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/fibonacci.py#L63">source</a></font>
 {% endraw %}

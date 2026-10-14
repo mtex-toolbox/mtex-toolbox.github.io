@@ -13,5 +13,5 @@ A property of [PoleFigure](PoleFigure_index_py.html).
 
 whether the pole figures hold no measurement
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L228">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L261">source</a></font>
 {% endraw %}

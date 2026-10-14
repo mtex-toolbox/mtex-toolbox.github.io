@@ -28,5 +28,5 @@ eig(T)
 
 MATLAB's [S2FunHarmonic.eig](S2FunHarmonic.eig.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1667">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1864">source</a></font>
 {% endraw %}

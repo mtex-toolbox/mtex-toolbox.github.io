@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the cell of the lattice about a site, as its corners
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L539">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L567">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 the Miller-Bravais index T = -(U + V) of a lattice direction
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L283">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L293">source</a></font>
 {% endraw %}

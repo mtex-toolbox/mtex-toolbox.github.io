@@ -12,6 +12,10 @@ status: Reference
 the recipe of the embedding of a crystal frame: the identity image and the orthonormal
 basis of the space it moves in, built once per frame
 
+## Input
+
+| `CS` | crystalFrame whose proper crystal symmetry defines the embedding |
+
 ## Members
 
 | [dim](embeddingSpec.dim_py.html) | the dimension of the space the images move in, the number of columns of the basis |

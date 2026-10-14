@@ -73,5 +73,5 @@ SO3TangentVector.angle(self, other=None, **kwargs)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L330">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L379">source</a></font>
 {% endraw %}

@@ -23,5 +23,5 @@ boundaryNetwork.numNeighbors(self, i)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L82">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L87">source</a></font>
 {% endraw %}

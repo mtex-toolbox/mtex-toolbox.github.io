@@ -36,5 +36,5 @@ EBSD3.cat(*maps)
 
 MATLAB's [EBSD3.cat](EBSD3.cat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L394">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L407">source</a></font>
 {% endraw %}

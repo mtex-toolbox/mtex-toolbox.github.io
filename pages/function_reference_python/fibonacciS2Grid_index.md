@@ -23,6 +23,11 @@ S2G = fibonacciS2Grid(resolution=2*degree)
 
 </div>
 
+## Input
+
+| `N` | requested number of nodes, rounded to a nearby odd count |
+| `resolution` | target angular spacing in radians when N is omitted; default 5*degree |
+
 ## Members
 
 | [fibonacciS2Grid](fibonacciS2Grid.fibonacciS2Grid_py.html) | the spherical Fibonacci grid: N = 2n + 1 points along a spiral, z linear in the index and the azimuth advancing by the golden angle |

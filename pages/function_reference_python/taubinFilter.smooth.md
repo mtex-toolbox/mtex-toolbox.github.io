@@ -24,5 +24,5 @@ taubinFilter.smooth(self, V, net, h)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L174">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L188">source</a></font>
 {% endraw %}

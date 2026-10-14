@@ -72,5 +72,5 @@ chunk); the result is an orientation from the crystal frame of e to SS.
 
 MATLAB's [embedding.orientation](embedding.orientation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L495">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L498">source</a></font>
 {% endraw %}

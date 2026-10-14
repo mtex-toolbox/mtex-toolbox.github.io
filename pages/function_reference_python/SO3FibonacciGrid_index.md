@@ -23,6 +23,13 @@ S3G = superfibonacciSO3Grid(cs, ss, resolution=5*degree)
 
 </div>
 
+## Input
+
+| `rot` | rotations of the grid nodes, normally supplied by superfibonacciSO3Grid |
+| `frameA` | crystal reference frame |
+| `frameB` | specimen reference frame |
+| `resolution` | nominal angular node spacing in radians |
+
 ## Members
 
 | [find](SO3FibonacciGrid.find_py.html) | the nearest grid rotation of every orientation, or the k nearest, or all within a radius, up to the symmetries of the grid's frames |

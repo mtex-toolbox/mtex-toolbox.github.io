@@ -26,5 +26,5 @@ a + b
 
 MATLAB's [SO3VectorFieldRBF.plus](SO3VectorFieldRBF.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1141">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1146">source</a></font>
 {% endraw %}

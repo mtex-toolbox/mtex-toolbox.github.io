@@ -73,5 +73,5 @@ group, axes and mineral; a frame cs given has to be of the catalogue's Laue clas
 
 [CrystalReferenceSystem](CrystalReferenceSystem_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L1323">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L1463">source</a></font>
 {% endraw %}

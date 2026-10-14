@@ -76,5 +76,5 @@ flat image is returned unchanged.
 
 MATLAB's [mapImage.rescale](mapImage.rescale.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L524">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L535">source</a></font>
 {% endraw %}

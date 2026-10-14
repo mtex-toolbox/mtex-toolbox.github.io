@@ -86,7 +86,7 @@ beta fastest, then alpha, then gamma, and G.weights their weights.
 |---|---|---|
 | `rA` | `None` | the fold about z on the crystal side, without frames |
 | `rB` | `None` | the fold about z on the specimen side, without frames |
-| `dtype` | `<class 'numpy.float64'>` | the floating point type of the angles and weights |
+| `dtype` | `np.float64` | the floating point type of the angles and weights |
 
 ## Output
 
@@ -102,5 +102,5 @@ beta fastest, then alpha, then gamma, and G.weights their weights.
 
 MATLAB's [quadratureSO3Grid.quadratureSO3Grid](quadratureSO3Grid.quadratureSO3Grid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L131">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L158">source</a></font>
 {% endraw %}

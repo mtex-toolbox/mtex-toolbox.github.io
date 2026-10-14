@@ -12,10 +12,35 @@ status: Reference
 {% raw %}
 A method of [tensor](tensor_index_py.html).
 
-the eigenvalues in ascending order and the eigenvectors as axes of the frame; a rank
-four tensor is diagonalised in its Voigt matrix
+diagonalise rank-two tensors or rank-four tensors in Voigt notation
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+values, axes = T.eig()
+```
+
+</div>
+
+## Description
+
+Eigenvalues are returned in ascending order. For rank two, the associated eigenvectors
+are antipodal vector3d axes in the tensor frame, arranged as rows after the tensor-array
+dimensions. For rank four the decomposition uses the 6-by-6 Voigt matrix and returns its
+numeric eigenvector matrix. Symmetric matrices use a real symmetric eigensolver.
+
+## Output
+
+| `values` | eigenvalues, with the eigenvalue axis last |
+| `axes` | vector3d eigenvectors for rank two, numeric eigenvectors for rank four |
+
+## See also
+
+[tensor.eigvals](tensor.eigvals_py.html), [Voigt](tensor.Voigt_py.html), [Kelvin](Kelvin_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -27,5 +52,5 @@ tensor.eig(self)
 
 MATLAB's [tensor.eig](tensor.eig.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L501">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L565">source</a></font>
 {% endraw %}

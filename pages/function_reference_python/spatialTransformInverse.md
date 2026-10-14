@@ -10,18 +10,42 @@ counterpart: spatialTransformInverse.html
 status: Reference
 ---
 {% raw %}
-the inverse of a transform that knows none in closed form, each preimage found by fixed point
-iteration to the tolerance tol relative to the extent of the positions
+a numerical inverse of a spatial transform without a closed-form inverse
 
 ## Syntax
 
 <div class="mx-form" markdown="1">
 
 ```python
-Tinv = spatialTransformInverse(T, tol=1e-10, maxIter=100)
+Ti = spatialTransformInverse(T, tol=1e-10, maxIter=100)
+original = Ti * transformed
 ```
 
 </div>
+
+## Description
+
+Starting at each target position, fixed-point iteration subtracts the error between its
+current image and the target. This works for sufficiently small, well-behaved distortions;
+a folded map or a poorly converging iteration raises ValueError.
+
+Convergence requires the largest xy error to be at most tol times max(1, the largest
+absolute finite target coordinate). Iteration also stops if the error ceases to decrease
+sufficiently after the first three steps. The z coordinate is preserved.
+
+## Input
+
+| `T` | spatialTransform to invert |
+| `tol` | relative position tolerance; default 1e-10 |
+| `maxIter` | maximum iteration count; default 100 |
+
+## Output
+
+| `Ti` | spatialTransformInverse |
+
+## See also
+
+[spatialTransform.inv](spatialTransform.inv_py.html), [spatialTransformField](spatialTransformField_index_py.html), [spatialTransformPoly](spatialTransformPoly_index_py.html)
 
 ## Members
 
@@ -33,5 +57,5 @@ Tinv = spatialTransformInverse(T, tol=1e-10, maxIter=100)
 
 MATLAB's [spatialTransformInverse](spatialTransformInverse.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L846">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L993">source</a></font>
 {% endraw %}

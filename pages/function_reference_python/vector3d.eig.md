@@ -12,9 +12,30 @@ status: Reference
 {% raw %}
 A method of [vector3d](vector3d_index_py.html).
 
-the principal axes of the moment matrix and its eigenvalues, vector3d/eig
+return the eigenvalues and principal axes of the vector moment matrix.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+values, axes = v.eig()
+```
+
+</div>
+
+## Description
+
+Flatten the list and form `sum(v_i*v_i.T)`, without normalising vector lengths or
+reducing crystal symmetry. The three eigenvalues are in ascending order; axes[j]
+is the corresponding unit eigenvector in the input frame. The first axis is the
+least represented direction, and the last is the most represented.
+
+## See also
+
+[vector3d.perp](vector3d.perp_py.html), [vector3d.mean](vector3d.mean_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +47,5 @@ vector3d.eig(self)
 
 MATLAB's [vector3d.eig](vector3d.eig.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L868">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L975">source</a></font>
 {% endraw %}

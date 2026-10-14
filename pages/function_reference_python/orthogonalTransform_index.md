@@ -18,11 +18,35 @@ the rotation followed by the inversion
 
 ```python
 orthogonalTransform(rot)
-orthogonalTransform(rot, True)       the improper transform -rot
-orthogonalTransform(cs)              the elements of a point group
 ```
 
 </div>
+
+<div class="mx-form" markdown="1">
+
+```python
+orthogonalTransform(rot, True)
+```
+
+The improper transform -rot.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+orthogonalTransform(cs)
+```
+
+The elements of a point group.
+
+</div>
+
+## Input
+
+| `rot` | rotation, quaternion coordinates, or a referenceFrame or symmetry supplying its elements; None selects identity |
+| `improper` | whether to apply inversion after the rotation; default False |
+| `dtype` | floating-point type of the stored coordinates |
 
 ## Members
 
@@ -38,7 +62,9 @@ orthogonalTransform(cs)              the elements of a point group
 | [dot](orthogonalTransform.dot_py.html) | the inner product of the rotational parts up to sign, zero between transforms of different parity |
 | [Euler](orthogonalTransform.Euler_py.html) | the Euler angles of the rotational part, in the convention named or the session's |
 | [i](orthogonalTransform.i_py.html) | whether the transform is improper, MATLAB's rot.i |
+| [id](orthogonalTransform.id_py.html) | the identity transform |
 | [inv](orthogonalTransform.inv_py.html) | the inverse transform, the inverse rotation with the same parity |
+| [inversion](orthogonalTransform.inversion_py.html) | the inversion -I |
 | [isclose](orthogonalTransform.isclose_py.html) | equal within the angular tolerance tol and of one parity, MATLAB's eq |
 | [isImproper](orthogonalTransform.isImproper_py.html) | whether the transform is improper, its determinant -1 |
 | [matrix](orthogonalTransform.matrix_py.html) | the orthogonal matrices, the rotation matrix times the parity |
@@ -50,5 +76,5 @@ orthogonalTransform(cs)              the elements of a point group
 
 [CrystalSymmetries](CrystalSymmetries_py.html), [RotationImproper](RotationImproper_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L860">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1036">source</a></font>
 {% endraw %}

@@ -61,5 +61,5 @@ One system of the family; symmetrise gives every equivalent one.
 
 [CrystalShapes](CrystalShapes_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L503">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L516">source</a></font>
 {% endraw %}

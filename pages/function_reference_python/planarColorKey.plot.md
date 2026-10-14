@@ -75,5 +75,5 @@ degrees when its values exceed 2 pi.
 
 [planarColorKey.property2color](planarColorKey.property2color_py.html), [ipfColorKey](ipfColorKey_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/planarkey.py#L87">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/planarkey.py#L127">source</a></font>
 {% endraw %}

@@ -36,5 +36,5 @@ S1FunHarmonic.norm(self)
 
 MATLAB's [S1FunHarmonic.norm](S1FunHarmonic.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L392">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L438">source</a></font>
 {% endraw %}

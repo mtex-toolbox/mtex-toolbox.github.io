@@ -24,6 +24,18 @@ oS = sigmaSections(cs, ss, sigma=np.arange(0, 60, 10)*degree)
 
 </div>
 
+## Input
+
+| `frameA` | crystal reference frame |
+| `frameB` | specimen reference frame; None uses the default |
+| `h1` | first crystal direction; default reciprocal c axis |
+| `h2` | second crystal direction, defining twist about h1; default a axis; must not be parallel to h1 |
+| `sections` | section count when explicit twist angles are omitted; default 6 |
+| `values` | explicit twist angles in radians |
+| `tol` | angular assignment tolerance in radians; default 5*degree |
+| `maxOmega` | maximum twist angle in radians; None uses the symmetry-dependent period |
+| `kwargs` | twist angles may also be supplied as sigma=values |
+
 ## Members
 
 | [sigma](sigmaSections.sigma_py.html) | the sigma values of the sections |
@@ -34,5 +46,5 @@ oS = sigmaSections(cs, ss, sigma=np.arange(0, 60, 10)*degree)
 
 MATLAB's [sigmaSections](sigmaSections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L546">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L610">source</a></font>
 {% endraw %}

@@ -22,6 +22,31 @@ SO3AbelPoissonKernel(halfwidth=5*degree)
 
 </div>
 
+## Description
+
+A nonnegative kernel with mean one on orientation space. Increasing kappa towards
+one narrows the peak and requires more harmonic degrees. It has an infinite series,
+which MTEX truncates when a harmonic representation is needed.
+
+Evaluate psi at t=cos(omega/2), the cosine of half the rotation angle.
+Use psi.halfwidth() for the angular width in radians and psi.bandwidth for the
+maximum degree of its harmonic representation.
+
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `kappa` |  | concentration in (0, 1), with larger values giving a sharper peak |
+| `halfwidth` |  | angular halfwidth in radians, taking precedence over kappa |
+
+## Output
+
+| `psi` | SO3AbelPoissonKernel |
+
+## See also
+
+[SO3Kernel](SO3Kernel_index_py.html), [calcDensity](calcDensity_py.html), [calcKernel](EBSD.calcKernel_py.html)
+
 ## Members
 
 | [radon](SO3AbelPoissonKernel.radon_py.html) | the Radon transform: the kernel on the sphere of the same coefficients, in closed form |
@@ -30,5 +55,5 @@ SO3AbelPoissonKernel(halfwidth=5*degree)
 
 [ODFShapes](ODFShapes_py.html), [RBFApproximationTheory](RBFApproximationTheory_py.html), [SO3Kernels](SO3Kernels_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L387">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L425">source</a></font>
 {% endraw %}

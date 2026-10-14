@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 whether the map holds no measurement
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L150">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L163">source</a></font>
 {% endraw %}

@@ -54,5 +54,5 @@ volume is ebsd3.lattice; this port's, MATLAB keeps the unit cell and d1, d2, d3 
 
 [voxelLattice.fromPositions](voxelLattice.fromPositions_py.html), [voxelLattice.index](voxelLattice.index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L87">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L92">source</a></font>
 {% endraw %}

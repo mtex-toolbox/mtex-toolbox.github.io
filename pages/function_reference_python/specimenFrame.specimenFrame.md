@@ -130,5 +130,5 @@ symmetry, never about a direction.
 
 MATLAB's [specimenFrame.specimenFrame](specimenFrame.specimenFrame.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1059">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1133">source</a></font>
 {% endraw %}

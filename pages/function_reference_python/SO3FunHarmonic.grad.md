@@ -85,5 +85,5 @@ carry their orientations, so exp takes no second argument as MATLAB's exp(v, rot
 
 MATLAB's [SO3FunHarmonic.grad](SO3FunHarmonic.grad.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L703">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L754">source</a></font>
 {% endraw %}

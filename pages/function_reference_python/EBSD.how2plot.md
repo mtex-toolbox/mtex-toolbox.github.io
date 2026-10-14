@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the plotting convention of the specimen frame the map is written in
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L208">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L221">source</a></font>
 {% endraw %}

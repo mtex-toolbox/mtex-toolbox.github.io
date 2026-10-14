@@ -13,5 +13,5 @@ A property of [fibre](fibre_index_py.html).
 
 the specimen frame of the fibre, MATLAB's f.SS
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L98">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L104">source</a></font>
 {% endraw %}

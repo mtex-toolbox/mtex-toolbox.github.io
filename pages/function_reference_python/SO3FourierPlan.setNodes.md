@@ -23,5 +23,5 @@ SO3FourierPlan.setNodes(self, rots)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L591">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L614">source</a></font>
 {% endraw %}

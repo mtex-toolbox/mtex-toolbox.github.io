@@ -87,5 +87,5 @@ the row and column id - 1 for the grain id.
 
 MATLAB's [grain2d.neighbors](grain2d.neighbors.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L270">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L282">source</a></font>
 {% endraw %}

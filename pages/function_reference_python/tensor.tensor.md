@@ -90,7 +90,7 @@ The coefficients M are an array whose last R indices have dimension three, the d
 in front of them the shape of the list; the rank, when not given, is the number of trailing
 dimensions of size three. A 6 x 6 matrix is read as the Voigt matrix of a rank four tensor,
 a 3 x 6 matrix as that of a rank three one. Rotating the tensor, or an orientation acting on
-it, ori * T, transforms the coefficients, which is what the texture averages build on.
+it, `ori * T`, transforms the coefficients, which is what the texture averages build on.
 
 The frame is a crystalFrame or a specimenFrame, given positionally or as frame=; without one
 the tensor is in the default specimen frame. T.M gives the coefficients back, T.rank,
@@ -120,6 +120,18 @@ Voigt convention.
 
 | `T` | tensor |
 
+## Properties
+
+| `M` | full Cartesian coefficient array with rank trailing axes of length three |
+| `rank` | number of tensor indices, independent of the number of tensors in a list |
+| `frame` | reference frame of the coefficients |
+| `CS` | alias for the tensor reference frame |
+| `doubleConvention` | Voigt convention used for shear-component factors |
+| `density` | material mass density, when provided |
+| `unit` | physical unit label carried by the tensor |
+| `name` | descriptive tensor label |
+| `shape` | shape of the tensor list, excluding tensor-component axes |
+
 ## See also
 
 [stiffnessTensor](stiffnessTensor_index_py.html), [strainTensor](strainTensor_index_py.html), [stressTensor](stressTensor_index_py.html), [tensor.rotate](tensor.rotate_py.html), [TensorDefinition](TensorDefinition_py.html)
@@ -130,5 +142,5 @@ Voigt convention.
 
 MATLAB's [tensor.tensor](tensor.tensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L134">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L161">source</a></font>
 {% endraw %}

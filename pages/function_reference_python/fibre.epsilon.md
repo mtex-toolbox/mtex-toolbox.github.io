@@ -62,5 +62,5 @@ The segment runs from the Euler angles (315, 0, 0) to (270, 54.7356, 45) degrees
 
 [OrientationFibre](OrientationFibre_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L609">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L615">source</a></font>
 {% endraw %}

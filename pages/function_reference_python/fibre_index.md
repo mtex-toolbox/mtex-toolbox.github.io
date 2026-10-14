@@ -18,14 +18,57 @@ specimen direction r, or the arc of them between two orientations; a list of fib
 <div class="mx-form" markdown="1">
 
 ```python
-f = fibre(h, r)                    the orientations with ori * h = r
+f = fibre(h, r)
+```
+
+The orientations with ori * h = r.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
 f = fibre(h, r, ss)
-f = fibre(o1, o2)                  the arc from o1 to o2 about the axis between them
-f = fibre(o1, h)                   the whole fibre through o1 about h
-f = fibre(o1, o2, full=True)       the full fibre through the arc
 ```
 
 </div>
+
+<div class="mx-form" markdown="1">
+
+```python
+f = fibre(o1, o2)
+```
+
+The arc from o1 to o2 about the axis between them.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+f = fibre(o1, h)
+```
+
+The whole fibre through o1 about h.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+f = fibre(o1, o2, full=True)
+```
+
+The full fibre through the arc.
+
+</div>
+
+## Input
+
+| `a` | crystal direction h, or first orientation o1 |
+| `b` | specimen direction r, second orientation o2, or a crystal direction for a fibre through o1 |
+| `frames` | optional crystal and specimen frames |
+| `full` | include the entire circular fibre rather than only the arc between two orientations; default False |
 
 ## Members
 

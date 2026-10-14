@@ -13,5 +13,5 @@ A property of [spotDirectionKey](spotDirectionKey_index_py.html).
 
 the centres, with the equivalents under the group kept beside them; set as in MATLAB
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L512">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L546">source</a></font>
 {% endraw %}

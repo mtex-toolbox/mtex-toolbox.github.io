@@ -26,5 +26,5 @@ a - b
 
 MATLAB's [quaternion.minus](quaternion.minus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L192">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L215">source</a></font>
 {% endraw %}

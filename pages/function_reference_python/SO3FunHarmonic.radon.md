@@ -90,5 +90,5 @@ the transform, is not taken: truncate the function first.
 
 MATLAB's [SO3FunHarmonic.radon](SO3FunHarmonic.radon.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L744">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L795">source</a></font>
 {% endraw %}

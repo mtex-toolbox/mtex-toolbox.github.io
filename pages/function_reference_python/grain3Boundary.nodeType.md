@@ -30,5 +30,5 @@ grain3Boundary.nodeType(self)
 
 MATLAB's [grain3Boundary.nodeType](grain3Boundary.nodeType.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L285">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L320">source</a></font>
 {% endraw %}

@@ -12,9 +12,28 @@ status: Reference
 {% raw %}
 A method of [quaternion](quaternion_index_py.html).
 
-the Rodrigues vectors, the axes scaled by tan(omega/2)
+express each rotation as an axis scaled by tan(omega/2).
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+r = rot.Rodrigues()
+```
+
+</div>
+
+## Description
+
+The result is a vector3d of dimensionless Rodrigues coordinates. The identity maps
+to the origin; half-turns lie at infinity, so this representation is singular at pi.
+
+## See also
+
+[rotation.byRodrigues](rotation.byRodrigues_py.html), [quaternion.homochoric](quaternion.homochoric_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -30,5 +49,5 @@ quaternion.Rodrigues(self)
 
 MATLAB's [quaternion.Rodrigues](quaternion.Rodrigues.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L341">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L404">source</a></font>
 {% endraw %}

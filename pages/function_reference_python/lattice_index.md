@@ -24,6 +24,12 @@ l = lattice(pos, basis=(A, 'hex'))
 
 </div>
 
+## Input
+
+| `pos` | vector3d positions of the map measurements |
+| `basis` | optional pair (A, shape), with a 2-by-2 basis and 'square' or 'hex' cell shape |
+| `plane` | optional mapPlane; None fits the plane from the positions |
+
 ## Members
 
 | [dxy](lattice.dxy_py.html) | the representative spacing: the mean length of the two basis vectors |
@@ -33,5 +39,5 @@ l = lattice(pos, basis=(A, 'hex'))
 | [subset](lattice.subset_py.html) | the same lattice on a subset of its sites, the index counted from the least one kept |
 | [unitCell](lattice.unitCell_py.html) | the corners of the cell around a site, relative to it, anticlockwise, shape (k, 3) |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L99">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L103">source</a></font>
 {% endraw %}

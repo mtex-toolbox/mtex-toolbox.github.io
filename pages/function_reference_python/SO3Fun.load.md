@@ -36,5 +36,5 @@ SO3Fun.load(fname, *args, **kwargs)
 
 MATLAB's [SO3Fun.load](SO3Fun.load.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3funclass.py#L12">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3funclass.py#L27">source</a></font>
 {% endraw %}

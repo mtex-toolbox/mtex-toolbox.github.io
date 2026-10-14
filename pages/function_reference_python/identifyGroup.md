@@ -57,5 +57,5 @@ takes the type its angles say.
 
 [symmetry](symmetry_index_py.html), [findPointGroup](findPointGroup_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L614">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L664">source</a></font>
 {% endraw %}

@@ -23,5 +23,5 @@ S2AxisFieldHarmonic.symmetrise(self)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L253">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L258">source</a></font>
 {% endraw %}

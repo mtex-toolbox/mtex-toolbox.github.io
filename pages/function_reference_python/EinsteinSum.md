@@ -17,10 +17,30 @@ the contraction of tensors, vectors, rotations or arrays over the indices they s
 <div class="mx-form" markdown="1">
 
 ```python
-EinsteinSum(C, [1, 2, -1, -2], eps, [-1, -2])     sigma_ij = C_ijkl eps_kl
-EinsteinSum(a, [1], b, [2])                        the dyad a_i b_j
-EinsteinSum(T, [-1, -2, -1, -2])                   a label twice in one operand is a trace
+EinsteinSum(C, [1, 2, -1, -2], eps, [-1, -2])
 ```
+
+Sigma_ij = C_ijkl eps_kl.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+EinsteinSum(a, [1], b, [2])
+```
+
+The dyad a_i b_j.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+EinsteinSum(T, [-1, -2, -1, -2])
+```
+
+A label twice in one operand is a trace.
 
 </div>
 
@@ -47,5 +67,5 @@ EinsteinSum(*args)
 
 MATLAB's [EinsteinSum](EinsteinSum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1031">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1119">source</a></font>
 {% endraw %}

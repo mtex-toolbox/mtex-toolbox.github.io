@@ -28,15 +28,22 @@ eps.type
 
 </div>
 
+## Input
+
+| `M` | symmetric rank-two coefficients or six-component Voigt vectors, or another tensor |
+| `args` | optional reference frame |
+| `type` | 'Lagrange' for the reference configuration or 'Euler' for the current configuration |
+| `kwargs` | tensor constructor options; engineering Voigt convention is used by default |
+
 ## Members
 
-| [axisRatios](strainTensor.axisRatios_py.html) | the differences of the principal values, largest first |
+| [axisRatios](strainTensor.axisRatios_py.html) | return signed differences between the principal values of a rank-two tensor |
 | [calcTaylor](strainTensor.calcTaylor_py.html) | the Taylor factor, the shears of the slip systems and the plastic spin of a strain the crystal accommodates by slip alone |
-| [deviatoricStrain](strainTensor.deviatoricStrain_py.html) | the deviatoric part, the tensor less a third of its trace on the diagonal |
-| [equivalentStrain](strainTensor.equivalentStrain_py.html) | the von Mises equivalent strain, sqrt(2/3 e:e) of the deviatoric strain e |
-| [maxStrain](strainTensor.maxStrain_py.html) | the magnitude of a strain is its largest principal value, which the Taylor factor is measured against |
+| [deviatoricStrain](strainTensor.deviatoricStrain_py.html) | remove the isotropic part of a rank-two stress or strain tensor |
+| [equivalentStrain](strainTensor.equivalentStrain_py.html) | compute the von Mises equivalent strain |
+| [maxStrain](strainTensor.maxStrain_py.html) | return the largest absolute principal strain of each tensor |
 | [norm](strainTensor.norm_py.html) | the Frobenius norm of every tensor, over all its coefficients |
-| [octahedralStrain](strainTensor.octahedralStrain_py.html) | the octahedral shear and normal strain, from the principal stretches |
+| [octahedralStrain](strainTensor.octahedralStrain_py.html) | compute octahedral shear and normal strain from Green–Lagrange strain |
 | [strainTensor](strainTensor.strainTensor_py.html) | a rank two symmetric strain tensor, in the double convention of the Voigt notation |
 
 ## Used on
@@ -45,5 +52,5 @@ eps.type
 
 MATLAB's [strainTensor_index](strainTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1298">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1451">source</a></font>
 {% endraw %}

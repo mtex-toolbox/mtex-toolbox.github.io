@@ -36,5 +36,5 @@ S1FunHarmonic.sum(self)
 
 MATLAB's [S1Fun.sum](S1Fun.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L428">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L474">source</a></font>
 {% endraw %}

@@ -27,5 +27,5 @@ crystalFrame.transformationMatrix(self, other)
 
 MATLAB's [crystalSymmetry.transformationMatrix](crystalSymmetry.transformationMatrix.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L959">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1033">source</a></font>
 {% endraw %}

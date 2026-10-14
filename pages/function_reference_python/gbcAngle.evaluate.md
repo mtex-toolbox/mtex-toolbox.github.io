@@ -72,5 +72,5 @@ pixels whose value is 1 into one grain.
 
 [gbcSoft](gbcSoft_index_py.html), [gbcEqual](gbcEqual_index_py.html), [calcGrains](EBSD.calcGrains_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L160">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L164">source</a></font>
 {% endraw %}

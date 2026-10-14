@@ -83,5 +83,5 @@ adopted, CS from h1 and SS from r1, unless frames are named.
 
 MATLAB's [orientation.map](orientation.map.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L279">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L295">source</a></font>
 {% endraw %}

@@ -112,6 +112,15 @@ symmetrise=False.
 
 | `SO3F` | SO3FunHarmonic |
 
+## Properties
+
+| `fhat` | Wigner coefficients in MTEX's public basis |
+| `bandwidth` | largest harmonic degree; assignment truncates or pads the expansion |
+| `CS, SS` | crystal and specimen reference frames |
+| `isReal` | whether the function takes real values; setting True projects onto the real part |
+| `antipodal` | whether grain exchange symmetry f(g)=f(inv(g)) is imposed |
+| `shape` | shape of a function list, excluding the coefficient axis |
+
 ## See also
 
 [SO3FunHarmonic.quadrature](SO3FunHarmonic.quadrature_py.html), [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate_py.html), [SO3FunRBF](SO3FunRBF_index_py.html), [SO3FunHandle](SO3FunHandle_index_py.html), [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html), [SO3FunHarmonicRepresentation](SO3FunHarmonicRepresentation_py.html)
@@ -127,7 +136,7 @@ symmetrise=False.
 | [conv](SO3FunHarmonic.conv_py.html) | the convolution with another SO(3) function, a kernel, a function on the sphere or a vector of multipliers per degree, as conv(f, g) |
 | [dot](SO3FunHarmonic.dot_py.html) | the inner product int conj(f) g, the first argument conjugated |
 | [dtype](SO3FunHarmonic.dtype_py.html) | the dtype of the coefficients |
-| [eval](SO3FunHarmonic.eval_py.html) | the coefficients are invariant under the groups of the frames, so the transform may run on the reduced index set of their z folds |
+| [eval](SO3FunHarmonic.eval_py.html) | evaluate a harmonic orientation function at rotations or orientations |
 | [example](SO3FunHarmonic.example_py.html) | the harmonic expansion of the Dubna ODF, MTEX's example function |
 | [exp](SO3FunHarmonic.exp_py.html) | the exponential of the function, by quadrature at twice the bandwidth, or at the bandwidth given |
 | [fhat](SO3FunHarmonic.fhat_py.html) | the coefficients in MTEX's basis, as MATLAB's SO3F.fhat reads and assigns them |
@@ -136,7 +145,7 @@ symmetrise=False.
 | [grad](SO3FunHarmonic.grad_py.html) | the gradient, a harmonic vector field on SO(3), left or with side='right' right |
 | [horzcat](SO3FunHarmonic.horzcat_py.html) | the functions joined into one list along an axis, the coefficients padded to the largest bandwidth |
 | [interpolate](SO3FunHarmonic.interpolate_py.html) | the harmonic function fitted to values at orientations, by regularised least squares, as interpolate(nodes, values, ...) |
-| [inv](SO3FunHarmonic.inv_py.html) | the function of the inverse rotations, f(g^-1), its crystal and specimen frame exchanged |
+| [inv](SO3FunHarmonic.inv_py.html) | form the function evaluated at inverse rotations |
 | [isclose](SO3FunHarmonic.isclose_py.html) | the same coefficients up to a tolerance |
 | [isReal](SO3FunHarmonic.isReal_py.html) | SO3F.isReal = True makes the coefficients those of the real part, as MATLAB's does |
 | [laplace](SO3FunHarmonic.laplace_py.html) | the Laplace-Beltrami operator applied to the function, degree n scaled by -n(n+1) |
@@ -163,11 +172,11 @@ symmetrise=False.
 | [sqrt](SO3FunHarmonic.sqrt_py.html) | the square root of the function, by quadrature at twice the bandwidth, or at the bandwidth given |
 | [subsref](SO3FunHarmonic.subsref_py.html) |  |
 | [sum](SO3FunHarmonic.sum_py.html) | the integral over SO(3), 8 pi^2 times the mean |
-| [symmetrise](SO3FunHarmonic.symmetrise_py.html) | the projection of H5 on both sides, and the exchange symmetry f(g) = f(g^-1) |
+| [symmetrise](SO3FunHarmonic.symmetrise_py.html) | project the coefficients onto the symmetries carried by the two frames |
 | [T](SO3FunHarmonic.T_py.html) | the list transposed, a row of n functions becoming a column |
 | [textureIndex](SO3FunHarmonic.textureIndex_py.html) | the texture index of a function on SO(3) or on the sphere, the squared L2 norm of its harmonic expansion |
 | [times](SO3FunHarmonic.times_py.html) |  |
-| [truncate](SO3FunHarmonic.truncate_py.html) | the coefficient vector cut or padded to a bandwidth |
+| [truncate](SO3FunHarmonic.truncate_py.html) | cut or pad a harmonic orientation function to maximum degree L |
 | [uminus](SO3FunHarmonic.uminus_py.html) |  |
 | [vertcat](SO3FunHarmonic.vertcat_py.html) | the functions joined into one list along an axis, the coefficients padded to the largest bandwidth |
 | [volume](SO3FunHarmonic.volume_py.html) | the share of orientations within a radius of a centre: the integral of f over the ball, int_{angle(g, c) < r} f(g) dg, relative to the integral over all orientations |

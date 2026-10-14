@@ -10,19 +10,39 @@ counterpart: directionColorKey.html
 status: Reference
 ---
 {% raw %}
-a colour key turning directions into colours
+base class for assigning colours to directions with crystal symmetry
 
 ## Syntax
 
 <div class="mx-form" markdown="1">
 
 ```python
-rgb = key.direction2color(h)     an (..., 3) array in [0, 1]
-key.sym, key.sR                  the group and the sector the key is defined on
-key.plot()                       the key drawn on its sector
+rgb = key.direction2color(h)
+key.plot()
 ```
 
 </div>
+
+## Description
+
+A concrete direction key maps symmetry-equivalent directions to the same colour. Colouring
+returns an array of shape h.shape + (3,) with RGB channels in [0, 1]. Plot the key alongside
+a direction or orientation map to show what its colours mean. Use HSVDirectionKey,
+TSLDirectionKey, HKLDirectionKey or spotDirectionKey to choose the colouring rule.
+
+## Input
+
+| `CS` | referenceFrame or symmetry group defining equivalent directions |
+
+## Properties
+
+| `CS` | frame or symmetry supplied to the key |
+| `sym` | symmetry group used when folding directions |
+| `sR` | fundamental spherical sector used for colouring |
+
+## See also
+
+[HSVDirectionKey](HSVDirectionKey_index_py.html), [TSLDirectionKey](TSLDirectionKey_index_py.html), [HKLDirectionKey](HKLDirectionKey_index_py.html), [ipfColorKey](ipfColorKey_index_py.html)
 
 ## Members
 

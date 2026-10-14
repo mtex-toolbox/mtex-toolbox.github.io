@@ -26,5 +26,5 @@ a + b
 
 MATLAB's [crystalShape.plus](crystalShape.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L288">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L361">source</a></font>
 {% endraw %}

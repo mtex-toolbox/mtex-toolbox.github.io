@@ -96,5 +96,5 @@ point iteration; here the first argument is the smoothing length.
 
 | [l1TVFilter](l1TVFilter.l1TVFilter_py.html) | the total variation filter of the orientations of a map, absolute in the data term and in the differences between neighbours, which smooths noise and keeps sharp steps |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L74">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L88">source</a></font>
 {% endraw %}

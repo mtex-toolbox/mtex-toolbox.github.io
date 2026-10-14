@@ -13,5 +13,5 @@ A property of [EBSDFileInfo](EBSDFileInfo_index_py.html).
 
 the file name without its folder
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L57">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L83">source</a></font>
 {% endraw %}

@@ -24,5 +24,5 @@ S2Triangulation.locate(self, v)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/s2triangulation.py#L56">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/s2triangulation.py#L59">source</a></font>
 {% endraw %}

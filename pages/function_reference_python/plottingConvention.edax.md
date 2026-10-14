@@ -53,7 +53,7 @@ setting is given, the port takes 2 silently.
 
 ## See also
 
-[plottingConvention](plottingConvention_index_py.html), [plottingConvention.default](plotx2east_py.html)
+[plottingConvention](plottingConvention_index_py.html), [plottingConvention.default](plottingConvention.default_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L65">source</a></font>
 {% endraw %}

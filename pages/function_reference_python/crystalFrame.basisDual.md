@@ -12,9 +12,28 @@ status: Reference
 {% raw %}
 A method of [crystalFrame](crystalFrame_index_py.html).
 
-the reciprocal axes a*, b*, c* as vectors
+return the reciprocal lattice basis `a*, b*, c*` as Cartesian vectors.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+reciprocal = cs.basisDual()
+```
+
+</div>
+
+## Description
+
+The three rows are dual to the direct basis: `dot(a_i, a_j*)` equals the identity matrix.
+Units are reciprocal to the cell-length units. No factor of `2*pi` is included.
+
+## See also
+
+[crystalFrame.axes](crystalFrame.axes_py.html), [crystalFrame.axesDual](crystalSymmetry.axesDual_py.html), [vector3d.dspacing](Miller.dspacing_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +45,5 @@ crystalFrame.basisDual(self)
 
 MATLAB's [crystalFrame.basisDual](crystalFrame.basisDual.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L950">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1016">source</a></font>
 {% endraw %}

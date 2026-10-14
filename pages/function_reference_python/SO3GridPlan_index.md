@@ -12,9 +12,15 @@ status: Reference
 the plan of a Wigner series on a Clenshaw-Curtis quadrature grid of SO(3) up to bandwidth L, a
 sequence of FFTs one axis at a time: plan(fhat) evaluates, plan.adjoint(values, weights)
 
+## Input
+
+| `g` | quadratureSO3Grid at which to evaluate the series |
+| `L` | maximum Wigner degree; default the grid bandwidth |
+| `real` | whether the represented function is real-valued; default True |
+
 ## Members
 
 | [adjoint](SO3GridPlan.adjoint_py.html) | the SO(3) coefficients from weighted values on the grid, the FFTs taken backwards |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L764">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L799">source</a></font>
 {% endraw %}

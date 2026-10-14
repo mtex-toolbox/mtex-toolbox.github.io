@@ -43,6 +43,11 @@ gbcAngle(10*degree, byPhase={'Forsterite': 15*degree})
 
 </div>
 
+## Input
+
+| `threshold` | misorientation threshold in radians, a high/low pair, or a per-phase list of thresholds |
+| `byPhase` | dictionary of thresholds keyed by phase name, overriding the common thresholds |
+
 ## Members
 
 | [evaluate](gbcAngle.evaluate_py.html) | the connectivity of the pairs i[k], j[k]: the share of the angle levels their misorientation stays below, 0 across phases, 1 between not indexed measurements |

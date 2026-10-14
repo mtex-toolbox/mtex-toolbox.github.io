@@ -13,5 +13,5 @@ A property of [SO3FunBingham](SO3FunBingham_index_py.html).
 
 the four principal quaternion axes as orientations, MATLAB's odf.A
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L148">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L155">source</a></font>
 {% endraw %}

@@ -12,10 +12,34 @@ status: Reference
 {% raw %}
 A method of [crystalShape](crystalShape_index_py.html).
 
-the section of the shape by the plane through its centre with the normal n: the
-vertices of the polygon in order, in the frame the shape stands in
+cut a single crystal shape by a plane through the mean of its vertices.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+section = cS.innerFace(normal)
+```
+
+</div>
+
+## Description
+
+The plane is perpendicular to normal. Return its intersection with the shape as an
+ordered polygon of vector3d vertices in the current frame. This is an internal section,
+which need not coincide with an external crystal face. For a list of shapes, select one
+with cS[k] before taking a section.
+
+## Input
+
+| `n` | nonzero vector3d normal or Cartesian triple |
+
+## See also
+
+[crystalShape.subSet](crystalShape.subSet_py.html), [crystalShape.exitDistance](crystalShape.exitDistance_py.html), [crystalShape.plotInnerFace](crystalShape.plotInnerFace_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -27,5 +51,5 @@ crystalShape.innerFace(self, n)
 
 MATLAB's [crystalShape.innerFace](crystalShape.innerFace.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L337">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L432">source</a></font>
 {% endraw %}

@@ -61,5 +61,5 @@ axis or the a axis, and the standard triangles of the cubic groups.
 
 [referenceFrame.fundamentalSector](referenceFrame.fundamentalSector_py.html), [sphericalRegion](sphericalRegion_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L393">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L445">source</a></font>
 {% endraw %}

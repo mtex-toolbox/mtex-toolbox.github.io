@@ -18,5 +18,5 @@ boundary network sampled at the spacing h, the fixed ones stay
 | [smooth](boundaryFilter.smooth_py.html) | V are the vertices (n, 2) of the network, h the spacing they are sampled at |
 | [solveDirichlet](boundaryFilter.solveDirichlet_py.html) | solve M V = V0 for the vertices that may move: the fixed ones are eliminated rather than penalised, so they stay exactly where they are and enter through the right hand side |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L105">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L110">source</a></font>
 {% endraw %}

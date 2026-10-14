@@ -25,6 +25,11 @@ job.undistort()
 
 </div>
 
+## Input
+
+| `imgList` | ordered mapImage sequence, from most distorted to the final reference image |
+| `T` | spatialTransform stages for the hops between consecutive images; None leaves the hop list unconfigured |
+
 ## Members
 
 | [calcDistortion](trueEbsd.calcDistortion_py.html) | the distortion between every consecutive pair of maps of the job fitted |

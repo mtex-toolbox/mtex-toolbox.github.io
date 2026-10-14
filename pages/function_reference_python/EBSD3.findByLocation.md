@@ -78,5 +78,5 @@ of any position are returned once each, in the order of the map.
 
 MATLAB's [EBSD3.findByLocation](EBSD3.findByLocation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L419">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L432">source</a></font>
 {% endraw %}

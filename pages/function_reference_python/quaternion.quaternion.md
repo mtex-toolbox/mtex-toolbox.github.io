@@ -10,29 +10,44 @@ counterpart: quaternion.quaternion.html
 status: Reference
 ---
 {% raw %}
-quaternions a + b i + c j + d k, the coefficients along the last axis; q * q2 is the product,
-q * v rotates a vector
+quaternions stored as `a + b*i + c*j + d*k`, with one coefficient tuple per element.
 
 ## Syntax
 
 <div class="mx-form" markdown="1">
 
 ```python
-quaternion(a, b, c, d)
-quaternion(abcd)                     an array of shape (..., 4) or (4, N)
+q = quaternion(a, b, c, d)
+q = quaternion(abcd)
 ```
 
 </div>
 
-## Signature
+## Description
 
-<div class="mx-form" markdown="1">
+Separate coefficient arrays broadcast together. A coordinate array has shape (..., 4),
+or (4, n) for a column-oriented list. Construction preserves the norm and sign;
+q and -q are distinct quaternions. Use [`rotation`](rotation_index_py.html) for unit quaternions representing
+proper rotations, where opposite signs represent the same rotation.
 
-```python
-quaternion(*args, dtype=None)
-```
+Quaternion multiplication composes products in the usual order. For unit quaternions,
+`q*v` applies the rotation to a vector3d. Indexing and reshaping preserve the container.
 
-</div>
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `dtype` | `None` | floating-point type of the stored coefficients |
+
+## Properties
+
+| `a, b, c, d` | real and imaginary coefficients as arrays of the container shape |
+| `data` | numeric coefficient array with a trailing axis of length four |
+| `shape` | shape of the quaternion array, excluding the four coefficients |
+
+## See also
+
+[rotation](rotation_index_py.html), [orthogonalTransform](orthogonalTransform_index_py.html), [quaternion.normalize](quaternion.normalize_py.html)
 
 ## Used on
 

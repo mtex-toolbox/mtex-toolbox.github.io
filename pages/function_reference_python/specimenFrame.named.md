@@ -43,7 +43,7 @@ The rolling frame of the session.
 
 ## See also
 
-[referenceFrame.byName](referenceFrame.byName_py.html), specimenFrame.rolling
+[referenceFrame.byName](referenceFrame.byName_py.html), [specimenFrame.rolling](specimenFrame.rolling_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1119">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1193">source</a></font>
 {% endraw %}

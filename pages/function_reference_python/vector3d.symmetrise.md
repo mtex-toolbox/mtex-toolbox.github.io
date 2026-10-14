@@ -76,5 +76,5 @@ axis of one.
 
 MATLAB's [vector3d.symmetrise](vector3d.symmetrise.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1063">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1180">source</a></font>
 {% endraw %}

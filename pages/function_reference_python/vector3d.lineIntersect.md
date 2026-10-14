@@ -51,5 +51,5 @@ The segments and the planes broadcast against each other.
 
 MATLAB's [vector3d.lineIntersect](vector3d.lineIntersect.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L190">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L220">source</a></font>
 {% endraw %}

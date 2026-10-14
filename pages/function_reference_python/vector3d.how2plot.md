@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 the plotting convention of the vector, that of its frame or the default
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L168">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L178">source</a></font>
 {% endraw %}

@@ -103,5 +103,5 @@ the old relationship that every new one is closest to.
 
 MATLAB's [parentGrainReconstructor.calcParent2Child](parentGrainReconstructor.calcParent2Child.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L670">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L674">source</a></font>
 {% endraw %}

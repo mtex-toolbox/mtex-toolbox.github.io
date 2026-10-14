@@ -27,5 +27,5 @@ SO3FunHarmonic.interpolate(nodes, values, **kwargs)
 
 MATLAB's [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L775">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L826">source</a></font>
 {% endraw %}

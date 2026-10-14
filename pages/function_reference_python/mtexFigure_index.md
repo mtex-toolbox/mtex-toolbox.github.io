@@ -133,7 +133,7 @@ MATLAB's.
 | [gca](mtexFigure.gca_py.html) | MATLAB's mtexFig.gca: the axes drawn into last |
 | [mtexFigure](mtexFigure.mtexFigure_py.html) | a figure of MTEX plots: equally sized axes in a grid, with colour bars and legends that follow them |
 | [nextAxis](mtexFigure.nextAxis_py.html) | a new axes in the next cell of the layout, the layout and the figure grown when it is full |
-| [savefig](mtexFigure.savefig_py.html) | a PNG is written at zlib level 1, not Pillow's 6: the same pixels, a file about a tenth larger, in half the time a large map took, most of which was the compression |
+| [savefig](mtexFigure.savefig_py.html) | save the matplotlib figure to an image or vector-graphics file |
 | [setColormap](mtexFigure.setColormap_py.html) | the colour map of the plots of the figure, or of one axes |
 | [setColorRange](mtexFigure.setColorRange_py.html) | one colour range over every axes ('equal'), each axes its own ('tight'), or one given as (lo, hi) |
 | [setColorScale](mtexFigure.setColorScale_py.html) | logarithmic or linear colours on every axes of the figure |

@@ -12,9 +12,30 @@ status: Reference
 {% raw %}
 A method of [vector3d](vector3d_index_py.html).
 
-polar angle to z in [0, pi] and azimuth from x towards y in [0, 2pi), vector3d/polar
+return polar angle, azimuth and length for every vector.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+theta, rho, radius = v.polar()
+```
+
+</div>
+
+## Description
+
+The polar angle theta is measured from +z towards the xy plane and lies in [0, pi].
+The azimuth rho is measured from +x towards +y and lies in [0, `2*pi`). Both angles
+are in radians. Radius has the units of the Cartesian coordinates. The three arrays
+have the shape of v; for a zero vector the implementation returns theta=pi/2 and rho=0.
+
+## See also
+
+[vector3d.byPolar](vector3d.byPolar_py.html), [vector3d.theta](vector3d.theta_py.html), [vector3d.rho](vector3d.rho_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -26,5 +47,5 @@ vector3d.polar(self)
 
 MATLAB's [vector3d.polar](vector3d.polar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L551">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L627">source</a></font>
 {% endraw %}

@@ -12,9 +12,13 @@ status: Reference
 the componentwise median of the neighbourhood, which takes a wild pixel out without
 pulling the boundary after it
 
+## Input
+
+| `numNeighbours` | number of lattice-neighbour rings in the window; default 1 |
+
 ## Used on
 
 [EBSDDenoising](EBSDDenoising_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L54">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L57">source</a></font>
 {% endraw %}

@@ -12,9 +12,28 @@ status: Reference
 {% raw %}
 A method of [quaternion](quaternion_index_py.html).
 
-the cubochoric vectors, the homochoric ball mapped onto the cube
+express rotations as equal-volume coordinates in a cube.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+c = rot.cubochoric()
+```
+
+</div>
+
+## Description
+
+The homochoric ball is mapped to a cube centred at zero. The result is a vector3d
+whose coordinates are dimensionless, with the same array shape as rot.
+
+## See also
+
+[rotation.byCubochoric](rotation.byCubochoric_py.html), [quaternion.homochoric](quaternion.homochoric_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -30,5 +49,5 @@ quaternion.cubochoric(self)
 
 MATLAB's [quaternion.cubochoric](quaternion.cubochoric.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L349">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L429">source</a></font>
 {% endraw %}

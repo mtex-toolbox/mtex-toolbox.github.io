@@ -13,5 +13,5 @@ A property of [grain3Boundary](grain3Boundary_index_py.html).
 
 the incidence of vertices and grains, a sparse boolean matrix vertices x grains
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L353">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L388">source</a></font>
 {% endraw %}

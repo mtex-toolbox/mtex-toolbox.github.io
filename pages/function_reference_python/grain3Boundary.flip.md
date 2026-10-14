@@ -63,5 +63,5 @@ boundary is copied.
 
 MATLAB's [grain3Boundary.flip](grain3Boundary.flip.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L162">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3boundary.py#L197">source</a></font>
 {% endraw %}

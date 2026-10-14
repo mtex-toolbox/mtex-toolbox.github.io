@@ -26,5 +26,5 @@ a + b
 
 MATLAB's [SO3TangentVector.plus](SO3TangentVector.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L278">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L327">source</a></font>
 {% endraw %}

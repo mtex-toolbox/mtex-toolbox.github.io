@@ -26,5 +26,5 @@ a != b
 
 MATLAB's [fibre.ne](fibre.ne.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L354">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L360">source</a></font>
 {% endraw %}

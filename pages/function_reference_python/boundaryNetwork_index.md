@@ -14,6 +14,12 @@ in compressed form, and which of them may not move. The pool of vertices a bound
 indexes into is the whole cell complex, most of which no segment touches; compressing
 first is what keeps the sparse system the size of the boundary and not of the map
 
+## Input
+
+| `gBs` | grainBoundary networks to smooth together |
+| `moveTriplePoints` | allow triple junction vertices to move; default False |
+| `moveOuterBoundary` | allow outer-boundary vertices to move; default False |
+
 ## Members
 
 | [byArrays](boundaryNetwork.byArrays_py.html) | a network given by its arrays, the neighbours of vertex i being nbr[ptr[i]:ptr[i + 1]] |

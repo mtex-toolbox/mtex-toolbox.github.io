@@ -10,17 +10,17 @@ counterpart: BinghamODF.html
 status: Reference
 ---
 {% raw %}
-a Bingham distributed ODF; MATLAB's BinghamODF
+construct an orientation distribution from Bingham concentrations and quaternion axes
 
 ## Syntax
 
 <div class="mx-form" markdown="1">
 
 ```python
-odf = BinghamODF(20, ori)
+odf = BinghamODF(20, cs)
 ```
 
-About one orientation, the identity basis in its frames.
+Concentrated about the identity in this crystal frame.
 
 </div>
 
@@ -30,17 +30,7 @@ About one orientation, the identity basis in its frames.
 odf = BinghamODF(20, f)
 ```
 
-About a fibre.
-
-</div>
-
-<div class="mx-form" markdown="1">
-
-```python
-odf = BinghamODF(20, cs)
-```
-
-The identity basis in a crystal frame.
+Concentrated about an orientation fibre.
 
 </div>
 
@@ -50,31 +40,38 @@ The identity basis in a crystal frame.
 odf = BinghamODF([20, 10, 0, 0], A, cs, ss)
 ```
 
-Four concentrations, the axes a 4x4 matrix.
+Four orthogonal quaternion axes.
 
 </div>
 
 ## Description
 
-A Bingham distribution from four concentrations and four orthogonal quaternion axes, the
-axes as a 4x4 matrix, four orientations, or one orientation standing for the identity
-basis; fewer concentrations are padded with zeros; a fibre takes its two axes with the
-same concentration, as MATLAB's constructor does. The keywords of SO3FunBingham, weight
-and antipodal, are passed on.
+The density is proportional to `exp(sum_i kappa[i] * dot(q, A[:, i])**2)`, averaged
+over the crystal and specimen symmetry groups. A larger concentration favours the
+corresponding quaternion axis. Adding the same constant to all four concentrations leaves
+the density unchanged. Missing concentrations are padded with zeros.
+
+A fibre supplies two quaternion axes with the same concentration when kappa is scalar.
+A single orientation supplies its frames and selects the identity quaternion basis; its
+rotation does not set the peak position. To rotate a distribution, rotate the resulting
+ODF, or provide four explicitly rotated orthogonal quaternion axes.
+
+Additional keywords are passed to SO3FunBingham: weight sets the mean (default 1),
+and antipodal imposes grain-exchange symmetry.
 
 ## Input
 
-| `kappa` | the form parameters, up to four concentrations |
-| `A` | the axes: an orthogonal 4x4 matrix, four orientations, one orientation, a fibre, a crystal frame, or a crystal direction h followed by a specimen direction r for the fibre between them |
-| `frames` | the crystal and the specimen frame, when A does not carry them |
+| `kappa` | one to four concentration parameters |
+| `A` | orthogonal 4-by-4 matrix with quaternion axes as columns, four rotations or orientations, a fibre, a crystalFrame, or one orientation supplying its frames; None selects the identity basis |
+| `frames` | crystal and specimen frames when they are not supplied by A; when A is a crystal direction, the first extra argument is the specimen direction of the fibre |
 
 ## Output
 
-| `odf` | SO3FunBingham |
+| `odf` | SO3FunBingham, of mean one unless a different weight is supplied |
 
 ## See also
 
-[calcBinghamODF](orientation.calcBinghamODF_py.html), [fibreODF](fibreODF_py.html), [unimodalODF](unimodalODF_py.html), [uniformODF](uniformODF_py.html), [SO3FunBingham](SO3FunBingham_index_py.html)
+[SO3FunBingham](SO3FunBingham_index_py.html), [calcBinghamODF](orientation.calcBinghamODF_py.html), [fibreODF](fibreODF_py.html), [unimodalODF](unimodalODF_py.html)
 
 ## Signature
 
@@ -92,5 +89,5 @@ BinghamODF(kappa, A=None, *frames, **kwargs)
 
 MATLAB's [BinghamODF](BinghamODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L342">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L349">source</a></font>
 {% endraw %}

@@ -89,5 +89,5 @@ Reproducible.
 
 MATLAB's [rotation.rand](rotation.rand.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L80">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L103">source</a></font>
 {% endraw %}

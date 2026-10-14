@@ -93,5 +93,5 @@ list of functions have the nodes first.
 
 MATLAB's [S2FunHarmonic.quadrature](S2FunHarmonic.quadrature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L163">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L171">source</a></font>
 {% endraw %}

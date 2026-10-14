@@ -12,9 +12,9 @@ status: Reference
 {% raw %}
 A property of [S1FunHarmonic](S1FunHarmonic_index_py.html).
 
-f(x) = f(-x): c_{-k} = c_k
+whether f(x)=f(-x), tested from the Fourier coefficients; this is a boolean property, not an even-part projection.
 
 MATLAB's [S1FunHarmonic.even](S1FunHarmonic.even.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L200">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L206">source</a></font>
 {% endraw %}

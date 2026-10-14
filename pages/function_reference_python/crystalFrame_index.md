@@ -185,7 +185,7 @@ or R, which centering also sets.
 | [alpha](crystalFrame.alpha_py.html) | the angle alpha between the b and c axes, in radians |
 | [axes](crystalFrame.axes_py.html) | the crystal axes a, b, c in Euclidean coordinates, the basis |
 | [axesDual](crystalSymmetry.axesDual_py.html) | the reciprocal axes a*, b*, c*, MATLAB's axesDual |
-| [basisDual](crystalFrame.basisDual_py.html) | the reciprocal axes a*, b*, c* as vectors |
+| [basisDual](crystalFrame.basisDual_py.html) | return the reciprocal lattice basis `a*, b*, c*` as Cartesian vectors |
 | [bAxis](crystalFrame.bAxis_py.html) | the b axis as the Miller direction [010] of the frame |
 | [bAxisRec](crystalFrame.bAxisRec_py.html) | the reciprocal axis b* as the Miller plane normal (010) of the frame |
 | [beta](crystalFrame.beta_py.html) | the angle beta between the c and a axes, in radians |
@@ -198,7 +198,7 @@ or R, which centering also sets.
 | [crystalFrame](crystalFrame.crystalFrame_py.html) | the reference frame glued to the lattice basis of a phase, with the point group of the crystal |
 | [crystalSymmetry](crystalSymmetry.crystalSymmetry_py.html) | the reference frame glued to the lattice basis of a phase, with the point group of the crystal |
 | [gamma](crystalFrame.gamma_py.html) | the angle gamma between the a and b axes, in radians |
-| [load](crystalSymmetry.load_py.html) | the constructor answers with the registered instance crystalFrame.load('Al-Aluminum.cif'): the frame a CIF file describes, read by the interfaces layer above this one |
+| [load](crystalSymmetry.load_py.html) | construct a registered crystal frame from a CIF structure file |
 | [plotHKL](crystalSymmetry.plotHKL_py.html) | the low index directions <100>, <110>, <111> of a crystal with all their symmetric equivalents, labelled by their indices |
 | [primitiveAxes](crystalFrame.primitiveAxes_py.html) | the axes of a primitive cell of the lattice, the conventional axes where it is primitive |
 | [transformationMatrix](crystalFrame.transformationMatrix_py.html) | between crystal frames the axes are first re-paired by nearest length when the cells disagree, which is how the monoclinic settings 121 and 112 relate |
@@ -208,5 +208,5 @@ or R, which centering also sets.
 
 [CrystalDirections](CrystalDirections_py.html), [CrystalOperations](CrystalOperations_py.html), [CrystalReferenceSystem](CrystalReferenceSystem_py.html), [CrystalShapeSmorf](CrystalShapeSmorf_py.html), [CrystalSymmetries](CrystalSymmetries_py.html), [FundamentalSector](FundamentalSector_py.html), [LatticeMetric](LatticeMetric_py.html), [SymmetryAlignment](SymmetryAlignment_py.html), [MTEXvsBungeConvention](MTEXvsBungeConvention_py.html), [OrientationEmbeddings](OrientationEmbeddings_py.html), [OrientationFibre](OrientationFibre_py.html), [OrientationFundamentalRegion](OrientationFundamentalRegion_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L715">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L775">source</a></font>
 {% endraw %}

@@ -66,5 +66,5 @@ segment; a closed chain wraps around.
 
 MATLAB's [grainBoundary.curvature](grainBoundary.curvature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L472">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L508">source</a></font>
 {% endraw %}

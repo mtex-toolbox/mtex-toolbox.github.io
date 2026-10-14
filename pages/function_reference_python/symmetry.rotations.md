@@ -11,9 +11,28 @@ status: Reference
 {% raw %}
 A method of [symmetry](symmetry_index_py.html).
 
-the proper rotations, and the rotational axes with the highest order about each
+return the proper rotations already contained in the point group.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+rotations = cs.sym.rotations()
+```
+
+</div>
+
+## Description
+
+The result is a rotation container. Operations with determinant -1 are omitted;
+this method returns no axis or multiplicity arrays. For those use elements.
+
+## See also
+
+[symmetry.elements](symmetry.elements_py.html), [symmetry.properSubGroup](symmetry.properSubGroup_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 

@@ -58,5 +58,5 @@ itself.
 
 [ipfColorKey.orientation2color](ipfColorKey.orientation2color_py.html), [colorGrid](colorGrid_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L95">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L124">source</a></font>
 {% endraw %}

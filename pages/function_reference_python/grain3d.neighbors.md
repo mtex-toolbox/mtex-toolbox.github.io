@@ -62,5 +62,5 @@ id first, and listed once; the outside of the volume is no neighbour. MATLAB's f
 
 MATLAB's [grain3d.neighbors](grain3d.neighbors.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L379">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L404">source</a></font>
 {% endraw %}

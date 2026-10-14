@@ -141,5 +141,5 @@ The density of tensors of different densities is averaged with them. MATLAB's
 
 MATLAB's [tensor.mean](tensor.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L689">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L777">source</a></font>
 {% endraw %}

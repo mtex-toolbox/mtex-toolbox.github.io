@@ -64,5 +64,5 @@ than nmax vertices is sampled down to nmax. The plane and frame keywords go to s
 
 MATLAB's [shape2d.byFV](shape2d.byFV.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L436">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L477">source</a></font>
 {% endraw %}

@@ -71,5 +71,5 @@ agree.
 
 [S2Kernel.grad](S2Kernel.grad_py.html), [S2BumpKernel](S2BumpKernel_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L919">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1204">source</a></font>
 {% endraw %}

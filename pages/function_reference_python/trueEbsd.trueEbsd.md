@@ -26,6 +26,11 @@ job.undistort()
 
 </div>
 
+## Input
+
+| `imgList` | ordered mapImage sequence, from most distorted to the final reference image |
+| `T` | spatialTransform stages for the hops between consecutive images; None leaves the hop list unconfigured |
+
 ## Signature
 
 <div class="mx-form" markdown="1">

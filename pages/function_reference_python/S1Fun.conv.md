@@ -26,5 +26,5 @@ S1FunHarmonic.conv(self, psi)
 
 MATLAB's [S1Fun.conv](S1Fun.conv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L274">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L320">source</a></font>
 {% endraw %}

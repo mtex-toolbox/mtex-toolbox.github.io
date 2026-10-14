@@ -28,5 +28,5 @@ tensor.rotate(self, r)
 
 MATLAB's [tensor.rotate](tensor.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L580">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L668">source</a></font>
 {% endraw %}

@@ -27,5 +27,5 @@ S2Triangulation.calcBario(self, v)
 
 MATLAB's [S2Triangulation.calcBario](S2Triangulation.calcBario.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/s2triangulation.py#L76">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/s2triangulation.py#L79">source</a></font>
 {% endraw %}

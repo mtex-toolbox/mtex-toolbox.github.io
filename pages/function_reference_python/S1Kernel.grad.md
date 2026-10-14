@@ -53,5 +53,5 @@ The derivative as a kernel, an S1KernelHandle.
 
 [S1Kernel.calcFourier](S1Kernel.calcFourier_py.html), [S1FunHarmonic.grad](S1FunHarmonic.grad_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1104">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1440">source</a></font>
 {% endraw %}

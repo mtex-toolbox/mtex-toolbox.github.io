@@ -39,5 +39,5 @@ S2FunTri.abs(self)
 
 MATLAB's [S2FunTri.abs](S2FunTri.abs.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L134">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L164">source</a></font>
 {% endraw %}

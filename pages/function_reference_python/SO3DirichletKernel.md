@@ -10,7 +10,7 @@ counterpart: SO3DirichletKernel.html
 status: Reference
 ---
 {% raw %}
-the Dirichlet kernel on SO(3), sum_n (2n+1) U_2n(t) up to the degree N, of integral one:
+the Dirichlet kernel on SO(3), sum_n (2n+1) U_2n(t) up to the degree N, of mean one:
 the kernel for physical properties
 
 ## Syntax
@@ -19,10 +19,43 @@ the kernel for physical properties
 
 ```python
 SO3DirichletKernel(35)
-SO3DirichletKernel()        N the preference maxSO3Bandwidth
 ```
 
 </div>
+
+<div class="mx-form" markdown="1">
+
+```python
+SO3DirichletKernel()
+```
+
+N the preference maxSO3Bandwidth.
+
+</div>
+
+## Description
+
+Convolution with this kernel retains harmonic degrees 0 through N unchanged and
+removes higher degrees. It is useful for a specified harmonic resolution, including
+physical-property calculations. It has mean one but can take negative values.
+
+Evaluate psi at t=cos(omega/2), the cosine of half the rotation angle.
+Use psi.halfwidth() for the angular width in radians and psi.bandwidth for the
+maximum degree of its harmonic representation.
+
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `N` |  | maximum harmonic degree; the maxSO3Bandwidth preference when omitted |
+
+## Output
+
+| `psi` | SO3DirichletKernel |
+
+## See also
+
+[SO3Kernel](SO3Kernel_index_py.html), [calcDensity](calcDensity_py.html), [calcKernel](EBSD.calcKernel_py.html)
 
 ## Members
 
@@ -35,5 +68,5 @@ SO3DirichletKernel()        N the preference maxSO3Bandwidth
 
 MATLAB's [SO3DirichletKernel](SO3DirichletKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L569">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L688">source</a></font>
 {% endraw %}

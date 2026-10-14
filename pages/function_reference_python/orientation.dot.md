@@ -74,5 +74,5 @@ a rotation, it is rotation.dot: |q1 . q2|, or the signed product with antipodal=
 
 MATLAB's [orientation.dot](orientation.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L465">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L508">source</a></font>
 {% endraw %}

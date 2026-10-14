@@ -62,5 +62,5 @@ of scattered directions.
 
 MATLAB's [PoleFigure.mean](PoleFigure.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L362">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L395">source</a></font>
 {% endraw %}

@@ -12,9 +12,13 @@ status: Reference
 the mean of the most homogeneous of the four quadrants of the window, which smooths within
 a grain and leaves a step where one is
 
+## Input
+
+| `numNeighbours` | number of lattice-neighbour rings in the window; default 1 |
+
 ## Used on
 
 [EBSDDenoising](EBSDDenoising_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L60">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L66">source</a></font>
 {% endraw %}

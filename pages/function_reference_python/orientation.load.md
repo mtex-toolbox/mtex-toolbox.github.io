@@ -12,10 +12,29 @@ status: Reference
 {% raw %}
 A method of [orientation](orientation_index_py.html).
 
-orientation.load(fname, cs, columnNames=['phi1', 'Phi', 'phi2']): the orientations of a
-text table; loadOrientation returns the other columns too
+read orientations from a text table.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+ori = orientation.load(fname, cs, columnNames=['phi1', 'Phi', 'phi2'])
+```
+
+</div>
+
+## Description
+
+Frames, angle conventions, column assignments and other options are passed to
+[`loadOrientation`](loadOrientation_py.html). Only its orientation result is returned; call loadOrientation
+directly to retain additional data columns.
+
+## See also
+
+[loadOrientation](loadOrientation_py.html), [orientation.byEuler](orientation.byEuler_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -27,5 +46,5 @@ orientation.load(fname, *args, **kwargs)
 
 MATLAB's [orientation.load](orientation.load.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L181">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L189">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [grain3d](grain3d_index_py.html).
 
 all vertices of the boundary, as vectors
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L274">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L299">source</a></font>
 {% endraw %}

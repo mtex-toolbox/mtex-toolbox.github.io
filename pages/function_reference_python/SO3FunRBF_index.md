@@ -69,6 +69,15 @@ MATLAB's SO3FunRBF(F), approximating another SO3Fun, is not ported.
 
 | `SO3F` | SO3FunRBF |
 
+## Properties
+
+| `center` | kernel centres as orientations |
+| `psi` | radial kernel shared by the centres |
+| `weights` | coefficients multiplying the individual kernel contributions |
+| `c0` | constant contribution to the function |
+| `CS, SS` | crystal and specimen reference frames |
+| `antipodal` | whether grain exchange symmetry is used |
+
 ## See also
 
 [unimodalODF](unimodalODF_py.html), [SO3FunCBF](SO3FunCBF_index_py.html), [SO3FunRBF.interpolate](SO3FunRBF.interpolate_py.html), [calcDensity](calcDensity_py.html), [SO3FunRBF.radon](SO3FunRBF.radon_py.html), [RadialODFs](RadialODFs_py.html)

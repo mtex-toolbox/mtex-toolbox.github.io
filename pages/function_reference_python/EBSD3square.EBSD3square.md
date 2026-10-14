@@ -91,6 +91,17 @@ neighbours, or the rows of D. Positions on no lattice leave ebsd.lattice None.
 
 | `ebsd` | EBSD3 |
 
+## Properties
+
+| `pos` | vector3d voxel-centre positions |
+| `rotations` | measured rotation at each voxel |
+| `phaseId` | phase-list index at each voxel, zero for notIndexed |
+| `CSList` | phase metadata and crystal frames |
+| `shape` | voxel-array shape or shape of a scattered selection |
+| `lattice` | voxel grid geometry and spacing |
+| `isPadding` | mask of unmeasured cells introduced by gridding |
+| `scanUnit` | unit of spatial positions |
+
 ## See also
 
 [EBSD3square](EBSD3square_py.html), [EBSD](EBSD_index_py.html), [voxelLattice](voxelLattice_index_py.html), [calcGrains](EBSD.calcGrains_py.html), [grain3d](grain3d_index_py.html), [EBSD3Analysis](EBSD3Analysis_py.html)

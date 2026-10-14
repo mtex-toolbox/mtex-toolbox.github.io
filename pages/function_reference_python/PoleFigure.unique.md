@@ -63,5 +63,5 @@ has a dot product with the other above 1 - tol (its absolute value for axes).
 
 MATLAB's [PoleFigure.unique](PoleFigure.unique.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L418">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L451">source</a></font>
 {% endraw %}

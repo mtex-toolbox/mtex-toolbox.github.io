@@ -9,7 +9,7 @@ lang: python
 status: Reference
 ---
 {% raw %}
-a transform given by a function of the positions and, for the inverse, a second one
+a spatial transform defined by a callable and an optional inverse callable
 
 ## Syntax
 
@@ -17,9 +17,30 @@ a transform given by a function of the positions and, for the inverse, a second 
 
 ```python
 T = spatialTransformHandle(fun, funInv)
+moved = T * pos
 ```
 
 </div>
+
+## Description
+
+The callable receives vector3d positions and must return their transformed positions,
+rather than their displacements. It is responsible for preserving the required shape,
+frame and z coordinates. Supply funInv to enable T.inv(); without it, requesting an
+inverse raises ValueError. The inverse callable receives positions in the output space.
+
+## Input
+
+| `fun` | callable mapping input positions to output positions |
+| `funInv` | inverse callable, or None if no inverse is provided |
+
+## Output
+
+| `T` | spatialTransformHandle |
+
+## See also
+
+[spatialTransform](spatialTransform_index_py.html), [spatialTransformInverse](spatialTransformInverse_index_py.html)
 
 ## Members
 
@@ -27,5 +48,5 @@ T = spatialTransformHandle(fun, funInv)
 | [inv](spatialTransformHandle.inv_py.html) | the transform of the inverse function, an error where none was given |
 | [paramChar](spatialTransformHandle.paramChar_py.html) | the name of the function as a line of text |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L749">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L844">source</a></font>
 {% endraw %}

@@ -23,9 +23,14 @@ rgb = key.orientation2color(ori)
 
 </div>
 
+## Input
+
+| `x` | crystalFrame, orientation, or single-phase EBSD or grain data |
+| `ipfDirection` | vector3d specimen direction whose crystal alignment is coloured; default zvector |
+
 ## Used on
 
 [EBSDIPFMap](EBSDIPFMap_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L208">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L271">source</a></font>
 {% endraw %}

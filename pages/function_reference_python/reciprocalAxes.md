@@ -9,9 +9,37 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the reciprocal axes a*, b*, c*
+compute reciprocal basis vectors from a direct crystal basis
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+dual = reciprocalAxes(axes)
+```
+
+</div>
+
+## Description
+
+Rows of axes are the Cartesian vectors a, b and c. Return rows `a*, b* and c*` such that
+axes @ dual.T is the identity. No factor `2*pi` is included. Reciprocal lengths use the
+inverse of the direct-basis units. A degenerate basis has no finite reciprocal basis.
+
+## Input
+
+| `axes` | numeric array of shape (3, 3), one direct basis vector per row |
+
+## Output
+
+| `dual` | array of shape (3, 3), one reciprocal basis vector per row |
+
+## See also
+
+[crystalFrame.basisDual](crystalFrame.basisDual_py.html), [Miller](Miller_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 

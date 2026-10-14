@@ -11,9 +11,28 @@ status: Reference
 {% raw %}
 A method of [referenceFrame](referenceFrame_index_py.html).
 
-empties the frame register, the named frames and the default frame of the session
+clear the session's frame register, named frames and default frame.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+referenceFrame.reset()
+```
+
+</div>
+
+## Description
+
+Use this to start a new frame-registration session. Existing data retain their frame
+objects; new constructions can receive different frame instances after the reset.
+
+## See also
+
+[referenceFrame.intern](referenceFrame.intern_py.html), [specimenFrame.named](specimenFrame.named_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -27,5 +46,5 @@ referenceFrame.reset()
 
 [PythonDevelopers](PythonDevelopers_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L564">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L616">source</a></font>
 {% endraw %}

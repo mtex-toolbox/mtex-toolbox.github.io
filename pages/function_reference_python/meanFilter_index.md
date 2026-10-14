@@ -11,6 +11,10 @@ status: Reference
 {% raw %}
 the mean of the neighbourhood, the fastest filter and the one that blurs a boundary most
 
+## Input
+
+| `numNeighbours` | number of lattice-neighbour rings in the window; default 1 |
+
 ## Used on
 
 [EBSDDenoising](EBSDDenoising_py.html)

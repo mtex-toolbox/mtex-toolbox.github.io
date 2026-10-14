@@ -87,5 +87,5 @@ the definitions.
 
 MATLAB's [SO3FunHarmonic.conv](SO3FunHarmonic.conv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L675">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L726">source</a></font>
 {% endraw %}

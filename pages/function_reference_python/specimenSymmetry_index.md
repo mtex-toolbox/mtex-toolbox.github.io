@@ -127,9 +127,14 @@ symmetry, never about a direction.
 ## Members
 
 | [char](specimenFrame.char_py.html) | the name or the convention, the point group after it when there is one: y↑→x (mmm) |
+| [default](specimenFrame.default_py.html) | the frame that supplies the session default convention |
 | [frameFor](specimenFrame.frameFor_py.html) | the session frame carrying a convention: the default when it already does, otherwise a fork of it with that convention, registered |
+| [geological](specimenFrame.geological_py.html) | north, east, down of structural geology |
 | [makeDefault](specimenFrame.makeDefault_py.html) | makes this frame the session's default frame, the one supplying the default plotting convention |
+| [measurement](specimenFrame.measurement_py.html) | the sample surface frame of an Oxford instrument, drawn as its SEM images are |
 | [named](specimenFrame.named_py.html) | the interned session instance of a named frame, constructed on first use with its seed convention and kept in the session's name map |
+| [rolling](specimenFrame.rolling_py.html) | rolling, transverse and normal direction, RD north and TD west |
+| [specimen](specimenFrame.specimen_py.html) | the generic specimen frame X, Y, Z - where an import lands and the session default |
 | [specimenFrame](specimenFrame.specimenFrame_py.html) | the reference frame a sample is expressed in, with the sample symmetry it claims |
 | [specimenSymmetry](specimenSymmetry.specimenSymmetry_py.html) | the reference frame a sample is expressed in, with the sample symmetry it claims |
 
@@ -139,5 +144,5 @@ symmetry, never about a direction.
 
 MATLAB's [specimenSymmetry_index](specimenSymmetry_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1059">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1133">source</a></font>
 {% endraw %}

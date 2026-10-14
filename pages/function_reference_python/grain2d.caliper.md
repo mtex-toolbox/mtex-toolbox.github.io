@@ -90,5 +90,5 @@ aligned along. A list of directions or angles gives a width per outline and dire
 
 MATLAB's [grain2d.caliper](grain2d.caliper.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L286">source</a></font>
 {% endraw %}

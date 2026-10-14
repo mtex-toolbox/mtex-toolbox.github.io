@@ -10,7 +10,7 @@ status: Reference
 ---
 {% raw %}
 how a reference frame is laid out on screen: one rotation taking the screen axes to the
-reference axes, east = rot * x, north = rot * y, outOfScreen = rot * z
+reference axes, `east = rot * x`, `north = rot * y`, `outOfScreen = rot * z`
 
 ## Syntax
 
@@ -18,17 +18,38 @@ reference axes, east = rot * x, north = rot * y, outOfScreen = rot * z
 
 ```python
 pC = plottingConvention(outOfScreen, east)
-pC = plottingConvention('y↑→x')      each axis next to the screen direction it points to
-pC = plottingConvention.ij          x east, y south, z into the screen
 ```
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+pC = plottingConvention('y↑→x')
+```
+
+Each axis next to the screen direction it points to.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
+```python
+pC = plottingConvention.ij
+```
+
+X east, y south, z into the screen.
 
 </div>
 
 ## Members
 
 | [char](plottingConvention.char_py.html) | 'y↑→x' when both screen axes are reference axes, the three names run together otherwise |
+| [default3D](plottingConvention.default3D_py.html) | a tilted view for three dimensional plots |
+| [default](plottingConvention.default_py.html) | the session default is the convention of the default specimen frame, so that everything holding that frame follows a change of it |
 | [east](plottingConvention.east_py.html) | the reference direction pointing east on screen |
 | [edax](plottingConvention.edax_py.html) | the EDAX/TSL frame of the given setting, 1 to 4, z out of the screen |
+| [ij](plottingConvention.ij_py.html) | the convention of images: x east, y south, z into the screen |
 | [intoScreen](plottingConvention.intoScreen_py.html) | the reference direction pointing into the screen |
 | [isPictogram](plottingConvention.isPictogram_py.html) | whether both screen axes lie along reference axes, so that the convention reads as 'y↑→x' |
 | [makeDefault](plottingConvention.makeDefault_py.html) | makes this convention the session default, that of the default specimen frame |

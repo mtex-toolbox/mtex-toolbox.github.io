@@ -13,5 +13,5 @@ A property of [grain2d](grain2d_index_py.html).
 
 the plane the map lies in, a mapPlane
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L222">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L234">source</a></font>
 {% endraw %}

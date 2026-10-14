@@ -62,5 +62,5 @@ vector3d.det(self, b=None, c=None)
 
 MATLAB's [vector3d.det](vector3d.det.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1187">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1304">source</a></font>
 {% endraw %}

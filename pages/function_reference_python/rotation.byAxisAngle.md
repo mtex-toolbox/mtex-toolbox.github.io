@@ -12,7 +12,7 @@ status: Reference
 {% raw %}
 A method of [rotation](rotation_index_py.html).
 
-the rotations by the angle omega about the axis v
+construct right-handed rotations about given axes.
 
 ## Syntax
 
@@ -20,19 +20,29 @@ the rotations by the angle omega about the axis v
 
 ```python
 rot = rotation.byAxisAngle(v, omega)
+rot = rotation.byAxisAngle(vector3d.Z, 30*degree)
+rot = rotation.byAxisAngle(axis, angles)
 ```
 
 </div>
 
-<div class="mx-form" markdown="1">
+## Description
 
-```python
-rot = rotation.byAxisAngle(zvector, [10*degree, 20*degree, 30*degree])
-```
+Angles are in radians and broadcast with the axes. Each nonzero axis is normalised
+internally, so its length does not change the rotation angle.
 
-Three about z.
+## Input
 
-</div>
+| `v` | vector3d or Cartesian coordinates of shape (..., 3) |
+| `omega` | rotation angles in radians |
+
+## Output
+
+| `rot` | rotation container with the broadcast shape |
+
+## See also
+
+rotation.axis, rotation.angle, [rotation.byEuler](rotation.byEuler_py.html)
 
 ## Signature
 
@@ -46,5 +56,5 @@ rotation.byAxisAngle(v, omega)
 
 MATLAB's [rotation.byAxisAngle](rotation.byAxisAngle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L663">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L780">source</a></font>
 {% endraw %}

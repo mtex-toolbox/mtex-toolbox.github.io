@@ -25,5 +25,5 @@ rhoRange(sR)
 
 MATLAB's [sphericalRegion.rhoRange](sphericalRegion.rhoRange.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L633">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L674">source</a></font>
 {% endraw %}

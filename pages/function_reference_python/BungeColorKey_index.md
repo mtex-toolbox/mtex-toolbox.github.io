@@ -9,18 +9,44 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the three Euler angles of the representative inside the Euler box, scaled to red, green
-and blue
+colour orientations by their three Bunge Euler angles
 
 ## Syntax
 
 <div class="mx-form" markdown="1">
 
 ```python
-BungeColorKey(cs, ss)
+key = BungeColorKey(cs, ss)
+rgb = key.orientation2color(ori)
 ```
 
 </div>
+
+## Description
+
+A symmetry-equivalent representative is selected within the Euler plotting box. Its phi1,
+Phi and phi2 angles are divided by the box limits and assigned to red, green and blue.
+RGB values lie in [0, 1]. Colour discontinuities can occur where the chosen symmetry
+representative changes or an Euler angle wraps.
+
+## Input
+
+| `x` | crystalFrame, orientation, or single-phase EBSD or grain data supplying the frames |
+| `frameB` | specimenFrame when supplied separately |
+
+## Output
+
+| `key` | BungeColorKey |
+
+## Properties
+
+| `phi1Range` | upper limit of the first Euler angle, in radians |
+| `PhiRange` | upper limit of the second Euler angle, in radians |
+| `phi2Range` | upper limit of the third Euler angle, in radians |
+
+## See also
+
+[ipfHSVKey](ipfHSVKey_index_py.html), [axisAngleColorKey](axisAngleColorKey_index_py.html)
 
 ## Members
 
@@ -30,5 +56,5 @@ BungeColorKey(cs, ss)
 
 [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L320">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L399">source</a></font>
 {% endraw %}

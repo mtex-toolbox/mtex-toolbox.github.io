@@ -9,9 +9,26 @@ lang: python
 status: Reference
 ---
 {% raw %}
-matrix(x, ...) is x.matrix(...), the method of the object passed
+express rotations, transforms or tensors as numeric matrices.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+M = matrix(x)
+```
+
+</div>
+
+## Description
+
+For an MTEX object, matrix(x, ...) calls x.matrix(...). Additional positional
+and keyword arguments are passed to that method unchanged. Its documentation
+specifies the accepted inputs, units, symmetry handling and optional outputs.
+Consult the corresponding method for the behaviour of a particular object type.
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -24,8 +41,8 @@ matrix(x, *args, **kwargs)
 ## Methods it calls
 
 | [orthogonalTransform](orthogonalTransform.matrix_py.html) | the orthogonal matrices, the rotation matrix times the parity |
-| [quaternion](quaternion.matrix_py.html) | the rotation matrices, of shape (..., 3, 3) |
-| [rotation](rotation.matrix_py.html) | the rotation matrices, of shape (..., 3, 3) |
+| [quaternion](quaternion.matrix_py.html) | return the numeric rotation matrix of each unit quaternion |
+| [rotation](rotation.matrix_py.html) | return the numeric rotation matrix of each unit quaternion |
 | [spatialTransform](spatialTransform.matrix_py.html) | the 3 x 3 homogeneous matrix of the transform, None where it has none |
 | [spatialTransformId](spatialTransformId.matrix_py.html) | the 3 x 3 identity matrix |
 | [spatialTransformProjective](spatialTransformProjective.matrix_py.html) | the 3 x 3 homography |
@@ -35,5 +52,5 @@ matrix(x, *args, **kwargs)
 
 [RotationImproper](RotationImproper_py.html), [RotationSpinTensor](RotationSpinTensor_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L136">source</a></font>
 {% endraw %}

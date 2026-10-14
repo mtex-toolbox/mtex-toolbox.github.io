@@ -76,5 +76,5 @@ intercepts as a third output always; here segLength=True asks for them.
 
 MATLAB's [grainBoundary.intersect](grainBoundary.intersect.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L562">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L598">source</a></font>
 {% endraw %}

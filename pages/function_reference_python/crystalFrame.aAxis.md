@@ -13,5 +13,5 @@ A property of [crystalFrame](crystalFrame_index_py.html).
 
 the a axis as the Miller direction [100] of the frame
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L920">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L986">source</a></font>
 {% endraw %}

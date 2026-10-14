@@ -156,6 +156,18 @@ function Miller from its indices.
 | `v` | vector3d |
 | `m` | vector3d, a crystal direction |
 
+## Properties
+
+| `xyz` | Cartesian coordinates as a numeric array of shape v.shape + (3,) |
+| `frame` | referenceFrame of the coordinates, or None for frame-free data |
+| `CS` | crystalFrame for Miller directions, otherwise None |
+| `antipodal` | whether opposite directions represent the same axis |
+| `isNormalized` | whether the coordinates are known to have unit length |
+| `dispStyle` | display convention: 'xyz', 'hkl', 'hkil', 'uvw' or 'UVTW' |
+| `hkl` | three reciprocal-lattice indices for plane normals in a crystal frame |
+| `uvw` | three direct-lattice indices for lattice directions in a crystal frame |
+| `shape` | array shape excluding the trailing Cartesian coordinate axis |
+
 ## See also
 
 [Miller](Miller_py.html), [vector3d.byPolar](vector3d.byPolar_py.html), [crystalFrame](crystalFrame_index_py.html), [VectorDefinition](VectorDefinition_py.html), [CrystalDirections](CrystalDirections_py.html)

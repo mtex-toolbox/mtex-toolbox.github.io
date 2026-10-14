@@ -62,5 +62,5 @@ segment is walked the other way, so the grain in grainId[:, 0] stays on its left
 
 MATLAB's [grainBoundary.flip](grainBoundary.flip.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L416">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L452">source</a></font>
 {% endraw %}

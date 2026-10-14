@@ -24,5 +24,5 @@ huberFilter.smooth(self, V, net, h)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L241">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L276">source</a></font>
 {% endraw %}

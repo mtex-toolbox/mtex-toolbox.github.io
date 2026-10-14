@@ -24,6 +24,31 @@ S2DeLaValleePoussinKernel(halfwidth=10*degree)
 
 </div>
 
+## Description
+
+A nonnegative, mean-one kernel for densities of directions and fibre ODFs. Larger
+kappa gives a narrower peak. Integer kappa gives a finite polynomial; for a
+noninteger kappa the stored harmonic expansion is truncated.
+
+Evaluate psi at t=cos(theta), the cosine of the angular distance on the sphere.
+Use psi.halfwidth() for the angular width in radians and psi.bandwidth for the
+maximum degree of its harmonic representation.
+
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `kappa` |  | positive concentration parameter; larger values give a sharper peak |
+| `halfwidth` |  | angular halfwidth in radians, taking precedence over kappa |
+
+## Output
+
+| `psi` | S2DeLaValleePoussinKernel |
+
+## See also
+
+[S2Kernel](S2Kernel_index_py.html), [calcDensity](calcDensity_py.html), [calcKernel](EBSD.calcKernel_py.html)
+
 ## Members
 
 | [halfwidth](S2DeLaValleePoussinKernel.halfwidth_py.html) | the halfwidth in closed form, acos(2 * 2^(-1 / kappa) - 1) |
@@ -34,5 +59,5 @@ S2DeLaValleePoussinKernel(halfwidth=10*degree)
 
 MATLAB's [S2DeLaValleePoussinKernel](S2DeLaValleePoussinKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L842">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1079">source</a></font>
 {% endraw %}

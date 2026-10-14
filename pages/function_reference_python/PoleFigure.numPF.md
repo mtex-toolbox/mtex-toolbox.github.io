@@ -13,5 +13,5 @@ A property of [PoleFigure](PoleFigure_index_py.html).
 
 the number of pole figures
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L161">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L194">source</a></font>
 {% endraw %}

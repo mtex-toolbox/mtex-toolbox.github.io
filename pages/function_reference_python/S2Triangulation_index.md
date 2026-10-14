@@ -25,6 +25,10 @@ B = sT.barycentric(w)
 
 </div>
 
+## Input
+
+| `vertices` | vector3d directions surrounding the origin; vertices are normalised to the unit sphere |
+
 ## Members
 
 | [calcBario](S2Triangulation.calcBario_py.html) | the barycentric coordinates of directions in the triangulation, a sparse matrix with a row per direction and a column per vertex (MATLAB's calcBario) |

@@ -78,6 +78,21 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 
 | `ebsd` | EBSD |
 
+## Properties
+
+| `pos` | vector3d measurement positions in the specimen frame |
+| `rotations` | rotation coefficients of the measured orientations |
+| `phaseId` | zero-based index into CSList for each measurement; zero is notIndexed |
+| `CSList` | phaseList containing the phase frames and mineral metadata |
+| `orientations` | orientation data for a selection containing one indexed phase |
+| `prop` | additional arrays such as band contrast or grainId, also accessible as attributes |
+| `id` | measurement ids, distinct from positional array indices after selection |
+| `lattice` | geometry and spacing of a regular scan, or None for scattered data |
+| `shape` | measurement-array shape: a list or a spatially gridded array |
+| `isPadding` | mask of grid cells without an original measurement |
+| `scanUnit` | unit of the spatial coordinates |
+| `grainId` | grain assignments, available after calcGrains has written them to the map |
+
 ## See also
 
 [loadEBSD](loadEBSD_ang_py.html), [EBSDsquare](EBSDsquare_py.html), [gridify](gridify_py.html), [simulateEBSD](simulateEBSD_index_py.html), [EBSDImport](EBSDImport_py.html), [EBSDSelect](EBSDSelect_py.html), [EBSDPlotting](EBSDPlotting_py.html), [GrainReconstruction](GrainReconstruction_py.html)
@@ -105,12 +120,12 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 | [EBSDhex](EBSDhex.EBSDhex_py.html) | an EBSD map: positions, rotations and phase ids with the list of the phases' frames and the properties of every measurement |
 | [EBSDsquare](EBSDsquare.EBSDsquare_py.html) | an EBSD map: positions, rotations and phase ids with the list of the phases' frames and the properties of every measurement |
 | [EulerCorrection](EBSD.EulerCorrection_py.html) | the frame change the import applied to the Euler angles, the identity when none |
-| [export](EBSD.export_py.html) | ebsd.export('map.ang'): the map written by the format the extension names |
+| [export](EBSD.export_py.html) | write the EBSD map to a vendor format or a text table |
 | [extent](EBSD.extent_py.html) | the bounds of the measured positions, [xmin, xmax, ymin, ymax] |
 | [fill](EBSD.fill_py.html) | the map with every pixel that carries no measurement filled, the measured ones left as they are |
 | [fillByGrainId](EBSD.fillByGrainId_py.html) | the map with every pixel of a grain given the mean orientation of that grain, which is the map the grains describe rather than the one they were built from |
 | [findByLocation](EBSD.findByLocation_py.html) | the measurements closest to positions, or within a radius of them |
-| [findByOrientation](EBSD.findByOrientation_py.html) | the measurements of the phase of ori within an angle of it, or of a fibre |
+| [findByOrientation](EBSD.findByOrientation_py.html) | select measurements close to a reference orientation or an orientation fibre |
 | [flatten](EBSD.flatten_py.html) | the map as a list, one dimensional arrays in the order of the grid |
 | [frame](EBSD.frame_py.html) | the specimen frame of the positions |
 | [gradient](EBSD.gradient_py.html) | the derivative of the orientation along the two axes of the plane of the map, per unit length, as a pair of framed vectors |
@@ -131,7 +146,7 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 | [KAM](EBSD.KAM_py.html) | the kernel average misorientation: the mean misorientation angle of every pixel to its neighbours |
 | [latticeBasis](EBSD.latticeBasis_py.html) | the basis, the stencil and the spacing a cell polygon of four or six corners describes |
 | [layout](EBSD.layout_py.html) | the directions the indices of a gridded map run along (MATLAB ebsd.layout) |
-| [load](EBSD.load_py.html) | EBSD.load('map.ang'): the map a file holds, read by the interfaces layer above this one |
+| [load](EBSD.load_py.html) | read an EBSD map from a supported vendor file or a text table |
 | [mineralList](EBSD.mineralList_py.html) | the mineral names of the phases, in the order of CSList |
 | [N](EBSD.N_py.html) | the normal of the measurement plane |
 | [name2id](EBSD.name2id_py.html) | the phase id of a mineral name, MATLAB's name2id |

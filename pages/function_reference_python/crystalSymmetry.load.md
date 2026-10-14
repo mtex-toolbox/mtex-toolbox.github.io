@@ -12,11 +12,28 @@ status: Reference
 {% raw %}
 A method of [crystalFrame](crystalFrame_index_py.html).
 
-the constructor answers with the registered instance
-crystalFrame.load('Al-Aluminum.cif'): the frame a CIF file describes, read by the
-interfaces layer above this one
+construct a registered crystal frame from a CIF structure file.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+cs = crystalFrame.load('structure.cif')
+```
+
+</div>
+
+## Description
+
+The CIF reader supplies the lattice dimensions, angles, symmetry and descriptive metadata.
+Equivalent frame constructions are interned in the session register.
+
+## See also
+
+[loadCIF](loadCIF_py.html), [crystalFrame](crystalFrame_index_py.html), [referenceFrame.intern](referenceFrame.intern_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -28,5 +45,5 @@ crystalFrame.load(fname)
 
 MATLAB's [crystalSymmetry.load](crystalSymmetry.load.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L844">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L904">source</a></font>
 {% endraw %}

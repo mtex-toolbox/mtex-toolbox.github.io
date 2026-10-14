@@ -13,5 +13,5 @@ A property of [spatialTransformRigid](spatialTransformRigid_index_py.html).
 
 the translation vector
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L330">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L377">source</a></font>
 {% endraw %}

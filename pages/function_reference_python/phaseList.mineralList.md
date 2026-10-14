@@ -13,5 +13,5 @@ A property of [phaseList](phaseList_index_py.html).
 
 the mineral names of the phases
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L90">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L93">source</a></font>
 {% endraw %}

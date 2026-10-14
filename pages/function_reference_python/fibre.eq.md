@@ -62,5 +62,5 @@ as they are, without the symmetry.
 
 MATLAB's [fibre.eq](fibre.eq.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L325">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L331">source</a></font>
 {% endraw %}

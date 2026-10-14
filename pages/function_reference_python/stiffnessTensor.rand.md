@@ -88,5 +88,5 @@ the constructor of the class.
 
 MATLAB's [stiffnessTensor.rand](stiffnessTensor.rand.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L912">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1000">source</a></font>
 {% endraw %}

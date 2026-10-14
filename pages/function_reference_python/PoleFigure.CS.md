@@ -13,5 +13,5 @@ A property of [PoleFigure](PoleFigure_index_py.html).
 
 the crystal frame, that of the crystal directions allH
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L173">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L206">source</a></font>
 {% endraw %}

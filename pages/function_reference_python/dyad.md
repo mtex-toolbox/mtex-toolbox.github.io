@@ -85,5 +85,5 @@ outer product to that power.
 
 MATLAB's [dyad](dyad.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1135">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1222">source</a></font>
 {% endraw %}

@@ -11,7 +11,7 @@ status: Reference
 {% raw %}
 A property of [quaternion](quaternion_index_py.html).
 
-the third Bunge Euler angle phi2
+third Bunge Euler angle phi2 in radians, returned in the shape of the rotations.
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L332">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L385">source</a></font>
 {% endraw %}

@@ -20,10 +20,27 @@ orthonormal quaternion axes A; BinghamODF builds it from axes, orientations or a
 
 ```python
 SO3FunBingham(kappa, A, cs, ss)
-SO3FunBingham(kappa, A, cs, cs, antipodal=True)      with exchange symmetry
 ```
 
 </div>
+
+<div class="mx-form" markdown="1">
+
+```python
+SO3FunBingham(kappa, A, cs, cs, antipodal=True)
+```
+
+With exchange symmetry.
+
+</div>
+
+## Input
+
+| `kappa` | four Bingham concentration parameters, one per quaternion axis |
+| `A` | orthonormal quaternion axes as columns of a 4-by-4 matrix, or four rotations or orientations |
+| `frames` | crystal and specimen frames; inherited from orientation axes when omitted |
+| `weight` | mean density over SO(3); default 1 |
+| `antipodal` | impose grain-exchange symmetry f(g)=f(inv(g)); default False |
 
 ## Members
 

@@ -13,8 +13,14 @@ status: Reference
 the smooth boundary as the minimiser of |V - V0|^2 + alpha |L V|^2, where L V is how far
 a vertex sits off the line through its neighbours. There is no iteration count: the
 minimiser is the solution of one sparse system, so the result depends on alpha alone.
-alpha is stated as a length, the wavelength damped to half amplitude, detail finer than
-it goes, detail coarser than it stays, which means the same thing at any step size
+smoothingLength specifies the spatial wavelength damped to half amplitude. The weight
+alpha is derived from this length and the vertex spacing, so the smoothing scale
+remains comparable between samplings. Supplying alpha overrides that conversion.
+
+## Input
+
+| `smoothingLength` | spatial wavelength damped to half amplitude, in the units of the boundary |
+| `alpha` | dimensionless regularisation weight, overriding smoothingLength |
 
 ## Members
 
@@ -26,5 +32,5 @@ it goes, detail coarser than it stays, which means the same thing at any step si
 
 MATLAB's [curvatureFilter](curvatureFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L204">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L218">source</a></font>
 {% endraw %}

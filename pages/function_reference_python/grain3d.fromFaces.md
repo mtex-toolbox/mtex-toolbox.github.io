@@ -66,5 +66,5 @@ is of phase 1 when CSList has an indexed phase, else not indexed; the voxels are
 
 [grain3d.load](grain3d.load_py.html), [calcGrains](EBSD.calcGrains_py.html), [grain3d.orientFaces](grain3d.orientFaces_py.html), [Grains3D](Grains3D_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L54">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L79">source</a></font>
 {% endraw %}

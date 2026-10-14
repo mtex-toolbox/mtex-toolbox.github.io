@@ -62,5 +62,5 @@ ones, is f.multiplicity().
 
 MATLAB's [fibre.symmetrise](fibre.symmetrise.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L280">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L286">source</a></font>
 {% endraw %}

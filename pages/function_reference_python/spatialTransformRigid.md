@@ -23,6 +23,10 @@ T = spatialTransformRigid.fit(posA, posB, weights=w)
 
 </div>
 
+## Input
+
+| `u` | vector3d translation; only x and y are used; None gives zero displacement |
+
 ## Members
 
 | [fit](spatialTransformRigid.fit_py.html) | the translation fitted to point pairs, the weighted mean of their displacements |
@@ -36,5 +40,5 @@ T = spatialTransformRigid.fit(posA, posB, weights=w)
 
 MATLAB's [spatialTransformRigid](spatialTransformRigid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L316">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L360">source</a></font>
 {% endraw %}

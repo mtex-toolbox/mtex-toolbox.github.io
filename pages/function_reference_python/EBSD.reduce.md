@@ -64,5 +64,5 @@ measurements a list.
 
 MATLAB's [EBSD.reduce](EBSD.reduce.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L493">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L502">source</a></font>
 {% endraw %}

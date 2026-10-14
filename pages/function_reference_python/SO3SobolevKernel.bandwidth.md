@@ -13,5 +13,5 @@ A property of [SO3SobolevKernel](SO3SobolevKernel_index_py.html).
 
 the degree N the kernel is cut at
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L651">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L832">source</a></font>
 {% endraw %}

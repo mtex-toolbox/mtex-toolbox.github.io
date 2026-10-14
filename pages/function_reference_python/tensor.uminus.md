@@ -26,5 +26,5 @@ the negative, the operator -a
 
 MATLAB's [tensor.uminus](tensor.uminus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L338">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L375">source</a></font>
 {% endraw %}

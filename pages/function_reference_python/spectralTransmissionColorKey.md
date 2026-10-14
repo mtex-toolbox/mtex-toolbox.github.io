@@ -25,6 +25,11 @@ key.propagationDirection, key.polarizer, key.phi
 
 </div>
 
+## Input
+
+| `rI` | refractiveIndexTensor of the crystal |
+| `thickness` | section thickness in nanometres |
+
 ## Members
 
 | [orientation2color](spectralTransmissionColorKey.orientation2color_py.html) | the colours of the thin section at the orientations, the transmitted spectrum of light along the propagation direction between polariser and analyser |
@@ -35,5 +40,5 @@ key.propagationDirection, key.polarizer, key.phi
 
 MATLAB's [spectralTransmissionColorKey](spectralTransmissionColorKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L390">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L505">source</a></font>
 {% endraw %}

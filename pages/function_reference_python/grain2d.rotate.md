@@ -40,5 +40,5 @@ rotate(v, rot, *args, **kwargs)
 
 MATLAB's [grain2d.rotate](grain2d.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L113">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L242">source</a></font>
 {% endraw %}

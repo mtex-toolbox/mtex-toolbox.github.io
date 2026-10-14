@@ -34,5 +34,5 @@ SO3FunHarmonic.reshape(self, *shape)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L195">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L202">source</a></font>
 {% endraw %}

@@ -11,9 +11,29 @@ status: Reference
 {% raw %}
 A method of [orientation](orientation_index_py.html).
 
-the fundamental region of the orientations, the orientationRegion of the groups of CS and SS
+return the region of symmetry-distinct orientations for the input frames.
 
 ## Syntax
+
+<div class="mx-form" markdown="1">
+
+```python
+region = ori.fundamentalRegion()
+```
+
+</div>
+
+## Description
+
+The result is an orientationRegion determined by the crystal and specimen point groups
+and, for misorientations, the grain-exchange flag. It describes a domain; it does not
+move the input orientations into that domain.
+
+## See also
+
+[fundamentalRegion](fundamentalRegion_py.html), [orientation.projectIntoFundamentalRegion](orientation.project2FundamentalRegion_py.html)
+
+## Signature
 
 <div class="mx-form" markdown="1">
 
@@ -23,5 +43,5 @@ orientation.fundamentalRegion(self)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L745">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L788">source</a></font>
 {% endraw %}

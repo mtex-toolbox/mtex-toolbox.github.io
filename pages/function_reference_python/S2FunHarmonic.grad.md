@@ -60,5 +60,5 @@ The gradient is tangent to the sphere, the derivative of the function along the 
 
 MATLAB's [S2FunHarmonic.grad](S2FunHarmonic.grad.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L718">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L754">source</a></font>
 {% endraw %}

@@ -23,5 +23,5 @@ SO3FibonacciGrid.subGrid(self, mask)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/superfibonacci.py#L57">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/superfibonacci.py#L63">source</a></font>
 {% endraw %}

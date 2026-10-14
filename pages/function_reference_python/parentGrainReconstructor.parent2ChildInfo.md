@@ -28,5 +28,5 @@ parentGrainReconstructor.parent2ChildInfo(self)
 
 MATLAB's [parentGrainReconstructor.parent2ChildInfo](parentGrainReconstructor.parent2ChildInfo.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1198">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1202">source</a></font>
 {% endraw %}

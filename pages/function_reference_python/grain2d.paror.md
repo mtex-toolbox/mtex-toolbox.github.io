@@ -67,5 +67,5 @@ directions.
 
 MATLAB's [grain2d.paror](grain2d.paror.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L295">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L336">source</a></font>
 {% endraw %}

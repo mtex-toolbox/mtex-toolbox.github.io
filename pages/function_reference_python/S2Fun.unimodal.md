@@ -73,5 +73,5 @@ halfwidth, turned from the north pole to v.
 
 MATLAB's [S2Fun.unimodal](S2Fun.unimodal.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funclass.py#L75">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funclass.py#L89">source</a></font>
 {% endraw %}

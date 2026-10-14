@@ -71,5 +71,5 @@ explained.
 
 [interpolate](SO3VectorFieldHarmonic.interpolate_py.html), [S2FunHarmonic.adjoint](S2FunHarmonic.adjoint_py.html), [calcDensity](calcDensity_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funclass.py#L108">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funclass.py#L122">source</a></font>
 {% endraw %}

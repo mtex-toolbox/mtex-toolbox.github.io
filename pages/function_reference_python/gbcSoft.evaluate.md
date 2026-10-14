@@ -24,5 +24,5 @@ gbcSoft.evaluate(self, ebsd, i, j)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L229">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L238">source</a></font>
 {% endraw %}

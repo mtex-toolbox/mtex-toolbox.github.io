@@ -29,5 +29,5 @@ tensor.svd(self)
 
 MATLAB's [tensor.svd](tensor.svd.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L552">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L628">source</a></font>
 {% endraw %}

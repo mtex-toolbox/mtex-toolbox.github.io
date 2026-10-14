@@ -13,5 +13,5 @@ A property of [ipfHSVKey](ipfHSVKey_index_py.html).
 
 the sharpness and the white centre live on the direction key and are set through it
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L176">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L235">source</a></font>
 {% endraw %}

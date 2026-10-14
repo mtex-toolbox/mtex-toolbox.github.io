@@ -13,5 +13,5 @@ A property of [orthogonalTransform](orthogonalTransform_index_py.html).
 
 the coefficient c of the rotational part
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L967">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1148">source</a></font>
 {% endraw %}
