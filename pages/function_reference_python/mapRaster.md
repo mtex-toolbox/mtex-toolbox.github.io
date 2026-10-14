@@ -47,13 +47,13 @@ Turned to another convention.
 
 ## Description
 
-A pixel belongs to the cell of the nearest site: by rounding the lattice coordinates where
-the lattice is aligned with the screen and the parallelogram is the cell, and otherwise
-among the four corners of the lattice parallelogram it lies in, since on a hexagonal
-lattice the parallelogram is a rhombus and not the cell. One pixel per cell where the
-lattice is aligned with the screen, a quarter of the spacing elsewhere. A lattice the measurements
-have drifted from has no picture, judged at the scale of the picture with a hundredth of
-a cell as the floor. The padding of a grid shows nothing.
+Every pixel of the picture shows the measurement whose site is nearest. Where the lattice
+is aligned with the screen the picture has one pixel per cell; elsewhere, as on a turned or
+a hexagonal lattice, a quarter of the spacing.
+
+A map whose positions have drifted from their lattice has no picture: the drift is judged
+at the scale of the picture, with a hundredth of a cell as the floor. The padding of a grid
+shows nothing.
 
 ## Input
 

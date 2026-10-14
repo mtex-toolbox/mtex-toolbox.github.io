@@ -72,5 +72,5 @@ for max.
 
 MATLAB's [SO3Fun.min](SO3Fun.min.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L739">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L759">source</a></font>
 {% endraw %}

@@ -108,18 +108,24 @@ A needle per boundary segment.
 
 ## Description
 
-On the sphere an arrow is the tangential part of w at its direction carried through the
-projection; the longest vector of all is arrowSize times the grid spacing resolution, so a
-vector almost normal to the sphere draws almost nothing, and normalize=True draws every
-arrow at that length. An antipodal w, or an axis field, draws centred needles without heads.
+What the first argument is decides where the arrows go:
+
+- directions or a vector or axis field: arrows on the sphere, a field on an equispaced grid
+of the spacing resolution.
+- orientations: arrows in the ODF sections of the current figure.
+- a map, its grains or its boundaries: an arrow per measurement, grain or segment on the map
+plot, with the keywords scale, scaling, autoScaleFactor, projectIntoPlane, antipodal, color,
+lineWidth and displayName.
+- a map of volumes or 3D grains: arrows in the scene of its figure.
+
+On the sphere an arrow is the tangential part of w at its direction, so a vector almost
+normal to the sphere draws almost nothing. The longest vector of all is arrowSize times the
+spacing resolution; normalize=True draws every arrow at that length. An antipodal w, or an
+axis field, draws centred needles without heads.
+
 maxHeadSize is the length of the heads as a fraction of the longest arrow, lineWidth the
 width of the shafts, color their colour; the projection and the charts follow the keywords
 of the spherical plots.
-
-A map, its grains or its boundaries go to the map plot: an arrow per measurement, grain
-or segment, with the keywords scale, scaling, autoScaleFactor, projectIntoPlane,
-antipodal, color, lineWidth and displayName; a map of volumes or 3D grains draws its
-arrows into the scene of its figure, orientations into the ODF sections held.
 
 ## Input
 

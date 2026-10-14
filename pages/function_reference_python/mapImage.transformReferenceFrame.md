@@ -29,5 +29,5 @@ mapImage.transformReferenceFrame(mg, target, *args, byScreenAlignment=False)
 
 MATLAB's [mapImage.transformReferenceFrame](mapImage.transformReferenceFrame.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L622">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L625">source</a></font>
 {% endraw %}

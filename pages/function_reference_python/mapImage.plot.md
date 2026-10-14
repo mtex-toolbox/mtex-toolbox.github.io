@@ -112,5 +112,5 @@ its contrast stretched over the 2nd to 98th percentile.
 
 MATLAB's [mapImage.plot](mapImage.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1400">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1417">source</a></font>
 {% endraw %}

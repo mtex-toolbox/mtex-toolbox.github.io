@@ -39,13 +39,19 @@ The least norm correction that integrates every harmonic the count allows.
 
 ## Description
 
-On a regular grid of rings (a polar ladder from the pole in equal steps) the weights are the
-Clenshaw-Curtis weights of the rings shared by their points, exact on the sphere and, with
-the equator ring halved, on a hemisphere. Scattered directions take the areas of their
-spherical Voronoi cells (MATLAB's only method), an axis list counted on both hemispheres,
-duplicates sharing a cell; method='harmonic' instead corrects equal weights by the least norm
-change that integrates every spherical harmonic the number of points allows. Where neither
-works the weights are equal.
+On a regular grid of rings, a polar ladder from the pole in equal steps, the weights are
+the Clenshaw-Curtis weights of the rings, shared by their points. They are exact on the
+sphere and, with the equator ring halved, on a hemisphere.
+
+For scattered directions the method chooses:
+
+- 'voronoi', the default and MATLAB's only method: the areas of the spherical Voronoi cells,
+an axis list counted on both hemispheres, duplicates sharing a cell. No cell counts more
+than twice the 80 % quantile of the areas, so isolated points do not dominate.
+- 'harmonic': equal weights corrected by the least change that integrates every spherical
+harmonic the number of points allows.
+
+Where neither works, as for fewer than four distinct directions, the weights are equal.
 
 ## Input
 
@@ -67,5 +73,5 @@ works the weights are equal.
 
 MATLAB's [vector3d.calcQuadratureWeights](vector3d.calcQuadratureWeights.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L966">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L968">source</a></font>
 {% endraw %}

@@ -47,12 +47,23 @@ Volumes within a radius, every mode kept.
 
 ## Description
 
-Every seed climbs by steepest ascent to a local maximum of the function; maxima closer than
-the tolerance are one mode, and its weight is the sum of the weights of the seeds that reached
-it. The seeds are the centres of a radial function with their weights, else the nodes of a
-2.5 degree grid, which first climb to their peaks on the grid. Modes of less than one percent
-of the weight are dropped unless exact=True, and the seeds that reached them get centerId -1.
-The modes are ordered by decreasing weight.
+Every seed climbs by steepest ascent to a local maximum of the function. Maxima closer than
+tol are one mode, and its weight is the sum of the weights of the seeds that reached it,
+only of those within radius of it when a radius is given. The modes are ordered by
+decreasing weight.
+
+The seeds are, in this order of preference:
+
+- the orientations given as seed, with equal weights unless weights are given; MATLAB
+weighs them by the function's values there.
+- the centres of a radial function, with its weights.
+- the nodes of a 2.5 degree grid, with equal weights, which first climb to their peaks on
+the grid; the weight of a mode is then the share of the orientation space that flows into
+it, not its volume.
+
+Seeds of weight zero are left out, so centerId has one entry per seed of positive weight.
+Modes of less than one percent of the weight are dropped unless exact=True, and the seeds
+that reached them get centerId -1. The progress is not reported, whatever verbose says.
 
 ## Input
 
@@ -86,5 +97,5 @@ The modes are ordered by decreasing weight.
 
 MATLAB's [SO3Fun.calcComponents](SO3Fun.calcComponents.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L871">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L891">source</a></font>
 {% endraw %}

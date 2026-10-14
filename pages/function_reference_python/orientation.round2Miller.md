@@ -66,13 +66,15 @@ The second best fit.
 
 ## Description
 
-For an orientation the plane (hkl) and the direction [uvw] of the crystal along the
-specimen z and x, rounded to the nearest low indices. For a misorientation the planes n1,
-n2 and the directions d1, d2, d1 in n1, with mori * n1 = n2 and mori * d1 = d2 as nearly
-as indices up to maxIndex allow: every candidate's misfit angle plus penalty times the
-size of its indices is minimised. The result displays as a table of the parallel planes
-and directions with the angle the relation makes to the misorientation; a list of
-misorientations gives lists.
+For an orientation, the plane (hkl) along the specimen z and the direction [uvw] along the
+specimen x, each rounded on its own to the nearest low indices, as MATLAB's; the two need
+not be perpendicular. penalty and nextFit do not apply.
+
+For a misorientation, the planes n1, n2 and the directions d1, d2, d1 in n1, with
+mori * n1 = n2 and mori * d1 = d2 as nearly as indices up to maxIndex allow. Each candidate
+scores its misfit angle plus penalty times the size of its indices, and the lowest score
+wins. The result displays as a table of the parallel planes and directions with the angle
+of the relation to the misorientation; a list of misorientations gives lists.
 
 ## Input
 
@@ -102,5 +104,5 @@ misorientations gives lists.
 
 MATLAB's [orientation.round2Miller](orientation.round2Miller.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L580">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L588">source</a></font>
 {% endraw %}

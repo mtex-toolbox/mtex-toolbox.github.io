@@ -88,13 +88,16 @@ Without regularisation.
 ## Description
 
 The harmonic coefficients up to the bandwidth minimise the weighted squared misfit at the
-nodes plus lambda_ times the Sobolev norm of order s, solved by LSQR. On SO(3) the fit is posed
-among the functions with the symmetries of the nodes; nodes closer than 0.02 are merged into one
-carrying the mean of their values; the bandwidth follows from the number of nodes, at most the
-preference 'maxSO3Bandwidth'. Values with further axes after the node axis give one function
-per component. A vector field on SO(3) is fitted componentwise, three SO3FunHarmonic, as
-MATLAB's SO3VectorFieldHarmonic.interpolate; MATLAB passes the tangent vectors as values,
-here they carry their orientations.
+nodes plus lambda_ times the Sobolev norm of order s, solved by LSQR. Without a bandwidth it
+follows from the number of nodes, on SO(3) at most the preference 'maxSO3Bandwidth'.
+
+On SO(3) the fit is posed among the functions with the symmetries of the nodes. Nodes closer
+than 0.02 are merged into one carrying the mean of their values.
+
+Values with further axes after the node axis give one function per component; withParameters
+is then ignored, as it is on the sphere. A vector field on SO(3) is fitted componentwise,
+three SO3FunHarmonic, as MATLAB's SO3VectorFieldHarmonic.interpolate; MATLAB passes the
+tangent vectors as values, here they carry their orientations.
 
 ## Input
 

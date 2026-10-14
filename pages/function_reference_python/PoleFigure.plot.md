@@ -101,5 +101,5 @@ the colour bars.
 
 MATLAB's [PoleFigure.plot](PoleFigure.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L324">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L329">source</a></font>
 {% endraw %}

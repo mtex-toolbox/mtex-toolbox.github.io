@@ -67,5 +67,5 @@ plotInnerFace with the figure held. Several planes give several polygons.
 
 MATLAB's [crystalShape.plotInnerFace](crystalShape.plotInnerFace.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L260">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L262">source</a></font>
 {% endraw %}

@@ -99,14 +99,21 @@ The pole figure on a sphere in space.
 ## Description
 
 Every pole figure is the Radon transform odf.radon(h) of the ODF, the density of the
-specimen directions along which h lies. A list of directions draws one axes each, titled
-by its indices (title=False leaves them untitled, MATLAB's noTitle); each takes its own
-colour range, colorRange='equal' one for all or a pair the limits. superposition gives
-the structure coefficients: with one coefficient per direction the directions make one
-superposed pole figure; with a list of coefficient arrays, one per entry of a list of
-direction sets, each set one. The other keywords are those of the spherical plots:
-resolution, the styles pcolor, contourf=True or contour=True with their levels, colorbar,
-minmax, antipodal, complete, upper, lower, the projection and the layout.
+specimen directions along which h lies. A list of directions draws one axes each, titled by
+its indices; title=False leaves them untitled (MATLAB's noTitle).
+
+Each pole figure takes its own colour range; colorRange='equal' gives one for all, a pair
+the limits.
+
+superposition gives the structure coefficients of superposed directions:
+
+- one coefficient per direction: all directions make one superposed pole figure.
+- a list of coefficient arrays, one per entry of a list of direction sets: one superposed
+pole figure per set, as plotPF(odf, pf.allH, superposition=pf.c).
+
+The other keywords are those of the spherical plots: resolution, the styles pcolor,
+contourf=True or contour=True with their levels, colorbar, minmax, antipodal, complete,
+upper, lower, the projection and the layout.
 
 ## Input
 
@@ -129,5 +136,5 @@ minmax, antipodal, complete, upper, lower, the projection and the layout.
 
 MATLAB's [SO3FunRBF.plotPDF](SO3FunRBF.plotPDF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1563">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1569">source</a></font>
 {% endraw %}

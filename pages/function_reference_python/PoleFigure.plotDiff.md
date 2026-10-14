@@ -112,5 +112,5 @@ are those of plot(pf).
 
 MATLAB's [PoleFigure.plotDiff](PoleFigure.plotDiff.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L359">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L364">source</a></font>
 {% endraw %}

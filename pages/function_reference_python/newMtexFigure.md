@@ -78,5 +78,5 @@ newMtexFigure(n=1, **kwargs)
 
 MATLAB's [newMtexFigure](newMtexFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L494">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L497">source</a></font>
 {% endraw %}

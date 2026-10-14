@@ -57,12 +57,20 @@ One line per function.
 
 ## Description
 
-For a kernel on S2 or SO(3) the coefficients A_l / (2l + 1) are drawn over the degree l on a
-logarithmic degree axis, up to degree 32 unless the bandwidth says otherwise. For a function
-on S2 or SO(3) the power of every degree, the norm of its coefficients, is drawn as open
-circles on a dotted line, up to the bandwidth of the function; a function of another kind is
-first expanded into harmonics. A list draws one line per function in one axes. The other
-keywords are those of a line plot; fontSize sets the size of the labels and ticks.
+What is drawn depends on the input:
+
+- a kernel on S2 or SO(3): the coefficients A_l / (2l + 1) over the degree l, on a
+logarithmic degree axis, up to degree 32 unless the bandwidth says otherwise. With
+logarithmic=True their absolute values on log-log axes.
+- a function on S2 or SO(3): the power of every degree, the norm of its coefficients, as
+open circles on a dotted line, up to the bandwidth of the function. A function of another
+kind is first expanded into harmonics; logarithmic changes nothing.
+- a list: one line per entry, in one axes.
+
+A function on the circle, S1FunHarmonic, is not supported: it is expanded as if it were a
+function on SO(3), where MATLAB draws the absolute values of its coefficients per |k|.
+
+The other keywords are those of a line plot; fontSize sets the size of the labels and ticks.
 
 ## Input
 

@@ -26,5 +26,5 @@ S2FunHarmonic.even(self)
 
 MATLAB's [S2FunHarmonic.even](S2FunHarmonic.even.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L454">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L462">source</a></font>
 {% endraw %}

@@ -77,14 +77,16 @@ On the directions of a measurement.
 
 ## Description
 
-The intensity of the crystal direction h at the specimen direction r is the radon
-transform of the ODF, the mean of the ODF over the orientations taking h to r; over the
-directions of an axis grid it is the mean of r and -r. A Python list of crystal
-directions makes one pole figure per entry, and an entry of several directions is their
-superposition, weighted by the superposition coefficients, as the overlapping
-reflections a diffractometer measures together. Without specimen directions the pole
-figures are evaluated on regularS2Grid, which takes the remaining keywords. The result
-can be turned into counts by noisepf.
+The intensity of the crystal direction h at the specimen direction r is the mean of the ODF
+over all orientations that take h to r, its radon transform. Where the specimen directions
+are axes, as on the default grid of the upper hemisphere, it is the mean of r and -r.
+
+A Python list of crystal directions makes one pole figure per entry. An entry of several
+directions is their superposition, weighted by the superposition coefficients, as the
+overlapping reflections a diffractometer measures together.
+
+Without specimen directions the pole figures are evaluated on regularS2Grid, which takes
+the remaining keywords. noisepf turns the intensities into counts.
 
 ## Input
 

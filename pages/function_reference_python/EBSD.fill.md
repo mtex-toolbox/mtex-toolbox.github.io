@@ -49,19 +49,26 @@ Another filter, up to the outer boundary.
 
 ## Description
 
-A hole is filled with the continuation of the field of orientations that encloses it, by
-the solver of a variational filter (by default l1TVFilter; a window filter has no
-variational form and is refused), within the grains where the map knows them and within
-the phases otherwise. The numeric properties are filled by the same solve, the labels
-(phase, grain id, ...) copied from the nearest measured pixel. A pixel the outside reaches
-without crossing a measurement stays empty unless extrapolate. MATLAB fills by the
-nearest neighbour; here the hole takes the smooth continuation.
+A hole is filled with the smooth continuation of the orientations around it, by a
+variational filter, l1TVFilter by default; a window filter is refused. Nothing is filled
+across a grain boundary, where the map has grain ids, or a phase boundary. MATLAB fills by
+the nearest neighbour instead.
+
+The numeric properties are filled by the same solve, the labels (phase, grain id, ...)
+copied from the nearest measured pixel. A pixel the outside reaches without crossing a
+measurement stays empty, unless extrapolate=True. Only pixels on the lattice are filled: a
+gridded map, or the padding gridify adds.
 
 With grains, MATLAB's fill(ebsd, grains), a pixel is filled only from the grain whose
-polygon holds it: one inside no grain becomes notIndexed, one its grain's measurements do
-not reach over the lattice takes the grain's mean orientation; padding a polygon holds
-becomes a cell of the map. The map needs its grain ids, from calcGrains(ebsd). The pixels
-to fill must exist on the lattice: a gridded map, or the padding gridify adds. The map
+polygon holds it, which needs the grain ids calcGrains writes into the map:
+
+- a pixel inside no grain becomes notIndexed
+- a pixel its grain's measurements do not reach over the lattice takes the grain's mean
+orientation
+- padding a polygon holds becomes a cell of the map
+
+A pixel counts as measured by its phase: the notIndexed pixels calcGrains absorbs into a
+grain carry its phase, so they are not filled and keep their NaN orientation. The map
 passed is not changed.
 
 ## Input

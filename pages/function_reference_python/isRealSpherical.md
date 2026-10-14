@@ -56,5 +56,5 @@ phase the relation above assumes.
 
 [isRealWigner](isRealWigner_py.html), [isRealFourier](isRealFourier_py.html), [sphericalSeries](sphericalSeries_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L408">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L411">source</a></font>
 {% endraw %}

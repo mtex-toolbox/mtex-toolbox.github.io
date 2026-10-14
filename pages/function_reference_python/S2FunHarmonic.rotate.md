@@ -26,5 +26,5 @@ S2FunHarmonic.rotate(self, rot)
 
 MATLAB's [S2FunHarmonic.rotate](S2FunHarmonic.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L693">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L701">source</a></font>
 {% endraw %}

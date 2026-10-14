@@ -11,5 +11,5 @@ status: Reference
 {% raw %}
 a list of transforms, one hop each, displayed as MATLAB's table of a spatialTransform array
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L901">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L900">source</a></font>
 {% endraw %}

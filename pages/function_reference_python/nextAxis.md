@@ -87,5 +87,5 @@ is made.
 
 MATLAB's [nextAxis](nextAxis.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L514">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L517">source</a></font>
 {% endraw %}

@@ -58,23 +58,28 @@ The derivative along a direction of the specimen.
 
 ## Description
 
-The derivative is a vector of the left tangent space, the rotation vector of the step to
-the neighbour divided by its length, taken from the neighbours that are comparable: inside
-the map, indexed, of the same phase and, where the map carries grain ids, of the same
-grain. A pixel whose neighbours do not span two directions has none, and is NaN.
+The derivative at a pixel is the rotation vector of the step to its neighbour divided by
+the step length, a vector of the left tangent space, fitted over several neighbours. Only
+comparable neighbours count: inside the map, indexed, of the same phase and, where the map
+carries grain ids, of the same grain. A pixel whose neighbours do not span two directions
+gets NaN, as does every pixel of a map of a single row.
 
-The stencil 'oneSided' takes the neighbours along the two lattice directions, stepping
-backwards only where the map ends and NaN where the neighbour it asks for is missing inside
-the map. 'lattice' (MATLAB's '1hop', which is taken too) fits over the stencil of the
-lattice, four axial neighbours of a square grid and six of a hexagonal one, the central
-difference in the interior; 'full' fits over all eight offsets in {-1, 0, 1}^2, leaving far
-fewer pixels NaN. MATLAB returns the derivatives along the lattice directions with the basis
-as second output; the port returns them along the axes of the plane of the map. A direction
-off the plane of the map gives NaN.
+The stencil chooses the neighbours:
+
+- 'oneSided', the default: the next pixel along each of the two lattice directions, the
+previous one only where the map ends; NaN where a neighbour inside the map is missing or not
+comparable.
+- 'lattice' (MATLAB's '1hop'): a least squares fit over the axial neighbours, four on a
+square grid and six on a hexagonal one, the central difference in the interior.
+- 'full': a least squares fit over all eight neighbours, which leaves the fewest pixels NaN.
+
+MATLAB returns the derivatives along the lattice directions with the basis as second output;
+the port returns them along the axes of the plane of the map. A direction off the plane of
+the map gives NaN.
 
 ## Input
 
-| `ebsd` | EBSD of one phase |
+| `ebsd` | EBSD on a lattice, of one phase or several |
 | `direction` | vector3d of the specimen, or three coordinates; without it both axes |
 
 ## Keywords

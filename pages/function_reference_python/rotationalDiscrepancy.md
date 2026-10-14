@@ -59,20 +59,23 @@ The largest ball difference and its ball.
 ## Description
 
 With B(C, r) = {R : angle(C, R) <= r} the balls of SO(3) and nu = mu - eta the difference
-of the two measures, D_ball is sup |nu(B(C, r))|, D_2 the root of the integral of
-|nu(B(C, r))|^2 over the centres (normalised Haar measure) and the radii (sin(r) dr),
-which Stolarsky's identity turns into nu(SO3)^2 / 2 - 1/(2 sqrt(2) pi) int int |R - S|_F
-dnu dnu, and L2 the root of the sum of the squared Wigner moments of nu through the
-bandwidth. All three count a difference in total mass: an ODF of mean one (integral 8
-pi^2) and the probability density of the same texture differ by that factor.
+of the two measures, the metric is one of:
 
-Point weights are normalised to sum one; an orientation set compared with a function takes
-the function's integral, and mass one if that vanishes. An orientation is the uniform
-measure on its orbit of symmetrically equivalent rotations, a bare rotation one atom.
-D_2 keeps the atoms exact at every bandwidth, the functions through their harmonic
-projection. D_ball is a finite search, a lower bound, info.isExact False; SO(3) is three
-dimensional, so raise numCenters and numRadii until it settles. MATLAB's metric 'kernel',
-the objective of optimalSample, is taken by discrepancy, not here.
+- 'D_2', the default: the root of the mean of |nu(B(C, r))|^2 over the centres (Haar
+measure) and the radii (sin(r) dr), by Stolarsky's identity nu(SO3)^2 / 2 -
+1/(2 sqrt(2) pi) int int |R - S|_F dnu dnu. Samples are taken exactly, functions through
+their harmonic expansion.
+- 'D_ball': the largest |nu(B(C, r))|, found by a finite search over centres and radii. It
+is a lower bound; raise numCenters and numRadii until it settles.
+- 'L2', also 'E_L': the root of the weighted sum of the squared Wigner coefficients of nu up
+to the bandwidth.
+
+All three count a difference in total mass: an ODF of mean one (integral 8 pi^2) and the
+probability density of the same texture differ. Point weights are normalised to sum one,
+and a sample compared with a function takes its integral (one if that vanishes). An
+orientation stands for all its symmetrically equivalent rotations, a rotation for one.
+
+MATLAB's metric 'kernel', the objective of optimalSample, is taken by discrepancy, not here.
 
 ## Input
 
@@ -104,5 +107,5 @@ the objective of optimalSample, is taken by discrepancy, not here.
 
 MATLAB's [rotationalDiscrepancy](rotationalDiscrepancy.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/discrepancy.py#L528">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/discrepancy.py#L531">source</a></font>
 {% endraw %}

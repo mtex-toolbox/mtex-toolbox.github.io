@@ -74,5 +74,5 @@ six.
 
 [spatialTransformProjective.fit](spatialTransformProjective.fit_py.html), [spatialTransformDrift.fit](spatialTransformDrift.fit_py.html), [spatialTransformTilt](spatialTransformTilt_index_py.html), [transform](transform_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L530">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L529">source</a></font>
 {% endraw %}

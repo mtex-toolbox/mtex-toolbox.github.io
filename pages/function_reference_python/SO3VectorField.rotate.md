@@ -65,5 +65,5 @@ orientation turns the field into the other frame of the orientation, as SO3FunHa
 
 MATLAB's [SO3VectorField.rotate](SO3VectorField.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L630">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L635">source</a></font>
 {% endraw %}

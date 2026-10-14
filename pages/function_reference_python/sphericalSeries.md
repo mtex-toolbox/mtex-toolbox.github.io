@@ -76,5 +76,5 @@ f.fhat. The result has the shape of the directions.
 
 [sphericalSeriesAdjoint](sphericalSeriesAdjoint_py.html), [sphericalPlan](sphericalPlan_py.html), [S2FunHarmonic.eval](S2FunHarmonic.eval_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1149">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1152">source</a></font>
 {% endraw %}

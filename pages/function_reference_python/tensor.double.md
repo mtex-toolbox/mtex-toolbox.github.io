@@ -59,5 +59,5 @@ The tensor components, repeated ones included.
 
 MATLAB's [tensor.double](tensor.double.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L526">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L525">source</a></font>
 {% endraw %}

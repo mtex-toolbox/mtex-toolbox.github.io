@@ -26,5 +26,5 @@ SO3FunHarmonic.symmetrise(self)
 
 MATLAB's [SO3FunHarmonic.symmetrise](SO3FunHarmonic.symmetrise.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L386">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L398">source</a></font>
 {% endraw %}

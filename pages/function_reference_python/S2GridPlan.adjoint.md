@@ -23,5 +23,5 @@ S2GridPlan.adjoint(self, values, weights)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L873">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L876">source</a></font>
 {% endraw %}

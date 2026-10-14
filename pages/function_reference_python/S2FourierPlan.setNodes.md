@@ -23,5 +23,5 @@ S2FourierPlan.setNodes(self, v)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L641">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L644">source</a></font>
 {% endraw %}

@@ -69,19 +69,22 @@ The largest cap difference and its cap.
 ## Description
 
 With C(m, t) = {x : m.x >= t} the spherical caps and nu = mu - eta the difference of the
-two measures, D_cap is sup |nu(C(m, t))|, D_2 the root of the integral of |nu(C(m, t))|^2
-over the centres m (normalised area) and the heights t, which Stolarsky's identity turns
-into nu(S2)^2 - 1/4 int int |x - y| dnu dnu, and L2 the root of the sum of the squared
-harmonic moments of nu through the bandwidth. All three count a difference in total
-mass: two densities differing only in their integral have a positive discrepancy.
+two measures, the metric is one of:
 
-Point weights are normalised to sum one; a point set compared with a function takes the
-function's integral, and mass one if that vanishes. An antipodal point set puts half its
-mass at each of +x and -x. D_2 keeps the atoms exact at every bandwidth (a cost quadratic
-in the points), the functions through their harmonic projection. D_cap is a finite search
-over centres and heights, a lower bound, info.isExact False; raise numCenters and
-numHeights until it settles. MATLAB's metric 'kernel', the objective of optimalSample, is
-taken by discrepancy, not here.
+- 'D_2', the default: the root of the mean of |nu(C(m, t))|^2 over all caps, by Stolarsky's
+identity nu(S2)^2 - 1/4 int int |x - y| dnu dnu. Point sets are taken exactly, at a cost
+quadratic in the number of points; functions through their harmonic expansion.
+- 'D_cap': the largest |nu(C(m, t))|, found by a finite search over centres and heights.
+It is a lower bound; raise numCenters and numHeights until it settles.
+- 'L2', also 'E_L': the root of the weighted sum of the squared harmonic coefficients of nu
+up to the bandwidth.
+
+All three count a difference in total mass: two densities differing only in their integral
+have a positive discrepancy. Point weights are normalised to sum one, and a point set
+compared with a function takes the function's integral (one if that vanishes). An antipodal
+point set puts half its mass at +x and half at -x.
+
+MATLAB's metric 'kernel', the objective of optimalSample, is taken by discrepancy, not here.
 
 ## Input
 

@@ -23,5 +23,5 @@ SO3FunHarmonic.dot(self, g)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L605">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L617">source</a></font>
 {% endraw %}

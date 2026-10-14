@@ -62,5 +62,5 @@ agree in every other axis, and to join along axis 1 they need two axes.
 
 MATLAB's [S2FunHarmonic.vertcat](S2FunHarmonic.vertcat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L330">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L338">source</a></font>
 {% endraw %}

@@ -58,7 +58,7 @@ Every phase by its inverse pole figure key along x.
 <div class="mx-form" markdown="1">
 
 ```python
-plot(grains, faceColor='none', lineColor='r')
+plot(grains, alpha=0, lineColor='r')
 ```
 
 The outlines alone, in red.
@@ -107,22 +107,24 @@ An axis per grain as a needle.
 
 ## Description
 
-Every grain is one polygon with its holes, coloured as mapValues colours: by phase, by a
-value per grain through a colour map, by orientations through the inverse pole figure key
-of their phase, by an orientation colour key, by an RGB colour per grain or in one colour.
-The boundary, grains.boundary, is drawn on top in lineColor, else in the face colour, else
-black. A crystalShape draws the shape of every grain, rotated by its mean orientation, at
-its centroid; a vector3d per grain an axis as a needle through it, its half pointing out of
-the screen black and the other white.
+Every grain is one polygon with its holes, coloured as mapValues describes: by phase, by a
+value per grain through a colour map, by orientation through the inverse pole figure key of
+its phase or an orientation colour key, by an RGB colour per grain, or in one colour. The
+boundary is drawn on top in lineColor, else in the face colour, else black.
 
-translucent=s fades a grain by its colour, as MATLAB's 'translucent': the opacity of a grain
-is s (1 - min(r, g, b)) for a colour and s v / max(v) for a value, so that pale grains let
-what lies below show.
+Two kinds of color draw something else at every grain:
+
+- a crystalShape: the shape rotated by the mean orientation of the grain, at its centroid.
+- a vector3d per grain: the axis as a needle through the centroid, the half pointing out of
+the screen black, the other white.
+
+translucent=s fades a grain by its colour, as MATLAB's 'translucent': the opacity is
+s (1 - min(r, g, b)) for a colour and s v / max(v) for a value, so that pale grains let what
+lies below show.
 
 region=(xmin, xmax, ymin, ymax) shows a part of the map, title= names the axes,
-coordinates=True labels the axes with the map coordinates, how2plot= a plottingConvention
-other than the map's, parent= the axes to draw into and figSize= the size of a new figure;
-every other keyword goes to the matplotlib artist.
+coordinates=True labels them, how2plot= sets another plottingConvention, parent= the axes
+and figSize= the size of a new figure. Other keywords go to the matplotlib artist.
 
 ## Input
 
@@ -133,7 +135,7 @@ every other keyword goes to the matplotlib artist.
 
 | keyword | default | description |
 |---|---|---|
-| `faceColor` | `None` | one colour for every grain; 'none' draws the boundary alone |
+| `faceColor` | `None` | one colour for every grain; 'none' fills the grains black, alpha=0 draws the boundary alone |
 | `colormap` | `'viridis'` | the colour map of values |
 | `colorRange` | `None` | (lo, hi), the values the colour map spans |
 | `colorbar` | `False` | add a colour bar for values |
@@ -159,5 +161,5 @@ every other keyword goes to the matplotlib artist.
 
 MATLAB's [grain2d.plot](grain2d.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L625">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L631">source</a></font>
 {% endraw %}

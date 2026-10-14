@@ -65,5 +65,5 @@ the box stays as it was, so draw what defines it first. A plane cannot be drawn 
 
 MATLAB's [plane3d.plot](plane3d.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L380">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L382">source</a></font>
 {% endraw %}

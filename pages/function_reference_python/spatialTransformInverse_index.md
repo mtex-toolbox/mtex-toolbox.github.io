@@ -30,5 +30,5 @@ Tinv = spatialTransformInverse(T, tol=1e-10, maxIter=100)
 | [paramChar](spatialTransformInverse.paramChar_py.html) | the parameters of the inverted transform as a line of text |
 | [shortChar](spatialTransformInverse.shortChar_py.html) | the short name of the inverted transform with the prefix inv- |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L847">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L846">source</a></font>
 {% endraw %}

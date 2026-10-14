@@ -23,5 +23,5 @@ S2FourierPlan.adjoint(self, values, weights)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L651">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L654">source</a></font>
 {% endraw %}

@@ -64,5 +64,5 @@ gridify(ebsd) turns it into a grid again.
 
 MATLAB's [EBSD.reduce](EBSD.reduce.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L481">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L488">source</a></font>
 {% endraw %}

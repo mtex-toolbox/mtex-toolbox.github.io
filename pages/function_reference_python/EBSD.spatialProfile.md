@@ -75,5 +75,5 @@ by default; a pixel at the joint of two segments is met once.
 
 MATLAB's [EBSD.spatialProfile](EBSD.spatialProfile.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L616">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L628">source</a></font>
 {% endraw %}

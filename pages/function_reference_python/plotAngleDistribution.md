@@ -68,13 +68,16 @@ With a legend entry.
 ## Description
 
 A list of misorientations is drawn as bars, the percentage of the misorientations in each
-bin; the bins run from 0 to the largest misorientation angle the two symmetries allow, or
-to the largest angle present when it is below half of that. A misorientation distribution
-function, or the distribution of uncorrelated orientations of two frames, is drawn as a
-curve, in multiples of the random distribution. Drawn into held axes holding a histogram,
-a list takes the same bins and a curve is scaled to percent of a bin, so that the two
-compare; each new bar set or curve takes the next of MTEX's colours. Other keywords
-(color, lineWidth, ...) go to matplotlib's bar or plot.
+bin. The bins run from 0 to the largest misorientation angle the two symmetries allow, or
+to the largest angle present when it is below half of that.
+
+A misorientation distribution function, or the distribution of uncorrelated orientations
+of two frames, is drawn as a curve in multiples of the random distribution. Drawn into held
+axes holding a histogram, a list takes the same bins and a curve is scaled to percent of a
+bin, so that the two compare.
+
+Each new bar set or curve takes the next of MTEX's colours. Other keywords (color,
+lineWidth, ...) go to matplotlib's bar or plot.
 
 ## Input
 

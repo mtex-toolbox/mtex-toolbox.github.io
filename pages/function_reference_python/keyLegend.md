@@ -62,5 +62,5 @@ its row, the upper hemisphere above the lower.
 
 [ipfHSVKey](ipfHSVKey_index_py.html), [plotKey](plotKey_py.html), [EBSD.plot](EBSD.plot_py.html), [EBSDIPFMap](EBSDIPFMap_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1333">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1350">source</a></font>
 {% endraw %}

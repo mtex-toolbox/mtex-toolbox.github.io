@@ -64,5 +64,5 @@ column the normal reaches is unknown and NaN.
 
 MATLAB's [EBSD.curvature](EBSD.curvature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L341">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L346">source</a></font>
 {% endraw %}

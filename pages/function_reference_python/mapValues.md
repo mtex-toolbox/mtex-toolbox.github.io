@@ -64,19 +64,25 @@ The measurements ind alone.
 
 ## Description
 
-The colouring asked for is one of: None or 'phase', the colours of the phases;
-'orientation', or an ipfDirection alone, every phase through the inverse pole figure key of
-its own frame; an orientation per element, through the inverse pole figure key of its
-phase; an orientationColorKey; the name of a property of the map or of a value per element
-it computes (area, perimeter, aspectRatio, ... of grains); a value or an RGB colour per
-element; one colour, a name or an RGB triple, for all; faceColor alone, one colour for
-all. A site without an orientation is white, a not indexed phase white unless its frame
-has a colour of its own.
+The colouring asked for is one of:
 
-A picture shows fewer measurements than a large map holds, and at= colours only those it
-shows. A route that yields values ignores at and returns them all, since the colour range
-is the map's and not the picture's; a route that yields colours returns one per entry of
-at.
+- None or 'phase': the colours of the phases.
+- 'orientation', or an ipfDirection alone: every phase through the inverse pole figure key of
+its own frame.
+- an orientation per element: through the inverse pole figure key of its phase.
+- an orientationColorKey: the phases of its frame through the key, the others by their own
+inverse pole figure key for an ipfColorKey, else white.
+- the name of a property, or of a value per element the map or the grains compute (area,
+perimeter, aspectRatio, ...): values.
+- a value or an RGB colour per element.
+- one colour, a name or an RGB triple, for all; or faceColor alone.
+
+A site without an orientation is white, a not indexed phase too unless its frame has a
+colour of its own.
+
+at= colours only the elements a picture shows, for a large map. Values are returned for all
+elements regardless, since the colour range belongs to the whole map; colours are returned
+one per entry of at.
 
 ## Input
 

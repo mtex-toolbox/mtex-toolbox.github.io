@@ -54,9 +54,9 @@ The Wigner-d matrices given.
 
 ## Description
 
-The coefficients are the internal ones, f._fhat, with the Condon-Shortley phase
-(docs/design/harmonics.md), not MATLAB's f.fhat. The transform is the first step of the
-evaluation on a grid or by the NUFFT; with numba and no degrees given it is a compiled loop.
+The coefficients are the port's internal ones, f._fhat, with the Condon-Shortley phase, not
+MATLAB's f.fhat. The transform is the first step of the evaluation on a grid or by the
+NUFFT.
 
 ## Input
 
@@ -78,5 +78,5 @@ evaluation on a grid or by the NUFFT; with numba and no degrees given it is a co
 
 [sphericalTransformAdjoint](sphericalTransformAdjoint_py.html), [sphericalSeries](sphericalSeries_py.html), [halfPiDegrees](halfPiDegrees_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L298">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L301">source</a></font>
 {% endraw %}

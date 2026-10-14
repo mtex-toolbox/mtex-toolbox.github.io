@@ -28,5 +28,5 @@ EBSD3.interp(self, pos)
 
 MATLAB's [EBSD3square.interp](EBSD3square.interp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L222">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L224">source</a></font>
 {% endraw %}

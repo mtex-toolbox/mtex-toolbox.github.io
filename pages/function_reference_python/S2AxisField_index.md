@@ -57,17 +57,18 @@ From the coefficients of the six components.
 
 ## Description
 
-Since an axis has no sign, not the axis a but the six independent entries xx, xy, yy, xz,
-yz, zz of the symmetric matrix a a^T are expanded in spherical harmonics; evaluation
-recovers the axis as the leading eigenvector of the matrix. A function or a field is
-approximated by quadrature on a grid of the bandwidth, axes at scattered directions by the
-quadrature sum with the weights given, equal ones by default (S2AxisFieldHarmonic.interpolate
-fits them by least squares). The field is symmetrised under the group of its frame.
-S2AxisField is the abstract class above it, S2AxisFieldHandle the field of a function
-evaluated where it is asked.
+Since an axis has no sign, the field expands not the axis a but the six entries of the
+symmetric matrix a a^T in spherical harmonics. Evaluation recovers the axis as the leading
+eigenvector of that matrix.
+
+A function or a field is approximated by quadrature on a grid of the bandwidth. Axes at
+scattered directions enter the quadrature sum with the weights given, equal by default;
+S2AxisFieldHarmonic.interpolate fits them by least squares instead. The field is
+symmetrised under the group of its frame unless symmetrise=False.
 
 The coefficient form takes a (L+1)^2 x 6 matrix, one column per component xx, xy, xz, yy,
-yz, zz, in MTEX's basis, the coefficients aF.fhat returns and S2FunHarmonic takes.
+yz, zz, in MTEX's basis: the coefficients aF.fhat returns. S2AxisField is the abstract class
+of axis fields, S2AxisFieldHandle the field of a function evaluated where it is asked.
 
 ## Input
 

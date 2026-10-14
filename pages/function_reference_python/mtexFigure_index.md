@@ -88,13 +88,16 @@ A colour bar per axes, or one for all.
 ## Description
 
 The figure becomes the current one, which gcm returns and into which the plots of MTEX
-draw; newMtexFigure makes one the same way. Without layout or columns the n axes are laid
-out in the grid nearest to a slightly wide picture. The layout grows when more axes are
-asked for than it holds, and the figure grows with it, so that the axes keep their size.
-The spacing between the axes is matplotlib's constrained layout, which makes room for
-titles, labels and colour bars; innerPlotSpacing sets the gap between neighbouring axes and
-outerPlotSpacing the margin around them all, at least half that gap, in pixels at 96 to
-the inch, as MATLAB's.
+draw; newMtexFigure makes one the same way.
+
+Without layout or columns the n axes are laid out in the grid nearest to a slightly wide
+picture. When more axes are asked for than the layout holds, the layout grows and the
+figure with it, so that the axes keep their size.
+
+The spacing is matplotlib's constrained layout, which makes room for titles, labels and
+colour bars. innerPlotSpacing sets the gap between neighbouring axes, outerPlotSpacing the
+margin around them all, at least half that gap; both in pixels at 96 to the inch, as
+MATLAB's.
 
 ## Input
 

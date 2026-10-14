@@ -26,5 +26,5 @@ a * b
 
 MATLAB's [SO3FunHarmonic.times](SO3FunHarmonic.times.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L461">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L473">source</a></font>
 {% endraw %}

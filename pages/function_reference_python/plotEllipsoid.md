@@ -81,5 +81,5 @@ page.
 
 MATLAB's [plotEllipsoid](plotEllipsoid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L214">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L216">source</a></font>
 {% endraw %}

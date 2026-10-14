@@ -57,13 +57,15 @@ The zero positions of the i-th pole figure.
 
 ## Description
 
-The measurement positions are smoothed with a spherical kernel twice: unweighted, their
-density, which says where the data backs a statement, and weighted by alpha where the
-intensity exceeds the background bg and by -1 where it does not. A direction where the
-density is above the threshold and the weighted sum below -0.1 of it counts as zero; an
-orientation is ruled out when one of its symmetric poles falls on such a direction in some
-pole figure. calcODF(pf, zeroRange=True) removes those orientations from the grid of the
-ansatz functions; calcODF(pf, zeroRange=zrm) uses the method set up here.
+A direction of a pole figure is in its zero range where enough measurements surround it
+and most of them lie below the background. Both are kernel sums over the measured
+directions: their density, which must exceed the threshold, and a sum weighting an
+intensity above the background bg by alpha - 1 and one below it by -1, which must be
+below -0.1 times the density.
+
+An orientation is ruled out when one of its symmetric poles falls into the zero range of
+some pole figure. calcODF(pf, zeroRange=True) drops those orientations from the grid of
+the ansatz functions; calcODF(pf, zeroRange=zrm) uses the method set up here.
 
 ## Input
 

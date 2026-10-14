@@ -26,5 +26,5 @@ dislocationDensityTensor.curvature(alpha)
 
 MATLAB's [dislocationDensityTensor.curvature](dislocationDensityTensor.curvature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L353">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L358">source</a></font>
 {% endraw %}

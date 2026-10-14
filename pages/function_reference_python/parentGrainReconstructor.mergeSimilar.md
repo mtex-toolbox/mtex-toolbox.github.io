@@ -63,5 +63,5 @@ prior grains in each.
 
 MATLAB's [parentGrainReconstructor.mergeSimilar](parentGrainReconstructor.mergeSimilar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1020">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1022">source</a></font>
 {% endraw %}

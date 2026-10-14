@@ -59,5 +59,5 @@ their difference is at most atol + rtol times the norm of those of g.
 
 [SO3FunHarmonic.norm](SO3FunHarmonic.norm_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L612">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L624">source</a></font>
 {% endraw %}

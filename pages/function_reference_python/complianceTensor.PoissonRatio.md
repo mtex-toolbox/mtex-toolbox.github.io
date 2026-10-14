@@ -81,5 +81,5 @@ complianceTensor.PoissonRatio(T, x=None, y=None)
 
 MATLAB's [complianceTensor.PoissonRatio](complianceTensor.PoissonRatio.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L319">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L323">source</a></font>
 {% endraw %}

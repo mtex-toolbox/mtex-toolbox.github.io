@@ -23,5 +23,5 @@ SO3FunHarmonic.truncate(self, L)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L350">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L362">source</a></font>
 {% endraw %}

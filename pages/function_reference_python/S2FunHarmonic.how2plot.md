@@ -13,5 +13,5 @@ A property of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
 the plotting convention of the frame, or the session's
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L267">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L275">source</a></font>
 {% endraw %}

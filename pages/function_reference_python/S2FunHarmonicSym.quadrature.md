@@ -59,13 +59,14 @@ Values on a quadratureS2Grid g.
 
 ## Description
 
-The coefficients are the integrals of f against the conjugate spherical harmonics,
-computed as the quadrature sum sum_m w_m f(v_m) conj(Y(v_m)) by the adjoint transform. A
-callable is sampled on a quadrature grid exact up to the bandwidth; values at scattered
-nodes take the weights given, which integrate to 4 pi, equal ones by default, and give a
-good approximation only on nodes dense enough for the bandwidth (S2FunHarmonic.interpolate
-fits values by least squares instead). A quadratureS2Grid brings its own weights and
-bandwidth. Values for a list of functions have the nodes first.
+The coefficients are the integrals of f against the spherical harmonics, approximated by
+the quadrature sum over the nodes. A callable is sampled on a quadrature grid exact up to
+the bandwidth, and a quadratureS2Grid brings its own weights and bandwidth.
+
+Values at scattered nodes take the weights given, which sum to 4 pi, equal ones by
+default. They give a good approximation only on nodes dense enough for the bandwidth;
+S2FunHarmonic.interpolate fits scattered values by least squares instead. Values for a
+list of functions have the nodes first.
 
 ## Input
 
@@ -92,5 +93,5 @@ bandwidth. Values for a list of functions have the nodes first.
 
 MATLAB's [S2FunHarmonicSym.quadrature](S2FunHarmonicSym.quadrature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L156">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L163">source</a></font>
 {% endraw %}

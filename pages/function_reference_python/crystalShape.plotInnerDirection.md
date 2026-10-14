@@ -65,5 +65,5 @@ shows inside a translucent shape drawn before. Several directions give several a
 
 MATLAB's [crystalShape.plotInnerDirection](crystalShape.plotInnerDirection.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L311">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L313">source</a></font>
 {% endraw %}

@@ -75,5 +75,5 @@ another grid is this at the positions of the target.
 
 MATLAB's [mapImage.interp](mapImage.interp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L261">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L264">source</a></font>
 {% endraw %}

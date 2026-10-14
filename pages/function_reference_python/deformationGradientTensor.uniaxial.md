@@ -62,5 +62,5 @@ rate below one compresses. The tensor is in the frame of d.
 
 MATLAB's [deformationGradientTensor.uniaxial](deformationGradientTensor.uniaxial.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L164">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L169">source</a></font>
 {% endraw %}

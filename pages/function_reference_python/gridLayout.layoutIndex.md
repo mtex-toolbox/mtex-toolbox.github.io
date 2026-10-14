@@ -47,19 +47,20 @@ The closest layout a reindexing reaches.
 
 ## Description
 
-A layout says which specimen directions the row and the column index of an array advance
-along, so two of them differ by a transpose and two flips, the only thing a reindexing can
-express. It transposes where the axes are crossed and flips an axis that runs backwards; a
-tie, a grid turned by 45 degrees, keeps the order unless the column of gL is nearer y than
-x. The inverse is the same call with the two layouts swapped. The source is given as two
-directions, since a grid may be sheared; MATLAB also takes a gridLayout there, the port does
-not.
+Two layouts of one grid differ by a transpose and flips of the two axes, which is all a
+reindexing can express. The index transposes where the axes are crossed and flips an axis
+that runs backwards. A tie, a grid turned by 45 degrees, keeps the order unless the column
+direction of gL is nearer y than x.
+
+The inverse is the same call with the two layouts swapped. The source is given as two
+directions, since a grid may be sheared; MATLAB also takes a gridLayout there, the port
+does not.
 
 ## Input
 
 | `gL` | gridLayout, the layout the array is to be laid out in, the target |
 | `d` | (d1, d2), vector3d, the directions the first and the second index advance along |
-| `shape` | the shape of the array, its first two dimensions |
+| `shape` | the shape of the array, its two dimensions |
 
 ## Keywords
 

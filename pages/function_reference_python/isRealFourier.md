@@ -51,5 +51,5 @@ With a looser tolerance.
 
 [isRealSpherical](isRealSpherical_py.html), [isRealWigner](isRealWigner_py.html), [fourierSeries](fourierSeries_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L428">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L431">source</a></font>
 {% endraw %}

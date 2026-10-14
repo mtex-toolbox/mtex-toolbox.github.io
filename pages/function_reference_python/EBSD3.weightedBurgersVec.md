@@ -57,23 +57,29 @@ From the orientation gradient.
 
 ## Description
 
-The integral method, the default, sums the crystal coordinates of the specimen x and y axes
-around a square loop of 2 windowSize + 1 pixels about every pixel; it needs a gridded map of
-one indexed phase, and a loop that leaves the grain (after calcGrains) or the map gives NaN.
-The gradient method takes the column of Nye's tensor along the normal of the map, from the
-curvature of the nearest neighbours, and runs on a list as well. The vectors are in the
-specimen frame, per scan unit, after Wheeler et al.
+The weighted Burgers vector of Wheeler et al. is computed by one of two methods:
+
+- the integral method, the default: the crystal coordinates of the specimen x and y axes
+summed around a square loop of 2 windowSize + 1 pixels about every pixel. It needs a gridded
+map of one indexed phase. A loop that leaves the map, meets a non indexed pixel or, after
+calcGrains, leaves the grain gives NaN, so a larger window leaves more pixels NaN.
+- the gradient method, gradient=True: the column of Nye's tensor along the normal of the map,
+from the curvature of the nearest neighbours. It runs on a list and on a map of several
+phases as well.
+
+The vectors are in the specimen frame, per scan unit. windowSize must be at least 1; 0 gives
+infinite values.
 
 ## Input
 
-| `ebsd` | EBSD of one indexed phase, gridified for the integral method |
+| `ebsd` | EBSD, of one indexed phase and gridified for the integral method |
 
 ## Keywords
 
 | keyword | default | description |
 |---|---|---|
 | `windowSize` | `1` | the half width of the loop of the integral method, in pixels |
-| `stencil` | `'oneSided'` | the stencil of the derivatives of the gradient method, 'oneSided' or 'full' |
+| `stencil` | `'oneSided'` | the stencil of the derivatives of the gradient method, 'oneSided', 'lattice' or 'full' |
 | `gradient` | `False` | use the gradient method instead of the integral one |
 
 ## Output
@@ -90,5 +96,5 @@ specimen frame, per scan unit, after Wheeler et al.
 
 MATLAB's [EBSD3.weightedBurgersVec](EBSD3.weightedBurgersVec.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L378">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L383">source</a></font>
 {% endraw %}

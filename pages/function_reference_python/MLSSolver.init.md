@@ -26,5 +26,5 @@ MLSSolver.init(self)
 
 MATLAB's [MLSSolver.init](MLSSolver.init.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L307">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L309">source</a></font>
 {% endraw %}

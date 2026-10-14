@@ -48,5 +48,5 @@ Of another figure.
 
 [show3d](show3d_py.html), [exportHTML](exportHTML_py.html), [setCamera](setCamera_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L300">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L302">source</a></font>
 {% endraw %}

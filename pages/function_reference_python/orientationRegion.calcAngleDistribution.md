@@ -87,14 +87,19 @@ At the angles given.
 
 ## Description
 
-For a crystal frame the distribution of the uniform density is the area of the axis sector
-of the fundamental region at each angle times sin^2(omega/2), scaled to mean one over the
-angles. For an SO3Fun it is that uniform distribution times the mean of the function over the
-axes at each angle: the axes are sampled with a count following sin^2(omega/2) and only the
-rotations of minimal angle under the symmetries kept. For misorientations it is a histogram
-of the disorientation angles in percent, summing to 100, and omega the centres of the bins.
-The angles are in radians and end at the largest angle of the fundamental region; MATLAB's
-outputs in this order. The angles may also be given positionally, after the second frame.
+The result depends on the input:
+
+- a crystal frame, or two: the distribution of the uniform density, the area of the axis
+sector of the fundamental region at each angle times sin^2(omega/2), scaled to mean one
+over the angles.
+- an SO3Fun: that uniform distribution times the mean of the function over the axes at each
+angle, scaled by the same factor, so that a uniform density gives the uniform distribution.
+- misorientations: a histogram of the disorientation angles in percent, summing to 100,
+with omega the centres of the bins.
+
+The angles are in radians and end at the largest angle of the fundamental region; angles
+given beyond it are dropped. They may also be given positionally, after the second frame.
+MATLAB returns the same two outputs in this order.
 
 ## Input
 
@@ -106,7 +111,7 @@ outputs in this order. The angles may also be given positionally, after the seco
 | keyword | default | description |
 |---|---|---|
 | `omega` | `None` | the angles at which the distribution is computed, 200 up to the largest angle by default (SO3Fun and frames) |
-| `edges` | `None` | the bin edges of the histogram, by default between 5 and 50 bins up to the largest angle (misorientations) |
+| `edges` | `None` | the bin edges of the histogram, by default between 4 and 49 bins up to the largest angle, one per 20 misorientations (misorientations) |
 | `resolution` | `0.5*degree` | the spacing of the axes sampled at each angle (SO3Fun) |
 
 ## Output
@@ -124,5 +129,5 @@ outputs in this order. The angles may also be given positionally, after the seco
 
 MATLAB's [orientationRegion.calcAngleDistribution](orientationRegion.calcAngleDistribution.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L256">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L265">source</a></font>
 {% endraw %}

@@ -26,5 +26,5 @@ the negative, the operator -a
 
 MATLAB's [SO3FunCBF.uminus](SO3FunCBF.uminus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L833">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L836">source</a></font>
 {% endraw %}

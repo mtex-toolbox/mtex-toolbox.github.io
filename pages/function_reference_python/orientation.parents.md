@@ -31,5 +31,5 @@ orientation.parents(self)
 
 MATLAB's [orientation.parents](orientation.parents.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L840">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L847">source</a></font>
 {% endraw %}

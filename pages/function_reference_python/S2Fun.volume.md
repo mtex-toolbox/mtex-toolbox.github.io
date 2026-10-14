@@ -68,11 +68,20 @@ The share of a list of orientations.
 ## Description
 
 The volume is the mean of f on a local grid in the ball times the ball's share of the
-fundamental region (its Haar measure times the number of symmetric copies, at most one).
-On the sphere it is the same over a spherical cap; an antipodal function over a cap of 90
-degree gives its mean value. A fibre as the centre gives fibreVolume; a list of
-orientations gives the share of them within the radius; a list of centres a value each.
-The spherical form is a function only, not a method of the spherical functions.
+fundamental region, counting its symmetric copies, at most one. A uniform density gives
+the share of the ball itself, so a value above it marks a preferred orientation.
+
+On the sphere the ball is a spherical cap; an antipodal function over a cap of 90 degree
+gives its mean value. The spherical form is a function only, volume(sF, v, r), not a
+method of the spherical functions.
+
+The centre may also be:
+
+- a fibre: the volume of the tube about it, as fibreVolume.
+- a list of centres: one value each.
+
+Given a list of orientations instead of a function, the result is the share of them
+within the radius.
 
 ## Input
 

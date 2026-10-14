@@ -60,13 +60,18 @@ Values at orientations, weighted equally.
 ## Description
 
 A callable or another SO(3) function is expanded as SO3FunHarmonic(f, cs, ss, bandwidth=)
-does, exact up to the bandwidth. Values at nodes are summed with the weights against the
-Wigner functions and projected onto the functions invariant under the frames; on a
-quadratureSO3Grid the grid's weights make the result exact up to its bandwidth, which is
-the default bandwidth then, the values at its distinct nodes spread onto all of them. At
-other nodes the sum is the quadrature only when the weights are those of a quadrature
-rule; equal weights 1/n give the series of the density of the nodes times the values, for
-a fit see SO3FunHarmonic.interpolate. SO3FunHarmonic.approximate is the same function.
+does, exact up to the bandwidth; an SO3FunRBF reaches at most its kernel's bandwidth.
+
+Values at nodes are summed with the weights against the Wigner functions and made
+invariant under the frames. What that gives depends on the nodes:
+
+- a quadratureSO3Grid: the grid's weights make the result exact up to its bandwidth, the
+default then. Values at its distinct nodes are spread onto all of them.
+- other nodes with the weights of a quadrature rule: the quadrature of that rule.
+- other nodes, equally weighted by 1/n: the series of the density of the nodes times the
+values, not a fit; for a fit see SO3FunHarmonic.interpolate.
+
+SO3FunHarmonic.approximate is the same function.
 
 ## Input
 
@@ -93,5 +98,5 @@ a fit see SO3FunHarmonic.interpolate. SO3FunHarmonic.approximate is the same fun
 
 MATLAB's [SO3FunHarmonic.approximate](SO3FunHarmonic.approximate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L238">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L245">source</a></font>
 {% endraw %}

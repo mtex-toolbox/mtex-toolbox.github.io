@@ -83,5 +83,5 @@ bandwidth is 512.
 
 MATLAB's [S2FunHarmonic.adjointNFSFT](S2FunHarmonic.adjointNFSFT.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L210">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L218">source</a></font>
 {% endraw %}

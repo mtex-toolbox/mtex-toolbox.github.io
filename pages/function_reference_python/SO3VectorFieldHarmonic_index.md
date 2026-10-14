@@ -77,15 +77,20 @@ A callable by quadrature.
 
 ## Description
 
-The coefficient matrix has the three components as columns, deg2dim(L + 1) rows of MTEX's
-coefficients each. A field in the left tangent space returns its tangent vectors in the
-specimen frame, one in the right tangent space in the crystal frame, 'left' unless named;
-another field is converted to the side named. Tangent vectors t, an SO3TangentVector with
-its reference orientations, are summed with the weights against the Wigner functions, which
-is the quadrature only for the weights of a quadrature rule; a callable returning tangent
-vectors at orientations is sampled on a quadrature grid of the bandwidth, by default the
-preference defaultSO3Bandwidth. A coefficient matrix given is made equivariant under the
-frames unless symmetrise=False.
+A field in the left tangent space returns its tangent vectors in the specimen frame, one
+in the right tangent space in the crystal frame; 'left' unless named. Another field given
+is converted to the side named.
+
+The field is built from:
+
+- a coefficient matrix: the components as columns of MTEX's coefficients, made equivariant
+under the frames unless symmetrise=False.
+- tangent vectors t at reference orientations: summed with the weights against the Wigner
+functions, a quadrature only for the weights of a quadrature rule.
+- a callable of orientations: sampled on a quadrature grid of the bandwidth, by default the
+preference defaultSO3Bandwidth.
+- three component functions: their coefficients, cut to the largest bandwidth; a Python
+list takes its frames from cs and ss, else the trivial frames.
 
 ## Input
 

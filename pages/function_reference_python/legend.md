@@ -66,10 +66,12 @@ Removes the legends.
 ## Description
 
 Without names the legend collects every artist of the figure that a displayName (a
-label) named, each name once, MATLAB's legend('show'); with names it names the bars,
+label) named, each name once, as MATLAB's legend('show'). With names it names the bars,
 curves and markers of the current axes in the order they were drawn, as MATLAB's legend
-with labels does. A new legend replaces those the figure has. It goes into the last axes,
-or for a location ending in 'outside' beside the charts, the figure widened when it would
+with labels.
+
+A new legend replaces those the figure has. It goes into the last axes of the figure, or,
+for a location ending in 'outside', beside the charts, the figure widened when it would
 not fit. Every entry gets a marker of the same size. Other keywords go to matplotlib's
 legend.
 
@@ -97,5 +99,5 @@ legend.
 
 [OrientationFibre](OrientationFibre_py.html), [OrientationStandard](OrientationStandard_py.html), [WaveVelocities](WaveVelocities_py.html), [BoundaryPlots](BoundaryPlots_py.html), [GrainSmoothing](GrainSmoothing_py.html), [AngleDistributionFunction](AngleDistributionFunction_py.html), [MisorientationDistributionFunction](MisorientationDistributionFunction_py.html), [MisorientationGrainExchangeSym](MisorientationGrainExchangeSym_py.html), [MisorientationTheory](MisorientationTheory_py.html), [SlipTransmission](SlipTransmission_py.html), [Annotations](Annotations_py.html), [CombinedPlots](CombinedPlots_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L844">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L847">source</a></font>
 {% endraw %}

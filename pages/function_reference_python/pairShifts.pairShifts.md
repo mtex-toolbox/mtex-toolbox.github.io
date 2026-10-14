@@ -78,5 +78,5 @@ pairShifts(pos=None, u=None, peak=None, roiSize=None)
 
 MATLAB's [pairShifts.pairShifts](pairShifts.pairShifts.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/registration.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/registration.py#L248">source</a></font>
 {% endraw %}

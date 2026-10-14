@@ -56,13 +56,16 @@ Another field fitted on a grid.
 
 ## Description
 
-The field is the sum over the centres of the kernel at the misorientation to the centre
-times the centre's weight vector, summed over the symmetric equivalents so that it is
-equivariant under the frames. Through tangent vectors t, an SO3TangentVector at reference
-orientations, the weights solve the dense linear system of the kernel between the
-references, which suits hundreds of centres; another field is sampled on an equispaced grid
-of the resolution and fitted the same way, the kernel by default of halfwidth the resolution.
-MATLAB stores the three components as SO3FunRBF; the weights here are one vector per centre.
+The field is the sum over the centres of the kernel at the misorientation to the centre,
+times the centre's weight vector. It is summed over the symmetric equivalents, so that it
+is equivariant under the frames.
+
+Through tangent vectors t, an SO3TangentVector at reference orientations, the weights solve
+the dense linear system of the kernel between the references, which suits hundreds of
+centres. Another field is sampled on an equispaced grid of the resolution and fitted the
+same way, with a kernel of halfwidth the resolution unless one is given.
+
+MATLAB stores the three components as SO3FunRBF; here the weights are one vector per centre.
 
 ## Input
 
@@ -103,5 +106,5 @@ MATLAB stores the three components as SO3FunRBF; the weights here are one vector
 | [times](SO3VectorFieldRBF.times_py.html) |  |
 | [uminus](SO3VectorFieldRBF.uminus_py.html) |  |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L997">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1005">source</a></font>
 {% endraw %}

@@ -65,5 +65,5 @@ has the exchange symmetry of the misorientations within one phase.
 
 MATLAB's [SO3Fun.calcMDF](SO3Fun.calcMDF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L219">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L228">source</a></font>
 {% endraw %}

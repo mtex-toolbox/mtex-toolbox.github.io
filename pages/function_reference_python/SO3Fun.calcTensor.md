@@ -67,12 +67,19 @@ Over a map, one tensor per phase.
 
 ## Description
 
-The Voigt average is the mean of the tensor rotated by the orientations, the Reuss average
-the inverse of the mean of the rotated inverses, Hill's the mean of the two. Over an ODF
-the integral is exact, since a rotated tensor of rank R is a polynomial of degree R in the
-rotation. Over a map every indexed phase takes the tensor of its crystal frame, the
-tensors given in any order, and a phase without one is refused: select the phases first,
-ebsd[['Forsterite', 'Enstatite']]. MATLAB's geometric mean ('geometric') is not offered.
+The average decides how the rotated tensors are combined:
+
+- 'Voigt', the default: the mean of the tensor rotated by the orientations.
+- 'Reuss': the inverse of the mean of the rotated inverses.
+- 'Hill': the mean of the Voigt and the Reuss average.
+- 'all': the three of them.
+
+Over an ODF the average is exact, since a rotated tensor of rank R is a polynomial of degree
+R in the rotation. MATLAB's geometric mean ('geometric') is not offered.
+
+Over a map every indexed phase takes the tensor of its crystal frame, the tensors given in
+any order, and a phase without a tensor is refused: select the phases first,
+ebsd[['Forsterite', 'Enstatite']].
 
 ## Input
 

@@ -19,5 +19,5 @@ periodic axes of the array shrink by the folds and the nodes are stretched
 | [adjoint](SO3FourierPlan.adjoint_py.html) | coefficients from weighted values at the nodes |
 | [setNodes](SO3FourierPlan.setNodes_py.html) | moves the plan to other rotations, the finufft plans kept |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L573">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L576">source</a></font>
 {% endraw %}

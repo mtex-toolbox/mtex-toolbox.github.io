@@ -29,5 +29,5 @@ stiffnessTensor.HashinShtrikmanModulus(C, K0, G0)
 
 MATLAB's [stiffnessTensor.HashinShtrikmanModulus](stiffnessTensor.HashinShtrikmanModulus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L417">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L421">source</a></font>
 {% endraw %}

@@ -57,12 +57,14 @@ An (n1, n2, n3) array of voxels.
 
 ## Description
 
-A volume is the three dimensional EBSD: a list of voxels, or the same arrays of shape
-(n1, n2, n3), ebsd[i, j, k] one voxel, where orientation gradients are available along all
-three axes. phaseId indexes CSList, 0 the not indexed phase. The voxel lattice, the origin
-and the three steps d1, d2, d3, is inferred from the positions when it is not given, the
-shortest independent differences to the neighbours or the rows of D; positions on no
-lattice leave ebsd.lattice None. EBSD3.load reads the volumes of DREAM.3D and Neper.
+A volume is the three dimensional EBSD: a list of voxels, or arrays of shape (n1, n2, n3)
+with ebsd[i, j, k] one voxel, where orientation gradients are available along all three
+axes. phaseId indexes CSList, 0 being the not indexed phase. EBSD3.load reads the volumes of
+DREAM.3D and Neper.
+
+The voxel lattice, the origin and the three steps d1, d2, d3, is inferred from the
+positions unless it is given: the steps are the shortest independent differences between
+neighbours, or the rows of D. Positions on no lattice leave ebsd.lattice None.
 
 ## Input
 

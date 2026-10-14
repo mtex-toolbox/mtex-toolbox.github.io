@@ -48,14 +48,15 @@ Empty outside the measurements.
 
 ## Description
 
-The holes of the map are filled first, by the solver smooth and fill use, then each
-position is interpolated within the lattice cell it falls in, linearly in the tangent
-space of the component (grain or phase) of the nearest measured corner and over the
-corners of that component only, so nothing is averaged across a grain boundary. A
-position no measured corner surrounds takes the nearest measurement where extrapolate
-allows it, and is notIndexed otherwise. The phase and the other properties are those of
-the nearest measured corner. MATLAB takes the nearest measurement within its pixel; here
-the orientations are interpolated.
+The orientation at a position is interpolated linearly from the corners of the lattice cell
+it falls in, over the corners that share the grain (or, without grain ids, the phase) of
+the nearest measured corner only, so nothing is averaged across a grain boundary. The
+phase and the other properties are those of the nearest measured corner. MATLAB takes the
+nearest measurement within its pixel instead.
+
+With fill=True the holes of the map are first filled as fill(ebsd, F) fills them. A
+position no measured corner surrounds takes the nearest measurement with
+extrapolate=True, and is notIndexed otherwise.
 
 ## Input
 
@@ -81,5 +82,5 @@ the orientations are interpolated.
 
 MATLAB's [EBSD.interp](EBSD.interp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L512">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L519">source</a></font>
 {% endraw %}

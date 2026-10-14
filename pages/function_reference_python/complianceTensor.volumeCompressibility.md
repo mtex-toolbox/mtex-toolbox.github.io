@@ -26,5 +26,5 @@ complianceTensor.volumeCompressibility(T)
 
 MATLAB's [complianceTensor.volumeCompressibility](complianceTensor.volumeCompressibility.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L278">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L282">source</a></font>
 {% endraw %}

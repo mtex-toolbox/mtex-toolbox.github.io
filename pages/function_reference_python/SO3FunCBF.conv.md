@@ -26,5 +26,5 @@ SO3FunCBF.conv(self, psi)
 
 MATLAB's [SO3FunCBF.conv](SO3FunCBF.conv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L808">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L811">source</a></font>
 {% endraw %}

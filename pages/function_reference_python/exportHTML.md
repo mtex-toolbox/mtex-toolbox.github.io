@@ -53,5 +53,5 @@ Of another figure, with a title.
 
 [show3d](show3d_py.html), [gcs](gcs_py.html), [saveFigure](saveFigure_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L565">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L567">source</a></font>
 {% endraw %}

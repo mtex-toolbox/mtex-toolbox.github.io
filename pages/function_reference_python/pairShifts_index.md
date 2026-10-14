@@ -71,5 +71,5 @@ meanShift states the mean shift over the tiles measured in pixels.
 | [meanShift](pairShifts.meanShift_py.html) | the mean shift in pixels of size px over the tiles measured, [mean length, mean x, mean y] |
 | [pairShifts](pairShifts.pairShifts_py.html) | the shifts one cross correlation pass measured between two images |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/registration.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/registration.py#L248">source</a></font>
 {% endraw %}

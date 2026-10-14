@@ -13,5 +13,5 @@ A property of [SO3VectorFieldRBF](SO3VectorFieldRBF_index_py.html).
 
 the bandwidth of the kernel
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1079">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1090">source</a></font>
 {% endraw %}

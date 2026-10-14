@@ -13,5 +13,5 @@ A property of [quadratureSO3Grid](quadratureSO3Grid_index_py.html).
 
 the quadrature weights of the nodes, in the order of nodes(); they sum to one, the Haar measure
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L203">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L213">source</a></font>
 {% endraw %}

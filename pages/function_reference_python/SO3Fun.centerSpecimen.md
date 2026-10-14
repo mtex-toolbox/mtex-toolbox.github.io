@@ -37,12 +37,18 @@ Another start, a smaller search.
 
 ## Description
 
-The mismatch of a candidate axis is the norm of the difference between the harmonic series
-of the density and the series turned by 180 degrees about it. The first two fold axis is
-searched on a cap of the opening delta about v0, and refined; the second on the fan
-perpendicular to the first. The rotation carries the two axes onto the specimen axes nearest
-to them. The search always runs on the harmonic series, so MATLAB's flags 'Fourier' and
-'silent' change nothing; MATLAB's 'SO3Grid' and 'resolution' are not taken.
+The function finds the two fold axes of a texture that should have orthorhombic specimen
+symmetry but was measured slightly turned, and turns it back. A candidate axis is scored
+by how much the density changes when turned by 180 degree about it; the fit verbose
+reports is one minus that change, relative to the norm of the density.
+
+The first axis is searched on a cap of opening delta about v0 and refined, the second on
+the fan perpendicular to the first. The rotation carries the two axes onto the specimen
+axes nearest to them; v2 is returned made exactly perpendicular to v1.
+
+The search and the result use the harmonic series of the given bandwidth, so odr is
+truncated to it. MATLAB's flags 'Fourier' and 'silent' change nothing; its 'SO3Grid' and
+'resolution' are not taken.
 
 ## Input
 
@@ -73,5 +79,5 @@ to them. The search always runs on the harmonic series, so MATLAB's flags 'Fouri
 
 MATLAB's [SO3Fun.centerSpecimen](SO3Fun.centerSpecimen.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1176">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1215">source</a></font>
 {% endraw %}

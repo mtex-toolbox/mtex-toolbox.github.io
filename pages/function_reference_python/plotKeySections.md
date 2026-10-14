@@ -46,13 +46,15 @@ Coarser, in three columns.
 
 ## Description
 
-Every section is filled with the colour key.orientation2color gives the orientations of its
-grid; orientations the key leaves without a colour stay white. The sections follow the
-frames of the key, frameA and frameB, and are named by a string ('phi2', 'phi1', 'sigma',
-...) or given as an ODFSections object; the keywords of the sections (sections, phi2,
-maxPhi, ...) choose them as for plotSection. An antipodal key, one with grain exchange
-symmetry, is drawn over the region that symmetry halves. A key on the sphere, as
-ipfHSVKey, draws its inverse pole figure with plot(key) instead.
+Every section is filled with the colours key.orientation2color gives the orientations of
+its grid; orientations the key leaves without a colour stay white. An antipodal key, one
+with grain exchange symmetry, is drawn over the region that symmetry halves.
+
+The sections follow the frames of the key, frameA and frameB. They are named by a string
+('phi2', 'phi1', 'sigma', ...) or given as an ODFSections object, and the keywords of the
+sections (sections, phi2, maxPhi, ...) choose them as for plotSection. A key on the
+sphere, as ipfHSVKey, draws its inverse pole figure with plot(key); plotKeySections draws
+it in sections too.
 
 ## Input
 

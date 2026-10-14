@@ -70,5 +70,5 @@ the internal ones, F._fhat.
 
 [wignerSeriesAdjoint](wignerSeriesAdjoint_py.html), [wignerPlan](wignerPlan_py.html), [quadratureSO3Grid](quadratureSO3Grid_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L800">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L803">source</a></font>
 {% endraw %}

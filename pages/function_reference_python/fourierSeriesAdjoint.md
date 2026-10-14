@@ -69,5 +69,5 @@ the coefficients of a trigonometric polynomial of degree L.
 
 [fourierSeries](fourierSeries_py.html), [S1FunHarmonic](S1FunHarmonic_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1271">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L1274">source</a></font>
 {% endraw %}

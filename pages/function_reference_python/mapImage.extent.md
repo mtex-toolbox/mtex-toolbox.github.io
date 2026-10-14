@@ -26,5 +26,5 @@ mapImage.extent(self)
 
 MATLAB's [mapImage.extent](mapImage.extent.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L217">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L220">source</a></font>
 {% endraw %}

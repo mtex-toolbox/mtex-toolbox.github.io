@@ -64,5 +64,5 @@ representation.
 
 MATLAB's [S2AxisFieldHarmonic.quadrature](S2AxisFieldHarmonic.quadrature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L175">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L176">source</a></font>
 {% endraw %}

@@ -78,5 +78,5 @@ complianceTensor.bulkModulus(T, which=None)
 
 MATLAB's [complianceTensor.bulkModulus](complianceTensor.bulkModulus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L352">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L356">source</a></font>
 {% endraw %}

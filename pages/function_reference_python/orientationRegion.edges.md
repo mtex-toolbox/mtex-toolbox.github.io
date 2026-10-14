@@ -56,5 +56,5 @@ Coarser chains.
 
 [plot](S1Grid.plot_py.html), [orientationRegion.maxAngle](orientationRegion.maxAngle_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L232">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L233">source</a></font>
 {% endraw %}

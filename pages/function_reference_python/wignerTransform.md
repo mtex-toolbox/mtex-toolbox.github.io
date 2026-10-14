@@ -46,17 +46,20 @@ A 4 fold about z in the crystal, 2 fold in the specimen.
 
 ## Description
 
-A Wigner series of bandwidth L is a trigonometric series in the Euler angles,
+A Wigner series of bandwidth L is a trigonometric series in the Euler angles of the ZYZ
+convention (alpha = phi1 - pi/2, beta = Phi, gamma = phi2 + pi/2),
 f(alpha, beta, gamma) = sum G[l, k, j] e^{-i(k alpha + j beta + l gamma)}, with
-G[l, k, j] = sum_n sqrt(2n+1) i^{k-l} fhat_n^{kl} d_n^{jk}(pi/2) d_n^{jl}(pi/2). The array
-is what a NUFFT or, on a Clenshaw-Curtis grid, an FFT evaluates; SO3FunHarmonic.eval goes
-this way. Every index runs from -L to L and sits at its value plus L.
+G[l, k, j] = sum_n sqrt(2n+1) i^{k-l} fhat_n^{kl} d_n^{jk}(pi/2) d_n^{jl}(pi/2). A NUFFT, or
+an FFT on a Clenshaw-Curtis grid, evaluates this array; SO3FunHarmonic.eval goes this way.
+Every index runs from -L to L and sits at its value plus L.
 
-The coefficients are the internal ones, SO3FunHarmonic._fhat (docs/design/harmonics.md), not
-the fhat a user reads. For a real function only l >= 0 is kept, the plane l = 0 halved, and
-f is twice the real part of the sum. A function with an rA fold symmetry about z in the
-crystal and an rB fold in the specimen has coefficients only at l = 0 mod rA and
-k = 0 mod rB: those axes are indexed by l / rA and k / rB.
+The coefficients are the port's internal ones, SO3FunHarmonic._fhat, not the fhat a user
+reads. For a real function only l >= 0 is kept, the plane l = 0 halved, and f is twice the
+real part of the sum.
+
+A function with an rA fold symmetry about z in the crystal and an rB fold in the specimen
+has coefficients only at l = 0 mod rA and k = 0 mod rB; with folds=(rA, rB) those axes are
+indexed by l / rA and k / rB.
 
 ## Input
 

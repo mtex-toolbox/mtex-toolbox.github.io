@@ -46,14 +46,18 @@ Every node of every grid kept.
 
 ## Description
 
-The halfwidths run from sqrt(e)^(maxSteps-1) times the target down to the target, those
-whose grid would be coarser than 45 degree dropped; each step solves on an equispaced grid
-of its own resolution, started from the ODF of the previous step evaluated on the grid,
-beginning with the uniform ODF. Missing data is filled by the volume a coarser model puts
-along the fibres, so that highly irregular sampling still gives an ODF; it is an elaborate
-start for calcODF and acts as a regularisation. Before every solve the nodes whose share
-is below thinning times the uniform one are removed. MATLAB's second output alpha is not
-returned; MATLAB's flag nothinning is thinning=0. Further keywords go to MLSSolver.
+Where the pole figures are sampled very irregularly, a coarse model fills the gaps with
+volume along the fibres it justifies, and finer models refine it. The method is an
+elaborate start for calcODF and acts as a regularisation.
+
+The halfwidths run from sqrt(e)^(maxSteps-1) times the target down to the target, the
+steps whose grid would be coarser than 45 degree left out. Each step solves on an
+equispaced grid of its own resolution, starting from the previous ODF evaluated on that
+grid (MATLAB interpolates it), the first from the uniform ODF. Before every solve the
+nodes whose share is below thinning times the uniform one are removed.
+
+MATLAB's second output alpha is not returned; MATLAB's flag nothinning is thinning=0.
+Further keywords go to MLSSolver.
 
 ## Input
 
@@ -86,5 +90,5 @@ returned; MATLAB's flag nothinning is thinning=0. Further keywords go to MLSSolv
 
 [PoleFigureRefinement](PoleFigureRefinement_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L591">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L593">source</a></font>
 {% endraw %}

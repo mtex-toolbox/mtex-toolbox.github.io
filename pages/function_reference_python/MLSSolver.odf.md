@@ -13,5 +13,5 @@ A property of [MLSSolver](MLSSolver_index_py.html).
 
 the ODF the current coefficients describe
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L452">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L454">source</a></font>
 {% endraw %}

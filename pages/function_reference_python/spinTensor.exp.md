@@ -70,5 +70,5 @@ specimen frame on the left, exp(W) * ori0, unless side says otherwise.
 
 [spinTensorOf](spinTensorOf_py.html), [SO3TangentVector](SO3TangentVector_index_py.html), [doEulerStep](doEulerStep_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L456">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L460">source</a></font>
 {% endraw %}

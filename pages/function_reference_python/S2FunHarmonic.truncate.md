@@ -63,5 +63,5 @@ MATLAB's truncate takes no degree.
 
 MATLAB's [S2FunHarmonic.truncate](S2FunHarmonic.truncate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L361">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L369">source</a></font>
 {% endraw %}

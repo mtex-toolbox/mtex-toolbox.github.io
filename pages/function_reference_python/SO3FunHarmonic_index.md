@@ -77,14 +77,21 @@ A misorientation function, f(g) = f(g^-1).
 
 ## Description
 
-The coefficients fhat are MTEX's, degree by degree, deg2dim(L + 1) of them for the bandwidth L;
-a vector ending inside a degree block is padded with zeros to its end. Another SO(3) function
-gives its harmonic form at the bandwidth given (an SO3FunRBF at most its kernel's), a kernel
-its series, a callable of orientations is sampled on a quadrature grid of the bandwidth, by
-default the preference defaultSO3Bandwidth, Clenshaw-Curtis unless 'GaussLegendre' is named
-among the frames. The frames are the crystal frame and the specimen frame, the second by
-default specimenFrame.default; the coefficients are made invariant under both unless
-symmetrise=False. A list of functions carries its shape in front of the coefficients.
+What the first argument is decides how the coefficients come about:
+
+- coefficients: MTEX's, degree by degree, deg2dim(L + 1) of them for the bandwidth L; a
+vector ending inside a degree block is padded with zeros to its end. An array of more axes
+is a list of functions, its shape in front of the coefficients.
+- another SO(3) function: its harmonic form at the bandwidth given; an SO3FunRBF reaches at
+most its kernel's bandwidth.
+- an SO(3) kernel: its series.
+- a callable of orientations: sampled on a quadrature grid of the bandwidth, by default the
+preference defaultSO3Bandwidth, Clenshaw-Curtis unless 'GaussLegendre' is named among the
+frames.
+
+The frames are the crystal frame and the specimen frame, the second by default
+specimenFrame.default. The coefficients are made invariant under both unless
+symmetrise=False.
 
 ## Input
 

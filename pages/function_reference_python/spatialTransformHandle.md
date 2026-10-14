@@ -30,5 +30,5 @@ T = spatialTransformHandle(fun, funInv)
 
 MATLAB's [spatialTransformHandle](spatialTransformHandle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L750">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L749">source</a></font>
 {% endraw %}

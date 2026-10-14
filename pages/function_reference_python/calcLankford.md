@@ -89,5 +89,5 @@ The angles theta may also be given as a positional array after sS, as MATLAB.
 
 MATLAB's [calcLankford](calcLankford.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L184">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L191">source</a></font>
 {% endraw %}

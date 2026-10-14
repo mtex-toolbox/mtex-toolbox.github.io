@@ -65,5 +65,5 @@ Further keywords, lambda_, s, maxIter and tol, go to interpolate.
 
 MATLAB's [S2AxisFieldHarmonic.interpolate](S2AxisFieldHarmonic.interpolate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L201">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L202">source</a></font>
 {% endraw %}

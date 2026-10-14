@@ -66,5 +66,5 @@ The coefficients are the internal ones of an S2FunHarmonic, f._fhat, not MATLAB'
 
 [sphericalSeries](sphericalSeries_py.html), [sphericalSeriesAdjoint](sphericalSeriesAdjoint_py.html), [wignerPlan](wignerPlan_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L918">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L921">source</a></font>
 {% endraw %}

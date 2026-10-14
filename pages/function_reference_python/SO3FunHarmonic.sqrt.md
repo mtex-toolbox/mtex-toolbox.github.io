@@ -58,5 +58,5 @@ truncation of a density may leave, give NaN there.
 
 [SO3FunHarmonic.exp](SO3FunHarmonic.exp_py.html), [SO3FunHarmonic.log](SO3FunHarmonic.log_py.html), [mapFun](mapFun_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L481">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L493">source</a></font>
 {% endraw %}

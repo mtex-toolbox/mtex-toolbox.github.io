@@ -26,5 +26,5 @@ a + b
 
 MATLAB's [SO3FunRBF.plus](SO3FunRBF.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L484">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L487">source</a></font>
 {% endraw %}

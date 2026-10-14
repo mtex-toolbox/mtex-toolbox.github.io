@@ -62,5 +62,5 @@ part of it, with its orientation; job.grains and job.mergeId follow the merge.
 
 MATLAB's [parentGrainReconstructor.mergeInclusions](parentGrainReconstructor.mergeInclusions.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1040">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1042">source</a></font>
 {% endraw %}

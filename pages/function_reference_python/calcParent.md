@@ -87,13 +87,18 @@ The variant triple of every triple point.
 
 ## Description
 
-The parent of many children of one grain: every child proposes its parent variants, and the
-proposal the others agree with best is refined as their weighted mean. With a parent
-orientation, one or one per child, every child takes the parent variant nearest it. For
-pairs and triples of children, an (n, 2) or (n, 3) array as a boundary or a triple point
-gives them, the parent variants that agree best on a parent, the fit their disorientation.
-numFit returns the best few instead of one, along a last axis. With id=True the one based
-ids of the parent variants, childOri * p2c.variants(parent=True)[id - 1] being the parent.
+The form of the input decides what is reconstructed:
+
+- many children of one grain: every child proposes its parent variants, and the proposal
+the others agree with best is refined as their weighted mean.
+- children with a parent orientation, one or one per child: every child takes the parent
+variant nearest that parent.
+- pairs or triples of children, an (n, 2) or (n, 3) array as a boundary or a triple point
+gives them: the parent variants that agree best on one parent, the fit their disorientation.
+
+numFit returns the best few fits instead of one, along a last axis. With id=True the one
+based ids of the parent variants come back, childOri * p2c.variants(parent=True)[id - 1]
+being the parent.
 
 ## Input
 
@@ -126,5 +131,5 @@ ids of the parent variants, childOri * p2c.variants(parent=True)[id - 1] being t
 
 MATLAB's [calcParent](calcParent.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L350">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L353">source</a></font>
 {% endraw %}

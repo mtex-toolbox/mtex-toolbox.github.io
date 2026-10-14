@@ -66,12 +66,20 @@ Scale times the length of v.
 
 ## Description
 
-A direction starts at its point, an axis (an antipodal vector, or antipodal=True) is centred
-on it. By default an arrow of a grain is a fifth of its diameter, of a map one and a half
-spacings, of a boundary three median segment lengths, and is drawn as its projection onto
-the map, so that a direction steep to the map is short. scale=s draws every arrow s times
-the length of its vector in the plane instead, scaling=False at the length of the vector
-itself. Into a held map plot the arrows go on top of it, else into a map of their own.
+A direction starts at its point, an axis (an antipodal vector, or antipodal=True) runs both
+ways from it. The default length depends on what carries the arrows:
+
+- grains: a fifth of the grain diameter along the direction in space, seen on the map, so
+that a direction steep to the map is short; an axis reaches that far to either side. A
+direction pointing into the map ends at the centroid unless projectIntoPlane=True.
+- a map: one and a half pixel spacings on the map for every arrow, whatever its inclination.
+- boundary segments: needles both ways from the midpoint, proportional to the length of the
+vector in space and seen on the map; autoScaleFactor, by default 0.15, sets their size
+relative to the spacing of the segments.
+
+scale=s draws every arrow s times the length of its vector in the plane of the map instead,
+scaling=False at that length itself. Into a held map plot the arrows go on top of it, else
+into a map of their own.
 
 ## Input
 
@@ -99,5 +107,5 @@ itself. Into a held map plot the arrows go on top of it, else into a map of thei
 
 [grain2d.plot](grain2d.plot_py.html), [EBSD.plot](EBSD.plot_py.html), [Annotations](Annotations_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1070">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1079">source</a></font>
 {% endraw %}

@@ -67,5 +67,5 @@ random texture, one for a single crystal.
 
 MATLAB's [orientation.calcMIndex](orientation.calcMIndex.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L332">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L346">source</a></font>
 {% endraw %}

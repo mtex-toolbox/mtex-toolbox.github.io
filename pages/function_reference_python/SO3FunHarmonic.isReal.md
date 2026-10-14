@@ -13,5 +13,5 @@ A property of [SO3FunHarmonic](SO3FunHarmonic_index_py.html).
 
 SO3F.isReal = True makes the coefficients those of the real part, as MATLAB's does
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L314">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L326">source</a></font>
 {% endraw %}

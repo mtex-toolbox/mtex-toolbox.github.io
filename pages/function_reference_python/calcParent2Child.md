@@ -68,13 +68,16 @@ With the misfit of every misorientation.
 ## Description
 
 Two children of one parent grain are related by a misorientation the relationship predicts,
-V_i^-1 V_j for two of its variants. The relationship minimises the trimmed chordal misfit
-of the measured misorientations to the nearest predicted one, the share quantile of the
-smallest misfits, by a fixed point iteration; unless local, the iteration also starts from
-the best basins of a scan over the space of relationships, so that a poor start still
-finds the global minimum. Pairs of child orientations, an (n, 2) array in the specimen
-frame, are turned into their misorientations. The progress is reported unless
-verbose=False.
+V_i^-1 V_j for two of its variants. The fitted relationship minimises the trimmed chordal
+misfit of the measured misorientations to the nearest predicted one, taken over the share
+quantile of the smallest misfits, by a fixed point iteration.
+
+With local=True the iteration starts from p2c0 alone. By default it also starts from the
+best basins of a scan over all relationships, so that a poor start still finds the global
+minimum; p2c0 refined on its own remains a candidate.
+
+Pairs of child orientations, an (n, 2) array in the specimen frame, are turned into their
+misorientations. The progress is reported unless verbose=False.
 
 ## Input
 

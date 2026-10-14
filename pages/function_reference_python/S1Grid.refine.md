@@ -30,5 +30,5 @@ refine(v)
 
 MATLAB's [S1Grid.refine](S1Grid.refine.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1084">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1092">source</a></font>
 {% endraw %}

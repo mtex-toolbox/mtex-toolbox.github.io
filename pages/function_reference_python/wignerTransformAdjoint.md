@@ -77,5 +77,5 @@ the forward transform.
 
 [wignerTransform](wignerTransform_py.html), [sphericalTransformAdjoint](sphericalTransformAdjoint_py.html), [SO3FourierPlan](SO3FourierPlan_index_py.html), [wignerSeriesAdjoint](wignerSeriesAdjoint_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L239">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L242">source</a></font>
 {% endraw %}

@@ -62,5 +62,5 @@ index. With a Sobolev index s every degree n is weighted by (2n+1)^{2s}.
 
 MATLAB's [SO3FunHarmonic.norm](SO3FunHarmonic.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L580">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L592">source</a></font>
 {% endraw %}

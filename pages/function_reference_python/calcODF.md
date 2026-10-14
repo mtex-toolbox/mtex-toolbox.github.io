@@ -123,5 +123,5 @@ solver.calcODF(). A kernel or a grid of orientations may be passed positionally.
 
 [DetectionOfSampleSymmetry](DetectionOfSampleSymmetry_py.html), [ODFComponents](ODFComponents_py.html), [SO3FunHarmonicRepresentation](SO3FunHarmonicRepresentation_py.html), [AxesAlignment](AxesAlignment_py.html), [CombinedPlots](CombinedPlots_py.html), [ContourPlots](ContourPlots_py.html), [PoleFigure2ODF](PoleFigure2ODF_py.html), [PoleFigure2ODFAmbiguity](PoleFigure2ODFAmbiguity_py.html), [PoleFigure2ODFGhostCorrection](PoleFigure2ODFGhostCorrection_py.html), [PoleFigureCorrection](PoleFigureCorrection_py.html), [PoleFigureDubna](PoleFigureDubna_py.html), [PoleFigureExport](PoleFigureExport_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L527">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L529">source</a></font>
 {% endraw %}

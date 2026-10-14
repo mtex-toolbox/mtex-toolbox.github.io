@@ -73,5 +73,5 @@ S2FunHarmonic uses them.
 
 [WignerD](WignerD_py.html), [SO3FunHarmonic.symmetrise](SO3FunHarmonic.symmetrise_py.html), [S2FunHarmonic.symmetrise](S2FunHarmonic.symmetrise_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L381">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L383">source</a></font>
 {% endraw %}

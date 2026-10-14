@@ -26,5 +26,5 @@ velocityGradientTensor.rotationRate(L)
 
 MATLAB's [velocityGradientTensor.rotationRate](velocityGradientTensor.rotationRate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L309">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L314">source</a></font>
 {% endraw %}

@@ -83,5 +83,5 @@ page.
 
 MATLAB's [grain3Boundary.quiver](grain3Boundary.quiver.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L162">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L164">source</a></font>
 {% endraw %}

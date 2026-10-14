@@ -78,5 +78,5 @@ calcKearnsFactor(f, h=None, N=None)
 
 MATLAB's [calcKearnsFactor](calcKearnsFactor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L256">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L263">source</a></font>
 {% endraw %}

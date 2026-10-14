@@ -13,5 +13,5 @@ A property of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
 the number of functions in a list, 1 for one function
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L299">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L307">source</a></font>
 {% endraw %}

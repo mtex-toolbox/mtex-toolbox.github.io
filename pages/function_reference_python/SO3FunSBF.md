@@ -69,5 +69,5 @@ to the frame of E, the default specimen frame when E has none.
 
 [SingleSlipModel](SingleSlipModel_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L291">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L298">source</a></font>
 {% endraw %}

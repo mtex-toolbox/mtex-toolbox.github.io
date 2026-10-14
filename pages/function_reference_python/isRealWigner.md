@@ -57,5 +57,5 @@ function, every pair compared up to the relative tolerance.
 
 [isRealSpherical](isRealSpherical_py.html), [isRealFourier](isRealFourier_py.html), [wignerSeries](wignerSeries_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L387">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L390">source</a></font>
 {% endraw %}

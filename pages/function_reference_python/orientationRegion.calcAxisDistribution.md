@@ -101,5 +101,5 @@ few points. The distribution is antipodal for a function with grain exchange.
 
 MATLAB's [orientationRegion.calcAxisDistribution](orientationRegion.calcAxisDistribution.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L414">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L428">source</a></font>
 {% endraw %}

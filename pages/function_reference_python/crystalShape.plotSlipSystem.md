@@ -79,5 +79,5 @@ shape translucent first, plot(cS, faceAlpha=0.2), and hold the figure.
 
 MATLAB's [crystalShape.plotSlipSystem](crystalShape.plotSlipSystem.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L339">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L341">source</a></font>
 {% endraw %}

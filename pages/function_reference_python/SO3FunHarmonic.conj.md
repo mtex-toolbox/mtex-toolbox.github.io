@@ -26,5 +26,5 @@ SO3FunHarmonic.conj(self)
 
 MATLAB's [SO3FunHarmonic.conj](SO3FunHarmonic.conj.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L431">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L443">source</a></font>
 {% endraw %}

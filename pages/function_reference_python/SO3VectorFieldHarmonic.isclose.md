@@ -60,5 +60,5 @@ most rtol times the norm of those of the second.
 
 [SO3FunHarmonic.isclose](SO3FunHarmonic.isclose_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L590">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L595">source</a></font>
 {% endraw %}

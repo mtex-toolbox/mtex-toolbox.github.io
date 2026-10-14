@@ -75,5 +75,5 @@ fundamentalRegion(cs).maxAngle(axis) here.
 
 MATLAB's [symmetry.maxAngle](symmetry.maxAngle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L447">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L448">source</a></font>
 {% endraw %}

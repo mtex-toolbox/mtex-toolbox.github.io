@@ -26,5 +26,5 @@ S2AxisFieldHarmonic.dot(self, x)
 
 MATLAB's [S2AxisFieldHarmonic.dot](S2AxisFieldHarmonic.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L261">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L262">source</a></font>
 {% endraw %}

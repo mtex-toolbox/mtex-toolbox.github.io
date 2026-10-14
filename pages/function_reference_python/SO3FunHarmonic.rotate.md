@@ -62,5 +62,5 @@ specimen frame of the function, from the right its specimen frame the crystal fr
 
 [SO3FunHandle.rotate](SO3FunHandle.rotate_py.html), [SO3FunRBF.rotate](SO3FunRBF.rotate_py.html), [rotation](rotation_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L636">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L648">source</a></font>
 {% endraw %}

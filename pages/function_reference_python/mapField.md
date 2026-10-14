@@ -55,14 +55,17 @@ A field times a number.
 
 ## Description
 
-The arguments are evaluated on the quadrature grid of the component frames of v, op is
-applied to the arrays, the tangent vectors of a field an (n, 3) array in the tangent space of
-v, a function's values an (n, 1) column, which broadcasts against them, a number itself, and
-the result is expanded again: an (n, 3) result is a field in the tangent space of v, one
-value per node a function. The bandwidth is
-that of the operands added, at most the preference maxSO3Bandwidth. A scalar result lives
-on the component frames of v unless invariant says it is invariant under the full frames of
-the field.
+The arguments are evaluated on a quadrature grid, op is applied to the arrays of values and
+the result is expanded again. op sees a field as an (n, 3) array of tangent vectors in the
+tangent space of v, a function as an (n, 1) column, which broadcasts against them, and a
+number as itself.
+
+An (n, 3) result is a field in the tangent space of v, one value per node a function. A
+function lives on the component frames of v, the frames with the symmetry on the tangent
+side stripped, unless invariant=True puts it on the full frames of the field.
+
+The bandwidth of the result is the sum of those of the operands, at most the preference
+maxSO3Bandwidth.
 
 ## Input
 
@@ -87,5 +90,5 @@ the field.
 
 [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html), [grad](grad_py.html), [antiderivative](antiderivative_py.html), [SO3FunVectorField](SO3FunVectorField_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L837">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L842">source</a></font>
 {% endraw %}

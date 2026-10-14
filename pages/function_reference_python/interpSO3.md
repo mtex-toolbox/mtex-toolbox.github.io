@@ -93,5 +93,5 @@ orientations weighted by the values, calcBinghamODF. Vector values give a vector
 
 [interpolateRBF](interpolateRBF_py.html), [interpolate](SO3VectorFieldHarmonic.interpolate_py.html), [calcBinghamODF](orientation.calcBinghamODF_py.html), [SO3FunApproximationTheory](SO3FunApproximationTheory_py.html), [RBFApproximationTheory](RBFApproximationTheory_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbfinterpolation.py#L226">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbfinterpolation.py#L235">source</a></font>
 {% endraw %}

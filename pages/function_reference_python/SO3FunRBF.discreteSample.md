@@ -79,13 +79,21 @@ N measurements of a map, of any phases.
 
 ## Description
 
-A density is sampled on the nodes of a grid with probability proportional to its values, and
-every node drawn is moved by a random rotation within the grid resolution and turned by a
-random element of each symmetry group. A radial function is sampled exactly: a centre by its
-weight, the angle by the inverse distribution of the kernel, a uniform axis; a Bingham
-distribution exactly by rejection, a sum of radial functions term by term. A Python function
-of numbers is sampled on 10000 points of the range. MATLAB's 'compact' sampling and the
-indices of the members drawn from a list are not provided.
+How the sample is drawn depends on what is sampled:
+
+- a density on SO(3) or the sphere: grid nodes drawn with probability proportional to the
+values, each moved by a random rotation of up to 1.5 times the grid resolution and turned by
+a random element of each symmetry group. A finer resolution gives a more exact sample.
+- a radial function (unimodalODF, calcDensity): exactly, a centre by its weight, the angle
+by the distribution of the kernel and a uniform axis; a sum of radial functions term by term.
+- a Bingham distribution: exactly, by rejection.
+- a Python function of numbers (a def or a lambda, not a NumPy ufunc such as np.exp): its
+values at 10000 points of the range.
+- a list, a map, grains or boundary segments: n of its members, with replacement unless
+withoutReplacement=True, which returns all members when n exceeds their number.
+
+MATLAB's 'compact' sampling and the indices of the members drawn from a list are not
+provided.
 
 ## Input
 
@@ -111,5 +119,5 @@ indices of the members drawn from a list are not provided.
 
 MATLAB's [SO3FunRBF.discreteSample](SO3FunRBF.discreteSample.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L957">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L988">source</a></font>
 {% endraw %}

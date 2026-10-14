@@ -66,5 +66,5 @@ the sector.
 
 MATLAB's [orientationRegion.maxAngle](orientationRegion.maxAngle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L171">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L172">source</a></font>
 {% endraw %}

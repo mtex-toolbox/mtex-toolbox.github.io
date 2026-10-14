@@ -64,5 +64,5 @@ kept when every function is real.
 
 MATLAB's [SO3FunHarmonic.cat](SO3FunHarmonic.cat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L202">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L209">source</a></font>
 {% endraw %}

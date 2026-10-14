@@ -24,5 +24,5 @@ slowest and theta fastest over the axes thetaGrid and rhoGrid, with its weights
 
 [S2FunQuadrature](S2FunQuadrature_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L308">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L318">source</a></font>
 {% endraw %}

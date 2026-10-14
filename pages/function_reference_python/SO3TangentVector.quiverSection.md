@@ -67,16 +67,16 @@ A direction per orientation.
 
 ## Description
 
-With a function on the sphere sF, a vector field vF, S2VectorField, S2AxisField or a
-function of the directions, is evaluated at 36 points of the circle normal to sec, or of
-the small circle at the polar angle eta from sec, and the vectors are drawn at the ring that
-plotSection(sF, sec) draws, the points pushed out to the values of sF and seen down sec. The
-longest arrow is scaled to the spacing of the points (autoScaleFactor=0.9); an axis field
-draws segments without heads. This form also takes displayName and how2plot.
+With a function on the sphere sF, the field vF (an S2VectorField, an S2AxisField or a
+function of the directions) is evaluated at 36 points of the circle normal to sec, or of
+the small circle at the polar angle eta from sec. The vectors are drawn on the curve
+plotSection(sF, sec) draws, seen down sec. The longest arrow is scaled to the spacing of
+the points (autoScaleFactor=0.9); an axis field draws segments without heads. This form
+also takes displayName and how2plot.
 
 With orientations, the arrows go into the sections of the current section plot, which
-plotSection draws first: at every orientation, in the section it lies in, an arrow along
-the specimen direction w, one for all or one per orientation.
+plotSection draws first. Every orientation gets an arrow along the specimen direction w in
+the section it lies in; w is one direction for all or one per orientation.
 
 ## Input
 

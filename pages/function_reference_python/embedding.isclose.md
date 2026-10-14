@@ -53,5 +53,5 @@ Up to a coarser tolerance.
 
 [embedding.dot](embedding.dot_py.html), [embedding.norm](embedding.norm_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L365">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L364">source</a></font>
 {% endraw %}

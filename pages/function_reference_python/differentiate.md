@@ -37,8 +37,8 @@ The right derivatives.
 ## Description
 
 The three columns are the coefficients of the derivatives along the x, y and z axes of the
-tangent space, the coefficient matrix of the gradient field; the vector is in the port's
-internal convention (docs/design/harmonics.md), not MATLAB's fhat. The port's own, no MATLAB
+tangent space, together the coefficient matrix of the gradient field. The coefficients are
+in the port's internal convention, those of SO3F._fhat, not MATLAB's fhat. MATLAB has no
 counterpart.
 
 ## Input

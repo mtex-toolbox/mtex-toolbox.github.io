@@ -13,5 +13,5 @@ A property of [S2FunHarmonic](S2FunHarmonic_index_py.html).
 
 the shape of a list of functions, () for one
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L294">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L302">source</a></font>
 {% endraw %}

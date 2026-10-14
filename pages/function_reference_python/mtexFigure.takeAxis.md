@@ -55,5 +55,5 @@ cell the next plot paints. Without a pending axes a new one is added to the layo
 
 [nextAxis](nextAxis_py.html), [hold](hold_py.html), [mtexFigure](mtexFigure_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L175">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L178">source</a></font>
 {% endraw %}

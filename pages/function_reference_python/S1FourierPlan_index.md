@@ -15,5 +15,5 @@ the circle: f(x) = sum_{k=-L}^{L} c_k e^{ikx}
 
 | [adjoint](S1FourierPlan.adjoint_py.html) | the Fourier coefficients c_{-L} . |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L679">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L682">source</a></font>
 {% endraw %}

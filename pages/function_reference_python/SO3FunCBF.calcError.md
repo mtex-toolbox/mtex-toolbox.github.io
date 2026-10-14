@@ -48,10 +48,16 @@ The RP error against pole figures.
 
 ## Description
 
-Two functions are compared on the equispaced grid of the resolution: 'l1', the default, is
-half the mean absolute difference, for two densities the fraction of the volume that would
-have to move to turn one into the other; 'l2' is the norm of the difference over the norm of
-g. With pole figures second the result is PoleFigure.calcError, one number per pole figure,
+Two functions are compared at the nodes of an equispaced grid of the resolution in the
+fundamental region of f; g is evaluated there whatever its own symmetry, where MATLAB
+refuses functions of different symmetry. The mode chooses the measure:
+
+- 'l1', the default: half the mean absolute difference. For two densities it is the fraction
+of the volume that would have to move to turn one into the other, between 0 and 1.
+- 'l2': the norm of the difference over the norm of g, on the grid; MATLAB computes it from
+the harmonic series.
+
+With pole figures second the result is PoleFigure.calcError, one number per pole figure,
 with its own modes ('relative', the default, 'RP', 'l1', 'l2') and the threshold epsilon.
 MATLAB's 'L0', the volume where the two differ by more than epsilon, is not provided.
 
@@ -76,5 +82,5 @@ MATLAB's 'L0', the volume where the two differ by more than epsilon, is not prov
 
 [PoleFigure.calcError](PoleFigure.calcError_py.html), [calcODF](calcODF_py.html), [PoleFigure2ODF](PoleFigure2ODF_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L464">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L478">source</a></font>
 {% endraw %}

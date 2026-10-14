@@ -59,13 +59,18 @@ Functions of the propagation direction.
 
 ## Description
 
-The light propagates along vprop through a plate of the given thickness; the two waves the
+The light propagates along vprop through a plate of the given thickness. The two waves the
 refractive index tensor allows along it leave with a retardation, the birefringence times
 the thickness, and the analyser lets through what their interference leaves of every
-wavelength. The spectrum is weighted with the CIE 1931 colour matching functions and given
-as Adobe RGB. A list of directions gives one colour per direction. With the thickness alone
-the three channels are S2FunHarmonic of the propagation direction, which plot draws as
-the interference colours of every direction.
+wavelength.
+
+The transmitted spectrum is weighted with the CIE 1931 colour matching functions and given
+as Adobe RGB, one colour per direction. The values are not clipped: a channel may lie
+slightly below 0 or above 1.
+
+With the thickness alone the three channels are S2FunHarmonic of the propagation
+direction, which plot draws as the interference colours of every direction. MATLAB
+returns them as one vector valued function.
 
 ## Input
 
