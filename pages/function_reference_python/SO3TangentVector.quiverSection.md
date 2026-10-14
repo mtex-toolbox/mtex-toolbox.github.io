@@ -15,35 +15,57 @@ orientations in the sections of orientation space; MATLAB's S2Fun/quiverSection
 
 ## Syntax
 
-The field vF along the circle normal to z:
+<div class="mx-form" markdown="1">
 
 ```python
 quiverSection(sF, vF, zvector)
 ```
 
-Along the small circle at 60 degree from z:
+The field vF along the circle normal to z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiverSection(sF, vF, zvector, np.pi/3)
 ```
 
-Every vector of the same length:
+Along the small circle at 60 degree from z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiverSection(sF, vF, zvector, normalized=True)
 ```
 
-An arrow along x at every orientation:
+Every vector of the same length.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiverSection(ori, xvector)
 ```
 
-A direction per orientation:
+An arrow along x at every orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiverSection(ori, w, color='r', resolution=5*degree)
 ```
+
+A direction per orientation.
+
+</div>
+
+## Description
 
 With a function on the sphere sF, a vector field vF, S2VectorField, S2AxisField or a
 function of the directions, is evaluated at 36 points of the circle normal to sec, or of
@@ -58,8 +80,6 @@ the specimen direction w, one for all or one per orientation.
 
 ## Input
 
-| | |
-|---|---|
 | `sF` | S2Fun, the function whose section is drawn |
 | `vF` | S2VectorField, S2AxisField, a vector3d per point of the circle, or a function |
 | `sec` | vector3d, the normal of the section |
@@ -69,7 +89,7 @@ the specimen direction w, one for all or one per orientation.
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `color` | `'k'` | the colour of the arrows |
 | `lineWidth` | `1.0` | the width of the arrows |

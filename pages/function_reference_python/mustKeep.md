@@ -16,38 +16,44 @@ over the same vertices still walks over
 
 ## Syntax
 
-The junctions and the corners:
+<div class="mx-form" markdown="1">
 
 ```python
 keep = mustKeep(gB)
 ```
 
-And the vertices the inner boundary uses:
+The junctions and the corners.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 keep = mustKeep(gB, protect=grains.sharedVertices())
 ```
+
+And the vertices the inner boundary uses.
+
+</div>
+
+## Description
 
 A row is the head of a segment, its vertex gB.F[:, 1]; reduce and simplify keep the rows
 marked and may dissolve the others.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
-
-## Output
-
-| | |
-|---|---|
-| `keep` | a boolean per segment, whether its head must stay |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `protect` | `None` | the ids of vertices that must stay as well |
+
+## Output
+
+| `keep` | a boolean per segment, whether its head must stay |
 
 ## See also
 

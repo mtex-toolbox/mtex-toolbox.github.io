@@ -13,14 +13,16 @@ reduce(x, ...) is x.reduce(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 reduce(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.reduce_py.html) | every n-th measurement along each lattice direction, which is the map at a coarser step |
 | [EBSD3](EBSD3.reduce_py.html) | every n-th measurement along each lattice direction, which is the map at a coarser step |
 | [grainBoundary](grainBoundary.reduce_py.html) | the boundary coarsened by keeping every n-th vertex along each chain, whatever the shape |

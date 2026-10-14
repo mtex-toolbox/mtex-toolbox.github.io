@@ -15,47 +15,77 @@ misorientations, or of the uniform density of two crystal frames
 
 ## Syntax
 
-The angle distribution of a misorientation density:
+<div class="mx-form" markdown="1">
 
 ```python
 density, omega = calcAngleDistribution(mdf)
 ```
 
-At the angles given:
+The angle distribution of a misorientation density.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 density, omega = calcAngleDistribution(mdf, omega=np.linspace(0, 60, 31)*degree)
 ```
 
-A histogram of misorientations:
+At the angles given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 density, omega = calcAngleDistribution(mori)
 ```
 
-With the bin edges given:
+A histogram of misorientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 density, omega = calcAngleDistribution(mori, edges=np.linspace(0, 63, 22)*degree)
 ```
 
-The uniform distribution of one crystal frame:
+With the bin edges given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ad, omega = calcAngleDistribution(cs)
 ```
 
-The uniform one of two crystal frames:
+The uniform distribution of one crystal frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ad, omega = calcAngleDistribution(cs, cs2)
 ```
 
-At the angles given:
+The uniform one of two crystal frames.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ad, omega = calcAngleDistribution(cs, np.linspace(0, 60, 61)*degree)
 ```
+
+At the angles given.
+
+</div>
+
+## Description
 
 For a crystal frame the distribution of the uniform density is the area of the axis sector
 of the fundamental region at each angle times sin^2(omega/2), scaled to mean one over the
@@ -68,25 +98,21 @@ outputs in this order. The angles may also be given positionally, after the seco
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun, a misorientation density; orientation, misorientations; or crystalFrame |
 | `cs2` | crystalFrame, the second frame of the uniform distribution (positional) |
 
-## Output
-
-| | |
-|---|---|
-| `density` | ndarray, the values of the distribution |
-| `omega` | ndarray, the angles they belong to |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `omega` | `None` | the angles at which the distribution is computed, 200 up to the largest angle by default (SO3Fun and frames) |
 | `edges` | `None` | the bin edges of the histogram, by default between 5 and 50 bins up to the largest angle (misorientations) |
 | `resolution` | `0.5*degree` | the spacing of the axes sampled at each angle (SO3Fun) |
+
+## Output
+
+| `density` | ndarray, the values of the distribution |
+| `omega` | ndarray, the angles they belong to |
 
 ## See also
 

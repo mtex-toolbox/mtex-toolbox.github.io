@@ -14,15 +14,23 @@ the current mtexFigure, None before the first plot
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mtexFig = gcm()
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 gcm()
 ```
+
+</div>
 
 ## Used on
 

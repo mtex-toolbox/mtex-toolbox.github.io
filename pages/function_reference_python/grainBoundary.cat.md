@@ -17,16 +17,24 @@ once, and the chains are walked again
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gB = grainBoundary.cat(gB1, gB2)
 gB = cat(gB['Forsterite', 'Forsterite'], gB['Forsterite', 'Enstatite'])
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grainBoundary.cat(*parts)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L348">source</a></font>
 {% endraw %}

@@ -16,32 +16,38 @@ the curl, a field of the same side; with x its values at the orientations x
 
 ## Syntax
 
-The curl, an SO3VectorFieldHarmonic:
+<div class="mx-form" markdown="1">
 
 ```python
 C = SO3VF.curl()
 ```
 
-Its values at orientations:
+The curl, an SO3VectorFieldHarmonic.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = SO3VF.curl(ori)
 ```
+
+Its values at orientations.
+
+</div>
+
+## Description
 
 The field is taken in its harmonic form; the curl of a gradient vanishes. MATLAB's curl of a
 field that is not harmonic returns a handle, here always the harmonic field.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3VF` | SO3VectorField |
 | `x` | orientation, where to evaluate the curl |
 
 ## Output
 
-| | |
-|---|---|
 | `C` | SO3VectorFieldHarmonic |
 | `c` | SO3TangentVector, the values at x |
 
@@ -51,9 +57,13 @@ field that is not harmonic returns a handle, here always the harmonic field.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.curl(self, x=None)
 ```
+
+</div>
 
 ## Used on
 

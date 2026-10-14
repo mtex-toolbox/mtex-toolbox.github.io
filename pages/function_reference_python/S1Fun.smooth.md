@@ -17,23 +17,37 @@ halfwidth is given; MATLAB's smooth
 
 ## Syntax
 
-With the de la Vallee Poussin kernel of 2.9 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = smooth(sF)
 ```
 
-A wider kernel:
+With the de la Vallee Poussin kernel of 2.9 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = smooth(sF, halfwidth=30*degree)
 ```
 
-A kernel given:
+A wider kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = smooth(sF, S1DeLaValleePoussinKernel(halfwidth=30*degree))
 ```
+
+A kernel given.
+
+</div>
+
+## Description
 
 Every coefficient c_k is multiplied by the coefficient of degree k of the kernel. The
 de la Vallee Poussin kernel of halfwidth h keeps the degrees up to n = 1.2 / h unchanged and
@@ -42,22 +56,18 @@ as it is.
 
 ## Input
 
-| | |
-|---|---|
 | `sF` | S1FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
-| `sF` | S1FunHarmonic, the smoothed function |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `psi` | `None` | S1Kernel, the smoothing kernel, which replaces the halfwidth |
 | `halfwidth` | `0.05061454830783556` | the halfwidth of the de la Vallee Poussin kernel |
+
+## Output
+
+| `sF` | S1FunHarmonic, the smoothed function |
 
 ## See also
 

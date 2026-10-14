@@ -18,23 +18,37 @@ whole, white at its pole, as MATLAB's key
 
 ## Syntax
 
-One fold: 432 halves its sector to that of m-3m:
+<div class="mx-form" markdown="1">
 
 ```python
 folds = sectorFolds(crystalFrame('432').sym)
 ```
 
-No fold: the sector is bounded by mirrors:
+One fold: 432 halves its sector to that of m-3m.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 folds = sectorFolds(crystalFrame('m-3m').sym)
 ```
 
-Another sector, a looser test:
+No fold: the sector is bounded by mirrors.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 folds = sectorFolds(cs.sym, cs.fundamentalSector(), tol=1e-4)
 ```
+
+Another sector, a looser test.
+
+</div>
+
+## Description
 
 A candidate plane folds the sector when the reflection in it maps the boundary planes of
 the sector onto themselves, within tol, and it is taken when it doubles the group to a
@@ -43,22 +57,18 @@ frame not lying in the plane points into.
 
 ## Input
 
-| | |
-|---|---|
 | `pg` | symmetry, the point group |
 | `sR` | sphericalRegion, the sector to fold; by default the group's conventional sector |
 
-## Output
-
-| | |
-|---|---|
-| `folds` | list of (3,) arrays, the normals of the folding planes in the order they apply |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-06` | the tolerance of the test whether a reflection maps the sector onto itself |
+
+## Output
+
+| `folds` | list of (3,) arrays, the normals of the folding planes in the order they apply |
 
 ## See also
 

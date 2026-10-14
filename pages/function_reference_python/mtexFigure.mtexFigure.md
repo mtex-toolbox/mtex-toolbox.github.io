@@ -15,47 +15,77 @@ follow them
 
 ## Syntax
 
-A new figure:
+<div class="mx-form" markdown="1">
 
 ```python
 fig = mtexFigure()
 ```
 
-Laid out for 4 axes, large:
+A new figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fig = mtexFigure(4, figSize='large')
 ```
 
-One row of three axes:
+Laid out for 4 axes, large.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fig = mtexFigure(layout=(1, 3))
 ```
 
-6 axes in two columns:
+One row of three axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fig = mtexFigure(6, columns=2)
 ```
 
-The next axes of the layout:
+6 axes in two columns.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ax = fig.nextAxis()
 ```
 
-The axes made so far:
+The next axes of the layout.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fig.children
 ```
 
-A colour bar per axes, or one for all:
+The axes made so far.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fig.colorbar()
 ```
+
+A colour bar per axes, or one for all.
+
+</div>
+
+## Description
 
 The figure becomes the current one, which gcm returns and into which the plots of MTEX
 draw; newMtexFigure makes one the same way. Without layout or columns the n axes are laid
@@ -68,19 +98,11 @@ the inch, as MATLAB's.
 
 ## Input
 
-| | |
-|---|---|
 | `n` | the number of axes the layout is made for |
-
-## Output
-
-| | |
-|---|---|
-| `fig` | mtexFigure, with fig.fig the matplotlib figure and fig.children its axes |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `figSize` | `None` | 'tiny', 'small', 'medium', 'normal', 'large', 'huge', or (width, height) in inches |
 | `hold` | `False` | start with hold on: the next plot draws into the last axes |
@@ -91,6 +113,10 @@ the inch, as MATLAB's.
 | `outerPlotSpacing` | `None` | the margin around the axes, in pixels at 96 to the inch |
 | `marginx` | `None` | the space left and right of every axes, in pixels at 96 to the inch |
 | `marginy` | `None` | the space above and below every axes, in pixels at 96 to the inch |
+
+## Output
+
+| `fig` | mtexFigure, with fig.fig the matplotlib figure and fig.children its axes |
 
 ## See also
 

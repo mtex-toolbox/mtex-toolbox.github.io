@@ -14,39 +14,45 @@ a not indexed phase only when it was given a colour of its own
 
 ## Syntax
 
-The phases of a map in the upper right:
+<div class="mx-form" markdown="1">
 
 ```python
 leg = phaseLegend(mP, ebsd)
 ```
 
-Elsewhere:
+The phases of a map in the upper right.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 leg = phaseLegend(mP, grains, loc='lower left')
 ```
+
+Elsewhere.
+
+</div>
+
+## Description
 
 A map coloured by phase draws this itself with legend=True. A patch is labelled by the
 mineral of its phase.
 
 ## Input
 
-| | |
-|---|---|
 | `mP` | mapPlot, the map plot the legend goes into |
 | `x` | EBSD or grain2d, whose phases are shown |
 
-## Output
-
-| | |
-|---|---|
-| `leg` | the matplotlib Legend |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `loc` | `'upper right'` | the place of the legend, as matplotlib's legend takes it |
+
+## Output
+
+| `leg` | the matplotlib Legend |
 
 ## See also
 

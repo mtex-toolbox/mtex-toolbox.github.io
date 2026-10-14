@@ -15,9 +15,13 @@ the indices of the orientations on the gamma ladder of node k
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3Grid.node(self, k)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/so3grid.py#L79">source</a></font>
 {% endraw %}

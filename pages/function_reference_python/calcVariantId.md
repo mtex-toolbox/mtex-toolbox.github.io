@@ -15,21 +15,35 @@ MATLAB's calcVariantId
 
 ## Syntax
 
-The {111} packets and {001} Bain groups:
+<div class="mx-form" markdown="1">
 
 ```python
 variantId, packetId, bainId, fit = calcVariantId(parentOri, childOri, p2c)
 ```
 
+The {111} packets and {001} Bain groups.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 hklParent = Miller([[1, 1, 1], [1, -1, 1], [-1, 1, 1], [1, 1, -1]], p2c.CS)
 ```
 
-Packets by planes of one's own:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 variantId, packetId, bainId, fit = calcVariantId(parentOri, childOri, p2c, packet=(hklParent, Miller(1, 0, 1, p2c.SS)))
 ```
+
+Packets by planes of one's own.
+
+</div>
+
+## Description
 
 For every child the variant of its parent it belongs to, one based, with the misfit, and
 the packet and Bain group of that variant: the packet by the parent {111} plane the
@@ -40,27 +54,23 @@ port always does, with these defaults.
 
 ## Input
 
-| | |
-|---|---|
 | `parentOri` | orientation of the parent phase, one or one per child |
 | `childOri` | orientation of the child phase |
 | `p2c` | orientation, the parent to child orientation relationship |
 
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `packet` | `None` | (hklParent, hklChild), the parent planes (one Miller per packet) and the child plane they map onto |
+| `bain` | `None` | (hklParent, hklChild), the parent directions (one Miller per Bain group) and the child direction they map onto |
+
 ## Output
 
-| | |
-|---|---|
 | `variantId` | the one based variant ids, in the order of p2c.variants() |
 | `packetId` | the one based packet ids |
 | `bainId` | the one based Bain group ids |
 | `fit` | the misorientation angle between the child and its variant, in radians |
-
-## Keywords
-
-| | default | |
-|---|---|---|
-| `packet` | `None` | (hklParent, hklChild), the parent planes (one Miller per packet) and the child plane they map onto |
-| `bain` | `None` | (hklParent, hklChild), the parent directions (one Miller per Bain group) and the child direction they map onto |
 
 ## See also
 

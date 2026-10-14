@@ -16,9 +16,13 @@ the length of the difference of the Burgers vectors of paired systems, entry by 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 slipSystem.residualBurgersVector(self, other)
 ```
+
+</div>
 
 MATLAB's [slipSystem.residualBurgersVector](slipSystem.residualBurgersVector.html)
 

@@ -16,52 +16,66 @@ rotations defined by Euler angles
 
 ## Syntax
 
-Bunge's convention:
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.byEuler(phi1, Phi, phi2)
 ```
 
-Matthies' convention:
+Bunge's convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.byEuler(alpha, beta, gamma, 'ZYZ')
 ```
 
-Kocks' convention:
+Matthies' convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.byEuler(phi1, Phi, phi2, 'Kocks')
 ```
 
-The angles as one triple, or an array of triples:
+Kocks' convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.byEuler([phi1, Phi, phi2])
 ```
+
+The angles as one triple, or an array of triples.
+
+</div>
+
+## Description
 
 The angles are in radians, arrays of them broadcast against each other. Without a
 convention the preference EulerAngleConvention decides, Bunge's ZXZ by default.
 
 ## Input
 
-| | |
-|---|---|
 | `a` | the first angle, phi1 or alpha; or an array whose last axis holds the three angles |
 | `b` | the second angle, Phi or beta; the convention when a holds the triples |
 | `c` | the third angle, phi2 or gamma |
 
-## Output
-
-| | |
-|---|---|
-| `rot` | rotation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `convention` | `None` | 'Bunge' or 'ZXZ', 'Matthies', 'ZYZ' or 'ABG', 'Roe', 'Kocks', 'Canova', 'nfft' |
+
+## Output
+
+| `rot` | rotation |
 
 ## See also
 

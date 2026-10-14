@@ -16,23 +16,37 @@ MATLAB's S2FunHarmonic.interpolate
 
 ## Syntax
 
-A function through values at directions:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2Fun.interpolate(v, y)
 ```
 
-Of a given degree, regularised:
+A function through values at directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2Fun.interpolate(v, y, bandwidth=16, lambda_=1e-4)
 ```
 
-A vector field through vectors w:
+Of a given degree, regularised.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sVF = S2Fun.interpolate(v, w)
 ```
+
+A vector field through vectors w.
+
+</div>
+
+## Description
 
 The harmonic coefficients up to the bandwidth minimise the weighted squared misfit at the
 nodes plus lambda_ times the Sobolev norm, solved by LSQR; the keywords, bandwidth, lambda_,
@@ -41,21 +55,17 @@ explained.
 
 ## Input
 
-| | |
-|---|---|
 | `nodes` | vector3d, the directions |
-
-## Output
-
-| | |
-|---|---|
-| `sF` | S2FunHarmonic, or S2VectorFieldHarmonic for vector values |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `values` | `None` | ndarray of one value per node, or vector3d for a vector field |
+
+## Output
+
+| `sF` | S2FunHarmonic, or S2VectorFieldHarmonic for vector values |
 
 ## See also
 

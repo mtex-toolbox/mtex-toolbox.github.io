@@ -16,9 +16,13 @@ the leading eigenvector of the reconstructed matrix
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2AxisFieldHarmonic.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [S2AxisFieldHarmonic.eval](S2AxisFieldHarmonic.eval.html)
 

@@ -17,37 +17,43 @@ yvector); MATLAB's EBSD.gradientY
 
 ## Syntax
 
-One sided differences:
+<div class="mx-form" markdown="1">
 
 ```python
 gY = gradientY(ebsd)
 ```
 
-Least squares with the diagonals:
+One sided differences.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gY = gradientY(ebsd, stencil='full')
 ```
 
+Least squares with the diagonals.
+
+</div>
+
+## Description
+
 The stencil is that of gradient.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD of one phase |
-
-## Output
-
-| | |
-|---|---|
-| `gY` | vector3d, of the shape of the map |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `stencil` | `'oneSided'` | 'oneSided', 'lattice' ('1hop') or 'full', the neighbours it is taken from |
+
+## Output
+
+| `gY` | vector3d, of the shape of the map |
 
 ## See also
 

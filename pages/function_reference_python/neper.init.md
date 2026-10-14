@@ -15,9 +15,13 @@ the one interface of the session, neper.instance()
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 neper.init()
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/neper.py#L52">source</a></font>
 {% endraw %}

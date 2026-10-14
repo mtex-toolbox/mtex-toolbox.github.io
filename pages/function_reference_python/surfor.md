@@ -13,14 +13,16 @@ surfor(x, ...) is x.surfor(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 surfor(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grainBoundary](grainBoundary.surfor_py.html) | the cumulative projection length of the boundary segments (Panozzo 1984) |
 
 ## Used on

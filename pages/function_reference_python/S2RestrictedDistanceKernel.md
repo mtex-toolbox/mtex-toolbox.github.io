@@ -15,8 +15,6 @@ negative, a distance between directions that makes points repel each other
 
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](S2RestrictedDistanceKernel.bandwidth_py.html) | the degree N the kernel is cut at |
 
 MATLAB's [S2RestrictedDistanceKernel](S2RestrictedDistanceKernel.html)

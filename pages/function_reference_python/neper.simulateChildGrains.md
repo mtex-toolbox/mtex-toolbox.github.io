@@ -17,23 +17,37 @@ child variants; MATLAB's neper.simulateChildGrains
 
 ## Syntax
 
-10 parent grains, habit plane {111}:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = nep.simulateChildGrains(10, p2c, odfParent)
 ```
 
-Another habit plane and width:
+10 parent grains, habit plane {111}.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = nep.simulateChildGrains(10, p2c, odfParent, habitPlane=Miller(1, 1, 0, p2c.CS), width=0.05)
 ```
 
-The variants to choose from:
+Another habit plane and width.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = nep.simulateChildGrains(10, p2c.variants()[:12], odfParent, rng=np.random.default_rng(0))
 ```
+
+The variants to choose from.
+
+</div>
+
+## Description
 
 The parent orientations are sampled from odfParent, and every parent grain of the
 tessellation is cut into lamellae normal to its habit plane, the plane turned by the
@@ -47,27 +61,23 @@ interface neper.init() returns, and MATLAB's flag 'silent' is verbose=False, the
 
 ## Input
 
-| | |
-|---|---|
 | `numParents` | the number of parent grains |
 | `p2c` | orientation, the parent to child orientation relationship, or the variants to choose from |
 | `odfParent` | SO3Fun, the distribution of the parent orientations |
 
-## Output
-
-| | |
-|---|---|
-| `grains` | grain3d of the child lamellae, with meanOrientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `habitPlane` | `None` | Miller of the parent, the plane the lamellae lie in, by default {111} |
 | `width` | `0.015` | the width of the lamellae |
 | `verbose` | `False` | print Neper's output |
 | `aspectRatio` | `None` | three lengths, the aspect ratio of the parent grains along x, y and z |
 | `rng` | `None` | numpy.random.Generator of the variants and the random turns |
+
+## Output
+
+| `grains` | grain3d of the child lamellae, with meanOrientation |
 
 ## See also
 

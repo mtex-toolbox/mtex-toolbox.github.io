@@ -16,9 +16,13 @@ the ellipse of the same second moments: its centre and its two half axes
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.fitEllipse(self)
 ```
+
+</div>
 
 ## Used on
 

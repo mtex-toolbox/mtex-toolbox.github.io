@@ -13,14 +13,16 @@ smooth(x, ...) is x.smooth(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 smooth(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [boundaryFilter](boundaryFilter.smooth_py.html) | V are the vertices (n, 2) of the network, h the spacing they are sampled at |
 | [curvatureFilter](curvatureFilter.smooth_py.html) | the minimiser of \|V - V0\|^2 + alpha \|L V\|^2 over the free vertices, one sparse system |
 | [EBSD](EBSD.smooth_py.html) | the map with its orientations denoised, every one replaced by one computed from its neighbours, within the grains where the map knows them and within the phases otherwise |

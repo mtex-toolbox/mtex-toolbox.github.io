@@ -15,9 +15,13 @@ the data range in the corners, MATLAB's TL and BL annotations
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalPlot.annotateMinMax(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L154">source</a></font>
 {% endraw %}

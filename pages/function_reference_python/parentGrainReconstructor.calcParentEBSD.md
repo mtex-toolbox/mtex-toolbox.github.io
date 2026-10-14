@@ -16,17 +16,27 @@ the reconstructed parent map; MATLAB's parentGrainReconstructor.calcParentEBSD
 
 ## Syntax
 
-The parent orientation of every grain:
+<div class="mx-form" markdown="1">
 
 ```python
 parentEBSD = job.calcParentEBSD()
 ```
 
-The parent each pixel's own orientation gives:
+The parent orientation of every grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 parentEBSD = job.calcParentEBSD(exactOR=True)
 ```
+
+The parent each pixel's own orientation gives.
+
+</div>
+
+## Description
 
 A copy of the prior map with the grain ids of the current grains, every child pixel of a
 grain that is a parent now given the parent orientation of its grain and the parent phase.
@@ -37,21 +47,17 @@ fit is zero.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor |
-
-## Output
-
-| | |
-|---|---|
-| `parentEBSD` | EBSD, with parentEBSD.grainId, variantId, packetId and fit |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `exactOR` | `False` | enforce the exact orientation relationship pixel by pixel |
+
+## Output
+
+| `parentEBSD` | EBSD, with parentEBSD.grainId, variantId, packetId and fit |
 
 ## See also
 

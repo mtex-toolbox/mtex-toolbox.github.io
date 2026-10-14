@@ -19,9 +19,13 @@ job.grains.clusterSize the size of its component
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 parentGrainReconstructor.calcParentFromGraph(job)
 ```
+
+</div>
 
 ## Used on
 

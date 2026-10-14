@@ -16,9 +16,13 @@ grain3d.load('grains.dream3d'), grain3d.load('grains.tess', CS=cs)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain3d.load(fname, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [grain3d.load](grain3d.load.html)
 

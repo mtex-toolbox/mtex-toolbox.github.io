@@ -16,9 +16,13 @@ clustered on its own; the pairs within a not indexed phase are always connected
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gbcFMC.evaluate(self, ebsd, i, j)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L88">source</a></font>
 {% endraw %}

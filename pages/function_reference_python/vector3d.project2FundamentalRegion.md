@@ -18,45 +18,55 @@ that of the Laue group; given a centre, the equivalent nearest it instead
 
 ## Syntax
 
-Into the sector of an inverse pole figure:
+<div class="mx-form" markdown="1">
 
 ```python
 h = h.projectIntoFundamentalRegion()
 ```
 
-Into the sector of the Laue group:
+Into the sector of an inverse pole figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = h.projectIntoFundamentalRegion(antipodal=True)
 ```
 
-The equivalent nearest a centre:
+Into the sector of the Laue group.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = h.projectIntoFundamentalRegion(center)
 ```
+
+The equivalent nearest a centre.
+
+</div>
+
+## Description
 
 The sector is the conventional one, fundamentalSector of the frame. Vectors in no
 crystal frame are returned as they are.
 
 ## Input
 
-| | |
-|---|---|
 | `h` | Miller |
 | `center` | Miller, the centre the equivalent nearest to it is taken for |
 
-## Output
-
-| | |
-|---|---|
-| `h` | Miller, in the shape of h |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | fold the directions as axes, into the sector of the Laue group |
+
+## Output
+
+| `h` | Miller, in the shape of h |
 
 ## See also
 

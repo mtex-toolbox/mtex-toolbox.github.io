@@ -16,9 +16,13 @@ pcolor(sF), pcolor(v), pcolor(v, data): a coloured surface
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.smooth(x, *args, **kw)
 ```
+
+</div>
 
 MATLAB's [Miller.smooth](Miller.smooth.html)
 

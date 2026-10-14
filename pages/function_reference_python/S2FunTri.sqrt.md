@@ -15,9 +15,13 @@ the square root of the function, taken at the vertices
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunTri.sqrt(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funtri.py#L143">source</a></font>
 {% endraw %}

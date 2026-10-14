@@ -14,9 +14,13 @@ whether the region lies within the hemisphere into the screen of the convention 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 isLower(sR, pC)
 ```
+
+</div>
 
 MATLAB's [sphericalRegion.isLower](sphericalRegion.isLower.html)
 

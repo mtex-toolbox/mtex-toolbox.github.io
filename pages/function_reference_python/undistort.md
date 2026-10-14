@@ -13,14 +13,16 @@ undistort(x, ...) is x.undistort(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 undistort(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [trueEbsd](trueEbsd.undistort_py.html) | job.undistort(): every map resampled onto the reference grid through the hops between it and the reference, its own first, by the nearest pixel |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>

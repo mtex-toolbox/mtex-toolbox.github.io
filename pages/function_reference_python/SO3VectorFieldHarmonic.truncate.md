@@ -15,9 +15,13 @@ the field with its coefficients cut or padded to the bandwidth L
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.truncate(self, L)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L522">source</a></font>
 {% endraw %}

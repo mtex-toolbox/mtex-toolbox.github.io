@@ -15,17 +15,27 @@ proper orthogonal transforms defined by Euler angles
 
 ## Syntax
 
-Bunge's convention:
+<div class="mx-form" markdown="1">
 
 ```python
 T = orthogonalTransform.byEuler(phi1, Phi, phi2)
 ```
 
-Matthies' convention:
+Bunge's convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = orthogonalTransform.byEuler(alpha, beta, gamma, 'ZYZ')
 ```
+
+Matthies' convention.
+
+</div>
+
+## Description
 
 The rotations of rotation.byEuler as orthogonal transforms of parity one, to be combined
 with improper ones. The angles are in radians; without a convention the preference
@@ -33,23 +43,19 @@ EulerAngleConvention decides, Bunge's ZXZ by default.
 
 ## Input
 
-| | |
-|---|---|
 | `a` | the first angle, phi1 or alpha; or an array whose last axis holds the three angles |
 | `b` | the second angle, Phi or beta; the convention when a holds the triples |
 | `c` | the third angle, phi2 or gamma |
 
-## Output
-
-| | |
-|---|---|
-| `T` | orthogonalTransform, proper |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `convention` | `None` | 'Bunge' or 'ZXZ', 'Matthies', 'ZYZ' or 'ABG', 'Roe', 'Kocks', 'Canova', 'nfft' |
+
+## Output
+
+| `T` | orthogonalTransform, proper |
 
 ## See also
 

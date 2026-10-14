@@ -18,35 +18,57 @@ MATLAB's calcErrorPF
 
 ## Syntax
 
-The damped relative error:
+<div class="mx-form" markdown="1">
 
 ```python
 pfe = calcErrorPF(pf, odf)
 ```
 
-Against other pole figures:
+The damped relative error.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pfe = calcErrorPF(pf, pf2)
 ```
 
-|pf - pfcalc| / pfcalc where pfcalc > 0.5:
+Against other pole figures.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pfe = pf.calcErrorPF(odf, 'RP', epsilon=0.5)
 ```
 
-|pf - pfcalc|:
+|pf - pfcalc| / pfcalc where pfcalc > 0.5.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pfe = pf.calcErrorPF(odf, 'l1')
 ```
 
-|pf - pfcalc|^2:
+|pf - pfcalc|.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pfe = pf.calcErrorPF(odf, 'l2')
 ```
+
+|pf - pfcalc|^2.
+
+</div>
+
+## Description
 
 The recalculation is first scaled to the mass of the measurement by calcNormalization.
 'relative', the default, is |I - Ic| / max(I + epsilon, Ic + epsilon), which MATLAB computes
@@ -56,23 +78,19 @@ directions; 'l1' and 'l2' are the plain differences. The names are taken in any 
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure, the measurement |
 | `other` | SO3Fun, the ODF of the recalculation, or PoleFigure on the same directions |
 
-## Output
-
-| | |
-|---|---|
-| `pfe` | PoleFigure of the deviations |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `mode` | `'relative'` | 'relative', 'RP', 'l1' or 'l2' |
 | `epsilon` | `None` | the damping of 'relative' (0.5) or the threshold of 'RP' (1), both times the normalisation |
+
+## Output
+
+| `pfe` | PoleFigure of the deviations |
 
 ## See also
 

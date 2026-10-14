@@ -15,9 +15,13 @@ the complement of the widest gap between the azimuths of its boundary
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rhoRange(sR)
 ```
+
+</div>
 
 MATLAB's [sphericalRegion.rhoRange](sphericalRegion.rhoRange.html)
 

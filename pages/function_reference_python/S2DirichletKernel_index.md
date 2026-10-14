@@ -13,15 +13,17 @@ the Dirichlet kernel on the sphere, sum_n (2n+1) P_n(t) up to the degree N, of i
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2DirichletKernel(35)
 S2DirichletKernel()        N the preference maxS2Bandwidth
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](S2DirichletKernel.bandwidth_py.html) | the degree N of the kernel |
 
 ## Used on

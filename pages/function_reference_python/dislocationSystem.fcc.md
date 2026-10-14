@@ -15,9 +15,13 @@ the edge and screw dislocations of the symmetrised face-centred cubic slip syste
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 dislocationSystem.fcc(CS)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L718">source</a></font>
 {% endraw %}

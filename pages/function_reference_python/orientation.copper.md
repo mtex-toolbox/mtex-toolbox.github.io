@@ -15,9 +15,13 @@ A method of [orientation](orientation_index_py.html).
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.copper(CS, *ss)
 ```
+
+</div>
 
 ## Used on
 

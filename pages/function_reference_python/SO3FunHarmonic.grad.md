@@ -17,29 +17,47 @@ values at the orientations x
 
 ## Syntax
 
-The gradient, an SO3VectorFieldHarmonic:
+<div class="mx-form" markdown="1">
 
 ```python
 G = SO3F.grad()
 ```
 
-Its values at orientations, tangent vectors:
+The gradient, an SO3VectorFieldHarmonic.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 g = SO3F.grad(ori)
 ```
 
-The right tangent vectors, in the crystal frame:
+Its values at orientations, tangent vectors.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 g = SO3F.grad(ori, side='right')
 ```
 
-5 degree along the gradient from ori:
+The right tangent vectors, in the crystal frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori_new = exp(5*degree*normalize(g))
 ```
+
+5 degree along the gradient from ori.
+
+</div>
+
+## Description
 
 The left gradient gives its tangent vectors in the specimen frame, the right one in the
 crystal frame; MATLAB passes SO3TangentSpace.rightVector for the right. The tangent vectors
@@ -47,23 +65,19 @@ carry their orientations, so exp takes no second argument as MATLAB's exp(v, rot
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunHarmonic |
 | `x` | orientation, where to evaluate the gradient |
 
-## Output
-
-| | |
-|---|---|
-| `G` | SO3VectorFieldHarmonic |
-| `g` | SO3TangentVector, the values at x |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left' or 'right', the tangent space |
+
+## Output
+
+| `G` | SO3VectorFieldHarmonic |
+| `g` | SO3TangentVector, the values at x |
 
 ## See also
 

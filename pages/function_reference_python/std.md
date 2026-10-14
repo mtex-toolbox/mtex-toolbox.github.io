@@ -13,14 +13,16 @@ std(x, ...) is x.std(...), the method of the object passed; NumPy's std for an a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 std(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [quaternion](quaternion.std_py.html) | the mean angular deviation of a list of rotations from their mean |
 
 ## Used on

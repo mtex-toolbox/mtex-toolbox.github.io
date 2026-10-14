@@ -15,9 +15,13 @@ the coordinates in the plane of positions of shape (..., 3), as (..., 2)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapPlane.to2d(self, xyz)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L83">source</a></font>
 {% endraw %}

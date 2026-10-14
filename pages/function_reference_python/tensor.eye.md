@@ -16,50 +16,64 @@ rank two tensors; MATLAB's tensor.eye
 
 ## Syntax
 
-The unit matrix in the frame cs:
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor.eye(cs)
 ```
 
-The identity of rank four:
+The unit matrix in the frame cs.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 C = stiffnessTensor.eye()
 ```
 
-A plain tensor of rank four:
+The identity of rank four.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor.eye(rank=4)
 ```
 
-With a unit:
+A plain tensor of rank four.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor.eye(cs, unit='GPa')
 ```
+
+With a unit.
+
+</div>
+
+## Description
 
 The frame is the reference frame among the arguments; other keywords go to the
 constructor of the class (unit, name, density, ...).
 
 ## Input
 
-| | |
-|---|---|
 | `cs` | referenceFrame, the frame, the specimen frame without one |
-
-## Output
-
-| | |
-|---|---|
-| `T` | a tensor of the class |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` | `None` | 2 or 4, by default the rank of the class, two for a plain tensor |
+
+## Output
+
+| `T` | a tensor of the class |
 
 ## See also
 

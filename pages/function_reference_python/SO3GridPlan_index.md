@@ -14,8 +14,6 @@ sequence of FFTs one axis at a time: plan(fhat) evaluates, plan.adjoint(values, 
 
 ## Members
 
-| | |
-|---|---|
 | [adjoint](SO3GridPlan.adjoint_py.html) | the SO(3) coefficients from weighted values on the grid, the FFTs taken backwards |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L761">source</a></font>

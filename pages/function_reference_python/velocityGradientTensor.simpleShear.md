@@ -17,36 +17,40 @@ velocityGradientTensor.simpleShear
 
 ## Syntax
 
-Of the strain rate one:
+<div class="mx-form" markdown="1">
 
 ```python
 L = velocityGradientTensor.simpleShear(d, n)
 ```
 
-Of the strain rate 1e-3:
+Of the strain rate one.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 L = velocityGradientTensor.simpleShear(d, n, e=1e-3)
 ```
 
+Of the strain rate 1e-3.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `d` | vector3d or Miller, the shear direction |
 | `n` | vector3d or Miller, the normal of the shear plane |
 
-## Output
-
-| | |
-|---|---|
-| `L` | velocityGradientTensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `e` | `1.0` | the strain rate |
+
+## Output
+
+| `L` | velocityGradientTensor |
 
 ## See also
 

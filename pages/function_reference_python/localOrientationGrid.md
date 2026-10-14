@@ -14,29 +14,47 @@ an equispaced grid of orientations in a ball about a centre
 
 ## Syntax
 
-The frames and the ball:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = localOrientationGrid(CS, SS, maxAngle=20*degree, center=ori0)
 ```
 
-About the identity:
+The frames and the ball.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = localOrientationGrid(CS, SS, 20*degree)
 ```
 
-About an orientation:
+About the identity.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = localOrientationGrid(ori0, 10*degree, resolution=2*degree)
 ```
 
-Every point of the ball:
+About an orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = localOrientationGrid(ori0, 10*degree, respectSymmetry=False)
 ```
+
+Every point of the ball.
+
+</div>
+
+## Description
 
 The orientations lie on shells about the centre, resolution apart in angle, and on every
 shell the axes are spaced so that neighbouring orientations are resolution apart. With
@@ -46,26 +64,22 @@ so that a ball larger than the fundamental region holds no orientation twice.
 
 ## Input
 
-| | |
-|---|---|
 | `CS` | crystalFrame |
 | `SS` | specimenFrame, by default the default specimen frame |
 | `ori0` | orientation, the centre, whose frames are taken |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `maxAngle` | `None` | the radius of the ball, also given positionally |
 | `resolution` | `5*degree` | the spacing of the grid |
 | `center` | `None` | orientation, the centre of the ball, by default the identity |
 | `respectSymmetry` | `True` | keep one representative of the orientations symmetrically equivalent |
+
+## Output
+
+| `ori` | orientation |
 
 ## See also
 

@@ -15,17 +15,27 @@ the lattice of voxels positions lie on
 
 ## Syntax
 
-The translations inferred:
+<div class="mx-form" markdown="1">
 
 ```python
 l = voxelLattice.fromPositions(P)
 ```
 
-Known translations, the rows of D:
+The translations inferred.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 l = voxelLattice.fromPositions(P, D)
 ```
+
+Known translations, the rows of D.
+
+</div>
+
+## Description
 
 Without D the translations d1, d2, d3 are the three shortest independent differences from
 a voxel to its neighbours, ordered and signed to run along x, y and z as far as they can,
@@ -36,21 +46,17 @@ indices, so every index is nonnegative.
 
 ## Input
 
-| | |
-|---|---|
 | `P` | (n, 3) array of positions, at least four |
-
-## Output
-
-| | |
-|---|---|
-| `l` | voxelLattice |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `D` | `None` | the three translations as the rows of a 3 x 3 array |
+
+## Output
+
+| `l` | voxelLattice |
 
 ## See also
 

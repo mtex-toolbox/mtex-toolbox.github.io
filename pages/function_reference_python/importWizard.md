@@ -15,23 +15,37 @@ the import; MATLAB's import_wizard
 
 ## Syntax
 
-Browse the current folder:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = importWizard()
 ```
 
-A folder, or a file to open on start:
+Browse the current folder.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = importWizard('/data/ebsd')
 ```
 
-The window, without its event loop:
+A folder, or a file to open on start.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 w = importWizard(show=False, exec=False)
 ```
+
+The window, without its event loop.
+
+</div>
+
+## Description
 
 The window blocks until it is closed and returns the map imported, unless a Qt event loop
 runs already, as under IPython's %gui qt, where it returns the window. From a terminal,
@@ -42,14 +56,10 @@ hidden, exec=False returns it without running the event loop.
 
 ## Input
 
-| | |
-|---|---|
 | `path` | a folder to browse or a file to open, by default the current folder |
 
 ## Output
 
-| | |
-|---|---|
 | `ebsd` | the map imported, None when nothing was; or the window |
 
 ## See also
@@ -58,9 +68,13 @@ hidden, exec=False returns it without running the event loop.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 importWizard(path=None, **kwargs)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/wizard/__init__.py#L48">source</a></font>
 {% endraw %}

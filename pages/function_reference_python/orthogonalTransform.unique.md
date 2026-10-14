@@ -15,49 +15,59 @@ the disjoint list of orthogonal transforms, those equal up to a tolerance taken 
 
 ## Syntax
 
-Sorted, one of each:
+<div class="mx-form" markdown="1">
 
 ```python
 u = unique(T)
 ```
 
-In the order of first appearance:
+Sorted, one of each.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u = unique(T, stable=True)
 ```
 
-The index maps:
+In the order of first appearance.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u, iT, iu = unique(T, return_index=True, return_inverse=True)
 ```
+
+The index maps.
+
+</div>
+
+## Description
 
 Two transforms are one when their parities agree and their rotational parts agree to tol,
 a rotation and its negative counted as one.
 
 ## Input
 
-| | |
-|---|---|
 | `T` | orthogonalTransform |
-
-## Output
-
-| | |
-|---|---|
-| `u` | orthogonalTransform, a one-dimensional list |
-| `iT` | indices with u = T.flatten()[iT] |
-| `iu` | indices with T.flatten() = u[iu] |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `0.001` | the tolerance in the quaternion coefficients |
 | `stable` | `False` | keep the order of first appearance instead of sorting |
 | `return_index` | `False` | also return iT |
 | `return_inverse` | `False` | also return iu |
+
+## Output
+
+| `u` | orthogonalTransform, a one-dimensional list |
+| `iT` | indices with u = T.flatten()[iT] |
+| `iu` | indices with T.flatten() = u[iu] |
 
 ## See also
 

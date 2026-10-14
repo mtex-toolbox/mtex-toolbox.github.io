@@ -14,29 +14,47 @@ whatever axes it is written in
 
 ## Syntax
 
-About the centre of the conventional sector:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = dirichletSector(cs)
 ```
 
-About another centre:
+About the centre of the conventional sector.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = dirichletSector(cs, center=vector3d(1, 2, 3))
 ```
 
-Of the Laue group, for axes:
+About another centre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = dirichletSector(cs, antipodal=True)
 ```
 
-Of a group, the region given in a frame:
+Of the Laue group, for axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = dirichletSector(pg, frame=cs)
 ```
+
+Of a group, the region given in a frame.
+
+</div>
+
+## Description
 
 The region is bounded by the great circles bisecting the centre and each of its images
 under the group: the directions nearer the centre than any of its other images. Where the
@@ -46,23 +64,19 @@ for a group the conventional sector does not fit, such as the rotations two fram
 
 ## Input
 
-| | |
-|---|---|
 | `pg` | a point group, or a reference frame, whose group is taken and which the region is given in |
-
-## Output
-
-| | |
-|---|---|
-| `sR` | sphericalRegion |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `center` | `None` | vector3d, the centre of the domain; by default the centre of the conventional sector |
 | `frame` | `None` | the referenceFrame the region is given in |
 | `antipodal` | `False` | the domain of the Laue group, for axes |
+
+## Output
+
+| `sR` | sphericalRegion |
 
 ## See also
 

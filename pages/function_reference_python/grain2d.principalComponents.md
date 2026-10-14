@@ -17,15 +17,23 @@ one first, as antipodal vectors of the specimen frame
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 a, b = grains.principalComponents()
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grain2d.principalComponents(self)
 ```
+
+</div>
 
 ## Used on
 

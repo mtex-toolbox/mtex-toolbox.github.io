@@ -15,9 +15,13 @@ the PLage component, Bunge Euler angles (65°, 45°, 0°), in cs and the specime
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.PLage(CS, *ss)
 ```
+
+</div>
 
 ## Used on
 

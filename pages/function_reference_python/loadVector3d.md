@@ -14,35 +14,57 @@ other columns it names
 
 ## Syntax
 
-The names on the line above the numbers:
+<div class="mx-form" markdown="1">
 
 ```python
 v, S = loadVector3d('vectors.txt')
 ```
 
-Polar angles in degrees:
+The names on the line above the numbers.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v, S = loadVector3d('vectors.txt', columnNames=['polar angle', 'azimuth angle'])
 ```
 
-Cartesian, with a weight in S:
+Polar angles in degrees.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v, S = loadVector3d('vectors.txt', columnNames=['x', 'y', 'z', 'weight'])
 ```
 
-The columns the names sit in:
+Cartesian, with a weight in S.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v, S = loadVector3d('vectors.txt', columnNames=['latitude', 'longitude'], columns=[1, 0])
 ```
 
-The directions alone:
+The columns the names sit in.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.load('vectors.txt')
 ```
+
+The directions alone.
+
+</div>
+
+## Description
 
 The coordinates are x, y, z, kept at their length, or two angles read as unit directions:
 the polar angle (colatitude) from z and the azimuth (longitude) in the xy plane, or the
@@ -54,26 +76,22 @@ the header ends at the first row of numbers.
 
 ## Input
 
-| | |
-|---|---|
 | `fname` | str, the name of a text file |
-
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d, the directions |
-| `S` | dict, the columns that are not coordinates, by name |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `columnNames` | `None` | the names of the columns, in their order in the file or in columns |
 | `columns` | `None` | the positions of the named columns, counted from zero |
 | `radians` | `False` | the angles are in radians, not degrees |
 | `delimiter` | `None` | the delimiter between the numbers, blank space by default |
 | `header` | `None` | the number of header lines, found from the first row of numbers by default |
+
+## Output
+
+| `v` | vector3d, the directions |
+| `S` | dict, the columns that are not coordinates, by name |
 
 ## See also
 

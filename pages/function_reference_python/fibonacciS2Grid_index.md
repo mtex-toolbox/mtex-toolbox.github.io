@@ -14,15 +14,17 @@ the azimuth advancing by the golden angle; by default the count fitting a resolu
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2G = fibonacciS2Grid(1000)
 S2G = fibonacciS2Grid(resolution=2*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [fibonacciS2Grid](fibonacciS2Grid.fibonacciS2Grid_py.html) | the spherical Fibonacci grid: N = 2n + 1 points along a spiral, z linear in the index and the azimuth advancing by the golden angle |
 | [find](fibonacciS2Grid.find_py.html) | the nearest grid point of every direction and its angle, or with eps the sparse matrices of the points within eps and their angles |
 | [neighbourIndices](fibonacciS2Grid.neighbourIndices_py.html) | the indices of the grid points within the angle eps of the direction v |

@@ -14,8 +14,6 @@ a kernel on SO(3) given by its Chebyshev coefficients A
 
 ## Members
 
-| | |
-|---|---|
 | [calcFourier](SO3Kernel.calcFourier_py.html) | the Chebyshev coefficients A_0 . |
 | [conv](SO3Kernel.conv_py.html) | convolution multiplies the coefficients and divides by 2n+1, on S2 when either factor is |
 | [eval](SO3Kernel.eval_py.html) | the kernel at the cosine argument t (the angle on S1), or at a rotation or direction, or between two of them |

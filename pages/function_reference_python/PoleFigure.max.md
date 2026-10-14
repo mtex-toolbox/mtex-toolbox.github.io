@@ -17,42 +17,50 @@ another pole figure; MATLAB's max
 
 ## Syntax
 
-The largest intensity of every pole figure:
+<div class="mx-form" markdown="1">
 
 ```python
 m = max(pf)
 ```
 
-The intensities clipped from below at zero:
+The largest intensity of every pole figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = max(pf, 0)
 ```
 
-The larger intensity of two pole figures on the same directions:
+The intensities clipped from below at zero.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = max(pf1, pf2)
 ```
 
+The larger intensity of two pole figures on the same directions.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
-| `m` | ndarray, one number per pole figure |
-| `pf` | PoleFigure, with another argument |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `other` | `None` | a number, one per pole figure, or a PoleFigure on the same directions |
+
+## Output
+
+| `m` | ndarray, one number per pole figure |
+| `pf` | PoleFigure, with another argument |
 
 ## See also
 

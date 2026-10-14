@@ -16,9 +16,13 @@ the Funk transform: A_n P_n(0)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Kernel.radon(self)
 ```
+
+</div>
 
 MATLAB's [S2Kernel.radon](S2Kernel.radon.html)
 

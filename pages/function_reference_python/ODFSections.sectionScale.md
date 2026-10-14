@@ -15,9 +15,13 @@ the scale of the axes of section k, one unless the section shrinks with its valu
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 ODFSections.sectionScale(self, k)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L132">source</a></font>
 {% endraw %}

@@ -14,8 +14,6 @@ slowest and theta fastest over the axes thetaGrid and rhoGrid, with its weights
 
 ## Members
 
-| | |
-|---|---|
 | [gridShape](quadratureS2Grid.gridShape_py.html) | the shape of the nodes over the axes, rho by theta |
 | [nodes](quadratureS2Grid.nodes_py.html) | the nodes as a plain list of directions |
 | [quadratureS2Grid](quadratureS2Grid.quadratureS2Grid_py.html) | the nodes of a quadrature rule on the sphere, a list of directions as in MATLAB, rho slowest and theta fastest over the axes thetaGrid and rhoGrid, with its weights |

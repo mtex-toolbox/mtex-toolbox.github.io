@@ -15,15 +15,17 @@ index 0, so that a phase id is an index into the list
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 phaseList(cs1, cs2)
 phaseList(['notIndexed', cs1, cs2])      a string names a not indexed frame
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [colorList](phaseList.colorList_py.html) | the colours the frames of the phases carry, None where they carry none |
 | [CSList](phaseList.CSList_py.html) | the frames of the phases as a list, the not indexed one first |
 | [indexedPhaseId](phaseList.indexedPhaseId_py.html) | the ids of the phases that carry a lattice |

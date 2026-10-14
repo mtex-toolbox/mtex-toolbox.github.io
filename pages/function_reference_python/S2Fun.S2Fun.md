@@ -14,9 +14,13 @@ the functions on the sphere: S2FunHarmonic, S2FunHandle, S2FunBingham
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Fun()
 ```
+
+</div>
 
 MATLAB's [S2Fun.S2Fun](S2Fun.S2Fun.html)
 

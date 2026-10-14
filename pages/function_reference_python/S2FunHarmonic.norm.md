@@ -17,38 +17,44 @@ MATLAB's norm
 
 ## Syntax
 
-The L2 norm:
+<div class="mx-form" markdown="1">
 
 ```python
 t = norm(sF)
 ```
 
-The Sobolev norm of index s:
+The L2 norm.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 t = norm(sF, s=1)
 ```
+
+The Sobolev norm of index s.
+
+</div>
+
+## Description
 
 The L2 norm is (int |f|^2 dS / 4 pi)^(1/2); the Sobolev norm weights the coefficients of
 degree l by (2l+1)^(2s). MATLAB's norm has no Sobolev index.
 
 ## Input
 
-| | |
-|---|---|
 | `sF` | S2FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
-| `t` | float, or an array of the shape of the list |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `s` | `None` | the Sobolev index; None for the L2 norm |
+
+## Output
+
+| `t` | float, or an array of the shape of the list |
 
 ## See also
 

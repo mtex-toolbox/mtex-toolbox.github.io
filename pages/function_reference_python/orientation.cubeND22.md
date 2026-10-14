@@ -15,9 +15,13 @@ the cubeND22 component, Bunge Euler angles (22°, 0°, 0°), in cs and the speci
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.cubeND22(CS, *ss)
 ```
+
+</div>
 
 ## Used on
 

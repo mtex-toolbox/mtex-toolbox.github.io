@@ -15,17 +15,27 @@ says
 
 ## Syntax
 
-Semi-axes a and b about rot * z:
+<div class="mx-form" markdown="1">
 
 ```python
 ellipse(rot, a, b)
 ```
 
-Onto the last plot only:
+Semi-axes a and b about rot * z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ellipse(rot, a, b, lineColor='b', add2all=False)
 ```
+
+Onto the last plot only.
+
+</div>
+
+## Description
 
 The centre of the ellipse is rot * z, its semi-axes, a and b in radians, lie along rot * x
 and rot * y; the polar distance from the centre is ab / sqrt((b cos rho)^2 + (a sin rho)^2).
@@ -33,27 +43,23 @@ A list of rotations, with one a and b or one per rotation, gives several ellipse
 
 ## Input
 
-| | |
-|---|---|
 | `rot` | rotation, the position and the turn of the ellipse |
 | `a` | the semi-axis along rot * x, in radians |
 | `b` | the semi-axis along rot * y, in radians |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib lines, one per ellipse and axes |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `add2all` | `True` | draw onto every spherical plot of the figure, else onto the last one |
 | `lineColor` | `'k'` | the colour of the line |
 | `lineWidth` | `1.5` | the width of the line |
 | `edgeAlpha` | `1.0` | the opacity of the line |
 | `parent` | `None` | the axes, or a list of them, to draw onto |
+
+## Output
+
+| `h` | the matplotlib lines, one per ellipse and axes |
 
 ## See also
 

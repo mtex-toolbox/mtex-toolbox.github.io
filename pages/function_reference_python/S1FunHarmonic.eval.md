@@ -16,9 +16,13 @@ the values at the angles x
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHarmonic.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [S1FunHarmonic.eval](S1FunHarmonic.eval.html)
 

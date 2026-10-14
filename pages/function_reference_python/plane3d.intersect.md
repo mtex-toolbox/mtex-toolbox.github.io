@@ -16,37 +16,41 @@ where the segments from v1 to v2 cross the plane, NaN where they do not
 
 ## Syntax
 
-The crossings of the segments from v1 to v2:
+<div class="mx-form" markdown="1">
 
 ```python
 v = plane.intersect(v1, v2)
 ```
 
-The segments as the pairs V[..., 0], V[..., 1]:
+The crossings of the segments from v1 to v2.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = plane.intersect(V)
 ```
 
+The segments as the pairs V[..., 0], V[..., 1].
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `plane` | plane3d |
 | `v1` | vector3d, the starting points of the segments |
 | `v2` | vector3d, their end points, by default the last axis of v1 holding both |
 
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d of the crossings |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `5.72958e-12*degree` | how far, as a fraction of the segment, a crossing may lie beyond its ends |
+
+## Output
+
+| `v` | vector3d of the crossings |
 
 ## See also
 

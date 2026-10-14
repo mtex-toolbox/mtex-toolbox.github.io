@@ -16,15 +16,17 @@ surround the origin
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sT = S2Triangulation(v)
 B = sT.barycentric(w)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [calcBario](S2Triangulation.calcBario_py.html) | the barycentric coordinates of directions in the triangulation, a sparse matrix with a row per direction and a column per vertex (MATLAB's calcBario) |
 | [checkInside](S2Triangulation.checkInside_py.html) | whether each direction v lies in the triangle t given for it |
 | [frame](S2Triangulation.frame_py.html) | the frame of the vertices |

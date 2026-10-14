@@ -14,35 +14,57 @@ a function on the sphere given by a callable that receives directions
 
 ## Syntax
 
-A function of the directions:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHandle(lambda v: v.z**2)
 ```
 
-In a crystal frame:
+A function of the directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHandle(fun, cs)
 ```
 
-Averaged over v and -v and the group:
+In a crystal frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHandle(fun, cs, antipodal=True)
 ```
 
-Averaged over the group on every call:
+Averaged over v and -v and the group.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHandle(fun, cs, symmetrise=True)
 ```
 
-The bandwidth of its harmonic form:
+Averaged over the group on every call.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHandle(fun, cs, bandwidth=64)
 ```
+
+The bandwidth of its harmonic form.
+
+</div>
+
+## Description
 
 Nothing is precomputed: evaluating the function calls fun on the directions, normalised and
 in the frame of the function, exactly. Every operation that needs coefficients, a
@@ -53,25 +75,21 @@ fun becomes the handle of its evaluation.
 
 ## Input
 
-| | |
-|---|---|
 | `fun` | callable taking a vector3d and returning its values, or an S2Fun |
 | `frame` | crystalFrame or specimenFrame the directions are expressed in |
 
-## Output
-
-| | |
-|---|---|
-| `sF` | S2FunHandle |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` |  | the bandwidth of the harmonic form, by default the quadrature bandwidth |
 | `antipodal` |  | the function fulfils f(v) = f(-v) |
 | `real` |  | the function takes only real values; the imaginary part of the values is dropped |
 | `symmetrise` |  | average the callable over the group of the frame (and over v and -v when antipodal) on every call; by default only when antipodal |
+
+## Output
+
+| `sF` | S2FunHandle |
 
 ## See also
 
@@ -79,8 +97,6 @@ fun becomes the handle of its evaluation.
 
 ## Members
 
-| | |
-|---|---|
 | [CS](S2FunHandle.CS_py.html) | the frame of the function, MATLAB's sF.CS |
 | [eval](S2FunHandle.eval_py.html) | the values of the callable at the directions x, taken into the frame of the function |
 | [exp](S2FunHandle.exp_py.html) | the pointwise exponential, a handle evaluated when asked |

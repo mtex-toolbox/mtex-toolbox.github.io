@@ -14,9 +14,13 @@ a reflection at the plane with normal n
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 reflection(n)
 ```
+
+</div>
 
 ## Used on
 

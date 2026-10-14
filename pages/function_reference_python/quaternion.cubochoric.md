@@ -16,9 +16,13 @@ the cubochoric vectors, the homochoric ball mapped onto the cube
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion.cubochoric(self)
 ```
+
+</div>
 
 ## Used on
 

@@ -18,23 +18,37 @@ of a crystal frame within the tolerance tol of the cosine, and up to sign when a
 
 ## Syntax
 
-The same direction:
+<div class="mx-form" markdown="1">
 
 ```python
 b = v.isclose(w)
 ```
 
-The same axis:
+The same direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = v.isclose(w, antipodal=True)
 ```
 
-A coarser tolerance:
+The same axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = v.isclose(w, tol=1e-6)
 ```
+
+A coarser tolerance.
+
+</div>
+
+## Description
 
 True where <v, w> differs from |v| |w| by less than tol, the product reduced over the
 group of a crystal frame; vectors of different frames are never close. The operator ==
@@ -42,22 +56,18 @@ compares exactly.
 
 ## Input
 
-| | |
-|---|---|
 | `v, w` | vector3d or Miller |
-
-## Output
-
-| | |
-|---|---|
-| `b` | boolean array |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | up to sign, also when neither vector is antipodal |
 | `tol` | `1e-10` | the tolerance of the cosine times the lengths |
+
+## Output
+
+| `b` | boolean array |
 
 ## See also
 

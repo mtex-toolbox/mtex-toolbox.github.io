@@ -16,30 +16,30 @@ convention and kept in the session's name map; MATLAB's specimenFrame.named
 
 ## Syntax
 
-The rolling frame of the session:
+<div class="mx-form" markdown="1">
 
 ```python
 ss = specimenFrame.named('rolling', ('RD', 'TD', 'ND'))
 ```
 
+The rolling frame of the session.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `name` | str, the name of the frame |
 | `axesNames` | the names of its three axes, used when it is built |
 
-## Output
-
-| | |
-|---|---|
-| `ss` | specimenFrame |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `seed` | `None` | the plottingConvention it is built with on first use |
+
+## Output
+
+| `ss` | specimenFrame |
 
 ## See also
 

@@ -14,23 +14,37 @@ a new mtexFigure laid out for n axes, which becomes the current one
 
 ## Syntax
 
-A new figure:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig = newMtexFigure()
 ```
 
-Laid out for 4 axes, large:
+A new figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig = newMtexFigure(4, figSize='large')
 ```
 
-One row of three axes:
+Laid out for 4 axes, large.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig = newMtexFigure(layout=(1, 3))
 ```
+
+One row of three axes.
+
+</div>
+
+## Description
 
 The keywords are those of mtexFigure: figSize, hold, figure, columns, layout,
 innerPlotSpacing, outerPlotSpacing, marginx, marginy. The figure is always new, so MATLAB's
@@ -38,14 +52,10 @@ second output, whether it is, has no counterpart.
 
 ## Input
 
-| | |
-|---|---|
 | `n` | the number of axes the layout is made for |
 
 ## Output
 
-| | |
-|---|---|
 | `mtexFig` | mtexFigure |
 
 ## See also
@@ -54,9 +64,13 @@ second output, whether it is, has no counterpart.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 newMtexFigure(n=1, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

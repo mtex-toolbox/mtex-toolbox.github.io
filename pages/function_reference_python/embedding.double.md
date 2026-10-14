@@ -17,35 +17,39 @@ orientation; MATLAB's double of an embedding
 
 ## Syntax
 
-The packed coordinates, the dimension of the embedding:
+<div class="mx-form" markdown="1">
 
 ```python
 d = e.double()
 ```
 
-The tensor components, repeated ones included:
+The packed coordinates, the dimension of the embedding.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = e.double(full=True)
 ```
 
+The tensor components, repeated ones included.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `e` | embedding |
-
-## Output
-
-| | |
-|---|---|
-| `d` | array of shape e.shape + (e.dim,), or of the number of tensor components |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `full` | `False` | the components of the tensors instead of the packed coordinates |
+
+## Output
+
+| `d` | array of shape e.shape + (e.dim,), or of the number of tensor components |
 
 ## See also
 

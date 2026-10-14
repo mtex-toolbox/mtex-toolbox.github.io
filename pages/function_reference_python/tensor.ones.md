@@ -15,39 +15,45 @@ a tensor of ones of the rank of the class, or a list of them; MATLAB's tensor.on
 
 ## Syntax
 
-Five tensors of rank two in the frame cs:
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor.ones(cs, 5)
 ```
 
-A 2 x 3 list of tensors of rank four:
+Five tensors of rank two in the frame cs.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor.ones(2, 3, rank=4)
 ```
+
+A 2 x 3 list of tensors of rank four.
+
+</div>
+
+## Description
 
 The numbers among the arguments give the shape of the list, a reference frame the frame;
 other keywords go to the constructor of the class (unit, name, ...).
 
 ## Input
 
-| | |
-|---|---|
 | `n, m, ...` | the shape of the list |
 | `cs` | referenceFrame, the frame |
 
-## Output
-
-| | |
-|---|---|
-| `T` | a tensor of the class |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` | `None` | the rank, by default that of the class, two for a plain tensor |
+
+## Output
+
+| `T` | a tensor of the class |
 
 ## See also
 

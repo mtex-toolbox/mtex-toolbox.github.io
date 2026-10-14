@@ -14,16 +14,18 @@ measured pole figure intensities, one or several pole figures of one specimen
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PoleFigure(h, r, I)                          h a Miller, one or several superposed directions
 PoleFigure([h1, h23], [r1, r2], [I1, I2])    one pole figure per entry
 PoleFigure(h, r, I, cs, ss, superposition=c, complete=True)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [antipodal](PoleFigure.antipodal_py.html) | whether the specimen directions are axes, r not told from -r |
 | [calcError](PoleFigure.calcError_py.html) | the mean deviation, one number per pole figure, from a recalculation by an ODF or from other pole figures on the same directions |
 | [calcErrorPF](PoleFigure.calcErrorPF_py.html) | the pole figures of the deviation from a recalculation: the difference between measured intensities and those an ODF predicts, or another pole figure on the same directions |

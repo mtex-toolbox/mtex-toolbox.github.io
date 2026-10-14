@@ -14,41 +14,67 @@ with ghost correction and, on request, the zero range method
 
 ## Syntax
 
-The defaults:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcODF(pf)
 ```
 
-The halfwidth and the grid:
+The defaults.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcODF(pf, halfwidth=7.5*degree, resolution=5*degree)
 ```
 
-The ansatz functions of the kernel psi:
+The halfwidth and the grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcODF(pf, psi)
 ```
 
-Drop the orientations the data says are empty:
+The ansatz functions of the kernel psi.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcODF(pf, zeroRange=True)
 ```
 
-Keep the uniform portion in the components:
+Drop the orientations the data says are empty.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcODF(pf, ghostCorrection=False)
 ```
 
-Run an MLSSolver set up before:
+Keep the uniform portion in the components.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcODF(pf, solver)
 ```
+
+Run an MLSSolver set up before.
+
+</div>
+
+## Description
 
 The ODF is a weighted sum of many unimodal ODFs on a grid, whose pole figures are fitted to
 the intensities in the least squares sense, every pole figure scaled by its own factor.
@@ -59,21 +85,13 @@ solver.calcODF(). A kernel or a grid of orientations may be passed positionally.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
 | `psi` | SO3Kernel, the shape of the ansatz functions |
 | `solver` | MLSSolver, run with its own settings |
 
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunRBF |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `None` | the spacing of the grid the ansatz functions sit on, by default the resolution of the pole figures (MATLAB: 3/2 of it) |
 | `halfwidth` | `None` | the halfwidth of the ansatz functions, by default the resolution of the grid (MATLAB: 2/3 of it) |
@@ -88,6 +106,10 @@ solver.calcODF(). A kernel or a grid of orientations may be passed positionally.
 | `intensityWeights` | `False` | weight the residuals with (1 + I)^(-1/2), the counting statistics of the intensities I |
 | `regularisation` | `0.0` | the weight of a penalty on the Dirichlet energy, a discrete Laplacian on the grid; zero for none |
 | `verbose` | `False` | report the fit of every pole figure in every iteration |
+
+## Output
+
+| `odf` | SO3FunRBF |
 
 ## References
 

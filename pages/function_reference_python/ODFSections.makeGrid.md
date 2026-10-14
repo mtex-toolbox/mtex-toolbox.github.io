@@ -16,39 +16,51 @@ are computed for oS.plot(values); MATLAB's makeGrid
 
 ## Syntax
 
-The nodes at 2.5 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = oS.makeGrid()
 ```
 
-A coarser grid:
+The nodes at 2.5 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = oS.makeGrid(resolution=5*degree)
 ```
 
-Values on the nodes drawn as sections:
+A coarser grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oS.plot(odf.eval(ori))
 ```
 
+Values on the nodes drawn as sections.
+
+</div>
+
+## Description
+
 The nodes are the grids of the section charts, chart by chart, turned into orientations;
 the sections remember the resolution and the node counts, so oS.plot(values) splits the
 values onto the charts again.
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation, a list of the nodes of every chart in turn |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `2.5*degree` | the spacing of the grid on every chart |
+
+## Output
+
+| `ori` | orientation, a list of the nodes of every chart in turn |
 
 ## See also
 

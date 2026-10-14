@@ -17,9 +17,13 @@ a group turned against its own axes can give, so it is moved off every such elem
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sectorCenter(pg)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L360">source</a></font>
 {% endraw %}

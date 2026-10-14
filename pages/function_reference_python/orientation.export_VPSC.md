@@ -14,6 +14,8 @@ write a map to the file the extension names
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 export(ebsd, 'map.ang')                   TSL / EDAX, the correction of setting 2 undone
 export(ebsd, 'map.ctf')                   Oxford / Channel, the half turn about y undone
@@ -23,11 +25,17 @@ export(v, 'vectors.txt')                  a list of directions as a table, see e
 export(pf, 'dubna', degree=True)          a pole figure data set, one table per pole figure
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 export(ebsd, fname, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

@@ -14,9 +14,13 @@ the HSV coordinates of colours given in HSL, as three arrays h, s, v
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 hsl2hsv(h, s, l)
 ```
+
+</div>
 
 MATLAB's [hsl2hsv](hsl2hsv.html)
 

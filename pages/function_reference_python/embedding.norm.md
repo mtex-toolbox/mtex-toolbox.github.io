@@ -16,17 +16,27 @@ the Euclidean norm of every image; MATLAB's norm of an embedding
 
 ## Syntax
 
-The norm of every image:
+<div class="mx-form" markdown="1">
 
 ```python
 n = norm(e)
 ```
 
-Over the norm of an orientation's image:
+The norm of every image.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n = norm(e, normalized=True)
 ```
+
+Over the norm of an orientation's image.
+
+</div>
+
+## Description
 
 Every orientation has an image of the same norm, so the normalized norm is one at an
 orientation and smaller at a mean of several, a measure of their spread. The sum of
@@ -35,21 +45,17 @@ list.
 
 ## Input
 
-| | |
-|---|---|
 | `e` | embedding |
-
-## Output
-
-| | |
-|---|---|
-| `n` | array of the shape of e |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `normalized` | `False` | divide by the norm of the image of an orientation |
+
+## Output
+
+| `n` | array of the shape of e |
 
 ## See also
 

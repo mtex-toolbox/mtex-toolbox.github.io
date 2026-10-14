@@ -15,9 +15,13 @@ the indices an r fold about z leaves at degree n, k = 0 mod r, as block indices
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 InvariantProjection.support(self, n)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L339">source</a></font>
 {% endraw %}

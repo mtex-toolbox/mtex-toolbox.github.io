@@ -15,9 +15,13 @@ the phase id of a mineral name, MATLAB's name2id
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.name2id(self, name)
 ```
+
+</div>
 
 ## Used on
 

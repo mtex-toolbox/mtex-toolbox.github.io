@@ -17,29 +17,47 @@ map; MATLAB's calcParent2Child of the job
 
 ## Syntax
 
-Fitted to the parent to child and the child to child boundaries:
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParent2Child()
 ```
 
-To the child to child boundaries alone:
+Fitted to the parent to child and the child to child boundaries.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParent2Child(c2c=True, quantile=0.8)
 ```
 
-To the parent to child boundaries alone:
+To the child to child boundaries alone.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParent2Child(p2c=True, threshold=3*degree)
 ```
 
-From another start:
+To the parent to child boundaries alone.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParent2Child(orientation.NishiyamaWassermann(job.csParent, job.csChild))
 ```
+
+From another start.
+
+</div>
+
+## Description
 
 Two fits are made and combined, weighted by their numbers of boundaries. Where the
 parent phase covers more than one percent of the map, the misorientations of the parent
@@ -56,14 +74,12 @@ verbose, ...
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor, with job.p2c or p2c0 set |
 | `p2c0` | orientation, the start of the fit instead of job.p2c |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `p2c` | `False` | fit to the parent to child boundaries alone |
 | `c2c` | `False` | fit to the child to child boundaries alone |

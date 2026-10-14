@@ -15,23 +15,37 @@ region of a pair of frames
 
 ## Syntax
 
-The fundamental region of a crystal frame:
+<div class="mx-form" markdown="1">
 
 ```python
 oR = fundamentalRegion(cs)
 ```
 
-Of misorientations, with grain exchange:
+The fundamental region of a crystal frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oR = fundamentalRegion(cs, cs, antipodal=True)
 ```
 
-The region bounded by the quaternions N:
+Of misorientations, with grain exchange.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oR = orientationRegion(N, cs, specimenFrame())
 ```
+
+The region bounded by the quaternions N.
+
+</div>
+
+## Description
 
 The region holds the quaternions q with dot(q, N) <= 0 for every bounding quaternion N; q
 and -q are the same rotation. The fundamental region of two frames is the Dirichlet domain
@@ -43,26 +57,22 @@ rotation axes besides.
 
 ## Input
 
-| | |
-|---|---|
 | `N` | quaternion, or an array (n, 4), the normals of the bounding planes |
 | `frameA` | the first frame, the crystal frame |
 | `frameB` | the second frame, the specimen or a second crystal frame |
 
-## Output
-
-| | |
-|---|---|
-| `oR` | orientationRegion, with oR.CS and oR.SS its two frames, MATLAB's CS1 and CS2 |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` |  | identify a misorientation with its inverse, the grain exchange symmetry |
 | `common` |  | the rotations, as an array (n, 4), the two frames share |
 | `sector` |  | sphericalRegion, the sector of rotation axes where the frames share rotations |
 | `axisCenter` |  | the centre of that sector, an array of three |
+
+## Output
+
+| `oR` | orientationRegion, with oR.CS and oR.SS its two frames, MATLAB's CS1 and CS2 |
 
 ## See also
 
@@ -70,8 +80,6 @@ rotation axes besides.
 
 ## Members
 
-| | |
-|---|---|
 | [axisSector](orientationRegion.axisSector_py.html) | the sector of rotation axes the region allows at a fixed rotation angle: a bound with N = (-sin(w_i/4), cos(w_i/4) a_i) reads for q = (cos(w/2), sin(w/2) v) as dot(v, a_i) <= cot(w/2) tan(w_i/4), a small circle about the axis |
 | [calcAngleDistribution](orientationRegion.calcAngleDistribution_py.html) | the distribution of the misorientation angle: of a misorientation density, of a list of misorientations, or of the uniform density of two crystal frames |
 | [calcAxisDistribution](orientationRegion.calcAxisDistribution_py.html) | the axis distribution of an SO(3) function, an S2 function of the rotation axes symmetric under the rotations the two frames share |

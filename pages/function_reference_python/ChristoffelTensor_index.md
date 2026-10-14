@@ -14,8 +14,6 @@ ChristoffelTensor(C, n): E_ik = C_ijkl n_j n_l of a stiffness and a direction
 
 ## Members
 
-| | |
-|---|---|
 | [ChristoffelTensor](ChristoffelTensor.ChristoffelTensor_py.html) | ChristoffelTensor(C, n): E_ik = C_ijkl n_j n_l of a stiffness and a direction |
 
 ## Used on

@@ -17,9 +17,13 @@ diagram of directions
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 histogram(x, *args, **kw)
 ```
+
+</div>
 
 ## Used on
 

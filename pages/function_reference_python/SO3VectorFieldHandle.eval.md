@@ -16,9 +16,13 @@ the tangent vectors of the field at orientations, by the callable
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHandle.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldHandle.eval](SO3VectorFieldHandle.eval.html)
 

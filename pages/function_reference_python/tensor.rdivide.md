@@ -16,9 +16,13 @@ the quotient, the operator a / b
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 a / b
 ```
+
+</div>
 
 MATLAB's [tensor.rdivide](tensor.rdivide.html)
 

@@ -14,39 +14,45 @@ the dyadic product of tensors or vectors, their outer product; MATLAB's dyad
 
 ## Syntax
 
-The outer product, of the ranks added:
+<div class="mx-form" markdown="1">
 
 ```python
 T = dyad(T1, T2)
 ```
 
-The third dyadic power v x v x v:
+The outer product, of the ranks added.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = dyad(v, 3)
 ```
+
+The third dyadic power v x v x v.
+
+</div>
+
+## Description
 
 A vector counts as a tensor of rank one; a single argument is returned as a tensor. The
 power is given as the second argument; the keyword n is not used.
 
 ## Input
 
-| | |
-|---|---|
 | `a` | tensor or vector3d, T1 above |
 | `b` | tensor or vector3d, T2 above, or an integer power |
 
-## Output
-
-| | |
-|---|---|
-| `T` | tensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `None` | not used |
+
+## Output
+
+| `T` | tensor |
 
 ## See also
 

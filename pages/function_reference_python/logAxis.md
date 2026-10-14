@@ -14,30 +14,34 @@ both axes of a plot logarithmic, a decade of the same length on either
 
 ## Syntax
 
-The current axes:
+<div class="mx-form" markdown="1">
 
 ```python
 logAxis()
 ```
 
-The axes given, with their limits:
+The current axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 logAxis(ax, (1, 100), (1, 1000))
 ```
 
+The axes given, with their limits.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `ax` | the matplotlib axes; the current one by default |
 | `xLimits` | (lo, hi) of the x axis; by default the limits it has |
 | `yLimits` | (lo, hi) of the y axis; by default the limits it has |
 
 ## Output
 
-| | |
-|---|---|
 | `ax` | the axes |
 
 ## See also
@@ -46,9 +50,13 @@ logAxis(ax, (1, 100), (1, 1000))
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 logAxis(ax=None, xLimits=None, yLimits=None)
 ```
+
+</div>
 
 ## Used on
 

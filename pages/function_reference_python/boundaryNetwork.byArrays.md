@@ -15,9 +15,13 @@ a network given by its arrays, the neighbours of vertex i being nbr[ptr[i]:ptr[i
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 boundaryNetwork.byArrays(ptr, nbr, fixed, used)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L66">source</a></font>
 {% endraw %}

@@ -17,9 +17,13 @@ spaces above this layer, vector3d/calcDensity
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.calcDensity(self, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

@@ -17,9 +17,13 @@ vertices of the polygon in order, in the frame the shape stands in
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 crystalShape.innerFace(self, n)
 ```
+
+</div>
 
 MATLAB's [crystalShape.innerFace](crystalShape.innerFace.html)
 

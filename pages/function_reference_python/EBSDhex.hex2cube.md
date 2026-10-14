@@ -18,17 +18,27 @@ differ by one step in two of the three; MATLAB's EBSDhex/hex2cube
 
 ## Syntax
 
-By row and column:
+<div class="mx-form" markdown="1">
 
 ```python
 x, y, z = hex2cube(ebsd, row, col)
 ```
 
-By flat index:
+By row and column.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 x, y, z = ebsd.hex2cube([0, 100, 200])
 ```
+
+By flat index.
+
+</div>
+
+## Description
 
 A cell of a hexagonal grid is addressed by its row and column, the offset coordinates; the
 cube coordinates make the neighbours one step apart in two of three, see
@@ -38,22 +48,18 @@ index runs in the order of the grid, where MATLAB counts from 1 in column major 
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD gridded on a hexagonal lattice, at least 3 x 3 cells |
 | `row` | the rows of the cells, or their flat indices when col is not given |
 
-## Output
-
-| | |
-|---|---|
-| `x, y, z` | the cube coordinates |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `col` | `None` | the columns of the cells |
+
+## Output
+
+| `x, y, z` | the cube coordinates |
 
 ## See also
 

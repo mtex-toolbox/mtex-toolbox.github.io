@@ -13,14 +13,16 @@ isCompatible(x, ...) is x.isCompatible(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 isCompatible(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.isCompatible_py.html) | whether a transition between the frames exists, and the transition |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>

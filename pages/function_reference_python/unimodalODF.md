@@ -14,35 +14,57 @@ a unimodal ODF, radially symmetric about a modal orientation, its shape a kernel
 
 ## Syntax
 
-The de la Vallee Poussin kernel of halfwidth 10 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = unimodalODF(ori)
 ```
 
-Another halfwidth:
+The de la Vallee Poussin kernel of halfwidth 10 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = unimodalODF(ori, halfwidth=15*degree)
 ```
 
-The centre given as a rotation, the frames named:
+Another halfwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = unimodalODF(rot, cs, ss)
 ```
 
-The kernel psi, also kernel=psi:
+The centre given as a rotation, the frames named.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = unimodalODF(ori, psi)
 ```
 
-One weight per centre, all kept:
+The kernel psi, also kernel=psi.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = unimodalODF(ori, weights=w, thinning=False)
 ```
+
+One weight per centre, all kept.
+
+</div>
+
+## Description
 
 The ODF is a kernel sum, SO3FunRBF, with the kernel at the modal orientations, the weights
 normalised to a mean of one. Given weights, the centres of negligible weight, a hundredth
@@ -51,25 +73,21 @@ centre the mode is the identity.
 
 ## Input
 
-| | |
-|---|---|
 | `center` | orientation, the modal orientations, or a rotation with the frames following |
 | `args` | crystalFrame and specimenFrame of a centre given as a rotation, and an SO3Kernel |
 
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunRBF |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `kernel` | `None` | SO3Kernel, the shape; by default the de la Vallee Poussin kernel |
 | `halfwidth` | `None` | the halfwidth of the default kernel, 10 degree unless given |
 | `weights` | `None` | one weight per centre |
 | `thinning` | `True` | drop the centres of negligible weight (MATLAB's flag nothinning keeps them) |
+
+## Output
+
+| `odf` | SO3FunRBF |
 
 ## See also
 

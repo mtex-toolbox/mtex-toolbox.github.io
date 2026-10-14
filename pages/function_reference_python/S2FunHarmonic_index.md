@@ -15,35 +15,57 @@ the default representation of a function on the sphere
 
 ## Syntax
 
-From MTEX's coefficients:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(fhat)
 ```
 
-In a crystal frame, f(v) = f(-v):
+From MTEX's coefficients.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(fhat, cs, antipodal=True)
 ```
 
-A callable expanded by quadrature:
+In a crystal frame, f(v) = f(-v).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(lambda v: v.z**2, bandwidth=16)
 ```
 
-The series of a kernel on the sphere:
+A callable expanded by quadrature.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(psi)
 ```
 
-Another function, truncated:
+The series of a kernel on the sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(sF, bandwidth=8)
 ```
+
+Another function, truncated.
+
+</div>
+
+## Description
 
 The coefficients fhat are MTEX's, degree by degree, (L + 1)^2 of them for the bandwidth L;
 a vector ending inside a degree block is padded with zeros to its end. Convolution,
@@ -56,20 +78,12 @@ shape in front of the coefficients.
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | array of MTEX's coefficients, an S2Fun, an S2Kernel or a callable of vector3d |
 | `frame` | the crystalFrame or specimenFrame of the directions |
 
-## Output
-
-| | |
-|---|---|
-| `sF` | S2FunHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` |  | whether the function takes real values only; by default read off the coefficients or the sampled values |
 | `antipodal` |  | f(v) = f(-v) |
@@ -77,14 +91,16 @@ shape in front of the coefficients.
 | `bandwidth` |  | the largest degree of the series |
 | `dtype` |  | the complex type of the coefficients, complex128 unless given |
 
+## Output
+
+| `sF` | S2FunHarmonic |
+
 ## See also
 
 [S2FunHarmonic.quadrature](S2FunHarmonic.quadrature_py.html), [S2FunHarmonic.interpolate](S2FunHarmonic.interpolate_py.html), [S2FunHandle](S2FunHandle_index_py.html), [S2Kernel](S2Kernel_index_py.html), [SO3FunHarmonic](SO3FunHarmonic_index_py.html), [S2FunHarmonicRepresentation](S2FunHarmonicRepresentation_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [abs](S2FunHarmonic.abs_py.html) | the absolute value \|f\| as a handle, evaluated when asked |
 | [adjoint](S2FunHarmonic.adjoint_py.html) | S2FunHarmonic.adjointNFSFT(v, values, bandwidth=32): the adjoint transform, the coefficients sum_j w_j y_j conj(Y(v_j)) with unit weights unless given, a grid's own on a grid |
 | [adjointNFSFT](S2FunHarmonic.adjointNFSFT_py.html) | S2FunHarmonic.adjointNFSFT(v, values, bandwidth=32): the adjoint transform, the coefficients sum_j w_j y_j conj(Y(v_j)) with unit weights unless given, a grid's own on a grid |

@@ -18,9 +18,13 @@ addFeature_circularSubgrain and updateOri)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 simulateEBSD.addFeature(self, kind)
 ```
+
+</div>
 
 ## Used on
 

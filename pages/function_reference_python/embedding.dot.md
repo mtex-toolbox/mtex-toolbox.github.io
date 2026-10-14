@@ -16,9 +16,13 @@ the inner product of two embeddings of the same crystal frame, image by image
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 embedding.dot(self, other)
 ```
+
+</div>
 
 MATLAB's [embedding.dot](embedding.dot.html)
 

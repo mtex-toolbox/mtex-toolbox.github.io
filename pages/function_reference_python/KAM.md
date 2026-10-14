@@ -13,14 +13,16 @@ KAM(x, ...) is x.KAM(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 KAM(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.KAM_py.html) | the kernel average misorientation: the mean misorientation angle of every pixel to its neighbours |
 | [EBSD3](EBSD3.KAM_py.html) | the kernel average misorientation of a volume: the mean misorientation angle of every voxel to its neighbours |
 

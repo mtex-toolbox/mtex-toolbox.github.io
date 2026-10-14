@@ -17,29 +17,47 @@ as a thin section shows it under the microscope
 
 ## Syntax
 
-Polariser at 45 degree to the fast wave:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = rI.spectralTransmission(vprop, thickness)
 ```
 
-A polariser direction:
+Polariser at 45 degree to the fast wave.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = rI.spectralTransmission(vprop, thickness, polarizationDirection=p)
 ```
 
-The angles given:
+A polariser direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = rI.spectralTransmission(vprop, thickness, tau=30*degree, phi=90*degree)
 ```
 
-Functions of the propagation direction:
+The angles given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 r, g, b = rI.spectralTransmission(thickness, bandwidth=64)
 ```
+
+Functions of the propagation direction.
+
+</div>
+
+## Description
 
 The light propagates along vprop through a plate of the given thickness; the two waves the
 refractive index tensor allows along it leave with a retardation, the birefringence times
@@ -51,27 +69,23 @@ the interference colours of every direction.
 
 ## Input
 
-| | |
-|---|---|
 | `rI` | refractiveIndexTensor |
 | `vprop` | vector3d or Miller, the propagation direction of the light, in the frame of rI |
 | `thickness` | the thickness of the plate in nanometres (30 micrometre = 30000) |
 
-## Output
-
-| | |
-|---|---|
-| `rgb` | (..., 3) array, the colour of every direction |
-| `r, g, b` | S2FunHarmonic, the channels as functions of the propagation direction |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `polarizationDirection` | `None` | vector3d, the direction of the polariser; the angle between it and the fast wave replaces tau |
 | `tau` | `45*degree` | the angle between the polariser and the vibration direction of the fast wave |
 | `phi` | `90*degree` | the angle between the polariser and the analyser; 90 degree for crossed polarisers |
 | `bandwidth` | `32` | the bandwidth of the three functions when no direction is given |
+
+## Output
+
+| `rgb` | (..., 3) array, the colour of every direction |
+| `r, g, b` | S2FunHarmonic, the channels as functions of the propagation direction |
 
 ## See also
 

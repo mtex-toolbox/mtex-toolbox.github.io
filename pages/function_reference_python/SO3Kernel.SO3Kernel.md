@@ -14,9 +14,13 @@ a kernel on SO(3) given by its Chebyshev coefficients A
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3Kernel(A)
 ```
+
+</div>
 
 ## Used on
 

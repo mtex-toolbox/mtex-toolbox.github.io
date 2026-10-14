@@ -16,9 +16,13 @@ redraws its bar in the corner of what is shown
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapPlot.followView(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L138">source</a></font>
 {% endraw %}

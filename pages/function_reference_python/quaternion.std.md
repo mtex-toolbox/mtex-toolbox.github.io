@@ -16,23 +16,37 @@ the mean angular deviation of a list of rotations from their mean
 
 ## Syntax
 
-The deviation in radians:
+<div class="mx-form" markdown="1">
 
 ```python
 sigma = std(rot)
 ```
 
-From the robust mean:
+The deviation in radians.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sigma = std(rot, robust=True)
 ```
 
-From the weighted mean:
+From the robust mean.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sigma = std(rot, weights=w)
 ```
+
+From the weighted mean.
+
+</div>
+
+## Description
 
 The root mean square of the rotational angles between the mean and every rotation; for
 orientations the angle is the symmetry reduced one, as the mean is. The weights enter the
@@ -40,19 +54,11 @@ mean only, not the average of the angles.
 
 ## Input
 
-| | |
-|---|---|
 | `rot` | quaternion, rotation or orientation |
-
-## Output
-
-| | |
-|---|---|
-| `sigma` | the deviation in radians |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per rotation, for the mean |
 | `robust` | `False` | deviation from the robust mean, outliers left out of the mean |
@@ -61,6 +67,10 @@ mean only, not the average of the angles.
 | `out` | `None` | NumPy's argument, refused |
 | `keepdims` | `False` | keep the reduced axes with length one, as np.std does |
 | `ddof` | `0` | NumPy's degrees of freedom, refused |
+
+## Output
+
+| `sigma` | the deviation in radians |
 
 ## See also
 

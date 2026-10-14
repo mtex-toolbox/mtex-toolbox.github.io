@@ -17,23 +17,37 @@ colour per face; MATLAB's grain3Boundary.plot
 
 ## Syntax
 
-Light blue faces:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(gB)
 ```
 
-Coloured by a value per face:
+Light blue faces.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(gB, gB.area)
 ```
 
-One colour, faint edges:
+Coloured by a value per face.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(gB, faceColor='r', edgeAlpha=0.2)
 ```
+
+One colour, faint edges.
+
+</div>
+
+## Description
 
 Values are mapped by the colour map, parula as MATLAB's patches. The options of the
 drawing are keywords too: faceColor, faceAlpha, edgeColor, edgeAlpha, lineWidth, colormap
@@ -44,23 +58,19 @@ page.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grain3Boundary |
 | `color` | a value or an RGB colour per face |
 
-## Output
-
-| | |
-|---|---|
-| `fig` | mtexFigure |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `how2plot` | `None` | the plottingConvention of the view, by default plottingConvention.default3D |
 | `figSize` | `None` | the size of a new figure, 'small', 'normal', 'large', ..., or (width, height) in inches |
+
+## Output
+
+| `fig` | mtexFigure |
 
 ## See also
 

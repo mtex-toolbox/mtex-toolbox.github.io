@@ -15,9 +15,13 @@ the sibling frame carrying the proper point group, the elements with their parit
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 referenceFrame.properGroup(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L297">source</a></font>
 {% endraw %}

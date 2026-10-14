@@ -19,9 +19,13 @@ and the moduli are NaN)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 stiffnessTensor.HashinShtrikmanModulus(C, K0, G0)
 ```
+
+</div>
 
 MATLAB's [stiffnessTensor.HashinShtrikmanModulus](stiffnessTensor.HashinShtrikmanModulus.html)
 

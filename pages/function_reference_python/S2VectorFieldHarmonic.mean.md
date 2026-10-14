@@ -16,9 +16,13 @@ the mean vector of the field over the sphere, read off the coefficients of degre
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.mean(self)
 ```
+
+</div>
 
 MATLAB's [S2VectorFieldHarmonic.mean](S2VectorFieldHarmonic.mean.html)
 

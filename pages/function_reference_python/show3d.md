@@ -14,30 +14,36 @@ the mouse
 
 ## Syntax
 
-The scene of the current figure:
+<div class="mx-form" markdown="1">
 
 ```python
 show3d()
 ```
 
-Of another figure, in a smaller window:
+The scene of the current figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 show3d(fig, window_size=(600, 400))
 ```
 
-## Output
+Of another figure, in a smaller window.
 
-| | |
-|---|---|
-| `p` | the pyvista Plotter of the window |
+</div>
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure holding the scene, by default the current one |
 | `window_size` | `(900, 900)` | the size of the window in pixels |
+
+## Output
+
+| `p` | the pyvista Plotter of the window |
 
 ## See also
 

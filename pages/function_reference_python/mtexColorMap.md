@@ -14,35 +14,57 @@ the colour map of the current figure, or of one figure or axes; MATLAB's mtexCol
 
 ## Syntax
 
-Every axes of the current figure:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexColorMap('LaboTeX')
 ```
 
-Every axes of one MTEX figure:
+Every axes of the current figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexColorMap('white2black', gcm())
 ```
 
-One axes only:
+Every axes of one MTEX figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexColorMap(ax, 'hot')
 ```
 
-An n x 3 matrix of rgb values:
+One axes only.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexColorMap(np.array([[1, 1, 1], [0, 0, 1]]))
 ```
 
-A named map function, as MATLAB passes it:
+An n x 3 matrix of rgb values.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexColorMap(blue2redColorMap)
 ```
+
+A named map function, as MATLAB passes it.
+
+</div>
+
+## Description
 
 Without a figure the map is given to every axes of the current MTEX figure, so that all the
 sections of one function share the colour scale; to give the subplots of a figure different
@@ -52,21 +74,17 @@ matplotlib figure the images and filled contours of the current figure take the 
 
 ## Input
 
-| | |
-|---|---|
 | `name` | the name of a colour map, a matplotlib Colormap, an n x 3 matrix of rgb values or a function returning one; an axes, with the map following as the second argument |
-
-## Output
-
-| | |
-|---|---|
-| `cmap` | the matplotlib Colormap set |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure to colour instead of the current one |
+
+## Output
+
+| `cmap` | the matplotlib Colormap set |
 
 ## See also
 

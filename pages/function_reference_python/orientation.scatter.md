@@ -17,41 +17,67 @@ orientation/scatter
 
 ## Syntax
 
-In Euler angle space, in the fundamental region:
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(ori)
 ```
 
-In axis angle space, the region around them:
+In Euler angle space, in the fundamental region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(ori, axisAngle=True)
 ```
 
-In Rodrigues space:
+In axis angle space, the region around them.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(ori, Rodrigues=True)
 ```
 
-Coloured by a value each:
+In Rodrigues space.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(ori, ori.angle(), axisAngle=True, colorbar=True)
 ```
 
-The orientations as they are:
+Coloured by a value each.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(ori, ignoreFundamentalRegion=True)
 ```
 
-Every orientation, not a sample:
+The orientations as they are.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(ori, all=True)
 ```
+
+Every orientation, not a sample.
+
+</div>
+
+## Description
 
 Orientations are brought into the fundamental region of their symmetries and drawn in
 Euler angle space by default, misorientations and bare rotations in axis angle space;
@@ -66,20 +92,12 @@ takes the next colour as open circles. plot3d(ori) is the same.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation or rotation |
 | `data` | one value per orientation, or an (n, 3) array of RGB colours |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib Path3DCollection of the markers |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axisAngle` | `False` | draw in axis angle space |
 | `Rodrigues` | `False` | draw in Rodrigues space |
@@ -95,6 +113,10 @@ takes the next colour as open circles. plot3d(ori) is the same.
 | `colorRange` | `None` | (lo, hi), the values of the ends of the colour map; by default the range of the data |
 | `colorbar` | `False` | add a colour bar of the data |
 | `all` | `False` | draw every orientation, however many |
+
+## Output
+
+| `h` | the matplotlib Path3DCollection of the markers |
 
 ## See also
 

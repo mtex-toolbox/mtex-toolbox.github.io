@@ -16,17 +16,27 @@ whether a transition between the frames exists, and the transition; MATLAB's isC
 
 ## Syntax
 
-The transition from cs1 to cs2:
+<div class="mx-form" markdown="1">
 
 ```python
 ok, M = cs1.isCompatible(cs2)
 ```
 
-With another tolerance:
+The transition from cs1 to cs2.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ok, M = cs1.isCompatible(cs2, tol=1e-3)
 ```
+
+With another tolerance.
+
+</div>
+
+## Description
 
 Two frames are compatible when the transition between them is close to orthogonal: the
 same data can be expressed in either. The lengths of the basis vectors do not enter, the
@@ -34,22 +44,18 @@ transition is computed on normalised bases.
 
 ## Input
 
-| | |
-|---|---|
 | `cs1, cs2` | referenceFrame |
-
-## Output
-
-| | |
-|---|---|
-| `ok` | bool |
-| `M` | the 3 x 3 transition matrix from cs1 to cs2 |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `None` | the tolerance on the orthogonality defect of M; by default referenceFrame.tolCompatible, 0.1 |
+
+## Output
+
+| `ok` | bool |
+| `M` | the 3 x 3 transition matrix from cs1 to cs2 |
 
 ## See also
 

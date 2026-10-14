@@ -16,15 +16,23 @@ the Pitsch-Schrader orientation relationship between bcc and hcp, (011) || (0001
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 p2c = orientation.PitschSchrader(csParent, csChild)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 orientation.PitschSchrader(csParent, csChild)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L124">source</a></font>
 {% endraw %}

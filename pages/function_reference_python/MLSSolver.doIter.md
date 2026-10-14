@@ -18,9 +18,13 @@ normalised coefficients, moves linearly along the direction and keeps its scalin
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 MLSSolver.doIter(self)
 ```
+
+</div>
 
 MATLAB's [MLSSolver.doIter](MLSSolver.doIter.html)
 

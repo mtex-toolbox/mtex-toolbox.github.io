@@ -16,29 +16,47 @@ the mean of a list of quaternions, with the principal moments and axes of inerti
 
 ## Syntax
 
-The mean:
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(q)
 ```
 
-A weighted mean:
+The mean.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(q, weights=w)
 ```
 
-Outliers left out:
+A weighted mean.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(q, robust=True)
 ```
 
-The moments and axes of inertia too:
+Outliers left out.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m, lam, V = mean(q, return_inertia=True)
 ```
+
+The moments and axes of inertia too.
+
+</div>
+
+## Description
 
 The mean is the principal eigenvector of the weighted moment matrix sum w q q^T / sum w,
 so q and -q count alike. Entries that are not a number, sites without an orientation, are
@@ -50,21 +68,11 @@ part. orientation.mean reduces by the symmetry first.
 
 ## Input
 
-| | |
-|---|---|
 | `q` | quaternion, rotation or orientation |
-
-## Output
-
-| | |
-|---|---|
-| `m` | the mean, of the class of q |
-| `lam` | the principal moments of inertia, the eigenvalues of the moment matrix in ascending order |
-| `V` | quaternion, the four principal axes of inertia, the eigenvectors |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per quaternion |
 | `robust` | `False` | leave out the outliers |
@@ -73,6 +81,12 @@ part. orientation.mean reduces by the symmetry first.
 | `dtype` | `None` | NumPy's argument, refused |
 | `out` | `None` | NumPy's argument, refused |
 | `keepdims` | `False` | keep the reduced axes with length one, as np.mean does |
+
+## Output
+
+| `m` | the mean, of the class of q |
+| `lam` | the principal moments of inertia, the eigenvalues of the moment matrix in ascending order |
+| `V` | quaternion, the four principal axes of inertia, the eigenvectors |
 
 ## See also
 

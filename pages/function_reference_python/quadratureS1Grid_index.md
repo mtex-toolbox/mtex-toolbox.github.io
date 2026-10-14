@@ -13,8 +13,6 @@ the circle: 2L+2 equispaced nodes with equal weights integrate degree 2L+1 exact
 
 ## Members
 
-| | |
-|---|---|
 | [nodes](quadratureS1Grid.nodes_py.html) | the nodes, 2L+2 equispaced angles in [0, 2 pi) |
 | [weights](quadratureS1Grid.weights_py.html) | the quadrature weights, all equal and summing to one |
 

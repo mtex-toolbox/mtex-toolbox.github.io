@@ -17,23 +17,37 @@ grainBoundary.isTwinning
 
 ## Syntax
 
-Within 5 degrees of the misorientation:
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.isTwinning(mori)
 ```
 
-Within 2 degrees:
+Within 5 degrees of the misorientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.isTwinning(mori, 2*degree)
 ```
 
-The Sigma 3 boundaries of a cubic phase:
+Within 2 degrees.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.isTwinning(CSL(3, ebsd['Iron'].CS))
 ```
+
+The Sigma 3 boundaries of a cubic phase.
+
+</div>
+
+## Description
 
 Only the segments between the two phases of the misorientation, its frames, are compared;
 a segment with them the other way round is compared with the inverse. The angle is the
@@ -41,22 +55,18 @@ symmetry reduced misorientation angle.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
 | `mori` | the misorientation, an orientation between two crystal frames |
 
-## Output
-
-| | |
-|---|---|
-| `ind` | a boolean per segment |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `threshold` | `5*degree` | the largest misorientation angle to mori |
+
+## Output
+
+| `ind` | a boolean per segment |
 
 ## See also
 

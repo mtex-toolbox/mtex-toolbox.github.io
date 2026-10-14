@@ -17,41 +17,47 @@ the points within eps and their angles; MATLAB's S2Grid.find
 
 ## Syntax
 
-The nearest grid point and the angle to it:
+<div class="mx-form" markdown="1">
 
 ```python
 ind, d = S2G.find(v)
 ```
 
-Every grid point within 10 degree:
+The nearest grid point and the angle to it.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 I, d = S2G.find(v, 10*degree)
 ```
+
+Every grid point within 10 degree.
+
+</div>
+
+## Description
 
 The search for the nearest point runs over the rings, a binary search in the polar angle and in
 the azimuth of each ring near it; the search within eps through a k-d tree. On an antipodal grid a direction and its antipode are the same.
 
 ## Input
 
-| | |
-|---|---|
 | `S2G` | S2Grid |
 | `v` | vector3d, the directions searched for |
 
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `eps` | `None` | the radius of the search; by default only the nearest point is returned |
+
 ## Output
 
-| | |
-|---|---|
 | `ind` | the index of the nearest grid point, of the shape of v |
 | `d` | its angle to v; with eps a sparse matrix (directions x grid) of the angles |
 | `I` | with eps a sparse boolean matrix (directions x grid) of the grid points within eps |
-
-## Keywords
-
-| | default | |
-|---|---|---|
-| `eps` | `None` | the radius of the search; by default only the nearest point is returned |
 
 ## See also
 

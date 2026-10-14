@@ -16,31 +16,53 @@ the energy velocity of a lossless elastic plane wave, the vector C_ijkl p_j n_k 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vp, vs1, vs2, pp, ps1, ps2 = velocity(C, n)
 ```
 
-The energy velocity of the p wave in the direction n:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 E = energyVector(C, n, vp, pp)
 ```
 
-Of the faster s wave, with another density:
+The energy velocity of the p wave in the direction n.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 E = energyVector(C, n, vs1, ps1, density=rho)
 ```
 
+Of the faster s wave, with another density.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 vp, vs1, vs2, pp, ps1, ps2 = velocity(C)
 ```
 
-As a vector field on the sphere:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 E = energyVector(C, None, vp, pp)
 ```
+
+As a vector field on the sphere.
+
+</div>
+
+## Description
 
 The energy velocity of a medium without attenuation is the velocity at which a plane wave
 carries its energy, a good proxy for the group velocity: Ve_i = C_ijkl p_j n_k p_l / (rho
@@ -51,24 +73,20 @@ result is a vector field on the sphere.
 
 ## Input
 
-| | |
-|---|---|
 | `C` | stiffnessTensor in GPa |
 | `n` | vector3d, the propagation directions, or None for the vector field |
 | `speed` | the phase speed of the wave in km/s, vp, vs1 or vs2 of velocity, an S2Fun for the vector field |
 | `polarization` | vector3d, the polarisation of the wave, pp, ps1 or ps2 of velocity, an S2AxisField for the vector field |
 
-## Output
-
-| | |
-|---|---|
-| `E` | vector3d, the energy velocity in km/s; S2VectorField without a direction |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `density` | `None` | the density in g/cm^3; by default the density stored on the tensor |
+
+## Output
+
+| `E` | vector3d, the energy velocity in km/s; S2VectorField without a direction |
 
 ## References
 

@@ -17,17 +17,25 @@ grainBoundary goes to the calcGBND of the traces
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 calcGBND(gB3)
 calcGBND(gB3, grains)
 calcGBND(gB3, grains, moriRef, halfwidth=5*degree)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 calcGBND(gB, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

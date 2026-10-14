@@ -13,14 +13,16 @@ paror(x, ...) is x.paror(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 paror(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grain2d](grain2d.paror_py.html) | the cumulative particle projection function of the outlines (Panozzo 1983) |
 
 ## Used on

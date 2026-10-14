@@ -15,59 +15,97 @@ or the rotation group; MATLAB's optimal discrete sampling points
 
 ## Syntax
 
-Equally weighted directions:
+<div class="mx-form" markdown="1">
 
 ```python
 v = optimalSample(sF, 1000)
 ```
 
-Moved from the starting nodes v0:
+Equally weighted directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = optimalSample(sF, v0)
 ```
 
-Exact up to degree 128:
+Moved from the starting nodes v0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = optimalSample(sF, 1000, bandwidth=128)
 ```
 
-Gradient descent instead of L-BFGS:
+Exact up to degree 128.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = optimalSample(sF, n, method='steepestDescent')
 ```
 
-More iterations, a finer stop:
+Gradient descent instead of L-BFGS.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = optimalSample(sF, n, maxIter=1000, tol=0.005*degree)
 ```
 
-The weights optimised too:
+More iterations, a finer stop.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v, c = optimalSample(sF, n, optimizeWeights=True)
 ```
 
-Nodes of smaller weight dropped:
+The weights optimised too.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v, c = optimalSample(sF, n, optimizeWeights=True, minWeight=1e-4)
 ```
 
-Orientations of an ODF:
+Nodes of smaller weight dropped.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = optimalSample(odf, 500)
 ```
 
-With the discrepancy and the stop reason:
+Orientations of an ODF.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 res = optimalSample(odf, 500, diagnostics=True)
 ```
+
+With the discrepancy and the stop reason.
+
+</div>
+
+## Description
 
 The density f is represented by the discrete measure sum_j c_j delta_{x_j}, and the nodes
 are moved so that the kernel discrepancy sum_l A_l |mu_l - f_l|^2, with the Legendre
@@ -86,22 +124,12 @@ optimises the weights when a second output is asked for; here the keyword says i
 
 ## Input
 
-| | |
-|---|---|
 | `f` | S2Fun or SO3Fun, a nonnegative real density |
 | `n` | the number of nodes, or the starting nodes, vector3d or orientation |
 
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d, or orientation for a function on SO(3), the nodes |
-| `c` | ndarray, the weights, nonnegative and summing to one (with optimizeWeights) |
-| `res` | OptimalSampleResult (with diagnostics): nodes, weights, discrepancy, history, iterations, converged, reason, bandwidth |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `optimizeWeights` | `False` | optimise the weights as well and return the nodes and the weights |
 | `bandwidth` | `None` | the largest harmonic degree reproduced; by default the preference defaultS2Bandwidth on the sphere, 32 on SO(3) |
@@ -116,6 +144,12 @@ optimises the weights when a second output is asked for; here the keyword says i
 | `innerIter` | `5` | the multiplicative weight steps per iteration on SO(3) |
 | `minWeight` | `0.0` | drop the nodes of a smaller weight at the end, when the weights are optimised |
 | `diagnostics` | `False` | return an OptimalSampleResult instead of the nodes |
+
+## Output
+
+| `v` | vector3d, or orientation for a function on SO(3), the nodes |
+| `c` | ndarray, the weights, nonnegative and summing to one (with optimizeWeights) |
+| `res` | OptimalSampleResult (with diagnostics): nodes, weights, discrepancy, history, iterations, converged, reason, bandwidth |
 
 ## References
 

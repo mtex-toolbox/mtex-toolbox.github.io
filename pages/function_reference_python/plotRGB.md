@@ -14,44 +14,54 @@ their values clipped to [0, 1]; the interference colours of a crystal
 
 ## Syntax
 
-The three channels as one picture:
+<div class="mx-form" markdown="1">
 
 ```python
 plot((r, g, b), rgb=True)
 ```
 
-On a coarser grid:
+The three channels as one picture.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotRGB((r, g, b), resolution=2*degree)
 ```
 
-The upper hemisphere, no symmetry sector:
+On a coarser grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotRGB((r, g, b), complete=True, upper=True)
 ```
+
+The upper hemisphere, no symmetry sector.
+
+</div>
+
+## Description
 
 The charts follow the region of r, its sector unless complete, and the keywords of the
 spherical plots.
 
 ## Input
 
-| | |
-|---|---|
 | `channels` | a tuple of three S2Fun, the red, green and blue values |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib meshes |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `0.5*degree` | the spacing of the grid the functions are evaluated on |
+
+## Output
+
+| `h` | the matplotlib meshes |
 
 ## See also
 

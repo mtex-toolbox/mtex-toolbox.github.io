@@ -16,9 +16,13 @@ the quotient, the operator a / b
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 a / b
 ```
+
+</div>
 
 MATLAB's [S1FunHarmonic.rdivide](S1FunHarmonic.rdivide.html)
 

@@ -16,9 +16,13 @@ the pole figures of several data sets in one; those of equal crystal directions 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PoleFigure.union(self, *others)
 ```
+
+</div>
 
 MATLAB's [PoleFigure.union](PoleFigure.union.html)
 

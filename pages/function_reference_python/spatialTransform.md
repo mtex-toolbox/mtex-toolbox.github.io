@@ -15,15 +15,17 @@ and leave z; T * pos moves positions, T1 * T2 is T2 followed by T1, T1 + T2 chai
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 pos2 = T * pos
 T.inv(), T.displacement(pos), T.discretize(pos), transform(ebsd, T)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [absorb](spatialTransform.absorb_py.html) | one matrix for two transforms that each have one: affine where the product keeps the last row, projective otherwise |
 | [char](spatialTransform.char_py.html) | the name and the parameters of the transform as one line of text |
 | [discretize](spatialTransform.discretize_py.html) | the transform as a field of displacements at the given points |

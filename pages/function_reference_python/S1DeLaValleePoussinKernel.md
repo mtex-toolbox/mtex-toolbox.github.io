@@ -15,15 +15,17 @@ kernels: coefficients one up to n, falling to zero at 2n
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1DeLaValleePoussinKernel(20)
 S1DeLaValleePoussinKernel(halfwidth=5*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](S1DeLaValleePoussinKernel.bandwidth_py.html) | the degree 2n beyond which the coefficients vanish |
 
 ## Used on

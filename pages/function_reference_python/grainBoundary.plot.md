@@ -14,41 +14,67 @@ the grain boundary segments, in one colour or coloured segment by segment
 
 ## Syntax
 
-All boundaries in black:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains.boundary)
 ```
 
-The subgrain boundaries in red:
+All boundaries in black.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains.innerBoundary, lineColor='r', lineWidth=2)
 ```
 
-By misorientation angle:
+The subgrain boundaries in red.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(gB, gB.misorientation.angle() / degree, colorbar=True)
 ```
 
-By an RGB colour per segment, n x 3:
+By misorientation angle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(gB, rgb)
 ```
 
-A transparency per segment:
+By an RGB colour per segment, n x 3.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(gB, edgeAlpha=a)
 ```
 
-The chains with rounded joins:
+A transparency per segment.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(gB, lineWidth=4, smooth=True)
 ```
+
+The chains with rounded joins.
+
+</div>
+
+## Description
 
 Without values the boundary is drawn as joined chains in one colour; a value per segment
 colours it through a colour map, an RGB triple per segment directly, both segment by
@@ -63,20 +89,12 @@ every other keyword goes to the matplotlib artist.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
 | `color` | an array of a value or of an RGB colour per segment |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib line or line collection |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `lineColor` | `'k'` | the colour of the boundary without values |
 | `lineWidth` | `1.0` | the width of the lines |
@@ -88,6 +106,10 @@ every other keyword goes to the matplotlib artist.
 | `refFrame` | `True` | draw the axes of the specimen frame in the scale bar box |
 | `displayName` | `None` | the name in a legend |
 | `smooth` | `False` | draw the chains with round joins and ends |
+
+## Output
+
+| `h` | the matplotlib line or line collection |
 
 ## See also
 

@@ -17,9 +17,13 @@ it describes
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 shape2d.byRhoTheta(rho, theta, **kw)
 ```
+
+</div>
 
 MATLAB's [shape2d.byRhoTheta](shape2d.byRhoTheta.html)
 

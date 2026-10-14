@@ -17,9 +17,13 @@ map the grains describe rather than the one they were built from
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.fillByGrainId(ebsd, grains)
 ```
+
+</div>
 
 MATLAB's [EBSD.fillByGrainId](EBSD.fillByGrainId.html)
 

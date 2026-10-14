@@ -16,9 +16,13 @@ the mean by the area of the Voronoi cell of every vertex
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunTri.mean(self)
 ```
+
+</div>
 
 MATLAB's [S2FunTri.mean](S2FunTri.mean.html)
 

@@ -17,9 +17,13 @@ on the reduced index set of their z folds
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunHarmonic.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3FunHarmonic.eval](SO3FunHarmonic.eval.html)
 

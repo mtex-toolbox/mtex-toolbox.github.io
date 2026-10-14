@@ -16,9 +16,13 @@ the pole figures an ODF predicts on the measured directions
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PoleFigure.calcPoleFigure(self, odf)
 ```
+
+</div>
 
 MATLAB's [PoleFigure.calcPoleFigure](PoleFigure.calcPoleFigure.html)
 

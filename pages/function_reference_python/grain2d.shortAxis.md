@@ -16,9 +16,13 @@ the short half axis of the ellipse of every outline, the smaller principal compo
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.shortAxis(self)
 ```
+
+</div>
 
 ## Used on
 

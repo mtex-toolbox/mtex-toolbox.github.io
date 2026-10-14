@@ -16,23 +16,37 @@ the ODF the solver reconstructs, with the ghost correction
 
 ## Syntax
 
-With the solver's settings:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = solver.calcODF()
 ```
 
-Another number of iterations:
+With the solver's settings.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = solver.calcODF(minIter=2, maxIter=4)
 ```
 
-No ghost correction, reported:
+Another number of iterations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = solver.calcODF(ghostCorrection=False, verbose=True)
 ```
+
+No ghost correction, reported.
+
+</div>
+
+## Description
 
 The zero range method, when set, thins the grid first; then the coefficients are iterated.
 With the ghost correction the uniform portion the data allows, the smallest intensity of
@@ -43,24 +57,20 @@ MATLAB's second output alpha, is solver.alpha afterwards.
 
 ## Input
 
-| | |
-|---|---|
 | `solver` | MLSSolver |
-
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunRBF, or the uniform ODF when the data says the ODF is uniform |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `minIter` | `None` | the least number of iterations |
 | `maxIter` | `None` | the largest number of iterations |
 | `ghostCorrection` | `None` | fix the uniform portion and reconstruct only the rest |
 | `verbose` | `None` | report the fit of every pole figure in every iteration |
+
+## Output
+
+| `odf` | SO3FunRBF, or the uniform ODF when the data says the ODF is uniform |
 
 ## See also
 

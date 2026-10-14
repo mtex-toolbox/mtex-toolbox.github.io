@@ -16,29 +16,47 @@ of the boundaries
 
 ## Syntax
 
-A face of an Iron grain:
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasPhase('Iron')
 ```
 
-Between two Iron grains:
+A face of an Iron grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasPhase('Iron', 'Iron')
 ```
 
-At the outside or a not indexed region:
+Between two Iron grains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasPhase('notIndexed')
 ```
 
-A phase by its number:
+At the outside or a not indexed region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasPhase(1)
 ```
+
+A phase by its number.
+
+</div>
+
+## Description
 
 A phase is given by its mineral name, its crystal frame or its number in gB.CSList.
 'indexed', when no mineral has the name, selects the faces with both sides indexed and
@@ -47,22 +65,18 @@ indexed region.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grain3Boundary |
 | `a` | a phase: mineral name, crystalFrame or phase number |
 
-## Output
-
-| | |
-|---|---|
-| `ind` | boolean mask of the faces |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `b` | `None` | a second phase: the faces between a and b |
+
+## Output
+
+| `ind` | boolean mask of the faces |
 
 ## See also
 

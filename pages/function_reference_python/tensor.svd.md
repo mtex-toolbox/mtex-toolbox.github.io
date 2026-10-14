@@ -19,9 +19,13 @@ the basis of its mode singular vectors, and no V
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.svd(self)
 ```
+
+</div>
 
 MATLAB's [tensor.svd](tensor.svd.html)
 

@@ -14,38 +14,44 @@ SO(3), fhat_l^{-m} = (-1)^m conj(fhat_l^m) on S2, c_{-k} = conj(c_k) on S1
 
 ## Syntax
 
-Whether the SO(3) coefficients are those of a real function:
+<div class="mx-form" markdown="1">
 
 ```python
 isRealWigner(F._fhat)
 ```
 
-With a looser tolerance:
+Whether the SO(3) coefficients are those of a real function.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 isRealWigner(F._fhat, tol=1e-6)
 ```
+
+With a looser tolerance.
+
+</div>
+
+## Description
 
 Whether internal Wigner coefficients, F._fhat of an SO3FunHarmonic, belong to a real valued
 function, every pair compared up to the relative tolerance.
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | the Wigner coefficients |
-
-## Output
-
-| | |
-|---|---|
-| `isReal` | bool |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-10` | the tolerance, relative to the size of a coefficient where it exceeds one |
+
+## Output
+
+| `isReal` | bool |
 
 ## See also
 

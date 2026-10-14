@@ -16,9 +16,13 @@ the point at s in [0, 1] on the shortest path from this rotation to another
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion.geodesic(self, other, s)
 ```
+
+</div>
 
 MATLAB's [quaternion.geodesic](quaternion.geodesic.html)
 

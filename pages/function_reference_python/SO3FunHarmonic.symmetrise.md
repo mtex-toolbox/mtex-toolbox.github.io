@@ -16,9 +16,13 @@ the projection of H5 on both sides, and the exchange symmetry f(g) = f(g^-1)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunHarmonic.symmetrise(self)
 ```
+
+</div>
 
 MATLAB's [SO3FunHarmonic.symmetrise](SO3FunHarmonic.symmetrise.html)
 

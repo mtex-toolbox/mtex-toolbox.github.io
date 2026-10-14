@@ -17,29 +17,47 @@ values of either, through the harmonic form of the bandwidth
 
 ## Syntax
 
-The pole figure of the crystal direction h:
+<div class="mx-form" markdown="1">
 
 ```python
 S2F = SO3F.radon(h)
 ```
 
-The inverse pole figure of the specimen direction r:
+The pole figure of the crystal direction h.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2F = SO3F.radon(r=r)
 ```
 
-The pole figure of h at the directions r:
+The inverse pole figure of the specimen direction r.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = SO3F.radon(h, r)
 ```
 
-A superposed pole figure:
+The pole figure of h at the directions r.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2F = SO3F.radon([h1, h2], superposition=[0.6, 0.4])
 ```
+
+A superposed pole figure.
+
+</div>
+
+## Description
 
 The pole figure of h at r is the mean of the function over all orientations carrying h
 onto r. A function without coefficients, a composition, a handle, is expanded to an
@@ -47,25 +65,21 @@ SO3FunHarmonic of the bandwidth first. MATLAB's pdf, ipdf and calcPDF are this f
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3Fun |
 | `h` | Miller or vector3d, the crystal direction, or a list of them to superpose |
 
-## Output
-
-| | |
-|---|---|
-| `S2F` | S2FunHarmonic, the pole figure in the specimen frame or the inverse pole figure in the crystal frame |
-| `v` | the values at r |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `r` | `None` | vector3d, the specimen direction of the inverse pole figure, or the directions to evaluate the pole figure at |
 | `superposition` | `None` | the weights of several crystal directions, equal unless given |
 | `bandwidth` | `None` | the bandwidth of the harmonic form a function without coefficients is expanded to |
+
+## Output
+
+| `S2F` | S2FunHarmonic, the pole figure in the specimen frame or the inverse pole figure in the crystal frame |
+| `v` | the values at r |
 
 ## See also
 

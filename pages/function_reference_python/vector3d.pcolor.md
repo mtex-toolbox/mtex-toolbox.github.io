@@ -16,9 +16,13 @@ pcolor(sF), pcolor(v), pcolor(v, data): a coloured surface
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.pcolor(x, *args, **kw)
 ```
+
+</div>
 
 MATLAB's [vector3d.pcolor](vector3d.pcolor.html)
 

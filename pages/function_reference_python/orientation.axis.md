@@ -17,35 +17,57 @@ orientations
 
 ## Syntax
 
-In the crystal frame of mori:
+<div class="mx-form" markdown="1">
 
 ```python
 h = axis(mori)
 ```
 
-Of the rotation as it is stored:
+In the crystal frame of mori.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = axis(mori, symmetry=False)
 ```
 
-Of the equivalent that turns the most:
+Of the rotation as it is stored.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = axis(mori, 'max')
 ```
 
-Expressed in csHex, one of the two frames of mori:
+Of the equivalent that turns the most.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = axis(mori, csHex)
 ```
 
-In the specimen frame, also of two phases:
+Expressed in csHex, one of the two frames of mori.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = axis(ori1, ori2)
 ```
+
+In the specimen frame, also of two phases.
+
+</div>
+
+## Description
 
 The axis is that of the representative in the fundamental region, the disorientation, so
 it does not depend on the representative stored. Of a misorientation it is a crystal
@@ -56,23 +78,19 @@ with grain exchange it is an axis without sign.
 
 ## Input
 
-| | |
-|---|---|
 | `mori` | orientation, a misorientation or an orientation |
 | `other` | orientation, the second orientation, in the specimen frame; a frame of mori to express the axis in; or 'max' |
 
-## Output
-
-| | |
-|---|---|
-| `h` | Miller, the axis in a crystal frame, or vector3d in the specimen frame |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `symmetry` | `True` | reduce by the symmetry first; False takes the axis of the rotation as stored, MATLAB's 'noSymmetry' |
 | `antipodal` | `None` | set whether the axis is read as an axis without sign; by default as the symmetry says |
+
+## Output
+
+| `h` | Miller, the axis in a crystal frame, or vector3d in the specimen frame |
 
 ## See also
 

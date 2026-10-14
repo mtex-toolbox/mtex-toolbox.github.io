@@ -14,35 +14,57 @@ pole figure key
 
 ## Syntax
 
-Colours along the z direction:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = ipfColors(ebsd)
 ```
 
-Colours of grains along x:
+Colours along the z direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = ipfColors(grains, ipfDirection=xvector)
 ```
 
-Black where nothing is indexed:
+Colours of grains along x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = ipfColors(ebsd, unindexed=(0, 0, 0))
 ```
 
-Through the key itself, no colour grid:
+Black where nothing is indexed.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = ipfColors(ebsd, exact=True)
 ```
 
-The measurements ind alone:
+Through the key itself, no colour grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = ipfColors(ebsd, at=ind)
 ```
+
+The measurements ind alone.
+
+</div>
+
+## Description
 
 Every indexed phase is coloured by the HSV inverse pole figure key (ipfHSVKey) of its own
 crystal frame: the specimen direction ipfDirection is taken into crystal coordinates,
@@ -53,25 +75,21 @@ a large map than colouring every direction through the key; exact=True does the 
 
 ## Input
 
-| | |
-|---|---|
 | `x` | EBSD or grain2d, a map or its grains |
-
-## Output
-
-| | |
-|---|---|
-| `rgb` | array of shape x.shape + (3,), or (len(at), 3), RGB values in [0, 1] |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ipfDirection` | `None` | vector3d, the specimen direction of the inverse pole figure, zvector by default |
 | `unindexed` | `(1.0, 1.0, 1.0)` | the RGB colour of the measurements not indexed |
 | `exact` | `False` | colour every measurement through the key instead of the colour grid |
 | `resolution` | `0.5*degree` | the spacing of the colour grid, in radians |
 | `at` | `None` | the indices of the measurements to colour, the others left out |
+
+## Output
+
+| `rgb` | array of shape x.shape + (3,), or (len(at), 3), RGB values in [0, 1] |
 
 ## See also
 

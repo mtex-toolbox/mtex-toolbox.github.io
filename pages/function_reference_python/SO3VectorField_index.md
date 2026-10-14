@@ -15,41 +15,67 @@ the right tangent space
 
 ## Syntax
 
-From a coefficient matrix:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldHarmonic(fhat, cs, ss, 'left')
 ```
 
-Another field in the right tangent space:
+From a coefficient matrix.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldHarmonic(F, 'right')
 ```
 
-Another field cut to a bandwidth:
+Another field in the right tangent space.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldHarmonic(F, bandwidth=8)
 ```
 
-Through tangent vectors t at orientations:
+Another field cut to a bandwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldHarmonic(t, bandwidth=8)
 ```
 
-From its three component functions:
+Through tangent vectors t at orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldHarmonic([F1, F2, F3])
 ```
 
-A callable by quadrature:
+From its three component functions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldHarmonic(lambda ori: F(ori), cs, ss, bandwidth=8)
 ```
+
+A callable by quadrature.
+
+</div>
+
+## Description
 
 The coefficient matrix has the three components as columns, deg2dim(L + 1) rows of MTEX's
 coefficients each. A field in the left tangent space returns its tangent vectors in the
@@ -63,24 +89,20 @@ frames unless symmetrise=False.
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | (deg2dim(L + 1), 3) array, an SO3VectorField, an SO3TangentVector, three SO3FunHarmonic or a callable of orientations |
 | `cs, ss` | crystalFrame and specimenFrame |
 
-## Output
-
-| | |
-|---|---|
-| `SO3VF` | SO3VectorFieldHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` |  | the largest degree of the components |
 | `weights` |  | the weights of the tangent vectors, equal unless given |
 | `symmetrise` |  | make a coefficient matrix equivariant under the frames' symmetries |
+
+## Output
+
+| `SO3VF` | SO3VectorFieldHarmonic |
 
 ## See also
 
@@ -88,8 +110,6 @@ frames unless symmetrise=False.
 
 ## Members
 
-| | |
-|---|---|
 | [antiderivative](SO3VectorField.antiderivative_py.html) | the function of mean zero whose gradient the field is |
 | [antiderivative](SO3VectorFieldHarmonic.antiderivative_py.html) | the function of mean zero whose gradient the field is |
 | [approximate](SO3VectorFieldHarmonic.approximate_py.html) | MATLAB's approximate: the quadrature of a callable or of values at orientations |

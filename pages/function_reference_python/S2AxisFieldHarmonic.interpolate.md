@@ -17,17 +17,27 @@ MATLAB's S2AxisFieldHarmonic.interpolate
 
 ## Syntax
 
-An axis field through axes a at directions v:
+<div class="mx-form" markdown="1">
 
 ```python
 aF = S2AxisFieldHarmonic.interpolate(v, a)
 ```
 
-Of a given degree, regularised:
+An axis field through axes a at directions v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 aF = S2AxisFieldHarmonic.interpolate(v, a, bandwidth=8, lambda_=1e-3)
 ```
+
+Of a given degree, regularised.
+
+</div>
+
+## Description
 
 Each of the six components of the matrices a a^T is fitted by interpolate, a regularised
 least squares fit, and the field evaluates to the leading eigenvector of the fitted matrix.
@@ -35,23 +45,19 @@ Further keywords, lambda_, s, maxIter and tol, go to interpolate.
 
 ## Input
 
-| | |
-|---|---|
 | `nodes` | vector3d, the directions |
 | `values` | vector3d, the axes at the directions |
 
-## Output
-
-| | |
-|---|---|
-| `aF` | S2AxisFieldHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest harmonic degree; by default it follows from the number of nodes |
 | `weights` | `None` | the weights of the nodes, as interpolate takes them |
+
+## Output
+
+| `aF` | S2AxisFieldHarmonic |
 
 ## See also
 

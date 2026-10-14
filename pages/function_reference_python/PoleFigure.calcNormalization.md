@@ -16,9 +16,13 @@ the factor the second pole figure is scaled by to carry the mass of the first
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PoleFigure.calcNormalization(self, other)
 ```
+
+</div>
 
 MATLAB's [PoleFigure.calcNormalization](PoleFigure.calcNormalization.html)
 

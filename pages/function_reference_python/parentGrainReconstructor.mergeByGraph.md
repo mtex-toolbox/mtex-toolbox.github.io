@@ -17,17 +17,27 @@ mergeByGraph of parentGrainReconstructor
 
 ## Syntax
 
-Merged where they fit within 5 degrees:
+<div class="mx-form" markdown="1">
 
 ```python
 job.mergeByGraph()
 ```
 
-A tighter fit:
+Merged where they fit within 5 degrees.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.mergeByGraph(threshold=3*degree)
 ```
+
+A tighter fit.
+
+</div>
+
+## Description
 
 The components of job.graph, after clusterGraph, are merged as a test first. For every
 component of more than one grain the parent orientation is fitted: the mean of its parent
@@ -38,21 +48,17 @@ graph and the votes are removed; the job is changed in place.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor with a clustered job.graph |
-
-## Output
-
-| | |
-|---|---|
-| `job.grains` | the reconstructed parent grains |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `threshold` | `5*degree` | the largest misfit of a component that is merged |
+
+## Output
+
+| `job.grains` | the reconstructed parent grains |
 
 ## See also
 

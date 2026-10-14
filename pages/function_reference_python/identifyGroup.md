@@ -13,17 +13,27 @@ the symbol of a list of elements written in the given axes, '' when it names no 
 
 ## Syntax
 
-'-3m1' for a trigonal crystal:
+<div class="mx-form" markdown="1">
 
 ```python
 s = identifyGroup(cs.sym.rot, axes=cs.sym.axes)
 ```
 
-In orthonormal axes x, y, z:
+'-3m1' for a trigonal crystal.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = identifyGroup(els)
 ```
+
+In orthonormal axes x, y, z.
+
+</div>
+
+## Description
 
 The groups whose elements have the same angles and parities are tried in turn; the first
 whose closure in the axes is the list names it. A group in a setting no symbol spells
@@ -31,21 +41,17 @@ takes the type its angles say.
 
 ## Input
 
-| | |
-|---|---|
 | `els` | orthogonalTransform, the elements of the group |
-
-## Output
-
-| | |
-|---|---|
-| `s` | str, the Hermann-Mauguin symbol |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axes` | `None` | the crystal axes a, b, c as a vector3d or a 3 x 3 array, rows, by default the orthonormal ones; the secondary symbols depend on them, '-3m1' and '-31m' differing by the place of a |
+
+## Output
+
+| `s` | str, the Hermann-Mauguin symbol |
 
 ## See also
 

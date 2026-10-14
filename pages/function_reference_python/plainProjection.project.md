@@ -15,9 +15,13 @@ the plane coordinates (rho, theta) of directions in degrees, NaN outside the reg
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 plainProjection.project(self, v)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L389">source</a></font>
 {% endraw %}

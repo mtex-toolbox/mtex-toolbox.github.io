@@ -16,38 +16,44 @@ MATLAB's rotate
 
 ## Syntax
 
-Rotated in specimen coordinates:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3F.rotate(r)
 ```
 
-Rotated in crystal coordinates:
+Rotated in specimen coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3F.rotate(r, side='right')
 ```
 
+Rotated in crystal coordinates.
+
+</div>
+
+## Description
+
 The handle is expanded into its harmonic form, which is rotated.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunHandle |
 | `r` | rotation |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left', the specimen side, or 'right', the crystal side, as MATLAB's flag 'right' |
+
+## Output
+
+| `SO3F` | SO3FunHarmonic |
 
 ## See also
 

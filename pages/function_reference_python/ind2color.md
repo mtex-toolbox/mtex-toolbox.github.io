@@ -15,44 +15,54 @@ RGB row per index of an array, NaN where the index is negative or NaN; MATLAB's 
 
 ## Syntax
 
-One colour of the order of MTEX's preference:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = ind2color(i)
 ```
 
-The order in which neighbouring ids get related colours:
+One colour of the order of MTEX's preference.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = ind2color(ids, 'ordered')
 ```
 
-A matrix of colours as the order:
+The order in which neighbouring ids get related colours.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = ind2color(ids, cmap)
 ```
+
+A matrix of colours as the order.
+
+</div>
+
+## Description
 
 The order has 24 colours and repeats beyond them, so that the phases or grains numbered by
 the indices are told apart.
 
 ## Input
 
-| | |
-|---|---|
 | `i` | an index, or an array of them |
-
-## Output
-
-| | |
-|---|---|
-| `rgb` | an rgb triplet, or one row per index |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `cmap` | `None` | 'ordered' for MATLAB's order of related neighbours, or a matrix of colours |
+
+## Output
+
+| `rgb` | an rgb triplet, or one row per index |
 
 ## See also
 

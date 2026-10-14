@@ -14,9 +14,13 @@ the bandwidth of a coefficient array of length d, so that dim2deg(deg2dim(n + 1)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 dim2deg(d)
 ```
+
+</div>
 
 MATLAB's [dim2deg](dim2deg.html)
 

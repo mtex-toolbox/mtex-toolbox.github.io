@@ -17,35 +17,57 @@ PoleFigure.load and loadPoleFigure
 
 ## Syntax
 
-The format and the direction found from the file:
+<div class="mx-form" markdown="1">
 
 ```python
 pf = loadPoleFigure('Q(10-10)_amp.cnv', cs)
 ```
 
-Several files, one pole figure or more each:
+The format and the direction found from the file.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = PoleFigure.load([f1, f2, f3], cs)
 ```
 
-Given directions, a superposed pair weighted:
+Several files, one pole figure or more each.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = loadPoleFigure([f1, f2], [h1, [h2, h3]], cs, superposition=[1, [0.52, 1.23]])
 ```
 
-A format named:
+Given directions, a superposed pair weighted.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = loadPoleFigure('scan.dat', cs, interface='geesthacht')
 ```
 
-A table:
+A format named.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = loadPoleFigure('scan.txt', h, cs, columnNames=['polar angle', 'azimuth angle', 'intensity'], radians=True)
 ```
+
+A table.
+
+</div>
+
+## Description
 
 The crystal directions are read off the file names (string2Miller) unless given, one per
 file or, for a file of several pole figures, a list of them, a list inside it for a
@@ -57,24 +79,20 @@ or x, y, z, and the intensity.
 
 ## Input
 
-| | |
-|---|---|
 | `fname` | a file name or a list of them |
 | `h` | Miller, the crystal directions, a list of them, a list for a superposition (optional) |
 | `cs, ss` | the crystal and the specimen frame (optional) |
 
-## Output
-
-| | |
-|---|---|
-| `pf` | a PoleFigure |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `interface` | `None` | the format: 'dubna', 'uxd', 'geesthacht', 'xrdml', 'generic', ...; by default told by the extension and the marker the file carries |
 | `superposition` | `None` | the structure coefficients of the directions, one number or a list of numbers per pole figure |
+
+## Output
+
+| `pf` | a PoleFigure |
 
 ## See also
 

@@ -16,9 +16,13 @@ the component orthogonal to a normal N, vector3d/orthProj
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.orthProj(self, N)
 ```
+
+</div>
 
 MATLAB's [vector3d.orthProj](vector3d.orthProj.html)
 

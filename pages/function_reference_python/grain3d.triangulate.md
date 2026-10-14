@@ -16,9 +16,13 @@ the faces of polygonal grains as triangles, the fan from the first corner of eve
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain3d.triangulate(self)
 ```
+
+</div>
 
 ## Used on
 

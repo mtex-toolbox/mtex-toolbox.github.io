@@ -15,9 +15,13 @@ the goss component, Bunge Euler angles (0°, 45°, 0°), in cs and the specimen 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.goss(CS, *ss)
 ```
+
+</div>
 
 ## Used on
 

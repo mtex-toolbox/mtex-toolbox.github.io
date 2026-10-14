@@ -16,9 +16,13 @@ smoothing by a kernel is one factor per mode
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHarmonic.conv(self, psi)
 ```
+
+</div>
 
 MATLAB's [S1FunHarmonic.conv](S1FunHarmonic.conv.html)
 

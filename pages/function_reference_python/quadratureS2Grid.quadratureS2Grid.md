@@ -15,9 +15,13 @@ slowest and theta fastest over the axes thetaGrid and rhoGrid, with its weights
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quadratureS2Grid(bandwidth, *args, dtype=<class 'numpy.float64'>)
 ```
+
+</div>
 
 ## Used on
 

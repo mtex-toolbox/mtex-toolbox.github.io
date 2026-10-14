@@ -16,36 +16,40 @@ parity; antipodal=False keeps the sign
 
 ## Syntax
 
-|cos(omega/2)|, 0 for different parity:
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(T1, T2)
 ```
 
-With the sign of the quaternions:
+|cos(omega/2)|, 0 for different parity.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(T1, T2, antipodal=False)
 ```
 
+With the sign of the quaternions.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `T1` | orthogonalTransform |
 | `T2` | orthogonalTransform or rotation |
 
-## Output
-
-| | |
-|---|---|
-| `d` | the inner products |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `True` | take the absolute value |
+
+## Output
+
+| `d` | the inner products |
 
 ## See also
 

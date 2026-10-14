@@ -18,9 +18,13 @@ axes of the variants, printed and returned
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 parentGrainReconstructor.parent2ChildInfo(self)
 ```
+
+</div>
 
 MATLAB's [parentGrainReconstructor.parent2ChildInfo](parentGrainReconstructor.parent2ChildInfo.html)
 

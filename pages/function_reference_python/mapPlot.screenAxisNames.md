@@ -15,9 +15,13 @@ which reference axis runs to the right and which up under the layout, by name an
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapPlot.screenAxisNames(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L93">source</a></font>
 {% endraw %}

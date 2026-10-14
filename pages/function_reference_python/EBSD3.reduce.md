@@ -17,17 +17,27 @@ MATLAB's reduce
 
 ## Syntax
 
-Every second pixel along both lattice directions:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = reduce(ebsd)
 ```
 
-Every third pixel:
+Every second pixel along both lattice directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = reduce(ebsd, 3)
 ```
+
+Every third pixel.
+
+</div>
+
+## Description
 
 The measurements are selected by their lattice index, so a square, a hexagonal and a
 rotated lattice are all reduced alike; the kept sites form the same kind of lattice factor
@@ -36,21 +46,17 @@ gridify(ebsd) turns it into a grid again.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD with a lattice |
-
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD, the kept measurements |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `factor` | `2` | the step of the reduction, an integer of at least one |
+
+## Output
+
+| `ebsd` | EBSD, the kept measurements |
 
 ## See also
 

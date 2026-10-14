@@ -18,9 +18,13 @@ grains take the representative of the last of their children
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 parentGrainReconstructor.calcVariants(self, **options)
 ```
+
+</div>
 
 ## Used on
 

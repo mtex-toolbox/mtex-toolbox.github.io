@@ -15,9 +15,13 @@ phase list gives one frame per phase
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 loadCIF(fname)
 ```
+
+</div>
 
 ## Used on
 

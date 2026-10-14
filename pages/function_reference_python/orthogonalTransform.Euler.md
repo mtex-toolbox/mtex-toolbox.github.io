@@ -15,35 +15,39 @@ the Euler angles of the rotational part, in the convention named or the session'
 
 ## Syntax
 
-The session's convention:
+<div class="mx-form" markdown="1">
 
 ```python
 phi1, Phi, phi2 = T.Euler()
 ```
 
-Matthies' convention:
+The session's convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 alpha, beta, gamma = T.Euler('ZYZ')
 ```
 
+Matthies' convention.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `T` | orthogonalTransform |
-
-## Output
-
-| | |
-|---|---|
-| `alpha, beta, gamma` | three arrays of angles in radians |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `convention` | `None` | the name of the convention, as quaternion.Euler |
+
+## Output
+
+| `alpha, beta, gamma` | three arrays of angles in radians |
 
 ## See also
 

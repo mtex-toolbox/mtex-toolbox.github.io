@@ -16,9 +16,13 @@ the rotation rate of a velocity gradient, the length of its angular velocity vec
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 velocityGradientTensor.rotationRate(L)
 ```
+
+</div>
 
 MATLAB's [velocityGradientTensor.rotationRate](velocityGradientTensor.rotationRate.html)
 

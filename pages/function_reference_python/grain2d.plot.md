@@ -15,59 +15,97 @@ their boundaries on top
 
 ## Syntax
 
-Colours by phase:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains)
 ```
 
-Colours by a value per grain:
+Colours by phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, grains.area, colorbar=True)
 ```
 
-By mean orientation:
+Colours by a value per grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains['Forsterite'], grains['Forsterite'].meanOrientation)
 ```
 
-Every phase by its inverse pole figure key along x:
+By mean orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, ipfDirection=xvector)
 ```
 
-The outlines alone, in red:
+Every phase by its inverse pole figure key along x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, faceColor='none', lineColor='r')
 ```
 
-No boundary, faded by colour:
+The outlines alone, in red.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, boundary=False, translucent=0.5)
 ```
 
-One colour, in the legend:
+No boundary, faded by colour.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, faceColor='red', displayName='all grains')
 ```
 
-The crystal shape of every grain:
+One colour, in the legend.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, cS)
 ```
 
-An axis per grain as a needle:
+The crystal shape of every grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, v)
 ```
+
+An axis per grain as a needle.
+
+</div>
+
+## Description
 
 Every grain is one polygon with its holes, coloured as mapValues colours: by phase, by a
 value per grain through a colour map, by orientations through the inverse pole figure key
@@ -88,20 +126,12 @@ every other keyword goes to the matplotlib artist.
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain2d |
 | `color` | the colouring: an array of values or of RGB colours, orientations, an orientationColorKey, a crystalShape, a vector3d per grain, the name of a property or of a measure ('area', 'aspectRatio', ...), 'phase' or one colour |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib collection of the grains |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `None` | one colour for every grain; 'none' draws the boundary alone |
 | `colormap` | `'viridis'` | the colour map of values |
@@ -118,6 +148,10 @@ every other keyword goes to the matplotlib artist.
 | `legend` | `None` | draw the legend of the phases or the inverse pole figure keys; by default for a phase map |
 | `displayName` | `None` | the name in a legend |
 | `translucent` | `None` | s, the opacity of a grain following its colour, as above |
+
+## Output
+
+| `h` | the matplotlib collection of the grains |
 
 ## See also
 

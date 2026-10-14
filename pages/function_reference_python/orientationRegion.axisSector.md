@@ -18,17 +18,27 @@ dot(v, a_i) <= cot(w/2) tan(w_i/4), a small circle about the axis
 
 ## Syntax
 
-The axes of a 40 degree rotation in the region:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = oR.axisSector(40*degree)
 ```
 
-Without the region's own sector of axes:
+The axes of a 40 degree rotation in the region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = oR.axisSector(40*degree, sector=None)
 ```
+
+Without the region's own sector of axes.
+
+</div>
+
+## Description
 
 The bounds whose small circle covers every axis at this angle drop out; the remaining
 circles are joined with a sector of axes, by default the region's own, the sector its
@@ -36,22 +46,18 @@ symmetry leaves for the axes.
 
 ## Input
 
-| | |
-|---|---|
 | `oR` | orientationRegion |
 | `omega` | the rotation angle |
 
-## Output
-
-| | |
-|---|---|
-| `sR` | sphericalRegion of the axes, in the first frame of the region |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `sector` | `'own'` | the sphericalRegion the axes are restricted to as well, 'own' the region's own sector, None no restriction |
+
+## Output
+
+| `sR` | sphericalRegion of the axes, in the first frame of the region |
 
 ## See also
 

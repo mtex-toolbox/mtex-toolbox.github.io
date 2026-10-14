@@ -16,23 +16,37 @@ the 2D map of the section of a volume through a plane; MATLAB's slice of EBSD3
 
 ## Syntax
 
-A plane3d:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = ebsd3.slice(plane3d(vector3d.Z, vector3d(0, 0, 2)))
 ```
 
-Normal and a point on the plane:
+A plane3d.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = ebsd3.slice(vector3d(1, 1, 1), vector3d(1, 1, 2))
 ```
 
-Normal and distance from the origin:
+Normal and a point on the plane.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = ebsd3.slice(vector3d.Z, 2.5)
 ```
+
+Normal and distance from the origin.
+
+</div>
+
+## Description
 
 The volume is sampled on a square grid of the voxel spacing in the plane, spanned by the
 edge of the bounding box that lies most in the plane and the direction across it, the
@@ -42,22 +56,18 @@ map whose positions lie in the plane.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd3` | EBSD3 |
 | `plane` | plane3d, or the normal vector3d of the plane |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD, a gridded map in the plane |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `P0` | `None` | with a normal: a point on the plane, a vector3d, or its distance from the origin; by default the plane through the origin |
+
+## Output
+
+| `ebsd` | EBSD, a gridded map in the plane |
 
 ## See also
 

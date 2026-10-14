@@ -13,23 +13,37 @@ the shifts one cross correlation pass measured between two images
 
 ## Syntax
 
-The tile centres, their shifts, peaks and width:
+<div class="mx-form" markdown="1">
 
 ```python
 ps = pairShifts(pos, u, peak, roiSize)
 ```
 
-[mean length, mean x, mean y] in pixels of size px:
+The tile centres, their shifts, peaks and width.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = ps.meanShift(px)
 ```
 
-Whether nothing was measured:
+[mean length, mean x, mean y] in pixels of size px.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ps.isempty
 ```
+
+Whether nothing was measured.
+
+</div>
+
+## Description
 
 What the trueEbsd job keeps of every pass of xcfShift between a pair of images: the tile
 centres, how far each tile of the test image has to move to sit on the reference, the
@@ -38,8 +52,6 @@ meanShift states the mean shift over the tiles measured in pixels.
 
 ## Input
 
-| | |
-|---|---|
 | `pos` | vector3d, the tile centres |
 | `u` | vector3d, the shift of every tile |
 | `peak` | the correlation peak height of every tile |
@@ -47,8 +59,6 @@ meanShift states the mean shift over the tiles measured in pixels.
 
 ## Output
 
-| | |
-|---|---|
 | `ps` | pairShifts |
 
 ## See also
@@ -57,8 +67,6 @@ meanShift states the mean shift over the tiles measured in pixels.
 
 ## Members
 
-| | |
-|---|---|
 | [isempty](pairShifts.isempty_py.html) | whether no shift was measured |
 | [meanShift](pairShifts.meanShift_py.html) | the mean shift in pixels of size px over the tiles measured, [mean length, mean x, mean y] |
 | [pairShifts](pairShifts.pairShifts_py.html) | the shifts one cross correlation pass measured between two images |

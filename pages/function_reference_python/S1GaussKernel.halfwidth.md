@@ -15,9 +15,13 @@ the halfwidth in closed form, sigma sqrt(2 log 2)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1GaussKernel.halfwidth(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1260">source</a></font>
 {% endraw %}

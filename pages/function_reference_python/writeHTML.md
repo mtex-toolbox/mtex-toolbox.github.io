@@ -13,36 +13,40 @@ the scene written to a file as an interactive HTML page, that of sceneHTML
 
 ## Syntax
 
-The scene of the current figure:
+<div class="mx-form" markdown="1">
 
 ```python
 writeHTML(gcs(), 'fig.html')
 ```
 
-With a title of the page:
+The scene of the current figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 writeHTML(scene, 'fig.html', title='grains')
 ```
 
+With a title of the page.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `scene` | scene3d |
-| `fname` | the file name |
-
-## Output
-
-| | |
-|---|---|
 | `fname` | the file name |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `title` | `'MTEX 3D plot'` | the title of the page |
+
+## Output
+
+| `fname` | the file name |
 
 ## See also
 

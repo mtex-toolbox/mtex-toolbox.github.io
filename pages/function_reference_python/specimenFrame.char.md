@@ -15,9 +15,13 @@ the name or the convention, the point group after it when there is one: y↑→x
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 specimenFrame.char(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1197">source</a></font>
 {% endraw %}

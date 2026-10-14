@@ -14,11 +14,15 @@ the inverse pole figure key of HKL Channel 5, the HKLDirectionKey on the Laue gr
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 key = ipfHKLKey(cs)
 key = ipfHKLKey(ebsd['Iron'], ipfDirection=xvector)
 rgb = key.orientation2color(ori)
 ```
+
+</div>
 
 ## Used on
 

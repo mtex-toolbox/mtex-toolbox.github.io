@@ -16,9 +16,13 @@ the total length of the boundary, the sum of the segment lengths
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grainBoundary.perimeter(self)
 ```
+
+</div>
 
 MATLAB's [grainBoundary.perimeter](grainBoundary.perimeter.html)
 

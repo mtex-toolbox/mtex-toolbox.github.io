@@ -18,43 +18,51 @@ orientation fits its frame: another lattice is left out
 
 ## Syntax
 
-A shape per Forsterite grain:
+<div class="mx-form" markdown="1">
 
 ```python
 s, ids = shapesOnMap(grains, crystalShape.olivine(grains.CSList[1]))
 ```
 
-At half the size:
+A shape per Forsterite grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s, ids = shapesOnMap(grains, crystalShape.olivine(grains.CSList[1]), scale=0.5)
 ```
 
-A shape per measurement:
+At half the size.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s, ids = shapesOnMap(ebsd['Fo'], crystalShape.olivine(ebsd.CSList[1]), scale=0.3)
 ```
 
+A shape per measurement.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `x` | grain2d or EBSD |
 | `cS` | crystalShape in a crystal frame |
 
-## Output
-
-| | |
-|---|---|
-| `s` | crystalShape, one list of shapes, None when no phase takes the shape |
-| `ids` | int array, the grains or the measurements the shapes stand for |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `scale` | `1.0` | the factor on the size: the square root of the area of a grain, one on a map |
+
+## Output
+
+| `s` | crystalShape, one list of shapes, None when no phase takes the shape |
+| `ids` | int array, the grains or the measurements the shapes stand for |
 
 ## See also
 

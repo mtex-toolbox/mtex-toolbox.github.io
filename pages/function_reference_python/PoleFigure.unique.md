@@ -18,17 +18,27 @@ unique
 
 ## Syntax
 
-The directions within 1e-6 merged:
+<div class="mx-form" markdown="1">
 
 ```python
 pf = unique(pf)
 ```
 
-A coarser tolerance:
+The directions within 1e-6 merged.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = pf.unique(tol=1e-3)
 ```
+
+A coarser tolerance.
+
+</div>
+
+## Description
 
 Two directions are merged when one of them, turned by a rotation of the specimen group,
 has a dot product with the other above 1 - tol (its absolute value for axes). Only the
@@ -37,21 +47,17 @@ then merged only when they coincide.
 
 ## Input
 
-| | |
-|---|---|
-| `pf` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
 | `pf` | PoleFigure |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-06` | the tolerance on the dot product of two directions |
+
+## Output
+
+| `pf` | PoleFigure |
 
 ## See also
 

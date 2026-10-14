@@ -16,16 +16,18 @@ walk; chains, junctions and triple points are derived from that order
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gB = grains.boundary
 gB['Forsterite', 'Enstatite']
 gB.segLength, gB.misorientation
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [allV](grainBoundary.allV_py.html) | the vertices as framed points of the specimen, all of them and the ones in use |
 | [angle](grainBoundary.angle_py.html) | the angle of every segment to a direction, or to the segments of another boundary, in [0, pi/2], the segments having no sense |
 | [arcLength](grainBoundary.arcLength_py.html) | the length along the chain up to the end of each segment |

@@ -16,21 +16,33 @@ the rotations by the angle omega about the axis v
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rot = rotation.byAxisAngle(v, omega)
 ```
 
-Three about z:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.byAxisAngle(zvector, [10*degree, 20*degree, 30*degree])
 ```
 
+Three about z.
+
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 rotation.byAxisAngle(v, omega)
 ```
+
+</div>
 
 MATLAB's [rotation.byAxisAngle](rotation.byAxisAngle.html)
 

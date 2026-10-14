@@ -16,71 +16,117 @@ MATLAB's calcDensity
 
 ## Syntax
 
-The halfwidth selected by UCV:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcDensity(ori)
 ```
 
-A de la Vallee Poussin kernel of that halfwidth:
+The halfwidth selected by UCV.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcDensity(ori, halfwidth=5*degree)
 ```
 
-A kernel of your own:
+A de la Vallee Poussin kernel of that halfwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcDensity(ori, kernel=SO3AbelPoissonKernel(halfwidth=10*degree))
 ```
 
-Weighted by the grain areas:
+A kernel of your own.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcDensity(grains.meanOrientation, weights=grains.area)
 ```
 
-The orientations of a map, grouped by its grains:
+Weighted by the grain areas.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcDensity(ebsd)
 ```
 
-The harmonic form:
+The orientations of a map, grouped by its grains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcDensity(ori, Fourier=True)
 ```
 
-The harmonic form of order 16:
+The harmonic form.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcDensity(ori, harmonic=True, bandwidth=16)
 ```
 
-Weighted directions:
+The harmonic form of order 16.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = calcDensity(v, kernel=psi, weights=w)
 ```
 
-Axes:
+Weighted directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = calcDensity(v, halfwidth=10*degree, antipodal=True)
 ```
 
-Angles, a function on the circle:
+Axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = calcDensity(rho, periodic=True)
 ```
 
-Real values on an interval:
+Angles, a function on the circle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = calcDensity(x, range=[0, 1])
 ```
+
+Real values on an interval.
+
+</div>
+
+## Description
 
 Orientations give a sum of kernels about them, the radial form up to 200 orientations and
 the harmonic form above (or with a Dirichlet kernel, or for misorientations between two
@@ -105,23 +151,19 @@ bandwidth here, its flag 'Fourier' the keyword; the Bingham estimate is calcBing
 
 ## Input
 
-| | |
-|---|---|
 | `x` | orientation, vector3d, EBSD, or an array of angles or real values |
-
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunRBF or SO3FunHarmonic |
-| `sF` | S2FunHarmonic |
-| `f` | S1FunHarmonic for angles, a griddedDensity for real values |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `Fourier` | `False` | return orientations' density in harmonic form, MATLAB's flag 'Fourier' |
+
+## Output
+
+| `odf` | SO3FunRBF or SO3FunHarmonic |
+| `sF` | S2FunHarmonic |
+| `f` | S1FunHarmonic for angles, a griddedDensity for real values |
 
 ## See also
 

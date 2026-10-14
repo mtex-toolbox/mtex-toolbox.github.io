@@ -17,9 +17,13 @@ of orientations times a row of systems is MATLAB's outer ori * dS
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 dislocationSystem.rotate(self, rot)
 ```
+
+</div>
 
 MATLAB's [dislocationSystem.rotate](dislocationSystem.rotate.html)
 

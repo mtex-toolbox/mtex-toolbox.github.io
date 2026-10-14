@@ -17,9 +17,13 @@ curvature, so the entry a map cannot measure drops out of alpha_33
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 curvatureTensor.dislocationDensity(kappa)
 ```
+
+</div>
 
 ## Used on
 

@@ -13,9 +13,13 @@ the block of degree n as a view, rows the specimen side k, columns the crystal s
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 degreeBlock(fhat, n)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L50">source</a></font>
 {% endraw %}

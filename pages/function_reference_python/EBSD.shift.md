@@ -16,9 +16,13 @@ the map with every position moved by the vector v, the arrays not reordered
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.shift(self, v)
 ```
+
+</div>
 
 MATLAB's [EBSD.shift](EBSD.shift.html)
 

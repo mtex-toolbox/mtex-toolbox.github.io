@@ -17,17 +17,27 @@ too; MATLAB's crystalFrame.conventionChar
 
 ## Syntax
 
-The frame's own convention:
+<div class="mx-form" markdown="1">
 
 ```python
 c = cs.conventionChar()
 ```
 
-Another one, in crystal axes:
+The frame's own convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = cs.conventionChar(plottingConvention.ij)
 ```
+
+Another one, in crystal axes.
+
+</div>
+
+## Description
 
 The axis out of the screen and the one to the east are named, from the direct and the
 reciprocal axes, since the axis to the north is in general none of them; where none fits
@@ -35,21 +45,17 @@ the form of plottingConvention.char is returned.
 
 ## Input
 
-| | |
-|---|---|
 | `cs` | crystalFrame |
-
-## Output
-
-| | |
-|---|---|
-| `c` | str |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `pC` | `None` | plottingConvention; by default the frame's how2plot |
+
+## Output
+
+| `c` | str |
 
 ## See also
 

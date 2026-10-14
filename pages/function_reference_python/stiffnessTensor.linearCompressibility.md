@@ -17,29 +17,33 @@ S_ijkk v_i v_j; MATLAB's linearCompressibility
 
 ## Syntax
 
-At the directions v:
+<div class="mx-form" markdown="1">
 
 ```python
 beta = linearCompressibility(C, v)
 ```
 
-The function on the sphere:
+At the directions v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 beta = C.linearCompressibility()
 ```
 
+The function on the sphere.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `C` | stiffnessTensor or complianceTensor, a stiffness tensor is inverted first |
 | `v` | vector3d or Miller, the directions; left out for the function |
 
 ## Output
 
-| | |
-|---|---|
 | `beta` | the linear compressibility at every direction, or an S2Fun of the direction |
 
 ## See also
@@ -48,9 +52,13 @@ beta = C.linearCompressibility()
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 stiffnessTensor.linearCompressibility(T, v=None)
 ```
+
+</div>
 
 MATLAB's [stiffnessTensor.linearCompressibility](stiffnessTensor.linearCompressibility.html)
 

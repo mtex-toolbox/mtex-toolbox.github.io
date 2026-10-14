@@ -14,23 +14,37 @@ target, each step started from the last
 
 ## Syntax
 
-The defaults:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcODFIterative(pf)
 ```
 
-The target halfwidth:
+The defaults.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcODFIterative(pf, halfwidth=5*degree)
 ```
 
-Every node of every grid kept:
+The target halfwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcODFIterative(pf, thinning=0)
 ```
+
+Every node of every grid kept.
+
+</div>
+
+## Description
 
 The halfwidths run from sqrt(e)^(maxSteps-1) times the target down to the target, those
 whose grid would be coarser than 45 degree dropped; each step solves on an equispaced grid
@@ -43,19 +57,11 @@ returned; MATLAB's flag nothinning is thinning=0. Further keywords go to MLSSolv
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunRBF |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `None` | the resolution of the finest grid, by default that of the pole figures |
 | `halfwidth` | `None` | the target halfwidth of the ansatz functions, by default the resolution |
@@ -63,6 +69,10 @@ returned; MATLAB's flag nothinning is thinning=0. Further keywords go to MLSSolv
 | `maxSteps` | `5` | the number of halfwidths of the ladder |
 | `thinning` | `0.025` | remove the nodes below this fraction of the uniform share; 0 keeps all |
 | `verbose` | `False` | report the fit of every pole figure in every step |
+
+## Output
+
+| `odf` | SO3FunRBF |
 
 ## References
 

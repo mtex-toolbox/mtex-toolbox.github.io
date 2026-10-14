@@ -14,11 +14,17 @@ colours at its vertices
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 HSVDirectionKey(cs)
 HSVDirectionKey(cs, whiteCenter=v, maxAngle=5*degree)
 HSVDirectionKey(cs, perceptual=True, hueLightness=0.5)
 ```
+
+</div>
+
+## Description
 
 A finite maxAngle makes the key sharp: the whole colour circle is spent on the cap of that
 opening about the white centre and everything outside it is black. perceptual=True takes
@@ -29,8 +35,6 @@ yellow, and the key comes closer to MTEX's and less even.
 
 ## Members
 
-| | |
-|---|---|
 | [direction2color](HSVDirectionKey.direction2color_py.html) | the colours of directions under the key |
 
 ## Used on

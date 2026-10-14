@@ -15,29 +15,47 @@ loadTensor_generic
 
 ## Syntax
 
-A stiffness tensor and its density:
+<div class="mx-form" markdown="1">
 
 ```python
 C = stiffnessTensor.load('Olivine1997PC.GPa', cs)
 ```
 
-The same:
+A stiffness tensor and its density.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 C = loadTensor('Olivine1997PC.GPa', cs, cls=stiffnessTensor)
 ```
 
-A rank three in Voigt form:
+The same.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 P = tensor.load('Single_RH_quartz_poly.P', cs, rank=3, doubleConvention=True)
 ```
 
-A plain tensor, the rank from the block:
+A rank three in Voigt form.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = loadTensor('Olivine1997PC.GPa', cs)
 ```
+
+A plain tensor, the rank from the block.
+
+</div>
+
+## Description
 
 The coefficients are the last block of numeric rows of one width: six rows of six a Voigt
 matrix, three of six the Voigt table of a rank three, three of three a rank two. A plain
@@ -48,22 +66,18 @@ the class.
 
 ## Input
 
-| | |
-|---|---|
 | `fname` | the name of the file |
 | `cs` | the crystal frame (optional) |
 
-## Output
-
-| | |
-|---|---|
-| `T` | a tensor of the class cls |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `cls` | `None` | the class of the tensor, tensor by default; stiffnessTensor.load passes its own |
+
+## Output
+
+| `T` | a tensor of the class cls |
 
 ## See also
 

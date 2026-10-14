@@ -13,14 +13,16 @@ stages applied in order, the first given first; nested composites are flattened
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 T = spatialTransformComposite(T1, T2, T3)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](spatialTransformComposite.eval_py.html) | the positions moved through every stage in order |
 | [fitStage](spatialTransformComposite.fitStage_py.html) | the stage s, counted from zero, fitted to a residual measured after the ones before it |
 | [inv](spatialTransformComposite.inv_py.html) | the inverses of the stages in reverse order |

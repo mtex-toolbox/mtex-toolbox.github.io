@@ -15,9 +15,13 @@ the plane radius r(theta) a polar angle is drawn at, 2 sin(theta / 2) for the eq
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalProjection.radius(theta)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L52">source</a></font>
 {% endraw %}

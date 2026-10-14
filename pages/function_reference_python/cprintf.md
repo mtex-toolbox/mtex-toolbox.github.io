@@ -15,23 +15,37 @@ one row
 
 ## Syntax
 
-A matrix, the columns right aligned:
+<div class="mx-form" markdown="1">
 
 ```python
 cprintf(np.eye(2))
 ```
 
-With column and row labels:
+A matrix, the columns right aligned.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cprintf([[1, 2], [3, 4]], Lc=['a', 'b'], Lr=['x', 'y'])
 ```
 
-MATLAB's option pairs:
+With column and row labels.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cprintf([[1, 2], [3, 4]], '-Lc', ['a', 'b'])
 ```
+
+MATLAB's option pairs.
+
+</div>
+
+## Description
 
 The numbers are printed in the shortest form (%g), every column as wide as the widest. Of
 MATLAB's options only the labels '-Lc' and '-Lr' are taken, as pairs or as keywords, and
@@ -39,13 +53,11 @@ the table is printed, not returned as a character array.
 
 ## Input
 
-| | |
-|---|---|
 | `d` | a matrix or a vector of numbers |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `Lc` | `None` | the labels of the columns |
 | `Lr` | `None` | the labels of the rows |

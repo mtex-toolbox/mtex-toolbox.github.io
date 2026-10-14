@@ -15,15 +15,17 @@ a finite series, the kernel recommended for texture analysis
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2DeLaValleePoussinKernel(20)
 S2DeLaValleePoussinKernel(halfwidth=10*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [halfwidth](S2DeLaValleePoussinKernel.halfwidth_py.html) | the halfwidth in closed form, acos(2 * 2^(-1 / kappa) - 1) |
 
 ## Used on

@@ -16,38 +16,44 @@ the orientations of rotation matrices; MATLAB's orientation.byMatrix
 
 ## Syntax
 
-One 3 x 3 matrix, or (..., 3, 3):
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.byMatrix(M, cs, ss)
 ```
 
-A misorientation with grain exchange:
+One 3 x 3 matrix, or (..., 3, 3).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = orientation.byMatrix(M, cs, cs, antipodal=True)
 ```
 
+A misorientation with grain exchange.
+
+</div>
+
+## Description
+
 A matrix of determinant -1 is refused: an orientation is proper.
 
 ## Input
 
-| | |
-|---|---|
 | `M` | a 3 x 3 rotation matrix, or an array of them along the last two axes |
 | `frames` | the crystal frame, then the specimen frame or a second crystal frame |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation of the shape M.shape[:-2] |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | mark a misorientation with grain exchange |
+
+## Output
+
+| `ori` | orientation of the shape M.shape[:-2] |
 
 ## See also
 

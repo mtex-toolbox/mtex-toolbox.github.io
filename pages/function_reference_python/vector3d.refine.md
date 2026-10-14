@@ -18,9 +18,13 @@ stays a cap; returns the joined list and the new points, MATLAB's [v, r] = refin
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.refine(v)
 ```
+
+</div>
 
 MATLAB's [vector3d.refine](vector3d.refine.html)
 

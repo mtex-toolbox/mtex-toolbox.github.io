@@ -14,23 +14,37 @@ the figure written to a graphics file cropped to its content; MATLAB's saveFigur
 
 ## Syntax
 
-The current figure:
+<div class="mx-form" markdown="1">
 
 ```python
 saveFigure('pf.png')
 ```
 
-A figure given, as vector graphics:
+The current figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 saveFigure('pf.pdf', fig=mtexFig)
 ```
 
-Another resolution:
+A figure given, as vector graphics.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 saveFigure('pf.png', dpi=300)
 ```
+
+Another resolution.
+
+</div>
+
+## Description
 
 The format is that of the extension. A bitmap is written at 1.5 times the screen
 resolution, a map at 2.5 times and without smoothing between its cells, so that no colour
@@ -40,13 +54,11 @@ MATLAB's file dialog without a name has no counterpart.
 
 ## Input
 
-| | |
-|---|---|
 | `fname` | the file name |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure or matplotlib figure; the current one by default |
 

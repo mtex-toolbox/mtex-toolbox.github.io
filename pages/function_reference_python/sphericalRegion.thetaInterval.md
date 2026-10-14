@@ -15,9 +15,13 @@ the polar interval (min, max) of the region along the meridian rho, None where i
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalRegion.thetaInterval(self, rho)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L260">source</a></font>
 {% endraw %}

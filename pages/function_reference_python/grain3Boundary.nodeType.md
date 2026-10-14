@@ -16,9 +16,13 @@ the number of grains meeting at every vertex, plus 10 on the surface of the volu
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain3Boundary.nodeType(self)
 ```
+
+</div>
 
 ## Used on
 

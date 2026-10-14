@@ -16,9 +16,13 @@ convolution multiplies the coefficients and divides by 2n+1, on S2 when either f
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3Kernel.conv(self, other)
 ```
+
+</div>
 
 MATLAB's [SO3Kernel.conv](SO3Kernel.conv.html)
 

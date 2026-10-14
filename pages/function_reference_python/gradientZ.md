@@ -13,14 +13,16 @@ gradientZ(x, ...) is x.gradientZ(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gradientZ(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.gradientZ_py.html) | the derivative of the orientation along the specimen z axis per unit length, gradient(ebsd, zvector) |
 | [EBSD3](EBSD3.gradientZ_py.html) | the derivative of the orientation along the third axis of the volume per unit length |
 

@@ -17,9 +17,13 @@ measure: int conj(f) g dS / 4 pi
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunHarmonic.dot(self, g)
 ```
+
+</div>
 
 MATLAB's [S2FunHarmonic.dot](S2FunHarmonic.dot.html)
 

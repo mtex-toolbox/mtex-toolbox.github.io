@@ -17,9 +17,13 @@ dislocation unless given, the isotropic line energy with Poisson ratio 0.3
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 dislocationSystem(b, l=None, u=None)
 ```
+
+</div>
 
 ## Used on
 

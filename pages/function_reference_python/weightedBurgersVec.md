@@ -13,14 +13,16 @@ weightedBurgersVec(x, ...) is x.weightedBurgersVec(...), the method of the objec
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 weightedBurgersVec(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.weightedBurgersVec_py.html) | the weighted Burgers vector: the net Burgers vector of the dislocations crossing the map per unit area, by the integral or the gradient method |
 | [EBSD3](EBSD3.weightedBurgersVec_py.html) | the weighted Burgers vector: the net Burgers vector of the dislocations crossing the map per unit area, by the integral or the gradient method |
 

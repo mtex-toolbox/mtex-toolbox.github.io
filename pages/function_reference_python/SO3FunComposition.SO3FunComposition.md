@@ -15,9 +15,13 @@ form adds the harmonic forms
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunComposition(*terms)
 ```
+
+</div>
 
 MATLAB's [SO3FunComposition.SO3FunComposition](SO3FunComposition.SO3FunComposition.html)
 

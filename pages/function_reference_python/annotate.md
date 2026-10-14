@@ -15,28 +15,44 @@ those of plot
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 annotate(v)
 annotate(v, markerFaceColor='r', label='a', backgroundColor='w')
 ```
 
-The great circle normal to v:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 annotate(v, plane=True, lineStyle='--')
 ```
 
-Into the sections, pole figures or orientation space shown:
+The great circle normal to v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 annotate(ori, marker='v', markerSize=15)
 ```
 
+Into the sections, pole figures or orientation space shown.
+
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 annotate(v, *args, **kw)
 ```
+
+</div>
 
 ## Used on
 

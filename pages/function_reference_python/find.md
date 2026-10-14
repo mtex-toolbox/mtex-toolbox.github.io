@@ -13,14 +13,16 @@ find(x, ...) is x.find(...), the method of the object passed; NumPy's flatnonzer
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 find(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [fibonacciS2Grid](fibonacciS2Grid.find_py.html) | the nearest grid point of every direction and its angle, or with eps the sparse matrices of the points within eps and their angles |
 | [orientation](orientation.find_py.html) | the orientations of ori nearest to w up to symmetry, MATLAB's orientation.find |
 | [S2Grid](S2Grid.find_py.html) | the nearest grid point of every direction and its angle, or with eps the sparse matrices of the points within eps and their angles |

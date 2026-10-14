@@ -14,8 +14,6 @@ the functions on SO(3): SO3FunHarmonic, SO3FunRBF, SO3FunCBF, SO3FunBingham, SO3
 
 ## Members
 
-| | |
-|---|---|
 | [calcAngleDistribution](SO3Fun.calcAngleDistribution_py.html) | the distribution of the misorientation angle: of a misorientation density, of a list of misorientations, or of the uniform density of two crystal frames |
 | [calcAxisDistribution](SO3Fun.calcAxisDistribution_py.html) | the axis distribution of an SO(3) function, an S2 function of the rotation axes symmetric under the rotations the two frames share |
 | [calcComponents](SO3Fun.calcComponents_py.html) | the modal orientations of an orientation density, the components: their orientations, their volumes and the mode every seed flowed into |

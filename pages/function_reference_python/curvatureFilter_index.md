@@ -17,8 +17,6 @@ it goes, detail coarser than it stays, which means the same thing at any step si
 
 ## Members
 
-| | |
-|---|---|
 | [smooth](curvatureFilter.smooth_py.html) | the minimiser of \|V - V0\|^2 + alpha \|L V\|^2 over the free vertices, one sparse system |
 
 ## Used on

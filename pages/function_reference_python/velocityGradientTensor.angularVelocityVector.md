@@ -16,9 +16,13 @@ the angular velocity of a velocity gradient, the axial vector of its antisymmetr
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 velocityGradientTensor.angularVelocityVector(L)
 ```
+
+</div>
 
 MATLAB's [velocityGradientTensor.angularVelocityVector](velocityGradientTensor.angularVelocityVector.html)
 

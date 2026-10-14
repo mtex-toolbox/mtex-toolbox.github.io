@@ -16,9 +16,13 @@ the rotation matrices, of shape (..., 3, 3)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation.matrix(self)
 ```
+
+</div>
 
 MATLAB's [rotation.matrix](rotation.matrix.html)
 

@@ -16,9 +16,13 @@ the measurements of the phase of ori within an angle of it, or of a fibre
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.findByOrientation(self, ori, epsilon)
 ```
+
+</div>
 
 MATLAB's [EBSD.findByOrientation](EBSD.findByOrientation.html)
 

@@ -15,17 +15,27 @@ the diamond crystal shape of the catalogue, in cs when given, MATLAB's crystalSh
 
 ## Syntax
 
-In the catalogue's own frame:
+<div class="mx-form" markdown="1">
 
 ```python
 cS = crystalShape.diamond()
 ```
 
-In the crystal frame cs:
+In the catalogue's own frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cS = crystalShape.diamond(cs)
 ```
+
+In the crystal frame cs.
+
+</div>
+
+## Description
 
 The faces are the catalogue's lattice planes at their distances from the centre, or with a
 habitus and extension. Without cs the shape is in the catalogue's own crystal frame, its point
@@ -33,21 +43,17 @@ group, axes and mineral; a frame cs given has to be of the catalogue's Laue clas
 
 ## Input
 
-| | |
-|---|---|
 | `CS` | crystalFrame, the frame of the shape |
-
-## Output
-
-| | |
-|---|---|
-| `cS` | crystalShape |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `simple` | `False` | the simple shape, which the catalogue does not have for diamond: True is refused |
+
+## Output
+
+| `cS` | crystalShape |
 
 ## See also
 

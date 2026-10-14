@@ -15,32 +15,40 @@ the boundary of the region as plane coordinates, one pair of arrays per arc
 
 ## Syntax
 
-(rho, theta) in degree every half degree:
+<div class="mx-form" markdown="1">
 
 ```python
 b = plainProjection(sR).boundary()
 ```
 
-Coarser arcs:
+(rho, theta) in degree every half degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = plainProjection(sR).boundary(resolution=2*degree)
 ```
 
+Coarser arcs.
+
+</div>
+
+## Description
+
 Unlike the other charts a whole sphere or hemisphere has no boundary here: the list is
 empty.
 
-## Output
-
-| | |
-|---|---|
-| `b` | list of (rho, theta) pairs of arrays in degree, one per arc |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `0.5*degree` | the spacing of the points along an arc |
+
+## Output
+
+| `b` | list of (rho, theta) pairs of arrays in degree, one per arc |
 
 ## See also
 

@@ -16,9 +16,13 @@ the vorticity of a velocity gradient, its rotation rate over the magnitude of it
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 velocityGradientTensor.vorticity(L)
 ```
+
+</div>
 
 MATLAB's [velocityGradientTensor.vorticity](velocityGradientTensor.vorticity.html)
 

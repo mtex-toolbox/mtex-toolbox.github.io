@@ -14,15 +14,17 @@ sections of constant rotation angle, each on the axis sector the region allows t
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 axisAngleSections(cs1, cs2, angles=(10:20:180)*degree)
 axisAngleSections(cs1, cs2, sections=5, volumeScaling=False, antipodal=True)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [angles](axisAngleSections.angles_py.html) | the rotation angles of the sections |
 | [orientationsAt](axisAngleSections.orientationsAt_py.html) | the orientations at axes vs rotated by the angle of section k |
 | [outerSector](axisAngleSections.outerSector_py.html) | the sector the axes are drawn on, the conventional sector of the rotations both frames share |

@@ -16,9 +16,13 @@ the reciprocal axes a*, b*, c* as vectors
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 crystalFrame.basisDual(self)
 ```
+
+</div>
 
 MATLAB's [crystalFrame.basisDual](crystalFrame.basisDual.html)
 

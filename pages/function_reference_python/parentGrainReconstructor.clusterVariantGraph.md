@@ -17,29 +17,47 @@ votes for the parent orientations; MATLAB's clusterVariantGraph of parentGrainRe
 
 ## Syntax
 
-Job.votes from the variant graph:
+<div class="mx-form" markdown="1">
 
 ```python
 job.clusterVariantGraph()
 ```
 
-Similar variants share their score:
+Job.votes from the variant graph.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.clusterVariantGraph(includeSimilar=True)
 ```
 
-The graph built first with these options:
+Similar variants share their score.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.clusterVariantGraph(threshold=3*degree)
 ```
 
-The parents from the votes:
+The graph built first with these options.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParentFromVote(minProb=0.5)
 ```
+
+The parents from the votes.
+
+</div>
+
+## Description
 
 The variant graph is built by calcVariantGraph first when the job has none, with the
 keywords left over. Then numIter steps of MCL: the expansion, the inflation by
@@ -50,13 +68,11 @@ removed unless keepGraph. The job is changed in place.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor with its orientation relationship job.p2c |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `inflationPower` | `1.05` | the inflation power of MCL |
 | `numIter` | `10` | the number of iterations |

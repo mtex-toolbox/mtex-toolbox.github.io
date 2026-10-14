@@ -16,29 +16,47 @@ the same orientation described with another reference frame of the crystal
 
 ## Syntax
 
-The axes aligned by the frames' conventions:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = ori.transformReferenceFrame(cs)
 ```
 
-The frames related by an orientation:
+The axes aligned by the frames' conventions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = ori.transformReferenceFrame(cs, rule=rel)
 ```
 
-The frames related by their plotting conventions:
+The frames related by an orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = ori.transformReferenceFrame(cs, 'byScreenAlignment')
 ```
 
-Both frames of a misorientation:
+The frames related by their plotting conventions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = mori.transformReferenceFrame(cs1, cs2)
 ```
+
+Both frames of a misorientation.
+
+</div>
+
+## Description
 
 An orientation is described with respect to Cartesian axes aligned in a fixed way with the
 crystal axes a, b, c, such as X||a, Z||c* or X||a*, Z||c. The orientation, the physical
@@ -48,24 +66,20 @@ for every crystal direction h restated as h'.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
 | `to` | crystalFrame, the new frame, the first one of a misorientation |
 | `toB` | crystalFrame, the new second frame of a misorientation; or the rule |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation in the new frame |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rule` | `None` | how the old frame relates to the new one: 'byAxes', by the crystal axes, the default; 'byScreenAlignment', by the two frames being drawn alike; or an orientation from the old frame to the new one |
 | `tol` | `0.1` | how far from a rotation the transition by the axes may come out |
+
+## Output
+
+| `ori` | orientation in the new frame |
 
 ## See also
 

@@ -13,14 +13,16 @@ inpolygon(x, ...) is x.inpolygon(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 inpolygon(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.inpolygon_py.html) | the mask of the measurements inside a rectangle [x, y, w, h] or a polygon (N, 2), edges included |
 | [grain2d](grain2d.inpolygon_py.html) | the mask of the outlines whose centroid lies inside a rectangle [xmin, ymin, dx, dy] or a polygon (N, 2), edges included, as MATLAB's |
 | [grainBoundary](grainBoundary.inpolygon_py.html) | the segments whose midpoint lies inside a polygon (N, 2), or the rectangle [x, y, w, h] |

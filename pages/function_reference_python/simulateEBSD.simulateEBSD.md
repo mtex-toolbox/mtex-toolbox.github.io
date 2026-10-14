@@ -16,6 +16,8 @@ stage, which every verb rewrites
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 eS = simulateEBSD()
 eS.makeMap()
@@ -23,11 +25,17 @@ eS.addFeature('simpleGradient')
 eS.addNoise()
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 simulateEBSD()
 ```
+
+</div>
 
 ## Used on
 

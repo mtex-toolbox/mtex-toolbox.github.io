@@ -16,23 +16,37 @@ as (lo, hi)
 
 ## Syntax
 
-One range over every axes:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.setColorRange()
 ```
 
-Each axes the range of its own data:
+One range over every axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.setColorRange('tight')
 ```
 
-The range given:
+Each axes the range of its own data.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.setColorRange((0, 5))
 ```
+
+The range given.
+
+</div>
+
+## Description
 
 A filled contour plot is drawn again with its levels over the new range, and the colour
 bars of the figure follow it. A figure of explicit colours keeps a range given for the bar
@@ -40,8 +54,6 @@ mtexColorbar draws.
 
 ## Input
 
-| | |
-|---|---|
 | `colorRange` | 'equal', 'tight' or (lo, hi) |
 
 ## See also
@@ -50,9 +62,13 @@ mtexColorbar draws.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 mtexFigure.setColorRange(self, colorRange='equal')
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L235">source</a></font>
 {% endraw %}

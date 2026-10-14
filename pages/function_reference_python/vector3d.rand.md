@@ -17,56 +17,74 @@ last; rng= a NumPy random generator
 
 ## Syntax
 
-One random unit vector:
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.rand()
 ```
 
-An m x n array of them:
+One random unit vector.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.rand(m, n)
 ```
 
-Random axes:
+An m x n array of them.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.rand(100, antipodal=True)
 ```
 
-Uniform in the region sR:
+Random axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.rand(100, sR)
 ```
 
-Reproducible:
+Uniform in the region sR.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.rand(100, rng=np.random.default_rng(0))
 ```
 
+Reproducible.
+
+</div>
+
+## Description
+
 In a region the uniform vectors outside it are rejected until enough are left.
 
 ## Input
 
-| | |
-|---|---|
 | `shape` | the sizes of the array, one tuple or several integers, and a sphericalRegion as the last argument |
-
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d of unit vectors |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | the vectors as axes |
 | `rng` | `None` | the NumPy random generator, a fresh one by default |
+
+## Output
+
+| `v` | vector3d of unit vectors |
 
 ## See also
 

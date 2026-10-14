@@ -17,47 +17,77 @@ below a misorientation angle, or every inclusion into the grain around it; MATLA
 
 ## Syntax
 
-Every pair of grains sharing a segment of the boundary:
+<div class="mx-form" markdown="1">
 
 ```python
 merged = grains.merge(grains.boundary['Forsterite', 'Forsterite'])
 ```
 
-The pairs of these grain ids:
+Every pair of grains sharing a segment of the boundary.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 merged = grains.merge(np.array([[1, 2], [5, 9]]))
 ```
 
-The pairs a sparse matrix over the ids marks:
+The pairs of these grain ids.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 merged = grains.merge(grains.neighbors(matrix=True))
 ```
 
-Neighbours of a misorientation below 5 degree:
+The pairs a sparse matrix over the ids marks.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 merged = grains.merge(threshold=5*degree)
 ```
 
-Every inclusion of fewer than 5 pixels into its host:
+Neighbours of a misorientation below 5 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 merged = grains.merge(inclusions=True, maxSize=5)
 ```
 
-Inclusions only into large grains:
+Every inclusion of fewer than 5 pixels into its host.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 merged = grains.merge(inclusions=True, host=grains.numPixel > 100)
 ```
 
-The parent ids, nothing merged:
+Inclusions only into large grains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 parentId = grains.merge(threshold=5*degree, testRun=True)
 ```
+
+The parent ids, nothing merged.
+
+</div>
+
+## Description
 
 Two grains go into one when a criterion joins them, directly or through a chain of other
 grains; several criteria given together apply together. Grains of two phases are merged
@@ -78,27 +108,23 @@ not here.
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain2d |
 | `pairs` | what is merged: a grainBoundary, whose segments join the grains on both sides; an (n, 2) array of grain ids; a square matrix or sparse matrix M over the ids, M[i, j] nonzero joining the grains of ids i + 1 and j + 1; or a label per grain, the grains of one label joined |
 
-## Output
-
-| | |
-|---|---|
-| `merged` | grain2d, the merged grains, numbered from 1 |
-| `parentId` | array, with testRun: the id in the merged list of every grain |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `threshold` | `None` | join the neighbours whose mean orientations differ by less than this angle |
 | `inclusions` | `None` | True to join every inclusion, a grain surrounded by one other grain, to that host; a mask over the grains to join only the inclusions it marks |
 | `host` | `None` | mask over the grains of those that may take an inclusion |
 | `maxSize` | `inf` | the inclusions joined are those of fewer pixels |
 | `testRun` | `False` | return the parent id of every grain instead of the merged grains, the grains passed left unchanged |
+
+## Output
+
+| `merged` | grain2d, the merged grains, numbered from 1 |
+| `parentId` | array, with testRun: the id in the merged list of every grain |
 
 ## See also
 

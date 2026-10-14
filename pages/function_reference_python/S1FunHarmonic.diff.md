@@ -16,9 +16,13 @@ the derivative multiplies c_k by -ik
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHarmonic.diff(self)
 ```
+
+</div>
 
 MATLAB's [S1FunHarmonic.diff](S1FunHarmonic.diff.html)
 

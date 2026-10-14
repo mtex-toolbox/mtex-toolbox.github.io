@@ -16,9 +16,13 @@ ChristoffelTensor(C, n): E_ik = C_ijkl n_j n_l of a stiffness and a direction
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 stiffnessTensor.ChristoffelTensor(M, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [stiffnessTensor.ChristoffelTensor](stiffnessTensor.ChristoffelTensor.html)
 

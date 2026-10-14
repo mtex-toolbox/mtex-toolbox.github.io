@@ -16,59 +16,97 @@ MATLAB's vector3d.quiver, S2VectorField.quiver and EBSD.quiver
 
 ## Syntax
 
-The tangent vectors w at the directions v:
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(v, w)
 ```
 
-Longer arrows, in red:
+The tangent vectors w at the directions v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(v, w, arrowSize=1, color='r')
 ```
 
-All of one length, with larger heads:
+Longer arrows, in red.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(v, w, normalize=True, maxHeadSize=0.3)
 ```
 
-A vector field on an equispaced grid:
+All of one length, with larger heads.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(vF)
 ```
 
-On a finer grid:
+A vector field on an equispaced grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(vF, resolution=5*degree)
 ```
 
-An arrow per measurement of a map:
+On a finer grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(ebsd, ebsd.rotations.axis(), color='r')
 ```
 
-Axes, centred on the measurements:
+An arrow per measurement of a map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(ebsd, ebsd.rotations.axis(), antipodal=True)
 ```
 
-An arrow per grain:
+Axes, centred on the measurements.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(grains, grains.meanOrientation * Miller(1, 0, 0, grains.CS, 'uvw'))
 ```
 
-A needle per boundary segment:
+An arrow per grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(gB, gB.direction)
 ```
+
+A needle per boundary segment.
+
+</div>
+
+## Description
 
 On the sphere an arrow is the tangential part of w at its direction carried through the
 projection; the longest vector of all is arrowSize times the grid spacing resolution, so a
@@ -85,22 +123,18 @@ arrows into the scene of its figure, orientations into the ODF sections held.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d, the points of the arrows; an S2VectorField or S2AxisField; orientation; EBSD, grain2d or grainBoundary; EBSD3 or grain3d |
 | `w` | vector3d, the arrows, one per point of v |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib quiver or line collections, one per spherical plot |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `10*degree` | the spacing of the grid a field is drawn on, and the length unit of the arrows on the sphere |
+
+## Output
+
+| `h` | the matplotlib quiver or line collections, one per spherical plot |
 
 ## See also
 

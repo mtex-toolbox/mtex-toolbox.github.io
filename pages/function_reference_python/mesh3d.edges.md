@@ -15,9 +15,13 @@ the edges of the polygons, every one once, (e, 2)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mesh3d.edges(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L43">source</a></font>
 {% endraw %}

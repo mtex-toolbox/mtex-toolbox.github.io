@@ -14,9 +14,13 @@ whether the region lies within the hemisphere out of the screen of the conventio
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 isUpper(sR, pC)
 ```
+
+</div>
 
 MATLAB's [sphericalRegion.isUpper](sphericalRegion.isUpper.html)
 

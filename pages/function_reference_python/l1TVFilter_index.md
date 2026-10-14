@@ -14,29 +14,47 @@ the differences between neighbours, which smooths noise and keeps sharp steps
 
 ## Syntax
 
-Smoothing over four steps of the map:
+<div class="mx-form" markdown="1">
 
 ```python
 F = l1TVFilter()
 ```
 
-Smoothing over a length in the map's units:
+Smoothing over four steps of the map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 F = l1TVFilter(10)
 ```
 
-The weight given, boundaries above 10 degree kept:
+Smoothing over a length in the map's units.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 F = l1TVFilter(alpha=0.1, threshold=10*degree)
 ```
 
-The smoothed map:
+The weight given, boundaries above 10 degree kept.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = smooth(ebsd, F)
 ```
+
+The smoothed map.
+
+</div>
+
+## Description
 
 The filtered orientations minimise the sum of the distances to the measured ones plus
 alpha times the sum of the misorientations between neighbours, both as absolute values; an
@@ -51,15 +69,9 @@ a fine map; alpha, when given, replaces it.
 MATLAB's l1TVFilter takes alpha as its first argument and solves by a cyclic proximal
 point iteration; here the first argument is the smoothing length.
 
-## Output
-
-| | |
-|---|---|
-| `F` | l1TVFilter, applied by smooth(ebsd, F) |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `smoothingLength` |  | the wavelength damped to half its amplitude, in the units of the map; four steps of the map when neither it nor alpha is given |
 | `alpha` |  | the weight of the differences against the data, larger smoother |
@@ -67,6 +79,10 @@ point iteration; here the first argument is the smoothing length.
 | `eps` |  | the difference at which the penalty turns from a square into a line, in radians |
 | `maxIter` |  | the bound on the reweighting steps |
 | `tol` |  | the change of every orientation in a connected part below which its iteration stops, in radians |
+
+## Output
+
+| `F` | l1TVFilter, applied by smooth(ebsd, F) |
 
 ## References
 
@@ -78,8 +94,6 @@ point iteration; here the first argument is the smoothing length.
 
 ## Members
 
-| | |
-|---|---|
 | [l1TVFilter](l1TVFilter.l1TVFilter_py.html) | the total variation filter of the orientations of a map, absolute in the data term and in the differences between neighbours, which smooths noise and keeps sharp steps |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L74">source</a></font>

@@ -17,9 +17,13 @@ harmonic form, exact for a kernel of finite bandwidth, as MTEX does
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunRBF.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3FunRBF.eval](SO3FunRBF.eval.html)
 

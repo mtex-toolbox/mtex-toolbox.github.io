@@ -14,17 +14,27 @@ plotEllipsoid
 
 ## Syntax
 
-Light blue ellipsoids:
+<div class="mx-form" markdown="1">
 
 ```python
 mesh = ellipsoids3d(center, a, b, c)
 ```
 
-A colour each, coarser:
+Light blue ellipsoids.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mesh = ellipsoids3d(center, a, b, c, color=[[1, 0, 0], [0, 0, 1]], n=12, m=6)
 ```
+
+A colour each, coarser.
+
+</div>
+
+## Description
 
 Every ellipsoid is the set center + cos(theta) a + sin(theta) (sin(rho) b + cos(rho) c),
 divided into quadrilaterals along n longitudes rho and m latitudes theta; a, b and c are
@@ -32,25 +42,21 @@ the half axes as vectors, as principalComponents of 3D grains returns them.
 
 ## Input
 
-| | |
-|---|---|
 | `center` | array (k, 3), the centres |
 | `a, b, c` | arrays (k, 3), the three half axes of every ellipsoid |
 
-## Output
-
-| | |
-|---|---|
-| `mesh` | mesh3d, the surfaces of all ellipsoids |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `color` | `'lightblue'` | one colour for all, a name or an RGB triple, or one RGB row per ellipsoid |
 | `edgeAlpha` | `0.25` | the opacity of the edges of the quadrilaterals |
 | `n` | `24` | the number of longitudes |
 | `m` | `12` | the number of latitudes |
+
+## Output
+
+| `mesh` | mesh3d, the surfaces of all ellipsoids |
 
 ## See also
 

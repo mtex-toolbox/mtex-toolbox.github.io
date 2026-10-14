@@ -15,23 +15,37 @@ velocity field spin; MATLAB's doEulerStep
 
 ## Syntax
 
-Orientations in 10 steps:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = doEulerStep(spin, ori0, 10)
 ```
 
-A density in 40 steps:
+Orientations in 10 steps.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = doEulerStep(spin, odf0, 40)
 ```
 
-The density in harmonics up to 16:
+A density in 40 steps.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = doEulerStep(spin, odf0, 40, bandwidth=16)
 ```
+
+The density in harmonics up to 16.
+
+</div>
+
+## Description
 
 Orientations move along the exponential of the field, one step of a n-th of the time at a
 time. A density follows the continuity equation, d f / dt = -div(f spin), integrated by the
@@ -40,23 +54,19 @@ explicit Euler method in its harmonic space. MATLAB's implicit variants ('implic
 
 ## Input
 
-| | |
-|---|---|
 | `spin` | SO3VectorField or a callable of orientations, the rotation velocity |
 | `x` | orientation or SO3Fun, the start |
 
-## Output
-
-| | |
-|---|---|
-| `x` | orientation or SO3FunHarmonic after unit time |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `1` | the number of steps |
 | `bandwidth` | `None` | the bandwidth of the density, by default that of SO3FunHarmonic(x) |
+
+## Output
+
+| `x` | orientation or SO3FunHarmonic after unit time |
 
 ## See also
 

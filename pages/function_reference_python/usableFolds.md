@@ -13,9 +13,13 @@ the z folds a NUFFT array of bandwidth L can carry, (1, 1) when a folded axis wo
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 usableFolds(L, real, folds)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L142">source</a></font>
 {% endraw %}

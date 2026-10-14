@@ -17,9 +17,13 @@ by the interfaces layer above this one; loadVector3d returns the other columns t
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.load(fname, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [vector3d.load](vector3d.load.html)
 

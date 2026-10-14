@@ -14,9 +14,13 @@ contour(sF), contour(v), contour(v, data): contour lines
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 contour(x, *args, **kw)
 ```
+
+</div>
 
 ## Used on
 

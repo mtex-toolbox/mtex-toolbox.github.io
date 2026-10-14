@@ -16,9 +16,13 @@ v.export('vectors.txt'): the directions written as a text table
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.export(self, fname, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [vector3d.export](vector3d.export.html)
 

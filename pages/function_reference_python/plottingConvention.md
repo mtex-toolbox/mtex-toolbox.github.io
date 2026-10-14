@@ -15,16 +15,18 @@ reference axes, east = rot * x, north = rot * y, outOfScreen = rot * z
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 pC = plottingConvention(outOfScreen, east)
 pC = plottingConvention('y↑→x')      each axis next to the screen direction it points to
 pC = plottingConvention.ij          x east, y south, z into the screen
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [char](plottingConvention.char_py.html) | 'y↑→x' when both screen axes are reference axes, the three names run together otherwise |
 | [east](plottingConvention.east_py.html) | the reference direction pointing east on screen |
 | [edax](plottingConvention.edax_py.html) | the EDAX/TSL frame of the given setting, 1 to 4, z out of the screen |

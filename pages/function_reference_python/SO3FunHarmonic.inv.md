@@ -16,9 +16,13 @@ the function of the inverse rotations, f(g^-1), its crystal and specimen frame e
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunHarmonic.inv(self)
 ```
+
+</div>
 
 MATLAB's [SO3FunHarmonic.inv](SO3FunHarmonic.inv.html)
 

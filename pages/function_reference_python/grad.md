@@ -13,14 +13,16 @@ grad(x, ...) is x.grad(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grad(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [S1BumpKernel](S1BumpKernel.grad_py.html) | the derivative of the bump kernel, zero wherever it exists |
 | [S1FunHarmonic](S1FunHarmonic.grad_py.html) | the derivative as a function, or its values at the angles x |
 | [S1Kernel](S1Kernel.grad_py.html) | the derivative of a kernel on the circle, -2 sum_k k c_k sin(kx) |

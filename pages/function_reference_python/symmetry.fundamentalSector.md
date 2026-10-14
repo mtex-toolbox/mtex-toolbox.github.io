@@ -17,29 +17,47 @@ symmetric copy of each falls into
 
 ## Syntax
 
-The conventional sector:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = pg.fundamentalSector()
 ```
 
-With the inversion added:
+The conventional sector.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = pg.fundamentalSector(antipodal=True)
 ```
 
-The Dirichlet domain about a centre:
+With the inversion added.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = pg.fundamentalSector(center=vector3d(1, 2, 3))
 ```
 
-The rotation axes allowed at one rotation angle:
+The Dirichlet domain about a centre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = pg.fundamentalSector(angle=55*degree)
 ```
+
+The rotation axes allowed at one rotation angle.
+
+</div>
+
+## Description
 
 The sector is the conventional one, the sector an inverse pole figure shows, wherever it is
 a fundamental domain of the group, which it is for every crystal symmetry; for a group
@@ -57,23 +75,19 @@ has no convention and places it on x, y, z.
 
 ## Input
 
-| | |
-|---|---|
 | `pg` | symmetry |
-
-## Output
-
-| | |
-|---|---|
-| `sR` | sphericalRegion |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `center` | `None` | vector3d, the centre of a Dirichlet domain |
 | `antipodal` | `False` | add the inversion to the group, the sector of axes |
 | `angle` | `None` | the rotation angle of misorientations, in radians, whose allowed axes are sought |
+
+## Output
+
+| `sR` | sphericalRegion |
 
 ## See also
 

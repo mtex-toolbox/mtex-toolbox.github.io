@@ -18,54 +18,70 @@ of that rotational angle about the identity, the angle by inverting its distribu
 
 ## Syntax
 
-One:
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.rand()
 ```
 
-A list of 100:
+One.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.rand(100)
 ```
 
-A 10 x 3 array:
+A list of 100.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.rand(10, 3)
 ```
 
-Within 10 degree of the identity:
+A 10 x 3 array.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.rand(100, maxAngle=10*degree)
 ```
 
-Reproducible:
+Within 10 degree of the identity.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.rand(100, rng=np.random.default_rng(0))
 ```
 
+Reproducible.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `shape` | the sizes of the array, one tuple or several integers |
-
-## Output
-
-| | |
-|---|---|
-| `rot` | quaternions of the class it is called on, rotation or quaternion |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rng` | `None` | the NumPy random generator, a fresh one by default |
 | `maxAngle` | `None` | the largest rotational angle about the identity |
+
+## Output
+
+| `rot` | quaternions of the class it is called on, rotation or quaternion |
 
 ## See also
 

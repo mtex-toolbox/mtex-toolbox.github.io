@@ -15,15 +15,17 @@ nonnegative and a finite series, the kernel recommended for texture analysis
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3DeLaValleePoussinKernel(20)
 SO3DeLaValleePoussinKernel(halfwidth=10*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [halfwidth](SO3DeLaValleePoussinKernel.halfwidth_py.html) | the halfwidth in closed form, 2 acos(2^(-1 / (2 kappa))) |
 | [radon](SO3DeLaValleePoussinKernel.radon_py.html) | the Radon transform: the de la Vallee Poussin kernel on the sphere of the same kappa |
 

@@ -17,9 +17,13 @@ the class kept
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.expm(self)
 ```
+
+</div>
 
 MATLAB's [tensor.expm](tensor.expm.html)
 

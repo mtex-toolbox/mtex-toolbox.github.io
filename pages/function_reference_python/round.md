@@ -14,9 +14,13 @@ rounds, of a number as Python rounds, so that from mtex import * keeps Python's 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 round(x, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

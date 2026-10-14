@@ -16,8 +16,6 @@ difference that still counts as one grain, gbcCustom('grainId', 0.5)
 
 ## Members
 
-| | |
-|---|---|
 | [evaluate](gbcCustom.evaluate_py.html) | the connectivity of the pairs i[k], j[k]: the function's value, or 1 where the property differs by at most the threshold, as an angle for vectors and orientations, 0 otherwise |
 
 ## Used on

@@ -15,9 +15,13 @@ the transform it inverts
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformInverse.inv(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L883">source</a></font>
 {% endraw %}

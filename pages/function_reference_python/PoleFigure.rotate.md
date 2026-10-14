@@ -17,9 +17,13 @@ strips the group from the frame
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PoleFigure.rotate(self, rot)
 ```
+
+</div>
 
 MATLAB's [PoleFigure.rotate](PoleFigure.rotate.html)
 

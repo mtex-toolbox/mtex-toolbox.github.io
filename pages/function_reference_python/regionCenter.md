@@ -16,17 +16,27 @@ sector, so it is this centre and not the group's Dirichlet centre that it turns 
 
 ## Syntax
 
-The centre as an (3,) array:
+<div class="mx-form" markdown="1">
 
 ```python
 c = regionCenter(cs.fundamentalSector())
 ```
 
-A finer grid for the centroid:
+The centre as an (3,) array.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = regionCenter(cs.fundamentalSector(), resolution=0.5*degree)
 ```
+
+A finer grid for the centroid.
+
+</div>
+
+## Description
 
 The resolution matters only for a region of four or more vertices, whose centroid is
 summed over an equispaced grid of that spacing; a region without boundary has its centre
@@ -34,21 +44,17 @@ at z.
 
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
-
-## Output
-
-| | |
-|---|---|
-| `c` | (3,) array, the unit vector of the centre |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `1*degree` | the spacing of the grid the area centroid is summed over |
+
+## Output
+
+| `c` | (3,) array, the unit vector of the centre |
 
 ## See also
 

@@ -15,9 +15,13 @@ the map as a list, one dimensional arrays in the order of the grid
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.flatten(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L413">source</a></font>
 {% endraw %}

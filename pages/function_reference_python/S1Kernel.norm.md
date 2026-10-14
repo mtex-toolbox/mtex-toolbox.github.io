@@ -15,15 +15,23 @@ the L2 norm of the kernel, the Euclidean norm of its two sided coefficients
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 t = norm(psi)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S1Kernel.norm(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1081">source</a></font>
 {% endraw %}

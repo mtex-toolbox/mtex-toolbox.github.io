@@ -14,32 +14,38 @@ counts as an image; the direction itself when no image lies inside
 
 ## Syntax
 
-Under the group of v's frame:
+<div class="mx-form" markdown="1">
 
 ```python
 w = projectIntoRegion(v, sR)
 ```
 
-Under another group:
+Under the group of v's frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 w = projectIntoRegion(v, sR, cs.sym)
 ```
 
+Under another group.
+
+</div>
+
+## Description
+
 The antipode counts when v or the region is antipodal.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d or Miller |
 | `sR` | sphericalRegion |
 | `pg` | the point group, by default that of the frame of v |
 
 ## Output
 
-| | |
-|---|---|
 | `w` | the images, of the class and shape of v |
 
 ## See also
@@ -48,9 +54,13 @@ The antipode counts when v or the region is antipodal.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 projectIntoRegion(v, sR, pg=None)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L684">source</a></font>
 {% endraw %}

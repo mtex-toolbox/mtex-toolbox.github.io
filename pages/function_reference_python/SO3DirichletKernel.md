@@ -15,15 +15,17 @@ the kernel for physical properties
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3DirichletKernel(35)
 SO3DirichletKernel()        N the preference maxSO3Bandwidth
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](SO3DirichletKernel.bandwidth_py.html) | the degree N of the kernel |
 | [radon](SO3DirichletKernel.radon_py.html) | the Radon transform: the Dirichlet kernel on the sphere of the same degree |
 

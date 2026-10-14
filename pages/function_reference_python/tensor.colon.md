@@ -15,23 +15,35 @@ MATLAB's A:B
 
 ## Syntax
 
-A stiffness and a strain give a stress:
+<div class="mx-form" markdown="1">
 
 ```python
 sigma = colon(C, eps)
 ```
 
-Two rank two tensors a number:
+A stiffness and a strain give a stress.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = colon(sigma, eps)
 ```
 
+Two rank two tensors a number.
+
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 colon(A, B)
 ```
+
+</div>
 
 ## Used on
 

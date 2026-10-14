@@ -15,9 +15,13 @@ number, the cell under Cell/Dim and Cell/Angles, the colour as r,g,b
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 loadPHL(fname)
 ```
+
+</div>
 
 MATLAB's [loadPHL](loadPHL.html)
 

@@ -17,17 +17,27 @@ calcFourier
 
 ## Syntax
 
-Up to the bandwidth of the kernel, psi.A:
+<div class="mx-form" markdown="1">
 
 ```python
 A = psi.calcFourier()
 ```
 
-Up to the degree 64:
+Up to the bandwidth of the kernel, psi.A.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 A = psi.calcFourier(64)
 ```
+
+Up to the degree 64.
+
+</div>
+
+## Description
 
 The kernel is the series psi(cos(omega/2)) = sum_n A_n U_2n(cos(omega/2)) of Chebyshev
 polynomials of the second kind; the coefficients come in closed form or by a recurrence for
@@ -36,21 +46,17 @@ the kernel families and by quadrature for a kernel given as a function. MATLAB's
 
 ## Input
 
-| | |
-|---|---|
 | `psi` | SO3Kernel |
-
-## Output
-
-| | |
-|---|---|
-| `A` | ndarray of L + 1 coefficients |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `L` | `None` | the largest degree, the bandwidth of the kernel when not given |
+
+## Output
+
+| `A` | ndarray of L + 1 coefficients |
 
 ## See also
 

@@ -16,38 +16,42 @@ the polygons with the shape and the face each one is
 
 ## Syntax
 
-The front faces seen down the map normal:
+<div class="mx-form" markdown="1">
 
 ```python
 polys, shape, face = shapeOutlines(ori * cS, ebsd.lattice.plane)
 ```
 
-Under a layout that flips the plane:
+The front faces seen down the map normal.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 polys, shape, face = shapeOutlines(cS, ebsd.lattice.plane, layout=[[1, 0], [0, -1]])
 ```
 
+Under a layout that flips the plane.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `cS` | crystalShape, one shape or a list of shapes |
 | `plane` | mapPlane, the plane the shapes are seen in |
 
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `layout` | `None` | 2 x 2 matrix, the turn of the plane coordinates to the screen; the identity by default |
+
 ## Output
 
-| | |
-|---|---|
 | `polys` | list of (k, 2) arrays, the polygons on the screen |
 | `shape` | int array, the shape every polygon belongs to |
 | `face` | int array, the face of the shape every polygon is |
-
-## Keywords
-
-| | default | |
-|---|---|---|
-| `layout` | `None` | 2 x 2 matrix, the turn of the plane coordinates to the screen; the identity by default |
 
 ## See also
 

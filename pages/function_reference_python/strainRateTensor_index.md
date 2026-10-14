@@ -15,36 +15,38 @@ double convention of the Voigt notation
 
 ## Syntax
 
-By its 3 x 3 matrix:
+<div class="mx-form" markdown="1">
 
 ```python
 E = strainRateTensor(M)
 ```
 
-The symmetric part of a velocity gradient:
+By its 3 x 3 matrix.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 E = strainRate(L)
 ```
+
+The symmetric part of a velocity gradient.
+
+</div>
+
+## Description
 
 Only the symmetric part of the matrix given is kept, as MATLAB's constructor does, so that
 strainRateTensor(L) of a velocity gradient is strainRate(L).
 
 ## Input
 
-| | |
-|---|---|
 | `M` | 3 x 3 matrix, or an array (..., 3, 3) of them |
-
-## Output
-
-| | |
-|---|---|
-| `E` | strainRateTensor |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` |  | the rank of the tensor; for this class always two |
 | `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal |
@@ -55,14 +57,16 @@ strainRateTensor(L) of a velocity gradient is strainRate(L).
 | `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
 | `dtype` |  | the NumPy type of the coefficients |
 
+## Output
+
+| `E` | strainRateTensor |
+
 ## See also
 
 [tensor](tensor_index_py.html), [velocityGradientTensor](velocityGradientTensor_index_py.html), [strainTensor](strainTensor_index_py.html), [velocityGradientTensor.strainRate](velocityGradientTensor.strainRate_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [strainRateTensor](strainRateTensor.strainRateTensor_py.html) | a rank two symmetric strain rate tensor, the symmetric part of a velocity gradient, in the double convention of the Voigt notation |
 
 ## Used on

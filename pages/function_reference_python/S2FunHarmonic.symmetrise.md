@@ -18,23 +18,37 @@ MATLAB's symmetrise
 
 ## Syntax
 
-Under the group of the frame of sF:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = symmetrise(sF)
 ```
 
-Under the group of another frame, the result in that frame:
+Under the group of the frame of sF.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = symmetrise(sF, crystalFrame('432'))
 ```
 
-The mean over a group of rotations:
+Under the group of another frame, the result in that frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = sF.symmetrise(rotation.byAxisAngle(zvector, np.arange(4)*90*degree))
 ```
+
+The mean over a group of rotations.
+
+</div>
+
+## Description
 
 Each degree is averaged over the group, the mean of the Wigner matrices of its rotations
 applied to the coefficients, which keeps exactly the invariant part. A frame given puts the
@@ -43,21 +57,17 @@ returning a kernel, has no counterpart.
 
 ## Input
 
-| | |
-|---|---|
-| `sF` | S2FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
 | `sF` | S2FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rots` | `None` | rotation of a group, or a crystalFrame or specimenFrame whose group is taken |
+
+## Output
+
+| `sF` | S2FunHarmonic |
 
 ## See also
 

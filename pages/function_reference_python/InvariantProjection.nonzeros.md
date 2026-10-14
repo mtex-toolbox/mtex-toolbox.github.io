@@ -17,9 +17,13 @@ projection keeps them, a leading block of degrees reads a prefix
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 InvariantProjection.nonzeros(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L308">source</a></font>
 {% endraw %}

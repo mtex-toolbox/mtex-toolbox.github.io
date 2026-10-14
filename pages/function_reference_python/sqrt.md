@@ -13,14 +13,16 @@ sqrt(x, ...) is x.sqrt(...), the method of the object passed; NumPy's sqrt for a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sqrt(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [S1FunHarmonic](S1FunHarmonic.sqrt_py.html) | the pointwise square root, a Fourier series of a smoothing bandwidth, or at the bandwidth given |
 | [S2FunHarmonic](S2FunHarmonic.sqrt_py.html) | the square root of the function, expanded by quadrature, or at the bandwidth given |
 | [S2FunTri](S2FunTri.sqrt_py.html) | the square root of the function, taken at the vertices |

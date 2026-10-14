@@ -15,9 +15,13 @@ the mean shift in pixels of size px over the tiles measured, [mean length, mean 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 pairShifts.meanShift(self, px)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/registration.py#L278">source</a></font>
 {% endraw %}

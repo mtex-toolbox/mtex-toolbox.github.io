@@ -16,9 +16,13 @@ the values of the distribution at orientations, the mean over the symmetric copi
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunBingham.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3FunBingham.eval](SO3FunBingham.eval.html)
 

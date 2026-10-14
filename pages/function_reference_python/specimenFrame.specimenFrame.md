@@ -14,53 +14,87 @@ the reference frame a sample is expressed in, with the sample symmetry it claims
 
 ## Syntax
 
-The session default frame:
+<div class="mx-form" markdown="1">
 
 ```python
 ss = specimenFrame()
 ```
 
-The session frame in that sample symmetry:
+The session default frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ss = specimenFrame('mmm')
 ```
 
-The same by the crystal system:
+The session frame in that sample symmetry.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ss = specimenFrame('orthorhombic')
 ```
 
-The session frame drawn that way:
+The same by the crystal system.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ss = specimenFrame(pC)
 ```
 
-That frame, claiming no symmetry:
+The session frame drawn that way.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ss = specimenFrame(otherFrame)
 ```
 
-A fresh named frame:
+That frame, claiming no symmetry.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ss = specimenFrame('rolling', axesNames=('RD', 'TD', 'ND'), how2plot='y←↑x')
 ```
 
-A named session frame:
+A fresh named frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ss = specimenFrame.rolling
 ```
 
-In a sample symmetry:
+A named session frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ss = specimenFrame.rolling('mmm')
 ```
+
+In a sample symmetry.
+
+</div>
+
+## Description
 
 The named frames, specimenFrame.specimen (X, Y, Z), .measurement, .rolling (RD, TD, ND),
 .geological and .default, are the session's instances, so that moving between specimen
@@ -71,24 +105,20 @@ symmetry, never about a direction.
 
 ## Input
 
-| | |
-|---|---|
 | `name` | a point group symbol or crystal system, the sample symmetry; or the name of a fresh frame; or a plottingConvention or another specimenFrame |
-
-## Output
-
-| | |
-|---|---|
-| `ss` | specimenFrame |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axesNames` | `('X', 'Y', 'Z')` | the names of the three axes |
 | `how2plot` | `None` | the plottingConvention of the frame |
 | `intern` | `True` | register the frame with the session |
 | `basis` | `None` | vector3d, the basis vectors in canonical coordinates |
+
+## Output
+
+| `ss` | specimenFrame |
 
 ## See also
 

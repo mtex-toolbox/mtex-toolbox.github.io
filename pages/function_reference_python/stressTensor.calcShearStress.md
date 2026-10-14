@@ -17,9 +17,13 @@ system carrying the largest one
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 stressTensor.calcShearStress(sigma, sS)
 ```
+
+</div>
 
 MATLAB's [stressTensor.calcShearStress](stressTensor.calcShearStress.html)
 

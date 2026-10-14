@@ -13,14 +13,16 @@ isnan(x, ...) is x.isnan(...), the method of the object passed; NumPy's isnan fo
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 isnan(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [quaternion](quaternion.isnan_py.html) | whether a quaternion has a NaN coefficient |
 | [vector3d](vector3d.isnan_py.html) | whether a vector has a NaN coordinate |
 

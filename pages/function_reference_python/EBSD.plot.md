@@ -14,65 +14,107 @@ a spatial EBSD map, coloured by phase, by a value, by orientation or by colours 
 
 ## Syntax
 
-Colours by phase, with a legend:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd)
 ```
 
-Colours by a value, here MAD:
+Colours by phase, with a legend.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd, ebsd.mad)
 ```
 
-With a colour bar of a fixed range:
+Colours by a value, here MAD.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd, ebsd.mad, colorbar=True, colorRange=(0, 1))
 ```
 
-Colours by orientation:
+With a colour bar of a fixed range.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd['Forsterite'], ebsd['Forsterite'].orientations)
 ```
 
-Every phase by its inverse pole figure key along x:
+Colours by orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd, ipfDirection=xvector)
 ```
 
-By an orientation colour key:
+Every phase by its inverse pole figure key along x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd['Forsterite'], key)
 ```
 
-By colours of one's own, n x 3:
+By an orientation colour key.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd['Forsterite'], rgb)
 ```
 
-One colour, in the legend:
+By colours of one's own, n x 3.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd[ebsd.mad > 1], faceColor='black', displayName='bad values')
 ```
 
-A part of the map:
+One colour, in the legend.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd, region=(0, 400, 0, 200))
 ```
 
-The measurements as dots:
+A part of the map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd, backend='scatter', markerSize=2)
 ```
+
+The measurements as dots.
+
+</div>
+
+## Description
 
 The map is drawn in the plotting convention of its frame (ebsd.how2plot), with a scale bar
 and the axes of the specimen frame in one corner. The colouring follows mapValues: the
@@ -94,20 +136,12 @@ every other keyword goes to the matplotlib artist.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD, a map of the plane |
 | `color` | the colouring: an array of values or of RGB colours, orientations, an orientationColorKey, a crystalShape drawn at every measurement, a property name, 'phase', 'orientation' or one colour |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib image, collection or scatter drawn; MATLAB's second output, the map plot, is h.axes' mapPlot |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `None` | one colour for every measurement; 'none' outlines the cells |
 | `backend` | `None` | 'imagesc', 'patch' or 'scatter', as above |
@@ -125,6 +159,10 @@ every other keyword goes to the matplotlib artist.
 | `legend` | `None` | draw the legend of the phases or the inverse pole figure keys; by default for a phase map |
 | `displayName` | `None` | the name in a legend |
 | `markerSize` | `4` | the size of the dots of backend='scatter' |
+
+## Output
+
+| `h` | the matplotlib image, collection or scatter drawn; MATLAB's second output, the map plot, is h.axes' mapPlot |
 
 ## See also
 

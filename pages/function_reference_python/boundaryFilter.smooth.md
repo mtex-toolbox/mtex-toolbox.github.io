@@ -15,9 +15,13 @@ V are the vertices (n, 2) of the network, h the spacing they are sampled at
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 boundaryFilter.smooth(self, V, net, h)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L109">source</a></font>
 {% endraw %}

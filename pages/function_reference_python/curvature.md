@@ -13,14 +13,16 @@ curvature(x, ...) is x.curvature(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 curvature(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [dislocationDensityTensor](dislocationDensityTensor.curvature_py.html) | the curvature tensor of a dislocation density tensor by Nye's relation, kappa = alpha^T - tr(alpha) I / 2 |
 | [EBSD](EBSD.curvature_py.html) | the curvature tensor of every pixel, kappa = d omega / d x, in the specimen frame per scan unit |
 | [EBSD3](EBSD3square.curvature_py.html) | the curvature tensor of every voxel |

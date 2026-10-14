@@ -15,9 +15,13 @@ the halfwidth, the radius delta of the bump
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3BumpKernel.halfwidth(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L550">source</a></font>
 {% endraw %}

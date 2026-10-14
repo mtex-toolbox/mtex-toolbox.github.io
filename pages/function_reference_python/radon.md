@@ -13,14 +13,16 @@ radon(x, ...) is x.radon(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 radon(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [fibreVonMisesFisherKernel](fibreVonMisesFisherKernel.radon_py.html) | the Radon transform: the kernel on the sphere of the same coefficients, in closed form |
 | [S2FunHarmonic](S2FunHarmonic.radon_py.html) | the Funk transform, the mean over the great circle perpendicular to every direction |
 | [S2Kernel](S2Kernel.radon_py.html) | the Funk transform: A_n P_n(0) |

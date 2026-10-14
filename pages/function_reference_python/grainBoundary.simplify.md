@@ -17,29 +17,47 @@ MATLAB's grainBoundary.simplify
 
 ## Syntax
 
-The pixel staircase straightened:
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.simplify()
 ```
 
-A tolerance of 0.5 map units:
+The pixel staircase straightened.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.simplify(0.5)
 ```
 
-These vertices kept as well:
+A tolerance of 0.5 map units.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.simplify(protect=vertexIds)
 ```
 
-No grain of the list collapsed:
+These vertices kept as well.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.simplify(keepGrains=grains.id)
 ```
+
+No grain of the list collapsed.
+
+</div>
+
+## Description
 
 A vertex is dropped when leaving it out moves the boundary by less than epsilon, so many
 vertices go along a straight run and none at a corner; on a pixel grid this turns a
@@ -53,23 +71,19 @@ boundary at 45 degree, so it removes the grid and nothing else.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
-
-## Output
-
-| | |
-|---|---|
-| `gB` | grainBoundary, the simplified boundary |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `epsilon` | `None` | the tolerance in the units of the map, how far the boundary may move; 0 leaves the boundary as it is, by default the median segment length over sqrt(2) |
 | `protect` | `None` | the ids of the vertices that must stay, on top of the junctions |
 | `keepGrains` | `None` | the ids of the grains that must keep a polygon: a grain smaller than epsilon would lose all its vertices and is not coarsened at all; MATLAB does this for every grain, grain2d.simplifyBoundary passes all of them |
+
+## Output
+
+| `gB` | grainBoundary, the simplified boundary |
 
 ## See also
 

@@ -16,9 +16,13 @@ the complex conjugate function
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunHarmonic.conj(self)
 ```
+
+</div>
 
 MATLAB's [SO3FunHarmonic.conj](SO3FunHarmonic.conj.html)
 

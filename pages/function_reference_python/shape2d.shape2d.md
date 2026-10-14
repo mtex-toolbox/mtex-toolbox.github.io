@@ -17,9 +17,13 @@ positive one
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 shape2d(V, plane=None, frame=None)
 ```
+
+</div>
 
 MATLAB's [shape2d.shape2d](shape2d.shape2d.html)
 

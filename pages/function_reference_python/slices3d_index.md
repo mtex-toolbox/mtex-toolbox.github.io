@@ -15,8 +15,6 @@ as the rows of D, and the voxel index of each slice, None for a slice not shown
 
 ## Members
 
-| | |
-|---|---|
 | [bounds](slices3d.bounds_py.html) | the corners (lo, hi) of the box around the voxel volume |
 | [plane](slices3d.plane_py.html) | the slice through voxel index i along axis a: its colours (rows, cols, 3) over the other two axes in increasing index, the voxels shown, and the corners of its rectangle, the first at index (-1/2, -1/2), then along the rows, the columns, both |
 | [planes](slices3d.planes_py.html) | the slices shown, one plane(a) each, the axes without a slice left out |

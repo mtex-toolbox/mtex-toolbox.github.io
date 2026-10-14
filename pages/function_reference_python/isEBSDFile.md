@@ -13,9 +13,13 @@ whether a name is an EBSD file by its extension; a .crc beside its .cpr is the s
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 isEBSDFile(name)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L118">source</a></font>
 {% endraw %}

@@ -17,23 +17,37 @@ gradients of its harmonic expansion, as MATLAB's grad
 
 ## Syntax
 
-The gradients at ori, tangent vectors on the left:
+<div class="mx-form" markdown="1">
 
 ```python
 g = SO3F.grad(ori)
 ```
 
-Tangent vectors on the right, in crystal coordinates:
+The gradients at ori, tangent vectors on the left.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 g = SO3F.grad(ori, side='right')
 ```
 
-The gradient field, an SO3VectorFieldHarmonic:
+Tangent vectors on the right, in crystal coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 G = SO3F.grad()
 ```
+
+The gradient field, an SO3VectorFieldHarmonic.
+
+</div>
+
+## Description
 
 Over every pair of a symmetric equivalent h of the crystal direction and the specimen
 direction r, the gradient is psi'(t) (g h x r) on the left and psi'(t) (h x g^-1 r) on
@@ -41,23 +55,19 @@ the right, t = g h . r and psi' the derivative of the kernel in t.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunCBF |
-
-## Output
-
-| | |
-|---|---|
-| `g` | SO3TangentVector at the orientations |
-| `G` | SO3VectorFieldHarmonic without them |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `x` | `None` | the orientations; without them the gradient field is returned |
 | `side` | `'left'` | 'left' or 'right', the side of the tangent vectors |
+
+## Output
+
+| `g` | SO3TangentVector at the orientations |
+| `G` | SO3VectorFieldHarmonic without them |
 
 ## See also
 

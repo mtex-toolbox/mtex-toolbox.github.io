@@ -14,23 +14,37 @@ of the same function in the Euler angles
 
 ## Syntax
 
-The full Fourier array, axes (l, k, j):
+<div class="mx-form" markdown="1">
 
 ```python
 G = wignerTransform(fhat, L)
 ```
 
-A real function, only l >= 0:
+The full Fourier array, axes (l, k, j).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 G = wignerTransform(fhat, L, real=True)
 ```
 
-A 4 fold about z in the crystal, 2 fold in the specimen:
+A real function, only l >= 0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 G = wignerTransform(fhat, L, folds=(4, 2))
 ```
+
+A 4 fold about z in the crystal, 2 fold in the specimen.
+
+</div>
+
+## Description
 
 A Wigner series of bandwidth L is a trigonometric series in the Euler angles,
 f(alpha, beta, gamma) = sum G[l, k, j] e^{-i(k alpha + j beta + l gamma)}, with
@@ -46,24 +60,20 @@ k = 0 mod rB: those axes are indexed by l / rA and k / rB.
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | the internal Wigner coefficients, a complex array of at least the degrees 0 to L |
 | `L` | the bandwidth |
 
-## Output
-
-| | |
-|---|---|
-| `G` | complex array of the shape foldedDims(L, real, folds) |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` | `False` | the function is real, the array kept for l >= 0 |
 | `folds` | `(1, 1)` | (rA, rB), the folds about z in the crystal and the specimen |
 | `degrees` | `None` | pairs (n, d_n(pi/2)) to sum over instead of the cached matrices, which selects the NumPy form |
+
+## Output
+
+| `G` | complex array of the shape foldedDims(L, real, folds) |
 
 ## See also
 

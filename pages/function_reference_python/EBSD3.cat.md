@@ -16,15 +16,23 @@ the list of several maps, the phases of the first, MATLAB's [ebsd1, ebsd2]
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 ebsd = EBSD.cat(ebsd1, ebsd2, ebsd3)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 EBSD3.cat(*maps)
 ```
+
+</div>
 
 MATLAB's [EBSD3.cat](EBSD3.cat.html)
 

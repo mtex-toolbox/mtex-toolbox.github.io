@@ -14,14 +14,16 @@ fundamentalRegion(x, ...) is x.fundamentalRegion(...), the method of the object 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 fundamentalRegion(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [orientation](orientation.fundamentalRegion_py.html) | the fundamental region of the orientations, the orientationRegion of the groups of CS and SS |
 | [referenceFrame](referenceFrame.fundamentalRegion_py.html) | the fundamental region in orientation space of this group, or of the pair with another frame |
 | [symmetry](symmetry.fundamentalRegion_py.html) | the fundamental region of orientations of this group and another one, the Dirichlet domain of the identity |

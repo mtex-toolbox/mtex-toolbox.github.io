@@ -17,9 +17,13 @@ the class kept
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.sqrtm(self)
 ```
+
+</div>
 
 MATLAB's [tensor.sqrtm](tensor.sqrtm.html)
 

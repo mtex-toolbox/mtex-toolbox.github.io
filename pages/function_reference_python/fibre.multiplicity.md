@@ -16,9 +16,13 @@ the number of distinct symmetrically equivalent fibres
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 fibre.multiplicity(self)
 ```
+
+</div>
 
 MATLAB's [fibre.multiplicity](fibre.multiplicity.html)
 

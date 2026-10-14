@@ -15,9 +15,13 @@ whether a vector has a NaN coordinate
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.isnan(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L806">source</a></font>
 {% endraw %}

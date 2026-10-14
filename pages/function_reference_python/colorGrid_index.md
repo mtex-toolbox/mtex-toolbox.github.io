@@ -14,14 +14,16 @@ then looked up at the node nearest a direction
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 g = colorGrid(key, resolution=0.5*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [direction2color](colorGrid.direction2color_py.html) | a NaN or zero direction, the pole of an unmeasured orientation, has no grid node and is coloured white, as MTEX greys such a cell rather than failing the map |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L434">source</a></font>

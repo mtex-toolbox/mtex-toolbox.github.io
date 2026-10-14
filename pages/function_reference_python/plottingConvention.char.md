@@ -15,42 +15,50 @@ A method of [plottingConvention](plottingConvention_index_py.html).
 
 ## Syntax
 
-'y↑→x':
+<div class="mx-form" markdown="1">
 
 ```python
 s = pC.char()
 ```
 
-'y^->x':
+'y↑→x'.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = pC.char(utf8=False)
 ```
 
-In the axis names of a file, 'Y1↑→X1':
+'y^->x'.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = pC.char(names=('X1', 'Y1', 'Z1'))
 ```
 
+In the axis names of a file, 'Y1↑→X1'.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `pC` | plottingConvention |
-
-## Output
-
-| | |
-|---|---|
-| `s` | str |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `utf8` | `None` | arrows as Unicode characters, or as ASCII ('^', 'v', '->', '<-'); by default the preference 'UTF8Output' |
 | `names` | `('x', 'y', 'z')` | the names of the three reference axes |
+
+## Output
+
+| `s` | str |
 
 ## See also
 

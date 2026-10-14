@@ -16,9 +16,13 @@ the proper rotation group of the Laue group: the rotation parts of all elements
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetry.properGroup(self)
 ```
+
+</div>
 
 MATLAB's [symmetry.properGroup](symmetry.properGroup.html)
 

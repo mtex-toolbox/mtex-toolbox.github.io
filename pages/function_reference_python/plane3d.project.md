@@ -16,9 +16,13 @@ the orthogonal projection of points onto the plane
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 plane3d.project(self, v)
 ```
+
+</div>
 
 MATLAB's [plane3d.project](plane3d.project.html)
 

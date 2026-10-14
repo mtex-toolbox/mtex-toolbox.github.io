@@ -17,35 +17,39 @@ fibre.orientation
 
 ## Syntax
 
-1000 orientations along the fibre:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = f.orientation()
 ```
 
-10 of them:
+1000 orientations along the fibre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = f.orientation(points=10)
 ```
 
+10 of them.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `f` | fibre |
-
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation between the fibre's frames, of shape (points,) + f.shape |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `points` | `1000` | the number of orientations per fibre |
+
+## Output
+
+| `ori` | orientation between the fibre's frames, of shape (points,) + f.shape |
 
 ## See also
 

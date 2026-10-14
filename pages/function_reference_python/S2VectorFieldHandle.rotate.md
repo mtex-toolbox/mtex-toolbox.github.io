@@ -15,9 +15,13 @@ the field rotated by r, v'(xi) = r v(r^-1 xi)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHandle.rotate(self, r)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L559">source</a></font>
 {% endraw %}

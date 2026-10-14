@@ -16,17 +16,27 @@ the pointwise square root, a Fourier series of a smoothing bandwidth, or at the 
 
 ## Syntax
 
-At twice the bandwidth, at least 32:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = sqrt(sF)
 ```
 
-At the bandwidth given:
+At twice the bandwidth, at least 32.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = sqrt(sF, bandwidth=64)
 ```
+
+At the bandwidth given.
+
+</div>
+
+## Description
 
 The function is evaluated on an equispaced grid and expanded again by quadrature (mapFun).
 The square root is no trigonometric polynomial, so the expansion is cut at the bandwidth: by
@@ -35,21 +45,17 @@ S1FunHarmonic.quadrature.
 
 ## Input
 
-| | |
-|---|---|
-| `sF` | S1FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
 | `sF` | S1FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest frequency of the result |
+
+## Output
+
+| `sF` | S1FunHarmonic |
 
 ## See also
 

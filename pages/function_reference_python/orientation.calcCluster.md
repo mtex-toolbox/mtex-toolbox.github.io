@@ -17,41 +17,67 @@ zero, and the centre of every cluster
 
 ## Syntax
 
-Directions by CLASSIX:
+<div class="mx-form" markdown="1">
 
 ```python
 cId, center = calcCluster(v)
 ```
 
-Orientations by the modes of their density:
+Directions by CLASSIX.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cId, center = calcCluster(ori)
 ```
 
-Orientations by CLASSIX:
+Orientations by the modes of their density.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cId, center = calcCluster(ori, method='classix', radius=0.1, minPoints=15)
 ```
 
-The five largest modes:
+Orientations by CLASSIX.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cId, center = calcCluster(ori, method='odf', halfwidth=3*degree, numCluster=5)
 ```
 
-Merged until the centres are 15 degree apart:
+The five largest modes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cId, center = calcCluster(ori, method='hierarchical', maxAngle=15*degree)
 ```
 
-Merged until five clusters are left:
+Merged until the centres are 15 degree apart.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cId, center = calcCluster(v, method='hierarchical', numCluster=5)
 ```
+
+Merged until five clusters are left.
+
+</div>
+
+## Description
 
 Three methods. CLASSIX, the default for directions, sorts the points along their first
 principal axis, groups them within a radius and merges the groups whose centres are close;
@@ -70,21 +96,12 @@ means for antipodal directions; cId has the shape of the input.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d, the directions |
 | `ori` | orientation, the orientations |
 
-## Output
-
-| | |
-|---|---|
-| `cId` | ndarray of ints, the cluster of every element counted from zero, a float array with NaN for the orientations the density method leaves out |
-| `center` | vector3d or orientation, the centre of every cluster |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `method` | `None` | 'classix' (default for directions), 'odf' (default for orientations, the modes of the density) or 'hierarchical'; may also be given positionally |
 | `radius` | `None` | the radius of the CLASSIX groups, in the scaled coordinates; by default estimated from the distance to the tenth nearest neighbour |
@@ -96,6 +113,11 @@ means for antipodal directions; cId has the shape of the input.
 | `weights` | `None` | a weight per element, for the density and the hierarchical method |
 | `resolution` | `2.5*degree` | the grid the hierarchical method bins more than 1000 orientations on |
 | `verbose` | `False` | accepted for MATLAB's 'silent'; nothing is reported |
+
+## Output
+
+| `cId` | ndarray of ints, the cluster of every element counted from zero, a float array with NaN for the orientations the density method leaves out |
+| `center` | vector3d or orientation, the centre of every cluster |
 
 ## References
 

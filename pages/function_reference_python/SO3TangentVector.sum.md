@@ -16,35 +16,39 @@ the sum of tangent vectors at one shared reference, over all or along an axis
 
 ## Syntax
 
-Over all:
+<div class="mx-form" markdown="1">
 
 ```python
 s = sum(v)
 ```
 
-Along the first axis:
+Over all.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = sum(v, axis=0)
 ```
 
+Along the first axis.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `v` | SO3TangentVector, every one at the same reference |
-
-## Output
-
-| | |
-|---|---|
-| `s` | SO3TangentVector at that reference |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `None` | the axis or axes of the list to sum along, all by default |
+
+## Output
+
+| `s` | SO3TangentVector at that reference |
 
 ## See also
 

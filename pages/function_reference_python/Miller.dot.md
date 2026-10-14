@@ -17,41 +17,67 @@ symmetric equivalents
 
 ## Syntax
 
-Pointwise, broadcast against each other:
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(v1, v2)
 ```
 
-Up to sign: the absolute value:
+Pointwise, broadcast against each other.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(v1, v2, antipodal=True)
 ```
 
-Crystal directions as they are given:
+Up to sign: the absolute value.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(m1, m2, symmetry=False)
 ```
 
-The smallest over the symmetric equivalents:
+Crystal directions as they are given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(m1, m2, min=True)
 ```
 
-Every symmetric equivalent:
+The smallest over the symmetric equivalents.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(m1, m2, all=True)
 ```
 
-Every pair, MATLAB's dot_outer:
+Every symmetric equivalent.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(v1, v2, outer=True)
 ```
+
+Every pair, MATLAB's dot_outer.
+
+</div>
+
+## Description
 
 An axis on either side reads the product up to sign; antipodal=True does so always,
 antipodal=False never. Crystal directions in a frame with symmetry give the largest product
@@ -59,26 +85,22 @@ over their symmetric equivalents.
 
 ## Input
 
-| | |
-|---|---|
 | `v1, v2` | vector3d |
 | `m1, m2` | vector3d in one crystal frame |
 
-## Output
-
-| | |
-|---|---|
-| `d` | array, of the broadcast shape; with outer=True of shape v1.shape + v2.shape |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `None` | read the vectors as axes: True always, False never; by default where one of them is an axis |
 | `symmetry` | `True` | take the symmetric equivalents of crystal directions into account |
 | `min` | `False` | the smallest product over the symmetric equivalents instead of the largest |
 | `all` | `False` | the products with every symmetric equivalent, along a new first axis |
 | `outer` | `False` | every entry of v1 with every entry of v2 |
+
+## Output
+
+| `d` | array, of the broadcast shape; with outer=True of shape v1.shape + v2.shape |
 
 ## See also
 

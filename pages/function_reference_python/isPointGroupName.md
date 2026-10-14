@@ -14,9 +14,13 @@ substring: the specimen frame 'measurement' is no group m
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 isPointGroupName(name)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/data/pointgroupnames.py#L58">source</a></font>
 {% endraw %}

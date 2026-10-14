@@ -17,29 +17,47 @@ MATLAB's grainBoundary.reduce
 
 ## Syntax
 
-Every second vertex:
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.reduce()
 ```
 
-Every fourth vertex:
+Every second vertex.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.reduce(4)
 ```
 
-These vertices kept as well:
+Every fourth vertex.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.reduce(2, protect=vertexIds)
 ```
 
-No grain of the list collapsed:
+These vertices kept as well.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.reduce(2, keepGrains=grains.id)
 ```
+
+No grain of the list collapsed.
+
+</div>
+
+## Description
 
 The vertices between the kept ones are dissolved and their segments merged, so the
 boundary stays connected and keeps its length up to the straightening of the dissolved
@@ -53,23 +71,19 @@ needs them and is mostly the better choice.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
-
-## Output
-
-| | |
-|---|---|
-| `gB` | grainBoundary, the coarsened boundary |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `2` | keep every n-th vertex along each chain; 1 or less leaves the boundary as it is |
 | `protect` | `None` | the ids of the vertices that must stay, on top of the junctions |
 | `keepGrains` | `None` | the ids of the grains that must keep a polygon: a grain that would be left with fewer than three vertices is not coarsened at all; MATLAB does this for every grain, grain2d.reduceBoundary passes all of them |
+
+## Output
+
+| `gB` | grainBoundary, the coarsened boundary |
 
 ## See also
 

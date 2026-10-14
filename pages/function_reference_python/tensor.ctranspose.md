@@ -16,9 +16,13 @@ the transpose swaps the indices of a rank two and the pairs of a rank four
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.ctranspose(self)
 ```
+
+</div>
 
 MATLAB's [tensor.ctranspose](tensor.ctranspose.html)
 

@@ -16,9 +16,13 @@ a uniform portion of 0.73 and a von Mises Fisher component of 10 degree halfwidt
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SantaFe()
 ```
+
+</div>
 
 ## Used on
 

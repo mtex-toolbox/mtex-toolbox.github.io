@@ -13,14 +13,16 @@ calcGND(x, ...) is x.calcGND(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 calcGND(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.calcGND_py.html) | the geometrically necessary dislocation content of every pixel after Pantleon (2008) |
 | [EBSD3](EBSD3square.calcGND_py.html) | the geometrically necessary dislocation content of every pixel after Pantleon (2008) |
 

@@ -15,29 +15,47 @@ unimodal components fitted to scattered pole figure intensities
 
 ## Syntax
 
-Set up the solver:
+<div class="mx-form" markdown="1">
 
 ```python
 solver = MLSSolver(pf, resolution=5*degree, halfwidth=7.5*degree)
 ```
 
-And run it:
+Set up the solver.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = solver.calcODF()
 ```
 
-A kernel and the centres given:
+And run it.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 solver = MLSSolver(pf, psi, S3G=grid)
 ```
 
-The scaling of each pole figure:
+A kernel and the centres given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 solver.alpha
 ```
+
+The scaling of each pole figure.
+
+</div>
+
+## Description
 
 The ansatz functions have the shape of a kernel, by default the de la Vallee Poussin kernel,
 and sit on a grid of orientations, by default an equispaced grid of the resolution. The
@@ -51,21 +69,13 @@ scaling factors, solver.zrm the zero range method; solver.odf the ODF they descr
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
 | `psi` | SO3Kernel, the shape of the ansatz functions |
 | `grid` | orientation, the centres of the ansatz functions |
 
-## Output
-
-| | |
-|---|---|
-| `solver` | MLSSolver |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `None` | the spacing of the grid the ansatz functions sit on, by default the resolution of the pole figures (MATLAB: 3/2 of it) |
 | `halfwidth` | `None` | the halfwidth of the ansatz functions, by default the resolution of the grid (MATLAB: 2/3 of it) |
@@ -80,6 +90,10 @@ scaling factors, solver.zrm the zero range method; solver.odf the ODF they descr
 | `intensityWeights` | `False` | weight the residuals with (1 + I)^(-1/2), the counting statistics of the intensities I |
 | `regularisation` | `0.0` | the weight of a penalty on the Dirichlet energy, a discrete Laplacian on the grid; zero for none |
 | `verbose` | `False` | report the fit of every pole figure in every iteration |
+
+## Output
+
+| `solver` | MLSSolver |
 
 ## References
 

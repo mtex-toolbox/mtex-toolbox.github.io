@@ -13,29 +13,47 @@ the file of a sample data set, or its files, fetched on first use
 
 ## Syntax
 
-The file of a map:
+<div class="mx-form" markdown="1">
 
 ```python
 fname = mtexdatafile('forsterite')
 ```
 
-A data set of several files:
+The file of a map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 tess, oris = mtexdatafile('my100grains')
 ```
 
-Only a file already there:
+A data set of several files.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fname = mtexdatafile('forsterite', root=mtexDataPath(), download=False)
 ```
 
-Fetched without saying so:
+Only a file already there.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fnames = mtexdatafile('dubna', verbose=False)
 ```
+
+Fetched without saying so.
+
+</div>
+
+## Description
 
 Besides the data sets mtexdata reads, every data set of the data repository has its
 files here, the Neper tessellation 'my100grains' for instance. A data set of one file gives
@@ -44,23 +62,19 @@ repository into the folder root.
 
 ## Input
 
-| | |
-|---|---|
 | `name` | the name of a data set, as mtexdata() lists them, or of a data set of the repository |
-
-## Output
-
-| | |
-|---|---|
-| `fname` | the path of the file, or a list of paths |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `root` | `None` | the folder the files are kept in, mtexDataPath() by default |
 | `download` | `True` | fetch a missing file; False raises for it instead |
 | `verbose` | `True` | say when a file is fetched |
+
+## Output
+
+| `fname` | the path of the file, or a list of paths |
 
 ## See also
 

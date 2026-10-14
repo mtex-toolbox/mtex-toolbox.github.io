@@ -13,14 +13,16 @@ disjoint(x, ...) is x.disjoint(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 disjoint(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.disjoint_py.html) | the sibling frame carrying the intersection of the two groups |
 | [symmetry](symmetry.disjoint_py.html) | the intersection of two groups, symmetry/disjoint |
 

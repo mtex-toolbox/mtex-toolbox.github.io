@@ -16,9 +16,13 @@ per pixel is taken in MATLAB's order of the list, column by column
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 simulateEBSD.makeMap(self)
 ```
+
+</div>
 
 ## Used on
 

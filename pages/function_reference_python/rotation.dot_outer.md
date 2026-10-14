@@ -16,38 +16,44 @@ the inner product up to sign, since q and -q are one rotation
 
 ## Syntax
 
-|cos(omega/2)| of the rotation between them:
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(rot1, rot2)
 ```
 
-With the sign of the quaternions:
+|cos(omega/2)| of the rotation between them.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(rot1, rot2, antipodal=False)
 ```
+
+With the sign of the quaternions.
+
+</div>
+
+## Description
 
 The absolute value is cos(omega / 2) of the angle omega between the rotations; the
 product with an improper transform is zero. orientation.dot reduces by the symmetry.
 
 ## Input
 
-| | |
-|---|---|
 | `rot1, rot2` | rotation |
-
-## Output
-
-| | |
-|---|---|
-| `d` | the inner products |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `True` | take the absolute value, q and -q being one rotation |
+
+## Output
+
+| `d` | the inner products |
 
 ## See also
 

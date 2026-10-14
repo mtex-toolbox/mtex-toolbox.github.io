@@ -13,14 +13,16 @@ subGrid(x, ...) is x.subGrid(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 subGrid(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [mapImage](mapImage.subGrid_py.html) | a rectangle cut out of the image |
 | [S1Grid](S1Grid.subGrid_py.html) | the points selected by a mask, the range kept |
 | [S2Grid](S2Grid.subGrid_py.html) | the grid points selected by a mask, or within eps of a centre |

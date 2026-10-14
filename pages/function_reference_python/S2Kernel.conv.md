@@ -17,9 +17,13 @@ divided by 2n+1, a kernel on the sphere
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Kernel.conv(self, other)
 ```
+
+</div>
 
 MATLAB's [S2Kernel.conv](S2Kernel.conv.html)
 

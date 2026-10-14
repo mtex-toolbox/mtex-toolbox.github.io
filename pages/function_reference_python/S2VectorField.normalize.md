@@ -16,9 +16,13 @@ the field scaled to unit length at every direction
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.normalize(self)
 ```
+
+</div>
 
 MATLAB's [S2VectorField.normalize](S2VectorField.normalize.html)
 

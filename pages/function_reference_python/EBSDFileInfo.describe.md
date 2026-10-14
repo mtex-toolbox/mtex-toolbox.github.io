@@ -15,9 +15,13 @@ the rows of the file information panel, name and value
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSDFileInfo.describe(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L81">source</a></font>
 {% endraw %}

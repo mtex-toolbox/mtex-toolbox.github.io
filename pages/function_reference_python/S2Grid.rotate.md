@@ -16,9 +16,13 @@ the vectors turned by a rotation, rot * v; a number is an angle about z
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Grid.rotate(self, rot)
 ```
+
+</div>
 
 MATLAB's [S2Grid.rotate](S2Grid.rotate.html)
 

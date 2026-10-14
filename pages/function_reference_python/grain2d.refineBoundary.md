@@ -17,17 +17,27 @@ pieces of about length delta; MATLAB's grain2d.refineBoundary
 
 ## Syntax
 
-Pieces of half the median segment length:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.refineBoundary()
 ```
 
-Pieces of about 10 map units:
+Pieces of half the median segment length.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.refineBoundary(10)
 ```
+
+Pieces of about 10 map units.
+
+</div>
+
+## Description
 
 The vertices stay where they are and the new ones lie on the old segments, so the grains
 keep their shape and only the sampling gets finer, which lets a following smoothBoundary
@@ -35,21 +45,17 @@ move evenly spaced vertices. Both boundaries are refined over one pool of vertic
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain2d |
-
-## Output
-
-| | |
-|---|---|
-| `grains` | grain2d, the polygons traced again |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `delta` | `None` | the length of the pieces in the units of the map, by default half the median segment length of the boundary |
+
+## Output
+
+| `grains` | grain2d, the polygons traced again |
 
 ## See also
 

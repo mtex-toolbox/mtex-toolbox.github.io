@@ -15,23 +15,37 @@ of the orientations that map the crystal direction h onto the specimen direction
 
 ## Syntax
 
-The volume within radius of the fibre h || r:
+<div class="mx-form" markdown="1">
 
 ```python
 v = fibreVolume(odf, h, r, radius)
 ```
 
-The fibre given as a fibre:
+The volume within radius of the fibre h || r.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = fibreVolume(odf, fibre(h, r), radius)
 ```
 
-A coarser quadrature:
+The fibre given as a fibre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = fibreVolume(odf, h, r, radius, resolution=2*degree)
 ```
+
+A coarser quadrature.
+
+</div>
+
+## Description
 
 The function is averaged over the tube about the fibre, the orientations g with g h within
 the radius of r: the directions u on the cap of the radius about r, and for each the turns
@@ -41,24 +55,20 @@ is (1 - cos radius) / 2 times the number of the copies.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun, an orientation density |
 | `h` | Miller, the crystal direction, or a fibre, whose h and r are taken |
 | `r` | vector3d, the specimen direction; with a fibre the radius |
 | `radius` | the angle of the tube about the fibre in radians |
 
-## Output
-
-| | |
-|---|---|
-| `v` | float, the volume between 0 and 1 |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `None` | the spacing of the quadrature of the tube; by default the smaller of one degree and a thirtieth of the radius |
+
+## Output
+
+| `v` | float, the volume between 0 and 1 |
 
 ## See also
 

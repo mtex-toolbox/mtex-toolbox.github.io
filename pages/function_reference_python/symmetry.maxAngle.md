@@ -15,45 +15,55 @@ the frames, MATLAB's maxAngle of a symmetry
 
 ## Syntax
 
-The largest angle of an orientation:
+<div class="mx-form" markdown="1">
 
 ```python
 omega = maxAngle(cs)
 ```
 
-The largest misorientation angle:
+The largest angle of an orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = maxAngle(cs, cs)
 ```
 
-With the misorientations' inverses identified:
+The largest misorientation angle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = maxAngle(cs, cs, antipodal=True)
 ```
+
+With the misorientations' inverses identified.
+
+</div>
+
+## Description
 
 MATLAB's maxAngle(cs, axis), the largest angle about an axis, is
 fundamentalRegion(cs).maxAngle(axis) here.
 
 ## Input
 
-| | |
-|---|---|
 | `frA` | crystalFrame |
 | `frB` | the second frame, by default the default specimen frame |
 
-## Output
-
-| | |
-|---|---|
-| `omega` | the angle in radians |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | identify every misorientation with its inverse |
+
+## Output
+
+| `omega` | the angle in radians |
 
 ## See also
 

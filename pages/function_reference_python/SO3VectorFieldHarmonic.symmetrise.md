@@ -18,9 +18,13 @@ on the right, by the Kronecker products
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.symmetrise(self)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldHarmonic.symmetrise](SO3VectorFieldHarmonic.symmetrise.html)
 

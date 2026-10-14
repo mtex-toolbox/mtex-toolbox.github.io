@@ -14,29 +14,47 @@ a Bingham distributed ODF; MATLAB's BinghamODF
 
 ## Syntax
 
-About one orientation, the identity basis in its frames:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = BinghamODF(20, ori)
 ```
 
-About a fibre:
+About one orientation, the identity basis in its frames.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = BinghamODF(20, f)
 ```
 
-The identity basis in a crystal frame:
+About a fibre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = BinghamODF(20, cs)
 ```
 
-Four concentrations, the axes a 4x4 matrix:
+The identity basis in a crystal frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = BinghamODF([20, 10, 0, 0], A, cs, ss)
 ```
+
+Four concentrations, the axes a 4x4 matrix.
+
+</div>
+
+## Description
 
 A Bingham distribution from four concentrations and four orthogonal quaternion axes, the
 axes as a 4x4 matrix, four orientations, or one orientation standing for the identity
@@ -46,16 +64,12 @@ and antipodal, are passed on.
 
 ## Input
 
-| | |
-|---|---|
 | `kappa` | the form parameters, up to four concentrations |
 | `A` | the axes: an orthogonal 4x4 matrix, four orientations, one orientation, a fibre, a crystal frame, or a crystal direction h followed by a specimen direction r for the fibre between them |
 | `frames` | the crystal and the specimen frame, when A does not carry them |
 
 ## Output
 
-| | |
-|---|---|
 | `odf` | SO3FunBingham |
 
 ## See also
@@ -64,9 +78,13 @@ and antipodal, are passed on.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 BinghamODF(kappa, A=None, *frames, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

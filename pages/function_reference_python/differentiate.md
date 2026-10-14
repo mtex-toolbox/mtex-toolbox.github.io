@@ -14,17 +14,27 @@ columns for the right; the degree is preserved
 
 ## Syntax
 
-The left derivatives, one column each:
+<div class="mx-form" markdown="1">
 
 ```python
 D = differentiate(SO3F._fhat)
 ```
 
-The right derivatives:
+The left derivatives, one column each.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 D = differentiate(SO3F._fhat, side='right')
 ```
+
+The right derivatives.
+
+</div>
+
+## Description
 
 The three columns are the coefficients of the derivatives along the x, y and z axes of the
 tangent space, the coefficient matrix of the gradient field; the vector is in the port's
@@ -33,21 +43,17 @@ counterpart.
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | ndarray, deg2dim(L + 1) Wigner coefficients |
-
-## Output
-
-| | |
-|---|---|
-| `D` | ndarray of shape (deg2dim(L + 1), 3) |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left' or 'right', the tangent space |
+
+## Output
+
+| `D` | ndarray of shape (deg2dim(L + 1), 3) |
 
 ## See also
 

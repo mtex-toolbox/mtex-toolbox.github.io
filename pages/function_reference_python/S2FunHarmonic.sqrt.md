@@ -16,17 +16,27 @@ the square root of the function, expanded by quadrature, or at the bandwidth giv
 
 ## Syntax
 
-At twice the bandwidth, at least 32:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = sqrt(sF)
 ```
 
-At the bandwidth given:
+At twice the bandwidth, at least 32.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = sqrt(sF, bandwidth=64)
 ```
+
+At the bandwidth given.
+
+</div>
+
+## Description
 
 The function is evaluated on a quadrature grid and expanded again (mapFun); the square root
 is no polynomial, so the expansion is cut at the bandwidth: by default twice that of the
@@ -34,21 +44,17 @@ function, at least 32. A negative value gives NaN.
 
 ## Input
 
-| | |
-|---|---|
-| `sF` | S2FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
 | `sF` | S2FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest harmonic degree of the result |
+
+## Output
+
+| `sF` | S2FunHarmonic |
 
 ## See also
 

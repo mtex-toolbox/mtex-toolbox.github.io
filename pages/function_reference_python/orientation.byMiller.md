@@ -17,16 +17,24 @@ of uvw the symmetric equivalent closest to perpendicular to hkl is used
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.byMiller(Miller(1, 1, 0, cs), Miller(0, 0, 1, cs, 'uvw'))
 orientation.byMiller([1, 1, 0], [0, 0, 1], cs)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 orientation.byMiller(hkl, uvw, *frames)
 ```
+
+</div>
 
 ## Used on
 

@@ -16,9 +16,13 @@ the number of proper rotations of the group
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetry.numProper(self)
 ```
+
+</div>
 
 MATLAB's [symmetry.numProper](symmetry.numProper.html)
 

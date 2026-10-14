@@ -16,9 +16,13 @@ the octahedral shear and normal strain, from the principal stretches
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 strainTensor.octahedralStrain(eps)
 ```
+
+</div>
 
 MATLAB's [strainTensor.octahedralStrain](strainTensor.octahedralStrain.html)
 

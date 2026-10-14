@@ -16,9 +16,13 @@ the Laplace-Beltrami operator applied to the function, degree n scaled by -n(n+1
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunHarmonic.laplace(self)
 ```
+
+</div>
 
 MATLAB's [SO3FunHarmonic.laplace](SO3FunHarmonic.laplace.html)
 

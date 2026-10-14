@@ -16,45 +16,55 @@ orientation a spin at a reference orientation leads to
 
 ## Syntax
 
-The rotation of the spin:
+<div class="mx-form" markdown="1">
 
 ```python
 rot = W.exp()
 ```
 
-The orientation reached from ori0:
+The rotation of the spin.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = W.exp(ori0)
 ```
 
-The spin applied on the crystal side:
+The orientation reached from ori0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = W.exp(ori0, side='right')
 ```
+
+The spin applied on the crystal side.
+
+</div>
+
+## Description
 
 A spin in a crystal frame acts on the right of the orientation, ori0 * exp(W), one in the
 specimen frame on the left, exp(W) * ori0, unless side says otherwise.
 
 ## Input
 
-| | |
-|---|---|
 | `W` | spinTensor |
-
-## Output
-
-| | |
-|---|---|
-| `rot` | rotation, or orientation with a reference |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ref` | `None` | orientation, the reference the spin starts at, ori0 above |
 | `side` | `None` | 'left' or 'right', the side the spin acts on; by default from the frame of W |
+
+## Output
+
+| `rot` | rotation, or orientation with a reference |
 
 ## See also
 

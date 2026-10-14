@@ -16,9 +16,13 @@ how much the outline is indented against its convex hull, in percent
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.paris(self)
 ```
+
+</div>
 
 ## Used on
 

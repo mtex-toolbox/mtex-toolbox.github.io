@@ -13,14 +13,16 @@ perp(x, ...) is x.perp(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 perp(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [vector3d](vector3d.perp_py.html) | the axis best orthogonal to a list of directions, the smallest principal axis |
 
 ## Used on

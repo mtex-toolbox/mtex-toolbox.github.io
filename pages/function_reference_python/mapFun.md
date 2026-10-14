@@ -14,17 +14,27 @@ bandwidths, capped by the preference, or at the given bandwidth
 
 ## Syntax
 
-Exp of one function:
+<div class="mx-form" markdown="1">
 
 ```python
 h = mapFun(np.exp, f)
 ```
 
-The pointwise maximum of two, of bandwidth 64:
+Exp of one function.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = mapFun(np.maximum, f, g, bandwidth=64)
 ```
+
+The pointwise maximum of two, of bandwidth 64.
+
+</div>
+
+## Description
 
 op is evaluated at the nodes of a quadrature grid of the bandwidth, with the values of f and
 gs as its arguments, and the result expanded again; the functions are on SO(3)
@@ -34,23 +44,19 @@ after the nodes. It is what exp, log, sqrt, max and min of the harmonic function
 
 ## Input
 
-| | |
-|---|---|
 | `op` | a function of arrays, applied to the values |
 | `f` | SO3FunHarmonic, S2FunHarmonic or S1FunHarmonic |
 | `gs` | further functions of the same kind and frames |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the harmonic function of the kind of f |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the bandwidth of the result; by default the sum of the bandwidths, at most the preference maxSO3Bandwidth, maxS2Bandwidth or maxS1Bandwidth |
+
+## Output
+
+| `h` | the harmonic function of the kind of f |
 
 ## See also
 

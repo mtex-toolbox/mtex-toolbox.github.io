@@ -14,47 +14,77 @@ function in the browser
 
 ## Syntax
 
-The list of the documentation pages:
+<div class="mx-form" markdown="1">
 
 ```python
 pages = openDoc()
 ```
 
-The pages of one chapter:
+The list of the documentation pages.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 openDoc('EBSDAnalysis')
 ```
 
-The page as a script, opened in VS Code:
+The pages of one chapter.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 path = openDoc('EBSDTutorial')
 ```
 
-The page as a Jupyter notebook:
+The page as a script, opened in VS Code.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 path = openDoc('EBSDTutorial', notebook=True)
 ```
 
-The reference page of a function by its name:
+The page as a Jupyter notebook.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 url = openDoc('fibre.angle')
 ```
 
-The reference page of a function itself:
+The reference page of a function by its name.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 url = openDoc(calcGrains)
 ```
 
-The reference page of a method:
+The reference page of a function itself.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 url = openDoc(ori.mean)
 ```
+
+The reference page of a method.
+
+</div>
+
+## Description
 
 A documentation page is written as <Page>.py, a "# %%" line before every section, into the
 current folder, and opened in VS Code, where every section runs on its own; with
@@ -64,24 +94,20 @@ page of the function reference on the MTEX website.
 
 ## Input
 
-| | |
-|---|---|
 | `name` | str, a documentation page, a chapter or the name of a function; or the function, class or method itself |
-
-## Output
-
-| | |
-|---|---|
-| `out` | the list of pages for no name, the pages of a chapter, the path of the file written, or the address of the reference page |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `folder` | `None` | the folder the script is written into, by default the current one |
 | `overwrite` | `False` | write the page again over a file of its name |
 | `edit` | `True` | open the script in VS Code, or the reference page in the browser; False only writes the file or returns the address |
 | `notebook` | `False` | write a Jupyter notebook instead of a script |
+
+## Output
+
+| `out` | the list of pages for no name, the pages of a chapter, the path of the file written, or the address of the reference page |
 
 ## See also
 

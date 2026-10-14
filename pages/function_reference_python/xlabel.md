@@ -14,30 +14,38 @@ matplotlib's own label would not show
 
 ## Syntax
 
-Under the current axes:
+<div class="mx-form" markdown="1">
 
 ```python
 xlabel('x')
 ```
 
-Under the current axes of a figure given:
+Under the current axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 xlabel('x', fig=mtexFig)
 ```
+
+Under the current axes of a figure given.
+
+</div>
+
+## Description
 
 The current axes is the one nextAxis prepared, else the one drawn into last; without an
 mtexFigure it is matplotlib's. Further keywords go to matplotlib's text.
 
 ## Input
 
-| | |
-|---|---|
 | `text` | the label |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure whose current axes takes the label; the current figure by default |
 

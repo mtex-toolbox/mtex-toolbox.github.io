@@ -16,9 +16,13 @@ the inverse function f(g^-1), the centres inverted, crystal and specimen sides e
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunRBF.inv(self)
 ```
+
+</div>
 
 MATLAB's [SO3FunRBF.inv](SO3FunRBF.inv.html)
 

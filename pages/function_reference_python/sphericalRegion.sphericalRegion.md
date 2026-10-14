@@ -15,47 +15,77 @@ for every normal N_i
 
 ## Syntax
 
-The whole sphere:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sphericalRegion()
 ```
 
-The intersection of the hemispheres about N:
+The whole sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sphericalRegion(N)
 ```
 
-The intersection of the caps dot(v, N_i) >= alpha_i:
+The intersection of the hemispheres about N.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sphericalRegion(N, alpha)
 ```
 
-A region of axes, v or -v inside:
+The intersection of the caps dot(v, N_i) >= alpha_i.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sphericalRegion(N, antipodal=True)
 ```
 
-The hemisphere about z, 'lower' about -z:
+A region of axes, v or -v inside.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sphericalRegion('upper')
 ```
 
-A region given in a reference frame:
+The hemisphere about z, 'lower' about -z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sphericalRegion(N, frame=cs)
 ```
 
-The polygon through the vertices:
+A region given in a reference frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sphericalRegion.byVertices(V)
 ```
+
+The polygon through the vertices.
+
+</div>
+
+## Description
 
 An alpha of 0 makes the boundary a great circle, a positive alpha a cap smaller than a
 hemisphere. The fundamental sectors of the point groups are spherical regions:
@@ -64,23 +94,19 @@ fraction of the sphere the region covers.
 
 ## Input
 
-| | |
-|---|---|
 | `N` | vector3d, the normals of the bounding circles, or 'upper' or 'lower' |
 | `alpha` | array, the cosines of the bounding circles, one for all or one per normal; by default 0 |
 
-## Output
-
-| | |
-|---|---|
-| `sR` | sphericalRegion |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `frame` | `None` | the referenceFrame the region is given in |
 | `antipodal` | `False` | a region of axes: a direction is inside when v or -v is |
+
+## Output
+
+| `sR` | sphericalRegion |
 
 ## See also
 

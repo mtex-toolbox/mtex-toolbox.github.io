@@ -17,9 +17,13 @@ inverse of double(e)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 embedding.setDouble(self, d)
 ```
+
+</div>
 
 MATLAB's [embedding.setDouble](embedding.setDouble.html)
 

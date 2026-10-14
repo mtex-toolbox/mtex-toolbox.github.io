@@ -13,9 +13,13 @@ the isotropic shear modulus of a polycrystal, the Voigt, Reuss and Hill bounds
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 isotropicShearModulus(T)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L377">source</a></font>
 {% endraw %}

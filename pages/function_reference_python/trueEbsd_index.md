@@ -14,6 +14,8 @@ ground truth last, one unfitted spatial transform per hop; the methods alter the
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 job = trueEbsd(imgList, T)
 job.pixelSizeMatch()
@@ -21,10 +23,10 @@ job.calcDistortion('fitErr')
 job.undistort()
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [calcDistortion](trueEbsd.calcDistortion_py.html) | the distortion between every consecutive pair of maps of the job fitted |
 | [pixelSizeMatch](trueEbsd.pixelSizeMatch_py.html) | every image and map of the job resampled onto one grid |
 | [setOptions](trueEbsd.setOptions_py.html) | the registration settings of every map of the job, or of one |

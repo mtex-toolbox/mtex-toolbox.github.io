@@ -17,38 +17,44 @@ MATLAB's grainBoundary.flip
 
 ## Syntax
 
-Every segment:
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.flip()
 ```
 
-The grain k on the first side throughout:
+Every segment.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.flip(gB.grainId[:, 1] == grains[k].id)
 ```
+
+The grain k on the first side throughout.
+
+</div>
+
+## Description
 
 The two grains, pixels and phases of a segment swap and its misorientation inverts; the
 segment is walked the other way, so the grain in grainId[:, 0] stays on its left.
 
 ## Input
 
-| | |
-|---|---|
-| `gB` | grainBoundary |
-
-## Output
-
-| | |
-|---|---|
 | `gB` | grainBoundary |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ind` | `None` | the segments to flip, booleans or indices; all of them when not given |
+
+## Output
+
+| `gB` | grainBoundary |
 
 ## See also
 

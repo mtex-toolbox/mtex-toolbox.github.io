@@ -14,9 +14,13 @@ the von Mises equivalent strain, sqrt(2/3 e:e) of the deviatoric strain e
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 equivalentStrain(eps)
 ```
+
+</div>
 
 MATLAB's [velocityGradientTensor.equivalentStrain](velocityGradientTensor.equivalentStrain.html)
 

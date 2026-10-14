@@ -14,14 +14,16 @@ disorientation to it; several centres multiply
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spotColorKey(center=ori, color=(0, 0, 1), psi=SO3DeLaValleePoussinKernel(halfwidth=10*degree))
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [orientation2color](spotColorKey.orientation2color_py.html) | the colours of orientations: white, multiplied for every centre by its colour faded with the kernel of the disorientation to it |
 
 ## Used on

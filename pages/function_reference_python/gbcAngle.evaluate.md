@@ -17,23 +17,37 @@ numba is the backend; MATLAB's gbcAngle.evaluate
 
 ## Syntax
 
-1 joined, 0 a boundary:
+<div class="mx-form" markdown="1">
 
 ```python
 c = gbcAngle(10*degree).evaluate(ebsd, i, j)
 ```
 
-0.5 for a low angle boundary:
+1 joined, 0 a boundary.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = gbcAngle([10*degree, 2*degree]).evaluate(ebsd, i, j)
 ```
 
-The NumPy loop:
+0.5 for a low angle boundary.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = gbcAngle(10*degree).evaluate(ebsd, i, j, backend='numpy')
 ```
+
+The NumPy loop.
+
+</div>
+
+## Description
 
 With a pair [high, low] the value is 1 below low, 0.5 between low and high and 0 above
 high: the share of the levels the misorientation angle stays below. calcGrains joins two
@@ -41,22 +55,18 @@ pixels whose value is 1 into one grain.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD |
 | `i, j` | the flat indices of the pairs of measurements, equally long |
 
-## Output
-
-| | |
-|---|---|
-| `c` | the connectivity of every pair, between 0 and 1 |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `backend` | `None` | 'numba' or 'numpy', by default the preference 'kernels' |
+
+## Output
+
+| `c` | the connectivity of every pair, between 0 and 1 |
 
 ## See also
 

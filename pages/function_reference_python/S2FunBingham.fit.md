@@ -17,23 +17,37 @@ modal axis
 
 ## Syntax
 
-The fitted distribution:
+<div class="mx-form" markdown="1">
 
 ```python
 f = S2FunBingham.fit(v)
 ```
 
-Weighted directions:
+The fitted distribution.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = S2FunBingham.fit(v, weights=w)
 ```
 
-With the confidence ellipse:
+Weighted directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f, ab, rot = S2FunBingham.fit(v, confidenceEllipse=True, p=0.95)
 ```
+
+With the confidence ellipse.
+
+</div>
+
+## Description
 
 The eigen decomposition of the scatter matrix of the directions, sum of w v v^T, gives
 the axes of the distribution, and Newton's method on the moments its shape parameters,
@@ -45,25 +59,21 @@ onto the mode, drawn by ellipse(rot, ab[0], ab[1]).
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d or Miller, the directions or axes |
-
-## Output
-
-| | |
-|---|---|
-| `f` | S2FunBingham, in the frame of v |
-| `ab` | the two semi-axes of the confidence ellipse in radians |
-| `rot` | rotation, the position of the confidence ellipse |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | the weights of the directions, equal by default |
 | `confidenceEllipse` | `False` | return also ab and rot, MATLAB's second and third output |
 | `p` | `0.95` | the confidence level of the ellipse |
+
+## Output
+
+| `f` | S2FunBingham, in the frame of v |
+| `ab` | the two semi-axes of the confidence ellipse in radians |
+| `rot` | rotation, the position of the confidence ellipse |
 
 ## References
 

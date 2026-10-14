@@ -17,8 +17,6 @@ areas move, only not systematically one way (Taubin, SIGGRAPH 1995)
 
 ## Members
 
-| | |
-|---|---|
 | [smooth](taubinFilter.smooth_py.html) | the vertices after iter pairs of a smoothing step lambda_ and an unshrinking step mu, the fixed ones kept |
 
 ## Used on

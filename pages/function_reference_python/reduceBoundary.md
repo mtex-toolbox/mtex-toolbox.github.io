@@ -13,14 +13,16 @@ reduceBoundary(x, ...) is x.reduceBoundary(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 reduceBoundary(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grain2d](grain2d.reduceBoundary_py.html) | the grains with every n-th vertex of their boundary kept along each chain, whatever the shape, the inner boundary kept on it |
 | [grain3d](grain3d.reduceBoundary_py.html) | the grains with their triangulated boundary coarsened, the vertices within cells of n edges merged |
 

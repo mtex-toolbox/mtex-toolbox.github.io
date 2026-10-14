@@ -16,38 +16,44 @@ the composition of the components rotated by r from the left or the right; MATLA
 
 ## Syntax
 
-Rotated in specimen coordinates:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3F.rotate(r)
 ```
 
-Rotated in crystal coordinates:
+Rotated in specimen coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3F.rotate(r, side='right')
 ```
 
+Rotated in crystal coordinates.
+
+</div>
+
+## Description
+
 Every component is rotated in its own representation.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunComposition |
 | `r` | rotation |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunComposition |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left', the specimen side, or 'right', the crystal side, as MATLAB's flag 'right' |
+
+## Output
+
+| `SO3F` | SO3FunComposition |
 
 ## See also
 

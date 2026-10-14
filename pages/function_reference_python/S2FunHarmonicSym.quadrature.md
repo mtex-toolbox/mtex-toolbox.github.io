@@ -17,29 +17,47 @@ values at nodes; MATLAB's approximate is the same
 
 ## Syntax
 
-A callable on a grid of the default bandwidth:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic.quadrature(lambda v: v.z**2)
 ```
 
-In the crystal frame cs:
+A callable on a grid of the default bandwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic.quadrature(lambda v: v.z**2, cs, bandwidth=16)
 ```
 
-Values at the nodes v:
+In the crystal frame cs.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic.quadrature(v, values, bandwidth=8, weights=w)
 ```
 
-Values on a quadratureS2Grid g:
+Values at the nodes v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic.quadrature(g, values)
 ```
+
+Values on a quadratureS2Grid g.
+
+</div>
+
+## Description
 
 The coefficients are the integrals of f against the conjugate spherical harmonics,
 computed as the quadrature sum sum_m w_m f(v_m) conj(Y(v_m)) by the adjoint transform. A
@@ -51,26 +69,22 @@ bandwidth. Values for a list of functions have the nodes first.
 
 ## Input
 
-| | |
-|---|---|
 | `nodes` | a callable of vector3d, vector3d, or a quadratureS2Grid |
 | `values` | the values at the nodes, the nodes along the first axis; for a callable the frame instead |
 | `frame` | the crystalFrame or specimenFrame of the result; by default that of the nodes |
 
-## Output
-
-| | |
-|---|---|
-| `sF` | S2FunHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest degree; by default the grid's for a quadrature grid, else the preference defaultS2Bandwidth |
 | `weights` | `None` | the quadrature weights of the nodes, summing to 4 pi |
 | `real` | `None` | whether the function is real; by default read off the values |
 | `antipodal` | `None` | f(v) = f(-v); by default that of the nodes |
+
+## Output
+
+| `sF` | S2FunHarmonic |
 
 ## See also
 

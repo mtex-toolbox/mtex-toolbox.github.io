@@ -18,8 +18,6 @@ rotation part) projects with the identity and is held as no matrices at all
 
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](InvariantProjection.bandwidth_py.html) | the highest degree the held projection blocks reach |
 | [isIdentity](InvariantProjection.isIdentity_py.html) | whether the projection is the identity, the group acting through the identity alone |
 | [nonzeros](InvariantProjection.nonzeros_py.html) | the entries of the blocks above rounding level as flat lists over the degrees, degree n at ptr[n]:ptr[n+1], with block indices: what the compiled projection visits |

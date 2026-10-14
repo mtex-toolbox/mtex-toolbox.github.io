@@ -16,9 +16,13 @@ MATLAB's approximate: the quadrature of a callable or of values at orientations
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.approximate(fun, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldHarmonic.approximate](SO3VectorFieldHarmonic.approximate.html)
 

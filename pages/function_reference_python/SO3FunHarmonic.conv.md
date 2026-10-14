@@ -17,29 +17,47 @@ multipliers per degree, as conv(f, g); with inverse=True of the inverse of f
 
 ## Syntax
 
-Two functions on SO(3):
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = conv(SO3F1, SO3F2)
 ```
 
-With an SO3Kernel, a smoothing:
+Two functions on SO(3).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = conv(SO3F1, psi)
 ```
 
-With a function on the sphere, a function on the sphere:
+With an SO3Kernel, a smoothing.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF2 = conv(SO3F1, sF1)
 ```
 
-Of the inverse function f(g^-1):
+With a function on the sphere, a function on the sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3F1.conv(psi, inverse=True)
 ```
+
+Of the inverse function f(g^-1).
+
+</div>
+
+## Description
 
 Two functions on SO(3) chain: the specimen frame of SO3F2 must be the crystal frame of SO3F1,
 and the result maps from the crystal frame of SO3F2 to the specimen frame of SO3F1. A function
@@ -49,23 +67,19 @@ the definitions.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F1` | SO3FunHarmonic |
 | `g` | SO3Fun, SO3Kernel, S2Fun, S2Kernel, or an array of multipliers per degree |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunHarmonic |
-| `sF2` | S2FunHarmonic, for a function or kernel on the sphere |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `inverse` | `False` | convolve the inverse function f(g^-1), its frames exchanged |
+
+## Output
+
+| `SO3F` | SO3FunHarmonic |
+| `sF2` | S2FunHarmonic, for a function or kernel on the sphere |
 
 ## See also
 

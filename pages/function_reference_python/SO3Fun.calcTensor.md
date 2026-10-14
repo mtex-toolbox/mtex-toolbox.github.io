@@ -15,35 +15,57 @@ map; MATLAB's calcTensor
 
 ## Syntax
 
-Over an ODF, the Voigt average:
+<div class="mx-form" markdown="1">
 
 ```python
 TV = calcTensor(odf, T)
 ```
 
-The inverse averaged and inverted:
+Over an ODF, the Voigt average.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 TR = calcTensor(odf, T, 'Reuss')
 ```
 
-The mean of the Voigt and the Reuss average:
+The inverse averaged and inverted.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 TH = calcTensor(odf, T, average='Hill')
 ```
 
-Over a weighted list of orientations:
+The mean of the Voigt and the Reuss average.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 TV = calcTensor(ori, T, weights=w)
 ```
 
-Over a map, one tensor per phase:
+Over a weighted list of orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 TV, TR, TH = calcTensor(ebsd, T1, T2, 'all')
 ```
+
+Over a map, one tensor per phase.
+
+</div>
+
+## Description
 
 The Voigt average is the mean of the tensor rotated by the orientations, the Reuss average
 the inverse of the mean of the rotated inverses, Hill's the mean of the two. Over an ODF
@@ -54,23 +76,19 @@ ebsd[['Forsterite', 'Enstatite']]. MATLAB's geometric mean ('geometric') is not 
 
 ## Input
 
-| | |
-|---|---|
 | `x` | SO3Fun, orientation or EBSD |
 | `T` | tensor, the single crystal tensor; for a map one per phase |
 
-## Output
-
-| | |
-|---|---|
-| `T` | the average, of the class of T; with 'all' the three averages Voigt, Reuss, Hill |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `average` | `'Voigt'` | 'Voigt', 'Reuss', 'Hill' or 'all'; also given as a string after the tensors |
 | `weights` | `None` | one weight per orientation or pixel |
+
+## Output
+
+| `T` | the average, of the class of T; with 'all' the three averages Voigt, Reuss, Hill |
 
 ## See also
 

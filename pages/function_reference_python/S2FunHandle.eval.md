@@ -15,9 +15,13 @@ the values of the callable at the directions x, taken into the frame of the func
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunHandle.eval(self, x)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L540">source</a></font>
 {% endraw %}

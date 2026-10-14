@@ -14,9 +14,13 @@ the differences of the principal values, largest first
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 axisRatios(T)
 ```
+
+</div>
 
 MATLAB's [velocityGradientTensor.axisRatios](velocityGradientTensor.axisRatios.html)
 

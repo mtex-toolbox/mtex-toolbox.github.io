@@ -13,24 +13,24 @@ intersect(plane, v1, v2): where the segments cross the plane
 
 ## Syntax
 
-The crossings of the segments from v1 to v2:
+<div class="mx-form" markdown="1">
 
 ```python
 v = intersect(plane, v1, v2)
 ```
 
+The crossings of the segments from v1 to v2.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `plane` | plane3d |
 | `v1` | vector3d, the starting points of the segments |
 | `v2` | vector3d, their end points, by default the last axis of v1 holding both |
 
 ## Output
 
-| | |
-|---|---|
 | `v` | vector3d of the crossings, NaN where a segment misses the plane |
 
 ## See also
@@ -39,9 +39,13 @@ v = intersect(plane, v1, v2)
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 intersect(plane, v1, v2=None)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L223">source</a></font>
 {% endraw %}

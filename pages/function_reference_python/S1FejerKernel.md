@@ -15,8 +15,6 @@ of integral one
 
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](S1FejerKernel.bandwidth_py.html) | the degree n of the kernel |
 
 MATLAB's [S1FejerKernel](S1FejerKernel.html)

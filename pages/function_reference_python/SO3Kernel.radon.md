@@ -16,9 +16,13 @@ the Radon transform is the S2 kernel with the same coefficients
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3Kernel.radon(self)
 ```
+
+</div>
 
 MATLAB's [SO3Kernel.radon](SO3Kernel.radon.html)
 

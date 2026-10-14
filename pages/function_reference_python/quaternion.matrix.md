@@ -16,9 +16,13 @@ the rotation matrices, of shape (..., 3, 3)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion.matrix(self)
 ```
+
+</div>
 
 MATLAB's [quaternion.matrix](quaternion.matrix.html)
 

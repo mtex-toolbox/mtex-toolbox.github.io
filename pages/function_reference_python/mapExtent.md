@@ -13,17 +13,27 @@ the extent of what a map plot has to show, on the screen: (xlo, xhi, ylo, yhi)
 
 ## Syntax
 
-A map:
+<div class="mx-form" markdown="1">
 
 ```python
 e = mapExtent(ebsd)
 ```
 
-Grains, turned to another convention:
+A map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = mapExtent(grains, layout=mapLayout('x↑→y'))
 ```
+
+Grains, turned to another convention.
+
+</div>
+
+## Description
 
 A map reaches a lattice spacing beyond its outer measurements, the padding of a grid left
 out; grains end at the vertices of their boundary, a boundary or a list of triple points at
@@ -31,21 +41,17 @@ its vertices. Nothing to show gives zeros.
 
 ## Input
 
-| | |
-|---|---|
 | `x` | EBSD, grain2d, grainBoundary or triplePointList |
-
-## Output
-
-| | |
-|---|---|
-| `e` | (xlo, xhi, ylo, yhi) |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `layout` | `None` | the 2 x 2 matrix taking the plane to the screen, mapLayout; by default the identity |
+
+## Output
+
+| `e` | (xlo, xhi, ylo, yhi) |
 
 ## See also
 

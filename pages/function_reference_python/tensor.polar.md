@@ -17,9 +17,13 @@ symmetric
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.polar(self)
 ```
+
+</div>
 
 MATLAB's [tensor.polar](tensor.polar.html)
 

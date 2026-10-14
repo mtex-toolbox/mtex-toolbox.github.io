@@ -14,9 +14,13 @@ eig(T) is T.eig(): the eigenvalues in ascending order and the eigenvectors
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 eig(T)
 ```
+
+</div>
 
 ## Used on
 

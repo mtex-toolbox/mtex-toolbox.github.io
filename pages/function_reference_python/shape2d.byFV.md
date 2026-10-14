@@ -17,17 +17,27 @@ MATLAB's shape2d.byFV
 
 ## Syntax
 
-In the xy plane:
+<div class="mx-form" markdown="1">
 
 ```python
 cShape = shape2d.byFV(gB.F, gB.V)
 ```
 
-In the plane of a map:
+In the xy plane.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cShape = shape2d.byFV(gB.F, gB.V, plane=gB.plane, frame=gB.frame)
 ```
+
+In the plane of a map.
+
+</div>
+
+## Description
 
 Every segment and its antipode, sorted by the angle of its direction and summed up, give a
 closed, convex and centrally symmetric outline centred at the origin. An outline of more
@@ -35,22 +45,18 @@ than nmax vertices is sampled down to nmax. The plane and frame keywords go to s
 
 ## Input
 
-| | |
-|---|---|
 | `F` | (n, 2) int array, the vertex indices of every segment |
 | `V` | (m, 2) or (m, 3) array of the vertices |
 
-## Output
-
-| | |
-|---|---|
-| `cShape` | shape2d |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `nmax` | `1024` | the largest number of vertices of the outline |
+
+## Output
+
+| `cShape` | shape2d |
 
 ## See also
 

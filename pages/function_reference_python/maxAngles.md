@@ -15,9 +15,13 @@ dot(q, N_i) <= 0 at q = (cos(w/2), sin(w/2) v) reads tan(w/2) dot(v, a_i) <= tan
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 maxAngles(oR, V)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/space.py#L118">source</a></font>
 {% endraw %}

@@ -15,11 +15,17 @@ birefringent
 
 ## Syntax
 
-By its 3 x 3 matrix in a crystal frame:
+<div class="mx-form" markdown="1">
 
 ```python
 rI = refractiveIndexTensor(M, cs)
 ```
+
+By its 3 x 3 matrix in a crystal frame.
+
+</div>
+
+## Description
 
 The tensor says how light of a given propagation direction is slowed down by the crystal:
 rI.refractiveIndex(v) the indices of the two waves along v, rI.birefringence(v) their
@@ -29,20 +35,12 @@ polarisers.
 
 ## Input
 
-| | |
-|---|---|
 | `M` | 3 x 3 symmetric matrix, or an array (..., 3, 3) of them |
 | `cs` | crystalFrame the coefficients refer to |
 
-## Output
-
-| | |
-|---|---|
-| `rI` | refractiveIndexTensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` |  | the rank of the tensor; for this class always two |
 | `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal |
@@ -53,14 +51,16 @@ polarisers.
 | `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
 | `dtype` |  | the NumPy type of the coefficients |
 
+## Output
+
+| `rI` | refractiveIndexTensor |
+
 ## See also
 
 [tensor](tensor_index_py.html), [refractiveIndexTensor.birefringence](refractiveIndexTensor.birefringence_py.html), [refractiveIndexTensor.opticalAxis](refractiveIndexTensor.opticalAxis_py.html), [refractiveIndexTensor.spectralTransmission](refractiveIndexTensor.spectralTransmission_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [birefringence](refractiveIndexTensor.birefringence_py.html) | the birefringence for light propagating along vprop, the difference of the two refractive indices, and the polarisation axes of the fast and the slow wave |
 | [opticalAxis](refractiveIndexTensor.opticalAxis_py.html) | the optical axes of a refractive index tensor, the directions along which the two refractive indices coincide and the birefringence vanishes |
 | [refractiveIndex](refractiveIndexTensor.refractiveIndex_py.html) | the refractive index in the direction v, n_ij v_i v_j |

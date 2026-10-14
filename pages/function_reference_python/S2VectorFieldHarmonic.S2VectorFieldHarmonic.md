@@ -15,41 +15,67 @@ components
 
 ## Syntax
 
-A callable of the directions:
+<div class="mx-form" markdown="1">
 
 ```python
 vF = S2VectorFieldHarmonic(lambda v: v.cross(vector3d.Z), bandwidth=16)
 ```
 
-Vectors at directions, by quadrature:
+A callable of the directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 vF = S2VectorFieldHarmonic(v, w, weights=wq)
 ```
 
-The component functions:
+Vectors at directions, by quadrature.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 vF = S2VectorFieldHarmonic([sFx, sFy, sFz])
 ```
 
-The coefficients, (L+1)^2 x 3:
+The component functions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 vF = S2VectorFieldHarmonic(fhat, cs)
 ```
 
-The expansion of another field:
+The coefficients, (L+1)^2 x 3.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 vF = S2VectorFieldHarmonic(sF.grad())
 ```
 
-MATLAB's form:
+The expansion of another field.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 vF = S2VectorFieldHarmonic.quadrature(lambda v: v.cross(vector3d.Z))
 ```
+
+MATLAB's form.
+
+</div>
+
+## Description
 
 A callable is evaluated on a quadrature grid of the bandwidth and expanded; vectors w at
 directions v are expanded with the quadrature weights given, equal ones by default, which
@@ -60,8 +86,6 @@ largest degree.
 
 ## Input
 
-| | |
-|---|---|
 | `fun` | callable taking a vector3d and returning vector3d, or an S2VectorField |
 | `v` | vector3d, the directions of given vectors |
 | `w` | vector3d, the vectors at them |
@@ -69,19 +93,17 @@ largest degree.
 | `fhat` | complex array of (L+1)^2 x 3 coefficients |
 | `cs` | crystalFrame or specimenFrame of the directions |
 
-## Output
-
-| | |
-|---|---|
-| `vF` | S2VectorFieldHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest degree of the expansion, by default the preference 'defaultS2Bandwidth'; truncates a field given |
 | `weights` | `None` | the quadrature weights of the directions v |
 | `symmetrise` | `True` | project onto the fields equivariant under the group of the frame |
+
+## Output
+
+| `vF` | S2VectorFieldHarmonic |
 
 ## See also
 

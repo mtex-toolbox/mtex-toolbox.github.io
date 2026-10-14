@@ -16,35 +16,57 @@ the disjoint list of vectors, equal ones within a tolerance taken once
 
 ## Syntax
 
-Sorted, each vector once:
+<div class="mx-form" markdown="1">
 
 ```python
 u = unique(v)
 ```
 
-A larger tolerance:
+Sorted, each vector once.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u = unique(v, tol=0.01)
 ```
 
-V and -v the same:
+A larger tolerance.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u = unique(v, antipodal=True)
 ```
 
-In the order of their first appearance:
+V and -v the same.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u = unique(v, stable=True)
 ```
 
-U = v[iv], v = u[iu]:
+In the order of their first appearance.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u, iv, iu = unique(v, return_index=True, return_inverse=True)
 ```
+
+U = v[iv], v = u[iu].
+
+</div>
+
+## Description
 
 Axes are equal up to sign; antipodal=True takes them so always, antipodal=False never.
 Crystal directions in a frame with symmetry are equal when they are symmetrically
@@ -52,21 +74,11 @@ equivalent: they are projected to the fundamental sector first.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d |
-
-## Output
-
-| | |
-|---|---|
-| `u` | vector3d, one dimensional |
-| `iv` | array, the indices with u = v.flat[iv], with return_index=True |
-| `iu` | array, the indices with v.flat = u[iu], with return_inverse=True |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-06` | the tolerance of the coordinates within which vectors are equal |
 | `antipodal` | `None` | take the vectors as axes: True always, False never; by default where they are axes |
@@ -74,6 +86,12 @@ equivalent: they are projected to the fundamental sector first.
 | `stable` | `False` | keep the order of the first appearances rather than sorting |
 | `return_index` | `False` | also return the indices iv of the kept vectors |
 | `return_inverse` | `False` | also return the indices iu reconstructing the list |
+
+## Output
+
+| `u` | vector3d, one dimensional |
+| `iv` | array, the indices with u = v.flat[iv], with return_index=True |
+| `iu` | array, the indices with v.flat = u[iu], with return_inverse=True |
 
 ## See also
 

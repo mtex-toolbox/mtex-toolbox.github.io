@@ -17,29 +17,33 @@ the hemisphere opposite to a direction, z by default, added to the region
 
 ## Syntax
 
-The part with z <= 0:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sR.restrictToLower()
 ```
 
-The part away from x:
+The part with z <= 0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sR.restrictToLower(xvector)
 ```
 
+The part away from x.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
 | `up` | vector3d, z by default |
 
 ## Output
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
 
 ## See also
@@ -48,9 +52,13 @@ sR = sR.restrictToLower(xvector)
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalRegion.restrict2Lower(self, up=None)
 ```
+
+</div>
 
 MATLAB's [sphericalRegion.restrict2Lower](sphericalRegion.restrict2Lower.html)
 

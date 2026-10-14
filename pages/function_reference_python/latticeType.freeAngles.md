@@ -15,38 +15,44 @@ which of alpha, beta and gamma the lattice leaves independent
 
 ## Syntax
 
-Beta, the unique axis b:
+<div class="mx-form" markdown="1">
 
 ```python
 free = latticeType.monoclinic.freeAngles()
 ```
 
-Gamma, the unique axis c:
+Beta, the unique axis b.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 free = latticeType.monoclinic.freeAngles(uniqueAxis=2)
 ```
+
+Gamma, the unique axis c.
+
+</div>
+
+## Description
 
 A triclinic lattice leaves all three angles free, a monoclinic one the angle between the
 two axes perpendicular to its unique axis, every other lattice none.
 
 ## Input
 
-| | |
-|---|---|
 | `lat` | latticeType |
-
-## Output
-
-| | |
-|---|---|
-| `free` | three bools, for alpha, beta and gamma |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `uniqueAxis` | `1` | the unique axis of a monoclinic lattice, 0, 1 or 2 for a, b or c |
+
+## Output
+
+| `free` | three bools, for alpha, beta and gamma |
 
 ## See also
 

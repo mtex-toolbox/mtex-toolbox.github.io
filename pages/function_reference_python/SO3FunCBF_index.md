@@ -14,23 +14,37 @@ a fibre ODF: a sum over fibres h || r of a kernel on the sphere of the angle bet
 
 ## Syntax
 
-The fibre h || r, a 10 degree kernel:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunCBF(h, r)
 ```
 
-Several fibres, weighted, the kernel psi:
+The fibre h || r, a 10 degree kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunCBF(h, r, weights, psi)
 ```
 
-From a fibre f:
+Several fibres, weighted, the kernel psi.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunCBF(f, halfwidth=10*degree)
 ```
+
+From a fibre f.
+
+</div>
+
+## Description
 
 The function of the orientation g is sum_i w_i psi(g h_i . r_i), every fibre taken with all
 its symmetrically equivalent fibres; it is constant along each fibre. The crystal frame is
@@ -39,25 +53,21 @@ mean of one. fibreODF builds one with the weights normalised.
 
 ## Input
 
-| | |
-|---|---|
 | `h` | Miller or vector3d, the crystal directions, or a fibre |
 | `r` | vector3d, the specimen directions, one per crystal direction |
 | `weights` | one weight per fibre; by default a mean of one |
 | `psi` | S2Kernel; by default the de la Vallee Poussin kernel |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunCBF |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `SS` |  | the specimen frame, when r has none |
 | `halfwidth` |  | the halfwidth of the default kernel, 10 degree unless given |
+
+## Output
+
+| `SO3F` | SO3FunCBF |
 
 ## See also
 
@@ -65,8 +75,6 @@ mean of one. fibreODF builds one with the weights normalised.
 
 ## Members
 
-| | |
-|---|---|
 | [abs](SO3FunCBF.abs_py.html) | the absolute value of the function, pointwise, as a function handle |
 | [bandwidth](SO3FunCBF.bandwidth_py.html) | the harmonic bandwidth of the S2 kernel |
 | [calcError](SO3FunCBF.calcError_py.html) | the distance between two orientation density functions, or the error of an ODF against pole figures |

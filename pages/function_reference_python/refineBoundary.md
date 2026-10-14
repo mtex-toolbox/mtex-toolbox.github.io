@@ -13,14 +13,16 @@ refineBoundary(x, ...) is x.refineBoundary(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 refineBoundary(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grain2d](grain2d.refineBoundary_py.html) | the grains with their boundary and inner boundary refined, every segment split into pieces of about length delta |
 | [grain3d](grain3d.refineBoundary_py.html) | the grains with their triangulated boundary refined, every triangle split into four at the midpoints of its edges, n times |
 

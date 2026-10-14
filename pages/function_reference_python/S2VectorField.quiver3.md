@@ -15,35 +15,57 @@ arrows at positions; MATLAB's quiver3
 
 ## Syntax
 
-Tangent vectors at their orientations:
+<div class="mx-form" markdown="1">
 
 ```python
 quiver3d(t)
 ```
 
-In Rodrigues space, all of one length:
+Tangent vectors at their orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver3d(t, Rodrigues=True, normalize=True)
 ```
 
-A field on the sphere as arrows on it:
+In Rodrigues space, all of one length.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver3d(sVF)
 ```
 
-A vector field on SO(3):
+A field on the sphere as arrows on it.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver3d(F, axisAngle=True, resolution=7.5*degree)
 ```
 
-Arrows at the positions pos along d:
+A vector field on SO(3).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver3d(pos, d)
 ```
+
+Arrows at the positions pos along d.
+
+</div>
+
+## Description
 
 A tangent vector is an arrow at its reference orientation, in the coordinates of the held
 axes, else in axis angle space, the orientations scattered first; the arrow ends where
@@ -58,20 +80,12 @@ lineWidth), MATLAB's vector3d/quiver3.
 
 ## Input
 
-| | |
-|---|---|
 | `t` | SO3TangentVector, S2VectorField, S2AxisField or SO3VectorField |
 | `pos, d` | vector3d, the tails of the arrows and their directions |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib Quiver3D, or the scene3d of the arrows at positions |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `lineWidth` | `1.5` | the width of the arrows' lines |
 | `color` | `None` | the colour of the arrows; blue for tangent vectors, black on the sphere |
@@ -80,6 +94,10 @@ lineWidth), MATLAB's vector3d/quiver3.
 | `Rodrigues` | `False` | draw in Rodrigues space |
 | `Euler` | `False` | draw in Euler angle space |
 | `maxHeadSize` | `None` | the length of the heads as a fraction of the arrows; by default 0.25 for tangent vectors and arrows at positions, 0.3 for fields |
+
+## Output
+
+| `h` | the matplotlib Quiver3D, or the scene3d of the arrows at positions |
 
 ## See also
 

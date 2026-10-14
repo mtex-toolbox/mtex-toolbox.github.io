@@ -17,35 +17,57 @@ equivalents
 
 ## Syntax
 
-Pointwise, broadcast against each other:
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(v1, v2)
 ```
 
-Between axes, at most 90 degree:
+Pointwise, broadcast against each other.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(v1, v2, antipodal=True)
 ```
 
-Crystal directions as they are given:
+Between axes, at most 90 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(h1, h2, symmetry=False)
 ```
 
-In the plane normal to N, from 0 to 2 pi:
+Crystal directions as they are given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(v1, v2, N)
 ```
 
-Every pair, MATLAB's angle_outer:
+In the plane normal to N, from 0 to 2 pi.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(v1, v2, outer=True)
 ```
+
+Every pair, MATLAB's angle_outer.
+
+</div>
+
+## Description
 
 The angle is taken through atan2 of the cross and the inner product, accurate near 0 and
 pi. An axis on either side reads it up to sign; antipodal=True does so always,
@@ -54,25 +76,21 @@ and the angle is counted counterclockwise about N from v1 to v2.
 
 ## Input
 
-| | |
-|---|---|
 | `v1, v2` | vector3d |
 | `h1, h2` | vector3d in one crystal frame |
 | `N` | vector3d, the normal of the plane the angle is measured in |
 
-## Output
-
-| | |
-|---|---|
-| `omega` | array, in radians; with outer=True of shape v1.shape + v2.shape |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `None` | read the vectors as axes: True always, False never; by default where one of them is an axis |
 | `symmetry` | `True` | take the symmetric equivalents of crystal directions into account |
 | `outer` | `False` | every entry of v1 with every entry of v2 |
+
+## Output
+
+| `omega` | array, in radians; with outer=True of shape v1.shape + v2.shape |
 
 ## See also
 

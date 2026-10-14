@@ -14,9 +14,13 @@ weighted values at the plan's nodes
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 adjointTransform(plan, values, weights)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L710">source</a></font>
 {% endraw %}

@@ -16,17 +16,27 @@ the symmetrically equivalent fibres, MATLAB's fibre.symmetrise
 
 ## Syntax
 
-Every equivalent, numSS * numCS x shape:
+<div class="mx-form" markdown="1">
 
 ```python
 fS = f.symmetrise()
 ```
 
-The distinct ones of a single fibre:
+Every equivalent, numSS * numCS x shape.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fS = f.symmetrise(unique=True)
 ```
+
+The distinct ones of a single fibre.
+
+</div>
+
+## Description
 
 The equivalent fibres run from s * o1 * inv(g) about g * h, over the elements s of the
 specimen group and g of the crystal group. MATLAB's second output, the number of distinct
@@ -34,21 +44,17 @@ ones, is f.multiplicity().
 
 ## Input
 
-| | |
-|---|---|
 | `f` | fibre |
-
-## Output
-
-| | |
-|---|---|
-| `fS` | fibre |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `unique` | `False` | keep only the distinct fibres, those whose h and r differ (a single fibre only) |
+
+## Output
+
+| `fS` | fibre |
 
 ## See also
 

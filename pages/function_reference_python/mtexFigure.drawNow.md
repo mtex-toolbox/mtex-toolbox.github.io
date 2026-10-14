@@ -16,21 +16,29 @@ the figure drawn, resized first when a size is given; MATLAB's drawNow(mtexFig)
 
 ## Syntax
 
-The figure drawn as it is:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.drawNow()
 ```
 
-Resized to a named size of its layout:
+The figure drawn as it is.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.drawNow(figSize='large')
 ```
 
+Resized to a named size of its layout.
+
+</div>
+
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `figSize` | `None` | 'tiny', 'small', 'medium', 'normal', 'large', 'huge', scaling the size the layout gives, or (width, height) in inches; by default the size is kept |
 

@@ -17,29 +17,47 @@ quadrature
 
 ## Syntax
 
-Another function to a bandwidth:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHarmonic.quadrature(odf, bandwidth=48)
 ```
 
-A callable and its frames:
+Another function to a bandwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHarmonic.quadrature(lambda o: o.angle(), cs, bandwidth=16)
 ```
 
-Values on a quadratureSO3Grid:
+A callable and its frames.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHarmonic.quadrature(g, odf(g.nodes()))
 ```
 
-Values at orientations, weighted equally:
+Values on a quadratureSO3Grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHarmonic.quadrature(ori, values, bandwidth=8)
 ```
+
+Values at orientations, weighted equally.
+
+</div>
+
+## Description
 
 A callable or another SO(3) function is expanded as SO3FunHarmonic(f, cs, ss, bandwidth=)
 does, exact up to the bandwidth. Values at nodes are summed with the weights against the
@@ -52,26 +70,22 @@ a fit see SO3FunHarmonic.interpolate. SO3FunHarmonic.approximate is the same fun
 
 ## Input
 
-| | |
-|---|---|
 | `nodes` | a callable or SO3Fun, a quadratureSO3Grid, orientation or rotation |
 | `values` | array, the values at the nodes; none for a callable, whose crystal frame may stand here |
 | `cs, ss` | the frames of a callable or of rotations |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest degree of the series, by default the preference defaultSO3Bandwidth or the grid's |
 | `weights` | `None` | the quadrature weights of the nodes |
 | `real` | `None` | whether the function takes real values only; by default whether the values are real |
 | `antipodal` | `False` | f(g) = f(g^-1), for a misorientation function; taken from antipodal orientations as well |
+
+## Output
+
+| `SO3F` | SO3FunHarmonic |
 
 ## See also
 

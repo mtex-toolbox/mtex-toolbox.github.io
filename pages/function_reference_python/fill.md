@@ -13,14 +13,16 @@ fill(x, ...) is x.fill(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 fill(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.fill_py.html) | the map with every pixel that carries no measurement filled, the measured ones left as they are |
 | [EBSD3](EBSD3.fill_py.html) | the empty voxels of a volume filled from their nearest measured voxel |
 

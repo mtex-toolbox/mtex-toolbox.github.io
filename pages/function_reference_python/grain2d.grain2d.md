@@ -16,35 +16,57 @@ grain2d
 
 ## Syntax
 
-The grains of a map:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd)
 ```
 
-A table from its columns:
+The grains of a map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grain2d(grains.id, grains.phaseId, grains.CSList, grains.numPixel, grains.meanRotation, grains.GOS, grains.frame, boundary=grains.boundary)
 ```
 
-The grains of one phase:
+A table from its columns.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains['Forsterite']
 ```
 
-The grains of a condition:
+The grains of one phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains[grains.numPixel > 10]
 ```
 
-The grains of these ids:
+The grains of a condition.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains.selectByGrainId([1, 2, 3])
 ```
+
+The grains of these ids.
+
+</div>
+
+## Description
 
 Grains are made by calcGrains, which segments a map; the constructor takes the columns of
 the table and the boundaries of a segmentation. The polygon of a grain is the loops of the
@@ -57,8 +79,6 @@ grains come from a segmentation alone.
 
 ## Input
 
-| | |
-|---|---|
 | `id` | integer array, the id of every grain |
 | `phaseId` | integer array, the position of every grain's phase in CSList |
 | `CSList` | phaseList, the frames of the phases |
@@ -67,21 +87,19 @@ grains come from a segmentation alone.
 | `GOS` | array, the grain orientation spread of every grain in radians |
 | `frame` | specimenFrame, the frame the grains lie in |
 
-## Output
-
-| | |
-|---|---|
-| `grains` | grain2d |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `prop` | `None` | dict of further properties, one value per grain, read as grains.name or grains.prop['name'] |
 | `boundary` | `None` | grainBoundary, the segments between the grains and to the outside of the map |
 | `innerBoundary` | `None` | grainBoundary, the segments inside the grains, the low angle boundaries of a segmentation with two thresholds |
 | `loops` | `None` | the polygon of every grain as loops of boundary segments; traced from boundary when not given |
 | `phaseMap` | `None` | the phase number of the file for every entry of CSList |
+
+## Output
+
+| `grains` | grain2d |
 
 ## See also
 

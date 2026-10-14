@@ -15,9 +15,13 @@ the same criterion with another smallest region left standing
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gbcFMC.setMinPixel(self, minPixel)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L82">source</a></font>
 {% endraw %}

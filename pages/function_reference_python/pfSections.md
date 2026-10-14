@@ -14,15 +14,17 @@ pole figure sections: the pole figure of h1, split by the twist of h2 about it
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 pfSections(cs, ss, h1=..., h2=..., sections=6, omega=values)
 sigmaSections(cs, ss, sections=6, sigma=values)   with h1 = c*, h2 = a
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [h1](pfSections.h1_py.html) | the crystal direction whose pole figure every section shows, a unit vector |
 | [h2](pfSections.h2_py.html) | the part of the second crystal direction perpendicular to h1, whose twist about h1 splits the sections |
 | [omega](pfSections.omega_py.html) | the twist angles of the sections |

@@ -15,9 +15,13 @@ the SR component, Bunge Euler angles (53°, 35°, 63°), in cs and the specimen 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.SR(CS, *ss)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L288">source</a></font>
 {% endraw %}

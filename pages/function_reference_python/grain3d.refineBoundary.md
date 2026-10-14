@@ -17,9 +17,13 @@ midpoints of its edges, n times
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain3d.refineBoundary(self, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [grain3d.refineBoundary](grain3d.refineBoundary.html)
 

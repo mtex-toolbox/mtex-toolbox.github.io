@@ -15,9 +15,13 @@ the QLage component, Bunge Euler angles (65°, 20°, 0°), in cs and the specime
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.QLage(CS, *ss)
 ```
+
+</div>
 
 ## Used on
 

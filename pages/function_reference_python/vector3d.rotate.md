@@ -16,9 +16,13 @@ the vectors turned by a rotation, rot * v; a number is an angle about z
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.rotate(self, rot)
 ```
+
+</div>
 
 MATLAB's [vector3d.rotate](vector3d.rotate.html)
 

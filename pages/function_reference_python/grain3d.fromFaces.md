@@ -16,17 +16,27 @@ constructor
 
 ## Syntax
 
-The geometry only:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grain3d.fromFaces(V, F, I_GF)
 ```
 
-With phases and orientations:
+The geometry only.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grain3d.fromFaces(V, F, I_GF, ori, CSList, phaseId)
 ```
+
+With phases and orientations.
+
+</div>
+
+## Description
 
 A face lies between the grain whose row of I_GF is +1 for it, the side its normal points
 away from, and the one whose row is -1; a face with one grain only lies on the outer surface.
@@ -35,8 +45,6 @@ is of phase 1 when CSList has an indexed phase, else not indexed; the voxels are
 
 ## Input
 
-| | |
-|---|---|
 | `V` | (n, 3) array or vector3d, the vertices |
 | `F` | (m, 3) array of triangles, or a list of polygons, indices into V |
 | `I_GF` | (grains x faces) array or sparse matrix of +1, -1 and 0 |
@@ -44,17 +52,15 @@ is of phase 1 when CSList has an indexed phase, else not indexed; the voxels are
 | `CSList` | phaseList, or a list of crystalFrame with 'notIndexed' first |
 | `phaseId` | int array, the phase of every grain as the index into CSList |
 
-## Output
-
-| | |
-|---|---|
-| `grains` | grain3d |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `frame` | `None` | specimenFrame of the vertices |
+
+## Output
+
+| `grains` | grain3d |
 
 ## See also
 

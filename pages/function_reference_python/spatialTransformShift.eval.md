@@ -15,9 +15,13 @@ the positions moved by the affine map
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformShift.eval(self, pos)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L255">source</a></font>
 {% endraw %}

@@ -16,9 +16,13 @@ stiffnessTensor.load(fname): the tensor of a file as the class it is called on
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.load(fname, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [tensor.load](tensor.load.html)
 

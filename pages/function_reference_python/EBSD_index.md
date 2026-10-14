@@ -15,23 +15,37 @@ properties of every measurement; MATLAB's EBSD
 
 ## Syntax
 
-The measurements as a list:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD(pos, rot, phaseId, CSList)
 ```
 
-With properties:
+The measurements as a list.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD(pos, rot, phaseId, CSList, {'mad': mad})
 ```
 
-The shape of a pixel stated:
+With properties.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD(pos, rot, phaseId, CSList, prop, unitCell=uC)
 ```
+
+The shape of a pixel stated.
+
+</div>
+
+## Description
 
 A map is a table of measurements, a row per pixel, or, gridified, the same arrays in map
 shape, ebsd[i, j] the pixel of row i and column j. phaseId indexes CSList, 0 the not indexed
@@ -41,23 +55,15 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 
 ## Input
 
-| | |
-|---|---|
 | `pos` | vector3d, or an (n, 2) or (n, 3) array, the centres of the pixels |
 | `rotations` | rotation, the rotation of every pixel |
 | `phaseId` | int array, the phase of every pixel as the index into CSList |
 | `CSList` | phaseList, or a list of crystalFrame with 'notIndexed' first |
 | `prop` | dict, a property per pixel of the shape of the map, ebsd.prop['mad'] and ebsd.mad |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `unitCell` |  | vector3d or (k, 2) array, the corners of a pixel about its centre, from which the lattice is built |
 | `scanUnit` |  | the unit of the positions |
@@ -68,14 +74,16 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 | `id` |  | the id of every pixel, by default its position in the list |
 | `isPadding` |  | the mask of the cells a grid adds to close it, MATLAB's NaN phase |
 
+## Output
+
+| `ebsd` | EBSD |
+
 ## See also
 
 [loadEBSD](loadEBSD_ang_py.html), [EBSDsquare](EBSDsquare_py.html), [gridify](gridify_py.html), [simulateEBSD](simulateEBSD_index_py.html), [EBSDImport](EBSDImport_py.html), [EBSDSelect](EBSDSelect_py.html), [EBSDPlotting](EBSDPlotting_py.html), [GrainReconstruction](GrainReconstruction_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [calcGND](EBSD.calcGND_py.html) | the geometrically necessary dislocation content of every pixel after Pantleon (2008) |
 | [calcGrains](EBSD.calcGrains_py.html) | the grains of a map, the pixels joined across every boundary the criterion keeps |
 | [calcGROD](EBSD.calcGROD_py.html) | the grain reference orientation deviation, mis2mean: the misorientation of every pixel from the mean orientation of its grain, or from a given reference |

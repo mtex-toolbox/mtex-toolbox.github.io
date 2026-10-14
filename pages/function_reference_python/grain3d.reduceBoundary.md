@@ -17,16 +17,24 @@ merged
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grains.reduceBoundary(3)
 grains.reduceBoundary(2, quadric=True)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grain3d.reduceBoundary(self, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [grain3d.reduceBoundary](grain3d.reduceBoundary.html)
 

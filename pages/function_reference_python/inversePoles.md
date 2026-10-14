@@ -14,17 +14,27 @@ the distinct equivalents of r under the specimen group; MATLAB's inv(ori) * symm
 
 ## Syntax
 
-The crystal directions along z:
+<div class="mx-form" markdown="1">
 
 ```python
 h = inversePoles(ori, zvector)
 ```
 
-As axes:
+The crystal directions along z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = inversePoles(ori, zvector, antipodal=True)
 ```
+
+As axes.
+
+</div>
+
+## Description
 
 They are what plotIPF draws for a list of orientations, which folds them into the
 fundamental sector of the crystal; here they are not folded. An axis and its antipode
@@ -32,22 +42,18 @@ count once when antipodal is asked for, r is an axis, or -r is an equivalent of 
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation, shaped (...) |
 | `r` | vector3d, one specimen direction |
 
-## Output
-
-| | |
-|---|---|
-| `h` | vector3d in the crystal frame, shaped (..., m) over the m distinct equivalents of r |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | count an axis and its antipode once |
+
+## Output
+
+| `h` | vector3d in the crystal frame, shaped (..., m) over the m distinct equivalents of r |
 
 ## See also
 

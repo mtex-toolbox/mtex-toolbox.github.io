@@ -15,9 +15,13 @@ the number of elements of the point group
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 referenceFrame.numSym(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L203">source</a></font>
 {% endraw %}

@@ -15,15 +15,17 @@ concentration, larger is sharper
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 fibreVonMisesFisherKernel(90)
 fibreVonMisesFisherKernel(halfwidth=10*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [halfwidth](fibreVonMisesFisherKernel.halfwidth_py.html) | the halfwidth in closed form, acos(1 - log(2) / kappa) |
 | [radon](fibreVonMisesFisherKernel.radon_py.html) | the Radon transform: the kernel on the sphere of the same coefficients, in closed form |
 

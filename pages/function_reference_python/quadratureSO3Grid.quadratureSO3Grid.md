@@ -15,29 +15,47 @@ harmonic function up to that degree exactly
 
 ## Syntax
 
-Clenshaw-Curtis in beta, no symmetry:
+<div class="mx-form" markdown="1">
 
 ```python
 G = quadratureSO3Grid(L)
 ```
 
-Gauss-Legendre, reduced by the frames:
+Clenshaw-Curtis in beta, no symmetry.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 G = quadratureSO3Grid(bandwidthFor(L, cs), cs, ss, 'GaussLegendre')
 ```
 
-Reduced by fourfold and twofold folds about z:
+Gauss-Legendre, reduced by the frames.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 G = quadratureSO3Grid(15, rA=4, rB=2)
 ```
 
-The nodes and their weights:
+Reduced by fourfold and twofold folds about z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori, w = G.nodes(), G.weights
 ```
+
+The nodes and their weights.
+
+</div>
+
+## Description
 
 The Euler angles alpha and gamma are equispaced, 2L + 2 of each, and beta follows a
 Clenshaw-Curtis rule, the default, or a Gauss-Legendre rule. The frames' rotations about z
@@ -48,25 +66,21 @@ orientation: G.nodes() gives the orientations, beta fastest, and G.weights the w
 
 ## Input
 
-| | |
-|---|---|
 | `bandwidth` | int, the degree up to which the rule is exact |
 | `CS, SS` | crystalFrame and specimenFrame (positional, optional) |
 | `scheme` | 'ClenshawCurtis' (default) or 'GaussLegendre' (positional, optional) |
 
-## Output
-
-| | |
-|---|---|
-| `G` | quadratureSO3Grid |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rA` | `None` | the fold about z on the crystal side, without frames |
 | `rB` | `None` | the fold about z on the specimen side, without frames |
 | `dtype` | `<class 'numpy.float64'>` | the floating point type of the angles and weights |
+
+## Output
+
+| `G` | quadratureSO3Grid |
 
 ## See also
 

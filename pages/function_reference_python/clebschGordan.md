@@ -13,9 +13,13 @@ status: Reference
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 clebschGordan(j1, m1, j2, m2, J, M)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L554">source</a></font>
 {% endraw %}

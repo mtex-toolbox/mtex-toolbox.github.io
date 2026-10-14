@@ -16,9 +16,13 @@ the mean of the function over SO(3), the sum of the weights times the kernel's m
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunCBF.mean(self)
 ```
+
+</div>
 
 MATLAB's [SO3FunCBF.mean](SO3FunCBF.mean.html)
 

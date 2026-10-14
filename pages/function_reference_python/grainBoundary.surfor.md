@@ -17,23 +17,37 @@ grainBoundary.surfor
 
 ## Syntax
 
-Every degree from 0 to 180:
+<div class="mx-form" markdown="1">
 
 ```python
 lp = gB.surfor()
 ```
 
-Every second degree:
+Every degree from 0 to 180.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 lp = surfor(gB, np.linspace(0, np.pi, 91))
 ```
 
-The boundary of the grains:
+Every second degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 lp = surfor(grains)
 ```
+
+The boundary of the grains.
+
+</div>
+
+## Description
 
 For every direction the lengths of the segments projected onto it, summed and normalised by
 the largest value. It makes sense only for sufficiently smooth boundaries. MATLAB returns
@@ -42,21 +56,17 @@ given.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary, or grain2d for its boundary |
-
-## Output
-
-| | |
-|---|---|
-| `lp` | array, one value per angle |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `omega` | `None` | the angles of the directions to the x axis, by default 0 to 180 degree in steps of one degree |
+
+## Output
+
+| `lp` | array, one value per angle |
 
 ## References
 

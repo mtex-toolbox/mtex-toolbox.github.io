@@ -15,17 +15,25 @@ left, exp(v) * oriRef, or on the right, oriRef * exp(v); from vectors or skew ma
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3TangentVector(v, oriRef)
 SO3TangentVector(v, oriRef, 'right')
 SO3TangentVector(S, oriRef, side)      from skew matrices of shape (..., 3, 3)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3TangentVector(v, oriRef, side='left')
 ```
+
+</div>
 
 ## Used on
 

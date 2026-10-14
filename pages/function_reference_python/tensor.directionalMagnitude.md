@@ -17,32 +17,38 @@ direction on every index, T_i1...iR v_i1 ... v_iR; MATLAB's directionalMagnitude
 
 ## Syntax
 
-At the directions v:
+<div class="mx-form" markdown="1">
 
 ```python
 q = T.directionalMagnitude(v)
 ```
 
-The function on the sphere:
+At the directions v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 q = T.directionalMagnitude()
 ```
+
+The function on the sphere.
+
+</div>
+
+## Description
 
 Without a direction the function on the sphere, a polynomial of the degree of the rank,
 antipodal for an even rank.
 
 ## Input
 
-| | |
-|---|---|
 | `T` | tensor |
 | `v` | vector3d or Miller, the directions; left out for the function |
 
 ## Output
 
-| | |
-|---|---|
 | `q` | the magnitudes, or an S2FunHarmonic of the direction |
 
 ## See also
@@ -51,9 +57,13 @@ antipodal for an even rank.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.directionalMagnitude(self, v=None)
 ```
+
+</div>
 
 ## Used on
 

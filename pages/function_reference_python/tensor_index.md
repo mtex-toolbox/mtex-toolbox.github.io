@@ -14,47 +14,77 @@ a tensor of rank R in a reference frame, or a list of them
 
 ## Syntax
 
-The coefficients in a crystal frame:
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor(M, cs)
 ```
 
-The rank, a name and a unit:
+The coefficients in a crystal frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor(M, cs, rank=2, name='strain', unit='%')
 ```
 
-A vector as a tensor of rank one:
+The rank, a name and a unit.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor(v)
 ```
 
-A rotation as its matrix, rank two:
+A vector as a tensor of rank one.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor(rot)
 ```
 
-A 6 x 6 Voigt matrix:
+A rotation as its matrix, rank two.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 C = tensor(V, rank=4)
 ```
 
-With the factors of two of the compliance:
+A 6 x 6 Voigt matrix.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S = tensor(V, rank=4, doubleConvention=True)
 ```
 
-A matrix in the Kelvin notation:
+With the factors of two of the compliance.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 C = tensor(V, rank=4, Kelvin=True)
 ```
+
+A matrix in the Kelvin notation.
+
+</div>
+
+## Description
 
 The coefficients M are an array whose last R indices have dimension three, the dimensions
 in front of them the shape of the list; the rank, when not given, is the number of trailing
@@ -70,20 +100,12 @@ Voigt convention.
 
 ## Input
 
-| | |
-|---|---|
 | `M` | array of the coefficients, (..., 3, ..., 3), a Voigt matrix (..., 6, 6), a vector3d or a rotation |
 | `cs` | crystalFrame or specimenFrame the coefficients refer to |
 
-## Output
-
-| | |
-|---|---|
-| `T` | tensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` |  | the rank of the tensor, read from the shape of M when not given |
 | `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal, as is usual for the compliance |
@@ -94,14 +116,16 @@ Voigt convention.
 | `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
 | `dtype` |  | the NumPy type of the coefficients |
 
+## Output
+
+| `T` | tensor |
+
 ## See also
 
 [stiffnessTensor](stiffnessTensor_index_py.html), [strainTensor](strainTensor_index_py.html), [stressTensor](stressTensor_index_py.html), [tensor.rotate](tensor.rotate_py.html), [TensorDefinition](TensorDefinition_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [antiSym](tensor.antiSym_py.html) | the antisymmetric part (T - T^t) / 2 of a rank two tensor |
 | [cat](tensor.cat_py.html) | the list of the tensors, MATLAB's [T1, T2] |
 | [checkSymmetry](tensor.checkSymmetry_py.html) | whether the tensor is invariant under every element of the group of its frame |

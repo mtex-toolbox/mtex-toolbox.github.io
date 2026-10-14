@@ -16,9 +16,13 @@ the vectors of the field at the directions x, vF(x)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [S2VectorFieldHarmonic.eval](S2VectorFieldHarmonic.eval.html)
 

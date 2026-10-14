@@ -14,15 +14,17 @@ functions of the second kind
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3SquareSingularityKernel(0.9)
 SO3SquareSingularityKernel(halfwidth=10*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [radon](SO3SquareSingularityKernel.radon_py.html) | the Radon transform: the kernel on the sphere of the same coefficients, in closed form |
 
 ## Used on

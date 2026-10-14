@@ -16,23 +16,37 @@ of every scan line
 
 ## Syntax
 
-Scan lines along x:
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformDrift.fit(posA, posB)
 ```
 
-Scan lines along y:
+Scan lines along x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformDrift.fit(posA, posB, slowScan=xvector)
 ```
 
-Continued beyond the lines:
+Scan lines along y.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformDrift.fit(posA, posB, extrapolate=True)
 ```
+
+Continued beyond the lines.
+
+</div>
+
+## Description
 
 The points of one scan line share their coordinate along the slow scan direction, up to
 rounding; each line becomes a knot with the median displacement of its points. The median
@@ -42,24 +56,20 @@ them to outvote.
 
 ## Input
 
-| | |
-|---|---|
 | `posA` | vector3d, the positions in the first frame |
 | `posB` | vector3d, where they went in the second, one for each |
 
-## Output
-
-| | |
-|---|---|
-| `T` | spatialTransformDrift, a knot per scan line |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | array, a weight per point pair; zero drops a point |
 | `slowScan` | `None` | vector3d, the slow scan direction, by default y |
 | `extrapolate` | `False` | continue the end segments beyond the first and last line, where the drift is otherwise NaN |
+
+## Output
+
+| `T` | spatialTransformDrift, a knot per scan line |
 
 ## See also
 

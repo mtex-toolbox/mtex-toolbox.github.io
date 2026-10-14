@@ -17,35 +17,39 @@ antipodal
 
 ## Syntax
 
-12 for <110> in 432:
+<div class="mx-form" markdown="1">
 
 ```python
 n = h.multiplicity()
 ```
 
-6, the axes:
+12 for <110> in 432.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n = h.multiplicity(antipodal=True)
 ```
 
+6, the axes.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `h` | Miller |
-
-## Output
-
-| | |
-|---|---|
-| `n` | an integer per vector, in the shape of h |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `None` | count the axes, v and -v one; by default as h says |
+
+## Output
+
+| `n` | an integer per vector, in the shape of h |
 
 ## See also
 

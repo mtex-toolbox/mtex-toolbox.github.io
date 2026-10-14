@@ -14,21 +14,35 @@ bandwidth chosen from the data
 
 ## Syntax
 
-The density on 2^14 points:
+<div class="mx-form" markdown="1">
 
 ```python
 bw, density, xmesh = kde1d(data)
 ```
 
-On 2^10 points of [lo, hi]:
+The density on 2^14 points.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 bw, density, xmesh = kde1d(data, 2 ** 10, lo, hi)
 ```
 
+On 2^10 points of [lo, hi].
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 bw, density, xmesh = kde1d(data, weights=w, bandwidth=2.0) # weighted data, a bandwidth chosen
 ```
+
+</div>
+
+## Description
 
 The data are binned on n cells of [lo, hi] and the histogram is smoothed by the heat
 kernel, which is the Gaussian kernel of the bandwidth sqrt(t) (hi - lo). The time t is the
@@ -42,27 +56,23 @@ cumulative distribution, and its plot when no output is asked are not ported.
 
 ## Input
 
-| | |
-|---|---|
 | `data` | array, the samples |
-
-## Output
-
-| | |
-|---|---|
-| `bw` | the bandwidth of the Gaussian kernel, in the units of the data |
-| `density` | array of length n, the density estimate at the points of xmesh |
-| `xmesh` | array of length n, the centres of the cells of [lo, hi] |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `16384` | the number of cells, rounded up to a power of two |
 | `lo` | `None` | the lower end of the interval; with hi, by default the range of the data widened by half of it on each side |
 | `hi` | `None` | the upper end of the interval |
 | `weights` | `None` | the weights of the samples |
 | `bandwidth` | `None` | the bandwidth of the kernel instead of the one chosen from the data |
+
+## Output
+
+| `bw` | the bandwidth of the Gaussian kernel, in the units of the data |
+| `density` | array of length n, the density estimate at the points of xmesh |
+| `xmesh` | array of length n, the centres of the cells of [lo, hi] |
 
 ## References
 

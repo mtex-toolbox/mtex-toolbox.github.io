@@ -15,29 +15,47 @@ MATLAB's makeSphericalProjection
 
 ## Syntax
 
-The upper hemisphere of v:
+<div class="mx-form" markdown="1">
 
 ```python
 proj = makeSphericalProjection(v, upper=True)
 ```
 
-A region, equal angle:
+The upper hemisphere of v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 proj = makeSphericalProjection(sR, projection='eangle')
 ```
 
-The whole sphere of axes:
+A region, equal angle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 proj = makeSphericalProjection(None, complete=True, antipodal=True)
 ```
 
-The fundamental sector of a frame:
+The whole sphere of axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 proj = makeSphericalProjection(cs)
 ```
+
+The fundamental sector of a frame.
+
+</div>
+
+## Description
 
 The region is what the data cover, unless a sphericalRegion is given: the whole sphere for
 directions, the fundamental sector for a frame, and for a function of a frame with
@@ -50,19 +68,11 @@ Where MATLAB returns the projection, Python returns a list of one or two charts.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d, sphericalRegion, a reference frame, a function on the sphere, or None for the whole sphere |
-
-## Output
-
-| | |
-|---|---|
-| `proj` | list of sphericalProjection, one chart or the upper and the lower one |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `projection` | `'earea'` | 'earea' (equal area), 'eangle' or 'stereo' (equal angle), 'edist', 'orthographic', 'gnomonic', 'plain', or a sphericalProjection class |
 | `upper` | `False` | the upper hemisphere only |
@@ -72,6 +82,10 @@ Where MATLAB returns the projection, Python returns a list of one or two charts.
 | `how2plot` | `None` | the plottingConvention, or its name such as 'x↑→y'; by default that of the frame |
 | `fundamentalRegion` | `False` | restrict to the fundamental sector of the frame of v |
 | `symmetric` | `None` | whether the charts draw a function of the symmetry of its frame; by default true for a function of a frame with symmetry, false for directions and regions |
+
+## Output
+
+| `proj` | list of sphericalProjection, one chart or the upper and the lower one |
 
 ## See also
 

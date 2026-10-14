@@ -15,15 +15,23 @@ orientations, in the left or right tangent space; bandwidth is the hint for its 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHandle(lambda ori: ..., cs, ss, 'left')
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VectorFieldHandle(fun, *args, bandwidth=None)
 ```
+
+</div>
 
 ## Used on
 

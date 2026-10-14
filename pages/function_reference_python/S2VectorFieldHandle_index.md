@@ -14,14 +14,16 @@ its harmonic expansion
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vF = S2VectorFieldHandle(lambda v: v.cross(vector3d.Z()))
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](S2VectorFieldHandle.eval_py.html) | the vectors the callable gives at the directions x, vF(x) |
 | [fhat](S2VectorFieldHandle.fhat_py.html) | the coefficients of the harmonic expansion of the field at its bandwidth hint |
 | [rotate](S2VectorFieldHandle.rotate_py.html) | the field rotated by r, v'(xi) = r v(r^-1 xi) |

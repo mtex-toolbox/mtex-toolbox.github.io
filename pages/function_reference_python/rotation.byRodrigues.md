@@ -16,9 +16,13 @@ the rotations of Rodrigues vectors, the axes scaled by tan(omega/2)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation.byRodrigues(v)
 ```
+
+</div>
 
 MATLAB's [rotation.byRodrigues](rotation.byRodrigues.html)
 

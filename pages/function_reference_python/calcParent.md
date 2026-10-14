@@ -15,47 +15,77 @@ relationship, with their fit
 
 ## Syntax
 
-The parent of the children of one grain:
+<div class="mx-form" markdown="1">
 
 ```python
 parentOri, fit = calcParent(childOri, p2c)
 ```
 
-The children weighted:
+The parent of the children of one grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 parentOri, fit = calcParent(childOri, p2c, weights=w)
 ```
 
-The parent variant of every child:
+The children weighted.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 parentOri, fit = calcParent(childOri, parentOri, p2c)
 ```
 
-Its id instead:
+The parent variant of every child.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 parentId, fit = calcParent(childOri, parentOri, p2c, id=True)
 ```
 
-The two best:
+Its id instead.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 parentId, fit = calcParent(childOri, parentOri, p2c, numFit=2, id=True)
 ```
 
-The variant pair of every boundary:
+The two best.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 parentOri, fit = calcParent(childPairs, p2c)
 ```
 
-The variant triple of every triple point:
+The variant pair of every boundary.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 parentOri, fit = calcParent(childTriples, p2c)
 ```
+
+The variant triple of every triple point.
+
+</div>
+
+## Description
 
 The parent of many children of one grain: every child proposes its parent variants, and the
 proposal the others agree with best is refined as their weighted mean. With a parent
@@ -67,28 +97,24 @@ ids of the parent variants, childOri * p2c.variants(parent=True)[id - 1] being t
 
 ## Input
 
-| | |
-|---|---|
 | `childOri` | orientation of the child phase; (n, 2) pairs or (n, 3) triples of them |
 | `parentOri` | orientation of the parent phase, one or one per child |
 | `p2c` | orientation, the parent to child orientation relationship, or its inverse |
 
-## Output
-
-| | |
-|---|---|
-| `parentOri` | orientation of the parent phase |
-| `parentId` | the one based parent variant ids |
-| `fit` | the disorientation angle to the relationship, in radians |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `numFit` | `1` | the number of best fits to return |
 | `id` | `False` | return the parent variant ids instead of the orientations |
 | `weights` | `None` | the weights of the children of one grain in the mean |
 | `threshold` | `10*degree` | the largest disagreement of the first pair of a triple that is considered |
+
+## Output
+
+| `parentOri` | orientation of the parent phase |
+| `parentId` | the one based parent variant ids |
+| `fit` | the disorientation angle to the relationship, in radians |
 
 ## See also
 

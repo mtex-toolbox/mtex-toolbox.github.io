@@ -14,19 +14,23 @@ through the key of the whole sphere, its angle through the saturation (Thomsen e
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 axisAngleColorKey(frameA, frameB, oriRef=..., maxAngle=..., thresholdAngle=...)
 rgb = key.orientation2color(ori)
 rgb = key.orientation2color(ori, oriRef)
 ```
 
+</div>
+
+## Description
+
 The saturation is full at maxAngle, by default the 80th percentile of the angles, and the
 colour is NaN above thresholdAngle. Without a reference the identity is the reference.
 
 ## Members
 
-| | |
-|---|---|
 | [orientation2color](axisAngleColorKey.orientation2color_py.html) | the colours of orientations: the axis of the rotation from the reference through the key of the sphere, its angle as the saturation, NaN above thresholdAngle |
 
 ## Used on

@@ -15,17 +15,27 @@ direction scaled by the weights so that none crosses zero
 
 ## Syntax
 
-A c = y with c >= 0, starting at c0:
+<div class="mx-form" markdown="1">
 
 ```python
 c, k = mlsq(A, y, c0)
 ```
 
-Other bounds of the iteration:
+A c = y with c >= 0, starting at c0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c, k = mlsq(A, y, c0, maxIter=10, tol=1e-6)
 ```
+
+Other bounds of the iteration.
+
+</div>
+
+## Description
 
 The modified least squares of A c = y keeps the weights of one sign and, when the start sums
 to one, their sum: each step moves along the gradient projected against the weights and
@@ -35,25 +45,21 @@ the residual decreases by less than tol. Unlike MATLAB the start is required, A 
 
 ## Input
 
-| | |
-|---|---|
 | `A` | ndarray or sparse matrix, N x M |
 | `y` | ndarray of N values |
 | `c0` | ndarray of M real start weights, ones(M)/M as MATLAB's default |
 
-## Output
-
-| | |
-|---|---|
-| `c` | ndarray of the M weights |
-| `k` | the number of iterations |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `maxIter` | `100` | the largest number of iterations, MATLAB's itermax |
 | `tol` | `0.001` | the smallest decrease of the residual's norm that continues |
+
+## Output
+
+| `c` | ndarray of the M weights |
+| `k` | the number of iterations |
 
 ## See also
 

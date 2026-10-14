@@ -17,9 +17,13 @@ empty for an orthogonal lattice
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 crystalFrame.alignment(self)
 ```
+
+</div>
 
 MATLAB's [crystalSymmetry.alignment](crystalSymmetry.alignment.html)
 

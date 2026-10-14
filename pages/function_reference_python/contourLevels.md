@@ -13,39 +13,45 @@ n levels between the extremes, logarithmic on request: the levels of a contour p
 
 ## Syntax
 
-Ten levels from 0 to 4:
+<div class="mx-form" markdown="1">
 
 ```python
 levels = contourLevels(0, 4)
 ```
 
-Five levels equally spaced on a log scale:
+Ten levels from 0 to 4.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 levels = contourLevels(1, 100, 5, log=True)
 ```
+
+Five levels equally spaced on a log scale.
+
+</div>
+
+## Description
 
 A range of no width is widened a little, so that the levels still differ; a logarithmic
 spacing needs a positive lower end and is linear otherwise.
 
 ## Input
 
-| | |
-|---|---|
 | `lo, hi` | the lowest and the highest level |
-
-## Output
-
-| | |
-|---|---|
-| `levels` | an array of n levels |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `10` | the number of levels |
 | `log` | `False` | equal ratios instead of equal differences between the levels |
+
+## Output
+
+| `levels` | an array of n levels |
 
 ## See also
 

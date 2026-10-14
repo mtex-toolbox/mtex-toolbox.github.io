@@ -13,38 +13,44 @@ the size of the markers of a plot of n points; MTEX's dynamic marker size as one
 
 ## Syntax
 
-The size for 1000 markers:
+<div class="mx-form" markdown="1">
 
 ```python
 s = dynamicMarkerSize(1000)
 ```
 
-Never larger than 5:
+The size for 1000 markers.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = dynamicMarkerSize(1000, default=5)
 ```
+
+Never larger than 5.
+
+</div>
+
+## Description
 
 Fifty times the mean spacing of n markers on a hemisphere, sqrt(2 pi / n), never smaller
 than 1.5 and never larger than the default size.
 
 ## Input
 
-| | |
-|---|---|
 | `n` | the number of markers |
-
-## Output
-
-| | |
-|---|---|
-| `s` | the marker size in points |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `default` | `10` | the largest size, that of few markers |
+
+## Output
+
+| `s` | the marker size in points |
 
 ## See also
 

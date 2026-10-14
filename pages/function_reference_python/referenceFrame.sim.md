@@ -15,9 +15,13 @@ whether two frames describe the same symmetry, without requiring aligned bases
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 referenceFrame.sim(self, other)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L502">source</a></font>
 {% endraw %}

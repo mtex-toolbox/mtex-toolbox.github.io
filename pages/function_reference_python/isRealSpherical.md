@@ -13,38 +13,44 @@ whether spherical coefficients are those of a real function, fhat_l^{-m} = (-1)^
 
 ## Syntax
 
-Whether f is real valued:
+<div class="mx-form" markdown="1">
 
 ```python
 isRealSpherical(f._fhat)
 ```
 
-With a looser tolerance:
+Whether f is real valued.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 isRealSpherical(f._fhat, tol=1e-6)
 ```
+
+With a looser tolerance.
+
+</div>
+
+## Description
 
 The coefficients are the internal ones of an S2FunHarmonic, f._fhat, with the Condon-Shortley
 phase the relation above assumes.
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | the spherical coefficients |
-
-## Output
-
-| | |
-|---|---|
-| `isReal` | bool |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-10` | the tolerance, relative to the size of a coefficient where it exceeds one |
+
+## Output
+
+| `isReal` | bool |
 
 ## See also
 

@@ -15,17 +15,25 @@ in between; a direction given twice takes the mean of its values
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunTri(v, values)          the values at the directions v
 S2FunTri(sT, values)         on a triangulation already made
 S2FunTri(fun)                a callable sampled on a 1.5 degree grid
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2FunTri(nodes, values=None)
 ```
+
+</div>
 
 MATLAB's [S2FunTri.S2FunTri](S2FunTri.S2FunTri.html)
 

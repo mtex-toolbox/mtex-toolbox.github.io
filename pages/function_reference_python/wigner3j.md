@@ -13,9 +13,13 @@ the Wigner 3j symbol of (j1 j2 j3; m1 m2 m3), from the Clebsch-Gordan coefficien
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 wigner3j(j1, j2, j3, m1, m2, m3)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L568">source</a></font>
 {% endraw %}

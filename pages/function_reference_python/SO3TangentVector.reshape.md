@@ -15,15 +15,23 @@ the tangent vectors in another shape, a reference per element reshaped with them
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 v = v.reshape(m, n)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3TangentVector.reshape(self, *shape)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L186">source</a></font>
 {% endraw %}

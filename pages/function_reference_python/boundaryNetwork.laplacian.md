@@ -15,9 +15,13 @@ the normalised Laplacian D^-1 A - I of the network, as a sparse matrix
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 boundaryNetwork.laplacian(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L90">source</a></font>
 {% endraw %}

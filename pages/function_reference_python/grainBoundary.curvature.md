@@ -18,17 +18,27 @@ it; positive where the boundary bulges into grainId[:, 1]; MATLAB's grainBoundar
 
 ## Syntax
 
-Smoothed 50 times:
+<div class="mx-form" markdown="1">
 
 ```python
 kappa = gB.curvature()
 ```
 
-Smoothed twice:
+Smoothed 50 times.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kappa = gB.curvature(2)
 ```
+
+Smoothed twice.
+
+</div>
+
+## Description
 
 The segments are stored in walk order with the grain grainId[:, 0] on the left, so the sign
 says into which grain the boundary bulges. To read it as convex or concave with respect to
@@ -38,21 +48,17 @@ segment; a closed chain wraps around.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
-
-## Output
-
-| | |
-|---|---|
-| `kappa` | one over the radius of the fitted circle, in the units of the map, per segment |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `50` | the number of passes of the binomial filter along the chain |
+
+## Output
+
+| `kappa` | one over the radius of the fitted circle, in the units of the map, per segment |
 
 ## See also
 

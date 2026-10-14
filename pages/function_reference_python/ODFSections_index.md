@@ -14,6 +14,8 @@ sections through orientation space
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 oS.frameA, oS.frameB       the two frames
 oS.tol               the tolerance an orientation may deviate from a section
@@ -24,10 +26,10 @@ oS.orientationsAt(k, v)   the orientations at points of a chart of section k
 oS.plot(x, ...)      plotSection(x, oS, ...)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [CS](ODFSections.CS_py.html) | the first frame of the sections, frameA |
 | [makeGrid](ODFSections.makeGrid_py.html) | the orientations of the nodes of every section chart, section by section, at which values are computed for oS.plot(values) |
 | [numSections](ODFSections.numSections_py.html) | the number of sections |

@@ -17,35 +17,57 @@ int_{angle(g, c) < r} f(g) dg, relative to the integral over all orientations; M
 
 ## Syntax
 
-Around an orientation:
+<div class="mx-form" markdown="1">
 
 ```python
 v = volume(odf, ori, 20*degree)
 ```
 
-A finer local grid:
+Around an orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = volume(odf, ori, 20*degree, resolution=1*degree)
 ```
 
-Around a fibre:
+A finer local grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = volume(odf, f, 10*degree)
 ```
 
-A spherical function around a direction:
+Around a fibre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = volume(sF, xvector, 20*degree)
 ```
 
-The share of a list of orientations:
+A spherical function around a direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = volume(ori, center, 10*degree)
 ```
+
+The share of a list of orientations.
+
+</div>
+
+## Description
 
 The volume is the mean of f on a local grid in the ball times the ball's share of the
 fundamental region (its Haar measure times the number of symmetric copies, at most one).
@@ -56,23 +78,19 @@ The spherical form is a function only, not a method of the spherical functions.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun, S2Fun or orientation |
 | `center` | orientation, fibre, or vector3d on the sphere |
 | `radius` | the radius of the ball, an angle |
 
-## Output
-
-| | |
-|---|---|
-| `v` | the share of the volume, a number, or an array of one per centre |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `None` | the spacing of the local grid, by default the smaller of 1.25 degree and a thirtieth of the radius (on the sphere 0.1 degree and a two hundredth) |
+
+## Output
+
+| `v` | the share of the volume, a number, or an array of one per centre |
 
 ## See also
 

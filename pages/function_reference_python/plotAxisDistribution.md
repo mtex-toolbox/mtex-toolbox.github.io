@@ -15,41 +15,67 @@ the two frames share
 
 ## Syntax
 
-Axes of misorientations, in crystal coordinates:
+<div class="mx-form" markdown="1">
 
 ```python
 plotAxisDistribution(mori)
 ```
 
-Their density, smoothed by 10 degrees:
+Axes of misorientations, in crystal coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotAxisDistribution(mori, contourf=True)
 ```
 
-Axes between orientations, in specimen coordinates:
+Their density, smoothed by 10 degrees.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotAxisDistribution(ori1, ori2)
 ```
 
-Random axis distribution:
+Axes between orientations, in specimen coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotAxisDistribution(cs)
 ```
 
-Uncorrelated axis distribution of two phases:
+Random axis distribution.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotAxisDistribution(cs1, cs2)
 ```
 
-Axis distribution of an MDF:
+Uncorrelated axis distribution of two phases.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotAxisDistribution(mdf)
 ```
+
+Axis distribution of an MDF.
+
+</div>
+
+## Description
 
 A list of misorientations is drawn as its axes, one marker each; with a filled plot
 (contourf=True, smooth=True, pcolor=True) as the density of the axes, a kernel density
@@ -60,26 +86,22 @@ colorRange, ...).
 
 ## Input
 
-| | |
-|---|---|
 | `mori` | misorientation, a list of misorientations |
 | `ori1, ori2` | orientation, two lists of orientations of one length |
 | `cs, cs1, cs2` | crystalFrame, the phases |
 | `mdf` | SO3Fun, a misorientation distribution function |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the handle of the spherical plot |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `halfwidth` | `None` | the halfwidth of the kernel density estimate of the axes, in radians |
 | `weights` | `None` | a weight per misorientation for the density estimate |
 | `antipodal` | `False` | treat the axes as antipodal, as for misorientations between grains of one phase whose order does not matter |
+
+## Output
+
+| `h` | the handle of the spherical plot |
 
 ## See also
 

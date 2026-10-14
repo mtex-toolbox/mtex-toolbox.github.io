@@ -16,9 +16,13 @@ the rotation or orientation the vector points to, with the frames of the referen
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3TangentVector.exp(self)
 ```
+
+</div>
 
 MATLAB's [SO3TangentVector.exp](SO3TangentVector.exp.html)
 

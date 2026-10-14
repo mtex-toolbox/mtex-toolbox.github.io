@@ -15,8 +15,6 @@ from them: the default axis angles, the independent axis lengths, the orthogonal
 
 ## Members
 
-| | |
-|---|---|
 | [defaultAngles](latticeType.defaultAngles_py.html) | the axis angles the lattice implies |
 | [freeAngles](latticeType.freeAngles_py.html) | which of alpha, beta and gamma the lattice leaves independent |
 | [freeLengths](latticeType.freeLengths_py.html) | which of a, b and c the lattice leaves independent |

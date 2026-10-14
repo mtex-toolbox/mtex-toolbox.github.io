@@ -16,9 +16,13 @@ the Cauchy (small) strain of a deformation gradient, its symmetric part less the
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 deformationGradientTensor.CauchyStrain(F)
 ```
+
+</div>
 
 MATLAB's [deformationGradientTensor.CauchyStrain](deformationGradientTensor.CauchyStrain.html)
 

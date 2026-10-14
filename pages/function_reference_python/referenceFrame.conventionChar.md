@@ -17,38 +17,44 @@ x, y, z; MATLAB's conventionChar
 
 ## Syntax
 
-The frame's own convention:
+<div class="mx-form" markdown="1">
 
 ```python
 c = ss.conventionChar()
 ```
 
-Another one, in the frame's names:
+The frame's own convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = ss.conventionChar(plottingConvention('x↑→y'))
 ```
+
+Another one, in the frame's names.
+
+</div>
+
+## Description
 
 The canonical X, Y, Z frame keeps the form of plottingConvention.char; empty when the frame
 carries no convention and none is given.
 
 ## Input
 
-| | |
-|---|---|
 | `ss` | referenceFrame |
-
-## Output
-
-| | |
-|---|---|
-| `c` | str |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `pC` | `None` | plottingConvention; by default the frame's how2plot |
+
+## Output
+
+| `c` | str |
 
 ## See also
 

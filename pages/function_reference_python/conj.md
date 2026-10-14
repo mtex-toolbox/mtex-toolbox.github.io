@@ -13,14 +13,16 @@ conj(x, ...) is x.conj(...), the method of the object passed; NumPy's conjugate 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 conj(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [quaternion](quaternion.conj_py.html) | the conjugate quaternion a - b i - c j - d k, of a rotation its inverse |
 | [S1FunHarmonic](S1FunHarmonic.conj_py.html) | the complex conjugate function |
 | [S2FunHarmonic](S2FunHarmonic.conj_py.html) | the complex conjugate function |

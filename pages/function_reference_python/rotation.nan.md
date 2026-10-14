@@ -16,9 +16,13 @@ quaternions of NaN coefficients, of the shape given
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation.nan(*shape)
 ```
+
+</div>
 
 MATLAB's [rotation.nan](rotation.nan.html)
 

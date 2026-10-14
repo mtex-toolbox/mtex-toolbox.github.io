@@ -17,14 +17,16 @@ orientation list
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S3G = equispacedSO3Grid(cs, ss, resolution=5*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [alphaPeriod](SO3Grid.alphaPeriod_py.html) | the period of alpha, 2 pi over the order of the rotations about z the frames share |
 | [dot_outer](SO3Grid.dot_outer_py.html) | the dot product up to symmetry, cos(omega/2) of the misorientation angle omega reduced over the groups of both frames |
 | [find](SO3Grid.find_py.html) | the nearest grid rotation of every orientation, or the k nearest, or all within a radius, up to the symmetries of the grid's frames |

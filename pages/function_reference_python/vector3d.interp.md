@@ -18,9 +18,13 @@ layer, vector3d/interp; interp(v, y, vi, ...) its values at vi
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.interp(self, y, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [vector3d.interp](vector3d.interp.html)
 

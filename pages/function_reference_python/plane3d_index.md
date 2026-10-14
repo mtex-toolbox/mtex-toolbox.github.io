@@ -14,28 +14,38 @@ a plane <N, v> = d, or a list of them
 
 ## Syntax
 
-<N, v> = d:
+<div class="mx-form" markdown="1">
 
 ```python
 plane = plane3d(N, d)
 ```
 
-Through the point v0:
+<N, v> = d.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plane = plane3d(N, v0)
 ```
 
-Fitted through the points v:
+Through the point v0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plane = plane3d.byPoints(v)
 ```
 
+Fitted through the points v.
+
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [byPoints](plane3d.byPoints_py.html) | the plane through points: the least squares fit through their centroid, the normal the smallest principal axis of the cloud |
 | [cat](plane3d.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |
 | [clip](plane3d.clip_py.html) | the polygon the plane cuts out of the box from lo to hi, its corners in order around the normal |

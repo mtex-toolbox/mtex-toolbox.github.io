@@ -16,9 +16,13 @@ the Hermann-Mauguin symbol of the Laue group, the smallest one containing this g
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetry.LaueName(self)
 ```
+
+</div>
 
 MATLAB's [symmetry.LaueName](symmetry.LaueName.html)
 

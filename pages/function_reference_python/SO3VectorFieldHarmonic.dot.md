@@ -16,9 +16,13 @@ the inner product with a constant vector, exact, a function on the component fra
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.dot(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldHarmonic.dot](SO3VectorFieldHarmonic.dot.html)
 

@@ -17,9 +17,13 @@ class kept
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 deformationGradientTensor.logm(self)
 ```
+
+</div>
 
 MATLAB's [deformationGradientTensor.logm](deformationGradientTensor.logm.html)
 

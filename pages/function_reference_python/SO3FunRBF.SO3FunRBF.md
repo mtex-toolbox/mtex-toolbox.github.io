@@ -15,23 +15,37 @@ radial basis function ODF
 
 ## Syntax
 
-Kernels psi at the orientations ori:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunRBF(ori, psi, weights)
 ```
 
-Plus the constant c0:
+Kernels psi at the orientations ori.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunRBF(ori, psi, weights, c0)
 ```
 
-10 degree kernels, the weights giving a mean of one:
+Plus the constant c0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunRBF(ori)
 ```
+
+10 degree kernels, the weights giving a mean of one.
+
+</div>
+
+## Description
 
 The function is c0 + sum_i w_i psi(angle(g, ori_i)), every centre taken with all its
 symmetrically equivalent orientations, in the crystal and specimen frames of the centres.
@@ -43,8 +57,6 @@ values. MATLAB's SO3FunRBF(F) approximating another SO3Fun is not ported.
 
 ## Input
 
-| | |
-|---|---|
 | `center` | orientation, the centres of the kernels |
 | `psi` | SO3Kernel; by default the de la Vallee Poussin kernel of halfwidth 10 degree |
 | `weights` | one weight per centre; by default equal, giving a mean of one |
@@ -52,8 +64,6 @@ values. MATLAB's SO3FunRBF(F) approximating another SO3Fun is not ported.
 
 ## Output
 
-| | |
-|---|---|
 | `SO3F` | SO3FunRBF |
 
 ## See also
@@ -62,9 +72,13 @@ values. MATLAB's SO3FunRBF(F) approximating another SO3Fun is not ported.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunRBF(center, psi=None, weights=None, c0=0.0)
 ```
+
+</div>
 
 ## Used on
 

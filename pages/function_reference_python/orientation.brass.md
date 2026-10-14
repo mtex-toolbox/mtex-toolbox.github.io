@@ -15,9 +15,13 @@ the brass component, Bunge Euler angles (35°, 45°, 0°), in cs and the specime
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.brass(CS, *ss)
 ```
+
+</div>
 
 ## Used on
 

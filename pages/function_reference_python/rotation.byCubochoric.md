@@ -15,9 +15,13 @@ the rotations of cubochoric vectors
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation.byCubochoric(v)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L688">source</a></font>
 {% endraw %}

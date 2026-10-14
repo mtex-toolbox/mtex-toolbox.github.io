@@ -16,17 +16,27 @@ placement
 
 ## Syntax
 
-Towards z:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = cs.sym.conventionalSector()
 ```
 
-On the lower hemisphere:
+Towards z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = cs.sym.conventionalSector(up=-zvector)
 ```
+
+On the lower hemisphere.
+
+</div>
+
+## Description
 
 The hemisphere towards up when some element sends up below it, a wedge about the c axis
 starting on a mirror plane, else on a two-fold axis, else at a, and the standard
@@ -37,22 +47,18 @@ convention.
 
 ## Input
 
-| | |
-|---|---|
 | `pg` | symmetry |
-
-## Output
-
-| | |
-|---|---|
-| `sR` | sphericalRegion |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `up` | `None` | vector3d, the direction out of the screen, z by default |
 | `east` | `None` | vector3d, the direction to the right, by default the a axis |
+
+## Output
+
+| `sR` | sphericalRegion |
 
 ## See also
 

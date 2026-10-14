@@ -15,9 +15,13 @@ one component as a function without the group
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.component(self, i)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L336">source</a></font>
 {% endraw %}

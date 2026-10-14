@@ -13,35 +13,57 @@ a legend: of every artist a displayName named, or naming the curves of the curre
 
 ## Syntax
 
-A legend of every displayName of the figure:
+<div class="mx-form" markdown="1">
 
 ```python
 legend()
 ```
 
-Names the curves in the order they were drawn:
+A legend of every displayName of the figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 legend('first', 'second')
 ```
 
-Another place, two columns:
+Names the curves in the order they were drawn.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 legend(location='southwest', numColumns=2)
 ```
 
-Beside the charts, outside the axes:
+Another place, two columns.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 legend(location='northoutside')
 ```
 
-Removes the legends:
+Beside the charts, outside the axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 legend('off')
 ```
+
+Removes the legends.
+
+</div>
+
+## Description
 
 Without names the legend collects every artist of the figure that a displayName (a
 label) named, each name once, MATLAB's legend('show'); with names it names the bars,
@@ -53,23 +75,19 @@ legend.
 
 ## Input
 
-| | |
-|---|---|
 | `names` | str, the names of the curves; 'off' removes the legends |
-
-## Output
-
-| | |
-|---|---|
-| `leg` | the matplotlib legend, None for 'off' |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `location` | `'northeast'` | MATLAB's compass names, 'north', 'northeast', ..., 'best', or with 'outside' appended to place it beside the charts |
 | `numColumns` | `1` | the number of columns of the legend |
 | `fontSize` | `None` | the font size; by default the preference FontSize |
+
+## Output
+
+| `leg` | the matplotlib legend, None for 'off' |
 
 ## See also
 

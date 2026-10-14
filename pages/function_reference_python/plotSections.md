@@ -14,23 +14,37 @@ section; MATLAB's ODFSections/plot
 
 ## Syntax
 
-The charts of the sections:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(oS)
 ```
 
-In two columns:
+The charts of the sections.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fig = plotSections(oS, columns=2)
 ```
 
-Without the reference fields:
+In two columns.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotSections(oS, field=False)
 ```
+
+Without the reference fields.
+
+</div>
+
+## Description
 
 A section plot of orientations or of a function draws into these charts; the figure keeps
 oS as its sections, so that later plots of orientations, fibres or annotations go into the
@@ -40,22 +54,18 @@ them.
 
 ## Input
 
-| | |
-|---|---|
 | `oS` | ODFSections, as phi2Sections or sigmaSections |
-
-## Output
-
-| | |
-|---|---|
-| `fig` | mtexFigure |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `columns` | `0` | the number of columns of sections; by default a grid near a slightly wide picture |
 | `field` | `True` | draw the field each section counts its coordinate from, where it has one |
+
+## Output
+
+| `fig` | mtexFigure |
 
 ## See also
 

@@ -14,49 +14,63 @@ or the NUFFT by the number of nodes
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 f = S2FunHarmonic(lambda v: v.z**2, bandwidth=8)
 ```
 
-The values, as f.eval:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 y = sphericalSeries(f._fhat, vector3d.rand(100))
 ```
 
-On a grid, by the FFT:
+The values, as f.eval.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 y = sphericalSeries(f._fhat, quadratureS2Grid(16))
 ```
 
-The complex values:
+On a grid, by the FFT.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 y = sphericalSeries(f._fhat, vector3d.rand(100), real=False)
 ```
+
+The complex values.
+
+</div>
+
+## Description
 
 The coefficients are the internal ones, f._fhat, with the Condon-Shortley phase, not MATLAB's
 f.fhat. The result has the shape of the directions.
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | the spherical coefficients |
 | `v` | vector3d, or a quadratureS2Grid |
 
-## Output
-
-| | |
-|---|---|
-| `y` | the values at the directions, real for real coefficients |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` | `None` | whether the coefficients are those of a real function, whose values are returned real; by default isRealSpherical(fhat) |
+
+## Output
+
+| `y` | the values at the directions, real for real coefficients |
 
 ## See also
 

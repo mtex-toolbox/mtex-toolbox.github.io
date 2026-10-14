@@ -15,9 +15,13 @@ the phase id of a frame, a mineral name or a number, MATLAB's cs2phaseId
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.cs2phaseId(self, CS)
 ```
+
+</div>
 
 ## Used on
 

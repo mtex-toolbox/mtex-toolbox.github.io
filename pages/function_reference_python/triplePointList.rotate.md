@@ -15,16 +15,24 @@ rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method; '
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotate(ebsd, rot, keepEuler=True)
 rotate(odf, rot, 'right')
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 rotate(v, rot, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

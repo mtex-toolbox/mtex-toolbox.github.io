@@ -17,29 +17,47 @@ t = cos(omega/2); MATLAB's grad
 
 ## Syntax
 
-At the cosines of the half angles t:
+<div class="mx-form" markdown="1">
 
 ```python
 d = psi.grad(t)
 ```
 
-At the angles of rotations:
+At the cosines of the half angles t.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = psi.grad(rot)
 ```
 
-At the angles between two rotations:
+At the angles of rotations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = psi.grad(rot1, rot2)
 ```
 
-The derivative as a kernel, an SO3KernelHandle:
+At the angles between two rotations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 dpsi = psi.grad()
 ```
+
+The derivative as a kernel, an SO3KernelHandle.
+
+</div>
+
+## Description
 
 The derivative follows from sin(omega/2) psi = sum_n A_n sin((2n+1) omega/2); it vanishes at
 omega = 0. MATLAB calls it the magnitude of the gradient: the gradient of the function
@@ -47,22 +65,18 @@ g -> psi(g) has this length.
 
 ## Input
 
-| | |
-|---|---|
 | `psi` | SO3Kernel |
 | `t` | ndarray of cosines cos(omega/2), or rotation |
 
-## Output
-
-| | |
-|---|---|
-| `d` | ndarray, or SO3KernelHandle without an argument |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `other` | `None` | a second rotation: the derivative at the angle between t and it |
+
+## Output
+
+| `d` | ndarray, or SO3KernelHandle without an argument |
 
 ## See also
 

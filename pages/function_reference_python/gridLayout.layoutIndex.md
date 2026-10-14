@@ -15,23 +15,37 @@ asks, new[r, c] = old.flat[lin[r, c]]; MATLAB's gridLayout.layoutIndex
 
 ## Syntax
 
-A.flat[lin] is A laid out in gL:
+<div class="mx-form" markdown="1">
 
 ```python
 lin = layoutIndex(gL, (d1, d2), A.shape)
 ```
 
-And whether it transposes:
+A.flat[lin] is A laid out in gL.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 lin, t = layoutIndex(gL, (d1, d2), A.shape, return_transpose=True)
 ```
 
-The closest layout a reindexing reaches:
+And whether it transposes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 lin = layoutIndex(gL, (d1, d2), A.shape, nearest=True)
 ```
+
+The closest layout a reindexing reaches.
+
+</div>
+
+## Description
 
 A layout says which specimen directions the row and the column index of an array advance
 along, so two of them differ by a transpose and two flips, the only thing a reindexing can
@@ -43,25 +57,21 @@ not.
 
 ## Input
 
-| | |
-|---|---|
 | `gL` | gridLayout, the layout the array is to be laid out in, the target |
 | `d` | (d1, d2), vector3d, the directions the first and the second index advance along |
 | `shape` | the shape of the array, its first two dimensions |
 
-## Output
-
-| | |
-|---|---|
-| `lin` | an integer array of the reindexed shape, the linear indices into the array |
-| `t` | whether the first two dimensions were exchanged (return_transpose): a transpose also exchanges whatever is indexed by dimension, a pixel step or a size |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `nearest` | `False` | take the layout a transpose and flips reach closest, where otherwise directions that differ by more than a signed permutation are refused |
 | `return_transpose` | `False` | also return t, MATLAB's second output |
+
+## Output
+
+| `lin` | an integer array of the reindexed shape, the linear indices into the array |
+| `t` | whether the first two dimensions were exchanged (return_transpose): a transpose also exchanges whatever is indexed by dimension, a pixel step or a size |
 
 ## See also
 

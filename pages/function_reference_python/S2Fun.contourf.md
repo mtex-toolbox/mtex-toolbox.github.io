@@ -14,9 +14,13 @@ contourf(sF), contourf(v), contourf(v, data): filled contours
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 contourf(x, *args, **kw)
 ```
+
+</div>
 
 ## Used on
 

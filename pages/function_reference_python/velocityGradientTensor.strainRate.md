@@ -17,9 +17,13 @@ spin, whose axial vector is the angular velocity
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 velocityGradientTensor.strainRate(L)
 ```
+
+</div>
 
 MATLAB's [velocityGradientTensor.strainRate](velocityGradientTensor.strainRate.html)
 

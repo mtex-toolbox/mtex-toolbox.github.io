@@ -18,45 +18,55 @@ MATLAB's min
 
 ## Syntax
 
-The global minimum and where it is:
+<div class="mx-form" markdown="1">
 
 ```python
 value, ori = min(odf)
 ```
 
-Three local minima:
+The global minimum and where it is.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 values, oris = min(odf, numLocal=3)
 ```
 
-The pointwise minimum with a number:
+Three local minima.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = min(odf, 0)
 ```
+
+The pointwise minimum with a number.
+
+</div>
+
+## Description
 
 The minimum is the maximum of -f, the keywords resolution, accuracy and startingNodes as
 for max.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun, S2Fun or S1Fun; a second function or a number for the pointwise minimum |
-
-## Output
-
-| | |
-|---|---|
-| `value` | the smallest value, or numLocal values in ascending order |
-| `ori` | the position: orientation, vector3d, or the angle on the circle |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `numLocal` | `1` | the number of local minima returned |
+
+## Output
+
+| `value` | the smallest value, or numLocal values in ascending order |
+| `ori` | the position: orientation, vector3d, or the angle on the circle |
 
 ## See also
 

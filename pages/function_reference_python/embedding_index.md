@@ -16,29 +16,47 @@ orientations modulo the crystal symmetry
 
 ## Syntax
 
-The images of a list of orientations:
+<div class="mx-form" markdown="1">
 
 ```python
 e = embedding(ori)
 ```
 
-The image of the identity:
+The images of a list of orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = embedding(cs)
 ```
 
-The coordinates, one row per orientation:
+The image of the identity.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = double(e)
 ```
 
-The mean orientation, the projection of the mean image:
+The coordinates, one row per orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = mean(e).orientation()
 ```
+
+The mean orientation, the projection of the mean image.
+
+</div>
+
+## Description
 
 An orientation g is mapped to a tuple of symmetric tensors, the mean over the proper
 point group of the powers of the turned vectors g s l_i, less their mean over SO(3) and
@@ -56,22 +74,18 @@ given tensors, is built here by setDouble(e, d) or from the keywords.
 
 ## Input
 
-| | |
-|---|---|
 | `o` | orientation, the orientations to embed, or a crystalFrame for the image of the identity |
-
-## Output
-
-| | |
-|---|---|
-| `e` | embedding, the images, e[i] the image of one orientation |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `spec` |  | the recipe of the embedding of a crystal frame, with u: an embedding of given components |
 | `u` |  | the components, one column per image, with spec |
+
+## Output
+
+| `e` | embedding, the images, e[i] the image of one orientation |
 
 ## References
 
@@ -83,8 +97,6 @@ given tensors, is built here by setDouble(e, d) or from the keywords.
 
 ## Members
 
-| | |
-|---|---|
 | [cat](embedding.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |
 | [CS](embedding.CS_py.html) | the crystal frame the embedding belongs to |
 | [dim](embedding.dim_py.html) | the dimension of the space of the images, the length of a row of double(e) |

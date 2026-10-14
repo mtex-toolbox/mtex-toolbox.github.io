@@ -16,16 +16,18 @@ an orientation has rotated them
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sS = slipSystem(b, n)
 sS = slipSystem(b, n, CRSS)
 sS = slipSystem.fcc(cs)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [basal](slipSystem.basal_py.html) | the basal slip system <11-20>(0001) of a hexagonal crystal |
 | [bcc](slipSystem.bcc_py.html) | the slip systems <1-11>{011}, <-111>{211} and <-111>{321} of a body-centred cubic crystal |
 | [cat](slipSystem.cat_py.html) | the list of several systems of one crystal, MATLAB's [sS1, sS2] |

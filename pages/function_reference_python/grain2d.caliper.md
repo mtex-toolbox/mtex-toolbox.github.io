@@ -17,29 +17,47 @@ longest or the shortest width as a framed axis of that length; MATLAB's grain2d.
 
 ## Syntax
 
-The longest, norm(cV) its length:
+<div class="mx-form" markdown="1">
 
 ```python
 cV = grains.caliper()
 ```
 
-The narrowest, or 'longest', 'shortestPerp':
+The longest, norm(cV) its length.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cV = grains.caliper('shortest')
 ```
 
-The width across a direction:
+The narrowest, or 'longest', 'shortestPerp'.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = grains.caliper(vector3d.X)
 ```
 
-The widths across angles to the x axis:
+The width across a direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = caliper(grains, [0, 30*degree])
 ```
+
+The widths across angles to the x axis.
+
+</div>
+
+## Description
 
 The width across a direction is the extent of the convex hull projected onto it. 'longest'
 is the diameter of the outline and 'shortest' its narrowest width, each the vector3d along
@@ -49,22 +67,18 @@ aligned along. A list of directions or angles gives a width per outline and dire
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain2d, or any set of outlines |
-
-## Output
-
-| | |
-|---|---|
-| `cV` | vector3d, one per outline, norm(cV) the length |
-| `c` | array of the widths, (n,) or (n, k) for k directions |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `arg` | `None` | 'longest' (by default), 'shortest' or 'shortestPerp', or a direction, an angle to the x axis of the map or a list of them |
+
+## Output
+
+| `cV` | vector3d, one per outline, norm(cV) the length |
+| `c` | array of the widths, (n,) or (n, k) for k directions |
 
 ## See also
 

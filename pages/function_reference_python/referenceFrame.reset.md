@@ -15,9 +15,13 @@ empties the frame register, the named frames and the default frame of the sessio
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 referenceFrame.reset()
 ```
+
+</div>
 
 ## Used on
 

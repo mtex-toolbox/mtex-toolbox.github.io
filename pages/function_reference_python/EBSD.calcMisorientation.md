@@ -17,23 +17,37 @@ they say nothing about one another; MATLAB's calcMisorientation of a map
 
 ## Syntax
 
-Within one phase:
+<div class="mx-form" markdown="1">
 
 ```python
 mori = calcMisorientation(ebsd['Forsterite'], sampleSize=1000)
 ```
 
-Pairs at least 100 apart:
+Within one phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = calcMisorientation(ebsd['Forsterite'], minDistance=100)
 ```
 
-Between two phases:
+Pairs at least 100 apart.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = calcMisorientation(ebsd['Forsterite'], ebsd['Enstatite'])
 ```
+
+Between two phases.
+
+</div>
+
+## Description
 
 This is the distribution an uncorrelated misorientation distribution is compared against.
 Both maps must hold one indexed phase. For orientations o1 of the first map and o2 of the
@@ -44,24 +58,20 @@ not returned.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD of one indexed phase |
 | `other` | EBSD of one indexed phase, by default the first map |
 
-## Output
-
-| | |
-|---|---|
-| `mori` | orientation from the crystal frame of other to that of ebsd |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `sampleSize` | `100000` | the number of pairs drawn |
 | `minDistance` | `None` | the least distance of a pair, in the scan unit; a hundredth of the diagonal of the first map by default |
 | `rng` | `None` | the seed or the numpy Generator of the draw |
+
+## Output
+
+| `mori` | orientation from the crystal frame of other to that of ebsd |
 
 ## See also
 

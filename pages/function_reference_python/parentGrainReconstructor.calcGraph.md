@@ -17,23 +17,37 @@ parentGrainReconstructor
 
 ## Syntax
 
-The default probabilities:
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcGraph()
 ```
 
-Another misfit at probability 1/2:
+The default probabilities.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcGraph(threshold=2.5*degree, tol=2.5*degree)
 ```
 
-The child to child boundaries only:
+Another misfit at probability 1/2.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcGraph(c2c=True)
 ```
+
+The child to child boundaries only.
+
+</div>
+
+## Description
 
 A node per grain, and between neighbouring grains the probability that the misfit of their
 boundary to the orientation relationship still means one parent: a cumulative Gaussian of
@@ -42,13 +56,11 @@ child boundaries are both used unless one of them is asked for. The job is chang
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor with its orientation relationship job.p2c |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `threshold` | `2*degree` | the misfit at which the probability is 1/2 |
 | `tol` | `1.5*degree` | the range about threshold over which the probability goes from 1 to 0 |

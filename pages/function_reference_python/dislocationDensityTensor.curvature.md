@@ -16,9 +16,13 @@ the curvature tensor of a dislocation density tensor by Nye's relation, kappa = 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 dislocationDensityTensor.curvature(alpha)
 ```
+
+</div>
 
 MATLAB's [dislocationDensityTensor.curvature](dislocationDensityTensor.curvature.html)
 

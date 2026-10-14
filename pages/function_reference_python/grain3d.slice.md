@@ -16,23 +16,37 @@ the 2D grains a plane cuts from 3D grains; MATLAB's slice of grain3d
 
 ## Syntax
 
-A plane3d:
+<div class="mx-form" markdown="1">
 
 ```python
 grains2 = grains.slice(plane3d(vector3d.Z, vector3d(0, 0, 2.2)))
 ```
 
-Normal and a point on the plane:
+A plane3d.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains2 = grains.slice(vector3d(1, 1, 1), vector3d(1, 1, 2))
 ```
 
-Normal and distance from the origin:
+Normal and a point on the plane.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains2 = grains.slice(vector3d.Z, 2.2)
 ```
+
+Normal and distance from the origin.
+
+</div>
+
+## Description
 
 Every grain the plane intersects contributes the polygons of its section, which become
 grains of a grain2d in the plane; grains2.prop['Id3d'] names the 3D grain every section
@@ -42,22 +56,18 @@ cuts no grain raises a ValueError, where MATLAB returns an empty grain2d.
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain3d |
 | `plane` | plane3d, or the normal vector3d of the plane |
 
-## Output
-
-| | |
-|---|---|
-| `grains2` | grain2d |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `P0` | `None` | with a normal: a point on the plane, a vector3d, or its distance from the origin; by default the plane through the origin |
+
+## Output
+
+| `grains2` | grain2d |
 
 ## See also
 

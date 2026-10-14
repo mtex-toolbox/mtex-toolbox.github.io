@@ -15,14 +15,16 @@ orientations, in the left or right tangent space; bandwidth is the hint for its 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHandle(lambda ori: ..., cs, ss, 'left')
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](SO3VectorFieldHandle.eval_py.html) | the tangent vectors of the field at orientations, by the callable |
 | [frameA](SO3VectorFieldHandle.frameA_py.html) | the frame the orientations map from, the crystal frame |
 | [frameB](SO3VectorFieldHandle.frameB_py.html) | the frame the orientations map to, the specimen or a second crystal frame |

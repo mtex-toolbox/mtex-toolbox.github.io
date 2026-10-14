@@ -16,38 +16,44 @@ equal at the same reference within tol in the components (MATLAB's eq)
 
 ## Syntax
 
-Equal up to 1e-6:
+<div class="mx-form" markdown="1">
 
 ```python
 b = v1.isclose(v2)
 ```
 
-A coarser tolerance:
+Equal up to 1e-6.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = v1.isclose(v2, tol=1e-3)
 ```
+
+A coarser tolerance.
+
+</div>
+
+## Description
 
 True where the references are the same and the difference of the vectors, brought to
 the side of the first, is shorter than tol. The operator == compares exactly.
 
 ## Input
 
-| | |
-|---|---|
 | `v1, v2` | SO3TangentVector |
-
-## Output
-
-| | |
-|---|---|
-| `b` | boolean array |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-06` | the largest length of the difference |
+
+## Output
+
+| `b` | boolean array |
 
 ## See also
 

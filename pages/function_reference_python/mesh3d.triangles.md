@@ -15,9 +15,13 @@ the fan triangles of the faces, (k, 3), and the face each belongs to
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mesh3d.triangles(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L35">source</a></font>
 {% endraw %}

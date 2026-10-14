@@ -16,9 +16,13 @@ the convolution with a kernel psi, through the harmonic expansion
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunCBF.conv(self, psi)
 ```
+
+</div>
 
 MATLAB's [SO3FunCBF.conv](SO3FunCBF.conv.html)
 

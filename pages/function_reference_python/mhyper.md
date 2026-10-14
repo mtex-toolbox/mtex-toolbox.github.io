@@ -14,9 +14,13 @@ status: Reference
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mhyper(kappa)
 ```
+
+</div>
 
 MATLAB's [mhyper](mhyper.html)
 

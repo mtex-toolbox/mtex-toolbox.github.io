@@ -15,9 +15,13 @@ environment variable MTEX_DATA, else ~/.mtex/data
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mtexDataPath()
 ```
+
+</div>
 
 ## Used on
 

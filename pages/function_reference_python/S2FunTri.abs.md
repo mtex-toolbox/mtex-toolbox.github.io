@@ -19,15 +19,23 @@ is S2FunHarmonic(abs(sF), bandwidth=bw)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sF = abs(sF)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2FunTri.abs(self)
 ```
+
+</div>
 
 MATLAB's [S2FunTri.abs](S2FunTri.abs.html)
 

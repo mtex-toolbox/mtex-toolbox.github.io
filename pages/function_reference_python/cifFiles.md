@@ -13,9 +13,13 @@ the names of the CIF files shipped with MTEX, sorted
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 cifFiles()
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/cif.py#L26">source</a></font>
 {% endraw %}

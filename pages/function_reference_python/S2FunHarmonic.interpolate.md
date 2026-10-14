@@ -17,9 +17,13 @@ the values y at the directions v
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunHarmonic.interpolate(nodes, values, **kwargs)
 ```
+
+</div>
 
 MATLAB's [S2FunHarmonic.interpolate](S2FunHarmonic.interpolate.html)
 

@@ -15,39 +15,45 @@ the rotational axes of the group, both signs, and their multiplicities; MATLAB's
 
 ## Syntax
 
-Every rotational axis and its multiplicity:
+<div class="mx-form" markdown="1">
 
 ```python
 axes, mult = cs.elements()
 ```
 
-The threefold axes:
+Every rotational axis and its multiplicity.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 axes = cs.elements(3)
 ```
+
+The threefold axes.
+
+</div>
+
+## Description
 
 Every axis appears with both signs; its multiplicity is the highest order of a rotation
 about it.
 
 ## Input
 
-| | |
-|---|---|
 | `cs` | referenceFrame |
-
-## Output
-
-| | |
-|---|---|
-| `axes` | vector3d, the axes |
-| `mult` | their multiplicities (without multiplicity) |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `multiplicity` | `None` | return only the axes of this order |
+
+## Output
+
+| `axes` | vector3d, the axes |
+| `mult` | their multiplicities (without multiplicity) |
 
 ## See also
 

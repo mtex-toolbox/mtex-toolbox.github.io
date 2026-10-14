@@ -13,14 +13,16 @@ det(x, ...) is x.det(...), the method of the object passed; NumPy's det for an a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 det(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [tensor](tensor.det_py.html) | the determinant of a rank two tensor |
 | [vector3d](vector3d.det_py.html) | the triple product, vector3d/det det(a, b, c) the triple product |
 

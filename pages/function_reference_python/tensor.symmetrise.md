@@ -16,9 +16,13 @@ the mean over the group of the frame, and whether the tensor is invariant under 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.symmetrise(self)
 ```
+
+</div>
 
 MATLAB's [tensor.symmetrise](tensor.symmetrise.html)
 

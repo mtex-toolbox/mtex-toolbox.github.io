@@ -17,9 +17,13 @@ equivalents of the centres
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldRBF.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldRBF.eval](SO3VectorFieldRBF.eval.html)
 

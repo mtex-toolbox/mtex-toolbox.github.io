@@ -15,9 +15,13 @@ the positions of plane coordinates of shape (..., 2)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapPlane.from2d(self, xy)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L88">source</a></font>
 {% endraw %}

@@ -15,9 +15,13 @@ the distinct nodes, MATLAB's grid(:)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quadratureSO3Grid.flatten(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L244">source</a></font>
 {% endraw %}

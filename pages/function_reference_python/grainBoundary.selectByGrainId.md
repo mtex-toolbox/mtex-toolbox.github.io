@@ -18,23 +18,35 @@ for pairs of ids the segments between the two of a pair, with the row of its pai
 
 ## Syntax
 
-The boundaries of these grains:
+<div class="mx-form" markdown="1">
 
 ```python
 gBSub = gB.selectByGrainId([1, 2, 3])
 ```
 
-Pairs (n, 2): gBSub.grainId is pairs[pairId] up to the order:
+The boundaries of these grains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gBSub, pairId = gB.selectByGrainId(pairs)
 ```
 
+Pairs (n, 2): gBSub.grainId is pairs[pairId] up to the order.
+
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grainBoundary.selectByGrainId(self, ids)
 ```
+
+</div>
 
 MATLAB's [grainBoundary.selectByGrainId](grainBoundary.selectByGrainId.html)
 

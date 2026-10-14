@@ -13,8 +13,6 @@ the equal angle, stereographic, projection: r = tan(theta / 2)
 
 ## Members
 
-| | |
-|---|---|
 | [polarAngle](eangleProjection.polarAngle_py.html) | the polar angle 2 arctan(r) drawn at the plane radius r |
 | [radius](eangleProjection.radius_py.html) | the plane radius tan(theta / 2) of the polar angle theta |
 

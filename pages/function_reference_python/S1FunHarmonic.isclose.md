@@ -15,17 +15,27 @@ whether the coefficients of g agree within atol + rtol times their norm
 
 ## Syntax
 
-Equal up to a relative 1e-8:
+<div class="mx-form" markdown="1">
 
 ```python
 tf = isclose(sF1, sF2)
 ```
 
-With an absolute tolerance:
+Equal up to a relative 1e-8.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 tf = isclose(sF1, sF2, atol=1e-3)
 ```
+
+With an absolute tolerance.
+
+</div>
+
+## Description
 
 The functions are compared at the larger of their bandwidths: the Euclidean norm of the
 difference of the coefficients, the L2 distance for the normalised measure, must not exceed
@@ -33,23 +43,19 @@ atol + rtol |g|.
 
 ## Input
 
-| | |
-|---|---|
 | `sF1` | S1FunHarmonic |
 | `g` | S1FunHarmonic, the function to compare with |
 
-## Output
-
-| | |
-|---|---|
-| `tf` | bool |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rtol` | `1e-08` | the tolerance relative to the norm of g |
 | `atol` | `0.0` | the absolute tolerance |
+
+## Output
+
+| `tf` | bool |
 
 ## See also
 

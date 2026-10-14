@@ -15,9 +15,13 @@ the positions moved by the polynomial displacement
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformPoly.eval(self, pos)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L496">source</a></font>
 {% endraw %}

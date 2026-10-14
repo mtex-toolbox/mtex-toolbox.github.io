@@ -16,15 +16,23 @@ the Kurdjumov-Sachs orientation relationship from fcc to bcc, (111) || (011) and
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 p2c = orientation.KurdjumovSachs(csGamma, csAlpha)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 orientation.KurdjumovSachs(csG, csA)
 ```
+
+</div>
 
 ## Used on
 

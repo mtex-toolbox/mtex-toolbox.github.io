@@ -17,15 +17,23 @@ cell outside the grid
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 row, col = cube2hex(ebsd, x, y, z)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 EBSD.cube2hex(ebsd, x, y, z)
 ```
+
+</div>
 
 MATLAB's [EBSDhex.cube2hex](EBSDhex.cube2hex.html)
 

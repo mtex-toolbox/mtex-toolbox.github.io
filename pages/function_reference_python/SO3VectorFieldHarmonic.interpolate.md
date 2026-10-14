@@ -15,47 +15,77 @@ orientations, on the sphere at directions, a vector field for vector values or t
 
 ## Syntax
 
-An SO(3) function through values at orientations:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = interpolate(ori, y)
 ```
 
-Of a given degree, the nodes weighted equally:
+An SO(3) function through values at orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = interpolate(ori, y, bandwidth=8, weights='equal')
 ```
 
-With LSQR's flag, residual and iterations:
+Of a given degree, the nodes weighted equally.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F, (flag, residual, nIter) = interpolate(ori, y, withParameters=True)
 ```
 
-A function on the sphere through values at directions:
+With LSQR's flag, residual and iterations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = interpolate(v, y, bandwidth=16, lambda_=1e-4)
 ```
 
-A vector field on the sphere through vectors w:
+A function on the sphere through values at directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sVF = interpolate(v, w)
 ```
 
-A vector field on SO(3) through tangent vectors:
+A vector field on the sphere through vectors w.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = interpolate(SO3TangentVector(w, ori), bandwidth=8)
 ```
 
-Without regularisation:
+A vector field on SO(3) through tangent vectors.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = interpolate(SO3TangentVector(w, ori), lambda_=0)
 ```
+
+Without regularisation.
+
+</div>
+
+## Description
 
 The harmonic coefficients up to the bandwidth minimise the weighted squared misfit at the
 nodes plus lambda_ times the Sobolev norm of order s, solved by LSQR. On SO(3) the fit is posed
@@ -68,20 +98,12 @@ here they carry their orientations.
 
 ## Input
 
-| | |
-|---|---|
 | `nodes` | orientation or rotation, vector3d, or SO3TangentVector for a vector field on SO(3) |
 | `values` | ndarray of one value per node, or vector3d for a vector field on the sphere |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunHarmonic, S2FunHarmonic, S2VectorFieldHarmonic or SO3VectorFieldHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest harmonic degree; set by hand it may undersample |
 | `lambda_` | `None` | the regularisation parameter, 1e-8 on SO(3) by default, 0 for none; MATLAB's 'regularization' |
@@ -90,6 +112,10 @@ here they carry their orientations.
 | `maxIter` | `100` | the largest number of LSQR iterations |
 | `tol` | `None` | the tolerance of LSQR, 1e-3 on SO(3) and 1e-6 on the sphere by default |
 | `withParameters` | `False` | return also LSQR's flag, residual and number of iterations |
+
+## Output
+
+| `SO3F` | SO3FunHarmonic, S2FunHarmonic, S2VectorFieldHarmonic or SO3VectorFieldHarmonic |
 
 ## See also
 

@@ -16,9 +16,13 @@ polar angle to z in [0, pi] and azimuth from x towards y in [0, 2pi), vector3d/p
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.polar(self)
 ```
+
+</div>
 
 MATLAB's [vector3d.polar](vector3d.polar.html)
 

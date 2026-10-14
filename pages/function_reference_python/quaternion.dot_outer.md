@@ -16,32 +16,34 @@ the inner product of the coefficients
 
 ## Syntax
 
-A b + ... + d d of the coefficients:
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(q1, q2)
 ```
+
+A b + ... + d d of the coefficients.
+
+</div>
+
+## Description
 
 The plain inner product of the quaternions as vectors of R^4, signed: q and -q give
 opposite values. rotation.dot takes its absolute value.
 
 ## Input
 
-| | |
-|---|---|
 | `q1, q2` | quaternion |
-
-## Output
-
-| | |
-|---|---|
-| `d` | the inner products |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `True` | not used by quaternions, which keep the sign; taken so that the call is the one of rotations |
+
+## Output
+
+| `d` | the inner products |
 
 ## See also
 

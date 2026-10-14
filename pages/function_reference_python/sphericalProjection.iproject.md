@@ -15,9 +15,13 @@ the direction drawn at the plane point (x, y)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalProjection.iproject(self, x, y)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L107">source</a></font>
 {% endraw %}

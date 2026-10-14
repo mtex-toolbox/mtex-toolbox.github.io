@@ -17,23 +17,37 @@ bulkModulus
 
 ## Syntax
 
-The Voigt bound:
+<div class="mx-form" markdown="1">
 
 ```python
 K = bulkModulus(C)
 ```
 
-The mean of the two bounds:
+The Voigt bound.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 K = bulkModulus(C, 'Hill')
 ```
 
-All three:
+The mean of the two bounds.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 KV, KR, KH = bulkModulus(C, 'all')
 ```
+
+All three.
+
+</div>
+
+## Description
 
 The Voigt upper bound is a ninth of C_iijj, the Reuss lower bound the reciprocal of the
 volume compressibility S_iijj, Hill's the mean of the two. MATLAB returns the three as
@@ -41,15 +55,11 @@ outputs; here 'all' returns them as a named tuple (voigt, reuss, hill).
 
 ## Input
 
-| | |
-|---|---|
 | `C` | stiffnessTensor or complianceTensor |
 | `which` | 'Voigt', 'Reuss', 'Hill' or 'all' |
 
 ## Output
 
-| | |
-|---|---|
 | `K` | the bulk modulus, or the bounds |
 
 ## See also
@@ -58,9 +68,13 @@ outputs; here 'all' returns them as a named tuple (voigt, reuss, hill).
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 stiffnessTensor.bulkModulus(T, which=None)
 ```
+
+</div>
 
 MATLAB's [stiffnessTensor.bulkModulus](stiffnessTensor.bulkModulus.html)
 

@@ -14,15 +14,17 @@ a function on the circle given by a callable that receives angles
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHandle(fun)
 S1FunHandle(fun, bandwidth=L)     the bandwidth of its harmonic form
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](S1FunHandle.eval_py.html) | the values of the callable at the angles x |
 | [max](S1FunHandle.max_py.html) | the global, local and pointwise maxima of a function on the circle given by a callable |
 | [mean](S1FunHandle.mean_py.html) | the mean over the circle, through the harmonic form |

@@ -14,35 +14,57 @@ MATLAB's SO3Fun/export
 
 ## Syntax
 
-The values on a regular Euler grid:
+<div class="mx-form" markdown="1">
 
 ```python
 export(odf, 'odf.txt', resolution=10*degree)
 ```
 
-In the ZYZ convention, the angles in radians:
+The values on a regular Euler grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 export(odf, 'odf.txt', 'ZYZ', radians=True)
 ```
 
-The values on a grid of orientations:
+In the ZYZ convention, the angles in radians.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 export(odf, 'odf.txt', S3G)
 ```
 
-The components, human readable:
+The values on a grid of orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 export(odf, 'odf.mtex', interface='mtex')
 ```
 
-A sample of orientations for VPSC:
+The components, human readable.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 export(odf, 'odf-vpsc.txt', 'VPSC', points=5000)
 ```
+
+A sample of orientations for VPSC.
+
+</div>
+
+## Description
 
 The generic file has three header lines naming the frames and the columns and one row per
 node, the Euler angles and the value: on an SO3Grid passed, else on a regular grid over the
@@ -55,14 +77,12 @@ function. The interface may also be named by a positional 'generic', 'mtex' or '
 
 ## Input
 
-| | |
-|---|---|
 | `odf` | an SO3Fun |
 | `fname` | the name of the file |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `interface` | `None` | 'generic' (the default), 'mtex' or 'VPSC'; the other keywords, resolution, radians and points, go to the writer of the interface |
 

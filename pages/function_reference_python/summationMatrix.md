@@ -14,23 +14,37 @@ MATLAB's createSummationMatrix
 
 ## Syntax
 
-Sparse, the pairs within 3.5 halfwidths:
+<div class="mx-form" markdown="1">
 
 ```python
 M = summationMatrix(psi, S3G, nodes)
 ```
 
-The pairs within 20 degree:
+Sparse, the pairs within 3.5 halfwidths.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 M = summationMatrix(psi, S3G, nodes, epsilon=20*degree)
 ```
 
-Every pair, dense:
+The pairs within 20 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 M = summationMatrix(psi, S3G, nodes, exact=True)
 ```
+
+Every pair, dense.
+
+</div>
+
+## Description
 
 An entry is the mean of the kernel over the symmetric equivalents of the centre, as SO3FunRBF
 evaluates; a fit M c = y of values y at the nodes gives the weights c of the kernels. For
@@ -40,24 +54,20 @@ a dense array over every pair and every equivalent.
 
 ## Input
 
-| | |
-|---|---|
 | `psi` | SO3Kernel |
 | `centres` | orientation, the centres of the kernels, an SO3Grid |
 | `nodes` | orientation, where the values are given |
 
-## Output
-
-| | |
-|---|---|
-| `M` | scipy.sparse.csr_matrix or ndarray, nodes x centres |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `exact` | `False` | every pair and every equivalent, a dense matrix |
 | `epsilon` | `None` | the radius beyond which the kernel counts as zero, by default 3.5 halfwidths |
+
+## Output
+
+| `M` | scipy.sparse.csr_matrix or ndarray, nodes x centres |
 
 ## See also
 

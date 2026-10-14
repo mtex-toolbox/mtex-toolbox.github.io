@@ -16,15 +16,23 @@ the integral over the circle, 2 pi times the mean, MATLAB's sum
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 value = sum(sF)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S1FunHarmonic.sum(self)
 ```
+
+</div>
 
 MATLAB's [S1FunHarmonic.sum](S1FunHarmonic.sum.html)
 

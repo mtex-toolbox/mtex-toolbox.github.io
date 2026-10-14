@@ -15,9 +15,13 @@ an N x 3 or N x 2 matrix, z zero in the second case
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.byXYZ(xyz)
 ```
+
+</div>
 
 ## Used on
 

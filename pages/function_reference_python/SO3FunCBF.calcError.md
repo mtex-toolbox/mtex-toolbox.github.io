@@ -16,23 +16,37 @@ pole figures
 
 ## Syntax
 
-Half the mean absolute difference:
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(odf1, odf2)
 ```
 
-The relative L2 error on a finer grid:
+Half the mean absolute difference.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(odf1, odf2, 'l2', resolution=2.5*degree)
 ```
 
-The RP error against pole figures:
+The relative L2 error on a finer grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(odf, pf, 'RP')
 ```
+
+The RP error against pole figures.
+
+</div>
+
+## Description
 
 Two functions are compared on the equispaced grid of the resolution: 'l1', the default, is
 half the mean absolute difference, for two densities the fraction of the volume that would
@@ -43,24 +57,20 @@ MATLAB's 'L0', the volume where the two differ by more than epsilon, is not prov
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun |
 | `g` | SO3Fun, or PoleFigure |
 | `mode` | 'l1' or 'l2' for two functions, 'relative', 'RP', 'l1' or 'l2' with pole figures |
 
-## Output
-
-| | |
-|---|---|
-| `e` | float, or one float per pole figure |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `5*degree` | the spacing of the grid on which two functions are compared |
 | `epsilon` | `None` | the threshold of the error against pole figures |
+
+## Output
+
+| `e` | float, or one float per pole figure |
 
 ## See also
 

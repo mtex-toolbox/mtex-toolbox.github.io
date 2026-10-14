@@ -18,23 +18,37 @@ its third the rotations of the frame, v.frame.rotations()
 
 ## Syntax
 
-Every image, numSym x shape:
+<div class="mx-form" markdown="1">
 
 ```python
 hs = h.symmetrise()
 ```
 
-The distinct ones of one direction:
+Every image, numSym x shape.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 hs = h.symmetrise(unique=True)
 ```
 
-The negatives too:
+The distinct ones of one direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 hs = h.symmetrise(antipodal=True)
 ```
+
+The negatives too.
+
+</div>
+
+## Description
 
 With antipodal=True the negatives are added, unless the group holds the inversion or h
 is an axis; with unique=True an axis, or antipodal=True, takes v and -v as one, and
@@ -43,22 +57,18 @@ axis of one.
 
 ## Input
 
-| | |
-|---|---|
 | `h` | Miller |
-
-## Output
-
-| | |
-|---|---|
-| `hs` | Miller |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `unique` | `False` | the distinct images of a single direction, a flat list |
 | `antipodal` | `None` | treat the directions as axes; by default as h says |
+
+## Output
+
+| `hs` | Miller |
 
 ## See also
 

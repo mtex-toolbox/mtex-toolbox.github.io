@@ -17,29 +17,47 @@ vector3d/arrow3d
 
 ## Syntax
 
-Arrows from the origin to v:
+<div class="mx-form" markdown="1">
 
 ```python
 arrow3d(v)
 ```
 
-A red arrow named z:
+Arrows from the origin to v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 arrow3d(zvector, faceColor='r', label='z')
 ```
 
-Arrows from another point, thinner:
+A red arrow named z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 arrow3d(v, anchor=vector3d(1, 0, 0), arrowWidth=0.05)
 ```
 
-Every arrow named by its indices:
+Arrows from another point, thinner.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 arrow3d(Miller(1, 0, 0, cs, 'uvw'), labeled=True)
 ```
+
+Every arrow named by its indices.
+
+</div>
+
+## Description
 
 The arrows go into the held axes in space or into a new figure, whose camera looks down on
 the screen plane of the plotting convention, and the axes widen to hold every arrow and
@@ -48,19 +66,11 @@ framing. The coordinates are those of v, in its frame.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d, the arrows, the tips when anchor is not given |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the Poly3DCollection of the arrows' faces |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `'k'` | the colour of the arrows |
 | `anchor` | `None` | vector3d or (n, 3) array, the tails of the arrows, one for all or one per arrow |
@@ -68,6 +78,10 @@ framing. The coordinates are those of v, in its frame.
 | `edgeColor` | `'none'` | the colour of the edges of the faces, 'none' for none |
 | `labeled` | `False` | name every arrow by its indices or coordinates |
 | `label` | `None` | a text at the tip of every arrow, one for all or a list with one per arrow |
+
+## Output
+
+| `h` | the Poly3DCollection of the arrows' faces |
 
 ## See also
 

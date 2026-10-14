@@ -16,9 +16,13 @@ the mean stress, a third of the trace of the stress tensor
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 stressTensor.meanStress(sigma)
 ```
+
+</div>
 
 MATLAB's [stressTensor.meanStress](stressTensor.meanStress.html)
 

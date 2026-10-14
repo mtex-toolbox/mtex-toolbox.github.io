@@ -14,16 +14,18 @@ the rotation followed by the inversion
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orthogonalTransform(rot)
 orthogonalTransform(rot, True)       the improper transform -rot
 orthogonalTransform(cs)              the elements of a point group
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [a](orthogonalTransform.a_py.html) | the coefficient a of the rotational part |
 | [angle](orthogonalTransform.angle_py.html) | the rotational angle of the rotational part, or the angle between the rotational parts of two |
 | [axis](orthogonalTransform.axis_py.html) | the rotational axis of the rotational part |

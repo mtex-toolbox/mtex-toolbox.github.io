@@ -13,14 +13,16 @@ transformationMatrix(x, ...) is x.transformationMatrix(...), the method of the o
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 transformationMatrix(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [crystalFrame](crystalFrame.transformationMatrix_py.html) | between crystal frames the axes are first re-paired by nearest length when the cells disagree, which is how the monoclinic settings 121 and 112 relate |
 | [referenceFrame](referenceFrame.transformationMatrix_py.html) | the transition matrix taking coordinates in this frame to coordinates in the other, on normalised bases: with the unit axes as rows, inv(B) A is the rotation between the two settings of one lattice |
 

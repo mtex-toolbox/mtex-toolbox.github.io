@@ -15,9 +15,13 @@ the minimiser of |V - V0|^2 + alpha |L V|^2 over the free vertices, one sparse s
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 curvatureFilter.smooth(self, V, net, h)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L215">source</a></font>
 {% endraw %}

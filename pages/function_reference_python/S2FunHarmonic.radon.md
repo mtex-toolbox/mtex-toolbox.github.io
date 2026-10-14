@@ -17,17 +17,27 @@ radon(delta) over the small circle at pi/2 + delta; MATLAB's radon
 
 ## Syntax
 
-The mean over the great circles:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = radon(sF)
 ```
 
-The mean over the small circles at 100 degree:
+The mean over the great circles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = radon(sF, 10*degree)
 ```
+
+The mean over the small circles at 100 degree.
+
+</div>
+
+## Description
 
 The transform is a convolution: the coefficients of degree n are multiplied by the Legendre
 polynomial P_n(cos(pi/2 + delta)), for the great circle (-1)^(n/2) (n-1)!!/n!! of an even n
@@ -36,21 +46,17 @@ even functions.
 
 ## Input
 
-| | |
-|---|---|
-| `sF` | S2FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
 | `sF` | S2FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `delta` | `None` | the angle by which the circle is moved from the great circle |
+
+## Output
+
+| `sF` | S2FunHarmonic |
 
 ## See also
 

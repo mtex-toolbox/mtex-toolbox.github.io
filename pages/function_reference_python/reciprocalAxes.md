@@ -13,9 +13,13 @@ the reciprocal axes a*, b*, c*
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 reciprocalAxes(axes)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalaxes.py#L72">source</a></font>
 {% endraw %}

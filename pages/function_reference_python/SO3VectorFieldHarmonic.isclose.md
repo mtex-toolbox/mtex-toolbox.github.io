@@ -15,17 +15,27 @@ whether two fields have the same coefficients on one side up to the relative tol
 
 ## Syntax
 
-Equal up to the relative tolerance 1e-8:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF.isclose(SO3VF2)
 ```
 
-Up to another one:
+Equal up to the relative tolerance 1e-8.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF.isclose(SO3VF2, rtol=1e-3)
 ```
+
+Up to another one.
+
+</div>
+
+## Description
 
 The second field is taken in the harmonic form and the tangent space of the first; the
 coefficients, padded to the larger bandwidth, agree when the norm of their difference is at
@@ -33,22 +43,18 @@ most rtol times the norm of those of the second.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3VF` | SO3VectorFieldHarmonic |
 | `w` | SO3VectorField |
 
-## Output
-
-| | |
-|---|---|
-| `tf` | bool |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rtol` | `1e-08` | the tolerance relative to the norm of w |
+
+## Output
+
+| `tf` | bool |
 
 ## See also
 

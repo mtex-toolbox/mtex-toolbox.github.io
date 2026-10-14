@@ -18,46 +18,56 @@ intercepts between successive crossings along the line
 
 ## Syntax
 
-The crossings:
+<div class="mx-form" markdown="1">
 
 ```python
 x, y = gB.intersect([33500, 4500], [36000, 7500])
 ```
 
-And the intercept lengths:
+The crossings.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 x, y, L = gB.intersect([33500, 4500], [36000, 7500], segLength=True)
 ```
 
-The number of crossings:
+And the intercept lengths.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n = np.sum(~np.isnan(x))
 ```
+
+The number of crossings.
+
+</div>
+
+## Description
 
 A line through a vertex crosses both segments there, as MATLAB's tolerance has it. MATLAB
 returns the intercepts as a third output always; here segLength=True asks for them.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
 | `p, q` | the end points of the line, (x, y) or a vector3d |
 
-## Output
-
-| | |
-|---|---|
-| `x, y` | the coordinates of the crossing per segment, NaN where none |
-| `L` | the lengths between successive crossings along the line (segLength=True) |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `segLength` | `False` | also return the intercept lengths |
+
+## Output
+
+| `x, y` | the coordinates of the crossing per segment, NaN where none |
+| `L` | the lengths between successive crossings along the line (segLength=True) |
 
 ## See also
 

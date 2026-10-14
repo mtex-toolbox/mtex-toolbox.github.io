@@ -17,35 +17,39 @@ it; MATLAB's grain2d.subBoundarySize
 
 ## Syntax
 
-Every inner segment:
+<div class="mx-form" markdown="1">
 
 ```python
 n = grains.subBoundarySize()
 ```
 
-The segments selected:
+Every inner segment.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n = grains.subBoundarySize(grains.innerBoundary.segLength > 40)
 ```
 
+The segments selected.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain2d |
-
-## Output
-
-| | |
-|---|---|
-| `n` | the number of inner boundary segments per grain |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `sel` | `None` | a mask or the indices of the inner boundary segments counted, all when not given |
+
+## Output
+
+| `n` | the number of inner boundary segments per grain |
 
 ## See also
 

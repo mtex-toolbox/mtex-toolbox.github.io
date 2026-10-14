@@ -16,17 +16,25 @@ the spacing of the grid it is evaluated on, the other keywords those of plot
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 key.plot()
 plot(key)
 key.plot(complete=True, resolution=1*degree)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 directionColorKey.plot(self, **kwargs)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L286">source</a></font>
 {% endraw %}

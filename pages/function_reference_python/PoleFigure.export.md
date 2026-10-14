@@ -17,17 +17,27 @@ MATLAB's PoleFigure/export
 
 ## Syntax
 
-Dubna_{101̅0}.txt, ..., the angles in radians:
+<div class="mx-form" markdown="1">
 
 ```python
 names = export(pf, 'dubna')
 ```
 
-The angles in degrees:
+Dubna_{101̅0}.txt, ..., the angles in radians.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 names = export(pf, 'dubna', degree=True)
 ```
+
+The angles in degrees.
+
+</div>
+
+## Description
 
 Every crystal direction (or superposition of directions) gets the file
 <fname>_<directions>.txt with three columns, the polar angle and the azimuth of the specimen
@@ -35,22 +45,18 @@ directions and the intensity, the table loadPoleFigure reads back.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | a PoleFigure |
 | `fname` | the base name of the files |
 
-## Output
-
-| | |
-|---|---|
-| `names` | the names of the files written |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `degree` | `False` | the polar angle and the azimuth in degrees instead of radians |
+
+## Output
+
+| `names` | the names of the files written |
 
 ## See also
 

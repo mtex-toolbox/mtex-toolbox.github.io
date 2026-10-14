@@ -17,9 +17,13 @@ the plane over, since the basis would change its hand
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 lattice.moved(self, R, v, plane)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L154">source</a></font>
 {% endraw %}

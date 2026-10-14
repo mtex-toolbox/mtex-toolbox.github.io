@@ -16,9 +16,13 @@ the volume change per pressure, S_iikk
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 stiffnessTensor.volumeCompressibility(T)
 ```
+
+</div>
 
 MATLAB's [stiffnessTensor.volumeCompressibility](stiffnessTensor.volumeCompressibility.html)
 

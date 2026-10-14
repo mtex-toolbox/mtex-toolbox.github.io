@@ -16,54 +16,68 @@ the average of a property over each grain; MATLAB's grainMean
 
 ## Syntax
 
-One value per grain:
+<div class="mx-form" markdown="1">
 
 ```python
 meanG = grainMean(ebsd, ebsd.ci, grains)
 ```
 
-The value of its grain at every pixel:
+One value per grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 meanE = grainMean(ebsd, ebsd.ci)
 ```
 
-The maximum instead of the mean:
+The value of its grain at every pixel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 maxG = grainMean(ebsd, ebsd.ci, grains, np.max)
 ```
 
-Only the values above 0.1:
+The maximum instead of the mean.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 meanG = grainMean(ebsd, ebsd.ci, grains, llim=0.1)
 ```
+
+Only the values above 0.1.
+
+</div>
+
+## Description
 
 The grains are those of the grain ids the map carries, which calcGrains stores with it.
 A pixel without a grain and a grain without a value in the range are NaN.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD with grain ids |
 | `prop` | array of a value per pixel, of the shape of the map |
 | `grains` | grain2d, for one value per grain in its order; without it one value per pixel |
 | `method` | the reduction of the values of a grain, a function of an array |
 
-## Output
-
-| | |
-|---|---|
-| `meanProp` | array, a value per grain, or one per pixel of the shape of the map |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ulim` | `inf` | the largest value taken into the average |
 | `llim` | `-inf` | the smallest value taken into the average |
+
+## Output
+
+| `meanProp` | array, a value per grain, or one per pixel of the shape of the map |
 
 ## See also
 

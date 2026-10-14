@@ -15,16 +15,18 @@ in between; a direction given twice takes the mean of its values
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunTri(v, values)          the values at the directions v
 S2FunTri(sT, values)         on a triangulation already made
 S2FunTri(fun)                a callable sampled on a 1.5 degree grid
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [abs](S2FunTri.abs_py.html) | the absolute value of the function, taken at the vertices, again a function on the triangulation |
 | [CS](S2FunTri.CS_py.html) | the frame of the vertices, MATLAB's sF.CS |
 | [eval](S2FunTri.eval_py.html) | the values at the directions v, the barycentric mean of the values at the corners of the triangle each lies in |

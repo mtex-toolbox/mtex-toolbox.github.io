@@ -16,9 +16,13 @@ the harmonic expansion of the Dubna ODF, MTEX's example function
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunHarmonic.example()
 ```
+
+</div>
 
 ## Used on
 

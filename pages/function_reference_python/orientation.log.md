@@ -16,29 +16,47 @@ the logarithm of an orientation, the tangent vector at a reference pointing to i
 
 ## Syntax
 
-At the identity:
+<div class="mx-form" markdown="1">
 
 ```python
 v = log(ori)
 ```
 
-At oriRef, in specimen coordinates:
+At the identity.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = log(ori, oriRef)
 ```
 
-At oriRef, in crystal coordinates:
+At oriRef, in specimen coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = log(ori, oriRef, side='right')
 ```
 
-The misorientation vector in crystal coordinates:
+At oriRef, in crystal coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = log(mori, 'right')
 ```
+
+The misorientation vector in crystal coordinates.
+
+</div>
+
+## Description
 
 The tangent vector v at oriRef with exp(v) = ori, the misorientation vector of ori relative
 to oriRef. The pair is reduced by symmetry first, as angle does it, so that the vector
@@ -48,23 +66,19 @@ space, a specimen direction; with 'right' it is inv(oriRef) * ori, a crystal dir
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
 | `ref` | orientation, the reference, by default the identity between the frames of ori; or 'left' or 'right', the side |
 
-## Output
-
-| | |
-|---|---|
-| `v` | SO3TangentVector at the reference, its norm the angle in radians |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left', the vector in specimen coordinates, or 'right', in crystal coordinates, MATLAB's SO3TangentSpace.leftVector and rightVector |
 | `symmetry` | `True` | reduce the pair by symmetry first; False takes the rotations as stored, MATLAB's 'noSymmetry' |
+
+## Output
+
+| `v` | SO3TangentVector at the reference, its norm the angle in radians |
 
 ## See also
 

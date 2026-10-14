@@ -14,33 +14,53 @@ the error between a measurement and a recalculation, or between two SO(3) functi
 
 ## Syntax
 
-One number per pole figure, PoleFigure.calcError:
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(pf, odf)
 ```
 
-The same, in MATLAB's order:
+One number per pole figure, PoleFigure.calcError.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(odf, pf, 'RP')
 ```
 
-'l1':
+The same, in MATLAB's order.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(odf1, odf2)
 ```
 
+'l1'.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 e = calcError(odf1, odf2, 'l2', resolution=2.5*degree)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 calcError(a, b, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

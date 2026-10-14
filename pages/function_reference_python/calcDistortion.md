@@ -13,14 +13,16 @@ calcDistortion(x, ...) is x.calcDistortion(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 calcDistortion(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [trueEbsd](trueEbsd.calcDistortion_py.html) | the distortion between every consecutive pair of maps of the job fitted |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>

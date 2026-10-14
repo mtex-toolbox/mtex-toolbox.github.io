@@ -16,8 +16,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| | |
-|---|---|
 | [crystalFrame](crystalFrame_index_py.html) | the reference frame glued to the lattice basis of a phase, with the point group of the crystal |
 | [crystalShape](crystalShape_index_py.html) | a crystal shape, the polyhedron bounded by the lattice planes of the face normals N |
 | [dislocationSystem](dislocationSystem_index_py.html) | a Burgers vector with a line vector, edge when orthogonal and screw when parallel |
@@ -61,8 +59,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Functions
 
-| | |
-|---|---|
 | [align](align_py.html) | the orientation two frames stand in by their axes, MATLAB's orientation.align |
 | [alignment](alignment_py.html) | alignment(x, ...) is x.alignment(...), the method of the object passed |
 | [alignmentSetups](alignmentSetups_py.html) | the twelve alignment pairs ['X\|\|a', 'Z\|\|b*'], .. |
@@ -253,8 +249,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| | |
-|---|---|
 | [fibreVonMisesFisherKernel](fibreVonMisesFisherKernel_index_py.html) | the von Mises Fisher kernel of a fibre, what fibreODF convolves with |
 | [griddedDensity](griddedDensity_index_py.html) | a density on a regular grid, evaluated by its tensor product spline as MATLAB's griddedInterpolant(..., 'spline'), extrapolating beyond the grid |
 | [InvariantProjection](InvariantProjection_index_py.html) | the same projection, held and kept in its support |
@@ -318,8 +312,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Functions
 
-| | |
-|---|---|
 | [adjointTransform](adjointTransform_py.html) | adjointTransform(plan, values, weights) is plan.adjoint(values, weights): the coefficients from weighted values at the plan's nodes |
 | [angularDerivatives](angularDerivatives_py.html) | L_i f, the derivative under the rotation about e_i, on the coefficients: the ladder operators as shifts of the coefficient vector, the degrees never mixing |
 | [antiderivative](antiderivative_py.html) | the antiderivative of a gradient field, the function of mean zero whose gradient it is |
@@ -423,8 +415,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| | |
-|---|---|
 | [ChristoffelTensor](ChristoffelTensor_index_py.html) | ChristoffelTensor(C, n): E_ik = C_ijkl n_j n_l of a stiffness and a direction |
 | [complianceTensor](complianceTensor_index_py.html) | the elastic compliance S = inv(C), its Voigt matrix carrying the factors of the double convention |
 | [curvatureTensor](curvatureTensor_index_py.html) | the lattice curvature tensor, the rank two tensor of the spatial derivatives of the orientation field |
@@ -442,8 +432,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Functions
 
-| | |
-|---|---|
 | [antiSym](antiSym_py.html) | antiSym(T) is T.antiSym(): the antisymmetric part of a rank two tensor |
 | [checkSymmetry](checkSymmetry_py.html) | whether the tensor is invariant under the group of its frame, T.checkSymmetry() |
 | [colon](complianceTensor.colon_py.html) | the double contraction A : B, the last two indices of A against the first two of B, MATLAB's A:B |
@@ -466,8 +454,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| | |
-|---|---|
 | [boundaryFilter](boundaryFilter_index_py.html) | the base of the boundary smoothing filters: smooth(V, net, h) moves the free vertices V of a boundary network sampled at the spacing h, the fixed ones stay |
 | [boundaryNetwork](boundaryNetwork_index_py.html) | the network the smoothing runs on: only the vertices the boundaries use, their neighbours in compressed form, and which of them may not move |
 | [cellComplex](cellComplex_index_py.html) | the spatial decomposition of a map, one cell per site: the vertices V, the vertex pair F and the site pair of every face, the sites and the lattice |
@@ -499,8 +485,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Functions
 
-| | |
-|---|---|
 | [calcTraces](EBSD.calcTraces_py.html) | the traces of subregions of a map or of sets of grains, the direction their lamellae run along |
 | [chainOrder](chainOrder_py.html) | the decomposition of an edge list into maximal chains, each walked end to end: the permutation that brings the edges into walk order, and per edge whether the walk enters it at its first (1) or second (2) vertex |
 | [cleanUpPseudoSym](cleanUpPseudoSym_py.html) | the map corrected for a pseudo symmetry of one phase, detected by the tortuosity of its boundaries |
@@ -529,8 +513,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| | |
-|---|---|
 | [EBSD3](EBSD3_index_py.html) | the measurements of a volume: positions, rotations and phase ids of voxels with the list of the phases' frames and the properties of every measurement |
 | [grain3Boundary](grain3Boundary_index_py.html) | the faces between the grains of a volume, triangles or polygons over the vertices allV, with the grains, voxels and phases on their two sides and the misrotation across: grains.boundary |
 | [grain3d](grain3d_index_py.html) | the grains of a volume as closed polyhedra, given by the incidence I_GF of grains and the faces of a grain3Boundary: what calcGrains returns for a volume, the counterpart of grain2d |
@@ -539,8 +521,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Functions
 
-| | |
-|---|---|
 | [calcGrains](EBSD.calcGrains_py.html) | the grains of a map, the pixels joined across every boundary the criterion keeps |
 | [EBSD3square](EBSD3square_py.html) | a volume on its (n1, n2, n3) array of voxels, on a rectangular lattice |
 | [orientFaces](orientFaces_py.html) | the grains with their faces turned consistently, the normals pointing out of every grain: the signs of I_GF and the sides of the boundary change, the corners do not |
@@ -549,8 +529,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| | |
-|---|---|
 | [EBSDFilter](EBSDFilter_index_py.html) | the base of the denoising filters of a gridded EBSD map, which replace the orientation of every pixel by one computed from its neighbours: smooth(ebsd, F) |
 | [embedding](embedding_index_py.html) | the isometric embedding of orientations into a Euclidean space: one matrix of components with a column per orientation, so that norm(e1 - e2) is a metric on the orientations modulo the crystal symmetry |
 | [embeddingSpec](embeddingSpec_index_py.html) | the recipe of the embedding of a crystal frame: the identity image and the orthonormal basis of the space it moves in, built once per frame |
@@ -568,8 +546,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Functions
 
-| | |
-|---|---|
 | [angularVelocityVector](velocityGradientTensor.angularVelocityVector_py.html) | the angular velocity of a velocity gradient, the axial vector of its antisymmetric part |
 | [axisRatios](strainTensor.axisRatios_py.html) | the differences of the principal values, largest first |
 | [birefringence](refractiveIndexTensor.birefringence_py.html) | the birefringence for light propagating along vprop, the difference of the two refractive indices, and the polarisation axes of the fast and the slow wave |
@@ -629,14 +605,10 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| | |
-|---|---|
 | [EBSDFileInfo](EBSDFileInfo_index_py.html) | what an EBSD file says about itself from its header alone: format, vendor, phases, properties, data sets, grid, step and Euler correction, as inspectEBSD returns it |
 
 ### Functions
 
-| | |
-|---|---|
 | [buildImportWizardScript](buildImportWizardScript_py.html) | the Python script of an import as the import wizard sets it up: the file, the plotting convention, the correction of the Euler angles, the phases and a first plot |
 | [cifFiles](cifFiles_py.html) | the names of the CIF files shipped with MTEX, sorted |
 | [cprintf](cprintf_py.html) | MATLAB's cprintf(d, '-Lc', labels, '-Lr', rows): a matrix printed as a table, a vector as one row |
@@ -674,8 +646,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| | |
-|---|---|
 | [alphaSections](alphaSections_index_py.html) | sections of constant alpha in the Matthies (ZYZ) convention |
 | [axisAngleColorKey](axisAngleColorKey_index_py.html) | the rotation from a reference orientation as a colour: its axis in the specimen frame through the key of the whole sphere, its angle through the saturation (Thomsen et al.) |
 | [axisAngleSections](axisAngleSections_index_py.html) | sections of constant rotation angle, each on the axis sector the region allows there |
@@ -723,8 +693,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Functions
 
-| | |
-|---|---|
 | [annotate](annotate_py.html) | annotate: markers on every axes of the current figure, black by default |
 | [annotateSection](annotateSection_py.html) | annotate(ori) on a section plot: every orientation marked in the section it lies in |
 | [arrow3d](vector3d.arrow3d_py.html) | solid arrows in space, from the origin, or from anchor, to the tips v |
@@ -880,7 +848,5 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Functions
 
-| | |
-|---|---|
 | [importWizard](importWizard_py.html) | the import wizard: a window that browses the files of a folder, shows what a file holds, lets the phases, the conventions and the reference frames be chosen and writes the Python of the import |
 {% endraw %}

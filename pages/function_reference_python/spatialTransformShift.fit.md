@@ -16,17 +16,27 @@ and where they went, posB
 
 ## Syntax
 
-PosB = T(posA) as nearly as can be:
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformShift.fit(posA, posB)
 ```
 
-The points weighted:
+PosB = T(posA) as nearly as can be.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformShift.fit(posA, posB, weights=w)
 ```
+
+The points weighted.
+
+</div>
+
+## Description
 
 The degree one polynomial fit of spatialTransformPoly.fit, plain least squares without
 the reweighting against outliers, as MATLAB's. A point with a missing position or weight
@@ -34,22 +44,18 @@ is dropped; other keywords are accepted and not used.
 
 ## Input
 
-| | |
-|---|---|
 | `posA` | vector3d, the positions in frame A |
 | `posB` | vector3d, the same points in frame B |
 
-## Output
-
-| | |
-|---|---|
-| `T` | spatialTransformShift |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per point |
+
+## Output
+
+| `T` | spatialTransformShift |
 
 ## See also
 

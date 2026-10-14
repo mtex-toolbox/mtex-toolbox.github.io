@@ -14,23 +14,37 @@ to the screen, east to the right and north up
 
 ## Syntax
 
-The default plotting convention:
+<div class="mx-form" markdown="1">
 
 ```python
 M = mapLayout()
 ```
 
-X up, y to the right:
+The default plotting convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 M = mapLayout('x↑→y')
 ```
 
-A map in another plane:
+X up, y to the right.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 M = mapLayout(pC, ebsd.lattice.plane)
 ```
+
+A map in another plane.
+
+</div>
+
+## Description
 
 The rows are the components of east and north along the coordinates of the map's plane (x
 and y without a plane), snapped to the signed permutation an axis aligned convention is,
@@ -38,18 +52,16 @@ so that the picture is turned rather than resampled. A convention whose screen i
 plane, as the xy convention of a map in the yz plane, draws the plane's own coordinates
 east and north.
 
-## Output
-
-| | |
-|---|---|
-| `M` | a 2 x 2 array |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `pC` | `None` | plottingConvention, or the string of one; by default plottingConvention.default |
 | `plane` | `None` | the plane of the map, whose e1 and e2 are its coordinates |
+
+## Output
+
+| `M` | a 2 x 2 array |
 
 ## See also
 

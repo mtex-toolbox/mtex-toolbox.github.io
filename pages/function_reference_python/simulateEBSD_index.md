@@ -15,6 +15,8 @@ stage, which every verb rewrites
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 eS = simulateEBSD()
 eS.makeMap()
@@ -22,10 +24,10 @@ eS.addFeature('simpleGradient')
 eS.addNoise()
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [addFeature](simulateEBSD.addFeature_py.html) | a known feature added to the map: 'singleStep', a domain turned by moriAngle about axS |
 | [addNoise](simulateEBSD.addNoise_py.html) | every orientation turned on the specimen side about a random axis by a random angle: uniform up to noiseMax, or lognormal scaled so that the largest is noiseMax (MATLAB's addnoise) |
 | [CS](simulateEBSD.CS_py.html) | the crystal frame is the one of ori0 |

@@ -14,9 +14,13 @@ sym(T) is T.sym(): the symmetric part, the mean over the permutations of the ind
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sym(T)
 ```
+
+</div>
 
 MATLAB's [embedding.sym](embedding.sym.html)
 

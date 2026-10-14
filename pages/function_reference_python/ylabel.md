@@ -14,31 +14,39 @@ carry matplotlib's own label
 
 ## Syntax
 
-Left of the current axes:
+<div class="mx-form" markdown="1">
 
 ```python
 ylabel('y')
 ```
 
-Left of the axes given:
+Left of the current axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ylabel(ax, 'y')
 ```
+
+Left of the axes given.
+
+</div>
+
+## Description
 
 The current axes is the one nextAxis prepared, else the one drawn into last; without an
 mtexFigure it is matplotlib's. Further keywords go to matplotlib's text.
 
 ## Input
 
-| | |
-|---|---|
 | `ax` | the matplotlib axes, before the text |
 | `text` | the label |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure whose current axes takes the label; the current figure by default |
 

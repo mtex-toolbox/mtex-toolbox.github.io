@@ -15,9 +15,13 @@ the inverse: the inverse affine map at degree 1, the fixed point inverse at degr
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformPoly.inv(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L502">source</a></font>
 {% endraw %}

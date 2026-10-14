@@ -13,35 +13,39 @@ the spin tensor of an axial vector v, the antisymmetric tensor W with W u = v x 
 
 ## Syntax
 
-In the frame of v:
+<div class="mx-form" markdown="1">
 
 ```python
 W = spinTensorOf(v)
 ```
 
-Of the coordinates a in the frame cs:
+In the frame of v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 W = spinTensorOf(a, frame=cs)
 ```
 
+Of the coordinates a in the frame cs.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d, or an array of (..., 3) coordinates |
-
-## Output
-
-| | |
-|---|---|
-| `W` | spinTensor |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `frame` | `None` | the frame of the tensor, for coordinates without one |
+
+## Output
+
+| `W` | spinTensor |
 
 ## See also
 

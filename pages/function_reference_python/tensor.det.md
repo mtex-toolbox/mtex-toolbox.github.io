@@ -16,9 +16,13 @@ the determinant of a rank two tensor
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.det(self)
 ```
+
+</div>
 
 MATLAB's [tensor.det](tensor.det.html)
 

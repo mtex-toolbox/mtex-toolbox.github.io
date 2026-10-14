@@ -16,25 +16,41 @@ along for the classes whose lists have axes
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 v = cat(v1, v2)
 ```
 
-Side by side:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = cat(v1, v2, axis=1)
 ```
 
+Side by side.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 ebsd = cat(ebsd1, ebsd2)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 cat(*arrays, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

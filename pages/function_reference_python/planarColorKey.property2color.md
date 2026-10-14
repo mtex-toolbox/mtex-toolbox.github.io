@@ -15,9 +15,13 @@ rgb = pK.property2color(v1, v2): the colour of every pair, one row per element
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 planarColorKey.property2color(self, v1, v2)
 ```
+
+</div>
 
 ## Used on
 

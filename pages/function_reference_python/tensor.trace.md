@@ -16,9 +16,13 @@ the trace of a rank two tensor, or of the Voigt matrix of a rank four one
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.trace(self)
 ```
+
+</div>
 
 MATLAB's [tensor.trace](tensor.trace.html)
 

@@ -17,9 +17,13 @@ class kept
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.logm(self)
 ```
+
+</div>
 
 MATLAB's [tensor.logm](tensor.logm.html)
 

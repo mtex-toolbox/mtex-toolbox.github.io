@@ -16,46 +16,56 @@ the orientations of the rotations by omega about the axis v; MATLAB's orientatio
 
 ## Syntax
 
-An orientation:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.byAxisAngle(v, omega, cs, ss)
 ```
 
-A misorientation about the crystal direction h:
+An orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = orientation.byAxisAngle(h, omega)
 ```
 
-With grain exchange:
+A misorientation about the crystal direction h.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = orientation.byAxisAngle(h, omega, antipodal=True)
 ```
+
+With grain exchange.
+
+</div>
+
+## Description
 
 About a crystal direction h with no frames named it is the rotation of that crystal frame
 into itself, a misorientation; the frames named otherwise, the crystal frame first.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d or Miller, the rotational axis |
 | `omega` | the rotational angle, broadcast against v |
 | `frames` | the crystal frame, then the specimen frame or a second crystal frame |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | mark a misorientation with grain exchange, mori == inv(mori) |
+
+## Output
+
+| `ori` | orientation |
 
 ## See also
 

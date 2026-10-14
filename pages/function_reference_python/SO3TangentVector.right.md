@@ -16,9 +16,13 @@ the vectors on the right side, turned by the inverse reference where they are on
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3TangentVector.right(self)
 ```
+
+</div>
 
 MATLAB's [SO3TangentVector.right](SO3TangentVector.right.html)
 

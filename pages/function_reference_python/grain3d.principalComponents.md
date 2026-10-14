@@ -16,9 +16,13 @@ the half axes of the ellipsoid of the same second moments and volume, the longes
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain3d.principalComponents(self)
 ```
+
+</div>
 
 ## Used on
 

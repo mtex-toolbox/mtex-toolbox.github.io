@@ -15,35 +15,57 @@ two crystals, or the kind named (MATLAB newODFSectionPlot)
 
 ## Syntax
 
-Phi2 sections:
+<div class="mx-form" markdown="1">
 
 ```python
 oS = newODFSectionPlot(cs, ss)
 ```
 
-Axis angle sections of misorientations:
+Phi2 sections.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oS = newODFSectionPlot(cs, cs)
 ```
 
-Four phi1 sections:
+Axis angle sections of misorientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oS = newODFSectionPlot(cs, ss, 'phi1', sections=4)
 ```
 
-Sigma sections at given angles:
+Four phi1 sections.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oS = newODFSectionPlot(cs, ss, 'sigma', sigma=[0, 30*degree])
 ```
 
-Pole figure sections:
+Sigma sections at given angles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oS = newODFSectionPlot(cs, ss, 'pf', h1=Miller(1,1,1,cs), h2=Miller(1,-1,0,cs), sections=3)
 ```
+
+Pole figure sections.
+
+</div>
+
+## Description
 
 The kind is one of 'phi1', 'phi2', 'alpha', 'gamma' (Euler sections), 'sigma' or 'omega'
 (sigmaSections), 'pf' (pfSections) and 'axisAngle' (axisAngleSections), in any case, or
@@ -54,22 +76,18 @@ angle sections; any other keyword is dropped, so the options of a plot can be pa
 
 ## Input
 
-| | |
-|---|---|
 | `frameA` | the first frame, the crystal frame |
 | `frameB` | the second frame, a specimen frame or a second crystal frame; by default the session's specimen frame |
 
-## Output
-
-| | |
-|---|---|
-| `oS` | ODFSections, phi2Sections, sigmaSections, axisAngleSections, ... |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `kind` | `None` | the name of the section kind, or ODFSections; by default phi2 against a specimen and axisAngle between two crystals |
+
+## Output
+
+| `oS` | ODFSections, phi2Sections, sigmaSections, axisAngleSections, ... |
 
 ## See also
 

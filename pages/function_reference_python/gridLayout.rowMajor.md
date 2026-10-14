@@ -15,9 +15,13 @@ the layout with the first index along x, the second along y
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gridLayout.rowMajor()
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L72">source</a></font>
 {% endraw %}

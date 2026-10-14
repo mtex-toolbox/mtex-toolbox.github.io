@@ -16,35 +16,57 @@ distribution of the uniform distribution, exactly; MATLAB's calcAxisDistribution
 
 ## Syntax
 
-The axis distribution:
+<div class="mx-form" markdown="1">
 
 ```python
 adf = calcAxisDistribution(mdf)
 ```
 
-Its values at the axes v:
+The axis distribution.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 value = calcAxisDistribution(mdf, v)
 ```
 
-Only rotations by 20 to 40 degree:
+Its values at the axes v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 adf = calcAxisDistribution(mdf, minAngle=20*degree, maxAngle=40*degree)
 ```
 
-A finer angle quadrature:
+Only rotations by 20 to 40 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 value = calcAxisDistribution(mdf, v, resolution=1*degree)
 ```
 
-Of the uniform distribution:
+A finer angle quadrature.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 adf = calcAxisDistribution(cs1, cs2)
 ```
+
+Of the uniform distribution.
+
+</div>
+
+## Description
 
 By default the rotation angle is integrated over the full range the fundamental region
 allows for the axis in question, by a rectangle rule of the step resolution (2.5 degree).
@@ -55,23 +77,19 @@ few points. The distribution is antipodal for a function with grain exchange.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun, or a crystal frame cs1 for the uniform distribution |
 | `v` | vector3d, the axes to evaluate at, or the second frame cs2 |
 
-## Output
-
-| | |
-|---|---|
-| `adf` | S2FunHarmonic, or S2FunHandle for the uniform distribution |
-| `value` | the values at the axes v |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `64` | the bandwidth of the harmonic expansion of adf |
+
+## Output
+
+| `adf` | S2FunHarmonic, or S2FunHandle for the uniform distribution |
+| `value` | the values at the axes v |
 
 ## See also
 

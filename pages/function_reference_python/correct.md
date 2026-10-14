@@ -13,9 +13,13 @@ correct(pf, ...) is pf.correct(...): the background subtracted and the defocusin
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 correct(pf, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

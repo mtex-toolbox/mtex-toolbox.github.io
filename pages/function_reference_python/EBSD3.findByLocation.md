@@ -17,23 +17,37 @@ EBSD.findByLocation
 
 ## Syntax
 
-The nearest measurement:
+<div class="mx-form" markdown="1">
 
 ```python
 e = ebsd.findByLocation([10000, 5000])
 ```
 
-One per position:
+The nearest measurement.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = ebsd.findByLocation([[10000, 5000], [20000, 7000]])
 ```
 
-All within 100 map units:
+One per position.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = ebsd.findByLocation([10000, 5000], radius=100)
 ```
+
+All within 100 map units.
+
+</div>
+
+## Description
 
 A position is (x, y), (x, y, z) or a vector3d. Without a radius every position gives its
 nearest measurement, in the order of the positions; with one the measurements within it
@@ -41,22 +55,18 @@ of any position are returned once each, in the order of the map.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD |
 | `xy` | the positions, (n, 2), (n, 3) or vector3d |
 
-## Output
-
-| | |
-|---|---|
-| `e` | EBSD, the measurements found as a list |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `radius` | `None` | the distance within which every measurement is taken; the nearest one only when not given |
+
+## Output
+
+| `e` | EBSD, the measurements found as a list |
 
 ## See also
 

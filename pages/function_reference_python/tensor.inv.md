@@ -17,9 +17,13 @@ convention and with it the class, a stiffness inverting to a compliance
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.inv(self)
 ```
+
+</div>
 
 MATLAB's [tensor.inv](tensor.inv.html)
 

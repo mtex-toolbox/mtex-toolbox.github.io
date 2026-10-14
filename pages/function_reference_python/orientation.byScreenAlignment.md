@@ -17,9 +17,13 @@ conventions
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.byScreenAlignment(frA, frB)
 ```
+
+</div>
 
 MATLAB's [orientation.byScreenAlignment](orientation.byScreenAlignment.html)
 

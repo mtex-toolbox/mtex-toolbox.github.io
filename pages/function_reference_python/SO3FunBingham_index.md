@@ -16,15 +16,17 @@ orthonormal quaternion axes A; BinghamODF builds it from axes, orientations or a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunBingham(kappa, A, cs, ss)
 SO3FunBingham(kappa, A, cs, cs, antipodal=True)      with exchange symmetry
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [axes](SO3FunBingham.axes_py.html) | the four principal quaternion axes as orientations, MATLAB's odf.A |
 | [bandwidth](SO3FunBingham.bandwidth_py.html) | the bandwidth of the harmonic expansion, the preference maxSO3Bandwidth |
 | [eval](SO3FunBingham.eval_py.html) | the values of the distribution at orientations, the mean over the symmetric copies of its axes |

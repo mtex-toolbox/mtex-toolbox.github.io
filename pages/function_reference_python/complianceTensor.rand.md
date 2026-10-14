@@ -17,29 +17,47 @@ class
 
 ## Syntax
 
-Entries uniform in [0, 1]:
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor.rand(rank=4)
 ```
 
-A list of 100 in the frame cs:
+Entries uniform in [0, 1].
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = tensor.rand(100, cs, rank=2)
 ```
 
-A random compliance tensor:
+A list of 100 in the frame cs.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S = complianceTensor.rand()
 ```
 
-Reproducible, of the symmetry of cs:
+A random compliance tensor.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 C = stiffnessTensor.rand(cs, rng=np.random.default_rng(0))
 ```
+
+Reproducible, of the symmetry of cs.
+
+</div>
+
+## Description
 
 A plain tensor has independent entries drawn uniformly from [0, 1], as MATLAB's, and none
 of the symmetries a physical tensor would have. A symmetric one (strain, stress, ...) is
@@ -50,23 +68,19 @@ the constructor of the class.
 
 ## Input
 
-| | |
-|---|---|
 | `n, m, ...` | the shape of the list |
 | `cs` | referenceFrame, the frame |
 
-## Output
-
-| | |
-|---|---|
-| `T` | a tensor of the class |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` | `None` | the rank of a plain tensor, by default that of the class, two for a plain tensor |
 | `rng` | `None` | the NumPy random generator, a fresh one by default |
+
+## Output
+
+| `T` | a tensor of the class |
 
 ## See also
 

@@ -14,29 +14,47 @@ the sample data of the documentation, read from the data repository
 
 ## Syntax
 
-The table of the data sets:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexdata()
 ```
 
-A map, read with the recipe its page uses:
+The table of the data sets.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = mtexdata('forsterite')
 ```
 
-Pole figures, with their directions and coefficients:
+A map, read with the recipe its page uses.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = mtexdata('dubna')
 ```
 
-From the local folder only:
+Pole figures, with their directions and coefficients.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = mtexdata('forsterite', root=mtexDataPath(), download=False)
 ```
+
+From the local folder only.
+
+</div>
+
+## Description
 
 The files are fetched from the data repository mtex-toolbox/mtex-data on first use and
 kept under getMTEXpref('mtexDataPath'), MTEX_DATA or ~/.mtex/data; root names another
@@ -46,23 +64,19 @@ particular alignment sets it itself. mtexdatafile gives the files without readin
 
 ## Input
 
-| | |
-|---|---|
 | `name` | the name of the data set, case does not matter |
-
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD, grain2d, PoleFigure, EBSD3, SO3Fun, S2Fun or tensor, by the data set; the table of the data sets without a name |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `root` | `None` | the folder the files are kept in, instead of mtexDataPath() |
 | `download` | `True` | fetch a missing file; False raises instead |
 | `verbose` | `True` | report a download, its source and where the file is kept; False is MATLAB's silent |
+
+## Output
+
+| `ebsd` | EBSD, grain2d, PoleFigure, EBSD3, SO3Fun, S2Fun or tensor, by the data set; the table of the data sets without a name |
 
 ## See also
 

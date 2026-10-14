@@ -14,35 +14,57 @@ a function on SO(3) given by a callable that receives orientations
 
 ## Syntax
 
-A function of the orientations of cs:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHandle(lambda o: np.cos(angle(o, r)), cs)
 ```
 
-Both frames, the bandwidth of its harmonic form:
+A function of the orientations of cs.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHandle(fun, cs, ss, bandwidth=32)
 ```
 
-Averaged over the groups on every call:
+Both frames, the bandwidth of its harmonic form.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHandle(fun, cs, ss, symmetrise=True)
 ```
 
-With exchange symmetry, f(g) = f(inv(g)):
+Averaged over the groups on every call.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHandle(fun, cs, cs, antipodal=True)
 ```
 
-The handle of another SO3Fun:
+With exchange symmetry, f(g) = f(inv(g)).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHandle(odf)
 ```
+
+The handle of another SO3Fun.
+
+</div>
+
+## Description
 
 Nothing is precomputed: evaluating the function calls fun on orientations in the frames of
 the function, exactly. Every operation that needs coefficients, a pole figure, a
@@ -52,25 +74,21 @@ Exchange symmetry needs the same frame on both sides.
 
 ## Input
 
-| | |
-|---|---|
 | `fun` | callable taking an orientation and returning its values, or an SO3Fun |
 | `frames` | the crystal frame and the specimen frame, one or both, positionally |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunHandle |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the bandwidth of the harmonic form, by default the preference 'defaultSO3Bandwidth' |
 | `antipodal` | `False` | exchange symmetry, f(g) = f(inv(g)), for misorientations |
 | `real` | `True` | the function takes only real values; the imaginary part of the values is dropped |
 | `symmetrise` | `False` | average the callable over the groups of both frames on every call |
+
+## Output
+
+| `SO3F` | SO3FunHandle |
 
 ## See also
 

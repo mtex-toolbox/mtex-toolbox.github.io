@@ -17,23 +17,37 @@ least squares
 
 ## Syntax
 
-Samples at the angles x:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic.interpolate(x, values)
 ```
 
-A bandwidth and a stronger smoothing:
+Samples at the angles x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic.interpolate(x, values, bandwidth=10, regularisation=1e-3)
 ```
 
-The samples weighted:
+A bandwidth and a stronger smoothing.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic.interpolate(x, values, weights=w)
 ```
+
+The samples weighted.
+
+</div>
+
+## Description
 
 Equispaced samples, x = 2 pi k / n, are expanded by quadrature to the bandwidth (n - 1) / 2,
 or the one given. Other angles are taken modulo 2 pi, samples at coinciding angles merged
@@ -44,20 +58,12 @@ set by hand may undersample the data.
 
 ## Input
 
-| | |
-|---|---|
 | `x` | array of angles in radians |
 | `values` | array, one value per angle |
 
-## Output
-
-| | |
-|---|---|
-| `sF` | S1FunHarmonic, real when the values are |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest degree of the series |
 | `weights` | `None` | one weight per sample, equal weights unless given |
@@ -65,6 +71,10 @@ set by hand may undersample the data.
 | `SobolevIndex` | `2` | the exponent s of the Sobolev penalty \|k\|^(2 s) |
 | `tol` | `1e-06` | the stopping tolerance of LSQR |
 | `maxIter` | `100` | the largest number of iterations of LSQR |
+
+## Output
+
+| `sF` | S1FunHarmonic, real when the values are |
 
 ## See also
 

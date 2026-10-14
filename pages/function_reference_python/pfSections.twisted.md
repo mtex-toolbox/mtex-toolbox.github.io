@@ -16,9 +16,13 @@ point for the orientation to belong there
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 pfSections.twisted(self, r, omega)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L466">source</a></font>
 {% endraw %}

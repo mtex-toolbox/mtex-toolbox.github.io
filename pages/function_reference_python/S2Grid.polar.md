@@ -16,9 +16,13 @@ the polar angles of the grid points, exact from the rings
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Grid.polar(self)
 ```
+
+</div>
 
 MATLAB's [S2Grid.polar](S2Grid.polar.html)
 

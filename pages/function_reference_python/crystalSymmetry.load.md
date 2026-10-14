@@ -18,9 +18,13 @@ interfaces layer above this one
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 crystalFrame.load(fname)
 ```
+
+</div>
 
 MATLAB's [crystalSymmetry.load](crystalSymmetry.load.html)
 

@@ -13,14 +13,16 @@ fundamentalSector(x, ...) is x.fundamentalSector(...), the method of the object 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 fundamentalSector(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.fundamentalSector_py.html) | the fundamental sector of the group of the frame on the sphere, the region an inverse pole figure shows |
 | [symmetry](symmetry.fundamentalSector_py.html) | the fundamental sector of the group on the sphere, the region of the directions one symmetric copy of each falls into |
 

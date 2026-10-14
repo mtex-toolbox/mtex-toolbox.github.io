@@ -14,33 +14,55 @@ map turns into colours: what a map plot draws, before it is drawn
 
 ## Syntax
 
-Phase colours:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb, scalar = mapValues(ebsd, 'phase')
 ```
 
-A property, scalar is True:
+Phase colours.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v, scalar = mapValues(ebsd, 'mad')
 ```
 
+A property, scalar is True.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 rgb, scalar = mapValues(ebsd, None, ipfDirection=xvector) # inverse pole figure colours along x
 ```
 
-Through an orientation colour key:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb, scalar = mapValues(ebsd['Forsterite'], key)
 ```
 
-The measurements ind alone:
+Through an orientation colour key.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb, scalar = mapValues(ebsd, 'mad', at=ind)
 ```
+
+The measurements ind alone.
+
+</div>
+
+## Description
 
 The colouring asked for is one of: None or 'phase', the colours of the phases;
 'orientation', or an ipfDirection alone, every phase through the inverse pole figure key of
@@ -58,25 +80,21 @@ at.
 
 ## Input
 
-| | |
-|---|---|
 | `x` | EBSD or grain2d |
 | `color` | the colouring asked for, as listed above |
 
-## Output
-
-| | |
-|---|---|
-| `values` | array, the RGB colours (n, 3) or the values (n,) |
-| `scalar` | bool, whether values are values a colour map maps, not colours |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `None` | one colour for all, when no colouring is asked for |
 | `ipfDirection` | `None` | vector3d, the specimen direction of the inverse pole figure colours |
 | `at` | `None` | the indices of the elements to colour |
+
+## Output
+
+| `values` | array, the RGB colours (n, 3) or the values (n,) |
+| `scalar` | bool, whether values are values a colour map maps, not colours |
 
 ## See also
 

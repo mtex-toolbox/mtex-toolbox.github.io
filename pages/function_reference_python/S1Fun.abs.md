@@ -16,15 +16,23 @@ the pointwise absolute value, a Fourier series of a smoothing bandwidth
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sF = abs(sF)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S1FunHarmonic.abs(self)
 ```
+
+</div>
 
 MATLAB's [S1Fun.abs](S1Fun.abs.html)
 

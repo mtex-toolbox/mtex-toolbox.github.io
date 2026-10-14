@@ -17,9 +17,13 @@ Schmid tensor is the same dyad, MATLAB's velocity gradient of a unit shear
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 slipSystem.deformationTensor(self)
 ```
+
+</div>
 
 ## Used on
 

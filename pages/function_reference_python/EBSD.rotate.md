@@ -17,29 +17,47 @@ MATLAB's EBSD.rotate
 
 ## Syntax
 
-About the z axis:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = ebsd.rotate(10*degree)
 ```
 
-About the x axis:
+About the z axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = rotate(ebsd, rotation.byAxisAngle(vector3d.X, 180*degree))
 ```
 
-Only the positions:
+About the x axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = rotate(ebsd, 180*degree, keepEuler=True)
 ```
 
-Only the orientations:
+Only the positions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = ebsd.rotate(90*degree, keepXY=True)
 ```
+
+Only the orientations.
+
+</div>
+
+## Description
 
 The positions and the orientations turn together, about the origin; an angle is a
 rotation about z. A gridded map keeps the order of its arrays: the positions move and the
@@ -48,23 +66,19 @@ rotate(ebsd, rot). MATLAB's center= option, a centre other than the origin, is n
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD |
 | `rot` | rotation, or an angle about the z axis |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `keepXY` | `False` | turn only the orientations, the Euler angles |
 | `keepEuler` | `False` | turn only the positions |
+
+## Output
+
+| `ebsd` | EBSD |
 
 ## See also
 

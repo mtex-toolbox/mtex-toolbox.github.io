@@ -15,9 +15,13 @@ the short names of the stages joined by dashes
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformComposite.shortChar(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L805">source</a></font>
 {% endraw %}

@@ -17,23 +17,37 @@ orientationRegion/plot
 
 ## Syntax
 
-The region with its surface and edges:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(oR)
 ```
 
-Only the edges, in red:
+The region with its surface and edges.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(oR, boundaryColor='r', surface=False)
 ```
 
-Another surface, without the grid lines:
+Only the edges, in red.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(oR, color='b', alpha=0.5, lines=False)
 ```
+
+Another surface, without the grid lines.
+
+</div>
+
+## Description
 
 The region is drawn in axis angle space, the coordinates in degrees: its surface, light
 and transparent so that orientations inside it show, the parallels and meridians on it
@@ -43,19 +57,11 @@ region; a region reaching the half turn keeps the whole ball. plot3d(oR) is the 
 
 ## Input
 
-| | |
-|---|---|
 | `oR` | orientationRegion, e.g. fundamentalRegion(cs, ss) |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the Poly3DCollection of the surface, or the list of the edges' lines when surface=False |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `5*degree` | the spacing of the mesh of the surface, an angle |
 | `color` | `(0.8, 0.8, 0.8)` | the colour of the surface |
@@ -64,6 +70,10 @@ region; a region reaching the half turn keeps the whole ball. plot3d(oR) is the 
 | `lineColor` | `'k'` | the colour of the parallels and meridians |
 | `boundaryColor` | `'k'` | the colour of the edges of the region |
 | `surface` | `True` | draw the surface; False draws the edges alone |
+
+## Output
+
+| `h` | the Poly3DCollection of the surface, or the list of the edges' lines when surface=False |
 
 ## See also
 

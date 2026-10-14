@@ -14,9 +14,13 @@ spinTensor(M), or spinTensor(v) the skew matrix of a rotation vector, in its fra
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spinTensor(M, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

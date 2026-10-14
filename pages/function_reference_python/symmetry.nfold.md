@@ -16,29 +16,33 @@ the maximal n-fold of the group, and about given axes, symmetry/nfold
 
 ## Syntax
 
-The highest order of any axis:
+<div class="mx-form" markdown="1">
 
 ```python
 n = cs.sym.nfold()
 ```
 
-About z, 1 when it is no axis:
+The highest order of any axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n = cs.sym.nfold(vector3d(0, 0, 1))
 ```
 
+About z, 1 when it is no axis.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `pg` | symmetry |
 | `axis` | vector3d, the axes asked about |
 
 ## Output
 
-| | |
-|---|---|
 | `n` | an integer, or one per axis |
 
 ## See also
@@ -47,9 +51,13 @@ n = cs.sym.nfold(vector3d(0, 0, 1))
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetry.nfold(self, axis=None)
 ```
+
+</div>
 
 MATLAB's [symmetry.nfold](symmetry.nfold.html)
 

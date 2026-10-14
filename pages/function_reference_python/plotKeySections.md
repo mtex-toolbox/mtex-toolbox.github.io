@@ -14,23 +14,37 @@ MATLAB's orientationColorKey/plot
 
 ## Syntax
 
-The colours in the default sections:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(key)
 ```
 
-Six sigma sections:
+The colours in the default sections.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotKeySections(key, 'sigma', sections=6)
 ```
 
-Coarser, in three columns:
+Six sigma sections.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotKeySections(key, resolution=5*degree, columns=3, field=True)
 ```
+
+Coarser, in three columns.
+
+</div>
+
+## Description
 
 Every section is filled with the colour key.orientation2color gives the orientations of its
 grid; orientations the key leaves without a colour stay white. The sections follow the
@@ -42,23 +56,19 @@ ipfHSVKey, draws its inverse pole figure with plot(key) instead.
 
 ## Input
 
-| | |
-|---|---|
 | `key` | an orientation colour key, as BungeColorKey, axisAngleColorKey or spotColorKey; ipfHSVKey through plotKeySections itself |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the list of matplotlib meshes drawn |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `2.5*degree` | the spacing of the grid the colours are computed on, an angle |
 | `columns` | `0` | the number of columns of the sections, 0 to choose it from the figure |
 | `field` | `False` | draw into every section the arrows of the reference field its coordinate is counted from |
+
+## Output
+
+| `h` | the list of matplotlib meshes drawn |
 
 ## See also
 

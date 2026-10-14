@@ -13,14 +13,16 @@ stripSym(x, ...) is x.stripSym(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 stripSym(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.stripSym_py.html) | the sibling frame carrying the trivial group |
 
 ## Used on

@@ -15,15 +15,23 @@ the length of the displacement at every position
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 n = norm(T, pos)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 spatialTransform.norm(self, pos)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L174">source</a></font>
 {% endraw %}

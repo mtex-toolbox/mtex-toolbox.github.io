@@ -17,38 +17,44 @@ MATLAB's cat, horzcat and vertcat
 
 ## Syntax
 
-A list of two functions:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = cat(sF1, sF2)
 ```
 
-Lists of shape (n, 1) side by side, an (n, 2) list:
+A list of two functions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic.cat(sFa, sFb, axis=1)
 ```
+
+Lists of shape (n, 1) side by side, an (n, 2) list.
+
+</div>
+
+## Description
 
 A single function counts as a list of one. The axis is that of the lists: the lists must
 agree in every other axis, and to join along axis 1 they need two axes.
 
 ## Input
 
-| | |
-|---|---|
 | `fs` | S2FunHarmonic, the functions or lists to join |
-
-## Output
-
-| | |
-|---|---|
-| `sF` | S2FunHarmonic, a list of functions |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `0` | the axis of the lists along which they are joined |
+
+## Output
+
+| `sF` | S2FunHarmonic, a list of functions |
 
 ## See also
 

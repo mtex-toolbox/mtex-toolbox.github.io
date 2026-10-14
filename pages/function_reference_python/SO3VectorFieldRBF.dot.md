@@ -17,9 +17,13 @@ function on the component frames
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldRBF.dot(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldRBF.dot](SO3VectorFieldRBF.dot.html)
 

@@ -15,39 +15,45 @@ the translation fitted to point pairs, the weighted mean of their displacements
 
 ## Syntax
 
-The mean displacement:
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformRigid.fit(posA, posB)
 ```
 
-The weighted mean:
+The mean displacement.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformRigid.fit(posA, posB, weights=w)
 ```
+
+The weighted mean.
+
+</div>
+
+## Description
 
 A point with a missing position or weight is dropped; other keywords are accepted and not
 used.
 
 ## Input
 
-| | |
-|---|---|
 | `posA` | vector3d, the positions in frame A |
 | `posB` | vector3d, the same points in frame B |
 
-## Output
-
-| | |
-|---|---|
-| `T` | spatialTransformRigid |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per point |
+
+## Output
+
+| `T` | spatialTransformRigid |
 
 ## See also
 

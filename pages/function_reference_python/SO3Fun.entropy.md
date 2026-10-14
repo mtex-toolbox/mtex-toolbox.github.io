@@ -14,17 +14,27 @@ the entropy -int f log f of a function on SO(3) or on the sphere; MATLAB's entro
 
 ## Syntax
 
-At twice the bandwidth, at least 64 (128 on the sphere):
+<div class="mx-form" markdown="1">
 
 ```python
 e = odf.entropy()
 ```
 
-The quadrature of another bandwidth:
+At twice the bandwidth, at least 64 (128 on the sphere).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = odf.entropy(bandwidth=128)
 ```
+
+The quadrature of another bandwidth.
+
+</div>
+
+## Description
 
 The integral is computed by the exact quadrature rule of a raised bandwidth, since f log f
 is not bandlimited; points where f is not positive contribute zero. On the sphere it is the
@@ -32,21 +42,17 @@ mean over the sphere, as MATLAB divides by 4 pi.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun or S2Fun |
-
-## Output
-
-| | |
-|---|---|
-| `e` | the entropy, a number |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the bandwidth of the quadrature grid, at most twice the preference maxSO3Bandwidth (maxS2Bandwidth on the sphere) |
+
+## Output
+
+| `e` | the entropy, a number |
 
 ## See also
 

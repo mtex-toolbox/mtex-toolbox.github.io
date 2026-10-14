@@ -14,23 +14,37 @@ the colours a colour map gives those numbers, MATLAB's num2rgb
 
 ## Syntax
 
-WhiteJet over the extent of the values:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = num2rgb(values)
 ```
 
-Another map, a fixed range:
+WhiteJet over the extent of the values.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = num2rgb(values, 'hot', range=[0, 6])
 ```
 
-One of eight colours of a matrix:
+Another map, a fixed range.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = num2rgb(values, blue2redColorMap(8))
 ```
+
+One of eight colours of a matrix.
+
+</div>
+
+## Description
 
 The values are scaled to the range and clipped to it; a map given by name is sampled
 continuously, a matrix of colours gives the nearest of its rows (MATLAB's option N, the
@@ -38,22 +52,18 @@ number of colours of a named map, is not taken).
 
 ## Input
 
-| | |
-|---|---|
 | `values` | an array of numbers |
-
-## Output
-
-| | |
-|---|---|
-| `rgb` | n x 3 rgb triplets, one row per value |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `colormap` | `'WhiteJet'` | the name of a colour map, a matplotlib map or an n x 3 matrix of colours |
 | `range` | `None` | [lower, upper] limit of the values, by default their minimum and maximum |
+
+## Output
+
+| `rgb` | n x 3 rgb triplets, one row per value |
 
 ## See also
 

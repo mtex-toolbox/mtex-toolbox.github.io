@@ -16,39 +16,45 @@ frames; MATLAB's eq
 
 ## Syntax
 
-Equal up to symmetry:
+<div class="mx-form" markdown="1">
 
 ```python
 b = ori1.isclose(ori2)
 ```
 
-Within 1 degree:
+Equal up to symmetry.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = ori1.isclose(ori2, tol=1*degree)
 ```
+
+Within 1 degree.
+
+</div>
+
+## Description
 
 Orientations between other frames, or one with grain exchange and one without, are never
 close; ori1 == ori2 compares the rotations as stored.
 
 ## Input
 
-| | |
-|---|---|
 | `ori1` | orientation |
 | `other` | orientation, or a rotation compared as rotation.isclose |
 
-## Output
-
-| | |
-|---|---|
-| `b` | bool, of the broadcast shape |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `0.0005` | the angular tolerance, in radians |
+
+## Output
+
+| `b` | bool, of the broadcast shape |
 
 ## See also
 

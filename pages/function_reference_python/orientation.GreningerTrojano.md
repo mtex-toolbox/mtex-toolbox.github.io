@@ -16,15 +16,23 @@ the Greninger-Trojano orientation relationship from fcc to bcc, by the Bunge Eul
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 p2c = orientation.GreningerTrojano(csGamma, csAlpha)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 orientation.GreningerTrojano(csG, csA)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L96">source</a></font>
 {% endraw %}

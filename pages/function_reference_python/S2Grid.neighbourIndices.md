@@ -15,9 +15,13 @@ the indices of the grid points within eps of one direction
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Grid.neighbourIndices(self, v, eps)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L212">source</a></font>
 {% endraw %}

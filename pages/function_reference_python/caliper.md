@@ -13,14 +13,16 @@ caliper(x, ...) is x.caliper(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 caliper(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grain2d](grain2d.caliper_py.html) | the caliper, the Feret diameter, of every outline: its width across a direction, or the longest or the shortest width as a framed axis of that length |
 
 ## Used on

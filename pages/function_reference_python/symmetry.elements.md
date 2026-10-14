@@ -16,39 +16,45 @@ the rotational axes and their multiplicities, both signs, symmetry/elements
 
 ## Syntax
 
-Every axis with its order:
+<div class="mx-form" markdown="1">
 
 ```python
 axes, mult = cs.sym.elements()
 ```
 
-The two-fold axes alone:
+Every axis with its order.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 axes = cs.sym.elements(multiplicity=2)
 ```
+
+The two-fold axes alone.
+
+</div>
+
+## Description
 
 Every axis of a rotation or rotoinversion of order above one, with the highest order
 about it, and its antipode with the same order, as MATLAB lists them.
 
 ## Input
 
-| | |
-|---|---|
 | `pg` | symmetry |
-
-## Output
-
-| | |
-|---|---|
-| `axes` | vector3d, antipodal |
-| `mult` | the order of every axis |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `multiplicity` | `None` | return the axes of this order alone |
+
+## Output
+
+| `axes` | vector3d, antipodal |
+| `mult` | the order of every axis |
 
 ## See also
 

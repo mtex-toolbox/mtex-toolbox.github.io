@@ -15,15 +15,17 @@ mean one
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3BumpKernel(40*degree)
 SO3BumpKernel(halfwidth=10*degree, bandwidth=64)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [grad](SO3BumpKernel.grad_py.html) | the derivative of the bump kernel, zero wherever it exists |
 | [halfwidth](SO3BumpKernel.halfwidth_py.html) | the halfwidth, the radius delta of the bump |
 | [radon](SO3BumpKernel.radon_py.html) | the Radon transform: the kernel on the sphere of the same coefficients, in closed form |

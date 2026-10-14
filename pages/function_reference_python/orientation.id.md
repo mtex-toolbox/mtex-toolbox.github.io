@@ -15,9 +15,13 @@ the identical orientations between the frames given, of the shape given (MATLAB'
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.id(*args)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L360">source</a></font>
 {% endraw %}

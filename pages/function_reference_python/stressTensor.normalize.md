@@ -16,9 +16,13 @@ the tensors divided by their Frobenius norms
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 stressTensor.normalize(self)
 ```
+
+</div>
 
 MATLAB's [stressTensor.normalize](stressTensor.normalize.html)
 

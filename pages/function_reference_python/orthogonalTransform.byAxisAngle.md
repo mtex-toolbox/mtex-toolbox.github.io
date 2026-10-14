@@ -15,15 +15,23 @@ the proper transforms rotating by omega about the axis v
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 T = orthogonalTransform.byAxisAngle(v, omega)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 orthogonalTransform.byAxisAngle(v, omega)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L927">source</a></font>
 {% endraw %}

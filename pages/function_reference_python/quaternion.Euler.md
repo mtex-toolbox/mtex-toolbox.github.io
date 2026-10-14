@@ -16,17 +16,27 @@ the Euler angles (alpha, beta, gamma) in the convention named, the session's by 
 
 ## Syntax
 
-The session's convention, Bunge by default:
+<div class="mx-form" markdown="1">
 
 ```python
 phi1, Phi, phi2 = rot.Euler()
 ```
 
-Matthies' convention:
+The session's convention, Bunge by default.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 alpha, beta, gamma = rot.Euler('ZYZ')
 ```
+
+Matthies' convention.
+
+</div>
+
+## Description
 
 The conventions are 'Bunge' or 'ZXZ', 'Matthies', 'ZYZ' or 'ABG', 'Roe', 'Kocks',
 'Canova' and 'nfft'; the default is the preference 'EulerAngleConvention'. Where the
@@ -35,21 +45,17 @@ it.
 
 ## Input
 
-| | |
-|---|---|
 | `rot` | quaternion |
-
-## Output
-
-| | |
-|---|---|
-| `alpha, beta, gamma` | three arrays of angles in radians in the shape of rot |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `convention` | `None` | the name of the convention |
+
+## Output
+
+| `alpha, beta, gamma` | three arrays of angles in radians in the shape of rot |
 
 ## See also
 

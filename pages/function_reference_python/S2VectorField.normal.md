@@ -16,9 +16,13 @@ the field of the outer normals, v at v, exact at bandwidth one
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.normal()
 ```
+
+</div>
 
 MATLAB's [S2VectorField.normal](S2VectorField.normal.html)
 

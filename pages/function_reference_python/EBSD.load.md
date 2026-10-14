@@ -17,9 +17,13 @@ the interface and the options MATLAB returns besides are what inspectEBSD report
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.load(fname, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [EBSD.load](EBSD.load.html)
 

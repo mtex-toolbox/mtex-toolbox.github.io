@@ -16,38 +16,44 @@ MATLAB's referenceFrame.byName
 
 ## Syntax
 
-Look up, None when unknown:
+<div class="mx-form" markdown="1">
 
 ```python
 ss = referenceFrame.byName('rolling')
 ```
 
-Store fr under the name:
+Look up, None when unknown.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 referenceFrame.byName('myFrame', fr)
 ```
+
+Store fr under the name.
+
+</div>
+
+## Description
 
 The register holds one instance per name: the named frames (specimenFrame.rolling, ...)
 are built on first use and stored here, so every later call returns the same handle.
 
 ## Input
 
-| | |
-|---|---|
 | `name` | str |
-
-## Output
-
-| | |
-|---|---|
-| `ss` | referenceFrame, the frame registered under the name, or None |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fr` | `None` | the frame to register under the name |
+
+## Output
+
+| `ss` | referenceFrame, the frame registered under the name, or None |
 
 ## See also
 

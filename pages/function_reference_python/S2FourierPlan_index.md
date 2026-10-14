@@ -14,8 +14,6 @@ reusable across coefficient vectors: plan(fhat) evaluates, plan.adjoint(values, 
 
 ## Members
 
-| | |
-|---|---|
 | [adjoint](S2FourierPlan.adjoint_py.html) | the spherical coefficients from weighted values at the nodes, the adjoint of the evaluation |
 | [setNodes](S2FourierPlan.setNodes_py.html) | moves the plan to other directions, the finufft plans kept |
 

@@ -18,27 +18,43 @@ findByLocation, or grains[x, y]
 
 ## Syntax
 
-By a rectangle:
+<div class="mx-form" markdown="1">
 
 ```python
 ind = grains.inpolygon([xmin, ymin, dx, dy])
 ```
 
-By a polygon:
+By a rectangle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = inpolygon(grains, [[x1, y1], [x2, y2], [x3, y3]])
 ```
 
+By a polygon.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 grains = grains[ind]
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grain2d.inpolygon(self, region)
 ```
+
+</div>
 
 MATLAB's [grain2d.inpolygon](grain2d.inpolygon.html)
 

@@ -15,35 +15,57 @@ degree or of all degrees up to a bandwidth
 
 ## Syntax
 
-The (2l+1) x (2l+1) matrix of degree l:
+<div class="mx-form" markdown="1">
 
 ```python
 Dl = WignerD(g, l)
 ```
 
-L2 normalised, times sqrt(2l + 1):
+The (2l+1) x (2l+1) matrix of degree l.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 Dl = WignerD(g, l, normalize=True)
 ```
 
-The list of the matrices of degree 0 to L:
+L2 normalised, times sqrt(2l + 1).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 D = WignerD(g, bandwidth=L)
 ```
 
-The real Wigner-d matrix at the second Euler angle:
+The list of the matrices of degree 0 to L.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 dl = WignerD(beta, l)
 ```
 
-The mean over the symmetries of a frame:
+The real Wigner-d matrix at the second Euler angle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 P = WignerD(cs, l)
 ```
+
+The mean over the symmetries of a frame.
+
+</div>
+
+## Description
 
 The matrices are MTEX's Wigner functions, the basis the public coefficients fhat of an
 SO3FunHarmonic are taken in: with normalize=True, f(g) = sum fhat_n^{kl} D_n^{kl}(g). A
@@ -54,28 +76,24 @@ and normalize does not apply to them. MATLAB's kernel option is not there.
 
 ## Input
 
-| | |
-|---|---|
 | `g` | rotation, orientation or quaternion |
 | `beta` | the second Euler angle in [0, pi] |
 | `cs` | crystalFrame or point group |
 | `degree` | the degree l of a single matrix |
 
-## Output
-
-| | |
-|---|---|
-| `Dl` | (..., 2l+1, 2l+1) complex array |
-| `D` | list of the matrices of degree 0 to L |
-| `dl` | (2l+1) x (2l+1) real array |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | all degrees up to this one, instead of a single degree |
 | `normalize` | `False` | multiply the matrix of degree n by sqrt(2n + 1) |
 | `dtype` | `None` | the NumPy type of the matrices |
+
+## Output
+
+| `Dl` | (..., 2l+1, 2l+1) complex array |
+| `D` | list of the matrices of degree 0 to L |
+| `dl` | (2l+1) x (2l+1) real array |
 
 ## See also
 

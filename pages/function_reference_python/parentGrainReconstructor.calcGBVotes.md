@@ -17,35 +17,57 @@ written into job.votes; MATLAB's calcGBVotes
 
 ## Syntax
 
-From the child to child and the parent to child boundaries:
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcGBVotes()
 ```
 
-From the parent to child boundaries alone:
+From the child to child and the parent to child boundaries.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcGBVotes(p2c=True, threshold=2.5*degree, tol=1.5*degree)
 ```
 
-Every measured child grain anew, the growth step:
+From the parent to child boundaries alone.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcGBVotes(p2c=True, reconsiderAll=True, threshold=4*degree, tol=1.5*degree)
 ```
 
-The best fit per variant instead of a probability:
+Every measured child grain anew, the growth step.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcGBVotes(numFit=1, bestFit=True)
 ```
 
-The number of fits below the threshold:
+The best fit per variant instead of a probability.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcGBVotes(count=True)
 ```
+
+The number of fits below the threshold.
+
+</div>
+
+## Description
 
 A pair of neighbouring child grains votes for the numFit pairs of variants that let both
 come from one parent, a child grain next to a parent grain for the numFit variants of
@@ -61,20 +83,12 @@ mergeSimilar or after revert.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor, with job.p2c set |
 | `ind` | with reconsiderAll: the positions of the prior grains to vote for; the table of their votes is returned and job.votes left as it was |
 
-## Output
-
-| | |
-|---|---|
-| `votes` | with ind: voteTable of the votes of those grains |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `p2c` | `False` | only the parent to child boundaries vote |
 | `c2c` | `False` | only the child to child boundaries vote |
@@ -87,6 +101,10 @@ mergeSimilar or after revert.
 | `bestFit` | `False` | the vote of a grain is the best fit per variant, an angle, instead of a probability |
 | `count` | `False` | the vote of a grain is the number of fits per variant below the threshold |
 | `curvatureFactor` | `None` | with reconsiderAll: weigh a boundary by 1 plus this factor times its normalised curvature, so that curved boundaries count more |
+
+## Output
+
+| `votes` | with ind: voteTable of the votes of those grains |
 
 ## See also
 

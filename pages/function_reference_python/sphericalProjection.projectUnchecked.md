@@ -15,9 +15,13 @@ the plane coordinates of directions known to lie in the chart
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalProjection.projectUnchecked(self, v)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L99">source</a></font>
 {% endraw %}

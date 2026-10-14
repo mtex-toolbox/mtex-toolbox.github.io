@@ -15,17 +15,27 @@ the reference field turned into the section, at an equispaced grid of its region
 
 ## Syntax
 
-The field of the first section:
+<div class="mx-form" markdown="1">
 
 ```python
 v, d = oS.sectionField(0)
 ```
 
-On a coarser grid:
+The field of the first section.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v, d = oS.sectionField(1, resolution=10*degree)
 ```
+
+On a coarser grid.
+
+</div>
+
+## Description
 
 The field shows where ori * h2 points for an orientation to belong to section k: the
 reference field of the plotting convention turned about every direction by the section's
@@ -33,22 +43,18 @@ twist angle. quiverSectionField draws it.
 
 ## Input
 
-| | |
-|---|---|
 | `k` | int, the index of the section |
-
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d, the grid directions inside the region of the chart |
-| `d` | vector3d, the field at them |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `15*degree` | the spacing of the equispaced grid |
+
+## Output
+
+| `v` | vector3d, the grid directions inside the region of the chart |
+| `d` | vector3d, the field at them |
 
 ## See also
 

@@ -16,33 +16,43 @@ save=True also the default of every later session, stored in the user's settings
 
 ## Syntax
 
-For this session:
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention('y↑→x').makeDefault()
 ```
 
-For every later session too:
+For this session.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention('y↑→x').makeDefault(save=True)
 ```
 
-The same:
+For every later session too.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention.default('y↑→x', save=True)
 ```
 
+The same.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `pC` | plottingConvention |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `save` | `False` | store the convention in mtex_settings.json as well |
 

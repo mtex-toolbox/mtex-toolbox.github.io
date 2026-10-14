@@ -14,16 +14,24 @@ the misorientation key of Patala, Mason and Schuh for m-3m, m-3, mmm, 4/mmm and 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PatalaColorKey(cs), PatalaColorKey(cs1, cs2), PatalaColorKey(gB) of a grain boundary
 rgb = key.orientation2color(mori)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 PatalaColorKey(x, frameB=None)
 ```
+
+</div>
 
 ## Used on
 

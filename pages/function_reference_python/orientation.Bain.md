@@ -16,15 +16,23 @@ misorientation from the parent frame csG to the child frame csA
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 p2c = orientation.Bain(csGamma, csAlpha)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 orientation.Bain(csG, csA)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L64">source</a></font>
 {% endraw %}

@@ -15,60 +15,78 @@ specimen direction, its shape a kernel on the sphere
 
 ## Syntax
 
-The de la Vallee Poussin kernel of halfwidth 10 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = fibreODF(h, r)
 ```
 
-Another halfwidth:
+The de la Vallee Poussin kernel of halfwidth 10 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = fibreODF(h, r, halfwidth=15*degree)
 ```
 
-The S2 kernel psi, also kernel=psi:
+Another halfwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = fibreODF(h, r, psi)
 ```
 
-The specimen frame named:
+The S2 kernel psi, also kernel=psi.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = fibreODF(h, r, ss)
 ```
 
-From a fibre f, one weight per fibre:
+The specimen frame named.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = fibreODF(f, weights=w)
 ```
+
+From a fibre f, one weight per fibre.
+
+</div>
+
+## Description
 
 The ODF is SO3FunCBF, the kernel of the angle between g h and r, the weights normalised to a
 mean of one. Several crystal and specimen directions give several fibres.
 
 ## Input
 
-| | |
-|---|---|
 | `h` | Miller, the crystal directions, or a fibre |
 | `r` | vector3d, the specimen directions |
 | `args` | specimenFrame and an S2Kernel |
 
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunCBF |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `kernel` | `None` | S2Kernel, the shape; by default the de la Vallee Poussin kernel |
 | `halfwidth` | `None` | the halfwidth of the default kernel, 10 degree unless given |
 | `weights` | `None` | one weight per fibre |
+
+## Output
+
+| `odf` | SO3FunCBF |
 
 ## See also
 

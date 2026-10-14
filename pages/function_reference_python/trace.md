@@ -13,9 +13,13 @@ trace(T) is T.trace(): the trace of a rank two tensor, or of the Voigt matrix of
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 trace(T)
 ```
+
+</div>
 
 ## Used on
 

@@ -15,9 +15,13 @@ whether the command runs
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 neper.available(self)
 ```
+
+</div>
 
 ## Used on
 

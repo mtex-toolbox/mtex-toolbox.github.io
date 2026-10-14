@@ -15,8 +15,6 @@ left and the top right; a two dimensional map drawn in the plane it lies in
 
 ## Members
 
-| | |
-|---|---|
 | [bounds](picture3d.bounds_py.html) | the corners (lo, hi) of the box around the rectangle |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L97">source</a></font>

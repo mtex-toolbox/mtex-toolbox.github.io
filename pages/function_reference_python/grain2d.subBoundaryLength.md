@@ -17,35 +17,39 @@ selects if given; MATLAB's grain2d.subBoundaryLength
 
 ## Syntax
 
-Every inner segment:
+<div class="mx-form" markdown="1">
 
 ```python
 L = grains.subBoundaryLength()
 ```
 
-The segments selected:
+Every inner segment.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 L = grains.subBoundaryLength(grains.innerBoundary.segLength > 40)
 ```
 
+The segments selected.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain2d |
-
-## Output
-
-| | |
-|---|---|
-| `L` | the length of the inner boundary per grain, in the units of the map |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `sel` | `None` | a mask or the indices of the inner boundary segments summed, all when not given |
+
+## Output
+
+| `L` | the length of the inner boundary per grain, in the units of the map |
 
 ## See also
 

@@ -17,23 +17,37 @@ calcDistortion of trueEbsd
 
 ## Syntax
 
-Every hop fitted:
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcDistortion()
 ```
 
-And what each hop leaves over measured:
+Every hop fitted.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcDistortion(fitErr=True)
 ```
 
-Silent, one pass per hop:
+And what each hop leaves over measured.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcDistortion(fitErr=True, verbose=False, retryMax=1)
 ```
+
+Silent, one pass per hop.
+
+</div>
+
+## Description
 
 job.T[n] is the unfitted spatialTransform between map n and map n + 1. For every pair the
 images are cut into tiles, the tiles cross correlated for a local shift each, and the stages
@@ -52,13 +66,11 @@ longer fit the image or retryMax attempts are made.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | trueEbsd after pixelSizeMatch |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fitErr` | `False` | measure what is left after each hop and retry the hops that leave too much |
 | `verbose` | `True` | print the table of the hops, MATLAB's silent the opposite |

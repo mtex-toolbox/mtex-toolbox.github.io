@@ -16,9 +16,13 @@ follows the new limits
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapPlot.extend(self, x)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L118">source</a></font>
 {% endraw %}

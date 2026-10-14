@@ -14,14 +14,16 @@ angle and the azimuth of the fundamental sector
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 key = HKLDirectionKey(cs)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [direction2color](HKLDirectionKey.direction2color_py.html) | the colours of directions under the HKL key |
 | [whiteCenter](HKLDirectionKey.whiteCenter_py.html) | the centre of the fundamental sector |
 

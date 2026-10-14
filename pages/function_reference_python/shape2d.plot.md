@@ -17,17 +17,27 @@ MATLAB's shape2d/plot
 
 ## Syntax
 
-The outline about its centre:
+<div class="mx-form" markdown="1">
 
 ```python
 h = plot(shape)
 ```
 
-Scaled to area 1, without grid and labels:
+The outline about its centre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = plot(shape, normalize=True, plain=True)
 ```
+
+Scaled to area 1, without grid and labels.
+
+</div>
+
+## Description
 
 The outline is shifted to the mean of its vertices and drawn as a closed polar line, the
 angle measured in the plane of the map as its frame's plotting convention shows it.
@@ -35,19 +45,11 @@ Further keywords go to matplotlib's plot.
 
 ## Input
 
-| | |
-|---|---|
 | `shape` | shape2d, a closed outline, as characteristicShape returns |
-
-## Output
-
-| | |
-|---|---|
-| `h` | matplotlib Line2D, the outline drawn |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `lineWidth` | `1.0` | the width of the line in points |
 | `displayName` | `None` | the name of the line in a legend |
@@ -55,6 +57,10 @@ Further keywords go to matplotlib's plot.
 | `normalize` | `False` | scale the shape to area 1, for comparing the form of shapes of different size |
 | `plain` | `False` | leave out the polar grid and the radial labels |
 | `how2plot` | `None` | the plotting convention; by default that of the shape's frame |
+
+## Output
+
+| `h` | matplotlib Line2D, the outline drawn |
 
 ## See also
 

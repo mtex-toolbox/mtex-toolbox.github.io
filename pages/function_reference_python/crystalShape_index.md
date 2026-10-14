@@ -14,34 +14,48 @@ a crystal shape, the polyhedron bounded by the lattice planes of the face normal
 
 ## Syntax
 
-Faces at the reciprocal length of their normal:
+<div class="mx-form" markdown="1">
 
 ```python
 cS = crystalShape(N)
 ```
 
-The distances from the indices alone:
+Faces at the reciprocal length of their normal.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cS = crystalShape(N, habitus, extension)
 ```
 
-A hexagonal prism, crystalShape.cube(cs) a cube:
+The distances from the indices alone.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cS = crystalShape.hex(cs)
 ```
 
-From the catalogue, in its own crystal frame:
+A hexagonal prism, crystalShape.cube(cs) a cube.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cS = crystalShape.quartz(simple=True)
 ```
 
+From the catalogue, in its own crystal frame.
+
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [albite](crystalShape.albite_py.html) | the albite crystal shape of the catalogue, in cs when given, MATLAB's crystalShape.albite |
 | [amphibole](crystalShape.amphibole_py.html) | the amphibole crystal shape of the catalogue, in cs when given, MATLAB's crystalShape.amphibole |
 | [analcime](crystalShape.analcime_py.html) | the analcime crystal shape of the catalogue, in cs when given, MATLAB's crystalShape.analcime |

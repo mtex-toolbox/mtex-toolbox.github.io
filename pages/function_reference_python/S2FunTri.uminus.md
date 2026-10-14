@@ -16,9 +16,13 @@ the negative, the operator -a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 -a
 ```
+
+</div>
 
 MATLAB's [S2FunTri.uminus](S2FunTri.uminus.html)
 

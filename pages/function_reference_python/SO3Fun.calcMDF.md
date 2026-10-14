@@ -14,17 +14,27 @@ the uncorrelated misorientation distribution function of one or two ODFs; MATLAB
 
 ## Syntax
 
-Of one ODF, with grain exchange symmetry:
+<div class="mx-form" markdown="1">
 
 ```python
 mdf = calcMDF(odf)
 ```
 
-Of two ODFs, at another bandwidth:
+Of one ODF, with grain exchange symmetry.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mdf = calcMDF(odf1, odf2, bandwidth=16)
 ```
+
+Of two ODFs, at another bandwidth.
+
+</div>
+
+## Description
 
 The density of inv(o1) o2 for independent grains, (inv f1 * f2)(g) = int f1(S g^-1)
 f2(S) dS, computed by the convolution of the harmonic expansions; for one ODF the result
@@ -32,22 +42,18 @@ has the exchange symmetry of the misorientations within one phase.
 
 ## Input
 
-| | |
-|---|---|
 | `f1` | SO3Fun |
 | `f2` | SO3Fun, the second phase; f1 when omitted |
 
-## Output
-
-| | |
-|---|---|
-| `mdf` | SO3FunHarmonic, from the crystal frame of f1 to that of f2 |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `32` | the bandwidth the expansions are truncated to |
+
+## Output
+
+| `mdf` | SO3FunHarmonic, from the crystal frame of f1 to that of f2 |
 
 ## See also
 

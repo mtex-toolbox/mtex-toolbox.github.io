@@ -16,15 +16,23 @@ a new axes in the next cell of the layout, the layout and the figure grown when 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 ax = mtexFig.nextAxis()
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFigure.nextAxis(self)
 ```
+
+</div>
 
 ## Used on
 

@@ -16,29 +16,47 @@ global, local and pointwise minima of a function on the circle
 
 ## Syntax
 
-The global minimum and the angle it is taken at:
+<div class="mx-form" markdown="1">
 
 ```python
 v, pos = min(sF)
 ```
 
-The three smallest local minima:
+The global minimum and the angle it is taken at.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 values, positions = min(sF, numLocal=3)
 ```
 
-The pointwise minimum with a constant:
+The three smallest local minima.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = min(sF, 0)
 ```
 
-The pointwise minimum of two functions:
+The pointwise minimum with a constant.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = min(sF1, sF2, bandwidth=64)
 ```
+
+The pointwise minimum of two functions.
+
+</div>
+
+## Description
 
 The function is sampled at the resolution, the discrete local minima are refined by a
 ternary search, and the smallest numLocal are returned with the values ascending: a pair
@@ -49,25 +67,21 @@ kmax, startingNodes, tolerance and maxStepSize are not taken.
 
 ## Input
 
-| | |
-|---|---|
 | `sF, sF1, sF2` | S1FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
-| `v, values` | the smallest values |
-| `pos, positions` | the angles, in radians, they are taken at |
-| `sF` | S1FunHarmonic, the pointwise minimum |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `numLocal` | `1` | the number of local minima to return |
 | `resolution` | `0.004363323129985824` | the spacing of the sampling the minima are searched on |
 | `bandwidth` | `None` | the bandwidth of the pointwise minimum |
+
+## Output
+
+| `v, values` | the smallest values |
+| `pos, positions` | the angles, in radians, they are taken at |
+| `sF` | S1FunHarmonic, the pointwise minimum |
 
 ## See also
 

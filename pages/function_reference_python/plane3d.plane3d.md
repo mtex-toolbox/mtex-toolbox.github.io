@@ -14,29 +14,45 @@ a plane <N, v> = d, or a list of them
 
 ## Syntax
 
-<N, v> = d:
+<div class="mx-form" markdown="1">
 
 ```python
 plane = plane3d(N, d)
 ```
 
-Through the point v0:
+<N, v> = d.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plane = plane3d(N, v0)
 ```
 
-Fitted through the points v:
+Through the point v0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plane = plane3d.byPoints(v)
 ```
 
+Fitted through the points v.
+
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 plane3d(N, d=0)
 ```
+
+</div>
 
 ## Used on
 

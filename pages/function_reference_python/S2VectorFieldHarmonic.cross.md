@@ -16,9 +16,13 @@ F x x = -[x]_x F, on the rows of the coefficients F [x]_x
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.cross(self, x)
 ```
+
+</div>
 
 MATLAB's [S2VectorFieldHarmonic.cross](S2VectorFieldHarmonic.cross.html)
 

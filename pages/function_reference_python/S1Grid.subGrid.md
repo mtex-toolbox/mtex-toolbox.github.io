@@ -16,9 +16,13 @@ the points selected by a mask, the range kept
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1Grid.subGrid(self, mask)
 ```
+
+</div>
 
 MATLAB's [S1Grid.subGrid](S1Grid.subGrid.html)
 

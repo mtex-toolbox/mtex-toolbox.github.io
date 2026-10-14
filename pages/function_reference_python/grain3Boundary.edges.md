@@ -17,9 +17,13 @@ every face
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain3Boundary.edges(self)
 ```
+
+</div>
 
 MATLAB's [grain3Boundary.edges](grain3Boundary.edges.html)
 

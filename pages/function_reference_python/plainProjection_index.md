@@ -13,8 +13,6 @@ rho over theta in degrees: the polar angles of the frame itself, no convention
 
 ## Members
 
-| | |
-|---|---|
 | [boundary](plainProjection.boundary_py.html) | the boundary of the region as plane coordinates, one pair of arrays per arc |
 | [bounds](plainProjection.bounds_py.html) | the azimuth and polar ranges of the region in degrees, widened by the margin |
 | [chartRegion](plainProjection.chartRegion_py.html) | the region shown, without its frame |

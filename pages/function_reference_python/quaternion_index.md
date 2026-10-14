@@ -15,15 +15,17 @@ q * v rotates a vector
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion(a, b, c, d)
 quaternion(abcd)                     an array of shape (..., 4) or (4, N)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [a](quaternion.a_py.html) | the real part a of the quaternions |
 | [abcd](quaternion.abcd_py.html) | the coefficients a, b, c, d as one array of shape (..., 4) |
 | [angle](quaternion.angle_py.html) | the rotational angle in [0, pi], or the angle between two, both from atan2 forms that keep their digits near 0 and pi |

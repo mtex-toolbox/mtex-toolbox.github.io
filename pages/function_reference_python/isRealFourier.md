@@ -13,35 +13,39 @@ whether Fourier coefficients on the circle are those of a real function, c_{-k} 
 
 ## Syntax
 
-C_{-1}, c_0, c_1 of 1 + cos(x): True:
+<div class="mx-form" markdown="1">
 
 ```python
 isRealFourier([0.5, 1, 0.5])
 ```
 
-With a looser tolerance:
+C_{-1}, c_0, c_1 of 1 + cos(x): True.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 isRealFourier([0.5, 1, 0.5], tol=1e-6)
 ```
 
+With a looser tolerance.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `chat` | the coefficients c_{-L} .. c_L |
-
-## Output
-
-| | |
-|---|---|
-| `isReal` | bool |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-10` | the tolerance, relative to the size of a coefficient where it exceeds one |
+
+## Output
+
+| `isReal` | bool |
 
 ## See also
 

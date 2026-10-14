@@ -15,23 +15,37 @@ it holds in every later session
 
 ## Syntax
 
-For this session:
+<div class="mx-form" markdown="1">
 
 ```python
 setMTEXpref('maxS2Bandwidth', 256)
 ```
 
-The NumPy forms instead of the compiled loops:
+For this session.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 setMTEXpref('kernels', 'numpy')
 ```
 
-For every later session too:
+The NumPy forms instead of the compiled loops.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 setMTEXpref('displayRows', 40, save=True)
 ```
+
+For every later session too.
+
+</div>
+
+## Description
 
 Setting 'threads' or 'hugePages' applies the new value at once to the libraries it
 concerns. The settings file is mtex_settings.json, MATLAB's mtex_settings.m; nothing is
@@ -39,14 +53,12 @@ written when MTEX_SETTINGS is empty.
 
 ## Input
 
-| | |
-|---|---|
 | `name` | the name of the preference |
 | `value` | its new value |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `save` | `False` | store the preference in the user's settings file as well |
 

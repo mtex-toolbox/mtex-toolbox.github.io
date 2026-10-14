@@ -15,17 +15,27 @@ point group the data is invariant under and the default plotting convention
 
 ## Syntax
 
-A frame of the canonical basis:
+<div class="mx-form" markdown="1">
 
 ```python
 f = referenceFrame(name='lab', axesNames=('A', 'B', 'C'))
 ```
 
-A frame of the given basis vectors:
+A frame of the canonical basis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = referenceFrame(basis)
 ```
+
+A frame of the given basis vectors.
+
+</div>
+
+## Description
 
 The base class of crystalFrame, the frame glued to the lattice of a phase, and
 specimenFrame, the frame of a sample; use those. A frame carries an identity, a name such
@@ -36,25 +46,21 @@ transformationMatrix gives the change of coordinates between two frames.
 
 ## Input
 
-| | |
-|---|---|
 | `basis` | vector3d or 3 x 3 array, the basis vectors in canonical coordinates, by default the canonical basis |
-
-## Output
-
-| | |
-|---|---|
-| `f` | referenceFrame |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `name` | `''` | the identity of the frame |
 | `axesNames` | `('X', 'Y', 'Z')` | the names of the three axes |
 | `how2plot` | `None` | the default plottingConvention of the frame |
 | `sym` | `None` | the point group, by default the trivial one |
 | `color` | `None` | the colour of the frame's data in a phase map |
+
+## Output
+
+| `f` | referenceFrame |
 
 ## See also
 

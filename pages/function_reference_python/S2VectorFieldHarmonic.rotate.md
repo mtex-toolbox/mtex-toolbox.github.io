@@ -16,9 +16,13 @@ v'(xi) = r v(r^-1 xi): the components rotate and mix
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.rotate(self, r)
 ```
+
+</div>
 
 MATLAB's [S2VectorFieldHarmonic.rotate](S2VectorFieldHarmonic.rotate.html)
 

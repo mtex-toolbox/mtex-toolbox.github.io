@@ -18,23 +18,37 @@ much of the turn as a narrow one and the vertices sit at equal angles
 
 ## Syntax
 
-The radius and the equalised azimuth:
+<div class="mx-form" markdown="1">
 
 ```python
 r, rho = polarCoordinates(sR, h, regionCenter(sR))
 ```
 
-The plain azimuth about the centre:
+The radius and the equalised azimuth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 r, rho = polarCoordinates(sR, h, regionCenter(sR), equalise=False)
 ```
 
-The reference direction for rho = 0:
+The plain azimuth about the centre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 r, rho = polarCoordinates(sR, h, regionCenter(sR), ref=xvector)
 ```
+
+The reference direction for rho = 0.
+
+</div>
+
+## Description
 
 The azimuth starts at the pole of the plotting convention seen from the centre; only where
 the centre is that pole does the reference direction take over. A centre at a vertex or
@@ -43,25 +57,21 @@ whole turn.
 
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
 | `v` | vector3d, the directions |
 | `center` | vector3d or (3,) array, the centre of the coordinates |
 
-## Output
-
-| | |
-|---|---|
-| `r` | array, one at the centre and zero on the boundary |
-| `rho` | array, the azimuth about the centre in [0, 2 pi) |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ref` | `None` | the direction rho = 0 points to where the centre is the pole; x by default |
 | `equalise` | `True` | reparametrise the azimuth by the distance to the boundary |
+
+## Output
+
+| `r` | array, one at the centre and zero on the boundary |
+| `rho` | array, the azimuth about the centre in [0, 2 pi) |
 
 ## See also
 

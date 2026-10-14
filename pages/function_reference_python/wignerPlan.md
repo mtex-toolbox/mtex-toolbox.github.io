@@ -14,35 +14,57 @@ the NUFFT on the nodes of a grid whose polar rule is not equispaced
 
 ## Syntax
 
-The NUFFT at arbitrary rotations:
+<div class="mx-form" markdown="1">
 
 ```python
 p = wignerPlan(rotation.rand(1000), 8)
 ```
 
-The FFT on a Clenshaw-Curtis grid:
+The NUFFT at arbitrary rotations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 p = wignerPlan(quadratureSO3Grid(16), 8)
 ```
 
-For complex valued functions:
+The FFT on a Clenshaw-Curtis grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 p = wignerPlan(rotation.rand(1000), 8, real=False)
 ```
 
-The series at the nodes:
+For complex valued functions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = p(F._fhat)
 ```
 
-The adjoint with weights:
+The series at the nodes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = p.adjoint(f, np.full(1000, 1e-3))
 ```
+
+The adjoint with weights.
+
+</div>
+
+## Description
 
 A plan holds what the transform at a fixed node set needs, so that the series of many
 coefficient vectors or their adjoints at the same nodes cost the transform only. The
@@ -50,23 +72,19 @@ coefficients are the internal ones, F._fhat.
 
 ## Input
 
-| | |
-|---|---|
 | `nodes` | rotations, or a quadratureSO3Grid |
 | `L` | the bandwidth |
 
-## Output
-
-| | |
-|---|---|
-| `plan` | SO3GridPlan or SO3FourierPlan, called with coefficients, plan.adjoint with values and weights |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` | `True` | the plan for real valued functions, which needs half the Fourier array |
 | `folds` | `(1, 1)` | (rA, rB), the folds about z on the crystal and the specimen side the coefficients are known to have, which shrink the Fourier array; a grid brings its own |
+
+## Output
+
+| `plan` | SO3GridPlan or SO3FourierPlan, called with coefficients, plan.adjoint with values and weights |
 
 ## See also
 

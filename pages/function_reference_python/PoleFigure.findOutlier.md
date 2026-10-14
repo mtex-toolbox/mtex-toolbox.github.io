@@ -17,21 +17,35 @@ alpha standard deviations; MATLAB's isOutlier and findOutlier
 
 ## Syntax
 
-Deviating by more than two standard deviations:
+<div class="mx-form" markdown="1">
 
 ```python
 ind = isOutlier(pf)
 ```
 
+Deviating by more than two standard deviations.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 ind = pf.findOutlier(alpha=3) # by more than three
 ```
 
-The outliers removed:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = pf[~isOutlier(pf)]
 ```
+
+The outliers removed.
+
+</div>
+
+## Description
 
 The neighbours of a direction are the other directions of its pole figure within three
 times the resolution of the grid; the standard deviation is that of all intensities of the
@@ -39,21 +53,17 @@ pole figure.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
-| `ind` | ndarray of booleans, one per measurement, the pole figures one after another |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `alpha` | `2` | the number of standard deviations, MATLAB's 'alpha' |
+
+## Output
+
+| `ind` | ndarray of booleans, one per measurement, the pole figures one after another |
 
 ## See also
 

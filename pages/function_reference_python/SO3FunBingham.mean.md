@@ -16,9 +16,13 @@ the mean value of the function over SO(3), its weight
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunBingham.mean(self)
 ```
+
+</div>
 
 MATLAB's [SO3FunBingham.mean](SO3FunBingham.mean.html)
 

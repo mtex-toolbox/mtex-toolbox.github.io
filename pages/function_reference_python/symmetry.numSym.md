@@ -16,9 +16,13 @@ the number of elements of the group
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetry.numSym(self)
 ```
+
+</div>
 
 MATLAB's [symmetry.numSym](symmetry.numSym.html)
 

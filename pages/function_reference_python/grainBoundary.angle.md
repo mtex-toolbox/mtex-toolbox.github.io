@@ -17,16 +17,24 @@ the angle of every segment to a direction, or to the segments of another boundar
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 omega = gB.angle(vector3d.X)
 omega = angle(gB1, gB2)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grainBoundary.angle(self, x)
 ```
+
+</div>
 
 MATLAB's [grainBoundary.angle](grainBoundary.angle.html)
 

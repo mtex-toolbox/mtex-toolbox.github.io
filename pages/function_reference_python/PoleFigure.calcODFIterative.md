@@ -16,9 +16,13 @@ calcODFIterative(pf, ...): the reconstruction refined successively over a ladder
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PoleFigure.calcODFIterative(self, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [PoleFigure.calcODFIterative](PoleFigure.calcODFIterative.html)
 

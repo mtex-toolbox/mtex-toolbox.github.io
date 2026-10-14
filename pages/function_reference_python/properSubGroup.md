@@ -13,14 +13,16 @@ properSubGroup(x, ...) is x.properSubGroup(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 properSubGroup(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.properSubGroup_py.html) | the sibling frame carrying only the proper rotations of this group |
 | [symmetry](symmetry.properSubGroup_py.html) | the subgroup of proper rotations |
 

@@ -16,29 +16,47 @@ orientations defined by Euler angles
 
 ## Syntax
 
-Bunge's convention:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.byEuler(phi1, Phi, phi2, cs, ss)
 ```
 
-Matthies' convention:
+Bunge's convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.byEuler(alpha, beta, gamma, 'ZYZ', cs, ss)
 ```
 
-Kocks' convention:
+Matthies' convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.byEuler(phi1, Phi, phi2, 'Kocks', cs, ss)
 ```
 
-The angles as one triple, or an array of triples:
+Kocks' convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.byEuler([phi1, Phi, phi2], cs)
 ```
+
+The angles as one triple, or an array of triples.
+
+</div>
+
+## Description
 
 The angles are in radians, arrays of them broadcast against each other. Without a
 convention the preference EulerAngleConvention decides, Bunge's ZXZ by default. The
@@ -46,24 +64,20 @@ convention and the frames follow the angles, in any order.
 
 ## Input
 
-| | |
-|---|---|
 | `a` | the first angle, phi1 or alpha; or an array whose last axis holds the three angles |
 | `b` | the second angle, Phi or beta |
 | `c` | the third angle, phi2 or gamma |
 | `args` | the convention, 'Bunge' or 'ZXZ', 'Matthies', 'ZYZ' or 'ABG', 'Roe', 'Kocks', 'Canova', 'nfft'; the crystal frame cs and the specimen frame ss, or a second crystal frame for a misorientation |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | a misorientation with grain exchange |
+
+## Output
+
+| `ori` | orientation |
 
 ## See also
 

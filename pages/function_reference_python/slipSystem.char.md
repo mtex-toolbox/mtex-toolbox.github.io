@@ -16,35 +16,39 @@ as one piece of mathematics
 
 ## Syntax
 
-'(111)[011̅]':
+<div class="mx-form" markdown="1">
 
 ```python
 s = sS.char()
 ```
 
-'$(111)[01\bar{1}]$':
+'(111)[011̅]'.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = sS.char('latex')
 ```
 
+'$(111)[01\bar{1}]$'.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `sS` | slipSystem |
-
-## Output
-
-| | |
-|---|---|
-| `s` | str for a single system, a list of them otherwise |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `style` | `None` | None for plain text with combining bars, 'latex' for LaTeX, as Miller.char |
+
+## Output
+
+| `s` | str for a single system, a list of them otherwise |
 
 ## See also
 

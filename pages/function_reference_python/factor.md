@@ -13,14 +13,16 @@ factor(x, ...) is x.factor(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 factor(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.factor_py.html) | the factorisation of the two groups: self = rot1 * d and other = d * rot2 with d the common elements |
 | [symmetry](symmetry.factor_py.html) | factor self = rot1 * d and other = d * rot2 with d the common elements, symmetry/factor |
 

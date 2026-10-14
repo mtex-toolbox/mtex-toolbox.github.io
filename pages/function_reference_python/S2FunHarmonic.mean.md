@@ -17,35 +17,39 @@ function along that axis of a list; MATLAB's mean
 
 ## Syntax
 
-The mean value, one per function of a list:
+<div class="mx-form" markdown="1">
 
 ```python
 value = mean(sF)
 ```
 
-The pointwise mean of a list along its first axis:
+The mean value, one per function of a list.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = mean(sF, axis=0)
 ```
 
+The pointwise mean of a list along its first axis.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `sF` | S2FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
-| `value` | float, or an array of the shape of the list; with an axis S2FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `None` | the axis of the list along which the functions are averaged |
+
+## Output
+
+| `value` | float, or an array of the shape of the list; with an axis S2FunHarmonic |
 
 ## See also
 

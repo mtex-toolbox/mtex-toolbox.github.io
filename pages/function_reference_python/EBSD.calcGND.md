@@ -17,17 +17,27 @@ MATLAB's calcGND
 
 ## Syntax
 
-The content and the densities per system:
+<div class="mx-form" markdown="1">
 
 ```python
 gnd, rho = calcGND(ebsd, dS)
 ```
 
-The curvature from all eight neighbours:
+The content and the densities per system.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gnd, rho = calcGND(ebsd, dS, stencil='full')
 ```
+
+The curvature from all eight neighbours.
+
+</div>
+
+## Description
 
 MATLAB's route: the curvature of the map, the dislocation systems rotated into every pixel,
 and the densities of least total line energy that reproduce the curvature, a linear
@@ -37,23 +47,19 @@ noisy curvature gives noisy densities.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD of one phase, gridded or with a lattice |
 | `dS` | dislocationSystem, the systems in crystal coordinates |
 
-## Output
-
-| | |
-|---|---|
-| `gnd` | the dislocation content of every pixel, the shape of the map |
-| `rho` | the density of every system at every pixel, one row per pixel |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `stencil` | `'oneSided'` | the neighbours the curvature is taken from: 'oneSided' the one sided differences along the lattice directions, 'lattice' the central difference over the whole stencil of the lattice, 'full' the same with the diagonals |
+
+## Output
+
+| `gnd` | the dislocation content of every pixel, the shape of the map |
+| `rho` | the density of every system at every pixel, one row per pixel |
 
 ## References
 

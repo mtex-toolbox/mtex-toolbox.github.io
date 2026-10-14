@@ -14,35 +14,57 @@ at its midpoint
 
 ## Syntax
 
-A direction per grain:
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(grains, grains.meanOrientation * Miller(1, 0, 0, cs, 'uvw'))
 ```
 
-An arrow per measurement:
+A direction per grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(ebsd, v, color='w')
 ```
 
-A needle per boundary segment:
+An arrow per measurement.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(gB, gB.direction, autoScaleFactor=0.5)
 ```
 
-Axes, centred on the centroids:
+A needle per boundary segment.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(grains, v, antipodal=True)
 ```
 
-Scale times the length of v:
+Axes, centred on the centroids.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(grains, v, scale=10)
 ```
+
+Scale times the length of v.
+
+</div>
+
+## Description
 
 A direction starts at its point, an axis (an antipodal vector, or antipodal=True) is centred
 on it. By default an arrow of a grain is a fifth of its diameter, of a map one and a half
@@ -53,20 +75,12 @@ itself. Into a held map plot the arrows go on top of it, else into a map of thei
 
 ## Input
 
-| | |
-|---|---|
 | `x` | grain2d, EBSD or grainBoundary |
 | `v` | vector3d, one per grain, measurement or segment |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib quiver or line collection |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `scale` | `None` | draw every arrow scale times its length in the plane of the map |
 | `color` | `None` | the colour of the arrows; for grains by default the next of the axes' colours |
@@ -76,6 +90,10 @@ itself. Into a held map plot the arrows go on top of it, else into a map of thei
 | `autoScaleFactor` | `None` | a factor on the automatic length |
 | `projectIntoPlane` | `False` | let the arrow of a grain start at its centroid even when its direction points into the map, where it would otherwise end there |
 | `antipodal` | `False` | draw the vectors as axes, centred on their points |
+
+## Output
+
+| `h` | the matplotlib quiver or line collection |
 
 ## See also
 

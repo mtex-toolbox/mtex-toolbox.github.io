@@ -15,16 +15,24 @@ grains, their phases, the three boundary segments and the angles between them
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tP = grains.triplePoints
 tP('Iron bcc', 'Iron bcc', 'Iron bcc')
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 triplePointList(V, grainId, phaseId, boundaryId, angles, CSList, plane, frame, vertexId=None)
 ```
+
+</div>
 
 MATLAB's [triplePointList.triplePointList](triplePointList.triplePointList.html)
 

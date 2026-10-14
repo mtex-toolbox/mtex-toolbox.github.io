@@ -18,17 +18,27 @@ grain2d.simplifyBoundary
 
 ## Syntax
 
-The pixel staircase straightened:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.simplifyBoundary()
 ```
 
-A tolerance of 50 map units:
+The pixel staircase straightened.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.simplifyBoundary(50)
 ```
+
+A tolerance of 50 map units.
+
+</div>
+
+## Description
 
 Douglas-Peucker chain by chain: a straight run collapses into one segment while a corner
 stays. The junctions stay where they are and the polygons are traced again, so the grain
@@ -37,21 +47,17 @@ tolerance is left as it is rather than collapsed.
 
 ## Input
 
-| | |
-|---|---|
-| `grains` | grain2d |
-
-## Output
-
-| | |
-|---|---|
 | `grains` | grain2d |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `epsilon` | `None` | the tolerance in the units of the map, by default the median segment length over sqrt(2), how far a staircase strays from the line it approximates |
+
+## Output
+
+| `grains` | grain2d |
 
 ## See also
 

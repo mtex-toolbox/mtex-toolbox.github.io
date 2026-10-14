@@ -14,14 +14,16 @@ characteristicShape(x, ...) is x.characteristicShape(...), the method of the obj
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 characteristicShape(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grainBoundary](grainBoundary.characteristicShape_py.html) | the characteristic shape of a set of boundary segments |
 
 ## Used on

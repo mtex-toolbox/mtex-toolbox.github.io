@@ -17,46 +17,56 @@ fibre.rotation
 
 ## Syntax
 
-1000 rotations along the fibre:
+<div class="mx-form" markdown="1">
 
 ```python
 rot = f.rotation()
 ```
 
-100 of them:
+1000 rotations along the fibre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = f.rotation(points=100)
 ```
 
-And the angles from o1:
+100 of them.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot, omega = f.rotation(return_angles=True)
 ```
+
+And the angles from o1.
+
+</div>
+
+## Description
 
 The points are equispaced in the angle about h, from o1 (omega = 0) to o2; a full fibre runs
 once around.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | fibre |
-
-## Output
-
-| | |
-|---|---|
-| `rot` | rotation, of shape (points,) + f.shape |
-| `omega` | the angles the rotations are turned from o1 by, of the same shape (return_angles) |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `points` | `1000` | the number of rotations per fibre |
 | `return_angles` | `False` | also return omega, MATLAB's second output |
+
+## Output
+
+| `rot` | rotation, of shape (points,) + f.shape |
+| `omega` | the angles the rotations are turned from o1 by, of the same shape (return_angles) |
 
 ## See also
 

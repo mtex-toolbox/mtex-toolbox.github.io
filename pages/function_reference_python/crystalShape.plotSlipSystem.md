@@ -17,23 +17,37 @@ slip direction as an arrow in it
 
 ## Syntax
 
-The slip plane and direction, red:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cS, sS)
 ```
 
-Another colour:
+The slip plane and direction, red.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cS, sS, faceColor='blue')
 ```
 
-The arrow named at its tip:
+Another colour.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotSlipSystem(cS, sS, label='b')
 ```
+
+The arrow named at its tip.
+
+</div>
+
+## Description
 
 The plane is the section by the slip plane, as plotInnerFace draws it, the arrow the slip
 direction from the centre to the surface; several systems are drawn together. Draw the
@@ -41,20 +55,12 @@ shape translucent first, plot(cS, faceAlpha=0.2), and hold the figure.
 
 ## Input
 
-| | |
-|---|---|
 | `cS` | crystalShape |
 | `sS` | slipSystem |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib collection of the slip planes |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `'red'` | the colour of the plane and the arrow |
 | `faceAlpha` | `0.5` | the opacity of the plane |
@@ -62,6 +68,10 @@ shape translucent first, plot(cS, faceAlpha=0.2), and hold the figure.
 | `lineWidth` | `0.8` | the width of the edges of the plane |
 | `displayName` | `None` | the label of the plane in a legend |
 | `label` | `None` | the text at the tip of the arrow (not on a map) |
+
+## Output
+
+| `h` | the matplotlib collection of the slip planes |
 
 ## See also
 

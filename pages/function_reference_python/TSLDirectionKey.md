@@ -17,8 +17,6 @@ over the polar angle and the azimuth of the sector
 
 ## Members
 
-| | |
-|---|---|
 | [direction2color](TSLDirectionKey.direction2color_py.html) | the colours of directions under the TSL key |
 | [whiteCenter](TSLDirectionKey.whiteCenter_py.html) | the centre of the sector the colours run from |
 

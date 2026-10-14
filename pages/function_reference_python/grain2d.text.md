@@ -15,47 +15,77 @@ of the current axes; MATLAB's vector3d.text, EBSD.text and grain2d.text
 
 ## Syntax
 
-A label at every direction:
+<div class="mx-form" markdown="1">
 
 ```python
 text(v, ['a', 'b', 'c'])
 ```
 
-A crystal direction named by its indices:
+A label at every direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 text(Miller(1, 0, 0, cs), labeled=True)
 ```
 
-One text at measurements of the map:
+A crystal direction named by its indices.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd); text(ebsd[0:3], 'A')
 ```
 
-The grain ids at the centroids:
+One text at measurements of the map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains); text(grains, grains.id)
 ```
 
-Styled:
+The grain ids at the centroids.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 text(grains, labels, fontSize=8, color='r')
 ```
 
-At a point of the current axes:
+Styled.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 text(0.5, 0.5, 'here')
 ```
 
-At a point of 3D axes:
+At a point of the current axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 text(x, y, z, 'here')
 ```
+
+At a point of 3D axes.
+
+</div>
+
+## Description
 
 On the sphere the text sits at its direction with no marker, in every chart of the current
 figure unless nextAxis chose one of a held figure; the keywords of scatter style it
@@ -66,15 +96,11 @@ properties in MATLAB's spelling (fontSize, fontWeight, horizontalAlignment, ...)
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d or Miller; EBSD or grain2d; or the coordinates x, y (, z) |
 | `labels` | a string per direction, measurement or grain, or one for all; with coordinates the string |
 
 ## Output
 
-| | |
-|---|---|
 | `h` | the matplotlib collections, one per spherical plot, or the texts |
 
 ## See also
@@ -83,9 +109,13 @@ properties in MATLAB's spelling (fontSize, fontWeight, horizontalAlignment, ...)
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 text(v, labels=None, *more, **kw)
 ```
+
+</div>
 
 ## Used on
 

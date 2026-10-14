@@ -15,9 +15,13 @@ the number of neighbours of vertex i
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 boundaryNetwork.numNeighbors(self, i)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L82">source</a></font>
 {% endraw %}

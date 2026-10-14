@@ -17,23 +17,37 @@ they are
 
 ## Syntax
 
-The holes filled:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_f = fill(ebsd)
 ```
 
-Filled within the grains only:
+The holes filled.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_f = fill(ebsd, grains)
 ```
 
-Another filter, up to the outer boundary:
+Filled within the grains only.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_f = fill(ebsd, halfQuadraticFilter(), extrapolate=True)
 ```
+
+Another filter, up to the outer boundary.
+
+</div>
+
+## Description
 
 A hole is filled with the continuation of the field of orientations that encloses it, by
 the solver of a variational filter (by default l1TVFilter; a window filter has no
@@ -52,23 +66,19 @@ passed is not changed.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD, the map |
 | `F` | EBSDFilter, a variational filter, or grain2d in place of grains |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd_f` | EBSD, the filled map |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `grains` | `None` | grain2d of the map: fill a pixel only from the grain whose polygon holds it |
 | `extrapolate` | `False` | fill up to the outer boundary of the map |
+
+## Output
+
+| `ebsd_f` | EBSD, the filled map |
 
 ## See also
 

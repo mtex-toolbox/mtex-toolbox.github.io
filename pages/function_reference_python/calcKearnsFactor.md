@@ -15,23 +15,37 @@ direction N; MATLAB's calcKearnsFactor
 
 ## Syntax
 
-Of the crystal direction h with N:
+<div class="mx-form" markdown="1">
 
 ```python
 k = calcKearnsFactor(odf, h, N)
 ```
 
-With the z direction:
+Of the crystal direction h with N.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 k = calcKearnsFactor(odf, h)
 ```
 
-Of a pole figure:
+With the z direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 k = calcKearnsFactor(pdf, N)
 ```
+
+Of a pole figure.
+
+</div>
+
+## Description
 
 The integral of the pole figure of h against (r . N)^2 over the sphere, normalised so that
 a uniform texture gives 1/3. MATLAB's order is calcKearnsFactor(odf, N, h), the arguments
@@ -40,16 +54,12 @@ an ODF needs h.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun, an ODF, or S2Fun, a pole figure |
 | `h` | Miller, the crystal direction (with an ODF); with a pole figure the place of N |
 | `N` | vector3d, the specimen direction, z when left out |
 
 ## Output
 
-| | |
-|---|---|
 | `k` | float |
 
 ## See also
@@ -58,9 +68,13 @@ an ODF needs h.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 calcKearnsFactor(f, h=None, N=None)
 ```
+
+</div>
 
 MATLAB's [calcKearnsFactor](calcKearnsFactor.html)
 

@@ -14,29 +14,47 @@ draws for grain3d, MATLAB's grain3d/plot
 
 ## Syntax
 
-Coloured by phase:
+<div class="mx-form" markdown="1">
 
 ```python
 mesh = grainMesh(grains)
 ```
 
-By orientation, the ipf key of the phase:
+Coloured by phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mesh = grainMesh(grains, grains.meanOrientation)
 ```
 
-By a value, translucent:
+By orientation, the ipf key of the phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mesh = grainMesh(grains, grains.volume, colormap='viridis', faceAlpha=0.5)
 ```
 
-One colour, no edges:
+By a value, translucent.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mesh = grainMesh(grains, faceColor='lightblue', edgeColor='none')
 ```
+
+One colour, no edges.
+
+</div>
+
+## Description
 
 A face of the set of grains is outer when it belongs to one grain and is drawn in that
 grain's colour; a face between two of the grains is inner and drawn grey, and only when
@@ -44,19 +62,11 @@ the faces are translucent, faceAlpha below 1. A grain whose value is NaN is not 
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain3d, the grains |
-
-## Output
-
-| | |
-|---|---|
-| `mesh` | mesh3d, the faces with a colour each; with a value per grain it keeps the values, the colour map and the range for the colour bar |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `color` | `None` | what colours a grain: None for its phase, an orientation per grain, a value per grain mapped by the colour map, an RGB row per grain, or the name of a property |
 | `faceColor` | `None` | one colour for all grains, when color is not given |
@@ -67,6 +77,10 @@ the faces are translucent, faceAlpha below 1. A grain whose value is NaN is not 
 | `colormap` | `None` | the colour map for values |
 | `colorRange` | `None` | (min, max), the values the colour map spans; by default their range |
 | `ipfDirection` | `None` | the specimen direction of the inverse pole figure key for orientations |
+
+## Output
+
+| `mesh` | mesh3d, the faces with a colour each; with a value per grain it keeps the values, the colour map and the range for the colour bar |
 
 ## See also
 

@@ -13,14 +13,16 @@ interp(x, ...) is x.interp(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 interp(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.interp_py.html) | the map read at positions of one's own choosing, a new map with these positions |
 | [EBSD3](EBSD3.interp_py.html) | the voxel holding every position, or none outside the box of voxel centres, as MATLAB's nearest griddedInterpolant without extrapolation |
 | [mapImage](mapImage.interp_py.html) | the image values at arbitrary positions |

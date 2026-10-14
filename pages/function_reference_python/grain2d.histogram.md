@@ -19,9 +19,13 @@ diagram of directions
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.histogram(x, *args, **kw)
 ```
+
+</div>
 
 MATLAB's [grain2d.histogram](grain2d.histogram.html)
 

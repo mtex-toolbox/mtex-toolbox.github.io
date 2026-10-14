@@ -14,14 +14,16 @@ the angular distance to the nearest symmetric equivalent; several centres multip
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spotDirectionKey(cs, center=Miller(1, 1, 1, cs), color=(0, 0, 1), psi=S2DeLaValleePoussinKernel(halfwidth=7.5*degree))
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [center](spotDirectionKey.center_py.html) | the centres, with the equivalents under the group kept beside them |
 | [direction2color](spotDirectionKey.direction2color_py.html) | the colours of directions under the spot key |
 | [whiteCenter](spotDirectionKey.whiteCenter_py.html) | the first centre of the key |

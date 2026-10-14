@@ -15,9 +15,13 @@ a hexagonal prism, the faces {10-10} and (0002)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 crystalShape.hex(CS)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L380">source</a></font>
 {% endraw %}

@@ -16,9 +16,13 @@ larger, in half the time a large map took, most of which was the compression
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mtexFigure.savefig(self, *args, **kwargs)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L427">source</a></font>
 {% endraw %}

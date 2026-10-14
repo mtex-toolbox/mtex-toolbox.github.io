@@ -16,9 +16,13 @@ the Green-Lagrange strain of a deformation gradient, (F^T F - I) / 2
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 deformationGradientTensor.GreenStrain(F)
 ```
+
+</div>
 
 MATLAB's [deformationGradientTensor.GreenStrain](deformationGradientTensor.GreenStrain.html)
 

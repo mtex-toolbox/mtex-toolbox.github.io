@@ -15,9 +15,13 @@ the field the twist is measured against, at directions of the specimen frame
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 pfSections.referenceField(self, r)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L458">source</a></font>
 {% endraw %}

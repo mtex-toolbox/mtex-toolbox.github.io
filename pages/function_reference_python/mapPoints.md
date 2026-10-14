@@ -13,35 +13,39 @@ the measurements as points on the screen
 
 ## Syntax
 
-The positions in the map's plane:
+<div class="mx-form" markdown="1">
 
 ```python
 P = mapPoints(ebsd)
 ```
 
-Turned to another convention:
+The positions in the map's plane.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 P = mapPoints(ebsd, mapLayout('x↑→y'))
 ```
 
+Turned to another convention.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD |
-
-## Output
-
-| | |
-|---|---|
-| `P` | array of shape (n, 2) |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `layout` | `None` | the 2 x 2 matrix taking the plane to the screen, mapLayout; by default the identity |
+
+## Output
+
+| `P` | array of shape (n, 2) |
 
 ## See also
 

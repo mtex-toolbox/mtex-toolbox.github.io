@@ -16,17 +16,27 @@ the function on SO(3) through the values at the orientations, interpolate(nodes,
 
 ## Syntax
 
-An SO3FunHarmonic through the values:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3Fun.interpolate(ori, values)
 ```
 
-Of a given degree:
+An SO3FunHarmonic through the values.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3Fun.interpolate(ori, values, bandwidth=4)
 ```
+
+Of a given degree.
+
+</div>
+
+## Description
 
 The keywords of interpolate, bandwidth, lambda_, s, weights, maxIter, tol and withParameters,
 are passed on: the coefficients fit the values by least squares with a Sobolev
@@ -34,15 +44,11 @@ regularisation.
 
 ## Input
 
-| | |
-|---|---|
 | `nodes` | orientation, or SO3TangentVector for a vector field |
 | `values` | ndarray of one value per node |
 
 ## Output
 
-| | |
-|---|---|
 | `SO3F` | SO3FunHarmonic, or SO3VectorFieldHarmonic for tangent vectors |
 
 ## See also
@@ -51,9 +57,13 @@ regularisation.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunBingham.interpolate(nodes, values=None, **kwargs)
 ```
+
+</div>
 
 MATLAB's [SO3FunBingham.interpolate](SO3FunBingham.interpolate.html)
 

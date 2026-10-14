@@ -17,39 +17,45 @@ MATLAB's sphericalRegion.plot
 
 ## Syntax
 
-The fundamental sector of a crystal:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cs.fundamentalSector())
 ```
 
-In red, thicker:
+The fundamental sector of a crystal.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(sR, color='r', lineWidth=2)
 ```
+
+In red, thicker.
+
+</div>
+
+## Description
 
 The boundary is drawn as its arcs at half a degree; lineColor is taken for color, the
 other keywords go to the spherical plots and matplotlib's lines.
 
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib lines |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `color` | `'k'` | the colour of the outline |
 | `lineWidth` | `1.0` | its width |
+
+## Output
+
+| `h` | the matplotlib lines |
 
 ## See also
 

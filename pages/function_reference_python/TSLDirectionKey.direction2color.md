@@ -15,17 +15,27 @@ the colours of directions under the TSL key; MATLAB's TSLDirectionKey/direction2
 
 ## Syntax
 
-The colours of crystal directions:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = key.direction2color(h)
 ```
 
-Less saturated:
+The colours of crystal directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = key.direction2color(h, gray=0.5)
 ```
+
+Less saturated.
+
+</div>
+
+## Description
 
 Each direction is brought into the sector of the Laue group, its polar coordinates about
 the centre of the sector, from the first vertex, turned into hue and lightness without
@@ -33,21 +43,17 @@ the hue correction: white at the centre, the full colours on the boundary.
 
 ## Input
 
-| | |
-|---|---|
 | `h` | vector3d or Miller, the directions |
-
-## Output
-
-| | |
-|---|---|
-| `rgb` | an array of shape h.shape + (3,), RGB values in [0, 1] |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `gray` | `None` | the saturation, in [0, 1], by default 1; MATLAB's option grayValue |
+
+## Output
+
+| `rgb` | an array of shape h.shape + (3,), RGB values in [0, 1] |
 
 ## See also
 

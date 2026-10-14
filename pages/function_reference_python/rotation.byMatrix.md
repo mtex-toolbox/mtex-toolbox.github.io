@@ -16,9 +16,13 @@ a proper orthogonal matrix, or a list of them on the leading axes
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation.byMatrix(M)
 ```
+
+</div>
 
 MATLAB's [rotation.byMatrix](rotation.byMatrix.html)
 

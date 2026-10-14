@@ -18,23 +18,37 @@ MATLAB's PoissonRatio
 
 ## Syntax
 
-Of the tension along x, the contraction along y:
+<div class="mx-form" markdown="1">
 
 ```python
 nu = PoissonRatio(C, x, y)
 ```
 
-The function of the transverse direction:
+Of the tension along x, the contraction along y.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 nu = PoissonRatio(C, x)
 ```
 
-The isotropic ratio:
+The function of the transverse direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 nu = PoissonRatio(C)
 ```
+
+The isotropic ratio.
+
+</div>
+
+## Description
 
 Without directions the ratio of an isotropic polycrystal, (3K - 2G) / (2 (3K + G)) from
 the Voigt bounds of the bulk and the shear modulus. MATLAB's PoissonRatio(S, [], y), the
@@ -43,16 +57,12 @@ returned.
 
 ## Input
 
-| | |
-|---|---|
 | `C` | stiffnessTensor or complianceTensor, a stiffness tensor is inverted first |
 | `x` | vector3d or Miller, the tension direction |
 | `y` | vector3d or Miller, the transverse direction, perpendicular to x |
 
 ## Output
 
-| | |
-|---|---|
 | `nu` | the Poisson ratio, or an S2Fun of the transverse direction |
 
 ## See also
@@ -61,9 +71,13 @@ returned.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 stiffnessTensor.PoissonRatio(T, x=None, y=None)
 ```
+
+</div>
 
 MATLAB's [stiffnessTensor.PoissonRatio](stiffnessTensor.PoissonRatio.html)
 

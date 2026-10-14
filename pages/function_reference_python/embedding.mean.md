@@ -16,17 +16,27 @@ the arithmetic mean of the images; MATLAB's mean of an embedding
 
 ## Syntax
 
-The mean image of the whole list:
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(e)
 ```
 
-Weighted, the weights normalised to sum one:
+The mean image of the whole list.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(e, weights=w)
 ```
+
+Weighted, the weights normalised to sum one.
+
+</div>
+
+## Description
 
 The mean of the images is no image of an orientation; m.orientation() projects it back,
 the mean orientation, and norm(m, normalized=True) measures the spread. The mean of an
@@ -35,21 +45,17 @@ the mean is always over the whole list.
 
 ## Input
 
-| | |
-|---|---|
 | `e` | embedding |
-
-## Output
-
-| | |
-|---|---|
-| `m` | embedding, a single image |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per image |
+
+## Output
+
+| `m` | embedding, a single image |
 
 ## See also
 

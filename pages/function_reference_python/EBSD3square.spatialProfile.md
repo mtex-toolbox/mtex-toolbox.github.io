@@ -16,9 +16,13 @@ the voxels along a polyline, sampled at the voxel spacing, and their distance al
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD3.spatialProfile(ebsd, points)
 ```
+
+</div>
 
 MATLAB's [EBSD3square.spatialProfile](EBSD3square.spatialProfile.html)
 

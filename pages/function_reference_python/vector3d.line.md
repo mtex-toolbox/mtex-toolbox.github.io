@@ -14,21 +14,35 @@ a polyline in the coordinates of the current map, drawn under its layout, MATLAB
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 plot(ebsd)
 ```
 
-A dotted white line across the map:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 line([0, 10000], [0, 5000], lineStyle=':', lineWidth=4, color='w')
 ```
 
-A polyline in a 3D scene:
+A dotted white line across the map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 line(x, y, z)
 ```
+
+A polyline in a 3D scene.
+
+</div>
+
+## Description
 
 The points are given in the map's coordinates and placed on the screen as the map is,
 whatever its plotting convention; without a map the line goes into the current axes as
@@ -38,21 +52,17 @@ separating its pieces.
 
 ## Input
 
-| | |
-|---|---|
 | `x, y` | the coordinates of the points |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib line, or the scene object of a line in space |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `z` | `None` | the third coordinates, a polyline in space |
+
+## Output
+
+| `h` | the matplotlib line, or the scene object of a line in space |
 
 ## See also
 

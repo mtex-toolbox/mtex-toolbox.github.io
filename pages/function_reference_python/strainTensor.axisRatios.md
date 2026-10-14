@@ -16,9 +16,13 @@ the differences of the principal values, largest first
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 strainTensor.axisRatios(T)
 ```
+
+</div>
 
 MATLAB's [strainTensor.axisRatios](strainTensor.axisRatios.html)
 

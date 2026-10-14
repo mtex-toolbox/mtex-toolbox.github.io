@@ -15,9 +15,13 @@ the plane radius tan(theta) of the polar angle theta
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gnomonicProjection.radius(theta)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L357">source</a></font>
 {% endraw %}

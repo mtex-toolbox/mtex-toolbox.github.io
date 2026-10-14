@@ -15,9 +15,13 @@ the cube component, Bunge Euler angles (0°, 0°, 0°), in cs and the specimen f
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.cube(CS, *ss)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L288">source</a></font>
 {% endraw %}

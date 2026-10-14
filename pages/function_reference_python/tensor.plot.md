@@ -16,62 +16,100 @@ plot(x, ...) draws x as its kind is drawn; the page of each class's plot has its
 
 ## Syntax
 
-Directions on the sphere: markers, coloured, arrows w:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(v), plot(v, data), plot(v, rgb), plot(v, w)
 ```
 
-A function on the sphere, a vector or axis field, a region:
+Directions on the sphere: markers, coloured, arrows w.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(sF), plot(vF), plot(sR)
 ```
 
-Maps: pixels, grain polygons, boundaries, triple points:
+A function on the sphere, a vector or axis field, a region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd), plot(grains), plot(gB), plot(tP)
 ```
 
-ODF sections, the ODF along a fibre, a section layout:
+Maps: pixels, grain polygons, boundaries, triple points.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(odf), plot(odf, f), plot(oS)
 ```
 
-Orientations, fibres and regions in orientation space:
+ODF sections, the ODF along a fibre, a section layout.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ori), plot(f), plot(oR)
 ```
 
-Pole figures, the symmetry elements, a colour key:
+Orientations, fibres and regions in orientation space.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(pf), plot(cs), plot(key)
 ```
 
-Circle functions, shapes, crystal shapes, planes:
+Pole figures, the symmetry elements, a colour key.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(sF1), plot(shape), plot(cS), plot(plane)
 ```
 
-A tensor by its directional magnitude:
+Circle functions, shapes, crystal shapes, planes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(T)
 ```
+
+A tensor by its directional magnitude.
+
+</div>
+
+## Description
 
 On the sphere the flags contourf, contour, pcolor and smooth draw the density of the
 directions or the interpolant of their data.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.plot(v, *args, **kw)
 ```
+
+</div>
 
 MATLAB's [tensor.plot](tensor.plot.html)
 

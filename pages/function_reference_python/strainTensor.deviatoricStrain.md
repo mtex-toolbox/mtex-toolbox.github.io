@@ -16,9 +16,13 @@ the deviatoric part, the tensor less a third of its trace on the diagonal
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 strainTensor.deviatoricStrain(T)
 ```
+
+</div>
 
 MATLAB's [strainTensor.deviatoricStrain](strainTensor.deviatoricStrain.html)
 

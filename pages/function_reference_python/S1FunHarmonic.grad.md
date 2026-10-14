@@ -15,37 +15,43 @@ the derivative as a function, or its values at the angles x
 
 ## Syntax
 
-The derivative, an S1FunHarmonic:
+<div class="mx-form" markdown="1">
 
 ```python
 dF = grad(sF)
 ```
 
-The derivative at the angles:
+The derivative, an S1FunHarmonic.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = grad(sF, [0.5, 1])
 ```
 
+The derivative at the angles.
+
+</div>
+
+## Description
+
 The coefficient c_k of the derivative is -ik c_k, the function diff gives.
 
 ## Input
 
-| | |
-|---|---|
 | `sF` | S1FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
-| `dF` | S1FunHarmonic, or the values at x |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `x` | `None` | angles at which to evaluate the derivative |
+
+## Output
+
+| `dF` | S1FunHarmonic, or the values at x |
 
 ## See also
 

@@ -13,14 +13,16 @@ project(x, ...) is x.project(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 project(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [embedding](embedding.project_py.html) | the rotations whose images are closest to the embedding, the projection of a point of the Euclidean space back onto the orientations |
 | [plainProjection](plainProjection.project_py.html) | the plane coordinates (rho, theta) of directions in degrees, NaN outside the region |
 | [plane3d](plane3d.project_py.html) | the orthogonal projection of points onto the plane |

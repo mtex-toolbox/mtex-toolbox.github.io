@@ -13,14 +13,16 @@ multiplicity(x, ...) is x.multiplicity(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 multiplicity(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [fibre](fibre.multiplicity_py.html) | the number of distinct symmetrically equivalent fibres |
 | [vector3d](Miller.multiplicity_py.html) | the number of distinct directions symmetrically equivalent to each vector, of axes under antipodal |
 

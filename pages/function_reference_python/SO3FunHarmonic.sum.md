@@ -16,36 +16,40 @@ the integral over SO(3), 8 pi^2 times the mean; with an axis the sum along it of
 
 ## Syntax
 
-The integral of every function:
+<div class="mx-form" markdown="1">
 
 ```python
 value = sum(SO3F)
 ```
 
-The pointwise sum along the first axis:
+The integral of every function.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = sum(SO3F, axis=0)
 ```
 
+The pointwise sum along the first axis.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunHarmonic, a single function or a list |
-
-## Output
-
-| | |
-|---|---|
-| `value` | float, or an array of the shape of the list |
-| `SO3F` | SO3FunHarmonic, with axis given |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `None` | the axis of the list to sum the functions along; MATLAB's d, counted from 0 |
+
+## Output
+
+| `value` | float, or an array of the shape of the list |
+| `SO3F` | SO3FunHarmonic, with axis given |
 
 ## See also
 

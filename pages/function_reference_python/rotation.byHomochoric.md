@@ -16,9 +16,13 @@ the rotations of homochoric vectors
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation.byHomochoric(v)
 ```
+
+</div>
 
 MATLAB's [rotation.byHomochoric](rotation.byHomochoric.html)
 

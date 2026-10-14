@@ -14,9 +14,13 @@ str2rgb('salmon'): the RGB triplet of a colour name, MATLAB tools/str2rgb
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 str2rgb(name)
 ```
+
+</div>
 
 ## Used on
 

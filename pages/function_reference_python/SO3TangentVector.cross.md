@@ -16,9 +16,13 @@ the cross product with tangent vectors at the same reference, brought to this si
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3TangentVector.cross(self, other)
 ```
+
+</div>
 
 MATLAB's [SO3TangentVector.cross](SO3TangentVector.cross.html)
 

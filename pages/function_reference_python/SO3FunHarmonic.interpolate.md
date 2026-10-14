@@ -17,9 +17,13 @@ interpolate(nodes, values, ...)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunHarmonic.interpolate(nodes, values, **kwargs)
 ```
+
+</div>
 
 MATLAB's [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate.html)
 

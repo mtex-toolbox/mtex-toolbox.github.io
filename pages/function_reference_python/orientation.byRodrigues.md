@@ -17,36 +17,40 @@ orientation.byRodrigues
 
 ## Syntax
 
-From Rodrigues vectors:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.byRodrigues(v, cs, ss)
 ```
 
-A misorientation with grain exchange:
+From Rodrigues vectors.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = orientation.byRodrigues(v, cs, cs, antipodal=True)
 ```
 
+A misorientation with grain exchange.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d, or an array with the coordinates along its last axis |
 | `frames` | the crystal frame, then the specimen frame or a second crystal frame |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | mark a misorientation with grain exchange |
+
+## Output
+
+| `ori` | orientation |
 
 ## See also
 

@@ -15,35 +15,57 @@ misorientations, a curve of a misorientation distribution function or of two ran
 
 ## Syntax
 
-Histogram of boundary misorientations:
+<div class="mx-form" markdown="1">
 
 ```python
 plotAngleDistribution(gB.misorientation)
 ```
 
-Narrower bins:
+Histogram of boundary misorientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotAngleDistribution(mori, resolution=2*degree)
 ```
 
-Angle distribution of an MDF:
+Narrower bins.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotAngleDistribution(mdf)
 ```
 
-Uncorrelated angle distribution of two phases:
+Angle distribution of an MDF.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotAngleDistribution(cs1, cs2)
 ```
 
-With a legend entry:
+Uncorrelated angle distribution of two phases.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotAngleDistribution(cs1, cs1, displayName='uncorrelated')
 ```
+
+With a legend entry.
+
+</div>
+
+## Description
 
 A list of misorientations is drawn as bars, the percentage of the misorientations in each
 bin; the bins run from 0 to the largest misorientation angle the two symmetries allow, or
@@ -56,27 +78,23 @@ compare; each new bar set or curve takes the next of MTEX's colours. Other keywo
 
 ## Input
 
-| | |
-|---|---|
 | `mori` | misorientation, a list of misorientations |
 | `mdf` | SO3Fun, a misorientation distribution function |
 | `cs1, cs2` | crystalFrame, the two phases |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the bar container of the histogram, or the line of the curve |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `figSize` | `None` | the size of a new figure, 'small', 'normal', 'large', ... |
 | `resolution` | `5*degree` | the width of the bins, in radians |
 | `numBins` | `None` | the number of bin edges instead of the resolution |
 | `percent` | `False` | draw a curve in percent instead of multiples of the random distribution |
 | `displayName` | `None` | the name of the bars or the curve in a legend |
+
+## Output
+
+| `h` | the bar container of the histogram, or the line of the curve |
 
 ## See also
 

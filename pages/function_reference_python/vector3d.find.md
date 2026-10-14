@@ -17,23 +17,37 @@ where either is antipodal, antipodal=True always, False never
 
 ## Syntax
 
-The nearest of v to every w, and its angle:
+<div class="mx-form" markdown="1">
 
 ```python
 ind, d = v.find(w)
 ```
 
-The 3 nearest, an integer:
+The nearest of v to every w, and its angle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind, d = v.find(w, 3)
 ```
 
-All within 5 degree, a float:
+The 3 nearest, an integer.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 I, D = v.find(w, 5*degree)
 ```
+
+All within 5 degree, a float.
+
+</div>
+
+## Description
 
 The angles are reduced over the group of a crystal frame. Within a radius the result is
 two sparse matrices of len(w) x len(v), the hits and the angles; large lists of specimen
@@ -41,25 +55,21 @@ directions are searched by a tree.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d, the list searched |
 | `w` | vector3d, the directions searched for |
 | `epsOrK` | the number of neighbours, an integer, or the radius, a float |
 
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `antipodal` | `None` | read the directions up to sign; by default where v or w is antipodal |
+
 ## Output
 
-| | |
-|---|---|
 | `ind` | the indices into v, in the shape of w; (len(w), k) for k neighbours |
 | `d` | the angles to them |
 | `I, D` | sparse matrices of the hits and of the angles |
-
-## Keywords
-
-| | default | |
-|---|---|---|
-| `antipodal` | `None` | read the directions up to sign; by default where v or w is antipodal |
 
 ## See also
 

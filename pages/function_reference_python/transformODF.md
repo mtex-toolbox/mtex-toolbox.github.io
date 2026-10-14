@@ -15,17 +15,27 @@ called as variants(p2c, odf)
 
 ## Syntax
 
-Every variant equally likely:
+<div class="mx-form" markdown="1">
 
 ```python
 odfC = transformODF(odfP, p2c)
 ```
 
-The parents weighted by a function vSel:
+Every variant equally likely.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odfC = transformODF(odfP, p2c, vSel)
 ```
+
+The parents weighted by a function vSel.
+
+</div>
+
+## Description
 
 The child ODF at a child orientation is the mean of the parent ODF over the parent
 orientations it can come from, one per variant of p2c, expanded to the bandwidth of the
@@ -35,22 +45,18 @@ number of one variant instead; the port has no such form.
 
 ## Input
 
-| | |
-|---|---|
 | `odfP` | SO3Fun, the parent ODF |
 | `p2c` | orientation, the parent to child orientation relationship |
 
-## Output
-
-| | |
-|---|---|
-| `odfC` | SO3FunHarmonic, the child ODF in the child crystal frame |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `vSel` | `None` | an SO3Fun over the parent orientations, the variant selection |
+
+## Output
+
+| `odfC` | SO3FunHarmonic, the child ODF in the child crystal frame |
 
 ## See also
 

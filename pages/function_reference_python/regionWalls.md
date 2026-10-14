@@ -14,37 +14,43 @@ sector from the identity out to the surface, one polygon per arc
 
 ## Syntax
 
-The walls of a misorientation region:
+<div class="mx-form" markdown="1">
 
 ```python
 W = regionWalls(fundamentalRegion(cs, cs))
 ```
 
-With coarser arcs:
+The walls of a misorientation region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 W = regionWalls(fundamentalRegion(cs, cs), resolution=5*degree)
 ```
 
+With coarser arcs.
+
+</div>
+
+## Description
+
 A region whose axes are not cut down to a sector has no walls and gives an empty list.
 
 ## Input
 
-| | |
-|---|---|
 | `oR` | orientationRegion |
-
-## Output
-
-| | |
-|---|---|
-| `W` | list of (k, 3) arrays, every polygon starting at the origin |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `2*degree` | the spacing of the points along the boundary arcs of the sector |
+
+## Output
+
+| `W` | list of (k, 3) arrays, every polygon starting at the origin |
 
 ## See also
 

@@ -16,23 +16,37 @@ the fibre that fits a list of orientations best, MATLAB's fibre.fit
 
 ## Syntax
 
-The fibre through the orientations:
+<div class="mx-form" markdown="1">
 
 ```python
 f = fibre.fit(ori)
 ```
 
-With the eigenvalues and the mean angle:
+The fibre through the orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f, lam, delta = fibre.fit(ori, diagnostics=True)
 ```
 
-The orientations as stored:
+With the eigenvalues and the mean angle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = fibre.fit(ori, symmetry=False)
 ```
+
+The orientations as stored.
+
+</div>
+
+## Description
 
 The fibre is the plane of the two leading eigenvectors of the quaternion tensor of the
 orientations, after they are moved to the symmetric equivalents nearest their mean. This
@@ -41,25 +55,21 @@ ODF is not taken. The result is a full fibre, with r in the upper hemisphere.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
 | `args` | 'local', MATLAB's flag, accepted |
 
-## Output
-
-| | |
-|---|---|
-| `f` | fibre, full |
-| `lam` | the eigenvalues of the quaternion tensor, ascending and summing to one (diagnostics) |
-| `delta` | the mean angle of the orientations to the fibre (diagnostics) |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `diagnostics` | `False` | also return lam and delta, MATLAB's second and third outputs |
 | `symmetry` | `True` | move the orientations to the equivalents nearest their mean first; False takes them as stored |
+
+## Output
+
+| `f` | fibre, full |
+| `lam` | the eigenvalues of the quaternion tensor, ascending and summing to one (diagnostics) |
+| `delta` | the mean angle of the orientations to the fibre (diagnostics) |
 
 ## See also
 

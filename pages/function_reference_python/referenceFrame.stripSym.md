@@ -15,9 +15,13 @@ the sibling frame carrying the trivial group
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 referenceFrame.stripSym(self)
 ```
+
+</div>
 
 ## Used on
 

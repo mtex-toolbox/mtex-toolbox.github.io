@@ -15,24 +15,32 @@ logarithmic or linear colours on every axes of the figure; MATLAB's set(gca, 'Co
 
 ## Syntax
 
-The colours spread over the decades of the range:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.setColorScale('log')
 ```
 
-Back to linear colours:
+The colours spread over the decades of the range.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.setColorScale('linear')
 ```
 
+Back to linear colours.
+
+</div>
+
+## Description
+
 A range starting at zero or below starts at a millionth of its top on the logarithmic scale.
 
 ## Input
 
-| | |
-|---|---|
 | `scale` | 'log' or 'linear' |
 
 ## See also
@@ -41,9 +49,13 @@ A range starting at zero or below starts at a millionth of its top on the logari
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 mtexFigure.setColorScale(self, scale='linear')
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L310">source</a></font>
 {% endraw %}

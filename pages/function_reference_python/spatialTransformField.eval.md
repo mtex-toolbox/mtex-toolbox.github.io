@@ -16,9 +16,13 @@ point beyond it; MATLAB takes natural neighbours inside and linear extrapolation
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformField.eval(self, pos)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L690">source</a></font>
 {% endraw %}

@@ -17,40 +17,52 @@ a colour map; a figure that has bars loses them instead, as MATLAB's toggle does
 
 ## Syntax
 
-A bar per axes, or one for all:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.colorbar()
 ```
 
-With a label:
+A bar per axes, or one for all.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.colorbar(label='mrd')
 ```
 
-A bar per axes, also where the ranges agree:
+With a label.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.colorbar(multiple=True)
 ```
 
+A bar per axes, also where the ranges agree.
+
+</div>
+
+## Description
+
 A figure of explicit colours, as a boundary coloured by num2rgb, shows the colour map over
 the range setColorRange gave. mtexColorbar calls this on the current figure; further
 keywords, as location, go to matplotlib's colorbar.
 
-## Output
-
-| | |
-|---|---|
-| `bars` | list of the matplotlib colour bars drawn, empty when they were removed |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `label` | `''` | the label of the bar, or a list of one label per bar in the order of the axes |
 | `multiple` | `False` | a bar per axes even where the ranges and the colour maps agree |
+
+## Output
+
+| `bars` | list of the matplotlib colour bars drawn, empty when they were removed |
 
 ## See also
 

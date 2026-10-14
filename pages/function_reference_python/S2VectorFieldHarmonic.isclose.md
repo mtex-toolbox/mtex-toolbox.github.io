@@ -15,17 +15,27 @@ whether two fields agree in their coefficients up to the relative tolerance rtol
 
 ## Syntax
 
-Equal up to a relative 1e-8:
+<div class="mx-form" markdown="1">
 
 ```python
 tf = isclose(vF1, vF2)
 ```
 
-Up to a relative 1e-2:
+Equal up to a relative 1e-8.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 tf = isclose(vF1, vF2, rtol=1e-2)
 ```
+
+Up to a relative 1e-2.
+
+</div>
+
+## Description
 
 The fields are compared at the larger of their bandwidths: the norm of the difference of
 the coefficients of the three components must not exceed rtol times the norm of those of
@@ -33,22 +43,18 @@ w; a field of another kind is expanded first.
 
 ## Input
 
-| | |
-|---|---|
 | `vF1` | S2VectorFieldHarmonic |
 | `w` | S2VectorField, the field to compare with |
 
-## Output
-
-| | |
-|---|---|
-| `tf` | bool |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rtol` | `1e-08` | the tolerance relative to the norm of w |
+
+## Output
+
+| `tf` | bool |
 
 ## See also
 

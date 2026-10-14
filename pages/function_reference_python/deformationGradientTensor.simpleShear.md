@@ -17,36 +17,40 @@ I + tan(gamma) d n^T; MATLAB's deformationGradientTensor.simpleShear
 
 ## Syntax
 
-Sheared by 45 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 F = deformationGradientTensor.simpleShear(d, n)
 ```
 
-By 30 degree:
+Sheared by 45 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 F = deformationGradientTensor.simpleShear(d, n, 30*degree)
 ```
 
+By 30 degree.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `d` | vector3d or Miller, the shear direction |
 | `n` | vector3d or Miller, the normal of the shear plane |
 
-## Output
-
-| | |
-|---|---|
-| `F` | deformationGradientTensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `gamma` | `45*degree` | the shear angle in radians |
+
+## Output
+
+| `F` | deformationGradientTensor |
 
 ## See also
 

@@ -17,9 +17,13 @@ the position of the outline holding each point, -1 for a point in none
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.findByLocation(self, xy)
 ```
+
+</div>
 
 ## Used on
 

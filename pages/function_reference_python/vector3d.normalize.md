@@ -16,35 +16,39 @@ the vectors scaled to unit length; with zeroToZero=True a zero vector stays zero
 
 ## Syntax
 
-A zero vector becomes NaN:
+<div class="mx-form" markdown="1">
 
 ```python
 v = v.normalize()
 ```
 
-A zero vector stays zero:
+A zero vector becomes NaN.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = v.normalize(zeroToZero=True)
 ```
 
+A zero vector stays zero.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d |
-
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d of unit length, isNormalized set |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `zeroToZero` | `False` | keep vectors of length zero at zero instead of NaN |
+
+## Output
+
+| `v` | vector3d of unit length, isNormalized set |
 
 ## See also
 

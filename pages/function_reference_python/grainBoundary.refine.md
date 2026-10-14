@@ -20,17 +20,27 @@ measurements and the misorientation of the segment it lies on; MATLAB's grainBou
 
 ## Syntax
 
-Pieces of half the median segment length:
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.refine()
 ```
 
-Pieces of about 10 map units:
+Pieces of half the median segment length.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.refine(10)
 ```
+
+Pieces of about 10 map units.
+
+</div>
+
+## Description
 
 A segment is split into round(length / delta) pieces, at least one. MATLAB resamples every
 chain at equal arc length between the vertices that must stay and takes a protect list;
@@ -39,21 +49,17 @@ protect.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
-
-## Output
-
-| | |
-|---|---|
-| `gB` | grainBoundary, the refined boundary |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `delta` | `None` | the length of the pieces in the units of the map, by default half the median segment length; 0 or less leaves the boundary as it is |
+
+## Output
+
+| `gB` | grainBoundary, the refined boundary |
 
 ## See also
 

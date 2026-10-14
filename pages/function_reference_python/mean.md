@@ -13,14 +13,16 @@ mean(x, ...) is x.mean(...), the method of the object passed; NumPy's mean for a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mean(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [embedding](embedding.mean_py.html) | the arithmetic mean of the images |
 | [orientation](orientation.mean_py.html) | the mean of a list of orientations, with the principal moments and axes of inertia |
 | [PoleFigure](PoleFigure.mean_py.html) | the mean intensity of each pole figure, the integral over the sphere |

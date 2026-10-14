@@ -17,8 +17,6 @@ nothing moves; maxIter is a safety limit, not a tuning knob
 
 ## Members
 
-| | |
-|---|---|
 | [smooth](huberFilter.smooth_py.html) | the minimiser of \|V - V0\|^2 plus alpha times the Huber penalty of the curvature L V, by reweighting the sparse system until nothing moves, the fixed vertices kept |
 
 ## Used on

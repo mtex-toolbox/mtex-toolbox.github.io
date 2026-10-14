@@ -15,9 +15,13 @@ the chart section k is drawn on, the Euler angle box as a plain projection
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 eulerSections.sectionCharts(self, k)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L261">source</a></font>
 {% endraw %}

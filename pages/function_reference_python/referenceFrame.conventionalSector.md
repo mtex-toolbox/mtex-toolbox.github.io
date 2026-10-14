@@ -16,17 +16,27 @@ directions of the frame's plotting convention
 
 ## Syntax
 
-As the frame is drawn:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = cs.conventionalSector()
 ```
 
-Other directions:
+As the frame is drawn.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = cs.conventionalSector(up=vector3d(0, 0, 1), east=vector3d(0, 1, 0))
 ```
+
+Other directions.
+
+</div>
+
+## Description
 
 The sector is the hemisphere towards up where an element of the group sends up below it, a
 wedge about the c axis of the angle the order leaves, starting on a mirror plane, a twofold
@@ -34,22 +44,18 @@ axis or the a axis, and the standard triangles of the cubic groups.
 
 ## Input
 
-| | |
-|---|---|
 | `cs` | referenceFrame |
-
-## Output
-
-| | |
-|---|---|
-| `sR` | sphericalRegion |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `up` | `None` | the direction out of the screen; by default the frame's plotting convention's |
 | `east` | `None` | the direction to the east the wedge starts from; by default the convention's |
+
+## Output
+
+| `sR` | sphericalRegion |
 
 ## See also
 

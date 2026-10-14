@@ -16,41 +16,67 @@ the mean direction of a list of vectors, of axes, or of crystal directions
 
 ## Syntax
 
-The arithmetic mean over all vectors:
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(v)
 ```
 
-Along the first axis:
+The arithmetic mean over all vectors.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(v, axis=0)
 ```
 
-The normalised weighted sum:
+Along the first axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(v, weights=w)
 ```
 
-The mean axis:
+The normalised weighted sum.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(v, antipodal=True)
 ```
 
-Without the farthest fifth:
+The mean axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(v, robust=True)
 ```
 
-Also the equivalents averaged, MATLAB's mSym:
+Without the farthest fifth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m, hProjected = mean(h, return_projected=True)
 ```
+
+Also the equivalents averaged, MATLAB's mSym.
+
+</div>
+
+## Description
 
 Vectors give their arithmetic mean, with weights the normalised weighted sum. Axes give the
 eigenvector of the largest eigenvalue of the moment matrix. Crystal directions in a frame
@@ -60,21 +86,12 @@ than 80 percent of them and averages again.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d |
 | `h` | vector3d in a crystal frame |
 
-## Output
-
-| | |
-|---|---|
-| `m` | vector3d |
-| `hProjected` | vector3d, the equivalents of the directions the mean was taken over |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | array, a weight per vector |
 | `antipodal` | `False` | average the vectors as axes |
@@ -85,6 +102,11 @@ than 80 percent of them and averages again.
 | `dtype` | `None` | NumPy's argument, refused: a container has no dtype to choose |
 | `out` | `None` | NumPy's argument, refused: a container has no output buffer |
 | `keepdims` | `False` | keep the averaged axes with length one |
+
+## Output
+
+| `m` | vector3d |
+| `hProjected` | vector3d, the equivalents of the directions the mean was taken over |
 
 ## See also
 

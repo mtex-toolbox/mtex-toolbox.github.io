@@ -15,44 +15,56 @@ azimuths, the layout of pole figure files
 
 ## Syntax
 
-5 degree in both angles:
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = regularS2Grid(resolution=5*degree)
 ```
 
-In the azimuth and the polar angle:
+5 degree in both angles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = regularS2Grid(resolution=[5*degree, 2.5*degree])
 ```
 
-72 azimuths, 19 polar angles:
+In the azimuth and the polar angle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = regularS2Grid(points=(72, 19))
 ```
 
-The angles given:
+72 azimuths, 19 polar angles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = regularS2Grid(theta=np.arange(0, 81, 5)*degree, rho=np.arange(0, 360, 5)*degree)
 ```
+
+The angles given.
+
+</div>
+
+## Description
 
 The grid is an nRho x nTheta matrix of vector3d, rho along the first axis and theta along
 the second. The polar angles run from minTheta to maxTheta both included, the azimuths
 from minRho to maxRho periodically, the last left out. Python has no 'identified'
 hemisphere and no restrict2MinMax.
 
-## Output
-
-| | |
-|---|---|
-| `S2G` | vector3d, an nRho x nTheta matrix |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `5*degree` | the spacing in radians, one for both angles, or the pair of the azimuth and the polar angle |
 | `points` | `None` | (nRho, nTheta), the number of azimuths and of polar angles instead of the resolution |
@@ -65,6 +77,10 @@ hemisphere and no restrict2MinMax.
 | `antipodal` | `False` | the directions are axes, the grid covers the upper hemisphere |
 | `hemisphere` | `'complete'` | 'complete', 'upper' or 'lower' |
 | `frame` | `None` | the frame of the directions |
+
+## Output
+
+| `S2G` | vector3d, an nRho x nTheta matrix |
 
 ## See also
 

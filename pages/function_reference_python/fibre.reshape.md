@@ -15,15 +15,23 @@ the fibres in another shape
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 f = f.reshape(m, n)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 fibre.reshape(self, *shape)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L147">source</a></font>
 {% endraw %}

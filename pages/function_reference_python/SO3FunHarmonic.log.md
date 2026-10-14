@@ -15,35 +15,39 @@ the logarithm of the function, by quadrature at twice the bandwidth, or at the b
 
 ## Syntax
 
-At twice the bandwidth:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = log(SO3F + 1)
 ```
 
-At a bandwidth of its own:
+At twice the bandwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3F.log(bandwidth=32)
 ```
 
+At a bandwidth of its own.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunHarmonic, positive where the logarithm is taken |
-
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the bandwidth of the result; twice that of the function by default |
+
+## Output
+
+| `SO3F` | SO3FunHarmonic |
 
 ## See also
 

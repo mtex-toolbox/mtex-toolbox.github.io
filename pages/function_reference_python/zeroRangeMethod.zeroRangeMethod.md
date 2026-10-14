@@ -15,29 +15,47 @@ vanishes on every fibre through it
 
 ## Syntax
 
-The defaults:
+<div class="mx-form" markdown="1">
 
 ```python
 zrm = zeroRangeMethod(pf)
 ```
 
-A wider kernel, a higher background:
+The defaults.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 zrm = zeroRangeMethod(pf, halfwidth=10*degree, delta=0.01)
 ```
 
-The orientations ruled out:
+A wider kernel, a higher background.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 isZero = zrm.checkZeroRange(ori)
 ```
 
-The zero positions of the i-th pole figure:
+The orientations ruled out.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 isZero = zrm.checkZeroRange(v, i)
 ```
+
+The zero positions of the i-th pole figure.
+
+</div>
+
+## Description
 
 The measurement positions are smoothed with a spherical kernel twice: unweighted, their
 density, which says where the data backs a statement, and weighted by alpha where the
@@ -49,20 +67,12 @@ ansatz functions; calcODF(pf, zeroRange=zrm) uses the method set up here.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
 | `psi` | S2Kernel, the smoothing kernel, given positionally |
 
-## Output
-
-| | |
-|---|---|
-| `zrm` | zeroRangeMethod |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `halfwidth` | `None` | the halfwidth of the de la Vallee Poussin smoothing kernel, by default twice the resolution of the pole figures |
 | `kernel` | `None` | S2Kernel, the smoothing kernel instead |
@@ -71,6 +81,10 @@ ansatz functions; calcODF(pf, zeroRange=zrm) uses the method set up here.
 | `bg` | `None` | the background intensity, one number or one per pole figure |
 | `alpha` | `10` | the weight of an intensity above the background against one below it |
 | `bandwidth` | `None` | the bandwidth of the smoothed densities, by default the kernel's |
+
+## Output
+
+| `zrm` | zeroRangeMethod |
 
 ## See also
 

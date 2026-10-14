@@ -15,33 +15,35 @@ MATLAB's lineIntersect
 
 ## Syntax
 
-The crossings of the segments from a to b:
+<div class="mx-form" markdown="1">
 
 ```python
 v = lineIntersect(a, b, n, d)
 ```
 
+The crossings of the segments from a to b.
+
+</div>
+
+## Description
+
 The segments and the planes broadcast against each other.
 
 ## Input
 
-| | |
-|---|---|
 | `a, b` | vector3d, the starting and end points of the segments |
 | `n` | vector3d, the normals of the planes |
 | `d` | the distances of the planes, <n, v> = d |
 
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d of the crossings |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `5.72958e-12*degree` | how far, as a fraction of the segment, a crossing may lie beyond its ends |
+
+## Output
+
+| `v` | vector3d of the crossings |
 
 ## See also
 

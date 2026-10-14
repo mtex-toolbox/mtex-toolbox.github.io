@@ -14,9 +14,13 @@ homo2cubo
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 homo2cubo(h)
 ```
+
+</div>
 
 MATLAB's [homo2cubo](homo2cubo.html)
 

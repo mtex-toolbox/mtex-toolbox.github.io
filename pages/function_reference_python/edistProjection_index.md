@@ -13,8 +13,6 @@ the equidistant projection: r = theta
 
 ## Members
 
-| | |
-|---|---|
 | [polarAngle](edistProjection.polarAngle_py.html) | the polar angle drawn at the plane radius r, r itself |
 | [radius](edistProjection.radius_py.html) | the plane radius of the polar angle theta, theta itself |
 

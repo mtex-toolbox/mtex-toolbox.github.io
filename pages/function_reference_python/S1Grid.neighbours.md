@@ -15,9 +15,13 @@ the indices of the points within eps of one angle, in order
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1Grid.neighbours(self, x, eps)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L101">source</a></font>
 {% endraw %}

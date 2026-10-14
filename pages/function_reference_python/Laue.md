@@ -13,14 +13,16 @@ Laue(x, ...) is x.Laue(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 Laue(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.Laue_py.html) | the sibling frame carrying the Laue group, the group with the inversion added |
 | [symmetry](symmetry.Laue_py.html) | the smallest Laue group containing this one: every element once proper and once improper |
 

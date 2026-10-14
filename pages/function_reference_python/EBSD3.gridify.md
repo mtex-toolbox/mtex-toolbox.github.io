@@ -17,17 +17,27 @@ EBSD3
 
 ## Syntax
 
-The selection on its lattice:
+<div class="mx-form" markdown="1">
 
 ```python
 g = ebsd3['Iron'].gridify()
 ```
 
-And where every voxel went:
+The selection on its lattice.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 g, newId = ebsd3['Iron'].gridify(return_index=True)
 ```
+
+And where every voxel went.
+
+</div>
+
+## Description
 
 A selection from a volume, ebsd3['Iron'] or ebsd3[condition], is a list of voxels that
 keeps the lattice of the grid it came from. gridify rebuilds that grid: every voxel goes
@@ -37,22 +47,18 @@ is returned as it is.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD3 whose positions lie on a lattice of voxels |
-
-## Output
-
-| | |
-|---|---|
-| `g` | EBSD3square, the gridded volume, g.pos.flat[newId] the positions of the list |
-| `newId` | the flat (C order) array index of every voxel of the list, with return_index |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `return_index` | `False` | return newId as well |
+
+## Output
+
+| `g` | EBSD3square, the gridded volume, g.pos.flat[newId] the positions of the list |
+| `newId` | the flat (C order) array index of every voxel of the list, with return_index |
 
 ## See also
 

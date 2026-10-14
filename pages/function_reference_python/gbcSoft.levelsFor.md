@@ -16,9 +16,13 @@ common ones
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gbcSoft.levelsFor(self, CSList, p)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L221">source</a></font>
 {% endraw %}

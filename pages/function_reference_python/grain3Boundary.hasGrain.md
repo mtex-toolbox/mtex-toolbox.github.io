@@ -15,45 +15,55 @@ the boundary faces of a grain, or between two grains
 
 ## Syntax
 
-The faces of grain 1:
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasGrain(1)
 ```
 
-The faces of grain 1 or 2:
+The faces of grain 1.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasGrain([1, 2])
 ```
 
-The faces between grains 1 and 2:
+The faces of grain 1 or 2.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasGrain(1, 2)
 ```
+
+The faces between grains 1 and 2.
+
+</div>
+
+## Description
 
 The grains are given by their ids, grains.id. MATLAB's grain3Boundary has no hasGrain; the
 faces of grains are there selected through grains.boundary.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grain3Boundary |
 | `g` | a grain id, or a list of them |
 
-## Output
-
-| | |
-|---|---|
-| `ind` | boolean mask of the faces |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `h` | `None` | a second grain id: the faces between g and h |
+
+## Output
+
+| `ind` | boolean mask of the faces |
 
 ## See also
 

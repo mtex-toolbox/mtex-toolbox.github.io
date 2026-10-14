@@ -17,29 +17,47 @@ pole figure of a specimen direction, or the pole density of both
 
 ## Syntax
 
-The pole figure of h:
+<div class="mx-form" markdown="1">
 
 ```python
 S2F = SO3F.radon(h)
 ```
 
-The inverse pole figure of r:
+The pole figure of h.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2F = SO3F.radon(r=r)
 ```
 
-The pole figure of h at r:
+The inverse pole figure of r.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = SO3F.radon(h, r)
 ```
 
-The superposed pole figure:
+The pole figure of h at r.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2F = SO3F.radon([h1, h2], superposition=[0.3, 0.7])
 ```
+
+The superposed pole figure.
+
+</div>
+
+## Description
 
 The Radon transform of f at (h, r) is the mean of f over the orientations taking h to r.
 For a kernel sum it is again a sum of radial kernels on the sphere, the kernel's Radon
@@ -49,25 +67,21 @@ calcPDF, pdf and ipdf.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunRBF |
 | `h` | Miller or vector3d, the crystal direction, or a list of them to superpose |
 | `r` | vector3d, the specimen direction |
 
-## Output
-
-| | |
-|---|---|
-| `S2F` | S2FunHarmonic, the pole figure on the specimen sphere or the inverse pole figure on the crystal sphere |
-| `v` | the values at r, given h and r |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `superposition` | `None` | the weights of the superposed crystal directions |
 | `bandwidth` | `None` | the harmonic degree of the result, by default the kernel's |
+
+## Output
+
+| `S2F` | S2FunHarmonic, the pole figure on the specimen sphere or the inverse pole figure on the crystal sphere |
+| `v` | the values at r, given h and r |
 
 ## See also
 

@@ -15,35 +15,57 @@ angle
 
 ## Syntax
 
-The sphere at 5 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = equispacedS2Grid(resolution=5*degree)
 ```
 
-About 1000 points:
+The sphere at 5 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = equispacedS2Grid(points=1000)
 ```
 
-Axes, the upper hemisphere:
+About 1000 points.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = equispacedS2Grid(resolution=5*degree, antipodal=True)
 ```
 
-A spherical cap:
+Axes, the upper hemisphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = equispacedS2Grid(resolution=5*degree, maxTheta=70*degree)
 ```
 
-The fundamental sector of a frame:
+A spherical cap.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = equispacedS2Grid(cs, resolution=5*degree)
 ```
+
+The fundamental sector of a frame.
+
+</div>
+
+## Description
 
 The rings lie resolution apart in the polar angle, each holding sin(theta) times the equator
 count of azimuths, the odd rings offset by half a step. With a number of points the
@@ -55,19 +77,11 @@ point at the pole, not MATLAB's centre direction.
 
 ## Input
 
-| | |
-|---|---|
 | `args` | a crystalFrame or specimenFrame, whose fundamental sector the grid covers, or a sphericalRegion |
-
-## Output
-
-| | |
-|---|---|
-| `S2G` | S2Grid |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `2.5*degree` | the spacing of the rings and of the points on a ring, in radians |
 | `points` | `None` | the number of points instead of the resolution |
@@ -81,6 +95,10 @@ point at the pole, not MATLAB's centre direction.
 | `rhoPeriod` | `360*degree` | the period of the azimuths, of the searches on a ring |
 | `region` | `None` | a sphericalRegion the grid is restricted to |
 | `frame` | `None` | the frame of the directions; by default that of the frame or region given |
+
+## Output
+
+| `S2G` | S2Grid |
 
 ## See also
 

@@ -17,29 +17,47 @@ MATLAB's orientation.angle
 
 ## Syntax
 
-The smallest angle of the equivalents:
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(ori)
 ```
 
-Ignore the symmetric equivalents:
+The smallest angle of the equivalents.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(ori, symmetry=False)
 ```
 
-The misorientation angle between them:
+Ignore the symmetric equivalents.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(ori1, ori2)
 ```
 
-The largest angle of the equivalents:
+The misorientation angle between them.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(mori, 'max')
 ```
+
+The largest angle of the equivalents.
+
+</div>
+
+## Description
 
 For misorientations with grain exchange, ori1.antipodal or ori2.antipodal, the two argument
 form is the smaller of the angles to ori2 and to inv(ori2); there is no antipodal option.
@@ -47,22 +65,18 @@ With a fibre as other it is the angle to the fibre.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
-
-## Output
-
-| | |
-|---|---|
-| `omega` | the angles in radians, of the broadcast shape |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `other` | `None` | orientation, the second one; a fibre; or 'max' |
 | `symmetry` | `True` | reduce over the symmetric equivalents; False the plain angle of the rotations |
+
+## Output
+
+| `omega` | the angles in radians, of the broadcast shape |
 
 ## See also
 

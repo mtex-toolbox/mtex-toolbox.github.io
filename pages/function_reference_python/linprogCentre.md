@@ -15,23 +15,37 @@ analytic centre of its optimal face; MATLAB's linprogCentre
 
 ## Syntax
 
-One program:
+<div class="mx-form" markdown="1">
 
 ```python
 x = linprogCentre(c, A, y)
 ```
 
-One program per row of C and Y:
+One program.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 x = linprogCentre(C, A, Y)
 ```
 
-A coarser stop:
+One program per row of C and Y.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 x = linprogCentre(c, A, y, tol=1e-6, maxIter=20)
 ```
+
+A coarser stop.
+
+</div>
+
+## Description
 
 Where the optimum is not unique the solution is the centre of the optimal face, which is
 symmetric where the program is, where a simplex gives any vertex of it; this is the choice
@@ -40,24 +54,20 @@ following method, its Newton steps aimed at the central path at 0.3 mu.
 
 ## Input
 
-| | |
-|---|---|
 | `c` | (n,) or (N, n), the costs |
 | `A` | (m, n) or (N, m, n), the constraint matrix |
 | `y` | (m,) or (N, m), the right hand sides |
 
-## Output
-
-| | |
-|---|---|
-| `x` | (n,) or (N, n), the solutions; NaN for a program that does not converge |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-09` | the relative tolerance of the primal and dual residuals and the duality gap |
 | `maxIter` | `100` | the largest number of Newton steps |
+
+## Output
+
+| `x` | (n,) or (N, n), the solutions; NaN for a program that does not converge |
 
 ## See also
 

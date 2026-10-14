@@ -14,43 +14,51 @@ MATLAB's calcErrorPF
 
 ## Syntax
 
-The damped relative error:
+<div class="mx-form" markdown="1">
 
 ```python
 pfe = calcErrorPF(pf, odf)
 ```
 
-|pf - pfcalc| / pfcalc where pfcalc > 1:
+The damped relative error.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pfe = calcErrorPF(pf, odf, 'RP')
 ```
 
-|pf - pf2| against other pole figures:
+|pf - pfcalc| / pfcalc where pfcalc > 1.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pfe = calcErrorPF(pf, pf2, 'l1')
 ```
 
+|pf - pf2| against other pole figures.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure, the measurement |
 | `other` | SO3Fun or PoleFigure, the recalculation |
 
-## Output
-
-| | |
-|---|---|
-| `pfe` | PoleFigure of the deviations |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `mode` | `'relative'` | 'relative', 'RP', 'l1' or 'l2' |
 | `epsilon` | `None` | the damping of 'relative' (0.5) or the threshold of 'RP' (1) |
+
+## Output
+
+| `pfe` | PoleFigure of the deviations |
 
 ## See also
 

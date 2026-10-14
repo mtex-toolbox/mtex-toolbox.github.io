@@ -16,9 +16,13 @@ A method of [mapImage](mapImage_index_py.html).
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapImage.extent(self)
 ```
+
+</div>
 
 MATLAB's [mapImage.extent](mapImage.extent.html)
 

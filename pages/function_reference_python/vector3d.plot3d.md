@@ -16,9 +16,15 @@ plot3d(v), plot3d(v, data), plot3d(sF), plot3d(vF), plot3d(oR), plot3d(ori), plo
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.plot3d(x, *args, **kw)
 ```
+
+</div>
+
+## Description
 
 Directions as markers on the sphere in space, a function as the sphere coloured, a field
 as arrows on it, the fundamental region of orientation space as its boundary in axis angle

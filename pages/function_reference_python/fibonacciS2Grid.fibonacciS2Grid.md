@@ -15,16 +15,24 @@ the azimuth advancing by the golden angle; by default the count fitting a resolu
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2G = fibonacciS2Grid(1000)
 S2G = fibonacciS2Grid(resolution=2*degree)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 fibonacciS2Grid(N=None, resolution=None)
 ```
+
+</div>
 
 ## Used on
 

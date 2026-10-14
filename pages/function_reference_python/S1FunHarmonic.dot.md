@@ -15,9 +15,13 @@ the inner product with g for the normalised measure, by the coefficients
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHarmonic.dot(self, g)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L398">source</a></font>
 {% endraw %}

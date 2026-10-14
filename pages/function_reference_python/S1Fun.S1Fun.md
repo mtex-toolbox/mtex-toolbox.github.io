@@ -15,29 +15,47 @@ MATLAB's
 
 ## Syntax
 
-From the coefficients, k = -2..2:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic([0.25, 0, 1, 0, 0.25])
 ```
 
-A callable by quadrature:
+From the coefficients, k = -2..2.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic(lambda x: np.sin(2*x), bandwidth=16)
 ```
 
-The Fourier series of an S1 kernel:
+A callable by quadrature.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic(psi, bandwidth=32)
 ```
 
-Another function, cut to a bandwidth:
+The Fourier series of an S1 kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic(sF, bandwidth=8)
 ```
+
+Another function, cut to a bandwidth.
+
+</div>
+
+## Description
 
 The coefficients run from the degree -L to L, so a coefficient vector has odd length 2 L + 1.
 A callable is sampled on the equispaced quadrature grid of the bandwidth, by default the
@@ -47,23 +65,19 @@ c_{-k} = conj(c_k), which is checked from the coefficients unless real says it.
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | array of 2 L + 1 coefficients, a callable of the angle, an S1Kernel or an S1Fun |
-
-## Output
-
-| | |
-|---|---|
-| `sF` | S1FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` | `None` | whether the function takes real values only; by default read off the coefficients or the sampled values |
 | `bandwidth` | `None` | the largest degree L of the series |
 | `dtype` | `None` | the complex type of the coefficients, complex128 unless given |
+
+## Output
+
+| `sF` | S1FunHarmonic |
 
 ## See also
 

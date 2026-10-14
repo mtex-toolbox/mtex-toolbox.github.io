@@ -17,38 +17,44 @@ the deformation gradient of a pure shear, stretched by lam along ext and shorten
 
 ## Syntax
 
-Stretched to twice its length:
+<div class="mx-form" markdown="1">
 
 ```python
 F = deformationGradientTensor.pureShear(ext, comp)
 ```
 
-By the factor 3:
+Stretched to twice its length.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 F = deformationGradientTensor.pureShear(ext, comp, lam=3)
 ```
 
+By the factor 3.
+
+</div>
+
+## Description
+
 The direction perpendicular to both keeps its length, so does the volume.
 
 ## Input
 
-| | |
-|---|---|
 | `ext` | vector3d or Miller, the direction of extension |
 | `comp` | vector3d or Miller, the direction of compression, perpendicular to ext |
 
-## Output
-
-| | |
-|---|---|
-| `F` | deformationGradientTensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `lam` | `2.0` | the stretch ratio, MATLAB's lambda |
+
+## Output
+
+| `F` | deformationGradientTensor |
 
 ## See also
 

@@ -17,17 +17,27 @@ about a given axis
 
 ## Syntax
 
-The largest angle in the region:
+<div class="mx-form" markdown="1">
 
 ```python
 omega = oR.maxAngle()
 ```
 
-The largest angle about an axis:
+The largest angle in the region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = oR.maxAngle(vector3d(1, 1, 1))
 ```
+
+The largest angle about an axis.
+
+</div>
+
+## Description
 
 Without an axis the angle is found exactly at the vertices of the region in Rodrigues
 space; only a region whose sector of axes has caps is sampled, by random rotations until
@@ -37,22 +47,18 @@ the sector.
 
 ## Input
 
-| | |
-|---|---|
 | `oR` | orientationRegion |
 | `v` | vector3d, a single rotation axis |
 
-## Output
-
-| | |
-|---|---|
-| `omega` | the angle in radians |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `hits` | `2000` | the number of random rotations inside the region the sampling waits for |
+
+## Output
+
+| `omega` | the angle in radians |
 
 ## See also
 

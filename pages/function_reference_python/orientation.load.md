@@ -17,9 +17,13 @@ text table; loadOrientation returns the other columns too
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.load(fname, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [orientation.load](orientation.load.html)
 

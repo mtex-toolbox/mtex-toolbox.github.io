@@ -15,9 +15,13 @@ the grains, voxels and phases on their two sides and the misrotation across: gra
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain3Boundary(allV, F, grainId, ebsdId, phaseId, misrotation, CSList, frame, scanUnit='um', id=None)
 ```
+
+</div>
 
 MATLAB's [grain3Boundary.grain3Boundary](grain3Boundary.grain3Boundary.html)
 

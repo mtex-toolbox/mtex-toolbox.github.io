@@ -16,15 +16,23 @@ the dislocation density tensor of every system, b (x) l^, in the length unit of 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 alpha = dS.tensor()
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 dislocationSystem.tensor(self)
 ```
+
+</div>
 
 ## Used on
 

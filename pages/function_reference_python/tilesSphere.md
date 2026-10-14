@@ -14,17 +14,27 @@ folded into it all land inside, and it covers the share of one element; cached
 
 ## Syntax
 
-True for every crystal frame:
+<div class="mx-form" markdown="1">
 
 ```python
 tilesSphere(cs.fundamentalSector(), cs.sym)
 ```
 
-More test directions:
+True for every crystal frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 tilesSphere(sR, cs.sym, n=20000)
 ```
+
+More test directions.
+
+</div>
+
+## Description
 
 The region covers the share of one element when the fraction of the test directions
 inside it times the order of the group is 1 up to 0.15. The answer is kept per group and
@@ -32,22 +42,18 @@ region, so n matters only on the first call.
 
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
 | `pg` | the point group, or a frame holding it |
 
-## Output
-
-| | |
-|---|---|
-| `b` | True or False |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `6000` | the number of test directions, a Fibonacci lattice |
+
+## Output
+
+| `b` | True or False |
 
 ## See also
 

@@ -16,9 +16,13 @@ it has to be after the grains changed phase (MATLAB grains.update)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.update(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L671">source</a></font>
 {% endraw %}

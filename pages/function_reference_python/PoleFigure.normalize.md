@@ -17,35 +17,39 @@ normalize
 
 ## Syntax
 
-Every pole figure of mean intensity one:
+<div class="mx-form" markdown="1">
 
 ```python
 pf = normalize(pf)
 ```
 
-Scaled to the mass of the pole figures of the ODF:
+Every pole figure of mean intensity one.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = normalize(pf, odf)
 ```
 
+Scaled to the mass of the pole figures of the ODF.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
-| `pf` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
 | `pf` | PoleFigure |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `odf` | `None` | an SO3Fun: each pole figure divided by the factor calcNormalization fits against the pole figure the ODF predicts, instead of by its mean |
+
+## Output
+
+| `pf` | PoleFigure |
 
 ## See also
 

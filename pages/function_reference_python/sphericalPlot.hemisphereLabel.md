@@ -15,9 +15,13 @@ writes upper or lower, the hemisphere shown, in the top right corner of the char
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalPlot.hemisphereLabel(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L162">source</a></font>
 {% endraw %}

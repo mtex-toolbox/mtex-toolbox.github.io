@@ -14,29 +14,47 @@ fundamental region of the frame pair; MATLAB's fibonacciSO3Grid
 
 ## Syntax
 
-5 degree resolution:
+<div class="mx-form" markdown="1">
 
 ```python
 S3G = fibonacciSO3Grid(cs)
 ```
 
-About 10000 nodes in the region:
+5 degree resolution.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S3G = fibonacciSO3Grid(cs, ss, points=10000)
 ```
 
-A finer grid:
+About 10000 nodes in the region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S3G = fibonacciSO3Grid(cs, ss, resolution=2.5*degree)
 ```
 
-Misorientations with antipodal symmetry:
+A finer grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S3G = fibonacciSO3Grid(cs, cs, antipodal=True)
 ```
+
+Misorientations with antipodal symmetry.
+
+</div>
+
+## Description
 
 The nodes are the super-Fibonacci spiral of Alexa with round(8 pi^2 / resolution^3) nodes
 over SO(3), one node per resolution^3 of its volume, trimmed to the fundamental region. Unlike
@@ -46,24 +64,20 @@ localOrientationGrid.
 
 ## Input
 
-| | |
-|---|---|
 | `CS` | crystalFrame |
 | `SS` | specimenFrame or crystalFrame, by default the default specimen frame |
 
-## Output
-
-| | |
-|---|---|
-| `S3G` | SO3FibonacciGrid, orientations from CS to SS |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `5*degree` | the node spacing, in radians |
 | `points` | `None` | the approximate number of nodes in the fundamental region, instead of the resolution |
 | `antipodal` | `False` | the fundamental region with the antipodal symmetry of misorientations, half the region |
+
+## Output
+
+| `S3G` | SO3FibonacciGrid, orientations from CS to SS |
 
 ## References
 

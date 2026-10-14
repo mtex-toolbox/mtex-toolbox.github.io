@@ -17,17 +17,27 @@ MATLAB's clusterGraph of parentGrainReconstructor
 
 ## Syntax
 
-The grain graph by MCL:
+<div class="mx-form" markdown="1">
 
 ```python
 job.clusterGraph()
 ```
 
-Larger for smaller clusters:
+The grain graph by MCL.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.clusterGraph(inflationPower=1.6)
 ```
+
+Larger for smaller clusters.
+
+</div>
+
+## Description
 
 A grain graph, from calcGraph, is clustered by mclComponents, so that its components are
 the parent grains, for calcParentFromGraph or mergeByGraph. A variant graph, from
@@ -36,21 +46,17 @@ arguments and an inflation power of 1.05 by default. The job is changed in place
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor with job.graph |
-
-## Output
-
-| | |
-|---|---|
-| `job.graph` | the clustered graph |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `inflationPower` | `None` | the inflation power of MCL, larger for smaller clusters; by default 1.6 for a grain graph, 1.05 for a variant graph |
+
+## Output
+
+| `job.graph` | the clustered graph |
 
 ## See also
 

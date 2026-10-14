@@ -15,6 +15,8 @@ specimen direction r, or the arc of them between two orientations; a list of fib
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 f = fibre(h, r)                    the orientations with ori * h = r
 f = fibre(h, r, ss)
@@ -23,10 +25,10 @@ f = fibre(o1, h)                   the whole fibre through o1 about h
 f = fibre(o1, o2, full=True)       the full fibre through the arc
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [alpha](fibre.alpha_py.html) | the alpha fibre of rolling textures, between the orientations MTEX puts at its ends |
 | [angle](fibre.angle_py.html) | the angle by which ori * h misses r, the least over both orbits, from the chord of the closest pair |
 | [antipodal](fibre.antipodal_py.html) | whether the fibre is antipodal, read off its crystal direction |

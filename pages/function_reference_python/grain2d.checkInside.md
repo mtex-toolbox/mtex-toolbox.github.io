@@ -17,9 +17,13 @@ as a (points, outlines) matrix
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.checkInside(self, xy)
 ```
+
+</div>
 
 MATLAB's [grain2d.checkInside](grain2d.checkInside.html)
 

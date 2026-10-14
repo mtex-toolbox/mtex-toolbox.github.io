@@ -16,9 +16,13 @@ the smallest Laue group containing this one: every element once proper and once 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetry.Laue(self)
 ```
+
+</div>
 
 MATLAB's [symmetry.Laue](symmetry.Laue.html)
 

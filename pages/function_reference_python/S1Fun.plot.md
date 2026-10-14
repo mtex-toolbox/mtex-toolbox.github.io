@@ -17,29 +17,47 @@ S1Fun/plot
 
 ## Syntax
 
-A polar line over the angle:
+<div class="mx-form" markdown="1">
 
 ```python
 h = plot(sF1)
 ```
 
-A line style and a colour:
+A polar line over the angle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = plot(sF1, '--', color='r')
 ```
 
-The values over the angle in [0, 2 pi]:
+A line style and a colour.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = plot(sF1, polar=False)
 ```
 
-A wider line named in the legend:
+The values over the angle in [0, 2 pi].
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = plot(sF1, lineWidth=2, displayName='f')
 ```
+
+A wider line named in the legend.
+
+</div>
+
+## Description
 
 The function is evaluated at 361 angles from 0 to 2 pi; a complex function shows its real
 part. A positional string is matplotlib's format, MATLAB's line style. An axes the user made
@@ -48,25 +66,21 @@ further keywords go to matplotlib's plot.
 
 ## Input
 
-| | |
-|---|---|
 | `sF1` | S1FunHarmonic, a function on the circle |
-
-## Output
-
-| | |
-|---|---|
-| `h` | matplotlib Line2D, the line drawn |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `lineWidth` | `1.0` | the width of the line in points |
 | `displayName` | `None` | the name of the line in a legend |
 | `color` | `None` | the colour of the line, a name or an RGB triple |
 | `polar` | `True` | draw in polar coordinates, the radius the value; False draws the values over the angle in Cartesian axes, MATLAB's 'notPolar' |
 | `how2plot` | `None` | the plotting convention that places the angle 0 and the sense of rotation |
+
+## Output
+
+| `h` | matplotlib Line2D, the line drawn |
 
 ## See also
 

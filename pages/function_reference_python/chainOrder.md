@@ -16,9 +16,13 @@ that brings the edges into walk order, and per edge whether the walk enters it a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 chainOrder(F, nV)
 ```
+
+</div>
 
 MATLAB's [chainOrder](chainOrder.html)
 

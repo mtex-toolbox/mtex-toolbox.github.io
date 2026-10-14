@@ -16,9 +16,13 @@ calcODF(pf, ...): an ODF reconstructed from the pole figure intensities, an SO3F
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PoleFigure.calcODF(self, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [PoleFigure.calcODF](PoleFigure.calcODF.html)
 

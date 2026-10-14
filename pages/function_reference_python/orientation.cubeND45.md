@@ -15,9 +15,13 @@ the cubeND45 component, Bunge Euler angles (45°, 0°, 0°), in cs and the speci
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.cubeND45(CS, *ss)
 ```
+
+</div>
 
 ## Used on
 

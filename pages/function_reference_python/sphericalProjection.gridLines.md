@@ -16,32 +16,40 @@ plane curves with NaN where they leave it
 
 ## Syntax
 
-Every 30 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 lines = proj.gridLines()
 ```
 
-Every 15 degree:
+Every 30 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 lines = proj.gridLines(step=15*degree)
 ```
 
+Every 15 degree.
+
+</div>
+
+## Description
+
 The step is rounded to a divisor of 180 degree. The small circles come first, about the
 pole of the plotting convention, then the meridians through it.
 
-## Output
-
-| | |
-|---|---|
-| `lines` | list of (x, y) pairs of arrays |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `step` | `30*degree` | the spacing of the small circles and of the meridians |
+
+## Output
+
+| `lines` | list of (x, y) pairs of arrays |
 
 ## See also
 

@@ -15,8 +15,6 @@ not by how far it is from it rather than by which side it fell on
 
 ## Members
 
-| | |
-|---|---|
 | [evaluate](gbcSoft.evaluate_py.html) | the connectivity of the pairs i[k], j[k]: one minus the error function step of width w about the threshold at their misorientation angle, 0 across phases |
 | [levelsFor](gbcSoft.levelsFor_py.html) | the threshold and the width of the transition for phase p, its own from byPhase or the common ones |
 

@@ -13,14 +13,16 @@ discretize(x, ...) is x.discretize(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 discretize(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [spatialTransform](spatialTransform.discretize_py.html) | the transform as a field of displacements at the given points |
 
 ## Used on

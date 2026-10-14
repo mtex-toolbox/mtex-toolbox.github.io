@@ -15,9 +15,13 @@ the crystal directions along the specimen direction of every orientation
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 ipfColorKey.crystalDirection(self, ori)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L89">source</a></font>
 {% endraw %}

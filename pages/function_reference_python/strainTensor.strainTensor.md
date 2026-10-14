@@ -16,6 +16,8 @@ one, 'Euler', MATLAB's strainTensor(M, 'type', 'Euler'), and is kept by everythi
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 eps = strainTensor(M)
 eps = strainTensor(M, cs)
@@ -24,11 +26,17 @@ eps = strainTensor(M, type='Euler')
 eps.type
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 strainTensor(M, *args, type=None, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

@@ -15,9 +15,13 @@ the correction on the specimen directions of a pole figure, one at the pole
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SchulzDefocusingKernel.defocusing(self, pf)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1134">source</a></font>
 {% endraw %}

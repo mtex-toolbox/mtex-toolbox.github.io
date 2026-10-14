@@ -13,32 +13,40 @@ the eight written in the axis names of a frame, 'Y1↑→X1' for an Oxford file
 
 ## Syntax
 
-'y↑→x', 'y↓→x', ...
+<div class="mx-form" markdown="1">
 
 ```python
 conventionNames()
 ```
 
-'Y1↑→X1', 'Y1↓→X1', ...
+'y↑→x', 'y↓→x', ...
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 conventionNames(names=('X1', 'Y1', 'Z1'))
 ```
 
+'Y1↑→X1', 'Y1↓→X1', ...
+
+</div>
+
+## Description
+
 The eight conventions whose screen axes lie along reference axes, AXIS_CONVENTIONS, the
 ones the import wizard offers, as Unicode pictograms.
 
-## Output
-
-| | |
-|---|---|
-| `names` | list of eight str |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `names` | `('x', 'y', 'z')` | the names of the three reference axes |
+
+## Output
+
+| `names` | list of eight str |
 
 ## See also
 

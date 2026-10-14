@@ -16,35 +16,41 @@ the pole figures of several data sets in one, in order; MATLAB's cat
 
 ## Syntax
 
-Every pole figure of the three, in order:
+<div class="mx-form" markdown="1">
 
 ```python
 pf = cat(pf1, pf2, pf3)
 ```
 
+Every pole figure of the three, in order.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 pf = PoleFigure.cat(pf1, pf2) # the same as a static method
 ```
+
+</div>
+
+## Description
 
 Unlike union, pole figures of the same crystal direction stay separate; None is skipped.
 
 ## Input
 
-| | |
-|---|---|
 | `pf1, pf2, pf3` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
-| `pf` | PoleFigure |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `0` | taken for numpy's signature and ignored: the pole figures form one list, MATLAB's dim |
+
+## Output
+
+| `pf` | PoleFigure |
 
 ## See also
 

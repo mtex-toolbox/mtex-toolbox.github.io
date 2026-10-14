@@ -13,14 +13,16 @@ normalize(x, ...) is x.normalize(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 normalize(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [PoleFigure](PoleFigure.normalize_py.html) | the pole figures scaled to mean one, or to the pole figures an ODF predicts |
 | [quaternion](quaternion.normalize_py.html) | the quaternions divided by their norm |
 | [S2VectorFieldHarmonic](S2VectorField.normalize_py.html) | the field scaled to unit length at every direction |

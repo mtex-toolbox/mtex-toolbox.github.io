@@ -13,14 +13,16 @@ halfwidth(x, ...) is x.halfwidth(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 halfwidth(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [fibreVonMisesFisherKernel](fibreVonMisesFisherKernel.halfwidth_py.html) | the halfwidth in closed form, acos(1 - log(2) / kappa) |
 | [S1BumpKernel](S1BumpKernel.halfwidth_py.html) | the halfwidth, the half length delta of the interval |
 | [S1GaussKernel](S1GaussKernel.halfwidth_py.html) | the halfwidth in closed form, sigma sqrt(2 log 2) |

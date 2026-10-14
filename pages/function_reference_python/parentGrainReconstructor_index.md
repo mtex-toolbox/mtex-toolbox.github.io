@@ -16,29 +16,47 @@ parentGrainReconstructor
 
 ## Syntax
 
-The parent and child phases guessed:
+<div class="mx-form" markdown="1">
 
 ```python
 job = parentGrainReconstructor(ebsd, grains)
 ```
 
-With an initial orientation relationship:
+The parent and child phases guessed.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job = parentGrainReconstructor(ebsd, grains, orientation.KurdjumovSachs(csParent, csChild))
 ```
 
-Votes from the orientations along the boundaries:
+With an initial orientation relationship.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job = parentGrainReconstructor(ebsd, grains, p2c, useBoundaryOrientations=True)
 ```
 
-The grains segmented at 3 degree:
+Votes from the orientations along the boundaries.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job = parentGrainReconstructor(ebsd)
 ```
+
+The grains segmented at 3 degree.
+
+</div>
+
+## Description
 
 The job keeps the map and the grains as given, ebsdPrior and grainsPrior, the grains at
 the current stage, grains, with parentGrains and childGrains, and for every prior grain the
@@ -57,24 +75,20 @@ which calcGrains writes into it.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD, the map of the measured, mostly child, phase, with the grain ids of grains |
 | `grains` | grain2d, the child grains of the map; when not given the map is segmented at 3 degree, on a copy |
 | `p2c` | orientation, the initial guess of the parent to child orientation relationship (MATLAB's p2c0) |
 
-## Output
-
-| | |
-|---|---|
-| `job` | parentGrainReconstructor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `useBoundaryOrientations` |  | a pair of grains votes with the mean orientations of their pixels along the boundary they share rather than with the grain means |
 | `reportFit` |  | show the quantiles of the misfit of the boundaries to p2c when the job is displayed |
+
+## Output
+
+| `job` | parentGrainReconstructor |
 
 ## References
 
@@ -87,8 +101,6 @@ which calcGrains writes into it.
 
 ## Members
 
-| | |
-|---|---|
 | [bainId](parentGrainReconstructor.bainId_py.html) | the reconstructed Bain group id of every prior grain, NaN where none is computed |
 | [c2c](parentGrainReconstructor.c2c_py.html) | the child to child misorientations of the relationship, the identity included |
 | [calcGBFit](parentGrainReconstructor.calcGBFit_py.html) | the misfit of the boundaries between neighbouring grains to the orientation relationship job.p2c, and the ids of the grains on either side |

@@ -14,32 +14,40 @@ the WhiteJet colour map, as MATLAB's WhiteJetColorMap returns it
 
 ## Syntax
 
-256 colours:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = WhiteJetColorMap()
 ```
 
-16 colours:
+256 colours.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = WhiteJetColorMap(16)
 ```
 
+16 colours.
+
+</div>
+
+## Description
+
 The colours are interpolated linearly between the stops of the map; pass the result to
 mtexColorMap or as a plot's colormap.
 
-## Output
-
-| | |
-|---|---|
-| `rgb` | an n x 3 array of rgb values in [0, 1] |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `256` | the number of colours |
+
+## Output
+
+| `rgb` | an n x 3 array of rgb values in [0, 1] |
 
 ## See also
 

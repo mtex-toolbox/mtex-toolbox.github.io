@@ -17,35 +17,57 @@ inverse pole figure, or their values
 
 ## Syntax
 
-The pole figure of the crystal direction h:
+<div class="mx-form" markdown="1">
 
 ```python
 pdf = odf.radon(h)
 ```
 
-The inverse pole figure of the specimen direction r:
+The pole figure of the crystal direction h.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ipdf = odf.radon(r=r)
 ```
 
-The pole figure at the directions r:
+The inverse pole figure of the specimen direction r.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 val = odf.radon(h, r)
 ```
 
-The superposed pole figure of several directions:
+The pole figure at the directions r.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pdf = odf.radon([h1, h2], superposition=[0.5, 0.5])
 ```
 
-A harmonic expansion of another bandwidth:
+The superposed pole figure of several directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pdf = odf.radon(h, bandwidth=32)
 ```
+
+A harmonic expansion of another bandwidth.
+
+</div>
+
+## Description
 
 The pole figure of h at r is the mean of the density over the orientations taking h to r,
 a great circle in the quaternions; for a Bingham distribution it is a closed form in a
@@ -56,25 +78,21 @@ superposed reflections, equally weighted unless superposition is given.
 
 ## Input
 
-| | |
-|---|---|
 | `odf` | SO3FunBingham |
-
-## Output
-
-| | |
-|---|---|
-| `pdf` | S2FunHarmonic, the pole figure in the specimen frame, or the inverse pole figure in the crystal frame |
-| `val` | the values of the pole figure at r |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `h` | `None` | Miller or vector3d, the crystal direction, or a list of them |
 | `r` | `None` | vector3d, the specimen direction |
 | `superposition` | `None` | the weights of several crystal directions |
 | `bandwidth` | `None` | the bandwidth of the harmonic expansion; 64 or the preference maxS2Bandwidth, the smaller, for the pole figure |
+
+## Output
+
+| `pdf` | S2FunHarmonic, the pole figure in the specimen frame, or the inverse pole figure in the crystal frame |
+| `val` | the values of the pole figure at r |
 
 ## References
 

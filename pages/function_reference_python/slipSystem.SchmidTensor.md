@@ -16,9 +16,13 @@ the Schmid tensor b n^T of the normalised vectors as a velocity gradient tensor,
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 slipSystem.SchmidTensor(self)
 ```
+
+</div>
 
 ## Used on
 

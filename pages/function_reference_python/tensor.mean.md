@@ -17,59 +17,97 @@ or orientations the texture average
 
 ## Syntax
 
-The mean over the whole list:
+<div class="mx-form" markdown="1">
 
 ```python
 T = T.mean()
 ```
 
-Along the second axis, MATLAB's mean(T, 2):
+The mean over the whole list.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = T.mean(axis=1)
 ```
 
-The weighted mean:
+Along the second axis, MATLAB's mean(T, 2).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = T.mean(weights=w)
 ```
 
-The inverse of the mean of the inverses:
+The weighted mean.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 TReuss = T.mean('Reuss')
 ```
 
-The mean of the Voigt and Reuss means:
+The inverse of the mean of the inverses.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 THill = T.mean('Hill')
 ```
 
-The three averages at once:
+The mean of the Voigt and Reuss means.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 TVoigt, TReuss, THill = T.mean('all')
 ```
 
-The texture average over an ODF:
+The three averages at once.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 TVoigt = T.mean(odf)
 ```
 
-Its three averages:
+The texture average over an ODF.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 TVoigt, TReuss, THill = T.mean(odf, 'all')
 ```
 
-The average over weighted orientations:
+Its three averages.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 TVoigt = T.mean(ori, weights=w)
 ```
+
+The average over weighted orientations.
+
+</div>
+
+## Description
 
 The plain mean is MATLAB's Voigt average; MATLAB's three outputs are asked for by name,
 'all'. With an ODF or orientations the mean is calcTensor's, the single crystal tensor
@@ -79,27 +117,23 @@ The density of tensors of different densities is averaged with them. MATLAB's
 
 ## Input
 
-| | |
-|---|---|
 | `T` | tensor |
 | `odf` | SO3Fun, the texture average over it |
 | `ori` | orientation, the texture average over them |
 
-## Output
-
-| | |
-|---|---|
-| `T` | tensor, the mean; TVoigt, TReuss, THill the three averages |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per tensor, or per orientation |
 | `axis` | `None` | the axis or tuple of axes of the list to average along |
 | `dtype` | `None` | NumPy's argument, refused unless None |
 | `out` | `None` | NumPy's argument, refused unless None |
 | `keepdims` | `False` | keep the averaged axes with length one |
+
+## Output
+
+| `T` | tensor, the mean; TVoigt, TReuss, THill the three averages |
 
 ## See also
 

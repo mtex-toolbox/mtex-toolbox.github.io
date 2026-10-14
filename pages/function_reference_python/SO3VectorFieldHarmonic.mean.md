@@ -16,9 +16,13 @@ the mean over SO(3), and the length of the vectors as a function, MATLAB's norm
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.mean(self)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldHarmonic.mean](SO3VectorFieldHarmonic.mean.html)
 

@@ -15,14 +15,16 @@ iteration to the tolerance tol relative to the extent of the positions
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 Tinv = spatialTransformInverse(T, tol=1e-10, maxIter=100)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](spatialTransformInverse.eval_py.html) | the preimage by fixed point iteration: the position moved against the error its image makes |
 | [inv](spatialTransformInverse.inv_py.html) | the transform it inverts |
 | [isid](spatialTransformInverse.isid_py.html) | whether the inverted transform is the identity |

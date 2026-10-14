@@ -17,35 +17,39 @@ the pieces whose midpoint lies inside are kept
 
 ## Syntax
 
-Points every degree along each arc:
+<div class="mx-form" markdown="1">
 
 ```python
 arcs = sR.boundary()
 ```
 
-Coarser:
+Points every degree along each arc.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 arcs = sR.boundary(resolution=5*degree)
 ```
 
+Coarser.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
-
-## Output
-
-| | |
-|---|---|
-| `arcs` | list of vector3d, the points along every arc of the boundary |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `1*degree` | the largest spacing of the points along an arc |
+
+## Output
+
+| `arcs` | list of vector3d, the points along every arc of the boundary |
 
 ## See also
 

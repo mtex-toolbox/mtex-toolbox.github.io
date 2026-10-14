@@ -13,17 +13,27 @@ the corners of every cell of a map, shape (n, m, 2), on the screen
 
 ## Syntax
 
-Four corners a cell on a square grid:
+<div class="mx-form" markdown="1">
 
 ```python
 V = mapCells(ebsd)
 ```
 
-Turned to another convention:
+Four corners a cell on a square grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 V = mapCells(ebsd, layout=mapLayout('x↑→y'))
 ```
+
+Turned to another convention.
+
+</div>
+
+## Description
 
 A corner is shared by the cells around it and sits at the mean of where each of them puts
 it, the measured centre plus the ideal offset to the corner. On a rigid grid that is the
@@ -32,21 +42,17 @@ gaps. A map on no lattice is refused.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD on a lattice |
-
-## Output
-
-| | |
-|---|---|
-| `V` | array of shape (n, m, 2), the m corners of the cell of each of the n measurements |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `layout` | `None` | the 2 x 2 matrix taking the plane to the screen, mapLayout; by default the identity |
+
+## Output
+
+| `V` | array of shape (n, m, 2), the m corners of the cell of each of the n measurements |
 
 ## See also
 

@@ -13,14 +13,16 @@ numSym(x, ...) is x.numSym(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 numSym(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.numSym_py.html) | the number of elements of the point group |
 | [symmetry](symmetry.numSym_py.html) | the number of elements of the group |
 

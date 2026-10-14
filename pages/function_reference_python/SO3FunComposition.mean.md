@@ -16,9 +16,13 @@ the sum of the means of the components
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunComposition.mean(self)
 ```
+
+</div>
 
 MATLAB's [SO3FunComposition.mean](SO3FunComposition.mean.html)
 

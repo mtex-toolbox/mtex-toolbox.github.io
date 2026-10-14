@@ -14,15 +14,17 @@ and the integer index of every voxel, voxel n at origin + ijk[n] @ D
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 voxelLattice(origin, D, ijk)
 voxelLattice.fromPositions(P)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [fromPositions](voxelLattice.fromPositions_py.html) | the lattice of voxels positions lie on |
 | [index](voxelLattice.index_py.html) | the real index of positions: integer on the voxel centres |
 | [positions](voxelLattice.positions_py.html) | the positions of the voxels of the lattice, or of given indices |

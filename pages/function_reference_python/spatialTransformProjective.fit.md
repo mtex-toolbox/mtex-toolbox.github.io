@@ -15,21 +15,35 @@ the homography best mapping the positions posA onto posB, by the direct linear t
 
 ## Syntax
 
-Robust against outliers:
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformProjective.fit(posA, posB)
 ```
 
-The points weighted:
+Robust against outliers.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformProjective.fit(posA, posB, weights=w)
 ```
 
+The points weighted.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 T = spatialTransformProjective.fit(posA, posB, robust=False) # plain least squares
 ```
+
+</div>
+
+## Description
 
 The equations x' (h31 x + h32 y + 1) = h11 x + h12 y + h13, and likewise for y', are solved
 by least squares, both coordinates under one scale, reweighted against outliers with
@@ -41,24 +55,20 @@ least four points are needed.
 
 ## Input
 
-| | |
-|---|---|
 | `posA` | vector3d, the positions in the first frame |
 | `posB` | vector3d, where they went in the second, one for each |
 
-## Output
-
-| | |
-|---|---|
-| `T` | spatialTransformProjective, T * posA close to posB |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | array, the weight of every point pair |
 | `robust` | `True` | reweight against outliers with Tukey's bisquare |
 | `maxIter` | `50` | the largest number of reweighting steps |
+
+## Output
+
+| `T` | spatialTransformProjective, T * posA close to posB |
 
 ## References
 

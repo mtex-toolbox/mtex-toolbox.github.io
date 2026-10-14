@@ -15,9 +15,13 @@ the vertices after iter steps of local averaging at the rate lambda_ / 2, the fi
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 laplaceFilter.smooth(self, V, net, h)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L153">source</a></font>
 {% endraw %}

@@ -16,9 +16,13 @@ the elements selected by ind, the operator a[ind]
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 a[ind]
 ```
+
+</div>
 
 MATLAB's [fibre.subsref](fibre.subsref.html)
 

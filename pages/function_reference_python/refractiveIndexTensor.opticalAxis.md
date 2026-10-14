@@ -17,38 +17,44 @@ refractive indices coincide and the birefringence vanishes; MATLAB's opticalAxis
 
 ## Syntax
 
-One axis for a uniaxial, two for a biaxial crystal:
+<div class="mx-form" markdown="1">
 
 ```python
 oA = rI.opticalAxis()
 ```
 
-Principal indices closer than 1e-4 taken as equal:
+One axis for a uniaxial, two for a biaxial crystal.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oA = opticalAxis(rI, tol=1e-4)
 ```
+
+Principal indices closer than 1e-4 taken as equal.
+
+</div>
+
+## Description
 
 An isotropic tensor, all three principal indices equal, has no optical axis and gives an
 empty list.
 
 ## Input
 
-| | |
-|---|---|
 | `rI` | refractiveIndexTensor |
-
-## Output
-
-| | |
-|---|---|
-| `oA` | the optical axes as axes in the frame of rI |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-08` | the difference below which two principal indices count as equal |
+
+## Output
+
+| `oA` | the optical axes as axes in the frame of rI |
 
 ## See also
 

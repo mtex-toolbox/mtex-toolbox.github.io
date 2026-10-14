@@ -18,9 +18,13 @@ gridded 2D map, a 3D one a volume
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD3.interp(self, pos)
 ```
+
+</div>
 
 MATLAB's [EBSD3square.interp](EBSD3square.interp.html)
 

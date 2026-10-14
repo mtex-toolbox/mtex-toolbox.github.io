@@ -13,8 +13,6 @@ the heat kernel of the circle, a wrapped Gaussian: what smooths a density of ang
 
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](S1GaussKernel.bandwidth_py.html) | the modes beyond 6 / sigma are below e^{-18} |
 | [halfwidth](S1GaussKernel.halfwidth_py.html) | the halfwidth in closed form, sigma sqrt(2 log 2) |
 

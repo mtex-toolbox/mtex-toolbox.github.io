@@ -15,47 +15,77 @@ MATLAB's plotIPDF
 
 ## Syntax
 
-The inverse pole figures of an ODF:
+<div class="mx-form" markdown="1">
 
 ```python
 plotIPF(odf, [xvector, zvector])
 ```
 
-Over the whole sphere:
+The inverse pole figures of an ODF.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotIPF(odf, zvector, antipodal=True, complete=True)
 ```
 
-The crystal directions as markers:
+Over the whole sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotIPF(ori, [xvector, zvector])
 ```
 
-The markers coloured by a value per orientation:
+The crystal directions as markers.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotIPF(ori, ori.angle(), r)
 ```
 
-At most 100 orientations drawn:
+The markers coloured by a value per orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotIPF(ori, r, points=100)
 ```
 
-Every orientation drawn:
+At most 100 orientations drawn.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotIPF(ori, r, all=True)
 ```
 
-The density of the directions, filled contours:
+Every orientation drawn.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotIPF(ori, r, contourf=True)
 ```
+
+The density of the directions, filled contours.
+
+</div>
+
+## Description
 
 An inverse pole figure shows which crystal directions, with all their equivalents folded
 into the fundamental sector of the crystal, point along the specimen direction r. For an
@@ -69,8 +99,6 @@ orientations along it. MATLAB's points='all' is all=True.
 
 ## Input
 
-| | |
-|---|---|
 | `odf` | SO3Fun, an ODF |
 | `ori` | orientation, or a fibre |
 | `data` | a value or an RGB colour per orientation, optional |
@@ -78,7 +106,7 @@ orientations along it. MATLAB's points='all' is all=True.
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `points` | `None` | the number of orientations drawn at most, a random selection |
 | `all` | `False` | draw every orientation, however many |

@@ -18,9 +18,13 @@ pair per boundary segment for gB.grainId
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.id2ind(self, ids)
 ```
+
+</div>
 
 MATLAB's [grain2d.id2ind](grain2d.id2ind.html)
 

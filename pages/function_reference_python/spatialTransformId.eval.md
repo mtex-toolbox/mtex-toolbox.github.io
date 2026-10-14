@@ -15,9 +15,13 @@ the positions unchanged
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformId.eval(self, pos)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L211">source</a></font>
 {% endraw %}

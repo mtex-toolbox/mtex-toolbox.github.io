@@ -14,29 +14,35 @@ or of maps in several planes draws into; None when the axes hold none
 
 ## Syntax
 
-The scene of the current figure:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains3); s = gcs()
 ```
 
-Of another figure:
+The scene of the current figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = gcs(fig)
 ```
 
-## Output
+Of another figure.
 
-| | |
-|---|---|
-| `s` | scene3d, its items the meshes, lines and pictures drawn |
+</div>
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure, by default the current one |
+
+## Output
+
+| `s` | scene3d, its items the meshes, lines and pictures drawn |
 
 ## See also
 

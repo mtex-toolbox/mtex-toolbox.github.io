@@ -17,37 +17,43 @@ every list shares the same one
 
 ## Syntax
 
-One after the other:
+<div class="mx-form" markdown="1">
 
 ```python
 v = cat(v1, v2)
 ```
 
-Side by side:
+One after the other.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = cat(v1, v2, axis=1)
 ```
 
+Side by side.
+
+</div>
+
+## Description
+
 The vectors are brought to the side of the first operand.
 
 ## Input
 
-| | |
-|---|---|
 | `arrays` | SO3TangentVector |
-
-## Output
-
-| | |
-|---|---|
-| `v` | SO3TangentVector |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `0` | the axis along which they are joined, as NumPy's concatenate |
+
+## Output
+
+| `v` | SO3TangentVector |
 
 ## See also
 

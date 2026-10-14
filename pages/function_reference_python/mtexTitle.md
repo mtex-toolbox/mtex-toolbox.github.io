@@ -13,23 +13,37 @@ a title over an axes
 
 ## Syntax
 
-The title of the current axes:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexTitle('pole figures')
 ```
 
-The title of the axes given:
+The title of the current axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexTitle(ax, '(100)')
 ```
 
-The axes of a figure given, larger:
+The title of the axes given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexTitle('(110)', fig=mtexFig, fontSize=14)
 ```
+
+The axes of a figure given, larger.
+
+</div>
+
+## Description
 
 The current axes is the one drawn into last; an axes made with plt.subplot outside an
 mtexFigure takes the title as well. Further keywords go to matplotlib's set_title, fontSize
@@ -38,14 +52,12 @@ counterpart.
 
 ## Input
 
-| | |
-|---|---|
 | `ax` | the matplotlib axes, before the text |
 | `text` | the title |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure whose axes drawn into last takes the title; the current one by default |
 

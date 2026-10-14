@@ -15,17 +15,27 @@ the orientations of homochoric vectors; MATLAB's rotation.byHomochoric
 
 ## Syntax
 
-From homochoric vectors:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.byHomochoric(v, cs, ss)
 ```
 
-A misorientation with grain exchange:
+From homochoric vectors.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = orientation.byHomochoric(v, cs, cs, antipodal=True)
 ```
+
+A misorientation with grain exchange.
+
+</div>
+
+## Description
 
 A homochoric vector points along the rotational axis and has the length
 (3/4 (omega - sin omega))^(1/3) for the rotational angle omega, which maps the rotations
@@ -33,22 +43,18 @@ onto a ball of radius (3 pi / 4)^(1/3), volume preserving.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d, or an array with the coordinates along its last axis |
 | `frames` | the crystal frame, then the specimen frame or a second crystal frame |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | mark a misorientation with grain exchange |
+
+## Output
+
+| `ori` | orientation |
 
 ## See also
 

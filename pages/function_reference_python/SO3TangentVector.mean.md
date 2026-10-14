@@ -16,45 +16,55 @@ the mean of tangent vectors at one shared reference, weighted when weights are g
 
 ## Syntax
 
-Over all:
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(v)
 ```
 
-Along the first axis:
+Over all.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(v, axis=0)
 ```
 
-Weighted:
+Along the first axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(v, weights=w)
 ```
+
+Weighted.
+
+</div>
+
+## Description
 
 Without weights the vectors that are not a number are left out; with weights they are
 not.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | SO3TangentVector, every one at the same reference |
-
-## Output
-
-| | |
-|---|---|
-| `m` | SO3TangentVector at that reference |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per vector, in the shape of v |
 | `axis` | `None` | the axis or axes of the list to average along, all by default |
+
+## Output
+
+| `m` | SO3TangentVector at that reference |
 
 ## See also
 

@@ -17,41 +17,67 @@ grain2d.smoothBoundary
 
 ## Syntax
 
-One smoothing step:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = smoothBoundary(grains)
 ```
 
-Five steps, the junctions moving too:
+One smoothing step.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = smoothBoundary(grains, 5, moveTriplePoints=True)
 ```
 
-The segments kept, smoothing only:
+Five steps, the junctions moving too.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = smoothBoundary(grains, 3, simplify=False, refine=False)
 ```
 
-Own tolerance and resampling length:
+The segments kept, smoothing only.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = smoothBoundary(grains, 3, simplify=0.5, refine=1)
 ```
 
-Smoothing without shrinking:
+Own tolerance and resampling length.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = smoothBoundary(grains, taubinFilter())
 ```
 
-A smoothing length:
+Smoothing without shrinking.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = smoothBoundary(grains, curvatureFilter(smoothingLength=3))
 ```
+
+A smoothing length.
+
+</div>
+
+## Description
 
 A boundary comes out of calcGrains as a staircase of pixel edges, every segment along a
 grid axis whatever direction the boundary has. It is repaired in three steps: simplify
@@ -77,25 +103,21 @@ laplaceFilter(iter).
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain2d |
 | `iter` | the number of smoothing steps of the default laplaceFilter, or the boundaryFilter to smooth with: laplaceFilter, taubinFilter, curvatureFilter or huberFilter |
 
-## Output
-
-| | |
-|---|---|
-| `grains` | grain2d with the smoothed boundary and inner boundary |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `simplify` | `None` | the tolerance of the simplification in the units of the map, by default d / sqrt(2) for the pixel spacing d; False leaves it out, MATLAB's 'noSimplify' |
 | `refine` | `None` | the resampling length in the units of the map, by default d; False leaves it out, MATLAB's 'noRefine' |
 | `moveTriplePoints` | `False` | smooth the junctions as well |
 | `moveOuterBoundary` | `False` | smooth the outer boundary of the map as well |
+
+## Output
+
+| `grains` | grain2d with the smoothed boundary and inner boundary |
 
 ## See also
 

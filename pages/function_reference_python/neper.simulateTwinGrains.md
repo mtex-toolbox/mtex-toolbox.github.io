@@ -17,23 +17,37 @@ lamella in twin orientation; MATLAB's neper.simulateTwinGrains
 
 ## Syntax
 
-100 twinned grains:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = nep.simulateTwinGrains(100, mori, odf, bndA)
 ```
 
-Lamellae of width 0.05:
+100 twinned grains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = nep.simulateTwinGrains(100, mori, odf, bndA, width=0.05)
 ```
 
-The same random turns every run:
+Lamellae of width 0.05.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = nep.simulateTwinGrains(100, mori, odf, bndA, rng=np.random.default_rng(0))
 ```
+
+The same random turns every run.
+
+</div>
+
+## Description
 
 The orientations of the host grains are sampled from odf, and every host gets a
 lamella normal, a crystal direction sampled from bndA turned by the host's orientation.
@@ -47,27 +61,23 @@ interface neper.init() returns, and MATLAB's flag 'silent' is verbose=False, the
 
 ## Input
 
-| | |
-|---|---|
 | `numGrains` | the number of host grains |
 | `mori` | orientation, the twin misorientation from the host to the twin |
 | `odf` | SO3Fun, the distribution of the host orientations |
 | `bndA` | S2Fun on crystal directions, the distribution of the lamella normals |
 
-## Output
-
-| | |
-|---|---|
-| `grains` | grain3d, every lamella one grain, with meanOrientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `width` | `None` | the width of the lamellae, by default a quarter of the edge of a cube of the mean grain volume of a cube(...) geometry |
 | `verbose` | `False` | print Neper's output |
 | `aspectRatio` | `None` | three lengths, the aspect ratio of the host grains along x, y and z |
 | `rng` | `None` | numpy.random.Generator of the random turns of the lamellae |
+
+## Output
+
+| `grains` | grain3d, every lamella one grain, with meanOrientation |
 
 ## See also
 

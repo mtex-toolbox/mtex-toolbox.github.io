@@ -17,29 +17,47 @@ or conservative=True says it is; with x its values at the orientations x
 
 ## Syntax
 
-The function, an SO3FunHarmonic:
+<div class="mx-form" markdown="1">
 
 ```python
 F = SO3VF.antiderivative()
 ```
 
-Its values at orientations:
+The function, an SO3FunHarmonic.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = SO3VF.antiderivative(ori)
 ```
 
-Without checking the field is a gradient:
+Its values at orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 F = SO3VF.antiderivative(conservative=True)
 ```
 
-Checked with another tolerance:
+Without checking the field is a gradient.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 F = SO3VF.antiderivative(tol=1e-3)
 ```
+
+Checked with another tolerance.
+
+</div>
+
+## Description
 
 The keywords conservative and tol go to antiderivative: the function is the inverse
 Laplacian of the divergence, and unless conservative=True the gradient of the result must
@@ -47,15 +65,11 @@ give the field back within tol (1e-4) relative to its norm, else a ValueError is
 
 ## Input
 
-| | |
-|---|---|
 | `SO3VF` | SO3VectorField, converted to its harmonic form |
 | `x` | orientation, where to evaluate the antiderivative |
 
 ## Output
 
-| | |
-|---|---|
 | `F` | SO3FunHarmonic |
 | `f` | array, the values at x |
 
@@ -65,9 +79,13 @@ give the field back within tol (1e-4) relative to its norm, else a ValueError is
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.antiderivative(self, x=None, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

@@ -16,8 +16,6 @@ first is what keeps the sparse system the size of the boundary and not of the ma
 
 ## Members
 
-| | |
-|---|---|
 | [byArrays](boundaryNetwork.byArrays_py.html) | a network given by its arrays, the neighbours of vertex i being nbr[ptr[i]:ptr[i + 1]] |
 | [degree](boundaryNetwork.degree_py.html) | the number of neighbours of every vertex of the network |
 | [laplacian](boundaryNetwork.laplacian_py.html) | the normalised Laplacian D^-1 A - I of the network, as a sparse matrix |

@@ -14,23 +14,37 @@ subtracted again; the same as pf.noisepf
 
 ## Syntax
 
-Counts of radiation 100:
+<div class="mx-form" markdown="1">
 
 ```python
 pfn = noisepf(pf, 100)
 ```
 
-With a background of 10:
+Counts of radiation 100.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pfn = noisepf(pf, 100, 10)
 ```
 
-The negative counts set to zero:
+With a background of 10.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pfn = noisepf(pf, 100, 10, nonnegative=True)
 ```
+
+The negative counts set to zero.
+
+</div>
+
+## Description
 
 Every intensity I is replaced by a random count of the Poisson distribution of the mean
 factor * I + background, from which the background is subtracted again: the counts a
@@ -40,24 +54,20 @@ result is negative, unless nonnegative=True sets it to zero.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
 | `factor` | the radiation, the counts of intensity one; one per pole figure or one for all |
 | `background` | the background radiation |
 
-## Output
-
-| | |
-|---|---|
-| `pfn` | PoleFigure, the simulated counts |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `nonnegative` | `False` | set the negative counts to zero (MATLAB's flag NONNEGATIV) |
 | `rng` | `None` | a numpy.random.Generator, for reproducible counts |
+
+## Output
+
+| `pfn` | PoleFigure, the simulated counts |
 
 ## See also
 

@@ -14,23 +14,37 @@ from the radius; the colouring the direction keys are built of
 
 ## Syntax
 
-The colours of points of the sphere:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = sphereColor(radius, rho)
 ```
 
-Full saturation everywhere:
+The colours of points of the sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = sphereColor(radius, rho, gray=1)
 ```
 
-Stretched, the plain hue circle:
+Full saturation everywhere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = sphereColor(radius, rho, colorStretching=2, hueCorrection=False)
 ```
+
+Stretched, the plain hue circle.
+
+</div>
+
+## Description
 
 The colour sphere has a white centre at radius 1 and a black one at radius 0; on the circle
 radius 0.5 between them the colours are fully saturated and the azimuth rho turns the hue
@@ -41,26 +55,22 @@ its own grayValue, grayGradient and colorStretching.
 
 ## Input
 
-| | |
-|---|---|
 | `radius` | array, from 0 at the black centre to 1 at the white one |
 | `rho` | array, the azimuth in radians, the hue |
 
-## Output
-
-| | |
-|---|---|
-| `rgb` | array of shape (..., 3), RGB values in [0, 1] |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `grayValue` | `(0.2, 0.5)` | (white, black), the gray at the white and at the black centre, 0 none, 1 all |
 | `grayGradient` | `(0.5, 0.5)` | (white, black), how fast the gray fades away from the white and from the black centre |
 | `colorStretching` | `1.0` | an exponent on the lightness, larger values giving more of the saturated colours of the middle |
 | `gray` | `None` | one saturation for every point, in [0, 1], instead of the fading towards the centres |
 | `hueCorrection` | `True` | even out the hue circle, so that red, green and blue take equal arcs |
+
+## Output
+
+| `rgb` | array of shape (..., 3), RGB values in [0, 1] |
 
 ## See also
 

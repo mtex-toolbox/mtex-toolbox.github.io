@@ -15,35 +15,57 @@ convention, the correction of the Euler angles, the phases and a first plot
 
 ## Syntax
 
-The plain load:
+<div class="mx-form" markdown="1">
 
 ```python
 script = buildImportWizardScript('map.ctf')
 ```
 
-A map of a project file:
+The plain load.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 script = buildImportWizardScript('map.h5oina', dataSet=2, dataSets=sets)
 ```
 
-Phases edited:
+A map of a project file.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 script = buildImportWizardScript('map.ang', phases=csList, headerPhases=info.phases)
 ```
 
-A correction:
+Phases edited.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 script = buildImportWizardScript('map.ctf', mapConvention='y↑→x', eulerConvention='y↓→x')
 ```
 
-A volume, read by EBSD3.load:
+A correction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 script = buildImportWizardScript('volume.dream3d', volume=True)
 ```
+
+A volume, read by EBSD3.load.
+
+</div>
+
+## Description
 
 The script sets the plotting convention of the map, loads the file with EBSD.load or
 EBSD3.load, turns the Euler angles where their frame differs from the map's, replaces the
@@ -53,19 +75,11 @@ it; loadCall gives the one line load.
 
 ## Input
 
-| | |
-|---|---|
 | `path` | the file |
-
-## Output
-
-| | |
-|---|---|
-| `script` | str |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `phases` | `None` | phaseList, the phases as edited, written out where they differ from headerPhases |
 | `headerPhases` | `None` | the phases the file declares, a phaseList or the snapshot frameKeys took |
@@ -77,6 +91,10 @@ it; loadCall gives the one line load.
 | `variable` | `'ebsd'` | the name of the variable the map is assigned to |
 | `drawn` | `None` | the phases the plot may show, by index, True or False or a pixel count |
 | `volume` | `False` | the file is a volume, read by EBSD3.load |
+
+## Output
+
+| `script` | str |
 
 ## See also
 

@@ -17,17 +17,27 @@ calcQuadratureWeights
 
 ## Syntax
 
-A regular grid exactly, scattered points by Voronoi areas:
+<div class="mx-form" markdown="1">
 
 ```python
 w = calcQuadratureWeights(r)
 ```
 
-The least norm correction that integrates every harmonic the count allows:
+A regular grid exactly, scattered points by Voronoi areas.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 w = calcQuadratureWeights(r, method='harmonic')
 ```
+
+The least norm correction that integrates every harmonic the count allows.
+
+</div>
+
+## Description
 
 On a regular grid of rings (a polar ladder from the pole in equal steps) the weights are the
 Clenshaw-Curtis weights of the rings shared by their points, exact on the sphere and, with
@@ -39,21 +49,17 @@ works the weights are equal.
 
 ## Input
 
-| | |
-|---|---|
 | `r` | vector3d |
-
-## Output
-
-| | |
-|---|---|
-| `w` | ndarray of the shape of r, summing to one |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `method` | `'voronoi'` | 'voronoi' or 'harmonic', for scattered directions |
+
+## Output
+
+| `w` | ndarray of the shape of r, summing to one |
 
 ## See also
 

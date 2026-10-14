@@ -16,15 +16,23 @@ the norm of the quaternions, sqrt(a^2 + b^2 + c^2 + d^2)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 n = norm(q)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 quaternion.norm(self)
 ```
+
+</div>
 
 MATLAB's [quaternion.norm](quaternion.norm.html)
 

@@ -14,9 +14,13 @@ the signs of I_GF and the sides of the boundary change, the corners do not
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientFaces(grains)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/orientfaces.py#L22">source</a></font>
 {% endraw %}

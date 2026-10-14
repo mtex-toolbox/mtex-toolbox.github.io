@@ -16,23 +16,37 @@ MATLAB's string2Miller
 
 ## Syntax
 
-{10-11}:
+<div class="mx-form" markdown="1">
 
 ```python
 h = string2Miller('Q(10-11)_amp.cnv', cs)
 ```
 
-Two directions, a superposition:
+{10-11}.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = string2Miller('Q(10-11)(01-11)_amp.cnv', cs)
 ```
 
-{002} of the cubic frame:
+Two directions, a superposition.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 h = string2Miller('PF_002_R.UXD')
 ```
+
+{002} of the cubic frame.
+
+</div>
+
+## Description
 
 Only the base name of a path is read. Four digits from 0 to 6 with optional minus signs are
 taken when the first three sum to zero, else three digits without a sign, else three with
@@ -41,21 +55,17 @@ not returned.
 
 ## Input
 
-| | |
-|---|---|
 | `s` | a file name or a line of text |
-
-## Output
-
-| | |
-|---|---|
-| `h` | Miller, one direction or several |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `CS` | `None` | the crystal frame of the directions, m-3m when not given |
+
+## Output
+
+| `h` | Miller, one direction or several |
 
 ## See also
 

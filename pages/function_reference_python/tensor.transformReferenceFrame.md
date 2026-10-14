@@ -17,9 +17,13 @@ the transition between the two bases
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.transformReferenceFrame(self, fr)
 ```
+
+</div>
 
 MATLAB's [tensor.transformReferenceFrame](tensor.transformReferenceFrame.html)
 

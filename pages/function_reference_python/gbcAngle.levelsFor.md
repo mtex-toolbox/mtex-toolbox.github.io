@@ -15,9 +15,13 @@ the levels of a phase: its own from byPhase or the per phase list, else the comm
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gbcAngle.levelsFor(self, CSList, p)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L151">source</a></font>
 {% endraw %}

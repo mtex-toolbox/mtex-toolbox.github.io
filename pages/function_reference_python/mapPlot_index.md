@@ -13,15 +13,17 @@ the map plot of one axes: the axes, the layout of the plane on the screen, the u
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mP = mapPlot(ax, x)
 mP.layout, mP.extent, mP.unit, mP.mappable
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [extend](mapPlot.extend_py.html) | more data drawn into the map widen it, as hold on does in MATLAB, and the scale bar follows the new limits |
 | [followView](mapPlot.followView_py.html) | a zoom, by xlim and ylim or in a window, takes the scale bar into the new view, as MATLAB redraws its bar in the corner of what is shown |
 | [mappable](mapPlot.mappable_py.html) | every drawing coloured by values, so that a colour map or range set afterwards reaches all of them, as MATLAB's does |

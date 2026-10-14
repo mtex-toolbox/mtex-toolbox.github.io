@@ -15,17 +15,25 @@ three shape parameters Z and three orthonormal principal axes a, symmetrised ove
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunBingham(Z)                       the coordinate axes
 S2FunBingham(Z, a)                    the axes as directions or a 3x3 matrix
 S2FunBingham.fit(v)                   the fit to directions
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2FunBingham(Z, a=None, frame=None)
 ```
+
+</div>
 
 ## Used on
 

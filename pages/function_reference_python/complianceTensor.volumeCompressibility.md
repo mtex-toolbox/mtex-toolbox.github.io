@@ -16,9 +16,13 @@ the volume change per pressure, S_iikk
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 complianceTensor.volumeCompressibility(T)
 ```
+
+</div>
 
 MATLAB's [complianceTensor.volumeCompressibility](complianceTensor.volumeCompressibility.html)
 

@@ -15,9 +15,13 @@ the lattice of the voxels selected by a flat index or mask, origin and translati
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 voxelLattice.subset(self, flat)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L83">source</a></font>
 {% endraw %}

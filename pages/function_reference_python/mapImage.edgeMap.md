@@ -19,9 +19,13 @@ and a backscatter image, but their boundaries are, so registration correlates th
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapImage.edgeMap(mg, padWidth=1)
 ```
+
+</div>
 
 MATLAB's [mapImage.edgeMap](mapImage.edgeMap.html)
 

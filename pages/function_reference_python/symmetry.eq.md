@@ -16,9 +16,13 @@ Return self==value.
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 a == b
 ```
+
+</div>
 
 MATLAB's [symmetry.eq](symmetry.eq.html)
 

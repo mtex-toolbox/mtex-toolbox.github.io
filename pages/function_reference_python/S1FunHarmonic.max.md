@@ -16,35 +16,57 @@ global, local and pointwise maxima of a function on the circle
 
 ## Syntax
 
-The global maximum and the angle it is taken at:
+<div class="mx-form" markdown="1">
 
 ```python
 v, pos = max(sF)
 ```
 
-Searched on a coarser sampling:
+The global maximum and the angle it is taken at.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v, pos = max(sF, resolution=1*degree)
 ```
 
-The three largest local maxima:
+Searched on a coarser sampling.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 values, positions = max(sF, numLocal=3)
 ```
 
-The pointwise maximum with a constant:
+The three largest local maxima.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = max(sF, 0.5)
 ```
 
-The pointwise maximum of two functions:
+The pointwise maximum with a constant.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = max(sF1, sF2, bandwidth=64)
 ```
+
+The pointwise maximum of two functions.
+
+</div>
+
+## Description
 
 The function is sampled at the resolution, the discrete local maxima are refined by a
 ternary search, and the largest numLocal are returned with the values descending: a pair
@@ -55,25 +77,21 @@ kmax, startingNodes, tolerance and maxStepSize are not taken.
 
 ## Input
 
-| | |
-|---|---|
 | `sF, sF1, sF2` | S1FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
-| `v, values` | the largest values |
-| `pos, positions` | the angles, in radians, they are taken at |
-| `sF` | S1FunHarmonic, the pointwise maximum |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `numLocal` | `1` | the number of local maxima to return |
 | `resolution` | `0.004363323129985824` | the spacing of the sampling the maxima are searched on |
 | `bandwidth` | `None` | the bandwidth of the pointwise maximum |
+
+## Output
+
+| `v, values` | the largest values |
+| `pos, positions` | the angles, in radians, they are taken at |
+| `sF` | S1FunHarmonic, the pointwise maximum |
 
 ## See also
 

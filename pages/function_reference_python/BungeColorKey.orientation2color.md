@@ -16,15 +16,23 @@ scaled to red, green and blue
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rgb = BungeColorKey(cs).orientation2color(ori)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 BungeColorKey.orientation2color(self, ori)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L331">source</a></font>
 {% endraw %}

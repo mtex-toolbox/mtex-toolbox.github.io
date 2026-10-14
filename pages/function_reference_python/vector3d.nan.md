@@ -16,9 +16,13 @@ the vectors of a shape with NaN coordinates
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.nan(*shape)
 ```
+
+</div>
 
 MATLAB's [vector3d.nan](vector3d.nan.html)
 

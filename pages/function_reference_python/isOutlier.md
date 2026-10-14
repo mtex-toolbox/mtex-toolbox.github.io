@@ -14,37 +14,43 @@ deviations; the same as pf.isOutlier, MATLAB's isOutlier
 
 ## Syntax
 
-Deviating by more than two standard deviations:
+<div class="mx-form" markdown="1">
 
 ```python
 ind = isOutlier(pf)
 ```
 
-By more than three:
+Deviating by more than two standard deviations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = isOutlier(pf, alpha=3)
 ```
 
+By more than three.
+
+</div>
+
+## Description
+
 The neighbours are the directions within three times the resolution of the grid.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
-| `ind` | ndarray of booleans, one per measurement |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `alpha` | `2` | the number of standard deviations |
+
+## Output
+
+| `ind` | ndarray of booleans, one per measurement |
 
 ## See also
 

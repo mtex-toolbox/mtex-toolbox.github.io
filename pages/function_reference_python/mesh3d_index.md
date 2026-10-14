@@ -14,8 +14,6 @@ a colour per face (m, 3) in [0, 1] or one colour for all, the face and edge tran
 
 ## Members
 
-| | |
-|---|---|
 | [bounds](mesh3d.bounds_py.html) | the corners (lo, hi) of the box around the vertices |
 | [edges](mesh3d.edges_py.html) | the edges of the polygons, every one once, (e, 2) |
 | [numCorners](mesh3d.numCorners_py.html) | the number of corners of every face |

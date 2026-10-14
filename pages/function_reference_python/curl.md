@@ -13,31 +13,37 @@ the curl, the dual of the exterior derivative, a field of the same side
 
 ## Syntax
 
-The curl, an SO3VectorFieldHarmonic:
+<div class="mx-form" markdown="1">
 
 ```python
 C = curl(SO3VF)
 ```
 
-Its values at orientations:
+The curl, an SO3VectorFieldHarmonic.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = curl(SO3VF, ori)
 ```
 
+Its values at orientations.
+
+</div>
+
+## Description
+
 Of the field in its harmonic form, in its tangent space; the curl of a gradient vanishes.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | SO3VectorField |
 | `x` | orientation, where to evaluate the curl |
 
 ## Output
 
-| | |
-|---|---|
 | `C` | SO3VectorFieldHarmonic |
 | `c` | SO3TangentVector, the values at x |
 
@@ -47,9 +53,13 @@ Of the field in its harmonic form, in its tangent space; the curl of a gradient 
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 curl(v, x=None)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L739">source</a></font>
 {% endraw %}

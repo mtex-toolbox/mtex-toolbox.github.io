@@ -13,14 +13,16 @@ the MTEX default inverse pole figure key, white at the centre of the sector
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 ipfHSVKey(cs), ipfHSVKey(cs, maxAngle=7.5*degree, whiteCenter=v, ipfDirection=xvector)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [maxAngle](ipfHSVKey.maxAngle_py.html) | the sharpness and the white centre live on the direction key and are set through it |
 | [whiteCenter](ipfHSVKey.whiteCenter_py.html) | the white centre of the key, a crystal direction |
 

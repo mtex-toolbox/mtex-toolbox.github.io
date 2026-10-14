@@ -16,15 +16,17 @@ thickness in nanometres; no polariser is circular polarisation
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 key = spectralTransmissionColorKey(rI, thickness)
 key.propagationDirection, key.polarizer, key.phi
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [orientation2color](spectralTransmissionColorKey.orientation2color_py.html) | the colours of the thin section at the orientations, the transmitted spectrum of light along the propagation direction between polariser and analyser |
 
 ## Used on

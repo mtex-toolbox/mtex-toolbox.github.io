@@ -15,9 +15,13 @@ the fundamental region of the orientations, the orientationRegion of the groups 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.fundamentalRegion(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L733">source</a></font>
 {% endraw %}

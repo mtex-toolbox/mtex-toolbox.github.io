@@ -14,35 +14,39 @@ no continuous one to one key; the colours jump somewhere on the sector
 
 ## Syntax
 
-True:
+<div class="mx-form" markdown="1">
 
 ```python
 hasSmoothKey(crystalFrame('m-3m').sym)
 ```
 
-False: the colours of -3 jump:
+True.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 hasSmoothKey(crystalFrame('-3').sym)
 ```
 
+False: the colours of -3 jump.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `pg` | symmetry, the point group |
-
-## Output
-
-| | |
-|---|---|
-| `tf` | bool, whether the boundary planes and the folds are all mirrors of the group the folds generate |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `sR` | `None` | sphericalRegion, the sector; by default the group's conventional sector |
+
+## Output
+
+| `tf` | bool, whether the boundary planes and the folds are all mirrors of the group the folds generate |
 
 ## See also
 

@@ -14,44 +14,54 @@ the uniform ODF, constant one, between a crystal and a specimen frame; MATLAB's 
 
 ## Syntax
 
-The specimen frame the default one:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = uniformODF(cs)
 ```
 
-Between two frames:
+The specimen frame the default one.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = uniformODF(cs, ss)
 ```
 
-A uniform misorientation distribution:
+Between two frames.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mdf = uniformODF(cs, cs, antipodal=True)
 ```
+
+A uniform misorientation distribution.
+
+</div>
+
+## Description
 
 The result is an SO3FunRBF without centres whose constant part is one. Without a frame the
 crystal frame has the point group 1.
 
 ## Input
 
-| | |
-|---|---|
 | `cs, ss` | crystalFrame, specimenFrame (or a second crystalFrame) |
-
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunRBF |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | the function symmetric under g -> g^-1, as a misorientation distribution of one phase |
+
+## Output
+
+| `odf` | SO3FunRBF |
 
 ## See also
 

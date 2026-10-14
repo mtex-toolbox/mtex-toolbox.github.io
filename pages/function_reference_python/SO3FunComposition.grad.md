@@ -17,23 +17,37 @@ field, left or right sided; MATLAB's grad
 
 ## Syntax
 
-The gradient field:
+<div class="mx-form" markdown="1">
 
 ```python
 G = SO3F.grad()
 ```
 
-Its values at orientations:
+The gradient field.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 g = G(ori)
 ```
 
-The right sided gradient:
+Its values at orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 G = SO3F.grad(side='right')
 ```
+
+The right sided gradient.
+
+</div>
+
+## Description
 
 A function without a harmonic form is differentiated by central differences of 0.05
 degree along the three axes, a field evaluated when asked. Evaluated directly, as
@@ -41,23 +55,19 @@ SO3F.grad(ori), it does not return at present (a recursion); evaluate the field 
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3Fun |
-
-## Output
-
-| | |
-|---|---|
-| `G` | SO3VectorFieldHandle, the gradient field |
-| `g` | the gradient at the orientations |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `x` | `None` | orientation, where to evaluate the gradient; the field when None |
 | `side` | `'left'` | 'left', the tangent vectors in specimen coordinates, or 'right', in crystal coordinates |
+
+## Output
+
+| `G` | SO3VectorFieldHandle, the gradient field |
+| `g` | the gradient at the orientations |
 
 ## See also
 

@@ -16,17 +16,27 @@ the fraction of the sphere the region covers, by a quadrature on a fine grid
 
 ## Syntax
 
-On a grid of 1 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 a = sR.volume()
 ```
 
-Finer, more accurate:
+On a grid of 1 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 a = sR.volume(resolution=0.25*degree)
 ```
+
+Finer, more accurate.
+
+</div>
+
+## Description
 
 The share of the points of a regular grid in polar coordinates inside the region,
 weighted by sin(theta); 1 is the whole sphere, so 4 pi times it is the area. Antipodal
@@ -34,21 +44,17 @@ regions count -v as well.
 
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
-
-## Output
-
-| | |
-|---|---|
-| `a` | the fraction of the sphere, between 0 and 1 |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `1*degree` | the spacing of the quadrature grid |
+
+## Output
+
+| `a` | the fraction of the sphere, between 0 and 1 |
 
 ## See also
 

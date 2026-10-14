@@ -15,29 +15,47 @@ the phases' frames and the properties of every measurement
 
 ## Syntax
 
-The voxels as a list:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD3(pos, rot, phaseId, CSList)
 ```
 
-With properties:
+The voxels as a list.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD3(pos, rot, phaseId, CSList, prop={'ci': ci})
 ```
 
-The steps of the voxel lattice stated:
+With properties.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD3(pos, rot, phaseId, CSList, D=D)
 ```
 
-An (n1, n2, n3) array of voxels:
+The steps of the voxel lattice stated.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD3square(rot, phaseId, CSList, dxyz=(dx, dy, dz))
 ```
+
+An (n1, n2, n3) array of voxels.
+
+</div>
+
+## Description
 
 A volume is the three dimensional EBSD: a list of voxels, or the same arrays of shape
 (n1, n2, n3), ebsd[i, j, k] one voxel, where orientation gradients are available along all
@@ -48,23 +66,15 @@ lattice leave ebsd.lattice None. EBSD3.load reads the volumes of DREAM.3D and Ne
 
 ## Input
 
-| | |
-|---|---|
 | `pos` | vector3d, or an (..., 3) array, the centres of the voxels |
 | `rotations` | rotation, the rotation of every voxel |
 | `phaseId` | int array, the phase of every voxel as the index into CSList |
 | `CSList` | phaseList, or a list of crystalFrame with 'notIndexed' first |
 | `prop` | dict, a property per voxel of the shape of the volume |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD3 |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `scanUnit` | `'um'` | the unit of the positions |
 | `frame` | `None` | specimenFrame of the positions, by default that of pos or the default one |
@@ -74,6 +84,10 @@ lattice leave ebsd.lattice None. EBSD3.load reads the volumes of DREAM.3D and Ne
 | `id` | `None` | the id of every voxel, by default its position in the list |
 | `isPadding` | `None` | the mask of the cells a grid adds to close it |
 | `D` | `None` | 3 x 3 array, the steps of the voxel lattice as rows, instead of inferring them |
+
+## Output
+
+| `ebsd` | EBSD3 |
 
 ## See also
 

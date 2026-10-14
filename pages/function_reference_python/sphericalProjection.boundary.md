@@ -16,29 +16,35 @@ hemisphere has no boundary of its own and gets the horizon
 
 ## Syntax
 
-Points every half degree:
+<div class="mx-form" markdown="1">
 
 ```python
 b = proj.boundary()
 ```
 
-Coarser arcs:
+Points every half degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = proj.boundary(resolution=2*degree)
 ```
 
-## Output
+Coarser arcs.
 
-| | |
-|---|---|
-| `b` | list of (x, y) pairs of arrays, one per arc of the region |
+</div>
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `0.5*degree` | the spacing of the points along an arc |
+
+## Output
+
+| `b` | list of (x, y) pairs of arrays, one per arc of the region |
 
 ## See also
 

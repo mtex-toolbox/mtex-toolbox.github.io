@@ -14,17 +14,27 @@ shown in a 3D scene
 
 ## Syntax
 
-The phase map of a slice in space:
+<div class="mx-form" markdown="1">
 
 ```python
 pic = mapPicture([(plotEBSD, ebsdSlice, (), {})])
 ```
 
-A coarser picture:
+The phase map of a slice in space.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pic = mapPicture(sources, pixels=400)
 ```
+
+A coarser picture.
+
+</div>
+
+## Description
 
 The plots are drawn by their own commands, one over the other, into an axes filling a
 figure pyplot does not know, so that every option of the map plots holds in space too;
@@ -34,21 +44,17 @@ itself when a map of another plane is plotted into it.
 
 ## Input
 
-| | |
-|---|---|
 | `sources` | a list of (plotFun, map, args, kw), the plot commands of maps in one plane |
-
-## Output
-
-| | |
-|---|---|
-| `pic` | picture3d, the image with the corners it spans in space |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `pixels` | `1600` | the length of the picture's longer side in pixels |
+
+## Output
+
+| `pic` | picture3d, the image with the corners it spans in space |
 
 ## See also
 

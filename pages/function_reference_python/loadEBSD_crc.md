@@ -15,47 +15,77 @@ interfaces loadEBSD_ang, loadEBSD_ctf, ...
 
 ## Syntax
 
-An EDAX file, its phases from the header:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD('map.ang')
 ```
 
-Another alignment of the Euler angles and the map:
+An EDAX file, its phases from the header.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD('map.ang', setting=1)
 ```
 
-The phases of the file replaced:
+Another alignment of the Euler angles and the map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD('map.ang', crystalFrame('m-3m', mineral='Iron bcc'))
 ```
 
-A table:
+The phases of the file replaced.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD('map.txt', cs, columnNames=['phi1', 'Phi', 'phi2', 'x', 'y'], radians=True)
 ```
 
-The format named rather than read off the name:
+A table.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD('map.dat', interface='ang')
 ```
 
-The measurements as a list:
+The format named rather than read off the name.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD('map.ang', grid=False)
 ```
 
-One map per file:
+The measurements as a list.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 maps = loadEBSD(['a.ang', 'b.ctf'])
 ```
+
+One map per file.
+
+</div>
+
+## Description
 
 The extension chooses the loader: .ang (EDAX, EMSphInx, the ACOM export of NanoMEGAS), .ctf
 (Oxford), .cpr/.crc, .osc and the vendors' HDF5 files (.h5, .h5oina, .oh5, .dream3d, ...);
@@ -75,23 +105,19 @@ and says why. MATLAB's headerOnly is inspectEBSD here.
 
 ## Input
 
-| | |
-|---|---|
 | `fname` | str or path, the file; or a list of them, read one by one |
 | `CS` | crystalFrame or a list of them, the phases, the not indexed one first or left out; required for a table, for a vendor file one frame per phase it declares |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD, or a list of EBSD for a list of files |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `interface` | `None` | the format, 'ang', 'ctf', 'crc', 'osc', 'h5', ..., instead of the extension |
 | `grid` | `True` | put a complete scan on its grid while it is read |
+
+## Output
+
+| `ebsd` | EBSD, or a list of EBSD for a list of files |
 
 ## See also
 

@@ -15,15 +15,17 @@ positions or fitted to a known basis
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 l = lattice(pos)
 l = lattice(pos, basis=(A, 'hex'))
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [dxy](lattice.dxy_py.html) | the representative spacing: the mean length of the two basis vectors |
 | [moved](lattice.moved_py.html) | the same lattice after the rigid motion x -> R x + v, in the plane the moved positions lie in: the index kept, the basis and the origin turned in the plane |
 | [position](lattice.position_py.html) | the physical position of indices of shape (..., 2), exactly as the ideal lattice places them |

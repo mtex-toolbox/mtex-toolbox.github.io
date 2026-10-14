@@ -17,17 +17,27 @@ a right one; F'(R) = F(R q^-1) and q^-1 F(R q^-1) for a rotation of the crystal
 
 ## Syntax
 
-Turned in the specimen frame:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = rotate(SO3VF, rot)
 ```
 
-Turned in the crystal frame:
+Turned in the specimen frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VF.rotate(rot, side='right')
 ```
+
+Turned in the crystal frame.
+
+</div>
+
+## Description
 
 The coefficients of the three components are turned as those of a function, and where the
 rotation acts on the tangent space of the field the components are combined linearly as the
@@ -36,22 +46,18 @@ orientation turns the field into the other frame of the orientation, as SO3FunHa
 
 ## Input
 
-| | |
-|---|---|
 | `SO3VF` | SO3VectorFieldHarmonic |
 | `rot` | rotation or orientation, one |
 
-## Output
-
-| | |
-|---|---|
-| `SO3VF` | SO3VectorFieldHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left', the specimen side, or 'right', the crystal side; MATLAB's flag 'right' |
+
+## Output
+
+| `SO3VF` | SO3VectorFieldHarmonic |
 
 ## See also
 

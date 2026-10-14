@@ -13,14 +13,16 @@ dspacing(x, ...) is x.dspacing(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 dspacing(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [vector3d](Miller.dspacing_py.html) | the distance between the lattice planes with this normal, in the units of the cell |
 
 ## Used on

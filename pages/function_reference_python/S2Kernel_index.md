@@ -14,8 +14,6 @@ a kernel on the sphere given by its Legendre coefficients A
 
 ## Members
 
-| | |
-|---|---|
 | [calcFourier](S2Kernel.calcFourier_py.html) | the Legendre coefficients A_0 . |
 | [conv](S2Kernel.conv_py.html) | the convolution with another kernel on the sphere or SO(3): the coefficients multiplied and divided by 2n+1, a kernel on the sphere |
 | [grad](S2Kernel.grad_py.html) | the derivative of a kernel on the sphere with respect to the polar angle, or to its cosine |

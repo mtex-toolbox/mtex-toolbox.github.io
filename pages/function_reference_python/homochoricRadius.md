@@ -13,9 +13,13 @@ the radius (3 pi / 4)^(1/3) of the homochoric ball, the image of the rotations o
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 homochoricRadius()
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/homochoric.py#L14">source</a></font>
 {% endraw %}

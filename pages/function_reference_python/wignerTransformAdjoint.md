@@ -14,23 +14,37 @@ to Wigner coefficients
 
 ## Syntax
 
-The coefficients of the array, j = 0 at index L:
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = wignerTransformAdjoint(H, L)
 ```
 
-A real function, only l >= 0 given:
+The coefficients of the array, j = 0 at index L.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = wignerTransformAdjoint(H, L, real=True)
 ```
 
-The output of an FFT, negative orders wrapped:
+A real function, only l >= 0 given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = wignerTransformAdjoint(H, L, centre=0)
 ```
+
+The output of an FFT, negative orders wrapped.
+
+</div>
+
+## Description
 
 fhat_n^{kl} = sqrt(2n+1) i^{k-l} sum_j d_n^{jk}(pi/2) d_n^{jl}(pi/2) H[l, k, -j], the adjoint
 of wignerTransform. With H = sum_m w_m e^{i(k alpha_m + j beta_m + l gamma_m)}, the adjoint
@@ -43,25 +57,21 @@ the forward transform.
 
 ## Input
 
-| | |
-|---|---|
 | `H` | complex array (l, k, j), the Fourier array of the values |
 | `L` | the bandwidth |
 
-## Output
-
-| | |
-|---|---|
-| `fhat` | the internal Wigner coefficients, SO3FunHarmonic._fhat, of the degrees 0 to L |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` | `False` | the function is real, H given for l >= 0 |
 | `folds` | `(1, 1)` | (rA, rB), the folds about z in the crystal and the specimen |
 | `degrees` | `None` | pairs (n, d_n(pi/2)) to sum over instead of the cached matrices, which selects the NumPy form |
 | `centre` | `None` | the index of the order j = 0 on the last axis of H; L by default, 0 for the output of an FFT |
+
+## Output
+
+| `fhat` | the internal Wigner coefficients, SO3FunHarmonic._fhat, of the degrees 0 to L |
 
 ## See also
 

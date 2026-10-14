@@ -16,17 +16,27 @@ the mean intensity of each pole figure, the integral over the sphere; MATLAB's m
 
 ## Syntax
 
-By the quadrature weights of the directions:
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(pf)
 ```
 
-By weights of one's own, one array per pole figure:
+By the quadrature weights of the directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = pf.mean(weights=w)
 ```
+
+By weights of one's own, one array per pole figure.
+
+</div>
+
+## Description
 
 The intensities are summed with the weights calcQuadratureWeights gives the directions of
 each pole figure, which sum to one: the exact weights of a regular grid, the Voronoi areas
@@ -34,21 +44,17 @@ of scattered directions.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
-| `m` | ndarray, one number per pole figure |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | a list of weights, one array per pole figure of the shape of its intensities, instead of the quadrature weights |
+
+## Output
+
+| `m` | ndarray, one number per pole figure |
 
 ## See also
 

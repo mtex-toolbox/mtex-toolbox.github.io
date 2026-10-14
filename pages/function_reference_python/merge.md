@@ -13,14 +13,16 @@ merge(x, ...) is x.merge(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 merge(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grain2d](grain2d.merge_py.html) | the grains joined into one along given boundaries, by pairs of ids, by a label per grain, below a misorientation angle, or every inclusion into the grain around it |
 
 ## Used on

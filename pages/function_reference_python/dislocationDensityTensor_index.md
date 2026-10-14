@@ -15,17 +15,27 @@ tensor of an orientation field
 
 ## Syntax
 
-By its 3 x 3 matrix in a crystal frame:
+<div class="mx-form" markdown="1">
 
 ```python
 alpha = dislocationDensityTensor(M, cs)
 ```
 
-From a curvature tensor:
+By its 3 x 3 matrix in a crystal frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 alpha = dislocationDensity(kappa)
 ```
+
+From a curvature tensor.
+
+</div>
+
+## Description
 
 Fitting it against a list of dislocationSystem gives the densities of the geometrically
 necessary dislocations, calcGND. Constructed from a curvatureTensor, the coefficients are
@@ -33,20 +43,12 @@ taken over as they are; dislocationDensity(kappa) computes the tensor from the c
 
 ## Input
 
-| | |
-|---|---|
 | `M` | 3 x 3 matrix, or an array (..., 3, 3) of them |
 | `cs` | crystalFrame the coefficients refer to |
 
-## Output
-
-| | |
-|---|---|
-| `alpha` | dislocationDensityTensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` |  | the rank of the tensor; for this class always two |
 | `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal |
@@ -57,14 +59,16 @@ taken over as they are; dislocationDensity(kappa) computes the tensor from the c
 | `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
 | `dtype` |  | the NumPy type of the coefficients |
 
+## Output
+
+| `alpha` | dislocationDensityTensor |
+
 ## See also
 
 [tensor](tensor_index_py.html), [curvatureTensor](curvatureTensor_index_py.html), [dislocationSystem](dislocationSystem_index_py.html), [calcGND](calcGND_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [curvature](dislocationDensityTensor.curvature_py.html) | the curvature tensor of a dislocation density tensor by Nye's relation, kappa = alpha^T - tr(alpha) I / 2 |
 | [dislocationDensityTensor](dislocationDensityTensor.dislocationDensityTensor_py.html) | the dislocation density or Nye tensor, the rank two tensor derived from the curvature tensor of an orientation field |
 

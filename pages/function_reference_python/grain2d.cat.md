@@ -18,16 +18,24 @@ the boundaries are joined as grainBoundary.cat joins them
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grains = grain2d.cat(grains['Forsterite'], grains['Enstatite'])
 grains = cat(grains[:100], grains[500:])
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grain2d.cat(*parts)
 ```
+
+</div>
 
 MATLAB's [grain2d.cat](grain2d.cat.html)
 

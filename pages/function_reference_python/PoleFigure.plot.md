@@ -17,41 +17,67 @@ MATLAB's PoleFigure/plot
 
 ## Syntax
 
-Every pole figure of the data set:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(pf)
 ```
 
-Only the first pole figure:
+Every pole figure of the data set.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(pf.select(0))
 ```
 
-Filled contours of the harmonic expansion:
+Only the first pole figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf.plot(contourf=True)
 ```
 
-Of an expansion to degree 16:
+Filled contours of the harmonic expansion.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf.plot(contourf=True, bandwidth=16)
 ```
 
-With the minimum and the maximum:
+Of an expansion to degree 16.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf.plot(minmax=True)
 ```
 
-One colour range over all pole figures:
+With the minimum and the maximum.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf.plot(colorRange='equal')
 ```
+
+One colour range over all pole figures.
+
+</div>
+
+## Description
 
 With contourf, contour, pcolor or smooth (MATLAB's flags, keywords here) each pole figure is
 first expanded into spherical harmonics, S2FunHarmonic(pf.select(i)), and drawn as a
@@ -60,13 +86,11 @@ the colour bars.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `colorRange` | `'individual'` | 'individual', each pole figure its own range, 'equal', one range over all, or (lo, hi) |
 | `bandwidth` | `None` | the harmonic degree of the expansion a filled style draws; by default that of S2FunHarmonic |

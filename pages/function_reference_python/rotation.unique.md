@@ -17,29 +17,47 @@ as one
 
 ## Syntax
 
-Sorted, one of each:
+<div class="mx-form" markdown="1">
 
 ```python
 u = unique(q)
 ```
 
-A coarser tolerance:
+Sorted, one of each.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u = unique(q, tol=0.01)
 ```
 
-In the order of first appearance:
+A coarser tolerance.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u = unique(q, stable=True)
 ```
 
-The index maps:
+In the order of first appearance.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u, iq, iu = unique(q, return_index=True, return_inverse=True)
 ```
+
+The index maps.
+
+</div>
+
+## Description
 
 Two quaternions are one when their coefficients agree to tol after rounding to multiples
 of it, so two close quaternions on either side of a rounding step stay apart. A quaternion
@@ -48,27 +66,23 @@ takes them as one.
 
 ## Input
 
-| | |
-|---|---|
 | `q` | quaternion |
-
-## Output
-
-| | |
-|---|---|
-| `u` | quaternion, a one-dimensional list |
-| `iq` | indices with u = q.flatten()[iq] |
-| `iu` | indices with q.flatten() = u[iu] |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `0.001` | the tolerance in the coefficients |
 | `antipodal` | `False` | take q and -q as one |
 | `stable` | `False` | keep the order of first appearance instead of sorting |
 | `return_index` | `False` | also return iq |
 | `return_inverse` | `False` | also return iu |
+
+## Output
+
+| `u` | quaternion, a one-dimensional list |
+| `iq` | indices with u = q.flatten()[iq] |
+| `iu` | indices with q.flatten() = u[iu] |
 
 ## See also
 

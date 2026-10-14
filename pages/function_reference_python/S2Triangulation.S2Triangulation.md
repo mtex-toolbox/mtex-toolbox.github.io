@@ -16,16 +16,24 @@ surround the origin
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sT = S2Triangulation(v)
 B = sT.barycentric(w)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2Triangulation(vertices)
 ```
+
+</div>
 
 MATLAB's [S2Triangulation.S2Triangulation](S2Triangulation.S2Triangulation.html)
 

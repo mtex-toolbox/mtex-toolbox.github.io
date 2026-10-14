@@ -15,9 +15,13 @@ A method of [spatialTransformTilt](spatialTransformTilt_index_py.html).
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformTilt.shortChar(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L842">source</a></font>
 {% endraw %}

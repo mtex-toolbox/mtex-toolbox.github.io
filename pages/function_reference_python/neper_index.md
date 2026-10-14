@@ -14,15 +14,17 @@ geometry, the morphology, the iterations and the file path the tessellation is w
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 nep = neper.init()
 grains = nep.simulateGrains(1000, odf)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [available](neper.available_py.html) | whether the command runs |
 | [command](neper.command_py.html) | the command that runs Neper, the preference neperCommand, 'neper' by default |
 | [init](neper.init_py.html) | the one interface of the session, neper.instance() |

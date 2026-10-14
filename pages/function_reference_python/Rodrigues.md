@@ -13,14 +13,16 @@ Rodrigues(x, ...) is x.Rodrigues(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 Rodrigues(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [quaternion](quaternion.Rodrigues_py.html) | the Rodrigues vectors, the axes scaled by tan(omega/2) |
 
 ## Used on

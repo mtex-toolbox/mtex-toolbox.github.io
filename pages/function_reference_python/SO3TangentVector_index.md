@@ -14,16 +14,18 @@ left, exp(v) * oriRef, or on the right, oriRef * exp(v); from vectors or skew ma
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3TangentVector(v, oriRef)
 SO3TangentVector(v, oriRef, 'right')
 SO3TangentVector(S, oriRef, side)      from skew matrices of shape (..., 3, 3)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [angle](SO3TangentVector.angle_py.html) | the angle of the rotation the vector describes, or the angle between two vectors |
 | [cat](SO3TangentVector.cat_py.html) | tangent vectors concatenate on one side |
 | [copy](SO3TangentVector.copy_py.html) | a copy of the tangent vectors, components and references |

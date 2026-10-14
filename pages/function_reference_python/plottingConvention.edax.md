@@ -15,33 +15,41 @@ the EDAX/TSL frame of the given setting, 1 to 4, z out of the screen
 
 ## Syntax
 
-Setting 2, y pointing west:
+<div class="mx-form" markdown="1">
 
 ```python
 pC = plottingConvention.edax()
 ```
 
-Y pointing east:
+Setting 2, y pointing west.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pC = plottingConvention.edax(setting=1)
 ```
 
+Y pointing east.
+
+</div>
+
+## Description
+
 The conventions that match EDAX's Euler reference frames A1 to A4, to compare
 orientation plots with EDAX's software; east is y, -y, x or -x. MATLAB warns when no
 setting is given, the port takes 2 silently.
 
-## Output
-
-| | |
-|---|---|
-| `pC` | plottingConvention |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `setting` | `2` | the EDAX setting, 1 to 4 |
+
+## Output
+
+| `pC` | plottingConvention |
 
 ## See also
 

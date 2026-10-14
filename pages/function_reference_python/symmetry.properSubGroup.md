@@ -16,9 +16,13 @@ the subgroup of proper rotations
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetry.properSubGroup(self)
 ```
+
+</div>
 
 MATLAB's [symmetry.properSubGroup](symmetry.properSubGroup.html)
 

@@ -16,23 +16,37 @@ international tables draw them; MATLAB's referenceFrame.plot
 
 ## Syntax
 
-The symmetry elements:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cs)
 ```
 
-Larger symbols, thinner mirrors:
+The symmetry elements.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cs, symbolSize=2, mirrorLineWidth=1.5)
 ```
 
-The same by name:
+Larger symbols, thinner mirrors.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotSymmetry(crystalFrame('-3m'))
 ```
+
+The same by name.
+
+</div>
+
+## Description
 
 A mirror plane is a great circle, an n-fold rotation axis a filled polygon of n corners (a
 lens for a twofold), a rotoinversion axis a hollow one around the polygon of its proper
@@ -41,22 +55,18 @@ follows the keywords of the spherical plots.
 
 ## Input
 
-| | |
-|---|---|
 | `fr` | crystalFrame or specimenFrame |
-
-## Output
-
-| | |
-|---|---|
-| `sP` | the spherical plot drawn into |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `symbolSize` | `None` | a factor on the size of the symbols, by default a third of the chart's extent |
 | `mirrorLineWidth` | `2.5` | the width of the great circles of the mirror planes |
+
+## Output
+
+| `sP` | the spherical plot drawn into |
 
 ## See also
 

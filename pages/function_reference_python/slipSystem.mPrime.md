@@ -17,9 +17,13 @@ systems, entry by entry as NumPy broadcasts, MATLAB's element by element
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 slipSystem.mPrime(self, other)
 ```
+
+</div>
 
 MATLAB's [slipSystem.mPrime](slipSystem.mPrime.html)
 

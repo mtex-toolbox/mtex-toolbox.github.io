@@ -15,71 +15,117 @@ or labelled
 
 ## Syntax
 
-The directions as markers:
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(v)
 ```
 
-Coloured by values, with a colour bar:
+The directions as markers.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(v, data, colorbar=True)
 ```
 
-An RGB colour per direction:
+Coloured by values, with a colour bar.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(v, rgb)
 ```
 
-A text below every marker:
+An RGB colour per direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(v, label=texts)
 ```
 
-The text above:
+A text below every marker.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(v, label=texts, textAboveMarker=True)
 ```
 
-Every direction labelled 1, 2, ..., n:
+The text above.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(v, numbered=True)
 ```
 
-Every equivalent, named by its indices:
+Every direction labelled 1, 2, ..., n.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(h, symmetrised=True, labeled=True)
 ```
 
-The markers styled:
+Every equivalent, named by its indices.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(v, marker='s', markerSize=8, markerFaceColor='r', markerEdgeColor='k')
 ```
 
-The smallest and largest value marked:
+The markers styled.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(v, data, minmax=True)
 ```
 
-Orientations in axis angle space:
+The smallest and largest value marked.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(ori)
 ```
 
-Points of two coordinate lists on the current map:
+Orientations in axis angle space.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter(x, y, 50, 'r')
 ```
+
+Points of two coordinate lists on the current map.
+
+</div>
+
+## Description
 
 The plot is new, or the one held; its projection, hemisphere and region follow the frame
 and the keywords of the spherical plots (upper, lower, fundamentalRegion, ...). A Miller
@@ -89,27 +135,23 @@ held.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d or Miller |
 | `data` | one value per direction, or an (n, 3) array of RGB colours |
 | `ori` | orientation |
 | `x, y` | the coordinates of points on a map |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib collections, one per spherical plot |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `minmax` | `False` | mark the smallest and the largest value |
 | `symmetrised` | `False` | draw every distinct symmetric equivalent of a crystal direction |
 | `colorbar` | `False` | add a colour bar for the data |
 | `numbered` | `False` | label the directions by their number, 1 to n, in their order |
+
+## Output
+
+| `h` | the matplotlib collections, one per spherical plot |
 
 ## See also
 

@@ -17,41 +17,67 @@ density on the sphere, of numbers from a density on an interval, or n random mem
 
 ## Syntax
 
-N orientations of the density:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = discreteSample(odf, n)
 ```
 
-From a coarser grid:
+N orientations of the density.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = discreteSample(odf, n, resolution=2*degree)
 ```
 
-N directions of a density on the sphere:
+From a coarser grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = discreteSample(sF, n)
 ```
 
-N numbers of a density on an interval:
+N directions of a density on the sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 x = discreteSample(lambda x: np.exp(-x), n, range=(0, 5))
 ```
 
-N members of a list, none twice:
+N numbers of a density on an interval.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = discreteSample(ori, n, withoutReplacement=True)
 ```
 
-N measurements of a map, of any phases:
+N members of a list, none twice.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = discreteSample(ebsd, n)
 ```
+
+N measurements of a map, of any phases.
+
+</div>
+
+## Description
 
 A density is sampled on the nodes of a grid with probability proportional to its values, and
 every node drawn is moved by a random rotation within the grid resolution and turned by a
@@ -63,25 +89,21 @@ indices of the members drawn from a list are not provided.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun, S2Fun, a Python function of numbers, or a list of orientations or directions, an EBSD map, grains or grain boundary segments |
 | `n` | int, the size of the sample |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation, vector3d, ndarray or the class of the list |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `None` | the spacing of the grid sampled, by default 1.5 degree on SO(3) and 1 degree on the sphere |
 | `rng` | `None` | numpy.random.Generator, the random numbers |
 | `withoutReplacement` | `False` | draw no member of a list twice (a list) |
 | `range` | `(0, 1)` | the interval of a Python function |
+
+## Output
+
+| `ori` | orientation, vector3d, ndarray or the class of the list |
 
 ## See also
 

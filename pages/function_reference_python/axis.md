@@ -13,14 +13,16 @@ axis(x, ...) is x.axis(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 axis(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [orientation](orientation.axis_py.html) | the rotational axis of a misorientation, an orientation or the misorientation between two orientations |
 | [orthogonalTransform](orthogonalTransform.axis_py.html) | the rotational axis of the rotational part |
 | [quaternion](quaternion.axis_py.html) | the rotational axis, a unit vector |

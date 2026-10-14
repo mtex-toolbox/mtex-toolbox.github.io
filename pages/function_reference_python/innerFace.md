@@ -13,9 +13,13 @@ innerFace(cS, n): the section of the shape by the plane through its centre
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 innerFace(cS, n)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L1363">source</a></font>
 {% endraw %}

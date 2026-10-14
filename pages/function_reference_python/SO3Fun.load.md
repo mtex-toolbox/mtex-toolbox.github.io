@@ -16,15 +16,23 @@ an ODF read from a file, loadODF
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 odf = SO3Fun.load('odf.txt', CS=cs, columnNames=[...])
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3Fun.load(fname, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [SO3Fun.load](SO3Fun.load.html)
 

@@ -16,23 +16,37 @@ the rotation a tangent vector at this reference points to, exp(ori, v) of MATLAB
 
 ## Syntax
 
-V a rotation vector in the specimen's coordinates:
+<div class="mx-form" markdown="1">
 
 ```python
 rot = exp(rotRef, v)
 ```
 
-A crystal direction, taken on the right:
+V a rotation vector in the specimen's coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = exp(oriRef, Miller(...))
 ```
 
-V in the crystal's coordinates:
+A crystal direction, taken on the right.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = exp(oriRef, v, side='right')
 ```
+
+V in the crystal's coordinates.
+
+</div>
+
+## Description
 
 The exponential map: the rotation exp(v) * ref on the left side, ref * exp(v) on the
 right, so that log(exp(ref, v), ref) is v again. An SO3TangentVector carries its own
@@ -41,22 +55,18 @@ have one shape; they do not broadcast.
 
 ## Input
 
-| | |
-|---|---|
 | `ref` | rotation or orientation, the reference |
 | `v` | vector3d, a rotation vector, or an SO3TangentVector |
 
-## Output
-
-| | |
-|---|---|
-| `rot` | rotation or orientation of the frames of the reference |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `None` | 'left' or 'right'; by default right for a vector in a crystal frame, left otherwise |
+
+## Output
+
+| `rot` | rotation or orientation of the frames of the reference |
 
 ## See also
 

@@ -14,15 +14,17 @@ sections of constant phi1 in the Bunge convention
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 oS = phi1Sections(cs, ss, sections=6)
 oS = phi1Sections(cs, ss, phi1=np.arange(0, 91, 15)*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [phi1](phi1Sections.phi1_py.html) | the phi1 values of the sections |
 
 ## Used on

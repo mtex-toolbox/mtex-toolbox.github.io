@@ -15,9 +15,13 @@ vertex its walk no longer reaches
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sharedVertices(grains)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L392">source</a></font>
 {% endraw %}

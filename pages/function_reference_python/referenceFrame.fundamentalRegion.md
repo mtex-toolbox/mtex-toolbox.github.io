@@ -16,45 +16,55 @@ frame; MATLAB's fundamentalRegion
 
 ## Syntax
 
-Of the orientations of cs:
+<div class="mx-form" markdown="1">
 
 ```python
 oR = cs.fundamentalRegion()
 ```
 
-Of the misorientations from cs2 to cs1:
+Of the orientations of cs.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oR = cs1.fundamentalRegion(cs2)
 ```
 
-With grain exchange:
+Of the misorientations from cs2 to cs1.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oR = cs1.fundamentalRegion(cs2, antipodal=True)
 ```
+
+With grain exchange.
+
+</div>
+
+## Description
 
 MATLAB's other outputs, the common group and the number of disjoint elements, are not
 returned.
 
 ## Input
 
-| | |
-|---|---|
 | `cs, cs1` | referenceFrame |
 | `other` | referenceFrame, the second frame cs2; by default the specimen frame |
 
-## Output
-
-| | |
-|---|---|
-| `oR` | orientationRegion |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | the grain exchange symmetry mori == inv(mori) of misorientations |
+
+## Output
+
+| `oR` | orientationRegion |
 
 ## See also
 

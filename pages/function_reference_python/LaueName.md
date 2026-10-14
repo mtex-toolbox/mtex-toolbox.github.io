@@ -13,14 +13,16 @@ LaueName(x, ...) is x.LaueName(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 LaueName(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.LaueName_py.html) | the international symbol of the Laue class of the group |
 | [symmetry](symmetry.LaueName_py.html) | the Hermann-Mauguin symbol of the Laue group, the smallest one containing this group |
 

@@ -15,35 +15,57 @@ the default representation of a function on the sphere
 
 ## Syntax
 
-From MTEX's coefficients:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(fhat)
 ```
 
-In a crystal frame, f(v) = f(-v):
+From MTEX's coefficients.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(fhat, cs, antipodal=True)
 ```
 
-A callable expanded by quadrature:
+In a crystal frame, f(v) = f(-v).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(lambda v: v.z**2, bandwidth=16)
 ```
 
-The series of a kernel on the sphere:
+A callable expanded by quadrature.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(psi)
 ```
 
-Another function, truncated:
+The series of a kernel on the sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic(sF, bandwidth=8)
 ```
+
+Another function, truncated.
+
+</div>
+
+## Description
 
 The coefficients fhat are MTEX's, degree by degree, (L + 1)^2 of them for the bandwidth L;
 a vector ending inside a degree block is padded with zeros to its end. Convolution,
@@ -56,26 +78,22 @@ shape in front of the coefficients.
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | array of MTEX's coefficients, an S2Fun, an S2Kernel or a callable of vector3d |
 | `frame` | the crystalFrame or specimenFrame of the directions |
 
-## Output
-
-| | |
-|---|---|
-| `sF` | S2FunHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` | `None` | whether the function takes real values only; by default read off the coefficients or the sampled values |
 | `antipodal` | `None` | f(v) = f(-v) |
 | `symmetrise` | `True` | make the coefficients invariant under the group of the frame |
 | `bandwidth` | `None` | the largest degree of the series |
 | `dtype` | `None` | the complex type of the coefficients, complex128 unless given |
+
+## Output
+
+| `sF` | S2FunHarmonic |
 
 ## See also
 

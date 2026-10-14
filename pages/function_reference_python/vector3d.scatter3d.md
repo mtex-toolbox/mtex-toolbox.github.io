@@ -16,23 +16,37 @@ directions as markers on the sphere in space; MATLAB's vector3d/scatter3d
 
 ## Syntax
 
-The directions on the sphere:
+<div class="mx-form" markdown="1">
 
 ```python
 scatter3d(v)
 ```
 
-Coloured by a value each, with a colour bar:
+The directions on the sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter3d(v, data, colorbar=True)
 ```
 
-Red markers with a text beside them:
+Coloured by a value each, with a colour bar.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 scatter3d(v, label='a', color='r')
 ```
+
+Red markers with a text beside them.
+
+</div>
+
+## Description
 
 The markers sit just outside the unit sphere, which is drawn first with its grid and the
 axes of the frame when the axes are new. An antipodal vector is drawn with its antipode.
@@ -40,19 +54,11 @@ plot3d(v) of directions is the same.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d, the directions, normalised for drawing |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib Path3DCollection of the markers |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `data` | `None` | one value per direction, the colour of its marker |
 | `markerSize` | `6` | the size of the markers in points |
@@ -63,6 +69,10 @@ plot3d(v) of directions is the same.
 | `axisLabels` | `True` | draw the axes of the frame on a new sphere |
 | `label` | `None` | a text beside every marker, one for all or a list with one per direction |
 | `colorbar` | `False` | add a colour bar of the data |
+
+## Output
+
+| `h` | the matplotlib Path3DCollection of the markers |
 
 ## See also
 

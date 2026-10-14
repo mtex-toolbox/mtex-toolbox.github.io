@@ -18,41 +18,67 @@ maximum; with axis= the maximum of a list of functions along an axis; MATLAB's m
 
 ## Syntax
 
-The global maximum and where it is:
+<div class="mx-form" markdown="1">
 
 ```python
 value, ori = max(odf)
 ```
 
-The five largest local maxima:
+The global maximum and where it is.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 values, oris = max(odf, numLocal=5, resolution=5*degree, accuracy=0.25*degree)
 ```
 
-The pointwise maximum of two functions:
+The five largest local maxima.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = max(odf1, odf2)
 ```
 
-On the sphere, the direction:
+The pointwise maximum of two functions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v, pos = max(sF)
 ```
 
-Three local maxima on the sphere:
+On the sphere, the direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 values, positions = max(sF, numLocal=3)
 ```
 
-The pointwise maximum with a number:
+Three local maxima on the sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = max(sF, 0.5)
 ```
+
+The pointwise maximum with a number.
+
+</div>
+
+## Description
 
 The local maxima are searched from a grid of the spacing resolution (5 degree on SO(3), 2.5
 on the sphere) and refined down to accuracy (0.25 and 0.05 degree); the keywords
@@ -63,22 +89,18 @@ max(SO3F, [], dim), the port writes max(SO3F, axis=dim - 1).
 
 ## Input
 
-| | |
-|---|---|
 | `f` | SO3Fun, S2Fun or S1Fun; a second function or a number for the pointwise maximum |
-
-## Output
-
-| | |
-|---|---|
-| `value` | the largest value, or numLocal values in descending order |
-| `ori` | the position: orientation, vector3d, or the angle on the circle |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `numLocal` | `1` | the number of local maxima returned |
+
+## Output
+
+| `value` | the largest value, or numLocal values in descending order |
+| `ori` | the position: orientation, vector3d, or the angle on the circle |
 
 ## See also
 

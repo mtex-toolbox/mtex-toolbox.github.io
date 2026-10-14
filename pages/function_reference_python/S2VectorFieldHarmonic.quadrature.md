@@ -17,17 +17,27 @@ values with their weights, MATLAB's name for the constructor
 
 ## Syntax
 
-Of a function returning vectors:
+<div class="mx-form" markdown="1">
 
 ```python
 vF = S2VectorFieldHarmonic.quadrature(lambda v: v.cross(zvector), bandwidth=8)
 ```
 
-Of vectors w at directions v:
+Of a function returning vectors.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 vF = S2VectorFieldHarmonic.quadrature(v, w, bandwidth=8, weights=wq)
 ```
+
+Of vectors w at directions v.
+
+</div>
+
+## Description
 
 A function is approximated by quadrature on a grid of the bandwidth, componentwise in x, y
 and z; vectors at scattered directions by the quadrature sum with the weights given, which
@@ -36,23 +46,19 @@ them by least squares.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | a function of vector3d returning vectors, S2VectorField, or vector3d of directions |
 | `args` | the vectors at the directions, and the frame of the field |
 
-## Output
-
-| | |
-|---|---|
-| `vF` | S2VectorFieldHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest harmonic degree; by default the preference 'defaultS2Bandwidth', for a field the field's |
 | `weights` | `None` | the quadrature weights of vectors at scattered directions, equal ones of sum 4 pi by default |
+
+## Output
+
+| `vF` | S2VectorFieldHarmonic |
 
 ## See also
 

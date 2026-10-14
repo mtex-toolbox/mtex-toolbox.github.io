@@ -14,46 +14,56 @@ w v e^{-ikx}; a quadrature grid brings the weights of its rule
 
 ## Syntax
 
-The weights 1/n:
+<div class="mx-form" markdown="1">
 
 ```python
 chat = fourierSeriesAdjoint(x, np.cos(x), 1)
 ```
 
-Weighted:
+The weights 1/n.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 chat = fourierSeriesAdjoint(x, np.cos(x), 1, weights=w)
 ```
 
-The quadrature of a grid:
+Weighted.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 chat = fourierSeriesAdjoint(quadratureS1Grid(16), values, 8)
 ```
+
+The quadrature of a grid.
+
+</div>
+
+## Description
 
 The adjoint of fourierSeries, directly or by the NUFFT; at equispaced angles with weights 1/n
 the coefficients of a trigonometric polynomial of degree L.
 
 ## Input
 
-| | |
-|---|---|
 | `x` | the angles, or a quadratureS1Grid |
 | `values` | the values at the angles |
 | `L` | the bandwidth |
 
-## Output
-
-| | |
-|---|---|
-| `chat` | the 2L+1 coefficients, complex |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | the weight of every angle; by default 1/n, or the grid's rule |
+
+## Output
+
+| `chat` | the 2L+1 coefficients, complex |
 
 ## See also
 

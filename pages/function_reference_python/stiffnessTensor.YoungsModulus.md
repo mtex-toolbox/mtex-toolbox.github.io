@@ -17,32 +17,38 @@ YoungsModulus
 
 ## Syntax
 
-At the directions v:
+<div class="mx-form" markdown="1">
 
 ```python
 E = YoungsModulus(C, v)
 ```
 
-The function on the sphere:
+At the directions v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 E = C.YoungsModulus()
 ```
+
+The function on the sphere.
+
+</div>
+
+## Description
 
 The tensor may be a stiffness or a compliance tensor; a stiffness tensor is inverted
 first. The direction may have any length.
 
 ## Input
 
-| | |
-|---|---|
 | `C` | stiffnessTensor or complianceTensor |
 | `v` | vector3d or Miller, the tension directions; left out for the function |
 
 ## Output
 
-| | |
-|---|---|
 | `E` | Young's modulus at every direction, or an S2Fun of the direction |
 
 ## See also
@@ -51,9 +57,13 @@ first. The direction may have any length.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 stiffnessTensor.YoungsModulus(T, v=None)
 ```
+
+</div>
 
 MATLAB's [stiffnessTensor.YoungsModulus](stiffnessTensor.YoungsModulus.html)
 

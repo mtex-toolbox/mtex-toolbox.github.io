@@ -13,9 +13,13 @@ the array C[m1, m2, M] of degrees l1, l2 coupled to J
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 clebschGordanTensor(l1, l2, J)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L573">source</a></font>
 {% endraw %}

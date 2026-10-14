@@ -17,39 +17,45 @@ side; the frame of the rotated side turns with it; MATLAB's rotate
 
 ## Syntax
 
-F(rot^-1 g), the specimen side turned:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = rotate(SO3F, rot)
 ```
 
-F(g rot^-1), the crystal side turned:
+F(rot^-1 g), the specimen side turned.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3F.rotate(rot, side='right')
 ```
+
+F(g rot^-1), the crystal side turned.
+
+</div>
+
+## Description
 
 A rotation that is no symmetry of the rotated side's group strips that group from its
 frame, with a warning.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunCBF |
 | `r` | rotation, one |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunCBF |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left' or 'right' |
+
+## Output
+
+| `SO3F` | SO3FunCBF |
 
 ## See also
 

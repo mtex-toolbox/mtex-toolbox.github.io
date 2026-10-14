@@ -17,27 +17,45 @@ parentGrainReconstructor
 
 ## Syntax
 
-The default probabilities:
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcVariantGraph()
 ```
 
+The default probabilities.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 job.calcVariantGraph(threshold=3.5*degree, tol=1.5*degree) # another misfit at probability 1/2
 ```
 
-Similar variants as one node:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcVariantGraph(mergeSimilar=True)
 ```
 
-The child to child boundaries only:
+Similar variants as one node.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcVariantGraph(c2c=True)
 ```
+
+The child to child boundaries only.
+
+</div>
+
+## Description
 
 A node per child grain and parent variant and one per parent grain. An edge joins two
 nodes of neighbouring grains where they agree: child to child over every pair of variants,
@@ -49,13 +67,11 @@ changed in place; clusterVariantGraph clusters the graph.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor with its orientation relationship job.p2c |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `threshold` | `2*degree` | the misfit at which the probability is 1/2 |
 | `tol` | `1.5*degree` | the range about threshold over which the probability goes from 1 to 0 |

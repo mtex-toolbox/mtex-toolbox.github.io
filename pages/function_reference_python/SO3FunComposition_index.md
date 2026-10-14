@@ -15,8 +15,6 @@ form adds the harmonic forms
 
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](SO3FunComposition.bandwidth_py.html) | the largest bandwidth of the components |
 | [CS](SO3FunComposition.CS_py.html) | the crystal frame the components share |
 | [discreteSample](SO3FunComposition.discreteSample_py.html) | a random sample of n orientations drawn from an orientation density, of directions from a density on the sphere, of numbers from a density on an interval, or n random members of a list |

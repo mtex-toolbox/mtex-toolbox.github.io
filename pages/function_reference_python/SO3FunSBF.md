@@ -15,17 +15,27 @@ SO3FunSBF
 
 ## Syntax
 
-The deformation texture of one slip system:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = SO3FunSBF(sS, E)
 ```
 
-With the bandwidth of its harmonic conversion:
+The deformation texture of one slip system.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = SO3FunSBF(sS, E, bandwidth=32)
 ```
+
+With the bandwidth of its harmonic conversion.
+
+</div>
+
+## Description
 
 The texture follows from the finite strain and the slip system without integrating its
 evolution; it is evaluated analytically and has no bandwidth of its own, the bandwidth is
@@ -34,22 +44,18 @@ to the frame of E, the default specimen frame when E has none.
 
 ## Input
 
-| | |
-|---|---|
 | `sS` | slipSystem, a single one, in a crystal frame |
 | `E` | strainTensor or strainRateTensor |
 
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunHandle |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the bandwidth of the handle, by default the preference maxSO3Bandwidth |
+
+## Output
+
+| `odf` | SO3FunHandle |
 
 ## References
 

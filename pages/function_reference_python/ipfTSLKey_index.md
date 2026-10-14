@@ -13,11 +13,15 @@ the inverse pole figure key of TSL / OIM, the TSLDirectionKey on the Laue group
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 key = ipfTSLKey(cs)
 key = ipfTSLKey(ebsd['Iron'], ipfDirection=xvector)
 rgb = key.orientation2color(ori)
 ```
+
+</div>
 
 ## Used on
 

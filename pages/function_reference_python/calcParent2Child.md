@@ -15,35 +15,57 @@ best, refined from an initial guess
 
 ## Syntax
 
-From child to child misorientations:
+<div class="mx-form" markdown="1">
 
 ```python
 p2c = calcParent2Child(c2c, p2c0)
 ```
 
-From pairs of child orientations:
+From child to child misorientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 p2c = calcParent2Child(childOri, p2c0)
 ```
 
-The fit on the best 80 percent:
+From pairs of child orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 p2c = calcParent2Child(c2c, p2c0, quantile=0.8)
 ```
 
-Iterate from p2c0 only:
+The fit on the best 80 percent.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 p2c = calcParent2Child(c2c, p2c0, local=True)
 ```
 
-With the misfit of every misorientation:
+Iterate from p2c0 only.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 p2c, fit = calcParent2Child(c2c, p2c0, fit=True)
 ```
+
+With the misfit of every misorientation.
+
+</div>
+
+## Description
 
 Two children of one parent grain are related by a misorientation the relationship predicts,
 V_i^-1 V_j for two of its variants. The relationship minimises the trimmed chordal misfit
@@ -56,22 +78,13 @@ verbose=False.
 
 ## Input
 
-| | |
-|---|---|
 | `c2c` | orientation, child to child misorientations |
 | `childOri` | orientation, (n, 2) pairs of child orientations |
 | `p2c0` | orientation, the initial guess of the parent to child relationship |
 
-## Output
-
-| | |
-|---|---|
-| `p2c` | orientation, the fitted parent to child relationship |
-| `fit` | the disorientation angle of every misorientation to the nearest predicted one |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `local` | `False` | iterate from p2c0 only, without the scan |
 | `quantile` | `0.9` | the share of the misorientations the fit is based on |
@@ -83,6 +96,11 @@ verbose=False.
 | `numLocal` | `5` | the number of basins of the scan fitted locally |
 | `verbose` | `True` | report the progress |
 | `fit` | `False` | also return the misfit of every misorientation, MATLAB's second output |
+
+## Output
+
+| `p2c` | orientation, the fitted parent to child relationship |
+| `fit` | the disorientation angle of every misorientation to the nearest predicted one |
 
 ## References
 

@@ -15,17 +15,27 @@ boundaries; MATLAB's cleanUpPseudoSym
 
 ## Syntax
 
-Tortuosity above 1.5:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd, grains, numChanged = cleanUpPseudoSym(ebsd, grains, psSym)
 ```
 
-Only the more tortuous:
+Tortuosity above 1.5.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd, grains, numChanged = cleanUpPseudoSym(ebsd, grains, psSym, threshold=2)
 ```
+
+Only the more tortuous.
+
+</div>
+
+## Description
 
 A pseudo symmetry is a rotation which is not a symmetry of the crystal but maps the
 diffraction pattern almost onto itself, so the indexing picks between the two solutions at
@@ -44,26 +54,22 @@ rotations and grain ids, and grains gets the parentId of the merge.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD with the grain ids calcGrains stores |
 | `grains` | grain2d of the map |
 | `psSym` | orientation, a misorientation of the phase with itself (psSym.CS is psSym.SS) |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD, the map passed, corrected |
-| `grains` | grain2d, the merged grains |
-| `numChanged` | the number of measurements whose orientation changed |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `delta` | `2*degree` | the largest angle between a boundary misorientation and psSym |
 | `threshold` | `1.5` | the smallest tortuosity, the length of a component over the diagonal of its bounding box, taken for an artefact |
+
+## Output
+
+| `ebsd` | EBSD, the map passed, corrected |
+| `grains` | grain2d, the merged grains |
+| `numChanged` | the number of measurements whose orientation changed |
 
 ## See also
 

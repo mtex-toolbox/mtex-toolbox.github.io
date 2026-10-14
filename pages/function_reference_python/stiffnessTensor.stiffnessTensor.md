@@ -14,9 +14,13 @@ the elastic stiffness C, sigma = C : eps; a 6 x 6 Voigt matrix in GPa or the ful
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 stiffnessTensor(M, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

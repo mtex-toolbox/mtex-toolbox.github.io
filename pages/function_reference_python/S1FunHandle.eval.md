@@ -16,9 +16,13 @@ the values of the callable at the angles x
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHandle.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [S1FunHandle.eval](S1FunHandle.eval.html)
 

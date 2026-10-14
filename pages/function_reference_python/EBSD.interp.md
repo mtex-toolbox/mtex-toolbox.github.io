@@ -16,23 +16,37 @@ the map read at positions of one's own choosing, a new map with these positions
 
 ## Syntax
 
-At the coordinates x, y:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_new = interp(ebsd, x, y)
 ```
 
-At the positions, a vector3d:
+At the coordinates x, y.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_new = interp(ebsd, pos)
 ```
 
-Empty outside the measurements:
+At the positions, a vector3d.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_new = interp(ebsd, x, y, fill=False, extrapolate=False)
 ```
+
+Empty outside the measurements.
+
+</div>
+
+## Description
 
 The holes of the map are filled first, by the solver smooth and fill use, then each
 position is interpolated within the lattice cell it falls in, linearly in the tangent
@@ -45,25 +59,21 @@ the orientations are interpolated.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD, a map on a lattice |
 | `pos` | vector3d, or an array of rows (x, y) or (x, y, z), the positions; or the x coordinates, with y |
 | `y` | the y coordinates, with pos the x coordinates |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd_new` | EBSD, the map at the positions, in the order given |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `F` | `None` | EBSDFilter, the variational filter the holes are filled by; by default l1TVFilter() |
 | `fill` | `True` | fill the holes of the map before interpolating |
 | `extrapolate` | `True` | a position outside the measured cells takes the nearest measurement instead of staying empty |
+
+## Output
+
+| `ebsd_new` | EBSD, the map at the positions, in the order given |
 
 ## See also
 

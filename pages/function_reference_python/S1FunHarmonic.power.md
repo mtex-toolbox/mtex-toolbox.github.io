@@ -16,9 +16,13 @@ the power, the operator a ** n
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 a ** n
 ```
+
+</div>
 
 MATLAB's [S1FunHarmonic.power](S1FunHarmonic.power.html)
 

@@ -13,14 +13,16 @@ conventionalSector(x, ...) is x.conventionalSector(...), the method of the objec
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 conventionalSector(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.conventionalSector_py.html) | the conventional sector of the group, the one MTEX draws, oriented by the up and east directions of the frame's plotting convention |
 | [symmetry](symmetry.conventionalSector_py.html) | the conventional sector of the group, the one MTEX draws, with up and east choosing its placement |
 

@@ -19,9 +19,13 @@ already related. Only a transpose and flips are applied, never a resampling
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapImage.transformReferenceFrame(mg, target, *args, byScreenAlignment=False)
 ```
+
+</div>
 
 MATLAB's [mapImage.transformReferenceFrame](mapImage.transformReferenceFrame.html)
 

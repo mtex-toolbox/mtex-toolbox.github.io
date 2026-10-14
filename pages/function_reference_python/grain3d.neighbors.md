@@ -16,17 +16,27 @@ the ids of neighbouring grains; MATLAB's neighbors of grain3d
 
 ## Syntax
 
-The pairs within the set:
+<div class="mx-form" markdown="1">
 
 ```python
 pairs = grains.neighbors()
 ```
 
-Every pair of the boundary:
+The pairs within the set.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pairs = grains.neighbors(full=True)
 ```
+
+Every pair of the boundary.
+
+</div>
+
+## Description
 
 Two grains are neighbours when they share a boundary face. A pair is sorted, the smaller
 id first, and listed once; the outside of the volume is no neighbour. MATLAB's flag
@@ -34,21 +44,17 @@ id first, and listed once; the outside of the volume is no neighbour. MATLAB's f
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain3d |
-
-## Output
-
-| | |
-|---|---|
-| `pairs` | (n, 2) array of grain ids |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `full` | `False` | every pair of grains sharing a face of the boundary, also those with a grain outside the set |
+
+## Output
+
+| `pairs` | (n, 2) array of grain ids |
 
 ## See also
 

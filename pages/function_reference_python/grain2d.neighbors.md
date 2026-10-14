@@ -18,29 +18,47 @@ of one of these and one of those; MATLAB's grain2d.neighbors
 
 ## Syntax
 
-The pairs of neighbours among the grains:
+<div class="mx-form" markdown="1">
 
 ```python
 pairs = grains.neighbors()
 ```
 
-A grain of g1 beside a grain of g2:
+The pairs of neighbours among the grains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pairs = g1.neighbors(g2)
 ```
 
-Every neighbour, inside the selection or not:
+A grain of g1 beside a grain of g2.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pairs = grains.neighbors(full=True)
 ```
 
-The adjacency matrix:
+Every neighbour, inside the selection or not.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 A = grains.neighbors(matrix=True)
 ```
+
+The adjacency matrix.
+
+</div>
+
+## Description
 
 A pair is listed once, the smaller id first; the rim of the map and a grain's own inner
 boundary make no pair. With other grains the first column is the grain of these, the
@@ -49,23 +67,19 @@ the row and column id - 1 for the grain id.
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain2d |
-
-## Output
-
-| | |
-|---|---|
-| `pairs` | the grain ids, (n, 2) |
-| `A` | scipy.sparse.csr_matrix (matrix=True) |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `full` | `False` | take the neighbours outside the selection as well; another grain2d in its place gives the pairs between the two sets |
 | `matrix` | `False` | the result as the adjacency matrix |
+
+## Output
+
+| `pairs` | the grain ids, (n, 2) |
+| `A` | scipy.sparse.csr_matrix (matrix=True) |
 
 ## See also
 

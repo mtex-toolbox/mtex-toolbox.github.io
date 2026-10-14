@@ -17,9 +17,13 @@ R^-1, so inv(grad f) = grad(inv f); the frames swap with the side
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.inv(self)
 ```
+
+</div>
 
 MATLAB's [SO3VectorField.inv](SO3VectorField.inv.html)
 

@@ -15,9 +15,13 @@ the Radon transform: the kernel on the sphere of the same coefficients, in close
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 fibreVonMisesFisherKernel.radon(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L679">source</a></font>
 {% endraw %}

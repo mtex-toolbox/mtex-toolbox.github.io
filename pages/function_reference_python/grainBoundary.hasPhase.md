@@ -16,23 +16,37 @@ side; MATLAB's grainBoundary.hasPhase
 
 ## Syntax
 
-A Forsterite grain on either side:
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasPhase('Forsterite')
 ```
 
-Between Forsterite and Enstatite:
+A Forsterite grain on either side.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasPhase('Forsterite', 'Enstatite')
 ```
 
-Between two indexed measurements:
+Between Forsterite and Enstatite.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = gB.hasPhase('indexed')
 ```
+
+Between two indexed measurements.
+
+</div>
+
+## Description
 
 A phase is named by its mineral or its phase id. Without a phase of that name in the list,
 'indexed' takes the segments between two indexed measurements and 'notIndexed' the others,
@@ -41,22 +55,18 @@ by this.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
 | `a` | the first phase, a mineral name or a phase id |
 
-## Output
-
-| | |
-|---|---|
-| `ind` | a boolean per segment |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `b` | `None` | the second phase; the segments with a on either side when not given |
+
+## Output
+
+| `ind` | a boolean per segment |
 
 ## See also
 

@@ -16,53 +16,87 @@ the pole figures of an ODF, one axes per crystal direction; MATLAB's plotPDF
 
 ## Syntax
 
-One pole figure:
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, Miller(1, 0, 0, cs))
 ```
 
-Two, on a coarser grid:
+One pole figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)], resolution=2*degree)
 ```
 
-Filled contours with a colour bar:
+Two, on a coarser grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, h, contourf=True, colorbar=True)
 ```
 
-Both hemispheres superposed, the whole sphere:
+Filled contours with a colour bar.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, h, antipodal=True, complete=True)
 ```
 
-One colour range, extrema marked:
+Both hemispheres superposed, the whole sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, h, colorRange='equal', minmax=True)
 ```
 
-One pole figure of the superposed directions:
+One colour range, extrema marked.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, [h1, h2], superposition=[1, 2])
 ```
 
-The superposed pole figures of a measurement:
+One pole figure of the superposed directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, pf.allH, superposition=pf.c)
 ```
 
-The pole figure on a sphere in space:
+The superposed pole figures of a measurement.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, h, '3d')
 ```
+
+The pole figure on a sphere in space.
+
+</div>
+
+## Description
 
 Every pole figure is the Radon transform odf.radon(h) of the ODF, the density of the
 specimen directions along which h lies. A list of directions draws one axes each, titled
@@ -76,22 +110,18 @@ minmax, antipodal, complete, upper, lower, the projection and the layout.
 
 ## Input
 
-| | |
-|---|---|
 | `odf` | SO3Fun |
 | `h` | Miller, or a list of Miller, the crystal directions |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib surfaces, one per chart |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `superposition` | `None` | the structure coefficients of superposed directions, an array or one array per entry of h |
+
+## Output
+
+| `h` | the matplotlib surfaces, one per chart |
 
 ## See also
 

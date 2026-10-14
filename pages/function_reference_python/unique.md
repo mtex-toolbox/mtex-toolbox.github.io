@@ -13,14 +13,16 @@ unique(x, ...) is x.unique(...), the method of the object passed; NumPy's unique
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 unique(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [orientation](orientation.unique_py.html) | the disjoint list of orientations, symmetric equivalents within a tolerance taken as one |
 | [orthogonalTransform](orthogonalTransform.unique_py.html) | the disjoint list of orthogonal transforms, those equal up to a tolerance taken as one |
 | [PoleFigure](PoleFigure.unique_py.html) | the duplicated directions removed: equivalent specimen directions under the specimen group carry the same pole density, so they are merged and their intensities averaged |

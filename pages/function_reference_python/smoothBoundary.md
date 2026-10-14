@@ -13,14 +13,16 @@ smoothBoundary(x, ...) is x.smoothBoundary(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 smoothBoundary(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grain2d](grain2d.smoothBoundary_py.html) | the grains with the pixel staircase of their boundaries turned into smooth curves |
 | [grain3d](grain3d.smoothBoundary_py.html) | the grains with their boundary surfaces smoothed, hierarchically: the triple lines along themselves first, then the faces |
 

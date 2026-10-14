@@ -17,47 +17,57 @@ line of each of them; MATLAB's spatialProfile
 
 ## Syntax
 
-One segment, x and y:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsdLine, dist = spatialProfile(ebsd, [15.5, 27], [20.5, 11])
 ```
 
-A polyline, (N, 2) points:
+One segment, x and y.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsdLine, dist = spatialProfile(ebsd, xy)
 ```
 
-A wider band:
+A polyline, (N, 2) points.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsdLine, dist = spatialProfile(ebsd, xy, radius=1)
 ```
+
+A wider band.
+
+</div>
+
+## Description
 
 A pixel belongs to the line when it lies within radius of one of its segments, half a step
 by default; a pixel at the joint of two segments is met once.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD |
 | `lineXY` | (N, 2) array of the points of the line, or their x coordinates |
 | `y` | the y coordinates, when lineXY gives x |
 
-## Output
-
-| | |
-|---|---|
-| `ebsdLine` | EBSD, the measurements along the line |
-| `dist` | array, the distance of each along the line from its first point |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `radius` | `None` | the half width of the band around the line, in the scan unit |
+
+## Output
+
+| `ebsdLine` | EBSD, the measurements along the line |
+| `dist` | array, the distance of each along the line from its first point |
 
 ## See also
 

@@ -16,37 +16,43 @@ the surface gradient: a vector field, or its values at the directions x; MATLAB'
 
 ## Syntax
 
-The gradient as a vector field:
+<div class="mx-form" markdown="1">
 
 ```python
 sVF = grad(sF)
 ```
 
-The gradient at the directions v, vector3d:
+The gradient as a vector field.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 g = grad(sF, v)
 ```
 
+The gradient at the directions v, vector3d.
+
+</div>
+
+## Description
+
 The gradient is tangent to the sphere, the derivative of the function along the sphere.
 
 ## Input
 
-| | |
-|---|---|
 | `sF` | S2FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
-| `sVF` | S2VectorFieldHarmonic, or vector3d at x |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `x` | `None` | vector3d, the directions at which to evaluate the gradient |
+
+## Output
+
+| `sVF` | S2VectorFieldHarmonic, or vector3d at x |
 
 ## See also
 

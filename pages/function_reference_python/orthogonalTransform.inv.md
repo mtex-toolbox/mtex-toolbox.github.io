@@ -15,9 +15,13 @@ the inverse transform, the inverse rotation with the same parity
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orthogonalTransform.inv(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1004">source</a></font>
 {% endraw %}

@@ -14,29 +14,47 @@ the triple points of a boundary network as circles, open or filled by a value
 
 ## Syntax
 
-Black circles:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains.triplePoints)
 ```
 
-Red circles:
+Black circles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains.triplePoints, color='r')
 ```
 
-Filled by a value per point:
+Red circles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(tP, values, colorbar=True)
 ```
 
-Filled in one colour:
+Filled by a value per point.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(tP, markerFaceColor='b', markerEdgeColor='w', markerSize=4)
 ```
+
+Filled in one colour.
+
+</div>
+
+## Description
 
 A triple point list drawn on its own opens a map of its own; drawn into a held map plot it
 marks the points of that map. Without values the circles are open, edged in the colour
@@ -49,20 +67,12 @@ every other keyword goes to the matplotlib artist.
 
 ## Input
 
-| | |
-|---|---|
 | `tP` | triplePointList |
 | `color` | a value per triple point, or the name of a colour |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib scatter, None when there are no points |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `markerFaceColor` | `None` | the fill of the circles without values |
 | `markerEdgeColor` | `None` | the edge colour of the circles |
@@ -74,6 +84,10 @@ every other keyword goes to the matplotlib artist.
 | `micronbar` | `None` | draw the scale bar; by default the preference showMicronBar |
 | `refFrame` | `True` | draw the axes of the specimen frame in the scale bar box |
 | `displayName` | `None` | the name in a legend, which joins the legend of the map |
+
+## Output
+
+| `h` | the matplotlib scatter, None when there are no points |
 
 ## See also
 

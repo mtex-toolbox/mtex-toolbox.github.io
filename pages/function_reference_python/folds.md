@@ -14,38 +14,44 @@ that leaves the frame's group invariant
 
 ## Syntax
 
-The folds of both frames:
+<div class="mx-form" markdown="1">
 
 ```python
 rA, rB = folds(cs, ss)
 ```
 
-The specimen side the default frame:
+The folds of both frames.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rA, rB = folds(cs)
 ```
+
+The specimen side the default frame.
+
+</div>
+
+## Description
 
 A harmonic transform on SO(3) samples the Euler angles on grids these folds divide, so that
 the symmetric equivalents of a node fall on nodes again.
 
 ## Input
 
-| | |
-|---|---|
 | `CS` | referenceFrame, the crystal frame |
-
-## Output
-
-| | |
-|---|---|
-| `rA, rB` | the orders of the rotations about z of the crystal and the specimen group |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `SS` | `None` | the specimen frame, specimenFrame.default when not given |
+
+## Output
+
+| `rA, rB` | the orders of the rotations about z of the crystal and the specimen group |
 
 ## See also
 

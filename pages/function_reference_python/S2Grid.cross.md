@@ -17,9 +17,13 @@ directions a plane normal, so the indices switch sides
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Grid.cross(self, other)
 ```
+
+</div>
 
 MATLAB's [S2Grid.cross](S2Grid.cross.html)
 

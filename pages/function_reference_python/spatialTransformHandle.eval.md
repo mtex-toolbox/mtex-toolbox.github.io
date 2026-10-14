@@ -15,9 +15,13 @@ the positions the function returns
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformHandle.eval(self, pos)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L760">source</a></font>
 {% endraw %}

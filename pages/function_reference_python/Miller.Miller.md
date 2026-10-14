@@ -16,71 +16,117 @@ crystal direction with Miller indices
 
 ## Syntax
 
-From the Cartesian coordinates:
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d(x, y, z)
 ```
 
-Coordinates of shape (..., 3) or (3, N):
+From the Cartesian coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d(xyz)
 ```
 
-Axes, v and -v the same:
+Coordinates of shape (..., 3) or (3, N).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d(x, y, z, antipodal=True)
 ```
 
-A crystal direction from its Euclidean coordinates:
+Axes, v and -v the same.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = vector3d(xyz, frame=cs)
 ```
 
-From the polar angles:
+A crystal direction from its Euclidean coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.byPolar(theta, rho)
 ```
 
-The axes of the frame, also Y and Z:
+From the polar angles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.X
 ```
 
-A lattice plane normal by its indices hkl:
+The axes of the frame, also Y and Z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller(1, 1, 1, cs)
 ```
 
-Four indices hkil of a hexagonal lattice:
+A lattice plane normal by its indices hkl.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller(1, 0, -1, 0, csHex)
 ```
 
-A lattice direction, 'UVTW' with four indices:
+Four indices hkil of a hexagonal lattice.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller(1, 1, 0, cs, 'uvw')
 ```
 
-(hkl) one plane, {hkl} the family, [uvw] and <uvw> directions:
+A lattice direction, 'UVTW' with four indices.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller('{111}', cs)
 ```
 
-A vector restated in the crystal frame:
+(hkl) one plane, {hkl} the family, [uvw] and <uvw> directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller(v, cs)
 ```
+
+A vector restated in the crystal frame.
+
+</div>
+
+## Description
 
 A crystal direction is a vector3d whose frame is a crystal frame: it has the Miller
 indices m.hkl and m.uvw, the four index forms m.hkil and m.UVTW of a trigonal or hexagonal
@@ -91,28 +137,24 @@ function Miller from its indices.
 
 ## Input
 
-| | |
-|---|---|
 | `x, y, z` | arrays of the Cartesian coordinates, broadcast against each other |
 | `xyz` | array of shape (..., 3) or (3, N), a vector3d, or a rank one tensor |
 | `cs` | crystalFrame, also given positionally to vector3d |
 
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d |
-| `m` | vector3d, a crystal direction |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | the vectors are axes: v and -v are the same |
 | `isNormalized` | `False` | the coordinates are known to be of length one |
 | `frame` | `None` | the referenceFrame the coordinates are given in, a crystal frame making the vectors crystal directions; also given as a positional argument |
 | `dispStyle` | `None` | the indices the display shows, 'hkl', 'hkil', 'uvw', 'UVTW' or 'xyz' |
 | `dtype` | `None` | the floating point type of the coordinates |
+
+## Output
+
+| `v` | vector3d |
+| `m` | vector3d, a crystal direction |
 
 ## See also
 

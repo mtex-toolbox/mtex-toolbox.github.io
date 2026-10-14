@@ -15,17 +15,27 @@ the orientation two frames stand in by their axes, MATLAB's orientation.align
 
 ## Syntax
 
-The rotation from the axes of cs1 to those of cs2:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.align(cs1, cs2)
 ```
 
-A transition nearer a rotation demanded:
+The rotation from the axes of cs1 to those of cs2.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.align(cs1, cs2, tol=1e-3)
 ```
+
+A transition nearer a rotation demanded.
+
+</div>
+
+## Description
 
 A point sitting at v in frA sits at ori * v in frB. Unlike orientation.byScreenAlignment,
 which infers the rotation from how the two frames are drawn, this reads the two bases: it is
@@ -35,22 +45,18 @@ without their groups (stripSym).
 
 ## Input
 
-| | |
-|---|---|
 | `frA` | referenceFrame, the source |
 | `frB` | referenceFrame, the target |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation from frA to frB |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `0.1` | how far, as the norm of I - M M', the transition M may be from a rotation; a larger deviation is refused |
+
+## Output
+
+| `ori` | orientation from frA to frB |
 
 ## See also
 

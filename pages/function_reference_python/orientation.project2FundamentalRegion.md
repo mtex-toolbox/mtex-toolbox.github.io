@@ -18,44 +18,54 @@ rotation.project2FundamentalRegion)
 
 ## Syntax
 
-The equivalents in the fundamental region:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = ori.projectIntoFundamentalRegion()
 ```
 
-Those closest to a reference:
+The equivalents in the fundamental region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = ori.projectIntoFundamentalRegion(oriRef)
 ```
 
-With grain exchange:
+Those closest to a reference.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = mori.projectIntoFundamentalRegion(antipodal=True)
 ```
 
+With grain exchange.
+
+</div>
+
+## Description
+
 MATLAB's second form, the symmetry elements that do the projection, is not returned.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
-
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation, of the same shape |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ref` | `None` | orientation, the reference; by default the fundamental region of the frames |
 | `antipodal` | `False` | add the grain exchange of a misorientation, mori == inv(mori), to the reduction |
+
+## Output
+
+| `ori` | orientation, of the same shape |
 
 ## See also
 

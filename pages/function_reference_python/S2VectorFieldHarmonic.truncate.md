@@ -15,9 +15,13 @@ the field cut off, or padded with zeros, at the bandwidth L
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.truncate(self, L)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L280">source</a></font>
 {% endraw %}

@@ -15,9 +15,13 @@ the plane radius tan(theta / 2) of the polar angle theta
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 eangleProjection.radius(theta)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L312">source</a></font>
 {% endraw %}

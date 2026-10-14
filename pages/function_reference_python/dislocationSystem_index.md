@@ -17,8 +17,6 @@ dislocation unless given, the isotropic line energy with Poisson ratio 0.3
 
 ## Members
 
-| | |
-|---|---|
 | [bcc](dislocationSystem.bcc_py.html) | the edge and screw dislocations of the symmetrised body-centred cubic slip systems |
 | [cat](dislocationSystem.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |
 | [CS](dislocationSystem.CS_py.html) | the crystal frame of the systems, None once they are in specimen coordinates |

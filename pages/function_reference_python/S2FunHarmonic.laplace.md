@@ -15,9 +15,13 @@ the Laplace-Beltrami operator applied to the function, the degree l scaled by -l
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunHarmonic.laplace(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L704">source</a></font>
 {% endraw %}

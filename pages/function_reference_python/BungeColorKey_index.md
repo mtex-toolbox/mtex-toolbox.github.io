@@ -14,14 +14,16 @@ and blue
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 BungeColorKey(cs, ss)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [orientation2color](BungeColorKey.orientation2color_py.html) | the colours of orientations, the Euler angles of the symmetric equivalent inside the Euler box scaled to red, green and blue |
 
 ## Used on

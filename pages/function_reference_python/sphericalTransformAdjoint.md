@@ -14,17 +14,27 @@ h[m, j] = sum_q w_q v_q e^{-i(m rho_q - j theta_q)}
 
 ## Syntax
 
-H of shape (2L+1) x (2L+1):
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = sphericalTransformAdjoint(H, 8)
 ```
 
-H of the rows m >= 0 of a real function:
+H of shape (2L+1) x (2L+1).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = sphericalTransformAdjoint(H, 8, real=True)
 ```
+
+H of the rows m >= 0 of a real function.
+
+</div>
+
+## Description
 
 The adjoint of sphericalTransform: the internal spherical coefficients (with the
 Condon-Shortley phase, not MATLAB's fhat) from the Fourier array of weighted values. For a
@@ -33,23 +43,19 @@ symmetry.
 
 ## Input
 
-| | |
-|---|---|
 | `H` | the complex array h[m, j] |
 | `L` | the bandwidth |
 
-## Output
-
-| | |
-|---|---|
-| `fhat` | the (L+1)^2 spherical coefficients |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` | `False` | H holds the rows m >= 0 of a real function |
 | `degrees` | `None` | the pairs (n, d_n(pi/2)) as halfPiDegrees yields them; by default those of the cache, which also selects the compiled loop |
+
+## Output
+
+| `fhat` | the (L+1)^2 spherical coefficients |
 
 ## See also
 

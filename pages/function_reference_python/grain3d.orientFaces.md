@@ -16,9 +16,13 @@ the faces turned consistently around every grain, the normals out of it, as MATL
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain3d.orientFaces(self)
 ```
+
+</div>
 
 MATLAB's [grain3d.orientFaces](grain3d.orientFaces.html)
 

@@ -14,45 +14,51 @@ a velocity gradient tensor L, the rank two tensor of the spatial derivatives of 
 
 ## Syntax
 
-By its 3 x 3 matrix:
+<div class="mx-form" markdown="1">
 
 ```python
 L = velocityGradientTensor(M)
 ```
 
-A uniaxial flow along d:
+By its 3 x 3 matrix.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 L = velocityGradientTensor.uniaxial(d, q)
 ```
 
-Simple shear along d on the plane n:
+A uniaxial flow along d.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 L = velocityGradientTensor.simpleShear(d, n, e)
 ```
+
+Simple shear along d on the plane n.
+
+</div>
+
+## Description
 
 Its symmetric part is the strain rate, strainRate(L), its skew symmetric part the spin,
 spin(L). A solid does not compress, so every velocity gradient of one has trace zero.
 
 ## Input
 
-| | |
-|---|---|
 | `M` | 3 x 3 matrix, or an array (..., 3, 3) of them |
 | `d, n` | vector3d, the flow direction and the shear plane normal |
 | `q` | the share of the contraction across the second axis, 0.5 for an axially symmetric flow |
 | `e` | the strain rate |
 
-## Output
-
-| | |
-|---|---|
-| `L` | velocityGradientTensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` |  | the rank of the tensor; for this class always two |
 | `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal |
@@ -63,14 +69,16 @@ spin(L). A solid does not compress, so every velocity gradient of one has trace 
 | `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
 | `dtype` |  | the NumPy type of the coefficients |
 
+## Output
+
+| `L` | velocityGradientTensor |
+
 ## See also
 
 [tensor](tensor_index_py.html), [strainRateTensor](strainRateTensor_index_py.html), [spinTensor](spinTensor_index_py.html), [deformationGradientTensor](deformationGradientTensor_index_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [angularVelocityVector](velocityGradientTensor.angularVelocityVector_py.html) | the angular velocity of a velocity gradient, the axial vector of its antisymmetric part |
 | [axisRatios](velocityGradientTensor.axisRatios_py.html) | the differences of the principal values, largest first |
 | [calcTaylor](velocityGradientTensor.calcTaylor_py.html) | the Taylor factor, the shears of the slip systems and the plastic spin of a strain the crystal accommodates by slip alone |

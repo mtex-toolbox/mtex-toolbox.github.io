@@ -14,9 +14,13 @@ the elastic compliance S = inv(C), its Voigt matrix carrying the factors of the 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 complianceTensor(M, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

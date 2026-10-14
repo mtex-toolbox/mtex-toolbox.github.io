@@ -15,14 +15,16 @@ coefficients by Gauss-Legendre quadrature
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2KernelHandle(lambda t: t**2, bandwidth=16)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](S2KernelHandle.bandwidth_py.html) | the degree the coefficients are computed to, the preference maxS2Bandwidth unless given |
 
 MATLAB's [S2KernelHandle](S2KernelHandle.html)

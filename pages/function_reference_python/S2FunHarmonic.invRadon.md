@@ -16,9 +16,13 @@ the inverse of the Funk transform: the even function whose Funk transform this i
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunHarmonic.invRadon(self)
 ```
+
+</div>
 
 MATLAB's [S2FunHarmonic.invRadon](S2FunHarmonic.invRadon.html)
 

@@ -18,23 +18,37 @@ MATLAB's adjoint and adjointNFSFT
 
 ## Syntax
 
-Unit weights:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic.adjoint(v, values, bandwidth=16)
 ```
 
-With quadrature weights:
+Unit weights.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic.adjoint(v, values, bandwidth=16, weights=w)
 ```
 
-A quadrature grid: its bandwidth and weights:
+With quadrature weights.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S2FunHarmonic.adjoint(quadratureS2Grid(16), values)
 ```
+
+A quadrature grid: its bandwidth and weights.
+
+</div>
+
+## Description
 
 With the weights of a quadrature rule exact up to twice the bandwidth the adjoint is the
 expansion of the function the values sample; with other weights it is the adjoint of the
@@ -45,23 +59,19 @@ bandwidth is 512.
 
 ## Input
 
-| | |
-|---|---|
 | `nodes` | vector3d or quadratureS2Grid |
 | `values` | ndarray, one value or one row of values per node |
 
-## Output
-
-| | |
-|---|---|
-| `sF` | S2FunHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest harmonic degree; by default the bandwidth of the grid, else 128 |
 | `weights` | `None` | the weights of the nodes, one number or one per node; by default those of a quadrature grid, else one |
+
+## Output
+
+| `sF` | S2FunHarmonic |
 
 ## See also
 

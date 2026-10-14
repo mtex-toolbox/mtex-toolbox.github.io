@@ -16,9 +16,13 @@ the mean over the circle, the coefficient c_0
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHarmonic.mean(self)
 ```
+
+</div>
 
 MATLAB's [S1Fun.mean](S1Fun.mean.html)
 

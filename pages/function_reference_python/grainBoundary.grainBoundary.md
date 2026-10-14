@@ -16,17 +16,25 @@ walk; chains, junctions and triple points are derived from that order
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gB = grains.boundary
 gB['Forsterite', 'Enstatite']
 gB.segLength, gB.misorientation
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grainBoundary(V, F, grainId, ebsdId, phaseId, misrotation, CSList, plane, frame, scanUnit='um')
 ```
+
+</div>
 
 MATLAB's [grainBoundary.grainBoundary](grainBoundary.grainBoundary.html)
 

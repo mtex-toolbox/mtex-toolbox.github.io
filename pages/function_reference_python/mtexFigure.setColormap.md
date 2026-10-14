@@ -15,29 +15,37 @@ the colour map of the plots of the figure, or of one axes; MATLAB's mtexColorMap
 
 ## Syntax
 
-Every axes, and the plots to come:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.setColormap('viridis')
 ```
 
-One axes only:
+Every axes, and the plots to come.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig.setColormap('hot', ax=mtexFig.children[0])
 ```
 
+One axes only.
+
+</div>
+
+## Description
+
 A filled contour plot cuts its bands out of the map, so it is drawn again.
 
 ## Input
 
-| | |
-|---|---|
 | `cmap` | a matplotlib colour map or the name of one of matplotlib's; mtexColorMap resolves MTEX's names, as 'LaboTeX', and calls this |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ax` | `None` | the one axes to recolour; the figure keeps its colour map for the others |
 

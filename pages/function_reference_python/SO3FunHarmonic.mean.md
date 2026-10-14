@@ -17,38 +17,44 @@ mean along that axis of the list
 
 ## Syntax
 
-The mean value of every function:
+<div class="mx-form" markdown="1">
 
 ```python
 value = mean(SO3F)
 ```
 
-The pointwise mean along the first axis of a list:
+The mean value of every function.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = mean(SO3F, axis=0)
 ```
 
+The pointwise mean along the first axis of a list.
+
+</div>
+
+## Description
+
 The mean value is the first Wigner coefficient, 1/(8 pi^2) times the integral over SO(3).
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunHarmonic, a single function or a list |
-
-## Output
-
-| | |
-|---|---|
-| `value` | float, or an array of the shape of the list |
-| `SO3F` | SO3FunHarmonic, with axis given |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `None` | the axis of the list to average the functions along; MATLAB's d, counted from 0 |
+
+## Output
+
+| `value` | float, or an array of the shape of the list |
+| `SO3F` | SO3FunHarmonic, with axis given |
 
 ## See also
 

@@ -18,9 +18,13 @@ property of every map that carries an EBSD map, under its name
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 trueEbsd.undistort(self)
 ```
+
+</div>
 
 ## Used on
 

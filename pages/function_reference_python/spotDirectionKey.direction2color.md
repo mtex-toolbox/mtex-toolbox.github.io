@@ -15,11 +15,17 @@ the colours of directions under the spot key
 
 ## Syntax
 
-The colours of crystal directions:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = key.direction2color(h)
 ```
+
+The colours of crystal directions.
+
+</div>
+
+## Description
 
 Every direction starts white and is multiplied, for every centre, by the colour of the
 centre faded with the kernel psi of the angle to the nearest equivalent of the centre:
@@ -27,21 +33,17 @@ the full colour at a centre, white far from all.
 
 ## Input
 
-| | |
-|---|---|
 | `h` | vector3d or Miller, the directions |
-
-## Output
-
-| | |
-|---|---|
-| `rgb` | an array of shape h.shape + (3,), RGB values in [0, 1] |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `gray` | `None` | taken for the calling form of the other keys and not used |
+
+## Output
+
+| `rgb` | an array of shape h.shape + (3,), RGB values in [0, 1] |
 
 ## See also
 

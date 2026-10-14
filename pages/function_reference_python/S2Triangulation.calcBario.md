@@ -17,9 +17,13 @@ direction and a column per vertex (MATLAB's calcBario)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Triangulation.calcBario(self, v)
 ```
+
+</div>
 
 MATLAB's [S2Triangulation.calcBario](S2Triangulation.calcBario.html)
 

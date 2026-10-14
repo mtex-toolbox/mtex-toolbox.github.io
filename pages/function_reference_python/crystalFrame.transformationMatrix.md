@@ -17,9 +17,13 @@ disagree, which is how the monoclinic settings 121 and 112 relate
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 crystalFrame.transformationMatrix(self, other)
 ```
+
+</div>
 
 MATLAB's [crystalFrame.transformationMatrix](crystalFrame.transformationMatrix.html)
 

@@ -17,9 +17,13 @@ sphere the result is a function on SO(3)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunHarmonic.conv(self, g)
 ```
+
+</div>
 
 MATLAB's [S2FunHarmonic.conv](S2FunHarmonic.conv.html)
 

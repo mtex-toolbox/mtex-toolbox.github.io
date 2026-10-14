@@ -15,17 +15,25 @@ or a frame gives its elements, an improper orthogonalTransform is refused
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation(a, b, c, d)
 rotation(q)
 rotation(cs)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 rotation(*args, dtype=None)
 ```
+
+</div>
 
 ## Used on
 

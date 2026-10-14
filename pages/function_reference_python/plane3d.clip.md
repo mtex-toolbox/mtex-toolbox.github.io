@@ -16,9 +16,13 @@ the normal; one plane only
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 plane3d.clip(self, lo, hi)
 ```
+
+</div>
 
 ## Used on
 

@@ -16,9 +16,13 @@ the inner product with a constant vector, exact, a function without the group
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.dot(self, x)
 ```
+
+</div>
 
 MATLAB's [S2VectorField.dot](S2VectorField.dot.html)
 

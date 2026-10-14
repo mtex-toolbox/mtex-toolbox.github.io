@@ -16,9 +16,13 @@ the rotations selected by a mask; nodes that empty out are dropped
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3Grid.subGrid(self, mask)
 ```
+
+</div>
 
 MATLAB's [SO3Grid.subGrid](SO3Grid.subGrid.html)
 

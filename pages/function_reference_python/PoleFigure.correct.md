@@ -16,23 +16,37 @@ the pole figures corrected for background and defocusing
 
 ## Syntax
 
-The background subtracted:
+<div class="mx-form" markdown="1">
 
 ```python
 pf = pf.correct(background=pfBg)
 ```
 
-The defocusing divided out:
+The background subtracted.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = pf.correct(defocusing=pfDef)
 ```
 
-Both, the defocusing without its background:
+The defocusing divided out.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = pf.correct(background=pfBg, defocusing=pfDef, defocusingBackground=pfDefBg)
 ```
+
+Both, the defocusing without its background.
+
+</div>
+
+## Description
 
 The background is subtracted from the intensities, and they are divided by the
 defocusing, from which its own background is subtracted first. Each correction is a
@@ -43,23 +57,19 @@ along a curve, as a defocusing usually is.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
-| `pf` | PoleFigure, the corrected intensities |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `background` | `None` | PoleFigure or number, the background (MATLAB's option bg) |
 | `defocusing` | `None` | PoleFigure, the defocusing (MATLAB's option def) |
 | `defocusingBackground` | `None` | PoleFigure or number, the background of the defocusing measurement (MATLAB's option defbg) |
+
+## Output
+
+| `pf` | PoleFigure, the corrected intensities |
 
 ## See also
 

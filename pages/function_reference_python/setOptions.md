@@ -13,14 +13,16 @@ setOptions(x, ...) is x.setOptions(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 setOptions(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [trueEbsd](trueEbsd.setOptions_py.html) | the registration settings of every map of the job, or of one |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>

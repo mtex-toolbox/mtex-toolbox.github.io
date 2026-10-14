@@ -17,35 +17,57 @@ other pole figures on the same directions; MATLAB's calcError
 
 ## Syntax
 
-The damped relative error:
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(pf, odf)
 ```
 
-Against other pole figures on the same directions:
+The damped relative error.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(pf, pf2)
 ```
 
-The RP error above 0.5:
+Against other pole figures on the same directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(pf, odf, 'RP', epsilon=0.5)
 ```
 
-The ODF first, as MATLAB's:
+The RP error above 0.5.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(odf, pf, 'RP')
 ```
 
-The relative mean square error:
+The ODF first, as MATLAB's.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e = calcError(pf, odf, 'l2')
 ```
+
+The relative mean square error.
+
+</div>
+
+## Description
 
 The deviations are those of calcErrorPF, averaged over each pole figure: 'relative', the
 default, the relative error damped by epsilon (0.5), which MATLAB computes when no measure is
@@ -56,23 +78,19 @@ names are taken in any case.
 
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure, the measurement |
 | `other` | SO3Fun, the ODF of the recalculation, or PoleFigure on the same directions |
 
-## Output
-
-| | |
-|---|---|
-| `e` | ndarray, one number per pole figure; NaN where 'RP' keeps no direction |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `mode` | `'relative'` | 'relative', 'RP', 'l1' or 'l2' |
 | `epsilon` | `None` | the damping of 'relative' or the threshold of 'RP', both times the normalisation |
+
+## Output
+
+| `e` | ndarray, one number per pole figure; NaN where 'RP' keeps no direction |
 
 ## See also
 

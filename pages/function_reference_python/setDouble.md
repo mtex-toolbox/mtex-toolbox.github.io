@@ -13,9 +13,13 @@ setDouble(e, d) is e.setDouble(d): the embedding with the coordinates d, one row
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 setDouble(e, d)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L544">source</a></font>
 {% endraw %}

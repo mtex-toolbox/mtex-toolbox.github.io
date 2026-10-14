@@ -14,36 +14,40 @@ the largest angle about every axis, in radians, with the faces of the mesh
 
 ## Syntax
 
-The surface on a 5 degree mesh:
+<div class="mx-form" markdown="1">
 
 ```python
 P, F = regionSurface(oR)
 ```
 
-A finer surface:
+The surface on a 5 degree mesh.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 P, F = regionSurface(oR, resolution=2*degree)
 ```
 
+A finer surface.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `oR` | orientationRegion, e.g. fundamentalRegion(cs, ss) |
-
-## Output
-
-| | |
-|---|---|
-| `P` | (n, 3) array, the points of the surface, NaN about the axes outside the region's sector |
-| `F` | (m, 3) int array, the triangles of the mesh as indices into P |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `5*degree` | the spacing of the sphere mesh the surface is pushed out from |
+
+## Output
+
+| `P` | (n, 3) array, the points of the surface, NaN about the axes outside the region's sector |
+| `F` | (m, 3) int array, the triangles of the mesh as indices into P |
 
 ## See also
 

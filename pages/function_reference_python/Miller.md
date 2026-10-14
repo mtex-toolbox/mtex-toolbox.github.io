@@ -13,59 +13,97 @@ crystal directions and lattice plane normals, a vector3d in a crystal frame; MAT
 
 ## Syntax
 
-A lattice plane normal:
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller(h, k, l, cs)
 ```
 
-Four indices, hexagonal and trigonal lattices:
+A lattice plane normal.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller(h, k, i, l, cs)
 ```
 
-A lattice direction, 'UVTW' with four indices:
+Four indices, hexagonal and trigonal lattices.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller(u, v, w, cs, 'uvw')
 ```
 
-Many at once, the indices along the last axis:
+A lattice direction, 'UVTW' with four indices.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller([[1, 0, 0], [1, 1, 1]], cs)
 ```
 
-(hkl) or [uvw] one, {hkl} or <uvw> the whole family:
+Many at once, the indices along the last axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller('{111}', cs)
 ```
 
-The plane holding both directions, the zone law:
+(hkl) or [uvw] one, {hkl} or <uvw> the whole family.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller('[100]\[011]', cs)
 ```
 
-The direction both planes hold:
+The plane holding both directions, the zone law.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller('(100)\(011)', cs)
 ```
 
-A vector3d expressed in the crystal frame:
+The direction both planes hold.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller(v, cs)
 ```
 
-With antipodal symmetry:
+A vector3d expressed in the crystal frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = Miller(1, 1, 0, cs, antipodal=True)
 ```
+
+With antipodal symmetry.
+
+</div>
+
+## Description
 
 A crystal direction is a vector3d written in a crystal frame: it has the Miller indices hkl
 and uvw, and where the frame carries a point group it stands for its symmetrically
@@ -76,22 +114,18 @@ components and is restated in the crystal frame.
 
 ## Input
 
-| | |
-|---|---|
 | `args` | three or four indices, each a number or an array, or one array with the indices along its last axis; a string; or a vector3d. Then the crystalFrame cs, and a style 'hkl', 'hkil', 'uvw', 'UVTW' or 'xyz', in any case, saying how the indices are read |
-
-## Output
-
-| | |
-|---|---|
-| `m` | vector3d in the crystal frame |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | the antipodal symmetry, here the frame's Laue group in place of its point group; MATLAB sets the antipodal flag instead, which stays False here |
 | `dispStyle` | `None` | the indices the display shows and the numbers are read as, the same as the style given positionally ('hkl', 'hkil', 'uvw', 'UVTW', 'xyz'); a string keeps the style of its brackets |
+
+## Output
+
+| `m` | vector3d in the crystal frame |
 
 ## See also
 

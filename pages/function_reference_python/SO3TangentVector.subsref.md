@@ -16,9 +16,13 @@ the elements selected by ind, the operator a[ind]
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 a[ind]
 ```
+
+</div>
 
 MATLAB's [SO3TangentVector.subsref](SO3TangentVector.subsref.html)
 

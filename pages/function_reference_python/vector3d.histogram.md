@@ -19,9 +19,13 @@ diagram of directions
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.histogram(x, *args, **kw)
 ```
+
+</div>
 
 MATLAB's [vector3d.histogram](vector3d.histogram.html)
 

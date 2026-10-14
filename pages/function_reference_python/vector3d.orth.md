@@ -16,9 +16,13 @@ an arbitrary orthogonal direction, vector3d/orth
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.orth(self)
 ```
+
+</div>
 
 MATLAB's [vector3d.orth](vector3d.orth.html)
 

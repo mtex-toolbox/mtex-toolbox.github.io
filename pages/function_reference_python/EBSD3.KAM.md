@@ -17,29 +17,47 @@ to its neighbours; MATLAB's KAM of EBSD3
 
 ## Syntax
 
-The six face neighbours:
+<div class="mx-form" markdown="1">
 
 ```python
 kam = KAM(ebsd)
 ```
 
-The neighbours up to the second order:
+The six face neighbours.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kam = KAM(ebsd, order=2)
 ```
 
-Misorientations above 5 degree left out:
+The neighbours up to the second order.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kam = KAM(ebsd, threshold=5*degree)
 ```
 
-The largest angle instead of the mean:
+Misorientations above 5 degree left out.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kam = KAM(ebsd, max=True)
 ```
+
+The largest angle instead of the mean.
+
+</div>
+
+## Description
 
 The neighbours of a voxel are those within order steps along the axes of the grid, of the
 same phase. On a volume that carries grain ids (after calcGrains) only the neighbours of the
@@ -49,23 +67,19 @@ volume holds one indexed phase. The angles are in radian.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD3 of one indexed phase |
-
-## Output
-
-| | |
-|---|---|
-| `kam` | array of the shape of the volume, the angles in radian |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `order` | `1` | the neighbours up to this many steps, the sum of the steps along the axes |
 | `threshold` | `None` | a misorientation angle above it is left out, instead of the grains |
 | `max` | `False` | the largest misorientation angle instead of the mean |
+
+## Output
+
+| `kam` | array of the shape of the volume, the angles in radian |
 
 ## See also
 

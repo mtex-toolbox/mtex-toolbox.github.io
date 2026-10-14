@@ -14,47 +14,77 @@ orientations they give
 
 ## Syntax
 
-The child variants:
+<div class="mx-form" markdown="1">
 
 ```python
 p2cVariants = variants(p2c)
 ```
 
-The parent variants:
+The child variants.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 p2pVariants = variants(p2c, parent=True)
 ```
 
-Every child variant of every parent:
+The parent variants.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oriChild = variants(p2c, oriParent)
 ```
 
-One per parent, chosen by its id:
+Every child variant of every parent.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oriChild = variants(p2c, oriParent, variantId)
 ```
 
-Every parent of every child:
+One per parent, chosen by its id.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oriParent = variants(p2c, oriChild)
 ```
 
-One per child, chosen by its id:
+Every parent of every child.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oriParent = variants(p2c, oriChild, variantId)
 ```
 
-The child texture:
+One per child, chosen by its id.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odfChild = variants(p2c, odfParent)
 ```
+
+The child texture.
+
+</div>
+
+## Description
 
 The child variants are the distinct p2c * r over the rotations r of the parent group modulo
 the child group, the parent variants the distinct r * p2c over the child group modulo the
@@ -66,26 +96,22 @@ frame gives its parent orientations instead, in the parent frame.
 
 ## Input
 
-| | |
-|---|---|
 | `p2c` | orientation, the parent to child misorientation, from the parent frame to the child frame |
 | `second` | orientation, the parent orientations, or the child orientations; SO3Fun, a parent texture; or 'parent', 'child' |
 | `ids` | the variant ids, one per orientation, broadcast against them; for a texture an SO3Fun of the parent orientations weighting the parents |
 
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `parent` | `False` | the parent variants instead of the child variants |
+
 ## Output
 
-| | |
-|---|---|
 | `p2cVariants` | orientation, the variants, a list |
 | `oriChild` | orientation, oriParent.shape + (numVariants,), or oriParent.shape with ids |
 | `oriParent` | orientation, oriChild.shape + (numVariants,), or oriChild.shape with ids |
 | `odfChild` | SO3Fun, the child texture |
-
-## Keywords
-
-| | default | |
-|---|---|---|
-| `parent` | `False` | the parent variants instead of the child variants |
 
 ## See also
 

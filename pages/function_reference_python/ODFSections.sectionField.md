@@ -15,32 +15,34 @@ the directions and vectors of a field drawn over section k, None for sections wi
 
 ## Syntax
 
-None: Euler and axis angle sections carry no field:
+<div class="mx-form" markdown="1">
 
 ```python
 oS.sectionField(k)
 ```
+
+None: Euler and axis angle sections carry no field.
+
+</div>
+
+## Description
 
 Only the pole figure sections draw a field over their charts, pfSections.sectionField;
 every other kind of section returns None.
 
 ## Input
 
-| | |
-|---|---|
 | `k` | int, the index of the section |
-
-## Output
-
-| | |
-|---|---|
-| `None` |  |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `15*degree` | the spacing of the grid the field would be given on |
+
+## Output
+
+| `None` |  |
 
 ## See also
 

@@ -15,15 +15,17 @@ beyond it, where MATLAB takes natural neighbours and extrapolates linearly
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 T = spatialTransformField(pos, u)
 T = spatialTransformField.fit(posA, posB)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](spatialTransformField.eval_py.html) | linear over the triangulation of the points in coordinates of unit spread, the nearest point beyond it |
 | [fit](spatialTransformField.fit_py.html) | the field of the displacements of the point pairs, at the points of frame A |
 | [inv](spatialTransformField.inv_py.html) | the inverse by fixed point iteration |

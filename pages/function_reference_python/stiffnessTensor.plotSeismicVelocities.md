@@ -17,23 +17,37 @@ MATLAB's stiffnessTensor/plotSeismicVelocities
 
 ## Syntax
 
-The overview, upper hemisphere:
+<div class="mx-form" markdown="1">
 
 ```python
 plotSeismicVelocities(C)
 ```
 
-Lower, extrema with their equivalents:
+The overview, upper hemisphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotSeismicVelocities(C, lower=True, symmetriseMinMax=True)
 ```
 
-With a density not stored on C:
+Lower, extrema with their equivalents.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotSeismicVelocities(C, density=3.355)
 ```
+
+With a density not stored on C.
+
+</div>
+
+## Description
 
 Six charts in two rows: Vp, the S-wave anisotropy 200 (Vs1 - Vs2) / (Vs1 + Vs2), Vs1 with
 the polarisation of the fast S-wave, Vs2 with that of the slow one, Vp/Vs1 and Vp/Vs2,
@@ -43,25 +57,21 @@ velocities are in km/s for a stiffness in GPa and a density in g/cm^3.
 
 ## Input
 
-| | |
-|---|---|
 | `C` | stiffnessTensor, with its density stored (C.density) or given |
-
-## Output
-
-| | |
-|---|---|
-| `fig` | the mtexFigure of the six charts |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `symmetriseMinMax` | `False` | mark every crystal direction equivalent to the extrema |
 | `markerSize` | `10` | the size of the markers of the extrema |
 | `lower` | `False` | the lower hemisphere instead of the upper |
 | `colormap` | `'red2blue'` | the colour map of the charts |
 | `density` | `None` | the density in g/cm^3; by default C.density |
+
+## Output
+
+| `fig` | the mtexFigure of the six charts |
 
 ## See also
 

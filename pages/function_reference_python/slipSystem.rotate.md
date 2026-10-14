@@ -17,9 +17,13 @@ NumPy does: a column of orientations times a row of systems is MATLAB's outer or
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 slipSystem.rotate(self, rot)
 ```
+
+</div>
 
 MATLAB's [slipSystem.rotate](slipSystem.rotate.html)
 

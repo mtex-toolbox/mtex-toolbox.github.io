@@ -18,33 +18,55 @@ distribution
 
 ## Syntax
 
-The normals from the orientations of the pixels:
+<div class="mx-form" markdown="1">
 
 ```python
 gbnd = calcGBND(gB, ebsd)
 ```
 
-The normals from the mean orientations of the grains:
+The normals from the orientations of the pixels.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gbnd = calcGBND(gB, grains)
 ```
 
-A smaller halfwidth, a nonnegative kernel:
+The normals from the mean orientations of the grains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gbnd = calcGBND(gB, ebsd, halfwidth=5*degree, nonneg=True)
 ```
 
-The character distribution of one misorientation:
+A smaller halfwidth, a nonnegative kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gbcd = calcGBND(gB, grains, moriRef)
 ```
 
+The character distribution of one misorientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 gbcd = calcGBND(gB, grains, moriRef, oneSide=True) # only the first side of a symmetric relation
 ```
+
+</div>
+
+## Description
 
 A section shows of every boundary only its trace, a direction in the plane of the map; the
 plane itself may be inclined about it at any angle. The orientations on the two sides turn
@@ -66,26 +88,22 @@ inverse, a twin, takes both sides of every boundary, unless oneSide.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary, the boundaries of one pair of phases |
 | `source` | EBSD, the map the boundaries were computed from, or grain2d, the grains |
 | `moriRef` | orientation, the misorientation of the character distribution |
 
-## Output
-
-| | |
-|---|---|
-| `gbnd` | S2FunHarmonic, antipodal, in the crystal frame of the phase, or of the first side of moriRef |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `halfwidth` | `10*degree` | the halfwidth of the density estimation, of the kernel in the normals, and, with moriRef, how far a misorientation may lie from it |
 | `nonneg` | `False` | a nonnegative kernel of the inclination, a Gaussian in the cosine to the trace, instead of the solution of the integral equation, which may ring and be negative |
 | `bump` | `False` | a bump kernel of the inclination, constant within the halfwidth |
 | `oneSide` | `False` | with a moriRef that is its own inverse, take only the first side of every boundary |
+
+## Output
+
+| `gbnd` | S2FunHarmonic, antipodal, in the crystal frame of the phase, or of the first side of moriRef |
 
 ## References
 

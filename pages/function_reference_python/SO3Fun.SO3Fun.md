@@ -14,9 +14,13 @@ the functions on SO(3): SO3FunHarmonic, SO3FunRBF, SO3FunCBF, SO3FunBingham, SO3
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3Fun()
 ```
+
+</div>
 
 MATLAB's [SO3Fun.SO3Fun](SO3Fun.SO3Fun.html)
 

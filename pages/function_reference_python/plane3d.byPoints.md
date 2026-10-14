@@ -16,9 +16,13 @@ the smallest principal axis of the cloud
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 plane3d.byPoints(v)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plane.py#L45">source</a></font>
 {% endraw %}

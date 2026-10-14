@@ -15,9 +15,13 @@ the positions moved by the drift interpolated at their coordinate along the slow
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformDrift.eval(self, pos)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L581">source</a></font>
 {% endraw %}

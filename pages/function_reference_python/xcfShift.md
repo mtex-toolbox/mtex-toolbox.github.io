@@ -14,29 +14,47 @@ how far every part of one image moved against another, by phase correlation of t
 
 ## Syntax
 
-Two arrays, in pixels:
+<div class="mx-form" markdown="1">
 
 ```python
 u, peak, pos = xcfShift(A, B)
 ```
 
-Two mapImage, in specimen units:
+Two arrays, in pixels.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u, peak, pos = xcfShift(mgA, mgB)
 ```
 
-The tiles given:
+Two mapImage, in specimen units.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u, peak, pos = xcfShift(A, B, ROISize=64, numROI=(24, 18))
 ```
 
-A transform fitted through the shifts:
+The tiles given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformShift.fit(pos, pos + u, weights=peak)
 ```
+
+A transform fitted through the shifts.
+
+</div>
+
+## Description
 
 The region where both images are finite is divided into a grid of tiles, and each tile of
 A is phase correlated with the same tile of B; the peak of the correlation, upsampled,
@@ -50,25 +68,21 @@ grid first, as MATLAB's.
 
 ## Input
 
-| | |
-|---|---|
 | `A, B` | 2d arrays of the same size, or mapImage on one grid |
-
-## Output
-
-| | |
-|---|---|
-| `u` | vector3d, the displacement from A to B of every tile |
-| `peak` | the correlation peak height of every tile, the weight in a fit |
-| `pos` | vector3d, the tile centres in A |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ROISize` | `None` | the tile width in pixels, at least 8; by default 2^ceil(log2(rows/4)) |
 | `numROI` | `24` | the number of tiles across, or (across, down); a single number is scaled by the aspect ratio for the tiles down |
 | `XCFMesh` | `250` | the upsampling factor of the correlation peak |
+
+## Output
+
+| `u` | vector3d, the displacement from A to B of every tile |
+| `peak` | the correlation peak height of every tile, the weight in a fit |
+| `pos` | vector3d, the tile centres in A |
 
 ## References
 

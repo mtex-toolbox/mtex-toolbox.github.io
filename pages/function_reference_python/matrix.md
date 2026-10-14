@@ -13,14 +13,16 @@ matrix(x, ...) is x.matrix(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 matrix(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [orthogonalTransform](orthogonalTransform.matrix_py.html) | the orthogonal matrices, the rotation matrix times the parity |
 | [quaternion](quaternion.matrix_py.html) | the rotation matrices, of shape (..., 3, 3) |
 | [rotation](rotation.matrix_py.html) | the rotation matrices, of shape (..., 3, 3) |

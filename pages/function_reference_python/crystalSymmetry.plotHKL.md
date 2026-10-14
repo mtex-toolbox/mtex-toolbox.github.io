@@ -17,17 +17,27 @@ equivalents, labelled by their indices; MATLAB's crystalFrame.plotHKL
 
 ## Syntax
 
-On the upper hemisphere:
+<div class="mx-form" markdown="1">
 
 ```python
 plotHKL(cs)
 ```
 
-On the whole sphere:
+On the upper hemisphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cs.plotHKL(complete=True)
 ```
+
+On the whole sphere.
+
+</div>
+
+## Description
 
 Every family is scattered with symmetrised=True and labeled=True, <111>, <110>, <100> in
 the colours of that order, with black marker edges over a grid; the other keywords go to
@@ -35,21 +45,17 @@ scatter and the spherical plots.
 
 ## Input
 
-| | |
-|---|---|
 | `CS` | crystalFrame |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib collections |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `complete` | `False` | the whole sphere instead of the upper hemisphere |
+
+## Output
+
+| `h` | the matplotlib collections |
 
 ## See also
 

@@ -16,9 +16,13 @@ the Rodrigues vectors, the axes scaled by tan(omega/2)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion.Rodrigues(self)
 ```
+
+</div>
 
 ## Used on
 

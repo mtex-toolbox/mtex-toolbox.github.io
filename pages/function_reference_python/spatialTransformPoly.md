@@ -15,15 +15,17 @@ the basis [1 x y] or [1 x y x^2 xy y^2]
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 T = spatialTransformPoly(c, 2)
 T = spatialTransformPoly.fit(posA, posB, degree=2, weights=w)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](spatialTransformPoly.eval_py.html) | the positions moved by the polynomial displacement |
 | [fit](spatialTransformPoly.fit_py.html) | the polynomial displacement best mapping the positions posA onto posB |
 | [fitOptions](spatialTransformPoly.fitOptions_py.html) | the degree, the keyword a refit keeps |

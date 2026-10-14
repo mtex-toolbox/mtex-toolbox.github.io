@@ -13,14 +13,16 @@ Euler(x, ...) is x.Euler(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 Euler(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [orthogonalTransform](orthogonalTransform.Euler_py.html) | the Euler angles of the rotational part, in the convention named or the session's |
 | [quaternion](quaternion.Euler_py.html) | the Euler angles (alpha, beta, gamma) in the convention named, the session's by default |
 

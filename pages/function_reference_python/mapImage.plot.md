@@ -17,41 +17,67 @@ coordinates and in the screen orientation of its frame
 
 ## Syntax
 
-One image:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(mg)
 ```
 
-One axes per image, titled by its name:
+One image.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(imgList)
 ```
 
-The edge transform of each:
+One axes per image, titled by its name.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(imgList, edge=True)
 ```
 
-One channel of a multi-channel image:
+The edge transform of each.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(mg, channel=1)
 ```
 
-No scale bar, another colour map:
+One channel of a multi-channel image.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(mg, micronbar=False, colormap='parula')
 ```
 
-An image over its map:
+No scale bar, another colour map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd, ebsd.bc); hold(True); plot(mg, alpha=0.5)
 ```
+
+An image over its map.
+
+</div>
+
+## Description
 
 An image is drawn in micrometres, not pixels, in the screen orientation its frame takes,
 so that an image and the map it is aligned to lie on top of each other without either
@@ -62,19 +88,11 @@ its contrast stretched over the 2nd to 98th percentile.
 
 ## Input
 
-| | |
-|---|---|
 | `mg` | mapImage, or a list or mapImageList of them |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib image, a list of them for a list |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `channel` | `None` | the channel, or the three channels, to draw; by default all |
 | `edge` | `False` | draw the edge transform of the image instead of its values |
@@ -83,6 +101,10 @@ its contrast stretched over the 2nd to 98th percentile.
 | `colormap` | `None` | the colour map of a single channel, gray by default |
 | `layout` | `None` | (rows, columns) of the axes of a list |
 | `figSize` | `None` | the size of a new figure of a list |
+
+## Output
+
+| `h` | the matplotlib image, a list of them for a list |
 
 ## See also
 

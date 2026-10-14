@@ -15,9 +15,13 @@ a tetragonal prism, the faces {100} and {001}
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 crystalShape.tetr(CS)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L385">source</a></font>
 {% endraw %}

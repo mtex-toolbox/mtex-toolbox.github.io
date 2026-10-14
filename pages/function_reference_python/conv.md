@@ -13,14 +13,16 @@ conv(x, ...) is x.conv(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 conv(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [S1FunHarmonic](S1FunHarmonic.conv_py.html) | smoothing by a kernel is one factor per mode |
 | [S1Kernel](S1Kernel.conv_py.html) | the convolution with another kernel on the circle: the coefficients multiplied |
 | [S2FunHarmonic](S2FunHarmonic.conv_py.html) | the convolution with a kernel or another function on the sphere |

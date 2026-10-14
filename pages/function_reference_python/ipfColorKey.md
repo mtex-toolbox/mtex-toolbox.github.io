@@ -14,18 +14,22 @@ an orientation coloured by the crystal direction it carries along a specimen dir
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 ipfColorKey(cs), ipfColorKey(ebsd), ipfColorKey(ori)
 key.ipfDirection = xvector
 rgb = key.orientation2color(ori)
 ```
 
+</div>
+
+## Description
+
 dirMap is the direction key doing the colouring, HSVDirectionKey unless given.
 
 ## Members
 
-| | |
-|---|---|
 | [crystalDirection](ipfColorKey.crystalDirection_py.html) | the crystal directions along the specimen direction of every orientation |
 | [orientation2color](ipfColorKey.orientation2color_py.html) | an orientation that was never measured has no colour, and a map shows nothing for it |
 | [plot](ipfColorKey.plot_py.html) | the direction key drawn on its sector, or with complete=True over the whole sphere |

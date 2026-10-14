@@ -15,50 +15,60 @@ undeformed body into dx = F dX of the deformed one
 
 ## Syntax
 
-By its 3 x 3 matrix:
+<div class="mx-form" markdown="1">
 
 ```python
 F = deformationGradientTensor(M)
 ```
 
-A uniaxial deformation along d:
+By its 3 x 3 matrix.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 F = deformationGradientTensor.uniaxial(d, rate)
 ```
 
-Simple shear along d on the plane n:
+A uniaxial deformation along d.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 F = deformationGradientTensor.simpleShear(d, n, e)
 ```
 
+Simple shear along d on the plane n.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 F = deformationGradientTensor.pureShear(ex, comp, lam) # pure shear, extension along ex
 ```
+
+</div>
+
+## Description
 
 The deformation gradient holds the full local rotation and stretch of the material; a volume
 preserving deformation has det F = 1. Its strains are F.GreenStrain() and F.CauchyStrain().
 
 ## Input
 
-| | |
-|---|---|
 | `M` | 3 x 3 matrix, or an array (..., 3, 3) of them |
 | `d, n` | vector3d, the shear direction and the shear plane normal |
 | `rate, e` | the amount of deformation |
 | `ex, comp` | vector3d, the extension and the compression direction |
 | `lam` | the stretch |
 
-## Output
-
-| | |
-|---|---|
-| `F` | deformationGradientTensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` |  | the rank of the tensor; for this class always two |
 | `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal |
@@ -69,14 +79,16 @@ preserving deformation has det F = 1. Its strains are F.GreenStrain() and F.Cauc
 | `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
 | `dtype` |  | the NumPy type of the coefficients |
 
+## Output
+
+| `F` | deformationGradientTensor |
+
 ## See also
 
 [tensor](tensor_index_py.html), [velocityGradientTensor](velocityGradientTensor_index_py.html), [strainTensor](strainTensor_index_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [CauchyStrain](deformationGradientTensor.CauchyStrain_py.html) | the Cauchy (small) strain of a deformation gradient, its symmetric part less the identity |
 | [deformationGradientTensor](deformationGradientTensor.deformationGradientTensor_py.html) | a deformation gradient tensor F, the rank two tensor carrying a line segment dX of the undeformed body into dx = F dX of the deformed one |
 | [GreenStrain](deformationGradientTensor.GreenStrain_py.html) | the Green-Lagrange strain of a deformation gradient, (F^T F - I) / 2 |

@@ -14,9 +14,13 @@ logm(T) is T.logm(): the matrix logarithm
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 logm(T)
 ```
+
+</div>
 
 MATLAB's [quaternion.logm](quaternion.logm.html)
 

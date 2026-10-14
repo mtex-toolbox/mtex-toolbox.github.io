@@ -16,9 +16,13 @@ the von Mises equivalent stress, sqrt(3/2 s:s) of the deviatoric stress s
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 stressTensor.equivalentStress(sigma)
 ```
+
+</div>
 
 MATLAB's [stressTensor.equivalentStress](stressTensor.equivalentStress.html)
 

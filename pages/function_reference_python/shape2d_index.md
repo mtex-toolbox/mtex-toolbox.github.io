@@ -16,8 +16,6 @@ positive one
 
 ## Members
 
-| | |
-|---|---|
 | [allV](shape2d.allV_py.html) | the vertices of the outline as framed points, the same as Vs |
 | [byFV](shape2d.byFV_py.html) | the outline of a set of segments laid end to end by direction, the characteristic shape |
 | [byRhoTheta](shape2d.byRhoTheta_py.html) | an outline in polar coordinates, which is how a projection function becomes the shape it describes |

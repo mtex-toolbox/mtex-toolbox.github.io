@@ -15,36 +15,48 @@ the one given as (lo, hi)
 
 ## Syntax
 
-One range over every axes:
+<div class="mx-form" markdown="1">
 
 ```python
 setColorRange('equal')
 ```
 
-The range given:
+One range over every axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 setColorRange((0, 4))
 ```
 
-Each axes of a figure given its own range:
+The range given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 setColorRange('tight', fig=mtexFig)
 ```
+
+Each axes of a figure given its own range.
+
+</div>
+
+## Description
 
 MATLAB's 'log' option is setColorScale('log'), its choice of the figures ('all', 'current',
 'figure') the keyword fig, and 'zero2white' has no counterpart.
 
 ## Input
 
-| | |
-|---|---|
 | `colorRange` | 'equal', 'tight' or (lo, hi) |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure; the current one by default |
 

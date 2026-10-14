@@ -17,39 +17,45 @@ handle; an orientation turns its harmonic form
 
 ## Syntax
 
-Turned in the specimen frame:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = rotate(SO3VF, rot)
 ```
 
-Turned in the crystal frame:
+Turned in the specimen frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VF.rotate(rot, side='right')
 ```
+
+Turned in the crystal frame.
+
+</div>
+
+## Description
 
 The new handle evaluates the old one at the orientations turned back and turns the vectors
 it returns where the rotation acts on their tangent space.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3VF` | SO3VectorFieldHandle |
 | `rot` | rotation, or an orientation, one |
 
-## Output
-
-| | |
-|---|---|
-| `SO3VF` | SO3VectorFieldHandle, or SO3VectorFieldHarmonic for an orientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left', the specimen side, or 'right', the crystal side; MATLAB's flag 'right' |
+
+## Output
+
+| `SO3VF` | SO3VectorFieldHandle, or SO3VectorFieldHarmonic for an orientation |
 
 ## See also
 

@@ -14,8 +14,6 @@ the sphere: f(theta, rho) = sum G[m, j] e^{i(m rho - j theta)}, theta a transfor
 
 ## Members
 
-| | |
-|---|---|
 | [adjoint](S2GridPlan.adjoint_py.html) | the spherical coefficients from weighted values on the grid, the FFTs taken backwards |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L839">source</a></font>

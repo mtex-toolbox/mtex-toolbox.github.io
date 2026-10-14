@@ -16,53 +16,87 @@ a crystal shape drawn as the polygons of its faces, in a 3D axes or onto a held 
 
 ## Syntax
 
-The shape in a 3D axes:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cS)
 ```
 
-One colour, translucent:
+The shape in a 3D axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cS, faceColor='red', faceAlpha=0.5, edgeColor='k')
 ```
 
-A value per face through the colour map:
+One colour, translucent.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cS, faceColor=cS.faceArea)
 ```
 
-A colour per form, with a legend:
+A value per face through the colour map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cS, colored=True)
 ```
 
-The colours of a key of the normals:
+A colour per form, with a legend.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cS, colored=ipfHSVKey(cS.CS))
 ```
 
-At positions, plot(x, y, z, cS) or plot(xy, cS):
+The colours of a key of the normals.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(x, y, cS)
 ```
 
-The section by a lattice plane:
+At positions, plot(x, y, z, cS) or plot(xy, cS).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cS, Miller(1, 1, 0, cS.CS, 'hkl'))
 ```
 
-A slip system inside the shape:
+The section by a lattice plane.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(cS, sS)
 ```
+
+A slip system inside the shape.
+
+</div>
+
+## Description
 
 A list of shapes, ori * cS turned by orientations for instance, is drawn at once; with
 positions every shape is moved there first. Drawn while a map is held, the shapes are seen
@@ -73,20 +107,12 @@ parent and the like, are taken as by every plot; MATLAB's legendSpacing is not t
 
 ## Input
 
-| | |
-|---|---|
 | `cS` | crystalShape, one or a list |
 | `x, y, z` | the positions of the shapes, or xy an (n, 2) or (n, 3) array of them |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib collection of the faces |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `None` | one colour, one per face, one per shape, or a value per face mapped through the colour map |
 | `faceAlpha` | `None` | the opacity of the faces |
@@ -95,6 +121,10 @@ parent and the like, are taken as by every plot; MATLAB's legendSpacing is not t
 | `colored` | `None` | True gives every form its own colour with a legend; a direction or ipf key colours the faces by their normals |
 | `colormap` | `'viridis'` | the colour map of the values per face |
 | `displayName` | `None` | the label of the shape in a legend |
+
+## Output
+
+| `h` | the matplotlib collection of the faces |
 
 ## See also
 

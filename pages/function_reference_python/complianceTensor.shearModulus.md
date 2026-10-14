@@ -17,33 +17,55 @@ MATLAB's shearModulus
 
 ## Syntax
 
-Of the plane h along u:
+<div class="mx-form" markdown="1">
 
 ```python
 G = shearModulus(C, h, u)
 ```
 
-The function of the shear direction:
+Of the plane h along u.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 G = shearModulus(C, h)
 ```
 
-The Voigt bound of an isotropic polycrystal:
+The function of the shear direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 G = shearModulus(C)
 ```
 
-The Reuss bound, 'Hill' the mean of the two:
+The Voigt bound of an isotropic polycrystal.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 G = shearModulus(C, 'Reuss')
 ```
 
+The Reuss bound, 'Hill' the mean of the two.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 GV, GR, GH = shearModulus(C, 'all') # all three
 ```
+
+</div>
+
+## Description
 
 With the plane and the direction the anisotropic modulus of the single crystal; with the
 plane alone the function on the sphere of the shear direction. Without both, or with a
@@ -55,16 +77,12 @@ counterpart.
 
 ## Input
 
-| | |
-|---|---|
 | `C` | stiffnessTensor or complianceTensor, a stiffness tensor is inverted first |
 | `h` | vector3d or Miller, the shear plane; or 'Voigt', 'Reuss', 'Hill', 'all' |
 | `u` | vector3d or Miller, the shear direction |
 
 ## Output
 
-| | |
-|---|---|
 | `G` | the shear modulus, an S2Fun of the direction, or the bounds |
 
 ## See also
@@ -73,9 +91,13 @@ counterpart.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 complianceTensor.shearModulus(T, h=None, u=None, *args)
 ```
+
+</div>
 
 MATLAB's [complianceTensor.shearModulus](complianceTensor.shearModulus.html)
 

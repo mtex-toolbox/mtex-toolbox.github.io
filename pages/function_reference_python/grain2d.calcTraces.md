@@ -17,29 +17,47 @@ along; MATLAB's calcTraces
 
 ## Syntax
 
-One trace of all indexed pixels, by the Radon transform:
+<div class="mx-form" markdown="1">
 
 ```python
 traces, rel, cSize = calcTraces(ebsd)
 ```
 
-A trace per phase, Fourier based:
+One trace of all indexed pixels, by the Radon transform.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 traces, rel, cSize = calcTraces(ebsd, ebsd.phaseId, 'Fourier', minClusterSize=50)
 ```
 
-A trace per phase from the characteristic shape:
+A trace per phase, Fourier based.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 traces, rel, cSize = calcTraces(grains, grains.phaseId)
 ```
 
-The shortest calliper of the shape instead:
+A trace per phase from the characteristic shape.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 traces, rel, cSize = calcTraces(grains, grains.phaseId, 'calliper')
 ```
+
+The shortest calliper of the shape instead.
+
+</div>
+
+## Description
 
 A cluster is the set of pixels, or grains, with one value of every column of clusterId,
 as MATLAB's clusterId = [grainId, variantId]; ids of zero or NaN belong to no cluster. By
@@ -58,23 +76,19 @@ summed numPixel of the grains on grains) is a keyword argument too.
 
 ## Input
 
-| | |
-|---|---|
 | `x` | EBSD on a lattice, or grain2d |
-
-## Output
-
-| | |
-|---|---|
-| `traces` | vector3d, antipodal directions in the plane of the map, one per cluster |
-| `rel` | the reliability, how much the winning direction stands out, zero for none |
-| `cSize` | the size of every cluster, pixels on a map, summed numPixel of the grains |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `clusterId` | `None` | one or more columns of ids, a row per pixel or grain, naming the cluster of each; by default one cluster |
+
+## Output
+
+| `traces` | vector3d, antipodal directions in the plane of the map, one per cluster |
+| `rel` | the reliability, how much the winning direction stands out, zero for none |
+| `cSize` | the size of every cluster, pixels on a map, summed numPixel of the grains |
 
 ## References
 

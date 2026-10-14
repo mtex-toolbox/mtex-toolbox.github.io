@@ -13,17 +13,27 @@ the frames the components are functions on: the group on the tangent side is str
 
 ## Syntax
 
-Of a field in the left tangent space:
+<div class="mx-form" markdown="1">
 
 ```python
 cA, cB = componentFrames(cs, ss)
 ```
 
-Of one in the right tangent space:
+Of a field in the left tangent space.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cA, cB = componentFrames(cs, ss, side='right')
 ```
+
+Of one in the right tangent space.
+
+</div>
+
+## Description
 
 A field in the left tangent space returns vectors in the specimen frame, which turn with a
 specimen symmetry, so its three components are invariant only under the crystal symmetry;
@@ -31,21 +41,17 @@ in the right tangent space the other way round. The port's own, no MATLAB counte
 
 ## Input
 
-| | |
-|---|---|
 | `CS, SS` | the crystal and the specimen frame of the field |
-
-## Output
-
-| | |
-|---|---|
-| `cA, cB` | the crystal and the specimen frame of the components |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left' or 'right', the tangent space |
+
+## Output
+
+| `cA, cB` | the crystal and the specimen frame of the components |
 
 ## See also
 

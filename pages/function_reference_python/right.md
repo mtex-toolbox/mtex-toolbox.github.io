@@ -13,9 +13,13 @@ right(t) is t.right(): the tangent vectors on the right side
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 right(t)
 ```
+
+</div>
 
 ## Used on
 

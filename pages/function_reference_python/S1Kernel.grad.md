@@ -15,35 +15,39 @@ the derivative of a kernel on the circle, -2 sum_k k c_k sin(kx)
 
 ## Syntax
 
-At the angles x:
+<div class="mx-form" markdown="1">
 
 ```python
 d = psi.grad(x)
 ```
 
-The derivative as a kernel, an S1KernelHandle:
+At the angles x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 dpsi = psi.grad()
 ```
 
+The derivative as a kernel, an S1KernelHandle.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `psi` | S1Kernel |
-
-## Output
-
-| | |
-|---|---|
-| `d` | ndarray, or S1KernelHandle without an argument |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `x` | `None` | the angles; without them the derivative is returned as a kernel |
+
+## Output
+
+| `d` | ndarray, or S1KernelHandle without an argument |
 
 ## See also
 

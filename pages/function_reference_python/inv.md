@@ -13,14 +13,16 @@ inv(x, ...) is x.inv(...), the method of the object passed; NumPy's inv for an a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 inv(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [complianceTensor](complianceTensor.inv_py.html) | the inverse: rank two by the matrix, rank four through the Voigt matrix, which swaps the convention and with it the class, a stiffness inverting to a compliance |
 | [orientation](orientation.inv_py.html) | the inverse maps the other way: the frames swap |
 | [orthogonalTransform](orthogonalTransform.inv_py.html) | the inverse transform, the inverse rotation with the same parity |

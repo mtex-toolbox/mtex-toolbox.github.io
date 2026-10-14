@@ -16,42 +16,48 @@ planes in space drawn as polygons, each clipped by the bounds of the 3D axes
 
 ## Syntax
 
-Into the current box, translucent:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(plane)
 ```
 
-Coloured:
+Into the current box, translucent.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(plane, faceColor='red', faceAlpha=0.3)
 ```
+
+Coloured.
+
+</div>
+
+## Description
 
 Every plane is cut by the box of the current axes and drawn as the polygon that remains;
 the box stays as it was, so draw what defines it first. A plane cannot be drawn into a map.
 
 ## Input
 
-| | |
-|---|---|
 | `plane` | plane3d, one or several |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib collection of the polygons, None when no plane meets the box |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `None` | one colour, or one per plane |
 | `faceAlpha` | `0.5` | the opacity of the polygons |
 | `edgeColor` | `'k'` | the colour of their edges |
 | `lineWidth` | `0.8` | the width of their edges |
 | `displayName` | `None` | the label in a legend |
+
+## Output
+
+| `h` | the matplotlib collection of the polygons, None when no plane meets the box |
 
 ## See also
 

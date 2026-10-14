@@ -17,17 +17,27 @@ the coefficients up to degree L; without L the trailing degrees whose power, dam
 
 ## Syntax
 
-The negligible degrees dropped:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = truncate(sF)
 ```
 
-Cut, or padded with zeros, at degree 8:
+The negligible degrees dropped.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = truncate(sF, 8)
 ```
+
+Cut, or padded with zeros, at degree 8.
+
+</div>
+
+## Description
 
 The power of a degree is the norm of its coefficients divided by (l+1)^2, a bit of
 regularisation, as MATLAB's; of a list of functions the largest over the list counts.
@@ -35,21 +45,17 @@ MATLAB's truncate takes no degree.
 
 ## Input
 
-| | |
-|---|---|
-| `sF` | S2FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
 | `sF` | S2FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `L` | `None` | the bandwidth of the result |
+
+## Output
+
+| `sF` | S2FunHarmonic |
 
 ## See also
 

@@ -16,16 +16,18 @@ sample tilts by alpha, and the measured intensity drops by the factor the kernel
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 psi = SchulzDefocusingKernel(theta=45*degree, r=1, w=2, d=200, dtheta=0.5*degree)
 psi.eval(cos(alpha))                     the factor at the tilt alpha
 psi.defocusing(pf)                       the factor on the specimen directions of a pole figure
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [defocusing](SchulzDefocusingKernel.defocusing_py.html) | the correction on the specimen directions of a pole figure, one at the pole |
 | [eval](SchulzDefocusingKernel.eval_py.html) | the defocusing factor at t = cos(alpha) of the tilt alpha, 1 at no tilt, infinite at 90 degrees |
 

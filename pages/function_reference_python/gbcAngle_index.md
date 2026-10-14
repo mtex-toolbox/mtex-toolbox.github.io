@@ -16,25 +16,35 @@ or per entry of ebsd.CSList as MATLAB's cell; byPhase gives a phase thresholds b
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gbcAngle(10*degree)
 gbcAngle([10*degree, 2*degree])
 ```
 
-One per indexed phase:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gbcAngle([[10*degree], [15*degree, 2*degree]])
 ```
 
+One per indexed phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 gbcAngle(10*degree, byPhase={'Forsterite': 15*degree})
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [evaluate](gbcAngle.evaluate_py.html) | the connectivity of the pairs i[k], j[k]: the share of the angle levels their misorientation stays below, 0 across phases, 1 between not indexed measurements |
 | [levelsFor](gbcAngle.levelsFor_py.html) | the levels of a phase: its own from byPhase or the per phase list, else the common ones |
 

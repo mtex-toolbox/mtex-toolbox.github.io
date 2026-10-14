@@ -14,9 +14,13 @@ cubo2homo
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 cubo2homo(c)
 ```
+
+</div>
 
 ## Used on
 

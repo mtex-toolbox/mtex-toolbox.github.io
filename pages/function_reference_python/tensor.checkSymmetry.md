@@ -17,35 +17,39 @@ checkSymmetry
 
 ## Syntax
 
-Invariant up to 1e-6 of its norm:
+<div class="mx-form" markdown="1">
 
 ```python
 tf = T.checkSymmetry()
 ```
 
-Up to 1e-3 of its norm:
+Invariant up to 1e-6 of its norm.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 tf = T.checkSymmetry(atol=1e-3)
 ```
 
+Up to 1e-3 of its norm.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `T` | tensor |
-
-## Output
-
-| | |
-|---|---|
-| `tf` | bool, one answer for the whole list |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `atol` | `1e-06` | the tolerance relative to the largest norm of the tensors |
+
+## Output
+
+| `tf` | bool, one answer for the whole list |
 
 ## See also
 

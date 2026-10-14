@@ -15,39 +15,45 @@ the same coefficients up to a tolerance
 
 ## Syntax
 
-Equal up to the relative tolerance 1e-8:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F.isclose(SO3F2)
 ```
 
-Or up to an absolute one:
+Equal up to the relative tolerance 1e-8.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F.isclose(SO3F2, atol=1e-12)
 ```
+
+Or up to an absolute one.
+
+</div>
+
+## Description
 
 The coefficients of both functions, padded to the larger bandwidth, agree when the norm of
 their difference is at most atol + rtol times the norm of those of g.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F, g` | SO3FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
-| `tf` | bool |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rtol` | `1e-08` | the tolerance relative to the norm of g |
 | `atol` | `0.0` | the absolute tolerance |
+
+## Output
+
+| `tf` | bool |
 
 ## See also
 

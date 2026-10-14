@@ -15,9 +15,13 @@ of its frames, as MATLAB's project2EulerFR: three arrays in the shape of the lis
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 projectIntoEulerRegion(o)
 ```
+
+</div>
 
 MATLAB's [quaternion.project2EulerFR](quaternion.project2EulerFR.html)
 

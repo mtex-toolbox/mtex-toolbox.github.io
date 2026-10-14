@@ -15,41 +15,67 @@ frame
 
 ## Syntax
 
-From MTEX's coefficients:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHarmonic(fhat, cs, ss)
 ```
 
-The harmonic form of another function:
+From MTEX's coefficients.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHarmonic(odf, bandwidth=32)
 ```
 
-A callable by quadrature:
+The harmonic form of another function.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHarmonic(lambda ori: ori.angle(), cs)
 ```
 
-On the Gauss-Legendre grid:
+A callable by quadrature.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHarmonic(lambda ori: ori.angle(), cs, 'GaussLegendre', bandwidth=16)
 ```
 
-The series of an SO(3) kernel:
+On the Gauss-Legendre grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3FunHarmonic(psi, cs, bandwidth=24)
 ```
 
-A misorientation function, f(g) = f(g^-1):
+The series of an SO(3) kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mdf = SO3FunHarmonic(lambda o: o.angle(), cs, cs, antipodal=True, bandwidth=8)
 ```
+
+A misorientation function, f(g) = f(g^-1).
+
+</div>
+
+## Description
 
 The coefficients fhat are MTEX's, degree by degree, deg2dim(L + 1) of them for the bandwidth L;
 a vector ending inside a degree block is padded with zeros to its end. Another SO(3) function
@@ -62,20 +88,12 @@ symmetrise=False. A list of functions carries its shape in front of the coeffici
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | array of MTEX's coefficients, an SO3Fun, an SO3Kernel or a callable of orientations |
 | `cs, ss` | crystalFrame and specimenFrame (or a second crystalFrame) |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` |  | whether the function takes real values only; by default read off the coefficients or the sampled values |
 | `antipodal` |  | f(g) = f(g^-1), the exchange symmetry of a misorientation function; needs the same frame on both sides |
@@ -83,14 +101,16 @@ symmetrise=False. A list of functions carries its shape in front of the coeffici
 | `bandwidth` |  | the largest degree of the series |
 | `dtype` |  | the complex type of the coefficients, complex128 unless given |
 
+## Output
+
+| `SO3F` | SO3FunHarmonic |
+
 ## See also
 
 [SO3FunHarmonic.quadrature](SO3FunHarmonic.quadrature_py.html), [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate_py.html), [SO3FunRBF](SO3FunRBF_index_py.html), [SO3FunHandle](SO3FunHandle_index_py.html), [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html), [SO3FunHarmonicRepresentation](SO3FunHarmonicRepresentation_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [abs](SO3FunHarmonic.abs_py.html) | the absolute value of the function, by quadrature at twice the bandwidth |
 | [approximate](SO3FunHarmonic.approximate_py.html) | the harmonic series of a function on SO(3) by quadrature |
 | [bandwidth](SO3FunHarmonic.bandwidth_py.html) | the bandwidth, the largest degree of the expansion |

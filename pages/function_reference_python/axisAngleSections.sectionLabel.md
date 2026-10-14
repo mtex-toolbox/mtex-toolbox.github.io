@@ -15,9 +15,13 @@ the title of section k, the rotation angle in degrees
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 axisAngleSections.sectionLabel(self, k)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L617">source</a></font>
 {% endraw %}

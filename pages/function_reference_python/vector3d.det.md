@@ -17,29 +17,33 @@ det(a, b, c) the triple product; det(v) of three vectors the determinant of thei
 
 ## Syntax
 
-<a, b x c>, element by element:
+<div class="mx-form" markdown="1">
 
 ```python
 d = det(a, b, c)
 ```
 
-Three vectors as the rows of a matrix:
+<a, b x c>, element by element.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = det(v)
 ```
 
+Three vectors as the rows of a matrix.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `a` | vector3d |
 | `b, c` | vector3d, the second and third factor |
 
 ## Output
 
-| | |
-|---|---|
 | `d` | the triple products |
 
 ## See also
@@ -48,9 +52,13 @@ d = det(v)
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.det(self, b=None, c=None)
 ```
+
+</div>
 
 MATLAB's [vector3d.det](vector3d.det.html)
 

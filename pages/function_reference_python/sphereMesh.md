@@ -15,30 +15,36 @@ the vertices as an (n, 3) array and the faces as (m, 3) index triples
 
 ## Syntax
 
-Rings 5 degree apart:
+<div class="mx-form" markdown="1">
 
 ```python
 V, F = sphereMesh()
 ```
 
-A coarser mesh:
+Rings 5 degree apart.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 V, F = sphereMesh(resolution=10*degree)
 ```
 
-## Output
+A coarser mesh.
 
-| | |
-|---|---|
-| `V` | (n, 3) array, the vertices on the unit sphere, the poles first and last |
-| `F` | (m, 3) int array, the triangles as indices into V |
+</div>
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `5*degree` | the spacing of the rings and of the vertices along them |
+
+## Output
+
+| `V` | (n, 3) array, the vertices on the unit sphere, the poles first and last |
+| `F` | (m, 3) int array, the triangles as indices into V |
 
 ## See also
 

@@ -16,9 +16,13 @@ uniform up to noiseMax, or lognormal scaled so that the largest is noiseMax (MAT
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 simulateEBSD.addNoise(self)
 ```
+
+</div>
 
 ## Used on
 

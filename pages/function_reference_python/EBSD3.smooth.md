@@ -17,35 +17,57 @@ neighbours, within the grains where the map knows them and within the phases oth
 
 ## Syntax
 
-The default filter, total variation:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_s = smooth(ebsd)
 ```
 
-Another filter:
+The default filter, total variation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_s = smooth(ebsd, halfQuadraticFilter())
 ```
 
-The pixels without a measurement solved for as well:
+Another filter.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_s = smooth(ebsd, F, fill=True)
 ```
 
-Only those inside a grain:
+The pixels without a measurement solved for as well.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_s = smooth(ebsd, F, fill=grains)
 ```
 
-A numeric property smoothed along:
+Only those inside a grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd_s = smooth(ebsd, F, props=('bc',))
 ```
+
+A numeric property smoothed along.
+
+</div>
+
+## Description
 
 The orientations are turned into a field of tangent vectors per connected component of
 the map (a grain, if calcGrains has written the grain ids, else a phase) and the filter
@@ -62,24 +84,20 @@ filter, is the F passed.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD, the map |
 | `F` | EBSDFilter, the filter; by default l1TVFilter() |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd_s` | EBSD, the smoothed map |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fill` | `False` | True to fill the pixels without a measurement, or grain2d to fill only those inside a grain |
 | `extrapolate` | `False` | fill up to the outer boundary of the map, the pixels the outside reaches without crossing a measurement included |
 | `props` | `()` | the names of numeric properties of the map smoothed with the orientations, by a variational filter |
+
+## Output
+
+| `ebsd_s` | EBSD, the smoothed map |
 
 ## See also
 

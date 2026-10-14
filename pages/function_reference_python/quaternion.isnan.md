@@ -16,9 +16,13 @@ whether a quaternion has a NaN coefficient
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion.isnan(self)
 ```
+
+</div>
 
 MATLAB's [quaternion.isnan](quaternion.isnan.html)
 

@@ -16,9 +16,13 @@ the pole figures of the index or indices i, a data set of their own
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PoleFigure.select(self, i)
 ```
+
+</div>
 
 MATLAB's [PoleFigure.select](PoleFigure.select.html)
 

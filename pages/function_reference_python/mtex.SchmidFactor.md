@@ -14,29 +14,47 @@ SchmidFactor
 
 ## Syntax
 
-A function of the tension direction:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = SchmidFactor(sS)
 ```
 
-Under a uniaxial tension along v:
+A function of the tension direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 tau = SchmidFactor(sS, v)
 ```
 
-Under a stress tensor:
+Under a uniaxial tension along v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 tau = SchmidFactor(sS, sigma)
 ```
 
-Over the critical resolved shear stress:
+Under a stress tensor.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 tau = SchmidFactor(sS, sigma, relative=True)
 ```
+
+Over the critical resolved shear stress.
+
+</div>
+
+## Description
 
 Under a stress tensor the shear it resolves on the system over the difference of the
 extreme principal stresses, so that a uniaxial tension gives the direction cosines
@@ -49,22 +67,18 @@ both in crystal coordinates, or ori * sS and the stress as measured.
 
 ## Input
 
-| | |
-|---|---|
 | `sS` | slipSystem |
 | `sigma` | stressTensor, or vector3d or Miller, the tension directions |
 
-## Output
-
-| | |
-|---|---|
-| `tau` | the Schmid factors, or an S2FunHarmonic of the tension direction |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `relative` | `False` | divide by the critical resolved shear stress sS.CRSS of every system |
+
+## Output
+
+| `tau` | the Schmid factors, or an S2FunHarmonic of the tension direction |
 
 ## See also
 

@@ -17,17 +17,27 @@ parentGrainReconstructor.mergeSimilar
 
 ## Syntax
 
-Within 5 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 job.mergeSimilar()
 ```
 
-Within 7.5 degree:
+Within 5 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.mergeSimilar(threshold=7.5*degree)
 ```
+
+Within 7.5 degree.
+
+</div>
+
+## Description
 
 Neighbouring grains of one phase whose mean orientations are within the threshold become
 one; job.grains and job.mergeId follow the merge, and job.grains.clusterSize counts the
@@ -35,13 +45,11 @@ prior grains in each.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `threshold` | `5*degree` | the misorientation angle up to which grains are merged |
 

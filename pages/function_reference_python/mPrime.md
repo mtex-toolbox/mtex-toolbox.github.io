@@ -14,9 +14,13 @@ paired slip systems
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mPrime(sS1, sS2)
 ```
+
+</div>
 
 ## Used on
 

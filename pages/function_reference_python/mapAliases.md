@@ -14,38 +14,44 @@ the face alpha of a map, and the grains keep translucent, MATLAB's alpha that fo
 
 ## Syntax
 
-{'faceAlpha': 0.5}:
+<div class="mx-form" markdown="1">
 
 ```python
 kw = mapAliases({'transparent': 0.5})
 ```
 
-{'translucent': 0.5}:
+{'faceAlpha': 0.5}.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kw = mapAliases({'transparent': 0.5}, grains=True)
 ```
+
+{'translucent': 0.5}.
+
+</div>
+
+## Description
 
 A variant spelling of a keyword is refused with the one to write. The dictionary is changed
 in place and returned.
 
 ## Input
 
-| | |
-|---|---|
 | `kw` | dict, the keywords of a map plot |
-
-## Output
-
-| | |
-|---|---|
-| `kw` | the same dict, the aliases replaced |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `grains` | `False` | the keywords of a plot of grains, which keep translucent |
+
+## Output
+
+| `kw` | the same dict, the aliases replaced |
 
 ## See also
 

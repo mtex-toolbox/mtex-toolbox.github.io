@@ -15,16 +15,18 @@ H[2, 2] = 1; straight lines stay straight
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 T = spatialTransformProjective(H)
 T = spatialTransformProjective.byTilt(theta, wd, centre)
 T = spatialTransformProjective.fit(posA, posB, weights=w)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [byTilt](spatialTransformProjective.byTilt_py.html) | the specimen tilted by theta about an axis along x through centre, seen from the working distance wd: the far side shrinks and straight lines stay straight |
 | [eval](spatialTransformProjective.eval_py.html) | the positions moved by the homography |
 | [fit](spatialTransformProjective.fit_py.html) | the homography best mapping the positions posA onto posB, by the direct linear transform |

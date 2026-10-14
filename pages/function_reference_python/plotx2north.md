@@ -15,47 +15,77 @@ plotx2north, plotx2west, plotx2south, plotzOutOfPlane and plotzIntoPlane
 
 ## Syntax
 
-X east, y south, z into the screen:
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention.default('y↓→x')
 ```
 
-Z out of the screen, x east:
+X east, y south, z into the screen.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention.default(zvector, xvector)
 ```
 
-X east, MATLAB's plotx2east:
+Z out of the screen, x east.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention.default(east=xvector)
 ```
 
-X north, MATLAB's plotx2north:
+X east, MATLAB's plotx2east.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention.default(north=xvector)
 ```
 
-Z into the screen, MATLAB's plotzIntoPlane:
+X north, MATLAB's plotx2north.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention.default(intoScreen=zvector)
 ```
 
-Z out of the screen, MATLAB's plotzOutOfPlane:
+Z into the screen, MATLAB's plotzIntoPlane.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention.default(outOfScreen=zvector)
 ```
 
-Kept for later sessions too:
+Z out of the screen, MATLAB's plotzOutOfPlane.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention.default(north=xvector, save=True)
 ```
+
+Kept for later sessions too.
+
+</div>
+
+## Description
 
 Read, plottingConvention.default is the convention of the default specimen frame, which
 every plot of data in that frame follows. Called with a convention, its name or the pair
@@ -67,14 +97,12 @@ rest, as MATLAB's plotx2east, plotzIntoPlane and the like do. A fresh installati
 
 ## Input
 
-| | |
-|---|---|
 | `outOfScreen` | a convention, its name ('y↑→x', 'y^->x' in ASCII), or the reference direction pointing out of the screen |
 | `east` | the reference direction pointing east, with outOfScreen |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `save` | `False` | also make it the default of later sessions, stored in mtex_settings.json |
 

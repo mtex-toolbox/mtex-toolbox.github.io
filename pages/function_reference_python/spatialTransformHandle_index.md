@@ -13,14 +13,16 @@ a transform given by a function of the positions and, for the inverse, a second 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 T = spatialTransformHandle(fun, funInv)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](spatialTransformHandle.eval_py.html) | the positions the function returns |
 | [inv](spatialTransformHandle.inv_py.html) | the transform of the inverse function, an error where none was given |
 | [paramChar](spatialTransformHandle.paramChar_py.html) | the name of the function as a line of text |

@@ -16,17 +16,27 @@ rotate(f, rot, side)
 
 ## Syntax
 
-F(rot^-1 g), turned in the specimen frame:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = rotate(SO3F, rot)
 ```
 
-F(g rot^-1), turned in the crystal frame:
+F(rot^-1 g), turned in the specimen frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = SO3F.rotate(rot, side='right')
 ```
+
+F(g rot^-1), turned in the crystal frame.
+
+</div>
+
+## Description
 
 The Wigner coefficients are turned degree by degree. A symmetry of the side turned that the
 rotation does not map onto itself is dropped with a warning. An orientation turns the
@@ -35,22 +45,18 @@ specimen frame of the function, from the right its specimen frame the crystal fr
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunHarmonic |
 | `rot` | rotation or orientation, one |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left', the specimen side, or 'right', the crystal side; MATLAB's flag 'right' |
+
+## Output
+
+| `SO3F` | SO3FunHarmonic |
 
 ## See also
 

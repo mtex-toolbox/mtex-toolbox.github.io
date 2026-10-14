@@ -15,31 +15,37 @@ the angle of the rotation the vector describes, or the angle between two vectors
 
 ## Syntax
 
-The rotational angle, the length:
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(v)
 ```
 
-The angle between the vectors:
+The rotational angle, the length.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(v1, v2)
 ```
 
+The angle between the vectors.
+
+</div>
+
+## Description
+
 The second vectors are brought to the reference and side of the first.
 
 ## Input
 
-| | |
-|---|---|
 | `v1` | SO3TangentVector |
 | `other` | SO3TangentVector at the same reference |
 
 ## Output
 
-| | |
-|---|---|
 | `omega` | the angles in radians |
 
 ## See also
@@ -48,9 +54,13 @@ SO3TangentVector.norm, [quaternion.log](quaternion.log_py.html)
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3TangentVector.angle(self, other=None, **kwargs)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L322">source</a></font>
 {% endraw %}

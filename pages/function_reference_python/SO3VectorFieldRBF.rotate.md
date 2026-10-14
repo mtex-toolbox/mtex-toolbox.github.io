@@ -17,17 +17,27 @@ and weights moved; an orientation turns its harmonic form
 
 ## Syntax
 
-Turned in the specimen frame:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = rotate(SO3VF, rot)
 ```
 
-Turned in the crystal frame:
+Turned in the specimen frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VF.rotate(rot, side='right')
 ```
+
+Turned in the crystal frame.
+
+</div>
+
+## Description
 
 The centres are multiplied by the rotation, from the left or the right, and the weight
 vectors turned where the rotation acts on the tangent space, so the result is again a sum of
@@ -35,22 +45,18 @@ kernels. A symmetry the rotation does not map onto itself is dropped with a warn
 
 ## Input
 
-| | |
-|---|---|
 | `SO3VF` | SO3VectorFieldRBF |
 | `rot` | rotation, or an orientation, one |
 
-## Output
-
-| | |
-|---|---|
-| `SO3VF` | SO3VectorFieldRBF, or SO3VectorFieldHarmonic for an orientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left', the specimen side, or 'right', the crystal side; MATLAB's flag 'right' |
+
+## Output
+
+| `SO3VF` | SO3VectorFieldRBF, or SO3VectorFieldHarmonic for an orientation |
 
 ## See also
 

@@ -15,23 +15,37 @@ the polynomial displacement best mapping the positions posA onto posB
 
 ## Syntax
 
-An affine map:
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformPoly.fit(posA, posB)
 ```
 
-A quadratic displacement:
+An affine map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformPoly.fit(posA, posB, degree=2)
 ```
 
-Weighted least squares:
+A quadratic displacement.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformPoly.fit(posA, posB, degree=2, weights=w, robust=False)
 ```
+
+Weighted least squares.
+
+</div>
+
+## Description
 
 The displacement posB - posA is fitted over the basis [1 x y], or [1 x y x^2 xy y^2] for
 degree 2, by least squares, reweighted against outliers with Tukey's bisquare. A point with
@@ -40,25 +54,21 @@ six.
 
 ## Input
 
-| | |
-|---|---|
 | `posA` | vector3d, the positions in the first frame |
 | `posB` | vector3d, where they went in the second, one for each |
 
-## Output
-
-| | |
-|---|---|
-| `T` | spatialTransformPoly, T * posA close to posB |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | array, the weight of every point pair |
 | `degree` | `1` | 1 or 2, the degree of the polynomial |
 | `robust` | `True` | reweight against outliers with Tukey's bisquare |
 | `maxIter` | `50` | the largest number of reweighting steps |
+
+## Output
+
+| `T` | spatialTransformPoly, T * posA close to posB |
 
 ## See also
 

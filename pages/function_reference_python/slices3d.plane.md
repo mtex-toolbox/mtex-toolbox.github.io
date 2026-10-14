@@ -17,9 +17,13 @@ first at index (-1/2, -1/2), then along the rows, the columns, both
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 slices3d.plane(self, a)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L69">source</a></font>
 {% endraw %}

@@ -15,29 +15,47 @@ table; MATLAB's SO3Fun.load, loadODF_generic and loadODF_VPSC
 
 ## Syntax
 
-A VPSC texture file:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = loadODF('TEX_PH1.OUT', cs)
 ```
 
-Its densities with another kernel:
+A VPSC texture file.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = loadODF('TEX_PH1.OUT', cs, halfwidth=5*degree)
 ```
 
-A function through the values of a table:
+Its densities with another kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = loadODF('odf.txt', CS=cs, columnNames=['phi1', 'Phi', 'phi2', 'value'])
 ```
 
-Kernels centred at the orientations of a table:
+A function through the values of a table.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = loadODF('ori.txt', cs, 'density', halfwidth=10*degree)
 ```
+
+Kernels centred at the orientations of a table.
+
+</div>
+
+## Description
 
 A file whose fourth line names a convention letter (B, K or R) and a count is a VPSC texture
 file: every block of weighted orientations becomes one density, calcDensity with the
@@ -53,21 +71,17 @@ The crystal frame is passed positionally or as CS=, the specimen frame as SS=.
 
 ## Input
 
-| | |
-|---|---|
 | `fname` | the name of the file |
-
-## Output
-
-| | |
-|---|---|
-| `odf` | an SO3Fun, or a list of them for a VPSC file of several blocks |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `interface` | `None` | 'VPSC' or 'generic', which the content decides when not given; the other keywords go to the reader of the interface |
+
+## Output
+
+| `odf` | an SO3Fun, or a list of them for a VPSC file of several blocks |
 
 ## See also
 

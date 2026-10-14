@@ -14,9 +14,13 @@ an ODF by its Fourier coefficients, or another ODF in its harmonic form (MATLAB 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 FourierODF(C, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

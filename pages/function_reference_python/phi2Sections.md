@@ -14,16 +14,18 @@ sections of constant phi2 in the Bunge convention, MTEX's default ODF sections
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 oS = phi2Sections(cs, ss)
 oS = phi2Sections(cs, ss, sections=6)
 oS = phi2Sections(cs, ss, phi2=np.arange(0, 91, 15)*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [phi2](phi2Sections.phi2_py.html) | the phi2 values of the sections |
 
 ## Used on

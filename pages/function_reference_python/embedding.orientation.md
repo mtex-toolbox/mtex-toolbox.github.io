@@ -17,44 +17,54 @@ the orientations of e.CS; MATLAB's orientation of an embedding
 
 ## Syntax
 
-The orientation of every image:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = e.orientation()
 ```
 
-The mean orientation of a list:
+The orientation of every image.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = mean(e).orientation()
 ```
 
-Fewer steps of the projection:
+The mean orientation of a list.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = mean(e).orientation(maxIter=50)
 ```
+
+Fewer steps of the projection.
+
+</div>
+
+## Description
 
 The projection is embedding.project, whose keywords are passed on (seeds, maxIter, tol,
 chunk); the result is an orientation from the crystal frame of e to SS.
 
 ## Input
 
-| | |
-|---|---|
 | `e` | embedding |
-
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation, one per image |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `SS` | `None` | the specimen frame of the orientations, by default the default specimen frame |
+
+## Output
+
+| `ori` | orientation, one per image |
 
 ## See also
 

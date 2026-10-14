@@ -14,41 +14,47 @@ grain3Boundary, MATLAB's grain3Boundary/plot
 
 ## Syntax
 
-Light blue faces:
+<div class="mx-form" markdown="1">
 
 ```python
 mesh = boundaryMesh(gB)
 ```
 
-Coloured by a value per face:
+Light blue faces.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mesh = boundaryMesh(gB, gB.misorientation.angle() / degree)
 ```
 
-One colour, translucent:
+Coloured by a value per face.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mesh = boundaryMesh(gB, faceColor='red', faceAlpha=0.3, lineWidth=1)
 ```
 
+One colour, translucent.
+
+</div>
+
+## Description
+
 A face whose value or colour is NaN is not drawn.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grain3Boundary, the boundary faces |
-
-## Output
-
-| | |
-|---|---|
-| `mesh` | mesh3d, the faces with a colour each; with a value per face it keeps the values, the colour map and the range for the colour bar |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `color` | `None` | a value per face mapped by the colour map, an RGB row per face or one RGB triple |
 | `faceColor` | `None` | one colour for all faces, when color is not given |
@@ -58,6 +64,10 @@ A face whose value or colour is NaN is not drawn.
 | `lineWidth` | `0.5` | the width of the edges in points |
 | `colormap` | `None` | the colour map for values |
 | `colorRange` | `None` | (min, max), the values the colour map spans; by default their range |
+
+## Output
+
+| `mesh` | mesh3d, the faces with a colour each; with a value per face it keeps the values, the colour map and the range for the colour bar |
 
 ## See also
 

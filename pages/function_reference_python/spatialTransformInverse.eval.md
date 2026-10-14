@@ -15,9 +15,13 @@ the preimage by fixed point iteration: the position moved against the error its 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformInverse.eval(self, pos)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L858">source</a></font>
 {% endraw %}

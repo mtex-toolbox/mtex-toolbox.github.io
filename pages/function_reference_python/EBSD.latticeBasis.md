@@ -14,9 +14,13 @@ the basis, the stencil and the spacing a cell polygon of four or six corners des
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 latticeBasis(cell)
 ```
+
+</div>
 
 MATLAB's [EBSD.latticeBasis](EBSD.latticeBasis.html)
 

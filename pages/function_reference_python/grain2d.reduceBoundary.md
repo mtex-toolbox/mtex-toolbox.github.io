@@ -17,17 +17,27 @@ shape, the inner boundary kept on it; MATLAB's grain2d.reduceBoundary
 
 ## Syntax
 
-Every second vertex:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.reduceBoundary()
 ```
 
-Every fourth vertex:
+Every second vertex.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.reduceBoundary(4)
 ```
+
+Every fourth vertex.
+
+</div>
+
+## Description
 
 The junctions stay where they are, so which grains touch, and where, is unchanged, and the
 polygons are traced again. The vertices both boundaries use stay, and no grain collapses.
@@ -36,21 +46,17 @@ shape needs them.
 
 ## Input
 
-| | |
-|---|---|
-| `grains` | grain2d |
-
-## Output
-
-| | |
-|---|---|
 | `grains` | grain2d |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `2` | keep every n-th vertex along each chain |
+
+## Output
+
+| `grains` | grain2d |
 
 ## See also
 

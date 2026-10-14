@@ -17,23 +17,37 @@ written into job.votes; MATLAB's calcTPVotes
 
 ## Syntax
 
-Every triple point of three child grains votes:
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcTPVotes()
 ```
 
-Only the triple points of one clear parent:
+Every triple point of three child grains votes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcTPVotes(minFit=2.5*degree, maxFit=5*degree)
 ```
 
-The best fit per variant instead of a probability:
+Only the triple points of one clear parent.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcTPVotes(numFit=1, bestFit=True)
 ```
+
+The best fit per variant instead of a probability.
+
+</div>
+
+## Description
 
 At a triple point where three child grains meet, the parent orientation that fits all
 three, the mean of one variant of each, is computed for the numFit best fitting
@@ -43,13 +57,11 @@ small and its second best large, which minFit and maxFit ask for.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor, with job.p2c set |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `numFit` | `2` | the number of best fitting parents every triple point votes for |
 | `threshold` | `None` | the misfit angle at which the probability is one half, by default 2 degree or minFit when smaller; also the largest misfit a parent is computed for, 5 degree when not given |

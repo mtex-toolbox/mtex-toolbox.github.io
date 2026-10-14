@@ -15,11 +15,17 @@ birefringent
 
 ## Syntax
 
-By its 3 x 3 matrix in a crystal frame:
+<div class="mx-form" markdown="1">
 
 ```python
 rI = refractiveIndexTensor(M, cs)
 ```
+
+By its 3 x 3 matrix in a crystal frame.
+
+</div>
+
+## Description
 
 The tensor says how light of a given propagation direction is slowed down by the crystal:
 rI.refractiveIndex(v) the indices of the two waves along v, rI.birefringence(v) their
@@ -29,20 +35,12 @@ polarisers.
 
 ## Input
 
-| | |
-|---|---|
 | `M` | 3 x 3 symmetric matrix, or an array (..., 3, 3) of them |
 | `cs` | crystalFrame the coefficients refer to |
 
-## Output
-
-| | |
-|---|---|
-| `rI` | refractiveIndexTensor |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rank` | `None` | the rank of the tensor; for this class always two |
 | `doubleConvention` | `None` | read and write a Voigt matrix with the factors of two off the diagonal |
@@ -52,6 +50,10 @@ polarisers.
 | `name` | `None` | the name of the tensor, carried along |
 | `Kelvin` | `False` | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
 | `dtype` | `None` | the NumPy type of the coefficients |
+
+## Output
+
+| `rI` | refractiveIndexTensor |
 
 ## See also
 

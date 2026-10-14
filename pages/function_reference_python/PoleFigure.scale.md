@@ -16,9 +16,13 @@ the intensities multiplied by alpha, one number or one per pole figure
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 PoleFigure.scale(self, alpha)
 ```
+
+</div>
 
 MATLAB's [PoleFigure.scale](PoleFigure.scale.html)
 

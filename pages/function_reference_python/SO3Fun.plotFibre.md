@@ -14,22 +14,36 @@ the ODF along the fibre f, as a line over the angle along the fibre; MATLAB's pl
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 odf = SantaFe()
 f = fibre.gamma(odf.CS, odf.SS)
 ```
 
-The values along the gamma fibre:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotFibre(odf, f)
 ```
 
-Fewer points, a thick red line:
+The values along the gamma fibre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotFibre(odf, f, points=200, lineWidth=3, color='r')
 ```
+
+Fewer points, a thick red line.
+
+</div>
+
+## Description
 
 The fibre is sampled at equally spaced orientations and the ODF evaluated there, the real
 part drawn against the angle along the fibre from 0 to 360 degree, in mrd. A held figure
@@ -40,23 +54,19 @@ the port returns the line.
 
 ## Input
 
-| | |
-|---|---|
 | `odf` | SO3Fun |
 | `f` | fibre |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib lines drawn |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `points` | `1000` | the number of orientations along the fibre, MATLAB's resolution |
 | `lineWidth` | `1.5` | the width of the line |
+
+## Output
+
+| `h` | the matplotlib lines drawn |
 
 ## See also
 

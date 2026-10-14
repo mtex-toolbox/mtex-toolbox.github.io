@@ -15,29 +15,29 @@ the corners of the region: the intersections of its circles that lie inside
 
 ## Syntax
 
-The corners, each once:
+<div class="mx-form" markdown="1">
 
 ```python
 V = sR.vertices()
 ```
 
+The corners, each once.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
-
-## Output
-
-| | |
-|---|---|
-| `V` | vector3d of unit vectors in the frame of the region |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-08` | the margin by which an intersection may lie outside the other circles |
+
+## Output
+
+| `V` | vector3d of unit vectors in the frame of the region |
 
 ## See also
 

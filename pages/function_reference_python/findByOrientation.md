@@ -13,14 +13,16 @@ findByOrientation(x, ...) is x.findByOrientation(...), the method of the object 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 findByOrientation(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.findByOrientation_py.html) | the measurements of the phase of ori within an angle of it, or of a fibre |
 | [grain2d](grain2d.findByOrientation_py.html) | the grains of the phase of ori whose mean orientation lies within epsilon of it, or of a fibre |
 

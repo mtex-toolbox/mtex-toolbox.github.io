@@ -14,23 +14,37 @@ the Bingham distribution estimated from orientations; MATLAB's calcBinghamODF
 
 ## Syntax
 
-By the large concentration approximation:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcBinghamODF(ori)
 ```
 
-Weighted orientations:
+By the large concentration approximation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcBinghamODF(ori, weights=w)
 ```
 
-The concentrations matching the moments exactly:
+Weighted orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = calcBinghamODF(ori, exact=True)
 ```
+
+The concentrations matching the moments exactly.
+
+</div>
+
+## Description
 
 The eigen decomposition of the quaternion tensor of the sample, projected to the
 fundamental region about its mean, gives the axes, and the concentrations follow from the
@@ -39,22 +53,18 @@ smallest value of zero, or exactly by Newton on the moments.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
-
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunBingham |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | a weight per orientation |
 | `exact` | `False` | solve for the concentrations whose moments are the eigenvalues, instead of the large concentration approximation |
+
+## Output
+
+| `odf` | SO3FunBingham |
 
 ## See also
 

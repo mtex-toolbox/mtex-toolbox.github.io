@@ -15,38 +15,44 @@ the tau fibre of rolling textures, between the orientations MTEX puts at its end
 
 ## Syntax
 
-The segment in the crystal frame cs:
+<div class="mx-form" markdown="1">
 
 ```python
 f = fibre.tau(cs)
 ```
 
-The whole fibre between cs and ss:
+The segment in the crystal frame cs.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = fibre.tau(cs, ss, full=True)
 ```
+
+The whole fibre between cs and ss.
+
+</div>
+
+## Description
 
 The segment runs from the Euler angles (315, 0, 0) to (270, 90, 45) degrees
 (Bunge); the frames default to the cubic group 432 and the specimen frame.
 
 ## Input
 
-| | |
-|---|---|
 | `frames` | the crystal frame, then the specimen frame |
-
-## Output
-
-| | |
-|---|---|
-| `f` | fibre |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `full` | `False` | the whole fibre instead of the segment between the ends |
+
+## Output
+
+| `f` | fibre |
 
 ## See also
 

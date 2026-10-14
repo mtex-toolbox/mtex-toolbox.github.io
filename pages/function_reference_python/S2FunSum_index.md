@@ -14,8 +14,6 @@ the harmonic form adds the harmonic forms; what + returns when coefficients cann
 
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](S2FunSum.bandwidth_py.html) | the largest bandwidth of the summands |
 | [CS](S2FunSum.CS_py.html) | the frame the summands share, MATLAB's sF.CS |
 | [eval](S2FunSum.eval_py.html) | the sum of the values of the summands at the directions x |

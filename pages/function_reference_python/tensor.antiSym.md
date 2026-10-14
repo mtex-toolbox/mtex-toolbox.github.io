@@ -16,9 +16,13 @@ the antisymmetric part (T - T^t) / 2 of a rank two tensor
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.antiSym(self)
 ```
+
+</div>
 
 MATLAB's [tensor.antiSym](tensor.antiSym.html)
 

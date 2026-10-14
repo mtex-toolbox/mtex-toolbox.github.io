@@ -13,14 +13,16 @@ log(x, ...) is x.log(...), the method of the object passed; NumPy's log for an a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 log(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [orientation](orientation.log_py.html) | the logarithm of an orientation, the tangent vector at a reference pointing to it |
 | [quaternion](quaternion.log_py.html) | the tangent vector pointing from the reference, the identity by default, to this rotation |
 | [S1FunHarmonic](S1Fun.log_py.html) | the pointwise logarithm, a Fourier series of a smoothing bandwidth, or at the bandwidth given |

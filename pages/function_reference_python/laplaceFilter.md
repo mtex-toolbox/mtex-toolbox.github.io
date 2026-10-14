@@ -19,8 +19,6 @@ the Laplacian and the default of 0.5 is in truth a rate of 0.25
 
 ## Members
 
-| | |
-|---|---|
 | [smooth](laplaceFilter.smooth_py.html) | the vertices after iter steps of local averaging at the rate lambda_ / 2, the fixed ones kept |
 
 ## Used on

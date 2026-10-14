@@ -16,8 +16,6 @@ periodic axes of the array shrink by the folds and the nodes are stretched
 
 ## Members
 
-| | |
-|---|---|
 | [adjoint](SO3FourierPlan.adjoint_py.html) | coefficients from weighted values at the nodes |
 | [setNodes](SO3FourierPlan.setNodes_py.html) | moves the plan to other rotations, the finufft plans kept |
 

@@ -15,9 +15,13 @@ azimuths five degrees apart, the last at 355 degree, starting where the instrume
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 DubnaGrid(ntheta)
 ```
+
+</div>
 
 MATLAB's [DubnaGrid](DubnaGrid.html)
 

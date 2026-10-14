@@ -16,35 +16,39 @@ MATLAB's nfold
 
 ## Syntax
 
-The highest order of a rotation axis:
+<div class="mx-form" markdown="1">
 
 ```python
 n = cs.nfold()
 ```
 
-The order about an axis, 1 when it is none:
+The highest order of a rotation axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n = cs.nfold(Miller(0, 0, 1, cs, 'uvw'))
 ```
 
+The order about an axis, 1 when it is none.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `cs` | referenceFrame |
-
-## Output
-
-| | |
-|---|---|
-| `n` | int, or an array of the shape of axis |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `None` | directions, the order of the rotations about each of them |
+
+## Output
+
+| `n` | int, or an array of the shape of axis |
 
 ## See also
 

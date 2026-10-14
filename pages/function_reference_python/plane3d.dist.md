@@ -17,39 +17,45 @@ NaN where the planes meet
 
 ## Syntax
 
-The signed distance of points, <N, v> - d:
+<div class="mx-form" markdown="1">
 
 ```python
 d = plane.dist(v)
 ```
 
-The distance of parallel planes:
+The signed distance of points, <N, v> - d.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = plane.dist(plane2)
 ```
+
+The distance of parallel planes.
+
+</div>
+
+## Description
 
 Two planes count as parallel when their normals agree up to tol; MATLAB requires them to
 agree exactly and returns the first plane's d for planes that meet, the port NaN.
 
 ## Input
 
-| | |
-|---|---|
 | `plane` | plane3d |
 | `v` | vector3d of points, or a second plane3d |
 
-## Output
-
-| | |
-|---|---|
-| `d` | the distances, positive on the side the normal points to |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-08` | how far the cosine of the normals may stay from 1 for parallel planes |
+
+## Output
+
+| `d` | the distances, positive on the side the normal points to |
 
 ## See also
 

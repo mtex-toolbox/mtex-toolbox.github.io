@@ -15,37 +15,43 @@ the names a selection ebsd['...'] takes: the minerals, 'indexed' and 'notIndexed
 
 ## Syntax
 
-The minerals, 'indexed', 'notIndexed':
+<div class="mx-form" markdown="1">
 
 ```python
 names = ebsd.CSList.selectionNames()
 ```
 
-Also every pair of minerals:
+The minerals, 'indexed', 'notIndexed'.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 names = ebsd.CSList.selectionNames(pairs=True)
 ```
 
+Also every pair of minerals.
+
+</div>
+
+## Description
+
 The pairs are those a boundary selection takes, gB['Forsterite', 'Enstatite'].
 
 ## Input
 
-| | |
-|---|---|
 | `pl` | phaseList |
-
-## Output
-
-| | |
-|---|---|
-| `names` | list of the names, then of the pairs as tuples |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `pairs` | `False` | add every ordered pair of minerals |
+
+## Output
+
+| `names` | list of the names, then of the pairs as tuples |
 
 ## See also
 

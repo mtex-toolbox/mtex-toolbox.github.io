@@ -17,17 +17,27 @@ grainBoundary.characteristicShape
 
 ## Syntax
 
-Of the boundaries of a phase:
+<div class="mx-form" markdown="1">
 
 ```python
 cShape = characteristicShape(grains.boundary['Fo', 'Fo'])
 ```
 
-Of the boundary of the grains:
+Of the boundaries of a phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cShape = grains.characteristicShape(nmax=256)
 ```
+
+Of the boundary of the grains.
+
+</div>
+
+## Description
 
 Every segment and its antipode, sorted by direction and laid end to end, close into a
 convex, centrally symmetric outline whose boundary length in each direction is the
@@ -36,21 +46,17 @@ nmax, which keeps its extent.
 
 ## Input
 
-| | |
-|---|---|
 | `x` | grainBoundary, or grain2d for its boundary |
-
-## Output
-
-| | |
-|---|---|
-| `cShape` | shape2d |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `nmax` | `1024` | the largest number of vertices of the outline |
+
+## Output
+
+| `cShape` | shape2d |
 
 ## See also
 

@@ -16,9 +16,13 @@ and a sector plane through the origin -m . rho <= 0; None when the sector has ca
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientationRegion.rodriguesPlanes(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L220">source</a></font>
 {% endraw %}

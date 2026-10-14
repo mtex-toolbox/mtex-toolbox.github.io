@@ -14,8 +14,6 @@ negative, a distance between directions that makes points repel each other
 
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](S2RestrictedDistanceKernel.bandwidth_py.html) | the degree N the kernel is cut at |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L938">source</a></font>

@@ -17,29 +17,47 @@ values (MATLAB's radon, calcPDF and calcIPDF)
 
 ## Syntax
 
-The pole figure of the crystal direction h:
+<div class="mx-form" markdown="1">
 
 ```python
 pf = SO3F.radon(h)
 ```
 
-The inverse pole figure of the specimen direction r:
+The pole figure of the crystal direction h.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ipf = SO3F.radon(r=r)
 ```
 
-The pole figure of h at the directions r:
+The inverse pole figure of the specimen direction r.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = SO3F.radon(h, r)
 ```
 
-Superposed pole figures:
+The pole figure of h at the directions r.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = SO3F.radon([h1, h2], superposition=[0.4, 0.6])
 ```
+
+Superposed pole figures.
+
+</div>
+
+## Description
 
 The pole figure of h is the mean of the function over the orientations g with g h = r, a
 function of r on the sphere in the specimen frame; the inverse pole figure of r the same
@@ -50,25 +68,21 @@ the transform, is not taken: truncate the function first.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3F` | SO3FunHarmonic |
 | `h` | Miller or vector3d, the crystal directions, or a list of them |
 | `r` | vector3d, the specimen directions |
 
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `superposition` | `None` | the weights of several crystal directions |
+
 ## Output
 
-| | |
-|---|---|
 | `pf` | S2FunHarmonic in the specimen frame |
 | `ipf` | S2FunHarmonic in the crystal frame |
 | `v` | array, the values at the pairs of h and r |
-
-## Keywords
-
-| | default | |
-|---|---|---|
-| `superposition` | `None` | the weights of several crystal directions |
 
 ## See also
 

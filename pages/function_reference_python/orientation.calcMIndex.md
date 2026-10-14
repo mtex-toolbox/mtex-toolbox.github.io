@@ -15,17 +15,27 @@ number of orientations; MATLAB's calcMIndex
 
 ## Syntax
 
-The M-index:
+<div class="mx-form" markdown="1">
 
 ```python
 mi = calcMIndex(odf)
 ```
 
-Angle distributions on a coarser grid:
+The M-index.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mi = calcMIndex(odf, resolution=2*degree)
 ```
+
+Angle distributions on a coarser grid.
+
+</div>
+
+## Description
 
 The M-index is half the total variation between the misorientation angle distributions of
 the uniform and of the uncorrelated misorientation distribution, calcMDF(odf): zero for a
@@ -33,21 +43,17 @@ random texture, one for a single crystal.
 
 ## Input
 
-| | |
-|---|---|
 | `odf` | SO3Fun |
-
-## Output
-
-| | |
-|---|---|
-| `mi` | the M-index, a number between 0 and 1 |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `1*degree` | the step of the angle distributions |
+
+## Output
+
+| `mi` | the M-index, a number between 0 and 1 |
 
 ## References
 

@@ -17,35 +17,39 @@ MATLAB's isAligned
 
 ## Syntax
 
-The same basis, no transition needed:
+<div class="mx-form" markdown="1">
 
 ```python
 b = cs1.isAligned(cs2)
 ```
 
-Within another relative tolerance:
+The same basis, no transition needed.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = cs1.isAligned(cs2, tol=1e-3)
 ```
 
+Within another relative tolerance.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `cs1, cs2` | referenceFrame |
-
-## Output
-
-| | |
-|---|---|
-| `b` | bool |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `None` | the relative tolerance on the basis vectors; by default referenceFrame.tolAligned, 0.05 |
+
+## Output
+
+| `b` | bool |
 
 ## See also
 

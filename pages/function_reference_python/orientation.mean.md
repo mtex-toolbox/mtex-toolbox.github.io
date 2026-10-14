@@ -16,35 +16,57 @@ the mean of a list of orientations, with the principal moments and axes of inert
 
 ## Syntax
 
-The mean orientation:
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(ori)
 ```
 
-A weighted mean:
+The mean orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(ori, weights=w)
 ```
 
-Outliers left out:
+A weighted mean.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = mean(ori, robust=True)
 ```
 
-With the equivalents nearest to it:
+Outliers left out.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m, oriProjected = mean(ori, return_projected=True)
 ```
 
-And the inertia:
+With the equivalents nearest to it.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m, oriProjected, lam, V = mean(ori, return_projected=True, return_inertia=True)
 ```
+
+And the inertia.
+
+</div>
+
+## Description
 
 Starting from the first orientation, every orientation is moved to its symmetric equivalent
 closest to the running mean, and the quaternion mean of these equivalents is the next mean;
@@ -56,22 +78,11 @@ part.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
-
-## Output
-
-| | |
-|---|---|
-| `m` | orientation, the mean |
-| `oriProjected` | orientation, the equivalents of ori closest to m, NaN where ori is |
-| `lam` | the principal moments of inertia, in ascending order |
-| `V` | quaternion, the four principal axes of inertia |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per orientation |
 | `robust` | `False` | leave out the outliers, as quaternion.mean does |
@@ -82,6 +93,13 @@ part.
 | `dtype` | `None` | NumPy's argument, refused |
 | `out` | `None` | NumPy's argument, refused |
 | `keepdims` | `False` | keep the reduced axes with length one, as np.mean does |
+
+## Output
+
+| `m` | orientation, the mean |
+| `oriProjected` | orientation, the equivalents of ori closest to m, NaN where ori is |
+| `lam` | the principal moments of inertia, in ascending order |
+| `V` | quaternion, the four principal axes of inertia |
 
 ## See also
 

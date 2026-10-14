@@ -16,16 +16,24 @@ orthonormal quaternion axes A; BinghamODF builds it from axes, orientations or a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunBingham(kappa, A, cs, ss)
 SO3FunBingham(kappa, A, cs, cs, antipodal=True)      with exchange symmetry
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3FunBingham(kappa, A, *frames, weight=1.0, antipodal=False)
 ```
+
+</div>
 
 MATLAB's [SO3FunBingham.SO3FunBingham](SO3FunBingham.SO3FunBingham.html)
 

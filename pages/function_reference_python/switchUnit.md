@@ -15,9 +15,13 @@ number, its unit and the factor it was multiplied by
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 switchUnit(x, unit)
 ```
+
+</div>
 
 MATLAB's [switchUnit](switchUnit.html)
 

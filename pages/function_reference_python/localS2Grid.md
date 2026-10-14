@@ -13,23 +13,37 @@ an equispaced grid of directions in a spherical cap about a centre
 
 ## Syntax
 
-A cap of 10 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 v = localS2Grid(center, maxTheta=10*degree)
 ```
 
-Finer:
+A cap of 10 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = localS2Grid(center, 10*degree, resolution=1*degree)
 ```
 
-Every point of the cap:
+Finer.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = localS2Grid(center, 60*degree, respectSymmetry=False)
 ```
+
+Every point of the cap.
+
+</div>
+
+## Description
 
 The directions lie on rings about the centre, resolution apart. For a crystal direction in
 a frame with symmetry the grid keeps one representative of every direction the cap holds up
@@ -37,23 +51,19 @@ to the symmetry, those nearer the centre than to any of its symmetric copies.
 
 ## Input
 
-| | |
-|---|---|
 | `center` | vector3d or Miller, the centre of the cap |
 | `maxTheta` | the radius of the cap |
 
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d in the frame of the centre |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `5*degree` | the spacing of the grid |
 | `respectSymmetry` | `True` | keep one representative of the directions symmetrically equivalent |
+
+## Output
+
+| `v` | vector3d in the frame of the centre |
 
 ## See also
 

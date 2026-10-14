@@ -15,9 +15,13 @@ the theta fibre of rolling textures, the orientations with <100> along the norma
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 fibre.theta(*frames)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L642">source</a></font>
 {% endraw %}

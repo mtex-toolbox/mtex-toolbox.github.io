@@ -15,9 +15,13 @@ the orientations of NaN coefficients between the frames given, of the shape give
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.nan(*args)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L367">source</a></font>
 {% endraw %}

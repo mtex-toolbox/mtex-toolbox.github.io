@@ -16,9 +16,13 @@ the perimeter against that of the circle of the same area, one for a circle
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.shapeFactor(self)
 ```
+
+</div>
 
 ## Used on
 

@@ -17,9 +17,13 @@ equivalents
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunCBF.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3FunCBF.eval](SO3FunCBF.eval.html)
 

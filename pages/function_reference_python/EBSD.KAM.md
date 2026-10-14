@@ -17,41 +17,67 @@ neighbours; MATLAB's KAM
 
 ## Syntax
 
-The nearest neighbours:
+<div class="mx-form" markdown="1">
 
 ```python
 kam = ebsd['Forsterite'].KAM()
 ```
 
-Misorientations above 10 degree left out:
+The nearest neighbours.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kam = KAM(ebsd, threshold=10*degree)
 ```
 
-The neighbours up to the second order:
+Misorientations above 10 degree left out.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kam = KAM(ebsd, order=2)
 ```
 
-The neighbours within a distance:
+The neighbours up to the second order.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kam = KAM(ebsd, radius=3*ebsd.lattice.dxy)
 ```
 
-Weighted by the distance:
+The neighbours within a distance.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kam = KAM(ebsd, order=3, weights=lambda d: np.exp(-(d / dxy)**2))
 ```
 
-The largest angle instead of the mean:
+Weighted by the distance.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kam = KAM(ebsd, max=True)
 ```
+
+The largest angle instead of the mean.
+
+</div>
+
+## Description
 
 The neighbours of a pixel are those within order steps over the stencil of the lattice,
 square or hexagonal, or within a physical radius. Only neighbours of the same phase, both
@@ -61,25 +87,21 @@ is NaN. The map needs no grid: the lattice of a list is used too. The angles are
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD |
-
-## Output
-
-| | |
-|---|---|
-| `kam` | array of the shape of the map, the angles in radian |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `order` | `1` | the neighbours up to this many steps over the lattice |
 | `radius` | `None` | the neighbours up to this distance, in the scan unit, instead of order |
 | `threshold` | `inf` | a misorientation angle above it is left out |
 | `max` | `False` | the largest misorientation angle instead of the mean |
 | `weights` | `None` | a function of the distance of a neighbour, its weight in the mean |
+
+## Output
+
+| `kam` | array of the shape of the map, the angles in radian |
 
 ## See also
 

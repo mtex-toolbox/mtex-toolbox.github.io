@@ -17,37 +17,43 @@ gives an orthogonalTransform, orientations stay orientations between the same fr
 
 ## Syntax
 
-One after the other:
+<div class="mx-form" markdown="1">
 
 ```python
 rot = cat(rot1, rot2)
 ```
 
-Side by side:
+One after the other.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = cat(rot1, rot2, axis=1)
 ```
 
+Side by side.
+
+</div>
+
+## Description
+
 Orientations must share their frames.
 
 ## Input
 
-| | |
-|---|---|
 | `arrays` | the rotations, orientations or orthogonal transforms |
-
-## Output
-
-| | |
-|---|---|
-| `rot` | the joined list, of the class of the operands |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `0` | the axis along which they are joined, as NumPy's concatenate |
+
+## Output
+
+| `rot` | the joined list, of the class of the operands |
 
 ## See also
 

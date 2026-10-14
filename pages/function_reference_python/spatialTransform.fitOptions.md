@@ -15,9 +15,13 @@ the keywords a refit of this transform takes to keep its kind, as a dict
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransform.fitOptions(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L153">source</a></font>
 {% endraw %}

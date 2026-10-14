@@ -13,11 +13,17 @@ a projection of the sphere to the plane, restricted to a region and a hemisphere
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalProjection(sR, pC, antipodal=False, upper=True)
 proj.project(v)        the plane coordinates, NaN outside the region
 proj.iproject(x, y)    the direction drawn at a point of the plane
 ```
+
+</div>
+
+## Description
 
 Fields: sR, the region shown; pC, the plotting convention; antipodal, whether v and -v
 are one point; upper, whether the chart shows the hemisphere out of the screen;
@@ -25,8 +31,6 @@ symmetric, whether the data carry the symmetry of the frame, as a function does.
 
 ## Members
 
-| | |
-|---|---|
 | [boundary](sphericalProjection.boundary_py.html) | the boundary of the region as plane curves, one (x, y) pair per arc |
 | [bounds](sphericalProjection.bounds_py.html) | the bounding box of the drawn region, from its boundary, as (xmin, xmax, ymin, ymax) |
 | [chartRegion](sphericalProjection.chartRegion_py.html) | the region as seen in the frame of the convention, folded into the upper hemisphere |

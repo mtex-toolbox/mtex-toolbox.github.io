@@ -16,47 +16,57 @@ the sum of the vectors, over all axes or the given ones
 
 ## Syntax
 
-Over all vectors:
+<div class="mx-form" markdown="1">
 
 ```python
 s = sum(v)
 ```
 
-Along the first axis:
+Over all vectors.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = sum(v, axis=0)
 ```
 
-NumPy's form, the summed axis kept:
+Along the first axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = np.sum(v, axis=1, keepdims=True)
 ```
+
+NumPy's form, the summed axis kept.
+
+</div>
+
+## Description
 
 The result keeps the frame and the display style of the vectors. MATLAB sums along the
 first axis that is not a singleton; the sum here is over all axes unless one is given.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d |
-
-## Output
-
-| | |
-|---|---|
-| `s` | vector3d |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `None` | an axis or a tuple of axes to sum over; by default all |
 | `dtype` | `None` | NumPy's argument, refused: a container has no dtype to choose |
 | `out` | `None` | NumPy's argument, refused: a container has no output buffer |
 | `keepdims` | `False` | keep the summed axes with length one |
+
+## Output
+
+| `s` | vector3d |
 
 ## See also
 

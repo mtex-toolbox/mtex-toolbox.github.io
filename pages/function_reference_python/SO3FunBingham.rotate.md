@@ -17,39 +17,45 @@ side='right', from the right (the crystal side); MATLAB's rotate
 
 ## Syntax
 
-Turned in specimen coordinates:
+<div class="mx-form" markdown="1">
 
 ```python
 odf = odf.rotate(r)
 ```
 
-Turned in crystal coordinates:
+Turned in specimen coordinates.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = odf.rotate(r, side='right')
 ```
+
+Turned in crystal coordinates.
+
+</div>
+
+## Description
 
 The axes of the distribution are turned, and with them the frame on that side: a symmetry
 the rotation does not map onto itself is dropped, with a warning.
 
 ## Input
 
-| | |
-|---|---|
 | `odf` | SO3FunBingham |
 | `r` | rotation |
 
-## Output
-
-| | |
-|---|---|
-| `odf` | SO3FunBingham |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left', the specimen side, or 'right', the crystal side, as MATLAB's flag 'right' |
+
+## Output
+
+| `odf` | SO3FunBingham |
 
 ## See also
 

@@ -16,39 +16,45 @@ the grid points selected by a mask, or within eps of a centre; MATLAB's S2Grid.s
 
 ## Syntax
 
-The points a condition selects:
+<div class="mx-form" markdown="1">
 
 ```python
 g = S2G.subGrid(S2G.theta < 30*degree)
 ```
 
-The points within 20 degree of a centre:
+The points a condition selects.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 g = S2G.subGrid(zvector, eps=20*degree)
 ```
+
+The points within 20 degree of a centre.
+
+</div>
+
+## Description
 
 The result is again a ring grid: the rings that empty out go, the others keep the points
 selected. A mask is a boolean array over the grid points or a list of indices.
 
 ## Input
 
-| | |
-|---|---|
 | `S2G` | S2Grid |
 | `mask` | a boolean array or indices of the grid points, or with eps the centre, a vector3d |
 
-## Output
-
-| | |
-|---|---|
-| `g` | S2Grid |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `eps` | `None` | the radius about the centre mask within which the points are kept |
+
+## Output
+
+| `g` | S2Grid |
 
 ## See also
 

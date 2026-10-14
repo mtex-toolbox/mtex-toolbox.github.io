@@ -13,10 +13,14 @@ the Gauss Weierstrass kernel on SO(3), sum_n (2n+1) e^(-n(n+1) kappa) U_2n(t), k
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3GaussWeierstrassKernel(0.1)
 SO3GaussWeierstrassKernel(halfwidth=10*degree)
 ```
+
+</div>
 
 ## Used on
 

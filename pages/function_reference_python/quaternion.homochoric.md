@@ -16,9 +16,13 @@ the homochoric vectors, the axes scaled by (3/4 (omega - sin omega))^(1/3)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion.homochoric(self)
 ```
+
+</div>
 
 ## Used on
 

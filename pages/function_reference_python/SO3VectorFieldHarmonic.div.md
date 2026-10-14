@@ -16,32 +16,38 @@ the divergence, a function on SO(3); with x its values at the orientations x
 
 ## Syntax
 
-The divergence, an SO3FunHarmonic:
+<div class="mx-form" markdown="1">
 
 ```python
 D = SO3VF.div()
 ```
 
-Its values at orientations:
+The divergence, an SO3FunHarmonic.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = SO3VF.div(ori)
 ```
+
+Its values at orientations.
+
+</div>
+
+## Description
 
 The field is taken in its harmonic form; the divergence of a gradient is the Laplacian of
 the function.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3VF` | SO3VectorField |
 | `x` | orientation, where to evaluate the divergence |
 
 ## Output
 
-| | |
-|---|---|
 | `D` | SO3FunHarmonic |
 | `d` | array, the values at x |
 
@@ -51,9 +57,13 @@ the function.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.div(self, x=None)
 ```
+
+</div>
 
 ## Used on
 

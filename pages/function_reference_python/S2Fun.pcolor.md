@@ -14,9 +14,13 @@ pcolor(sF), pcolor(v), pcolor(v, data): a coloured surface
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 pcolor(x, *args, **kw)
 ```
+
+</div>
 
 ## Used on
 

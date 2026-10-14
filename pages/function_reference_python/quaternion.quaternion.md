@@ -15,16 +15,24 @@ q * v rotates a vector
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion(a, b, c, d)
 quaternion(abcd)                     an array of shape (..., 4) or (4, N)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 quaternion(*args, dtype=None)
 ```
+
+</div>
 
 ## Used on
 

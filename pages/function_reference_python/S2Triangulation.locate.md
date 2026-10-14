@@ -16,9 +16,13 @@ triangle with the nearest centre towards the vertex a coordinate says is missing
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Triangulation.locate(self, v)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/s2triangulation.py#L56">source</a></font>
 {% endraw %}

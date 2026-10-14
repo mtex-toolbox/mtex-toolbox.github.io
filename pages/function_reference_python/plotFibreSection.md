@@ -14,45 +14,55 @@ what plot(f) does on a section plot
 
 ## Syntax
 
-The fibre over the sections of an ODF:
+<div class="mx-form" markdown="1">
 
 ```python
 odf.plotSection(); plot(f)
 ```
 
-Fewer and red dots:
+The fibre over the sections of an ODF.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(f, points=200, lineColor='r')
 ```
 
-The same, called directly:
+Fewer and red dots.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotFibreSection(f)
 ```
+
+The same, called directly.
+
+</div>
+
+## Description
 
 The fibre is sampled at evenly spaced orientations, each drawn as a dot in the section it
 lies in. Further keywords go to the markers, as markerSize; lineWidth is ignored.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | fibre |
-
-## Output
-
-| | |
-|---|---|
-| `h` | list of the marker handles |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `points` | `1000` | the number of orientations along the fibre |
 | `lineColor` | `'k'` | the colour of the dots |
+
+## Output
+
+| `h` | list of the marker handles |
 
 ## See also
 

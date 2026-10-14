@@ -15,23 +15,37 @@ properties of every measurement; MATLAB's EBSD
 
 ## Syntax
 
-The measurements as a list:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD(pos, rot, phaseId, CSList)
 ```
 
-With properties:
+The measurements as a list.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD(pos, rot, phaseId, CSList, {'mad': mad})
 ```
 
-The shape of a pixel stated:
+With properties.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = EBSD(pos, rot, phaseId, CSList, prop, unitCell=uC)
 ```
+
+The shape of a pixel stated.
+
+</div>
+
+## Description
 
 A map is a table of measurements, a row per pixel, or, gridified, the same arrays in map
 shape, ebsd[i, j] the pixel of row i and column j. phaseId indexes CSList, 0 the not indexed
@@ -41,23 +55,15 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 
 ## Input
 
-| | |
-|---|---|
 | `pos` | vector3d, or an (n, 2) or (n, 3) array, the centres of the pixels |
 | `rotations` | rotation, the rotation of every pixel |
 | `phaseId` | int array, the phase of every pixel as the index into CSList |
 | `CSList` | phaseList, or a list of crystalFrame with 'notIndexed' first |
 | `prop` | dict, a property per pixel of the shape of the map, ebsd.prop['mad'] and ebsd.mad |
 
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `unitCell` | `None` | vector3d or (k, 2) array, the corners of a pixel about its centre, from which the lattice is built |
 | `scanUnit` | `'um'` | the unit of the positions |
@@ -67,6 +73,10 @@ loadEBSD, mtexdata and the simulations build maps the same way.
 | `phaseMap` | `None` | the phase number the file gives each entry of CSList |
 | `id` | `None` | the id of every pixel, by default its position in the list |
 | `isPadding` | `None` | the mask of the cells a grid adds to close it, MATLAB's NaN phase |
+
+## Output
+
+| `ebsd` | EBSD |
 
 ## See also
 

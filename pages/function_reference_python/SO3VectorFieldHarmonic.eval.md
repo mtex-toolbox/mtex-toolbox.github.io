@@ -16,9 +16,13 @@ the tangent vectors of the field at orientations
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldHarmonic.eval](SO3VectorFieldHarmonic.eval.html)
 

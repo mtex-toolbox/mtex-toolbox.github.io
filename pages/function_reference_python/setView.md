@@ -14,23 +14,37 @@ screen direction; MATLAB's plottingConvention/setView
 
 ## Syntax
 
-The current axes as pC says:
+<div class="mx-form" markdown="1">
 
 ```python
 pC.setView()
 ```
 
-The axes given, a convention by its name:
+The current axes as pC says.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 setView('y↓→x', ax=ax)
 ```
 
-The default convention:
+The axes given, a convention by its name.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plottingConvention.default.setView(ax=ax)
 ```
+
+The default convention.
+
+</div>
+
+## Description
 
 A polar axes takes its zero where the convention's east lies and runs from east to north;
 a 3D axes is turned so that the convention's out of screen direction points at the viewer.
@@ -38,13 +52,11 @@ Any other axes is left as it is.
 
 ## Input
 
-| | |
-|---|---|
 | `pC` | plottingConvention, or the name of one, as 'x↑→y'; the default convention when None |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ax` | `None` | the matplotlib axes; the axes of the current figure drawn into last by default |
 

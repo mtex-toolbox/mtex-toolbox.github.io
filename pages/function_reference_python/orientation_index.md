@@ -15,35 +15,57 @@ in the frame SS; a misorientation is one between two crystal frames
 
 ## Syntax
 
-A rotation between a crystal and a specimen frame:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation(rot, cs, ss)
 ```
 
-The quaternion coefficients:
+A rotation between a crystal and a specimen frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation(a, b, c, d, cs, ss)
 ```
 
-A misorientation with grain exchange:
+The quaternion coefficients.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = orientation(rot, cs, cs, antipodal=True)
 ```
 
-Points along a fibre:
+A misorientation with grain exchange.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation(f, points=100)
 ```
 
-Euler angles, and the other constructors:
+Points along a fibre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.byEuler(phi1, Phi, phi2, cs, ss)
 ```
+
+Euler angles, and the other constructors.
+
+</div>
+
+## Description
 
 An orientation is a rotation that carries the two frames it maps between: frameA, the crystal
 frame CS, from which it takes the coordinates, and frameB, the specimen frame SS or the second
@@ -57,27 +79,23 @@ orientations, an embedding projected back onto the orientations.
 
 ## Input
 
-| | |
-|---|---|
 | `rot` | rotation, quaternion or orientation |
 | `a, b, c, d` | the quaternion coefficients, numbers or arrays |
 | `cs` | crystalFrame, the frame mapped from |
 | `ss` | specimenFrame, or the second crystalFrame of a misorientation |
 | `f` | fibre |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` |  | a misorientation with grain exchange, between two frames of one crystal: the misorientation and its inverse are taken as one |
 | `dtype` |  | the floating point type of the coefficients |
 | `points` |  | the number of orientations sampled along a fibre |
+
+## Output
+
+| `ori` | orientation |
 
 ## See also
 
@@ -85,8 +103,6 @@ orientations, an embedding projected back onto the orientations.
 
 ## Members
 
-| | |
-|---|---|
 | [align](orientation.align_py.html) | the orientation two frames stand in by their axes, MATLAB's orientation.align |
 | [angle](orientation.angle_py.html) | the rotational angle up to symmetry, of the orientation or of the misorientation to other |
 | [axis](orientation.axis_py.html) | the rotational axis of a misorientation, an orientation or the misorientation between two orientations |

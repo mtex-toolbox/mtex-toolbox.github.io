@@ -15,35 +15,39 @@ the viewer, who looks from the other side of the plane when the layout flips it
 
 ## Syntax
 
-X, y, z under the identity:
+<div class="mx-form" markdown="1">
 
 ```python
 s = frameOnScreen(ebsd.lattice.plane)
 ```
 
-Z pointing away:
+X, y, z under the identity.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = frameOnScreen(ebsd.lattice.plane, mapLayout('x↑→y'))
 ```
 
+Z pointing away.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `pl` | the plane of the map |
-
-## Output
-
-| | |
-|---|---|
-| `s` | a list of three (right, up, out) triples, for x, y and z |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `layout` | `None` | the 2 x 2 matrix taking the plane to the screen, mapLayout; by default the identity |
+
+## Output
+
+| `s` | a list of three (right, up, out) triples, for x, y and z |
 
 ## See also
 

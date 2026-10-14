@@ -17,23 +17,37 @@ quadrature
 
 ## Syntax
 
-A callable on the grid of the bandwidth:
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic.quadrature(lambda x: np.sin(2*x))
 ```
 
-To another bandwidth:
+A callable on the grid of the bandwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic.quadrature(lambda x: np.sin(2*x), bandwidth=16)
 ```
 
-Values at given angles:
+To another bandwidth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = S1FunHarmonic.quadrature(x, values, bandwidth=16, weights=w)
 ```
+
+Values at given angles.
+
+</div>
+
+## Description
 
 A callable is sampled on the equispaced quadrature grid of the bandwidth, which makes the
 coefficients exact up to that degree; values at given angles are summed with the weights,
@@ -44,24 +58,20 @@ same function.
 
 ## Input
 
-| | |
-|---|---|
 | `x` | a callable of the angle, or an array of angles in radians |
-
-## Output
-
-| | |
-|---|---|
-| `sF` | S1FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `values` | `None` | the values at the angles x |
 | `bandwidth` | `None` | the largest degree of the series |
 | `weights` | `None` | the quadrature weights of the angles |
 | `real` | `None` | whether the function takes real values only; by default whether the values are real |
+
+## Output
+
+| `sF` | S1FunHarmonic |
 
 ## See also
 

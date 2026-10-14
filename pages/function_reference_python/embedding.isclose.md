@@ -15,35 +15,39 @@ whether two embeddings belong to the same frame and have the same images up to a
 
 ## Syntax
 
-The same images up to 1e-10:
+<div class="mx-form" markdown="1">
 
 ```python
 e1.isclose(e2)
 ```
 
-Up to a coarser tolerance:
+The same images up to 1e-10.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 e1.isclose(e2, atol=1e-3)
 ```
 
+Up to a coarser tolerance.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `e1, e2` | embedding |
-
-## Output
-
-| | |
-|---|---|
-| `tf` | bool, one answer for the whole list |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `atol` | `1e-10` | the absolute tolerance of every coordinate |
+
+## Output
+
+| `tf` | bool, one answer for the whole list |
 
 ## See also
 

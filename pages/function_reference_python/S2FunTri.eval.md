@@ -17,9 +17,13 @@ triangle each lies in; NaN at a NaN direction
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunTri.eval(self, v)
 ```
+
+</div>
 
 MATLAB's [S2FunTri.eval](S2FunTri.eval.html)
 

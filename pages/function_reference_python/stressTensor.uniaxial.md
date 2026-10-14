@@ -15,43 +15,53 @@ the stress of a uniaxial tension along v, sigma v v^T
 
 ## Syntax
 
-Of unit magnitude:
+<div class="mx-form" markdown="1">
 
 ```python
 sigma = stressTensor.uniaxial(v)
 ```
 
-Of magnitude 100:
+Of unit magnitude.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sigma = stressTensor.uniaxial(v, sigma=100)
 ```
 
-A uniaxial compression:
+Of magnitude 100.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sigma = -stressTensor.uniaxial(v)
 ```
 
+A uniaxial compression.
+
+</div>
+
+## Description
+
 The tensor is in the frame of v, the default specimen frame for a direction without one.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d or Miller, the tension direction |
-
-## Output
-
-| | |
-|---|---|
-| `sigma` | stressTensor |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `sigma` | `1.0` | the magnitude of the stress |
+
+## Output
+
+| `sigma` | stressTensor |
 
 ## See also
 

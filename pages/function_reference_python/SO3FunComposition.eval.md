@@ -16,9 +16,13 @@ the sum of the values of the components at the orientations x
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunComposition.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3FunComposition.eval](SO3FunComposition.eval.html)
 

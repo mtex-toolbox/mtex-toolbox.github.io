@@ -16,23 +16,37 @@ every image and map of the job resampled onto one grid; MATLAB's pixelSizeMatch 
 
 ## Syntax
 
-The smallest pixel size present:
+<div class="mx-form" markdown="1">
 
 ```python
 job.pixelSizeMatch()
 ```
 
-Another pixel size:
+The smallest pixel size present.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.pixelSizeMatch(0.05)
 ```
 
-Corners aligned, cropped:
+Another pixel size.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.pixelSizeMatch(0.05, offsetMatch='topLeft', extentMatch='smallest')
 ```
+
+Corners aligned, cropped.
+
+</div>
+
+## Description
 
 The images are interpolated linearly, NaN outside them, the EBSD map takes its nearest
 measurement. The result is job.resizedList, which calcDistortion works on; the job is
@@ -40,14 +54,12 @@ changed in place.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | trueEbsd |
 | `pixelsize` | the pixel size of the common grid; 0 for the smallest of job.imgList |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `offsetMatch` | `'centre'` | how fields of view of different size are laid over one another: 'centre' aligns their centres, 'topLeft' their first corners; choose the one that leaves the smaller rigid shift between the images |
 | `extentMatch` | `'largest'` | 'largest' extends every image to the largest field of view, repeating its edge pixels; 'smallest' crops all to the smallest |

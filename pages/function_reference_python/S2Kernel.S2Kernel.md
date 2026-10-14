@@ -14,9 +14,13 @@ a kernel on the sphere given by its Legendre coefficients A
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Kernel(A)
 ```
+
+</div>
 
 MATLAB's [S2Kernel.S2Kernel](S2Kernel.S2Kernel.html)
 

@@ -17,9 +17,13 @@ more likely its two grains share a parent
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 parentGrainReconstructor.plotGraph(job, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

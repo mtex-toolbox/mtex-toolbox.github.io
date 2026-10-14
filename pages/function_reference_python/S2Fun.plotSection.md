@@ -14,9 +14,15 @@ plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 plotSection(x, *args, **kw)
 ```
+
+</div>
+
+## Description
 
 An SO3Fun or a list of orientations sliced into sections. Without a section object the
 default is the phi2 sections against a specimen frame and the axis angle sections between

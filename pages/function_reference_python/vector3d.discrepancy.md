@@ -17,47 +17,77 @@ vector3d) or on SO(3) (SO3Fun, rotation, orientation), in either order; MATLAB's
 
 ## Syntax
 
-D_2, the root cap or ball L2 discrepancy:
+<div class="mx-form" markdown="1">
 
 ```python
 d = discrepancy(v, w, weights=c, weights2=e)
 ```
 
-The finite search for the largest cap:
+D_2, the root cap or ball L2 discrepancy.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = discrepancy(sF, v, metric='D_cap', numCenters=4097)
 ```
 
-The largest ball on SO(3):
+The finite search for the largest cap.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = discrepancy(odf, ori, metric='D_ball', numRadii=513)
 ```
 
-A bandlimited L2 norm, 'E_L' the same:
+The largest ball on SO(3).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = discrepancy(sF, v, metric='L2', bandwidth=32)
 ```
 
-The square:
+A bandlimited L2 norm, 'E_L' the same.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = discrepancy(sF, v, squared=True)
 ```
 
-With what was computed:
+The square.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d, info = discrepancy(sF, v, info=True)
 ```
 
-The squared objective of optimalSample:
+With what was computed.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = discrepancy(sF, v, metric='kernel', bandwidth=16)
 ```
+
+The squared objective of optimalSample.
+
+</div>
+
+## Description
 
 The measures on the sphere go to sphericalDiscrepancy, those on SO(3) to
 rotationalDiscrepancy, with the keywords given (weights, weights2, bandwidth,
@@ -68,22 +98,18 @@ only weights, weights2 and bandwidth, and info.
 
 ## Input
 
-| | |
-|---|---|
 | `a, b` | S2Fun or vector3d on the sphere, SO3Fun or rotation on SO(3) |
-
-## Output
-
-| | |
-|---|---|
-| `d` | the discrepancy |
-| `info` | with info=True, what was computed |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `metric` | `'D_2'` | 'D_2', 'D_cap' or 'L2' ('E_L') on the sphere, 'D_2', 'D_ball' or 'L2' on SO(3), or 'kernel', MATLAB's measure |
+
+## Output
+
+| `d` | the discrepancy |
+| `info` | with info=True, what was computed |
 
 ## See also
 

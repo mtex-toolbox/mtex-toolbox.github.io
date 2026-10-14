@@ -16,23 +16,37 @@ a rectangle cut out of the image; MATLAB's mapImage.subGrid
 
 ## Syntax
 
-Rows 2 to 9, columns 5 to 19:
+<div class="mx-form" markdown="1">
 
 ```python
 mg = mg.subGrid(range(2, 10), range(5, 20))
 ```
 
-The same as slices:
+Rows 2 to 9, columns 5 to 19.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mg = mg.subGrid(slice(2, 10), slice(5, 20))
 ```
 
-The box round a mask over the grid:
+The same as slices.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mg = mg.subGrid(mask)
 ```
+
+The box round a mask over the grid.
+
+</div>
+
+## Description
 
 The image, the map riding along with it and the origin are cut so the geometry still says
 where the remaining pixels are; nothing is resampled. Rows and columns count from zero and
@@ -40,22 +54,18 @@ must be contiguous and ascending.
 
 ## Input
 
-| | |
-|---|---|
 | `mg` | mapImage |
 | `rows` | indices or slice of the rows, or a boolean mask over the grid |
 
-## Output
-
-| | |
-|---|---|
-| `mg` | mapImage |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `cols` | `None` | indices or slice of the columns, omitted with a mask |
+
+## Output
+
+| `mg` | mapImage |
 
 ## See also
 

@@ -16,41 +16,67 @@ the direction with its indices, or its coordinates, rounded to small integers
 
 ## Syntax
 
-The indices of the display rounded:
+<div class="mx-form" markdown="1">
 
 ```python
 m = round(m)
 ```
 
-No index larger than 5:
+The indices of the display rounded.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = round(m, maxHKL=5)
 ```
 
-The direct indices integer:
+No index larger than 5.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m = round(m, 'uvw')
 ```
 
-The Cartesian coordinates of a vector:
+The direct indices integer.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = round(v, maxXYZ=5)
 ```
 
-Rounded only where it turns by less:
+The Cartesian coordinates of a vector.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = round(v, accuracy=0.1*degree)
 ```
 
-Also the angle the rounding turned it by:
+Rounded only where it turns by less.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 m, err = round(m, return_error=True)
 ```
+
+Also the angle the rounding turned it by.
+
+</div>
+
+## Description
 
 The direction is scaled so that its largest index is 1, 2, ..., maxHKL, and the scale
 that brings the indices nearest to integers is kept. For a trigonal or hexagonal lattice the three and the four index forms
@@ -60,27 +86,23 @@ keeps them where the rounding would turn it by more than the accuracy.
 
 ## Input
 
-| | |
-|---|---|
 | `m` | vector3d in a crystal frame |
 | `v` | vector3d |
 
-## Output
-
-| | |
-|---|---|
-| `m, v` | vector3d, the rounded directions |
-| `err` | array, the angle between the given and the rounded direction, without symmetric equivalents, with return_error=True |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `style` | `None` | the indices rounded, 'hkl', 'hkil', 'uvw' or 'UVTW'; by default those of the display |
 | `maxHKL` | `12` | the largest index of a crystal direction |
 | `maxXYZ` | `12` | the largest coordinate of a vector without a lattice |
 | `accuracy` | `1*degree` | the largest angle the rounding may turn a vector without a lattice by, in radians |
 | `return_error` | `False` | also return the angle the rounding turned the directions by |
+
+## Output
+
+| `m, v` | vector3d, the rounded directions |
+| `err` | array, the angle between the given and the rounded direction, without symmetric equivalents, with return_error=True |
 
 ## See also
 

@@ -15,37 +15,41 @@ MATLAB's Gaussian
 
 ## Syntax
 
-The density as a function:
+<div class="mx-form" markdown="1">
 
 ```python
 f = Gaussian(m, delta)
 ```
 
-Its values at x:
+The density as a function.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fx = Gaussian(m, delta, x)
 ```
 
+Its values at x.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `m` | the mean |
 | `delta` | the width, the standard deviation times sqrt(2) |
 
-## Output
-
-| | |
-|---|---|
-| `f` | a function of x, exp(-(x - m)^2 / delta^2) / (delta sqrt(pi)) |
-| `fx` | its values at x |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `x` | `None` | the points to evaluate at; the function when None |
+
+## Output
+
+| `f` | a function of x, exp(-(x - m)^2 / delta^2) / (delta sqrt(pi)) |
+| `fx` | its values at x |
 
 ## See also
 

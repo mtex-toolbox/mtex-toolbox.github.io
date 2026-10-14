@@ -16,38 +16,44 @@ MATLAB's calcFourier
 
 ## Syntax
 
-Up to the bandwidth of the kernel, psi.fhat:
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = psi.calcFourier()
 ```
 
-The degrees -16 .. 16:
+Up to the bandwidth of the kernel, psi.fhat.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = psi.calcFourier(16)
 ```
+
+The degrees -16 .. 16.
+
+</div>
+
+## Description
 
 The kernel is the even series psi(x) = sum_k c_k e^{ikx}, c_-k = c_k; the coefficients are
 returned two sided, beyond the bandwidth as zeros.
 
 ## Input
 
-| | |
-|---|---|
 | `psi` | S1Kernel |
-
-## Output
-
-| | |
-|---|---|
-| `fhat` | ndarray of 2L + 1 coefficients |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `L` | `None` | the largest degree, the bandwidth of the kernel when not given |
+
+## Output
+
+| `fhat` | ndarray of 2L + 1 coefficients |
 
 ## See also
 

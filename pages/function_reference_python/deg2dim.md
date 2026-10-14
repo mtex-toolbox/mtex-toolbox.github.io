@@ -15,9 +15,13 @@ k = 0 .. n - 1; deg2dim(L + 1) is the length of an array of bandwidth L
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 deg2dim(n)
 ```
+
+</div>
 
 MATLAB's [deg2dim](deg2dim.html)
 

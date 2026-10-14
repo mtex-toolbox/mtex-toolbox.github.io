@@ -13,8 +13,6 @@ the orthographic projection: r = sin(theta)
 
 ## Members
 
-| | |
-|---|---|
 | [polarAngle](orthographicProjection.polarAngle_py.html) | the polar angle arcsin(r) drawn at the plane radius r |
 | [radius](orthographicProjection.radius_py.html) | the plane radius sin(theta) of the polar angle theta |
 

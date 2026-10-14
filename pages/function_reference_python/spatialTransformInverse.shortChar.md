@@ -15,9 +15,13 @@ the short name of the inverted transform with the prefix inv-
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformInverse.shortChar(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L892">source</a></font>
 {% endraw %}

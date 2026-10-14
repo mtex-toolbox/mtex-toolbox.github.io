@@ -16,9 +16,13 @@ the periodic distance of two angles
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1Grid.dist(self, x, y)
 ```
+
+</div>
 
 MATLAB's [S1Grid.dist](S1Grid.dist.html)
 

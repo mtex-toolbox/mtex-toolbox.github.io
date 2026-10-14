@@ -17,22 +17,34 @@ on the sphere
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 f = angle(sAF, v)
 f = angle(sAF1, sAF2)
 ```
 
-To the directions of a vector field:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = angle(sAF, sVF)
 ```
 
+To the directions of a vector field.
+
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2AxisFieldHarmonic.angle(self, x)
 ```
+
+</div>
 
 MATLAB's [S2AxisField.angle](S2AxisField.angle.html)
 

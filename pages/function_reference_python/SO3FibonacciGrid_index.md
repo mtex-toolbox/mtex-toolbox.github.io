@@ -15,14 +15,16 @@ superfibonacciSO3Grid
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S3G = superfibonacciSO3Grid(cs, ss, resolution=5*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [find](SO3FibonacciGrid.find_py.html) | the nearest grid rotation of every orientation, or the k nearest, or all within a radius, up to the symmetries of the grid's frames |
 | [resolution](SO3FibonacciGrid.resolution_py.html) | the mean nearest-neighbour spacing the grid was built for, in radians |
 | [subGrid](SO3FibonacciGrid.subGrid_py.html) | the grid of the orientations a mask or an index array selects |

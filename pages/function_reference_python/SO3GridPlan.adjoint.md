@@ -16,22 +16,36 @@ weights those of the grid's rule
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 g = quadratureSO3Grid(16)
 p = SO3GridPlan(g, 8)
 ```
 
-The quadrature of the grid's rule:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = p.adjoint(values)
 ```
 
-Weights of the grid's shape given:
+The quadrature of the grid's rule.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fhat = p.adjoint(values, weights=g.weights)
 ```
+
+Weights of the grid's shape given.
+
+</div>
+
+## Description
 
 The values are those at the nodes of a Clenshaw-Curtis grid in its order; real values give
 the coefficients of a real function. With the grid's rule the adjoint is the exact
@@ -40,21 +54,17 @@ the internal ones, F._fhat.
 
 ## Input
 
-| | |
-|---|---|
 | `values` | the values at the grid's nodes |
-
-## Output
-
-| | |
-|---|---|
-| `fhat` | the Wigner coefficients up to the plan's bandwidth |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | the quadrature weights at the nodes; by default the grid's rule in beta, the same for every alpha and gamma |
+
+## Output
+
+| `fhat` | the Wigner coefficients up to the plan's bandwidth |
 
 ## See also
 

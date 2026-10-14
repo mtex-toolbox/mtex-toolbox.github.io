@@ -16,9 +16,13 @@ the field with its values in the right tangent space, as a harmonic field
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.right(self)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldHarmonic.right](SO3VectorFieldHarmonic.right.html)
 

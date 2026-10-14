@@ -14,17 +14,27 @@ mixture of Botev et al.; MATLAB's kdeN
 
 ## Syntax
 
-Ceil(sqrt(n)) Gaussians:
+<div class="mx-form" markdown="1">
 
 ```python
 pdf, bw = kdeN(X, grid)
 ```
 
-More Gaussians, reproducible:
+Ceil(sqrt(n)) Gaussians.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pdf, bw = kdeN(X, grid, gam=50, rng=np.random.default_rng(1))
 ```
+
+More Gaussians, reproducible.
+
+</div>
+
+## Description
 
 A mixture of gam Gaussians is fitted by the regularised EM iteration to the data scaled to
 their bounding box widened by a tenth on every side, and evaluated at the rows of grid. The
@@ -34,24 +44,20 @@ returned instead. calcDensity of a matrix of samples calls it on a regular grid.
 
 ## Input
 
-| | |
-|---|---|
 | `X` | ndarray of shape (n, d), one sample per row |
 | `grid` | ndarray of shape (m, d), the points to evaluate at |
 
-## Output
-
-| | |
-|---|---|
-| `pdf` | the density at the rows of grid |
-| `bw` | the bandwidth per dimension |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `gam` | `None` | the number of Gaussians, below n; larger may be more accurate and is slower |
 | `rng` | `None` | the numpy random generator of the start |
+
+## Output
+
+| `pdf` | the density at the rows of grid |
+| `bw` | the bandwidth per dimension |
 
 ## References
 

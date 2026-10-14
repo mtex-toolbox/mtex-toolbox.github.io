@@ -14,35 +14,57 @@ the lattice planes and directions of low indices an orientation or a misorientat
 
 ## Syntax
 
-The plane normal along z and the direction along x:
+<div class="mx-form" markdown="1">
 
 ```python
 hkl, uvw = round2Miller(ori)
 ```
 
-The parallel planes and directions of two crystals:
+The plane normal along z and the direction along x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n1, n2, d1, d2 = round2Miller(mori)
 ```
 
-Smaller indices preferred more:
+The parallel planes and directions of two crystals.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n1, n2, d1, d2 = round2Miller(mori, penalty=0.01)
 ```
 
-Indices up to 6:
+Smaller indices preferred more.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n1, n2, d1, d2 = round2Miller(mori, maxIndex=6)
 ```
 
-The second best fit:
+Indices up to 6.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n1, n2, d1, d2 = round2Miller(mori, nextFit=2)
 ```
+
+The second best fit.
+
+</div>
+
+## Description
 
 For an orientation the plane (hkl) and the direction [uvw] of the crystal along the
 specimen z and x, rounded to the nearest low indices. For a misorientation the planes n1,
@@ -54,25 +76,21 @@ misorientations gives lists.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation, crystal to specimen |
 | `mori` | orientation, a misorientation between two crystals |
 
-## Output
-
-| | |
-|---|---|
-| `hkl, uvw` | Miller, the plane normal and the direction |
-| `n1, n2, d1, d2` | Miller, the parallel planes and directions |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `penalty` | `0.002` | the weight of the size of the indices against the misfit angle |
 | `maxIndex` | `None` | the largest index, 4 for a misorientation and 12 for an orientation by default |
 | `nextFit` | `1` | which fit to return, 1 the best |
+
+## Output
+
+| `hkl, uvw` | Miller, the plane normal and the direction |
+| `n1, n2, d1, d2` | Miller, the parallel planes and directions |
 
 ## See also
 

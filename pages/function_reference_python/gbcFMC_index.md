@@ -13,29 +13,47 @@ the grain boundary criterion of fast multiscale clustering; MATLAB's gbcFMC
 
 ## Syntax
 
-The default parameters:
+<div class="mx-form" markdown="1">
 
 ```python
 crit = gbcFMC()
 ```
 
-More grains, a tighter outlier radius:
+The default parameters.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 crit = gbcFMC(3.8, quatmax=5*degree)
 ```
 
-As the criterion of calcGrains:
+More grains, a tighter outlier radius.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd, criterion=gbcFMC(3.8, minPixel=5))
 ```
 
-The same by the keyword of calcGrains:
+As the criterion of calcGrains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd, fmc=3.8)
 ```
+
+The same by the keyword of calcGrains.
+
+</div>
+
+## Description
 
 Fast multiscale clustering (McMahon et al.) is an algebraic multigrid coarsening of the
 graph of neighbouring pixels: it builds a hierarchy of nested aggregates, each with its
@@ -46,15 +64,9 @@ small misorientation separates two uniform aggregates and does not separate the 
 deformed grain. Each indexed phase is clustered on its own; a pair of pixels of two phases
 is always a boundary.
 
-## Output
-
-| | |
-|---|---|
-| `crit` | gbcFMC, a grainBoundaryCriterion |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `cmaha` |  | the sharpness of the rebias of the coarse couplings by the aggregates' spread; larger gives more grains |
 | `cmaha0` |  | the decay of the initial coupling of two pixels per degree of misorientation |
@@ -64,6 +76,10 @@ is always a boundary.
 | `maxDelta` |  | the misorientation angle above which two pixels are never coupled |
 | `minPixel` |  | the smallest region left standing; smaller ones join their neighbours |
 | `verbose` |  | print the hierarchy of every phase |
+
+## Output
+
+| `crit` | gbcFMC, a grainBoundaryCriterion |
 
 ## References
 
@@ -75,8 +91,6 @@ is always a boundary.
 
 ## Members
 
-| | |
-|---|---|
 | [clusterPhase](gbcFMC.clusterPhase_py.html) | FMC on the pixels isP of one phase over the pair list (ip, jp) within them |
 | [evaluate](gbcFMC.evaluate_py.html) | 1 for every pair of pixels i, j that FMC puts into one cluster, 0 otherwise, each indexed phase clustered on its own |
 | [gbcFMC](gbcFMC.gbcFMC_py.html) | the grain boundary criterion of fast multiscale clustering |

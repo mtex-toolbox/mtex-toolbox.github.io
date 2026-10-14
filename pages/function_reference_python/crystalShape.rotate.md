@@ -17,9 +17,13 @@ list of them makes a list of shapes
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 crystalShape.rotate(self, rot)
 ```
+
+</div>
 
 MATLAB's [crystalShape.rotate](crystalShape.rotate.html)
 

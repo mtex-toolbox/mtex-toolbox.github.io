@@ -14,41 +14,67 @@ SO3FunRBF.interpolate
 
 ## Syntax
 
-The defaults:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = interpolateRBF(ori, y)
 ```
 
-The halfwidth of the kernel:
+The defaults.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = interpolateRBF(ori, y, halfwidth=10*degree)
 ```
 
-The kernels centred at the nodes:
+The halfwidth of the kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = interpolateRBF(ori, y, kernel=psi, exact=True)
 ```
 
-On an equispaced grid of that resolution:
+The kernels centred at the nodes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = interpolateRBF(ori, y, kernel=psi, resolution=7*degree)
 ```
 
-On a grid of your own:
+On an equispaced grid of that resolution.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = interpolateRBF(ori, y, kernel=psi, SO3Grid=S3G)
 ```
 
-A density, with the iterations:
+On a grid of your own.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F, it = interpolateRBF(ori, y, density=True, withIterations=True)
 ```
+
+A density, with the iterations.
+
+</div>
+
+## Description
 
 The function f(g) = sum_j w_j psi(angle(g, g_j)) with kernels centred on a grid minimises
 sum_i |f(ori_i) - y_i|^2, the system matrix the kernel values between the nodes and the
@@ -59,21 +85,12 @@ with more than one column give one set of weights per column.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation, the nodes |
 | `y` | the values at the nodes, (n,) or (n, k) |
 
-## Output
-
-| | |
-|---|---|
-| `SO3F` | SO3FunRBF |
-| `it` | the number of iterations, one per column of y |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `kernel` | `None` | SO3Kernel, the shape of the kernels instead of the de la Vallee Poussin kernel |
 | `halfwidth` | `None` | the halfwidth of the de la Vallee Poussin kernel, by default the resolution or 5 degree |
@@ -85,6 +102,11 @@ with more than one column give one set of weights per column.
 | `tol` | `0.001` | the tolerance of the iteration |
 | `maxIter` | `None` | the largest number of iterations, by default 100 for mlsq and 30 for LSQR |
 | `withIterations` | `False` | also return the number of iterations, MATLAB's second output |
+
+## Output
+
+| `SO3F` | SO3FunRBF |
+| `it` | the number of iterations, one per column of y |
 
 ## References
 

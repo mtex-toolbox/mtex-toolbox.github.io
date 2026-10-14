@@ -16,17 +16,27 @@ whether orientations lie inside the region, up to the tolerance, as a boolean ar
 
 ## Syntax
 
-The orientations inside the region:
+<div class="mx-form" markdown="1">
 
 ```python
 inside = oR.checkInside(ori)
 ```
 
-A wider margin at the boundary:
+The orientations inside the region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 inside = oR.checkInside(ori, tol=1*degree)
 ```
+
+A wider margin at the boundary.
+
+</div>
+
+## Description
 
 A point counts as inside when it violates no bound of the region by more than half the
 tolerance, an angle; the sector of axes, where the region has one, is checked with the
@@ -34,22 +44,18 @@ same tolerance.
 
 ## Input
 
-| | |
-|---|---|
 | `oR` | orientationRegion |
 | `o` | orientation, rotation or quaternions as an (..., 4) array |
 
-## Output
-
-| | |
-|---|---|
-| `inside` | boolean array in the shape of o |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `0.002` | the tolerance at the boundary of the region, MATLAB's 'tolerance' |
+
+## Output
+
+| `inside` | boolean array in the shape of o |
 
 ## See also
 

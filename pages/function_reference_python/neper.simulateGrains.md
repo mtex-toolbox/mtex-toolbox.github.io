@@ -17,29 +17,47 @@ neper.simulateGrains
 
 ## Syntax
 
-The interface, its geometry and morphology set before:
+<div class="mx-form" markdown="1">
 
 ```python
 nep = neper.init()
 ```
 
-100 grains of orientations sampled from an ODF:
+The interface, its geometry and morphology set before.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = nep.simulateGrains(100, odf)
 ```
 
-One grain per orientation:
+100 grains of orientations sampled from an ODF.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = nep.simulateGrains(ori)
 ```
 
-Grains elongated along x:
+One grain per orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = nep.simulateGrains(ori, aspectRatio=[2, 1, 1])
 ```
+
+Grains elongated along x.
+
+</div>
+
+## Description
 
 Neper tessellates the domain nep.geometry (a cube by default) into as many cells as
 there are orientations, with the morphology nep.morpho optimised over nep.maxIter
@@ -52,23 +70,19 @@ neper.init() returns, and MATLAB's flag 'silent' is verbose=False, the default.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation, one per grain, or the number of grains |
 | `odf` | SO3Fun, with a number of grains: the distribution the orientations are sampled from |
 
-## Output
-
-| | |
-|---|---|
-| `grains` | grain3d, with meanOrientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `verbose` | `False` | print Neper's output |
 | `aspectRatio` | `None` | three lengths, the aspect ratio of the grains along x, y and z, added to the morphology as Neper's aspratio |
+
+## Output
+
+| `grains` | grain3d, with meanOrientation |
 
 ## See also
 

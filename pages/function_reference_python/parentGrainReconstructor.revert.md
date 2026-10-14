@@ -17,23 +17,37 @@ parentGrainReconstructor.revert
 
 ## Syntax
 
-Undo the whole reconstruction:
+<div class="mx-form" markdown="1">
 
 ```python
 job.revert()
 ```
 
-Undo the grains a mask selects:
+Undo the whole reconstruction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.revert(job.grains.fit > 5*degree)
 ```
 
-Undo specific grains:
+Undo the grains a mask selects.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.revert(job.parentGrains[:5])
 ```
+
+Undo specific grains.
+
+</div>
+
+## Description
 
 The grains named, a mask or positions into job.grains, or grains, are given back the phase
 and the orientation of their prior grains; a grain merged of several comes apart into them,
@@ -41,8 +55,6 @@ the others stay merged. The votes and the variant graph are dropped.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor |
 | `ind` | bool mask or positions into job.grains, or grain2d; all grains when omitted |
 
@@ -52,9 +64,13 @@ the others stay merged. The votes and the variant graph are dropped.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 parentGrainReconstructor.revert(self, ind=None)
 ```
+
+</div>
 
 ## Used on
 

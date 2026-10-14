@@ -18,9 +18,13 @@ two settings of one lattice
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 referenceFrame.transformationMatrix(self, other)
 ```
+
+</div>
 
 MATLAB's [referenceFrame.transformationMatrix](referenceFrame.transformationMatrix.html)
 

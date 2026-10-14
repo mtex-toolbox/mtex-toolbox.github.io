@@ -16,9 +16,13 @@ the symmetric and the antisymmetric part, the mean over the permutations of the 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.sym(self)
 ```
+
+</div>
 
 MATLAB's [tensor.sym](tensor.sym.html)
 

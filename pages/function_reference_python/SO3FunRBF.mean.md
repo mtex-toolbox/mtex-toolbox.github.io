@@ -16,9 +16,13 @@ the mean of the function over SO(3), c0 plus the sum of the weights times the ke
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunRBF.mean(self)
 ```
+
+</div>
 
 MATLAB's [SO3FunRBF.mean](SO3FunRBF.mean.html)
 

@@ -18,39 +18,43 @@ positions, and the bounding box (umin, umax, vmin, vmax)
 
 ## Syntax
 
-In text heights:
+<div class="mx-form" markdown="1">
 
 ```python
 arrows, symbol, texts, bbox = triadGeometry(frameOnScreen(pl), ['x', 'y', 'z'])
 ```
 
-Twice as large:
+In text heights.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 arrows, symbol, texts, bbox = triadGeometry(screen, labels, t=2.0)
 ```
 
+Twice as large.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `screen` | the (right, up, out) triples of the axes, frameOnScreen |
 | `labels` | the label of every axis |
 
+## Keywords
+
+| keyword | default | description |
+|---|---|---|
+| `t` | `1.0` | the height of the text, the unit of the drawing |
+
 ## Output
 
-| | |
-|---|---|
 | `arrows` | a list of polygons of shape (7, 2) |
 | `symbol` | array of shape (m, 2), the circle and its spokes, NaN rows between pieces |
 | `texts` | a list of (position, label) |
 | `bbox` | (umin, umax, vmin, vmax) |
-
-## Keywords
-
-| | default | |
-|---|---|---|
-| `t` | `1.0` | the height of the text, the unit of the drawing |
 
 ## See also
 

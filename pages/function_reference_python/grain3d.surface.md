@@ -16,17 +16,25 @@ MATLAB's name for the surface area
 
 ## Syntax
 
-The same as grains.surfaceArea:
+<div class="mx-form" markdown="1">
 
 ```python
 s = grains.surface()
 ```
 
+The same as grains.surfaceArea.
+
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grain3d.surface(self)
 ```
+
+</div>
 
 ## Used on
 

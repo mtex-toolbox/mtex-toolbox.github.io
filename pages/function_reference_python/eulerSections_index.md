@@ -13,15 +13,17 @@ sections of constant Euler angle, the first or the third of a convention
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 phi2Sections(cs, ss, sections=6), phi2Sections(cs, ss, phi2=(0:15:90)*degree)
 phi1Sections, alphaSections, gammaSections
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [angleName](eulerSections.angleName_py.html) | the name of the Euler angle that is constant on each section |
 | [axisLabels](eulerSections.axisLabels_py.html) | the labels of the two chart axes, the other outer Euler angle and the middle one |
 | [names](eulerSections.names_py.html) | the names of the three Euler angles of the convention of the sections |

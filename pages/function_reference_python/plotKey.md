@@ -14,29 +14,47 @@ figure key as its direction key; MATLAB's directionColorKey.plot and ipfColorKey
 
 ## Syntax
 
-The key on the fundamental sector:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(HSVDirectionKey(cs))
 ```
 
-An inverse pole figure key, coarser:
+The key on the fundamental sector.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ipfHSVKey(cs), resolution=1*degree)
 ```
 
-On the whole region of the charts:
+An inverse pole figure key, coarser.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(key, fundamentalRegion=False)
 ```
 
-On the whole sphere:
+On the whole region of the charts.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(key, complete=True)
 ```
+
+On the whole sphere.
+
+</div>
+
+## Description
 
 The key is evaluated on the grid of every chart and drawn as an rgb surface; outside the
 sector a direction takes the colour of its equivalent inside. The other keywords are those
@@ -44,22 +62,18 @@ of the spherical plots.
 
 ## Input
 
-| | |
-|---|---|
 | `key` | a direction key (HSVDirectionKey, TSLDirectionKey, HKLDirectionKey, ...) or an ipfColorKey |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib meshes |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `0.5*degree` | the spacing of the grid |
 | `fundamentalRegion` | `True` | draw the key's sector only; complete=True sets it False |
+
+## Output
+
+| `h` | the matplotlib meshes |
 
 ## See also
 

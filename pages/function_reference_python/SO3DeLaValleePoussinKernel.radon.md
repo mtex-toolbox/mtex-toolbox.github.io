@@ -15,9 +15,13 @@ the Radon transform: the de la Vallee Poussin kernel on the sphere of the same k
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3DeLaValleePoussinKernel.radon(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L377">source</a></font>
 {% endraw %}

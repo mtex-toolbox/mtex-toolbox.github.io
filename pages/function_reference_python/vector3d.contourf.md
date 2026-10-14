@@ -16,9 +16,13 @@ contourf(sF), contourf(v), contourf(v, data): filled contours
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.contourf(x, *args, **kw)
 ```
+
+</div>
 
 MATLAB's [vector3d.contourf](vector3d.contourf.html)
 

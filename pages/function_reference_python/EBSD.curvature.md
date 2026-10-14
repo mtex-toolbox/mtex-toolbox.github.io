@@ -17,17 +17,27 @@ unit; MATLAB's EBSD.curvature, the incomplete curvature tensor
 
 ## Syntax
 
-From one sided differences:
+<div class="mx-form" markdown="1">
 
 ```python
 kappa = curvature(ebsd)
 ```
 
-From the least squares fit with the diagonals:
+From one sided differences.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 kappa = curvature(ebsd, stencil='full')
 ```
+
+From the least squares fit with the diagonals.
+
+</div>
+
+## Description
 
 Its rows are the components of the rotation vector and its columns the directions of the
 specimen, assembled from the gradient along the two axes of the plane of the map. A two
@@ -36,21 +46,17 @@ column the normal reaches is unknown and NaN.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD of one phase |
-
-## Output
-
-| | |
-|---|---|
-| `kappa` | curvatureTensor, of the shape of the map |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `stencil` | `'oneSided'` | 'oneSided', 'lattice' ('1hop') or 'full', passed to gradient |
+
+## Output
+
+| `kappa` | curvatureTensor, of the shape of the map |
 
 ## See also
 

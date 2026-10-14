@@ -17,9 +17,13 @@ the class kept
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 velocityGradientTensor.expm(self)
 ```
+
+</div>
 
 MATLAB's [velocityGradientTensor.expm](velocityGradientTensor.expm.html)
 

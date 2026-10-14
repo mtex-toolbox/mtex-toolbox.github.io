@@ -13,9 +13,13 @@ left(t) is t.left(): the tangent vectors on the left side
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 left(t)
 ```
+
+</div>
 
 ## Used on
 

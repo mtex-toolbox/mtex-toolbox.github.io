@@ -15,9 +15,13 @@ the basis the public coefficients fhat are taken in
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalY(l, v)
 ```
+
+</div>
 
 ## Used on
 

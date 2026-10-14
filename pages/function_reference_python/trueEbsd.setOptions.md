@@ -17,29 +17,47 @@ trueEbsd
 
 ## Syntax
 
-5 um tiles on every map:
+<div class="mx-form" markdown="1">
 
 ```python
 job.setOptions(roiSize=5, numROI=24)
 ```
 
-Map 1 alone matched on its values:
+5 um tiles on every map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.setOptions(1, registerOn='raw')
 ```
 
-A tile width per fit stage of map 0:
+Map 1 alone matched on its values.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.setOptions(0, roiSize=[4, 8])
 ```
 
-Maps 0 and 1, measured when needed:
+A tile width per fit stage of map 0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.setOptions([0, 1], highContrast='auto')
 ```
+
+Maps 0 and 1, measured when needed.
+
+</div>
+
+## Description
 
 The settings say how the job registers, not what an image is, so they live on the job. They
 are lengths in the scan unit, not pixels, so they may be set before or after pixelSizeMatch.
@@ -58,21 +76,17 @@ per pixel, carried and not used.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | trueEbsd |
-
-## Output
-
-| | |
-|---|---|
-| `the job is changed in place` |  |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `None` | the map, or a list of maps, the settings apply to; by default every map |
+
+## Output
+
+| `the job is changed in place` |  |
 
 ## See also
 

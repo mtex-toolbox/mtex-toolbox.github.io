@@ -16,29 +16,47 @@ rotation/discrepancy
 
 ## Syntax
 
-D_2 of two orientation sets:
+<div class="mx-form" markdown="1">
 
 ```python
 d = rotationalDiscrepancy(ori1, ori2)
 ```
 
-Of a density and a weighted sample:
+D_2 of two orientation sets.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = rotationalDiscrepancy(odf, ori, weights=c)
 ```
 
-The squared bandlimited norm:
+Of a density and a weighted sample.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = rotationalDiscrepancy(ori1, ori2, 'L2', bandwidth=16, squared=True)
 ```
 
-The largest ball difference and its ball:
+The squared bandlimited norm.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d, info = rotationalDiscrepancy(odf, ori, 'D_ball', numCenters=4097, info=True)
 ```
+
+The largest ball difference and its ball.
+
+</div>
+
+## Description
 
 With B(C, r) = {R : angle(C, R) <= r} the balls of SO(3) and nu = mu - eta the difference
 of the two measures, D_ball is sup |nu(B(C, r))|, D_2 the root of the integral of
@@ -58,21 +76,12 @@ the objective of optimalSample, is taken by discrepancy, not here.
 
 ## Input
 
-| | |
-|---|---|
 | `a, b` | SO3Fun, a real scalar density, or rotation and orientation, a sample |
 | `metric` | 'D_2', 'D_ball' or 'L2' (also 'E_L') |
 
-## Output
-
-| | |
-|---|---|
-| `d` | the discrepancy, its square with squared=True |
-| `info` | with info=True: method, isExact, bandwidth, and for D_ball the ball found, center, radius, closed (False for the limit of open balls), signedDifference |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | the non negative weights of the orientations of a |
 | `weights2` | `None` | the weights of the orientations of b |
@@ -83,6 +92,11 @@ the objective of optimalSample, is taken by discrepancy, not here.
 | `centers` | `None` | rotation, the ball centres D_ball searches instead |
 | `squared` | `False` | return the square of D_2 and L2 |
 | `info` | `False` | return the details too, as a second output |
+
+## Output
+
+| `d` | the discrepancy, its square with squared=True |
+| `info` | with info=True: method, isExact, bandwidth, and for D_ball the ball found, center, radius, closed (False for the limit of open balls), signedDifference |
 
 ## See also
 

@@ -13,14 +13,16 @@ cross(x, ...) is x.cross(...), the method of the object passed; NumPy's cross fo
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 cross(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [S2Grid](S2Grid.cross_py.html) | the cross product of two plane normals is a lattice direction and the one of two directions a plane normal, so the indices switch sides |
 | [S2VectorFieldHarmonic](S2VectorFieldHarmonic.cross_py.html) | F x x = -[x]_x F, on the rows of the coefficients F [x]_x |
 | [SO3TangentVector](SO3TangentVector.cross_py.html) | the cross product with tangent vectors at the same reference, brought to this side |

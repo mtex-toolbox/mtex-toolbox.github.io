@@ -13,14 +13,16 @@ isclose(x, ...) is x.isclose(...), the method of the object passed; NumPy's iscl
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 isclose(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [embedding](embedding.isclose_py.html) | whether two embeddings belong to the same frame and have the same images up to atol |
 | [fibre](fibre.eq_py.html) | equal when the frames are the same and h and r agree up to the symmetry of the frames within tol, both flipped counting as well |
 | [orientation](orientation.isclose_py.html) | equal up to the symmetry of the frames within the angular tolerance tol, between the same frames |

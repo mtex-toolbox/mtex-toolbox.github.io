@@ -15,9 +15,13 @@ the axial vector of a spin tensor
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spinTensor.vector(W)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L319">source</a></font>
 {% endraw %}

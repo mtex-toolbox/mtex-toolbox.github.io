@@ -14,43 +14,53 @@ figure; MATLAB's S2Kernel.plot
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 psi = S2DeLaValleePoussinKernel(halfwidth=10*degree)
 ```
 
-Over 0 to 180 degree:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(psi)
 ```
 
-Over -30 to 30 degree:
+Over 0 to 180 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(psi, maxAngle=30*degree, symmetric=True)
 ```
+
+Over -30 to 30 degree.
+
+</div>
+
+## Description
 
 The value psi(cos omega) is drawn against omega; the line keywords (lineColor, lineWidth,
 lineStyle, displayName) style the curve.
 
 ## Input
 
-| | |
-|---|---|
 | `psi` | S2Kernel |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib lines |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `maxAngle` | `180*degree` | the largest angle drawn |
 | `symmetric` | `False` | draw from -maxAngle to maxAngle |
+
+## Output
+
+| `h` | the matplotlib lines |
 
 ## See also
 

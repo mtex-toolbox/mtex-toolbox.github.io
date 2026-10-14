@@ -15,9 +15,13 @@ the slow scan direction, the keyword a refit keeps
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransformDrift.fitOptions(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L618">source</a></font>
 {% endraw %}

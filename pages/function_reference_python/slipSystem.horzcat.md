@@ -16,32 +16,34 @@ the list of several systems of one crystal, MATLAB's [sS1, sS2]
 
 ## Syntax
 
-One list of both:
+<div class="mx-form" markdown="1">
 
 ```python
 sS = cat(sS1, sS2)
 ```
+
+One list of both.
+
+</div>
+
+## Description
 
 The systems must be written in one frame; None operands are skipped. The result is
 always one flat list.
 
 ## Input
 
-| | |
-|---|---|
 | `systems` | slipSystem |
-
-## Output
-
-| | |
-|---|---|
-| `sS` | slipSystem |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `0` | NumPy's axis, not used: the systems are always joined into one list |
+
+## Output
+
+| `sS` | slipSystem |
 
 ## See also
 

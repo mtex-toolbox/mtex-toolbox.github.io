@@ -15,15 +15,23 @@ the L2 norm of the function, from its harmonic expansion
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 t = norm(odf)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3FunRBF.norm(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L506">source</a></font>
 {% endraw %}

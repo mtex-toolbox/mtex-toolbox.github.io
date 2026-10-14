@@ -17,29 +17,47 @@ eigenvalues and eigenvectors of the Christoffel tensor
 
 ## Syntax
 
-In the direction n, or at a list of them:
+<div class="mx-form" markdown="1">
 
 ```python
 vp, vs1, vs2, pp, ps1, ps2 = velocity(C, n)
 ```
 
-With another density than the tensor's:
+In the direction n, or at a list of them.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 vp, vs1, vs2, pp, ps1, ps2 = velocity(C, n, density=rho)
 ```
 
-As functions on the sphere and axis fields:
+With another density than the tensor's.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 vp, vs1, vs2, pp, ps1, ps2 = velocity(C)
 ```
 
-As harmonic expansions:
+As functions on the sphere and axis fields.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 vp, vs1, vs2, pp, ps1, ps2 = velocity(C, harmonic=True)
 ```
+
+As harmonic expansions.
+
+</div>
+
+## Description
 
 The Christoffel tensor of the direction n is C_ijkl n_j n_l; its eigenvalues divided by
 the density are the squared speeds of the quasi longitudinal wave, vp, and of the two
@@ -54,25 +72,21 @@ and expanded. MATLAB's velocity(C, n, rho) passes the density third, which is ta
 
 ## Input
 
-| | |
-|---|---|
 | `C` | stiffnessTensor in GPa, or complianceTensor |
 | `n` | vector3d, the propagation directions |
 
-## Output
-
-| | |
-|---|---|
-| `vp, vs1, vs2` | the speeds of the p wave and of the faster and slower s wave in km/s; S2Fun without a direction |
-| `pp, ps1, ps2` | vector3d, the polarisations of the three waves; S2AxisField without a direction |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `density` | `None` | the density in g/cm^3; by default the density stored on the tensor, else 1 |
 | `harmonic` | `False` | expand the functions of a call without a direction in spherical harmonics instead of evaluating them where they are asked |
 | `bandwidth` | `48` | the harmonic degree of these expansions |
+
+## Output
+
+| `vp, vs1, vs2` | the speeds of the p wave and of the faster and slower s wave in km/s; S2Fun without a direction |
+| `pp, ps1, ps2` | vector3d, the polarisations of the three waves; S2AxisField without a direction |
 
 ## See also
 

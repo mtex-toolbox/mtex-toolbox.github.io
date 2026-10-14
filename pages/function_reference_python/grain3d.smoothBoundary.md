@@ -17,17 +17,25 @@ themselves first, then the faces; the vertices where four or more grains meet st
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grains.smoothBoundary(10)                 a laplaceFilter of 10 iterations
 grains.smoothBoundary(taubinFilter(20))   any boundary filter
 grains.smoothBoundary(5, moveOuterBoundary=True)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 grain3d.smoothBoundary(self, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [grain3d.smoothBoundary](grain3d.smoothBoundary.html)
 

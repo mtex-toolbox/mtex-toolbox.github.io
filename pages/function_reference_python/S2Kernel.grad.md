@@ -16,29 +16,47 @@ the derivative of a kernel on the sphere with respect to the polar angle, or to 
 
 ## Syntax
 
-Dpsi/dtheta at the cosines t:
+<div class="mx-form" markdown="1">
 
 ```python
 d = psi.grad(t)
 ```
 
-At the angles between the directions v and the z axis:
+Dpsi/dtheta at the cosines t.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = psi.grad(v, zvector)
 ```
 
-Dpsi/dt, the derivative in the cosine:
+At the angles between the directions v and the z axis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = psi.grad(t, polynomial=True)
 ```
 
-The derivative as a kernel:
+Dpsi/dt, the derivative in the cosine.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 dpsi = psi.grad()
 ```
+
+The derivative as a kernel.
+
+</div>
+
+## Description
 
 The kernel is a Legendre series psi(t) in the cosine t of the angle; its derivative in t is
 a Legendre series of its own, and the derivative in the angle theta is -sin(theta) dpsi/dt.
@@ -47,23 +65,19 @@ Legendre series of dpsi/dt for polynomial=True.
 
 ## Input
 
-| | |
-|---|---|
 | `psi` | S2Kernel |
 | `t` | ndarray of cosines, or vector3d |
 | `other` | vector3d, the direction the angles of t are measured from |
 
-## Output
-
-| | |
-|---|---|
-| `d` | ndarray, or S2Kernel / S2KernelHandle without an argument |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `polynomial` | `False` | the derivative with respect to the cosine t instead of the angle |
+
+## Output
+
+| `d` | ndarray, or S2Kernel / S2KernelHandle without an argument |
 
 ## See also
 

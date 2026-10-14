@@ -17,23 +17,37 @@ Kabsch's matrix method
 
 ## Syntax
 
-Rot * u is nearest v:
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.fit(u, v)
 ```
 
-Some pairs counting more:
+Rot * u is nearest v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.fit(u, v, weights=w)
 ```
 
-By the singular value decomposition:
+Some pairs counting more.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.fit(u, v, method='kabsch')
 ```
+
+By the singular value decomposition.
+
+</div>
+
+## Description
 
 The rotation maximising the weighted sum of <rot u_i, v_i> over the unit vectors: Horn's
 method takes the largest eigenvector of a 4 x 4 matrix, Kabsch's the singular value
@@ -43,22 +57,18 @@ vectors is not ported: the vectors are taken with their sign.
 
 ## Input
 
-| | |
-|---|---|
 | `u, v` | vector3d, lists of one length |
-
-## Output
-
-| | |
-|---|---|
-| `rot` | rotation |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per pair |
 | `method` | `'horn'` | 'horn' or 'kabsch' |
+
+## Output
+
+| `rot` | rotation |
 
 ## References
 

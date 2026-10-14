@@ -14,36 +14,40 @@ rotates and zooms
 
 ## Syntax
 
-The scene of the current figure:
+<div class="mx-form" markdown="1">
 
 ```python
 exportHTML('grains.html')
 ```
 
-Of another figure, with a title:
+The scene of the current figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 exportHTML('grains.html', fig=fig, title='Iron grains')
 ```
 
+Of another figure, with a title.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `fname` | the name of the HTML file |
-
-## Output
-
-| | |
-|---|---|
-| `fname` | the file written |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure holding the scene, by default the current one |
 | `title` | `'MTEX 3D plot'` | the title of the page |
+
+## Output
+
+| `fname` | the file written |
 
 ## See also
 

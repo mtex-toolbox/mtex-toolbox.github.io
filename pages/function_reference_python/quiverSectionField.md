@@ -13,23 +13,37 @@ plot of a vector field on SO(3) as arrows in the sections of orientation space
 
 ## Syntax
 
-Arrows in phi2 sections, G = odf.grad():
+<div class="mx-form" markdown="1">
 
 ```python
 plot(G)
 ```
 
-In phi1 sections:
+Arrows in phi2 sections, G = odf.grad().
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiverSectionField(G, 'phi1')
 ```
 
-A coarser grid of blue arrows:
+In phi1 sections.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiverSectionField(G, resolution=15*degree, color='b')
 ```
+
+A coarser grid of blue arrows.
+
+</div>
+
+## Description
 
 At the nodes of a grid in every section the field is evaluated, and the arrow shows where
 a small turn about the field's axis moves the orientation within the section, its length
@@ -39,13 +53,11 @@ figure sections (sigma) are drawn, the others refused.
 
 ## Input
 
-| | |
-|---|---|
 | `G` | SO3VectorField, a vector field on SO(3), as the gradient of an ODF |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `color` | `'k'` | the colour of the arrows |
 | `lineWidth` | `1.0` | the width of the arrows |

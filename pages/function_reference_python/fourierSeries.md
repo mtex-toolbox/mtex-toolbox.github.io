@@ -14,45 +14,55 @@ coefficients are those of a real function
 
 ## Syntax
 
-1 + cos(x):
+<div class="mx-form" markdown="1">
 
 ```python
 y = fourierSeries([0.5, 1, 0.5], np.linspace(0, 2*np.pi, 50))
 ```
 
-The complex values:
+1 + cos(x).
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 y = fourierSeries([0.5, 1, 0.5], x, real=False)
 ```
 
-At the nodes of a grid:
+The complex values.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 y = fourierSeries(chat, quadratureS1Grid(16))
 ```
+
+At the nodes of a grid.
+
+</div>
+
+## Description
 
 The coefficients are c_{-L} .. c_L over e^{ikx}, the internal ones of an S1FunHarmonic (MATLAB's
 fhat runs over e^{-ikx}). The result has the shape of x.
 
 ## Input
 
-| | |
-|---|---|
 | `chat` | the 2L+1 coefficients |
 | `x` | the angles, or a quadratureS1Grid |
 
-## Output
-
-| | |
-|---|---|
-| `y` | the values, real for real coefficients |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` | `None` | whether the coefficients are those of a real function, whose values are returned real; by default isRealFourier(chat) |
+
+## Output
+
+| `y` | the values, real for real coefficients |
 
 ## See also
 

@@ -17,29 +17,47 @@ between two of them; MATLAB's eval
 
 ## Syntax
 
-At the cosines t, cos(omega/2) on SO(3), cos(theta) on S2:
+<div class="mx-form" markdown="1">
 
 ```python
 v = psi.eval(t)
 ```
 
-The same:
+At the cosines t, cos(omega/2) on SO(3), cos(theta) on S2.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = psi(t)
 ```
 
-At the angles of rotations, or the polar angles of directions:
+The same.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = psi.eval(rot)
 ```
 
-At the angles between two rotations or two directions:
+At the angles of rotations, or the polar angles of directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = psi.eval(rot1, rot2)
 ```
+
+At the angles between two rotations or two directions.
+
+</div>
+
+## Description
 
 A kernel on SO(3) is a function of the cosine of half the rotation angle, one on the sphere
 of the cosine of the polar angle, one on the circle of the angle itself. Rotations or
@@ -48,22 +66,18 @@ the z coordinate of a direction, the cosine between two.
 
 ## Input
 
-| | |
-|---|---|
 | `psi` | SO3Kernel, S2Kernel or S1Kernel |
 | `t` | ndarray of arguments, or rotation (SO3Kernel), or vector3d (S2Kernel) |
 
-## Output
-
-| | |
-|---|---|
-| `v` | ndarray, the values |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `other` | `None` | a second rotation or direction: the kernel at the angle between t and it |
+
+## Output
+
+| `v` | ndarray, the values |
 
 ## See also
 

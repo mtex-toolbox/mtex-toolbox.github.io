@@ -14,15 +14,17 @@ the von Mises Fisher kernel on SO(3), proportional to e^(kappa cos omega), kappa
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3vonMisesFisherKernel(90)
 SO3vonMisesFisherKernel(halfwidth=10*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [halfwidth](SO3vonMisesFisherKernel.halfwidth_py.html) | the halfwidth in closed form, acos(1 - log(2) / kappa) |
 | [radon](SO3vonMisesFisherKernel.radon_py.html) | the Radon transform: the kernel on the sphere of the same coefficients, in closed form |
 

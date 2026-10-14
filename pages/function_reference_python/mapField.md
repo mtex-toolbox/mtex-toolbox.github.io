@@ -13,29 +13,47 @@ a pointwise operation on vector fields on SO(3), as a field or a function
 
 ## Syntax
 
-The cross product of two fields:
+<div class="mx-form" markdown="1">
 
 ```python
 u = mapField(np.cross, v, w)
 ```
 
-The inner product, a function on the full frames:
+The cross product of two fields.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = mapField(np.multiply, v, w, reduce=True, invariant=True)
 ```
 
-A field times a scalar function:
+The inner product, a function on the full frames.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u = mapField(np.multiply, v, F, bandwidth=8)
 ```
 
-A field times a number:
+A field times a scalar function.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 u = mapField(np.multiply, v, 2)
 ```
+
+A field times a number.
+
+</div>
+
+## Description
 
 The arguments are evaluated on the quadrature grid of the component frames of v, op is
 applied to the arrays, the tangent vectors of a field an (n, 3) array in the tangent space of
@@ -48,26 +66,22 @@ the field.
 
 ## Input
 
-| | |
-|---|---|
 | `op` | a callable of NumPy arrays |
 | `v` | SO3VectorField |
 | `args` | further SO3VectorField, SO3Fun or numbers, on the frames of v |
 
-## Output
-
-| | |
-|---|---|
-| `u` | SO3VectorFieldHarmonic |
-| `f` | SO3FunHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the bandwidth of the result |
 | `invariant` | `False` | put a scalar result on the frames of the field rather than its component frames |
 | `reduce` | `False` | sum the result over the three components before it is expanded |
+
+## Output
+
+| `u` | SO3VectorFieldHarmonic |
+| `f` | SO3FunHarmonic |
 
 ## See also
 

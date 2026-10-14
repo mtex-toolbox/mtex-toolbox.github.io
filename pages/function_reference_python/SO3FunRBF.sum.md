@@ -17,36 +17,40 @@ MATLAB's sum(odf, d) with d = axis + 1, which for a single function is the funct
 
 ## Syntax
 
-The integral, 8 pi^2 for an ODF:
+<div class="mx-form" markdown="1">
 
 ```python
 value = sum(odf)
 ```
 
-Along an axis of a list, the function itself for one:
+The integral, 8 pi^2 for an ODF.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 odf = sum(odf, axis=0)
 ```
 
+Along an axis of a list, the function itself for one.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `odf` | SO3Fun |
-
-## Output
-
-| | |
-|---|---|
-| `value` | the integral, a number |
-| `odf` | the function summed along the axis |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `None` | the axis to sum along, a non-negative integer; the integral when None |
+
+## Output
+
+| `value` | the integral, a number |
+| `odf` | the function summed along the axis |
 
 ## See also
 

@@ -17,46 +17,56 @@ the groups of both frames; MATLAB's orientation.dot and dot_outer
 
 ## Syntax
 
-Pairwise, broadcast:
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(ori1, ori2)
 ```
 
-Every pair, MATLAB's dot_outer:
+Pairwise, broadcast.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(ori1.reshape(-1, 1), ori2)
 ```
 
-Of the rotations as stored:
+Every pair, MATLAB's dot_outer.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = dot(ori1, ori2, symmetry=False)
 ```
+
+Of the rotations as stored.
+
+</div>
+
+## Description
 
 MATLAB's dot_outer is the broadcast of a column against a row. With symmetry=False, or with
 a rotation, it is rotation.dot: |q1 . q2|, or the signed product with antipodal=False.
 
 ## Input
 
-| | |
-|---|---|
 | `ori1` | orientation |
 | `ori2` | orientation, or a rotation |
 
-## Output
-
-| | |
-|---|---|
-| `d` | cos(omega/2), of the broadcast shape |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `symmetry` | `True` | reduce over the symmetric equivalents; False takes the rotations as stored |
 | `antipodal` | `True` | without symmetry, the absolute value of the product; False keeps its sign. With symmetry it is not used, the grain exchange comes from ori1 and ori2 |
+
+## Output
+
+| `d` | cos(omega/2), of the broadcast shape |
 
 ## See also
 

@@ -15,9 +15,13 @@ the image as one line of text: its size, channels, steps, name and whether a map
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapImage.char(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L352">source</a></font>
 {% endraw %}

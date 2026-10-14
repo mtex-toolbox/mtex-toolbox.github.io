@@ -13,14 +13,16 @@ principalComponents(x, ...) is x.principalComponents(...), the method of the obj
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 principalComponents(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grain2d](grain2d.principalComponents_py.html) | the two half axes of the ellipse with the same second area moments as every outline, the long one first, as antipodal vectors of the specimen frame |
 | [grain3d](grain3d.principalComponents_py.html) | the half axes of the ellipsoid of the same second moments and volume, the longest first |
 

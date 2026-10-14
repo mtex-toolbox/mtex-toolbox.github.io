@@ -14,23 +14,37 @@ one matrix P_n per degree up to L
 
 ## Syntax
 
-Under the rotation parts of all elements:
+<div class="mx-form" markdown="1">
 
 ```python
 P = invariantProjection(cs, 16)
 ```
 
-Under the proper elements alone:
+Under the rotation parts of all elements.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 P = invariantProjection(cs, 16, proper=True)
 ```
 
-In single precision:
+Under the proper elements alone.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 P = invariantProjection(cs, 16, dtype=np.float32)
 ```
+
+In single precision.
+
+</div>
+
+## Description
 
 P_n is the mean of the Wigner matrices of the group's rotations; it is nonzero only where
 both indices are multiples of the order of the group's axis along z (P.fold), and only that
@@ -41,23 +55,19 @@ S2FunHarmonic uses them.
 
 ## Input
 
-| | |
-|---|---|
 | `g` | pointGroup or a frame carrying one |
 | `L` | the bandwidth, the largest degree |
 
-## Output
-
-| | |
-|---|---|
-| `P` | InvariantProjection, its blocks the matrices of the degrees 0 to L |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `dtype` | `<class 'numpy.float64'>` | the real precision of the matrices, which are complex of that precision |
 | `proper` | `False` | project onto the functions invariant under the proper elements alone, which the sphere needs beside the rotation parts of all elements |
+
+## Output
+
+| `P` | InvariantProjection, its blocks the matrices of the degrees 0 to L |
 
 ## See also
 

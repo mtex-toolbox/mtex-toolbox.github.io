@@ -16,9 +16,13 @@ the field of unit vectors in the directions of the field, by quadrature at twice
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.normalize(self)
 ```
+
+</div>
 
 MATLAB's [SO3VectorField.normalize](SO3VectorField.normalize.html)
 

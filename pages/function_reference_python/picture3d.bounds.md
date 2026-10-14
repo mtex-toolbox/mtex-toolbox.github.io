@@ -15,9 +15,13 @@ the corners (lo, hi) of the box around the rectangle
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 picture3d.bounds(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L106">source</a></font>
 {% endraw %}

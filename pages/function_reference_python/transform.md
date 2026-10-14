@@ -13,14 +13,16 @@ transform(x, ...) is x.transform(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 transform(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.transform_py.html) | any map of the positions |
 
 ## Used on

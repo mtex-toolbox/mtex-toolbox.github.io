@@ -17,30 +17,38 @@ parentGrainReconstructor.mergeInclusions
 
 ## Syntax
 
-Every grain enclosed by a parent grain:
+<div class="mx-form" markdown="1">
 
 ```python
 job.mergeInclusions()
 ```
 
-Only those of at most 50 pixels:
+Every grain enclosed by a parent grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.mergeInclusions(maxSize=50)
 ```
+
+Only those of at most 50 pixels.
+
+</div>
+
+## Description
 
 The child and parent grains lying inside a parent grain, of at most maxSize pixels, become
 part of it, with its orientation; job.grains and job.mergeId follow the merge.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `maxSize` | `inf` | the largest number of pixels of an inclusion that is merged |
 

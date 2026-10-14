@@ -15,52 +15,66 @@ random orientations
 
 ## Syntax
 
-One random orientation:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.rand(cs)
 ```
 
-N of them:
+One random orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.rand(n, cs, ss)
 ```
 
-An m x n array:
+N of them.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.rand(m, n, cs)
 ```
 
-Within 10 degree of the identity:
+An m x n array.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.rand(n, cs, maxAngle=10*degree)
 ```
+
+Within 10 degree of the identity.
+
+</div>
+
+## Description
 
 The rotations are uniformly distributed on SO(3), or within the ball of radius maxAngle
 about the identity; the symmetry of the frames does not enter the draw.
 
 ## Input
 
-| | |
-|---|---|
 | `args` | the shape, as numbers; the crystal frame cs and the specimen frame ss, or a second crystal frame for misorientations |
-
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rng` | `None` | a NumPy random generator, for draws that repeat |
 | `antipodal` | `False` | misorientations with grain exchange |
 | `maxAngle` | `None` | the largest rotational angle, in radians |
+
+## Output
+
+| `ori` | orientation |
 
 ## See also
 

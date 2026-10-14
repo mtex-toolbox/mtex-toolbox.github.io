@@ -16,17 +16,27 @@ the sphere, its angle as the saturation, NaN above thresholdAngle
 
 ## Syntax
 
-From the key's reference:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = key.orientation2color(ori)
 ```
 
-From a reference given here:
+From the key's reference.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = key.orientation2color(ori, oriRef)
 ```
+
+From a reference given here.
+
+</div>
+
+## Description
 
 The saturation is full at the key's maxAngle, by default the 80th percentile of the angles
 of ori. Without any reference the identity is the reference, so the colour shows the
@@ -34,21 +44,17 @@ rotation itself.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
-
-## Output
-
-| | |
-|---|---|
-| `rgb` | (..., 3) array of colours, NaN above thresholdAngle and for an unmeasured orientation |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `oriRef` | `None` | one reference orientation, or one per orientation, in place of the key's |
+
+## Output
+
+| `rgb` | (..., 3) array of colours, NaN above thresholdAngle and for an unmeasured orientation |
 
 ## See also
 

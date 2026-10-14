@@ -16,9 +16,13 @@ three matrices and not the whole table
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 wignerdDegrees(beta, L)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L138">source</a></font>
 {% endraw %}

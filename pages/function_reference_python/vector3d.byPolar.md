@@ -16,38 +16,44 @@ the vectors of polar angle theta to z and azimuth rho from x towards y, unit vec
 
 ## Syntax
 
-Directions:
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.byPolar(theta, rho)
 ```
 
-Axes:
+Directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.byPolar(theta, rho, antipodal=True)
 ```
 
+Axes.
+
+</div>
+
+## Description
+
 theta and rho broadcast against each other.
 
 ## Input
 
-| | |
-|---|---|
 | `theta` | the polar angles, 0 at z |
 | `rho` | the azimuths, 0 at x |
 
-## Output
-
-| | |
-|---|---|
-| `v` | vector3d of unit vectors |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | the vectors as axes, v and -v one |
+
+## Output
+
+| `v` | vector3d of unit vectors |
 
 ## See also
 

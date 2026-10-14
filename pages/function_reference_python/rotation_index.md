@@ -15,16 +15,18 @@ or a frame gives its elements, an improper orthogonalTransform is refused
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation(a, b, c, d)
 rotation(q)
 rotation(cs)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [byAxisAngle](rotation.byAxisAngle_py.html) | the rotations by the angle omega about the axis v |
 | [byCubochoric](rotation.byCubochoric_py.html) | the rotations of cubochoric vectors |
 | [byEuler](rotation.byEuler_py.html) | rotations defined by Euler angles |

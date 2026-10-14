@@ -16,17 +16,27 @@ the axis best orthogonal to a list of directions, the smallest principal axis
 
 ## Syntax
 
-E.g. the zone axis of plane normals:
+<div class="mx-form" markdown="1">
 
 ```python
 n = v.perp()
 ```
 
-Outliers left out:
+E.g. the zone axis of plane normals.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 n = v.perp(robust=True)
 ```
+
+Outliers left out.
+
+</div>
+
+## Description
 
 The eigenvector of the smallest eigenvalue of sum v v^T; NaN vectors are left out. A
 robust fit drops the 20 percent of the directions furthest from orthogonal and fits
@@ -35,21 +45,17 @@ other display style, a zone axis of planes.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | vector3d or Miller |
-
-## Output
-
-| | |
-|---|---|
-| `n` | vector3d or Miller, antipodal |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `robust` | `False` | fit again without the directions furthest from orthogonal |
+
+## Output
+
+| `n` | vector3d or Miller, antipodal |
 
 ## See also
 

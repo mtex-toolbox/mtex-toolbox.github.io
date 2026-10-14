@@ -13,14 +13,16 @@ calcMisorientation(x, ...) is x.calcMisorientation(...), the method of the objec
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 calcMisorientation(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.calcMisorientation_py.html) | uncorrelated misorientations: those of random pairs of measurements far enough apart that they say nothing about one another |
 
 ## Used on

@@ -15,9 +15,13 @@ the name and the parameters of the transform as one line of text
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 spatialTransform.char(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L149">source</a></font>
 {% endraw %}

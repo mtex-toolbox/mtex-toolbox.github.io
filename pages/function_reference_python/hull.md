@@ -13,14 +13,16 @@ hull(x, ...) is x.hull(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 hull(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grain2d](grain2d.hull_py.html) | the grains with their convex hulls for polygons: the hull edges form the boundary, with nothing on the other side, and there is no inner boundary |
 | [shape2d](shape2d.hull_py.html) | the convex hull of the outline, as an outline |
 

@@ -16,9 +16,13 @@ the refractive index in the direction v, n_ij v_i v_j
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 refractiveIndexTensor.refractiveIndex(rI, v)
 ```
+
+</div>
 
 MATLAB's [refractiveIndexTensor.refractiveIndex](refractiveIndexTensor.refractiveIndex.html)
 

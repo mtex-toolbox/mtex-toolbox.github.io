@@ -16,38 +16,44 @@ the region bounded by the great circles through consecutive vertices V, taken co
 
 ## Syntax
 
-A triangle:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sphericalRegion.byVertices(vector3d([[0, 0, 1], [1, 0, 1], [1, 1, 1]]))
 ```
 
-In a crystal frame:
+A triangle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sphericalRegion.byVertices(V, frame=cs)
 ```
+
+In a crystal frame.
+
+</div>
+
+## Description
 
 The normal of every side is the cross product of two consecutive vertices, the last
 joined to the first, so the region lies to the left when walking along the vertices.
 
 ## Input
 
-| | |
-|---|---|
 | `V` | vector3d, the vertices in counterclockwise order |
-
-## Output
-
-| | |
-|---|---|
-| `sR` | sphericalRegion |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `frame` | `None` | the frame the region is written in |
+
+## Output
+
+| `sR` | sphericalRegion |
 
 ## See also
 

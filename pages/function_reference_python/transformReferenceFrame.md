@@ -13,14 +13,16 @@ transformReferenceFrame(x, ...) is x.transformReferenceFrame(...), the method of
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 transformReferenceFrame(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [mapImage](mapImage.transformReferenceFrame_py.html) | the images stated in a frame and laid out that way: a layout reindexes and nothing else, a frame restates where they sit by the orientation given, by 'byScreenAlignment', the assertion that the frames were drawn the same way up, or by nothing where the frames are already related |
 | [orientation](orientation.transformReferenceFrame_py.html) | the same orientation described with another reference frame of the crystal |
 | [tensor](tensor.transformReferenceFrame_py.html) | the same coefficients read in another frame, the numbers changed by the rigid part of the transition between the two bases |

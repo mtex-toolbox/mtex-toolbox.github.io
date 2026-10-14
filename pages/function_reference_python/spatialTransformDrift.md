@@ -15,15 +15,17 @@ one row each, NaN beyond them unless extrapolate=True continues the end segments
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 T = spatialTransformDrift(s, u, slowScan=vector3d(0, 1, 0))
 T = spatialTransformDrift.fit(posA, posB)          the median displacement of every scan line
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](spatialTransformDrift.eval_py.html) | the positions moved by the drift interpolated at their coordinate along the slow scan direction |
 | [fit](spatialTransformDrift.fit_py.html) | a drift along the slow scan direction, the linear spline through the median displacement of every scan line |
 | [fitOptions](spatialTransformDrift.fitOptions_py.html) | the slow scan direction, the keyword a refit keeps |

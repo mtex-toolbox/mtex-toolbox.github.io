@@ -14,23 +14,37 @@ turned as MATLAB draws it for 321
 
 ## Syntax
 
-The sector of an inverse pole figure:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = plotSector(cs)
 ```
 
-The sector of m-3m, the Laue group:
+The sector of an inverse pole figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = plotSector(crystalFrame('432'), antipodal=True)
 ```
 
-Under another plotting convention:
+The sector of m-3m, the Laue group.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = plotSector(cs, how2plot='x↑→y')
 ```
+
+Under another plotting convention.
+
+</div>
+
+## Description
 
 The conventional sector of the group, its pole out of the screen and its first edge to the
 east of the plotting convention; 321 is turned by 30 degree so that it starts at an m
@@ -38,22 +52,18 @@ direction, as MATLAB draws it.
 
 ## Input
 
-| | |
-|---|---|
 | `fr` | crystalFrame, or any frame with a point group |
-
-## Output
-
-| | |
-|---|---|
-| `sR` | sphericalRegion in the frame fr |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | the sector of the Laue group, for axes |
 | `how2plot` | `None` | plottingConvention or its string; by default the convention of the frame |
+
+## Output
+
+| `sR` | sphericalRegion in the frame fr |
 
 ## See also
 

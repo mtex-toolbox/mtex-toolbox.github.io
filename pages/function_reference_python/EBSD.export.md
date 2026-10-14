@@ -16,9 +16,13 @@ ebsd.export('map.ang'): the map written by the format the extension names
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.export(self, fname, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [EBSD.export](EBSD.export.html)
 

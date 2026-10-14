@@ -16,29 +16,47 @@ figure shows
 
 ## Syntax
 
-The conventional sector:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = cs.fundamentalSector()
 ```
 
-Of the Laue group:
+The conventional sector.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = cs.fundamentalSector(antipodal=True)
 ```
 
-The axes of misorientations of that angle:
+Of the Laue group.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = cs.fundamentalSector(angle=omega)
 ```
 
-The Dirichlet domain of a centre:
+The axes of misorientations of that angle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = cs.fundamentalSector(center=v)
 ```
+
+The Dirichlet domain of a centre.
+
+</div>
+
+## Description
 
 The conventional sector, the one MATLAB and an inverse pole figure show, oriented by the
 frame's plotting convention, wherever it is a fundamental domain of the group, which it is
@@ -48,23 +66,19 @@ directions there.
 
 ## Input
 
-| | |
-|---|---|
 | `cs` | referenceFrame |
-
-## Output
-
-| | |
-|---|---|
-| `sR` | sphericalRegion |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `center` | `None` | vector3d, return the Dirichlet domain of this centre: the directions closer to it than to any of its symmetric equivalents |
 | `antipodal` | `False` | the sector of the group extended by the inversion, half as large |
 | `angle` | `None` | the axes of the rotations of this angle in the fundamental region, for axis angle sections of misorientations |
+
+## Output
+
+| `sR` | sphericalRegion |
 
 ## See also
 

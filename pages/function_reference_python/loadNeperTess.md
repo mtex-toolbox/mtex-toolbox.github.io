@@ -16,9 +16,13 @@ and the faces (3D) or the cell ids (2D)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 loadNeperTess(fname)
 ```
+
+</div>
 
 MATLAB's [loadNeperTess](loadNeperTess.html)
 

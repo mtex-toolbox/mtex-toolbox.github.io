@@ -15,9 +15,13 @@ $XDG_CONFIG_HOME/mtex or ~/.config/mtex elsewhere; None when MTEX_SETTINGS is em
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 settingsFile()
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/settings.py#L21">source</a></font>
 {% endraw %}

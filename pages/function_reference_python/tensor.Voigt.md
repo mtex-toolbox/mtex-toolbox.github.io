@@ -15,9 +15,13 @@ for rank two, the off diagonal entries doubled where the class prescribes it
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 Voigt(T)
 ```
+
+</div>
 
 MATLAB's [tensor.Voigt](tensor.Voigt.html)
 

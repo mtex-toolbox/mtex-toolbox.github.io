@@ -15,23 +15,37 @@ radius search of the tensor product grids S2Grid and SO3Grid
 
 ## Syntax
 
-The angles of a circle:
+<div class="mx-form" markdown="1">
 
 ```python
 S1G = S1Grid(np.arange(0, 360, 10)*degree, 0, 2*np.pi, periodic=True)
 ```
 
-Angles on an interval:
+The angles of a circle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S1G = S1Grid(points, 0, 1)
 ```
 
-The interval from the smallest to the largest point:
+Angles on an interval.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S1G = S1Grid(points)
 ```
+
+The interval from the smallest to the largest point.
+
+</div>
+
+## Description
 
 The points are sorted. Its use is the fast search: S1G.nearest(x), S1G.neighbours(x, eps)
 within a radius and S1G.dist(x, y), binary searches, plain arithmetic on an equispaced
@@ -41,23 +55,19 @@ MATLAB's option 'matrix', one grid per column of points, is not taken.
 
 ## Input
 
-| | |
-|---|---|
 | `points` | array of angles, in radians |
 | `min` | the start of the interval, by default the smallest point |
 | `max` | the end of the interval, by default the largest point |
 
-## Output
-
-| | |
-|---|---|
-| `S1G` | S1Grid |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `periodic` |  | identify min and max: the grid lies on a circle of length max - min |
+
+## Output
+
+| `S1G` | S1Grid |
 
 ## See also
 
@@ -65,8 +75,6 @@ MATLAB's option 'matrix', one grid per column of points, is not taken.
 
 ## Members
 
-| | |
-|---|---|
 | [dist](S1Grid.dist_py.html) | the periodic distance of two angles |
 | [double](S1Grid.double_py.html) | the coordinates of the images of an embedding in their orthonormal basis, one row per orientation, e.double() |
 | [fold](S1Grid.fold_py.html) | an angle moved into [min, min + period) |

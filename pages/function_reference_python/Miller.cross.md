@@ -17,9 +17,13 @@ directions a plane normal, so the indices switch sides
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.cross(self, other)
 ```
+
+</div>
 
 MATLAB's [Miller.cross](Miller.cross.html)
 

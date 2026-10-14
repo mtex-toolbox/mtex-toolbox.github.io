@@ -15,23 +15,37 @@ without a convention the default one; MATLAB's setCamera
 
 ## Syntax
 
-The view of the default convention:
+<div class="mx-form" markdown="1">
 
 ```python
 setCamera()
 ```
 
-X up and y to the right:
+The view of the default convention.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 setCamera(plottingConvention('x↑→y'))
 ```
 
-The view of a given 3D axes:
+X up and y to the right.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 setCamera(plottingConvention('z↑→x'), ax=ax)
 ```
+
+The view of a given 3D axes.
+
+</div>
+
+## Description
 
 The camera is orthographic. A figure holding a 3D scene is drawn again from the new
 camera, and a map seen from off its normal becomes a scene of the maps drawn into it.
@@ -40,13 +54,11 @@ must be a plottingConvention, not its string.
 
 ## Input
 
-| | |
-|---|---|
 | `how2plot` | plottingConvention; plottingConvention.default when None |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ax` | `None` | the matplotlib 3D axes; by default the current scene or the last axes of the current figure |
 

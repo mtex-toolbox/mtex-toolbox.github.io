@@ -17,56 +17,72 @@ grain3d
 
 ## Syntax
 
-About the origin:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.rotate(rotation.byAxisAngle(xvector, 180*degree))
 ```
 
-About a point:
+About the origin.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.rotate(rot, center=vector3d(1, 1, 1))
 ```
 
-The faces only:
+About a point.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.rotate(rot, keepEuler=True)
 ```
 
-The orientations only:
+The faces only.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = grains.rotate(rot, keepXY=True)
 ```
 
-The same as rotate:
+The orientations only.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = rot * grains
 ```
 
+The same as rotate.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain3d |
 | `rot` | rotation |
 
-## Output
-
-| | |
-|---|---|
-| `grains` | grain3d, new |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `keepXY` | `False` | turn only the orientations, the faces stay |
 | `keepEuler` | `False` | turn only the faces, the orientations stay |
 | `center` | `(0.0, 0.0, 0.0)` | vector3d or (x, y, z), the point the faces turn about |
+
+## Output
+
+| `grains` | grain3d, new |
 
 ## See also
 

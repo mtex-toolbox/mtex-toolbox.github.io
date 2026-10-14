@@ -15,9 +15,13 @@ other iterable as Python sums, so that from mtex import * keeps Python's sum
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sum(x, *args, **kwargs)
 ```
+
+</div>
 
 ## Used on
 

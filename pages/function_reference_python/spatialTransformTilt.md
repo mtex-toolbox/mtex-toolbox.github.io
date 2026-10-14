@@ -16,8 +16,6 @@ identity, so a partly fitted tilt evaluates as far as it has got
 
 ## Members
 
-| | |
-|---|---|
 | [inv](spatialTransformTilt.inv_py.html) | the inverses of the stages in reverse order, a plain composite |
 | [shortChar](spatialTransformTilt.shortChar_py.html) | 'tilt', the name in the display |
 

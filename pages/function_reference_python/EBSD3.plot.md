@@ -17,29 +17,47 @@ colour or an orientation per voxel; MATLAB's EBSD3.plot
 
 ## Syntax
 
-Coloured by phase:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd)
 ```
 
-Coloured by a value per voxel:
+Coloured by phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd, ebsd.prop['ConfidenceIndex'])
 ```
 
-Coloured by the orientation:
+Coloured by a value per voxel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd['indexed'], ebsd['indexed'].orientations)
 ```
 
-Two slices at the voxels given:
+Coloured by the orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(ebsd, at=(5, None, 10))
 ```
+
+Two slices at the voxels given.
+
+</div>
+
+## Description
 
 The slices are normal to the three axes of the voxel lattice, through the middle of the
 volume unless at gives the voxel index of each. A voxel not indexed or without a value is
@@ -55,24 +73,20 @@ meaning here; the slices of one plane are drawn as a map by plot of ebsd.slice.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD3 |
 | `color` | a value, an RGB colour or an orientation per voxel; by default the phase colours |
 
-## Output
-
-| | |
-|---|---|
-| `fig` | mtexFigure |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `how2plot` | `None` | the plottingConvention of the view, by default plottingConvention.default3D |
 | `figSize` | `None` | the size of a new figure, 'small', 'normal', 'large', ..., or (width, height) in inches |
 | `at` | `None` | (i, j, k), the voxel index of the slice normal to each axis of the lattice, None for a slice left out; by default the middle |
+
+## Output
+
+| `fig` | mtexFigure |
 
 ## See also
 

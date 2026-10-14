@@ -16,42 +16,48 @@ a crystal direction drawn as an arrow from the centre of a crystal shape to its 
 
 ## Syntax
 
-The direction d inside the shape:
+<div class="mx-form" markdown="1">
 
 ```python
 plotInnerDirection(cS, d)
 ```
 
-Coloured, for a legend:
+The direction d inside the shape.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotInnerDirection(cS, d, faceColor='blue', arrowWidth=0.05, displayName='[101]')
 ```
+
+Coloured, for a legend.
+
+</div>
+
+## Description
 
 The arrow runs from the centre of the shape along d up to where d leaves it, so that it
 shows inside a translucent shape drawn before. Several directions give several arrows.
 
 ## Input
 
-| | |
-|---|---|
 | `cS` | crystalShape |
 | `d` | Miller, the crystal direction, one or several |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the arrow, or a list of them |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `'blue'` | the colour of the arrow |
 | `arrowWidth` | `None` | MATLAB's width of the arrow, which replaces lineWidth: 0.05 gives two points |
 | `lineWidth` | `2.0` | the width of the arrow in points |
 | `displayName` | `None` | its label in a legend |
+
+## Output
+
+| `h` | the arrow, or a list of them |
 
 ## See also
 

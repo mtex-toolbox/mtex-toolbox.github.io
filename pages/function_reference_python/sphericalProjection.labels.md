@@ -17,9 +17,13 @@ the chart; a list of (direction, text)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalProjection.labels(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L265">source</a></font>
 {% endraw %}

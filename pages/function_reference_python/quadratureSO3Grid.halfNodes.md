@@ -17,9 +17,13 @@ onto all nodes. None where the groups have no such axis
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quadratureSO3Grid.halfNodes(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L282">source</a></font>
 {% endraw %}

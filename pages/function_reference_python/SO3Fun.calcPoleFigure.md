@@ -15,41 +15,67 @@ figures and any specimen directions
 
 ## Syntax
 
-One pole figure per element of h:
+<div class="mx-form" markdown="1">
 
 ```python
 pf = calcPoleFigure(odf, h, r)
 ```
 
-On a regular grid of the upper hemisphere:
+One pole figure per element of h.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = calcPoleFigure(odf, h, resolution=5*degree)
 ```
 
-On a regular grid of the whole sphere:
+On a regular grid of the upper hemisphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = calcPoleFigure(odf, h, resolution=5*degree, complete=True)
 ```
 
-One set of specimen directions per pole figure:
+On a regular grid of the whole sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = calcPoleFigure(odf, [h1, h2], [r1, r2])
 ```
 
-H23 two superposed directions:
+One set of specimen directions per pole figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = calcPoleFigure(odf, [h1, h23], r, superposition=[1, [0.2, 0.8]])
 ```
 
-On the directions of a measurement:
+H23 two superposed directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = calcPoleFigure(odf, pfMeasured)
 ```
+
+On the directions of a measurement.
+
+</div>
+
+## Description
 
 The intensity of the crystal direction h at the specimen direction r is the radon
 transform of the ODF, the mean of the ODF over the orientations taking h to r; over the
@@ -62,24 +88,20 @@ can be turned into counts by noisepf.
 
 ## Input
 
-| | |
-|---|---|
 | `odf` | SO3Fun |
 | `h` | Miller or vector3d in the crystal frame of the ODF, or a list of them, one per pole figure |
 
-## Output
-
-| | |
-|---|---|
-| `pf` | PoleFigure |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `r` | `None` | vector3d, the specimen directions, or a list of them, one per pole figure; by default a regular grid |
 | `superposition` | `None` | the weights of the superposed directions, a list with one entry per pole figure |
 | `complete` | `False` | the whole sphere instead of the upper hemisphere, the directions without antipodal symmetry (MATLAB's flag complete) |
+
+## Output
+
+| `pf` | PoleFigure |
 
 ## See also
 

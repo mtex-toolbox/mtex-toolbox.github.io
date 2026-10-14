@@ -16,9 +16,13 @@ factor self = rot1 * d and other = d * rot2 with d the common elements, symmetry
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetry.factor(self, other)
 ```
+
+</div>
 
 MATLAB's [symmetry.factor](symmetry.factor.html)
 

@@ -17,9 +17,13 @@ no measurement, and on a turned grid it reaches far beyond the map
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.extent(self)
 ```
+
+</div>
 
 MATLAB's [EBSD.extent](EBSD.extent.html)
 

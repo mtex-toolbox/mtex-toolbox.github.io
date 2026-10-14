@@ -16,9 +16,13 @@ the cosine of the angle to a constant axis, sqrt(x^T (a a^T) x), and to another 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2AxisFieldHarmonic.dot(self, x)
 ```
+
+</div>
 
 MATLAB's [S2AxisFieldHarmonic.dot](S2AxisFieldHarmonic.dot.html)
 

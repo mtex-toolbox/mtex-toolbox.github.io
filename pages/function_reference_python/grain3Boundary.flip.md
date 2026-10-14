@@ -17,17 +17,27 @@ flip of grain3Boundary
 
 ## Syntax
 
-Every face:
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.flip()
 ```
 
-The faces of grain 1:
+Every face.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.flip(gB.hasGrain(1))
 ```
+
+The faces of grain 1.
+
+</div>
+
+## Description
 
 The grain ids, the voxel ids and the phase ids of the two sides change places and the
 misrotation is inverted. The corners and so the normals stay; flipN turns those. The
@@ -35,21 +45,17 @@ boundary is copied.
 
 ## Input
 
-| | |
-|---|---|
-| `gB` | grain3Boundary |
-
-## Output
-
-| | |
-|---|---|
 | `gB` | grain3Boundary |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `sel` | `None` | the faces to flip, a boolean mask or indices; by default every face |
+
+## Output
+
+| `gB` | grain3Boundary |
 
 ## See also
 

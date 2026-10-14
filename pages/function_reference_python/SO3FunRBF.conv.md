@@ -17,9 +17,13 @@ through the harmonic expansion
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunRBF.conv(self, psi)
 ```
+
+</div>
 
 MATLAB's [SO3FunRBF.conv](SO3FunRBF.conv.html)
 

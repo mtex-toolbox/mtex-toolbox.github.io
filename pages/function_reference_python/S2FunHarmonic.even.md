@@ -16,9 +16,13 @@ the even part, f(v) + f(-v) over two
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunHarmonic.even(self)
 ```
+
+</div>
 
 MATLAB's [S2FunHarmonic.even](S2FunHarmonic.even.html)
 

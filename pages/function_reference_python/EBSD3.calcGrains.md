@@ -15,53 +15,87 @@ grain reconstruction from 2d and 3d EBSD data
 
 ## Syntax
 
-Grain boundaries above 15 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd)
 ```
 
-Another angle, no grains below 5 pixels:
+Grain boundaries above 15 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd, angle=10*degree, minPixel=5, alpha=3.7)
 ```
 
-High and low angle boundaries:
+Another angle, no grains below 5 pixels.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd, angle=[10*degree, 2*degree])
 ```
 
-A threshold per indexed phase:
+High and low angle boundaries.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd, angle=[[10*degree], [5*degree]])
 ```
 
-A threshold per phase:
+A threshold per indexed phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd, criterion=gbcAngle(10*degree, byPhase={'Enstatite': 5*degree}))
 ```
 
-A soft threshold and Markov clustering:
+A threshold per phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd, criterion=gbcSoft(10*degree, 2*degree), mcl=(1.4, 4))
 ```
 
-Fast multiscale clustering:
+A soft threshold and Markov clustering.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd, fmc=1.5, minPixel=10)
 ```
 
-The grains stored with the map:
+Fast multiscale clustering.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grains = calcGrains(ebsd, grainId=True)
 ```
+
+The grains stored with the map.
+
+</div>
+
+## Description
 
 Two neighbouring pixels belong to one grain when the misorientation between them stays
 below the threshold angle, and a grain is a connected set of such pixels. With a pair
@@ -82,19 +116,11 @@ ebsd.copy() to keep the map as it was.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD, a map of the plane, or EBSD3, a map of volumes |
-
-## Output
-
-| | |
-|---|---|
-| `grains` | grain2d, or grain3d for a map of volumes; ebsd.grainId numbers the grain of every pixel |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `angle` | `15*degree` | the misorientation angle above which neighbouring pixels belong to different grains; a pair [high, low] also keeps the low angle boundaries between low and high as grains.innerBoundary; a list of an angle or a pair per phase gives every phase its own |
 | `threshold` | `None` | the same as angle, which it replaces when given |
@@ -107,6 +133,10 @@ ebsd.copy() to keep the map as it was.
 | `verbose` | `False` | report the cluster hierarchy of fast multiscale clustering |
 | `backend` | `None` | 'numba' or 'numpy', the loops of the decomposition and the segmentation; by default the preference 'kernels' (map of the plane) |
 | `grainId` | `False` | join the pixels of one grain id stored with the map, ebsd.prop['grainId'] or the voxels' ebsd.grainId, instead of a criterion on the orientations |
+
+## Output
+
+| `grains` | grain2d, or grain3d for a map of volumes; ebsd.grainId numbers the grain of every pixel |
 
 ## References
 

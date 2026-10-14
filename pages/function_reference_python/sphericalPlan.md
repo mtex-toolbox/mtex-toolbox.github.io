@@ -13,44 +13,54 @@ the plan for a node set on the sphere: the FFT on a Clenshaw-Curtis grid, the NU
 
 ## Syntax
 
-The NUFFT at arbitrary directions:
+<div class="mx-form" markdown="1">
 
 ```python
 p = sphericalPlan(vector3d.rand(1000), 8)
 ```
 
-The FFT on a Clenshaw-Curtis grid:
+The NUFFT at arbitrary directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 p = sphericalPlan(quadratureS2Grid(16), 8, real=True)
 ```
 
-The series at the nodes:
+The FFT on a Clenshaw-Curtis grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = p(fhat)
 ```
 
+The series at the nodes.
+
+</div>
+
+## Description
+
 The coefficients are the internal ones of an S2FunHarmonic, f._fhat, not MATLAB's fhat.
 
 ## Input
 
-| | |
-|---|---|
 | `nodes` | directions, or a quadratureS2Grid |
 | `L` | the bandwidth |
 
-## Output
-
-| | |
-|---|---|
-| `plan` | S2GridPlan or S2FourierPlan, called with coefficients, plan.adjoint with values and weights |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `real` | `False` | the plan for real valued functions, which needs half the Fourier array |
+
+## Output
+
+| `plan` | S2GridPlan or S2FourierPlan, called with coefficients, plan.adjoint with values and weights |
 
 ## See also
 

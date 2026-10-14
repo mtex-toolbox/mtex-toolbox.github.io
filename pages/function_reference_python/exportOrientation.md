@@ -14,35 +14,57 @@ columns, or as a VPSC texture file; export(ori, fname) calls it
 
 ## Syntax
 
-Bunge Euler angles in degree:
+<div class="mx-form" markdown="1">
 
 ```python
 export(ori, fname)
 ```
 
-Another convention, in radians:
+Bunge Euler angles in degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 export(ori, fname, 'Matthies', radians=True)
 ```
 
-The four quaternion components:
+Another convention, in radians.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 export(ori, fname, quaternion=True)
 ```
 
-Further columns:
+The four quaternion components.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 export(ori, fname, {'area': grains.area})
 ```
 
-The VPSC texture file:
+Further columns.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 export(ori, fname, 'Bunge', interface='VPSC', weights=w)
 ```
+
+The VPSC texture file.
+
+</div>
+
+## Description
 
 The table has one row per orientation, the columns named in a header line: phi1, Phi, phi2
 for Bunge, alpha, beta, gamma for Matthies and ZYZ, Psi, Theta, Phi for Roe, Psi, Theta, phi
@@ -53,15 +75,13 @@ takes the conventions Bunge, Kocks and Roe.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
 | `fname` | the name of the file |
 | `args` | the Euler convention, 'Bunge', 'Matthies', 'ZYZ', 'Roe' or 'Kocks', and dictionaries of further columns, one value per orientation |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `radians` | `False` | the angles in radians instead of degree |
 | `quaternion` | `False` | the quaternion components instead of Euler angles |

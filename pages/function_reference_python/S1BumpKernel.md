@@ -14,8 +14,6 @@ the indicator of the interval |x| < delta scaled to a density
 
 ## Members
 
-| | |
-|---|---|
 | [grad](S1BumpKernel.grad_py.html) | the derivative of the bump kernel, zero wherever it exists |
 | [halfwidth](S1BumpKernel.halfwidth_py.html) | the halfwidth, the half length delta of the interval |
 

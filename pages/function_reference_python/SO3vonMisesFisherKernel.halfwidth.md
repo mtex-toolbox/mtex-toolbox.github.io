@@ -15,9 +15,13 @@ the halfwidth in closed form, acos(1 - log(2) / kappa)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3vonMisesFisherKernel.halfwidth(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L436">source</a></font>
 {% endraw %}

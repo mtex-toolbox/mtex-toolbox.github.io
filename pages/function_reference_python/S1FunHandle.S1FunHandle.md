@@ -14,16 +14,24 @@ a function on the circle given by a callable that receives angles
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHandle(fun)
 S1FunHandle(fun, bandwidth=L)     the bandwidth of its harmonic form
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S1FunHandle(fun, *, bandwidth=None, real=True)
 ```
+
+</div>
 
 ## Used on
 

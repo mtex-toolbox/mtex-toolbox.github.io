@@ -16,11 +16,17 @@ the curvature tensor of every voxel; MATLAB's curvature of EBSD3square
 
 ## Syntax
 
-A curvatureTensor per voxel:
+<div class="mx-form" markdown="1">
 
 ```python
 kappa = ebsd3['Iron'].curvature()
 ```
+
+A curvatureTensor per voxel.
+
+</div>
+
+## Description
 
 A volume measures the orientation gradient along all three axes of its voxels, so its
 curvature tensor is complete: the dyads of the gradients gradientX, gradientY, gradientZ
@@ -29,21 +35,17 @@ inverse scan unit. The volume is gridded first and must hold one indexed phase.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD3 of one indexed phase |
-
-## Output
-
-| | |
-|---|---|
-| `kappa` | curvatureTensor of the shape of the gridded volume |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `stencil` | `None` | accepted for the signature of EBSD.curvature and not used: a volume takes the one sided differences |
+
+## Output
+
+| `kappa` | curvatureTensor of the shape of the gridded volume |
 
 ## See also
 

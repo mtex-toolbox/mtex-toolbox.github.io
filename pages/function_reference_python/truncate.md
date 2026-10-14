@@ -13,14 +13,16 @@ truncate(x, ...) is x.truncate(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 truncate(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [S1FunHarmonic](S1FunHarmonic.truncate_py.html) | the function cut, or padded with zeros, to the bandwidth L |
 | [S2FunHarmonic](S2FunHarmonic.truncate_py.html) | the coefficients up to degree L |
 | [S2VectorFieldHarmonic](S2VectorFieldHarmonic.truncate_py.html) | the field cut off, or padded with zeros, at the bandwidth L |

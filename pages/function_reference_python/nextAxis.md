@@ -15,29 +15,47 @@ its number or its row and column
 
 ## Syntax
 
-The next axes:
+<div class="mx-form" markdown="1">
 
 ```python
 nextAxis()
 ```
 
-The third axes:
+The next axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 nextAxis(2)
 ```
 
-The axes in the second row and the first column:
+The third axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 nextAxis(1, 0)
 ```
 
-The next axes of a figure given:
+The axes in the second row and the first column.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ax = nextAxis(fig=mtexFig)
 ```
+
+The next axes of a figure given.
+
+</div>
+
+## Description
 
 The axes are counted from 0, where MATLAB counts them from 1. An axes made by nextAxis stays
 blank, without a frame, until a plot draws into it, as MATLAB leaves an unused cell; the
@@ -46,22 +64,18 @@ is made.
 
 ## Input
 
-| | |
-|---|---|
 | `k` | the number of the axes, counted from 0, or the row with j |
 | `j` | the column, counted from 0 |
 
-## Output
-
-| | |
-|---|---|
-| `ax` | the matplotlib axes the next plot takes |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure; the current one by default |
+
+## Output
+
+| `ax` | the matplotlib axes the next plot takes |
 
 ## See also
 

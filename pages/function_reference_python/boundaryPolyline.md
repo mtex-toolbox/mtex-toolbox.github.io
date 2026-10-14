@@ -13,9 +13,13 @@ a boundary as one polyline, the chains in walk order separated by a NaN row
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 boundaryPolyline(gB)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/maps.py#L308">source</a></font>
 {% endraw %}

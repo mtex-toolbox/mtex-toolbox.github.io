@@ -16,9 +16,13 @@ the distance between the lattice planes with this normal, in the units of the ce
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.dspacing(self)
 ```
+
+</div>
 
 MATLAB's [Miller.dspacing](Miller.dspacing.html)
 

@@ -15,23 +15,37 @@ the topaz crystal shape of the catalogue, in cs when given, MATLAB's crystalShap
 
 ## Syntax
 
-In the catalogue's own frame:
+<div class="mx-form" markdown="1">
 
 ```python
 cS = crystalShape.topaz()
 ```
 
-In the crystal frame cs:
+In the catalogue's own frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cS = crystalShape.topaz(cs)
 ```
 
-The simple shape, fewer faces:
+In the crystal frame cs.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 cS = crystalShape.topaz(simple=True)
 ```
+
+The simple shape, fewer faces.
+
+</div>
+
+## Description
 
 The faces are the catalogue's lattice planes at their distances from the centre, or with a
 habitus and extension. Without cs the shape is in the catalogue's own crystal frame, its point
@@ -39,21 +53,17 @@ group, axes and mineral; a frame cs given has to be of the catalogue's Laue clas
 
 ## Input
 
-| | |
-|---|---|
 | `CS` | crystalFrame, the frame of the shape |
-
-## Output
-
-| | |
-|---|---|
-| `cS` | crystalShape |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `simple` | `False` | the simple shape of the catalogue, with fewer faces, MATLAB's 'simple' |
+
+## Output
+
+| `cS` | crystalShape |
 
 ## See also
 

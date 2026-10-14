@@ -16,9 +16,13 @@ the distribution turned by a rotation, its axes and its frame
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunBingham.rotate(self, r)
 ```
+
+</div>
 
 MATLAB's [S2FunBingham.rotate](S2FunBingham.rotate.html)
 

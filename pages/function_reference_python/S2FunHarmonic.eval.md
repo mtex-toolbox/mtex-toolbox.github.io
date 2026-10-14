@@ -17,9 +17,13 @@ adds its shape after that of the directions
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunHarmonic.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [S2FunHarmonic.eval](S2FunHarmonic.eval.html)
 

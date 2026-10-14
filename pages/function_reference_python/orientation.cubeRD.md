@@ -15,9 +15,13 @@ the cubeRD component, Bunge Euler angles (0°, 22°, 0°), in cs and the specime
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.cubeRD(CS, *ss)
 ```
+
+</div>
 
 ## Used on
 

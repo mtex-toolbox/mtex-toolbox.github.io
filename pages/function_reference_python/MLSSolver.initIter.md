@@ -17,9 +17,13 @@ alpha_i and the weighted residuals u_i
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 MLSSolver.initIter(self)
 ```
+
+</div>
 
 MATLAB's [MLSSolver.initIter](MLSSolver.initIter.html)
 

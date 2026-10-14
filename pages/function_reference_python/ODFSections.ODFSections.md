@@ -14,6 +14,8 @@ sections through orientation space
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 oS.frameA, oS.frameB       the two frames
 oS.tol               the tolerance an orientation may deviate from a section
@@ -24,11 +26,17 @@ oS.orientationsAt(k, v)   the orientations at points of a chart of section k
 oS.plot(x, ...)      plotSection(x, oS, ...)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 ODFSections(frameA, frameB, values, tol)
 ```
+
+</div>
 
 MATLAB's [ODFSections.ODFSections](ODFSections.ODFSections.html)
 

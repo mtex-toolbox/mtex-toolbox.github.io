@@ -18,9 +18,13 @@ movmean down the columns and then along the rows)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mapImage.imboxfilt(mg, k=3)
 ```
+
+</div>
 
 MATLAB's [mapImage.imboxfilt](mapImage.imboxfilt.html)
 

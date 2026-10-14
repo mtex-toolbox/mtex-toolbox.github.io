@@ -16,15 +16,23 @@ the Shoji-Nishiyama orientation relationship from fcc to hcp, (111) || (0001) an
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 p2c = orientation.ShojiNishiyama(csGamma, csEps)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 orientation.ShojiNishiyama(csG, csE)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L140">source</a></font>
 {% endraw %}

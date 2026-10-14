@@ -14,15 +14,17 @@ sections MATLAB's sigma sections draw
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 oS = sigmaSections(cs, ss, sections=6)
 oS = sigmaSections(cs, ss, sigma=np.arange(0, 60, 10)*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [sigma](sigmaSections.sigma_py.html) | the sigma values of the sections |
 
 ## Used on

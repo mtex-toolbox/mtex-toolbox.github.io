@@ -15,62 +15,87 @@ Poussin kernel of the halfwidth chosen from the sample
 
 ## Syntax
 
-By unbiased cross validation of the degree energies:
+<div class="mx-form" markdown="1">
 
 ```python
 psi = calcKernel(ori)
 ```
 
-A map, folded by its grain ids after calcGrains:
+By unbiased cross validation of the degree energies.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 psi = calcKernel(ebsd)
 ```
 
-The conservative choice, pixels grouped by grain:
+A map, folded by its grain ids after calcGrains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 psi = calcKernel(ori, 'conservative', groups=grainId)
 ```
 
-Kullback-Leibler cross validation, as MATLAB's default:
+The conservative choice, pixels grouped by grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 psi = calcKernel(ori, 'klcv', samplingSize=500)
 ```
 
-An S2 kernel for directions, no lower bound:
+Kullback-Leibler cross validation, as MATLAB's default.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 psi = calcKernel(v, noiseFloor=False)
 ```
 
-'UCV', the default, and 'conservative' select from the degree energies of the sample
-(docs/plans/halfwidth.md) and are bounded below by a noise floor unless noiseFloor=False; they
-take directions too. The others are MATLAB's: 'klcv' scores ten halfwidths by Kullback-Leibler
-cross validation, 'ruleOfThumb' reads the nearest neighbour disorientations, 'magicRule' the
-sample size and the symmetries alone; above 5000 orientations they score a subsample and
-scale the result. MATLAB's default is 'klcv'. The pixels of a map are no independent draws:
-'klcv', 'ruleOfThumb' and 'magicRule' refuse orientations taken from a map (ori.notIID), and
-the energies need the grain ids, which a map brings along after calcGrains. MATLAB's 'LSCV'
-and 'BCV' are not provided.
+An S2 kernel for directions, no lower bound.
+
+</div>
+
+## Description
+
+The method chooses the halfwidth:
+
+- 'UCV', the default: the halfwidth that minimises an unbiased estimate of the error of the
+density, computed from the degree energies of the sample. Orientations and directions.
+- 'conservative': the same error with lower confidence bounds on the energies, which gives a
+wider kernel that does not undersmooth. Orientations and directions.
+- 'klcv': Kullback-Leibler cross validation of ten halfwidths, MATLAB's default.
+- 'ruleOfThumb': from the distances of every orientation to its nearest neighbour.
+- 'magicRule': from the sample size and the symmetries alone.
+
+'UCV' and 'conservative' never go below the halfwidth at which the noise of the sample would
+show as false peaks, unless noiseFloor=False.
+
+Neighbouring pixels of one grain are no independent draws. For a map, 'UCV' and
+'conservative' therefore group the pixels by their grain, which needs the grain ids that
+calcGrains writes into the map. 'klcv', 'ruleOfThumb' and 'magicRule' refuse orientations
+taken from a map; select from the grain mean orientations instead.
+
+Above 5000 orientations, 'klcv', 'ruleOfThumb' and 'magicRule' score a random subsample and
+scale the result to the whole sample. MATLAB's 'LSCV' and 'BCV' are not provided.
 
 ## Input
 
-| | |
-|---|---|
 | `o` | orientation, vector3d, or EBSD |
 | `method` | 'UCV', 'conservative', 'klcv', 'ruleOfThumb' or 'magicRule', in any case |
 
-## Output
-
-| | |
-|---|---|
-| `psi` | SO3DeLaValleePoussinKernel, or S2DeLaValleePoussinKernel for directions |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `samplingSize` | `1000` | the number of orientations 'klcv' scores |
 | `rng` | `None` | numpy.random.Generator of the subsamples; the energies use a fixed seed by default |
@@ -79,6 +104,10 @@ and 'BCV' are not provided.
 | `bandwidth` | `None` | the degree up to which the energies are computed, by default 64 on SO(3) (doubled when the choice lies at the edge), 256 on the sphere, 32 for 'conservative' |
 | `halfwidths` | `None` | the candidate halfwidths of the energies |
 | `noiseFloor` | `True` | bound the halfwidth below by the noise of the energies |
+
+## Output
+
+| `psi` | SO3DeLaValleePoussinKernel, or S2DeLaValleePoussinKernel for directions |
 
 ## See also
 

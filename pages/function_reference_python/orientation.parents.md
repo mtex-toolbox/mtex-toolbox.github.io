@@ -17,9 +17,13 @@ parent it can come from, MATLAB's parents
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.parents(self)
 ```
+
+</div>
 
 ## Used on
 

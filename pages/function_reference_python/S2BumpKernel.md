@@ -15,15 +15,17 @@ a density of mean one
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2BumpKernel(10*degree)
 S2BumpKernel(halfwidth=10*degree, bandwidth=64)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [grad](S2BumpKernel.grad_py.html) | the derivative of the bump kernel, zero wherever it exists |
 | [halfwidth](S2BumpKernel.halfwidth_py.html) | the halfwidth, the radius delta of the cap |
 

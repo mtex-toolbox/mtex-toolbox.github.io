@@ -17,29 +17,47 @@ grain, or in one colour; MATLAB's grain3d.plot
 
 ## Syntax
 
-Coloured by phase:
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains)
 ```
 
-Coloured by a value per grain:
+Coloured by phase.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, grains.volume)
 ```
 
-By the orientation, no edges:
+Coloured by a value per grain.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, grains.meanOrientation, lineStyle='none')
 ```
 
-One translucent colour:
+By the orientation, no edges.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plot(grains, faceColor='r', faceAlpha=0.5)
 ```
+
+One translucent colour.
+
+</div>
+
+## Description
 
 Only the outer faces of the set are drawn, each in the colour of the grain it bounds; a
 face between two grains of the set is inside and is drawn grey only where the faces are
@@ -55,23 +73,19 @@ page.
 
 ## Input
 
-| | |
-|---|---|
 | `grains` | grain3d |
 | `color` | a value, an orientation or an RGB colour per grain; by default the phase colours |
 
-## Output
-
-| | |
-|---|---|
-| `fig` | mtexFigure |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `how2plot` | `None` | the plottingConvention of the view, by default plottingConvention.default3D |
 | `figSize` | `None` | the size of a new figure, 'small', 'normal', 'large', ..., or (width, height) in inches |
+
+## Output
+
+| `fig` | mtexFigure |
 
 ## See also
 

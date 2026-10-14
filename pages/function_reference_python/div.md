@@ -13,32 +13,38 @@ the divergence, invariant under both groups
 
 ## Syntax
 
-The divergence, an SO3FunHarmonic:
+<div class="mx-form" markdown="1">
 
 ```python
 D = div(SO3VF)
 ```
 
-Its values at orientations:
+The divergence, an SO3FunHarmonic.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = div(SO3VF, ori)
 ```
+
+Its values at orientations.
+
+</div>
+
+## Description
 
 The sum of the derivatives of the three components along their own axes of the tangent space,
 of the field in its harmonic form; of a gradient it is the Laplacian of the function.
 
 ## Input
 
-| | |
-|---|---|
 | `v` | SO3VectorField |
 | `x` | orientation, where to evaluate the divergence |
 
 ## Output
 
-| | |
-|---|---|
 | `D` | SO3FunHarmonic |
 | `d` | array, the values at x |
 
@@ -48,9 +54,13 @@ of the field in its harmonic form; of a gradient it is the Laplacian of the func
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 div(v, x=None)
 ```
+
+</div>
 
 ## Used on
 

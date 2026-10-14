@@ -17,9 +17,13 @@ and named so that the assumption shows wherever the layout is displayed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gridLayout.assumedFor(fr)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L77">source</a></font>
 {% endraw %}

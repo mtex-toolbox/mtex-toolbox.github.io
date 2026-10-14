@@ -19,34 +19,44 @@ resolutions is the spacing in the polar angle and in the azimuth
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 proj = makeSphericalProjection(cs.fundamentalSector())[0]
 ```
 
-1 degree in both angles:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 V, X, Y = proj.grid()
 ```
 
-5 degree in the polar angle, 2 in the azimuth:
+1 degree in both angles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 V, X, Y = proj.grid(resolution=(5*degree, 2*degree))
 ```
 
-## Output
+5 degree in the polar angle, 2 in the azimuth.
 
-| | |
-|---|---|
-| `V` | vector3d, the nTheta x nRho directions |
-| `X, Y` | nTheta x nRho arrays, their coordinates in the plane |
+</div>
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `1*degree` | the spacing of the grid, an angle or a pair (polar, azimuthal) |
+
+## Output
+
+| `V` | vector3d, the nTheta x nRho directions |
+| `X, Y` | nTheta x nRho arrays, their coordinates in the plane |
 
 ## See also
 

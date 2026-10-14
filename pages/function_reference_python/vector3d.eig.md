@@ -16,9 +16,13 @@ the principal axes of the moment matrix and its eigenvalues, vector3d/eig
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.eig(self)
 ```
+
+</div>
 
 MATLAB's [vector3d.eig](vector3d.eig.html)
 

@@ -15,9 +15,13 @@ the mean over the circle, through the harmonic form
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHandle.mean(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L688">source</a></font>
 {% endraw %}

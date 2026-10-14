@@ -15,9 +15,13 @@ the corners (lo, hi) of the box around the vertices
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mesh3d.bounds(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L50">source</a></font>
 {% endraw %}

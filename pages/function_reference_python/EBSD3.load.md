@@ -16,9 +16,13 @@ EBSD3.load('volume.dream3d'), EBSD3.load(['s0.ang', 's1.ang'], z=[0, 1])
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD3.load(fname, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [EBSD3.load](EBSD3.load.html)
 

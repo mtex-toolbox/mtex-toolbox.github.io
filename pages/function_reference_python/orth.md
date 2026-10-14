@@ -13,14 +13,16 @@ orth(x, ...) is x.orth(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orth(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [vector3d](vector3d.orth_py.html) | an arbitrary orthogonal direction, vector3d/orth |
 
 ## Used on

@@ -14,8 +14,6 @@ the functions on the sphere: S2FunHarmonic, S2FunHandle, S2FunBingham
 
 ## Members
 
-| | |
-|---|---|
 | [contour](S2Fun.contour_py.html) | contour(sF), contour(v), contour(v, data): contour lines |
 | [contourf](S2Fun.contourf_py.html) | contourf(sF), contourf(v), contourf(v, data): filled contours |
 | [discrepancy](S2Fun.discrepancy_py.html) | the discrepancy between two densities and/or weighted point sets on the sphere (S2Fun, vector3d) or on SO(3) (SO3Fun, rotation, orientation), in either order |

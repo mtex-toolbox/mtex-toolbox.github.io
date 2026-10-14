@@ -14,14 +14,16 @@ symmetrise(x, ...) is x.symmetrise(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetrise(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [fibre](fibre.symmetrise_py.html) | the symmetrically equivalent fibres, MATLAB's fibre.symmetrise |
 | [orientation](orientation.symmetrise_py.html) | all crystallographically equivalent orientations |
 | [S2AxisFieldHarmonic](S2AxisFieldHarmonic.symmetrise_py.html) | the projection onto the equivariant fields, a(s xi) = +- s a(xi) |

@@ -15,9 +15,13 @@ the invGoss component, Bunge Euler angles (90°, 45°, 0°), in cs and the speci
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.invGoss(CS, *ss)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L288">source</a></font>
 {% endraw %}

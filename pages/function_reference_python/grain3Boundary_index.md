@@ -15,8 +15,6 @@ the grains, voxels and phases on their two sides and the misrotation across: gra
 
 ## Members
 
-| | |
-|---|---|
 | [area](grain3Boundary.area_py.html) | the area of every face |
 | [calcGBND](grain3Boundary.calcGBND_py.html) | the boundary normal distribution of a 3D boundary: the face normals in specimen coordinates weighted by area, with grains the normals in the crystal frame of the one phase, with moriRef the grain boundary character of the faces whose misorientation is near moriRef |
 | [cat](grain3Boundary.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |

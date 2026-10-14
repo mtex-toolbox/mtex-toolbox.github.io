@@ -15,23 +15,37 @@ show it
 
 ## Syntax
 
-The resolution 5 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = regularSO3Grid(CS)
 ```
 
-Another resolution:
+The resolution 5 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = regularSO3Grid(CS, SS, resolution=2.5*degree)
 ```
 
-Ten phi2 sections:
+Another resolution.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = regularSO3Grid(CS, SS, sections=10)
 ```
+
+Ten phi2 sections.
+
+</div>
+
+## Description
 
 The Bunge angles phi2 run in sections from zero below their bound, and on each section
 the (Phi, phi1) raster with both ends of Phi and phi1 from zero below its bound, all at
@@ -41,23 +55,19 @@ flags phi1 and Phi, the 'ZYZ' convention and the Clenshaw-Curtis grid are not th
 
 ## Input
 
-| | |
-|---|---|
 | `CS` | crystalFrame |
 | `SS` | specimenFrame, by default the default specimen frame |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation of shape (Phi, phi1, phi2) |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `5*degree` | the spacing of the Euler angles |
 | `sections` | `None` | the number of phi2 sections, instead of the resolution |
+
+## Output
+
+| `ori` | orientation of shape (Phi, phi1, phi2) |
 
 ## See also
 

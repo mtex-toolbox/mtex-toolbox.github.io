@@ -16,39 +16,45 @@ whether directions lie in the region, up to a small tolerance at the boundary
 
 ## Syntax
 
-A boolean per direction:
+<div class="mx-form" markdown="1">
 
 ```python
 inside = sR.checkInside(v)
 ```
 
-A wider margin at the boundary:
+A boolean per direction.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 inside = sR.checkInside(v, tol=1e-2)
 ```
+
+A wider margin at the boundary.
+
+</div>
+
+## Description
 
 A direction is inside when <v, N> >= alpha - tol for every boundary circle, the length
 of v not mattering. For an antipodal region or antipodal directions, -v inside counts too.
 
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
 | `v` | vector3d, or an (..., 3) array |
 
-## Output
-
-| | |
-|---|---|
-| `inside` | boolean array in the shape of v |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `0.0001` | the margin in the cosines |
+
+## Output
+
+| `inside` | boolean array in the shape of v |
 
 ## See also
 

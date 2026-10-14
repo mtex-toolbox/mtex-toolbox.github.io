@@ -15,37 +15,43 @@ the slip systems <1-11>{011}, <-111>{211} and <-111>{321} of a body-centred cubi
 
 ## Syntax
 
-With the critical resolved shear stress 1:
+<div class="mx-form" markdown="1">
 
 ```python
 sS = slipSystem.bcc(cs)
 ```
 
-With another:
+With the critical resolved shear stress 1.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sS = slipSystem.bcc(cs, CRSS=2)
 ```
 
+With another.
+
+</div>
+
+## Description
+
 One system of the family; symmetrise gives every equivalent one.
 
 ## Input
 
-| | |
-|---|---|
 | `CS` | crystalFrame of a cubic crystal |
-
-## Output
-
-| | |
-|---|---|
-| `sS` | slipSystem |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `CRSS` | `1` | the critical resolved shear stress, one or one per family |
+
+## Output
+
+| `sS` | slipSystem |
 
 ## See also
 

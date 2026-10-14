@@ -14,9 +14,13 @@ times(A, B) is A.times(B): the product of corresponding coefficients, MATLAB's A
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 times(A, B)
 ```
+
+</div>
 
 ## Used on
 

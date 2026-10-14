@@ -13,8 +13,6 @@ the gnomonic projection: r = tan(theta), great circles drawn as straight lines
 
 ## Members
 
-| | |
-|---|---|
 | [extent](gnomonicProjection.extent_py.html) | the radius of the polar angle 80 degrees, the extent of a gnomonic chart |
 | [polarAngle](gnomonicProjection.polarAngle_py.html) | the polar angle arctan(r) drawn at the plane radius r |
 | [radius](gnomonicProjection.radius_py.html) | the plane radius tan(theta) of the polar angle theta |

@@ -13,14 +13,16 @@ dot(x, ...) is x.dot(...), the method of the object passed; NumPy's dot for an a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 dot(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [embedding](embedding.dot_py.html) | the inner product of two embeddings of the same crystal frame, image by image |
 | [orientation](orientation.dot_py.html) | the dot product up to symmetry, cos(omega/2) of the misorientation angle omega reduced over the groups of both frames |
 | [orthogonalTransform](orthogonalTransform.dot_py.html) | the inner product of the rotational parts up to sign, zero between transforms of different parity |

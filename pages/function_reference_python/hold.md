@@ -13,37 +13,47 @@ hold on: the next plot goes into the current axes
 
 ## Syntax
 
-The next plots go into the current axes:
+<div class="mx-form" markdown="1">
 
 ```python
 hold(True)
 ```
 
-Each plot takes its axes for itself again:
+The next plots go into the current axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 hold(False)
 ```
 
-MATLAB's words, the figure held returned:
+Each plot takes its axes for itself again.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexFig = hold('on')
 ```
+
+MATLAB's words, the figure held returned.
+
+</div>
+
+## Description
 
 A plain matplotlib figure opened after the last MTEX figure is adopted as an mtexFigure;
 without any figure a new one is made.
 
 ## Input
 
-| | |
-|---|---|
 | `on` | True or 'on' to hold, False or 'off' to release |
 
 ## Output
 
-| | |
-|---|---|
 | `mtexFig` | the mtexFigure held |
 
 ## See also
@@ -52,9 +62,13 @@ without any figure a new one is made.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 hold(on=True)
 ```
+
+</div>
 
 ## Used on
 

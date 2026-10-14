@@ -13,47 +13,57 @@ the one line load of a file, for the clipboard
 
 ## Syntax
 
-Ebsd = EBSD.load('/.../map.ctf'):
+<div class="mx-form" markdown="1">
 
 ```python
 line = loadCall('map.ctf')
 ```
 
-A map of a project file:
+Ebsd = EBSD.load('/.../map.ctf').
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 line = loadCall('map.h5oina', dataSet=2, dataSets=[1, 2, 3])
 ```
 
-A volume:
+A map of a project file.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 line = loadCall('volume.dream3d', variable='vol', volume=True)
 ```
+
+A volume.
+
+</div>
+
+## Description
 
 The file is written with its absolute path. The import wizard copies it to the clipboard;
 buildImportWizardScript writes the whole script.
 
 ## Input
 
-| | |
-|---|---|
 | `path` | the file |
-
-## Output
-
-| | |
-|---|---|
-| `line` | str |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `dataSet` | `None` | the number of the map of a file with several |
 | `dataSets` | `()` | the maps of the file; a dataSet is written only when there are several |
 | `variable` | `'ebsd'` | the name of the variable the map is assigned to |
 | `volume` | `False` | the file is a volume, read by EBSD3.load |
+
+## Output
+
+| `line` | str |
 
 ## See also
 

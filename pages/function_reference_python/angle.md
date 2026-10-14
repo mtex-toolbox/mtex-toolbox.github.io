@@ -13,14 +13,16 @@ angle(x, ...) is x.angle(...), the method of the object passed; NumPy's angle fo
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 angle(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [fibre](fibre.angle_py.html) | the angle by which ori * h misses r, the least over both orbits, from the chord of the closest pair |
 | [grainBoundary](grainBoundary.angle_py.html) | the angle of every segment to a direction, or to the segments of another boundary, in [0, pi/2], the segments having no sense |
 | [orientation](orientation.angle_py.html) | the rotational angle up to symmetry, of the orientation or of the misorientation to other |

@@ -14,38 +14,44 @@ and zoomed with the mouse
 
 ## Syntax
 
-The scene of the current figure:
+<div class="mx-form" markdown="1">
 
 ```python
 page = sceneHTML(gcs())
 ```
 
-With a title of the page:
+The scene of the current figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 page = sceneHTML(scene, title='grains')
 ```
+
+With a title of the page.
+
+</div>
+
+## Description
 
 The page holds the geometry and the colours compressed in itself and loads three.js from
 a CDN.
 
 ## Input
 
-| | |
-|---|---|
 | `scene` | scene3d |
-
-## Output
-
-| | |
-|---|---|
-| `page` | str, the HTML text |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `title` | `'MTEX 3D plot'` | the title of the page |
+
+## Output
+
+| `page` | str, the HTML text |
 
 ## See also
 

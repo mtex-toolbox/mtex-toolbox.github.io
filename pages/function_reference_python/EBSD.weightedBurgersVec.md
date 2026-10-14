@@ -17,27 +17,45 @@ per unit area, by the integral or the gradient method; MATLAB's weightedBurgersV
 
 ## Syntax
 
-In specimen coordinates, a 3 x 3 loop:
+<div class="mx-form" markdown="1">
 
 ```python
 W = weightedBurgersVec(ebsd)
 ```
 
-Around a loop of 5 x 5 pixels:
+In specimen coordinates, a 3 x 3 loop.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 W = weightedBurgersVec(ebsd, windowSize=2)
 ```
 
+Around a loop of 5 x 5 pixels.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 W = ebsd.orientations.inv() * weightedBurgersVec(ebsd) # in crystal coordinates
 ```
 
-From the orientation gradient:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 W = weightedBurgersVec(ebsd, gradient=True)
 ```
+
+From the orientation gradient.
+
+</div>
+
+## Description
 
 The integral method, the default, sums the crystal coordinates of the specimen x and y axes
 around a square loop of 2 windowSize + 1 pixels about every pixel; it needs a gridded map of
@@ -48,23 +66,19 @@ specimen frame, per scan unit, after Wheeler et al.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD of one indexed phase, gridified for the integral method |
-
-## Output
-
-| | |
-|---|---|
-| `W` | vector3d of the shape of the map, in the specimen frame |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `windowSize` | `1` | the half width of the loop of the integral method, in pixels |
 | `stencil` | `'oneSided'` | the stencil of the derivatives of the gradient method, 'oneSided' or 'full' |
 | `gradient` | `False` | use the gradient method instead of the integral one |
+
+## Output
+
+| `W` | vector3d of the shape of the map, in the specimen frame |
 
 ## References
 

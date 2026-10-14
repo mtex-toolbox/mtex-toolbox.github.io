@@ -17,9 +17,13 @@ a fibre
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.findByOrientation(self, ori, epsilon)
 ```
+
+</div>
 
 MATLAB's [grain2d.findByOrientation](grain2d.findByOrientation.html)
 

@@ -15,21 +15,35 @@ plotEllipsoid
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 a, b, c = grains.principalComponents()
 ```
 
-The ellipsoids of the grains:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotEllipsoid(grains.centroid, a, b, c, faceColor='r')
 ```
 
-A colour each, no edges:
+The ellipsoids of the grains.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotEllipsoid(grains.centroid, a, b, c, faceColor=rgb, edgeAlpha=0)
 ```
+
+A colour each, no edges.
+
+</div>
+
+## Description
 
 Every ellipsoid is a surface on a grid of 24 longitudes and 12 latitudes. With hold on it
 joins the grains of the scene drawn before. The plot is a scene3d held by the mtexFigure, shown as the picture PyVista renders offscreen
@@ -39,27 +53,23 @@ page.
 
 ## Input
 
-| | |
-|---|---|
 | `center` | vector3d, the centres |
 | `a` | vector3d, the first half axis of every ellipsoid |
 | `b` | vector3d, the second half axis |
 | `c` | vector3d, the third half axis |
 
-## Output
-
-| | |
-|---|---|
-| `fig` | mtexFigure |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `'lightblue'` | the colour of the ellipsoids, one for all or an (n, 3) array of RGB values one per ellipsoid |
 | `edgeAlpha` | `0.25` | the opacity of the grid lines on the surfaces |
 | `how2plot` | `None` | the plottingConvention of the view, by default plottingConvention.default3D |
 | `figSize` | `None` | the size of a new figure, 'small', 'normal', 'large', ..., or (width, height) in inches |
+
+## Output
+
+| `fig` | mtexFigure |
 
 ## See also
 

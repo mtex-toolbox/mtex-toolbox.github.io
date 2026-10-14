@@ -13,14 +13,16 @@ gradient(x, ...) is x.gradient(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gradient(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.gradient_py.html) | the derivative of the orientation along the two axes of the plane of the map, per unit length, as a pair of framed vectors |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>

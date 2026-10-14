@@ -16,9 +16,13 @@ the inverse quaternion, the conjugate over the squared norm
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion.inv(self)
 ```
+
+</div>
 
 MATLAB's [quaternion.inv](quaternion.inv.html)
 

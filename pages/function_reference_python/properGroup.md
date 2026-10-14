@@ -13,14 +13,16 @@ properGroup(x, ...) is x.properGroup(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 properGroup(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [referenceFrame](referenceFrame.properGroup_py.html) | the sibling frame carrying the proper point group, the elements with their parity dropped |
 | [symmetry](symmetry.properGroup_py.html) | the proper rotation group of the Laue group: the rotation parts of all elements |
 

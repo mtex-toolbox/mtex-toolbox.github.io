@@ -17,35 +17,57 @@ of the variant they voted for; MATLAB's calcParentFromVote
 
 ## Syntax
 
-Every grain with a vote:
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParentFromVote()
 ```
 
-A probability of at least 0.7:
+Every grain with a vote.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParentFromVote(minProb=0.7)
 ```
 
-And ahead of the second by 0.2:
+A probability of at least 0.7.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParentFromVote(minProb=0.5, minDelta=0.2)
 ```
 
-After votes of the best fit:
+And ahead of the second by 0.2.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParentFromVote(minFit=2*degree, minDelta=1*degree)
 ```
 
-After counted votes:
+After votes of the best fit.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 job.calcParentFromVote(minCount=3, maxCount=1)
 ```
+
+After counted votes.
+
+</div>
+
+## Description
 
 The votes are those of the last calcGBVotes, calcTPVotes or clusterVariantGraph, and the
 criteria read them as they are: probabilities with minProb, minDelta and minAlpha, fits
@@ -59,13 +81,11 @@ fits, as MATLAB's code does, not probabilities, as its help says.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor, with job.votes |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `minProb` | `0` | with probabilities: the best must exceed this |
 | `minDelta` | `None` | the best must lead the second by more than this: in probability, or in angle with fits |

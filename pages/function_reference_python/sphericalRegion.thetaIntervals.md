@@ -18,9 +18,13 @@ are arcs; a cap taken away can leave the meridian in two pieces, so a list
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalRegion.thetaIntervals(self, rho)
 ```
+
+</div>
 
 MATLAB's [sphericalRegion.thetaIntervals](sphericalRegion.thetaIntervals.html)
 

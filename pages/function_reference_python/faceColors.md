@@ -13,58 +13,76 @@ the colour of every face of every crystal shape, as plot(cS) paints them
 
 ## Syntax
 
-The colour of the mineral, or LightSkyBlue:
+<div class="mx-form" markdown="1">
 
 ```python
 C = faceColors(cS)
 ```
 
-One colour:
+The colour of the mineral, or LightSkyBlue.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 C = faceColors(cS, 'red')
 ```
 
-A value per face through a colour map:
+One colour.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 C = faceColors(cS, cS.faceArea, colormap='parula')
 ```
 
-A colour per form:
+A value per face through a colour map.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 C = faceColors(cS, colored=True)
 ```
 
-The key's colour of every normal:
+A colour per form.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 C = faceColors(cS, colored=ipfHSVKey(cS.CS))
 ```
+
+The key's colour of every normal.
+
+</div>
+
+## Description
 
 faceColor is one colour, one RGB or RGBA row per face or per shape, or a value per face,
 mapped through the colour map from its smallest to its largest value. colored overrides it.
 
 ## Input
 
-| | |
-|---|---|
 | `cS` | crystalShape, one or a list of n shapes |
-
-## Output
-
-| | |
-|---|---|
-| `C` | (n, number of faces, 4) array of RGBA colours |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `None` | one colour, one per face, one per shape, or a value per face |
 | `colored` | `None` | True for a colour per form, or a direction or ipf key colouring the normals |
 | `colormap` | `'viridis'` | the colour map of the values per face |
+
+## Output
+
+| `C` | (n, number of faces, 4) array of RGBA colours |
 
 ## See also
 

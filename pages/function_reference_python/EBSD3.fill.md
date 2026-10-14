@@ -17,17 +17,27 @@ EBSD3
 
 ## Syntax
 
-The empty voxels enclosed by measured ones:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd3 = ebsd3.fill()
 ```
 
-Every empty voxel, up to the outer boundary:
+The empty voxels enclosed by measured ones.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd3 = ebsd3.fill(extrapolate=True)
 ```
+
+Every empty voxel, up to the outer boundary.
+
+</div>
+
+## Description
 
 The volume is gridded, and every empty voxel, padding or not indexed, takes the phase, the
 orientation and the properties of the nearest indexed voxel. Without extrapolate only the
@@ -38,21 +48,17 @@ not take.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD3 |
-
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD3square, a copy of the gridded volume |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `extrapolate` | `False` | fill every empty voxel, also those connected to the outside of the volume |
+
+## Output
+
+| `ebsd` | EBSD3square, a copy of the gridded volume |
 
 ## See also
 

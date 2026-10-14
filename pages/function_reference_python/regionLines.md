@@ -13,35 +13,39 @@ the parallels and meridians drawn on the surface, which is how a viewer reads it
 
 ## Syntax
 
-Lines every 15 degree:
+<div class="mx-form" markdown="1">
 
 ```python
 L = regionLines(oR)
 ```
 
-Fewer lines:
+Lines every 15 degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 L = regionLines(oR, step=30*degree)
 ```
 
+Fewer lines.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `oR` | orientationRegion |
-
-## Output
-
-| | |
-|---|---|
-| `L` | list of (k, 3) arrays, the lines of sphereGridLines pushed out to the surface, NaN outside the region's sector |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `step` | `15*degree` | the spacing of the parallels and meridians |
+
+## Output
+
+| `L` | list of (k, 3) arrays, the lines of sphereGridLines pushed out to the surface, NaN outside the region's sector |
 
 ## See also
 

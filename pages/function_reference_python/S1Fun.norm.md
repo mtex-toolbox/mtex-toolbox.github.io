@@ -16,15 +16,23 @@ the L2 norm for the normalised measure, the Euclidean norm of the coefficients
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 t = norm(sF)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S1FunHarmonic.norm(self)
 ```
+
+</div>
 
 MATLAB's [S1Fun.norm](S1Fun.norm.html)
 

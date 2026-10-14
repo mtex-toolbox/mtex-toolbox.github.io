@@ -17,38 +17,44 @@ within tol, both flipped counting as well; MATLAB's eq
 
 ## Syntax
 
-Equal up to symmetry:
+<div class="mx-form" markdown="1">
 
 ```python
 b = f1.isclose(f2)
 ```
 
-Within a wider tolerance:
+Equal up to symmetry.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = f1.isclose(f2, tol=1e-3)
 ```
+
+Within a wider tolerance.
+
+</div>
+
+## Description
 
 A segment is not the full fibre, and its ends are not compared. f1 == f2 compares h and r
 as they are, without the symmetry.
 
 ## Input
 
-| | |
-|---|---|
 | `f1, f2` | fibre |
-
-## Output
-
-| | |
-|---|---|
-| `b` | bool, of the broadcast shape |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-06` | the tolerance on the dot products of h and of r, 1 - cos of the angle |
+
+## Output
+
+| `b` | bool, of the broadcast shape |
 
 ## See also
 

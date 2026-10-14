@@ -18,23 +18,37 @@ parentGrainReconstructor.calcGBFit
 
 ## Syntax
 
-Every parent to child and child to child boundary:
+<div class="mx-form" markdown="1">
 
 ```python
 fit, pairs = job.calcGBFit()
 ```
 
-The parent to child boundaries alone:
+Every parent to child and child to child boundary.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fit, p2cPairs = job.calcGBFit(p2c=True)
 ```
 
-The child to child boundaries alone:
+The parent to child boundaries alone.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 fit, c2cPairs = job.calcGBFit(c2c=True)
 ```
+
+The child to child boundaries alone.
+
+</div>
+
+## Description
 
 For a pair of child grains the misfit is the angle between their misorientation and the
 nearest child to child misorientation job.p2c admits; for a parent and a child grain the
@@ -43,23 +57,19 @@ returned, the parent to child pairs first.
 
 ## Input
 
-| | |
-|---|---|
 | `job` | parentGrainReconstructor |
-
-## Output
-
-| | |
-|---|---|
-| `fit` | array of the misfit angles, in radians |
-| `pairs` | (n, 2) int array, the ids of the two grains of every boundary |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `p2c` | `False` | only the boundaries between a parent and a child grain |
 | `c2c` | `False` | only the boundaries between two child grains |
+
+## Output
+
+| `fit` | array of the misfit angles, in radians |
+| `pairs` | (n, 2) int array, the ids of the two grains of every boundary |
 
 ## See also
 

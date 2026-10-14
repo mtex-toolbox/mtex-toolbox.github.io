@@ -16,17 +16,27 @@ the section of a crystal shape by a lattice plane through its centre
 
 ## Syntax
 
-The plane N inside the shape:
+<div class="mx-form" markdown="1">
 
 ```python
 plotInnerFace(cS, N)
 ```
 
-Coloured, for a legend:
+The plane N inside the shape.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotInnerFace(cS, N, faceColor='red', faceAlpha=0.5, displayName='(101)')
 ```
+
+Coloured, for a legend.
+
+</div>
+
+## Description
 
 The plane is drawn as the polygon where it cuts the shape, in the axes of the shape, so
 that it shows inside a translucent shape drawn before: plot(cS, faceAlpha=0.2), then
@@ -34,26 +44,22 @@ plotInnerFace with the figure held. Several planes give several polygons.
 
 ## Input
 
-| | |
-|---|---|
 | `cS` | crystalShape |
 | `N` | Miller, the lattice plane, one or several |
 
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib collection of the sections, None when the plane misses the shape |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `faceColor` | `'blue'` | the colour of the section |
 | `faceAlpha` | `1.0` | its opacity |
 | `edgeColor` | `'k'` | the colour of its edges |
 | `lineWidth` | `0.8` | the width of its edges |
 | `displayName` | `None` | its label in a legend |
+
+## Output
+
+| `h` | the matplotlib collection of the sections, None when the plane misses the shape |
 
 ## See also
 

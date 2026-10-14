@@ -15,39 +15,45 @@ equal within the angular tolerance tol and of one parity, MATLAB's eq
 
 ## Syntax
 
-Equal up to 5e-4:
+<div class="mx-form" markdown="1">
 
 ```python
 b = T1.isclose(T2)
 ```
 
-A coarser tolerance:
+Equal up to 5e-4.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = T1.isclose(T2, tol=1*degree)
 ```
+
+A coarser tolerance.
+
+</div>
+
+## Description
 
 As rotation.isclose, the angle between the rotational parts below 2 tol, and the parities
 equal.
 
 ## Input
 
-| | |
-|---|---|
 | `T1` | orthogonalTransform |
 | `T2` | orthogonalTransform or rotation |
 
-## Output
-
-| | |
-|---|---|
-| `b` | boolean array |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `0.0005` | the tolerance, an angle |
+
+## Output
+
+| `b` | boolean array |
 
 ## See also
 

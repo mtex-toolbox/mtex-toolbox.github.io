@@ -13,14 +13,16 @@ even(x, ...) is x.even(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 even(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [S1FunHarmonic](S1FunHarmonic.even_py.html) | f(x) = f(-x): c_{-k} = c_k |
 | [S2FunHarmonic](S2FunHarmonic.even_py.html) | the even part, f(v) + f(-v) over two |
 

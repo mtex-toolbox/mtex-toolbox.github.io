@@ -16,17 +16,27 @@ many orientations are cheap; MATLAB's precompute
 
 ## Syntax
 
-The grid at half a degree:
+<div class="mx-form" markdown="1">
 
 ```python
 ipfKey.precompute()
 ```
 
-A coarser grid:
+The grid at half a degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ipfKey.precompute(resolution=1*degree)
 ```
+
+A coarser grid.
+
+</div>
+
+## Description
 
 The colours are then read off the node nearest each crystal direction without folding it
 into the sector. An unchanged HSV key takes the grid its crystal frame keeps for the
@@ -34,17 +44,15 @@ session, any other key a grid of its own, rebuilt when the key has changed since
 orientation2color calls this itself from 100000 orientations on, where the grid pays for
 itself.
 
-## Output
-
-| | |
-|---|---|
-| `ipfKey` | the key itself |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `None` | the spacing of the grid; half a degree by default |
+
+## Output
+
+| `ipfKey` | the key itself |
 
 ## See also
 

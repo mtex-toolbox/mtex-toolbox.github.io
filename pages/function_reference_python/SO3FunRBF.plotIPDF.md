@@ -16,9 +16,13 @@ plotIPF(odf, r): the inverse pole figures of an ODF, one axes per specimen direc
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunRBF.plotIPDF(odf, r, *args, **kw)
 ```
+
+</div>
 
 MATLAB's [SO3FunRBF.plotIPDF](SO3FunRBF.plotIPDF.html)
 

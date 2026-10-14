@@ -16,9 +16,13 @@ the callable receives orientations in the frames of the function
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunHandle.eval(self, x)
 ```
+
+</div>
 
 MATLAB's [SO3FunHandle.eval](SO3FunHandle.eval.html)
 

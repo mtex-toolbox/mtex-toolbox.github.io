@@ -17,9 +17,13 @@ nothing on the other side, and there is no inner boundary
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.hull(self)
 ```
+
+</div>
 
 MATLAB's [grain2d.hull](grain2d.hull.html)
 

@@ -17,9 +17,13 @@ region of its phase (MATLAB's EBSD.project2FundamentalRegion)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.project2FundamentalRegion(self)
 ```
+
+</div>
 
 MATLAB's [EBSD.project2FundamentalRegion](EBSD.project2FundamentalRegion.html)
 

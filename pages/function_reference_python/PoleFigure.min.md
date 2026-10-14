@@ -17,42 +17,50 @@ another pole figure; MATLAB's min
 
 ## Syntax
 
-The smallest intensity of every pole figure:
+<div class="mx-form" markdown="1">
 
 ```python
 m = min(pf)
 ```
 
-The intensities clipped from above at 100:
+The smallest intensity of every pole figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = min(pf, 100)
 ```
 
-The smaller intensity of two pole figures on the same directions:
+The intensities clipped from above at 100.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pf = min(pf1, pf2)
 ```
 
+The smaller intensity of two pole figures on the same directions.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `pf` | PoleFigure |
-
-## Output
-
-| | |
-|---|---|
-| `m` | ndarray, one number per pole figure |
-| `pf` | PoleFigure, with another argument |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `other` | `None` | a number, one per pole figure, or a PoleFigure on the same directions |
+
+## Output
+
+| `m` | ndarray, one number per pole figure |
+| `pf` | PoleFigure, with another argument |
 
 ## See also
 

@@ -14,29 +14,47 @@ volume of an xnovo file, or a stack of 2D maps; MATLAB's EBSD3.load
 
 ## Syntax
 
-The format from the file:
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD3('volume.dream3d')
 ```
 
-The format given:
+The format from the file.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD3('volume.h5', interface='xnovo')
 ```
 
-Other phases than the file's:
+The format given.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD3('volume.dream3d', CS=cs)
 ```
 
-A stack of 2D maps at their heights:
+Other phases than the file's.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ebsd = loadEBSD3(['s0.ang', 's1.ang'], z=[0, 1])
 ```
+
+A stack of 2D maps at their heights.
+
+</div>
+
+## Description
 
 The format is told by the extension and, for an HDF5 file, by what it holds: a LabDCT group
 makes it an xnovo file, the cell data of a grid a DREAM.3D file, whatever the data
@@ -48,23 +66,19 @@ file. EBSD3.load is the same function.
 
 ## Input
 
-| | |
-|---|---|
 | `fname` | the file name, or a list of file names of 2D maps |
-
-## Output
-
-| | |
-|---|---|
-| `ebsd` | EBSD3 |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `interface` | `None` | the format, 'dream3d' or 'xnovo'; by default told by the file |
 | `z` | `None` | the height of every map of a stack, by default 0, 1, 2, ... |
 | `CS` | `None` | a crystalFrame or a phaseList replacing the phases of the file |
+
+## Output
+
+| `ebsd` | EBSD3 |
 
 ## See also
 

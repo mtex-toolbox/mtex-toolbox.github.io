@@ -15,11 +15,17 @@ the field of the displacements of the point pairs, at the points of frame A
 
 ## Syntax
 
-The displacements as measured:
+<div class="mx-form" markdown="1">
 
 ```python
 T = spatialTransformField.fit(posA, posB)
 ```
+
+The displacements as measured.
+
+</div>
+
+## Description
 
 There is nothing to fit: the field interpolates its samples exactly. The weights only
 drop the points whose weight is not a number, as the points with a missing position are
@@ -28,22 +34,18 @@ accepted and not used.
 
 ## Input
 
-| | |
-|---|---|
 | `posA` | vector3d, the positions in frame A |
 | `posB` | vector3d, the same points in frame B |
 
-## Output
-
-| | |
-|---|---|
-| `T` | spatialTransformField |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | one weight per point |
+
+## Output
+
+| `T` | spatialTransformField |
 
 ## See also
 

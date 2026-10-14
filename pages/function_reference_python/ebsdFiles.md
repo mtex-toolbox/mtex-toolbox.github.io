@@ -13,9 +13,13 @@ the EBSD files of a folder by their extension, sorted, a .crc beside its .cpr le
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 ebsdFiles(folder)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/io/inspect.py#L123">source</a></font>
 {% endraw %}

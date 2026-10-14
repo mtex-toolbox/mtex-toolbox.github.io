@@ -16,9 +16,13 @@ the rotation f(x - phi)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S1FunHarmonic.rotate(self, phi)
 ```
+
+</div>
 
 MATLAB's [S1FunHarmonic.rotate](S1FunHarmonic.rotate.html)
 

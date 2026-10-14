@@ -15,35 +15,39 @@ the symbol with a bar over every rotoinversion axis under utf8 output
 
 ## Syntax
 
-'3̅m1' or '-3m1', as the preference says:
+<div class="mx-form" markdown="1">
 
 ```python
 s = cs.sym.char()
 ```
 
-'-3m1':
+'3̅m1' or '-3m1', as the preference says.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = cs.sym.char(utf8=False)
 ```
 
+'-3m1'.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `pg` | symmetry |
-
-## Output
-
-| | |
-|---|---|
-| `s` | str, the Hermann-Mauguin symbol |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `utf8` | `None` | a combining bar instead of the minus sign; by default the preference 'UTF8Output' |
+
+## Output
+
+| `s` | str, the Hermann-Mauguin symbol |
 
 ## See also
 

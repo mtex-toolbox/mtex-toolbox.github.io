@@ -17,38 +17,44 @@ deformationGradientTensor.uniaxial
 
 ## Syntax
 
-Stretched to twice its length along d:
+<div class="mx-form" markdown="1">
 
 ```python
 F = deformationGradientTensor.uniaxial(d)
 ```
 
-By the factor 3:
+Stretched to twice its length along d.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 F = deformationGradientTensor.uniaxial(d, 3)
 ```
+
+By the factor 3.
+
+</div>
+
+## Description
 
 The directions perpendicular to d are shortened by one over the square root of rate; a
 rate below one compresses. The tensor is in the frame of d.
 
 ## Input
 
-| | |
-|---|---|
 | `d` | vector3d or Miller, the direction of the stretch |
-
-## Output
-
-| | |
-|---|---|
-| `F` | deformationGradientTensor |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rate` | `2.0` | the stretch along d |
+
+## Output
+
+| `F` | deformationGradientTensor |
 
 ## See also
 

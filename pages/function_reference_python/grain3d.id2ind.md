@@ -16,9 +16,13 @@ the position of grain ids
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain3d.id2ind(self, ids)
 ```
+
+</div>
 
 MATLAB's [grain3d.id2ind](grain3d.id2ind.html)
 

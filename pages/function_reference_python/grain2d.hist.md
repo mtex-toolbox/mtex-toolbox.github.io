@@ -19,9 +19,13 @@ diagram of directions
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grain2d.hist(x, *args, **kw)
 ```
+
+</div>
 
 ## Used on
 

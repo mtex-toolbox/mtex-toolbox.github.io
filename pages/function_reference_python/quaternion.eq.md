@@ -16,17 +16,27 @@ equal within the angular tolerance tol, MATLAB's eq
 
 ## Syntax
 
-Equal up to 5e-4:
+<div class="mx-form" markdown="1">
 
 ```python
 b = q1.isclose(q2)
 ```
 
-A coarser tolerance:
+Equal up to 5e-4.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 b = q1.isclose(q2, tol=1e-2)
 ```
+
+A coarser tolerance.
+
+</div>
+
+## Description
 
 True where the inner product of the coefficients exceeds cos(tol), as MATLAB's eq; for
 unit quaternions the angle between them is below 2 tol. A quaternion and its negative
@@ -34,21 +44,17 @@ are not close; rotation.isclose takes them as one. The operator == compares exac
 
 ## Input
 
-| | |
-|---|---|
 | `q1, q2` | quaternion |
-
-## Output
-
-| | |
-|---|---|
-| `b` | boolean array |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `0.0005` | the tolerance, an angle |
+
+## Output
+
+| `b` | boolean array |
 
 ## See also
 

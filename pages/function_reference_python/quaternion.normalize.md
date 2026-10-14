@@ -16,9 +16,13 @@ the quaternions divided by their norm
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quaternion.normalize(self)
 ```
+
+</div>
 
 MATLAB's [quaternion.normalize](quaternion.normalize.html)
 

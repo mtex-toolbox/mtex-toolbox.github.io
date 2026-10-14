@@ -16,35 +16,57 @@ vector3d/discrepancy
 
 ## Syntax
 
-D_2 of two point sets:
+<div class="mx-form" markdown="1">
 
 ```python
 d = sphericalDiscrepancy(v, w)
 ```
 
-Of two weighted point sets:
+D_2 of two point sets.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = sphericalDiscrepancy(v, w, weights=c, weights2=e)
 ```
 
-Of a density and a sample:
+Of two weighted point sets.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = sphericalDiscrepancy(f, v)
 ```
 
-A weighted harmonic norm:
+Of a density and a sample.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = sphericalDiscrepancy(v, w, 'L2', bandwidth=32, degreeWeights=lambda l: np.exp(-0.1 * l * (l + 1)))
 ```
 
-The largest cap difference and its cap:
+A weighted harmonic norm.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d, info = sphericalDiscrepancy(v, w, 'D_cap', numCenters=4097, info=True)
 ```
+
+The largest cap difference and its cap.
+
+</div>
+
+## Description
 
 With C(m, t) = {x : m.x >= t} the spherical caps and nu = mu - eta the difference of the
 two measures, D_cap is sup |nu(C(m, t))|, D_2 the root of the integral of |nu(C(m, t))|^2
@@ -63,21 +85,12 @@ taken by discrepancy, not here.
 
 ## Input
 
-| | |
-|---|---|
 | `a, b` | S2Fun, a real scalar density, or vector3d, a point set |
 | `metric` | 'D_2', 'D_cap' or 'L2' (also 'E_L') |
 
-## Output
-
-| | |
-|---|---|
-| `d` | the discrepancy, its square with squared=True |
-| `info` | with info=True: method, isExact, bandwidth, and for D_cap the cap found, center, height, closed (False for the limit of open caps), signedDifference |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | the non negative weights of the points of a |
 | `weights2` | `None` | the weights of the points of b |
@@ -88,6 +101,11 @@ taken by discrepancy, not here.
 | `centers` | `None` | vector3d, the cap centres D_cap searches instead |
 | `squared` | `False` | return the square of D_2 and L2 |
 | `info` | `False` | return the details too, as a second output |
+
+## Output
+
+| `d` | the discrepancy, its square with squared=True |
+| `info` | with info=True: method, isExact, bandwidth, and for D_cap the cap found, center, height, closed (False for the limit of open caps), signedDifference |
 
 ## See also
 

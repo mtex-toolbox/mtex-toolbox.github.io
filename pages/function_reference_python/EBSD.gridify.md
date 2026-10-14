@@ -16,35 +16,57 @@ the same map with its arrays in map shape, the missing cells padding; MATLAB's g
 
 ## Syntax
 
-The rows and columns of the scan:
+<div class="mx-form" markdown="1">
 
 ```python
 grid = ebsd.gridify()
 ```
 
-And where every measurement went:
+The rows and columns of the scan.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grid, newId = ebsd.gridify(return_index=True)
 ```
 
-Transposed, one scan column per array row:
+And where every measurement went.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grid = ebsd.gridify('rowMajor')
 ```
 
-In the order a layout states:
+Transposed, one scan column per array row.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grid = ebsd.gridify(gridLayout.rowMajor())
 ```
 
-Resampled onto a coarser lattice:
+In the order a layout states.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 grid = ebsd.gridify(unitCell=2 * ebsd.unitCell)
 ```
+
+Resampled onto a coarser lattice.
+
+</div>
+
+## Description
 
 The grid closes the map to a full rectangle: a cell with no measurement, a pixel of another
 phase after ebsd['Forsterite'] or one outside a region, is padding, not indexed, with a NaN
@@ -59,24 +81,20 @@ the GND and KAM do not need a grid, they run on the lattice of a list too.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD, a list or a grid |
 | `layout` | gridLayout, or 'columnMajor' or 'rowMajor', the order of the arrays |
 
-## Output
-
-| | |
-|---|---|
-| `grid` | EBSD in map shape |
-| `newId` | the flat index of every measurement in the grid, grid.pos.flatten()[newId] is ebsd.pos |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `unitCell` | `None` | the unit cell of another lattice, onto which the map is resampled by the nearest measurement |
 | `return_index` | `False` | return newId as well |
+
+## Output
+
+| `grid` | EBSD in map shape |
+| `newId` | the flat index of every measurement in the grid, grid.pos.flatten()[newId] is ebsd.pos |
 
 ## See also
 

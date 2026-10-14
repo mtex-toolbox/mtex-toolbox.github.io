@@ -14,8 +14,6 @@ the identity transform, which leaves every position where it is
 
 ## Members
 
-| | |
-|---|---|
 | [eval](spatialTransformId.eval_py.html) | the positions unchanged |
 | [inv](spatialTransformId.inv_py.html) | the identity itself |
 | [isid](spatialTransformId.isid_py.html) | always True |

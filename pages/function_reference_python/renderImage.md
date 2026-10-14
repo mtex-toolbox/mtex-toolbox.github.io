@@ -13,17 +13,27 @@ the scene drawn offscreen by PyVista, as a picture
 
 ## Syntax
 
-The scene of the current figure:
+<div class="mx-form" markdown="1">
 
 ```python
 img = renderImage(gcs())
 ```
 
-400 pixels wide, 300 high:
+The scene of the current figure.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 img = renderImage(scene, size=(400, 300))
 ```
+
+400 pixels wide, 300 high.
+
+</div>
+
+## Description
 
 The scene is drawn unlit and flat, as MATLAB draws a patch without a light, seen as its
 plotting convention says. This is what a 3D plot shows in its figure; it needs the plot3d
@@ -31,21 +41,17 @@ extra (PyVista).
 
 ## Input
 
-| | |
-|---|---|
 | `scene` | scene3d |
-
-## Output
-
-| | |
-|---|---|
-| `img` | (height, width, 3) uint8 array |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `size` | `(800, 800)` | (width, height) of the picture in pixels |
+
+## Output
+
+| `img` | (height, width, 3) uint8 array |
 
 ## See also
 

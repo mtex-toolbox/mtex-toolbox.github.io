@@ -16,37 +16,47 @@ the hemisphere seen from a direction added to the region (MATLAB's sphericalRegi
 
 ## Syntax
 
-The part with z >= 0:
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sR.restrictToUpper()
 ```
 
-The part towards x:
+The part with z >= 0.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sR.restrictToUpper(xvector)
 ```
 
-Towards the viewer of a convention:
+The part towards x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sR = sR.restrictToUpper(plottingConvention('y↑→x'))
 ```
 
+Towards the viewer of a convention.
+
+</div>
+
+## Description
+
 The region is returned as it is when it already lies in that hemisphere.
 
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
 | `up` | vector3d, or a plottingConvention whose outOfScreen direction is taken; z by default |
 
 ## Output
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
 
 ## See also
@@ -55,9 +65,13 @@ The region is returned as it is when it already lies in that hemisphere.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 sphericalRegion.restrict2Upper(self, up=None)
 ```
+
+</div>
 
 MATLAB's [sphericalRegion.restrict2Upper](sphericalRegion.restrict2Upper.html)
 

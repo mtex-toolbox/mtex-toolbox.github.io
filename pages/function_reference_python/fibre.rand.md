@@ -16,35 +16,39 @@ frames given; MATLAB's fibre.rand
 
 ## Syntax
 
-Ten full fibres in the crystal frame cs:
+<div class="mx-form" markdown="1">
 
 ```python
 f = fibre.rand(10, cs)
 ```
 
-Between cs and ss, from a generator:
+Ten full fibres in the crystal frame cs.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = fibre.rand(10, cs, ss, rng=rng)
 ```
 
+Between cs and ss, from a generator.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `args` | the shape, then the frames, crystal and specimen |
-
-## Output
-
-| | |
-|---|---|
-| `f` | fibre, full fibres h \|\| r with h and r uniform on the sphere |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rng` | `None` | a numpy random generator |
+
+## Output
+
+| `f` | fibre, full fibres h \|\| r with h and r uniform on the sphere |
 
 ## See also
 

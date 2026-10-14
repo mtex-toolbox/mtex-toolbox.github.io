@@ -17,17 +17,27 @@ triangle, and the area centroid of anything larger
 
 ## Syntax
 
-The centre of the region:
+<div class="mx-form" markdown="1">
 
 ```python
 c = sR.center()
 ```
 
-The centroid on a finer grid:
+The centre of the region.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 c = sR.center(resolution=0.5*degree)
 ```
+
+The centroid on a finer grid.
+
+</div>
+
+## Description
 
 The whole sphere has its centre at z. The area centroid is the normalised sum of the
 points of an equispaced grid inside the region; resolution is its spacing and matters
@@ -35,21 +45,17 @@ only there.
 
 ## Input
 
-| | |
-|---|---|
 | `sR` | sphericalRegion |
-
-## Output
-
-| | |
-|---|---|
-| `c` | vector3d, a unit vector in the frame of the region |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `1*degree` | the spacing of the grid of the area centroid |
+
+## Output
+
+| `c` | vector3d, a unit vector in the frame of the region |
 
 ## See also
 

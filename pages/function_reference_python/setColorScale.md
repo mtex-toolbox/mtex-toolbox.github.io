@@ -13,27 +13,33 @@ logarithmic or linear colours on every plot of the figure
 
 ## Syntax
 
-The colours spread over the decades of the range:
+<div class="mx-form" markdown="1">
 
 ```python
 setColorScale('log')
 ```
 
-Linear colours again on a figure given:
+The colours spread over the decades of the range.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 setColorScale('linear', fig=mtexFig)
 ```
 
+Linear colours again on a figure given.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `scale` | 'log' or 'linear' |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure; the current one by default |
 

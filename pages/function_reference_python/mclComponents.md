@@ -14,17 +14,27 @@ the components of a weighted graph by Markov clustering, MCL; MATLAB's mclCompon
 
 ## Syntax
 
-Until the columns settle:
+<div class="mx-form" markdown="1">
 
 ```python
 A = mclComponents(job.graph, 1.6)
 ```
 
-At most four iterations:
+Until the columns settle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 A = mclComponents(job.graph, 1.6, maxIter=4)
 ```
+
+At most four iterations.
+
+</div>
+
+## Description
 
 The steps of S. van Dongen's algorithm repeated until the columns settle: the expansion
 A @ A, the inflation of every entry to the power p, the entries up to 1e-4 pruned and the
@@ -34,22 +44,18 @@ smaller the clusters; the nonzero pattern of the result joins the nodes of one c
 
 ## Input
 
-| | |
-|---|---|
 | `A` | sparse adjacency matrix, the weights between 0 and 1 |
 | `p` | the inflation power |
 
-## Output
-
-| | |
-|---|---|
-| `A` | sparse matrix of the clusters |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `maxIter` | `inf` | the iteration bound; the loop stops after maxIter - 1 steps |
+
+## Output
+
+| `A` | sparse matrix of the clusters |
 
 ## References
 

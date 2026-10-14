@@ -16,17 +16,27 @@ the smallest rotation taking u1 to v1, or the one taking u1 to v1 and u2 to v2
 
 ## Syntax
 
-The smallest rotation with rot * u1 || v1:
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.map(u1, v1)
 ```
 
-U1 onto v1 and u2 onto v2:
+The smallest rotation with rot * u1 || v1.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rot = rotation.map(u1, v1, u2, v2)
 ```
+
+U1 onto v1 and u2 onto v2.
+
+</div>
+
+## Description
 
 With two pairs the angle between u1 and u2 must be that between v1 and v2, up to 1e-3,
 and u1, u2 must not be colinear; an error is raised otherwise. The lengths of the vectors
@@ -34,15 +44,11 @@ do not matter.
 
 ## Input
 
-| | |
-|---|---|
 | `u1, v1` | vector3d |
 | `u2, v2` | vector3d, a second pair |
 
 ## Output
 
-| | |
-|---|---|
 | `rot` | rotation |
 
 ## See also
@@ -51,9 +57,13 @@ do not matter.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation.map(u1, v1, u2=None, v2=None)
 ```
+
+</div>
 
 MATLAB's [rotation.map](rotation.map.html)
 

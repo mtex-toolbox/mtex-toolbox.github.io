@@ -15,15 +15,23 @@ its harmonic expansion
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vF = S2VectorFieldHandle(lambda v: v.cross(vector3d.Z()))
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2VectorFieldHandle(fun, frame=None, *, bandwidth=None)
 ```
+
+</div>
 
 MATLAB's [S2VectorFieldHandle.S2VectorFieldHandle](S2VectorFieldHandle.S2VectorFieldHandle.html)
 

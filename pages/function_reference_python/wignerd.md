@@ -14,40 +14,46 @@ MATLAB's Wigner_d_recursion
 
 ## Syntax
 
-The (2l+1) x (2l+1) matrix of degree l:
+<div class="mx-form" markdown="1">
 
 ```python
 d = wignerd(beta, l)
 ```
 
-The matrices of the degrees 0 to L:
+The (2l+1) x (2l+1) matrix of degree l.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ds = wignerd(beta, bandwidth=L)
 ```
+
+The matrices of the degrees 0 to L.
+
+</div>
+
+## Description
 
 The matrices are those of MTEX's Wigner blocks, indexed from -l to l, computed by a stable
 recursion over the degrees. Give either the degree or the bandwidth.
 
 ## Input
 
-| | |
-|---|---|
 | `beta` | one angle, the second Euler angle |
 | `degree` | the degree l |
 
-## Output
-
-| | |
-|---|---|
-| `d` | ndarray of shape (2l+1, 2l+1) |
-| `ds` | list of the matrices of the degrees 0 to L |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the largest degree L of the list |
+
+## Output
+
+| `d` | ndarray of shape (2l+1, 2l+1) |
+| `ds` | list of the matrices of the degrees 0 to L |
 
 ## See also
 

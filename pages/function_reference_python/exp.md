@@ -13,14 +13,16 @@ exp(x, ...) is x.exp(...), the method of the object passed; NumPy's exp for an a
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 exp(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [orientation](orientation.exp_py.html) | the rotation a tangent vector at this reference points to, exp(ori, v) of MATLAB |
 | [S1FunHarmonic](S1Fun.exp_py.html) | the pointwise exponential, a Fourier series of a smoothing bandwidth, or at the bandwidth given |
 | [S2FunHandle](S2FunHandle.exp_py.html) | the pointwise exponential, a handle evaluated when asked |

@@ -14,9 +14,13 @@ every index triple up to maxIndex, coprime, without (0, 0, 0)
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 allHKL(maxIndex)
 ```
+
+</div>
 
 MATLAB's [allHKL](allHKL.html)
 

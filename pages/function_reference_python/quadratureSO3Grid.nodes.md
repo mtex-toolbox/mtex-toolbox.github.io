@@ -15,9 +15,13 @@ the nodes as orientations in the frames of the grid, beta fastest, then alpha, t
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quadratureSO3Grid.nodes(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L189">source</a></font>
 {% endraw %}

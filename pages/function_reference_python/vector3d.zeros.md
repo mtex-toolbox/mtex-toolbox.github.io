@@ -16,23 +16,35 @@ the zero vectors of a shape
 
 ## Syntax
 
-One zero vector:
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.zeros()
 ```
 
-An m x n array of them:
+One zero vector.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = vector3d.zeros(m, n)
 ```
 
+An m x n array of them.
+
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 vector3d.zeros(*shape)
 ```
+
+</div>
 
 MATLAB's [vector3d.zeros](vector3d.zeros.html)
 

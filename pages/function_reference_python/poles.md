@@ -15,17 +15,27 @@ ori.SS * (ori * symmetrise(h))
 
 ## Syntax
 
-The poles of the {100} directions:
+<div class="mx-form" markdown="1">
 
 ```python
 p = poles(ori, Miller(1, 0, 0, cs))
 ```
 
-An axis and its antipode counted once:
+The poles of the {100} directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 p = poles(ori, Miller(1, 1, 1, cs), antipodal=True)
 ```
+
+An axis and its antipode counted once.
+
+</div>
+
+## Description
 
 The poles are what plotPF draws for a list of orientations. An equivalent counts once, and
 an axis and its antipode count once where the pole figure cannot tell h from -h: when
@@ -34,22 +44,18 @@ then.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation, shaped (...) |
 | `h` | Miller or vector3d, one crystal direction |
 
-## Output
-
-| | |
-|---|---|
-| `p` | vector3d in the specimen frame, shaped (..., m) over the m distinct equivalents |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | count an axis and its antipode once |
+
+## Output
+
+| `p` | vector3d in the specimen frame, shaped (..., m) over the m distinct equivalents |
 
 ## See also
 

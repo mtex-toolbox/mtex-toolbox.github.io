@@ -17,23 +17,37 @@ the Burgers vector unless antipodal
 
 ## Syntax
 
-24 systems of fcc, both slip directions:
+<div class="mx-form" markdown="1">
 
 ```python
 sSAll = sS.symmetrise()
 ```
 
-12, one sign of each:
+24 systems of fcc, both slip directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sSAll = sS.symmetrise(antipodal=True)
 ```
 
-With the system each one comes from:
+12, one sign of each.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sSAll, id = sS.symmetrise(return_index=True)
 ```
+
+With the system each one comes from.
+
+</div>
+
+## Description
 
 For every system the symmetrically equivalent slip directions and plane normals are
 paired where they stay orthogonal. Systems in specimen coordinates are returned as they
@@ -41,23 +55,19 @@ are.
 
 ## Input
 
-| | |
-|---|---|
 | `sS` | slipSystem |
-
-## Output
-
-| | |
-|---|---|
-| `sSAll` | slipSystem |
-| `id` | the index into sS of the system each one comes from, MATLAB's second output |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | keep one sign of each slip direction |
 | `return_index` | `False` | also return id |
+
+## Output
+
+| `sSAll` | slipSystem |
+| `id` | the index into sS of the system each one comes from, MATLAB's second output |
 
 ## See also
 

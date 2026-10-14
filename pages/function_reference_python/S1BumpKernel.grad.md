@@ -15,35 +15,39 @@ the derivative of the bump kernel, zero wherever it exists; without an argument 
 
 ## Syntax
 
-Zeros of the shape of x:
+<div class="mx-form" markdown="1">
 
 ```python
 d = psi.grad(x)
 ```
 
-The zero kernel:
+Zeros of the shape of x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 dpsi = psi.grad()
 ```
 
+The zero kernel.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `psi` | S1BumpKernel |
-
-## Output
-
-| | |
-|---|---|
-| `d` | ndarray of zeros, or S1Kernel without an argument |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `x` | `None` | the angles; without them the zero kernel is returned |
+
+## Output
+
+| `d` | ndarray of zeros, or S1Kernel without an argument |
 
 ## See also
 

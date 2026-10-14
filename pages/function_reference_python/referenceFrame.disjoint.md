@@ -16,9 +16,13 @@ specimen frame of the same group
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 referenceFrame.disjoint(self, other)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L326">source</a></font>
 {% endraw %}

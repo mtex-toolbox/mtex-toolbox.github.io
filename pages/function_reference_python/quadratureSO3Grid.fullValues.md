@@ -15,9 +15,13 @@ values at the distinct nodes spread onto the full grid, values at the full grid 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 quadratureSO3Grid.fullValues(self, values)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L248">source</a></font>
 {% endraw %}

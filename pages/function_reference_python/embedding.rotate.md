@@ -16,9 +16,13 @@ the images turned by a rotation
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 embedding.rotate(self, r)
 ```
+
+</div>
 
 MATLAB's [embedding.rotate](embedding.rotate.html)
 

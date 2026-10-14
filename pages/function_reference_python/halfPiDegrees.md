@@ -14,17 +14,27 @@ streamed by the recursion above
 
 ## Syntax
 
-D_n(pi/2), a (2n+1) x (2n+1) matrix per degree:
+<div class="mx-form" markdown="1">
 
 ```python
 pairs = list(halfPiDegrees(8))
 ```
 
-In single precision:
+D_n(pi/2), a (2n+1) x (2n+1) matrix per degree.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pairs = list(halfPiDegrees(8, dtype=np.float32))
 ```
+
+In single precision.
+
+</div>
+
+## Description
 
 Every coefficient transform walks the degrees in order and needs one matrix at a time; up to
 bandwidth 256 the matrices are computed once per dtype and kept, above it the recursion yields
@@ -32,21 +42,17 @@ them one after the other without holding them.
 
 ## Input
 
-| | |
-|---|---|
 | `L` | the largest degree |
-
-## Output
-
-| | |
-|---|---|
-| `pairs` | an iterator of (n, d_n), n = 0 .. L |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `dtype` | `<class 'numpy.float64'>` | the floating point type of the matrices |
+
+## Output
+
+| `pairs` | an iterator of (n, d_n), n = 0 .. L |
 
 ## See also
 

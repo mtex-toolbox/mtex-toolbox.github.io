@@ -15,35 +15,57 @@ an origin and two perpendicular steps; MATLAB's mapImage
 
 ## Syntax
 
-Unit step, a frame of its own:
+<div class="mx-form" markdown="1">
 
 ```python
 mg = mapImage(img)
 ```
 
-Square pixels of 0.05:
+Unit step, a frame of its own.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mg = mapImage(img, dxy=0.05, name='bse')
 ```
 
-Rectangular pixels:
+Square pixels of 0.05.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mg = mapImage(img, dxy=(0.05, 0.1))
 ```
 
-A channel of a gridded map, the map along:
+Rectangular pixels.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mg = mapImage(ebsd.bc, ebsd, name='bcImg')
 ```
 
-An image on the grid of the map:
+A channel of a gridded map, the map along.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mg = mapImage(img, ebsd)
 ```
+
+An image on the grid of the map.
+
+</div>
+
+## Description
 
 A forescatter or backscatter image, a band contrast map or any other value per pixel,
 together with the part of the specimen each pixel covers, which makes an image and an EBSD
@@ -54,25 +76,21 @@ be square. An integer image is scaled to [0, 1].
 
 ## Input
 
-| | |
-|---|---|
 | `img` | array of rows x columns, or rows x columns x channels |
 | `ebsd` | EBSD, gridded and square, on the grid of the image |
 
-## Output
-
-| | |
-|---|---|
-| `mg` | mapImage |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `dxy` | `1.0` | the pixel size, one number or (dx, dy), for an image without a map |
 | `origin` | `None` | vector3d, the position of pixel (0, 0) |
 | `name` | `''` | an identifier, the property of the EBSD map an aligned image is written into |
 | `scanUnit` | `None` | the unit of the positions, by default the map's or 'um' |
+
+## Output
+
+| `mg` | mapImage |
 
 ## See also
 

@@ -15,29 +15,47 @@ as the principal directions of a stress or the polarisations of a wave
 
 ## Syntax
 
-Approximates a function of the directions:
+<div class="mx-form" markdown="1">
 
 ```python
 aF = S2AxisFieldHarmonic(lambda v: ..., cs, bandwidth=16)
 ```
 
-Fits axes given at the directions v:
+Approximates a function of the directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 aF = S2AxisFieldHarmonic(v, axes, bandwidth=16)
 ```
 
-Approximates a vector or axis field:
+Fits axes given at the directions v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 aF = S2AxisFieldHarmonic(vF)
 ```
 
-From the coefficients of the six components:
+Approximates a vector or axis field.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 aF = S2AxisFieldHarmonic(fhat, cs)
 ```
+
+From the coefficients of the six components.
+
+</div>
+
+## Description
 
 Since an axis has no sign, not the axis a but the six independent entries xx, xy, yy, xz,
 yz, zz of the symmetric matrix a a^T are expanded in spherical harmonics; evaluation
@@ -53,24 +71,20 @@ yz, zz, in MTEX's basis, the coefficients aF.fhat returns and S2FunHarmonic take
 
 ## Input
 
-| | |
-|---|---|
 | `fhat` | a function of vector3d returning axes, S2VectorField or S2AxisField, vector3d of directions, or the coefficient matrix |
 | `args` | the axes at the directions, and the crystalFrame or specimenFrame of the field |
 
-## Output
-
-| | |
-|---|---|
-| `aF` | S2AxisFieldHarmonic |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` |  | the largest harmonic degree; by default the preference 'defaultS2Bandwidth', for a field the field's |
 | `weights` |  | the quadrature weights of axes at scattered directions |
 | `symmetrise` |  | symmetrise the field under the group of its frame |
+
+## Output
+
+| `aF` | S2AxisFieldHarmonic |
 
 ## See also
 
@@ -78,8 +92,6 @@ yz, zz, in MTEX's basis, the coefficients aF.fhat returns and S2FunHarmonic take
 
 ## Members
 
-| | |
-|---|---|
 | [angle](S2AxisField.angle_py.html) | the angle between the axes of the field and a constant axis, or another field, as a function on the sphere |
 | [bandwidth](S2AxisFieldHarmonic.bandwidth_py.html) | the harmonic degree of the expansion |
 | [dot](S2AxisFieldHarmonic.dot_py.html) | the cosine of the angle to a constant axis, sqrt(x^T (a a^T) x), and to another field |

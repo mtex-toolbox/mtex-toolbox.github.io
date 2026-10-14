@@ -14,9 +14,13 @@ a name contained in the string, later entries first
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 findPointGroup(name)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/data/pointgroupnames.py#L39">source</a></font>
 {% endraw %}

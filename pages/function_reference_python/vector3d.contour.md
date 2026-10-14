@@ -16,9 +16,13 @@ contour(sF), contour(v), contour(v, data): contour lines
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 vector3d.contour(x, *args, **kw)
 ```
+
+</div>
 
 MATLAB's [vector3d.contour](vector3d.contour.html)
 

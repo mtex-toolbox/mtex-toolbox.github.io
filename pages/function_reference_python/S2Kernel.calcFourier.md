@@ -16,38 +16,44 @@ calcFourier
 
 ## Syntax
 
-Up to the bandwidth of the kernel, psi.A:
+<div class="mx-form" markdown="1">
 
 ```python
 A = psi.calcFourier()
 ```
 
-Up to the degree 64:
+Up to the bandwidth of the kernel, psi.A.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 A = psi.calcFourier(64)
 ```
+
+Up to the degree 64.
+
+</div>
+
+## Description
 
 The kernel is the series psi(t) = sum_n A_n P_n(t) of Legendre polynomials in the cosine t
 of the polar angle.
 
 ## Input
 
-| | |
-|---|---|
 | `psi` | S2Kernel |
-
-## Output
-
-| | |
-|---|---|
-| `A` | ndarray of L + 1 coefficients |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `L` | `None` | the largest degree, the bandwidth of the kernel when not given |
+
+## Output
+
+| `A` | ndarray of L + 1 coefficients |
 
 ## See also
 

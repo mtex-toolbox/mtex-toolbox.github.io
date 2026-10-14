@@ -15,36 +15,40 @@ the derivative of the bump kernel, zero wherever it exists; without an argument 
 
 ## Syntax
 
-Zeros of the shape of t:
+<div class="mx-form" markdown="1">
 
 ```python
 d = psi.grad(t)
 ```
 
-The zero kernel:
+Zeros of the shape of t.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 dpsi = psi.grad()
 ```
 
+The zero kernel.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `psi` | SO3BumpKernel |
 | `t` | ndarray of cosines cos(omega/2), or rotation |
 
-## Output
-
-| | |
-|---|---|
-| `d` | ndarray of zeros, or SO3Kernel without an argument |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `other` | `None` | a second rotation: the angle between t and it |
+
+## Output
+
+| `d` | ndarray of zeros, or SO3Kernel without an argument |
 
 ## See also
 

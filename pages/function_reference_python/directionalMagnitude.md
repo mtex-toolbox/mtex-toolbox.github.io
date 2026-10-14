@@ -14,29 +14,33 @@ on every index, T.directionalMagnitude(v); MATLAB's directionalMagnitude
 
 ## Syntax
 
-At the directions v:
+<div class="mx-form" markdown="1">
 
 ```python
 q = directionalMagnitude(T, v)
 ```
 
-The function on the sphere:
+At the directions v.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 q = directionalMagnitude(T)
 ```
 
+The function on the sphere.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `T` | tensor |
 | `v` | vector3d or Miller, the directions; left out for the function |
 
 ## Output
 
-| | |
-|---|---|
 | `q` | the magnitudes, or an S2FunHarmonic of the direction |
 
 ## See also
@@ -45,9 +49,13 @@ q = directionalMagnitude(T)
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 directionalMagnitude(T, v=None)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1613">source</a></font>
 {% endraw %}

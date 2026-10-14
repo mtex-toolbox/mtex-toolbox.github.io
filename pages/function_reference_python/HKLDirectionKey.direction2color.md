@@ -15,11 +15,17 @@ the colours of directions under the HKL key; MATLAB's HKLDirectionKey/direction2
 
 ## Syntax
 
-The colours of crystal directions:
+<div class="mx-form" markdown="1">
 
 ```python
 rgb = key.direction2color(h)
 ```
+
+The colours of crystal directions.
+
+</div>
+
+## Description
 
 Each direction is brought into the sector of the Laue group, red at its pole, green and
 blue along its two edges, blended linearly over the polar angle and the azimuth; for the
@@ -27,21 +33,17 @@ Laue group -1 three lobes of the upper hemisphere.
 
 ## Input
 
-| | |
-|---|---|
 | `h` | vector3d or Miller, the directions |
-
-## Output
-
-| | |
-|---|---|
-| `rgb` | an array of shape h.shape + (3,), RGB values in [0, 1] |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `gray` | `None` | taken for the calling form of the other keys and not used, as in MATLAB |
+
+## Output
+
+| `rgb` | an array of shape h.shape + (3,), RGB values in [0, 1] |
 
 ## See also
 

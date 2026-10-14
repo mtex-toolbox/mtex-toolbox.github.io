@@ -18,27 +18,45 @@ EBSD.gradient
 
 ## Syntax
 
-One sided differences:
+<div class="mx-form" markdown="1">
 
 ```python
 gX, gY = gradient(ebsd)
 ```
 
+One sided differences.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 gX, gY = gradient(ebsd, stencil='lattice') # least squares over the stencil of the lattice
 ```
 
-Least squares with the diagonals:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gX, gY = gradient(ebsd, stencil='full')
 ```
 
-The derivative along a direction of the specimen:
+Least squares with the diagonals.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gD = gradient(ebsd, xvector)
 ```
+
+The derivative along a direction of the specimen.
+
+</div>
+
+## Description
 
 The derivative is a vector of the left tangent space, the rotation vector of the step to
 the neighbour divided by its length, taken from the neighbours that are comparable: inside
@@ -56,23 +74,19 @@ off the plane of the map gives NaN.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD of one phase |
 | `direction` | vector3d of the specimen, or three coordinates; without it both axes |
 
-## Output
-
-| | |
-|---|---|
-| `gX, gY` | vector3d, the derivatives along the two axes of the plane of the map, of the shape of the map |
-| `gD` | vector3d, the derivative along direction |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `stencil` | `'oneSided'` | 'oneSided', 'lattice' ('1hop') or 'full', the neighbours it is taken from |
+
+## Output
+
+| `gX, gY` | vector3d, the derivatives along the two axes of the plane of the map, of the shape of the map |
+| `gD` | vector3d, the derivative along direction |
 
 ## See also
 

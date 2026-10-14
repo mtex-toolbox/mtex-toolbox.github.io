@@ -15,39 +15,65 @@ index advance along
 
 ## Syntax
 
-Row along y, col along x:
+<div class="mx-form" markdown="1">
 
 ```python
 gL = gridLayout()
 ```
 
-The directions stated:
+Row along y, col along x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gL = gridLayout(row, col)
 ```
 
-With a name:
+The directions stated.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gL = gridLayout(vector3d.X, -vector3d.Y, name='fsd')
 ```
 
-The two named layouts:
+With a name.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gL = gridLayout.columnMajor()
 ```
 
+The two named layouts.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 gL = gridLayout.rowMajor()
 ```
 
-The order a frame is drawn in:
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gL = gridLayout.assumedFor(fr)
 ```
+
+The order a frame is drawn in.
+
+</div>
+
+## Description
 
 An array is indexed [i, j]; which specimen directions the two indices advance along is not
 in the array and has to be stated. That is the layout, a relation between the array and a
@@ -58,22 +84,18 @@ layout, ebsd.layout says the one it is in.
 
 ## Input
 
-| | |
-|---|---|
 | `row` | vector3d, the direction the row index advances along |
 | `col` | vector3d, the direction the column index advances along |
 
-## Output
-
-| | |
-|---|---|
-| `gL` | gridLayout |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `name` | `''` | what the layout is called |
+
+## Output
+
+| `gL` | gridLayout |
 
 ## See also
 

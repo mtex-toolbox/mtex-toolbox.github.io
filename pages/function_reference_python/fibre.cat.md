@@ -16,35 +16,39 @@ the fibres joined into one list along an axis, MATLAB's [f1, f2]
 
 ## Syntax
 
-One after the other:
+<div class="mx-form" markdown="1">
 
 ```python
 f = cat(f1, f2)
 ```
 
-Side by side:
+One after the other.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = cat(f1, f2, axis=1)
 ```
 
+Side by side.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `fibres` | fibre, between the same frames |
-
-## Output
-
-| | |
-|---|---|
-| `f` | fibre |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `0` | the axis of the shape along which the fibres are joined |
+
+## Output
+
+| `f` | fibre |
 
 ## See also
 

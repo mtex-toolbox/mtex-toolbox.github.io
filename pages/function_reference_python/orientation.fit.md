@@ -17,17 +17,27 @@ sense; MATLAB's orientation.fit
 
 ## Syntax
 
-U in the crystal, v in the specimen frame:
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.fit(u, v, cs, ss)
 ```
 
-The pairs weighted:
+U in the crystal, v in the specimen frame.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ori = orientation.fit(u, v, cs, ss, weights=w)
 ```
+
+The pairs weighted.
+
+</div>
+
+## Description
 
 The rotation minimises the sum of w |ori * u - v|^2 over the pairs of normalised directions,
 by Horn's quaternion method. The frames are those
@@ -36,22 +46,18 @@ without frames the result is between the triclinic frame and the session's speci
 
 ## Input
 
-| | |
-|---|---|
 | `u, v` | vector3d or Miller, of one shape |
 | `frames` | the crystal frame, then the specimen frame or a second crystal frame |
 
-## Output
-
-| | |
-|---|---|
-| `ori` | orientation |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `weights` | `None` | a weight per pair; by default all one |
+
+## Output
+
+| `ori` | orientation |
 
 ## See also
 

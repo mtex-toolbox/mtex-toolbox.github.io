@@ -15,41 +15,67 @@ given axes
 
 ## Syntax
 
-By its international symbol:
+<div class="mx-form" markdown="1">
 
 ```python
 pg = symmetry('m-3m')
 ```
 
-By its Schoenflies symbol or an alias:
+By its international symbol.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pg = symmetry('D2')
 ```
 
-The point group of a space group:
+By its Schoenflies symbol or an alias.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pg = symmetry(spaceId=225)
 ```
 
-By its number in symmetry.pointGroups:
+The point group of a space group.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pg = symmetry(pointId=45)
 ```
 
-The monoclinic setting from the lattice angles:
+By its number in symmetry.pointGroups.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pg = symmetry('2', abg=[90*degree, 100*degree, 90*degree])
 ```
 
-The group the elements generate:
+The monoclinic setting from the lattice angles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 pg = symmetry(rotation.byAxisAngle(zvector, 90*degree))
 ```
+
+The group the elements generate.
+
+</div>
+
+## Description
 
 A group says nothing about where it acts: whether it describes a crystal or a specimen, and
 in which coordinate system, is the business of the frame carrying it, crystalFrame or
@@ -62,25 +88,21 @@ angles abg the unique axis is the one whose angle is not 90 degree, as MATLAB.
 
 ## Input
 
-| | |
-|---|---|
 | `name` | str, the Hermann-Mauguin or Schoenflies symbol, a lattice name or an alias such as 'orthotropic'; or rotation or orthogonalTransform, elements that generate the group; or a symmetry to copy; the triclinic group '1' when omitted |
 | `axes` | vector3d or an array (3, 3), the axes a, b, c the elements are written along; x, y, z when omitted |
 
-## Output
-
-| | |
-|---|---|
-| `pg` | symmetry, with pg.pointGroup its symbol, pg.rot its elements, pg.id its number |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `pointId` | `None` | the number of the group in symmetry.pointGroups, 1 to 47 |
 | `laueId` | `None` | the number of a Laue class, 1 to 11 |
 | `spaceId` | `None` | the number of a space group, 1 to 230, which gives its point group |
 | `abg` | `None` | the lattice angles alpha, beta, gamma in radians, which choose the unique axis of a monoclinic group |
+
+## Output
+
+| `pg` | symmetry, with pg.pointGroup its symbol, pg.rot its elements, pg.id its number |
 
 ## See also
 

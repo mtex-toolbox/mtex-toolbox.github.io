@@ -14,17 +14,27 @@ of the map
 
 ## Syntax
 
-The keys along z:
+<div class="mx-form" markdown="1">
 
 ```python
 axs = keyLegend(mP, ebsd)
 ```
 
-Along x, narrower:
+The keys along z.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 axs = keyLegend(mP, ebsd, ipfDirection=xvector, width=0.2)
 ```
+
+Along x, narrower.
+
+</div>
+
+## Description
 
 A map coloured by orientation draws these itself with legend=True. Every phase present
 gets the HSV key of its frame, titled by its mineral, one row each; a fundamental sector
@@ -33,24 +43,20 @@ its row, the upper hemisphere above the lower.
 
 ## Input
 
-| | |
-|---|---|
 | `mP` | mapPlot, the map plot beside which the keys go |
 | `x` | EBSD or grain2d, whose phases are shown |
 
-## Output
-
-| | |
-|---|---|
-| `axs` | list of the inset axes |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `ipfDirection` | `None` | vector3d, the specimen direction of the colouring; the keys, which live in crystal coordinates, are the same for every direction |
 | `width` | `0.28` | the width of an inset, as a fraction of the width of the map axes |
 | `resolution` | `None` | the mesh of a key in radians; by default from the size of the inset |
+
+## Output
+
+| `axs` | list of the inset axes |
 
 ## See also
 

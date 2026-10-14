@@ -16,9 +16,13 @@ the pointwise cross product with another field, a field of the same side
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3VectorFieldHarmonic.cross(self, w)
 ```
+
+</div>
 
 MATLAB's [SO3VectorFieldHarmonic.cross](SO3VectorFieldHarmonic.cross.html)
 

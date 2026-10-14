@@ -16,9 +16,13 @@ than penalised, so they stay exactly where they are and enter through the right 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 boundaryFilter.solveDirichlet(M, V, fixed)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L121">source</a></font>
 {% endraw %}

@@ -18,9 +18,13 @@ tensor into its specimen frame, without the specimen group
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.rotate(self, r)
 ```
+
+</div>
 
 MATLAB's [tensor.rotate](tensor.rotate.html)
 

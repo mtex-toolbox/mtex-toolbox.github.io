@@ -13,23 +13,37 @@ the antiderivative of a gradient field, the function of mean zero whose gradient
 
 ## Syntax
 
-The function, an SO3FunHarmonic:
+<div class="mx-form" markdown="1">
 
 ```python
 f = antiderivative(SO3VF)
 ```
 
-Its values at orientations x:
+The function, an SO3FunHarmonic.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 values = antiderivative(SO3VF, x)
 ```
 
-Without checking the field is a gradient:
+Its values at orientations x.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = antiderivative(SO3VF, conservative=True)
 ```
+
+Without checking the field is a gradient.
+
+</div>
+
+## Description
 
 The function is the inverse Laplacian of the divergence of the field, defined up to a
 constant, which is chosen to give mean zero. A field that is no gradient is refused unless
@@ -38,24 +52,20 @@ tol relative to its norm.
 
 ## Input
 
-| | |
-|---|---|
 | `SO3VF` | SO3VectorField, converted to its harmonic form |
 | `x` | orientation, where to evaluate the antiderivative |
 
-## Output
-
-| | |
-|---|---|
-| `f` | SO3FunHarmonic |
-| `values` | array, the values at x |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `conservative` | `False` | the field is known to be a gradient, so it is not checked |
 | `tol` | `0.0001` | the relative tolerance of the check |
+
+## Output
+
+| `f` | SO3FunHarmonic |
+| `values` | array, the values at x |
 
 ## See also
 

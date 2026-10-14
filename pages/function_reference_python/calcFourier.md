@@ -13,14 +13,16 @@ calcFourier(x, ...) is x.calcFourier(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 calcFourier(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [S1Kernel](S1Kernel.calcFourier_py.html) | the Fourier coefficients of the kernel, degrees -L . |
 | [S2Kernel](S2Kernel.calcFourier_py.html) | the Legendre coefficients A_0 . |
 | [SO3Kernel](SO3Kernel.calcFourier_py.html) | the Chebyshev coefficients A_0 . |

@@ -15,8 +15,6 @@ a distance between orientations that makes points repel each other
 
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](SO3RestrictedDistanceKernel.bandwidth_py.html) | the degree N the kernel is cut at |
 
 MATLAB's [SO3RestrictedDistanceKernel](SO3RestrictedDistanceKernel.html)

@@ -17,36 +17,40 @@ allow it; an open region is cut at a turn of nearly 180 degrees
 
 ## Syntax
 
-40 points along every edge:
+<div class="mx-form" markdown="1">
 
 ```python
 E = oR.edges()
 ```
 
-Coarser chains:
+40 points along every edge.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 E = oR.edges(points=5)
 ```
 
+Coarser chains.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `oR` | orientationRegion |
-
-## Output
-
-| | |
-|---|---|
-| `E` | list of (points, 3) arrays, the axis times the angle; empty when the sector of axes has caps |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `points` | `40` | the number of points on each edge |
 | `tol` | `1e-09` | the slack by which a parallel plane may miss the edge before it removes it |
+
+## Output
+
+| `E` | list of (points, 3) arrays, the axis times the angle; empty when the sector of axes has caps |
 
 ## See also
 

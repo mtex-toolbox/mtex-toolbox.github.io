@@ -16,9 +16,13 @@ the intersection of two groups, symmetry/disjoint
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 symmetry.disjoint(self, other)
 ```
+
+</div>
 
 MATLAB's [symmetry.disjoint](symmetry.disjoint.html)
 

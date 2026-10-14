@@ -16,9 +16,13 @@ the sum of kernels through values at orientations, MATLAB's SO3FunRBF.interpolat
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3FunRBF.interpolate(nodes, values, **kwargs)
 ```
+
+</div>
 
 MATLAB's [SO3FunRBF.interpolate](SO3FunRBF.interpolate.html)
 

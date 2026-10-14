@@ -16,9 +16,13 @@ the operators on the grid the zero range method leaves
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 MLSSolver.init(self)
 ```
+
+</div>
 
 MATLAB's [MLSSolver.init](MLSSolver.init.html)
 

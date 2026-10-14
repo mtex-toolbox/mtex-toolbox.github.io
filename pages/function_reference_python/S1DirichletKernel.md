@@ -14,8 +14,6 @@ the Dirichlet kernel on the circle, sum_(k = -n .. n) e^(ikx), of integral one
 
 ## Members
 
-| | |
-|---|---|
 | [bandwidth](S1DirichletKernel.bandwidth_py.html) | the degree n of the kernel |
 
 MATLAB's [S1DirichletKernel](S1DirichletKernel.html)

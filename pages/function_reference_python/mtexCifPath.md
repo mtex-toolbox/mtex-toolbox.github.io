@@ -14,9 +14,13 @@ the directory of the CIF files shipped with MTEX, where crystalFrame.load looks 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 mtexCifPath()
 ```
+
+</div>
 
 MATLAB's [mtexCifPath](mtexCifPath.html)
 

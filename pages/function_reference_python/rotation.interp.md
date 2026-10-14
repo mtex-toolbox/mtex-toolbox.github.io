@@ -17,44 +17,58 @@ values at the rotations, by the function spaces above this layer, MATLAB's rotat
 
 ## Syntax
 
-A sum of kernels about the nodes:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = ori.interp(values)
 ```
 
-A density by a given kernel:
+A sum of kernels about the nodes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = ori.interp(values, halfwidth=10*degree, density=True)
 ```
 
-In harmonic form:
+A density by a given kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = ori.interp(values, 'harmonic', bandwidth=16)
 ```
 
-A Bingham distribution:
+In harmonic form.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3F = ori.interp(values, 'bingham')
 ```
 
+A Bingham distribution.
+
+</div>
+
+## Description
+
 The method is the flag, and every keyword goes on to it; interpSO3 lists them.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | rotation or orientation, the nodes |
 | `values` | the values at the nodes, or vectors for a vector field |
 | `flags` | 'harmonic' or 'bingham' |
 
 ## Output
 
-| | |
-|---|---|
 | `SO3F` | SO3FunRBF, SO3FunHarmonic, SO3FunBingham or a vector field |
 
 ## See also
@@ -63,9 +77,13 @@ The method is the flag, and every keyword goes on to it; interpSO3 lists them.
 
 ## Signature
 
+<div class="mx-form" markdown="1">
+
 ```python
 rotation.interp(self, values=None, *flags, **kwargs)
 ```
+
+</div>
 
 MATLAB's [rotation.interp](rotation.interp.html)
 

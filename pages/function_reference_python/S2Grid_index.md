@@ -15,23 +15,37 @@ per ring, whose nearest and radius searches use that structure
 
 ## Syntax
 
-Nearly equidistant directions:
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = equispacedS2Grid(resolution=5*degree)
 ```
 
-A spherical cap:
+Nearly equidistant directions.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = equispacedS2Grid(resolution=5*degree, maxTheta=70*degree)
 ```
 
-From its rings:
+A spherical cap.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 S2G = S2Grid(S2G.thetaGrid, S2G.rhoGrid, resolution=5*degree)
 ```
+
+From its rings.
+
+</div>
+
+## Description
 
 The difference to a plain list of vector3d is that the grid knows its rings, so finding the
 grid points closest to a direction, or within a radius of it, searches the ladders instead
@@ -41,24 +55,20 @@ matrix of vector3d, as their layout is the matrix.
 
 ## Input
 
-| | |
-|---|---|
 | `theta` | S1Grid, the ladder of polar angles of the rings |
 | `rho` | a list of S1Grid, the azimuths of every ring |
 
-## Output
-
-| | |
-|---|---|
-| `S2G` | S2Grid |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `frame` |  | the frame of the directions |
 | `resolution` |  | the resolution the grid was built with, in radians |
 | `antipodal` |  | the directions are axes |
+
+## Output
+
+| `S2G` | S2Grid |
 
 ## See also
 
@@ -66,8 +76,6 @@ matrix of vector3d, as their layout is the matrix.
 
 ## Members
 
-| | |
-|---|---|
 | [cat](S2Grid.cat_py.html) | the list of the operands, MATLAB's [a, b] |
 | [cross](S2Grid.cross_py.html) | the cross product of two plane normals is a lattice direction and the one of two directions a plane normal, so the indices switch sides |
 | [find](S2Grid.find_py.html) | the nearest grid point of every direction and its angle, or with eps the sparse matrices of the points within eps and their angles |

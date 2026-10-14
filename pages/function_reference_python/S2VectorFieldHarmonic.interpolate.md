@@ -16,9 +16,13 @@ the least squares fit to vectors at directions
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2VectorFieldHarmonic.interpolate(nodes, values, **kwargs)
 ```
+
+</div>
 
 MATLAB's [S2VectorFieldHarmonic.interpolate](S2VectorFieldHarmonic.interpolate.html)
 

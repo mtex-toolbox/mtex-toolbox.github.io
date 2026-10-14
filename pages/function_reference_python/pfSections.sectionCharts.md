@@ -16,9 +16,13 @@ hemisphere when h1 has a symmetric equivalent opposite it
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 pfSections.sectionCharts(self, k)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L473">source</a></font>
 {% endraw %}

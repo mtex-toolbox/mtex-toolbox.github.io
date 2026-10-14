@@ -16,9 +16,13 @@ whether each direction v lies in the triangle t given for it
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2Triangulation.checkInside(self, v, t)
 ```
+
+</div>
 
 MATLAB's [S2Triangulation.checkInside](S2Triangulation.checkInside.html)
 

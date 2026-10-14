@@ -16,9 +16,13 @@ oS.plot(odf), oS.plot(ori), and oS.plot(values, 'smooth') of values on makeGrid'
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 ODFSections.plot(self, x, *args, **kwargs)
 ```
+
+</div>
 
 MATLAB's [ODFSections.plot](ODFSections.plot.html)
 

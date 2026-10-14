@@ -15,29 +15,47 @@ frame cs, MATLAB's CSL
 
 ## Syntax
 
-The twin of a cubic lattice:
+<div class="mx-form" markdown="1">
 
 ```python
 mori = CSL(3, cs)
 ```
 
-Several orders at once:
+The twin of a cubic lattice.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = CSL([3, 5, 7], cs)
 ```
 
-Of the lattice centred I:
+Several orders at once.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = CSL(5, cs, 'I')
 ```
 
-Near coincidences within a misfit of the metric:
+Of the lattice centred I.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mori = CSL(7, cs, delta=0.01)
 ```
+
+Near coincidences within a misfit of the metric.
+
+</div>
+
+## Description
 
 The misorientations are from cs to cs with grain exchange, ascending in sigma and then in
 angle: CSL(3, cs) is the twin of a cubic lattice. Any lattice is searched, a coincidence being
@@ -54,23 +72,19 @@ axis of its table, is not this one.
 
 ## Input
 
-| | |
-|---|---|
 | `sigma` | the order, an integer or a list of them |
 | `CS` | crystalFrame, whose lattice is searched |
 | `args` | a letter P, I, F, A, B, C or R, the centring of the lattice instead of cs.centering |
 
-## Output
-
-| | |
-|---|---|
-| `mori` | orientation from cs to cs, antipodal, one per coincidence class |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `delta` | `0` | the relative misfit of the metric within which rational ratios replace it; 0 keeps the metric as it is |
+
+## Output
+
+| `mori` | orientation from cs to cs, antipodal, one per coincidence class |
 
 ## See also
 

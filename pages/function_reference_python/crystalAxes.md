@@ -14,23 +14,37 @@ calcAxis, what crystalFrame builds its axes with
 
 ## Syntax
 
-X||a*, Z||c:
+<div class="mx-form" markdown="1">
 
 ```python
 axes = crystalAxes(lattice, abc, abg)
 ```
 
-Another alignment:
+X||a*, Z||c.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 axes = crystalAxes(lattice, abc, abg, alignment=['X||a', 'Z||c*'])
 ```
 
-The vendor's alignment, turned:
+Another alignment.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 axes = crystalAxes(lattice, abc, abg, alignment=['EDAX'], rotate=rot)
 ```
+
+The vendor's alignment, turned.
+
+</div>
+
+## Description
 
 The axes are built from the metric with a* along x and c along z, the default alignment,
 and then turned into the alignment asked for. An alignment names the lattice direction a
@@ -45,26 +59,22 @@ them; a cell the lattice does not allow is refused.
 
 ## Input
 
-| | |
-|---|---|
 | `lattice` | latticeType, the lattice system |
 | `abc` | the lengths a, b, c of the cell |
 | `abg` | the angles alpha, beta, gamma of the cell, in radians; by default those of the lattice |
 
-## Output
-
-| | |
-|---|---|
-| `axes` | a (3, 3) array, the axes a, b, c in Cartesian coordinates, one per row |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `alignment` | `()` | a list of strings like 'X\|\|a', 'Z\|\|c*' or a vendor's name |
 | `rotate` | `None` | a rotation, or a 3 x 3 matrix, applied to the aligned axes |
 | `uniqueAxis` | `1` | the index of the unique axis of a monoclinic lattice, 0 to 2 for a to c |
 | `check` | `True` | refuse a cell the lattice does not allow: unequal lengths a and b of a trigonal, hexagonal or tetragonal lattice, unequal lengths of a cubic one, angles not 90 degree with the unique axis of a monoclinic one |
+
+## Output
+
+| `axes` | a (3, 3) array, the axes a, b, c in Cartesian coordinates, one per row |
 
 ## See also
 

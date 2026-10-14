@@ -17,39 +17,45 @@ MATLAB's eq, T1 == T2
 
 ## Syntax
 
-Equal up to rounding:
+<div class="mx-form" markdown="1">
 
 ```python
 T1.isclose(T2)
 ```
 
-Every coefficient within 1e-3:
+Equal up to rounding.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 T1.isclose(T2, atol=1e-3)
 ```
+
+Every coefficient within 1e-3.
+
+</div>
+
+## Description
 
 The comparison is that of np.allclose, |a - b| <= atol + rtol |b|, over all coefficients;
 one answer for the whole list. T1 == T2 is the exact equality, of the frame too.
 
 ## Input
 
-| | |
-|---|---|
 | `T1, T2` | tensor |
-
-## Output
-
-| | |
-|---|---|
-| `tf` | bool |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `rtol` | `1e-08` | the tolerance relative to the coefficients of T2 |
 | `atol` | `0.0` | the absolute tolerance |
+
+## Output
+
+| `tf` | bool |
 
 ## See also
 

@@ -14,8 +14,6 @@ the elastic stiffness C, sigma = C : eps; a 6 x 6 Voigt matrix in GPa or the ful
 
 ## Members
 
-| | |
-|---|---|
 | [bulkModulus](stiffnessTensor.bulkModulus_py.html) | the bulk modulus of an isotropic polycrystal, the Voigt and Reuss bounds |
 | [ChristoffelTensor](stiffnessTensor.ChristoffelTensor_py.html) | ChristoffelTensor(C, n): E_ik = C_ijkl n_j n_l of a stiffness and a direction |
 | [colon](stiffnessTensor.colon_py.html) | the double contraction A : B, the last two indices of A against the first two of B, MATLAB's A:B |

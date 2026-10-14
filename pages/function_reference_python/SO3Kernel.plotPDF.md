@@ -15,59 +15,97 @@ measured PoleFigure; MATLAB's plotPDF
 
 ## Syntax
 
-The pole figures of an ODF, h a list of Miller:
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, h)
 ```
 
-One pole figure, the superposition of h:
+The pole figures of an ODF, h a list of Miller.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(odf, h, superposition=[0.5, 0.5])
 ```
 
-The poles of orientations as markers:
+One pole figure, the superposition of h.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(ori, h)
 ```
 
-The markers coloured by a value per orientation:
+The poles of orientations as markers.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(ori, ori.angle(), h)
 ```
 
-The density of the poles, filled contours:
+The markers coloured by a value per orientation.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(ori, h, contourf=True, antipodal=True)
 ```
 
-At most 50 orientations drawn:
+The density of the poles, filled contours.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(ori, h, points=50)
 ```
 
-Every orientation drawn:
+At most 50 orientations drawn.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(ori, h, all=True)
 ```
 
-A fibre as the curve of its poles:
+Every orientation drawn.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(f, Miller(1, 0, 0, f.CS))
 ```
 
-A measured pole figure:
+A fibre as the curve of its poles.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotPF(pf)
 ```
+
+A measured pole figure.
+
+</div>
+
+## Description
 
 A pole figure shows where the crystal direction h, with every equivalent of it, points in
 the specimen. For an ODF it is the density of these poles, the Radon transform odf.radon(h),
@@ -88,8 +126,6 @@ function its harmonic expansion gives.
 
 ## Input
 
-| | |
-|---|---|
 | `odf` | SO3Fun, an ODF |
 | `ori` | orientation, or a fibre |
 | `data` | a value or an RGB colour per orientation, optional |
@@ -98,7 +134,7 @@ function its harmonic expansion gives.
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `points` | `None` | the number of orientations drawn at most, a random selection |
 | `all` | `False` | draw every orientation, however many |

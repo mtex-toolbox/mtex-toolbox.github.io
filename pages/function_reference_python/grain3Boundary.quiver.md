@@ -17,23 +17,37 @@ grain3Boundary.quiver and grain3d.quiver
 
 ## Syntax
 
-The face normals in red:
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(gB, gB.N, color='r')
 ```
 
-Axes, twice as long:
+The face normals in red.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(gB, gB.N, antipodal=True, autoScaleFactor=2)
 ```
 
-A crystal direction per grain:
+Axes, twice as long.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 quiver(grains, grains.meanOrientation * Miller(0, 0, 1, cs))
 ```
+
+A crystal direction per grain.
+
+</div>
+
+## Description
 
 A grain's arrow is as long as its direction, a face's a fifth of the face's diameter,
 both times autoScaleFactor. Antipodal directions, axes, are drawn as lines through the
@@ -44,20 +58,12 @@ page.
 
 ## Input
 
-| | |
-|---|---|
 | `x` | grain3d or grain3Boundary |
 | `d` | vector3d, one direction per grain or face |
 
-## Output
-
-| | |
-|---|---|
-| `fig` | mtexFigure |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `color` | `(0.0, 0.0, 1.0)` | the RGB colour of the arrows, one for all or one per arrow |
 | `autoScaleFactor` | `1.0` | the factor of the arrow lengths |
@@ -66,6 +72,10 @@ page.
 | `antipodal` | `None` | draw axes, lines without heads; by default d.antipodal |
 | `how2plot` | `None` | the plottingConvention of the view, by default plottingConvention.default3D |
 | `figSize` | `None` | the size of a new figure, 'small', 'normal', 'large', ..., or (width, height) in inches |
+
+## Output
+
+| `fig` | mtexFigure |
 
 ## See also
 

@@ -13,14 +13,16 @@ extent(x, ...) is x.extent(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 extent(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.extent_py.html) | the bounds of the measured positions, [xmin, xmax, ymin, ymax] |
 | [EBSD3](EBSD3.extent_py.html) | the bounding box of the voxels, [xmin, xmax, ymin, ymax, zmin, zmax], the padding left out |
 | [EBSDFileInfo](EBSDFileInfo.extent_py.html) | the lengths the grid spans along its axes, in the scan unit |

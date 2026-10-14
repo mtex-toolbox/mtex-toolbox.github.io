@@ -16,15 +16,23 @@ the length of the vectors
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 n = norm(v)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 vector3d.norm(self)
 ```
+
+</div>
 
 MATLAB's [vector3d.norm](vector3d.norm.html)
 

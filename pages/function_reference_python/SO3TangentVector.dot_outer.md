@@ -16,9 +16,13 @@ the inner product with tangent vectors at the same reference, brought to this si
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 SO3TangentVector.dot_outer(self, other, **kwargs)
 ```
+
+</div>
 
 MATLAB's [SO3TangentVector.dot_outer](SO3TangentVector.dot_outer.html)
 

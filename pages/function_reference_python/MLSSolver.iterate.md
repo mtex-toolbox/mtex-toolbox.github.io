@@ -17,9 +17,13 @@ transforms between them
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 MLSSolver.iterate(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L430">source</a></font>
 {% endraw %}

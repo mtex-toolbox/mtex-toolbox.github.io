@@ -17,29 +17,47 @@ closest pair; MATLAB's fibre.angle
 
 ## Syntax
 
-The angle of orientations to the fibre:
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(f, ori)
 ```
 
-Ignore the symmetric equivalents:
+The angle of orientations to the fibre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(f, ori, symmetry=False)
 ```
 
-And the orientations on the fibre:
+Ignore the symmetric equivalents.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega, oriF = angle(f, ori, return_nearest=True)
 ```
 
-The angle between two fibres:
+And the orientations on the fibre.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 omega = angle(f1, f2)
 ```
+
+The angle between two fibres.
+
+</div>
+
+## Description
 
 The angle of an orientation to the fibre h || r is the angle between ori * h and r, the least
 over the crystal symmetric equivalents of h and the specimen symmetric ones of r. With
@@ -48,24 +66,20 @@ taken as the full fibre, its ends o1 and o2 do not count.
 
 ## Input
 
-| | |
-|---|---|
 | `f` | fibre, a single one |
 | `ori` | orientation, or a fibre |
 
-## Output
-
-| | |
-|---|---|
-| `omega` | the angles, of the shape of ori |
-| `oriF` | the orientations on the fibre nearest ori, which turn the closest image of h onto r (return_nearest) |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `symmetry` | `True` | take the least over the symmetric equivalents; False compares h and r only |
 | `return_nearest` | `False` | also return oriF, MATLAB's second output; not with a fibre |
+
+## Output
+
+| `omega` | the angles, of the shape of ori |
+| `oriF` | the orientations on the fibre nearest ori, which turn the closest image of h onto r (return_nearest) |
 
 ## See also
 

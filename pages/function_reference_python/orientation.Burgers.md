@@ -17,15 +17,23 @@ from the child
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 p2c = orientation.Burgers(csBeta, csAlpha)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 orientation.Burgers(csParent, csChild)
 ```
+
+</div>
 
 ## Used on
 

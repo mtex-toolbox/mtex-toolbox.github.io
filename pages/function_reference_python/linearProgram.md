@@ -13,17 +13,27 @@ the minimiser of a linear program in standard form, min c.x under A x = b, x >= 
 
 ## Syntax
 
-The solution, None when there is none:
+<div class="mx-form" markdown="1">
 
 ```python
 x = linearProgram(c, A, b)
 ```
 
-With its status, pivot count and residual:
+The solution, None when there is none.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 res = linearProgram(c, A, b, diagnostics=True)
 ```
+
+With its status, pivot count and residual.
+
+</div>
+
+## Description
 
 A scaled two phase simplex with Bland's rule, the kind of program the Taylor model solves
 for every strain: phase one finds a feasible vertex on artificial variables, every row scaled to unit
@@ -34,26 +44,22 @@ entry of |A x - b| relative to max(1, |b|).
 
 ## Input
 
-| | |
-|---|---|
 | `c` | the cost vector, n numbers |
 | `A` | the m x n matrix of the constraints |
 | `b` | the right hand side, m numbers |
 
-## Output
-
-| | |
-|---|---|
-| `x` | the minimiser, n numbers, or None |
-| `res` | LinearProgramResult |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `tol` | `1e-09` | the tolerance below which a reduced cost or a pivot counts as zero |
 | `maxIter` | `10000` | the largest number of pivots |
 | `diagnostics` | `False` | return a LinearProgramResult instead of the bare solution |
+
+## Output
+
+| `x` | the minimiser, n numbers, or None |
+| `res` | LinearProgramResult |
 
 ## See also
 

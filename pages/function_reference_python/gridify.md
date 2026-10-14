@@ -13,14 +13,16 @@ gridify(x, ...) is x.gridify(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 gridify(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [EBSD](EBSD.gridify_py.html) | the same map with its arrays in map shape, the missing cells padding |
 | [EBSD3](EBSD3.gridify_py.html) | a list of voxels put back onto the (n1, n2, n3) array of its lattice |
 

@@ -17,35 +17,39 @@ functions along that axis of a list
 
 ## Syntax
 
-The integral, one per function of a list:
+<div class="mx-form" markdown="1">
 
 ```python
 value = sum(sF)
 ```
 
-The pointwise sum along the first axis:
+The integral, one per function of a list.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 sF = sum(sF, axis=0)
 ```
 
+The pointwise sum along the first axis.
+
+</div>
+
 ## Input
 
-| | |
-|---|---|
 | `sF` | S2FunHarmonic |
-
-## Output
-
-| | |
-|---|---|
-| `value` | float, or an array of the shape of the list; with an axis S2FunHarmonic |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `axis` | `None` | the axis of the list along which the functions are summed |
+
+## Output
+
+| `value` | float, or an array of the shape of the list; with an axis S2FunHarmonic |
 
 ## See also
 

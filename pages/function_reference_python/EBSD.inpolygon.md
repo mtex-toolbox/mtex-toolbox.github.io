@@ -16,27 +16,43 @@ the mask of the measurements inside a rectangle [x, y, w, h] or a polygon (N, 2)
 
 ## Syntax
 
-By a rectangle:
+<div class="mx-form" markdown="1">
 
 ```python
 ind = ebsd.inpolygon([xmin, ymin, dx, dy])
 ```
 
-By a polygon:
+By a rectangle.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 ind = inpolygon(ebsd, [[x1, y1], [x2, y2], [x3, y3]])
 ```
 
+By a polygon.
+
+</div>
+
+<div class="mx-form" markdown="1">
+
 ```python
 ebsd = ebsd[ind]
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 EBSD.inpolygon(self, region)
 ```
+
+</div>
 
 MATLAB's [EBSD.inpolygon](EBSD.inpolygon.html)
 

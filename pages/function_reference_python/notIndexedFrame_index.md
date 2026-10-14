@@ -14,8 +14,6 @@ group or colour
 
 ## Members
 
-| | |
-|---|---|
 | [sibling](notIndexedFrame.sibling_py.html) | the frame itself: a not indexed frame has no group to change |
 
 ## Used on

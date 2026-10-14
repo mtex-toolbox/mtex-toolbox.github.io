@@ -13,14 +13,16 @@ laplace(x, ...) is x.laplace(...), the method of the object passed
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 laplace(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [S2FunHarmonic](S2FunHarmonic.laplace_py.html) | the Laplace-Beltrami operator applied to the function, the degree l scaled by -l(l+1) |
 | [SO3FunHarmonic](SO3FunHarmonic.laplace_py.html) | the Laplace-Beltrami operator applied to the function, degree n scaled by -n(n+1) |
 

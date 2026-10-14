@@ -16,9 +16,13 @@ the forward difference, backwards at the last voxel, NaN across a grain boundary
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD3.gradientDim(ebsd, dim)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/intragranular3d.py#L38">source</a></font>
 {% endraw %}

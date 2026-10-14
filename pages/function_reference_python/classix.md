@@ -14,17 +14,27 @@ X, counted from zero
 
 ## Syntax
 
-Every row its cluster:
+<div class="mx-form" markdown="1">
 
 ```python
 labels = classix(X, radius)
 ```
 
-No cluster below 10 points, small groups kept apart:
+Every row its cluster.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 labels = classix(X, radius, minPts=10, mergeTiny=False)
 ```
+
+No cluster below 10 points, small groups kept apart.
+
+</div>
+
+## Description
 
 The data are centred, scaled by their median norm and sorted along their first principal
 axis. In that order every point not yet grouped starts a group of the points within the
@@ -34,24 +44,20 @@ the nearest group of a large enough cluster.
 
 ## Input
 
-| | |
-|---|---|
 | `X` | ndarray (n, d), a point per row; a vector is a column |
 | `radius` | the radius of the groups, in the scaled coordinates |
 
-## Output
-
-| | |
-|---|---|
-| `labels` | ndarray of n ints, the cluster of every row counted from zero |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `minPts` | `1` | the smallest cluster; smaller ones are dissolved into their neighbours |
 | `mergeScale` | `1.5` | groups whose centres are closer than mergeScale times the radius are merged |
 | `mergeTiny` | `True` | whether groups of fewer than minPts points take part in the merging |
+
+## Output
+
+| `labels` | ndarray of n ints, the cluster of every row counted from zero |
 
 ## References
 

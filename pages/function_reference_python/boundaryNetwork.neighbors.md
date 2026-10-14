@@ -15,9 +15,13 @@ the neighbours of vertex i, indices into the network's vertices
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 boundaryNetwork.neighbors(self, i)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L86">source</a></font>
 {% endraw %}

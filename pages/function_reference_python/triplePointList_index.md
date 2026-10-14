@@ -15,15 +15,17 @@ grains, their phases, the three boundary segments and the angles between them
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tP = grains.triplePoints
 tP('Iron bcc', 'Iron bcc', 'Iron bcc')
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [allV](triplePointList.allV_py.html) | the positions of the triple points as framed points of the specimen |
 | [hasPhase](triplePointList.hasPhase_py.html) | the points with the phases named among their three grains, a name repeated asking for that many |
 | [isempty](triplePointList.isempty_py.html) | whether the list holds no triple point |

@@ -17,9 +17,13 @@ four tensor is diagonalised in its Voigt matrix
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.eig(self)
 ```
+
+</div>
 
 MATLAB's [tensor.eig](tensor.eig.html)
 

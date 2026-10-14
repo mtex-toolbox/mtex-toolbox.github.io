@@ -15,29 +15,47 @@ exactly equivariant
 
 ## Syntax
 
-From centres, weight vectors and a kernel:
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldRBF(center, weights, psi)
 ```
 
-In the right tangent space, the default kernel:
+From centres, weight vectors and a kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldRBF(center, weights, None, 'right')
 ```
 
-Fitted through tangent vectors t:
+In the right tangent space, the default kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldRBF(t, kernel=psi)
 ```
 
-Another field fitted on a grid:
+Fitted through tangent vectors t.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3VF = SO3VectorFieldRBF(F, resolution=10*degree)
 ```
+
+Another field fitted on a grid.
+
+</div>
+
+## Description
 
 The field is the sum over the centres of the kernel at the misorientation to the centre
 times the centre's weight vector, summed over the symmetric equivalents so that it is
@@ -49,24 +67,20 @@ MATLAB stores the three components as SO3FunRBF; the weights here are one vector
 
 ## Input
 
-| | |
-|---|---|
 | `center` | orientation, the centres; or an SO3TangentVector or SO3VectorField to fit |
 | `weights` | (n, 3) array, one weight vector per centre |
 | `psi` | SO3Kernel, a de la Vallee Poussin kernel of halfwidth 10 degree unless given |
 
-## Output
-
-| | |
-|---|---|
-| `SO3VF` | SO3VectorFieldRBF |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `kernel` | `None` | the kernel of a fit |
 | `resolution` | `None` | the grid spacing of the fit of another field, 5 degree unless given |
+
+## Output
+
+| `SO3VF` | SO3VectorFieldRBF |
 
 ## See also
 

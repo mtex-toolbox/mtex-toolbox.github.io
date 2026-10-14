@@ -17,9 +17,13 @@ symmetric
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 velocityGradientTensor.polar(self)
 ```
+
+</div>
 
 MATLAB's [velocityGradientTensor.polar](velocityGradientTensor.polar.html)
 

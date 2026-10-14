@@ -16,9 +16,13 @@ reweighting the sparse system until nothing moves, the fixed vertices kept
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 huberFilter.smooth(self, V, net, h)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L241">source</a></font>
 {% endraw %}

@@ -15,35 +15,57 @@ the Miller indices of a crystal direction in brackets, as text
 
 ## Syntax
 
-{111}, <uvw> where the frame has symmetry, else (111), [uvw]:
+<div class="mx-form" markdown="1">
 
 ```python
 s = m.char()
 ```
 
-In another convention: 'hkl', 'hkil', 'uvw', 'UVTW':
+{111}, <uvw> where the frame has symmetry, else (111), [uvw].
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = m.char('uvw')
 ```
 
-One plane or direction, (hkl) or [uvw]:
+In another convention: 'hkl', 'hkil', 'uvw', 'UVTW'.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = m.char(family=False)
 ```
 
-As mathematics, a bar over the negative indices:
+One plane or direction, (hkl) or [uvw].
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = m.char('LaTex')
 ```
 
-A minus sign instead of the bar:
+As mathematics, a bar over the negative indices.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 s = m.char(utf8=False)
 ```
+
+A minus sign instead of the bar.
+
+</div>
+
+## Description
 
 A point group makes the indices stand for the whole symmetrically equivalent set, so they
 are written in the family brackets {hkl} and <uvw>, while the trivial group leaves one plane
@@ -53,23 +75,19 @@ no_scopes and commasep are not taken.
 
 ## Input
 
-| | |
-|---|---|
 | `m` | vector3d, in a crystal frame for the indices |
-
-## Output
-
-| | |
-|---|---|
-| `s` | str |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `style` | `None` | the convention, 'hkl', 'hkil', 'uvw', 'UVTW' or 'xyz', or 'LaTex'; by default the display's |
 | `utf8` | `None` | a negative index as a digit with a bar over it rather than a minus sign; by default the preference 'UTF8Output' |
 | `family` | `None` | the family brackets {hkl} and <uvw>; by default where the frame has symmetry |
+
+## Output
+
+| `s` | str |
 
 ## See also
 

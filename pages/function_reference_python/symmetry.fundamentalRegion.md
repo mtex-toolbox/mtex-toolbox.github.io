@@ -17,45 +17,55 @@ of the identity
 
 ## Syntax
 
-Of orientations:
+<div class="mx-form" markdown="1">
 
 ```python
 oR = cs.sym.fundamentalRegion()
 ```
 
-Of misorientations:
+Of orientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oR = cs.sym.fundamentalRegion(cs.sym)
 ```
 
-A misorientation and its inverse as one:
+Of misorientations.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oR = cs.sym.fundamentalRegion(cs.sym, antipodal=True)
 ```
+
+A misorientation and its inverse as one.
+
+</div>
+
+## Description
 
 The orientations nearer the identity than any of their equivalents. The frames are
 built from the groups, so cs.fundamentalRegion() on the frame is the usual call.
 
 ## Input
 
-| | |
-|---|---|
 | `pg` | symmetry |
 | `other` | symmetry, the second group, by default that of the default specimen frame |
 
-## Output
-
-| | |
-|---|---|
-| `oR` | orientationRegion |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `antipodal` | `False` | identify every misorientation with its inverse |
+
+## Output
+
+| `oR` | orientationRegion |
 
 ## See also
 

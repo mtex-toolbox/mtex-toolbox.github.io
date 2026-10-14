@@ -16,29 +16,47 @@ the tangent vector pointing from the reference, the identity by default, to this
 
 ## Syntax
 
-The rotation vector at the identity:
+<div class="mx-form" markdown="1">
 
 ```python
 t = log(rot)
 ```
 
-The tangent vector at a reference:
+The rotation vector at the identity.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 t = log(rot, rotRef)
 ```
 
-In the frame of the reference's crystal:
+The tangent vector at a reference.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 t = log(rot, rotRef, side='right')
 ```
 
-The side alone, at the identity:
+In the frame of the reference's crystal.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 t = log(rot, 'right')
 ```
+
+The side alone, at the identity.
+
+</div>
+
+## Description
 
 The logarithmic map: the vector, of length the rotational angle, whose exponential at the
 reference gives the rotation. On the left side the vector is that of rot * inv(rotRef),
@@ -47,22 +65,18 @@ orientation.log reduces the pair by the symmetry first.
 
 ## Input
 
-| | |
-|---|---|
 | `rot` | rotation |
 | `ref` | rotation, the reference, or 'left' or 'right' for the side alone |
 
-## Output
-
-| | |
-|---|---|
-| `t` | SO3TangentVector at the reference |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `side` | `'left'` | 'left' or 'right', the side the tangent vector is taken on |
+
+## Output
+
+| `t` | SO3TangentVector at the reference |
 
 ## See also
 

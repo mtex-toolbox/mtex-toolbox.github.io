@@ -16,9 +16,13 @@ the function rotated, f(rot^-1 v); rot * f is the same
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S2FunHarmonic.rotate(self, rot)
 ```
+
+</div>
 
 MATLAB's [S2FunHarmonic.rotate](S2FunHarmonic.rotate.html)
 

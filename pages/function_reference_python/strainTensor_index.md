@@ -16,6 +16,8 @@ one, 'Euler', MATLAB's strainTensor(M, 'type', 'Euler'), and is kept by everythi
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 eps = strainTensor(M)
 eps = strainTensor(M, cs)
@@ -24,10 +26,10 @@ eps = strainTensor(M, type='Euler')
 eps.type
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [axisRatios](strainTensor.axisRatios_py.html) | the differences of the principal values, largest first |
 | [calcTaylor](strainTensor.calcTaylor_py.html) | the Taylor factor, the shears of the slip systems and the plastic spin of a strain the crystal accommodates by slip alone |
 | [deviatoricStrain](strainTensor.deviatoricStrain_py.html) | the deviatoric part, the tensor less a third of its trace on the diagonal |

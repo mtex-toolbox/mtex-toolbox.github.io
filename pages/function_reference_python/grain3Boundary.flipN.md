@@ -16,17 +16,27 @@ grain3Boundary
 
 ## Syntax
 
-Every face:
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.flipN()
 ```
 
-The faces between grains 1 and 2:
+Every face.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gB = gB.flipN(gB.hasGrain(1, 2))
 ```
+
+The faces between grains 1 and 2.
+
+</div>
+
+## Description
 
 The corners of a face are put in the reverse order, so its normal gB.N points the other
 way; a face selected twice is turned twice. The sides, grainId and phaseId, stay; flip
@@ -34,21 +44,17 @@ exchanges those. Unlike MATLAB, which turns only triangulated faces, any polygon
 
 ## Input
 
-| | |
-|---|---|
-| `gB` | grain3Boundary |
-
-## Output
-
-| | |
-|---|---|
 | `gB` | grain3Boundary |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `sel` | `None` | the faces to turn, a boolean mask or indices; by default every face |
+
+## Output
+
+| `gB` | grain3Boundary |
 
 ## See also
 

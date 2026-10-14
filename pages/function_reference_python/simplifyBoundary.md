@@ -13,14 +13,16 @@ simplifyBoundary(x, ...) is x.simplifyBoundary(...), the method of the object pa
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 simplifyBoundary(x, *args, **kwargs)
 ```
 
+</div>
+
 ## Methods it calls
 
-| | |
-|---|---|
 | [grain2d](grain2d.simplifyBoundary_py.html) | the grains with the vertices of their boundary that carry no shape dropped, those whose removal moves the boundary by less than epsilon, the inner boundary kept on it |
 
 ## Used on

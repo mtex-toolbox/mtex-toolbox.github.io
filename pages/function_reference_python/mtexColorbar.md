@@ -15,47 +15,63 @@ the figure has bars; MATLAB's mtexColorbar
 
 ## Syntax
 
-A bar per axes, or one for all:
+<div class="mx-form" markdown="1">
 
 ```python
 mtexColorbar()
 ```
 
-A bar with a title:
+A bar per axes, or one for all.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexColorbar(title='misorientation angle')
 ```
 
-A horizontal bar below:
+A bar with a title.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexColorbar('southoutside', title='mrd')
 ```
 
-A bar per axes, also where the ranges agree:
+A horizontal bar below.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 mtexColorbar('multiple')
 ```
+
+A bar per axes, also where the ranges agree.
+
+</div>
+
+## Description
 
 One bar for all axes needs the same colour range on them, which setColorRange('equal')
 gives first. A MATLAB location, 'eastoutside', 'southoutside', 'northoutside',
 'westoutside' or without 'outside', may stand in place of fig or be given as location=;
 further keywords go to matplotlib's colorbar.
 
-## Output
-
-| | |
-|---|---|
-| `bars` | list of the matplotlib colour bars drawn, empty when they were removed |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `fig` | `None` | the mtexFigure; the current one by default |
 | `title` | `None` | the label of the bar, or a list of one per bar |
+
+## Output
+
+| `bars` | list of the matplotlib colour bars drawn, empty when they were removed |
 
 ## See also
 

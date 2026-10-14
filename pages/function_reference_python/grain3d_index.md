@@ -15,16 +15,18 @@ faces of a grain3Boundary: what calcGrains returns for a volume, the counterpart
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 grains = calcGrains(ebsd3)
 grain3d.fromFaces(V, F, I_GF, ori, CSList, phaseId)
 grain3d.load('grains.dream3d')
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [allV](grain3d.allV_py.html) | all vertices of the boundary, as vectors |
 | [cat](grain3d.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |
 | [centroid](grain3d.centroid_py.html) | the centroid of every grain, the centre of mass of the polyhedron |

@@ -16,9 +16,13 @@ the Bunge Euler angles of the representative inside the Euler plotting box
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 orientation.project2EulerFR(self)
 ```
+
+</div>
 
 MATLAB's [orientation.project2EulerFR](orientation.project2EulerFR.html)
 

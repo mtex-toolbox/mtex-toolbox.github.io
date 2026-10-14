@@ -15,29 +15,47 @@ MATLAB's plotSpektra
 
 ## Syntax
 
-The Chebyshev coefficients of a kernel:
+<div class="mx-form" markdown="1">
 
 ```python
 plotSpectrum(psi)
 ```
 
-The absolute values, on log-log axes:
+The Chebyshev coefficients of a kernel.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotSpectrum(psi, bandwidth=16, logarithmic=True)
 ```
 
-The harmonic power of an SO3Fun:
+The absolute values, on log-log axes.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotSpectrum(odf)
 ```
 
-One line per function:
+The harmonic power of an SO3Fun.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 plotSpectrum([odf1, odf2], bandwidth=20)
 ```
+
+One line per function.
+
+</div>
+
+## Description
 
 For a kernel on S2 or SO(3) the coefficients A_l / (2l + 1) are drawn over the degree l on a
 logarithmic degree axis, up to degree 32 unless the bandwidth says otherwise. For a function
@@ -48,22 +66,18 @@ keywords are those of a line plot; fontSize sets the size of the labels and tick
 
 ## Input
 
-| | |
-|---|---|
 | `x` | an S2Kernel or SO3Kernel, an S2Fun or SO3Fun, or a list of them |
-
-## Output
-
-| | |
-|---|---|
-| `h` | the matplotlib lines drawn, a list of them for a list |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `bandwidth` | `None` | the highest degree drawn |
 | `logarithmic` | `False` | a kernel's absolute coefficients on log-log axes |
+
+## Output
+
+| `h` | the matplotlib lines drawn, a list of them for a list |
 
 ## See also
 

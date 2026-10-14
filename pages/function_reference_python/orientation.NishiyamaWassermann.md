@@ -16,15 +16,23 @@ the Nishiyama-Wassermann orientation relationship from fcc to bcc, (111) || (011
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 p2c = orientation.NishiyamaWassermann(csGamma, csAlpha)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 orientation.NishiyamaWassermann(csG, csA)
 ```
+
+</div>
 
 ## Used on
 

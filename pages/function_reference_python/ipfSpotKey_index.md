@@ -13,14 +13,16 @@ single spots of the inverse pole figure in their own colours
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 ipfSpotKey(cs, center=Miller(1, 0, 0, cs), color=(0, 0, 1), psi=S2DeLaValleePoussinKernel(halfwidth=7.5*degree))
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [center](ipfSpotKey.center_py.html) | the centres of the spots, crystal directions |
 | [color](ipfSpotKey.color_py.html) | the colours of the spots, one RGB row per centre |
 | [psi](ipfSpotKey.psi_py.html) | the kernel the spots fade to white with |

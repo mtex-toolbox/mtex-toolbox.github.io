@@ -16,23 +16,37 @@ the image values at arbitrary positions; MATLAB's mapImage.interp
 
 ## Syntax
 
-Bilinear, NaN outside the grid:
+<div class="mx-form" markdown="1">
 
 ```python
 v = mg.interp(pos)
 ```
 
-The value of the pixel covering it:
+Bilinear, NaN outside the grid.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = mg.interp(pos, 'nearest')
 ```
 
-The nearest border value outside:
+The value of the pixel covering it.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 v = mg.interp(pos, extrapolationMethod='nearest')
 ```
+
+The nearest border value outside.
+
+</div>
+
+## Description
 
 The positions reduce to fractional rows and columns of the regular grid, which are
 interpolated: 'linear' bilinearly, 'nearest' by the covering pixel, and 'cubic', 'spline' or
@@ -41,23 +55,19 @@ another grid is this at the positions of the target.
 
 ## Input
 
-| | |
-|---|---|
 | `mg` | mapImage |
 | `pos` | vector3d, or an (..., 2) or (..., 3) array of positions |
 
-## Output
-
-| | |
-|---|---|
-| `v` | array of the shape of pos, with the channels as a last axis when there are several |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `method` | `'linear'` | 'linear', 'nearest', 'cubic', 'spline' or 'makima' |
 | `extrapolationMethod` | `'none'` | 'none', NaN outside the grid, or 'nearest', the border value |
+
+## Output
+
+| `v` | array of the shape of pos, with the channels as a last axis when there are several |
 
 ## See also
 

@@ -16,9 +16,13 @@ MATLAB's .*: the product of corresponding coefficients, the rank kept
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 tensor.times(self, other)
 ```
+
+</div>
 
 MATLAB's [tensor.times](tensor.times.html)
 

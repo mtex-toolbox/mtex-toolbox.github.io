@@ -15,23 +15,37 @@ shape (ny, nx) with the first row at the bottom; None where the map is no pictur
 
 ## Syntax
 
-One pixel per cell:
+<div class="mx-form" markdown="1">
 
 ```python
 xs, ys, index = mapRaster(ebsd)
 ```
 
-A coarser picture:
+One pixel per cell.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 xs, ys, index = mapRaster(ebsd, maxPixels=10000)
 ```
 
-Turned to another convention:
+A coarser picture.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 xs, ys, index = mapRaster(ebsd, layout=mapLayout('x↑→y'))
 ```
+
+Turned to another convention.
+
+</div>
+
+## Description
 
 A pixel belongs to the cell of the nearest site: by rounding the lattice coordinates where
 the lattice is aligned with the screen and the parallelogram is the cell, and otherwise
@@ -43,23 +57,19 @@ a cell as the floor. The padding of a grid shows nothing.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD |
-
-## Output
-
-| | |
-|---|---|
-| `xs, ys` | the screen extent (lo, hi) of the picture in x and in y |
-| `index` | array of shape (ny, nx), the measurement of every pixel, -1 for none |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `maxPixels` | `16000000` | the largest number of pixels; a larger picture is scaled down, its shape kept |
 | `layout` | `None` | the 2 x 2 matrix taking the plane to the screen, mapLayout; by default the identity |
+
+## Output
+
+| `xs, ys` | the screen extent (lo, hi) of the picture in x and in y |
+| `index` | array of shape (ny, nx), the measurement of every pixel, -1 for none |
 
 ## See also
 

@@ -13,45 +13,55 @@ the median distance to the k-th nearest neighbour of a subsample, the radius CLA
 
 ## Syntax
 
-The median distance to the tenth neighbour:
+<div class="mx-form" markdown="1">
 
 ```python
 r = knnRadius(X)
 ```
 
-To the fifth neighbour:
+The median distance to the tenth neighbour.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 r = knnRadius(X, k=5)
 ```
 
-Over a subsample of 500 points:
+To the fifth neighbour.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 r = knnRadius(X, sub=500)
 ```
+
+Over a subsample of 500 points.
+
+</div>
+
+## Description
 
 The neighbours are searched among all points, the distances taken at a subsample spread
 evenly over the list. A list of k + 1 points or fewer gives 1.
 
 ## Input
 
-| | |
-|---|---|
 | `X` | (n, d) array, the points |
-
-## Output
-
-| | |
-|---|---|
-| `r` | float, the median distance |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `k` | `10` | the neighbour whose distance is taken |
 | `sub` | `1500` | the number of points the median is taken over; a shorter list is taken whole |
+
+## Output
+
+| `r` | float, the median distance |
 
 ## See also
 

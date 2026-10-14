@@ -13,8 +13,6 @@ the items of a three dimensional plot and the plotting convention it is seen by
 
 ## Members
 
-| | |
-|---|---|
 | [add](scene3d.add_py.html) | the item added to the scene, and returned |
 | [bounds](scene3d.bounds_py.html) | the corners (lo, hi) of the box around all items, the unit cube for an empty scene |
 | [camera](scene3d.camera_py.html) | the camera: the direction out of the screen and the one up, unit vectors |

@@ -16,11 +16,17 @@ MATLAB's gradientZ of EBSD3square
 
 ## Syntax
 
-A vector3d per voxel:
+<div class="mx-form" markdown="1">
 
 ```python
 g = ebsd3['Iron'].gradientZ()
 ```
+
+A vector3d per voxel.
+
+</div>
+
+## Description
 
 gradientDim(ebsd, 2): the logarithm of the next voxel's orientation at this one's, a left
 tangent vector in specimen coordinates, over the voxel spacing; the forward difference,
@@ -29,21 +35,17 @@ grainId. The volume is gridded first and must hold one indexed phase.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD3 of one indexed phase |
-
-## Output
-
-| | |
-|---|---|
-| `g` | vector3d of the shape of the gridded volume, in the inverse scan unit |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `stencil` | `None` | accepted for the signature of EBSD.gradientZ and not used: a volume takes the one sided difference |
+
+## Output
+
+| `g` | vector3d of the shape of the gridded volume, in the inverse scan unit |
 
 ## See also
 

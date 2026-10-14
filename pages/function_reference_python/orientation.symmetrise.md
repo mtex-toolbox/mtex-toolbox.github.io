@@ -16,38 +16,44 @@ all crystallographically equivalent orientations; MATLAB's orientation.symmetris
 
 ## Syntax
 
-Every equivalent, (numL * numR,) + ori.shape:
+<div class="mx-form" markdown="1">
 
 ```python
 oriSym = ori.symmetrise()
 ```
 
-The distinct ones, a flat list:
+Every equivalent, (numL * numR,) + ori.shape.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 oriSym = ori.symmetrise(unique=True)
 ```
+
+The distinct ones, a flat list.
+
+</div>
+
+## Description
 
 The equivalents are l * ori * r over the elements l of the group of the target frame and r of
 the source frame; a misorientation with grain exchange adds their inverses.
 
 ## Input
 
-| | |
-|---|---|
 | `ori` | orientation |
-
-## Output
-
-| | |
-|---|---|
-| `oriSym` | orientation |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `unique` | `False` | keep only the distinct equivalents, as a flat list |
+
+## Output
+
+| `oriSym` | orientation |
 
 ## See also
 

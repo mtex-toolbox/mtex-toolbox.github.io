@@ -19,9 +19,13 @@ and of the Burgers vectors
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 fitDislocationSystems(kappa, dS)
 ```
+
+</div>
 
 ## Used on
 

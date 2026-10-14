@@ -16,16 +16,24 @@ the Frobenius norm of every tensor, over all its coefficients
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 n = T.norm()
 n = norm(eps)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 strainTensor.norm(self)
 ```
+
+</div>
 
 MATLAB's [strainTensor.norm](strainTensor.norm.html)
 

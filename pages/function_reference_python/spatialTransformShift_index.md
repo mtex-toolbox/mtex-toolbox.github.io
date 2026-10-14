@@ -13,15 +13,17 @@ an affine transform of the plane, given by a 3 x 3 homogeneous matrix with last 
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 T = spatialTransformShift(M)
 T = spatialTransformShift.fit(posA, posB, weights=w)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [eval](spatialTransformShift.eval_py.html) | the positions moved by the affine map |
 | [fit](spatialTransformShift.fit_py.html) | the affine map fitted to point pairs by weighted least squares, the positions posA in frame A and where they went, posB |
 | [inv](spatialTransformShift.inv_py.html) | the affine map of the inverse matrix |

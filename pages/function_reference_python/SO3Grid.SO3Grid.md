@@ -17,15 +17,23 @@ orientation list
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 S3G = equispacedSO3Grid(cs, ss, resolution=5*degree)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 SO3Grid(rot, frameA, frameB, alphabeta, alpha, beta, gammaPoints, offset, gammaMin, gammaPeriod, resolution, center=None)
 ```
+
+</div>
 
 MATLAB's [SO3Grid.SO3Grid](SO3Grid.SO3Grid.html)
 

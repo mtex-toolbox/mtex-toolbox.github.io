@@ -15,29 +15,35 @@ the bounding box of the drawn region, from its boundary, as (xmin, xmax, ymin, y
 
 ## Syntax
 
-With a margin of 2 percent:
+<div class="mx-form" markdown="1">
 
 ```python
 xmin, xmax, ymin, ymax = proj.bounds()
 ```
 
-Tight about the boundary:
+With a margin of 2 percent.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 xmin, xmax, ymin, ymax = proj.bounds(margin=0)
 ```
 
-## Output
+Tight about the boundary.
 
-| | |
-|---|---|
-| `xmin, xmax, ymin, ymax` | floats |
+</div>
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `margin` | `0.02` | the widening on every side, a fraction of the shorter side of the box |
+
+## Output
+
+| `xmin, xmax, ymin, ymax` | floats |
 
 ## See also
 

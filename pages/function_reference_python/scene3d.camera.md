@@ -15,9 +15,13 @@ the camera: the direction out of the screen and the one up, unit vectors
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 scene3d.camera(self)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L256">source</a></font>
 {% endraw %}

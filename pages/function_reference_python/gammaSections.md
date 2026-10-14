@@ -14,15 +14,17 @@ sections of constant gamma in the Matthies (ZYZ) convention
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 oS = gammaSections(cs, ss, sections=6)
 oS = gammaSections(cs, ss, gamma=np.arange(0, 91, 15)*degree)
 ```
 
+</div>
+
 ## Members
 
-| | |
-|---|---|
 | [gamma](gammaSections.gamma_py.html) | the gamma values of the sections |
 
 MATLAB's [gammaSections](gammaSections.html)

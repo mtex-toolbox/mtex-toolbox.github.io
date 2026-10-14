@@ -15,29 +15,35 @@ the azimuth and polar ranges of the region in degrees, widened by the margin
 
 ## Syntax
 
-Tight:
+<div class="mx-form" markdown="1">
 
 ```python
 rhoMin, rhoMax, thetaMin, thetaMax = plainProjection(sR).bounds()
 ```
 
-Widened:
+Tight.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 rhoMin, rhoMax, thetaMin, thetaMax = plainProjection(sR).bounds(margin=0.1)
 ```
 
-## Output
+Widened.
 
-| | |
-|---|---|
-| `rhoMin, rhoMax, thetaMin, thetaMax` | floats in degree |
+</div>
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `margin` | `0.0` | the widening on every side, a fraction of the shorter of the two ranges |
+
+## Output
+
+| `rhoMin, rhoMax, thetaMin, thetaMax` | floats in degree |
 
 ## See also
 

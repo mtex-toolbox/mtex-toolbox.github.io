@@ -15,9 +15,13 @@ the frame itself: a not indexed frame has no group to change
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 notIndexedFrame.sibling(self, s)
 ```
+
+</div>
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1258">source</a></font>
 {% endraw %}

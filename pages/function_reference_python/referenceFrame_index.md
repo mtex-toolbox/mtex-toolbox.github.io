@@ -14,17 +14,27 @@ point group the data is invariant under and the default plotting convention
 
 ## Syntax
 
-A frame of the canonical basis:
+<div class="mx-form" markdown="1">
 
 ```python
 f = referenceFrame(name='lab', axesNames=('A', 'B', 'C'))
 ```
 
-A frame of the given basis vectors:
+A frame of the canonical basis.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 f = referenceFrame(basis)
 ```
+
+A frame of the given basis vectors.
+
+</div>
+
+## Description
 
 The base class of crystalFrame, the frame glued to the lattice of a phase, and
 specimenFrame, the frame of a sample; use those. A frame carries an identity, a name such
@@ -35,19 +45,11 @@ transformationMatrix gives the change of coordinates between two frames.
 
 ## Input
 
-| | |
-|---|---|
 | `basis` | vector3d or 3 x 3 array, the basis vectors in canonical coordinates, by default the canonical basis |
-
-## Output
-
-| | |
-|---|---|
-| `f` | referenceFrame |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `name` |  | the identity of the frame |
 | `axesNames` |  | the names of the three axes |
@@ -55,14 +57,16 @@ transformationMatrix gives the change of coordinates between two frames.
 | `sym` |  | the point group, by default the trivial one |
 | `color` |  | the colour of the frame's data in a phase map |
 
+## Output
+
+| `f` | referenceFrame |
+
 ## See also
 
 [crystalFrame](crystalFrame_index_py.html), [specimenFrame](specimenFrame_index_py.html), [plottingConvention](plottingConvention_index_py.html), [referenceFrame.transformationMatrix](referenceFrame.transformationMatrix_py.html)
 
 ## Members
 
-| | |
-|---|---|
 | [axesNames](referenceFrame.axesNames_py.html) | the names of the three axes, ('X', 'Y', 'Z'), ('a', 'b', 'c') or ('RD', 'TD', 'ND') |
 | [basis](referenceFrame.basis_py.html) | the basis vectors of the frame in the canonical Euclidean coordinates, one per row |
 | [byName](referenceFrame.byName_py.html) | the specimen frame registered under a name |

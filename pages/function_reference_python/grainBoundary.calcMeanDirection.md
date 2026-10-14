@@ -18,38 +18,44 @@ MATLAB's grainBoundary.calcMeanDirection
 
 ## Syntax
 
-Across three segments:
+<div class="mx-form" markdown="1">
 
 ```python
 d = gB.calcMeanDirection()
 ```
 
-Across five:
+Across three segments.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 d = gB.calcMeanDirection(2)
 ```
+
+Across five.
+
+</div>
+
+## Description
 
 The same as gB.direction but over a window of segments, which averages out the staircase
 of a pixel grid. The window never crosses a junction.
 
 ## Input
 
-| | |
-|---|---|
 | `gB` | grainBoundary |
-
-## Output
-
-| | |
-|---|---|
-| `d` | vector3d, antipodal, one per segment, not normalised |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `n` | `1` | the number of neighbouring segments on either side |
+
+## Output
+
+| `d` | vector3d, antipodal, one per segment, not normalised |
 
 ## See also
 

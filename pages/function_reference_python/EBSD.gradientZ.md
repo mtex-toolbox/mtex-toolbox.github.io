@@ -17,38 +17,44 @@ zvector); MATLAB's EBSD.gradientZ
 
 ## Syntax
 
-One sided differences:
+<div class="mx-form" markdown="1">
 
 ```python
 gZ = gradientZ(ebsd)
 ```
 
-Least squares with the diagonals:
+One sided differences.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 gZ = gradientZ(ebsd, stencil='full')
 ```
+
+Least squares with the diagonals.
+
+</div>
+
+## Description
 
 The stencil is that of gradient. A planar map has the derivative only where z lies in its
 plane, and is NaN elsewhere.
 
 ## Input
 
-| | |
-|---|---|
 | `ebsd` | EBSD of one phase |
-
-## Output
-
-| | |
-|---|---|
-| `gZ` | vector3d, of the shape of the map |
 
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `stencil` | `'oneSided'` | 'oneSided', 'lattice' ('1hop') or 'full', the neighbours it is taken from |
+
+## Output
+
+| `gZ` | vector3d, of the shape of the map |
 
 ## See also
 

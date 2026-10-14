@@ -16,17 +16,25 @@ an orientation has rotated them
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 sS = slipSystem(b, n)
 sS = slipSystem(b, n, CRSS)
 sS = slipSystem.fcc(cs)
 ```
 
+</div>
+
 ## Signature
+
+<div class="mx-form" markdown="1">
 
 ```python
 slipSystem(b, n, CRSS=1)
 ```
+
+</div>
 
 ## Used on
 

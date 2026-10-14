@@ -16,9 +16,13 @@ any map of the positions; the lattice is inferred again from where they land
 
 ## Syntax
 
+<div class="mx-form" markdown="1">
+
 ```python
 EBSD.transform(self, f)
 ```
+
+</div>
 
 MATLAB's [EBSD.transform](EBSD.transform.html)
 

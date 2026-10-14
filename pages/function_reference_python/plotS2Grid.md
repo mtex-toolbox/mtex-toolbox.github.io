@@ -15,29 +15,47 @@ plotS2Grid
 
 ## Syntax
 
-The grid of the whole sphere:
+<div class="mx-form" markdown="1">
 
 ```python
 r = plotS2Grid(resolution=5*degree)
 ```
 
-Crystal directions, upper hemisphere:
+The grid of the whole sphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 r = plotS2Grid(cs, resolution=2*degree, upper=True)
 ```
 
-5 degree in the polar angle, 2.5 in the azimuth:
+Crystal directions, upper hemisphere.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 r = plotS2Grid(resolution=(5*degree, 2.5*degree))
 ```
 
-Values on the grid, drawn as they lie:
+5 degree in the polar angle, 2.5 in the azimuth.
+
+</div>
+
+<div class="mx-form" markdown="1">
 
 ```python
 contourf(r, r.z ** 2)
 ```
+
+Values on the grid, drawn as they lie.
+
+</div>
+
+## Description
 
 The directions form a (theta, rho) array, the rows the polar angle, the columns the
 azimuth, in the frame given, so that values computed on them are drawn by contourf or
@@ -49,26 +67,22 @@ a sphericalRegion.
 
 ## Input
 
-| | |
-|---|---|
 | `frame` | a reference frame the directions are expressed in, e.g. crystalFrame('m-3m') |
 | `sR` | sphericalRegion, the region of the grid |
 
-## Output
-
-| | |
-|---|---|
-| `r` | vector3d, a (theta, rho) array of directions |
-
 ## Keywords
 
-| | default | |
+| keyword | default | description |
 |---|---|---|
 | `resolution` | `1*degree` | the spacing of the grid, an angle, or a pair (polar, azimuthal) |
 | `upper` | `False` | the upper hemisphere only |
 | `lower` | `False` | the lower hemisphere only |
 | `complete` | `False` | the whole sphere |
 | `antipodal` | `None` | a grid of axes, the upper hemisphere enough |
+
+## Output
+
+| `r` | vector3d, a (theta, rho) array of directions |
 
 ## See also
 
