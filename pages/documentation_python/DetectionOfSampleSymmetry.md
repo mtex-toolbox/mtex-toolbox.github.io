@@ -122,7 +122,7 @@ print(f'difference between applied and recovered rotation: {recoveryError:.3f} d
 ```
 
 ```text
-difference between applied and recovered rotation: 0.815 degree
+difference between applied and recovered rotation: 0.547 degree
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/DetectionOfSampleSymmetry-4.png"></center>

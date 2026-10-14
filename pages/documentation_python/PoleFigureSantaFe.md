@@ -121,8 +121,8 @@ for name, a, b, c, d in zip(['model', 'withGhostCorrection', 'withoutGhostCorrec
 ```text
                           odfError  meanPFResidual  minimumMrd  maximumMrd
 model                       0.0000          0.0511      0.7300      5.0394
-withGhostCorrection         0.0455          0.0494      0.5850      4.8902
-withoutGhostCorrection      0.1008          0.0482      0.1782      4.5416
+withGhostCorrection         0.0445          0.0505      0.5858      4.6910
+withoutGhostCorrection      0.1037          0.0503      0.1597      4.2780
 ```
 
 The corrected reconstruction has an ODF error of about 0.045, so between four and five

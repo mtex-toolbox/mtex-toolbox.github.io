@@ -61,8 +61,8 @@ G.eval(ori)
 ```text
 SO3TangentVector (left, y↑→x)
   reference: orientation (Quartz → y↑→x), one per element
-    x    y     z
-  -66  117  86.1
+      x    y     z
+  -66.5  117  85.6
 ```
 
 Plot the ODF in sigma sections and draw the gradient arrows on top.
@@ -157,12 +157,12 @@ SO3TangentVector (left, y↑→x)
   size     : 6
   reference: orientation (Quartz → y↑→x), one per element
         x     y        z
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
-  0.00289  0.05  -0.0189
+  0.00316  0.05  -0.0187
+  0.00316  0.05  -0.0187
+  0.00316  0.05  -0.0187
+  0.00316  0.05  -0.0187
+  0.00316  0.05  -0.0187
+  0.00316  0.05  -0.0187
 ```
 
 ---
@@ -176,12 +176,12 @@ SO3TangentVector (right, Quartz)
   size     : 6
   reference: orientation (Quartz → y↑→x), one per element
         x        y        z
-   0.0134  -0.0467   0.0226
-  -0.0471   0.0117   0.0226
-   0.0471   0.0117  -0.0226
-   0.0337    0.035   0.0226
-  -0.0337    0.035  -0.0226
-  -0.0134  -0.0467  -0.0226
+   0.0131  -0.0467   0.0224
+   -0.047    0.012   0.0224
+    0.047    0.012  -0.0224
+   0.0339   0.0347   0.0224
+  -0.0339   0.0347  -0.0224
+  -0.0131  -0.0467  -0.0224
 ```
 
 The left vectors turn with the crystal symmetry operation that relates the equivalent

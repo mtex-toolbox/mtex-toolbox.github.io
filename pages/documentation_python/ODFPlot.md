@@ -226,7 +226,7 @@ projectedEuler
 ```
 
 ```text
-array([63.1233, 10.5199, 52.8776])
+array([40.2762, 78.0145, 66.1779])
 ```
 
 All three displayed coordinates lie between $$0^{\circ}$$ and $$90^{\circ}$$. This

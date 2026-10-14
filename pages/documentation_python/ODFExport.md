@@ -203,8 +203,8 @@ texture exported by MTEX
 
 
 B 5000
- 359.35   65.18  293.87   0.0002000
- 354.68   68.86   28.65   0.0002000
+  16.74   92.06   10.19   0.0002000
+ 299.41   26.12  340.52   0.0002000
 ```
 
 The `points` option controls the number of orientations and defaults to 10000. More

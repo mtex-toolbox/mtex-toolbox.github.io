@@ -282,35 +282,6 @@ plt.scatter(sigma, np.sqrt(np.maximum(0, 1 - n)), 12)
 plt.legend(['de la Vallee Poussin', 'Bingham'], loc='best')
 ```
 
-```text
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-⋮
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-Warning: overflow encountered in dot
-```
-
 <center class="mtex-figure"><img class="inline" src="figures/python/OrientationEmbeddings-10.png"></center>
 
 The Bingham points do not collapse onto the first curve. Thus the norm of the mean

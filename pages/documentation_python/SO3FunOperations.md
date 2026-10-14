@@ -203,7 +203,7 @@ valueAtR
 ```
 
 ```text
-3.3518
+3.3519
 ```
 
 ---
@@ -214,7 +214,7 @@ inverseValue
 ```
 
 ```text
-3.3518
+3.3519
 ```
 
 The two displayed values agree, which checks the relation $g(\mathbf{R}^{-1}) =
@@ -248,7 +248,7 @@ maxValue
 ```
 
 ```text
-array([262.0311, 188.8086])
+array([262.031 , 188.8222])
 ```
 
 ---
@@ -263,7 +263,7 @@ orientation (Quartz → y↑→x)
   Bunge Euler angles in degree
   phi1   Phi  phi2
   89.7  44.5   270
-   133  35.7   205
+   133  35.6   205
 ```
 
 The annotations mark the two returned orientations. The first value is the global
@@ -312,7 +312,7 @@ normFromDefinition
 ```
 
 ```text
-4.0425
+4.0426
 ```
 
 The dedicated [norm](SO3Fun.norm.html) command computes the same quantity more
@@ -325,7 +325,7 @@ directNorm
 ```
 
 ```text
-4.0425
+4.0426
 ```
 
 ## Differentiation at One Orientation

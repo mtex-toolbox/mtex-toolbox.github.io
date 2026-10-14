@@ -173,6 +173,7 @@ mtex.Miller(1, 1, 0, ori.CS, 'uvw', antipodal=True)
 
 ```text
 vector3d (Forsterite)
+  antipodal: true
   u  v  w
   1  1  0
 ```

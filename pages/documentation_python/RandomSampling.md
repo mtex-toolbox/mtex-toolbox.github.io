@@ -116,7 +116,7 @@ print(f'L1 error, random sample, 10 degree: {errRandom10:.3f}')
 ```
 
 ```text
-L1 error, random sample, 10 degree: 0.165
+L1 error, random sample, 10 degree: 0.161
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-6.png"></center>
@@ -137,7 +137,7 @@ print(f'L1 error, random sample, 20 degree: {errRandom20:.3f}')
 ```
 
 ```text
-L1 error, random sample, 20 degree: 0.105
+L1 error, random sample, 20 degree: 0.107
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-7.png"></center>
@@ -153,8 +153,8 @@ print(f'texture index, random reconstruction: {norm(odf_rec) ** 2:.3f}')
 ```
 
 ```text
-texture index, original ODF: 1.304
-texture index, random reconstruction: 1.137
+texture index, original ODF: 1.496
+texture index, random reconstruction: 1.245
 ```
 
 ## Place an Optimized Sample
@@ -199,8 +199,8 @@ print(f'texture index, optimized reconstruction: {norm(odf_rec) ** 2:.3f}')
 ```
 
 ```text
-texture index, original ODF: 1.304
-texture index, optimized reconstruction: 1.230
+texture index, original ODF: 1.496
+texture index, optimized reconstruction: 1.385
 ```
 
 ## Optimizing the Weights Too
@@ -281,8 +281,8 @@ print(f'halfwidth for optimalSample: {np.exp(pHwOpt[1]):.1f} degree * M^{pHwOpt[
 ```
 
 ```text
-halfwidth for discreteSample: 97.8 degree * M^-0.288
-halfwidth for optimalSample: 48.8 degree * M^-0.264
+halfwidth for discreteSample: 62.0 degree * M^-0.220
+halfwidth for optimalSample: 45.9 degree * M^-0.253
 ```
 
 Plot the measured halfwidths with their fitted laws. The circles are the means of five
@@ -319,7 +319,7 @@ print(f'ratio of optimized to random halfwidth: {hwOpt[0] / np.mean(hwRand[0]):.
 ```
 
 ```text
-ratio of optimized to random halfwidth: 0.52 at M = 32 and 0.56 at M = 512
+ratio of optimized to random halfwidth: 0.65 at M = 32 and 0.60 at M = 512
 ```
 
 ## The Asymptotic Halfwidth Rule
@@ -362,8 +362,8 @@ print(f'error for optimalSample: {np.exp(pEOpt[1]):.2f} * M^{pEOpt[0]:.3f}')
 ```
 
 ```text
-error for discreteSample: 0.75 * M^-0.171
-error for optimalSample: 0.74 * M^-0.335
+error for discreteSample: 1.15 * M^-0.250
+error for optimalSample: 0.93 * M^-0.376
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/RandomSampling-16.png"></center>
@@ -382,11 +382,11 @@ for m in M:
 ```
 
 ```text
-32 optimized orientations correspond to 880 random ones
-64 optimized orientations correspond to 3408 random ones
-128 optimized orientations correspond to 13196 random ones
-256 optimized orientations correspond to 51090 random ones
-512 optimized orientations correspond to 197806 random ones
+32 optimized orientations correspond to 430 random ones
+64 optimized orientations correspond to 1218 random ones
+128 optimized orientations correspond to 3450 random ones
+256 optimized orientations correspond to 9778 random ones
+512 optimized orientations correspond to 27707 random ones
 ```
 
 ## Limits of the Comparison

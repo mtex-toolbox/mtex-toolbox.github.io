@@ -176,7 +176,7 @@ highAngleSummary
 ```
 
 ```text
-{'peakDensity': 1.391213111695422, 'distanceToTwinPlaneDegree': 5.575478383679621}
+{'peakDensity': 1.3912131116954223, 'distanceToTwinPlaneDegree': 5.575478383679621}
 ```
 
 ---
@@ -287,7 +287,7 @@ specimenSummary
 ```
 
 ```text
-{'minimumDensity': 0.6112683632589165, 'maximumDensity': 1.7424354059310017}
+{'minimumDensity': 0.6112683632909355, 'maximumDensity': 1.7424354056515161}
 ```
 
 ## The crystal GBND
@@ -316,7 +316,7 @@ crystalSummary
 ```
 
 ```text
-{'minimumDensity': 0.7411072299996189, 'maximumDensity': 2.004265757082114}
+{'minimumDensity': 0.7411072301120457, 'maximumDensity': 2.004265757262286}
 ```
 
 ## The GBCD in three dimensions
@@ -377,7 +377,7 @@ sigma3GBCDSummary
 ```
 
 ```text
-{'peakDensity': 16.306847879941838, 'distanceToSigma3PlaneDegree': 0.011782645270850784}
+{'peakDensity': 16.306847880546226, 'distanceToSigma3PlaneDegree': 0.011782645270850784}
 ```
 
 The peak density is 16.3, about 0.01 degrees from the plane, eight times the maximum of

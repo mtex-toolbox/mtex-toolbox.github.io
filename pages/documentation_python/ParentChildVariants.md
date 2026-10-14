@@ -71,7 +71,7 @@ oriChild
 orientation (Ti (alpha) → y↑→x)
   Bunge Euler angles in degree
   phi1   Phi  phi2
-  73.3  92.6  65.5
+   234  58.6   353
 ```
 
 The Burgers OR aligns a hexagonal $$(0001)$$ plane with a cubic $$(110)$$ plane. It also aligns
@@ -188,8 +188,8 @@ orientation (Ti (alpha) → y↑→x)
   size: 2
   Bunge Euler angles in degree
   phi1   Phi  phi2
-  13.7   105   126
-   156  19.4   183
+   330   151    38
+  85.1  69.3   289
 ```
 
 ## Exact and approximate orientation relationships
@@ -260,7 +260,7 @@ np.min(angle(oriParents, oriParent)) / degree
 ```
 
 ```text
-3.8167e-14
+5.5819e-14
 ```
 
 The [`parents`](orientation.parents.html) method returns the same set of OR variants.
@@ -275,12 +275,12 @@ orientation (Ti (beta) → y↑→x)
   size: 6
   Bunge Euler angles in degree
   phi1   Phi  phi2
-   234  45.6   117
-    36  65.9   149
-  4.31    20   354
-   335  13.5   203
-  38.6  76.1   328
-   230  55.7   300
+  53.1  80.9   136
+  53.3  91.4   316
+  54.9   141   137
+  51.2  31.4   317
+  55.6   151   318
+    50  20.9   139
 ```
 
 A single child orientation cannot identify which candidate parent is correct. Parent grain

@@ -72,7 +72,7 @@ peakValue
 ```
 
 ```text
-94.4039
+94.4118
 ```
 
 ---
@@ -150,7 +150,7 @@ textureIndexMeasured
 ```
 
 ```text
-16.3418
+16.3424
 ```
 
 ## Entropy
@@ -187,7 +187,7 @@ preferredVolumePercent
 ```
 
 ```text
-38.2540
+38.2544
 ```
 
 The printed result is the percentage within $$30^\circ$$ of the preferred orientation.

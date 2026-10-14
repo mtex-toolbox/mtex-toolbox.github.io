@@ -78,10 +78,10 @@ with open(fname) as f:
 ```
 
 ```text
-   phi1     Phi       phi2
-218.887  128.13    7.85836
- 199.86 129.784    98.3586
-192.146 113.646    224.277
+    phi1     Phi    phi2
+ 13.4423 38.9145  141.72
+ 34.6821 47.4012 29.2598
+ 209.182 122.692 340.627
 ```
 
 ## Other Conventions and Units
@@ -98,10 +98,10 @@ with open(fname) as f:
 ```
 
 ```text
-  alpha     beta    gamma
-2.24951  2.23629  1.70795
-1.91741  2.26516  3.28748
-1.78278   1.9835  5.48518
+  alpha     beta   gamma
+  4.947 0.679186 4.04427
+5.31771 0.827308 2.08148
+2.08012  2.14139 1.23267
 ```
 
 The new header and values describe the same orientations in a different convention and
@@ -121,9 +121,9 @@ with open(fname) as f:
 ```
 
 ```text
-          a          b           c         d
-   0.173502   0.240543   -0.866524 -0.401463
-  -0.364134   0.572915    0.701225  0.217851
+         a           b          c         d
+  0.202779    0.145298  -0.299744  0.920827
+  0.776768    0.401508  0.0190127  0.484831
 ```
 
 MTEX writes the scalar component first, in the order `a`, `b`, `c`, `d`. Other programs
@@ -148,9 +148,9 @@ with open(fname) as f:
 ```
 
 ```text
-   phi1     Phi       phi2   angle weight
-218.887  128.13    7.85836 59.8857   0.01
- 199.86 129.784    98.3586 64.2756   0.01
+    phi1     Phi    phi2   angle weight
+ 13.4423 38.9145  141.72 51.9856   0.01
+ 34.6821 47.4012 29.2598 72.1474   0.01
 ```
 
 The preview shows that `angle` and `weight` remain aligned with the Euler angles on each
@@ -179,8 +179,8 @@ texture exported by MTEX
 
 
 B 100
- 218.89  128.13    7.86   0.0100000
- 199.86  129.78   98.36   0.0100000
+  13.44   38.91  141.72   0.0100000
+  34.68   47.40   29.26   0.0100000
 ```
 
 The line `B 100` identifies Bunge angles and the 100 orientations. The following rows
@@ -209,8 +209,8 @@ texture exported by MTEX
 
 
 B 100
- 218.89  128.13    7.86   0.0001980
- 199.86  129.78   98.36   0.0003960
+  13.44   38.91  141.72   0.0001980
+  34.68   47.40   29.26   0.0003960
 1.0000
 ```
 

@@ -103,7 +103,7 @@ print(f'GROD angle: median {np.nanmedian(grodAngle):.2f} degree; maximum {np.nan
 ```
 
 ```text
-GROD angle: median 1.69 degree; maximum 23.6 degree
+GROD angle: median 1.68 degree; maximum 23.6 degree
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDGROD-5.png"></center>
@@ -134,7 +134,7 @@ print(f'GOS for {len(grains)} grains: median {np.nanmedian(GOS / degree):.2f} de
 ```
 
 ```text
-GOS for 377 grains: median 0.83 degree; maximum 6.6 degree
+GOS for 377 grains: median 0.83 degree; maximum 6.5 degree
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDGROD-6.png"></center>
@@ -246,7 +246,7 @@ print(f'Specimen-frame axis density: {specimenDensityRange[0]:.2f} to {specimenD
 ```
 
 ```text
-Specimen-frame axis density: 0.29 to 6.36 mrd
+Specimen-frame axis density: 0.28 to 6.41 mrd
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/EBSDGROD-10.png"></center>

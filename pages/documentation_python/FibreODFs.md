@@ -222,7 +222,7 @@ meanDistanceDegrees
 ```
 
 ```text
-array([10.6051, 10.5995])
+array([10.4953, 10.4887])
 ```
 
 The eigenvalues returned by the local branch test whether a fibre is a sensible model.
@@ -236,7 +236,7 @@ linearityRatio
 ```
 
 ```text
-86.2018
+91.2262
 ```
 
 Two warnings are essential. First, the fit always returns a fibre even when the data do

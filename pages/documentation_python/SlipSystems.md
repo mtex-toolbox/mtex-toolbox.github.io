@@ -254,7 +254,7 @@ ori
 orientation (Titanium (Alpha) → y↓→x)
   Bunge Euler angles in degree
   phi1   Phi  phi2
-   161  79.1   288
+   173  71.2  19.9
 ```
 
 ```python
@@ -264,8 +264,8 @@ sSSpecimen
 
 ```text
 slipSystem (y↓→x)
-      x     y      z  |  x    y     z
-  -2.73  1.09  -0.61  0.07  0.2  0.04
+      x      y    z  |  x    y     z
+  -0.64  -0.88  2.8  0.02  0.2  0.07
 ```
 
 ## References

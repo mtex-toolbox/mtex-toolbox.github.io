@@ -282,7 +282,7 @@ print(f'Elapsed time is {time.time() - t:.3f} seconds.')
 ```
 
 ```text
-Elapsed time is 12.643 seconds.
+Elapsed time is 12.693 seconds.
 ```
 
 ## Diagnose the `notIndexed` regions first

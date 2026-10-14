@@ -226,7 +226,7 @@ inner
 ```
 
 ```text
-array([1.9959, 2.2963, 2.6327])
+array([2.4646, 0.9053, 2.4056])
 ```
 
 ## Rank 2 matrix operations
@@ -240,7 +240,7 @@ d
 ```
 
 ```text
-array([ 0.0055, -0.2327,  0.1594])
+array([-0.0089, -0.0124,  0.2494])
 ```
 
 ## Rotating a tensor

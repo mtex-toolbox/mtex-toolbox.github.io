@@ -193,7 +193,7 @@ mtexColorbar(title='mrd')
 ```
 
 ```text
-Warning: Rotating an ODF with specimen symmetry will remove the specimen symmetry
+Warning: Rotating a function with specimen symmetry will remove the specimen symmetry
 ```
 
 <center class="mtex-figure"><img class="inline" src="figures/python/ODFModeling-10.png"></center>
