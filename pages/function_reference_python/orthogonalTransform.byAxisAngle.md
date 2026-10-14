@@ -16,12 +16,14 @@ the proper transforms rotating by omega about the axis v
 ## Syntax
 
 ```python
-orthogonalTransform.byAxisAngle(v, omega)
-```
-
-```python
 T = orthogonalTransform.byAxisAngle(v, omega)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L613">source</a></font>
+## Signature
+
+```python
+orthogonalTransform.byAxisAngle(v, omega)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L724">source</a></font>
 {% endraw %}

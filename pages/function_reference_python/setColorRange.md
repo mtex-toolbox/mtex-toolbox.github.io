@@ -16,12 +16,14 @@ the one given as (lo, hi)
 ## Syntax
 
 ```python
-setColorRange(colorRange='equal', fig=None)
-```
-
-```python
 setColorRange('equal')
 setColorRange((0, 4))
+```
+
+## Signature
+
+```python
+setColorRange(colorRange='equal', fig=None)
 ```
 
 ## Used on
@@ -30,5 +32,5 @@ setColorRange((0, 4))
 
 MATLAB's [setColorRange](setColorRange.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L556">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L610">source</a></font>
 {% endraw %}

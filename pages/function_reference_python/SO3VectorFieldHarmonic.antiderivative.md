@@ -18,13 +18,15 @@ or conservative=True says it is; with x its values at the orientations x
 ## Syntax
 
 ```python
-SO3VectorFieldHarmonic.antiderivative(self, x=None, **kwargs)
-```
-
-```python
 F.antiderivative()
 F.antiderivative(conservative=True)
 F.antiderivative(tol=1e-3)
+```
+
+## Signature
+
+```python
+SO3VectorFieldHarmonic.antiderivative(self, x=None, **kwargs)
 ```
 
 ## Used on

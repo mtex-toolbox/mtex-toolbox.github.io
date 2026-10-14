@@ -19,5 +19,5 @@ the camera: the direction out of the screen and the one up, unit vectors
 scene3d.camera(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L215">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L256">source</a></font>
 {% endraw %}

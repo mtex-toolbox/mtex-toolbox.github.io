@@ -26,5 +26,5 @@ doEulerStep(spin, x, n=1, bandwidth=None)
 
 MATLAB's [doEulerStep](doEulerStep.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L310">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L335">source</a></font>
 {% endraw %}

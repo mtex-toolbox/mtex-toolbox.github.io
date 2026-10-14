@@ -17,6 +17,13 @@ calcGND(x, ...) is x.calcGND(...), the method of the object passed
 calcGND(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [EBSD](EBSD.calcGND_py.html) | gnd, rho = calcGND(ebsd, dS): the geometrically necessary dislocation content of every pixel after Pantleon (2008), MATLAB's route: the curvature of the map, the systems rotated into every pixel, the densities of least total line energy reproducing the curvature |
+| [EBSD3](EBSD3square.calcGND_py.html) | gnd, rho = calcGND(ebsd, dS): the geometrically necessary dislocation content of every pixel after Pantleon (2008), MATLAB's route: the curvature of the map, the systems rotated into every pixel, the densities of least total line energy reproducing the curvature |
+
 ## Used on
 
 [GND](GND_py.html)

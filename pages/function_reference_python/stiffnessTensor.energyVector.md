@@ -12,17 +12,73 @@ status: Reference
 {% raw %}
 A method of [stiffnessTensor](stiffnessTensor_index_py.html).
 
-the energy velocity of a lossless wave, C_ijkl p_j n_k p_l / (rho v), whose projection on
-the propagation direction is the phase speed; with a speed function and a polarisation
-field the vector field on the sphere
+the energy velocity of a lossless elastic plane wave, the vector C_ijkl p_j n_k p_l / (rho v)
 
 ## Syntax
 
 ```python
-stiffnessTensor.energyVector(C, n, speed=None, polarization=None, *, density=None)
+vp, vs1, vs2, pp, ps1, ps2 = velocity(C, n)
 ```
+
+The energy velocity of the p wave in the direction n:
+
+```python
+E = energyVector(C, n, vp, pp)
+```
+
+Of the faster s wave, with another density:
+
+```python
+E = energyVector(C, n, vs1, ps1, density=rho)
+```
+
+```python
+vp, vs1, vs2, pp, ps1, ps2 = velocity(C)
+```
+
+As a vector field on the sphere:
+
+```python
+E = energyVector(C, None, vp, pp)
+```
+
+The energy velocity of a medium without attenuation is the velocity at which a plane wave
+carries its energy, a good proxy for the group velocity: Ve_i = C_ijkl p_j n_k p_l / (rho
+v), with n the propagation direction, v the phase speed and p the polarisation of one of
+the three waves velocity returns. Its projection onto n is the phase speed, so its length
+is at least v. With a speed function and a polarisation field and no direction the
+result is a vector field on the sphere.
+
+## Input
+
+| | |
+|---|---|
+| `C` | stiffnessTensor in GPa |
+| `n` | vector3d, the propagation directions, or None for the vector field |
+| `speed` | the phase speed of the wave in km/s, vp, vs1 or vs2 of velocity, an S2Fun for the vector field |
+| `polarization` | vector3d, the polarisation of the wave, pp, ps1 or ps2 of velocity, an S2AxisField for the vector field |
+
+## Output
+
+| | |
+|---|---|
+| `E` | vector3d, the energy velocity in km/s; S2VectorField without a direction |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `density` | `None` | the density in g/cm^3; by default the density stored on the tensor |
+
+## References
+
+- F. I. Fedorov, Theory of Elastic Waves in Crystals, Plenum Press, New York (1968)
+
+## See also
+
+velocity, [ChristoffelTensor](ChristoffelTensor_index_py.html), [WaveVelocities](WaveVelocities_py.html)
 
 MATLAB's [stiffnessTensor.energyVector](stiffnessTensor.energyVector.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L157">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L181">source</a></font>
 {% endraw %}

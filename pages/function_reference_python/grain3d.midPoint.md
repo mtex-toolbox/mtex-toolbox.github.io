@@ -14,5 +14,5 @@ A property of [grain3d](grain3d_index_py.html).
 the largest distance between two vertices of every grain, on MATLAB's rounding to 1e-4
 the centre of the box of the vertices, as MATLAB's midPoint
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L287">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L327">source</a></font>
 {% endraw %}

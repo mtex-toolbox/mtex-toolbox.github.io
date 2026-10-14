@@ -17,6 +17,12 @@ caliper(x, ...) is x.caliper(...), the method of the object passed
 caliper(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [grain2d](grain2d.caliper_py.html) | the caliper: with nothing, the longest width of every outline as a framed axis of that length |
+
 ## Used on
 
 [EllipseBasedParameters](EllipseBasedParameters_py.html)

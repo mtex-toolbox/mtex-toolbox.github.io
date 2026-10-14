@@ -23,5 +23,5 @@ S1FunHarmonic.smooth(self, psi=None, halfwidth=0.05061454830783556)
 
 MATLAB's [S1Fun.smooth](S1Fun.smooth.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L167">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L235">source</a></font>
 {% endraw %}

@@ -17,12 +17,14 @@ surround the origin
 ## Syntax
 
 ```python
-S2Triangulation(vertices)
-```
-
-```python
 sT = S2Triangulation(v)
 B = sT.barycentric(w)
+```
+
+## Signature
+
+```python
+S2Triangulation(vertices)
 ```
 
 MATLAB's [S2Triangulation.S2Triangulation](S2Triangulation.S2Triangulation.html)

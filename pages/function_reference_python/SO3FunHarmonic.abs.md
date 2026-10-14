@@ -16,12 +16,14 @@ the absolute value of the function, by quadrature at twice the bandwidth
 ## Syntax
 
 ```python
-SO3FunHarmonic.abs(self)
-```
-
-```python
 SO3F = abs(SO3F)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L385">source</a></font>
+## Signature
+
+```python
+SO3FunHarmonic.abs(self)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L445">source</a></font>
 {% endraw %}

@@ -13,6 +13,8 @@ status: Reference
 the square singularity kernel on SO(3), kappa in (0, 1), its coefficients the Legendre
 functions of the second kind
 
+## Syntax
+
 ```python
 SO3SquareSingularityKernel(0.9)
 SO3SquareSingularityKernel(halfwidth=10*degree)

@@ -13,5 +13,5 @@ A property of [grain2d](grain2d_index_py.html).
 
 the triple points of the grain boundary
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L170">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L207">source</a></font>
 {% endraw %}

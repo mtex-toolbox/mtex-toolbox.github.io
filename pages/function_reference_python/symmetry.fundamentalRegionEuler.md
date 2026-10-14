@@ -27,5 +27,5 @@ fundamentalRegionEuler(frA, frB=None)
 
 MATLAB's [symmetry.fundamentalRegionEuler](symmetry.fundamentalRegionEuler.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L266">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L292">source</a></font>
 {% endraw %}

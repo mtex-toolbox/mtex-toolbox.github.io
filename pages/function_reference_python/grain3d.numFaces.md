@@ -13,5 +13,5 @@ A property of [grain3d](grain3d_index_py.html).
 
 the number of faces of every grain
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L244">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L284">source</a></font>
 {% endraw %}

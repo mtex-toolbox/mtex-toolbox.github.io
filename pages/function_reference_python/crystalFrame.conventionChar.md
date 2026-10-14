@@ -22,5 +22,5 @@ crystalFrame.conventionChar(self, pC=None)
 
 MATLAB's [crystalFrame.conventionChar](crystalFrame.conventionChar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L771">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L856">source</a></font>
 {% endraw %}

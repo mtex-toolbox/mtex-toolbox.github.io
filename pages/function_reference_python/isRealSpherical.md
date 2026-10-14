@@ -17,5 +17,5 @@ whether spherical coefficients are those of a real function, fhat_l^{-m} = (-1)^
 isRealSpherical(fhat, tol=1e-10)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L282">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L335">source</a></font>
 {% endraw %}

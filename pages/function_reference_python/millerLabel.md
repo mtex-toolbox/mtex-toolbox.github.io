@@ -18,5 +18,5 @@ reciprocal one if that does not round, in the brackets of one direction; None if
 millerLabel(v, fr, utf8=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L532">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L565">source</a></font>
 {% endraw %}

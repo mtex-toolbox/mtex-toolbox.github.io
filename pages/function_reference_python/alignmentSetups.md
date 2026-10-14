@@ -18,5 +18,5 @@ them reach every distinct frame of a lattice
 alignmentSetups()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1043">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1146">source</a></font>
 {% endraw %}

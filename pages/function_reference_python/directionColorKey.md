@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 a colour key turning directions into colours
 
+## Syntax
+
 ```python
 rgb = key.direction2color(h)     an (..., 3) array in [0, 1]
 key.sym, key.sR                  the group and the sector the key is defined on
@@ -28,5 +30,5 @@ key.plot()                       the key drawn on its sector
 
 MATLAB's [directionColorKey](directionColorKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L237">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L264">source</a></font>
 {% endraw %}

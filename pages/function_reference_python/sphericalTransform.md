@@ -18,5 +18,5 @@ the sum of G e^{i(m rho - j theta)}; for a real function only m >= 0, the column
 sphericalTransform(fhat, L, real=False, degrees=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L229">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L282">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ symmetry.numSym(self)
 
 MATLAB's [symmetry.numSym](symmetry.numSym.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L249">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L278">source</a></font>
 {% endraw %}

@@ -19,5 +19,5 @@ the SR3 component, Bunge Euler angles (307°, 35°, 27°), in cs and the specime
 orientation.SR3(CS, *ss)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L264">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L288">source</a></font>
 {% endraw %}

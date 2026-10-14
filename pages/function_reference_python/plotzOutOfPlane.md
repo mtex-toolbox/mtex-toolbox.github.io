@@ -11,19 +11,24 @@ status: Reference
 ---
 {% raw %}
 the default plotting convention of the session, and setting it: default('y↑→x'),
+
+```python
 default(zvector, xvector) make a convention the default, default(north=xvector),
 default(intoScreen=zvector) change those directions and keep the rest (MATLAB's plotx2north,
 plotzIntoPlane); save=True keeps it in mtex_settings.json
+```
 
 ## Syntax
 
 ```python
-plottingConvention.default(outOfScreen=None, east=None, save=False, **directions)
+  plottingConvention.default('y↓→x')
+  plottingConvention.default(north=xvector, save=True)
 ```
 
+## Signature
+
 ```python
-plottingConvention.default('y↓→x')
-plottingConvention.default(north=xvector, save=True)
+plottingConvention.default(outOfScreen=None, east=None, save=False, **directions)
 ```
 
 MATLAB's [plotzOutOfPlane](plotzOutOfPlane.html)

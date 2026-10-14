@@ -24,5 +24,5 @@ vector3d.eq(self, other, antipodal=False, tol=1e-10)
 
 MATLAB's [vector3d.eq](vector3d.eq.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L746">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L943">source</a></font>
 {% endraw %}

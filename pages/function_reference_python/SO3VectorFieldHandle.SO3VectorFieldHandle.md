@@ -16,11 +16,13 @@ orientations, in the left or right tangent space; bandwidth is the hint for its 
 ## Syntax
 
 ```python
-SO3VectorFieldHandle(fun, *args, bandwidth=None)
+SO3VectorFieldHandle(lambda ori: ..., cs, ss, 'left')
 ```
 
+## Signature
+
 ```python
-SO3VectorFieldHandle(lambda ori: ..., cs, ss, 'left')
+SO3VectorFieldHandle(fun, *args, bandwidth=None)
 ```
 
 ## Used on
@@ -29,5 +31,5 @@ SO3VectorFieldHandle(lambda ori: ..., cs, ss, 'left')
 
 MATLAB's [SO3VectorFieldHandle.SO3VectorFieldHandle](SO3VectorFieldHandle.SO3VectorFieldHandle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L665">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L732">source</a></font>
 {% endraw %}

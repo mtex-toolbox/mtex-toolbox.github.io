@@ -16,12 +16,14 @@ the epsilon fibre of rolling textures, between the orientations MTEX puts at its
 ## Syntax
 
 ```python
-fibre.epsilon(*frames, full=False)
-```
-
-```python
 f = fibre.epsilon(cs)
 f = fibre.epsilon(cs, ss, full=True)
+```
+
+## Signature
+
+```python
+fibre.epsilon(*frames, full=False)
 ```
 
 ## Used on

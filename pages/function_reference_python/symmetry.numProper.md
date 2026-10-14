@@ -22,5 +22,5 @@ symmetry.numProper(self)
 
 MATLAB's [symmetry.numProper](symmetry.numProper.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L253">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L282">source</a></font>
 {% endraw %}

@@ -17,12 +17,14 @@ From GRID_FROM orientations on the key goes through its grid, which it builds on
 ## Syntax
 
 ```python
-ipfColorKey.orientation2color(self, ori)
-```
-
-```python
 rgb = ipfKey.orientation2color(ori)
 rgb = ipfKey.orientation2color(ebsd['Fo'].orientations)
+```
+
+## Signature
+
+```python
+ipfColorKey.orientation2color(self, ori)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L108">source</a></font>

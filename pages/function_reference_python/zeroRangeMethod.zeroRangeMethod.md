@@ -10,21 +10,71 @@ counterpart: zeroRangeMethod.zeroRangeMethod.html
 status: Reference
 ---
 {% raw %}
-a pole figure that vanishes on a region says the ODF vanishes on every fibre through
-it: the density of the measurement points says where the statement is backed by data,
-the density weighted by alpha (I > bg) - 1 where the data is zero
+the zero range method of the pole figure inversion: where a pole figure vanishes, the ODF
+vanishes on every fibre through it
 
 ## Syntax
 
-```python
-zeroRangeMethod(pf, *args, halfwidth=None, kernel=None, threshold=None, delta=0.001, bg=None, alpha=10, bandwidth=None)
-```
+The defaults:
 
 ```python
-zrm = zeroRangeMethod(pf, halfwidth=, threshold=, delta=, bg=, alpha=)
-zrm.checkZeroRange(ori)          the orientations every pole figure position of which is zero
-zrm.checkZeroRange(v, i)         the positions of the i-th pole figure that are zero
+zrm = zeroRangeMethod(pf)
 ```
+
+A wider kernel, a higher background:
+
+```python
+zrm = zeroRangeMethod(pf, halfwidth=10*degree, delta=0.01)
+```
+
+The orientations ruled out:
+
+```python
+isZero = zrm.checkZeroRange(ori)
+```
+
+The zero positions of the i-th pole figure:
+
+```python
+isZero = zrm.checkZeroRange(v, i)
+```
+
+The measurement positions are smoothed with a spherical kernel twice: unweighted, their
+density, which says where the data backs a statement, and weighted by alpha where the
+intensity exceeds the background bg and by -1 where it does not. A direction where the
+density is above the threshold and the weighted sum below -0.1 of it counts as zero; an
+orientation is ruled out when one of its symmetric poles falls on such a direction in some
+pole figure. calcODF(pf, zeroRange=True) removes those orientations from the grid of the
+ansatz functions; calcODF(pf, zeroRange=zrm) uses the method set up here.
+
+## Input
+
+| | |
+|---|---|
+| `pf` | PoleFigure |
+| `psi` | S2Kernel, the smoothing kernel, given positionally |
+
+## Output
+
+| | |
+|---|---|
+| `zrm` | zeroRangeMethod |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `halfwidth` | `None` | the halfwidth of the de la Vallee Poussin smoothing kernel, by default twice the resolution of the pole figures |
+| `kernel` | `None` | S2Kernel, the smoothing kernel instead |
+| `threshold` | `None` | the density below which the data says nothing, by default a tenth of the kernel's maximum |
+| `delta` | `0.001` | the background as a fraction of the largest intensity, when bg is not given |
+| `bg` | `None` | the background intensity, one number or one per pole figure |
+| `alpha` | `10` | the weight of an intensity above the background against one below it |
+| `bandwidth` | `None` | the bandwidth of the smoothed densities, by default the kernel's |
+
+## See also
+
+[calcODF](calcODF_py.html), [MLSSolver](MLSSolver_index_py.html), [PoleFigureDubna](PoleFigureDubna_py.html)
 
 MATLAB's [zeroRangeMethod.zeroRangeMethod](zeroRangeMethod.zeroRangeMethod.html)
 

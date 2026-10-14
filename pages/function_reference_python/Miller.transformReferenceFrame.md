@@ -22,5 +22,5 @@ vector3d.transformReferenceFrame(self, to, rule=None, tol=0.1)
 
 MATLAB's [Miller.transformReferenceFrame](Miller.transformReferenceFrame.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L805">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1002">source</a></font>
 {% endraw %}

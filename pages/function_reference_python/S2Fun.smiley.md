@@ -12,20 +12,68 @@ status: Reference
 {% raw %}
 A method of [S2Fun](S2Fun_index_py.html).
 
-the smiley test function on the sphere
+the smiley, a test function on the sphere whose face shows where a plot puts the axes
 
 ## Syntax
 
-```python
-S2Fun.smiley(v=None, exact=False, even=False, **kwargs)
-```
+Its harmonic expansion by quadrature:
 
 ```python
-sF = S2Fun.smiley(bandwidth=256)  # its harmonic expansion by quadrature
-values = S2Fun.smiley(v)  # its values at the directions v
-sF = S2Fun.smiley(exact=True)  # the function itself, as a handle
-sF = S2Fun.smiley(even=True)  # the smiley on both hemispheres, an antipodal function
+sF = S2Fun.smiley()
 ```
+
+Of a given bandwidth:
+
+```python
+sF = S2Fun.smiley(bandwidth=256)
+```
+
+Its values at the directions v:
+
+```python
+values = S2Fun.smiley(v)
+```
+
+The function itself, as a handle:
+
+```python
+sF = S2Fun.smiley(exact=True)
+```
+
+On both hemispheres, an antipodal function:
+
+```python
+sF = S2Fun.smiley(even=True)
+```
+
+The face is a sum of quadratic splines of the cosine about nine centres, the head, two eyes,
+the mouth and the nose; it reads upright in the convention 'y↑→x'. The even smiley adds
+its reflection through the origin, so it takes the same value at v and -v. Further
+keywords go to S2FunHarmonic.quadrature.
+
+## Input
+
+| | |
+|---|---|
+| `v` | vector3d, directions to evaluate at |
+
+## Output
+
+| | |
+|---|---|
+| `sF` | S2FunHarmonic, or S2FunHandle with exact=True |
+| `values` | array of the shape of v |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `exact` | `False` | return the function as an S2FunHandle instead of its expansion |
+| `even` | `False` | the antipodal smiley, the face also on the lower hemisphere |
+
+## See also
+
+[S2FunHarmonic.quadrature](S2FunHarmonic.quadrature_py.html), [S2Fun.unimodal](S2Fun.unimodal_py.html), [S2FunHarmonicRepresentation](S2FunHarmonicRepresentation_py.html)
 
 ## Used on
 

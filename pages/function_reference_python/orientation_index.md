@@ -13,11 +13,75 @@ status: Reference
 orientations and misorientations, rotations taking coordinates in the frame CS to coordinates
 in the frame SS; a misorientation is one between two crystal frames
 
+## Syntax
+
+A rotation between a crystal and a specimen frame:
+
 ```python
-orientation(rot, cs, ss)
-orientation(a, b, c, d, cs, ss)      the quaternion coefficients
-orientation(f, cs, points=1000)      points along a fibre
+ori = orientation(rot, cs, ss)
 ```
+
+The quaternion coefficients:
+
+```python
+ori = orientation(a, b, c, d, cs, ss)
+```
+
+A misorientation with grain exchange:
+
+```python
+mori = orientation(rot, cs, cs, antipodal=True)
+```
+
+Points along a fibre:
+
+```python
+ori = orientation(f, points=100)
+```
+
+Euler angles, and the other constructors:
+
+```python
+ori = orientation.byEuler(phi1, Phi, phi2, cs, ss)
+```
+
+An orientation is a rotation that carries the two frames it maps between: frameA, the crystal
+frame CS, from which it takes the coordinates, and frameB, the specimen frame SS or the second
+crystal frame of a misorientation, to which it takes them. The symmetries of both frames
+enter every comparison, angle, mean and plot. A frame left out is the triclinic crystal frame,
+or the default specimen frame. Coefficients are normalised; an improper transform is refused,
+an orientation is proper.
+
+An orientation given keeps its frames unless others are named; a fibre is sampled at points
+orientations, an embedding projected back onto the orientations.
+
+## Input
+
+| | |
+|---|---|
+| `rot` | rotation, quaternion or orientation |
+| `a, b, c, d` | the quaternion coefficients, numbers or arrays |
+| `cs` | crystalFrame, the frame mapped from |
+| `ss` | specimenFrame, or the second crystalFrame of a misorientation |
+| `f` | fibre |
+
+## Output
+
+| | |
+|---|---|
+| `ori` | orientation |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` |  | a misorientation with grain exchange, between two frames of one crystal: the misorientation and its inverse are taken as one |
+| `dtype` |  | the floating point type of the coefficients |
+| `points` |  | the number of orientations sampled along a fibre |
+
+## See also
+
+[orientation.byEuler](orientation.byEuler_py.html), [orientation.byAxisAngle](orientation.byAxisAngle_py.html), [orientation.byMiller](orientation.byMiller_py.html), [orientation.byMatrix](orientation.byMatrix_py.html), [orientation.map](orientation.map_py.html), [rotation](rotation_index_py.html), [crystalFrame](crystalFrame_index_py.html), [OrientationDefinition](OrientationDefinition_py.html), [MisorientationTheory](MisorientationTheory_py.html)
 
 ## Members
 
@@ -25,23 +89,23 @@ orientation(f, cs, points=1000)      points along a fibre
 |---|---|
 | [align](orientation.align_py.html) | the orientation two frames stand in by their axes: a point at v in frA sits at orientation.align(frA, frB) * v in frB |
 | [angle](orientation.angle_py.html) | the rotational angle up to symmetry, of the orientation or of the misorientation to other |
-| [axis](orientation.axis_py.html) | the rotational axis, of the representative in the fundamental region |
+| [axis](orientation.axis_py.html) | the rotational axis of a misorientation, an orientation or the misorientation between two orientations |
 | [Bagaryatsky](orientation.Bagaryatsky_py.html) | the Bagaryatsky orientation relationship between cementite and ferrite, (100) \|\| (1-10) and [010] \|\| [111], a misorientation from the cementite frame csT to the ferrite frame csA |
 | [Bain](orientation.Bain_py.html) | the Bain orientation relationship from fcc to bcc, (100) \|\| (100) and [010] \|\| [011], a misorientation from the parent frame csG to the child frame csA |
 | [brass2](orientation.brass2_py.html) | the brass2 component, Bunge Euler angles (325°, 45°, 0°), in cs and the specimen frame |
 | [brass](orientation.brass_py.html) | the brass component, Bunge Euler angles (35°, 45°, 0°), in cs and the specimen frame |
 | [Burgers](orientation.Burgers_py.html) | the Burgers orientation relationship between bcc and hcp, (110) \|\| (0001) and [-11-1] \|\| [2-1-10], from csParent to csChild |
 | [byAxisAngle](orientation.byAxisAngle_py.html) | the orientations of the rotations by omega about the axis v |
-| [byEuler](orientation.byEuler_py.html) | the orientations of the Euler angles, Bunge's ZXZ convention unless a convention is named ('Bunge', 'ZXZ', 'Matthies', 'ZYZ', 'ABG', 'Roe', 'Kocks', 'Canova') |
+| [byEuler](orientation.byEuler_py.html) | orientations defined by Euler angles |
 | [byHomochoric](orientation.byHomochoric_py.html) | the orientations of homochoric vectors |
 | [byMatrix](orientation.byMatrix_py.html) | the orientations of rotation matrices |
 | [byMiller](orientation.byMiller_py.html) | the orientation that takes the crystal plane hkl to z and the crystal direction uvw to x |
 | [byRodrigues](orientation.byRodrigues_py.html) | the orientations of Rodrigues vectors, the axes scaled by tan(omega/2) |
 | [byScreenAlignment](orientation.byScreenAlignment_py.html) | the orientation between two frames that are drawn alike on the screen, from their plotting conventions |
-| [calcAngleDistribution](orientation.calcAngleDistribution_py.html) | the distribution of the misorientation angle, MATLAB's order (density, omega):   calcAngleDistribution(cs1, cs2)   the uniform one, the area of the axis sector at each                                     angle times sin^2(omega/2), with mean one over the angles   calcAngleDistribution(mori)       a histogram of the disorientation angles in percent   calcAngleDistribution(f)          the uniform one times the mean of f over the axes at each                                     angle, found by sampling the axes with a count following                                     sin^2(omega/2) and keeping the rotations of minimal angle |
+| [calcAngleDistribution](orientation.calcAngleDistribution_py.html) | the distribution of the misorientation angle: of a misorientation density, of a list of misorientations, or of the uniform density of two crystal frames |
 | [calcBinghamODF](orientation.calcBinghamODF_py.html) | the estimate from orientations: the eigen decomposition of the quaternion tensor of the sample projected to the fundamental region about its mean gives the axes, and the concentrations follow from the eigenvalues, by the large concentration approximation kappa_i = -1/(2 lambda_i) shifted to a smallest value of zero, or exactly by Newton on the moments |
 | [calcCluster](orientation.calcCluster_py.html) | the clusters of directions or orientations: one cluster id per element, counted from zero, and the centre of every cluster |
-| [calcKernel](orientation.calcKernel_py.html) | the de la Vallee Poussin kernel a density estimate of orientations or directions should use (MATLAB calcKernel): 'UCV', the default, and 'conservative' select from the degree energies of the sample and are bounded below by a noise floor unless noiseFloor=False (docs/plans/halfwidth.md) |
+| [calcKernel](orientation.calcKernel_py.html) | the kernel a density estimate of orientations or directions should use, a de la Vallee Poussin kernel of the halfwidth chosen from the sample |
 | [calcMIndex](orientation.calcMIndex_py.html) | the M-index: half the total variation between the angle distributions of the uniform and the uncorrelated misorientation distribution |
 | [calcTensor](orientation.calcTensor_py.html) | the texture average of a single crystal tensor |
 | [cat](orientation.cat_py.html) | the list of the operands, MATLAB's [r1, r2] |
@@ -58,7 +122,7 @@ orientation(f, cs, points=1000)      points along a fibre
 | [dot_outer](orientation.dot_outer_py.html) | the reduced dot product and the disorientation angle, over the groups of both frames |
 | [exp](orientation.exp_py.html) | the rotation a tangent vector at this reference points to, exp(ori, v) of MATLAB |
 | [export_VPSC](orientation.export_VPSC_py.html) | write a map to the file the extension names |
-| [fibreVolume](orientation.fibreVolume_py.html) | the share of crystal directions within a radius of h among those mapped to r: the mean of the inverse pole figure over the cap, times the cap's share of the sphere over the orbit of h the share of the tube about the fibre: the function averaged over the orientations that send h within the radius of r, u = g h on a cap about r and the turn about u equispaced, times the tube's share of orientation space over the copies of h under the group |
+| [fibreVolume](orientation.fibreVolume_py.html) | the volume of a fibre: the share of an orientation density within a radius of the fibre of the orientations that map the crystal direction h onto the specimen direction r |
 | [find](orientation.find_py.html) | the orientations of ori nearest to w up to symmetry: the pair (ind, d) of the nearest, the k nearest for an integer, or two sparse matrices of those within the radius eps |
 | [fit](orientation.fit_py.html) | the orientation that maps the directions u best onto the directions v in the least squares sense, weighted by weights |
 | [fundamentalRegion](orientation.fundamentalRegion_py.html) | the fundamental region of the orientations, the orientationRegion of the groups of CS and SS |
@@ -71,10 +135,10 @@ orientation(f, cs, points=1000)      points along a fibre
 | [isMisorientation](orientation.isMisorientation_py.html) | whether both frames are crystal frames, so the orientation is a misorientation |
 | [KurdjumovSachs](orientation.KurdjumovSachs_py.html) | the Kurdjumov-Sachs orientation relationship from fcc to bcc, (111) \|\| (011) and [-101] \|\| [-1-11], a misorientation from the parent frame csG to the child frame csA |
 | [load](orientation.load_py.html) | orientation.load(fname, cs, columnNames=['phi1', 'Phi', 'phi2']): the orientations of a text table |
-| [log](orientation.log_py.html) | the tangent vector at the reference pointing to this orientation, the pair reduced by symmetry first so that its norm is angle(ori, ref) |
+| [log](orientation.log_py.html) | the logarithm of an orientation, the tangent vector at a reference pointing to it |
 | [logm](orientation.logm_py.html) | logm(T) is T.logm(): the matrix logarithm |
 | [map](orientation.map_py.html) | the smallest rotation taking u1 to v1, or the one taking u1 to v1 and u2 to v2 |
-| [mean](orientation.mean_py.html) | the mean orientation, every element moved to the equivalent closest to the running mean before the quaternion mean is taken |
+| [mean](orientation.mean_py.html) | the mean of a list of orientations, with the principal moments and axes of inertia |
 | [mtimes](orientation.mtimes_py.html) |  |
 | [nan](orientation.nan_py.html) | the orientations of NaN coefficients between the frames given, of the shape given |
 | [NishiyamaWassermann](orientation.NishiyamaWassermann_py.html) | the Nishiyama-Wassermann orientation relationship from fcc to bcc, (111) \|\| (011) and [11-2] \|\| [0-11], a misorientation from the parent frame csG to the child frame csA |
@@ -86,7 +150,7 @@ orientation(f, cs, points=1000)      points along a fibre
 | [PLage](orientation.PLage_py.html) | the PLage component, Bunge Euler angles (65°, 45°, 0°), in cs and the specimen frame |
 | [plot](orientation.plot_py.html) | plot(x, ...) draws x as its kind is drawn |
 | [plotIPDF](orientation.plotIPDF_py.html) | plotIPF(ori, r), plotIPF(ori, data, r), plotIPF(odf, r): the inverse pole figures of a list of orientations, the crystal directions along r as markers on the crystal sector, or of an ODF (MATLAB's plotIPDF) |
-| [plotPDF](orientation.plotPDF_py.html) | plotPF(ori, h), plotPF(ori, data, h), plotPF(ori, h, points=100, contourf=True, antipodal=True), plotPF(odf, h), plotPF(pf) |
+| [plotPDF](orientation.plotPDF_py.html) | pole figures, one per crystal direction: of an ODF, of a list of orientations or of a measured PoleFigure |
 | [plotSection](orientation.plotSection_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
 | [Potter](orientation.Potter_py.html) | the Potter orientation relationship between bcc and hcp, (011) \|\| (01-11) and [11-1] \|\| [2-1-10], a misorientation from csParent to csChild |
 | [project2EulerFR](orientation.project2EulerFR_py.html) | the Bunge Euler angles of the representative inside the Euler plotting box |
@@ -97,10 +161,10 @@ orientation(f, cs, points=1000)      points along a fibre
 | [QLage4](orientation.QLage4_py.html) | the QLage4 component, Bunge Euler angles (295°, 160°, 0°), in cs and the specimen frame |
 | [QLage](orientation.QLage_py.html) | the QLage component, Bunge Euler angles (65°, 20°, 0°), in cs and the specimen frame |
 | [quiver](orientation.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
-| [quiverSection](orientation.quiverSection_py.html) | quiver(ori, w) on a section plot: an arrow along w at every orientation, w a specimen direction per orientation |
-| [rand](orientation.rand_py.html) | random orientations, uniformly distributed or within maxAngle of the identity |
-| [round2Miller](orientation.round2Miller_py.html) | hkl, uvw = round2Miller(ori): the plane and the direction of the crystal along the specimen z and x, as their nearest low indices |
-| [scatter](orientation.scatter_py.html) | scatter(ori), plot3d(ori), scatter(ori, 'Rodrigues'), scatter(ori, 'Euler'), scatter(ori, data, 'axisAngle'), scatter(ori, all=True) |
+| [quiverSection](orientation.quiverSection_py.html) | arrows on a section plot: of a function on the sphere along one of its circles, or at orientations in the sections of orientation space |
+| [rand](orientation.rand_py.html) | random orientations |
+| [round2Miller](orientation.round2Miller_py.html) | the lattice planes and directions of low indices an orientation or a misorientation aligns |
+| [scatter](orientation.scatter_py.html) | orientations as points in a three dimensional space of orientations |
 | [ShojiNishiyama](orientation.ShojiNishiyama_py.html) | the Shoji-Nishiyama orientation relationship from fcc to hcp, (111) \|\| (0001) and [10-1] \|\| [2-1-10], a misorientation from the parent frame csG to the child frame csE |
 | [SR2](orientation.SR2_py.html) | the SR2 component, Bunge Euler angles (233°, 35°, 63°), in cs and the specimen frame |
 | [SR3](orientation.SR3_py.html) | the SR3 component, Bunge Euler angles (307°, 35°, 27°), in cs and the specimen frame |
@@ -109,9 +173,9 @@ orientation(f, cs, points=1000)      points along a fibre
 | [SS](orientation.SS_py.html) | the frame the orientation maps to, frameB: the specimen frame, or the second crystal frame of a misorientation |
 | [symmetrise](orientation.symmetrise_py.html) | the symmetric equivalents l * o * r, shaped (numL * numR,) + shape |
 | [times](orientation.times_py.html) |  |
-| [transformReferenceFrame](orientation.transformReferenceFrame_py.html) | the same orientation with another crystal frame, both frames of a misorientation |
-| [unique](orientation.unique_py.html) | the orientations with the equivalents within the tolerance removed, the first kept |
-| [variants](orientation.variants_py.html) | the variants of a parent-to-child relationship, the distinct p2c * r over the parent group modulo the child group, or the child orientations of parents |
+| [transformReferenceFrame](orientation.transformReferenceFrame_py.html) | the same orientation described with another reference frame of the crystal |
+| [unique](orientation.unique_py.html) | the disjoint list of orientations, symmetric equivalents within a tolerance taken as one |
+| [variants](orientation.variants_py.html) | the variants of a parent to child orientation relationship, and the child or parent orientations they give |
 | [volume](orientation.volume_py.html) | the share of orientations within a radius of a centre: the mean of f on a local grid in the ball, times the ball's share of the fundamental region (its Haar measure times the number of symmetric copies, at most one) |
 
 ## Used on

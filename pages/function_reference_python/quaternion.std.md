@@ -12,21 +12,59 @@ status: Reference
 {% raw %}
 A method of [quaternion](quaternion_index_py.html).
 
-the mean angular deviation from the mean, quaternion/std; for orientations the angle is
-the symmetry-reduced one, as the mean is; weights= weigh the rotations, robust=True takes the
-robust mean
+the mean angular deviation of a list of rotations from their mean
 
 ## Syntax
 
-```python
-quaternion.std(self, weights=None, robust=False)
-```
+The deviation in radians:
 
 ```python
 sigma = std(rot)
+```
+
+From the robust mean:
+
+```python
 sigma = std(rot, robust=True)
+```
+
+From the weighted mean:
+
+```python
 sigma = std(rot, weights=w)
 ```
+
+The root mean square of the rotational angles between the mean and every rotation; for
+orientations the angle is the symmetry reduced one, as the mean is. The weights enter the
+mean only, not the average of the angles.
+
+## Input
+
+| | |
+|---|---|
+| `rot` | quaternion, rotation or orientation |
+
+## Output
+
+| | |
+|---|---|
+| `sigma` | the deviation in radians |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `weights` | `None` | one weight per rotation, for the mean |
+| `robust` | `False` | deviation from the robust mean, outliers left out of the mean |
+| `axis` | `None` | NumPy's reduction axis, refused: the deviation is over the whole list |
+| `dtype` | `None` | NumPy's argument, refused |
+| `out` | `None` | NumPy's argument, refused |
+| `keepdims` | `False` | keep the reduced axes with length one, as np.std does |
+| `ddof` | `0` | NumPy's degrees of freedom, refused |
+
+## See also
+
+[quaternion.mean](quaternion.mean_py.html), [orientation.mean](orientation.mean_py.html)
 
 ## Used on
 
@@ -34,5 +72,5 @@ sigma = std(rot, weights=w)
 
 MATLAB's [quaternion.std](quaternion.std.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L355">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L411">source</a></font>
 {% endraw %}

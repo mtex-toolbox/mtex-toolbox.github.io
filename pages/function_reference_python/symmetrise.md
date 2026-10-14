@@ -18,6 +18,21 @@ symmetrise(x, ...) is x.symmetrise(...), the method of the object passed
 symmetrise(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [fibre](fibre.symmetrise_py.html) | the equivalent fibres s * o1 * inv(g) about g * h over both groups, or the distinct ones |
+| [orientation](orientation.symmetrise_py.html) | the symmetric equivalents l * o * r, shaped (numL * numR,) + shape |
+| [S2AxisFieldHarmonic](S2AxisFieldHarmonic.symmetrise_py.html) | the projection onto the equivariant fields, a(s xi) = +- s a(xi) |
+| [S2FunHarmonic](S2FunHarmonic.symmetrise_py.html) | the projection onto the functions invariant under the group of the frame, or under a list of rotations forming a group the frame does not name |
+| [S2VectorFieldHarmonic](S2VectorFieldHarmonic.symmetrise_py.html) | the projection onto the equivariant fields of the frame, v(s xi) = s v(xi) for the elements of the group including the improper ones |
+| [slipSystem](slipSystem.symmetrise_py.html) | the systems of every family: the pairs of the orbits that stay orthogonal, both signs of the Burgers vector unless antipodal |
+| [SO3FunHarmonic](SO3FunHarmonic.symmetrise_py.html) | the projection of H5 on both sides, and the exchange symmetry f(g) = f(g^-1) |
+| [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic.symmetrise_py.html) | the projection onto the equivariant fields of the frames: the invariant side one component at a time, the equivariant side F -> s F(s^-1 R) on the left, F -> s F(R s) on the right, by the Kronecker products |
+| [tensor](tensor.symmetrise_py.html) | the mean over the group of the frame, and whether the tensor is invariant under it |
+| [vector3d](vector3d.symmetrise_py.html) | the symmetrically equivalent directions, numSym x shape, or the distinct ones of one direction with unique=True |
+
 ## Used on
 
 [CrystalOperations](CrystalOperations_py.html), [OrientationSymmetry](OrientationSymmetry_py.html), [BoundaryNormalDistribution](BoundaryNormalDistribution_py.html), [MisorientationTheory](MisorientationTheory_py.html), [DislocationSystems](DislocationSystems_py.html), [SachsModel](SachsModel_py.html), [SchmidFactor](SchmidFactor_py.html), [TaylorModel](TaylorModel_py.html), [TextureEvolution](TextureEvolution_py.html), [S2FunOperations](S2FunOperations_py.html), [S2FunSym](S2FunSym_py.html)

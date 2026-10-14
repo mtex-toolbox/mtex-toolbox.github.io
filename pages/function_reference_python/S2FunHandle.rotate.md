@@ -19,5 +19,5 @@ the function rotated by r, through the harmonic form
 S2FunHandle.rotate(self, r)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L436">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L503">source</a></font>
 {% endraw %}

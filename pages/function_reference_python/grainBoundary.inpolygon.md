@@ -16,17 +16,29 @@ the segments whose midpoint lies inside a polygon (N, 2), or the rectangle [x, y
 
 ## Syntax
 
+By a rectangle:
+
+```python
+ind = gB.inpolygon([xmin, ymin, dx, dy])
+```
+
+By a polygon:
+
+```python
+ind = inpolygon(gB, [[x1, y1], [x2, y2], [x3, y3]])
+```
+
+```python
+gB = gB[ind]
+```
+
+## Signature
+
 ```python
 grainBoundary.inpolygon(self, region)
 ```
 
-```python
-ind = gB.inpolygon([xmin, ymin, dx, dy])                # by a rectangle
-ind = inpolygon(gB, [[x1, y1], [x2, y2], [x3, y3]])     # by a polygon
-gB = gB[ind]
-```
-
 MATLAB's [grainBoundary.inpolygon](grainBoundary.inpolygon.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L459">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L485">source</a></font>
 {% endraw %}

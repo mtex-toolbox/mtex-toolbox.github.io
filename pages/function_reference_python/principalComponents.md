@@ -17,5 +17,12 @@ principalComponents(x, ...) is x.principalComponents(...), the method of the obj
 principalComponents(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [grain2d](grain2d.principalComponents_py.html) | the two half axes of the ellipse with the same second area moments as every outline, the long one first, as antipodal vectors of the specimen frame |
+| [grain3d](grain3d.principalComponents_py.html) | the half axes of the ellipsoid of the same second moments and volume, the longest first |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

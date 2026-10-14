@@ -18,16 +18,23 @@ on the sphere
 ## Syntax
 
 ```python
-S2AxisFieldHarmonic.angle(self, x)
-```
-
-```python
 f = angle(sAF, v)
 f = angle(sAF1, sAF2)
-f = angle(sAF, sVF)  # to the directions of a vector field
+```
+
+To the directions of a vector field:
+
+```python
+f = angle(sAF, sVF)
+```
+
+## Signature
+
+```python
+S2AxisFieldHarmonic.angle(self, x)
 ```
 
 MATLAB's [S2AxisField.angle](S2AxisField.angle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L205">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L232">source</a></font>
 {% endraw %}

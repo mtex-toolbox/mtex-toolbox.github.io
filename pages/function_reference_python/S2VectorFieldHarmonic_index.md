@@ -11,14 +11,81 @@ status: Reference
 ---
 {% raw %}
 a vector field on the sphere by the spherical harmonic expansions of its three Cartesian
-components, projected onto the fields equivariant under the frame's group
+components
+
+## Syntax
+
+A callable of the directions:
+
+```python
+vF = S2VectorFieldHarmonic(lambda v: v.cross(vector3d.Z), bandwidth=16)
+```
+
+Vectors at directions, by quadrature:
+
+```python
+vF = S2VectorFieldHarmonic(v, w, weights=wq)
+```
+
+The component functions:
+
+```python
+vF = S2VectorFieldHarmonic([sFx, sFy, sFz])
+```
+
+The coefficients, (L+1)^2 x 3:
 
 ```python
 vF = S2VectorFieldHarmonic(fhat, cs)
-vF = S2VectorFieldHarmonic(fun, bandwidth=16)          a callable of the directions
-vF = S2VectorFieldHarmonic(v, values, weights=w)      vectors at directions, by quadrature
-vF = S2VectorFieldHarmonic([fx, fy, fz])               the component functions
 ```
+
+The expansion of another field:
+
+```python
+vF = S2VectorFieldHarmonic(sF.grad())
+```
+
+MATLAB's form:
+
+```python
+vF = S2VectorFieldHarmonic.quadrature(lambda v: v.cross(vector3d.Z))
+```
+
+A callable is evaluated on a quadrature grid of the bandwidth and expanded; vectors w at
+directions v are expanded with the quadrature weights given, equal ones by default, which
+suits directions spread evenly; two component functions leave z zero. The field is
+projected onto the fields equivariant under the group of the frame, which a crystal frame
+asks for, unless symmetrise=False. vF.x, vF.y, vF.z are the components, vF.bandwidth the
+largest degree.
+
+## Input
+
+| | |
+|---|---|
+| `fun` | callable taking a vector3d and returning vector3d, or an S2VectorField |
+| `v` | vector3d, the directions of given vectors |
+| `w` | vector3d, the vectors at them |
+| `sFx, sFy, sFz` | S2FunHarmonic, the components |
+| `fhat` | complex array of (L+1)^2 x 3 coefficients |
+| `cs` | crystalFrame or specimenFrame of the directions |
+
+## Output
+
+| | |
+|---|---|
+| `vF` | S2VectorFieldHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `bandwidth` |  | the largest degree of the expansion, by default the preference 'defaultS2Bandwidth'; truncates a field given |
+| `weights` |  | the quadrature weights of the directions v |
+| `symmetrise` |  | project onto the fields equivariant under the group of the frame |
+
+## See also
+
+[S2VectorField](S2VectorField_index_py.html), [S2FunHarmonic](S2FunHarmonic_index_py.html), [S2AxisFieldHarmonic](S2AxisFieldHarmonic_index_py.html), [S2FunVectorField](S2FunVectorField_py.html)
 
 ## Members
 
@@ -46,13 +113,13 @@ vF = S2VectorFieldHarmonic([fx, fy, fz])               the component functions
 | [plotSection](S2VectorField.plotSection_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
 | [plus](S2VectorFieldHarmonic.plus_py.html) |  |
 | [quadrature](S2VectorFieldHarmonic.quadrature_py.html) | S2VectorFieldHarmonic.quadrature(f, bandwidth=L), from a callable or from nodes and values with their weights, MATLAB's name for the constructor |
-| [quiver3](S2VectorField.quiver3_py.html) | quiver3d(t): a tangent vector as an arrow at its reference in orientation space, in the coordinates of the held axes or axis angle space |
+| [quiver3](S2VectorField.quiver3_py.html) | arrows in space: tangent vectors in orientation space, a field on the sphere or SO(3), or arrows at positions |
 | [quiver](S2VectorField.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
-| [quiverSection](S2VectorField.quiverSection_py.html) | quiver(ori, w) on a section plot: an arrow along w at every orientation, w a specimen direction per orientation |
+| [quiverSection](S2VectorField.quiverSection_py.html) | arrows on a section plot: of a function on the sphere along one of its circles, or at orientations in the sections of orientation space |
 | [rdivide](S2VectorFieldHarmonic.rdivide_py.html) |  |
 | [rotate](S2VectorFieldHarmonic.rotate_py.html) | v'(xi) = r v(r^-1 xi): the components rotate and mix |
-| [S2VectorField](S2VectorField.S2VectorField_py.html) | a vector field on the sphere by the spherical harmonic expansions of its three Cartesian components, projected onto the fields equivariant under the frame's group |
-| [S2VectorFieldHarmonic](S2VectorFieldHarmonic.S2VectorFieldHarmonic_py.html) | a vector field on the sphere by the spherical harmonic expansions of its three Cartesian components, projected onto the fields equivariant under the frame's group |
+| [S2VectorField](S2VectorField.S2VectorField_py.html) | a vector field on the sphere by the spherical harmonic expansions of its three Cartesian components |
+| [S2VectorFieldHarmonic](S2VectorFieldHarmonic.S2VectorFieldHarmonic_py.html) | a vector field on the sphere by the spherical harmonic expansions of its three Cartesian components |
 | [symmetrise](S2VectorFieldHarmonic.symmetrise_py.html) | the projection onto the equivariant fields of the frame, v(s xi) = s v(xi) for the elements of the group including the improper ones |
 | [times](S2VectorFieldHarmonic.times_py.html) |  |
 | [truncate](S2VectorFieldHarmonic.truncate_py.html) | the field cut off, or padded with zeros, at the bandwidth L |

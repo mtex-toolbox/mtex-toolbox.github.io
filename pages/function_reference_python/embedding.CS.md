@@ -13,5 +13,5 @@ A property of [embedding](embedding_index_py.html).
 
 the crystal frame the embedding belongs to
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L266">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L295">source</a></font>
 {% endraw %}

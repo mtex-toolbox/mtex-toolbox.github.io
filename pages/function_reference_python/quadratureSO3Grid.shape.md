@@ -13,5 +13,5 @@ A property of [quadratureSO3Grid](quadratureSO3Grid_index_py.html).
 
 the shape of the grid, the numbers of gamma, alpha and beta nodes
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L128">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L150">source</a></font>
 {% endraw %}

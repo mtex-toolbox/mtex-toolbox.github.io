@@ -23,5 +23,5 @@ tensor.eig(self)
 
 MATLAB's [tensor.eig](tensor.eig.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L456">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L484">source</a></font>
 {% endraw %}

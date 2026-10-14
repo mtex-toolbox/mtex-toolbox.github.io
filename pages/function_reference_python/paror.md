@@ -17,6 +17,12 @@ paror(x, ...) is x.paror(...), the method of the object passed
 paror(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [grain2d](grain2d.paror_py.html) | the cumulative projection length of the outlines, measured along each direction (Panozzo 1983): the width of the convex hull seen from that direction, summed over the outlines and normalised by its largest value |
+
 ## Used on
 
 [ProjectionBasedParameters](ProjectionBasedParameters_py.html)

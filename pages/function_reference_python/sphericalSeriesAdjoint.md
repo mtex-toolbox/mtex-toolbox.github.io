@@ -18,5 +18,5 @@ below 50 nodes; a quadrature grid brings the weights of its rule
 sphericalSeriesAdjoint(v, values, L, weights=None, real=False)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L893">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L946">source</a></font>
 {% endraw %}

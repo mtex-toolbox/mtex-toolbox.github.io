@@ -13,5 +13,5 @@ A property of [SO3FunComposition](SO3FunComposition_index_py.html).
 
 the largest bandwidth of the components
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L243">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L288">source</a></font>
 {% endraw %}

@@ -18,12 +18,14 @@ vector, a function on the sphere
 ## Syntax
 
 ```python
-S2VectorFieldHarmonic.angle(self, w)
-```
-
-```python
 f = angle(sVF1, sVF2)
 f = angle(sVF, vector3d.X)
+```
+
+## Signature
+
+```python
+S2VectorFieldHarmonic.angle(self, w)
 ```
 
 MATLAB's [S2VectorField.angle](S2VectorField.angle.html)

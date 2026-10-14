@@ -23,5 +23,5 @@ vector3d.find(self, w, epsOrK=None, antipodal=None)
 
 MATLAB's [vector3d.find](vector3d.find.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L799">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L996">source</a></font>
 {% endraw %}

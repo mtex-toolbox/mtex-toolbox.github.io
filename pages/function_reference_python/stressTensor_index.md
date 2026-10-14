@@ -10,12 +10,61 @@ counterpart: stressTensor_index.html
 status: Reference
 ---
 {% raw %}
-a rank two symmetric stress tensor; stressTensor.uniaxial(v, sigma) the uniaxial tension along v
+a rank two symmetric stress tensor, or a list of them
+
+## Syntax
+
+By its 3 x 3 matrix:
 
 ```python
 sigma = stressTensor(M)
+```
+
+The uniaxial tension along a direction:
+
+```python
 sigma = stressTensor.uniaxial(vector3d.X)
 ```
+
+Of a given magnitude:
+
+```python
+sigma = stressTensor.uniaxial(v, 2)
+```
+
+The stress is a symmetric tensor of rank two in the frame given, by default the specimen
+frame; the resolved shear stress on a slip system, SchmidFactor, and the equivalent stress
+are computed from it.
+
+## Input
+
+| | |
+|---|---|
+| `M` | 3 x 3 symmetric matrix, or an array (..., 3, 3) of them |
+| `v` | vector3d, the direction of a uniaxial tension |
+
+## Output
+
+| | |
+|---|---|
+| `sigma` | stressTensor |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `rank` |  | the rank of the tensor; for this class always two |
+| `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal |
+| `frame` |  | the reference frame of the coefficients, instead of giving it positionally |
+| `density` |  | the mass density of the material, carried along |
+| `unit` |  | the physical unit of the coefficients, a string carried along |
+| `name` |  | the name of the tensor, carried along |
+| `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
+| `dtype` |  | the NumPy type of the coefficients |
+
+## See also
+
+[tensor](tensor_index_py.html), [strainTensor](strainTensor_index_py.html), [slipSystem.SchmidFactor](slipSystem.SchmidFactor_py.html), [stressTensor.equivalentStress](stressTensor.equivalentStress_py.html)
 
 ## Members
 
@@ -26,7 +75,7 @@ sigma = stressTensor.uniaxial(vector3d.X)
 | [equivalentStress](stressTensor.equivalentStress_py.html) | the von Mises equivalent stress, sqrt(3/2 s:s) of the deviatoric stress s |
 | [meanStress](stressTensor.meanStress_py.html) | the mean stress, a third of the trace of the stress tensor |
 | [normalize](stressTensor.normalize_py.html) | the tensors divided by their Frobenius norms |
-| [stressTensor](stressTensor.stressTensor_py.html) | a rank two symmetric stress tensor |
+| [stressTensor](stressTensor.stressTensor_py.html) | a rank two symmetric stress tensor, or a list of them |
 | [uniaxial](stressTensor.uniaxial_py.html) | the stress of a uniaxial tension along v |
 
 ## Used on
@@ -35,5 +84,5 @@ sigma = stressTensor.uniaxial(vector3d.X)
 
 MATLAB's [stressTensor_index](stressTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1042">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1101">source</a></font>
 {% endraw %}

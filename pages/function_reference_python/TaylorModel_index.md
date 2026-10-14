@@ -14,5 +14,5 @@ critical resolved shear stresses, the strain each shear produces and its spin;
 spinSelection 'centre' takes the analytic centre of the optimal face, as MATLAB does,
 'basic' a vertex of it by the simplex, 'minimumNorm' the shears of least norm on it
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L185">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L207">source</a></font>
 {% endraw %}

@@ -17,5 +17,5 @@ plot(psi): a kernel on the sphere against the angle, over -180 to 180 degree wit
 plotKernel(psi, maxAngle=180*degree, symmetric=False, **kw)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L825">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L869">source</a></font>
 {% endraw %}

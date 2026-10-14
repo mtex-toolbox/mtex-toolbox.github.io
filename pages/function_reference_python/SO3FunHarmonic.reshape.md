@@ -16,13 +16,15 @@ the list of functions in another shape
 ## Syntax
 
 ```python
-SO3FunHarmonic.reshape(self, *shape)
-```
-
-```python
 SO3F = SO3F.reshape(2, 3)
 SO3F = SO3F.reshape((2, 3))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L157">source</a></font>
+## Signature
+
+```python
+SO3FunHarmonic.reshape(self, *shape)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L185">source</a></font>
 {% endraw %}

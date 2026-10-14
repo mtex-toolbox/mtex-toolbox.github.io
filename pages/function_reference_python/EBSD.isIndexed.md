@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 whether a measurement belongs to an indexed phase
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L192">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L220">source</a></font>
 {% endraw %}

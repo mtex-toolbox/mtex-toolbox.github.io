@@ -17,14 +17,16 @@ the length of the vectors
 ## Syntax
 
 ```python
-vector3d.norm(self)
+n = norm(v)
 ```
 
+## Signature
+
 ```python
-n = norm(v)
+vector3d.norm(self)
 ```
 
 MATLAB's [vector3d.norm](vector3d.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L584">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L691">source</a></font>
 {% endraw %}

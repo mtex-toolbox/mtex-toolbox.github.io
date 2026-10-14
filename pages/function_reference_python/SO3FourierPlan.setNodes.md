@@ -19,5 +19,5 @@ moves the plan to other rotations, the finufft plans kept
 SO3FourierPlan.setNodes(self, rots)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L435">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L488">source</a></font>
 {% endraw %}

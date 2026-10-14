@@ -23,5 +23,5 @@ SO3VectorFieldHarmonic.rotate(self, r, side='left')
 
 MATLAB's [SO3VectorField.rotate](SO3VectorField.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L490">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L514">source</a></font>
 {% endraw %}

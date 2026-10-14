@@ -28,5 +28,5 @@ parentGrainReconstructor.calcGBFit(self, p2c=False, c2c=False)
 
 MATLAB's [parentGrainReconstructor.calcGBFit](parentGrainReconstructor.calcGBFit.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L561">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L617">source</a></font>
 {% endraw %}

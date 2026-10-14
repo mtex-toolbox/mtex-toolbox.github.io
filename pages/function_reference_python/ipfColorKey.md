@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 an orientation coloured by the crystal direction it carries along a specimen direction
 
+## Syntax
+
 ```python
 ipfColorKey(cs), ipfColorKey(ebsd), ipfColorKey(ori)
 key.ipfDirection = xvector

@@ -13,6 +13,8 @@ the colour of a thin section of an anisotropic crystal between polariser and ana
 light along the propagation direction of the specimen through a plate of the given
 thickness in nanometres; no polariser is circular polarisation
 
+## Syntax
+
 ```python
 key = spectralTransmissionColorKey(rI, thickness)
 key.propagationDirection, key.polarizer, key.phi

@@ -19,5 +19,5 @@ the number of elements of the point group
 referenceFrame.numSym(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L180">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L203">source</a></font>
 {% endraw %}

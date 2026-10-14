@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 the azimuth from x towards y, in [0, 2 pi)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L453">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L536">source</a></font>
 {% endraw %}

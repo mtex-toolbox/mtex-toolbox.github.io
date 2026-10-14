@@ -20,17 +20,19 @@ give the list shape, rank= the rank of a plain tensor, rng= the generator
 ## Syntax
 
 ```python
-tensor.rand(*args, rank=None, rng=None, **kwargs)
-```
-
-```python
 T = tensor.rand(rank=4)
 T = tensor.rand(100, cs, rank=2)
 S = complianceTensor.rand()
 C = stiffnessTensor.rand(cs, rng=np.random.default_rng(0))
 ```
 
+## Signature
+
+```python
+tensor.rand(*args, rank=None, rng=None, **kwargs)
+```
+
 MATLAB's [tensor.rand](tensor.rand.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L748">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L814">source</a></font>
 {% endraw %}

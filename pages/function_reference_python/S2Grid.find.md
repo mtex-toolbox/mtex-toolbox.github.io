@@ -23,5 +23,5 @@ S2Grid.find(self, v, eps=None)
 
 MATLAB's [S2Grid.find](S2Grid.find.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L184">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L205">source</a></font>
 {% endraw %}

@@ -20,5 +20,5 @@ larger, in half the time a large map took, most of which was the compression
 mtexFigure.savefig(self, *args, **kwargs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L304">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L332">source</a></font>
 {% endraw %}

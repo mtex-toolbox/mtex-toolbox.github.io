@@ -17,13 +17,15 @@ resolution= is the spacing of the grid it is evaluated on, the other keywords th
 ## Syntax
 
 ```python
-ipfColorKey.plot(self, **kwargs)
-```
-
-```python
 ipfKey.plot()
 plot(ipfKey)
 ipfKey.plot(complete=True, resolution=1*degree)
+```
+
+## Signature
+
+```python
+ipfColorKey.plot(self, **kwargs)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L141">source</a></font>

@@ -17,6 +17,12 @@ calcGROD(x, ...) is x.calcGROD(...), the method of the object passed
 calcGROD(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [EBSD](EBSD.calcGROD_py.html) | the grain reference orientation deviation, mis2mean: the misorientation of every pixel from the mean orientation of its grain, or from a given reference |
+
 ## Used on
 
 [GrainOrientationParameters](GrainOrientationParameters_py.html)

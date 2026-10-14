@@ -12,6 +12,8 @@ status: Reference
 the lattice a volume is measured on: the origin, the translations d1, d2, d3 as the rows of D
 and the integer index of every voxel, voxel n at origin + ijk[n] @ D
 
+## Syntax
+
 ```python
 voxelLattice(origin, D, ijk)
 voxelLattice.fromPositions(P)

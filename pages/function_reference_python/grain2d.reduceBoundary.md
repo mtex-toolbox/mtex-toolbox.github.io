@@ -22,5 +22,5 @@ grain2d.reduceBoundary(grains, n=2)
 
 MATLAB's [grain2d.reduceBoundary](grain2d.reduceBoundary.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L339">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L393">source</a></font>
 {% endraw %}

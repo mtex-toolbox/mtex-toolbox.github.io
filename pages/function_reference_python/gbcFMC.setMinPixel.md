@@ -19,5 +19,5 @@ the same criterion with another smallest region left standing
 gbcFMC.setMinPixel(self, minPixel)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L53">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L82">source</a></font>
 {% endraw %}

@@ -19,5 +19,5 @@ the derivative as a function, or its values at the angles x
 S1FunHarmonic.grad(self, x=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L158">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L226">source</a></font>
 {% endraw %}

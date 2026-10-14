@@ -12,14 +12,67 @@ status: Reference
 {% raw %}
 A method of [rotation](rotation_index_py.html).
 
-the quaternions with those equal up to the tolerance in the coefficients removed; antipodal=True
-takes q and -q as one; optionally the indices of the kept ones and the index of each into them
+the disjoint list of quaternions, those equal up to a tolerance in the coefficients taken
+as one
 
 ## Syntax
 
+Sorted, one of each:
+
 ```python
-rotation.unique(self, tol=0.001, antipodal=False, stable=False, return_index=False, return_inverse=False)
+u = unique(q)
 ```
+
+A coarser tolerance:
+
+```python
+u = unique(q, tol=0.01)
+```
+
+In the order of first appearance:
+
+```python
+u = unique(q, stable=True)
+```
+
+The index maps:
+
+```python
+u, iq, iu = unique(q, return_index=True, return_inverse=True)
+```
+
+Two quaternions are one when their coefficients agree to tol after rounding to multiples
+of it, so two close quaternions on either side of a rounding step stay apart. A quaternion
+and its negative, one rotation, are kept apart unless antipodal is set; orientation.unique
+takes them as one.
+
+## Input
+
+| | |
+|---|---|
+| `q` | quaternion |
+
+## Output
+
+| | |
+|---|---|
+| `u` | quaternion, a one-dimensional list |
+| `iq` | indices with u = q.flatten()[iq] |
+| `iu` | indices with q.flatten() = u[iu] |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `tol` | `0.001` | the tolerance in the coefficients |
+| `antipodal` | `False` | take q and -q as one |
+| `stable` | `False` | keep the order of first appearance instead of sorting |
+| `return_index` | `False` | also return iq |
+| `return_inverse` | `False` | also return iu |
+
+## See also
+
+[orientation.unique](orientation.unique_py.html), [vector3d.unique](vector3d.unique_py.html)
 
 MATLAB's [rotation.unique](rotation.unique.html)
 

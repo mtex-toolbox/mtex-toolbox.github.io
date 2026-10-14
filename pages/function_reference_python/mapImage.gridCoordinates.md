@@ -20,5 +20,5 @@ are perpendicular, so each is one projection
 mapImage.gridCoordinates(self, pos)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L202">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L223">source</a></font>
 {% endraw %}

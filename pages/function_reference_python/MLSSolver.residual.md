@@ -19,5 +19,5 @@ the relative residual of each pole figure, and the norm of the vector of them
 MLSSolver.residual(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L327">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L396">source</a></font>
 {% endraw %}

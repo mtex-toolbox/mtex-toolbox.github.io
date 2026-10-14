@@ -12,6 +12,8 @@ status: Reference
 the de la Vallee Poussin kernel on SO(3), B(3/2, 1/2) / B(3/2, kappa + 1/2) t^(2 kappa):
 nonnegative and a finite series, the kernel recommended for texture analysis
 
+## Syntax
+
 ```python
 SO3DeLaValleePoussinKernel(20)
 SO3DeLaValleePoussinKernel(halfwidth=10*degree)

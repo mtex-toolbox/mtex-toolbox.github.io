@@ -18,12 +18,14 @@ keep their digits near 0 and pi
 ## Syntax
 
 ```python
-quaternion.angle_outer(self, other=None)
-```
-
-```python
 omega = angle(q)
 omega = angle(q1, q2)
+```
+
+## Signature
+
+```python
+quaternion.angle_outer(self, other=None)
 ```
 
 MATLAB's [quaternion.angle_outer](quaternion.angle_outer.html)

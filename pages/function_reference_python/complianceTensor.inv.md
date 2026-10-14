@@ -23,5 +23,5 @@ complianceTensor.inv(self)
 
 MATLAB's [complianceTensor.inv](complianceTensor.inv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L429">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L457">source</a></font>
 {% endraw %}

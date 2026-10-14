@@ -19,5 +19,5 @@ the number of points and the largest displacement as a line of text
 spatialTransformField.paramChar(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L599">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L670">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ checkSymmetry(T, atol=1e-06)
 
 [TensorImport](TensorImport_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1222">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1442">source</a></font>
 {% endraw %}

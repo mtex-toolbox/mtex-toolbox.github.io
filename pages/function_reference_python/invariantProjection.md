@@ -18,5 +18,5 @@ of the group alone, which the sphere needs beside the rotation parts of all elem
 invariantProjection(g, L, dtype=<class 'numpy.float64'>, proper=False)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L338">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L365">source</a></font>
 {% endraw %}

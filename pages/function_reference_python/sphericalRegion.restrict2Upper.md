@@ -22,5 +22,5 @@ sphericalRegion.restrict2Upper(self, up=None)
 
 MATLAB's [sphericalRegion.restrict2Upper](sphericalRegion.restrict2Upper.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L106">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L126">source</a></font>
 {% endraw %}

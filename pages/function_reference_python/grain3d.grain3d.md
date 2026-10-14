@@ -16,13 +16,15 @@ faces of a grain3Boundary: what calcGrains returns for a volume, the counterpart
 ## Syntax
 
 ```python
-grain3d(id, phaseId, CSList, numPixel, meanRotation, GOS, I_GF, boundary, frame, prop=None, phaseMap=None)
-```
-
-```python
 grains = calcGrains(ebsd3)
 grain3d.fromFaces(V, F, I_GF, ori, CSList, phaseId)
 grain3d.load('grains.dream3d')
+```
+
+## Signature
+
+```python
+grain3d(id, phaseId, CSList, numPixel, meanRotation, GOS, I_GF, boundary, frame, prop=None, phaseMap=None)
 ```
 
 MATLAB's [grain3d.grain3d](grain3d.grain3d.html)

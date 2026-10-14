@@ -19,5 +19,5 @@ the function rotated by r from the left or the right, through the harmonic form
 SO3FunHandle.rotate(self, r, side='left')
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L211">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L256">source</a></font>
 {% endraw %}

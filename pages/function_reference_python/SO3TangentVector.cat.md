@@ -18,12 +18,19 @@ every list shares the same one
 ## Syntax
 
 ```python
-SO3TangentVector.cat(*arrays, axis=0)
+v = cat(v1, v2)
 ```
 
+Side by side:
+
 ```python
-v = cat(v1, v2)
-v = cat(v1, v2, axis=1)    # side by side
+v = cat(v1, v2, axis=1)
+```
+
+## Signature
+
+```python
+SO3TangentVector.cat(*arrays, axis=0)
 ```
 
 MATLAB's [SO3TangentVector.cat](SO3TangentVector.cat.html)

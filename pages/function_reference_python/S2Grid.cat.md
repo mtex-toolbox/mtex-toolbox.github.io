@@ -17,12 +17,19 @@ the list of the operands, MATLAB's [a, b]; single elements are lists of one
 ## Syntax
 
 ```python
-S2Grid.cat(*arrays, axis=0)
+v = cat(v1, v2)
 ```
 
+Side by side:
+
 ```python
-v = cat(v1, v2)
-v = cat(v1, v2, axis=1)    # side by side
+v = cat(v1, v2, axis=1)
+```
+
+## Signature
+
+```python
+S2Grid.cat(*arrays, axis=0)
 ```
 
 MATLAB's [S2Grid.cat](S2Grid.cat.html)

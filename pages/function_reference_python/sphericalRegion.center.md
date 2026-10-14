@@ -21,5 +21,5 @@ triangle, and the area centroid of anything larger
 sphericalRegion.center(self, resolution=1*degree)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L80">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L100">source</a></font>
 {% endraw %}

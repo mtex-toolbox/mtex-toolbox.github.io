@@ -17,10 +17,6 @@ maximum; with axis= the maximum of a list of functions along an axis
 ## Syntax
 
 ```python
-max_(f, *args, numLocal=1, **kwargs)
-```
-
-```python
 value, ori = max(odf)
 values, oris = max(odf, numLocal=5, resolution=5*degree, accuracy=0.25*degree)
 f = max(odf1, odf2)
@@ -29,7 +25,13 @@ values, positions = max(sF, numLocal=3)
 sF = max(sF, 0.5)
 ```
 
+## Signature
+
+```python
+max_(f, *args, numLocal=1, **kwargs)
+```
+
 MATLAB's [S1Grid.max](S1Grid.max.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L544">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L608">source</a></font>
 {% endraw %}

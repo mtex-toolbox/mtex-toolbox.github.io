@@ -10,23 +10,77 @@ counterpart: orientationRegion_index.html
 status: Reference
 ---
 {% raw %}
-a fundamental region of orientation space: the Dirichlet domain of the identity, the
-quaternions q with dot(q, N) <= 0 for the bounding quaternions N, and a sector of the axes
-where the two frames share rotations
+a region of orientation space bounded by planes in the quaternions, mostly the fundamental
+region of a pair of frames
+
+## Syntax
+
+The fundamental region of a crystal frame:
+
+```python
+oR = fundamentalRegion(cs)
+```
+
+Of misorientations, with grain exchange:
+
+```python
+oR = fundamentalRegion(cs, cs, antipodal=True)
+```
+
+The region bounded by the quaternions N:
+
+```python
+oR = orientationRegion(N, cs, specimenFrame())
+```
+
+The region holds the quaternions q with dot(q, N) <= 0 for every bounding quaternion N; q
+and -q are the same rotation. The fundamental region of two frames is the Dirichlet domain
+of the identity, the rotations closer to the identity than to any of their symmetric
+equivalents, which is what fundamentalRegion builds and projectIntoFundamentalRegion projects
+into. Where the two frames share rotations, the rotations about a common axis for instance,
+the planes alone do not separate the equivalents and the region keeps a sector of the
+rotation axes besides.
+
+## Input
+
+| | |
+|---|---|
+| `N` | quaternion, or an array (n, 4), the normals of the bounding planes |
+| `frameA` | the first frame, the crystal frame |
+| `frameB` | the second frame, the specimen or a second crystal frame |
+
+## Output
+
+| | |
+|---|---|
+| `oR` | orientationRegion, with oR.CS and oR.SS its two frames, MATLAB's CS1 and CS2 |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` |  | identify a misorientation with its inverse, the grain exchange symmetry |
+| `common` |  | the rotations, as an array (n, 4), the two frames share |
+| `sector` |  | sphericalRegion, the sector of rotation axes where the frames share rotations |
+| `axisCenter` |  | the centre of that sector, an array of three |
+
+## See also
+
+[fundamentalRegion](fundamentalRegion_py.html), [orientation.projectIntoFundamentalRegion](orientation.project2FundamentalRegion_py.html), [orientationRegion.checkInside](orientationRegion.checkInside_py.html), [orientationRegion.plot](orientationRegion.plot_py.html), [fundamentalSector](fundamentalSector_py.html)
 
 ## Members
 
 | | |
 |---|---|
 | [axisSector](orientationRegion.axisSector_py.html) | the sector of rotation axes the region allows at a fixed rotation angle: a bound with N = (-sin(w_i/4), cos(w_i/4) a_i) reads for q = (cos(w/2), sin(w/2) v) as dot(v, a_i) <= cot(w/2) tan(w_i/4), a small circle about the axis |
-| [calcAngleDistribution](orientationRegion.calcAngleDistribution_py.html) | the distribution of the misorientation angle, MATLAB's order (density, omega):   calcAngleDistribution(cs1, cs2)   the uniform one, the area of the axis sector at each                                     angle times sin^2(omega/2), with mean one over the angles   calcAngleDistribution(mori)       a histogram of the disorientation angles in percent   calcAngleDistribution(f)          the uniform one times the mean of f over the axes at each                                     angle, found by sampling the axes with a count following                                     sin^2(omega/2) and keeping the rotations of minimal angle |
+| [calcAngleDistribution](orientationRegion.calcAngleDistribution_py.html) | the distribution of the misorientation angle: of a misorientation density, of a list of misorientations, or of the uniform density of two crystal frames |
 | [calcAxisDistribution](orientationRegion.calcAxisDistribution_py.html) | the axis distribution of an SO(3) function, an S2 function of the rotation axes symmetric under the rotations the two frames share |
 | [checkInside](orientationRegion.checkInside_py.html) | whether orientations lie inside the region, up to the tolerance, as a boolean array |
 | [CS](orientationRegion.CS_py.html) | the first frame of the region, frameA: the crystal frame (MATLAB's orientationRegion.CS1) |
 | [edges](orientationRegion.edges_py.html) | the edges of the region, each a chain of points in axis angle coordinates in radians: every pair of planes meets in a line of Rodrigues space, kept where the other planes allow it |
 | [maxAngle](orientationRegion.maxAngle_py.html) | the largest rotation angle inside the region, at a vertex of it in Rodrigues space, or about a given axis |
-| [orientationRegion](orientationRegion.orientationRegion_py.html) | a fundamental region of orientation space: the Dirichlet domain of the identity, the quaternions q with dot(q, N) <= 0 for the bounding quaternions N, and a sector of the axes where the two frames share rotations |
-| [plot](orientationRegion.plot_py.html) | plot(oR), plot(oR, boundaryColor='r', surface=False): the fundamental region in axis angle space, in degrees, its surface with the parallels and meridians on it and its edges |
+| [orientationRegion](orientationRegion.orientationRegion_py.html) | a region of orientation space bounded by planes in the quaternions, mostly the fundamental region of a pair of frames |
+| [plot](orientationRegion.plot_py.html) | a fundamental region of orientation space drawn in axis angle space |
 | [rodriguesPlanes](orientationRegion.rodriguesPlanes_py.html) | the region in Rodrigues space as A rho <= b: a bound dot(q, N) <= 0 reads n  |
 | [rotate](orientationRegion.rotate_py.html) | rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method |
 | [SS](orientationRegion.SS_py.html) | the second frame of the region, frameB: the specimen or second crystal frame (MATLAB's orientationRegion.CS2) |

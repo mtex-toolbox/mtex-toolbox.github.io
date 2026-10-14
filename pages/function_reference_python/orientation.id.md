@@ -19,5 +19,5 @@ the identical orientations between the frames given, of the shape given (MATLAB'
 orientation.id(*args)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L205">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L265">source</a></font>
 {% endraw %}

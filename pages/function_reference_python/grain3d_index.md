@@ -13,6 +13,8 @@ status: Reference
 the grains of a volume as closed polyhedra, given by the incidence I_GF of grains and the
 faces of a grain3Boundary: what calcGrains returns for a volume, the counterpart of grain2d
 
+## Syntax
+
 ```python
 grains = calcGrains(ebsd3)
 grain3d.fromFaces(V, F, I_GF, ori, CSList, phaseId)
@@ -31,7 +33,7 @@ grain3d.load('grains.dream3d')
 | [diameter](grain3d.diameter_py.html) | the diameter of every grain, the largest distance between two of its vertices |
 | [extent](grain3d.extent_py.html) | the box of the vertices, [xmin, xmax, ymin, ymax, zmin, zmax] |
 | [F](grain3d.F_py.html) | the faces of the boundary, an (m, 3) array of triangles or a list of polygons |
-| [fromFaces](grain3d.fromFaces_py.html) | the grains of vertices, faces and the incidence of grains and faces, as MATLAB's constructor: the face lies between the grain it is +1 for and the one it is -1 for, the misorientation from the mean rotations, the voxels unknown |
+| [fromFaces](grain3d.fromFaces_py.html) | the grains of vertices, faces and the incidence of grains and faces |
 | [grain3d](grain3d.grain3d_py.html) | the grains of a volume as closed polyhedra, given by the incidence I_GF of grains and the faces of a grain3Boundary: what calcGrains returns for a volume, the counterpart of grain2d |
 | [histogram](grain3d.histogram_py.html) | histogram(grains), histogram(grains, prop, bins): the area weighted distribution of a grain property as one histogram per indexed phase, drawn over each other, or with grouped=True side by side (MATLAB's hist) |
 | [id2ind](grain3d.id2ind_py.html) | the position of grain ids |
@@ -46,12 +48,12 @@ grain3d.load('grains.dream3d')
 | [numFaces](grain3d.numFaces_py.html) | the number of faces of every grain |
 | [numNeighbors](grain3d.numNeighbors_py.html) | the number of neighbouring grains of every grain |
 | [orientFaces](grain3d.orientFaces_py.html) | the faces turned consistently around every grain, the normals out of it, as MATLAB's orientFaces |
-| [plot](grain3d.plot_py.html) | plot(grains), plot(grains, values), plot(grains, ori), plot(grains, faceColor=...) |
+| [plot](grain3d.plot_py.html) | the 3D grains drawn by their faces, coloured by phase, by a value or an orientation per grain, or in one colour |
 | [principalComponents](grain3d.principalComponents_py.html) | the half axes of the ellipsoid of the same second moments and volume, the longest first |
-| [quiver](grain3d.quiver_py.html) | quiver(grains, dir), quiver(gB, dir): arrows at the centroids of 3D grains or of their boundary faces, as MATLAB's |
+| [quiver](grain3d.quiver_py.html) | arrows at the centroids of 3D grains or of their boundary faces |
 | [reduceBoundary](grain3d.reduceBoundary_py.html) | the grains with their triangulated boundary coarsened, the vertices within cells of n edges merged |
 | [refineBoundary](grain3d.refineBoundary_py.html) | the grains with their triangulated boundary refined, every triangle split into four at the midpoints of its edges, n times |
-| [rotate](grain3d.rotate_py.html) | the grains turned about a centre: their faces and, unless keepEuler, their orientations |
+| [rotate](grain3d.rotate_py.html) | the grains turned about a centre, their faces and their orientations |
 | [size](grain3d.size_py.html) | the number of grains |
 | [slice](grain3d.slice_py.html) | the 2D grains a plane cuts from the grains, as MATLAB's slice |
 | [smoothBoundary](grain3d.smoothBoundary_py.html) | the grains with their boundary surfaces smoothed, hierarchically: the triple lines along themselves first, then the faces |

@@ -17,15 +17,22 @@ the rotations by the angle omega about the axis v
 ## Syntax
 
 ```python
-rotation.byAxisAngle(v, omega)
+rot = rotation.byAxisAngle(v, omega)
 ```
 
+Three about z:
+
 ```python
-rot = rotation.byAxisAngle(v, omega)
-rot = rotation.byAxisAngle(zvector, [10*degree, 20*degree, 30*degree])    # three about z
+rot = rotation.byAxisAngle(zvector, [10*degree, 20*degree, 30*degree])
+```
+
+## Signature
+
+```python
+rotation.byAxisAngle(v, omega)
 ```
 
 MATLAB's [rotation.byAxisAngle](rotation.byAxisAngle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L446">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L541">source</a></font>
 {% endraw %}

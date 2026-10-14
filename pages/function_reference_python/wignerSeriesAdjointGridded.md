@@ -19,5 +19,5 @@ approximate, and its cost independent of the number of rotations
 wignerSeriesAdjointGridded(rots, values, L, weights=None, folds=(1, 1))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L783">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L836">source</a></font>
 {% endraw %}

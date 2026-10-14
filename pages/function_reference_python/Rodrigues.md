@@ -17,6 +17,12 @@ Rodrigues(x, ...) is x.Rodrigues(...), the method of the object passed
 Rodrigues(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [quaternion](quaternion.Rodrigues_py.html) | the Rodrigues vectors, the axes scaled by tan(omega/2) |
+
 ## Used on
 
 [OrientationEmbeddings](OrientationEmbeddings_py.html)

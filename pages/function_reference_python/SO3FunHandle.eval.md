@@ -22,5 +22,5 @@ SO3FunHandle.eval(self, x)
 
 MATLAB's [SO3FunHandle.eval](SO3FunHandle.eval.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L196">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L241">source</a></font>
 {% endraw %}

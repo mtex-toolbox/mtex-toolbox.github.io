@@ -25,5 +25,5 @@ EBSD.spatialProfile(ebsd, lineXY, y=None, radius=None)
 
 MATLAB's [EBSDsquare.spatialProfile](EBSDsquare.spatialProfile.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L430">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L496">source</a></font>
 {% endraw %}

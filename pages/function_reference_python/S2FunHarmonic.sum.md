@@ -18,15 +18,22 @@ along that axis of a list
 ## Syntax
 
 ```python
-S2FunHarmonic.sum(self, axis=None)
+value = sum(sF)
 ```
 
+The pointwise sum along the first axis:
+
 ```python
-value = sum(sF)
-sF = sum(sF, axis=0)  # the pointwise sum along the first axis
+sF = sum(sF, axis=0)
+```
+
+## Signature
+
+```python
+S2FunHarmonic.sum(self, axis=None)
 ```
 
 MATLAB's [S2FunHarmonic.sum](S2FunHarmonic.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L411">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L467">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ a + b
 
 MATLAB's [S2VectorFieldHarmonic.plus](S2VectorFieldHarmonic.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L308">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L334">source</a></font>
 {% endraw %}

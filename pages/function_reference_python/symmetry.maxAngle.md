@@ -25,5 +25,5 @@ maxAngle(frA, frB=None, antipodal=False)
 
 MATLAB's [symmetry.maxAngle](symmetry.maxAngle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L329">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L355">source</a></font>
 {% endraw %}

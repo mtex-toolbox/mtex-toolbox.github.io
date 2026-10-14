@@ -20,11 +20,13 @@ is S2FunHarmonic(abs(sF), bandwidth=bw)
 ## Syntax
 
 ```python
-S2FunTri.abs(self)
+sF = abs(sF)
 ```
 
+## Signature
+
 ```python
-sF = abs(sF)
+S2FunTri.abs(self)
 ```
 
 MATLAB's [S2FunTri.abs](S2FunTri.abs.html)

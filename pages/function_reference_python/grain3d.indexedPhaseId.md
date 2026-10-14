@@ -13,5 +13,5 @@ A property of [grain3d](grain3d_index_py.html).
 
 the ids of the indexed phases among the grains
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L105">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L126">source</a></font>
 {% endraw %}

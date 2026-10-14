@@ -23,5 +23,5 @@ SO3VectorFieldRBF.eval(self, x)
 
 MATLAB's [SO3VectorFieldRBF.eval](SO3VectorFieldRBF.eval.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L828">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L916">source</a></font>
 {% endraw %}

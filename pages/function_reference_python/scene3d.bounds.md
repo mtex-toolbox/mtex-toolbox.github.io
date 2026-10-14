@@ -19,5 +19,5 @@ the corners (lo, hi) of the box around all items, the unit cube for an empty sce
 scene3d.bounds(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L208">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L249">source</a></font>
 {% endraw %}

@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 sections of constant phi1 in the Bunge convention
 
+## Syntax
+
 ```python
 oS = phi1Sections(cs, ss, sections=6)
 oS = phi1Sections(cs, ss, phi1=np.arange(0, 91, 15)*degree)

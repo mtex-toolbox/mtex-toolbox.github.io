@@ -17,5 +17,12 @@ Laue(x, ...) is x.Laue(...), the method of the object passed
 Laue(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [referenceFrame](referenceFrame.Laue_py.html) | the sibling frame carrying the Laue group, the group with the inversion added |
+| [symmetry](symmetry.Laue_py.html) | the smallest Laue group containing this one: every element once proper and once improper |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

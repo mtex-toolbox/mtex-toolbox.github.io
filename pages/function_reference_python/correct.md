@@ -21,5 +21,5 @@ correct(pf, **kwargs)
 
 [PoleFigureCorrection](PoleFigureCorrection_py.html), [PoleFigureTutorial](PoleFigureTutorial_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L589">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L633">source</a></font>
 {% endraw %}

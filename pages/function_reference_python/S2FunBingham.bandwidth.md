@@ -13,5 +13,5 @@ A property of [S2FunBingham](S2FunBingham_index_py.html).
 
 the bandwidth of the harmonic expansion, the preference maxS2Bandwidth
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L387">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L417">source</a></font>
 {% endraw %}

@@ -12,6 +12,8 @@ status: Reference
 a polynomial displacement of degree 1 or 2, the coefficients c one column per coordinate over
 the basis [1 x y] or [1 x y x^2 xy y^2]
 
+## Syntax
+
 ```python
 T = spatialTransformPoly(c, 2)
 T = spatialTransformPoly.fit(posA, posB, degree=2, weights=w)
@@ -22,7 +24,7 @@ T = spatialTransformPoly.fit(posA, posB, degree=2, weights=w)
 | | |
 |---|---|
 | [eval](spatialTransformPoly.eval_py.html) | the positions moved by the polynomial displacement |
-| [fit](spatialTransformPoly.fit_py.html) | the polynomial displacement fitted to point pairs by least squares, reweighted against outliers with Tukey's bisquare unless robust=False |
+| [fit](spatialTransformPoly.fit_py.html) | the polynomial displacement best mapping the positions posA onto posB |
 | [fitOptions](spatialTransformPoly.fitOptions_py.html) | the degree, the keyword a refit keeps |
 | [inv](spatialTransformPoly.inv_py.html) | the inverse: the inverse affine map at degree 1, the fixed point inverse at degree 2 |
 | [isid](spatialTransformPoly.isid_py.html) | whether every coefficient vanishes |
@@ -34,5 +36,5 @@ T = spatialTransformPoly.fit(posA, posB, degree=2, weights=w)
 
 [EBSDSpatialTransform](EBSDSpatialTransform_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L407">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L432">source</a></font>
 {% endraw %}

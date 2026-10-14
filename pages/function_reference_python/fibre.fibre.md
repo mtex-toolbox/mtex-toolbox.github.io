@@ -16,15 +16,17 @@ specimen direction r, or the arc of them between two orientations; a list of fib
 ## Syntax
 
 ```python
-fibre(a, b, *frames, full=False)
-```
-
-```python
 f = fibre(h, r)                    the orientations with ori * h = r
 f = fibre(h, r, ss)
 f = fibre(o1, o2)                  the arc from o1 to o2 about the axis between them
 f = fibre(o1, h)                   the whole fibre through o1 about h
 f = fibre(o1, o2, full=True)       the full fibre through the arc
+```
+
+## Signature
+
+```python
+fibre(a, b, *frames, full=False)
 ```
 
 ## Used on

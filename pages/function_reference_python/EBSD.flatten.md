@@ -19,5 +19,5 @@ the map as a list, one dimensional arrays in the order of the grid
 EBSD.flatten(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L385">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L413">source</a></font>
 {% endraw %}

@@ -15,13 +15,22 @@ MATLAB's A:B
 
 ## Syntax
 
-```python
-colon(A, B)
-```
+A stiffness and a strain give a stress:
 
 ```python
-sigma = colon(C, eps)       # a stiffness and a strain give a stress
-s = colon(sigma, eps)       # two rank two tensors a number
+sigma = colon(C, eps)
+```
+
+Two rank two tensors a number:
+
+```python
+s = colon(sigma, eps)
+```
+
+## Signature
+
+```python
+colon(A, B)
 ```
 
 ## Used on
@@ -30,5 +39,5 @@ s = colon(sigma, eps)       # two rank two tensors a number
 
 MATLAB's [stiffnessTensor.colon](stiffnessTensor.colon.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L937">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1003">source</a></font>
 {% endraw %}

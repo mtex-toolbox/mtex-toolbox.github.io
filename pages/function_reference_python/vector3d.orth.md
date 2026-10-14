@@ -22,5 +22,5 @@ vector3d.orth(self)
 
 MATLAB's [vector3d.orth](vector3d.orth.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L671">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L794">source</a></font>
 {% endraw %}

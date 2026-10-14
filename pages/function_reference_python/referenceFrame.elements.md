@@ -17,13 +17,15 @@ only the axes of that order
 ## Syntax
 
 ```python
-referenceFrame.elements(self, multiplicity=None)
-```
-
-```python
 axes, mult = cs.elements()
 axes = cs.elements(3)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L192">source</a></font>
+## Signature
+
+```python
+referenceFrame.elements(self, multiplicity=None)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L215">source</a></font>
 {% endraw %}

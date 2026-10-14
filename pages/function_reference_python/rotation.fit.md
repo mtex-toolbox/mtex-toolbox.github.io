@@ -23,5 +23,5 @@ rotation.fit(u, v, weights=None, method='horn')
 
 MATLAB's [rotation.fit](rotation.fit.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L484">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L579">source</a></font>
 {% endraw %}

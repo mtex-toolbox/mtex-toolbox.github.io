@@ -17,5 +17,12 @@ findByOrientation(x, ...) is x.findByOrientation(...), the method of the object 
 findByOrientation(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [EBSD](EBSD.findByOrientation_py.html) | the measurements of the phase of ori within an angle of it, or of a fibre |
+| [grain2d](grain2d.findByOrientation_py.html) | the grains of the phase of ori whose mean orientation lies within epsilon of it, or of a fibre |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

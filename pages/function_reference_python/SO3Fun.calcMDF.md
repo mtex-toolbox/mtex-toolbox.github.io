@@ -25,5 +25,5 @@ calcMDF(f1, f2=None, bandwidth=32)
 
 MATLAB's [SO3Fun.calcMDF](SO3Fun.calcMDF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L158">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L178">source</a></font>
 {% endraw %}

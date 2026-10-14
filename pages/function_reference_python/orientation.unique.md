@@ -12,16 +12,68 @@ status: Reference
 {% raw %}
 A method of [orientation](orientation_index_py.html).
 
-the orientations with the equivalents within the tolerance removed, the first kept;
-optionally the indices of the kept ones and the index of each into them
+the disjoint list of orientations, symmetric equivalents within a tolerance taken as one
 
 ## Syntax
 
+One of each:
+
 ```python
-orientation.unique(self, tol=0.001, symmetry=True, stable=False, return_index=False, return_inverse=False)
+u = unique(ori)
 ```
+
+Within 1 degree as one:
+
+```python
+u = unique(ori, tol=1*degree)
+```
+
+The rotations as stored:
+
+```python
+u = unique(ori, symmetry=False)
+```
+
+The index maps:
+
+```python
+u, iOri, iu = unique(ori, return_index=True, return_inverse=True)
+```
+
+Two orientations are one when their misorientation angle, symmetry reduced, is below tol.
+Every orientation not yet taken takes the later ones within the tolerance, so the first of
+each kept is returned, in the order of first appearance. MATLAB sorts unless 'stable' is
+given; here the order is always that of first appearance.
+
+## Input
+
+| | |
+|---|---|
+| `ori` | orientation |
+
+## Output
+
+| | |
+|---|---|
+| `u` | orientation, a one-dimensional list |
+| `iOri` | indices with u = ori.flatten()[iOri] |
+| `iu` | indices with ori.flatten() = u[iu] |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `tol` | `0.001` | the angular tolerance, in radians |
+| `symmetry` | `True` | take symmetric equivalents as one; False compares the rotations as stored, MATLAB's 'noSymmetry' |
+| `stable` | `False` | accepted for MATLAB's flag; the order is that of first appearance anyway |
+| `return_index` | `False` | also return iOri |
+| `return_inverse` | `False` | also return iu |
+
+## See also
+
+[quaternion.unique](quaternion.unique_py.html), [orientation.isclose](orientation.isclose_py.html), [orientation.symmetrise](orientation.symmetrise_py.html)
 
 MATLAB's [orientation.unique](orientation.unique.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L359">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L439">source</a></font>
 {% endraw %}

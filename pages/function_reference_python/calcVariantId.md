@@ -30,5 +30,5 @@ other families.
 
 MATLAB's [calcVariantId](calcVariantId.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L271">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L303">source</a></font>
 {% endraw %}

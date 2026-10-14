@@ -16,5 +16,5 @@ a grain that sits inside the hole of another one: where the grain lies, not what
 
 MATLAB's [grain2d.isInclusion](grain2d.isInclusion.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L216">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L253">source</a></font>
 {% endraw %}

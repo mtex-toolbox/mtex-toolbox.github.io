@@ -17,6 +17,12 @@ transform(x, ...) is x.transform(...), the method of the object passed
 transform(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [EBSD](EBSD.transform_py.html) | any map of the positions |
+
 ## Used on
 
 [EBSDGrid](EBSDGrid_py.html), [EBSDSpatialTransform](EBSDSpatialTransform_py.html)

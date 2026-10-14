@@ -22,5 +22,5 @@ S2FunHarmonic.grad(self, x=None)
 
 MATLAB's [S2FunHarmonic.grad](S2FunHarmonic.grad.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L481">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L537">source</a></font>
 {% endraw %}

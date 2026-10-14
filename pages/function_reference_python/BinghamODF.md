@@ -29,5 +29,5 @@ same concentration, as MATLAB's constructor does.
 
 MATLAB's [BinghamODF](BinghamODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L295">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L325">source</a></font>
 {% endraw %}

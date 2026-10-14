@@ -22,5 +22,5 @@ S1FunHarmonic.mean(self)
 
 MATLAB's [S1Fun.mean](S1Fun.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L235">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L303">source</a></font>
 {% endraw %}

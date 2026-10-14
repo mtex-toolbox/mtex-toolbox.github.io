@@ -17,6 +17,12 @@ discretize(x, ...) is x.discretize(...), the method of the object passed
 discretize(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [spatialTransform](spatialTransform.discretize_py.html) | the transform as a field of displacements at the given points |
+
 ## Used on
 
 [EBSDSpatialTransform](EBSDSpatialTransform_py.html)

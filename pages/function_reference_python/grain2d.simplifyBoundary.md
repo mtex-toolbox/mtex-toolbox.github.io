@@ -23,5 +23,5 @@ grain2d.simplifyBoundary(grains, epsilon=None)
 
 MATLAB's [grain2d.simplifyBoundary](grain2d.simplifyBoundary.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L344">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L398">source</a></font>
 {% endraw %}

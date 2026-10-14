@@ -18,7 +18,7 @@ a kernel on the sphere given by its Legendre coefficients A
 |---|---|
 | [calcFourier](S2Kernel.calcFourier_py.html) | the Legendre coefficients A_0 . |
 | [conv](S2Kernel.conv_py.html) | the convolution with another kernel on the sphere or SO(3): the coefficients multiplied and divided by 2n+1, a kernel on the sphere |
-| [grad](S2Kernel.grad_py.html) | the derivative with respect to the polar angle at the cosine argument t, dpsi/dtheta = -sin(theta) dpsi/dt with dpsi/dt as its own Legendre series |
+| [grad](S2Kernel.grad_py.html) | the derivative of a kernel on the sphere with respect to the polar angle, or to its cosine |
 | [minus](S2Kernel.minus_py.html) |  |
 | [mrdivide](S2Kernel.mrdivide_py.html) |  |
 | [mtimes](S2Kernel.mtimes_py.html) |  |

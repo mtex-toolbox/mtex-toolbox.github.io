@@ -19,5 +19,5 @@ the inverse transform, the inverse rotation with the same parity
 orthogonalTransform.inv(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L690">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L801">source</a></font>
 {% endraw %}

@@ -17,14 +17,16 @@ the spacing of the grid it is evaluated on, the other keywords those of plot
 ## Syntax
 
 ```python
-directionColorKey.plot(self, **kwargs)
-```
-
-```python
 key.plot()
 plot(key)
 key.plot(complete=True, resolution=1*degree)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L259">source</a></font>
+## Signature
+
+```python
+directionColorKey.plot(self, **kwargs)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L286">source</a></font>
 {% endraw %}

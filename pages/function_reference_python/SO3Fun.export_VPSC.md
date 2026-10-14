@@ -15,16 +15,18 @@ write a map to the file the extension names
 ## Syntax
 
 ```python
-export(ebsd, fname, *args, **kwargs)
-```
-
-```python
 export(ebsd, 'map.ang')                   TSL / EDAX, the correction of setting 2 undone
 export(ebsd, 'map.ctf')                   Oxford / Channel, the half turn about y undone
 export(ebsd, 'map.h5oina')                into a copy of the file the map came from
 export(ebsd, 'map.txt', 'ABG', radians=True)   a table of x y, the Euler angles, the phase and the properties
 export(v, 'vectors.txt')                  a list of directions as a table, see exportVector3d
 export(pf, 'dubna', degree=True)          a pole figure data set, one table per pole figure
+```
+
+## Signature
+
+```python
+export(ebsd, fname, *args, **kwargs)
 ```
 
 ## Used on

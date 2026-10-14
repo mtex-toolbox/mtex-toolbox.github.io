@@ -24,5 +24,5 @@ grainBoundary.curvature(self, n=50)
 
 MATLAB's [grainBoundary.curvature](grainBoundary.curvature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L382">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L408">source</a></font>
 {% endraw %}

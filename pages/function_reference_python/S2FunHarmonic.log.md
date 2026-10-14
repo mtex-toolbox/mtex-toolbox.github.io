@@ -19,5 +19,5 @@ the logarithm of the function, expanded by quadrature, or at the bandwidth given
 S2FunHarmonic.log(self, bandwidth=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L395">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L451">source</a></font>
 {% endraw %}

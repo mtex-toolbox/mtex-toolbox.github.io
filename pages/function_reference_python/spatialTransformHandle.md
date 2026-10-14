@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 a transform given by a function of the positions and, for the inverse, a second one
 
+## Syntax
+
 ```python
 T = spatialTransformHandle(fun, funInv)
 ```
@@ -26,5 +28,5 @@ T = spatialTransformHandle(fun, funInv)
 
 MATLAB's [spatialTransformHandle](spatialTransformHandle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L613">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L684">source</a></font>
 {% endraw %}

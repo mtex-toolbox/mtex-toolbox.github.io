@@ -17,5 +17,12 @@ properSubGroup(x, ...) is x.properSubGroup(...), the method of the object passed
 properSubGroup(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [referenceFrame](referenceFrame.properSubGroup_py.html) | the sibling frame carrying only the proper rotations of this group |
+| [symmetry](symmetry.properSubGroup_py.html) | the subgroup of proper rotations |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

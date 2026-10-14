@@ -16,12 +16,14 @@ the exponential of the function, pointwise, as a function handle
 ## Syntax
 
 ```python
-SO3FunRBF.exp(self)
-```
-
-```python
 SO3F = exp(odf)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L606">source</a></font>
+## Signature
+
+```python
+SO3FunRBF.exp(self)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L710">source</a></font>
 {% endraw %}

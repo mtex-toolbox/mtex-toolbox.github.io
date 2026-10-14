@@ -26,5 +26,5 @@ grain3d.principalComponents(self)
 
 MATLAB's [grain3d.principalComponents](grain3d.principalComponents.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L312">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L352">source</a></font>
 {% endraw %}

@@ -17,15 +17,17 @@ the functions joined into one list along an axis, cut or padded to the largest b
 ## Syntax
 
 ```python
-S2FunHarmonic.horzcat(*fs, axis=0)
-```
-
-```python
 sF = cat(sF1, sF2)
 sF = S2FunHarmonic.cat(sF1, sF2, axis=1)
 ```
 
+## Signature
+
+```python
+S2FunHarmonic.horzcat(*fs, axis=0)
+```
+
 MATLAB's [S2FunHarmonic.horzcat](S2FunHarmonic.horzcat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L250">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L306">source</a></font>
 {% endraw %}

@@ -20,5 +20,5 @@ it has to be after the grains changed phase (MATLAB grains.update)
 grain2d.update(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L509">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L622">source</a></font>
 {% endraw %}

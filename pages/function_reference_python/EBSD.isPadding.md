@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the cells of a grid that hold no measurement
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L187">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L215">source</a></font>
 {% endraw %}

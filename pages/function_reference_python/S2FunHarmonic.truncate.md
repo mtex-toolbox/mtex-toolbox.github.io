@@ -23,5 +23,5 @@ S2FunHarmonic.truncate(self, L=None)
 
 MATLAB's [S2FunHarmonic.truncate](S2FunHarmonic.truncate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L268">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L324">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ orientationRegion.checkInside(self, o, tol=0.002)
 
 MATLAB's [orientationRegion.checkInside](orientationRegion.checkInside.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L85">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L111">source</a></font>
 {% endraw %}

@@ -11,19 +11,64 @@ status: Reference
 {% raw %}
 A method of [S1FunHandle](S1FunHandle_index_py.html).
 
-the smallest value and the angle it is taken at, numLocal local minima, or with a number
-or a second function on the circle the pointwise minimum, as S1FunHarmonic.min
+the global, local and pointwise minima of a function on the circle given by a callable
 
 ## Syntax
 
-```python
-S1FunHandle.min(self, *args, numLocal=1, resolution=0.004363323129985824, bandwidth=None)
-```
+The minimum and the angle it is taken at:
 
 ```python
 v, pos = min(sF)
-sF = min(sF1, sF2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L574">source</a></font>
+The three smallest local minima:
+
+```python
+values, positions = min(sF, numLocal=3)
+```
+
+The pointwise minimum with a constant:
+
+```python
+sF = min(sF, 0.5)
+```
+
+The pointwise minimum of two functions:
+
+```python
+sF = min(sF1, sF2, bandwidth=32)
+```
+
+The minima are searched on an equispaced raster of the resolution and refined by a ternary
+search about every peak; numLocal returns the smallest local minima, in ascending order.
+With a number or a second function the result is the pointwise minimum, an S1FunHandle, or
+an S1FunHarmonic of the bandwidth when one of the two is harmonic; as S1FunHarmonic.min.
+
+## Input
+
+| | |
+|---|---|
+| `sF, sF1, sF2` | S1Fun |
+
+## Output
+
+| | |
+|---|---|
+| `v, values` | the smallest value, or an array of the local minima |
+| `pos, positions` | the angle in radians, or an array of them |
+| `sF` | S1FunHandle or S1FunHarmonic, the pointwise minimum |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `numLocal` | `1` | the number of local minima to return |
+| `resolution` | `0.004363323129985824` | the spacing of the raster the search starts from |
+| `bandwidth` | `None` | the bandwidth of the pointwise minimum, by default the larger of the two |
+
+## See also
+
+[S1FunHandle.max](S1FunHandle.max_py.html), [S1FunHarmonic.min](S1FunHarmonic.min_py.html), [S1FunHandle](S1FunHandle_index_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L659">source</a></font>
 {% endraw %}

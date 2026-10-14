@@ -15,13 +15,15 @@ great circles, the rotation and rotoinversion axes as polygons of their order; p
 ## Syntax
 
 ```python
-plotSymmetry(fr, symbolSize=None, mirrorLineWidth=2.5, **kw)
-```
-
-```python
 plot(cs)
 plot(cs, symbolSize=2, mirrorLineWidth=1.5)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L968">source</a></font>
+## Signature
+
+```python
+plotSymmetry(fr, symbolSize=None, mirrorLineWidth=2.5, **kw)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1042">source</a></font>
 {% endraw %}

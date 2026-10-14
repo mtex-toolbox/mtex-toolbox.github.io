@@ -22,5 +22,5 @@ S2VectorFieldHarmonic.mean(self)
 
 MATLAB's [S2VectorFieldHarmonic.mean](S2VectorFieldHarmonic.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L323">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L349">source</a></font>
 {% endraw %}

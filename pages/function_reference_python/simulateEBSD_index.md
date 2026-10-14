@@ -13,6 +13,8 @@ a simulated map whose answer is known: a job holding the settings, the grid xdim
 stepSize, the orientations ori0, the noise and the features, and the map EBSDsim at the current
 stage, which every verb rewrites
 
+## Syntax
+
 ```python
 eS = simulateEBSD()
 eS.makeMap()

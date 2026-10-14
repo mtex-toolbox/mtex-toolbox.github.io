@@ -19,5 +19,5 @@ whether the coefficients of g agree within atol + rtol times their norm
 S1FunHarmonic.isclose(self, g, rtol=1e-08, atol=0.0)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L252">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L320">source</a></font>
 {% endraw %}

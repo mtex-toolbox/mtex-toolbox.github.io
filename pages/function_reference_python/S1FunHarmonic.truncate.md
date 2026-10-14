@@ -19,5 +19,5 @@ the function cut, or padded with zeros, to the bandwidth L
 S1FunHarmonic.truncate(self, L)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L142">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L210">source</a></font>
 {% endraw %}

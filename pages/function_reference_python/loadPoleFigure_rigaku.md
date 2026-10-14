@@ -15,10 +15,6 @@ the pole figures a file holds, or the files of a list, read by their format
 ## Syntax
 
 ```python
-loadPoleFigure(fname, *args, interface=None, superposition=None, **kwargs)
-```
-
-```python
 loadPoleFigure('Q(10-10)_amp.cnv', cs)
 loadPoleFigure([f1, f2], [h1, h23], cs, superposition=[1, [0.52, 1.23]])
 loadPoleFigure('scan.dat', h, cs, interface='geesthacht')
@@ -30,6 +26,12 @@ a file of several pole figures, a list of them; the frames are given positionall
 format follows the extension and the marker the file carries, interface= names one of
 INTERFACES, and a table option (columnNames, columns, header, delimiter, radians) reads a
 table whose columns the caller names.
+
+## Signature
+
+```python
+loadPoleFigure(fname, *args, interface=None, superposition=None, **kwargs)
+```
 
 MATLAB's [loadPoleFigure_rigaku](loadPoleFigure_rigaku.html)
 

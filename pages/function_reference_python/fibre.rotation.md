@@ -19,13 +19,15 @@ MATLAB's second output
 ## Syntax
 
 ```python
-fibre.rotation(self, points=1000, return_angles=False)
-```
-
-```python
 rot = f.rotation()
 rot = f.rotation(points=100)
 rot, omega = f.rotation(return_angles=True)
+```
+
+## Signature
+
+```python
+fibre.rotation(self, points=1000, return_angles=False)
 ```
 
 MATLAB's [fibre.rotation](fibre.rotation.html)

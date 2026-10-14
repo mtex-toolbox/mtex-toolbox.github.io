@@ -19,5 +19,5 @@ the highest order of a symmetry axis of the group; with axes, the order about ea
 referenceFrame.nfold(self, axis=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L188">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L211">source</a></font>
 {% endraw %}

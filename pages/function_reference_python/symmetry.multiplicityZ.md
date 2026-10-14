@@ -16,5 +16,5 @@ the highest order of a rotation axis of the group along z, 1 if there is none
 
 MATLAB's [symmetry.multiplicityZ](symmetry.multiplicityZ.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L316">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L345">source</a></font>
 {% endraw %}

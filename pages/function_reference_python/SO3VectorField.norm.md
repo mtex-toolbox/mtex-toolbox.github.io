@@ -17,14 +17,16 @@ the length of the vectors as a function on SO(3), the same as abs
 ## Syntax
 
 ```python
-SO3VectorFieldHarmonic.norm(self)
+SO3F = norm(SO3VF)
 ```
 
+## Signature
+
 ```python
-SO3F = norm(SO3VF)
+SO3VectorFieldHarmonic.norm(self)
 ```
 
 MATLAB's [SO3VectorField.norm](SO3VectorField.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L461">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L485">source</a></font>
 {% endraw %}

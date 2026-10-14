@@ -10,24 +10,63 @@ counterpart: mtexdata.html
 status: Reference
 ---
 {% raw %}
-the sample data of the documentation
+the sample data of the documentation, read from the data repository
 
 ## Syntax
 
-```python
-mtexdata(name=None, root=None, download=True, verbose=True)
-```
+The table of the data sets:
 
 ```python
-mtexdata()                       the table of the data sets
-mtexdata('forsterite')           a map, read from its file with the recipe its page uses
-mtexdata('dubna')                pole figures, read with their directions and coefficients
+mtexdata()
+```
+
+A map, read with the recipe its page uses:
+
+```python
+ebsd = mtexdata('forsterite')
+```
+
+Pole figures, with their directions and coefficients:
+
+```python
+pf = mtexdata('dubna')
+```
+
+From the local folder only:
+
+```python
+ebsd = mtexdata('forsterite', root=mtexDataPath(), download=False)
 ```
 
 The files are fetched from the data repository mtex-toolbox/mtex-data on first use and
 kept under getMTEXpref('mtexDataPath'), MTEX_DATA or ~/.mtex/data; root names another
-folder, a local copy of MTEX's data folder for instance, and download=False never
-fetches; silent is MATLAB's flag, the loading printing nothing anyway.
+folder, a local copy of MTEX's data folder for instance. Every data set is read as its
+documentation page does, in the plotting convention of the session: a page that wants a
+particular alignment sets it itself. mtexdatafile gives the files without reading them.
+
+## Input
+
+| | |
+|---|---|
+| `name` | the name of the data set, case does not matter |
+
+## Output
+
+| | |
+|---|---|
+| `ebsd` | EBSD, grain2d, PoleFigure, EBSD3, SO3Fun, S2Fun or tensor, by the data set; the table of the data sets without a name |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `root` | `None` | the folder the files are kept in, instead of mtexDataPath() |
+| `download` | `True` | fetch a missing file; False raises instead |
+| `verbose` | `True` | accepted for MATLAB's silent flag; reading prints nothing, a download its source |
+
+## See also
+
+[mtexdatafile](mtexdatafile_py.html), [loadEBSD](loadEBSD_ang_py.html), [loadPoleFigure](loadPoleFigure_aachen_py.html)
 
 ## Used on
 

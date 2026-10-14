@@ -28,5 +28,5 @@ parentGrainReconstructor.mergeSimilar(self, threshold=5*degree)
 
 MATLAB's [parentGrainReconstructor.mergeSimilar](parentGrainReconstructor.mergeSimilar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L806">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L988">source</a></font>
 {% endraw %}

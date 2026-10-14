@@ -14,6 +14,8 @@ the Delaunay triangulation of directions on the sphere, their convex hull: the t
 counterclockwise from outside, and the triangle opposite each vertex; the directions must
 surround the origin
 
+## Syntax
+
 ```python
 sT = S2Triangulation(v)
 B = sT.barycentric(w)

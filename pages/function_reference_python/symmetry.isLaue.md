@@ -16,5 +16,5 @@ whether the group contains the inversion
 
 MATLAB's [symmetry.isLaue](symmetry.isLaue.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L265">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L294">source</a></font>
 {% endraw %}

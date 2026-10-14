@@ -19,15 +19,17 @@ np.linalg.norm on a large list
 ## Syntax
 
 ```python
-embedding.norm(self, normalized=False)
-```
-
-```python
 n = norm(e)
 n = norm(e, normalized=True)
 ```
 
+## Signature
+
+```python
+embedding.norm(self, normalized=False)
+```
+
 MATLAB's [embedding.norm](embedding.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L314">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L343">source</a></font>
 {% endraw %}

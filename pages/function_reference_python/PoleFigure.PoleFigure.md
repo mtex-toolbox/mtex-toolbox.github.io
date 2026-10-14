@@ -15,13 +15,15 @@ measured pole figure intensities, one or several pole figures of one specimen
 ## Syntax
 
 ```python
-PoleFigure(h, r, intensities, *frames, superposition=None, complete=False)
-```
-
-```python
 PoleFigure(h, r, I)                          h a Miller, one or several superposed directions
 PoleFigure([h1, h23], [r1, r2], [I1, I2])    one pole figure per entry
 PoleFigure(h, r, I, cs, ss, superposition=c, complete=True)
+```
+
+## Signature
+
+```python
+PoleFigure(h, r, intensities, *frames, superposition=None, complete=False)
 ```
 
 MATLAB's [PoleFigure.PoleFigure](PoleFigure.PoleFigure.html)

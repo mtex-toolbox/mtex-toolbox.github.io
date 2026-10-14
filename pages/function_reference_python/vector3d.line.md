@@ -25,5 +25,5 @@ line(x, y, z=None, **kw)
 
 MATLAB's [vector3d.line](vector3d.line.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L747">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L937">source</a></font>
 {% endraw %}

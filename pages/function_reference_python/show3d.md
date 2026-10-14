@@ -17,5 +17,5 @@ show3d(): the scene of the current figure in an interactive PyVista window
 show3d(fig=None, window_size=(900, 900))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L381">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L515">source</a></font>
 {% endraw %}

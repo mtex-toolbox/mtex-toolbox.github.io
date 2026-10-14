@@ -22,5 +22,5 @@ referenceFrame.isCompatible(self, other, tol=None)
 
 MATLAB's [referenceFrame.isCompatible](referenceFrame.isCompatible.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L353">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L397">source</a></font>
 {% endraw %}

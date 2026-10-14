@@ -23,5 +23,5 @@ MLSSolver.initRegularisation(self, epsilon=None)
 
 MATLAB's [MLSSolver.initRegularisation](MLSSolver.initRegularisation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L241">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L310">source</a></font>
 {% endraw %}

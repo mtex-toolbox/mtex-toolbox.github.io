@@ -19,5 +19,5 @@ the points with the phases named among their three grains, a name repeated askin
 triplePointList.hasPhase(self, *names)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L534">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L560">source</a></font>
 {% endraw %}

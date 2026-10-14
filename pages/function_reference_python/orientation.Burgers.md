@@ -18,11 +18,13 @@ from the child
 ## Syntax
 
 ```python
-orientation.Burgers(csParent, csChild)
+p2c = orientation.Burgers(csBeta, csAlpha)
 ```
 
+## Signature
+
 ```python
-p2c = orientation.Burgers(csBeta, csAlpha)
+orientation.Burgers(csParent, csChild)
 ```
 
 ## Used on

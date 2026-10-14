@@ -19,5 +19,5 @@ whether the coefficients agree with those of g within the tolerances, relative t
 S2FunHarmonic.isclose(self, g, rtol=1e-08, atol=0.0)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L450">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L506">source</a></font>
 {% endraw %}

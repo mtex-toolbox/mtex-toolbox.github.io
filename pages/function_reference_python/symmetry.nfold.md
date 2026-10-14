@@ -22,5 +22,5 @@ symmetry.nfold(self, axis=None)
 
 MATLAB's [symmetry.nfold](symmetry.nfold.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L309">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L338">source</a></font>
 {% endraw %}

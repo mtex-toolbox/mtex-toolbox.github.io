@@ -17,12 +17,14 @@ the long half axis of the ellipse of every outline, the larger principal compone
 ## Syntax
 
 ```python
-grain2d.longAxis(self)
-```
-
-```python
 lA = grains.longAxis()
 lA = longAxis(grains)
+```
+
+## Signature
+
+```python
+grain2d.longAxis(self)
 ```
 
 ## Used on

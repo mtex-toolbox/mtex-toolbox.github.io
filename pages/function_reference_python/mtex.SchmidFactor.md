@@ -18,15 +18,27 @@ critical resolved shear stress of every system
 
 ## Syntax
 
+A function of the tension direction:
+
 ```python
-SchmidFactor(sS, sigma=None, relative=False)
+sF = SchmidFactor(sS)
+```
+
+Under a uniaxial tension along v:
+
+```python
+tau = SchmidFactor(sS, v)
 ```
 
 ```python
-sF = SchmidFactor(sS)  # a function of the tension direction
-tau = SchmidFactor(sS, v)  # under a uniaxial tension along v
 tau = SchmidFactor(sS, sigma)
 tau = SchmidFactor(sS, sigma, relative=True)
+```
+
+## Signature
+
+```python
+SchmidFactor(sS, sigma=None, relative=False)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L107">source</a></font>

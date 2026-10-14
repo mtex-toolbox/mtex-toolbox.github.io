@@ -16,15 +16,29 @@ as (lo, hi)
 
 ## Syntax
 
+One range over every axes:
+
+```python
+mtexFig.setColorRange()
+```
+
+Each axes the range of its own data:
+
+```python
+mtexFig.setColorRange('tight')
+```
+
+The range given:
+
+```python
+mtexFig.setColorRange((0, 5))
+```
+
+## Signature
+
 ```python
 mtexFigure.setColorRange(self, colorRange='equal')
 ```
 
-```python
-mtexFig.setColorRange()             # one range over every axes
-mtexFig.setColorRange('tight')      # each axes the range of its own data
-mtexFig.setColorRange((0, 5))       # the range given
-```
-
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L169">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L197">source</a></font>
 {% endraw %}

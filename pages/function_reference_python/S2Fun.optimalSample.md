@@ -18,14 +18,16 @@ the discrepancy, its history, the iteration count and the stop reason
 ## Syntax
 
 ```python
-optimalSample(f, n, *args, optimizeWeights=False, bandwidth=None, maxIter=None, tol=None, weights=None, memory=5, method='lbfgs', warmUp=None, tolWeights=None, tolJ=0.0001, innerIter=5, minWeight=0.0, diagnostics=False)
-```
-
-```python
 ori = optimalSample(odf, 500)
 ori, c = optimalSample(odf, 200, optimizeWeights=True, bandwidth=64)
 v = optimalSample(sF, 1000, bandwidth=128)
 optimalSample(f, nodes, method='steepestDescent', maxIter=1000, tol=0.05*degree, minWeight=1e-4)
+```
+
+## Signature
+
+```python
+optimalSample(f, n, *args, optimizeWeights=False, bandwidth=None, maxIter=None, tol=None, weights=None, memory=5, method='lbfgs', warmUp=None, tolWeights=None, tolJ=0.0001, innerIter=5, minWeight=0.0, diagnostics=False)
 ```
 
 ## Used on
@@ -34,5 +36,5 @@ optimalSample(f, nodes, method='steepestDescent', maxIter=1000, tol=0.05*degree,
 
 MATLAB's [S2Fun.optimalSample](S2Fun.optimalSample.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/optimalsample.py#L378">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/optimalsample.py#L463">source</a></font>
 {% endraw %}

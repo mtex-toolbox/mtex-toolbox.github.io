@@ -22,5 +22,5 @@ SO3FunHarmonic.plotPDF(odf, h, *args, superposition=None, **kw)
 
 MATLAB's [SO3FunHarmonic.plotPDF](SO3FunHarmonic.plotPDF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1330">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1404">source</a></font>
 {% endraw %}

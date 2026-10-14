@@ -19,5 +19,5 @@ the layout with the first index along x, the second along y
 gridLayout.rowMajor()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L51">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L72">source</a></font>
 {% endraw %}

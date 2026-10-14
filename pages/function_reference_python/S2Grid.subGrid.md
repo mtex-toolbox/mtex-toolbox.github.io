@@ -22,5 +22,5 @@ S2Grid.subGrid(self, mask, eps=None)
 
 MATLAB's [S2Grid.subGrid](S2Grid.subGrid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L76">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L97">source</a></font>
 {% endraw %}

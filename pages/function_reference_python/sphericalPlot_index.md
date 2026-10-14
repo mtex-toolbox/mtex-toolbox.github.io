@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 the spherical plot of one axes: its projection, boundary, grid and labels
 
+## Syntax
+
 ```python
 sP = sphericalPlot(ax, proj)
 sP.proj, sP.sR, sP.antipodal, sP.bounds, sP.minData, sP.maxData, sP.mappable

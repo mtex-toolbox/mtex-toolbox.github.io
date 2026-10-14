@@ -17,11 +17,13 @@ the Potter orientation relationship between bcc and hcp, (011) || (01-11) and
 ## Syntax
 
 ```python
-orientation.Potter(csParent, csChild)
+p2c = orientation.Potter(csParent, csChild)
 ```
 
+## Signature
+
 ```python
-p2c = orientation.Potter(csParent, csChild)
+orientation.Potter(csParent, csChild)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L132">source</a></font>

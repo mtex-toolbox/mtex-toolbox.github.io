@@ -19,5 +19,5 @@ the items of a three dimensional plot and the plotting convention it is seen by
 | [bounds](scene3d.bounds_py.html) | the corners (lo, hi) of the box around all items, the unit cube for an empty scene |
 | [camera](scene3d.camera_py.html) | the camera: the direction out of the screen and the one up, unit vectors |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L197">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L238">source</a></font>
 {% endraw %}

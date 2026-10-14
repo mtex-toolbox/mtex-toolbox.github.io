@@ -23,5 +23,5 @@ velocityGradientTensor.polar(self)
 
 MATLAB's [velocityGradientTensor.polar](velocityGradientTensor.polar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L521">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L549">source</a></font>
 {% endraw %}

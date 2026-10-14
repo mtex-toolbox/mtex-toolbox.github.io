@@ -22,5 +22,5 @@ SO3FunHarmonic.inv(self)
 
 MATLAB's [SO3FunHarmonic.inv](SO3FunHarmonic.inv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L323">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L383">source</a></font>
 {% endraw %}

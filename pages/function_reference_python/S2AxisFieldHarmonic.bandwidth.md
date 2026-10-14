@@ -13,5 +13,5 @@ A property of [S2AxisFieldHarmonic](S2AxisFieldHarmonic_index_py.html).
 
 the harmonic degree of the expansion
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L166">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L193">source</a></font>
 {% endraw %}

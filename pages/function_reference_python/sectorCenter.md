@@ -21,5 +21,5 @@ a group turned against its own axes can give, so it is moved off every such elem
 sectorCenter(pg)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L228">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L248">source</a></font>
 {% endraw %}

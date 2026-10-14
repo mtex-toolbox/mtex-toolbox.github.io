@@ -11,23 +11,90 @@ status: Reference
 ---
 {% raw %}
 a function on SO(3) as a series of Wigner functions, symmetric under its crystal and specimen
-frame: from MTEX's coefficients fhat, another SO(3) function, a kernel or a callable (by
-quadrature); a list of functions carries its shape in front of the coefficients
+frame
+
+## Syntax
+
+From MTEX's coefficients:
 
 ```python
-SO3FunHarmonic(fhat, cs, ss)
-SO3FunHarmonic(odf, bandwidth=32)               the harmonic form of another function
-SO3FunHarmonic(lambda ori: ori.angle(), cs)     by quadrature
+SO3F = SO3FunHarmonic(fhat, cs, ss)
 ```
+
+The harmonic form of another function:
+
+```python
+SO3F = SO3FunHarmonic(odf, bandwidth=32)
+```
+
+A callable by quadrature:
+
+```python
+SO3F = SO3FunHarmonic(lambda ori: ori.angle(), cs)
+```
+
+On the Gauss-Legendre grid:
+
+```python
+SO3F = SO3FunHarmonic(lambda ori: ori.angle(), cs, 'GaussLegendre', bandwidth=16)
+```
+
+The series of an SO(3) kernel:
+
+```python
+SO3F = SO3FunHarmonic(psi, cs, bandwidth=24)
+```
+
+A misorientation function, f(g) = f(g^-1):
+
+```python
+mdf = SO3FunHarmonic(lambda o: o.angle(), cs, cs, antipodal=True, bandwidth=8)
+```
+
+The coefficients fhat are MTEX's, degree by degree, deg2dim(L + 1) of them for the bandwidth L;
+a vector ending inside a degree block is padded with zeros to its end. Another SO(3) function
+gives its harmonic form at the bandwidth given (an SO3FunRBF at most its kernel's), a kernel
+its series, a callable of orientations is sampled on a quadrature grid of the bandwidth, by
+default the preference defaultSO3Bandwidth, Clenshaw-Curtis unless 'GaussLegendre' is named
+among the frames. The frames are the crystal frame and the specimen frame, the second by
+default specimenFrame.default; the coefficients are made invariant under both unless
+symmetrise=False. A list of functions carries its shape in front of the coefficients.
+
+## Input
+
+| | |
+|---|---|
+| `fhat` | array of MTEX's coefficients, an SO3Fun, an SO3Kernel or a callable of orientations |
+| `cs, ss` | crystalFrame and specimenFrame (or a second crystalFrame) |
+
+## Output
+
+| | |
+|---|---|
+| `SO3F` | SO3FunHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `real` |  | whether the function takes real values only; by default read off the coefficients or the sampled values |
+| `antipodal` |  | f(g) = f(g^-1), the exchange symmetry of a misorientation function; needs the same frame on both sides |
+| `symmetrise` |  | make the coefficients invariant under the two frames' symmetries |
+| `bandwidth` |  | the largest degree of the series |
+| `dtype` |  | the complex type of the coefficients, complex128 unless given |
+
+## See also
+
+[SO3FunHarmonic.quadrature](SO3FunHarmonic.quadrature_py.html), [SO3FunHarmonic.interpolate](SO3FunHarmonic.interpolate_py.html), [SO3FunRBF](SO3FunRBF_index_py.html), [SO3FunHandle](SO3FunHandle_index_py.html), [SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html), [SO3FunHarmonicRepresentation](SO3FunHarmonicRepresentation_py.html)
 
 ## Members
 
 | | |
 |---|---|
 | [abs](SO3FunHarmonic.abs_py.html) | the absolute value of the function, by quadrature at twice the bandwidth |
-| [approximate](SO3FunHarmonic.approximate_py.html) | from weighted samples at nodes, projected onto the invariant functions |
+| [approximate](SO3FunHarmonic.approximate_py.html) | the harmonic series of a function on SO(3) by quadrature |
 | [bandwidth](SO3FunHarmonic.bandwidth_py.html) | the bandwidth, the largest degree of the expansion |
-| [calcError](SO3FunHarmonic.calcError_py.html) | the distance of two SO(3) functions on the equispaced grid of the resolution: 'l1' (the default, as MATLAB's) is half the mean absolute difference, for densities the fraction of the volume that would have to move to turn one into the other |
+| [calcError](SO3FunHarmonic.calcError_py.html) | the distance between two orientation density functions, or the error of an ODF against pole figures |
 | [cat](SO3FunHarmonic.cat_py.html) | the functions joined into one list along an axis, the coefficients padded to the largest bandwidth |
 | [conj](SO3FunHarmonic.conj_py.html) | the complex conjugate function |
 | [conv](SO3FunHarmonic.conv_py.html) | the convolution with another SO(3) function, a kernel, a function on the sphere or a vector of multipliers per degree, as conv(f, g) |
@@ -58,14 +125,14 @@ SO3FunHarmonic(lambda ori: ori.angle(), cs)     by quadrature
 | [plotSection](SO3FunHarmonic.plotSection_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
 | [plus](SO3FunHarmonic.plus_py.html) |  |
 | [power](SO3FunHarmonic.power_py.html) | the harmonic power per degree, the norm of the coefficients of that degree |
-| [quadrature](SO3FunHarmonic.quadrature_py.html) | from weighted samples at nodes, projected onto the invariant functions |
-| [radon](SO3FunHarmonic.radon_py.html) | the Radon transform: the pole figure of h, the inverse pole figure of r, or with both the values |
+| [quadrature](SO3FunHarmonic.quadrature_py.html) | the harmonic series of a function on SO(3) by quadrature |
+| [radon](SO3FunHarmonic.radon_py.html) | the Radon transform of a function on SO(3): its pole figures, inverse pole figures, or their values (MATLAB's radon, calcPDF and calcIPDF) |
 | [rdivide](SO3FunHarmonic.rdivide_py.html) |  |
 | [reshape](SO3FunHarmonic.reshape_py.html) | the list of functions in another shape |
 | [rotate](SO3FunHarmonic.rotate_py.html) | the function turned by a rotation, from the left or with side='right' from the right, as rotate(f, rot, side) |
 | [shape](SO3FunHarmonic.shape_py.html) | the shape of a list of functions, () for one |
 | [size](SO3FunHarmonic.size_py.html) | the number of functions of the list, one for a single function |
-| [SO3FunHarmonic](SO3FunHarmonic.SO3FunHarmonic_py.html) | a function on SO(3) as a series of Wigner functions, symmetric under its crystal and specimen frame: from MTEX's coefficients fhat, another SO(3) function, a kernel or a callable (by quadrature) |
+| [SO3FunHarmonic](SO3FunHarmonic.SO3FunHarmonic_py.html) | a function on SO(3) as a series of Wigner functions, symmetric under its crystal and specimen frame |
 | [sqrt](SO3FunHarmonic.sqrt_py.html) | the square root of the function, by quadrature at twice the bandwidth, or at the bandwidth given |
 | [subsref](SO3FunHarmonic.subsref_py.html) |  |
 | [sum](SO3FunHarmonic.sum_py.html) | the integral over SO(3), 8 pi^2 times the mean |

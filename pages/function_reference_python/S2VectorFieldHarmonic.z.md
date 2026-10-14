@@ -13,5 +13,5 @@ A property of [S2VectorFieldHarmonic](S2VectorFieldHarmonic_index_py.html).
 
 the z component as a function on the sphere
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L284">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L310">source</a></font>
 {% endraw %}

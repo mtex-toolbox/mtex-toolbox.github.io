@@ -23,5 +23,5 @@ orientation.copper(CS, *ss)
 
 [OrientationStandard](OrientationStandard_py.html), [EulerAngleSections](EulerAngleSections_py.html), [SO3FunVectorField](SO3FunVectorField_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L243">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L267">source</a></font>
 {% endraw %}

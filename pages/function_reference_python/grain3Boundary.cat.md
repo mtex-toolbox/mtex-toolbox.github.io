@@ -17,13 +17,23 @@ along for the classes whose lists have axes
 ## Syntax
 
 ```python
-cat(*arrays, **kwargs)
+v = cat(v1, v2)
+```
+
+Side by side:
+
+```python
+v = cat(v1, v2, axis=1)
 ```
 
 ```python
-v = cat(v1, v2)
-v = cat(v1, v2, axis=1)    # side by side
 ebsd = cat(ebsd1, ebsd2)
+```
+
+## Signature
+
+```python
+cat(*arrays, **kwargs)
 ```
 
 ## Used on
@@ -32,5 +42,5 @@ ebsd = cat(ebsd1, ebsd2)
 
 MATLAB's [grain3Boundary.cat](grain3Boundary.cat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/_array.py#L170">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/_array.py#L185">source</a></font>
 {% endraw %}

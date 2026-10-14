@@ -18,17 +18,27 @@ symmetry=False the plain angle, other='max' the angle of the equivalent that tur
 ## Syntax
 
 ```python
-orientation.angle(self, other=None, symmetry=True)
+omega = angle(ori)
+```
+
+Ignore the symmetric equivalents:
+
+```python
+omega = angle(ori, symmetry=False)
 ```
 
 ```python
-omega = angle(ori)
-omega = angle(ori, symmetry=False)     # ignore the symmetric equivalents
 omega = angle(ori1, ori2)
 omega = angle(mori, 'max')
 ```
 
+## Signature
+
+```python
+orientation.angle(self, other=None, symmetry=True)
+```
+
 MATLAB's [orientation.angle](orientation.angle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L290">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L350">source</a></font>
 {% endraw %}

@@ -17,12 +17,14 @@ frames given
 ## Syntax
 
 ```python
-fibre.rand(*args, rng=None)
-```
-
-```python
 f = fibre.rand(10, cs)
 f = fibre.rand(10, cs, ss, rng=rng)
+```
+
+## Signature
+
+```python
+fibre.rand(*args, rng=None)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L276">source</a></font>

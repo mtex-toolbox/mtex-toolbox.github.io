@@ -17,5 +17,5 @@ exportHTML('grains.html'): the scene of the current figure as an interactive pag
 exportHTML(fname, fig=None, title='MTEX 3D plot')
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L392">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L526">source</a></font>
 {% endraw %}

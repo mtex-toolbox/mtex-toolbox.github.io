@@ -17,5 +17,11 @@ sim(x, ...) is x.sim(...), the method of the object passed
 sim(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [referenceFrame](referenceFrame.sim_py.html) | whether two frames describe the same symmetry, without requiring aligned bases |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

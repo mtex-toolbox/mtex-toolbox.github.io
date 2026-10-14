@@ -12,6 +12,8 @@ status: Reference
 the spherical Fibonacci grid: N = 2n + 1 points along a spiral, z linear in the index and
 the azimuth advancing by the golden angle; by default the count fitting a resolution of 5 degree
 
+## Syntax
+
 ```python
 S2G = fibonacciS2Grid(1000)
 S2G = fibonacciS2Grid(resolution=2*degree)

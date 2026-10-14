@@ -18,5 +18,5 @@ DIRECT_SERIES_NODES nodes (DIRECT_SUM_NODES without numba), and a grid that cann
 wignerSeries(fhat, rots, real=None, folds=(1, 1))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L732">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L785">source</a></font>
 {% endraw %}

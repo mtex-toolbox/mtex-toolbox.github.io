@@ -19,5 +19,5 @@ the stages with their parameters as one line of text
 spatialTransformComposite.paramChar(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L672">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L743">source</a></font>
 {% endraw %}

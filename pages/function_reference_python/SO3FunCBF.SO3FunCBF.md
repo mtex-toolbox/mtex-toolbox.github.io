@@ -10,19 +10,58 @@ counterpart: SO3FunCBF.SO3FunCBF.html
 status: Reference
 ---
 {% raw %}
-a fibre ODF, a sum over fibres h || r of an S2 kernel psi of the angle between g h and r, with
-weights normalised to a mean of one by default
+a fibre ODF: a sum over fibres h || r of a kernel on the sphere of the angle between g h and r
 
 ## Syntax
 
-```python
-SO3FunCBF(h, r=None, weights=None, psi=None, SS=None, *, halfwidth=None)
-```
+The fibre h || r, a 10 degree kernel:
 
 ```python
-SO3FunCBF(h, r, weights, psi)
-SO3FunCBF(f, halfwidth=10*degree)      from a fibre f
+SO3F = SO3FunCBF(h, r)
 ```
+
+Several fibres, weighted, the kernel psi:
+
+```python
+SO3F = SO3FunCBF(h, r, weights, psi)
+```
+
+From a fibre f:
+
+```python
+SO3F = SO3FunCBF(f, halfwidth=10*degree)
+```
+
+The function of the orientation g is sum_i w_i psi(g h_i . r_i), every fibre taken with all
+its symmetrically equivalent fibres; it is constant along each fibre. The crystal frame is
+that of h, the specimen frame that of r or SS. The weights default to equal ones giving a
+mean of one. fibreODF builds one with the weights normalised.
+
+## Input
+
+| | |
+|---|---|
+| `h` | Miller or vector3d, the crystal directions, or a fibre |
+| `r` | vector3d, the specimen directions, one per crystal direction |
+| `weights` | one weight per fibre; by default a mean of one |
+| `psi` | S2Kernel; by default the de la Vallee Poussin kernel |
+
+## Output
+
+| | |
+|---|---|
+| `SO3F` | SO3FunCBF |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `SS` | `None` | the specimen frame, when r has none |
+| `halfwidth` | `None` | the halfwidth of the default kernel, 10 degree unless given |
+
+## See also
+
+[fibreODF](fibreODF_py.html), [fibre](fibre_index_py.html), [SO3FunRBF](SO3FunRBF_index_py.html), [SO3FunCBF.radon](SO3FunCBF.radon_py.html), [FibreODFs](FibreODFs_py.html)
 
 ## Used on
 
@@ -30,5 +69,5 @@ SO3FunCBF(f, halfwidth=10*degree)      from a fibre f
 
 MATLAB's [SO3FunCBF.SO3FunCBF](SO3FunCBF.SO3FunCBF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L498">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L539">source</a></font>
 {% endraw %}

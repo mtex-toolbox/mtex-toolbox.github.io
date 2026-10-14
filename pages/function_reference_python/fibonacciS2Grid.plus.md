@@ -22,5 +22,5 @@ a + b
 
 MATLAB's [fibonacciS2Grid.plus](fibonacciS2Grid.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L514">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L597">source</a></font>
 {% endraw %}

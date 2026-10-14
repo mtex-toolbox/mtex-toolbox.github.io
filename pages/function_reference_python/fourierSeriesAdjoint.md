@@ -18,5 +18,5 @@ w v e^{-ikx}; a quadrature grid brings the weights of its rule
 fourierSeriesAdjoint(x, values, L, weights=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L935">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L988">source</a></font>
 {% endraw %}

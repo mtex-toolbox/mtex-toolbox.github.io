@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 sections of constant alpha in the Matthies (ZYZ) convention
 
+## Syntax
+
 ```python
 oS = alphaSections(cs, ss, sections=6)
 oS = alphaSections(cs, ss, alpha=np.arange(0, 91, 15)*degree)

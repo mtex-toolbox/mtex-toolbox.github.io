@@ -17,15 +17,17 @@ the L2 norm, or the Sobolev norm sqrt(sum (2n+1)^{2s} |fhat_n|^2)
 ## Syntax
 
 ```python
-SO3FunHarmonic.norm(self, s=None)
-```
-
-```python
 t = norm(SO3F)
 t = norm(SO3F, s=1)
 ```
 
+## Signature
+
+```python
+SO3FunHarmonic.norm(self, s=None)
+```
+
 MATLAB's [SO3FunHarmonic.norm](SO3FunHarmonic.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L426">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L486">source</a></font>
 {% endraw %}

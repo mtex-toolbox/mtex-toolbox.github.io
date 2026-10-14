@@ -12,6 +12,8 @@ status: Reference
 the n-th de la Vallee Poussin kernel on the circle, 2 F_(2n-1) - F_(n-1) with F the Fejer
 kernels: coefficients one up to n, falling to zero at 2n
 
+## Syntax
+
 ```python
 S1DeLaValleePoussinKernel(20)
 S1DeLaValleePoussinKernel(halfwidth=5*degree)
@@ -27,5 +29,5 @@ S1DeLaValleePoussinKernel(halfwidth=5*degree)
 
 [EllipseBasedParameters](EllipseBasedParameters_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L975">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1013">source</a></font>
 {% endraw %}

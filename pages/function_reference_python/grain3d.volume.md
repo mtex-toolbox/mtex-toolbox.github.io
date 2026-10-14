@@ -16,5 +16,5 @@ the volume of every grain, by the divergence theorem over its oriented faces
 
 MATLAB's [grain3d.volume](grain3d.volume.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L257">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L297">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the phase numbers of the file, the phase ids translated through phaseMap
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L162">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L190">source</a></font>
 {% endraw %}

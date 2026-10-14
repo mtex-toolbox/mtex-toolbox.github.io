@@ -11,16 +11,62 @@ status: Reference
 {% raw %}
 A method of [spatialTransformProjective](spatialTransformProjective_index_py.html).
 
-the homography of the direct linear transform, robustly reweighted. Both point sets are
-first moved to their centroid and scaled to a mean distance of sqrt(2), Hartley's
-normalisation: without it the algebraic residual weighs the points by their distance from
-the origin, and ten percent of outliers can hold the reweighting in a wrong basin
+the homography best mapping the positions posA onto posB, by the direct linear transform
 
 ## Syntax
 
+Robust against outliers:
+
 ```python
-spatialTransformProjective.fit(posA, posB, weights=None, robust=True, maxIter=50)
+T = spatialTransformProjective.fit(posA, posB)
 ```
+
+The points weighted:
+
+```python
+T = spatialTransformProjective.fit(posA, posB, weights=w)
+```
+
+```python
+T = spatialTransformProjective.fit(posA, posB, robust=False) # plain least squares
+```
+
+The equations x' (h31 x + h32 y + 1) = h11 x + h12 y + h13, and likewise for y', are solved
+by least squares, both coordinates under one scale, reweighted against outliers with
+Tukey's bisquare. Both point sets are first moved to their centroid and scaled to a mean
+distance of sqrt(2), Hartley's normalisation: without it the algebraic residual weighs the
+points by their distance from the origin, and ten percent of outliers can hold the
+reweighting in a wrong basin. A point with a missing position or no weight is dropped; at
+least four points are needed.
+
+## Input
+
+| | |
+|---|---|
+| `posA` | vector3d, the positions in the first frame |
+| `posB` | vector3d, where they went in the second, one for each |
+
+## Output
+
+| | |
+|---|---|
+| `T` | spatialTransformProjective, T * posA close to posB |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `weights` | `None` | array, the weight of every point pair |
+| `robust` | `True` | reweight against outliers with Tukey's bisquare |
+| `maxIter` | `50` | the largest number of reweighting steps |
+
+## References
+
+- R. Hartley, In defense of the eight-point algorithm, IEEE Transactions on Pattern Analysis and Machine Intelligence 19 (1997) 580-593
+
+## See also
+
+[spatialTransformPoly.fit](spatialTransformPoly.fit_py.html), [spatialTransformProjective.byTilt](spatialTransformProjective.byTilt_py.html), [spatialTransformTilt](spatialTransformTilt_index_py.html), [transform](transform_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L383">source</a></font>
 {% endraw %}

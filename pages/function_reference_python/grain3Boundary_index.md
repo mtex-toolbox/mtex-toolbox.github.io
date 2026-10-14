@@ -40,8 +40,8 @@ the grains, voxels and phases on their two sides and the misrotation across: gra
 | [nodeType](grain3Boundary.nodeType_py.html) | the number of grains meeting at every vertex, plus 10 on the surface of the volume |
 | [numCorners](grain3Boundary.numCorners_py.html) | the number of corners of every face |
 | [perimeter](grain3Boundary.perimeter_py.html) | the perimeter of every face, the length of its edges |
-| [plot](grain3Boundary.plot_py.html) | plot(gB), plot(gB, values), plot(gB, faceColor=...): the faces of a 3D grain boundary |
-| [quiver](grain3Boundary.quiver_py.html) | quiver(grains, dir), quiver(gB, dir): arrows at the centroids of 3D grains or of their boundary faces, as MATLAB's |
+| [plot](grain3Boundary.plot_py.html) | the faces of a 3D grain boundary, light blue, in one colour, or coloured by a value or a colour per face |
+| [quiver](grain3Boundary.quiver_py.html) | arrows at the centroids of 3D grains or of their boundary faces |
 | [size](grain3Boundary.size_py.html) | the number of faces |
 | [subsref](grain3Boundary.subsref_py.html) |  |
 | [V](grain3Boundary.V_py.html) | the vertices the faces use, as vectors |

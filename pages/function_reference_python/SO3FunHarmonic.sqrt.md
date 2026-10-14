@@ -19,5 +19,5 @@ the square root of the function, by quadrature at twice the bandwidth, or at the
 SO3FunHarmonic.sqrt(self, bandwidth=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L391">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L451">source</a></font>
 {% endraw %}

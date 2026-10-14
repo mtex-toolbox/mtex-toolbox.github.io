@@ -12,6 +12,8 @@ status: Reference
 the base of the spatial transforms, maps of the plane of a scan onto itself that move x and y
 and leave z; T * pos moves positions, T1 * T2 is T2 followed by T1, T1 + T2 chains T1 first
 
+## Syntax
+
 ```python
 pos2 = T * pos
 T.inv(), T.displacement(pos), T.discretize(pos), transform(ebsd, T)

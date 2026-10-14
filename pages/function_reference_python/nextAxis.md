@@ -10,22 +10,62 @@ counterpart: nextAxis.html
 status: Reference
 ---
 {% raw %}
-nextAxis: the next plot goes into the next axes of the current figure; nextAxis(k) into
-the axes k, nextAxis(i, j) into the one in row i and column j, all counted from 0 (MATLAB
-counts them from 1); fig= names the mtexFigure, the current one by default
+the axes the next plot goes into: the next of the current figure, or the one given by
+its number or its row and column
 
 ## Syntax
 
-```python
-nextAxis(k=None, j=None, fig=None)
-```
+The next axes:
 
 ```python
-nextAxis()               # the next axes
-nextAxis(2)              # the third axes
-nextAxis(1, 0)           # the axes in the second row and the first column
+nextAxis()
+```
+
+The third axes:
+
+```python
+nextAxis(2)
+```
+
+The axes in the second row and the first column:
+
+```python
+nextAxis(1, 0)
+```
+
+The next axes of a figure given:
+
+```python
 ax = nextAxis(fig=mtexFig)
 ```
+
+The axes are counted from 0, where MATLAB counts them from 1. An axes made by nextAxis stays
+blank, without a frame, until a plot draws into it, as MATLAB leaves an unused cell; the
+axes before k that do not exist yet are made blank too. Without a current figure a new one
+is made.
+
+## Input
+
+| | |
+|---|---|
+| `k` | the number of the axes, counted from 0, or the row with j |
+| `j` | the column, counted from 0 |
+
+## Output
+
+| | |
+|---|---|
+| `ax` | the matplotlib axes the next plot takes |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `fig` | `None` | the mtexFigure; the current one by default |
+
+## See also
+
+[mtexFigure](mtexFigure_index_py.html), [newMtexFigure](newMtexFigure_py.html), [Multiplot](Multiplot_py.html)
 
 ## Used on
 
@@ -33,5 +73,5 @@ ax = nextAxis(fig=mtexFig)
 
 MATLAB's [nextAxis](nextAxis.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L379">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L407">source</a></font>
 {% endraw %}

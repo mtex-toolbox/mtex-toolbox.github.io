@@ -15,10 +15,6 @@ the contraction of tensors, vectors, rotations or arrays over the indices they s
 ## Syntax
 
 ```python
-EinsteinSum(*args)
-```
-
-```python
 EinsteinSum(C, [1, 2, -1, -2], eps, [-1, -2])     sigma_ij = C_ijkl eps_kl
 EinsteinSum(a, [1], b, [2])                        the dyad a_i b_j
 EinsteinSum(T, [-1, -2, -1, -2])                   a label twice in one operand is a trace
@@ -29,11 +25,17 @@ a negative one is summed over. Lists of tensors combine elementwise over their l
 dimensions. The result keeps the frame of the first tensor and is a plain tensor, or a
 number when no index is free.
 
+## Signature
+
+```python
+EinsteinSum(*args)
+```
+
 ## Used on
 
 [AnisotropicTheory](AnisotropicTheory_py.html), [TensorArithmetics](TensorArithmetics_py.html)
 
 MATLAB's [tensor.EinsteinSum](tensor.EinsteinSum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L851">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L917">source</a></font>
 {% endraw %}

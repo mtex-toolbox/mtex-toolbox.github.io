@@ -22,5 +22,5 @@ symmetry.disjoint(self, other)
 
 MATLAB's [symmetry.disjoint](symmetry.disjoint.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L376">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L405">source</a></font>
 {% endraw %}

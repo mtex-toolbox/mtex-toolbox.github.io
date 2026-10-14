@@ -16,11 +16,13 @@ the fibres in another shape
 ## Syntax
 
 ```python
-fibre.reshape(self, *shape)
+f = f.reshape(m, n)
 ```
 
+## Signature
+
 ```python
-f = f.reshape(m, n)
+fibre.reshape(self, *shape)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/fibre.py#L147">source</a></font>

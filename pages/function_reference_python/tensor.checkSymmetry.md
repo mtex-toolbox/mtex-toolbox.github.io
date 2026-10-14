@@ -23,5 +23,5 @@ tensor.checkSymmetry(self, atol=1e-06)
 
 MATLAB's [tensor.checkSymmetry](tensor.checkSymmetry.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L585">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L613">source</a></font>
 {% endraw %}

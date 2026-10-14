@@ -17,6 +17,12 @@ calcMisorientation(x, ...) is x.calcMisorientation(...), the method of the objec
 calcMisorientation(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [EBSD](EBSD.calcMisorientation_py.html) | uncorrelated misorientations: those of random pairs of measurements far enough apart that they say nothing about one another |
+
 ## Used on
 
 [MisorientationDistributionFunction](MisorientationDistributionFunction_py.html)

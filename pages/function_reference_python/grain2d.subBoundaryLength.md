@@ -27,5 +27,5 @@ grain2d.subBoundaryLength(self, sel=None)
 
 MATLAB's [grain2d.subBoundaryLength](grain2d.subBoundaryLength.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L287">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L324">source</a></font>
 {% endraw %}

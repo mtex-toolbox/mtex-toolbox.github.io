@@ -18,5 +18,5 @@ h[m, j] = sum_q w_q v_q e^{-i(m rho_q - j theta_q)}
 sphericalTransformAdjoint(H, L, real=False, degrees=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L252">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L305">source</a></font>
 {% endraw %}

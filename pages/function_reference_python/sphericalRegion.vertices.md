@@ -19,5 +19,5 @@ the corners of the region: the intersections of its circles that lie inside
 sphericalRegion.vertices(self, tol=1e-08)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L156">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L176">source</a></font>
 {% endraw %}

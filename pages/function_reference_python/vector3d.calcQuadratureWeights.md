@@ -17,15 +17,17 @@ weights that integrate a function from samples at the directions, summing to one
 ## Syntax
 
 ```python
-vector3d.calcQuadratureWeights(v, method='voronoi')
-```
-
-```python
 calcQuadratureWeights(r)                     a regular grid exactly, scattered points by Voronoi areas
 calcQuadratureWeights(r, method='harmonic')  the least norm correction that integrates every harmonic the count allows
 ```
 
+## Signature
+
+```python
+vector3d.calcQuadratureWeights(v, method='voronoi')
+```
+
 MATLAB's [vector3d.calcQuadratureWeights](vector3d.calcQuadratureWeights.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L697">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L789">source</a></font>
 {% endraw %}

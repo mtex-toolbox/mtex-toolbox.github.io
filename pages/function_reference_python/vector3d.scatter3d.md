@@ -12,13 +12,61 @@ status: Reference
 {% raw %}
 A method of [vector3d](vector3d_index_py.html).
 
-scatter3d(v), plot3d(v, data): directions as markers on the sphere in space
+directions as markers on the sphere in space; MATLAB's vector3d/scatter3d
 
 ## Syntax
 
+The directions on the sphere:
+
 ```python
-vector3d.scatter3d(v, data=None, markerSize=6, color=(0.0, 0.447, 0.741), colormap='viridis', colorRange=None, grid=True, axisLabels=True, label=None, colorbar=False, **kw)
+scatter3d(v)
 ```
+
+Coloured by a value each, with a colour bar:
+
+```python
+scatter3d(v, data, colorbar=True)
+```
+
+Red markers with a text beside them:
+
+```python
+scatter3d(v, label='a', color='r')
+```
+
+The markers sit just outside the unit sphere, which is drawn first with its grid and the
+axes of the frame when the axes are new. An antipodal vector is drawn with its antipode.
+plot3d(v) of directions is the same.
+
+## Input
+
+| | |
+|---|---|
+| `v` | vector3d, the directions, normalised for drawing |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the matplotlib Path3DCollection of the markers |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `data` | `None` | one value per direction, the colour of its marker |
+| `markerSize` | `6` | the size of the markers in points |
+| `color` | `(0.0, 0.447, 0.741)` | the colour of the markers without data |
+| `colormap` | `'viridis'` | the colour map of the data |
+| `colorRange` | `None` | (lo, hi), the values of the ends of the colour map; by default the range of the data |
+| `grid` | `True` | draw the parallels and meridians on a new sphere |
+| `axisLabels` | `True` | draw the axes of the frame on a new sphere |
+| `label` | `None` | a text beside every marker, one for all or a list with one per direction |
+| `colorbar` | `False` | add a colour bar of the data |
+
+## See also
+
+arrow3d, [plot3d](S2Fun.plot3d_py.html), [scatter](quaternion.scatter_py.html), [VectorDefinition](VectorDefinition_py.html)
 
 MATLAB's [vector3d.scatter3d](vector3d.scatter3d.html)
 

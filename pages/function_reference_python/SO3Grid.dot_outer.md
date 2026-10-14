@@ -22,5 +22,5 @@ SO3Grid.dot_outer(self, other, symmetry=True, antipodal=True)
 
 MATLAB's [SO3Grid.dot_outer](SO3Grid.dot_outer.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L283">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L343">source</a></font>
 {% endraw %}

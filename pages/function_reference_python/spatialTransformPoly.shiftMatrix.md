@@ -19,5 +19,5 @@ the affine map a degree 1 displacement is
 spatialTransformPoly.shiftMatrix(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L437">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L462">source</a></font>
 {% endraw %}

@@ -17,14 +17,16 @@ the pointwise absolute value, a Fourier series of a smoothing bandwidth
 ## Syntax
 
 ```python
-S1FunHarmonic.abs(self)
+sF = abs(sF)
 ```
 
+## Signature
+
 ```python
-sF = abs(sF)
+S1FunHarmonic.abs(self)
 ```
 
 MATLAB's [S1Fun.abs](S1Fun.abs.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L214">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L282">source</a></font>
 {% endraw %}

@@ -15,12 +15,14 @@ bandwidths, capped by the preference, or at the given bandwidth
 ## Syntax
 
 ```python
-mapFun(op, f, *gs, bandwidth=None)
-```
-
-```python
 mapFun(np.exp, f)
 mapFun(np.maximum, f, g, bandwidth=64)
+```
+
+## Signature
+
+```python
+mapFun(op, f, *gs, bandwidth=None)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/funops.py#L372">source</a></font>

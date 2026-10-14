@@ -19,12 +19,14 @@ return_nearest=True also gives the orientation on the fibre nearest ori
 ## Syntax
 
 ```python
-fibre.angle(self, ori, symmetry=True, return_nearest=False)
-```
-
-```python
 omega = angle(f, ori)
 omega, oriF = angle(f, ori, return_nearest=True)
+```
+
+## Signature
+
+```python
+fibre.angle(self, ori, symmetry=True, return_nearest=False)
 ```
 
 MATLAB's [fibre.angle](fibre.angle.html)

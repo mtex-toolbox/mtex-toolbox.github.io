@@ -19,5 +19,5 @@ the proper rotations of the point group
 referenceFrame.rotations(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L204">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L227">source</a></font>
 {% endraw %}

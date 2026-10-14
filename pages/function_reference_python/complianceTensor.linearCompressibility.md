@@ -23,5 +23,5 @@ complianceTensor.linearCompressibility(T, v=None)
 
 MATLAB's [complianceTensor.linearCompressibility](complianceTensor.linearCompressibility.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L192">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L243">source</a></font>
 {% endraw %}

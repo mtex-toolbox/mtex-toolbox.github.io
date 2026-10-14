@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 a translation of the plane by the vector3d u
 
+## Syntax
+
 ```python
 T = spatialTransformRigid(vector3d(1, 2, 0))
 T = spatialTransformRigid.fit(posA, posB, weights=w)

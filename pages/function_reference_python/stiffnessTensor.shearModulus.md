@@ -24,5 +24,5 @@ stiffnessTensor.shearModulus(T, h=None, u=None, *args)
 
 MATLAB's [stiffnessTensor.shearModulus](stiffnessTensor.shearModulus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L207">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L258">source</a></font>
 {% endraw %}

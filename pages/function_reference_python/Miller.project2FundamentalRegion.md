@@ -19,15 +19,17 @@ that of the Laue group; given a centre, the equivalent nearest it instead
 ## Syntax
 
 ```python
-vector3d.project2FundamentalRegion(self, center=None, antipodal=False)
-```
-
-```python
 v.projectIntoFundamentalRegion()
 v.projectIntoFundamentalRegion(center)
 ```
 
+## Signature
+
+```python
+vector3d.project2FundamentalRegion(self, center=None, antipodal=False)
+```
+
 MATLAB's [Miller.project2FundamentalRegion](Miller.project2FundamentalRegion.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L786">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L983">source</a></font>
 {% endraw %}

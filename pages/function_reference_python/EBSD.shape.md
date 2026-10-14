@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the shape of the map, (n,) for a list and (rows, columns) for a grid
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L104">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L132">source</a></font>
 {% endraw %}

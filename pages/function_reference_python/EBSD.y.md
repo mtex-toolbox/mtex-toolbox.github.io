@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the y coordinates of the positions
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L147">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L175">source</a></font>
 {% endraw %}

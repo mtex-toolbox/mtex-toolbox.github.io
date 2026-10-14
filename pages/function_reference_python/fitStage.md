@@ -17,5 +17,11 @@ fitStage(x, ...) is x.fitStage(...), the method of the object passed
 fitStage(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [spatialTransformComposite](spatialTransformComposite.fitStage_py.html) | the stage s, counted from zero, fitted to a residual measured after the ones before it |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

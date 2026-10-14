@@ -21,10 +21,6 @@ calls the default RP); 'RP' keeps the directions above epsilon (1), MATLAB's 'RP
 ## Syntax
 
 ```python
-PoleFigure.calcError(self, other, mode='relative', epsilon=None)
-```
-
-```python
 e = calcError(pf, odf)
 e = calcError(pf, pf2)
 e = calcError(pf, odf, 'RP', epsilon=0.5)
@@ -32,7 +28,13 @@ e = calcError(odf, pf, 'RP')
 e = calcError(pf, odf, 'l2')
 ```
 
+## Signature
+
+```python
+PoleFigure.calcError(self, other, mode='relative', epsilon=None)
+```
+
 MATLAB's [PoleFigure.calcError](PoleFigure.calcError.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L518">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L562">source</a></font>
 {% endraw %}

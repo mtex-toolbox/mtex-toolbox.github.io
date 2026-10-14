@@ -22,5 +22,5 @@ S1Grid.subGrid(self, mask)
 
 MATLAB's [S1Grid.subGrid](S1Grid.subGrid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L96">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L115">source</a></font>
 {% endraw %}

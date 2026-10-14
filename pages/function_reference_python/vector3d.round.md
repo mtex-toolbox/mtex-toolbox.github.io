@@ -12,25 +12,79 @@ status: Reference
 {% raw %}
 A method of [vector3d](vector3d_index_py.html).
 
-a crystal direction rounded to integer indices, vector3d/round; style= the indices rounded
-('hkl', 'hkil', 'uvw', 'UVTW', the display's by default), maxHKL the largest multiple tried; a
-vector3d without a lattice has its coordinates rounded, maxXYZ the largest multiple tried;
-return_error=True also gives the angle between the given and the rounded direction, without
-symmetric equivalents, MATLAB's second output
+the direction with its indices, or its coordinates, rounded to small integers
 
 ## Syntax
 
-```python
-vector3d.round(self, style=None, maxHKL=12, maxXYZ=12, return_error=False)
-```
+The indices of the display rounded:
 
 ```python
 m = round(m)
+```
+
+No index larger than 5:
+
+```python
 m = round(m, maxHKL=5)
-m = round(m, 'uvw')       # the direct indices integer
+```
+
+The direct indices integer:
+
+```python
+m = round(m, 'uvw')
+```
+
+The Cartesian coordinates of a vector:
+
+```python
 v = round(v, maxXYZ=5)
+```
+
+Rounded only where it turns by less:
+
+```python
+v = round(v, accuracy=0.1*degree)
+```
+
+Also the angle the rounding turned it by:
+
+```python
 m, err = round(m, return_error=True)
 ```
+
+The direction is scaled so that its largest index is 1, 2, ..., maxHKL, and the scale
+that brings the indices nearest to integers is kept. For a trigonal or hexagonal lattice the three and the four index forms
+are not integer at the same time, UVTW = (1, 3, -4, 8) is uvw = (5, 7, 8)/3, so style says
+which is rounded. A vector without a lattice has its Cartesian coordinates rounded and
+keeps them where the rounding would turn it by more than the accuracy.
+
+## Input
+
+| | |
+|---|---|
+| `m` | vector3d in a crystal frame |
+| `v` | vector3d |
+
+## Output
+
+| | |
+|---|---|
+| `m, v` | vector3d, the rounded directions |
+| `err` | array, the angle between the given and the rounded direction, without symmetric equivalents, with return_error=True |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `style` | `None` | the indices rounded, 'hkl', 'hkil', 'uvw' or 'UVTW'; by default those of the display |
+| `maxHKL` | `12` | the largest index of a crystal direction |
+| `maxXYZ` | `12` | the largest coordinate of a vector without a lattice |
+| `accuracy` | `1*degree` | the largest angle the rounding may turn a vector without a lattice by, in radians |
+| `return_error` | `False` | also return the angle the rounding turned the directions by |
+
+## See also
+
+[vector3d.char](vector3d.char_py.html), [Miller](Miller_py.html), [CrystalDirections](CrystalDirections_py.html)
 
 ## Used on
 
@@ -38,5 +92,5 @@ m, err = round(m, return_error=True)
 
 MATLAB's [vector3d.round](vector3d.round.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L260">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L291">source</a></font>
 {% endraw %}

@@ -17,11 +17,13 @@ the list of several systems of one crystal, MATLAB's [sS1, sS2]
 ## Syntax
 
 ```python
-slipSystem.vertcat(*systems, axis=0)
+sS = cat(sS1, sS2)
 ```
 
+## Signature
+
 ```python
-sS = cat(sS1, sS2)
+slipSystem.vertcat(*systems, axis=0)
 ```
 
 MATLAB's [slipSystem.vertcat](slipSystem.vertcat.html)

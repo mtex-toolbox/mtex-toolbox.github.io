@@ -17,11 +17,13 @@ an ODF read from a file, loadODF
 ## Syntax
 
 ```python
-SO3Fun.load(fname, *args, **kwargs)
+odf = SO3Fun.load('odf.txt', CS=cs, columnNames=[...])
 ```
 
+## Signature
+
 ```python
-odf = SO3Fun.load('odf.txt', CS=cs, columnNames=[...])
+SO3Fun.load(fname, *args, **kwargs)
 ```
 
 MATLAB's [SO3Fun.load](SO3Fun.load.html)

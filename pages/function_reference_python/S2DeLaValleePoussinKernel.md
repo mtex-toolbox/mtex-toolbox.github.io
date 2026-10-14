@@ -13,6 +13,8 @@ status: Reference
 the de la Vallee Poussin kernel on the sphere, (1 + kappa) ((1 + t) / 2)^kappa: nonnegative and
 a finite series, the kernel recommended for texture analysis
 
+## Syntax
+
 ```python
 S2DeLaValleePoussinKernel(20)
 S2DeLaValleePoussinKernel(halfwidth=10*degree)
@@ -30,5 +32,5 @@ S2DeLaValleePoussinKernel(halfwidth=10*degree)
 
 MATLAB's [S2DeLaValleePoussinKernel](S2DeLaValleePoussinKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L728">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L747">source</a></font>
 {% endraw %}

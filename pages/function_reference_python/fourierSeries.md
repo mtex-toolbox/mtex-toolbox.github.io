@@ -18,5 +18,5 @@ coefficients are those of a real function
 fourierSeries(chat, x, real=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L913">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L966">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ a[ind]
 
 MATLAB's [grain3d.subsref](grain3d.subsref.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L184">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L205">source</a></font>
 {% endraw %}

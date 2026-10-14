@@ -20,5 +20,5 @@ directions of the frame's plotting convention
 referenceFrame.conventionalSector(self, up=None, east=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L324">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L368">source</a></font>
 {% endraw %}

@@ -17,6 +17,12 @@ grainMean(x, ...) is x.grainMean(...), the method of the object passed
 grainMean(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [EBSD](EBSD.grainMean_py.html) | the average of a property over each grain |
+
 ## Used on
 
 [EBSDGROD](EBSDGROD_py.html), [GrainOrientationParameters](GrainOrientationParameters_py.html), [GrainSpatialPlots](GrainSpatialPlots_py.html)

@@ -13,5 +13,5 @@ A property of [S2RestrictedDistanceKernel](S2RestrictedDistanceKernel_index_py.h
 
 the degree N the kernel is cut at
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L826">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L864">source</a></font>
 {% endraw %}

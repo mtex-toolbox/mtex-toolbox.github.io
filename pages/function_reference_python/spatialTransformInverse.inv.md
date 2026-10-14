@@ -19,5 +19,5 @@ the transform it inverts
 spatialTransformInverse.inv(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L746">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L817">source</a></font>
 {% endraw %}

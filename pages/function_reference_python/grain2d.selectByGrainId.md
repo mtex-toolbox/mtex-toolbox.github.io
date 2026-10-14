@@ -16,13 +16,15 @@ the grains named by id, in the order asked for
 ## Syntax
 
 ```python
-grain2d.selectByGrainId(self, ids)
-```
-
-```python
 grains = grains.selectByGrainId([5, 3, 1])
 grain = grains.selectByGrainId(17)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L370">source</a></font>
+## Signature
+
+```python
+grain2d.selectByGrainId(self, ids)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L447">source</a></font>
 {% endraw %}

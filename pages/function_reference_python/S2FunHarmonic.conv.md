@@ -23,5 +23,5 @@ S2FunHarmonic.conv(self, g)
 
 MATLAB's [S2FunHarmonic.conv](S2FunHarmonic.conv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L470">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L526">source</a></font>
 {% endraw %}

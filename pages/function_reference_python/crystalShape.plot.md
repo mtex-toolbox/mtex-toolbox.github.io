@@ -12,21 +12,95 @@ status: Reference
 {% raw %}
 A method of [crystalShape](crystalShape_index_py.html).
 
-plot(cS), plot(cS, faceColor='red', faceAlpha=0.5), plot(cS, colored=True), plot(cS, colored=key),
-plot(x, y, cS), plot(x, y, z, cS), plot(xy, cS), plot(cS, N), plot(cS, sS)
+a crystal shape drawn as the polygons of its faces, in a 3D axes or onto a held map
 
 ## Syntax
 
+The shape in a 3D axes:
+
 ```python
-crystalShape.plot(*args, faceColor=None, faceAlpha=None, edgeColor='k', lineWidth=0.8, colored=None, colormap='viridis', displayName=None, **kw)
+plot(cS)
 ```
 
-A crystal shape as the polygons of its faces in a 3D axes, or seen along the normal of a
-held map; colored gives every form its own colour with a legend, or the colours of the
-direction key of the normals. With a plane normal the section through the centre, with
-a slip system its plane and its direction inside the shape.
+One colour, translucent:
+
+```python
+plot(cS, faceColor='red', faceAlpha=0.5, edgeColor='k')
+```
+
+A value per face through the colour map:
+
+```python
+plot(cS, faceColor=cS.faceArea)
+```
+
+A colour per form, with a legend:
+
+```python
+plot(cS, colored=True)
+```
+
+The colours of a key of the normals:
+
+```python
+plot(cS, colored=ipfHSVKey(cS.CS))
+```
+
+At positions, plot(x, y, z, cS) or plot(xy, cS):
+
+```python
+plot(x, y, cS)
+```
+
+The section by a lattice plane:
+
+```python
+plot(cS, Miller(1, 1, 0, cS.CS, 'hkl'))
+```
+
+A slip system inside the shape:
+
+```python
+plot(cS, sS)
+```
+
+A list of shapes, ori * cS turned by orientations for instance, is drawn at once; with
+positions every shape is moved there first. Drawn while a map is held, the shapes are seen
+along the normal of the map, at the positions in its plane, as plot(grains, cS) puts them.
+By default the faces take the colour of the mineral, or LightSkyBlue. A lattice plane
+hands over to plotInnerFace, a slip system to plotSlipSystem. The keywords of the axes,
+parent and the like, are taken as by every plot; MATLAB's legendSpacing is not there.
+
+## Input
+
+| | |
+|---|---|
+| `cS` | crystalShape, one or a list |
+| `x, y, z` | the positions of the shapes, or xy an (n, 2) or (n, 3) array of them |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the matplotlib collection of the faces |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `faceColor` | `None` | one colour, one per face, one per shape, or a value per face mapped through the colour map |
+| `faceAlpha` | `None` | the opacity of the faces |
+| `edgeColor` | `'k'` | the colour of the edges |
+| `lineWidth` | `0.8` | the width of the edges |
+| `colored` | `None` | True gives every form its own colour with a legend; a direction or ipf key colours the faces by their normals |
+| `colormap` | `'viridis'` | the colour map of the values per face |
+| `displayName` | `None` | the label of the shape in a legend |
+
+## See also
+
+[crystalShape](crystalShape_index_py.html), [crystalShape.plotInnerFace](crystalShape.plotInnerFace_py.html), [crystalShape.plotInnerDirection](crystalShape.plotInnerDirection_py.html), [crystalShape.plotSlipSystem](crystalShape.plotSlipSystem_py.html), [faceColors](faceColors_py.html), [CrystalShapes](CrystalShapes_py.html)
 
 MATLAB's [crystalShape.plot](crystalShape.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L171">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L189">source</a></font>
 {% endraw %}

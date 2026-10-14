@@ -19,5 +19,5 @@ the preimage by fixed point iteration: the position moved against the error its 
 spatialTransformInverse.eval(self, pos)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L721">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L792">source</a></font>
 {% endraw %}

@@ -24,5 +24,5 @@ orientation.plotIPDF(o, *args, points=None, all=False, **kw)
 
 MATLAB's [orientation.plotIPDF](orientation.plotIPDF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L234">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L271">source</a></font>
 {% endraw %}

@@ -29,5 +29,5 @@ EBSD.calcGROD(ebsd, grains=None, rotRef=None)
 
 MATLAB's [EBSD.calcGROD](EBSD.calcGROD.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L362">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L409">source</a></font>
 {% endraw %}

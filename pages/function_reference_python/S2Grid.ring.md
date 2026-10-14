@@ -19,5 +19,5 @@ the indices of the points on ring k
 S2Grid.ring(self, k)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L55">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L76">source</a></font>
 {% endraw %}

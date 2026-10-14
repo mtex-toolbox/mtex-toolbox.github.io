@@ -19,5 +19,5 @@ the transform of the inverse function, an error where none was given
 spatialTransformHandle.inv(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L627">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L698">source</a></font>
 {% endraw %}

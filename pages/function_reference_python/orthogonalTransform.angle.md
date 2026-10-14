@@ -16,13 +16,15 @@ the rotational angle of the rotational part, or the angle between the rotational
 ## Syntax
 
 ```python
-orthogonalTransform.angle(self, other=None)
-```
-
-```python
 omega = angle(T)
 omega = angle(T1, T2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L698">source</a></font>
+## Signature
+
+```python
+orthogonalTransform.angle(self, other=None)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L809">source</a></font>
 {% endraw %}

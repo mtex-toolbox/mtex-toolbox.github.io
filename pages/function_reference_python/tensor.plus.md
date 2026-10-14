@@ -22,5 +22,5 @@ a + b
 
 MATLAB's [tensor.plus](tensor.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L293">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L321">source</a></font>
 {% endraw %}

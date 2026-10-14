@@ -17,6 +17,12 @@ stripSym(x, ...) is x.stripSym(...), the method of the object passed
 stripSym(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [referenceFrame](referenceFrame.stripSym_py.html) | the sibling frame carrying the trivial group |
+
 ## Used on
 
 [DetectionOfSampleSymmetry](DetectionOfSampleSymmetry_py.html)

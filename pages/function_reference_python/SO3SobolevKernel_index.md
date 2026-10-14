@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 the Sobolev kernel on SO(3), sum_n (2n+1) (n(n+1))^s U_2n(t) up to the bandwidth
 
+## Syntax
+
 ```python
 SO3SobolevKernel(1.1, bandwidth=20)
 ```

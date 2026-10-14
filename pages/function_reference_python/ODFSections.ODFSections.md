@@ -15,10 +15,6 @@ sections through orientation space
 ## Syntax
 
 ```python
-ODFSections(frameA, frameB, values, tol)
-```
-
-```python
 oS.frameA, oS.frameB       the two frames
 oS.tol               the tolerance an orientation may deviate from a section
 oS.numSections       how many
@@ -26,6 +22,12 @@ oS.sectionCharts(k)  the charts section k is drawn on
 oS.sectionData(ori)  where the equivalents of a list fall: directions, section, source
 oS.orientationsAt(k, v)   the orientations at points of a chart of section k
 oS.plot(x, ...)      plotSection(x, oS, ...)
+```
+
+## Signature
+
+```python
+ODFSections(frameA, frameB, values, tol)
 ```
 
 MATLAB's [ODFSections.ODFSections](ODFSections.ODFSections.html)

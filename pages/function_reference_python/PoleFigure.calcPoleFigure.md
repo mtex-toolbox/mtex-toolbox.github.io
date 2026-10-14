@@ -22,5 +22,5 @@ PoleFigure.calcPoleFigure(self, odf)
 
 MATLAB's [PoleFigure.calcPoleFigure](PoleFigure.calcPoleFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L476">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L520">source</a></font>
 {% endraw %}

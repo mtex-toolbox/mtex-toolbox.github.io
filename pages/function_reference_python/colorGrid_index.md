@@ -12,6 +12,8 @@ status: Reference
 a direction key evaluated once on a cube map of the sphere at the resolution, its colours
 then looked up at the node nearest a direction
 
+## Syntax
+
 ```python
 g = colorGrid(key, resolution=0.5*degree)
 ```

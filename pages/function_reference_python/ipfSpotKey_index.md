@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 single spots of the inverse pole figure in their own colours
 
+## Syntax
+
 ```python
 ipfSpotKey(cs, center=Miller(1, 0, 0, cs), color=(0, 0, 1), psi=S2DeLaValleePoussinKernel(halfwidth=7.5*degree))
 ```

@@ -17,6 +17,12 @@ perp(x, ...) is x.perp(...), the method of the object passed
 perp(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [vector3d](vector3d.perp_py.html) | the axis best orthogonal to a list of directions, the smallest principal axis |
+
 ## Used on
 
 [EBSDOrientationAnalysis](EBSDOrientationAnalysis_py.html)

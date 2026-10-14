@@ -17,11 +17,13 @@ the Pitsch-Schrader orientation relationship between bcc and hcp, (011) || (0001
 ## Syntax
 
 ```python
-orientation.PitschSchrader(csParent, csChild)
+p2c = orientation.PitschSchrader(csParent, csChild)
 ```
 
+## Signature
+
 ```python
-p2c = orientation.PitschSchrader(csParent, csChild)
+orientation.PitschSchrader(csParent, csChild)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L124">source</a></font>

@@ -10,16 +10,73 @@ counterpart: orientation.round2Miller.html
 status: Reference
 ---
 {% raw %}
-hkl, uvw = round2Miller(ori): the plane and the direction of the crystal along the
-specimen z and x, as their nearest low indices; n1, n2, d1, d2 = round2Miller(mori): the
-parallel planes and the parallel directions of the two crystals the misorientation
-relates, the smallest indices that fit best, penalty weighing the size of the indices
+the lattice planes and directions of low indices an orientation or a misorientation aligns
 
 ## Syntax
 
+The plane normal along z and the direction along x:
+
 ```python
-round2Miller(mori, penalty=0.002, maxIndex=None, nextFit=1)
+hkl, uvw = round2Miller(ori)
 ```
+
+The parallel planes and directions of two crystals:
+
+```python
+n1, n2, d1, d2 = round2Miller(mori)
+```
+
+Smaller indices preferred more:
+
+```python
+n1, n2, d1, d2 = round2Miller(mori, penalty=0.01)
+```
+
+Indices up to 6:
+
+```python
+n1, n2, d1, d2 = round2Miller(mori, maxIndex=6)
+```
+
+The second best fit:
+
+```python
+n1, n2, d1, d2 = round2Miller(mori, nextFit=2)
+```
+
+For an orientation the plane (hkl) and the direction [uvw] of the crystal along the
+specimen z and x, rounded to the nearest low indices. For a misorientation the planes n1,
+n2 and the directions d1, d2, d1 in n1, with mori * n1 = n2 and mori * d1 = d2 as nearly
+as indices up to maxIndex allow: every candidate's misfit angle plus penalty times the
+size of its indices is minimised. The result displays as a table of the parallel planes
+and directions with the angle the relation makes to the misorientation; a list of
+misorientations gives lists.
+
+## Input
+
+| | |
+|---|---|
+| `ori` | orientation, crystal to specimen |
+| `mori` | orientation, a misorientation between two crystals |
+
+## Output
+
+| | |
+|---|---|
+| `hkl, uvw` | Miller, the plane normal and the direction |
+| `n1, n2, d1, d2` | Miller, the parallel planes and directions |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `penalty` | `0.002` | the weight of the size of the indices against the misfit angle |
+| `maxIndex` | `None` | the largest index, 4 for a misorientation and 12 for an orientation by default |
+| `nextFit` | `1` | which fit to return, 1 the best |
+
+## See also
+
+[CSL](CSL_py.html), [orientation.map](orientation.map_py.html), [orientation.KurdjumovSachs](orientation.KurdjumovSachs_py.html), [Miller.round](Miller.round_py.html)
 
 ## Used on
 
@@ -27,5 +84,5 @@ round2Miller(mori, penalty=0.002, maxIndex=None, nextFit=1)
 
 MATLAB's [orientation.round2Miller](orientation.round2Miller.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L504">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/parent2child.py#L558">source</a></font>
 {% endraw %}

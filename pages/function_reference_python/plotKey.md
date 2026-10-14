@@ -18,5 +18,5 @@ key: the key evaluated on the chart grid, as an rgb surface
 plotKey(key, resolution=0.5*degree, fundamentalRegion=True, **kw)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1207">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1281">source</a></font>
 {% endraw %}

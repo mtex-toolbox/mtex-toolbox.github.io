@@ -25,5 +25,5 @@ double(e, full=False)
 
 MATLAB's [rotation.double](rotation.double.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L412">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L463">source</a></font>
 {% endraw %}

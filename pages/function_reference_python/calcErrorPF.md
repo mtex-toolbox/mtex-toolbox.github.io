@@ -18,5 +18,5 @@ deviation from a recalculation, 'relative', 'RP', 'l1' or 'l2'
 calcErrorPF(pf, other, mode='relative', epsilon=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L612">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L678">source</a></font>
 {% endraw %}

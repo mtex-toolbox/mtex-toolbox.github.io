@@ -13,5 +13,5 @@ A property of [SO3FunComposition](SO3FunComposition_index_py.html).
 
 the specimen frame the components share
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L276">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L321">source</a></font>
 {% endraw %}

@@ -14,12 +14,14 @@ the real Wigner-d matrix d_l(beta) at one angle, or with bandwidth=L the list d_
 ## Syntax
 
 ```python
-wignerd(beta, degree=None, *, bandwidth=None)
-```
-
-```python
 wignerd(beta, l)
 wignerd(beta, bandwidth=L)
+```
+
+## Signature
+
+```python
+wignerd(beta, degree=None, *, bandwidth=None)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L174">source</a></font>

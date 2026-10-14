@@ -22,5 +22,5 @@ S2AxisFieldHarmonic.interpolate(nodes, values, *, bandwidth=None, weights=None, 
 
 MATLAB's [S2AxisFieldHarmonic.interpolate](S2AxisFieldHarmonic.interpolate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L146">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L173">source</a></font>
 {% endraw %}

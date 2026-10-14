@@ -17,14 +17,16 @@ the integral over the circle, 2 pi times the mean, MATLAB's sum
 ## Syntax
 
 ```python
-S1FunHarmonic.sum(self)
+value = sum(sF)
 ```
 
+## Signature
+
 ```python
-value = sum(sF)
+S1FunHarmonic.sum(self)
 ```
 
 MATLAB's [S1Fun.sum](S1Fun.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L258">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L326">source</a></font>
 {% endraw %}

@@ -20,5 +20,5 @@ second order total variation
 
 MATLAB's [infimalConvolutionFilter](infimalConvolutionFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L81">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L118">source</a></font>
 {% endraw %}

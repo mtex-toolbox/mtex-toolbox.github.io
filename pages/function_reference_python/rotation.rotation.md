@@ -16,13 +16,15 @@ or a frame gives its elements, an improper orthogonalTransform is refused
 ## Syntax
 
 ```python
-rotation(*args, dtype=None)
-```
-
-```python
 rotation(a, b, c, d)
 rotation(q)
 rotation(cs)
+```
+
+## Signature
+
+```python
+rotation(*args, dtype=None)
 ```
 
 ## Used on
@@ -31,5 +33,5 @@ rotation(cs)
 
 MATLAB's [rotation.rotation](rotation.rotation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L399">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L479">source</a></font>
 {% endraw %}

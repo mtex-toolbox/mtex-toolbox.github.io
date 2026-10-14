@@ -22,5 +22,5 @@ vector3d.smooth(x, *args, **kw)
 
 MATLAB's [vector3d.smooth](vector3d.smooth.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1150">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1224">source</a></font>
 {% endraw %}

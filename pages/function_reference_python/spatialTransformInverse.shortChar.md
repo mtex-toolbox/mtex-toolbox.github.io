@@ -19,5 +19,5 @@ the short name of the inverted transform with the prefix inv-
 spatialTransformInverse.shortChar(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L755">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L826">source</a></font>
 {% endraw %}

@@ -23,5 +23,5 @@ embedding.double(self, full=False)
 
 MATLAB's [embedding.double](embedding.double.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L349">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L378">source</a></font>
 {% endraw %}

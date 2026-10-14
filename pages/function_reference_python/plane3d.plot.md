@@ -12,15 +12,52 @@ status: Reference
 {% raw %}
 A method of [plane3d](plane3d_index_py.html).
 
-plot(plane): planes in space, each clipped by the bounds of the axes
+planes in space drawn as polygons, each clipped by the bounds of the 3D axes
 
 ## Syntax
 
+Into the current box, translucent:
+
 ```python
-plane3d.plot(plane, faceColor=None, faceAlpha=0.5, edgeColor='k', lineWidth=0.8, displayName=None, **kw)
+plot(plane)
 ```
+
+Coloured:
+
+```python
+plot(plane, faceColor='red', faceAlpha=0.3)
+```
+
+Every plane is cut by the box of the current axes and drawn as the polygon that remains;
+the box stays as it was, so draw what defines it first. A plane cannot be drawn into a map.
+
+## Input
+
+| | |
+|---|---|
+| `plane` | plane3d, one or several |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the matplotlib collection of the polygons, None when no plane meets the box |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `faceColor` | `None` | one colour, or one per plane |
+| `faceAlpha` | `0.5` | the opacity of the polygons |
+| `edgeColor` | `'k'` | the colour of their edges |
+| `lineWidth` | `0.8` | the width of their edges |
+| `displayName` | `None` | the label in a legend |
+
+## See also
+
+[plane3d](plane3d_index_py.html), [crystalShape.plot](crystalShape.plot_py.html), [plot3d](S2Fun.plot3d_py.html)
 
 MATLAB's [plane3d.plot](plane3d.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L270">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/shapeplot.py#L380">source</a></font>
 {% endraw %}

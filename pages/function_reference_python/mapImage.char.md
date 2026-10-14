@@ -19,5 +19,5 @@ the image as one line of text: its size, channels, steps, name and whether a map
 mapImage.char(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L277">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L298">source</a></font>
 {% endraw %}

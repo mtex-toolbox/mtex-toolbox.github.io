@@ -24,5 +24,5 @@ mclComponents(A, p, maxIter=inf)
 
 MATLAB's [mclComponents](mclComponents.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L47">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/variantgraph.py#L66">source</a></font>
 {% endraw %}

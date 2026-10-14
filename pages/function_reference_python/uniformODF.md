@@ -15,12 +15,19 @@ the uniform ODF, constant one, between a crystal and a specimen frame
 ## Syntax
 
 ```python
-uniformODF(*frames, antipodal=False)
+odf = uniformODF(cs, ss)
 ```
 
+A uniform misorientation distribution:
+
 ```python
-odf = uniformODF(cs, ss)
-mdf = uniformODF(cs, cs, antipodal=True)  # a uniform misorientation distribution
+mdf = uniformODF(cs, cs, antipodal=True)
+```
+
+## Signature
+
+```python
+uniformODF(*frames, antipodal=False)
 ```
 
 ## Used on
@@ -29,5 +36,5 @@ mdf = uniformODF(cs, cs, antipodal=True)  # a uniform misorientation distributio
 
 MATLAB's [uniformODF](uniformODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L744">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L824">source</a></font>
 {% endraw %}

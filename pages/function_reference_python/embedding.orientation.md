@@ -18,15 +18,17 @@ orientations of e.CS in the specimen frame SS; keywords go to project
 ## Syntax
 
 ```python
-embedding.orientation(self, SS=None, **kwargs)
-```
-
-```python
 e.orientation()
 mean(e).orientation()          the mean orientation of a list
 ```
 
+## Signature
+
+```python
+embedding.orientation(self, SS=None, **kwargs)
+```
+
 MATLAB's [embedding.orientation](embedding.orientation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L393">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L444">source</a></font>
 {% endraw %}

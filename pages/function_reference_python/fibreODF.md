@@ -10,22 +10,69 @@ counterpart: fibreODF.html
 status: Reference
 ---
 {% raw %}
-a fibre ODF from crystal and specimen directions or from a fibre of P1, the weights
-normalised to a mean of one
+a fibre ODF, symmetric about the fibre of the orientations taking a crystal direction to a
+specimen direction, its shape a kernel on the sphere
 
 ## Syntax
 
-```python
-fibreODF(h, r=None, *args, kernel=None, halfwidth=None, weights=None)
-```
+The de la Vallee Poussin kernel of halfwidth 10 degree:
 
 ```python
-odf = fibreODF(h, r)  # the de la Vallee Poussin kernel of halfwidth 10 degree
-odf = fibreODF(h, r, halfwidth=15*degree)
-odf = fibreODF(h, r, psi)  # the S2 kernel psi, also kernel=psi
-odf = fibreODF(h, r, ss)  # the specimen frame named
-odf = fibreODF(f, weights=w)  # from a fibre f, one weight per fibre
+odf = fibreODF(h, r)
 ```
+
+Another halfwidth:
+
+```python
+odf = fibreODF(h, r, halfwidth=15*degree)
+```
+
+The S2 kernel psi, also kernel=psi:
+
+```python
+odf = fibreODF(h, r, psi)
+```
+
+The specimen frame named:
+
+```python
+odf = fibreODF(h, r, ss)
+```
+
+From a fibre f, one weight per fibre:
+
+```python
+odf = fibreODF(f, weights=w)
+```
+
+The ODF is SO3FunCBF, the kernel of the angle between g h and r, the weights normalised to a
+mean of one. Several crystal and specimen directions give several fibres.
+
+## Input
+
+| | |
+|---|---|
+| `h` | Miller, the crystal directions, or a fibre |
+| `r` | vector3d, the specimen directions |
+| `args` | specimenFrame and an S2Kernel |
+
+## Output
+
+| | |
+|---|---|
+| `odf` | SO3FunCBF |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `kernel` | `None` | S2Kernel, the shape; by default the de la Vallee Poussin kernel |
+| `halfwidth` | `None` | the halfwidth of the default kernel, 10 degree unless given |
+| `weights` | `None` | one weight per fibre |
+
+## See also
+
+[unimodalODF](unimodalODF_py.html), [uniformODF](uniformODF_py.html), [FourierODF](FourierODF_py.html), [BinghamODF](BinghamODF_py.html), [SO3FunCBF](SO3FunCBF_index_py.html), [FibreODFs](FibreODFs_py.html)
 
 ## Used on
 
@@ -33,5 +80,5 @@ odf = fibreODF(f, weights=w)  # from a fibre f, one weight per fibre
 
 MATLAB's [fibreODF](fibreODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L791">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L888">source</a></font>
 {% endraw %}

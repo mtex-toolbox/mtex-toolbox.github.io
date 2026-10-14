@@ -23,5 +23,5 @@ S2FunHarmonic.adjoint(nodes, values, *, bandwidth=None, weights=None)
 
 MATLAB's [S2FunHarmonic.adjoint](S2FunHarmonic.adjoint.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L154">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L210">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ S2VectorFieldHarmonic.normal()
 
 MATLAB's [S2VectorField.normal](S2VectorField.normal.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L249">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L275">source</a></font>
 {% endraw %}

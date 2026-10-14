@@ -16,12 +16,16 @@ MATLAB's name for the surface area
 
 ## Syntax
 
-```python
-grain3d.surface(self)
-```
+The same as grains.surfaceArea:
 
 ```python
-s = grains.surface()      # the same as grains.surfaceArea
+s = grains.surface()
+```
+
+## Signature
+
+```python
+grain3d.surface(self)
 ```
 
 ## Used on
@@ -30,5 +34,5 @@ s = grains.surface()      # the same as grains.surfaceArea
 
 MATLAB's [grain3d.surface](grain3d.surface.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L275">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L315">source</a></font>
 {% endraw %}

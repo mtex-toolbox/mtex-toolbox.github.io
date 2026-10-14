@@ -19,5 +19,5 @@ the specimen frame registered under a name; with a frame, registers it under tha
 referenceFrame.byName(name, fr=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L408">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L452">source</a></font>
 {% endraw %}

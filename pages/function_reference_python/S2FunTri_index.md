@@ -13,6 +13,8 @@ status: Reference
 a function on the sphere by its values at the vertices of a spherical triangulation, linear
 in between; a direction given twice takes the mean of its values
 
+## Syntax
+
 ```python
 S2FunTri(v, values)          the values at the directions v
 S2FunTri(sT, values)         on a triangulation already made

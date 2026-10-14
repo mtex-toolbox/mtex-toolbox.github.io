@@ -16,14 +16,16 @@ its harmonic expansion
 ## Syntax
 
 ```python
-S2VectorFieldHandle(fun, frame=None, *, bandwidth=None)
+vF = S2VectorFieldHandle(lambda v: v.cross(vector3d.Z()))
 ```
 
+## Signature
+
 ```python
-vF = S2VectorFieldHandle(lambda v: v.cross(vector3d.Z()))
+S2VectorFieldHandle(fun, frame=None, *, bandwidth=None)
 ```
 
 MATLAB's [S2VectorFieldHandle.S2VectorFieldHandle](S2VectorFieldHandle.S2VectorFieldHandle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L460">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L486">source</a></font>
 {% endraw %}

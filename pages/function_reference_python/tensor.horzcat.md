@@ -23,5 +23,5 @@ tensor.horzcat(*arrays, axis=0)
 
 MATLAB's [tensor.horzcat](tensor.horzcat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L684">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L750">source</a></font>
 {% endraw %}

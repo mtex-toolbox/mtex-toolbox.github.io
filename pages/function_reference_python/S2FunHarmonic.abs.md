@@ -16,12 +16,14 @@ the absolute value |f| as a handle, evaluated when asked
 ## Syntax
 
 ```python
-S2FunHarmonic.abs(self)
-```
-
-```python
 sF = abs(sF)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L379">source</a></font>
+## Signature
+
+```python
+S2FunHarmonic.abs(self)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L435">source</a></font>
 {% endraw %}

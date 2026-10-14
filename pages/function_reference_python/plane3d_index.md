@@ -12,10 +12,24 @@ status: Reference
 {% raw %}
 a plane <N, v> = d, or a list of them
 
+## Syntax
+
+<N, v> = d:
+
 ```python
-plane = plane3d(N, d)           # <N, v> = d
-plane = plane3d(N, v0)          # through the point v0
-plane = plane3d.byPoints(v)     # fitted through the points v
+plane = plane3d(N, d)
+```
+
+Through the point v0:
+
+```python
+plane = plane3d(N, v0)
+```
+
+Fitted through the points v:
+
+```python
+plane = plane3d.byPoints(v)
 ```
 
 ## Members
@@ -30,7 +44,7 @@ plane = plane3d.byPoints(v)     # fitted through the points v
 | [frame](plane3d.frame_py.html) | the frame of the planes, that of their normals |
 | [intersect](plane3d.intersect_py.html) | where the segments from v1 to v2 cross the plane, NaN where they do not |
 | [plane3d](plane3d.plane3d_py.html) | a plane <N, v> = d, or a list of them |
-| [plot](plane3d.plot_py.html) | plot(plane): planes in space, each clipped by the bounds of the axes |
+| [plot](plane3d.plot_py.html) | planes in space drawn as polygons, each clipped by the bounds of the 3D axes |
 | [project](plane3d.project_py.html) | the orthogonal projection of points onto the plane |
 | [rotate](plane3d.rotate_py.html) | a rotation turns the normal, the distance stays |
 | [shape](plane3d.shape_py.html) | the shape of the list of planes |

@@ -22,5 +22,5 @@ stiffnessTensor.ChristoffelTensor(M, *args, **kwargs)
 
 MATLAB's [stiffnessTensor.ChristoffelTensor](stiffnessTensor.ChristoffelTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/install.py#L1175">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/install.py#L1370">source</a></font>
 {% endraw %}

@@ -17,6 +17,12 @@ invRadon(x, ...) is x.invRadon(...), the method of the object passed
 invRadon(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [S2FunHarmonic](S2FunHarmonic.invRadon_py.html) | the inverse of the Funk transform: the even function whose Funk transform this is |
+
 ## Used on
 
 [S2FunRadon](S2FunRadon_py.html)

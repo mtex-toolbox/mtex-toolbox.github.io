@@ -17,5 +17,11 @@ orthProj(x, ...) is x.orthProj(...), the method of the object passed
 orthProj(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [vector3d](vector3d.orthProj_py.html) | the component orthogonal to a normal N, vector3d/orthProj |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

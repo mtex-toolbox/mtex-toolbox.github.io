@@ -17,14 +17,16 @@ the L2 norm for the normalised measure, the Euclidean norm of the coefficients
 ## Syntax
 
 ```python
-S1FunHarmonic.norm(self)
+t = norm(sF)
 ```
 
+## Signature
+
 ```python
-t = norm(sF)
+S1FunHarmonic.norm(self)
 ```
 
 MATLAB's [S1FunHarmonic.norm](S1FunHarmonic.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L240">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L308">source</a></font>
 {% endraw %}

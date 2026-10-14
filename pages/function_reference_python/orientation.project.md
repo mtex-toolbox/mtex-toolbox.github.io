@@ -22,5 +22,5 @@ project(fhat, P, Q, out=None)
 
 MATLAB's [orientation.project](orientation.project.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L387">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L414">source</a></font>
 {% endraw %}

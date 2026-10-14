@@ -17,6 +17,13 @@ Euler(x, ...) is x.Euler(...), the method of the object passed
 Euler(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [orthogonalTransform](orthogonalTransform.Euler_py.html) | the Euler angles of the rotational part, in the convention named or the session's |
+| [quaternion](quaternion.Euler_py.html) | the Euler angles (alpha, beta, gamma) in the convention named, the session's by default |
+
 ## Used on
 
 [OrientationStandard](OrientationStandard_py.html), [NotationAndConventions](NotationAndConventions_py.html), [RotationDefinition](RotationDefinition_py.html), [RotationOperations](RotationOperations_py.html)

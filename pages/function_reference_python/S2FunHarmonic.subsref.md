@@ -22,5 +22,5 @@ a[ind]
 
 MATLAB's [S2FunHarmonic.subsref](S2FunHarmonic.subsref.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L227">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L283">source</a></font>
 {% endraw %}

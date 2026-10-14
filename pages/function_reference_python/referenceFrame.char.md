@@ -19,5 +19,5 @@ the name of the frame, or its class name
 referenceFrame.char(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L441">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L485">source</a></font>
 {% endraw %}

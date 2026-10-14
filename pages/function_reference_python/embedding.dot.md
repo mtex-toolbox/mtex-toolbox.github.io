@@ -22,5 +22,5 @@ embedding.dot(self, other)
 
 MATLAB's [embedding.dot](embedding.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L309">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L338">source</a></font>
 {% endraw %}

@@ -19,5 +19,5 @@ the exponential of the function, by quadrature at twice the bandwidth, or at the
 SO3FunHarmonic.exp(self, bandwidth=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L396">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L456">source</a></font>
 {% endraw %}

@@ -12,6 +12,8 @@ status: Reference
 the three Euler angles of the representative inside the Euler box, scaled to red, green
 and blue
 
+## Syntax
+
 ```python
 BungeColorKey(cs, ss)
 ```

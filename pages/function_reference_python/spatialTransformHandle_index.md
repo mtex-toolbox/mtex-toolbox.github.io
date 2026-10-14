@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 a transform given by a function of the positions and, for the inverse, a second one
 
+## Syntax
+
 ```python
 T = spatialTransformHandle(fun, funInv)
 ```
@@ -23,5 +25,5 @@ T = spatialTransformHandle(fun, funInv)
 | [inv](spatialTransformHandle.inv_py.html) | the transform of the inverse function, an error where none was given |
 | [paramChar](spatialTransformHandle.paramChar_py.html) | the name of the function as a line of text |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L613">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L684">source</a></font>
 {% endraw %}

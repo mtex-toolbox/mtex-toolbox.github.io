@@ -17,11 +17,13 @@ kernel of the disorientation to it
 ## Syntax
 
 ```python
-spotColorKey.orientation2color(self, ori)
+rgb = spotColorKey(center, (0, 0, 1)).orientation2color(ori)
 ```
 
+## Signature
+
 ```python
-rgb = spotColorKey(center, (0, 0, 1)).orientation2color(ori)
+spotColorKey.orientation2color(self, ori)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L342">source</a></font>

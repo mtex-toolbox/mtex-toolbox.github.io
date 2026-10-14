@@ -13,5 +13,5 @@ A property of [S1FunHarmonic](S1FunHarmonic_index_py.html).
 
 the bandwidth L, the largest frequency of the coefficients
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L122">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L190">source</a></font>
 {% endraw %}

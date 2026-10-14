@@ -9,13 +9,64 @@ lang: python
 status: Reference
 ---
 {% raw %}
-a PyVista plotter drawing the scene, its camera set by the plotting convention
+a PyVista plotter drawing a 3D scene, its camera set by the plotting convention
 
 ## Syntax
 
+The scene of the current figure:
+
 ```python
-pyvistaPlotter(scene, off_screen=False, window_size=(800, 800), plotter=None)
+p = pyvistaPlotter(gcs())
 ```
+
+In an interactive window, as show3d():
+
+```python
+p.show()
+```
+
+Offscreen, of a size:
+
+```python
+p = pyvistaPlotter(gcs(), off_screen=True, window_size=(400, 300))
+```
+
+Into a plotter of your own:
+
+```python
+p = pyvistaPlotter(gcs(), plotter=q)
+```
+
+A scene3d holds what plot draws of a volume, grains in 3D and maps in planes of space as
+NumPy arrays: meshes, voxel slices, pictures, lines and points. This draws its items into
+a pyvista.Plotter, unlit, with their colours and opacities, and sets a parallel projection
+looking from where the plotting convention says, so that PyVista's view matches the
+figure. show3d opens it interactively, renderImage takes its picture, exportHTML writes the
+scene as a three.js page instead. PyVista is the plot3d extra.
+
+## Input
+
+| | |
+|---|---|
+| `scene` | scene3d, as gcs() gives it for the current figure |
+
+## Output
+
+| | |
+|---|---|
+| `p` | pyvista.Plotter |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `off_screen` | `False` | render without a window |
+| `window_size` | `(800, 800)` | the size of the window in pixels, (width, height) |
+| `plotter` | `None` | pyvista.Plotter to draw into instead of a new one |
+
+## See also
+
+[show3d](show3d_py.html), [renderImage](renderImage_py.html), [exportHTML](exportHTML_py.html), [gcs](gcs_py.html), [EBSD3Plotting](EBSD3Plotting_py.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/render3d.py#L45">source</a></font>
 {% endraw %}

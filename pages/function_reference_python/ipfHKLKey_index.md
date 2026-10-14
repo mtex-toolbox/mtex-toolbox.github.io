@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 the inverse pole figure key of HKL Channel 5, the HKLDirectionKey on the Laue group
 
+## Syntax
+
 ```python
 key = ipfHKLKey(cs)
 key = ipfHKLKey(ebsd['Iron'], ipfDirection=xvector)

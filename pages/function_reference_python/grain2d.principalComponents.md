@@ -18,11 +18,13 @@ one first, as antipodal vectors of the specimen frame
 ## Syntax
 
 ```python
-grain2d.principalComponents(self)
+a, b = grains.principalComponents()
 ```
 
+## Signature
+
 ```python
-a, b = grains.principalComponents()
+grain2d.principalComponents(self)
 ```
 
 ## Used on

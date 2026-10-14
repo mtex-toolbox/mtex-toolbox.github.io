@@ -16,12 +16,14 @@ q * v rotates a vector
 ## Syntax
 
 ```python
-quaternion(*args, dtype=None)
-```
-
-```python
 quaternion(a, b, c, d)
 quaternion(abcd)                     an array of shape (..., 4) or (4, N)
+```
+
+## Signature
+
+```python
+quaternion(*args, dtype=None)
 ```
 
 ## Used on

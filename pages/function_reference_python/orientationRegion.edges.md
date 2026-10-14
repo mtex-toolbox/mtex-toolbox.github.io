@@ -21,5 +21,5 @@ allow it; an open region is cut at a turn of nearly 180 degrees
 orientationRegion.edges(self, points=40, tol=1e-09)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L152">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L178">source</a></font>
 {% endraw %}

@@ -21,5 +21,5 @@ div(v, x=None)
 
 [SingleSlipModel](SingleSlipModel_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L559">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L583">source</a></font>
 {% endraw %}

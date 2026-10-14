@@ -21,5 +21,5 @@ projectIntoEulerRegion(o)
 
 MATLAB's [quaternion.project2EulerFR](quaternion.project2EulerFR.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L274">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L300">source</a></font>
 {% endraw %}

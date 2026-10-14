@@ -19,5 +19,5 @@ the halfwidth in closed form, acos(2 * 2^(-1 / kappa) - 1)
 S2DeLaValleePoussinKernel.halfwidth(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L753">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L772">source</a></font>
 {% endraw %}

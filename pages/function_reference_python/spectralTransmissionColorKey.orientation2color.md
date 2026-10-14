@@ -17,13 +17,15 @@ the propagation direction between polariser and analyser
 ## Syntax
 
 ```python
-spectralTransmissionColorKey.orientation2color(self, ori)
-```
-
-```python
 key = spectralTransmissionColorKey(rI, 30000)
 key.polarizer = vector3d.X
 rgb = key.orientation2color(ebsd['Fo'].orientations)
+```
+
+## Signature
+
+```python
+spectralTransmissionColorKey.orientation2color(self, ori)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L381">source</a></font>

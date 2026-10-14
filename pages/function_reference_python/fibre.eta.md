@@ -16,12 +16,14 @@ the eta fibre of rolling textures, between the orientations MTEX puts at its end
 ## Syntax
 
 ```python
-fibre.eta(*frames, full=False)
-```
-
-```python
 f = fibre.eta(cs)
 f = fibre.eta(cs, ss, full=True)
+```
+
+## Signature
+
+```python
+fibre.eta(*frames, full=False)
 ```
 
 ## Used on

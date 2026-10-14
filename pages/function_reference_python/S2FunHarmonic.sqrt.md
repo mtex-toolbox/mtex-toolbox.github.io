@@ -22,5 +22,5 @@ S2FunHarmonic.sqrt(self, bandwidth=None)
 
 MATLAB's [S2FunHarmonic.sqrt](S2FunHarmonic.sqrt.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L385">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L441">source</a></font>
 {% endraw %}

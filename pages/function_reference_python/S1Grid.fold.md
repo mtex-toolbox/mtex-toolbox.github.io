@@ -19,5 +19,5 @@ an angle moved into [min, min + period)
 S1Grid.fold(self, x)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L35">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L54">source</a></font>
 {% endraw %}

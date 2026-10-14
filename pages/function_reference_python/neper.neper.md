@@ -16,12 +16,14 @@ geometry, the morphology, the iterations and the file path the tessellation is w
 ## Syntax
 
 ```python
-neper()
-```
-
-```python
 nep = neper.init()
 grains = nep.simulateGrains(1000, odf)
+```
+
+## Signature
+
+```python
+neper()
 ```
 
 MATLAB's [neper.neper](neper.neper.html)

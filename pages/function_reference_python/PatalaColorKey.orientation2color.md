@@ -17,12 +17,14 @@ with grain exchange, the a axis along x, looked up in the map of the Laue group
 ## Syntax
 
 ```python
-PatalaColorKey.orientation2color(self, mori)
-```
-
-```python
 key = PatalaColorKey(gB)
 rgb = key.orientation2color(gB.misorientation)
+```
+
+## Signature
+
+```python
+PatalaColorKey.orientation2color(self, mori)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/patalakey.py#L185">source</a></font>

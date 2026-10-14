@@ -20,5 +20,5 @@ withExchange(False) drops the flag; needs the same frame on both sides
 SO3FunHarmonic.withExchange(self, x=True)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L329">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L389">source</a></font>
 {% endraw %}

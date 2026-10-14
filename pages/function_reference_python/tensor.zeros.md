@@ -16,14 +16,16 @@ a tensor of zeros of the rank of the class, or of rank=, the list shape given by
 ## Syntax
 
 ```python
-tensor.zeros(*args, rank=None, **kwargs)
-```
-
-```python
 T = tensor.zeros(cs, 5)
 T = tensor.zeros(rank=4)
 C = stiffnessTensor.zeros(cs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L731">source</a></font>
+## Signature
+
+```python
+tensor.zeros(*args, rank=None, **kwargs)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L797">source</a></font>
 {% endraw %}

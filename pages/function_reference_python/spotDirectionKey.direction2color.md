@@ -20,5 +20,5 @@ kernel of the angle to the nearest equivalent of the centre
 spotDirectionKey.direction2color(self, h, gray=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L451">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L478">source</a></font>
 {% endraw %}

@@ -27,5 +27,5 @@ grainBoundary.calcMeanDirection(self, n=1)
 
 MATLAB's [grainBoundary.calcMeanDirection](grainBoundary.calcMeanDirection.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L405">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L431">source</a></font>
 {% endraw %}

@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 an affine transform of the plane, given by a 3 x 3 homogeneous matrix with last row [0 0 1]
 
+## Syntax
+
 ```python
 T = spatialTransformShift(M)
 T = spatialTransformShift.fit(posA, posB, weights=w)

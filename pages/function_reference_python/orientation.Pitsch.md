@@ -17,11 +17,13 @@ misorientation from the parent frame csG to the child frame csA
 ## Syntax
 
 ```python
-orientation.Pitsch(csG, csA)
+p2c = orientation.Pitsch(csGamma, csAlpha)
 ```
 
+## Signature
+
 ```python
-p2c = orientation.Pitsch(csGamma, csAlpha)
+orientation.Pitsch(csG, csA)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L88">source</a></font>

@@ -22,5 +22,5 @@ sphericalRegion.byVertices(V, frame=None)
 
 MATLAB's [sphericalRegion.byVertices](sphericalRegion.byVertices.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L51">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L71">source</a></font>
 {% endraw %}

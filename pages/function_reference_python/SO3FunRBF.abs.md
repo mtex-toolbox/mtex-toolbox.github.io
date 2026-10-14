@@ -16,12 +16,14 @@ the absolute value of the function, pointwise, as a function handle
 ## Syntax
 
 ```python
-SO3FunRBF.abs(self)
-```
-
-```python
 SO3F = abs(odf)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L606">source</a></font>
+## Signature
+
+```python
+SO3FunRBF.abs(self)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L710">source</a></font>
 {% endraw %}

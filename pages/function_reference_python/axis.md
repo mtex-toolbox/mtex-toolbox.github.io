@@ -17,6 +17,14 @@ axis(x, ...) is x.axis(...), the method of the object passed
 axis(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [orientation](orientation.axis_py.html) | the rotational axis of a misorientation, an orientation or the misorientation between two orientations |
+| [orthogonalTransform](orthogonalTransform.axis_py.html) | the rotational axis of the rotational part |
+| [quaternion](quaternion.axis_py.html) | the rotational axis, a unit vector |
+
 ## Used on
 
 [BoundaryMisorientations](BoundaryMisorientations_py.html), [BoundaryPlots](BoundaryPlots_py.html), [BoundaryProperties](BoundaryProperties_py.html), [CSLBoundaries](CSLBoundaries_py.html), [TiltAndTwistBoundaries](TiltAndTwistBoundaries_py.html), [TwinningBoundaries](TwinningBoundaries_py.html), [AxisDistributionFunction](AxisDistributionFunction_py.html), [MisorientationDistributionFunction](MisorientationDistributionFunction_py.html), [MisorientationGrainExchangeSym](MisorientationGrainExchangeSym_py.html)

@@ -29,5 +29,5 @@ parentGrainReconstructor.calcParentEBSD(self, exactOR=False)
 
 MATLAB's [parentGrainReconstructor.calcParentEBSD](parentGrainReconstructor.calcParentEBSD.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L864">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1046">source</a></font>
 {% endraw %}

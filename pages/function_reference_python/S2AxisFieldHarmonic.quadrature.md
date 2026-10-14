@@ -22,5 +22,5 @@ S2AxisFieldHarmonic.quadrature(f, *args, bandwidth=None, weights=None)
 
 MATLAB's [S2AxisFieldHarmonic.quadrature](S2AxisFieldHarmonic.quadrature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L141">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2axisfield.py#L168">source</a></font>
 {% endraw %}

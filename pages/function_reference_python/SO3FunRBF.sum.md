@@ -18,15 +18,17 @@ MATLAB's sum(odf, d) with d = axis + 1, which for a single function is the funct
 ## Syntax
 
 ```python
-SO3FunRBF.sum(self, axis=None)
-```
-
-```python
 value = sum(odf)
 odf = sum(odf, axis=0)
 ```
 
+## Signature
+
+```python
+SO3FunRBF.sum(self, axis=None)
+```
+
 MATLAB's [SO3FunRBF.sum](SO3FunRBF.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L612">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L716">source</a></font>
 {% endraw %}

@@ -10,8 +10,54 @@ counterpart: strainRateTensor_index.html
 status: Reference
 ---
 {% raw %}
-a rank two symmetric strain rate tensor, the symmetric part of a velocity gradient, in the double
-convention of the Voigt notation
+a rank two symmetric strain rate tensor, the symmetric part of a velocity gradient, in the
+double convention of the Voigt notation
+
+## Syntax
+
+By its 3 x 3 matrix:
+
+```python
+E = strainRateTensor(M)
+```
+
+The symmetric part of a velocity gradient:
+
+```python
+E = strainRate(L)
+```
+
+The matrix given is taken as it is; strainRate(L) takes the symmetric part of a
+velocityGradientTensor, which MATLAB's strainRateTensor(L) does on construction.
+
+## Input
+
+| | |
+|---|---|
+| `M` | 3 x 3 symmetric matrix, or an array (..., 3, 3) of them |
+
+## Output
+
+| | |
+|---|---|
+| `E` | strainRateTensor |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `rank` |  | the rank of the tensor; for this class always two |
+| `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal |
+| `frame` |  | the reference frame of the coefficients, instead of giving it positionally |
+| `density` |  | the mass density of the material, carried along |
+| `unit` |  | the physical unit of the coefficients, a string carried along |
+| `name` |  | the name of the tensor, carried along |
+| `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
+| `dtype` |  | the NumPy type of the coefficients |
+
+## See also
+
+[tensor](tensor_index_py.html), [velocityGradientTensor](velocityGradientTensor_index_py.html), [strainTensor](strainTensor_index_py.html), [velocityGradientTensor.strainRate](velocityGradientTensor.strainRate_py.html)
 
 ## Members
 
@@ -25,5 +71,5 @@ convention of the Voigt notation
 
 MATLAB's [strainRateTensor_index](strainRateTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1090">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1171">source</a></font>
 {% endraw %}

@@ -20,5 +20,5 @@ fork of it with that convention, registered
 specimenFrame.frameFor(pC)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L923">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L1026">source</a></font>
 {% endraw %}

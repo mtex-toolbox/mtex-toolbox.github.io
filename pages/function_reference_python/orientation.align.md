@@ -20,5 +20,5 @@ orientation.align(frA, frB) * v in frB; the transition has to be a rotation
 orientation.align(frA, frB, tol=0.1)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L451">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L666">source</a></font>
 {% endraw %}

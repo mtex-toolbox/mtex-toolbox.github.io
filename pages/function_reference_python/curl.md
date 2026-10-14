@@ -17,5 +17,5 @@ the curl, the dual of the exterior derivative, a field of the same side
 curl(v, x=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L566">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L590">source</a></font>
 {% endraw %}

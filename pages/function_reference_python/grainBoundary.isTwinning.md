@@ -26,5 +26,5 @@ grainBoundary.isTwinning(self, mori, threshold=5*degree)
 
 MATLAB's [grainBoundary.isTwinning](grainBoundary.isTwinning.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L368">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L394">source</a></font>
 {% endraw %}

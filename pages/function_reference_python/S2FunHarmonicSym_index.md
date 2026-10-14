@@ -10,15 +10,76 @@ counterpart: S2FunHarmonicSym_index.html
 status: Reference
 ---
 {% raw %}
-a function on the sphere by its spherical harmonic coefficients, or a list of such functions;
-symmetrised by the group of its frame, even when antipodal
+a function on the sphere by its spherical harmonic series, or a list of such functions;
+the default representation of a function on the sphere
+
+## Syntax
+
+From MTEX's coefficients:
 
 ```python
-S2FunHarmonic(fhat)                         MTEX's coefficients
-S2FunHarmonic(fhat, cs, antipodal=True)
-S2FunHarmonic(lambda v: v.z**2, bandwidth=16)     a callable expanded by quadrature
-S2FunHarmonic(psi)                          a kernel on the sphere
+sF = S2FunHarmonic(fhat)
 ```
+
+In a crystal frame, f(v) = f(-v):
+
+```python
+sF = S2FunHarmonic(fhat, cs, antipodal=True)
+```
+
+A callable expanded by quadrature:
+
+```python
+sF = S2FunHarmonic(lambda v: v.z**2, bandwidth=16)
+```
+
+The series of a kernel on the sphere:
+
+```python
+sF = S2FunHarmonic(psi)
+```
+
+Another function, truncated:
+
+```python
+sF = S2FunHarmonic(sF, bandwidth=8)
+```
+
+The coefficients fhat are MTEX's, degree by degree, (L + 1)^2 of them for the bandwidth L;
+a vector ending inside a degree block is padded with zeros to its end. Convolution,
+rotation, products and quadrature are cheap on this form. A callable of vector3d is
+sampled on a quadrature grid of the bandwidth, by default the preference
+defaultS2Bandwidth (S2FunHarmonic.quadrature takes values at nodes), a kernel gives its
+series, another S2Fun its harmonic form. The function is symmetrised under the group of
+its frame, also when antipodal, unless symmetrise=False. A list of functions carries its
+shape in front of the coefficients.
+
+## Input
+
+| | |
+|---|---|
+| `fhat` | array of MTEX's coefficients, an S2Fun, an S2Kernel or a callable of vector3d |
+| `frame` | the crystalFrame or specimenFrame of the directions |
+
+## Output
+
+| | |
+|---|---|
+| `sF` | S2FunHarmonic |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `real` |  | whether the function takes real values only; by default read off the coefficients or the sampled values |
+| `antipodal` |  | f(v) = f(-v) |
+| `symmetrise` |  | make the coefficients invariant under the group of the frame |
+| `bandwidth` |  | the largest degree of the series |
+| `dtype` |  | the complex type of the coefficients, complex128 unless given |
+
+## See also
+
+[S2FunHarmonic.quadrature](S2FunHarmonic.quadrature_py.html), [S2FunHarmonic.interpolate](S2FunHarmonic.interpolate_py.html), [S2FunHandle](S2FunHandle_index_py.html), [S2Kernel](S2Kernel_index_py.html), [SO3FunHarmonic](SO3FunHarmonic_index_py.html), [S2FunHarmonicRepresentation](S2FunHarmonicRepresentation_py.html)
 
 ## Members
 
@@ -27,7 +88,7 @@ S2FunHarmonic(psi)                          a kernel on the sphere
 | [abs](S2FunHarmonic.abs_py.html) | the absolute value \|f\| as a handle, evaluated when asked |
 | [adjoint](S2FunHarmonic.adjoint_py.html) | S2FunHarmonic.adjointNFSFT(v, values, bandwidth=32): the adjoint transform, the coefficients sum_j w_j y_j conj(Y(v_j)) with unit weights unless given, a grid's own on a grid |
 | [adjointNFSFT](S2FunHarmonic.adjointNFSFT_py.html) | S2FunHarmonic.adjointNFSFT(v, values, bandwidth=32): the adjoint transform, the coefficients sum_j w_j y_j conj(Y(v_j)) with unit weights unless given, a grid's own on a grid |
-| [approximate](S2FunHarmonic.approximate_py.html) | from weighted samples |
+| [approximate](S2FunHarmonic.approximate_py.html) | the harmonic series of a function on the sphere by quadrature, from a callable or from values at nodes |
 | [bandwidth](S2FunHarmonic.bandwidth_py.html) | the bandwidth, the highest degree of the coefficients |
 | [cat](S2FunHarmonic.cat_py.html) | the functions joined into one list along an axis, cut or padded to the largest bandwidth |
 | [conj](S2FunHarmonic.conj_py.html) | the complex conjugate function |
@@ -57,15 +118,15 @@ S2FunHarmonic(psi)                          a kernel on the sphere
 | [plus](S2FunHarmonicSym.plus_py.html) |  |
 | [power](S2FunHarmonic.power_py.html) | the power of every degree, the norm of the coefficients of that degree, as an array of length bandwidth + 1 per function |
 | [power](S2FunHarmonicSym.power_py.html) | the power of every degree, the norm of the coefficients of that degree, as an array of length bandwidth + 1 per function |
-| [quadrature](S2FunHarmonic.quadrature_py.html) | from weighted samples |
-| [quadrature](S2FunHarmonicSym.quadrature_py.html) | from weighted samples |
+| [quadrature](S2FunHarmonic.quadrature_py.html) | the harmonic series of a function on the sphere by quadrature, from a callable or from values at nodes |
+| [quadrature](S2FunHarmonicSym.quadrature_py.html) | the harmonic series of a function on the sphere by quadrature, from a callable or from values at nodes |
 | [radon](S2FunHarmonic.radon_py.html) | the Funk transform, the mean over the great circle perpendicular to every direction |
 | [rdivide](S2FunHarmonic.rdivide_py.html) |  |
 | [rdivide](S2FunHarmonicSym.rdivide_py.html) |  |
 | [reshape](S2FunHarmonic.reshape_py.html) | the list of functions in another shape |
 | [rotate](S2FunHarmonic.rotate_py.html) | the function rotated, f(rot^-1 v) |
-| [S2FunHarmonic](S2FunHarmonic.S2FunHarmonic_py.html) | a function on the sphere by its spherical harmonic coefficients, or a list of such functions |
-| [S2FunHarmonicSym](S2FunHarmonicSym.S2FunHarmonicSym_py.html) | a function on the sphere by its spherical harmonic coefficients, or a list of such functions |
+| [S2FunHarmonic](S2FunHarmonic.S2FunHarmonic_py.html) | a function on the sphere by its spherical harmonic series, or a list of such functions |
+| [S2FunHarmonicSym](S2FunHarmonicSym.S2FunHarmonicSym_py.html) | a function on the sphere by its spherical harmonic series, or a list of such functions |
 | [shape](S2FunHarmonic.shape_py.html) | the shape of a list of functions, () for one |
 | [size](S2FunHarmonic.size_py.html) | the number of functions in a list, 1 for one function |
 | [sqrt](S2FunHarmonic.sqrt_py.html) | the square root of the function, expanded by quadrature, or at the bandwidth given |

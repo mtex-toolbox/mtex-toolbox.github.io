@@ -21,5 +21,5 @@ setColorScale(scale='linear', fig=None)
 
 [GND](GND_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L567">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L621">source</a></font>
 {% endraw %}

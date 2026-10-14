@@ -23,5 +23,5 @@ S2VectorFieldHarmonic.quadrature(f, *args, bandwidth=None, weights=None)
 
 MATLAB's [S2VectorFieldHarmonic.quadrature](S2VectorFieldHarmonic.quadrature.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L263">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L289">source</a></font>
 {% endraw %}

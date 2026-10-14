@@ -24,5 +24,5 @@ complianceTensor(M, *args, **kwargs)
 
 MATLAB's [complianceTensor.complianceTensor](complianceTensor.complianceTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1018">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1077">source</a></font>
 {% endraw %}

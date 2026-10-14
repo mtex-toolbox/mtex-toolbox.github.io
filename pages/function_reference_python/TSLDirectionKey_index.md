@@ -21,5 +21,5 @@ over the polar angle and the azimuth of the sector
 | [direction2color](TSLDirectionKey.direction2color_py.html) | the colours of directions, the polar coordinates in the sector about its centre turned into hue and lightness without the hue correction |
 | [whiteCenter](TSLDirectionKey.whiteCenter_py.html) | the centre of the sector the colours run from |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L353">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L380">source</a></font>
 {% endraw %}

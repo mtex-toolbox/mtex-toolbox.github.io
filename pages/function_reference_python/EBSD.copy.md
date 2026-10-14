@@ -19,5 +19,5 @@ a copy of the map with its own arrays; the phase list and the lattice are shared
 EBSD.copy(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L360">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L388">source</a></font>
 {% endraw %}

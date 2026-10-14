@@ -26,5 +26,5 @@ grain3d.triangulate(self)
 
 MATLAB's [grain3d.triangulate](grain3d.triangulate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L218">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L258">source</a></font>
 {% endraw %}

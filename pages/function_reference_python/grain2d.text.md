@@ -26,5 +26,5 @@ text(v, labels=None, *more, **kw)
 
 MATLAB's [grain2d.text](grain2d.text.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L891">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L965">source</a></font>
 {% endraw %}

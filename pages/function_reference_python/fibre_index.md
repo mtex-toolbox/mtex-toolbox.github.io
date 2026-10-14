@@ -13,6 +13,8 @@ status: Reference
 a fibre in orientation space: the orientations mapping the crystal direction h onto the
 specimen direction r, or the arc of them between two orientations; a list of fibres by shape
 
+## Syntax
+
 ```python
 f = fibre(h, r)                    the orientations with ori * h = r
 f = fibre(h, r, ss)
@@ -49,7 +51,7 @@ f = fibre(o1, o2, full=True)       the full fibre through the arc
 | [orientation](fibre.orientation_py.html) | the orientations along the fibre, points x shape, turning about h from o1 to o2 |
 | [plot](fibre.plot_py.html) | plot(x, ...) draws x as its kind is drawn |
 | [plotIPDF](fibre.plotIPDF_py.html) | plotIPF(ori, r), plotIPF(ori, data, r), plotIPF(odf, r): the inverse pole figures of a list of orientations, the crystal directions along r as markers on the crystal sector, or of an ODF (MATLAB's plotIPDF) |
-| [plotPDF](fibre.plotPDF_py.html) | plotPF(ori, h), plotPF(ori, data, h), plotPF(ori, h, points=100, contourf=True, antipodal=True), plotPF(odf, h), plotPF(pf) |
+| [plotPDF](fibre.plotPDF_py.html) | pole figures, one per crystal direction: of an ODF, of a list of orientations or of a measured PoleFigure |
 | [r](fibre.r_py.html) | the specimen direction of the fibre, o1 * h |
 | [rand](fibre.rand_py.html) | random fibres between random crystal and specimen directions, of the shape and between the frames given |
 | [reshape](fibre.reshape_py.html) | the fibres in another shape |

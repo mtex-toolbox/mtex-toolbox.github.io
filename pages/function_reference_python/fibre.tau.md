@@ -16,12 +16,14 @@ the tau fibre of rolling textures, between the orientations MTEX puts at its end
 ## Syntax
 
 ```python
-fibre.tau(*frames, full=False)
-```
-
-```python
 f = fibre.tau(cs)
 f = fibre.tau(cs, ss, full=True)
+```
+
+## Signature
+
+```python
+fibre.tau(*frames, full=False)
 ```
 
 ## Used on

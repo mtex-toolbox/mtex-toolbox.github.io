@@ -19,5 +19,5 @@ a function on the sphere through the values at the nodes, a regularised least sq
 S2Fun.interpolate(nodes, values=None, **kwargs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funclass.py#L72">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2funclass.py#L107">source</a></font>
 {% endraw %}

@@ -23,5 +23,5 @@ symmetry.fundamentalRegion(self, other=None, *, antipodal=False)
 
 MATLAB's [symmetry.fundamentalRegion](symmetry.fundamentalRegion.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L416">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L475">source</a></font>
 {% endraw %}

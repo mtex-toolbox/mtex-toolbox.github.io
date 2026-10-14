@@ -14,6 +14,8 @@ the defocusing of a Bragg-Brentano goniometer (MATLAB SchulzDefocusingKernel): t
 beam of width r is smeared over the receiving slit of width w at the distance d as the
 sample tilts by alpha, and the measured intensity drops by the factor the kernel gives
 
+## Syntax
+
 ```python
 psi = SchulzDefocusingKernel(theta=45*degree, r=1, w=2, d=200, dtheta=0.5*degree)
 psi.eval(cos(alpha))                     the factor at the tilt alpha
@@ -29,5 +31,5 @@ psi.defocusing(pf)                       the factor on the specimen directions o
 
 MATLAB's [SchulzDefocusingKernel](SchulzDefocusingKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L819">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L911">source</a></font>
 {% endraw %}

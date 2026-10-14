@@ -10,13 +10,82 @@ counterpart: grain2d_index.html
 status: Reference
 ---
 {% raw %}
-the grains of a map, MATLAB's grain2d: a table of ids, phases, pixel counts, mean orientations
-and properties, with the boundary, the inner boundary and the loops of every grain's polygon
+the grains of a map: a table of ids, phases, pixel counts, mean orientations and
+properties, with the boundary, the inner boundary and the polygon of every grain; MATLAB's
+grain2d
+
+## Syntax
+
+The grains of a map:
 
 ```python
 grains = calcGrains(ebsd)
-grains['Forsterite'], grains[grains.numPixel > 10], grains.selectByGrainId(ids)
 ```
+
+A table from its columns:
+
+```python
+grains = grain2d(grains.id, grains.phaseId, grains.CSList, grains.numPixel, grains.meanRotation, grains.GOS, grains.frame, boundary=grains.boundary)
+```
+
+The grains of one phase:
+
+```python
+grains['Forsterite']
+```
+
+The grains of a condition:
+
+```python
+grains[grains.numPixel > 10]
+```
+
+The grains of these ids:
+
+```python
+grains.selectByGrainId([1, 2, 3])
+```
+
+Grains are made by calcGrains, which segments a map; the constructor takes the columns of
+the table and the boundaries of a segmentation. The polygon of a grain is the loops of the
+boundary segments that carry its id, traced from the boundary when no loops are given, so
+grains without a boundary have no polygon and no shape. A property given in prop, or
+assigned as grains.name = values, is one value per grain and follows every selection.
+
+MATLAB builds grains also from vertices and polygons, grain2d(V, poly, ori, CSList); here
+grains come from a segmentation alone.
+
+## Input
+
+| | |
+|---|---|
+| `id` | integer array, the id of every grain |
+| `phaseId` | integer array, the position of every grain's phase in CSList |
+| `CSList` | phaseList, the frames of the phases |
+| `numPixel` | integer array, the number of pixels of every grain |
+| `meanRotation` | rotation, the mean orientation of every grain as a rotation from the crystal to the specimen |
+| `GOS` | array, the grain orientation spread of every grain in radians |
+| `frame` | specimenFrame, the frame the grains lie in |
+
+## Output
+
+| | |
+|---|---|
+| `grains` | grain2d |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `prop` |  | dict of further properties, one value per grain, read as grains.name or grains.prop['name'] |
+| `boundary` |  | grainBoundary, the segments between the grains and to the outside of the map |
+| `innerBoundary` |  | grainBoundary, the segments inside the grains, the low angle boundaries of a segmentation with two thresholds |
+| `loops` |  | the polygon of every grain as loops of boundary segments; traced from boundary when not given |
+| `phaseMap` |  | the phase number of the file for every entry of CSList |
+
+## See also
+
+[calcGrains](EBSD.calcGrains_py.html), [grain2d.merge](grain2d.merge_py.html), [grain2d.selectByGrainId](grain2d.selectByGrainId_py.html), [grainBoundary](grainBoundary_index_py.html), [GrainReconstruction](GrainReconstruction_py.html), [SelectingGrains](SelectingGrains_py.html), [GrainSpatialPlots](GrainSpatialPlots_py.html), [ShapeParameters](ShapeParameters_py.html)
 
 ## Members
 
@@ -28,7 +97,7 @@ grains['Forsterite'], grains[grains.numPixel > 10], grains.selectByGrainId(ids)
 | [boundarySize](grain2d.boundarySize_py.html) | the number of vertices on the loops of an outline, the holes included |
 | [calcTraces](grain2d.calcTraces_py.html) | traces, rel, cSize = calcTraces(ebsd \| grains, clusterId, 'Radon' \| 'Fourier' \| 'calliper' \| 'hist', minClusterSize=100) |
 | [caliper](grain2d.caliper_py.html) | the caliper: with nothing, the longest width of every outline as a framed axis of that length |
-| [cat](grain2d.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |
+| [cat](grain2d.cat_py.html) | the grains of several parts of one segmentation, MATLAB's [grains1, grains2]: the parts share its phases, frame and boundary vertices |
 | [centroid](grain2d.centroid_py.html) | the centroid of the area, holes taken off, as a framed point |
 | [checkInside](grain2d.checkInside_py.html) | whether points lie inside the outlines: within the outer loop and outside the holes, as a (points, outlines) matrix |
 | [copy](grain2d.copy_py.html) | a copy of the grains with their own table and properties, the boundaries shared |
@@ -40,7 +109,7 @@ grains['Forsterite'], grains[grains.numPixel > 10], grains.selectByGrainId(ids)
 | [findByLocation](grain2d.findByLocation_py.html) | the positions of the outlines a point lies in the position of the outline holding each point, -1 for a point in none |
 | [findByOrientation](grain2d.findByOrientation_py.html) | the grains of the phase of ori whose mean orientation lies within epsilon of it, or of a fibre |
 | [fitEllipse](grain2d.fitEllipse_py.html) | the ellipse of the same second moments: its centre and its two half axes |
-| [grain2d](grain2d.grain2d_py.html) | the grains of a map, MATLAB's grain2d: a table of ids, phases, pixel counts, mean orientations and properties, with the boundary, the inner boundary and the loops of every grain's polygon |
+| [grain2d](grain2d.grain2d_py.html) | the grains of a map: a table of ids, phases, pixel counts, mean orientations and properties, with the boundary, the inner boundary and the polygon of every grain |
 | [grainSize](grain2d.grainSize_py.html) | the number of pixels of every grain, grains.numPixel |
 | [hasHole](grain2d.hasHole_py.html) | whether an outline has holes, one entry per outline |
 | [hist](grain2d.hist_py.html) | histogram(grains), histogram(grains, prop, bins): the area weighted distribution of a grain property as one histogram per indexed phase, drawn over each other, or with grouped=True side by side (MATLAB's hist) |
@@ -56,7 +125,7 @@ grains['Forsterite'], grains[grains.numPixel > 10], grains.selectByGrainId(ids)
 | [isIndexed](grain2d.isIndexed_py.html) | whether each grain belongs to an indexed phase |
 | [longAxis](grain2d.longAxis_py.html) | the long half axis of the ellipse of every outline, the larger principal component |
 | [meanOrientation](grain2d.meanOrientation_py.html) | the mean orientations of the grains of the one indexed phase present |
-| [merge](grain2d.merge_py.html) | join grains into one: by pairs of ids, by the segments of a boundary, by a graph of grains indexed by id, by a label per grain, or by a misorientation threshold across the shared boundaries |
+| [merge](grain2d.merge_py.html) | the grains joined into one along given boundaries, by pairs of ids, by a label per grain, below a misorientation angle, or every inclusion into the grain around it |
 | [mineral](grain2d.mineral_py.html) | the mineral name of the one indexed phase of the grains |
 | [mineralList](grain2d.mineralList_py.html) | the mineral names of the phases of the phase list |
 | [N](grain2d.N_py.html) | the normal of the plane the map lies in, as a direction of the specimen |
@@ -67,7 +136,7 @@ grains['Forsterite'], grains[grains.numPixel > 10], grains.selectByGrainId(ids)
 | [perimeter](grain2d.perimeter_py.html) | the length of the outer loop of an outline, as MATLAB's default |
 | [phase](grain2d.phase_py.html) | the phase number of every grain as the file numbered it |
 | [plane](grain2d.plane_py.html) | the plane the map lies in, a mapPlane |
-| [plot](grain2d.plot_py.html) | plot(grains), plot(grains, property), plot(grains, grains.meanOrientation) |
+| [plot](grain2d.plot_py.html) | the grains of a map as polygons, coloured by phase, by a value or by orientation, with their boundaries on top |
 | [principalComponents](grain2d.principalComponents_py.html) | the two half axes of the ellipse with the same second area moments as every outline, the long one first, as antipodal vectors of the specimen frame |
 | [quiver](grain2d.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
 | [reduceBoundary](grain2d.reduceBoundary_py.html) | the grains thin, simplify or refine their boundary and keep their inner boundary on it |
@@ -81,7 +150,7 @@ grains['Forsterite'], grains[grains.numPixel > 10], grains.selectByGrainId(ids)
 | [shortAxis](grain2d.shortAxis_py.html) | the short half axis of the ellipse of every outline, the smaller principal component |
 | [simplifyBoundary](grain2d.simplifyBoundary_py.html) | the grains with the vertices of their boundary that carry no shape dropped, those whose removal moves the boundary by less than epsilon, the inner boundary kept on it |
 | [size](grain2d.size_py.html) | the number of grains |
-| [smoothBoundary](grain2d.smoothBoundary_py.html) | turn the staircase of a measured boundary into a smooth curve |
+| [smoothBoundary](grain2d.smoothBoundary_py.html) | the grains with the pixel staircase of their boundaries turned into smooth curves |
 | [subBoundaryLength](grain2d.subBoundaryLength_py.html) | the length of the subgrain boundaries inside every grain, of the inner boundary segments sel selects if given |
 | [subBoundarySize](grain2d.subBoundarySize_py.html) | the inner boundary of every grain: how many segments and how much length of the subgrain boundaries lie in it |
 | [subsref](grain2d.subsref_py.html) |  |

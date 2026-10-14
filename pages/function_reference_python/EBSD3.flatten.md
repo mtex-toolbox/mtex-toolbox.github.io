@@ -19,5 +19,5 @@ the voxels as a list, the volume itself when it is one
 EBSD3.flatten(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L134">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L163">source</a></font>
 {% endraw %}

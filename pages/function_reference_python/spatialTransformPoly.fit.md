@@ -11,14 +11,58 @@ status: Reference
 {% raw %}
 A method of [spatialTransformPoly](spatialTransformPoly_index_py.html).
 
-the polynomial displacement fitted to point pairs by least squares, reweighted against outliers
-with Tukey's bisquare unless robust=False
+the polynomial displacement best mapping the positions posA onto posB
 
 ## Syntax
 
+An affine map:
+
 ```python
-spatialTransformPoly.fit(posA, posB, weights=None, degree=1, robust=True, maxIter=50)
+T = spatialTransformPoly.fit(posA, posB)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L456">source</a></font>
+A quadratic displacement:
+
+```python
+T = spatialTransformPoly.fit(posA, posB, degree=2)
+```
+
+Weighted least squares:
+
+```python
+T = spatialTransformPoly.fit(posA, posB, degree=2, weights=w, robust=False)
+```
+
+The displacement posB - posA is fitted over the basis [1 x y], or [1 x y x^2 xy y^2] for
+degree 2, by least squares, reweighted against outliers with Tukey's bisquare. A point with
+a missing position or no weight is dropped; degree 1 needs at least three points, degree 2
+six.
+
+## Input
+
+| | |
+|---|---|
+| `posA` | vector3d, the positions in the first frame |
+| `posB` | vector3d, where they went in the second, one for each |
+
+## Output
+
+| | |
+|---|---|
+| `T` | spatialTransformPoly, T * posA close to posB |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `weights` | `None` | array, the weight of every point pair |
+| `degree` | `1` | 1 or 2, the degree of the polynomial |
+| `robust` | `True` | reweight against outliers with Tukey's bisquare |
+| `maxIter` | `50` | the largest number of reweighting steps |
+
+## See also
+
+[spatialTransformProjective.fit](spatialTransformProjective.fit_py.html), [spatialTransformDrift.fit](spatialTransformDrift.fit_py.html), [spatialTransformTilt](spatialTransformTilt_index_py.html), [transform](transform_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L481">source</a></font>
 {% endraw %}

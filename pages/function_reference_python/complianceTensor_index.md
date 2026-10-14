@@ -27,7 +27,7 @@ the elastic compliance S = inv(C), its Voigt matrix carrying the factors of the 
 | [PoissonRatio](complianceTensor.PoissonRatio_py.html) | the Poisson ratio of the pulling direction x and the transverse direction y, minus the transverse over the longitudinal strain |
 | [rand](complianceTensor.rand_py.html) | a random tensor with the symmetries its class and frame ask for: a plain tensor of entries drawn uniformly from [0, 1], as MATLAB's, a symmetric one the symmetric part of such a tensor, symmetrised in its frame, a stiffness or compliance one positive definite besides |
 | [shearModulus](complianceTensor.shearModulus_py.html) | the shear modulus of the plane h and the direction u, 1 / (4 S_ijkl h_i u_j h_k u_l) |
-| [velocity](complianceTensor.velocity_py.html) | the elastic wave velocities and their polarisations from the Christoffel tensor |
+| [velocity](complianceTensor.velocity_py.html) | the speeds of the three elastic plane waves in a direction and their polarisations, the eigenvalues and eigenvectors of the Christoffel tensor |
 | [volumeCompressibility](complianceTensor.volumeCompressibility_py.html) | the volume change per pressure, S_iikk |
 | [YoungsModulus](complianceTensor.YoungsModulus_py.html) | Young's modulus in the direction v, the reciprocal of S_ijkl v_i v_j v_k v_l |
 
@@ -37,5 +37,5 @@ the elastic compliance S = inv(C), its Voigt matrix carrying the factors of the 
 
 MATLAB's [complianceTensor_index](complianceTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1018">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1077">source</a></font>
 {% endraw %}

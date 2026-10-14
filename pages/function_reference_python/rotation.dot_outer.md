@@ -22,5 +22,5 @@ rotation.dot_outer(self, other, antipodal=True)
 
 MATLAB's [rotation.dot_outer](rotation.dot_outer.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L517">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L612">source</a></font>
 {% endraw %}

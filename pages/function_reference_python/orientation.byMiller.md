@@ -18,12 +18,14 @@ of uvw the symmetric equivalent closest to perpendicular to hkl is used
 ## Syntax
 
 ```python
-orientation.byMiller(hkl, uvw, *frames)
-```
-
-```python
 orientation.byMiller(Miller(1, 1, 0, cs), Miller(0, 0, 1, cs, 'uvw'))
 orientation.byMiller([1, 1, 0], [0, 0, 1], cs)
+```
+
+## Signature
+
+```python
+orientation.byMiller(hkl, uvw, *frames)
 ```
 
 ## Used on
@@ -32,5 +34,5 @@ orientation.byMiller([1, 1, 0], [0, 0, 1], cs)
 
 MATLAB's [orientation.byMiller](orientation.byMiller.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L441">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L656">source</a></font>
 {% endraw %}

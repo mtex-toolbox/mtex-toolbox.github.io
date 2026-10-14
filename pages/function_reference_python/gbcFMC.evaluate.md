@@ -20,5 +20,5 @@ clustered on its own; the pairs within a not indexed phase are always connected
 gbcFMC.evaluate(self, ebsd, i, j)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L59">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L88">source</a></font>
 {% endraw %}

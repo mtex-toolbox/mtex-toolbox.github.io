@@ -21,5 +21,5 @@ the indicator of the interval |x| < delta scaled to a density
 
 MATLAB's [S1BumpKernel](S1BumpKernel.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1051">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1089">source</a></font>
 {% endraw %}

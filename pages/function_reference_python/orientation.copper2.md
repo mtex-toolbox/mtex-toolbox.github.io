@@ -17,12 +17,14 @@ specimen frame
 ## Syntax
 
 ```python
-orientation.copper2(CS, *ss)
-```
-
-```python
 ori = orientation.copper2(cs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L248">source</a></font>
+## Signature
+
+```python
+orientation.copper2(CS, *ss)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L272">source</a></font>
 {% endraw %}

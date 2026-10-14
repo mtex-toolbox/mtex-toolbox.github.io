@@ -16,11 +16,13 @@ the L2 norm of the kernel, the Euclidean norm of its coefficients
 ## Syntax
 
 ```python
-SO3Kernel.norm(self)
+t = norm(psi)
 ```
 
+## Signature
+
 ```python
-t = norm(psi)
+SO3Kernel.norm(self)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L235">source</a></font>

@@ -22,5 +22,5 @@ S1FunHarmonic.eval(self, x)
 
 MATLAB's [S1FunHarmonic.eval](S1FunHarmonic.eval.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L149">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L217">source</a></font>
 {% endraw %}

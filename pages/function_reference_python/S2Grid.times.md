@@ -22,5 +22,5 @@ a * b
 
 MATLAB's [S2Grid.times](S2Grid.times.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L538">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L621">source</a></font>
 {% endraw %}

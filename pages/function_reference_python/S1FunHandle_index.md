@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 a function on the circle given by a callable that receives angles
 
+## Syntax
+
 ```python
 S1FunHandle(fun)
 S1FunHandle(fun, bandwidth=L)     the bandwidth of its harmonic form
@@ -22,9 +24,9 @@ S1FunHandle(fun, bandwidth=L)     the bandwidth of its harmonic form
 | | |
 |---|---|
 | [eval](S1FunHandle.eval_py.html) | the values of the callable at the angles x |
-| [max](S1FunHandle.max_py.html) | the largest value and the angle it is taken at, numLocal local maxima, or with a number or a second function on the circle the pointwise maximum, as S1FunHarmonic.max |
+| [max](S1FunHandle.max_py.html) | the global, local and pointwise maxima of a function on the circle given by a callable |
 | [mean](S1FunHandle.mean_py.html) | the mean over the circle, through the harmonic form |
-| [min](S1FunHandle.min_py.html) | the smallest value and the angle it is taken at, numLocal local minima, or with a number or a second function on the circle the pointwise minimum, as S1FunHarmonic.min |
+| [min](S1FunHandle.min_py.html) | the global, local and pointwise minima of a function on the circle given by a callable |
 | [S1FunHandle](S1FunHandle.S1FunHandle_py.html) | a function on the circle given by a callable that receives angles |
 
 ## Used on
@@ -33,5 +35,5 @@ S1FunHandle(fun, bandwidth=L)     the bandwidth of its harmonic form
 
 MATLAB's [S1FunHandle_index](S1FunHandle_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L536">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L603">source</a></font>
 {% endraw %}

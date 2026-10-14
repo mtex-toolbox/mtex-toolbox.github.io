@@ -17,6 +17,13 @@ spatialProfile(x, ...) is x.spatialProfile(...), the method of the object passed
 spatialProfile(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [EBSD](EBSD.spatialProfile_py.html) | the measurements along a polyline, in the order they are met, and the distance along the line of each of them, as MATLAB's pair |
+| [EBSD3](EBSD3.spatialProfile_py.html) | the voxels along a polyline, sampled at the voxel spacing, and their distance along it |
+
 ## Used on
 
 [EBSDProfile](EBSDProfile_py.html)

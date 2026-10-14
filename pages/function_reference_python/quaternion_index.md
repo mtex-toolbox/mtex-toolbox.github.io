@@ -13,6 +13,8 @@ status: Reference
 quaternions a + b i + c j + d k, the coefficients along the last axis; q * q2 is the product,
 q * v rotates a vector
 
+## Syntax
+
 ```python
 quaternion(a, b, c, d)
 quaternion(abcd)                     an array of shape (..., 4) or (4, N)
@@ -48,7 +50,7 @@ quaternion(abcd)                     an array of shape (..., 4) or (4, N)
 | [log](quaternion.log_py.html) | the tangent vector pointing from the reference, the identity by default, to this rotation |
 | [logm](quaternion.logm_py.html) | logm(T) is T.logm(): the matrix logarithm |
 | [matrix](quaternion.matrix_py.html) | the rotation matrices, of shape (..., 3, 3) |
-| [mean](quaternion.mean_py.html) | the mean, the principal eigenvector of the weighted moment matrix |
+| [mean](quaternion.mean_py.html) | the mean of a list of quaternions, with the principal moments and axes of inertia |
 | [minus](quaternion.minus_py.html) |  |
 | [mrdivide](quaternion.mrdivide_py.html) |  |
 | [mtimes](quaternion.mtimes_py.html) |  |
@@ -64,14 +66,14 @@ quaternion(abcd)                     an array of shape (..., 4) or (4, N)
 | [quaternion](quaternion.quaternion_py.html) | quaternions a + b i + c j + d k, the coefficients along the last axis |
 | [rdivide](quaternion.rdivide_py.html) |  |
 | [Rodrigues](quaternion.Rodrigues_py.html) | the Rodrigues vectors, the axes scaled by tan(omega/2) |
-| [scatter](quaternion.scatter_py.html) | scatter(v), scatter(v, data), scatter(v, label=texts): directions as markers |
-| [std](quaternion.std_py.html) | the mean angular deviation from the mean, quaternion/std |
+| [scatter](quaternion.scatter_py.html) | directions or crystal directions drawn as markers on a spherical plot, coloured by data or labelled |
+| [std](quaternion.std_py.html) | the mean angular deviation of a list of rotations from their mean |
 | [subsref](quaternion.subsref_py.html) |  |
 | [sum](quaternion.sum_py.html) | sum(x) of an MTEX object by its own sum, of an array or with an axis as NumPy sums, of any other iterable as Python sums, so that from mtex import * keeps Python's sum |
 | [times](quaternion.times_py.html) |  |
 | [transpose](quaternion.transpose_py.html) | the transpose of the leading axes |
 | [uminus](quaternion.uminus_py.html) |  |
-| [unique](quaternion.unique_py.html) | the quaternions with those equal up to the tolerance in the coefficients removed |
+| [unique](quaternion.unique_py.html) | the disjoint list of quaternions, those equal up to a tolerance in the coefficients taken as one |
 | [vertcat](quaternion.vertcat_py.html) | the list of the operands, MATLAB's [a, b] |
 
 ## Used on

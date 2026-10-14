@@ -22,5 +22,5 @@ tensor.transpose(self)
 
 MATLAB's [tensor.transpose](tensor.transpose.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L394">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L422">source</a></font>
 {% endraw %}

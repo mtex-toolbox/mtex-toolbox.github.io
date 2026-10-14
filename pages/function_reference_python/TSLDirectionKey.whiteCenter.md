@@ -13,5 +13,5 @@ A property of [TSLDirectionKey](TSLDirectionKey_index_py.html).
 
 the centre of the sector the colours run from
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L365">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L392">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ SO3FunSBF(sS, E, bandwidth=None)
 
 [SingleSlipModel](SingleSlipModel_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L229">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/texture.py#L254">source</a></font>
 {% endraw %}

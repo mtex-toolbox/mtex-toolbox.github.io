@@ -24,5 +24,5 @@ grain2d.neighbors(self, full=False, matrix=False)
 
 MATLAB's [grain2d.neighbors](grain2d.neighbors.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L233">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L270">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the positions as one array of shape shape + (3,)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L157">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L185">source</a></font>
 {% endraw %}

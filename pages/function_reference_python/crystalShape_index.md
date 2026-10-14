@@ -12,11 +12,30 @@ status: Reference
 {% raw %}
 a crystal shape, the polyhedron bounded by the lattice planes of the face normals N
 
+## Syntax
+
+Faces at the reciprocal length of their normal:
+
 ```python
-cS = crystalShape(N)                         # faces at the reciprocal length of their normal
-cS = crystalShape(N, habitus, extension)     # the distances from the indices alone
-cS = crystalShape.hex(cs)                    # a hexagonal prism, crystalShape.cube(cs) a cube
-cS = crystalShape.quartz(simple=True)        # from the catalogue, in its own crystal frame
+cS = crystalShape(N)
+```
+
+The distances from the indices alone:
+
+```python
+cS = crystalShape(N, habitus, extension)
+```
+
+A hexagonal prism, crystalShape.cube(cs) a cube:
+
+```python
+cS = crystalShape.hex(cs)
+```
+
+From the catalogue, in its own crystal frame:
+
+```python
+cS = crystalShape.quartz(simple=True)
 ```
 
 ## Members
@@ -76,10 +95,10 @@ cS = crystalShape.quartz(simple=True)        # from the catalogue, in its own cr
 | [olivine](crystalShape.olivine_py.html) | the olivine crystal shape of the catalogue, in cs when given |
 | [orthoclase](crystalShape.orthoclase_py.html) | the orthoclase crystal shape of the catalogue, in cs when given |
 | [plagioclase](crystalShape.plagioclase_py.html) | the Plagioclase crystal shape of the catalogue, in cs when given |
-| [plot](crystalShape.plot_py.html) | plot(cS), plot(cS, faceColor='red', faceAlpha=0.5), plot(cS, colored=True), plot(cS, colored=key), plot(x, y, cS), plot(x, y, z, cS), plot(xy, cS), plot(cS, N), plot(cS, sS) |
-| [plotInnerDirection](crystalShape.plotInnerDirection_py.html) | plotInnerDirection(cS, d): the crystal direction d as an arrow inside the shape |
-| [plotInnerFace](crystalShape.plotInnerFace_py.html) | plotInnerFace(cS, N): the section of the shape by the lattice plane N through its centre |
-| [plotSlipSystem](crystalShape.plotSlipSystem_py.html) | plotSlipSystem(cS, sS), plot(cS, sS, label='b'): the slip plane through the centre of the shape with the slip direction as an arrow in it, the arrow named at its tip |
+| [plot](crystalShape.plot_py.html) | a crystal shape drawn as the polygons of its faces, in a 3D axes or onto a held map |
+| [plotInnerDirection](crystalShape.plotInnerDirection_py.html) | a crystal direction drawn as an arrow from the centre of a crystal shape to its surface |
+| [plotInnerFace](crystalShape.plotInnerFace_py.html) | the section of a crystal shape by a lattice plane through its centre |
+| [plotSlipSystem](crystalShape.plotSlipSystem_py.html) | a slip system drawn inside a crystal shape: the slip plane through the centre with the slip direction as an arrow in it |
 | [plus](crystalShape.plus_py.html) |  |
 | [quartz](crystalShape.quartz_py.html) | the Quartz crystal shape of the catalogue, in cs when given |
 | [repmat](crystalShape.repmat_py.html) | n copies of the shape as a list |

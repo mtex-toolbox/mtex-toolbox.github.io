@@ -21,5 +21,5 @@ each to the equivalent nearest the white centre and reads the radius off the ang
 HSVDirectionKey.direction2color(self, h, gray=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L318">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L345">source</a></font>
 {% endraw %}

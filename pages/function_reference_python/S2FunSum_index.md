@@ -22,5 +22,5 @@ the harmonic form adds the harmonic forms; what + returns when coefficients cann
 | [mean](S2FunSum.mean_py.html) | the sum of the means of the summands |
 | [textureIndex](S2FunSum.textureIndex_py.html) | the texture index of a function on SO(3) or on the sphere, the squared L2 norm of its harmonic expansion |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L472">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L539">source</a></font>
 {% endraw %}

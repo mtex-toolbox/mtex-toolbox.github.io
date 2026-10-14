@@ -14,15 +14,34 @@ a crystal shape, the polyhedron bounded by the lattice planes of the face normal
 
 ## Syntax
 
-```python
-crystalShape(N, habitus=0, extension=(1, 1, 1))
-```
+Faces at the reciprocal length of their normal:
 
 ```python
-cS = crystalShape(N)                         # faces at the reciprocal length of their normal
-cS = crystalShape(N, habitus, extension)     # the distances from the indices alone
-cS = crystalShape.hex(cs)                    # a hexagonal prism, crystalShape.cube(cs) a cube
-cS = crystalShape.quartz(simple=True)        # from the catalogue, in its own crystal frame
+cS = crystalShape(N)
+```
+
+The distances from the indices alone:
+
+```python
+cS = crystalShape(N, habitus, extension)
+```
+
+A hexagonal prism, crystalShape.cube(cs) a cube:
+
+```python
+cS = crystalShape.hex(cs)
+```
+
+From the catalogue, in its own crystal frame:
+
+```python
+cS = crystalShape.quartz(simple=True)
+```
+
+## Signature
+
+```python
+crystalShape(N, habitus=0, extension=(1, 1, 1))
 ```
 
 ## Used on

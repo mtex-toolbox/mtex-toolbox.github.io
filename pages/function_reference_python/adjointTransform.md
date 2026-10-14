@@ -18,5 +18,5 @@ weighted values at the plan's nodes
 adjointTransform(plan, values, weights)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L557">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L610">source</a></font>
 {% endraw %}

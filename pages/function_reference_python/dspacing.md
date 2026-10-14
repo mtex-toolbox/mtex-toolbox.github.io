@@ -17,6 +17,12 @@ dspacing(x, ...) is x.dspacing(...), the method of the object passed
 dspacing(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [vector3d](Miller.dspacing_py.html) | the distance between the lattice planes with this normal, in the units of the cell |
+
 ## Used on
 
 [LatticeMetric](LatticeMetric_py.html)

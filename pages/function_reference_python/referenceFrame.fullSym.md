@@ -19,5 +19,5 @@ the largest group registered over this basis
 referenceFrame.fullSym(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L257">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L280">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [SO3FunRBF](SO3FunRBF_index_py.html).
 
 the specimen frame of the function, that of its centres
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L214">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L235">source</a></font>
 {% endraw %}

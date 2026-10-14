@@ -19,5 +19,5 @@ whether two embeddings belong to the same frame and have the same images up to a
 embedding.isclose(self, other, atol=1e-10)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L324">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L353">source</a></font>
 {% endraw %}

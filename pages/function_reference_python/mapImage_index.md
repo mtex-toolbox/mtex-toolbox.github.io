@@ -9,15 +9,73 @@ lang: python
 status: Reference
 ---
 {% raw %}
-an image that knows where on the specimen it sits: a regular grid of an origin and two
-perpendicular steps, d1 from row to row and d2 from column to column; an integer image is
-scaled to [0, 1]
+an image that knows where on the specimen it sits: a raster of values on a regular grid of
+an origin and two perpendicular steps; MATLAB's mapImage
+
+## Syntax
+
+Unit step, a frame of its own:
 
 ```python
-mapImage(img)                          unit step, a frame of its own
-mapImage(img, dxy=0.05, name='bse')    square pixels; dxy=(dx, dy) rectangular ones
-mapImage(ebsd.bc, ebsd, name='bcImg')  a channel of a gridded square map, the map riding along
+mg = mapImage(img)
 ```
+
+Square pixels of 0.05:
+
+```python
+mg = mapImage(img, dxy=0.05, name='bse')
+```
+
+Rectangular pixels:
+
+```python
+mg = mapImage(img, dxy=(0.05, 0.1))
+```
+
+A channel of a gridded map, the map along:
+
+```python
+mg = mapImage(ebsd.bc, ebsd, name='bcImg')
+```
+
+An image on the grid of the map:
+
+```python
+mg = mapImage(img, ebsd)
+```
+
+A forescatter or backscatter image, a band contrast map or any other value per pixel,
+together with the part of the specimen each pixel covers, which makes an image and an EBSD
+map comparable. The grid is regular: d1 is the step from row to row, d2 from column to
+column, and the positions follow from them; a distortion is applied by resampling, never by
+moving the pixels. An image with a map carries the map along, on the same grid, which must
+be square. An integer image is scaled to [0, 1].
+
+## Input
+
+| | |
+|---|---|
+| `img` | array of rows x columns, or rows x columns x channels |
+| `ebsd` | EBSD, gridded and square, on the grid of the image |
+
+## Output
+
+| | |
+|---|---|
+| `mg` | mapImage |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `dxy` |  | the pixel size, one number or (dx, dy), for an image without a map |
+| `origin` |  | vector3d, the position of pixel (0, 0) |
+| `name` |  | an identifier, the property of the EBSD map an aligned image is written into |
+| `scanUnit` |  | the unit of the positions, by default the map's or 'um' |
+
+## See also
+
+[mapImageList](mapImageList_index_py.html), [trueEbsd](trueEbsd_index_py.html), [mapImage.rescale](mapImage.rescale_py.html), [xcfShift](xcfShift_py.html), [gridLayout](gridLayout_index_py.html), [EBSDMapsAndImages](EBSDMapsAndImages_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
 
 ## Members
 
@@ -38,13 +96,13 @@ mapImage(ebsd.bc, ebsd, name='bcImg')  a channel of a gridded square map, the ma
 | [interp](mapImage.interp_py.html) | the image values at positions: bilinear on the grid by default, 'nearest' or 'cubic' |
 | [isempty](mapImage.isempty_py.html) | whether the image has no pixel |
 | [layout](mapImage.layout_py.html) | the gridLayout of the image, the directions its rows and columns advance along |
-| [mapImage](mapImage.mapImage_py.html) | an image that knows where on the specimen it sits: a regular grid of an origin and two perpendicular steps, d1 from row to row and d2 from column to column |
+| [mapImage](mapImage.mapImage_py.html) | an image that knows where on the specimen it sits: a raster of values on a regular grid of an origin and two perpendicular steps |
 | [nChannel](mapImage.nChannel_py.html) | the number of channels, 1 for a two dimensional image |
 | [origin](mapImage.origin_py.html) | the centre of pixel (0, 0) |
-| [plot](mapImage.plot_py.html) | plot(mg), plot(imgList), plot(imgList, edge=True), plot(mg, channel=1) |
+| [plot](mapImage.plot_py.html) | an image, or a list of them, drawn where it sits on the specimen, in the specimen's coordinates and in the screen orientation of its frame |
 | [pos2ind](mapImage.pos2ind_py.html) | the pixel covering each position: row and column, not clipped, and whether it lies on the grid |
 | [pos](mapImage.pos_py.html) | the centre of every pixel, (rows, cols) |
-| [rescale](mapImage.rescale_py.html) | the values stretched to [lo, hi], all channels of an image together or each on its own |
+| [rescale](mapImage.rescale_py.html) | the values of one or more images stretched to a common range |
 | [subGrid](mapImage.subGrid_py.html) | a rectangle cut out, rows and cols contiguous and ascending, or the box round a mask |
 | [transformReferenceFrame](mapImage.transformReferenceFrame_py.html) | the images stated in a frame and laid out that way: a layout reindexes and nothing else, a frame restates where they sit by the orientation given, by 'byScreenAlignment', the assertion that the frames were drawn the same way up, or by nothing where the frames are already related |
 

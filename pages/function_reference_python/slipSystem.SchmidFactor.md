@@ -19,13 +19,15 @@ direction on the sphere; relative=True divides by the critical resolved shear st
 ## Syntax
 
 ```python
-slipSystem.SchmidFactor(self, sigma=None, relative=False)
-```
-
-```python
 sS.SchmidFactor(v)
 sS.SchmidFactor(sigma)
 sS.SchmidFactor()
+```
+
+## Signature
+
+```python
+slipSystem.SchmidFactor(self, sigma=None, relative=False)
 ```
 
 ## Used on

@@ -22,5 +22,5 @@ grainBoundary.flip(self, ind=None)
 
 MATLAB's [grainBoundary.flip](grainBoundary.flip.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L361">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L387">source</a></font>
 {% endraw %}

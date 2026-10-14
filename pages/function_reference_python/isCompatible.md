@@ -17,5 +17,11 @@ isCompatible(x, ...) is x.isCompatible(...), the method of the object passed
 isCompatible(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [referenceFrame](referenceFrame.isCompatible_py.html) | whether a transition between the frames exists: the matrix is close to orthogonal |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

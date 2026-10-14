@@ -17,5 +17,11 @@ homochoric(x, ...) is x.homochoric(...), the method of the object passed
 homochoric(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [quaternion](quaternion.homochoric_py.html) | the homochoric vectors, the axes scaled by (3/4 (omega - sin omega))^(1/3) |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

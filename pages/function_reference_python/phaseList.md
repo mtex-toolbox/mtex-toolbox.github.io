@@ -13,6 +13,8 @@ status: Reference
 the phases of a map, the frames its measurements can belong to, the not indexed frame first at
 index 0, so that a phase id is an index into the list
 
+## Syntax
+
 ```python
 phaseList(cs1, cs2)
 phaseList(['notIndexed', cs1, cs2])      a string names a not indexed frame

@@ -26,5 +26,5 @@ grainBoundary.refine(gB, delta=None)
 
 MATLAB's [grainBoundary.refine](grainBoundary.refine.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L269">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L323">source</a></font>
 {% endraw %}

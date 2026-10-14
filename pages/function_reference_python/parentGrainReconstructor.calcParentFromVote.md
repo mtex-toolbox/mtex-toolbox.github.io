@@ -12,16 +12,75 @@ status: Reference
 {% raw %}
 A method of [parentGrainReconstructor](parentGrainReconstructor_index_py.html).
 
-job.calcParentFromVote(minProb=0.5): every grain whose leading vote is strong enough
-takes the parent orientation of that variant and the parent phase: for probabilities
-above minProb and ahead of the second by minDelta, for fits below minFit and behind the
-second by minDelta, for counts at least minCount with the second below maxCount
+the child grains whose vote is clear turned into parent grains, the parent orientation
+of the variant they voted for; MATLAB's calcParentFromVote
 
 ## Syntax
 
+Every grain with a vote:
+
 ```python
-parentGrainReconstructor.calcParentFromVote(self, minProb=0, minDelta=None, minFit=5*degree, minAlpha=None, minCount=0, maxCount=None)
+job.calcParentFromVote()
 ```
+
+A probability of at least 0.7:
+
+```python
+job.calcParentFromVote(minProb=0.7)
+```
+
+And ahead of the second by 0.2:
+
+```python
+job.calcParentFromVote(minProb=0.5, minDelta=0.2)
+```
+
+After votes of the best fit:
+
+```python
+job.calcParentFromVote(minFit=2*degree, minDelta=1*degree)
+```
+
+After counted votes:
+
+```python
+job.calcParentFromVote(minCount=3, maxCount=1)
+```
+
+The votes are those of the last calcGBVotes, calcTPVotes or clusterVariantGraph, and the
+criteria read them as they are: probabilities with minProb, minDelta and minAlpha, fits
+of bestFit with minFit, minDelta and minAlpha, counts with minCount and maxCount. A grain
+that meets them takes the parent phase and the parent orientation of the variant it
+voted for; a grain that is a parent already is reconstructed again from its measured
+orientation, a merged parent grain is not. The votes of the grains turned are cleared.
+
+MATLAB documents minVotes, which neither MATLAB nor this port reads; minAlpha compares
+fits, as MATLAB's code does, not probabilities, as its help says.
+
+## Input
+
+| | |
+|---|---|
+| `job` | parentGrainReconstructor, with job.votes |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `minProb` | `0` | with probabilities: the best must exceed this |
+| `minDelta` | `None` | the best must lead the second by more than this: in probability, or in angle with fits |
+| `minFit` | `5*degree` | with fits: the best must be below this angle |
+| `minAlpha` | `None` | with fits: the best must exceed this factor times the second |
+| `minCount` | `0` | with counts: the best must reach this count |
+| `maxCount` | `None` | with counts: the second must stay below this count |
+
+## References
+
+- F. Niessen, T. Nyyssönen, A. A. Gazder, R. Hielscher, Parent grain reconstruction from partially or fully transformed microstructures in MTEX, J. Appl. Cryst. 55 (2022) 180-194
+
+## See also
+
+[parentGrainReconstructor.calcGBVotes](parentGrainReconstructor.calcGBVotes_py.html), [parentGrainReconstructor.calcTPVotes](parentGrainReconstructor.calcTPVotes_py.html), [parentGrainReconstructor.calcParentFromGraph](parentGrainReconstructor.calcParentFromGraph_py.html), [MaParentGrainReconstruction](MaParentGrainReconstruction_py.html)
 
 ## Used on
 
@@ -29,5 +88,5 @@ parentGrainReconstructor.calcParentFromVote(self, minProb=0, minDelta=None, minF
 
 MATLAB's [parentGrainReconstructor.calcParentFromVote](parentGrainReconstructor.calcParentFromVote.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L754">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L904">source</a></font>
 {% endraw %}

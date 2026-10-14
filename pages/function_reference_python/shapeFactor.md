@@ -17,5 +17,11 @@ shapeFactor(x, ...) is x.shapeFactor(...), the method of the object passed
 shapeFactor(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [grain2d](grain2d.shapeFactor_py.html) | the perimeter against that of the circle of the same area, one for a circle |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

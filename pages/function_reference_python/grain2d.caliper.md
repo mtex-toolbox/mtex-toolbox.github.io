@@ -20,15 +20,34 @@ of the map, the width across it; a list of them gives a width per outline and di
 
 ## Syntax
 
-```python
-grain2d.caliper(self, arg=None)
-```
+The longest, norm(cV) its length:
 
 ```python
-cV = grains.caliper()                  # the longest, norm(cV) its length
-cV = grains.caliper('shortest')        # or 'longest', 'shortestPerp'
-c = grains.caliper(vector3d.X)         # the width across a direction
-c = caliper(grains, [0, 30*degree])    # the widths across angles to the x axis
+cV = grains.caliper()
+```
+
+Or 'longest', 'shortestPerp':
+
+```python
+cV = grains.caliper('shortest')
+```
+
+The width across a direction:
+
+```python
+c = grains.caliper(vector3d.X)
+```
+
+The widths across angles to the x axis:
+
+```python
+c = caliper(grains, [0, 30*degree])
+```
+
+## Signature
+
+```python
+grain2d.caliper(self, arg=None)
 ```
 
 ## Used on

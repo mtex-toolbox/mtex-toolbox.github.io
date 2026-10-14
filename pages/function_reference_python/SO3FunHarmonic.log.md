@@ -19,5 +19,5 @@ the logarithm of the function, by quadrature at twice the bandwidth, or at the b
 SO3FunHarmonic.log(self, bandwidth=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L401">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L461">source</a></font>
 {% endraw %}

@@ -9,14 +9,52 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the inverse pole figure key of every indexed phase present, drawn in insets beside the map,
-a sector reaching into both hemispheres as two; returns the inset axes
+the inverse pole figure key of every indexed phase in a map, drawn in insets to the right
+of the map
 
 ## Syntax
 
+The keys along z:
+
 ```python
-keyLegend(mP, x, ipfDirection=None, width=0.28, resolution=None)
+axs = keyLegend(mP, ebsd)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L992">source</a></font>
+Along x, narrower:
+
+```python
+axs = keyLegend(mP, ebsd, ipfDirection=xvector, width=0.2)
+```
+
+A map coloured by orientation draws these itself with legend=True. Every phase present
+gets the HSV key of its frame, titled by its mineral, one row each; a fundamental sector
+that reaches into both hemispheres, of a group without the inversion, takes two insets in
+its row, the upper hemisphere above the lower.
+
+## Input
+
+| | |
+|---|---|
+| `mP` | mapPlot, the map plot beside which the keys go |
+| `x` | EBSD or grain2d, whose phases are shown |
+
+## Output
+
+| | |
+|---|---|
+| `axs` | list of the inset axes |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `ipfDirection` | `None` | vector3d, the specimen direction of the colouring; the keys, which live in crystal coordinates, are the same for every direction |
+| `width` | `0.28` | the width of an inset, as a fraction of the width of the map axes |
+| `resolution` | `None` | the mesh of a key in radians; by default from the size of the inset |
+
+## See also
+
+[ipfHSVKey](ipfHSVKey_index_py.html), [plotKey](plotKey_py.html), [EBSD.plot](EBSD.plot_py.html), [EBSDIPFMap](EBSDIPFMap_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1234">source</a></font>
 {% endraw %}

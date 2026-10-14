@@ -22,5 +22,5 @@ vector3d.exp(self, ref=None, side=None)
 
 MATLAB's [Miller.exp](Miller.exp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L768">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L965">source</a></font>
 {% endraw %}

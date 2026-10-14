@@ -10,14 +10,59 @@ counterpart: vector3d.circle.html
 status: Reference
 ---
 {% raw %}
-circle(v, radius): the small circle of opening angle radius about v, on the axes nextAxis
-chose or the last one, on every axes with add2all (MATLAB plotting/circle.m)
+a circle on a spherical plot: the small circle of the opening angle about a direction, the
+great circle by default
 
 ## Syntax
 
+The great circle perpendicular to n:
+
 ```python
-circle(v, radius=90*degree, add2all=False, lineColor='k', lineWidth=1.5, edgeAlpha=1.0, parent=None, **kw)
+circle(n)
 ```
+
+The small circle 30 degree about n:
+
+```python
+circle(n, 30*degree)
+```
+
+Onto every spherical plot of the figure:
+
+```python
+circle(n, 20*degree, add2all=True, lineColor='r')
+```
+
+The circle annotates the spherical plot drawn last, or the one nextAxis chose; draw the
+plot first. A circle leaving the chart is broken where it does. Several directions give
+several circles.
+
+## Input
+
+| | |
+|---|---|
+| `v` | vector3d, the centre, one or several |
+| `radius` | the opening angle about v in radians, pi/2 for the great circle |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the matplotlib lines, one per circle and axes |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `add2all` | `False` | draw onto every spherical plot of the figure |
+| `lineColor` | `'k'` | the colour of the line |
+| `lineWidth` | `1.5` | the width of the line |
+| `edgeAlpha` | `1.0` | the opacity of the line |
+| `parent` | `None` | the axes, or a list of them, to draw onto |
+
+## See also
+
+[ellipse](ellipse_py.html), [plot](S1Grid.plot_py.html), [scatter](quaternion.scatter_py.html), [text](EBSD.text_py.html), [Annotations](Annotations_py.html)
 
 ## Used on
 

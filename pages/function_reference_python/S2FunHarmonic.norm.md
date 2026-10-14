@@ -17,15 +17,22 @@ the L2 norm for the normalised surface measure, or the Sobolev norm, one per fun
 ## Syntax
 
 ```python
-S2FunHarmonic.norm(self, s=None)
+t = norm(sF)
 ```
 
+The Sobolev norm of index s:
+
 ```python
-t = norm(sF)
-t = norm(sF, s=1)  # the Sobolev norm of index s
+t = norm(sF, s=1)
+```
+
+## Signature
+
+```python
+S2FunHarmonic.norm(self, s=None)
 ```
 
 MATLAB's [S2FunHarmonic.norm](S2FunHarmonic.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L421">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L477">source</a></font>
 {% endraw %}

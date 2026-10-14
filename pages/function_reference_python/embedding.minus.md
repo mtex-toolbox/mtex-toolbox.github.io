@@ -22,5 +22,5 @@ a - b
 
 MATLAB's [embedding.minus](embedding.minus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L296">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/embedding.py#L325">source</a></font>
 {% endraw %}

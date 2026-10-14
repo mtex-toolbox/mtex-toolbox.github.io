@@ -17,11 +17,13 @@ the Kurdjumov-Sachs orientation relationship from fcc to bcc, (111) || (011) and
 ## Syntax
 
 ```python
-orientation.KurdjumovSachs(csG, csA)
+p2c = orientation.KurdjumovSachs(csGamma, csAlpha)
 ```
 
+## Signature
+
 ```python
-p2c = orientation.KurdjumovSachs(csGamma, csAlpha)
+orientation.KurdjumovSachs(csG, csA)
 ```
 
 ## Used on

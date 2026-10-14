@@ -23,5 +23,5 @@ SO3FunRBF.rotate(self, r, side='left')
 
 MATLAB's [SO3FunRBF.rotate](SO3FunRBF.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L364">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L405">source</a></font>
 {% endraw %}

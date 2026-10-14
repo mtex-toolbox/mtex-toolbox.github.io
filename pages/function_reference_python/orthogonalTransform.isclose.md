@@ -19,5 +19,5 @@ equal within the angular tolerance tol and of one parity, MATLAB's eq
 orthogonalTransform.isclose(self, other, tol=0.0005)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L730">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L841">source</a></font>
 {% endraw %}

@@ -16,15 +16,17 @@ directions or axes, a function on the circle of angles or a density of real valu
 ## Syntax
 
 ```python
-calcDensity(x, Fourier=False, **kwargs)
-```
-
-```python
 calcDensity(ori)                          the halfwidth selected by UCV
 calcDensity(ori, halfwidth=5*degree)      a de la Vallee Poussin kernel of that halfwidth
 calcDensity(ebsd)                         the orientations of a map, grouped by its grains
 calcDensity(v, kernel=psi, weights=w)     weighted directions
 calcDensity(ori, Fourier=True)            the harmonic form
+```
+
+## Signature
+
+```python
+calcDensity(x, Fourier=False, **kwargs)
 ```
 
 ## Used on

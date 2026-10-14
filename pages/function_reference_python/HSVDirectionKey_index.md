@@ -12,6 +12,8 @@ status: Reference
 MTEX's default direction key: white at the centre of the fundamental sector, the primary
 colours at its vertices
 
+## Syntax
+
 ```python
 HSVDirectionKey(cs)
 HSVDirectionKey(cs, whiteCenter=v, maxAngle=5*degree)
@@ -35,5 +37,5 @@ yellow, and the key comes closer to MTEX's and less even.
 
 [EBSDGROD](EBSDGROD_py.html), [BoundaryPlots](BoundaryPlots_py.html), [GrainOrientationParameters](GrainOrientationParameters_py.html), [WBV](WBV_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L273">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L300">source</a></font>
 {% endraw %}

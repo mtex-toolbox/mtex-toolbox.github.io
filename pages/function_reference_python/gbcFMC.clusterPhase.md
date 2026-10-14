@@ -19,5 +19,5 @@ FMC on the pixels isP of one phase over the pair list (ip, jp) within them
 gbcFMC.clusterPhase(self, ebsd, isP, ip, jp, fr)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L81">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L110">source</a></font>
 {% endraw %}

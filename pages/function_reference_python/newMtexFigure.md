@@ -16,11 +16,13 @@ it is, has no counterpart
 ## Syntax
 
 ```python
-newMtexFigure(n=1, **kwargs)
+newMtexFigure(4, figSize='large')
 ```
 
+## Signature
+
 ```python
-newMtexFigure(4, figSize='large')
+newMtexFigure(n=1, **kwargs)
 ```
 
 ## Used on
@@ -29,5 +31,5 @@ newMtexFigure(4, figSize='large')
 
 MATLAB's [newMtexFigure](newMtexFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L371">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L399">source</a></font>
 {% endraw %}

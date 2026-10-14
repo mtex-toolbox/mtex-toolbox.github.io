@@ -19,5 +19,5 @@ S2FunHarmonic.unimodal(v, halfwidth=w): MATLAB's other name of S2Fun.unimodal
 S2FunHarmonic.unimodal(*args, **kwargs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L170">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L226">source</a></font>
 {% endraw %}

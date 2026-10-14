@@ -23,5 +23,5 @@ EBSD.project2FundamentalRegion(self)
 
 MATLAB's [EBSD.project2FundamentalRegion](EBSD.project2FundamentalRegion.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L167">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L195">source</a></font>
 {% endraw %}

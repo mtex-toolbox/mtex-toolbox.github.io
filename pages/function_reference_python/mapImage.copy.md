@@ -19,5 +19,5 @@ a copy of the image with its own pixel array; the map riding along is shared
 mapImage.copy(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L186">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L207">source</a></font>
 {% endraw %}

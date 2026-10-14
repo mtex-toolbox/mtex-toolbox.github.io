@@ -19,5 +19,5 @@ whether two fields agree in their coefficients up to the relative tolerance rtol
 S2VectorFieldHarmonic.isclose(self, w, rtol=1e-08)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L327">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L353">source</a></font>
 {% endraw %}

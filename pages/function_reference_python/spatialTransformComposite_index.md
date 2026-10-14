@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 stages applied in order, the first given first; nested composites are flattened
 
+## Syntax
+
 ```python
 T = spatialTransformComposite(T1, T2, T3)
 ```
@@ -27,5 +29,5 @@ T = spatialTransformComposite(T1, T2, T3)
 | [shortChar](spatialTransformComposite.shortChar_py.html) | the short names of the stages joined by dashes |
 | [stageList](spatialTransformComposite.stageList_py.html) | the stages, a list |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L640">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L711">source</a></font>
 {% endraw %}

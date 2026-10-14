@@ -27,5 +27,5 @@ vector3d.calcDensity(self, *args, **kwargs)
 
 MATLAB's [vector3d.calcDensity](vector3d.calcDensity.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L300">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L383">source</a></font>
 {% endraw %}

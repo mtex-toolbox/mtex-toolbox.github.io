@@ -10,23 +10,80 @@ counterpart: parentGrainReconstructor.parentGrainReconstructor.html
 status: Reference
 ---
 {% raw %}
-job = parentGrainReconstructor(ebsd, grains, p2c)
+the state of a parent grain reconstruction: the map and the grains it starts from, the
+orientation relationship and the grains after every step taken; MATLAB's
+parentGrainReconstructor
 
 ## Syntax
 
+The parent and child phases guessed:
+
 ```python
-parentGrainReconstructor(ebsd, grains=None, p2c=None, useBoundaryOrientations=False, reportFit=True)
+job = parentGrainReconstructor(ebsd, grains)
 ```
 
-The state of a parent grain reconstruction: the map and the grains it starts from
-(ebsdPrior, grainsPrior), the orientation relationship p2c, the grains after every step
-taken so far (grains) and which of them every prior grain went into (mergeId, the id of
-the current grain per prior grain). Without grains the map is segmented at 3 degrees;
-without p2c the phases are guessed, the most frequent indexed one the child and the
-rarest the parent, and job.p2c is set afterwards. The parent frame is added to the phase
-lists of the job's copies when the map carries only the child. With
-useBoundaryOrientations a pair of grains votes with the means of their pixels along the
-boundary they share rather than with the grain means.
+With an initial orientation relationship:
+
+```python
+job = parentGrainReconstructor(ebsd, grains, orientation.KurdjumovSachs(csParent, csChild))
+```
+
+Votes from the orientations along the boundaries:
+
+```python
+job = parentGrainReconstructor(ebsd, grains, p2c, useBoundaryOrientations=True)
+```
+
+The grains segmented at 3 degree:
+
+```python
+job = parentGrainReconstructor(ebsd)
+```
+
+The job keeps the map and the grains as given, ebsdPrior and grainsPrior, the grains at
+the current stage, grains, with parentGrains and childGrains, and for every prior grain the
+id of the current grain it went into, mergeId. The steps of a reconstruction are its
+methods: calcParent2Child refines the orientation relationship p2c, calcGBVotes,
+calcTPVotes or calcGraph with clusterVariantGraph collect votes, calcParentFromVote and
+calcParentFromGraph turn child grains into parent grains, mergeSimilar and
+mergeInclusions merge them, and calcParentEBSD gives the reconstructed map, with
+variantId and packetId.
+
+The phases are guessed from the map: the most frequent indexed phase is the child and
+the rarest the parent, which job.csParent and job.csChild correct, or setting job.p2c,
+whose frames then name both. The parent frame is added to the phase lists of the job's
+copies when the map carries only the child. The map must carry the grain ids of grains,
+which calcGrains writes into it.
+
+## Input
+
+| | |
+|---|---|
+| `ebsd` | EBSD, the map of the measured, mostly child, phase, with the grain ids of grains |
+| `grains` | grain2d, the child grains of the map; when not given the map is segmented at 3 degree, on a copy |
+| `p2c` | orientation, the initial guess of the parent to child orientation relationship (MATLAB's p2c0) |
+
+## Output
+
+| | |
+|---|---|
+| `job` | parentGrainReconstructor |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `useBoundaryOrientations` | `False` | a pair of grains votes with the mean orientations of their pixels along the boundary they share rather than with the grain means |
+| `reportFit` | `True` | show the quantiles of the misfit of the boundaries to p2c when the job is displayed |
+
+## References
+
+- R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia 22 (2022) 101399
+- F. Niessen, T. Nyyssönen, A. A. Gazder, R. Hielscher, Parent grain reconstruction from partially or fully transformed microstructures in MTEX, J. Appl. Cryst. 55 (2022) 180-194
+
+## See also
+
+[parentGrainReconstructor.calcParent2Child](parentGrainReconstructor.calcParent2Child_py.html), [parentGrainReconstructor.calcGBVotes](parentGrainReconstructor.calcGBVotes_py.html), [parentGrainReconstructor.calcParentFromVote](parentGrainReconstructor.calcParentFromVote_py.html), [calcParent2Child](calcParent2Child_py.html), [MaParentGrainReconstruction](MaParentGrainReconstruction_py.html), [TiBetaReconstruction](TiBetaReconstruction_py.html), [GrainGraphBasedReconstruction](GrainGraphBasedReconstruction_py.html)
 
 ## Used on
 
@@ -34,5 +91,5 @@ boundary they share rather than with the grain means.
 
 MATLAB's [parentGrainReconstructor.parentGrainReconstructor](parentGrainReconstructor.parentGrainReconstructor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L266">source</a></font>
 {% endraw %}

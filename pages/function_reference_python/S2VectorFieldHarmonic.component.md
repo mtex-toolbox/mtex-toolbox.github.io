@@ -19,5 +19,5 @@ one component as a function without the group
 S2VectorFieldHarmonic.component(self, i)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L289">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L315">source</a></font>
 {% endraw %}

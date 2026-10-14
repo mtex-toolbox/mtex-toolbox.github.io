@@ -17,12 +17,14 @@ the points within eps and their angles
 ## Syntax
 
 ```python
-fibonacciS2Grid.find(self, v, eps=None)
-```
-
-```python
 ind, d = S2G.find(v)
 I, d = S2G.find(v, eps)
+```
+
+## Signature
+
+```python
+fibonacciS2Grid.find(self, v, eps=None)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/fibonacci.py#L59">source</a></font>

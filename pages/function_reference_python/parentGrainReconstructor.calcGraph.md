@@ -12,15 +12,52 @@ status: Reference
 {% raw %}
 A method of [parentGrainReconstructor](parentGrainReconstructor_index_py.html).
 
-job.calcGraph(threshold=2.5*degree, tol=2.5*degree): job.graph, a node per grain
-and between neighbours the probability that the misfit of their boundary to the
-relationship still means one parent
+the graph of the grains for a parent grain reconstruction, job.graph; MATLAB's calcGraph of
+parentGrainReconstructor
 
 ## Syntax
 
+The default probabilities:
+
 ```python
-parentGrainReconstructor.calcGraph(job, threshold=2*degree, tol=1.5*degree, p2c=False, c2c=False)
+job.calcGraph()
 ```
+
+Another misfit at probability 1/2:
+
+```python
+job.calcGraph(threshold=2.5*degree, tol=2.5*degree)
+```
+
+The child to child boundaries only:
+
+```python
+job.calcGraph(c2c=True)
+```
+
+A node per grain, and between neighbouring grains the probability that the misfit of their
+boundary to the orientation relationship still means one parent: a cumulative Gaussian of
+the misfit with the mean threshold and the spread tol. The child to child and the parent to
+child boundaries are both used unless one of them is asked for. The job is changed in place.
+
+## Input
+
+| | |
+|---|---|
+| `job` | parentGrainReconstructor with its orientation relationship job.p2c |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `threshold` | `2*degree` | the misfit at which the probability is 1/2 |
+| `tol` | `1.5*degree` | the range about threshold over which the probability goes from 1 to 0 |
+| `p2c` | `False` | the parent to child boundaries only |
+| `c2c` | `False` | the child to child boundaries only |
+
+## See also
+
+[parentGrainReconstructor.clusterGraph](parentGrainReconstructor.clusterGraph_py.html), [parentGrainReconstructor.calcGBFit](parentGrainReconstructor.calcGBFit_py.html), [parentGrainReconstructor.calcVariantGraph](parentGrainReconstructor.calcVariantGraph_py.html), [GrainGraphBasedReconstruction](GrainGraphBasedReconstruction_py.html)
 
 ## Used on
 

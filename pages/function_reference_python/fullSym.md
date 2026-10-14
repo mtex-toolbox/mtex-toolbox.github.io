@@ -17,5 +17,11 @@ fullSym(x, ...) is x.fullSym(...), the method of the object passed
 fullSym(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [referenceFrame](referenceFrame.fullSym_py.html) | the largest group registered over this basis |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 a projection of the sphere to the plane, restricted to a region and a hemisphere
 
+## Syntax
+
 ```python
 sphericalProjection(sR, pC, antipodal=False, upper=True)
 proj.project(v)        the plane coordinates, NaN outside the region

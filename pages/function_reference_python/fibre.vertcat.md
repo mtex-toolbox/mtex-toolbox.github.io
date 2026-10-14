@@ -17,12 +17,19 @@ the fibres joined into one list along an axis
 ## Syntax
 
 ```python
-fibre.vertcat(*fibres, axis=0)
+f = cat(f1, f2)
 ```
 
+Side by side:
+
 ```python
-f = cat(f1, f2)
-f = cat(f1, f2, axis=1)    # side by side
+f = cat(f1, f2, axis=1)
+```
+
+## Signature
+
+```python
+fibre.vertcat(*fibres, axis=0)
 ```
 
 MATLAB's [fibre.vertcat](fibre.vertcat.html)

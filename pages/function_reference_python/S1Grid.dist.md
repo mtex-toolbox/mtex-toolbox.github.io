@@ -22,5 +22,5 @@ S1Grid.dist(self, x, y)
 
 MATLAB's [S1Grid.dist](S1Grid.dist.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L39">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L58">source</a></font>
 {% endraw %}

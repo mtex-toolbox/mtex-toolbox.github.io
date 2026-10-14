@@ -10,12 +10,55 @@ counterpart: SO3FunRBF_index.html
 status: Reference
 ---
 {% raw %}
-a function on SO(3) as a sum of radial kernels psi at centre orientations with weights, plus a
-constant c0; the weights default to a mean of one
+a function on SO(3) as a sum of radial kernels at centre orientations, plus a constant: a
+radial basis function ODF
+
+## Syntax
+
+Kernels psi at the orientations ori:
 
 ```python
-SO3FunRBF(ori, psi, weights, c0)
+SO3F = SO3FunRBF(ori, psi, weights)
 ```
+
+Plus the constant c0:
+
+```python
+SO3F = SO3FunRBF(ori, psi, weights, c0)
+```
+
+10 degree kernels, the weights giving a mean of one:
+
+```python
+SO3F = SO3FunRBF(ori)
+```
+
+The function is c0 + sum_i w_i psi(angle(g, ori_i)), every centre taken with all its
+symmetrically equivalent orientations, in the crystal and specimen frames of the centres.
+It stays a kernel sum under scaling, adding a constant, adding another kernel sum of the
+same kernel, rotation, inversion and convolution with a kernel on SO(3); the harmonic form
+it is evaluated through is kept until a centre, the kernel, the weights or the constant
+are set. unimodalODF and calcDensity build one; SO3FunRBF.interpolate fits one through
+values. MATLAB's SO3FunRBF(F) approximating another SO3Fun is not ported.
+
+## Input
+
+| | |
+|---|---|
+| `center` | orientation, the centres of the kernels |
+| `psi` | SO3Kernel; by default the de la Vallee Poussin kernel of halfwidth 10 degree |
+| `weights` | one weight per centre; by default equal, giving a mean of one |
+| `c0` | the constant added |
+
+## Output
+
+| | |
+|---|---|
+| `SO3F` | SO3FunRBF |
+
+## See also
+
+[unimodalODF](unimodalODF_py.html), [SO3FunCBF](SO3FunCBF_index_py.html), [SO3FunRBF.interpolate](SO3FunRBF.interpolate_py.html), [calcDensity](calcDensity_py.html), [SO3FunRBF.radon](SO3FunRBF.radon_py.html), [RadialODFs](RadialODFs_py.html)
 
 ## Members
 
@@ -25,12 +68,12 @@ SO3FunRBF(ori, psi, weights, c0)
 | [antipodal](SO3FunRBF.antipodal_py.html) | whether the function is antipodal, symmetric under inversion, as its centres are |
 | [bandwidth](SO3FunRBF.bandwidth_py.html) | the harmonic bandwidth of the kernel |
 | [c0](SO3FunRBF.c0_py.html) | the constant added to the sum of kernels |
-| [calcError](SO3FunRBF.calcError_py.html) | the distance of two SO(3) functions on the equispaced grid of the resolution: 'l1' (the default, as MATLAB's) is half the mean absolute difference, for densities the fraction of the volume that would have to move to turn one into the other |
+| [calcError](SO3FunRBF.calcError_py.html) | the distance between two orientation density functions, or the error of an ODF against pole figures |
 | [cat](SO3FunRBF.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |
 | [center](SO3FunRBF.center_py.html) | the centres of the kernels, a flat list of orientations |
 | [conv](SO3FunRBF.conv_py.html) | the convolution with a kernel psi, again a kernel sum when psi is an SO(3) kernel, otherwise through the harmonic expansion |
 | [CS](SO3FunRBF.CS_py.html) | the crystal frame of the function, that of its centres |
-| [discreteSample](SO3FunRBF.discreteSample_py.html) | the nodes of a grid drawn with probability proportional to f, moved by a random rotation within the grid resolution and by a random element of each group |
+| [discreteSample](SO3FunRBF.discreteSample_py.html) | a random sample of n orientations drawn from an orientation density, of directions from a density on the sphere, of numbers from a density on an interval, or n random members of a list |
 | [eval](SO3FunRBF.eval_py.html) | the kernel sum over the centres and their symmetric copies |
 | [exp](SO3FunRBF.exp_py.html) | the exponential of the function, pointwise, as a function handle |
 | [frameA](SO3FunRBF.frameA_py.html) | the frame the orientations map from, the crystal frame |
@@ -49,9 +92,9 @@ SO3FunRBF(ori, psi, weights, c0)
 | [plotSection](SO3FunRBF.plotSection_py.html) | plotSection(odf), plotSection(odf, 'sigma'), plotSection(ori, oS, sections=9) |
 | [plus](SO3FunRBF.plus_py.html) |  |
 | [psi](SO3FunRBF.psi_py.html) | the kernel |
-| [radon](SO3FunRBF.radon_py.html) | the Radon transform: with h the pole figure, with r the inverse pole figure, with both the pole figure of h evaluated at r |
+| [radon](SO3FunRBF.radon_py.html) | the Radon transform of a kernel sum: the pole figure of a crystal direction, the inverse pole figure of a specimen direction, or the pole density of both |
 | [rotate](SO3FunRBF.rotate_py.html) | the function rotated by r on the left, the specimen side, or with side='right' on the crystal side |
-| [SO3FunRBF](SO3FunRBF.SO3FunRBF_py.html) | a function on SO(3) as a sum of radial kernels psi at centre orientations with weights, plus a constant c0 |
+| [SO3FunRBF](SO3FunRBF.SO3FunRBF_py.html) | a function on SO(3) as a sum of radial kernels at centre orientations, plus a constant: a radial basis function ODF |
 | [sqrt](SO3FunRBF.sqrt_py.html) | the square root of the function, pointwise, as a function handle |
 | [SS](SO3FunRBF.SS_py.html) | the specimen frame of the function, that of its centres |
 | [sum](SO3FunRBF.sum_py.html) | the integral over orientation space, 8 pi^2 times the mean |

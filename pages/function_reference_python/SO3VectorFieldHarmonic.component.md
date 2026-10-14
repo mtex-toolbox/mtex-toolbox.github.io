@@ -19,5 +19,5 @@ one component as a function on the component frames
 SO3VectorFieldHarmonic.component(self, i)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L408">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L432">source</a></font>
 {% endraw %}

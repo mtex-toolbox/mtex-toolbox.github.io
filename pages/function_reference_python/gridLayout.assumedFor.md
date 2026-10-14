@@ -21,5 +21,5 @@ and named so that the assumption shows wherever the layout is displayed
 gridLayout.assumedFor(fr)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L56">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L77">source</a></font>
 {% endraw %}

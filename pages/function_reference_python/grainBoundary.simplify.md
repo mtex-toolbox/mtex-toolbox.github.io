@@ -12,18 +12,70 @@ status: Reference
 {% raw %}
 A method of [grainBoundary](grainBoundary_index_py.html).
 
-drop the vertices that carry no shape, chain by chain: a vertex goes when leaving it out
-moves the boundary by less than epsilon, which on a pixel grid turns a staircase into the
-straight line it approximates. The default tolerance is exactly that: a staircase of
-spacing d never strays further than d / sqrt(2) from the line it approximates
+the boundary with the vertices dropped that carry no shape, Douglas-Peucker chain by chain;
+MATLAB's grainBoundary.simplify
 
 ## Syntax
 
+The pixel staircase straightened:
+
 ```python
-grainBoundary.simplify(gB, epsilon=None, protect=None, keepGrains=None)
+gB = gB.simplify()
 ```
+
+A tolerance of 0.5 map units:
+
+```python
+gB = gB.simplify(0.5)
+```
+
+These vertices kept as well:
+
+```python
+gB = gB.simplify(protect=vertexIds)
+```
+
+No grain of the list collapsed:
+
+```python
+gB = gB.simplify(keepGrains=grains.id)
+```
+
+A vertex is dropped when leaving it out moves the boundary by less than epsilon, so many
+vertices go along a straight run and none at a corner; on a pixel grid this turns a
+staircase into the straight line it approximates. The junctions, the ends of the chains,
+always stay, so which grains touch, and where, is unchanged; a closed chain keeps at least
+three vertices. The dropped vertices' segments are merged as by reduce.
+
+The default tolerance is the median segment length over sqrt(2): a staircase of spacing d
+never strays further than d / sqrt(2) from the line it approximates, the worst case being a
+boundary at 45 degree, so it removes the grid and nothing else.
+
+## Input
+
+| | |
+|---|---|
+| `gB` | grainBoundary |
+
+## Output
+
+| | |
+|---|---|
+| `gB` | grainBoundary, the simplified boundary |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `epsilon` | `None` | the tolerance in the units of the map, how far the boundary may move; 0 leaves the boundary as it is, by default the median segment length over sqrt(2) |
+| `protect` | `None` | the ids of the vertices that must stay, on top of the junctions |
+| `keepGrains` | `None` | the ids of the grains that must keep a polygon: a grain smaller than epsilon would lose all its vertices and is not coarsened at all; MATLAB does this for every grain, grain2d.simplifyBoundary passes all of them |
+
+## See also
+
+[grainBoundary.reduce](grainBoundary.reduce_py.html), [grainBoundary.refine](grainBoundary.refine_py.html), [grain2d.simplifyBoundary](grain2d.simplifyBoundary_py.html), [smoothBoundary](smoothBoundary_py.html)
 
 MATLAB's [grainBoundary.simplify](grainBoundary.simplify.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L142">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundaryresampling.py#L169">source</a></font>
 {% endraw %}

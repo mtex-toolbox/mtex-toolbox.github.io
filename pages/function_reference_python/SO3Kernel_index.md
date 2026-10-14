@@ -25,7 +25,7 @@ a kernel on SO(3) given by its Chebyshev coefficients A
 | [mtimes](SO3Kernel.mtimes_py.html) |  |
 | [norm](SO3Kernel.norm_py.html) | the L2 norm of the kernel, the Euclidean norm of its coefficients |
 | [plot](SO3Kernel.plot_py.html) | plot(x, ...) draws x as its kind is drawn |
-| [plotPDF](SO3Kernel.plotPDF_py.html) | plotPF(ori, h), plotPF(ori, data, h), plotPF(ori, h, points=100, contourf=True, antipodal=True), plotPF(odf, h), plotPF(pf) |
+| [plotPDF](SO3Kernel.plotPDF_py.html) | pole figures, one per crystal direction: of an ODF, of a list of orientations or of a measured PoleFigure |
 | [plotSpektra](SO3Kernel.plotSpektra_py.html) | plotSpectrum(psi), plotSpectrum(odf): the Chebyshev coefficients of a kernel, or the harmonic power of a function, per degree (MATLAB's plotSpektra) |
 | [plus](SO3Kernel.plus_py.html) |  |
 | [radon](SO3Kernel.radon_py.html) | the Radon transform is the S2 kernel with the same coefficients |

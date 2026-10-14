@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 the map plot of one axes: the axes, the layout of the plane on the screen, the unit
 
+## Syntax
+
 ```python
 mP = mapPlot(ax, x)
 mP.layout, mP.extent, mP.unit, mP.mappable

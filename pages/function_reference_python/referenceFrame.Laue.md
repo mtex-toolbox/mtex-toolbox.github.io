@@ -19,5 +19,5 @@ the sibling frame carrying the Laue group, the group with the inversion added
 referenceFrame.Laue(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L268">source</a></font>
 {% endraw %}

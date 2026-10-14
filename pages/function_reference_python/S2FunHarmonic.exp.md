@@ -19,5 +19,5 @@ the exponential of the function, expanded by quadrature, or at the bandwidth giv
 S2FunHarmonic.exp(self, bandwidth=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L390">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L446">source</a></font>
 {% endraw %}

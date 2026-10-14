@@ -19,16 +19,28 @@ plane is a plane3d, or its normal with a point on it or its distance from the or
 ## Syntax
 
 ```python
-EBSD3.slice(self, plane, P0=None)
+ebsd = ebsd3.slice(plane3d(vector3d.Z, vector3d(0, 0, 0.15)))
 ```
 
+Normal and point:
+
 ```python
-ebsd = ebsd3.slice(plane3d(vector3d.Z, vector3d(0, 0, 0.15)))
-ebsd = ebsd3.slice(vector3d(1, 1, 1), vector3d(0, 0, 0))   # normal and point
-ebsd = ebsd3.slice(vector3d.Z, 0.15)                        # normal and distance
+ebsd = ebsd3.slice(vector3d(1, 1, 1), vector3d(0, 0, 0))
+```
+
+Normal and distance:
+
+```python
+ebsd = ebsd3.slice(vector3d.Z, 0.15)
+```
+
+## Signature
+
+```python
+EBSD3.slice(self, plane, P0=None)
 ```
 
 MATLAB's [EBSD3.slice](EBSD3.slice.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L204">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L233">source</a></font>
 {% endraw %}

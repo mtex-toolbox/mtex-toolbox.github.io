@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 the misorientation key of Patala, Mason and Schuh for m-3m, m-3, mmm, 4/mmm and 6/mmm
 
+## Syntax
+
 ```python
 PatalaColorKey(cs), PatalaColorKey(cs1, cs2), PatalaColorKey(gB) of a grain boundary
 rgb = key.orientation2color(mori)

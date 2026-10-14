@@ -19,5 +19,5 @@ the halfwidth in closed form, sigma sqrt(2 log 2)
 S1GaussKernel.halfwidth(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1096">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1134">source</a></font>
 {% endraw %}

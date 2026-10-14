@@ -13,5 +13,5 @@ A property of [grain2d](grain2d_index_py.html).
 
 the shape of the list of grains, (size,)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L106">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L143">source</a></font>
 {% endraw %}

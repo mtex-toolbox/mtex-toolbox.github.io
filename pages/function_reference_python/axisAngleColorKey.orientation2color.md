@@ -18,12 +18,14 @@ takes the place of the key's
 ## Syntax
 
 ```python
-axisAngleColorKey.orientation2color(self, ori, oriRef=None)
-```
-
-```python
 rgb = key.orientation2color(ori)
 rgb = key.orientation2color(ori, oriRef)
+```
+
+## Signature
+
+```python
+axisAngleColorKey.orientation2color(self, ori, oriRef=None)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L267">source</a></font>

@@ -19,5 +19,5 @@ a filled contour plot cuts its bands out of the map, so it is drawn again
 mtexFigure.setColormap(self, cmap, ax=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L246">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L274">source</a></font>
 {% endraw %}

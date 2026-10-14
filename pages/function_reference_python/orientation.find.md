@@ -18,16 +18,18 @@ nearest for an integer, or two sparse matrices of those within the radius eps
 ## Syntax
 
 ```python
-orientation.find(self, w, epsOrK=None)
-```
-
-```python
 ind, d = ori.find(w)
 ind, d = ori.find(w, 5)
 ind, d = ori.find(w, 5*degree)
 ```
 
+## Signature
+
+```python
+orientation.find(self, w, epsOrK=None)
+```
+
 MATLAB's [orientation.find](orientation.find.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L412">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L599">source</a></font>
 {% endraw %}

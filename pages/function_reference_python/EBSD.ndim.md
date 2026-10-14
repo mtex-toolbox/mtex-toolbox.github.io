@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the number of array axes, 1 for a list and 2 for a grid
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L109">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L137">source</a></font>
 {% endraw %}

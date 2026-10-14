@@ -18,5 +18,5 @@ counts as an image; the direction itself when no image lies inside
 projectIntoRegion(v, sR, pg=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L511">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L555">source</a></font>
 {% endraw %}

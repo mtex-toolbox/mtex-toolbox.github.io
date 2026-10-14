@@ -13,5 +13,5 @@ A property of [S1FunHarmonic](S1FunHarmonic_index_py.html).
 
 f(x) = f(x + pi): the odd modes vanish
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L127">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L195">source</a></font>
 {% endraw %}

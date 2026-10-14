@@ -19,5 +19,5 @@ the PLage2 component, Bunge Euler angles (245°, 45°, 0°), in cs and the speci
 orientation.PLage2(CS, *ss)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L264">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L288">source</a></font>
 {% endraw %}

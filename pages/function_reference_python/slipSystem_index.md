@@ -14,6 +14,8 @@ slip systems: slip directions b with plane normals n orthogonal to them and a cr
 shear stress each, in crystal coordinates while Miller indexed, in specimen coordinates once
 an orientation has rotated them
 
+## Syntax
+
 ```python
 sS = slipSystem(b, n)
 sS = slipSystem(b, n, CRSS)

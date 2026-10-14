@@ -19,5 +19,5 @@ shows the figures, matplotlib's show
 mtexFigure.show(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L316">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L344">source</a></font>
 {% endraw %}

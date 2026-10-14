@@ -19,5 +19,5 @@ the sibling frame carrying only the proper rotations of this group
 referenceFrame.properSubGroup(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L253">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L276">source</a></font>
 {% endraw %}

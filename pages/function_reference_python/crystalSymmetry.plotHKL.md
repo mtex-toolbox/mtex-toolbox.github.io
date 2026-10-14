@@ -24,5 +24,5 @@ crystalFrame.plotHKL(CS, complete=False, **kw)
 
 MATLAB's [crystalSymmetry.plotHKL](crystalSymmetry.plotHKL.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L946">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1020">source</a></font>
 {% endraw %}

@@ -22,5 +22,5 @@ symmetry.LaueName(self)
 
 MATLAB's [symmetry.LaueName](symmetry.LaueName.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L355">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L384">source</a></font>
 {% endraw %}

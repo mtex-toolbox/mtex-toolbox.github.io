@@ -23,5 +23,5 @@ grain2d.findByOrientation(self, ori, epsilon)
 
 MATLAB's [grain2d.findByOrientation](grain2d.findByOrientation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L360">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L437">source</a></font>
 {% endraw %}

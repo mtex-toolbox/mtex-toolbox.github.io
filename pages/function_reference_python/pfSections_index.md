@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 pole figure sections: the pole figure of h1, split by the twist of h2 about it
 
+## Syntax
+
 ```python
 pfSections(cs, ss, h1=..., h2=..., sections=6, omega=values)
 sigmaSections(cs, ss, sections=6, sigma=values)   with h1 = c*, h2 = a

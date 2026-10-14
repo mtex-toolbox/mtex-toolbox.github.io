@@ -12,17 +12,64 @@ status: Reference
 {% raw %}
 A method of [EBSD](EBSD_index_py.html).
 
-the average of a property over each grain: one value per grain when the grains are
-given, and the value of its own grain at every pixel when they are not; method is the
-reduction, llim and ulim the range of values it is taken over
+the average of a property over each grain; MATLAB's grainMean
 
 ## Syntax
 
+One value per grain:
+
 ```python
-EBSD.grainMean(ebsd, prop, grains=None, method=<function mean at 0x7f1e6d1b4370>, ulim=inf, llim=-inf)
+meanG = grainMean(ebsd, ebsd.ci, grains)
 ```
+
+The value of its grain at every pixel:
+
+```python
+meanE = grainMean(ebsd, ebsd.ci)
+```
+
+The maximum instead of the mean:
+
+```python
+maxG = grainMean(ebsd, ebsd.ci, grains, np.max)
+```
+
+Only the values above 0.1:
+
+```python
+meanG = grainMean(ebsd, ebsd.ci, grains, llim=0.1)
+```
+
+The grains are those of the grain ids the map carries, which calcGrains stores with it.
+A pixel without a grain and a grain without a value in the range are NaN.
+
+## Input
+
+| | |
+|---|---|
+| `ebsd` | EBSD with grain ids |
+| `prop` | array of a value per pixel, of the shape of the map |
+| `grains` | grain2d, for one value per grain in its order; without it one value per pixel |
+| `method` | the reduction of the values of a grain, a function of an array |
+
+## Output
+
+| | |
+|---|---|
+| `meanProp` | array, a value per grain, or one per pixel of the shape of the map |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `ulim` | `inf` | the largest value taken into the average |
+| `llim` | `-inf` | the smallest value taken into the average |
+
+## See also
+
+[calcGrains](EBSD.calcGrains_py.html), [calcGROD](calcGROD_py.html), [grain2d.meanOrientation](grain2d.meanOrientation_py.html), [GrainOrientationParameters](GrainOrientationParameters_py.html), [GrainSpatialPlots](GrainSpatialPlots_py.html)
 
 MATLAB's [EBSD.grainMean](EBSD.grainMean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L398">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L445">source</a></font>
 {% endraw %}

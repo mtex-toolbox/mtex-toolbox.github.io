@@ -23,5 +23,5 @@ tensor.sqrtm(self)
 
 MATLAB's [tensor.sqrtm](tensor.sqrtm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L501">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L529">source</a></font>
 {% endraw %}

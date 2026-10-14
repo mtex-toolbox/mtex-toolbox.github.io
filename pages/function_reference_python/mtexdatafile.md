@@ -25,7 +25,15 @@ instead of fetching it.
 
 ```python
 fname = mtexdatafile('forsterite')
-tess, oris = mtexdatafile('my100grains')      # a data set of several files
+```
+
+A data set of several files:
+
+```python
+tess, oris = mtexdatafile('my100grains')
+```
+
+```python
 fname = mtexdatafile('forsterite', root=mtexDataPath(), download=False)
 ```
 

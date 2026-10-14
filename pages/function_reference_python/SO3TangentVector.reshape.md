@@ -16,11 +16,13 @@ the tangent vectors in another shape, a reference per element reshaped with them
 ## Syntax
 
 ```python
-SO3TangentVector.reshape(self, *shape)
+v = v.reshape(m, n)
 ```
 
+## Signature
+
 ```python
-v = v.reshape(m, n)
+SO3TangentVector.reshape(self, *shape)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L186">source</a></font>

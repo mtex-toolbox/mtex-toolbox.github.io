@@ -17,11 +17,13 @@ a new axes in the next cell of the layout, the layout and the figure grown when 
 ## Syntax
 
 ```python
-mtexFigure.nextAxis(self)
+ax = mtexFig.nextAxis()
 ```
 
+## Signature
+
 ```python
-ax = mtexFig.nextAxis()
+mtexFigure.nextAxis(self)
 ```
 
 ## Used on
@@ -30,5 +32,5 @@ ax = mtexFig.nextAxis()
 
 MATLAB's [mtexFigure.nextAxis](mtexFigure.nextAxis.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L101">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L129">source</a></font>
 {% endraw %}

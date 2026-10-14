@@ -17,14 +17,16 @@ stage, which every verb rewrites
 ## Syntax
 
 ```python
-simulateEBSD()
-```
-
-```python
 eS = simulateEBSD()
 eS.makeMap()
 eS.addFeature('simpleGradient')
 eS.addNoise()
+```
+
+## Signature
+
+```python
+simulateEBSD()
 ```
 
 ## Used on

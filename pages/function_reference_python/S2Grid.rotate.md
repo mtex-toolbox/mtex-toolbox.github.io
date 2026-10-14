@@ -22,5 +22,5 @@ S2Grid.rotate(self, rot)
 
 MATLAB's [S2Grid.rotate](S2Grid.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L756">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L953">source</a></font>
 {% endraw %}

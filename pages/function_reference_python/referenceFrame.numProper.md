@@ -19,5 +19,5 @@ the number of proper rotations in the point group
 referenceFrame.numProper(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L184">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L207">source</a></font>
 {% endraw %}

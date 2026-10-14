@@ -19,5 +19,5 @@ the Fourier coefficients of the kernel, degrees -L .. L, to its bandwidth by def
 S1Kernel.calcFourier(self, L=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L905">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L943">source</a></font>
 {% endraw %}

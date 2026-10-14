@@ -18,15 +18,17 @@ the angle of every segment to a direction, or to the segments of another boundar
 ## Syntax
 
 ```python
-grainBoundary.angle(self, x)
-```
-
-```python
 omega = gB.angle(vector3d.X)
 omega = angle(gB1, gB2)
 ```
 
+## Signature
+
+```python
+grainBoundary.angle(self, x)
+```
+
 MATLAB's [grainBoundary.angle](grainBoundary.angle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L423">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/boundary.py#L449">source</a></font>
 {% endraw %}

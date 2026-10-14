@@ -17,11 +17,13 @@ the Bagaryatsky orientation relationship between cementite and ferrite, (100) ||
 ## Syntax
 
 ```python
-orientation.Bagaryatsky(csT, csA)
+mori = orientation.Bagaryatsky(csTheta, csAlpha)
 ```
 
+## Signature
+
 ```python
-mori = orientation.Bagaryatsky(csTheta, csAlpha)
+orientation.Bagaryatsky(csT, csA)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L105">source</a></font>

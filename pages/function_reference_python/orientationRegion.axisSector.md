@@ -24,5 +24,5 @@ orientationRegion.axisSector(self, omega, sector='own')
 
 MATLAB's [orientationRegion.axisSector](orientationRegion.axisSector.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L94">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L120">source</a></font>
 {% endraw %}

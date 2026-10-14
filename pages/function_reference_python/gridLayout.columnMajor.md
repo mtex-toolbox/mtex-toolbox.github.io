@@ -19,5 +19,5 @@ the layout with the first index along y, the second along x, MATLAB's images
 gridLayout.columnMajor()
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L46">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L67">source</a></font>
 {% endraw %}

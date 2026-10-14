@@ -13,5 +13,5 @@ A property of [S2VectorFieldHarmonic](S2VectorFieldHarmonic_index_py.html).
 
 the harmonic degree up to which the components are expanded
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L244">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L270">source</a></font>
 {% endraw %}

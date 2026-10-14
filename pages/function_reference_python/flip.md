@@ -17,6 +17,13 @@ flip(x, ...) is x.flip(...), the method of the object passed
 flip(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [grain3Boundary](grain3Boundary.flip_py.html) | the two sides exchanged, of all faces or a selection, as MATLAB's flip |
+| [grainBoundary](grainBoundary.flip_py.html) | swap the two sides of the segments marked, or of all of them, and walk the chains again |
+
 ## Used on
 
 [BoundaryCurvature](BoundaryCurvature_py.html)

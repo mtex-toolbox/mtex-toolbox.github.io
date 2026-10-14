@@ -16,13 +16,15 @@ the figure has bars; a MATLAB location as the first argument
 ## Syntax
 
 ```python
-mtexColorbar(fig=None, title=None, **kwargs)
-```
-
-```python
 mtexColorbar()
 mtexColorbar('southoutside', title='mrd')
 mtexColorbar('multiple')
+```
+
+## Signature
+
+```python
+mtexColorbar(fig=None, title=None, **kwargs)
 ```
 
 ## Used on
@@ -31,5 +33,5 @@ mtexColorbar('multiple')
 
 MATLAB's [mtexColorbar](mtexColorbar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L496">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L538">source</a></font>
 {% endraw %}

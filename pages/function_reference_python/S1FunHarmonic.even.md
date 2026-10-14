@@ -16,5 +16,5 @@ f(x) = f(-x): c_{-k} = c_k
 
 MATLAB's [S1FunHarmonic.even](S1FunHarmonic.even.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L132">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L200">source</a></font>
 {% endraw %}

@@ -14,6 +14,8 @@ the grain boundary of a map: the segments F between the vertices V in walk order
 its two grains, pixels, phases and misrotation, the grain in grainId[:, 0] to the left of the
 walk; chains, junctions and triple points are derived from that order
 
+## Syntax
+
 ```python
 gB = grains.boundary
 gB['Forsterite', 'Enstatite']
@@ -27,8 +29,9 @@ gB.segLength, gB.misorientation
 | [allV](grainBoundary.allV_py.html) | the vertices as framed points of the specimen, all of them and the ones in use |
 | [angle](grainBoundary.angle_py.html) | the angle of every segment to a direction, or to the segments of another boundary, in [0, pi/2], the segments having no sense |
 | [arcLength](grainBoundary.arcLength_py.html) | the length along the chain up to the end of each segment |
-| [calcGBND](grainBoundary.calcGBND_py.html) | calcGBND(gB, ebsd, halfwidth=5*degree, nonneg=True): the density of the boundary normals in the crystal frame of the one phase of gB |
+| [calcGBND](grainBoundary.calcGBND_py.html) | the grain boundary normal distribution in the crystal frame, estimated from the traces of the boundaries in a planar section |
 | [calcMeanDirection](grainBoundary.calcMeanDirection_py.html) | the direction of a segment averaged over 2n + 1 of them along the chain: the chord across a window, clamped at the end of an open chain and shorter than a closed one |
+| [cat](grainBoundary.cat_py.html) | the segments of several parts of one boundary, MATLAB's [gB1, gB2]: the parts share the vertices of the boundary they were taken from |
 | [chainId](grainBoundary.chainId_py.html) | the chain of every segment, counted from 0, from the walk order and the junctions: a chain breaks where the head of one segment is not the tail of the next, and at a junction (MATLAB counts the chains from 1) |
 | [chainLength](grainBoundary.chainLength_py.html) | the length of the chain of every segment |
 | [chainNeighbors](grainBoundary.chainNeighbors_py.html) | the segment before and after each one along its chain: a closed chain wraps its two ends onto each other, an open one clamps them, so a filter along the chain does not spread the undefined end |
@@ -54,14 +57,14 @@ gB.segLength, gB.misorientation
 | [midPoint](grainBoundary.midPoint_py.html) | the midpoint of every segment, a direction of the map as MATLAB's is |
 | [misorientation](grainBoundary.misorientation_py.html) | the misorientations of the boundary, which needs one pair of phases in one order throughout, with the grain exchange symmetry where both sides are one phase |
 | [perimeter](grainBoundary.perimeter_py.html) | the total length of the boundary, the sum of the segment lengths |
-| [plot](grainBoundary.plot_py.html) | plot(gB), plot(gB, values), plot(gB, rgb), plot(gB, lineColor='r', lineWidth=2) |
+| [plot](grainBoundary.plot_py.html) | the grain boundary segments, in one colour or coloured segment by segment |
 | [quiver](grainBoundary.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
-| [reduce](grainBoundary.reduce_py.html) | keep every n-th vertex along each chain, whatever the shape: it thins a straight run and a corner alike, so prefer simplify, which spends its vertices where the shape needs them |
+| [reduce](grainBoundary.reduce_py.html) | the boundary coarsened by keeping every n-th vertex along each chain, whatever the shape |
 | [refine](grainBoundary.refine_py.html) | split every segment into pieces of about length delta: the old vertices stay where they are and the new ones lie on the old segments, so the boundary keeps its shape and its length and only the sampling gets finer, which gives a smoothing that follows evenly spaced degrees of freedom |
 | [rotate](grainBoundary.rotate_py.html) | rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method |
 | [segLength](grainBoundary.segLength_py.html) | the length of every segment |
 | [selectByGrainId](grainBoundary.selectByGrainId_py.html) | the segments with a grain of the list on either side, walked again: a junction of the whole boundary may have lost its third segment, so the chains of the subset are longer |
-| [simplify](grainBoundary.simplify_py.html) | drop the vertices that carry no shape, chain by chain: a vertex goes when leaving it out moves the boundary by less than epsilon, which on a pixel grid turns a staircase into the straight line it approximates |
+| [simplify](grainBoundary.simplify_py.html) | the boundary with the vertices dropped that carry no shape, Douglas-Peucker chain by chain |
 | [size](grainBoundary.size_py.html) | the number of segments |
 | [subsref](grainBoundary.subsref_py.html) |  |
 | [surfor](grainBoundary.surfor_py.html) | the cumulative projection length of the boundary segments (Panozzo 1984): a projection is a dot product, the segment vector projected onto the direction, so no angle is formed and none has to be folded into [0, pi) |

@@ -10,18 +10,57 @@ counterpart: calcGBNDKernel.html
 status: Reference
 ---
 {% raw %}
-calcGBNDKernel(halfwidth=10*degree, nonneg=True): the kernel Psi of the inclination, a
-function of the cosine to the trace, normalised so that a uniform distribution of planes
-gives one, and the spherical function psi(v) = Psi(v.z) sin(angle(v, x)) it is applied as;
-without nonneg or bump Psi is the solution of the integral equation that makes the density
-of the normals the de la Vallee Poussin kernel of that halfwidth, or the S2Kernel given
-in its place
+the kernel of the inclination of a boundary plane about its trace, the one calcGBND
+convolves with
 
 ## Syntax
 
+The kernel of halfwidth 10 degree:
+
 ```python
-calcGBNDKernel(halfwidth=10*degree, nonneg=False, bump=False)
+Psi, psi = calcGBNDKernel()
 ```
+
+A nonnegative kernel of another halfwidth:
+
+```python
+Psi, psi = calcGBNDKernel(5*degree, nonneg=True)
+```
+
+The kernel for a given density kernel:
+
+```python
+Psi, psi = calcGBNDKernel(S2DeLaValleePoussinKernel(halfwidth=10*degree))
+```
+
+A trace in a section leaves the inclination of the plane open. Psi is a function of the
+cosine t between a normal and the trace, and psi(v) = Psi(v.z) sin(angle(v, x)) is the
+spherical function it is applied as, for a trace along z in a section with normal x. Both
+are normalised so that a uniform distribution of planes gives one.
+
+By default Psi solves the integral equation that makes the density of the normals the de
+la Vallee Poussin kernel of the halfwidth, or the S2Kernel given in its place; that
+solution may be negative. nonneg takes a Gaussian in t instead, bump the indicator of
+|t| < sin(halfwidth).
+
+## Output
+
+| | |
+|---|---|
+| `Psi` | S2Kernel, or S2KernelHandle with nonneg or bump, the kernel of the inclination |
+| `psi` | S2FunHarmonic, the spherical function of a trace along z, antipodal |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `halfwidth` | `10*degree` | the halfwidth of the kernel, or an S2Kernel, the density of the normals the kernel of the inclination is to give |
+| `nonneg` | `False` | a nonnegative kernel, a Gaussian in the cosine to the trace |
+| `bump` | `False` | a bump kernel, one within the halfwidth and zero outside |
+
+## See also
+
+[calcGBND](grain3Boundary.calcGBND_py.html), [S2DeLaValleePoussinKernel](S2DeLaValleePoussinKernel_index_py.html)
 
 MATLAB's [calcGBNDKernel](calcGBNDKernel.html)
 

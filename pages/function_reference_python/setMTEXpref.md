@@ -16,13 +16,15 @@ it holds in every later session
 ## Syntax
 
 ```python
-setMTEXpref(name, value, save=False)
-```
-
-```python
 setMTEXpref('maxS2Bandwidth', 256)
 setMTEXpref('kernels', 'numpy')
 setMTEXpref('displayRows', 40, save=True)
+```
+
+## Signature
+
+```python
+setMTEXpref(name, value, save=False)
 ```
 
 ## Used on

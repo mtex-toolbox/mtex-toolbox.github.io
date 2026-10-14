@@ -19,5 +19,5 @@ the number of rows and columns of the image
 mapImage.gridSize(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L182">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L203">source</a></font>
 {% endraw %}

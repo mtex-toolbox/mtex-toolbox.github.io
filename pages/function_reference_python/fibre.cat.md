@@ -17,12 +17,19 @@ the fibres joined into one list along an axis
 ## Syntax
 
 ```python
-fibre.cat(*fibres, axis=0)
+f = cat(f1, f2)
 ```
 
+Side by side:
+
 ```python
-f = cat(f1, f2)
-f = cat(f1, f2, axis=1)    # side by side
+f = cat(f1, f2, axis=1)
+```
+
+## Signature
+
+```python
+fibre.cat(*fibres, axis=0)
 ```
 
 MATLAB's [fibre.cat](fibre.cat.html)

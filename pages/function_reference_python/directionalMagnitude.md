@@ -18,5 +18,5 @@ on every index, without v the function on the sphere
 directionalMagnitude(T, v=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1228">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1448">source</a></font>
 {% endraw %}

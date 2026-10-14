@@ -18,11 +18,13 @@ orientation list
 ## Syntax
 
 ```python
-SO3Grid(rot, frameA, frameB, alphabeta, alpha, beta, gammaPoints, offset, gammaMin, gammaPeriod, resolution, center=None)
+S3G = equispacedSO3Grid(cs, ss, resolution=5*degree)
 ```
 
+## Signature
+
 ```python
-S3G = equispacedSO3Grid(cs, ss, resolution=5*degree)
+SO3Grid(rot, frameA, frameB, alphabeta, alpha, beta, gammaPoints, offset, gammaMin, gammaPeriod, resolution, center=None)
 ```
 
 MATLAB's [SO3Grid.SO3Grid](SO3Grid.SO3Grid.html)

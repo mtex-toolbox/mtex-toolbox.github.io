@@ -25,15 +25,34 @@ of titanium is 5/2 within delta = 0.01)
 
 ## Syntax
 
-```python
-CSL(sigma, CS, *args, delta=0)
-```
+The twin of a cubic lattice:
 
 ```python
-mori = CSL(3, cs)                # the twin of a cubic lattice
-mori = CSL([3, 5, 7], cs)        # several orders at once
-mori = CSL(sigma, cs, 'I')       # of the lattice centred I
-mori = CSL(7, cs, delta=0.01)    # near coincidences within a misfit of the metric
+mori = CSL(3, cs)
+```
+
+Several orders at once:
+
+```python
+mori = CSL([3, 5, 7], cs)
+```
+
+Of the lattice centred I:
+
+```python
+mori = CSL(sigma, cs, 'I')
+```
+
+Near coincidences within a misfit of the metric:
+
+```python
+mori = CSL(7, cs, delta=0.01)
+```
+
+## Signature
+
+```python
+CSL(sigma, CS, *args, delta=0)
 ```
 
 ## Used on

@@ -18,11 +18,13 @@ cell outside the grid
 ## Syntax
 
 ```python
-EBSD.cube2hex(ebsd, x, y, z)
+row, col = cube2hex(ebsd, x, y, z)
 ```
 
+## Signature
+
 ```python
-row, col = cube2hex(ebsd, x, y, z)
+EBSD.cube2hex(ebsd, x, y, z)
 ```
 
 MATLAB's [EBSDhex.cube2hex](EBSDhex.cube2hex.html)

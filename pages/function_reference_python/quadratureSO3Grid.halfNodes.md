@@ -21,5 +21,5 @@ onto all nodes. None where the groups have no such axis
 quadratureSO3Grid.halfNodes(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L229">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L251">source</a></font>
 {% endraw %}

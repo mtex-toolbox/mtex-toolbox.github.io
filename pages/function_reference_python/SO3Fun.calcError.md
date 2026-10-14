@@ -14,15 +14,32 @@ the error between a measurement and a recalculation, or between two SO(3) functi
 
 ## Syntax
 
+One number per pole figure, PoleFigure.calcError:
+
 ```python
-calcError(a, b, *args, **kwargs)
+e = calcError(pf, odf)
+```
+
+The same, in MATLAB's order:
+
+```python
+e = calcError(odf, pf, 'RP')
+```
+
+'l1':
+
+```python
+e = calcError(odf1, odf2)
 ```
 
 ```python
-e = calcError(pf, odf)  # one number per pole figure, PoleFigure.calcError
-e = calcError(odf, pf, 'RP')  # the same, in MATLAB's order
-e = calcError(odf1, odf2)  # 'l1'
 e = calcError(odf1, odf2, 'l2', resolution=2.5*degree)
+```
+
+## Signature
+
+```python
+calcError(a, b, *args, **kwargs)
 ```
 
 ## Used on
@@ -31,5 +48,5 @@ e = calcError(odf1, odf2, 'l2', resolution=2.5*degree)
 
 MATLAB's [SO3Fun.calcError](SO3Fun.calcError.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L618">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L684">source</a></font>
 {% endraw %}

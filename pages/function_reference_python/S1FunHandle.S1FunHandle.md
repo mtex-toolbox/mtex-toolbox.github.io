@@ -15,12 +15,14 @@ a function on the circle given by a callable that receives angles
 ## Syntax
 
 ```python
-S1FunHandle(fun, *, bandwidth=None, real=True)
-```
-
-```python
 S1FunHandle(fun)
 S1FunHandle(fun, bandwidth=L)     the bandwidth of its harmonic form
+```
+
+## Signature
+
+```python
+S1FunHandle(fun, *, bandwidth=None, real=True)
 ```
 
 ## Used on
@@ -29,5 +31,5 @@ S1FunHandle(fun, bandwidth=L)     the bandwidth of its harmonic form
 
 MATLAB's [S1FunHandle.S1FunHandle](S1FunHandle.S1FunHandle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L536">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L603">source</a></font>
 {% endraw %}

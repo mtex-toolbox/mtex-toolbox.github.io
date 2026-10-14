@@ -18,16 +18,25 @@ marks a misorientation with grain exchange
 
 ## Syntax
 
+An orientation:
+
+```python
+ori = orientation.byAxisAngle(v, omega, cs, ss)
+```
+
+A misorientation about the crystal direction h:
+
+```python
+mori = orientation.byAxisAngle(h, omega)
+```
+
+## Signature
+
 ```python
 orientation.byAxisAngle(v, omega, *frames, antipodal=False)
 ```
 
-```python
-ori = orientation.byAxisAngle(v, omega, cs, ss)     # an orientation
-mori = orientation.byAxisAngle(h, omega)            # a misorientation about the crystal direction h
-```
-
 MATLAB's [orientation.byAxisAngle](orientation.byAxisAngle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L142">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L188">source</a></font>
 {% endraw %}

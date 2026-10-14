@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 sections through orientation space
 
+## Syntax
+
 ```python
 oS.frameA, oS.frameB       the two frames
 oS.tol               the tolerance an orientation may deviate from a section

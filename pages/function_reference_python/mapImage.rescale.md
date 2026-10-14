@@ -12,16 +12,59 @@ status: Reference
 {% raw %}
 A method of [mapImage](mapImage_index_py.html).
 
-the values stretched to [lo, hi], all channels of an image together or each on its own; a
-non finite value is left out of the range and left alone, a flat image unchanged
+the values of one or more images stretched to a common range; MATLAB's rescale of a mapImage
 
 ## Syntax
 
+To [0, 1]:
+
 ```python
-mapImage.rescale(mg, lo=0.0, hi=1.0, perChannel=False)
+mg = rescale(mg)
 ```
+
+To another range:
+
+```python
+mg = rescale(mg, -1, 1)
+```
+
+Every channel on its own:
+
+```python
+mg = rescale(mg, perChannel=True)
+```
+
+Cross correlation compares pictures of different detectors, whose absolute levels mean
+nothing to each other, so putting them on one range is the usual first step. Each image is
+rescaled on its own, all its channels together, which keeps the colour balance. A non finite
+value is left out of the range and left alone, so the padding of a resampling stays NaN; a
+flat image is returned unchanged.
+
+## Input
+
+| | |
+|---|---|
+| `mg` | mapImage or mapImageList |
+| `lo` | the lower end of the range |
+| `hi` | the upper end of the range |
+
+## Output
+
+| | |
+|---|---|
+| `mg` | the images rescaled, new objects |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `perChannel` | `False` | rescale every channel separately |
+
+## See also
+
+[mapImage](mapImage_index_py.html), [mapImageList](mapImageList_index_py.html), [trueEbsd](trueEbsd_index_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
 
 MATLAB's [mapImage.rescale](mapImage.rescale.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L406">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L467">source</a></font>
 {% endraw %}

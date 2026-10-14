@@ -22,5 +22,5 @@ a[ind]
 
 MATLAB's [EBSD.subsref](EBSD.subsref.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L279">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L307">source</a></font>
 {% endraw %}

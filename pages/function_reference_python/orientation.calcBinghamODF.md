@@ -27,5 +27,5 @@ calcBinghamODF(o, weights=None, exact=False)
 
 MATLAB's [orientation.calcBinghamODF](orientation.calcBinghamODF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L328">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/bingham.py#L358">source</a></font>
 {% endraw %}

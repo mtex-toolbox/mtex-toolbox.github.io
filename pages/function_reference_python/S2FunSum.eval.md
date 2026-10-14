@@ -19,5 +19,5 @@ the sum of the values of the summands at the directions x
 S2FunSum.eval(self, x)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L501">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L568">source</a></font>
 {% endraw %}

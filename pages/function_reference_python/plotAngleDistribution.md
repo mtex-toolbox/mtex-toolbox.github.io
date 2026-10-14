@@ -10,13 +10,77 @@ counterpart: plotAngleDistribution.html
 status: Reference
 ---
 {% raw %}
-plotAngleDistribution(mori), plotAngleDistribution(cs1, cs2), plotAngleDistribution(mdf)
+the distribution of the misorientation angles: a histogram of a list of
+misorientations, a curve of a misorientation distribution function or of two random phases
 
 ## Syntax
 
+Histogram of boundary misorientations:
+
 ```python
-plotAngleDistribution(obj, *args, figSize=None, resolution=5*degree, numBins=None, percent=False, displayName=None, **kw)
+plotAngleDistribution(gB.misorientation)
 ```
+
+Narrower bins:
+
+```python
+plotAngleDistribution(mori, resolution=2*degree)
+```
+
+Angle distribution of an MDF:
+
+```python
+plotAngleDistribution(mdf)
+```
+
+Uncorrelated angle distribution of two phases:
+
+```python
+plotAngleDistribution(cs1, cs2)
+```
+
+With a legend entry:
+
+```python
+plotAngleDistribution(cs1, cs1, displayName='uncorrelated')
+```
+
+A list of misorientations is drawn as bars, the percentage of the misorientations in each
+bin; the bins run from 0 to the largest misorientation angle the two symmetries allow, or
+to the largest angle present when it is below half of that. A misorientation distribution
+function, or the distribution of uncorrelated orientations of two frames, is drawn as a
+curve, in multiples of the random distribution. Drawn into held axes holding a histogram,
+a list takes the same bins and a curve is scaled to percent of a bin, so that the two
+compare; each new bar set or curve takes the next of MTEX's colours. Other keywords
+(color, lineWidth, ...) go to matplotlib's bar or plot.
+
+## Input
+
+| | |
+|---|---|
+| `mori` | misorientation, a list of misorientations |
+| `mdf` | SO3Fun, a misorientation distribution function |
+| `cs1, cs2` | crystalFrame, the two phases |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the bar container of the histogram, or the line of the curve |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `figSize` | `None` | the size of a new figure, 'small', 'normal', 'large', ... |
+| `resolution` | `5*degree` | the width of the bins, in radians |
+| `numBins` | `None` | the number of bin edges instead of the resolution |
+| `percent` | `False` | draw a curve in percent instead of multiples of the random distribution |
+| `displayName` | `None` | the name of the bars or the curve in a legend |
+
+## See also
+
+[plotAxisDistribution](plotAxisDistribution_py.html), [calcAngleDistribution](SO3Fun.calcAngleDistribution_py.html), [MisorientationDistributionFunction](MisorientationDistributionFunction_py.html), [MisorientationTheory](MisorientationTheory_py.html)
 
 ## Used on
 

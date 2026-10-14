@@ -18,14 +18,26 @@ findByLocation, or grains[x, y]
 
 ## Syntax
 
+By a rectangle:
+
 ```python
-grain2d.inpolygon(self, region)
+ind = grains.inpolygon([xmin, ymin, dx, dy])
+```
+
+By a polygon:
+
+```python
+ind = inpolygon(grains, [[x1, y1], [x2, y2], [x3, y3]])
 ```
 
 ```python
-ind = grains.inpolygon([xmin, ymin, dx, dy])                # by a rectangle
-ind = inpolygon(grains, [[x1, y1], [x2, y2], [x3, y3]])     # by a polygon
 grains = grains[ind]
+```
+
+## Signature
+
+```python
+grain2d.inpolygon(self, region)
 ```
 
 MATLAB's [grain2d.inpolygon](grain2d.inpolygon.html)

@@ -26,5 +26,5 @@ mtexFigure.drawNow(self, figSize=None)
 
 MATLAB's [mtexFigure.drawNow](mtexFigure.drawNow.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L298">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L326">source</a></font>
 {% endraw %}

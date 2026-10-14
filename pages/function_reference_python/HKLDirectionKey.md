@@ -13,6 +13,8 @@ status: Reference
 the HKL vendor key on the Laue group: the three primaries blended linearly over the polar
 angle and the azimuth of the fundamental sector
 
+## Syntax
+
 ```python
 key = HKLDirectionKey(cs)
 ```
@@ -26,5 +28,5 @@ key = HKLDirectionKey(cs)
 
 MATLAB's [HKLDirectionKey](HKLDirectionKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L381">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L408">source</a></font>
 {% endraw %}

@@ -20,5 +20,5 @@ convention and kept in the session's name map
 specimenFrame.named(name, axesNames, seed=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L878">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L981">source</a></font>
 {% endraw %}

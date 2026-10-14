@@ -12,6 +12,8 @@ status: Reference
 the interface to Neper, the tessellation program, one per session with its settings: the
 geometry, the morphology, the iterations and the file path the tessellation is written to
 
+## Syntax
+
 ```python
 nep = neper.init()
 grains = nep.simulateGrains(1000, odf)
@@ -26,9 +28,9 @@ grains = nep.simulateGrains(1000, odf)
 | [init](neper.init_py.html) | the one interface of the session, neper.instance() |
 | [instance](neper.instance_py.html) | the one interface of the session, created on first call |
 | [neper](neper.neper_py.html) | the interface to Neper, the tessellation program, one per session with its settings: the geometry, the morphology, the iterations and the file path the tessellation is written to |
-| [simulateChildGrains](neper.simulateChildGrains_py.html) | child lamellae in parent grains: the children of a parent in variants that alternate |
-| [simulateGrains](neper.simulateGrains_py.html) | the grains of a tessellation with one grain per orientation, or n orientations of an ODF |
-| [simulateTwinGrains](neper.simulateTwinGrains_py.html) | twinned lamellae: every second lamella of a host turned by the twin misorientation |
+| [simulateChildGrains](neper.simulateChildGrains_py.html) | a microstructure after a phase transformation: Neper's parent grains cut into lamellae of child variants |
+| [simulateGrains](neper.simulateGrains_py.html) | the grains of a Neper tessellation of the domain, one grain per orientation |
+| [simulateTwinGrains](neper.simulateTwinGrains_py.html) | a microstructure of twinned grains: Neper's grains cut into lamellae, every second lamella in twin orientation |
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/neper.py#L25">source</a></font>
 {% endraw %}

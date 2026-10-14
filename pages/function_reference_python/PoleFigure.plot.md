@@ -23,5 +23,5 @@ PoleFigure.plot(pf, colorRange='individual', bandwidth=None, **kw)
 
 MATLAB's [PoleFigure.plot](PoleFigure.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L259">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L296">source</a></font>
 {% endraw %}

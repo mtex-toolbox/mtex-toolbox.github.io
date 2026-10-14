@@ -12,6 +12,8 @@ status: Reference
 the rotation from a reference orientation as a colour: its axis in the specimen frame
 through the key of the whole sphere, its angle through the saturation (Thomsen et al.)
 
+## Syntax
+
 ```python
 axisAngleColorKey(frameA, frameB, oriRef=..., maxAngle=..., thresholdAngle=...)
 rgb = key.orientation2color(ori)

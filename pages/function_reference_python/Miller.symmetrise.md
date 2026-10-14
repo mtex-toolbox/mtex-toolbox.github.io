@@ -24,5 +24,5 @@ vector3d.symmetrise(self, unique=False, antipodal=None)
 
 MATLAB's [Miller.symmetrise](Miller.symmetrise.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L773">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L970">source</a></font>
 {% endraw %}

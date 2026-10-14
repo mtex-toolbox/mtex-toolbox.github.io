@@ -17,6 +17,12 @@ std(x, ...) is x.std(...), the method of the object passed; NumPy's std for an a
 std(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [quaternion](quaternion.std_py.html) | the mean angular deviation of a list of rotations from their mean |
+
 ## Used on
 
 [OrientationEmbeddings](OrientationEmbeddings_py.html), [MartensiteVariants](MartensiteVariants_py.html)

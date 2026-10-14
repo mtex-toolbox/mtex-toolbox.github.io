@@ -13,5 +13,5 @@ A property of [grain3d](grain3d_index_py.html).
 
 the number of grains
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L95">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L116">source</a></font>
 {% endraw %}

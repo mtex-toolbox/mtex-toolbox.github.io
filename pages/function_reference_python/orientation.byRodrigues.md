@@ -22,5 +22,5 @@ orientation.byRodrigues(v, *frames, antipodal=False)
 
 MATLAB's [orientation.byRodrigues](orientation.byRodrigues.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L164">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L210">source</a></font>
 {% endraw %}

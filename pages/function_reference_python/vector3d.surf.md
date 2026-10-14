@@ -10,15 +10,55 @@ counterpart: vector3d.surf.html
 status: Reference
 ---
 {% raw %}
-surf(sF): the function as the sphere pushed out to |f|, coloured by f, the real part of a
-complex one; a list of functions one panel each; a single real function is first scaled
-to (f - mean) / (max - min) + 1 unless scaling=False, as MATLAB's surf does
+a function on the sphere as a surface in space, the sphere pushed out to |f| and
+coloured by f; MATLAB's S2Fun/surf
 
 ## Syntax
 
+The function as a surface:
+
 ```python
-surf(sF, layout=None, figSize=None, scaling=True, colormap='parula', resolution=5*degree, edgeColor=(0.1, 0.1, 0.1), **kw)
+surf(sF)
 ```
+
+A finer mesh, the values as they are:
+
+```python
+surf(sF, resolution=2*degree, scaling=False)
+```
+
+The radius of the surface in a direction is the absolute value of the function there, the
+colour its value, the real part of a complex function. A single real function is first
+scaled to (f - mean) / (max - min) + 1, as MATLAB does, which shows its shape as an
+ovoid around the unit sphere; scaling=False draws the values as they are. A list of
+functions is drawn one panel each, in a new figure.
+
+## Input
+
+| | |
+|---|---|
+| `sF` | S2Fun, or a list of them |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the Poly3DCollection of the surface, a list of them for a list of functions |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `layout` | `None` | (rows, columns) of the panels of a list of functions |
+| `figSize` | `None` | the size of a new figure, a name such as 'large' or (width, height) in inches |
+| `scaling` | `True` | scale a single real function to an ovoid around the unit sphere |
+| `colormap` | `'parula'` | the colour map of the values |
+| `resolution` | `5*degree` | the spacing of the mesh on the sphere, an angle |
+| `edgeColor` | `(0.1, 0.1, 0.1)` | the colour of the edges of the mesh, 'none' for none |
+
+## See also
+
+[plot3d](S2Fun.plot3d_py.html), [plot](S1Grid.plot_py.html), [S2FunPlotting](S2FunPlotting_py.html)
 
 ## Used on
 
@@ -26,5 +66,5 @@ surf(sF, layout=None, figSize=None, scaling=True, colormap='parula', resolution=
 
 MATLAB's [vector3d.surf](vector3d.surf.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L336">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spaceplot.py#L362">source</a></font>
 {% endraw %}

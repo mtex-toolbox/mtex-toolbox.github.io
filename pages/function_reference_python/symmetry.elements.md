@@ -22,5 +22,5 @@ symmetry.elements(self, multiplicity=None)
 
 MATLAB's [symmetry.elements](symmetry.elements.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L286">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L315">source</a></font>
 {% endraw %}

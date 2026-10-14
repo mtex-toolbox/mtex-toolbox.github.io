@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the orientations of the one indexed phase present, framed by it and by the specimen
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L229">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L257">source</a></font>
 {% endraw %}

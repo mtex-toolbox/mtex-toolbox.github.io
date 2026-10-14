@@ -18,15 +18,30 @@ of that rotational angle about the identity, the angle by inverting its distribu
 
 ## Syntax
 
+One:
+
 ```python
-rotation.rand(*shape, rng=None, maxAngle=None)
+rot = rotation.rand()
 ```
 
 ```python
-rot = rotation.rand()                            # one
 rot = rotation.rand(100)
-rot = rotation.rand(10, 3)                       # a 10 x 3 array
+```
+
+A 10 x 3 array:
+
+```python
+rot = rotation.rand(10, 3)
+```
+
+```python
 rot = rotation.rand(100, maxAngle=10*degree)
+```
+
+## Signature
+
+```python
+rotation.rand(*shape, rng=None, maxAngle=None)
 ```
 
 MATLAB's [rotation.rand](rotation.rand.html)

@@ -14,14 +14,28 @@ a plane <N, v> = d, or a list of them
 
 ## Syntax
 
-```python
-plane3d(N, d=0)
-```
+<N, v> = d:
 
 ```python
-plane = plane3d(N, d)           # <N, v> = d
-plane = plane3d(N, v0)          # through the point v0
-plane = plane3d.byPoints(v)     # fitted through the points v
+plane = plane3d(N, d)
+```
+
+Through the point v0:
+
+```python
+plane = plane3d(N, v0)
+```
+
+Fitted through the points v:
+
+```python
+plane = plane3d.byPoints(v)
+```
+
+## Signature
+
+```python
+plane3d(N, d=0)
 ```
 
 ## Used on

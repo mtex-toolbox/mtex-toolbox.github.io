@@ -19,16 +19,28 @@ distance from the origin
 ## Syntax
 
 ```python
-grain3d.slice(self, plane, P0=None)
+grains2 = grains.slice(plane3d(vector3d.Z, vector3d(0, 0, 0.15)))
 ```
 
+Normal and point:
+
 ```python
-grains2 = grains.slice(plane3d(vector3d.Z, vector3d(0, 0, 0.15)))
-grains2 = grains.slice(vector3d(1, 1, 1), vector3d(0, 0, 0))   # normal and point
-grains2 = grains.slice(vector3d.Z, 0.15)                        # normal and distance
+grains2 = grains.slice(vector3d(1, 1, 1), vector3d(0, 0, 0))
+```
+
+Normal and distance:
+
+```python
+grains2 = grains.slice(vector3d.Z, 0.15)
+```
+
+## Signature
+
+```python
+grain3d.slice(self, plane, P0=None)
 ```
 
 MATLAB's [grain3d.slice](grain3d.slice.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L398">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L438">source</a></font>
 {% endraw %}

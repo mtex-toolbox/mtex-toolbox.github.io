@@ -17,5 +17,5 @@ the plan for a node set on the sphere: the FFT on a Clenshaw-Curtis grid, the NU
 sphericalPlan(nodes, L, real=False)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L722">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L775">source</a></font>
 {% endraw %}

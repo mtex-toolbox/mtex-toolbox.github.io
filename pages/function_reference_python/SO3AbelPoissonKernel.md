@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 the Abel Poisson kernel on SO(3), sum_n (2n+1) kappa^(2n) U_2n(t), kappa in (0, 1)
 
+## Syntax
+
 ```python
 SO3AbelPoissonKernel(0.4)
 SO3AbelPoissonKernel(halfwidth=5*degree)

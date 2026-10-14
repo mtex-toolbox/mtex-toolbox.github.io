@@ -12,18 +12,91 @@ status: Reference
 {% raw %}
 a tensor of rank R in a reference frame, or a list of them
 
-frame= gives the frame as a keyword, name=, unit= and density= are carried along, and
-Kelvin=True reads a 6 x 6 matrix in the Kelvin (Mandel) notation.
+## Syntax
 
+The coefficients in a crystal frame:
 
 ```python
-T = tensor(M, cs)                         # the coefficients, the list dimensions in front
-T = tensor(M, cs, rank=2, name='strain', unit='%')
-T = tensor(v), tensor(rot)                # a vector as a rank one, a rotation as a rank two
-T = tensor(V, rank=4)                     # a 6 x 6 Voigt matrix
-T = tensor(V, rank=4, doubleConvention=True)   # with the factors of two of the compliance
-T.M, T.rank, T.frame, T.CS, T.isSymmetric
+T = tensor(M, cs)
 ```
+
+The rank, a name and a unit:
+
+```python
+T = tensor(M, cs, rank=2, name='strain', unit='%')
+```
+
+A vector as a tensor of rank one:
+
+```python
+T = tensor(v)
+```
+
+A rotation as its matrix, rank two:
+
+```python
+T = tensor(rot)
+```
+
+A 6 x 6 Voigt matrix:
+
+```python
+C = tensor(V, rank=4)
+```
+
+With the factors of two of the compliance:
+
+```python
+S = tensor(V, rank=4, doubleConvention=True)
+```
+
+A matrix in the Kelvin notation:
+
+```python
+C = tensor(V, rank=4, Kelvin=True)
+```
+
+The coefficients M are an array whose last R indices have dimension three, the dimensions
+in front of them the shape of the list; the rank, when not given, is the number of trailing
+dimensions of size three. A 6 x 6 matrix is read as the Voigt matrix of a rank four tensor,
+a 3 x 6 matrix as that of a rank three one. Rotating the tensor, or an orientation acting on
+it, ori * T, transforms the coefficients, which is what the texture averages build on.
+
+The frame is a crystalFrame or a specimenFrame, given positionally or as frame=; without one
+the tensor is in the default specimen frame. T.M gives the coefficients back, T.rank,
+T.frame (T.CS) and T.isSymmetric what they say. The physical tensors, stiffnessTensor,
+complianceTensor, strainTensor, stressTensor, ..., are subclasses fixing the rank and the
+Voigt convention.
+
+## Input
+
+| | |
+|---|---|
+| `M` | array of the coefficients, (..., 3, ..., 3), a Voigt matrix (..., 6, 6), a vector3d or a rotation |
+| `cs` | crystalFrame or specimenFrame the coefficients refer to |
+
+## Output
+
+| | |
+|---|---|
+| `T` | tensor |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `rank` |  | the rank of the tensor, read from the shape of M when not given |
+| `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal, as is usual for the compliance |
+| `frame` |  | the reference frame of the coefficients, instead of giving it positionally |
+| `density` |  | the mass density of the material, carried along (the wave velocities use it) |
+| `unit` |  | the physical unit of the coefficients, a string carried along |
+| `name` |  | the name of the tensor, carried along |
+| `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
+| `dtype` |  | the NumPy type of the coefficients |
+
+## See also
+
+[stiffnessTensor](stiffnessTensor_index_py.html), [strainTensor](strainTensor_index_py.html), [stressTensor](stressTensor_index_py.html), [tensor.rotate](tensor.rotate_py.html), [TensorDefinition](TensorDefinition_py.html)
 
 ## Members
 
@@ -54,7 +127,7 @@ T.M, T.rank, T.frame, T.CS, T.isSymmetric
 | [load](tensor.load_py.html) | stiffnessTensor.load(fname): the tensor of a file as the class it is called on |
 | [logm](tensor.logm_py.html) | the matrix logarithm of a rank two tensor, or of a rank four one through its Kelvin matrix, the class kept |
 | [M](tensor.M_py.html) | the coefficients as an array of shape (..., 3, ..., 3), the rank's indices last |
-| [mean](tensor.mean_py.html) | the mean over the list, or along axes of it, weighted or not |
+| [mean](tensor.mean_py.html) | the mean of a list of tensors, over all of them or along axes, weighted or not |
 | [minus](tensor.minus_py.html) |  |
 | [mrdivide](tensor.mrdivide_py.html) |  |
 | [mtimes](tensor.mtimes_py.html) |  |
@@ -70,7 +143,7 @@ T.M, T.rank, T.frame, T.CS, T.isSymmetric
 | [rotate](tensor.rotate_py.html) | the tensor turned by a rotation, an orthogonal transform or an orientation |
 | [sqrtm](tensor.sqrtm_py.html) | the matrix square root of a rank two tensor, or of a rank four one through its Kelvin matrix, the class kept |
 | [subsref](tensor.subsref_py.html) |  |
-| [sum](tensor.sum_py.html) | the sum of all tensors, or along axes of the array, MATLAB's sum(T, 2) |
+| [sum](tensor.sum_py.html) | the sum of a list of tensors, over all of them or along axes |
 | [svd](tensor.svd_py.html) | the singular value decomposition: of a rank two tensor the left singular vectors, the singular values from the largest and the right singular vectors, T v_k = s_k u_k |
 | [sym](tensor.sym_py.html) | the symmetric and the antisymmetric part, the mean over the permutations of the indices |
 | [symmetrise](tensor.symmetrise_py.html) | the mean over the group of the frame, and whether the tensor is invariant under it |

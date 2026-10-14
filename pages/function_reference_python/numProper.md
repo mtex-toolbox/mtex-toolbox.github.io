@@ -17,6 +17,13 @@ numProper(x, ...) is x.numProper(...), the method of the object passed
 numProper(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [referenceFrame](referenceFrame.numProper_py.html) | the number of proper rotations in the point group |
+| [symmetry](symmetry.numProper_py.html) | the number of proper rotations of the group |
+
 ## Used on
 
 [SpecimenSymmetry](SpecimenSymmetry_py.html)

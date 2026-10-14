@@ -18,5 +18,5 @@ scaled to the unit box, evaluated at the rows of grid; the density and the bandw
 kdeN(X, grid, gam=None, rng=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kde.py#L182">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kde.py#L214">source</a></font>
 {% endraw %}

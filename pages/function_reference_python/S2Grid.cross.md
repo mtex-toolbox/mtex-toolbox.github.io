@@ -23,5 +23,5 @@ S2Grid.cross(self, other)
 
 MATLAB's [S2Grid.cross](S2Grid.cross.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L576">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L683">source</a></font>
 {% endraw %}

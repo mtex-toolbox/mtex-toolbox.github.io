@@ -15,5 +15,5 @@ MATLAB's view of the grid: the nodes that differ under the symmetries, on which 
 evaluator need be called, and the full grid; two nodes are one when their symmetric
 equivalents coincide, the largest equivalent quaternion up to sign the key
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L155">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L177">source</a></font>
 {% endraw %}

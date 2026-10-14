@@ -22,5 +22,5 @@ S2Grid.polar(self)
 
 MATLAB's [S2Grid.polar](S2Grid.polar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L71">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L92">source</a></font>
 {% endraw %}

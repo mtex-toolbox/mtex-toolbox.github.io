@@ -12,6 +12,8 @@ status: Reference
 the plane of a set of positions with an orthonormal frame: the normal fitted and pointing up,
 e1 the given direction projected into the plane, the origin the specimen origin's foot on it
 
+## Syntax
+
 ```python
 plane = mapPlane(pos)
 plane.to2d(xyz), plane.from2d(xy)

@@ -15,13 +15,15 @@ two frames, the specimen frame the default second
 ## Syntax
 
 ```python
-eulerRegion(frA, frB=None)
-```
-
-```python
 maxPhi1, maxPhi, maxPhi2 = eulerRegion(cs)
 eulerRegion(cs1, cs2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L300">source</a></font>
+## Signature
+
+```python
+eulerRegion(frA, frB=None)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L326">source</a></font>
 {% endraw %}

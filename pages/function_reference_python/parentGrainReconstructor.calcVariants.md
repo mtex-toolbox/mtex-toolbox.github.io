@@ -28,5 +28,5 @@ parentGrainReconstructor.calcVariants(self, **options)
 
 MATLAB's [parentGrainReconstructor.calcVariants](parentGrainReconstructor.calcVariants.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L903">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L1085">source</a></font>
 {% endraw %}

@@ -18,5 +18,5 @@ folded into it all land inside, and it covers the share of one element; cached
 tilesSphere(sR, pg, n=6000)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L349">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L393">source</a></font>
 {% endraw %}

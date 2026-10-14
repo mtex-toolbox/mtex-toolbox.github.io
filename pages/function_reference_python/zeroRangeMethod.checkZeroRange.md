@@ -18,15 +18,17 @@ one of their symmetric poles; with i, which directions the i-th pole figure is z
 ## Syntax
 
 ```python
-zeroRangeMethod.checkZeroRange(self, x, i=None)
-```
-
-```python
 zrm.checkZeroRange(ori)
 zrm.checkZeroRange(v, i)
 ```
 
+## Signature
+
+```python
+zeroRangeMethod.checkZeroRange(self, x, i=None)
+```
+
 MATLAB's [zeroRangeMethod.checkZeroRange](zeroRangeMethod.checkZeroRange.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L134">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L159">source</a></font>
 {% endraw %}

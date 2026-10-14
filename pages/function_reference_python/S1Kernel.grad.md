@@ -19,5 +19,5 @@ the derivative -2 sum_k k c_k sin(kx)
 S1Kernel.grad(self, x=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L955">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L993">source</a></font>
 {% endraw %}

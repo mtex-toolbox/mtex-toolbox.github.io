@@ -13,6 +13,8 @@ status: Reference
 rotations, unit quaternions with q and -q one rotation; numbers are normalised, a point group
 or a frame gives its elements, an improper orthogonalTransform is refused
 
+## Syntax
+
 ```python
 rotation(a, b, c, d)
 rotation(q)
@@ -25,7 +27,7 @@ rotation(cs)
 |---|---|
 | [byAxisAngle](rotation.byAxisAngle_py.html) | the rotations by the angle omega about the axis v |
 | [byCubochoric](rotation.byCubochoric_py.html) | the rotations of cubochoric vectors |
-| [byEuler](rotation.byEuler_py.html) | the rotations of the Euler angles, Bunge's ZXZ convention unless a convention is named ('Bunge', 'ZXZ', 'Matthies', 'ZYZ', 'ABG', 'Roe', 'Kocks', 'Canova') |
+| [byEuler](rotation.byEuler_py.html) | rotations defined by Euler angles |
 | [byHomochoric](rotation.byHomochoric_py.html) | the rotations of homochoric vectors |
 | [byMatrix](rotation.byMatrix_py.html) | a proper orthogonal matrix, or a list of them on the leading axes |
 | [byRodrigues](rotation.byRodrigues_py.html) | the rotations of Rodrigues vectors, the axes scaled by tan(omega/2) |
@@ -53,7 +55,7 @@ rotation(cs)
 | [times](rotation.times_py.html) |  |
 | [transpose](rotation.transpose_py.html) | the transpose of the leading axes |
 | [uminus](rotation.uminus_py.html) |  |
-| [unique](rotation.unique_py.html) | the quaternions with those equal up to the tolerance in the coefficients removed |
+| [unique](rotation.unique_py.html) | the disjoint list of quaternions, those equal up to a tolerance in the coefficients taken as one |
 
 ## Used on
 
@@ -61,5 +63,5 @@ rotation(cs)
 
 MATLAB's [rotation_index](rotation_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L399">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L479">source</a></font>
 {% endraw %}

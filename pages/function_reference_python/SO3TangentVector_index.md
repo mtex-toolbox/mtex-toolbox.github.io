@@ -12,6 +12,8 @@ status: Reference
 a tangent vector of SO(3), a rotation vector v at a reference rotation or orientation, on the
 left, exp(v) * oriRef, or on the right, oriRef * exp(v); from vectors or skew matrices
 
+## Syntax
+
 ```python
 SO3TangentVector(v, oriRef)
 SO3TangentVector(v, oriRef, 'right')
@@ -39,8 +41,8 @@ SO3TangentVector(S, oriRef, side)      from skew matrices of shape (..., 3, 3)
 | [mtimes](SO3TangentVector.mtimes_py.html) |  |
 | [plot](SO3TangentVector.plot_py.html) | plot(x, ...) draws x as its kind is drawn |
 | [plus](SO3TangentVector.plus_py.html) |  |
-| [quiver3](SO3TangentVector.quiver3_py.html) | quiver3d(t): a tangent vector as an arrow at its reference in orientation space, in the coordinates of the held axes or axis angle space |
-| [quiverSection](SO3TangentVector.quiverSection_py.html) | quiver(ori, w) on a section plot: an arrow along w at every orientation, w a specimen direction per orientation |
+| [quiver3](SO3TangentVector.quiver3_py.html) | arrows in space: tangent vectors in orientation space, a field on the sphere or SO(3), or arrows at positions |
+| [quiverSection](SO3TangentVector.quiverSection_py.html) | arrows on a section plot: of a function on the sphere along one of its circles, or at orientations in the sections of orientation space |
 | [rdivide](SO3TangentVector.rdivide_py.html) |  |
 | [reshape](SO3TangentVector.reshape_py.html) | the tangent vectors in another shape, a reference per element reshaped with them |
 | [right](SO3TangentVector.right_py.html) | the vectors on the right side, turned by the inverse reference where they are on the left |
@@ -52,7 +54,7 @@ SO3TangentVector(S, oriRef, side)      from skew matrices of shape (..., 3, 3)
 | [T](SO3TangentVector.T_py.html) | the transposed array of tangent vectors, a reference per element transposed with them |
 | [times](SO3TangentVector.times_py.html) |  |
 | [toSide](SO3TangentVector.toSide_py.html) | the vectors on the side asked for, 'left' or 'right' |
-| [unique](SO3TangentVector.unique_py.html) | the distinct tangent vectors at one shared reference up to a tolerance, in order of first appearance |
+| [unique](SO3TangentVector.unique_py.html) | the disjoint list of tangent vectors at one shared reference |
 
 ## Used on
 

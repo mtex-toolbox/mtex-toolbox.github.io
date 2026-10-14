@@ -26,5 +26,5 @@ grain3d.intersected(self, plane, P0=None)
 
 MATLAB's [grain3d.intersected](grain3d.intersected.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L384">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L424">source</a></font>
 {% endraw %}

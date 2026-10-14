@@ -12,6 +12,8 @@ status: Reference
 how a reference frame is laid out on screen: one rotation taking the screen axes to the
 reference axes, east = rot * x, north = rot * y, outOfScreen = rot * z
 
+## Syntax
+
 ```python
 pC = plottingConvention(outOfScreen, east)
 pC = plottingConvention('y↑→x')      each axis next to the screen direction it points to

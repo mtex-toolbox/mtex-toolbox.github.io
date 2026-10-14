@@ -14,6 +14,8 @@ the criterion of a threshold on the misorientation angle: one angle, or a high a
 angle threshold, the pair counting as the share of the levels it stays below; byPhase gives
 a phase thresholds of its own
 
+## Syntax
+
 ```python
 gbcAngle(10*degree)
 gbcAngle([10*degree, 2*degree])

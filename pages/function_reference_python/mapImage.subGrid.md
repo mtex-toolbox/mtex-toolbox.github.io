@@ -23,5 +23,5 @@ mapImage.subGrid(self, rows, cols=None)
 
 MATLAB's [mapImage.subGrid](mapImage.subGrid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L254">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L275">source</a></font>
 {% endraw %}

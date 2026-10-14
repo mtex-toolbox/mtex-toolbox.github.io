@@ -13,6 +13,8 @@ status: Reference
 the inverse of a transform that knows none in closed form, each preimage found by fixed point
 iteration to the tolerance tol relative to the extent of the positions
 
+## Syntax
+
 ```python
 Tinv = spatialTransformInverse(T, tol=1e-10, maxIter=100)
 ```
@@ -29,5 +31,5 @@ Tinv = spatialTransformInverse(T, tol=1e-10, maxIter=100)
 
 MATLAB's [spatialTransformInverse](spatialTransformInverse.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L710">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L781">source</a></font>
 {% endraw %}

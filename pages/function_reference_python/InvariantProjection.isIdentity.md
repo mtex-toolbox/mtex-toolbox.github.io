@@ -13,5 +13,5 @@ A property of [InvariantProjection](InvariantProjection_index_py.html).
 
 whether the projection is the identity, the group acting through the identity alone
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L286">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L313">source</a></font>
 {% endraw %}

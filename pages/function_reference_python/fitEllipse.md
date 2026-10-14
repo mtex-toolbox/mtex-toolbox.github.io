@@ -17,5 +17,11 @@ fitEllipse(x, ...) is x.fitEllipse(...), the method of the object passed
 fitEllipse(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [grain2d](grain2d.fitEllipse_py.html) | the ellipse of the same second moments: its centre and its two half axes |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

@@ -19,5 +19,5 @@ the defocusing factor at t = cos(alpha) of the tilt alpha, 1 at no tilt, infinit
 SchulzDefocusingKernel.eval(self, t)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L832">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L924">source</a></font>
 {% endraw %}

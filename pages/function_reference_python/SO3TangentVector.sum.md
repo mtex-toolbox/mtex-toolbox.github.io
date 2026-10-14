@@ -17,12 +17,14 @@ the sum of tangent vectors at one shared reference, over all or along an axis
 ## Syntax
 
 ```python
-SO3TangentVector.sum(self, axis=None, **kwargs)
-```
-
-```python
 s = sum(v)
 s = sum(v, axis=0)
+```
+
+## Signature
+
+```python
+SO3TangentVector.sum(self, axis=None, **kwargs)
 ```
 
 MATLAB's [SO3TangentVector.sum](SO3TangentVector.sum.html)

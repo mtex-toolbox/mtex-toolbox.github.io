@@ -16,12 +16,14 @@ rotate(x, rot) is x.rotate(rot), or rot * x for an object without that method; '
 ## Syntax
 
 ```python
-rotate(v, rot, *args, **kwargs)
-```
-
-```python
 rotate(ebsd, rot, keepEuler=True)
 rotate(odf, rot, 'right')
+```
+
+## Signature
+
+```python
+rotate(v, rot, *args, **kwargs)
 ```
 
 ## Used on

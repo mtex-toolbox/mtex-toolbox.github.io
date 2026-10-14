@@ -20,5 +20,5 @@ hue and lightness without the hue correction; gray lowers the saturation
 TSLDirectionKey.direction2color(self, h, gray=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L370">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L397">source</a></font>
 {% endraw %}

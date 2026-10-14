@@ -16,13 +16,15 @@ the fundamental region in orientation space of this group, or of the pair with a
 ## Syntax
 
 ```python
-referenceFrame.fundamentalRegion(self, other=None, *, antipodal=False)
-```
-
-```python
 oR = cs.fundamentalRegion()
 oR = cs1.fundamentalRegion(cs2, antipodal=True)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L330">source</a></font>
+## Signature
+
+```python
+referenceFrame.fundamentalRegion(self, other=None, *, antipodal=False)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L374">source</a></font>
 {% endraw %}

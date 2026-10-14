@@ -19,5 +19,5 @@ the index of the nearest point, for any array of angles
 S1Grid.nearest(self, x)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L71">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L90">source</a></font>
 {% endraw %}

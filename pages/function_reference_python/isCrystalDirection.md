@@ -17,5 +17,5 @@ whether v is a vector given in a crystal frame
 isCrystalDirection(v)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L940">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1137">source</a></font>
 {% endraw %}

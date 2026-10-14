@@ -17,11 +17,13 @@ the rotational axis, a unit vector
 ## Syntax
 
 ```python
-quaternion.axis(self)
+v = axis(q)
 ```
 
+## Signature
+
 ```python
-v = axis(q)
+quaternion.axis(self)
 ```
 
 MATLAB's [quaternion.axis](quaternion.axis.html)

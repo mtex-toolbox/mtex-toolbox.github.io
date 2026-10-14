@@ -19,5 +19,5 @@ the colours of directions, red at the pole of the sector, green and blue along i
 HKLDirectionKey.direction2color(self, h, gray=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L400">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L427">source</a></font>
 {% endraw %}

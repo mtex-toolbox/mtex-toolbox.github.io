@@ -13,6 +13,8 @@ the super-Fibonacci grid of orientations, a low-discrepancy quaternion spiral tr
 fundamental region of the frame pair, searched through the quaternion k-d tree; built by
 superfibonacciSO3Grid
 
+## Syntax
+
 ```python
 S3G = superfibonacciSO3Grid(cs, ss, resolution=5*degree)
 ```

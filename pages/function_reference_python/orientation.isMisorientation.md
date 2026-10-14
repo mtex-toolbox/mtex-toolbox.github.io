@@ -16,5 +16,5 @@ whether both frames are crystal frames, so the orientation is a misorientation
 
 MATLAB's [orientation.isMisorientation](orientation.isMisorientation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L242">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L302">source</a></font>
 {% endraw %}

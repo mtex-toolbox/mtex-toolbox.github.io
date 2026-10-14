@@ -18,6 +18,12 @@ characteristicShape(x, ...) is x.characteristicShape(...), the method of the obj
 characteristicShape(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [grainBoundary](grainBoundary.characteristicShape_py.html) | the characteristic shape of a set of boundary segments: every segment and its antipode, sorted by direction and laid end to end, the convex, centrally symmetric outline whose boundary length in each direction is the boundary length the map has in it |
+
 ## Used on
 
 [EllipseBasedParameters](EllipseBasedParameters_py.html), [ProjectionBasedParameters](ProjectionBasedParameters_py.html)

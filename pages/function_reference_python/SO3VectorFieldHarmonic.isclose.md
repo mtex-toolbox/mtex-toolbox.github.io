@@ -19,5 +19,5 @@ whether two fields have the same coefficients on one side up to the relative tol
 SO3VectorFieldHarmonic.isclose(self, w, rtol=1e-08)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L467">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L491">source</a></font>
 {% endraw %}

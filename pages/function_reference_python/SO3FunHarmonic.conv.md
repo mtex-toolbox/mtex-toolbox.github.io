@@ -23,5 +23,5 @@ SO3FunHarmonic.conv(self, g, *, inverse=False)
 
 MATLAB's [SO3FunHarmonic.conv](SO3FunHarmonic.conv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L459">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L519">source</a></font>
 {% endraw %}

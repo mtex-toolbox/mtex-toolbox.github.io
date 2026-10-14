@@ -19,5 +19,5 @@ a copy of the grains with their own table and properties, the boundaries shared
 grain2d.copy(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L380">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L457">source</a></font>
 {% endraw %}

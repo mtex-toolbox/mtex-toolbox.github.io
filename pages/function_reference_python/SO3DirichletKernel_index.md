@@ -12,6 +12,8 @@ status: Reference
 the Dirichlet kernel on SO(3), sum_n (2n+1) U_2n(t) up to the degree N, of integral one:
 the kernel for physical properties
 
+## Syntax
+
 ```python
 SO3DirichletKernel(35)
 SO3DirichletKernel()        N the preference maxSO3Bandwidth

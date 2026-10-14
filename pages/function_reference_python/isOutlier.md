@@ -22,5 +22,5 @@ isOutlier(pf, alpha=2)
 
 [PoleFigureCorrection](PoleFigureCorrection_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L600">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L666">source</a></font>
 {% endraw %}

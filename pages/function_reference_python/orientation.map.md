@@ -23,5 +23,5 @@ orientation.map(u1, v1, *args, antipodal=False)
 
 MATLAB's [orientation.map](orientation.map.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L174">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L220">source</a></font>
 {% endraw %}

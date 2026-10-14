@@ -20,5 +20,5 @@ take the values of their images under the 2-fold axis
 quadratureSO3Grid.fromHalf(self, values)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L238">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L260">source</a></font>
 {% endraw %}

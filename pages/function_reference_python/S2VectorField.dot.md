@@ -22,5 +22,5 @@ S2VectorFieldHarmonic.dot(self, x)
 
 MATLAB's [S2VectorField.dot](S2VectorField.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L334">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L360">source</a></font>
 {% endraw %}

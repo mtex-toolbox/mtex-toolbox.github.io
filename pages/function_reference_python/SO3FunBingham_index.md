@@ -14,6 +14,8 @@ the Bingham distribution on SO(3): the density exp(q' A diag(kappa) A' q) on the
 symmetrised over the crystal and specimen frames, with four concentrations kappa and four
 orthonormal quaternion axes A; BinghamODF builds it from axes, orientations or a fibre
 
+## Syntax
+
 ```python
 SO3FunBingham(kappa, A, cs, ss)
 SO3FunBingham(kappa, A, cs, cs, antipodal=True)      with exchange symmetry
@@ -30,7 +32,7 @@ SO3FunBingham(kappa, A, cs, cs, antipodal=True)      with exchange symmetry
 | [frameB](SO3FunBingham.frameB_py.html) | the frame the orientations map to, the specimen or a second crystal frame |
 | [interpolate](SO3FunBingham.interpolate_py.html) | the function on SO(3) through the values at the orientations, interpolate(nodes, values) |
 | [mean](SO3FunBingham.mean_py.html) | the mean value of the function over SO(3), its weight |
-| [radon](SO3FunBingham.radon_py.html) | the Radon transform: radon(h) the pole figure, in closed form, radon(r=r) the inverse pole figure, radon(h, r) the values |
+| [radon](SO3FunBingham.radon_py.html) | the Radon transform of a Bingham distribution: its pole figure, in closed form, its inverse pole figure, or their values |
 | [rotate](SO3FunBingham.rotate_py.html) | the distribution turned by a rotation, from the left (the specimen side) or, with side='right', from the right (the crystal side) |
 | [SO3FunBingham](SO3FunBingham.SO3FunBingham_py.html) | the Bingham distribution on SO(3): the density exp(q' A diag(kappa) A' q) on the quaternions, symmetrised over the crystal and specimen frames, with four concentrations kappa and four orthonormal quaternion axes A |
 | [times](SO3FunBingham.times_py.html) |  |

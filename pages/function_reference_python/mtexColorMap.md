@@ -14,15 +14,32 @@ mtexColorMap WhiteJet: the colour map of the current figure, or of one figure
 
 ## Syntax
 
+Every axes of the current figure:
+
 ```python
-mtexColorMap(name='WhiteJet', fig=None)
+mtexColorMap('LaboTeX')
 ```
 
 ```python
-mtexColorMap('LaboTeX')            # every axes of the current figure
 mtexColorMap('white2black', mtexFig)
-mtexColorMap(ax, 'hot')            # one axes only
-mtexColorMap(np.array([[1, 1, 1], [0, 0, 1]]))   # an n x 3 matrix of rgb values
+```
+
+One axes only:
+
+```python
+mtexColorMap(ax, 'hot')
+```
+
+An n x 3 matrix of rgb values:
+
+```python
+mtexColorMap(np.array([[1, 1, 1], [0, 0, 1]]))
+```
+
+## Signature
+
+```python
+mtexColorMap(name='WhiteJet', fig=None)
 ```
 
 ## Used on

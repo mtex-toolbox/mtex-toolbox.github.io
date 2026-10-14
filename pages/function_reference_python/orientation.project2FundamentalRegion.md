@@ -25,5 +25,5 @@ orientation.project2FundamentalRegion(self, ref=None, antipodal=False)
 
 MATLAB's [orientation.project2FundamentalRegion](orientation.project2FundamentalRegion.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L379">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L517">source</a></font>
 {% endraw %}

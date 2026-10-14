@@ -23,5 +23,5 @@ complianceTensor.YoungsModulus(T, v=None)
 
 MATLAB's [complianceTensor.YoungsModulus](complianceTensor.YoungsModulus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L182">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/elasticity.py#L233">source</a></font>
 {% endraw %}

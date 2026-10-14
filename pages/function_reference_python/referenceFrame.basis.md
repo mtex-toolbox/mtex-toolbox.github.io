@@ -13,5 +13,5 @@ A property of [referenceFrame](referenceFrame_index_py.html).
 
 the basis vectors of the frame in the canonical Euclidean coordinates, one per row
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L77">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L100">source</a></font>
 {% endraw %}

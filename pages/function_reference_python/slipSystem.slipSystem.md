@@ -17,13 +17,15 @@ an orientation has rotated them
 ## Syntax
 
 ```python
-slipSystem(b, n, CRSS=1)
-```
-
-```python
 sS = slipSystem(b, n)
 sS = slipSystem(b, n, CRSS)
 sS = slipSystem.fcc(cs)
+```
+
+## Signature
+
+```python
+slipSystem(b, n, CRSS=1)
 ```
 
 ## Used on

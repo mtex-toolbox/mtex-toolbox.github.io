@@ -19,5 +19,5 @@ the orientations of homochoric vectors
 orientation.byHomochoric(v, *frames, antipodal=False)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L169">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L215">source</a></font>
 {% endraw %}

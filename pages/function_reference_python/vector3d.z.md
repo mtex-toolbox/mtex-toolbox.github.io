@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 the z coordinates
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L424">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L507">source</a></font>
 {% endraw %}

@@ -23,5 +23,5 @@ SO3VectorFieldHarmonic.inv(self)
 
 MATLAB's [SO3VectorField.inv](SO3VectorField.inv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L512">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L536">source</a></font>
 {% endraw %}

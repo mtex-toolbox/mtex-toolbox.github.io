@@ -23,5 +23,5 @@ sphericalRegion.boundary(self, resolution=1*degree)
 
 MATLAB's [sphericalRegion.boundary](sphericalRegion.boundary.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L164">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/sphericalregion.py#L184">source</a></font>
 {% endraw %}

@@ -17,12 +17,14 @@ save=True also the default of every later session, stored in the user's settings
 ## Syntax
 
 ```python
-plottingConvention.makeDefault(self, save=False)
-```
-
-```python
 plottingConvention('y↑→x').makeDefault()
 plottingConvention.default('y↑→x', save=True)
+```
+
+## Signature
+
+```python
+plottingConvention.makeDefault(self, save=False)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L80">source</a></font>

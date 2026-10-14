@@ -12,23 +12,62 @@ status: Reference
 {% raw %}
 A method of [rotation](rotation_index_py.html).
 
-the rotations of the Euler angles, Bunge's ZXZ convention unless a convention is named
-('Bunge', 'ZXZ', 'Matthies', 'ZYZ', 'ABG', 'Roe', 'Kocks', 'Canova')
+rotations defined by Euler angles
 
 ## Syntax
 
-```python
-rotation.byEuler(a, b=None, c=None, convention=None)
-```
+Bunge's convention:
 
 ```python
-rot = rotation.byEuler(phi1, Phi, phi2)              # Bunge
-rot = rotation.byEuler(alpha, beta, gamma, 'ZYZ')    # Matthies
-rot = rotation.byEuler(phi1, Phi, phi2, 'Kocks')
-rot = rotation.byEuler([phi1, Phi, phi2])            # the angles as one list
+rot = rotation.byEuler(phi1, Phi, phi2)
 ```
+
+Matthies' convention:
+
+```python
+rot = rotation.byEuler(alpha, beta, gamma, 'ZYZ')
+```
+
+Kocks' convention:
+
+```python
+rot = rotation.byEuler(phi1, Phi, phi2, 'Kocks')
+```
+
+The angles as one triple, or an array of triples:
+
+```python
+rot = rotation.byEuler([phi1, Phi, phi2])
+```
+
+The angles are in radians, arrays of them broadcast against each other. Without a
+convention the preference EulerAngleConvention decides, Bunge's ZXZ by default.
+
+## Input
+
+| | |
+|---|---|
+| `a` | the first angle, phi1 or alpha; or an array whose last axis holds the three angles |
+| `b` | the second angle, Phi or beta; the convention when a holds the triples |
+| `c` | the third angle, phi2 or gamma |
+
+## Output
+
+| | |
+|---|---|
+| `rot` | rotation |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `convention` | `None` | 'Bunge' or 'ZXZ', 'Matthies', 'ZYZ' or 'ABG', 'Roe', 'Kocks', 'Canova', 'nfft' |
+
+## See also
+
+rotation.Euler, [orientation.byEuler](orientation.byEuler_py.html), [rotation.byAxisAngle](rotation.byAxisAngle_py.html), [rotation.byMatrix](rotation.byMatrix_py.html), [RotationRepresentations](RotationRepresentations_py.html)
 
 MATLAB's [rotation.byEuler](rotation.byEuler.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L434">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L514">source</a></font>
 {% endraw %}

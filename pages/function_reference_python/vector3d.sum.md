@@ -16,16 +16,53 @@ the sum of the vectors, over all axes or the given ones
 
 ## Syntax
 
-```python
-vector3d.sum(self, axis=None)
-```
+Over all vectors:
 
 ```python
 s = sum(v)
+```
+
+Along the first axis:
+
+```python
 s = sum(v, axis=0)
 ```
 
+NumPy's form, the summed axis kept:
+
+```python
+s = np.sum(v, axis=1, keepdims=True)
+```
+
+The result keeps the frame and the display style of the vectors. MATLAB sums along the
+first axis that is not a singleton; the sum here is over all axes unless one is given.
+
+## Input
+
+| | |
+|---|---|
+| `v` | vector3d |
+
+## Output
+
+| | |
+|---|---|
+| `s` | vector3d |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `axis` | `None` | an axis or a tuple of axes to sum over; by default all |
+| `dtype` | `None` | NumPy's argument, refused: a container has no dtype to choose |
+| `out` | `None` | NumPy's argument, refused: a container has no output buffer |
+| `keepdims` | `False` | keep the summed axes with length one |
+
+## See also
+
+[vector3d.mean](vector3d.mean_py.html), [vector3d.norm](vector3d.norm_py.html)
+
 MATLAB's [vector3d.sum](vector3d.sum.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L694">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L817">source</a></font>
 {% endraw %}

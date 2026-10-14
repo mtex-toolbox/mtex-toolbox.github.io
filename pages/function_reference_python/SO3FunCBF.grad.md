@@ -22,5 +22,5 @@ SO3FunCBF.grad(self, x=None, side='left')
 
 MATLAB's [SO3FunCBF.grad](SO3FunCBF.grad.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L595">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L654">source</a></font>
 {% endraw %}

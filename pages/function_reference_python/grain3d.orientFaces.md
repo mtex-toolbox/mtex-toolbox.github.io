@@ -22,5 +22,5 @@ grain3d.orientFaces(self)
 
 MATLAB's [grain3d.orientFaces](grain3d.orientFaces.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L81">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/grain3d.py#L102">source</a></font>
 {% endraw %}

@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 the inverse pole figure key of TSL / OIM, the TSLDirectionKey on the Laue group
 
+## Syntax
+
 ```python
 key = ipfTSLKey(cs)
 key = ipfTSLKey(ebsd['Iron'], ipfDirection=xvector)

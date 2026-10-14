@@ -10,15 +10,55 @@ counterpart: referenceFrame.referenceFrame.html
 status: Reference
 ---
 {% raw %}
-a reference frame, the coordinate system data is expressed in: an identity (a name, a
-mineral), a basis, the point group the data is invariant under and the default plotting
-convention; a handle compared by identity, registered and sealed by the session
+a reference frame, the coordinate system data is expressed in: an identity, a basis, the
+point group the data is invariant under and the default plotting convention
 
 ## Syntax
 
+A frame of the canonical basis:
+
 ```python
-referenceFrame(basis=None, name='', axesNames=('X', 'Y', 'Z'), how2plot=None, sym=None, color=None)
+f = referenceFrame(name='lab', axesNames=('A', 'B', 'C'))
 ```
+
+A frame of the given basis vectors:
+
+```python
+f = referenceFrame(basis)
+```
+
+The base class of crystalFrame, the frame glued to the lattice of a phase, and
+specimenFrame, the frame of a sample; use those. A frame carries an identity, a name such
+as 'measurement', 'rolling' or a mineral; the basis vectors in canonical Euclidean
+coordinates, whose lengths count; the point group; and the plotting convention its data is
+drawn in. Frames are handles compared by identity, registered and sealed by the session;
+transformationMatrix gives the change of coordinates between two frames.
+
+## Input
+
+| | |
+|---|---|
+| `basis` | vector3d or 3 x 3 array, the basis vectors in canonical coordinates, by default the canonical basis |
+
+## Output
+
+| | |
+|---|---|
+| `f` | referenceFrame |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `name` | `''` | the identity of the frame |
+| `axesNames` | `('X', 'Y', 'Z')` | the names of the three axes |
+| `how2plot` | `None` | the default plottingConvention of the frame |
+| `sym` | `None` | the point group, by default the trivial one |
+| `color` | `None` | the colour of the frame's data in a phase map |
+
+## See also
+
+[crystalFrame](crystalFrame_index_py.html), [specimenFrame](specimenFrame_index_py.html), [plottingConvention](plottingConvention_index_py.html), [referenceFrame.transformationMatrix](referenceFrame.transformationMatrix_py.html)
 
 MATLAB's [referenceFrame.referenceFrame](referenceFrame.referenceFrame.html)
 

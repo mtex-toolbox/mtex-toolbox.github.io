@@ -16,12 +16,14 @@ the colours of orientations, an (..., 3) array in [0, 1]; defined by every key
 ## Syntax
 
 ```python
-orientationColorKey.orientation2color(self, ori)
-```
-
-```python
 rgb = key.orientation2color(ori)
 rgb = key.orientation2color(grains.meanOrientation)
+```
+
+## Signature
+
+```python
+orientationColorKey.orientation2color(self, ori)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L60">source</a></font>

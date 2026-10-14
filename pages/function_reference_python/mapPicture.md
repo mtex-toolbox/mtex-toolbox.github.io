@@ -20,5 +20,5 @@ its sources, so that a map in the same plane is drawn into it rather than beside
 mapPicture(sources, pixels=1600)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L273">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L407">source</a></font>
 {% endraw %}

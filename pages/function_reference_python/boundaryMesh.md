@@ -9,14 +9,59 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the faces of a 3D grain boundary, light blue, in one colour, or coloured by a value or a
-colour per face, as MATLAB's grain3Boundary/plot
+the faces of a 3D grain boundary as a polygon mesh of a scene3d; what plot(gB) draws for a
+grain3Boundary, MATLAB's grain3Boundary/plot
 
 ## Syntax
 
+Light blue faces:
+
 ```python
-boundaryMesh(gB, color=None, faceColor=None, faceAlpha=1.0, edgeColor='k', edgeAlpha=1.0, lineWidth=0.5, colormap=None, colorRange=None)
+mesh = boundaryMesh(gB)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L286">source</a></font>
+Coloured by a value per face:
+
+```python
+mesh = boundaryMesh(gB, gB.misorientation.angle() / degree)
+```
+
+One colour, translucent:
+
+```python
+mesh = boundaryMesh(gB, faceColor='red', faceAlpha=0.3, lineWidth=1)
+```
+
+A face whose value or colour is NaN is not drawn.
+
+## Input
+
+| | |
+|---|---|
+| `gB` | grain3Boundary, the boundary faces |
+
+## Output
+
+| | |
+|---|---|
+| `mesh` | mesh3d, the faces with a colour each; with a value per face it keeps the values, the colour map and the range for the colour bar |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `color` | `None` | a value per face mapped by the colour map, an RGB row per face or one RGB triple |
+| `faceColor` | `None` | one colour for all faces, when color is not given |
+| `faceAlpha` | `1.0` | the opacity of the faces |
+| `edgeColor` | `'k'` | the colour of the edges of the faces, 'none' for no edges |
+| `edgeAlpha` | `1.0` | the opacity of the edges |
+| `lineWidth` | `0.5` | the width of the edges in points |
+| `colormap` | `None` | the colour map for values |
+| `colorRange` | `None` | (min, max), the values the colour map spans; by default their range |
+
+## See also
+
+[grainMesh](grainMesh_py.html), [scene3d](scene3d_index_py.html), [plot3d](S2Fun.plot3d_py.html), [Grains3DBoundaries](Grains3DBoundaries_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L354">source</a></font>
 {% endraw %}

@@ -17,6 +17,13 @@ gridify(x, ...) is x.gridify(...), the method of the object passed
 gridify(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [EBSD](EBSD.gridify_py.html) | the same map with its arrays in map shape, the missing cells padding |
+| [EBSD3](EBSD3.gridify_py.html) | the list on the (n1, n2, n3) array of its lattice, every cell no voxel occupies padded as notIndexed |
+
 ## Used on
 
 [EBSDGrid](EBSDGrid_py.html), [EBSDInter](EBSDInter_py.html), [EBSDMapsAndImages](EBSDMapsAndImages_py.html)

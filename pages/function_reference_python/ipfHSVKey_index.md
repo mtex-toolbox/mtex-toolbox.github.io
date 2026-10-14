@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 the MTEX default inverse pole figure key, white at the centre of the sector
 
+## Syntax
+
 ```python
 ipfHSVKey(cs), ipfHSVKey(cs, maxAngle=7.5*degree, whiteCenter=v, ipfDirection=xvector)
 ```

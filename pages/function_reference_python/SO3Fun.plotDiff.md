@@ -26,5 +26,5 @@ plotDiff(pf, other, mode='relative', epsilon=None, **kw)
 
 MATLAB's [SO3Fun.plotDiff](SO3Fun.plotDiff.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L272">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L309">source</a></font>
 {% endraw %}

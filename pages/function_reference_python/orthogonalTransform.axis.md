@@ -16,12 +16,14 @@ the rotational axis of the rotational part
 ## Syntax
 
 ```python
-orthogonalTransform.axis(self)
-```
-
-```python
 v = axis(T)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L705">source</a></font>
+## Signature
+
+```python
+orthogonalTransform.axis(self)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L816">source</a></font>
 {% endraw %}

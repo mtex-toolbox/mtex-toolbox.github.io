@@ -17,5 +17,5 @@ status: Reference
 clebschGordan(j1, m1, j2, m2, J, M)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L488">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L515">source</a></font>
 {% endraw %}

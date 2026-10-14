@@ -18,5 +18,5 @@ surface, their values clipped to [0, 1]
 plotRGB(channels, resolution=0.5*degree, **kw)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/tensorplot.py#L100">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/tensorplot.py#L119">source</a></font>
 {% endraw %}

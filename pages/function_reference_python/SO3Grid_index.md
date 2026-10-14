@@ -15,6 +15,8 @@ SO3Grid: an S2 grid of the images of z with a ladder of gamma per node, so a sea
 three binary searches; built by equispacedSO3Grid, and anything derived from it is a plain
 orientation list
 
+## Syntax
+
 ```python
 S3G = equispacedSO3Grid(cs, ss, resolution=5*degree)
 ```

@@ -13,5 +13,5 @@ A property of [orientationRegion](orientationRegion_index_py.html).
 
 the first frame of the region, frameA: the crystal frame (MATLAB's orientationRegion.CS1)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L74">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L100">source</a></font>
 {% endraw %}

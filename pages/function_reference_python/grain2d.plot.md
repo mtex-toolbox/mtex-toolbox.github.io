@@ -10,21 +10,120 @@ counterpart: grain2d.plot.html
 status: Reference
 ---
 {% raw %}
-plot(grains), plot(grains, property), plot(grains, grains.meanOrientation)
+the grains of a map as polygons, coloured by phase, by a value or by orientation, with
+their boundaries on top
 
 ## Syntax
 
+Colours by phase:
+
 ```python
-plot(grains, color=None, faceColor=None, colormap='viridis', colorRange=None, colorbar=False, micronbar=None, refFrame=True, location=None, ipfDirection=None, boundary=True, lineWidth=1.0, lineColor=None, alpha=1.0, legend=None, displayName=None, translucent=None, **kw)
+plot(grains)
 ```
 
-The grains drawn as the polygons the boundary encloses, coloured by phase, by a value per
-grain, by their mean orientations or an orientation key, or in one colour, with the
-boundary on top unless noBoundary. translucent=s fades a grain by its colour, as MATLAB:
-s (1 - min(r, g, b)) for a colour, s v / max(v) for a value, so pale grains let the map
-below show.
+Colours by a value per grain:
+
+```python
+plot(grains, grains.area, colorbar=True)
+```
+
+By mean orientation:
+
+```python
+plot(grains['Forsterite'], grains['Forsterite'].meanOrientation)
+```
+
+Every phase by its inverse pole figure key along x:
+
+```python
+plot(grains, ipfDirection=xvector)
+```
+
+The outlines alone, in red:
+
+```python
+plot(grains, faceColor='none', lineColor='r')
+```
+
+No boundary, faded by colour:
+
+```python
+plot(grains, boundary=False, translucent=0.5)
+```
+
+One colour, in the legend:
+
+```python
+plot(grains, faceColor='red', displayName='all grains')
+```
+
+The crystal shape of every grain:
+
+```python
+plot(grains, cS)
+```
+
+An axis per grain as a needle:
+
+```python
+plot(grains, v)
+```
+
+Every grain is one polygon with its holes, coloured as mapValues colours: by phase, by a
+value per grain through a colour map, by orientations through the inverse pole figure key
+of their phase, by an orientation colour key, by an RGB colour per grain or in one colour.
+The boundary, grains.boundary, is drawn on top in lineColor, else in the face colour, else
+black. A crystalShape draws the shape of every grain, rotated by its mean orientation, at
+its centroid; a vector3d per grain an axis as a needle through it, its half pointing out of
+the screen black and the other white.
+
+translucent=s fades a grain by its colour, as MATLAB's 'translucent': the opacity of a grain
+is s (1 - min(r, g, b)) for a colour and s v / max(v) for a value, so that pale grains let
+what lies below show.
+
+region=(xmin, xmax, ymin, ymax) shows a part of the map, title= names the axes,
+coordinates=True labels the axes with the map coordinates, how2plot= a plottingConvention
+other than the map's, parent= the axes to draw into and figSize= the size of a new figure;
+every other keyword goes to the matplotlib artist.
+
+## Input
+
+| | |
+|---|---|
+| `grains` | grain2d |
+| `color` | the colouring: an array of values or of RGB colours, orientations, an orientationColorKey, a crystalShape, a vector3d per grain, a property name, 'phase' or one colour |
+
+## Output
+
+| | |
+|---|---|
+| `h` | the matplotlib collection of the grains |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `faceColor` | `None` | one colour for every grain; 'none' draws the boundary alone |
+| `colormap` | `'viridis'` | the colour map of values |
+| `colorRange` | `None` | (lo, hi), the values the colour map spans |
+| `colorbar` | `False` | add a colour bar for values |
+| `micronbar` | `None` | draw the scale bar; by default the preference showMicronBar |
+| `refFrame` | `True` | draw the axes of the specimen frame in the scale bar box |
+| `location` | `None` | the corner of the scale bar, 'sw', 'se', 'nw' or 'ne' |
+| `ipfDirection` | `None` | vector3d, colour by orientation through the inverse pole figure key along this specimen direction |
+| `boundary` | `True` | draw the grain boundary on top, MATLAB's flag noBoundary as boundary=False |
+| `lineWidth` | `1.0` | the width of the boundary |
+| `lineColor` | `None` | the colour of the boundary |
+| `alpha` | `1.0` | the opacity of the grains |
+| `legend` | `None` | draw the legend of the phases or the inverse pole figure keys; by default for a phase map |
+| `displayName` | `None` | the name in a legend |
+| `translucent` | `None` | s, the opacity of a grain following its colour, as above |
+
+## See also
+
+[GrainSpatialPlots](GrainSpatialPlots_py.html), [EBSD.plot](EBSD.plot_py.html), [grainBoundary.plot](grainBoundary.plot_py.html), [mapValues](mapValues_py.html), [crystalShape](crystalShape_index_py.html)
 
 MATLAB's [grain2d.plot](grain2d.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L507">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L586">source</a></font>
 {% endraw %}

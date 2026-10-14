@@ -23,5 +23,5 @@ EBSD.load(fname, *args, **kwargs)
 
 MATLAB's [EBSD.load](EBSD.load.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L513">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L570">source</a></font>
 {% endraw %}

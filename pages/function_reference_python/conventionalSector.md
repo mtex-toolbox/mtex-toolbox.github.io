@@ -17,5 +17,12 @@ conventionalSector(x, ...) is x.conventionalSector(...), the method of the objec
 conventionalSector(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [referenceFrame](referenceFrame.conventionalSector_py.html) | the conventional sector of the group, the one MTEX draws, oriented by the up and east directions of the frame's plotting convention |
+| [symmetry](symmetry.conventionalSector_py.html) | the conventional sector of the group, the one MTEX draws, with up and east choosing its placement |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

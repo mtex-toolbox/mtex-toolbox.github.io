@@ -10,13 +10,66 @@ status: Reference
 ---
 {% raw %}
 a vector field on SO(3) as a sum of radial kernels at centre orientations with weight vectors,
-exactly equivariant; from tangent vectors at orientations or another field it is fitted
+exactly equivariant
+
+## Syntax
+
+From centres, weight vectors and a kernel:
 
 ```python
-SO3VectorFieldRBF(center, weights, psi)
-SO3VectorFieldRBF(t, kernel=psi)                  through tangent vectors t
-SO3VectorFieldRBF(F, resolution=5*degree)         another field on a grid
+SO3VF = SO3VectorFieldRBF(center, weights, psi)
 ```
+
+In the right tangent space, the default kernel:
+
+```python
+SO3VF = SO3VectorFieldRBF(center, weights, None, 'right')
+```
+
+Fitted through tangent vectors t:
+
+```python
+SO3VF = SO3VectorFieldRBF(t, kernel=psi)
+```
+
+Another field fitted on a grid:
+
+```python
+SO3VF = SO3VectorFieldRBF(F, resolution=10*degree)
+```
+
+The field is the sum over the centres of the kernel at the misorientation to the centre
+times the centre's weight vector, summed over the symmetric equivalents so that it is
+equivariant under the frames. Through tangent vectors t, an SO3TangentVector at reference
+orientations, the weights solve the dense linear system of the kernel between the
+references, which suits hundreds of centres; another field is sampled on an equispaced grid
+of the resolution and fitted the same way, the kernel by default of halfwidth the resolution.
+MATLAB stores the three components as SO3FunRBF; the weights here are one vector per centre.
+
+## Input
+
+| | |
+|---|---|
+| `center` | orientation, the centres; or an SO3TangentVector or SO3VectorField to fit |
+| `weights` | (n, 3) array, one weight vector per centre |
+| `psi` | SO3Kernel, a de la Vallee Poussin kernel of halfwidth 10 degree unless given |
+
+## Output
+
+| | |
+|---|---|
+| `SO3VF` | SO3VectorFieldRBF |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `kernel` |  | the kernel of a fit |
+| `resolution` |  | the grid spacing of the fit of another field, 5 degree unless given |
+
+## See also
+
+[SO3VectorFieldHarmonic](SO3VectorFieldHarmonic_index_py.html), [SO3FunRBF](SO3FunRBF_index_py.html), [SO3TangentVector](SO3TangentVector_index_py.html), [SO3FunVectorField](SO3FunVectorField_py.html)
 
 ## Members
 
@@ -28,7 +81,7 @@ SO3VectorFieldRBF(F, resolution=5*degree)         another field on a grid
 | [eval](SO3VectorFieldRBF.eval_py.html) | the tangent vectors of the field at orientations, the kernel sums over the symmetric equivalents of the centres |
 | [frameA](SO3VectorFieldRBF.frameA_py.html) | the frame the orientations map from, the crystal frame |
 | [frameB](SO3VectorFieldRBF.frameB_py.html) | the frame the orientations map to, the specimen or a second crystal frame |
-| [interpolate](SO3VectorFieldRBF.interpolate_py.html) | the function of least squares through values at nodes, on SO(3) for orientations, on the sphere for directions, a vector field for vector values, fitted by LSQR with a Sobolev penalty lambda_ of order s |
+| [interpolate](SO3VectorFieldRBF.interpolate_py.html) | the function in harmonic form fitted by least squares to values at nodes: on SO(3) at orientations, on the sphere at directions, a vector field for vector values or tangent vectors |
 | [norm](SO3VectorFieldRBF.norm_py.html) | the length of the vectors as a function on SO(3), the same as abs |
 | [normalize](SO3VectorFieldRBF.normalize_py.html) | the field of unit vectors in the directions of the field, by quadrature at twice the bandwidth |
 | [plus](SO3VectorFieldRBF.plus_py.html) |  |
@@ -38,5 +91,5 @@ SO3VectorFieldRBF(F, resolution=5*degree)         another field on a grid
 | [times](SO3VectorFieldRBF.times_py.html) |  |
 | [uminus](SO3VectorFieldRBF.uminus_py.html) |  |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L748">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L815">source</a></font>
 {% endraw %}

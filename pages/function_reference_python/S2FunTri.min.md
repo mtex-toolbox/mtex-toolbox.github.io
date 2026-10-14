@@ -18,15 +18,17 @@ with a second function or a number the pointwise minimum; with axis= along an ax
 ## Syntax
 
 ```python
-S2FunTri.min(f, *args, numLocal=1, **kwargs)
-```
-
-```python
 value, ori = min(odf)
 f = min(odf, 0)
 ```
 
+## Signature
+
+```python
+S2FunTri.min(f, *args, numLocal=1, **kwargs)
+```
+
 MATLAB's [S2FunTri.min](S2FunTri.min.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L558">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L622">source</a></font>
 {% endraw %}

@@ -17,12 +17,14 @@ the ratio of the two half axes, one for a circle
 ## Syntax
 
 ```python
-grain2d.aspectRatio(self)
-```
-
-```python
 asp = grains.aspectRatio()
 asp = aspectRatio(grains)
+```
+
+## Signature
+
+```python
+grain2d.aspectRatio(self)
 ```
 
 ## Used on

@@ -27,5 +27,5 @@ identity, so a partly fitted tilt evaluates as far as it has got
 
 MATLAB's [spatialTransformTilt](spatialTransformTilt.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L691">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L762">source</a></font>
 {% endraw %}

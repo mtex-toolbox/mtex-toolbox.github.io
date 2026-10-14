@@ -17,5 +17,5 @@ the scene drawn offscreen, an (h, w, 3) uint8 image
 renderImage(scene, size=(800, 800))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/render3d.py#L94">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/render3d.py#L117">source</a></font>
 {% endraw %}

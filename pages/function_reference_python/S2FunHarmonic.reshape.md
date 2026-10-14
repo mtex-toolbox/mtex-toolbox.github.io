@@ -16,13 +16,15 @@ the list of functions in another shape
 ## Syntax
 
 ```python
-S2FunHarmonic.reshape(self, *shape)
-```
-
-```python
 sF = sF.reshape(2, 3)
 sF = sF.reshape((2, 3))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L233">source</a></font>
+## Signature
+
+```python
+S2FunHarmonic.reshape(self, *shape)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2fun.py#L289">source</a></font>
 {% endraw %}

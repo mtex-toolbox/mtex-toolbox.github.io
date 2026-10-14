@@ -20,5 +20,5 @@ weights those of the grid's rule
 SO3GridPlan.adjoint(self, values, weights=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L647">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L700">source</a></font>
 {% endraw %}

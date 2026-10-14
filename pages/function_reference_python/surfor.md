@@ -17,6 +17,12 @@ surfor(x, ...) is x.surfor(...), the method of the object passed
 surfor(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [grainBoundary](grainBoundary.surfor_py.html) | the cumulative projection length of the boundary segments (Panozzo 1984): a projection is a dot product, the segment vector projected onto the direction, so no angle is formed and none has to be folded into [0, pi) |
+
 ## Used on
 
 [ProjectionBasedParameters](ProjectionBasedParameters_py.html)

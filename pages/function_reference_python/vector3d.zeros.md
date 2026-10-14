@@ -16,16 +16,25 @@ the zero vectors of a shape
 
 ## Syntax
 
+One zero vector:
+
+```python
+v = vector3d.zeros()
+```
+
+An m x n array of them:
+
+```python
+v = vector3d.zeros(m, n)
+```
+
+## Signature
+
 ```python
 vector3d.zeros(*shape)
 ```
 
-```python
-v = vector3d.zeros()        # one zero vector
-v = vector3d.zeros(m, n)    # an m x n array of them
-```
-
 MATLAB's [vector3d.zeros](vector3d.zeros.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L370">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L453">source</a></font>
 {% endraw %}

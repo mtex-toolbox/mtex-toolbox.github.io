@@ -9,15 +9,68 @@ lang: python
 status: Reference
 ---
 {% raw %}
-the outer faces of the grains, each in the colour of the grain it bounds, as MATLAB's
-grain3d/plot; a face between two of the grains is inside and drawn grey only when the faces
-are translucent
+the faces of 3D grains as a polygon mesh of a scene3d, coloured by grain; what plot(grains)
+draws for grain3d, MATLAB's grain3d/plot
 
 ## Syntax
 
+Coloured by phase:
+
 ```python
-grainMesh(grains, color=None, faceColor=None, faceAlpha=1.0, edgeColor='k', edgeAlpha=1.0, lineWidth=0.5, colormap=None, colorRange=None, ipfDirection=None)
+mesh = grainMesh(grains)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L251">source</a></font>
+By orientation, the ipf key of the phase:
+
+```python
+mesh = grainMesh(grains, grains.meanOrientation)
+```
+
+By a value, translucent:
+
+```python
+mesh = grainMesh(grains, grains.volume, colormap='viridis', faceAlpha=0.5)
+```
+
+One colour, no edges:
+
+```python
+mesh = grainMesh(grains, faceColor='lightblue', edgeColor='none')
+```
+
+A face of the set of grains is outer when it belongs to one grain and is drawn in that
+grain's colour; a face between two of the grains is inner and drawn grey, and only when
+the faces are translucent, faceAlpha below 1. A grain whose value is NaN is not drawn.
+
+## Input
+
+| | |
+|---|---|
+| `grains` | grain3d, the grains |
+
+## Output
+
+| | |
+|---|---|
+| `mesh` | mesh3d, the faces with a colour each; with a value per grain it keeps the values, the colour map and the range for the colour bar |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `color` | `None` | what colours a grain: None for its phase, an orientation per grain, a value per grain mapped by the colour map, an RGB row per grain, or the name of a property |
+| `faceColor` | `None` | one colour for all grains, when color is not given |
+| `faceAlpha` | `1.0` | the opacity of the faces |
+| `edgeColor` | `'k'` | the colour of the edges of the faces, 'none' for no edges |
+| `edgeAlpha` | `1.0` | the opacity of the edges |
+| `lineWidth` | `0.5` | the width of the edges in points |
+| `colormap` | `None` | the colour map for values |
+| `colorRange` | `None` | (min, max), the values the colour map spans; by default their range |
+| `ipfDirection` | `None` | the specimen direction of the inverse pole figure key for orientations |
+
+## See also
+
+[boundaryMesh](boundaryMesh_py.html), [volumeSlices](volumeSlices_py.html), [scene3d](scene3d_index_py.html), [plot3d](S2Fun.plot3d_py.html), [Grains3D](Grains3D_py.html), [EBSD3Plotting](EBSD3Plotting_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L292">source</a></font>
 {% endraw %}

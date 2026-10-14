@@ -16,14 +16,16 @@ ground truth last, one unfitted spatial transform per hop; the methods alter the
 ## Syntax
 
 ```python
-trueEbsd(imgList=None, T=None)
-```
-
-```python
 job = trueEbsd(imgList, T)
 job.pixelSizeMatch()
 job.calcDistortion('fitErr')
 job.undistort()
+```
+
+## Signature
+
+```python
+trueEbsd(imgList=None, T=None)
 ```
 
 ## Used on

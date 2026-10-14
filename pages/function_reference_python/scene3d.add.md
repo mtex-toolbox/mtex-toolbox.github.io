@@ -19,5 +19,5 @@ the item added to the scene, and returned
 scene3d.add(self, item)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L203">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L244">source</a></font>
 {% endraw %}

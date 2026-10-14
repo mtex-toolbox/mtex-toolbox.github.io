@@ -17,5 +17,5 @@ writeHTML(scene, 'fig.html'): the scene as an interactive page
 writeHTML(scene, fname, title='MTEX 3D plot')
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/render3d.py#L288">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/render3d.py#L311">source</a></font>
 {% endraw %}

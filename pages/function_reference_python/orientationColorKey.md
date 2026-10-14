@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 a colour key turning orientations into colours
 
+## Syntax
+
 ```python
 rgb = key.orientation2color(ori)    an (..., 3) array in [0, 1]
 key.frameA, key.frameB, key.antipodal

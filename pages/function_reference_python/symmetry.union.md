@@ -22,5 +22,5 @@ symmetry.union(self, other)
 
 MATLAB's [symmetry.union](symmetry.union.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L387">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L416">source</a></font>
 {% endraw %}

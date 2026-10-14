@@ -22,5 +22,5 @@ S1FunHarmonic.conj(self)
 
 MATLAB's [S1Fun.conj](S1Fun.conj.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L181">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L249">source</a></font>
 {% endraw %}

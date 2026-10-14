@@ -21,15 +21,52 @@ antipodal=True adds the antipodal symmetry, dispStyle= the indices the display s
 'hkil', 'uvw', 'UVTW', 'xyz')
 
 
+A lattice plane normal:
+
 ```python
-m = Miller(h, k, l, cs)                    # a lattice plane normal
-m = Miller(h, k, i, l, cs)                 # four indices, hexagonal and trigonal lattices
-m = Miller(u, v, w, cs, 'uvw')             # a lattice direction, 'UVTW' with four indices
-m = Miller([[1, 0, 0], [1, 1, 1]], cs)     # many at once, the indices along the last axis
-m = Miller('{111}', cs)                    # (hkl) or [uvw] one, {hkl} or <uvw> the whole family
-m = Miller('[100]\[011]', cs)             # the plane holding both directions, the zone law
-m = Miller('(100)\(011)', cs)             # the direction both planes hold
-m = Miller(v, cs)                          # a vector3d expressed in the crystal frame
+m = Miller(h, k, l, cs)
+```
+
+Four indices, hexagonal and trigonal lattices:
+
+```python
+m = Miller(h, k, i, l, cs)
+```
+
+A lattice direction, 'UVTW' with four indices:
+
+```python
+m = Miller(u, v, w, cs, 'uvw')
+```
+
+Many at once, the indices along the last axis:
+
+```python
+m = Miller([[1, 0, 0], [1, 1, 1]], cs)
+```
+
+(hkl) or [uvw] one, {hkl} or <uvw> the whole family:
+
+```python
+m = Miller('{111}', cs)
+```
+
+The plane holding both directions, the zone law:
+
+```python
+m = Miller('[100]\[011]', cs)
+```
+
+The direction both planes hold:
+
+```python
+m = Miller('(100)\(011)', cs)
+```
+
+A vector3d expressed in the crystal frame:
+
+```python
+m = Miller(v, cs)
 ```
 
 ## Used on

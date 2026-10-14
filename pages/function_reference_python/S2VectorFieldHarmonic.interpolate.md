@@ -22,5 +22,5 @@ S2VectorFieldHarmonic.interpolate(nodes, values, **kwargs)
 
 MATLAB's [S2VectorFieldHarmonic.interpolate](S2VectorFieldHarmonic.interpolate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L269">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s2vectorfield.py#L295">source</a></font>
 {% endraw %}

@@ -17,11 +17,13 @@ scaled to red, green and blue
 ## Syntax
 
 ```python
-BungeColorKey.orientation2color(self, ori)
+rgb = BungeColorKey(cs).orientation2color(ori)
 ```
 
+## Signature
+
 ```python
-rgb = BungeColorKey(cs).orientation2color(ori)
+BungeColorKey.orientation2color(self, ori)
 ```
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L305">source</a></font>

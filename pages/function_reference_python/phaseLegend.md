@@ -18,5 +18,5 @@ a not indexed phase only when it was given a colour of its own
 phaseLegend(mP, x, loc='upper right')
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L971">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L1213">source</a></font>
 {% endraw %}

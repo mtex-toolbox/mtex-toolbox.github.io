@@ -17,5 +17,11 @@ shortAxis(x, ...) is x.shortAxis(...), the method of the object passed
 shortAxis(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [grain2d](grain2d.shortAxis_py.html) | the short half axis of the ellipse of every outline, the smaller principal component |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

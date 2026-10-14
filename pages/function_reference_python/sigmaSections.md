@@ -13,6 +13,8 @@ status: Reference
 pole figure sections of the c axis split by the twist sigma of the a axis about it, the
 sections MATLAB's sigma sections draw
 
+## Syntax
+
 ```python
 oS = sigmaSections(cs, ss, sections=6)
 oS = sigmaSections(cs, ss, sigma=np.arange(0, 60, 10)*degree)

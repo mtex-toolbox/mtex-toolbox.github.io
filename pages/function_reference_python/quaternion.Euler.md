@@ -17,12 +17,14 @@ the Euler angles (alpha, beta, gamma) in the convention named, the session's by 
 ## Syntax
 
 ```python
-quaternion.Euler(self, convention=None)
-```
-
-```python
 phi1, Phi, phi2 = rot.Euler()
 alpha, beta, gamma = rot.Euler('ZYZ')
+```
+
+## Signature
+
+```python
+quaternion.Euler(self, convention=None)
 ```
 
 MATLAB's [quaternion.Euler](quaternion.Euler.html)

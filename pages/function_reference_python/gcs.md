@@ -17,5 +17,5 @@ the scene of the current axes of a figure, None when it holds none
 gcs(fig=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L166">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/volumeplot.py#L300">source</a></font>
 {% endraw %}

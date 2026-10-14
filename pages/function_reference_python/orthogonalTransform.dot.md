@@ -20,5 +20,5 @@ parity; antipodal=False keeps the sign
 orthogonalTransform.dot(self, other, antipodal=True)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L715">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L826">source</a></font>
 {% endraw %}

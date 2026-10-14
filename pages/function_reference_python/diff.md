@@ -17,5 +17,11 @@ diff(x, ...) is x.diff(...), the method of the object passed
 diff(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [S1FunHarmonic](S1FunHarmonic.diff_py.html) | the derivative multiplies c_k by -ik |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

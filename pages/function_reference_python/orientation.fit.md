@@ -23,5 +23,5 @@ orientation.fit(u, v, *frames, weights=None)
 
 MATLAB's [orientation.fit](orientation.fit.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L187">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L233">source</a></font>
 {% endraw %}

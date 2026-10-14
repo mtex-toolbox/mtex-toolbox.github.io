@@ -22,5 +22,5 @@ SO3FunComposition.grad(self, x=None, side='left')
 
 MATLAB's [SO3FunComposition.grad](SO3FunComposition.grad.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L89">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L113">source</a></font>
 {% endraw %}

@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 measured pole figure intensities, one or several pole figures of one specimen
 
+## Syntax
+
 ```python
 PoleFigure(h, r, I)                          h a Miller, one or several superposed directions
 PoleFigure([h1, h23], [r1, r2], [I1, I2])    one pole figure per entry
@@ -30,7 +32,7 @@ PoleFigure(h, r, I, cs, ss, superposition=c, complete=True)
 | [calcODFIterative](PoleFigure.calcODFIterative_py.html) | calcODFIterative(pf, ...): the reconstruction refined successively over a ladder of halfwidths |
 | [calcPoleFigure](PoleFigure.calcPoleFigure_py.html) | the pole figures an ODF predicts on the measured directions |
 | [cat](PoleFigure.cat_py.html) | the pole figures of several data sets in one, in order |
-| [correct](PoleFigure.correct_py.html) | the background subtracted and the defocusing divided out, each correction a pole figure of its own, interpolated onto the measured directions where it was measured elsewhere |
+| [correct](PoleFigure.correct_py.html) | the pole figures corrected for background and defocusing |
 | [CS](PoleFigure.CS_py.html) | the crystal frame, that of the crystal directions allH |
 | [export](PoleFigure.export_py.html) | write every pole figure of a data set to its own three column table |
 | [findOutlier](PoleFigure.findOutlier_py.html) | the measurements whose intensity deviates from the mean of their neighbours within three resolutions by more than alpha standard deviations |
@@ -47,7 +49,7 @@ PoleFigure(h, r, I, cs, ss, superposition=c, complete=True)
 | [minus](PoleFigure.minus_py.html) |  |
 | [mrdivide](PoleFigure.mrdivide_py.html) |  |
 | [mtimes](PoleFigure.mtimes_py.html) |  |
-| [noisepf](PoleFigure.noisepf_py.html) | Poisson counts of factor * I + background, the background subtracted again |
+| [noisepf](PoleFigure.noisepf_py.html) | simulated diffraction counts: Poisson counts of factor * I + background, the background subtracted again |
 | [normalize](PoleFigure.normalize_py.html) | scaled to mean one, or to the pole figures the ODF predicts |
 | [numPF](PoleFigure.numPF_py.html) | the number of pole figures |
 | [plot](PoleFigure.plot_py.html) | plot(pf), plot(pf, contourf=True), plot(pf, minmax=True): a measured pole figure, or a data set of them in a row, the specimen directions as markers coloured by intensity |

@@ -17,5 +17,5 @@ the coefficients projected in place on the right, the crystal side, by the proje
 projectRight(fhat, Q)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L419">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/harmonics.py#L446">source</a></font>
 {% endraw %}

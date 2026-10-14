@@ -18,5 +18,5 @@ quadrature grid brings the weights of its rule
 wignerSeriesAdjoint(rots, values, L, weights=None, folds=(1, 1))
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L750">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L803">source</a></font>
 {% endraw %}

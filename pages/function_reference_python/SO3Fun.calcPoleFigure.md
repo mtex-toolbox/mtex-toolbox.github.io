@@ -10,21 +10,80 @@ counterpart: SO3Fun.calcPoleFigure.html
 status: Reference
 ---
 {% raw %}
-the pole figures of an ODF for the crystal directions h on the specimen directions r
+the pole figures an ODF predicts: simulated diffraction intensities, superposed pole
+figures and any specimen directions
 
 ## Syntax
 
-```python
-calcPoleFigure(odf, h, r=None, superposition=None, complete=False, **gridOptions)
-```
+One pole figure per element of h:
 
 ```python
-calcPoleFigure(odf, h, r)                       one pole figure per element of h
-calcPoleFigure(odf, [h1, h23], r)               a Python list: an entry of several directions is superposed
-calcPoleFigure(odf, [h1, h2], [r1, r2])         one set of specimen directions per pole figure
-calcPoleFigure(odf, h, resolution=5*degree)     on a regular grid
-calcPoleFigure(odf, pf)                         on the directions of a measurement
+pf = calcPoleFigure(odf, h, r)
 ```
+
+On a regular grid of the upper hemisphere:
+
+```python
+pf = calcPoleFigure(odf, h, resolution=5*degree)
+```
+
+On a regular grid of the whole sphere:
+
+```python
+pf = calcPoleFigure(odf, h, resolution=5*degree, complete=True)
+```
+
+One set of specimen directions per pole figure:
+
+```python
+pf = calcPoleFigure(odf, [h1, h2], [r1, r2])
+```
+
+H23 two superposed directions:
+
+```python
+pf = calcPoleFigure(odf, [h1, h23], r, superposition=[1, [0.2, 0.8]])
+```
+
+On the directions of a measurement:
+
+```python
+pf = calcPoleFigure(odf, pfMeasured)
+```
+
+The intensity of the crystal direction h at the specimen direction r is the radon
+transform of the ODF, the mean of the ODF over the orientations taking h to r; over the
+directions of an axis grid it is the mean of r and -r. A Python list of crystal
+directions makes one pole figure per entry, and an entry of several directions is their
+superposition, weighted by the superposition coefficients, as the overlapping
+reflections a diffractometer measures together. Without specimen directions the pole
+figures are evaluated on regularS2Grid, which takes the remaining keywords. The result
+can be turned into counts by noisepf.
+
+## Input
+
+| | |
+|---|---|
+| `odf` | SO3Fun |
+| `h` | Miller or vector3d in the crystal frame of the ODF, or a list of them, one per pole figure |
+
+## Output
+
+| | |
+|---|---|
+| `pf` | PoleFigure |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `r` | `None` | vector3d, the specimen directions, or a list of them, one per pole figure; by default a regular grid |
+| `superposition` | `None` | the weights of the superposed directions, a list with one entry per pole figure |
+| `complete` | `False` | the whole sphere instead of the upper hemisphere, the directions without antipodal symmetry (MATLAB's flag complete) |
+
+## See also
+
+[PoleFigure.noisepf](PoleFigure.noisepf_py.html), [calcODF](calcODF_py.html), [regularS2Grid](regularS2Grid_py.html), [PoleFigureSimulation](PoleFigureSimulation_py.html)
 
 ## Used on
 
@@ -32,5 +91,5 @@ calcPoleFigure(odf, pf)                         on the directions of a measureme
 
 MATLAB's [SO3Fun.calcPoleFigure](SO3Fun.calcPoleFigure.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L641">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L707">source</a></font>
 {% endraw %}

@@ -18,5 +18,5 @@ scatter of two coordinate lists; a string names the colour; NaN positions are le
 scatterXY(x, y, *args, filled=False, **kw)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L760">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L950">source</a></font>
 {% endraw %}

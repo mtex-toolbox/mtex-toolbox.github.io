@@ -12,17 +12,61 @@ status: Reference
 {% raw %}
 A method of [SO3FunCBF](SO3FunCBF_index_py.html).
 
-the Radon transform through the harmonic expansion of the bandwidth: with h the pole
-figure, with r the inverse pole figure, with both the values; several h superposed, weighted
-by superposition (MATLAB's pdf, ipdf and calcPDF)
+the Radon transform of a fibre ODF: the pole figure of a crystal direction, the inverse
+pole figure of a specimen direction, or the pole density of both
 
 ## Syntax
 
+The pole figure of h:
+
 ```python
-SO3FunCBF.radon(self, h=None, r=None, superposition=None, bandwidth=None)
+S2F = SO3F.radon(h)
 ```
+
+The inverse pole figure of r:
+
+```python
+S2F = SO3F.radon(r=r)
+```
+
+The pole figure of h at r:
+
+```python
+v = SO3F.radon(h, r)
+```
+
+The Radon transform of f at (h, r) is the mean of f over the orientations taking h to r,
+computed through the harmonic expansion of the bandwidth. Several crystal directions are
+superposed with the weights of superposition. It replaces MATLAB's calcPDF, pdf and
+ipdf.
+
+## Input
+
+| | |
+|---|---|
+| `SO3F` | SO3FunCBF |
+| `h` | Miller or vector3d, the crystal direction, or a list of them to superpose |
+| `r` | vector3d, the specimen direction |
+
+## Output
+
+| | |
+|---|---|
+| `S2F` | S2FunHarmonic, the pole figure or the inverse pole figure |
+| `v` | the values at r, given h and r |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `superposition` | `None` | the weights of the superposed crystal directions |
+| `bandwidth` | `None` | the harmonic degree of the result, by default the kernel's |
+
+## See also
+
+[calcPoleFigure](SO3Fun.calcPoleFigure_py.html), [SO3FunRBF.radon](SO3FunRBF.radon_py.html), [plotPF](SO3Fun.plotPDF_py.html), [plotIPF](SO3Fun.plotIPDF_py.html)
 
 MATLAB's [SO3FunCBF.radon](SO3FunCBF.radon.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L634">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/rbf.py#L693">source</a></font>
 {% endraw %}

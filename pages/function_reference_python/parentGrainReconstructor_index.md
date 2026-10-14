@@ -10,17 +10,80 @@ counterpart: parentGrainReconstructor_index.html
 status: Reference
 ---
 {% raw %}
-job = parentGrainReconstructor(ebsd, grains, p2c)
+the state of a parent grain reconstruction: the map and the grains it starts from, the
+orientation relationship and the grains after every step taken; MATLAB's
+parentGrainReconstructor
 
-The state of a parent grain reconstruction: the map and the grains it starts from
-(ebsdPrior, grainsPrior), the orientation relationship p2c, the grains after every step
-taken so far (grains) and which of them every prior grain went into (mergeId, the id of
-the current grain per prior grain). Without grains the map is segmented at 3 degrees;
-without p2c the phases are guessed, the most frequent indexed one the child and the
-rarest the parent, and job.p2c is set afterwards. The parent frame is added to the phase
-lists of the job's copies when the map carries only the child. With
-useBoundaryOrientations a pair of grains votes with the means of their pixels along the
-boundary they share rather than with the grain means.
+## Syntax
+
+The parent and child phases guessed:
+
+```python
+job = parentGrainReconstructor(ebsd, grains)
+```
+
+With an initial orientation relationship:
+
+```python
+job = parentGrainReconstructor(ebsd, grains, orientation.KurdjumovSachs(csParent, csChild))
+```
+
+Votes from the orientations along the boundaries:
+
+```python
+job = parentGrainReconstructor(ebsd, grains, p2c, useBoundaryOrientations=True)
+```
+
+The grains segmented at 3 degree:
+
+```python
+job = parentGrainReconstructor(ebsd)
+```
+
+The job keeps the map and the grains as given, ebsdPrior and grainsPrior, the grains at
+the current stage, grains, with parentGrains and childGrains, and for every prior grain the
+id of the current grain it went into, mergeId. The steps of a reconstruction are its
+methods: calcParent2Child refines the orientation relationship p2c, calcGBVotes,
+calcTPVotes or calcGraph with clusterVariantGraph collect votes, calcParentFromVote and
+calcParentFromGraph turn child grains into parent grains, mergeSimilar and
+mergeInclusions merge them, and calcParentEBSD gives the reconstructed map, with
+variantId and packetId.
+
+The phases are guessed from the map: the most frequent indexed phase is the child and
+the rarest the parent, which job.csParent and job.csChild correct, or setting job.p2c,
+whose frames then name both. The parent frame is added to the phase lists of the job's
+copies when the map carries only the child. The map must carry the grain ids of grains,
+which calcGrains writes into it.
+
+## Input
+
+| | |
+|---|---|
+| `ebsd` | EBSD, the map of the measured, mostly child, phase, with the grain ids of grains |
+| `grains` | grain2d, the child grains of the map; when not given the map is segmented at 3 degree, on a copy |
+| `p2c` | orientation, the initial guess of the parent to child orientation relationship (MATLAB's p2c0) |
+
+## Output
+
+| | |
+|---|---|
+| `job` | parentGrainReconstructor |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `useBoundaryOrientations` |  | a pair of grains votes with the mean orientations of their pixels along the boundary they share rather than with the grain means |
+| `reportFit` |  | show the quantiles of the misfit of the boundaries to p2c when the job is displayed |
+
+## References
+
+- R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia 22 (2022) 101399
+- F. Niessen, T. Nyyssönen, A. A. Gazder, R. Hielscher, Parent grain reconstruction from partially or fully transformed microstructures in MTEX, J. Appl. Cryst. 55 (2022) 180-194
+
+## See also
+
+[parentGrainReconstructor.calcParent2Child](parentGrainReconstructor.calcParent2Child_py.html), [parentGrainReconstructor.calcGBVotes](parentGrainReconstructor.calcGBVotes_py.html), [parentGrainReconstructor.calcParentFromVote](parentGrainReconstructor.calcParentFromVote_py.html), [calcParent2Child](calcParent2Child_py.html), [MaParentGrainReconstruction](MaParentGrainReconstruction_py.html), [TiBetaReconstruction](TiBetaReconstruction_py.html), [GrainGraphBasedReconstruction](GrainGraphBasedReconstruction_py.html)
 
 ## Members
 
@@ -29,19 +92,19 @@ boundary they share rather than with the grain means.
 | [bainId](parentGrainReconstructor.bainId_py.html) | the reconstructed Bain group id of every prior grain, NaN where none is computed |
 | [c2c](parentGrainReconstructor.c2c_py.html) | the child to child misorientations of the relationship, the identity included |
 | [calcGBFit](parentGrainReconstructor.calcGBFit_py.html) | fit, pairs = job.calcGBFit(): the misfit of every parent to child and child to child boundary to the relationship, and the ids of the grains on either side |
-| [calcGBVotes](parentGrainReconstructor.calcGBVotes_py.html) | job.calcGBVotes(): the votes the grain boundaries cast into job.votes |
-| [calcGraph](parentGrainReconstructor.calcGraph_py.html) | job.calcGraph(threshold=2.5*degree, tol=2.5*degree): job.graph, a node per grain and between neighbours the probability that the misfit of their boundary to the relationship still means one parent |
-| [calcParent2Child](parentGrainReconstructor.calcParent2Child_py.html) | job.calcParent2Child(): the relationship refined on the boundaries of the map |
+| [calcGBVotes](parentGrainReconstructor.calcGBVotes_py.html) | the votes the grain boundaries cast for the parent orientation of their child grains, written into job.votes |
+| [calcGraph](parentGrainReconstructor.calcGraph_py.html) | the graph of the grains for a parent grain reconstruction, job.graph |
+| [calcParent2Child](parentGrainReconstructor.calcParent2Child_py.html) | the parent to child orientation relationship job.p2c refined on the boundaries of the map |
 | [calcParentEBSD](parentGrainReconstructor.calcParentEBSD_py.html) | parentEBSD = job.calcParentEBSD(): the map with the grain ids of the current grains and every child pixel of a grain that is a parent now given the parent orientation of its grain, its variant and packet id, and fit, its misfit to the variant |
 | [calcParentFromGraph](parentGrainReconstructor.calcParentFromGraph_py.html) | job.calcParentFromGraph(): every component of job.graph of more than one grain gives its child grains the parent orientation that fits them together, or fits the parent grains among them |
-| [calcParentFromVote](parentGrainReconstructor.calcParentFromVote_py.html) | job.calcParentFromVote(minProb=0.5): every grain whose leading vote is strong enough takes the parent orientation of that variant and the parent phase: for probabilities above minProb and ahead of the second by minDelta, for fits below minFit and behind the second by minDelta, for counts at least minCount with the second below maxCount |
-| [calcTPVotes](parentGrainReconstructor.calcTPVotes_py.html) | job.calcTPVotes(minFit=2.5*degree, maxFit=5*degree): the votes the triple points of three child grains cast, each corner for the variant of the parent that fits all three |
-| [calcVariantGraph](parentGrainReconstructor.calcVariantGraph_py.html) | job.calcVariantGraph(threshold=3.5*degree, tol=1.5*degree): job.graph, the variant graph: a node per child grain and parent variant and one per parent grain, and an edge where two neighbours agree - child to child over every pair of variants, parent to child over the variants that fit the parent, parent to parent over their orientations - with the probability of the agreement |
+| [calcParentFromVote](parentGrainReconstructor.calcParentFromVote_py.html) | the child grains whose vote is clear turned into parent grains, the parent orientation of the variant they voted for |
+| [calcTPVotes](parentGrainReconstructor.calcTPVotes_py.html) | the votes the triple points of three child grains cast for their parent orientation, written into job.votes |
+| [calcVariantGraph](parentGrainReconstructor.calcVariantGraph_py.html) | the variant graph of a parent grain reconstruction, job.graph |
 | [calcVariants](parentGrainReconstructor.calcVariants_py.html) | job.calcVariants(): the variant, packet and Bain id of every transformed prior grain against the parent it went into, as job.variantId, job.packetId, job.bainId |
 | [childGrains](parentGrainReconstructor.childGrains_py.html) | the remaining child grains at the current stage of the reconstruction |
 | [childPhaseId](parentGrainReconstructor.childPhaseId_py.html) | the phase id of the child phase |
 | [clusterGraph](parentGrainReconstructor.clusterGraph_py.html) | job.clusterGraph(inflationPower=1.6): job.graph clustered by MCL, so that its components are the parent grains |
-| [clusterVariantGraph](parentGrainReconstructor.clusterVariantGraph_py.html) | job.clusterVariantGraph(includeSimilar=True): the variant graph (calcVariantGraph first when there is none) clustered by MCL - expansion, inflation by inflationPower, pruning below cutOff, the rows of every grain normalised together - over numIter steps |
+| [clusterVariantGraph](parentGrainReconstructor.clusterVariantGraph_py.html) | the variant graph clustered by the MCL algorithm generalised to the variants of a grain, the votes for the parent orientations |
 | [csChild](parentGrainReconstructor.csChild_py.html) | the frame of the child phase, that of the orientation relationship once it is set |
 | [csParent](parentGrainReconstructor.csParent_py.html) | the frame of the parent phase, that of the orientation relationship once it is set |
 | [ebsd](parentGrainReconstructor.ebsd_py.html) | the map at the current stage of the reconstruction, calcParentEBSD |
@@ -59,7 +122,7 @@ boundary they share rather than with the grain means.
 | [packetId](parentGrainReconstructor.packetId_py.html) | the reconstructed packet id of every prior grain, NaN where none is computed |
 | [parent2ChildInfo](parentGrainReconstructor.parent2ChildInfo_py.html) | OR = job.parent2ChildInfo(): the relationship with its closest rational parallel planes and directions, their deviations, its axis in both crystals and the angles and axes of the variants, printed and returned |
 | [parentEBSD](parentGrainReconstructor.parentEBSD_py.html) | the parent phase of the map at the current stage of the reconstruction |
-| [parentGrainReconstructor](parentGrainReconstructor.parentGrainReconstructor_py.html) | job = parentGrainReconstructor(ebsd, grains, p2c) |
+| [parentGrainReconstructor](parentGrainReconstructor.parentGrainReconstructor_py.html) | the state of a parent grain reconstruction: the map and the grains it starts from, the orientation relationship and the grains after every step taken |
 | [parentGrains](parentGrainReconstructor.parentGrains_py.html) | the parent grains at the current stage of the reconstruction |
 | [parentId](parentGrainReconstructor.parentId_py.html) | the parent variant every transformed prior grain was reconstructed with |
 | [parentPhaseId](parentGrainReconstructor.parentPhaseId_py.html) | the phase id of the parent phase |
@@ -75,5 +138,5 @@ boundary they share rather than with the grain means.
 
 MATLAB's [parentGrainReconstructor_index](parentGrainReconstructor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L245">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/reconstruction.py#L266">source</a></font>
 {% endraw %}

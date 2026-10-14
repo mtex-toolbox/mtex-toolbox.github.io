@@ -18,5 +18,5 @@ or the NUFFT by the number of nodes
 sphericalSeries(fhat, v, real=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L871">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L924">source</a></font>
 {% endraw %}

@@ -11,19 +11,66 @@ status: Reference
 ---
 {% raw %}
 an EBSD map: positions, rotations and phase ids with the list of the phases' frames and the
-properties, a scattered list or, gridified, arrays in map shape; nan positions are dropped and
-the lattice is read off the positions or a unit cell
+properties of every measurement; MATLAB's EBSD
 
 ## Syntax
 
-```python
-EBSD(pos, rotations, phaseId, CSList, prop=None, unitCell=None, scanUnit='um', frame=None, lattice=None, meta=None, phaseMap=None, id=None, isPadding=None)
-```
+The measurements as a list:
 
 ```python
-EBSD(pos, rotations, phaseId, CSList, prop)
-EBSD(pos, rotations, phaseId, CSList, prop, unitCell=uC)
+ebsd = EBSD(pos, rot, phaseId, CSList)
 ```
+
+With properties:
+
+```python
+ebsd = EBSD(pos, rot, phaseId, CSList, {'mad': mad})
+```
+
+The shape of a pixel stated:
+
+```python
+ebsd = EBSD(pos, rot, phaseId, CSList, prop, unitCell=uC)
+```
+
+A map is a table of measurements, a row per pixel, or, gridified, the same arrays in map
+shape, ebsd[i, j] the pixel of row i and column j. phaseId indexes CSList, 0 the not indexed
+phase. A position that is NaN is dropped, as MATLAB drops it. The lattice of the positions,
+square or hexagonal, is read off the positions, or off the unit cell when it is given;
+loadEBSD, mtexdata and the simulations build maps the same way.
+
+## Input
+
+| | |
+|---|---|
+| `pos` | vector3d, or an (n, 2) or (n, 3) array, the centres of the pixels |
+| `rotations` | rotation, the rotation of every pixel |
+| `phaseId` | int array, the phase of every pixel as the index into CSList |
+| `CSList` | phaseList, or a list of crystalFrame with 'notIndexed' first |
+| `prop` | dict, a property per pixel of the shape of the map, ebsd.prop['mad'] and ebsd.mad |
+
+## Output
+
+| | |
+|---|---|
+| `ebsd` | EBSD |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `unitCell` | `None` | vector3d or (k, 2) array, the corners of a pixel about its centre, from which the lattice is built |
+| `scanUnit` | `'um'` | the unit of the positions |
+| `frame` | `None` | specimenFrame of the positions, by default that of pos or the default one |
+| `lattice` | `None` | the lattice of the positions, when it is known, instead of reading it off them |
+| `meta` | `None` | dict, what a file states besides the measurements |
+| `phaseMap` | `None` | the phase number the file gives each entry of CSList |
+| `id` | `None` | the id of every pixel, by default its position in the list |
+| `isPadding` | `None` | the mask of the cells a grid adds to close it, MATLAB's NaN phase |
+
+## See also
+
+[loadEBSD](loadEBSD_ang_py.html), [EBSDsquare](EBSDsquare_py.html), [gridify](gridify_py.html), [simulateEBSD](simulateEBSD_index_py.html), [EBSDImport](EBSDImport_py.html), [EBSDSelect](EBSDSelect_py.html), [EBSDPlotting](EBSDPlotting_py.html), [GrainReconstruction](GrainReconstruction_py.html)
 
 ## Used on
 

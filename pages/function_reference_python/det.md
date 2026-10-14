@@ -17,6 +17,13 @@ det(x, ...) is x.det(...), the method of the object passed; NumPy's det for an a
 det(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [tensor](tensor.det_py.html) | the determinant of a rank two tensor |
+| [vector3d](vector3d.det_py.html) | the triple product, vector3d/det det(a, b, c) the triple product |
+
 ## Used on
 
 [LatticeMetric](LatticeMetric_py.html), [RotationImproper](RotationImproper_py.html), [TensorArithmetics](TensorArithmetics_py.html)

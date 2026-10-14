@@ -19,5 +19,5 @@ the same coefficients up to a tolerance
 SO3FunHarmonic.isclose(self, g, rtol=1e-08, atol=0.0)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L445">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L505">source</a></font>
 {% endraw %}

@@ -11,14 +11,57 @@ status: Reference
 {% raw %}
 A method of [orthogonalTransform](orthogonalTransform_index_py.html).
 
-the transforms with those equal up to the tolerance removed, a rotation and its negative one;
-optionally the indices of the kept ones and the index of each into them
+the disjoint list of orthogonal transforms, those equal up to a tolerance taken as one
 
 ## Syntax
 
+Sorted, one of each:
+
 ```python
-orthogonalTransform.unique(self, tol=0.001, stable=False, return_index=False, return_inverse=False)
+u = unique(T)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L737">source</a></font>
+In the order of first appearance:
+
+```python
+u = unique(T, stable=True)
+```
+
+The index maps:
+
+```python
+u, iT, iu = unique(T, return_index=True, return_inverse=True)
+```
+
+Two transforms are one when their parities agree and their rotational parts agree to tol,
+a rotation and its negative counted as one.
+
+## Input
+
+| | |
+|---|---|
+| `T` | orthogonalTransform |
+
+## Output
+
+| | |
+|---|---|
+| `u` | orthogonalTransform, a one-dimensional list |
+| `iT` | indices with u = T.flatten()[iT] |
+| `iu` | indices with T.flatten() = u[iu] |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `tol` | `0.001` | the tolerance in the quaternion coefficients |
+| `stable` | `False` | keep the order of first appearance instead of sorting |
+| `return_index` | `False` | also return iT |
+| `return_inverse` | `False` | also return iu |
+
+## See also
+
+[quaternion.unique](quaternion.unique_py.html), [orientation.unique](orientation.unique_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L848">source</a></font>
 {% endraw %}

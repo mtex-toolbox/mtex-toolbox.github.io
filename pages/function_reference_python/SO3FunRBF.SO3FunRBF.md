@@ -10,17 +10,60 @@ counterpart: SO3FunRBF.SO3FunRBF.html
 status: Reference
 ---
 {% raw %}
-a function on SO(3) as a sum of radial kernels psi at centre orientations with weights, plus a
-constant c0; the weights default to a mean of one
+a function on SO(3) as a sum of radial kernels at centre orientations, plus a constant: a
+radial basis function ODF
 
 ## Syntax
 
-```python
-SO3FunRBF(center, psi=None, weights=None, c0=0.0)
-```
+Kernels psi at the orientations ori:
 
 ```python
-SO3FunRBF(ori, psi, weights, c0)
+SO3F = SO3FunRBF(ori, psi, weights)
+```
+
+Plus the constant c0:
+
+```python
+SO3F = SO3FunRBF(ori, psi, weights, c0)
+```
+
+10 degree kernels, the weights giving a mean of one:
+
+```python
+SO3F = SO3FunRBF(ori)
+```
+
+The function is c0 + sum_i w_i psi(angle(g, ori_i)), every centre taken with all its
+symmetrically equivalent orientations, in the crystal and specimen frames of the centres.
+It stays a kernel sum under scaling, adding a constant, adding another kernel sum of the
+same kernel, rotation, inversion and convolution with a kernel on SO(3); the harmonic form
+it is evaluated through is kept until a centre, the kernel, the weights or the constant
+are set. unimodalODF and calcDensity build one; SO3FunRBF.interpolate fits one through
+values. MATLAB's SO3FunRBF(F) approximating another SO3Fun is not ported.
+
+## Input
+
+| | |
+|---|---|
+| `center` | orientation, the centres of the kernels |
+| `psi` | SO3Kernel; by default the de la Vallee Poussin kernel of halfwidth 10 degree |
+| `weights` | one weight per centre; by default equal, giving a mean of one |
+| `c0` | the constant added |
+
+## Output
+
+| | |
+|---|---|
+| `SO3F` | SO3FunRBF |
+
+## See also
+
+[unimodalODF](unimodalODF_py.html), [SO3FunCBF](SO3FunCBF_index_py.html), [SO3FunRBF.interpolate](SO3FunRBF.interpolate_py.html), [calcDensity](calcDensity_py.html), [SO3FunRBF.radon](SO3FunRBF.radon_py.html), [RadialODFs](RadialODFs_py.html)
+
+## Signature
+
+```python
+SO3FunRBF(center, psi=None, weights=None, c0=0.0)
 ```
 
 ## Used on

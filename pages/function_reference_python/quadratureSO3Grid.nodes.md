@@ -19,5 +19,5 @@ the nodes as orientations in the frames of the grid, beta fastest, then alpha, t
 quadratureSO3Grid.nodes(self)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L136">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L158">source</a></font>
 {% endraw %}

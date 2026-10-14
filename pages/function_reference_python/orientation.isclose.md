@@ -20,5 +20,5 @@ frames, MATLAB's eq
 orientation.isclose(self, other, tol=0.0005)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L347">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L427">source</a></font>
 {% endraw %}

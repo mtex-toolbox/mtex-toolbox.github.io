@@ -22,5 +22,5 @@ sphericalRegion.plot(sR, color='k', lineWidth=1.0, **kw)
 
 MATLAB's [sphericalRegion.plot](sphericalRegion.plot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1191">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1265">source</a></font>
 {% endraw %}

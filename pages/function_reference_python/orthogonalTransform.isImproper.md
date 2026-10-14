@@ -13,5 +13,5 @@ A property of [orthogonalTransform](orthogonalTransform_index_py.html).
 
 whether the transform is improper, its determinant -1
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L632">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L743">source</a></font>
 {% endraw %}

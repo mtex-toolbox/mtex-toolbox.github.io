@@ -19,11 +19,13 @@ differ by one step in two of the three
 ## Syntax
 
 ```python
-EBSD.hex2cube(ebsd, row, col=None)
+x, y, z = hex2cube(ebsd, row, col)
 ```
 
+## Signature
+
 ```python
-x, y, z = hex2cube(ebsd, row, col)
+EBSD.hex2cube(ebsd, row, col=None)
 ```
 
 ## Used on

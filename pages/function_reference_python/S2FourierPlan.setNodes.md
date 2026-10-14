@@ -19,5 +19,5 @@ moves the plan to other directions, the finufft plans kept
 S2FourierPlan.setNodes(self, v)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L488">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/transforms.py#L541">source</a></font>
 {% endraw %}

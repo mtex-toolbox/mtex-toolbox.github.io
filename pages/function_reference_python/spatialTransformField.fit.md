@@ -19,5 +19,5 @@ the field of the displacements of the point pairs, at the points of frame A
 spatialTransformField.fit(posA, posB, weights=None, **kwargs)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L605">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L676">source</a></font>
 {% endraw %}

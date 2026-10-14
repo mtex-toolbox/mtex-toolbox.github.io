@@ -15,11 +15,13 @@ the current mtexFigure, None before the first plot
 ## Syntax
 
 ```python
-gcm()
+mtexFig = gcm()
 ```
 
+## Signature
+
 ```python
-mtexFig = gcm()
+gcm()
 ```
 
 ## Used on
@@ -28,5 +30,5 @@ mtexFig = gcm()
 
 MATLAB's [gcm](gcm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L460">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L502">source</a></font>
 {% endraw %}

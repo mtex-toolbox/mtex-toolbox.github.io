@@ -12,6 +12,8 @@ status: Reference
 the bump kernel on SO(3): constant on the rotations of angle below delta, zero beyond, of
 mean one
 
+## Syntax
+
 ```python
 SO3BumpKernel(40*degree)
 SO3BumpKernel(halfwidth=10*degree, bandwidth=64)

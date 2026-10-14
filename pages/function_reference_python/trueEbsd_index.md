@@ -12,6 +12,8 @@ status: Reference
 the alignment of a sequence of images and EBSD maps of one area, most distorted first and the
 ground truth last, one unfitted spatial transform per hop; the methods alter the job
 
+## Syntax
+
 ```python
 job = trueEbsd(imgList, T)
 job.pixelSizeMatch()
@@ -23,8 +25,8 @@ job.undistort()
 
 | | |
 |---|---|
-| [calcDistortion](trueEbsd.calcDistortion_py.html) | job.calcDistortion('fitErr'), job.calcDistortion(fitErr=True, verbose=False, retryMax=3) |
-| [pixelSizeMatch](trueEbsd.pixelSizeMatch_py.html) | job.pixelSizeMatch(), job.pixelSizeMatch(0.05, offsetMatch='topLeft', extentMatch='smallest') |
+| [calcDistortion](trueEbsd.calcDistortion_py.html) | the distortion between every consecutive pair of maps of the job fitted |
+| [pixelSizeMatch](trueEbsd.pixelSizeMatch_py.html) | every image and map of the job resampled onto one grid |
 | [setOptions](trueEbsd.setOptions_py.html) | job.setOptions(roiSize=5, numROI=24), job.setOptions(3, registerOn='raw') |
 | [T](trueEbsd.T_py.html) | one unfitted transform per hop |
 | [trueEbsd](trueEbsd.trueEbsd_py.html) | the alignment of a sequence of images and EBSD maps of one area, most distorted first and the ground truth last, one unfitted spatial transform per hop |

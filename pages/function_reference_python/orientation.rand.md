@@ -11,21 +11,60 @@ status: Reference
 {% raw %}
 A method of [orientation](orientation_index_py.html).
 
-random orientations, uniformly distributed or within maxAngle of the identity;
-rng= a NumPy random generator, antipodal=True misorientations with grain exchange
+random orientations
 
 ## Syntax
 
-```python
-orientation.rand(*args, rng=None, antipodal=False, maxAngle=None)
-```
+One random orientation:
 
 ```python
-ori = orientation.rand(cs)                          # one
+ori = orientation.rand(cs)
+```
+
+N of them:
+
+```python
 ori = orientation.rand(n, cs, ss)
-ori = orientation.rand(m, n, cs)                    # an m x n array
+```
+
+An m x n array:
+
+```python
+ori = orientation.rand(m, n, cs)
+```
+
+Within 10 degree of the identity:
+
+```python
 ori = orientation.rand(n, cs, maxAngle=10*degree)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L193">source</a></font>
+The rotations are uniformly distributed on SO(3), or within the ball of radius maxAngle
+about the identity; the symmetry of the frames does not enter the draw.
+
+## Input
+
+| | |
+|---|---|
+| `args` | the shape, as numbers; the crystal frame cs and the specimen frame ss, or a second crystal frame for misorientations |
+
+## Output
+
+| | |
+|---|---|
+| `ori` | orientation |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `rng` | `None` | a NumPy random generator, for draws that repeat |
+| `antipodal` | `False` | misorientations with grain exchange |
+| `maxAngle` | `None` | the largest rotational angle, in radians |
+
+## See also
+
+[rotation.rand](rotation.rand_py.html), [orientation.id](orientation.id_py.html), [discreteSample](discreteSample_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L239">source</a></font>
 {% endraw %}

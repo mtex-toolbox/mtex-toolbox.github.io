@@ -17,12 +17,14 @@ elements
 ## Syntax
 
 ```python
-referenceFrame.factor(self, other)
-```
-
-```python
 rot1, d, rot2 = cs1.factor(cs2)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L289">source</a></font>
+## Signature
+
+```python
+referenceFrame.factor(self, other)
+```
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L312">source</a></font>
 {% endraw %}

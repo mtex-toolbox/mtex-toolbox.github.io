@@ -17,6 +17,13 @@ numSym(x, ...) is x.numSym(...), the method of the object passed
 numSym(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [referenceFrame](referenceFrame.numSym_py.html) | the number of elements of the point group |
+| [symmetry](symmetry.numSym_py.html) | the number of elements of the group |
+
 ## Used on
 
 [SpecimenSymmetry](SpecimenSymmetry_py.html), [SO3FunConcept](SO3FunConcept_py.html)

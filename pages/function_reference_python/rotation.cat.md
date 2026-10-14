@@ -18,15 +18,22 @@ gives an orthogonalTransform, orientations stay orientations between the same fr
 ## Syntax
 
 ```python
-rotation.cat(*arrays, axis=0)
+rot = cat(rot1, rot2)
 ```
 
+Side by side:
+
 ```python
-rot = cat(rot1, rot2)
-rot = cat(rot1, rot2, axis=1)    # side by side
+rot = cat(rot1, rot2, axis=1)
+```
+
+## Signature
+
+```python
+rotation.cat(*arrays, axis=0)
 ```
 
 MATLAB's [rotation.cat](rotation.cat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L502">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L597">source</a></font>
 {% endraw %}

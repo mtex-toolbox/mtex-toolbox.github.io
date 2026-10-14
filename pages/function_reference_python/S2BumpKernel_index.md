@@ -12,6 +12,8 @@ status: Reference
 the bump kernel on the sphere: 2 / (1 - cos delta) on the cap of radius delta, zero beyond,
 a density of mean one
 
+## Syntax
+
 ```python
 S2BumpKernel(10*degree)
 S2BumpKernel(halfwidth=10*degree, bandwidth=64)
@@ -28,5 +30,5 @@ S2BumpKernel(halfwidth=10*degree, bandwidth=64)
 
 [S2Kernels](S2Kernels_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L777">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L796">source</a></font>
 {% endraw %}

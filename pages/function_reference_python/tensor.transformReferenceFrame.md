@@ -23,5 +23,5 @@ tensor.transformReferenceFrame(self, fr)
 
 MATLAB's [tensor.transformReferenceFrame](tensor.transformReferenceFrame.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L566">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L594">source</a></font>
 {% endraw %}

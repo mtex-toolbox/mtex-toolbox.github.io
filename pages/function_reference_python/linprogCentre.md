@@ -24,5 +24,5 @@ linprogCentre(c, A, y, tol=1e-09, maxIter=100)
 
 MATLAB's [linprogCentre](linprogCentre.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L139">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L161">source</a></font>
 {% endraw %}

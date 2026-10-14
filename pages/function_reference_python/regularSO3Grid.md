@@ -10,15 +10,58 @@ counterpart: regularSO3Grid.html
 status: Reference
 ---
 {% raw %}
-the Euler angle raster over the Euler box of the frames, MATLAB's regularSO3Grid: sections
-of phi2 from zero below its bound, and on each the (Phi, phi1) grid with both ends of Phi
-and phi1 from zero below its bound, all at the resolution
+the regular raster of Euler angles over the Euler box of the frames, as the ODF sections
+show it
 
 ## Syntax
 
+The resolution 5 degree:
+
 ```python
-regularSO3Grid(CS, SS=None, resolution=5*degree, sections=None)
+ori = regularSO3Grid(CS)
 ```
+
+Another resolution:
+
+```python
+ori = regularSO3Grid(CS, SS, resolution=2.5*degree)
+```
+
+Ten phi2 sections:
+
+```python
+ori = regularSO3Grid(CS, SS, sections=10)
+```
+
+The Bunge angles phi2 run in sections from zero below their bound, and on each section
+the (Phi, phi1) raster with both ends of Phi and phi1 from zero below its bound, all at
+the resolution; the bounds are the Euler box of the crystal and the specimen symmetry. The
+result is an array of the shape (Phi, phi1, phi2). MATLAB's other outputs, the section
+flags phi1 and Phi, the 'ZYZ' convention and the Clenshaw-Curtis grid are not there.
+
+## Input
+
+| | |
+|---|---|
+| `CS` | crystalFrame |
+| `SS` | specimenFrame, by default the default specimen frame |
+
+## Output
+
+| | |
+|---|---|
+| `ori` | orientation of shape (Phi, phi1, phi2) |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `resolution` | `5*degree` | the spacing of the Euler angles |
+| `sections` | `None` | the number of phi2 sections, instead of the resolution |
+
+## See also
+
+[equispacedSO3Grid](equispacedSO3Grid_py.html), [phi2Sections](phi2Sections_index_py.html), [eulerRegion](eulerRegion_py.html)
 
 ## Used on
 
@@ -26,5 +69,5 @@ regularSO3Grid(CS, SS=None, resolution=5*degree, sections=None)
 
 MATLAB's [regularSO3Grid](regularSO3Grid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/so3grid.py#L291">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/so3grid.py#L313">source</a></font>
 {% endraw %}

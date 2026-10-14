@@ -17,11 +17,13 @@ the length of the vectors as a function on SO(3), the same as abs
 ## Syntax
 
 ```python
-SO3VectorFieldRBF.norm(self)
+SO3F = norm(SO3VF)
 ```
 
+## Signature
+
 ```python
-SO3F = norm(SO3VF)
+SO3VectorFieldRBF.norm(self)
 ```
 
 MATLAB's [SO3VectorFieldRBF.norm](SO3VectorFieldRBF.norm.html)

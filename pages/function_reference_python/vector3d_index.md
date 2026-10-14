@@ -14,31 +14,128 @@ three dimensional vectors, a container over (..., 3) coordinates carrying antipo
 isNormalized, the reference frame and the display style; a vector in a crystal frame is a
 crystal direction with Miller indices
 
+## Syntax
+
+From the Cartesian coordinates:
+
 ```python
-vector3d(x, y, z)
-vector3d(xyz, frame=cs)             coordinates of shape (..., 3) or (3, N)
-vector3d.byPolar(theta, rho)
-vector3d.X, vector3d.Y, vector3d.Z
+v = vector3d(x, y, z)
 ```
+
+Coordinates of shape (..., 3) or (3, N):
+
+```python
+v = vector3d(xyz)
+```
+
+Axes, v and -v the same:
+
+```python
+v = vector3d(x, y, z, antipodal=True)
+```
+
+A crystal direction from its Euclidean coordinates:
+
+```python
+m = vector3d(xyz, frame=cs)
+```
+
+From the polar angles:
+
+```python
+v = vector3d.byPolar(theta, rho)
+```
+
+The axes of the frame, also Y and Z:
+
+```python
+v = vector3d.X
+```
+
+A lattice plane normal by its indices hkl:
+
+```python
+m = Miller(1, 1, 1, cs)
+```
+
+Four indices hkil of a hexagonal lattice:
+
+```python
+m = Miller(1, 0, -1, 0, csHex)
+```
+
+A lattice direction, 'UVTW' with four indices:
+
+```python
+m = Miller(1, 1, 0, cs, 'uvw')
+```
+
+(hkl) one plane, {hkl} the family, [uvw] and <uvw> directions:
+
+```python
+m = Miller('{111}', cs)
+```
+
+A vector restated in the crystal frame:
+
+```python
+m = Miller(v, cs)
+```
+
+A crystal direction is a vector3d whose frame is a crystal frame: it has the Miller
+indices m.hkl and m.uvw, the four index forms m.hkil and m.UVTW of a trigonal or hexagonal
+lattice, a d-spacing, and where the frame carries a point group it stands for its
+symmetrically equivalent set, which dot, angle, mean and unique take into account. It is
+stored in Euclidean coordinates; MATLAB's class Miller is a vector3d here, built by the
+function Miller from its indices.
+
+## Input
+
+| | |
+|---|---|
+| `x, y, z` | arrays of the Cartesian coordinates, broadcast against each other |
+| `xyz` | array of shape (..., 3) or (3, N), a vector3d, or a rank one tensor |
+| `cs` | crystalFrame, also given positionally to vector3d |
+
+## Output
+
+| | |
+|---|---|
+| `v` | vector3d |
+| `m` | vector3d, a crystal direction |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `antipodal` |  | the vectors are axes: v and -v are the same |
+| `isNormalized` |  | the coordinates are known to be of length one |
+| `frame` |  | the referenceFrame the coordinates are given in, a crystal frame making the vectors crystal directions; also given as a positional argument |
+| `dispStyle` |  | the indices the display shows, 'hkl', 'hkil', 'uvw', 'UVTW' or 'xyz' |
+| `dtype` |  | the floating point type of the coordinates |
+
+## See also
+
+[Miller](Miller_py.html), [vector3d.byPolar](vector3d.byPolar_py.html), [crystalFrame](crystalFrame_index_py.html), [VectorDefinition](VectorDefinition_py.html), [CrystalDirections](CrystalDirections_py.html)
 
 ## Members
 
 | | |
 |---|---|
-| [angle](vector3d.angle_py.html) | the angle between two vectors, through atan2 for full accuracy near 0 and pi |
-| [angle_outer](vector3d.angle_outer_py.html) | the angle between two vectors, through atan2 for full accuracy near 0 and pi |
-| [arrow3d](vector3d.arrow3d_py.html) | arrow3d(v): solid arrows from the origin, or from anchor, to the tips v, into the held axes or a new figure in space, the axes widened to hold them (MATLAB @vector3d/arrow3d) |
+| [angle](vector3d.angle_py.html) | the angle between two vectors |
+| [angle_outer](vector3d.angle_outer_py.html) | the angle between two vectors |
+| [arrow3d](vector3d.arrow3d_py.html) | solid arrows in space, from the origin, or from anchor, to the tips v |
 | [byPolar](vector3d.byPolar_py.html) | the vectors of polar angle theta to z and azimuth rho from x towards y, unit vectors |
 | [byXYZ](vector3d.byXYZ_py.html) | an N x 3 or N x 2 matrix, z zero in the second case |
 | [calcCluster](vector3d.calcCluster_py.html) | the clusters of directions or orientations: one cluster id per element, counted from zero, and the centre of every cluster |
 | [calcDensity](Miller.calcDensity_py.html) | v.calcDensity(): the kernel density estimate of a list of directions, by the function spaces above this layer, vector3d/calcDensity |
 | [calcDensity](vector3d.calcDensity_py.html) | v.calcDensity(): the kernel density estimate of a list of directions, by the function spaces above this layer, vector3d/calcDensity |
-| [calcKernel](vector3d.calcKernel_py.html) | the de la Vallee Poussin kernel a density estimate of orientations or directions should use (MATLAB calcKernel): 'UCV', the default, and 'conservative' select from the degree energies of the sample and are bounded below by a noise floor unless noiseFloor=False (docs/plans/halfwidth.md) |
+| [calcKernel](vector3d.calcKernel_py.html) | the kernel a density estimate of orientations or directions should use, a de la Vallee Poussin kernel of the halfwidth chosen from the sample |
 | [calcQuadratureWeights](vector3d.calcQuadratureWeights_py.html) | weights that integrate a function from samples at the directions, summing to one |
 | [cat](Miller.cat_py.html) | the list of the operands, MATLAB's [a, b] |
 | [cat](vector3d.cat_py.html) | the list of the operands, MATLAB's [a, b] |
-| [char](vector3d.char_py.html) | the indices in brackets, {111} or [uvw], Miller/char |
-| [circle](vector3d.circle_py.html) | circle(v, radius): the small circle of opening angle radius about v, on the axes nextAxis chose or the last one, on every axes with add2all (MATLAB plotting/circle.m) |
+| [char](vector3d.char_py.html) | the Miller indices of a crystal direction in brackets, as text |
+| [circle](vector3d.circle_py.html) | a circle on a spherical plot: the small circle of the opening angle about a direction, the great circle by default |
 | [contour](vector3d.contour_py.html) | contour(sF), contour(v), contour(v, data): contour lines |
 | [contourf](vector3d.contourf_py.html) | contourf(sF), contourf(v), contourf(v, data): filled contours |
 | [convention](vector3d.convention_py.html) | the convention the vector is written in, its display style: 'xyz', 'hkl', 'hkil', 'uvw' or 'UVTW' |
@@ -48,10 +145,10 @@ vector3d.X, vector3d.Y, vector3d.Z
 | [CS](vector3d.CS_py.html) | the crystal frame of a crystal direction, None for any other vector |
 | [det](vector3d.det_py.html) | the triple product, vector3d/det det(a, b, c) the triple product |
 | [discrepancy](vector3d.discrepancy_py.html) | the discrepancy between two densities and/or weighted point sets on the sphere (S2Fun, vector3d) or on SO(3) (SO3Fun, rotation, orientation), in either order |
-| [dot](Miller.dot_py.html) | the inner product |
-| [dot](vector3d.dot_py.html) | the inner product |
-| [dot_outer](Miller.dot_outer_py.html) | the inner product |
-| [dot_outer](vector3d.dot_outer_py.html) | the inner product |
+| [dot](Miller.dot_py.html) | the inner product of two vectors, pointwise |
+| [dot](vector3d.dot_py.html) | the inner product of two vectors, pointwise |
+| [dot_outer](Miller.dot_outer_py.html) | the inner product of two vectors, pointwise |
+| [dot_outer](vector3d.dot_outer_py.html) | the inner product of two vectors, pointwise |
 | [double](vector3d.double_py.html) | double(e) is e.double(): the coordinates of the images in the orthonormal basis, one row per orientation |
 | [dspacing](Miller.dspacing_py.html) | the distance between the lattice planes with this normal, in the units of the cell |
 | [dyad](vector3d.dyad_py.html) | the outer product of tensors or vectors |
@@ -78,8 +175,8 @@ vector3d.X, vector3d.Y, vector3d.Z
 | [line](vector3d.line_py.html) | line(x, y, lineStyle=':', lineWidth=4, color='w'): a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
 | [lineIntersect](vector3d.lineIntersect_py.html) | where the segments from a to b cross the planes <n, v> = d, NaN where they do not |
 | [load](vector3d.load_py.html) | vector3d.load('vectors.txt', columnNames=[...]): the directions a text table holds, read by the interfaces layer above this one |
-| [mean](Miller.mean_py.html) | the mean vector: the arithmetic mean, the normalised weighted sum, or for axes the largest principal axis of the moment matrix |
-| [mean](vector3d.mean_py.html) | the mean vector: the arithmetic mean, the normalised weighted sum, or for axes the largest principal axis of the moment matrix |
+| [mean](Miller.mean_py.html) | the mean direction of a list of vectors, of axes, or of crystal directions |
+| [mean](vector3d.mean_py.html) | the mean direction of a list of vectors, of axes, or of crystal directions |
 | [Miller](Miller.Miller_py.html) | three dimensional vectors, a container over (..., 3) coordinates carrying antipodal, isNormalized, the reference frame and the display style |
 | [minus](vector3d.minus_py.html) |  |
 | [mrdivide](vector3d.mrdivide_py.html) |  |
@@ -100,7 +197,7 @@ vector3d.X, vector3d.Y, vector3d.Z
 | [polar](vector3d.polar_py.html) | polar angle to z in [0, pi] and azimuth from x towards y in [0, 2pi), vector3d/polar |
 | [project2FundamentalRegion](Miller.project2FundamentalRegion_py.html) | the directions folded into the fundamental sector of their frame, with antipodal=True into that of the Laue group |
 | [project2FundamentalRegion](vector3d.project2FundamentalRegion_py.html) | the directions folded into the fundamental sector of their frame, with antipodal=True into that of the Laue group |
-| [quiver3](vector3d.quiver3_py.html) | quiver3d(t): a tangent vector as an arrow at its reference in orientation space, in the coordinates of the held axes or axis angle space |
+| [quiver3](vector3d.quiver3_py.html) | arrows in space: tangent vectors in orientation space, a field on the sphere or SO(3), or arrows at positions |
 | [quiver](vector3d.quiver_py.html) | quiver(v, w), quiver(vF), quiver(ori, w): arrows at directions, a vector or axis field, or arrows at orientations in the sections of the current figure |
 | [rand](vector3d.rand_py.html) | uniformly distributed unit vectors or axes, on the sphere or in a sphericalRegion given last |
 | [rdivide](vector3d.rdivide_py.html) |  |
@@ -109,17 +206,17 @@ vector3d.X, vector3d.Y, vector3d.Z
 | [rho](vector3d.rho_py.html) | the azimuth from x towards y, in [0, 2 pi) |
 | [rotate](Miller.rotate_py.html) | the vectors turned by a rotation, rot * v |
 | [rotate](vector3d.rotate_py.html) | the vectors turned by a rotation, rot * v |
-| [round](Miller.round_py.html) | a crystal direction rounded to integer indices, vector3d/round |
-| [round](vector3d.round_py.html) | a crystal direction rounded to integer indices, vector3d/round |
-| [scatter3d](vector3d.scatter3d_py.html) | scatter3d(v), plot3d(v, data): directions as markers on the sphere in space |
-| [scatter](Miller.scatter_py.html) | scatter(v), scatter(v, data), scatter(v, label=texts): directions as markers |
-| [scatter](vector3d.scatter_py.html) | scatter(v), scatter(v, data), scatter(v, label=texts): directions as markers |
+| [round](Miller.round_py.html) | the direction with its indices, or its coordinates, rounded to small integers |
+| [round](vector3d.round_py.html) | the direction with its indices, or its coordinates, rounded to small integers |
+| [scatter3d](vector3d.scatter3d_py.html) | directions as markers on the sphere in space |
+| [scatter](Miller.scatter_py.html) | directions or crystal directions drawn as markers on a spherical plot, coloured by data or labelled |
+| [scatter](vector3d.scatter_py.html) | directions or crystal directions drawn as markers on a spherical plot, coloured by data or labelled |
 | [smooth](Miller.smooth_py.html) | pcolor(sF), pcolor(v), pcolor(v, data): a coloured surface |
 | [smooth](vector3d.smooth_py.html) | pcolor(sF), pcolor(v), pcolor(v, data): a coloured surface |
 | [subsref](vector3d.subsref_py.html) |  |
 | [sum](vector3d.sum_py.html) | the sum of the vectors, over all axes or the given ones |
-| [surf](Miller.surf_py.html) | surf(sF): the function as the sphere pushed out to \|f\|, coloured by f, the real part of a complex one |
-| [surf](vector3d.surf_py.html) | surf(sF): the function as the sphere pushed out to \|f\|, coloured by f, the real part of a complex one |
+| [surf](Miller.surf_py.html) | a function on the sphere as a surface in space, the sphere pushed out to \|f\| and coloured by f |
+| [surf](vector3d.surf_py.html) | a function on the sphere as a surface in space, the sphere pushed out to \|f\| and coloured by f |
 | [symmetrise](Miller.symmetrise_py.html) | the symmetrically equivalent directions, numSym x shape, or the distinct ones of one direction with unique=True |
 | [symmetrise](vector3d.symmetrise_py.html) | the symmetrically equivalent directions, numSym x shape, or the distinct ones of one direction with unique=True |
 | [T](vector3d.T_py.html) | the Miller-Bravais index T = -(U + V) of a lattice direction |
@@ -131,8 +228,8 @@ vector3d.X, vector3d.Y, vector3d.Z
 | [u](vector3d.u_py.html) | the index u of a lattice direction |
 | [U](vector3d.U_py.html) | the Miller-Bravais index U of a lattice direction |
 | [uminus](vector3d.uminus_py.html) |  |
-| [unique](Miller.unique_py.html) | the disjoint list of vectors up to a tolerance, vector3d/unique, up to sign for axes, antipodal=True always, antipodal=False never |
-| [unique](vector3d.unique_py.html) | the disjoint list of vectors up to a tolerance, vector3d/unique, up to sign for axes, antipodal=True always, antipodal=False never |
+| [unique](Miller.unique_py.html) | the disjoint list of vectors, equal ones within a tolerance taken once |
+| [unique](vector3d.unique_py.html) | the disjoint list of vectors, equal ones within a tolerance taken once |
 | [UVTW](vector3d.UVTW_py.html) | the Weber indices: U = 2u - v, V = 2v - u, T = -(u + v), W = 3w |
 | [uvw](vector3d.uvw_py.html) | the indices of a lattice direction, the coordinates in the basis of the crystal frame |
 | [v](vector3d.v_py.html) | the index v of a lattice direction |

@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 sections of constant rotation angle, each on the axis sector the region allows there
 
+## Syntax
+
 ```python
 axisAngleSections(cs1, cs2, angles=(10:20:180)*degree)
 axisAngleSections(cs1, cs2, sections=5, volumeScaling=False, antipodal=True)

@@ -21,5 +21,5 @@ SO3FunComposition(*terms)
 
 MATLAB's [SO3FunComposition.SO3FunComposition](SO3FunComposition.SO3FunComposition.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L226">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/handles.py#L271">source</a></font>
 {% endraw %}

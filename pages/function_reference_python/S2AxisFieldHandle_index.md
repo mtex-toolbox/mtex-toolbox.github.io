@@ -12,6 +12,8 @@ status: Reference
 an axis field on the sphere given by a function of the directions, with a bandwidth hint
 for its expansion
 
+## Syntax
+
 ```python
 aF = S2AxisFieldHandle(lambda v: ..., cs)
 ```

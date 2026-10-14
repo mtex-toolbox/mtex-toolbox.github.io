@@ -10,17 +10,56 @@ counterpart: SO3Fun.centerSpecimen.html
 status: Reference
 ---
 {% raw %}
-two perpendicular twofold axes of an assumed orthotropic texture, found and rotated onto
-the nearest specimen axes (MATLAB centerSpecimen): the mismatch of a candidate axis is the
-norm of the difference between the harmonic series of the density and the series turned
-by 180 degrees about it; the first axis is searched on a cap about v0, the second on the
-fan perpendicular to it. Returns the centred series, the correction applied, and the axes
+an orientation density of an assumed orthotropic texture rotated so that its two fold axes
+lie on the specimen axes
 
 ## Syntax
 
+Starting at the x axis:
+
 ```python
-centerSpecimen(odf, v0=None, *args, delta=45*degree, bandwidth=16, verbose=False)
+odr, rot, v1, v2 = centerSpecimen(odf)
 ```
+
+Another start, a smaller search:
+
+```python
+odr, rot, v1, v2 = centerSpecimen(odf, yvector, delta=30*degree, verbose=True)
+```
+
+The mismatch of a candidate axis is the norm of the difference between the harmonic series
+of the density and the series turned by 180 degrees about it. The first two fold axis is
+searched on a cap of the opening delta about v0, and refined; the second on the fan
+perpendicular to the first. The rotation carries the two axes onto the specimen axes nearest
+to them. The search always runs on the harmonic series, so MATLAB's flags 'Fourier' and
+'silent' change nothing; MATLAB's 'SO3Grid' and 'resolution' are not taken.
+
+## Input
+
+| | |
+|---|---|
+| `odf` | SO3Fun |
+| `v0` | vector3d, the start of the search for the first axis, the x axis by default |
+
+## Output
+
+| | |
+|---|---|
+| `odr` | SO3FunHarmonic, the rotated density |
+| `rot` | rotation, the rotation applied, odr = rotate(odf, rot) |
+| `v1, v2` | vector3d, the two fold axes found |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `delta` | `45*degree` | the opening angle of the cap about v0 searched for the first axis |
+| `bandwidth` | `16` | the degree of the harmonic series the search compares |
+| `verbose` | `False` | report the fit of every step |
+
+## See also
+
+[SO3Fun.rotate](SO3Fun.rotate_py.html), [DetectionOfSampleSymmetry](DetectionOfSampleSymmetry_py.html)
 
 ## Used on
 
@@ -28,5 +67,5 @@ centerSpecimen(odf, v0=None, *args, delta=45*degree, bandwidth=16, verbose=False
 
 MATLAB's [SO3Fun.centerSpecimen](SO3Fun.centerSpecimen.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L895">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/characteristics.py#L1030">source</a></font>
 {% endraw %}

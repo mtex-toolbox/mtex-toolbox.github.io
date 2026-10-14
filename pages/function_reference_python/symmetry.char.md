@@ -19,5 +19,5 @@ the symbol with a bar over every rotoinversion axis under utf8 output
 symmetry.char(self, utf8=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L239">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/symmetry.py#L268">source</a></font>
 {% endraw %}

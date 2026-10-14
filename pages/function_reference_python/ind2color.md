@@ -16,13 +16,15 @@ RGB row per index of an array, NaN where the index is negative or NaN
 ## Syntax
 
 ```python
-ind2color(i, cmap=None)
-```
-
-```python
 ind2color(i)
 ind2color(ids, 'ordered')     the order in which neighbouring ids get related colours
 ind2color(ids, cmap)          a matrix of colours as the order
+```
+
+## Signature
+
+```python
+ind2color(i, cmap=None)
 ```
 
 ## Used on

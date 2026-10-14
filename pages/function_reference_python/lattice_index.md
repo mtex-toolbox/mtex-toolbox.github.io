@@ -13,6 +13,8 @@ the lattice an EBSD map is measured on: the basis of the two shortest translatio
 shape 'square' or 'hex', the plane and the integer index of every position, inferred from the
 positions or fitted to a known basis
 
+## Syntax
+
 ```python
 l = lattice(pos)
 l = lattice(pos, basis=(A, 'hex'))

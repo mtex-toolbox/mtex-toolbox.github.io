@@ -20,5 +20,5 @@ pending one as it is, for an annotation onto the plot it holds
 mtexFigure.takeAxis(self, keep=False)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L123">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L151">source</a></font>
 {% endraw %}

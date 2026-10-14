@@ -23,5 +23,5 @@ EBSD3.gridify(self, return_index=False)
 
 MATLAB's [EBSD3.gridify](EBSD3.gridify.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L140">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/ebsd3.py#L169">source</a></font>
 {% endraw %}

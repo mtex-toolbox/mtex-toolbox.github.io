@@ -16,5 +16,5 @@ whether f(x) = -f(-x): c_{-k} = -c_k
 
 MATLAB's [S1FunHarmonic.odd](S1FunHarmonic.odd.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L137">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/s1fun.py#L205">source</a></font>
 {% endraw %}

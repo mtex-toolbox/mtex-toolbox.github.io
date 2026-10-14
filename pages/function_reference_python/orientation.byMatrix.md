@@ -22,5 +22,5 @@ orientation.byMatrix(M, *frames, antipodal=False)
 
 MATLAB's [orientation.byMatrix](orientation.byMatrix.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L156">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L202">source</a></font>
 {% endraw %}

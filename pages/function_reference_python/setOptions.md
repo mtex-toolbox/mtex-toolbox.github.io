@@ -17,5 +17,11 @@ setOptions(x, ...) is x.setOptions(...), the method of the object passed
 setOptions(x, *args, **kwargs)
 ```
 
+## Methods it calls
+
+| | |
+|---|---|
+| [trueEbsd](trueEbsd.setOptions_py.html) | job.setOptions(roiSize=5, numROI=24), job.setOptions(3, registerOn='raw') |
+
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L14">source</a></font>
 {% endraw %}

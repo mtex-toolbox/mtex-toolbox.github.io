@@ -14,6 +14,8 @@ a rank two symmetric strain tensor, in the double convention of the Voigt notati
 whether it refers to the undeformed configuration, 'Lagrange' (the default), or to the deformed
 one, 'Euler', MATLAB's strainTensor(M, 'type', 'Euler'), and is kept by everything derived from it
 
+## Syntax
+
 ```python
 eps = strainTensor(M)
 eps = strainTensor(M, cs)
@@ -27,7 +29,7 @@ eps.type
 | | |
 |---|---|
 | [axisRatios](strainTensor.axisRatios_py.html) | the differences of the principal values, largest first |
-| [calcTaylor](strainTensor.calcTaylor_py.html) | the Taylor factor, the shears of the slip systems and the plastic spin of a strain |
+| [calcTaylor](strainTensor.calcTaylor_py.html) | the Taylor factor, the shears of the slip systems and the plastic spin of a strain the crystal accommodates by slip alone |
 | [deviatoricStrain](strainTensor.deviatoricStrain_py.html) | the deviatoric part, the tensor less a third of its trace on the diagonal |
 | [equivalentStrain](strainTensor.equivalentStrain_py.html) | the von Mises equivalent strain, sqrt(2/3 e:e) of the deviatoric strain e |
 | [maxStrain](strainTensor.maxStrain_py.html) | the magnitude of a strain is its largest principal value, which the Taylor factor is measured against |
@@ -41,5 +43,5 @@ eps.type
 
 MATLAB's [strainTensor_index](strainTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1061">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1142">source</a></font>
 {% endraw %}

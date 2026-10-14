@@ -17,11 +17,13 @@ the length at every direction, a function on the sphere, as MATLAB's norm
 ## Syntax
 
 ```python
-S2VectorFieldHarmonic.norm(self)
+sF = norm(sVF)
 ```
 
+## Signature
+
 ```python
-sF = norm(sVF)
+S2VectorFieldHarmonic.norm(self)
 ```
 
 MATLAB's [S2VectorFieldHarmonic.norm](S2VectorFieldHarmonic.norm.html)

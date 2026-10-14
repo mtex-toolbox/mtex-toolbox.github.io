@@ -20,5 +20,5 @@ in the crystal frame acts on the right of the orientation
 spinTensor.exp(W, ref=None, side=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L383">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/taylor.py#L438">source</a></font>
 {% endraw %}

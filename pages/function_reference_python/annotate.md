@@ -16,14 +16,26 @@ those of plot
 ## Syntax
 
 ```python
-annotate(v, *args, **kw)
-```
-
-```python
 annotate(v)
 annotate(v, markerFaceColor='r', label='a', backgroundColor='w')
-annotate(v, plane=True, lineStyle='--')    # the great circle normal to v
-annotate(ori, marker='v', markerSize=15)   # into the sections, pole figures or orientation space shown
+```
+
+The great circle normal to v:
+
+```python
+annotate(v, plane=True, lineStyle='--')
+```
+
+Into the sections, pole figures or orientation space shown:
+
+```python
+annotate(ori, marker='v', markerSize=15)
+```
+
+## Signature
+
+```python
+annotate(v, *args, **kw)
 ```
 
 ## Used on
@@ -32,5 +44,5 @@ annotate(ori, marker='v', markerSize=15)   # into the sections, pole figures or 
 
 MATLAB's [annotate](annotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1045">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L1119">source</a></font>
 {% endraw %}

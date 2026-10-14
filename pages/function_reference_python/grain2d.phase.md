@@ -13,5 +13,5 @@ A property of [grain2d](grain2d_index_py.html).
 
 the phase number of every grain as the file numbered it
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L140">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L177">source</a></font>
 {% endraw %}

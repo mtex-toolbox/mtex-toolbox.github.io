@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 the von Mises Fisher kernel on SO(3), proportional to e^(kappa cos omega), kappa > 0
 
+## Syntax
+
 ```python
 SO3vonMisesFisherKernel(90)
 SO3vonMisesFisherKernel(halfwidth=10*degree)

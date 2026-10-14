@@ -13,5 +13,5 @@ A property of [referenceFrame](referenceFrame_index_py.html).
 
 whether the point group has proper rotations only
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L170">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L193">source</a></font>
 {% endraw %}

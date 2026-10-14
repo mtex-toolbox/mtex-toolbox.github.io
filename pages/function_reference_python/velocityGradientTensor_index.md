@@ -10,14 +10,62 @@ counterpart: velocityGradientTensor_index.html
 status: Reference
 ---
 {% raw %}
-a velocity gradient tensor L, the rank two tensor of the spatial derivatives of the velocity; its
-symmetric part the strain rate, its skew part the spin
+a velocity gradient tensor L, the rank two tensor of the spatial derivatives of the velocity
+
+## Syntax
+
+By its 3 x 3 matrix:
 
 ```python
 L = velocityGradientTensor(M)
-L = velocityGradientTensor.uniaxial(d, e)
+```
+
+A uniaxial flow along d:
+
+```python
+L = velocityGradientTensor.uniaxial(d, q)
+```
+
+Simple shear along d on the plane n:
+
+```python
 L = velocityGradientTensor.simpleShear(d, n, e)
 ```
+
+Its symmetric part is the strain rate, strainRate(L), its skew symmetric part the spin,
+spin(L). A solid does not compress, so every velocity gradient of one has trace zero.
+
+## Input
+
+| | |
+|---|---|
+| `M` | 3 x 3 matrix, or an array (..., 3, 3) of them |
+| `d, n` | vector3d, the flow direction and the shear plane normal |
+| `q` | the share of the contraction across the second axis, 0.5 for an axially symmetric flow |
+| `e` | the strain rate |
+
+## Output
+
+| | |
+|---|---|
+| `L` | velocityGradientTensor |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `rank` |  | the rank of the tensor; for this class always two |
+| `doubleConvention` |  | read and write a Voigt matrix with the factors of two off the diagonal |
+| `frame` |  | the reference frame of the coefficients, instead of giving it positionally |
+| `density` |  | the mass density of the material, carried along |
+| `unit` |  | the physical unit of the coefficients, a string carried along |
+| `name` |  | the name of the tensor, carried along |
+| `Kelvin` |  | read a 6 x 6 matrix in the Kelvin (Mandel) notation |
+| `dtype` |  | the NumPy type of the coefficients |
+
+## See also
+
+[tensor](tensor_index_py.html), [strainRateTensor](strainRateTensor_index_py.html), [spinTensor](spinTensor_index_py.html), [deformationGradientTensor](deformationGradientTensor_index_py.html)
 
 ## Members
 
@@ -25,7 +73,7 @@ L = velocityGradientTensor.simpleShear(d, n, e)
 |---|---|
 | [angularVelocityVector](velocityGradientTensor.angularVelocityVector_py.html) | the angular velocity of a velocity gradient, the axial vector of its antisymmetric part |
 | [axisRatios](velocityGradientTensor.axisRatios_py.html) | the differences of the principal values, largest first |
-| [calcTaylor](velocityGradientTensor.calcTaylor_py.html) | the Taylor factor, the shears of the slip systems and the plastic spin of a strain |
+| [calcTaylor](velocityGradientTensor.calcTaylor_py.html) | the Taylor factor, the shears of the slip systems and the plastic spin of a strain the crystal accommodates by slip alone |
 | [equivalentStrain](velocityGradientTensor.equivalentStrain_py.html) | the von Mises equivalent strain, sqrt(2/3 e:e) of the deviatoric strain e |
 | [expm](velocityGradientTensor.expm_py.html) | the matrix exponential of a rank two tensor, or of a rank four one through its Kelvin matrix, the class kept |
 | [polar](velocityGradientTensor.polar_py.html) | the polar decomposition T = R SR = SL R of a rank two tensor, R orthogonal, SL and SR symmetric |
@@ -39,5 +87,5 @@ L = velocityGradientTensor.simpleShear(d, n, e)
 
 MATLAB's [velocityGradientTensor_index](velocityGradientTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1113">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1241">source</a></font>
 {% endraw %}

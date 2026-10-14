@@ -23,5 +23,5 @@ deformationGradientTensor.logm(self)
 
 MATLAB's [deformationGradientTensor.logm](deformationGradientTensor.logm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L493">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L521">source</a></font>
 {% endraw %}

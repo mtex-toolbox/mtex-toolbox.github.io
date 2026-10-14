@@ -12,6 +12,8 @@ status: Reference
 {% raw %}
 sections of constant phi2 in the Bunge convention, MTEX's default ODF sections
 
+## Syntax
+
 ```python
 oS = phi2Sections(cs, ss)
 oS = phi2Sections(cs, ss, sections=6)

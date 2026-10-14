@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 sections of constant Euler angle, the first or the third of a convention
 
+## Syntax
+
 ```python
 phi2Sections(cs, ss, sections=6), phi2Sections(cs, ss, phi2=(0:15:90)*degree)
 phi1Sections, alphaSections, gammaSections

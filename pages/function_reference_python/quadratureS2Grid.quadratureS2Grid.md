@@ -25,5 +25,5 @@ quadratureS2Grid(bandwidth, *args, dtype=<class 'numpy.float64'>)
 
 MATLAB's [quadratureS2Grid.quadratureS2Grid](quadratureS2Grid.quadratureS2Grid.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L255">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L277">source</a></font>
 {% endraw %}

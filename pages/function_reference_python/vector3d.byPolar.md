@@ -17,12 +17,19 @@ the vectors of polar angle theta to z and azimuth rho from x towards y, unit vec
 ## Syntax
 
 ```python
-vector3d.byPolar(theta, rho, antipodal=False)
+v = vector3d.byPolar(theta, rho)
 ```
 
+Axes:
+
 ```python
-v = vector3d.byPolar(theta, rho)
-v = vector3d.byPolar(theta, rho, antipodal=True)    # axes
+v = vector3d.byPolar(theta, rho, antipodal=True)
+```
+
+## Signature
+
+```python
+vector3d.byPolar(theta, rho, antipodal=False)
 ```
 
 ## Used on
@@ -31,5 +38,5 @@ v = vector3d.byPolar(theta, rho, antipodal=True)    # axes
 
 MATLAB's [vector3d.byPolar](vector3d.byPolar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L318">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L401">source</a></font>
 {% endraw %}

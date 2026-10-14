@@ -23,5 +23,5 @@ SO3FunHarmonic.grad(self, x=None, side='left')
 
 MATLAB's [SO3FunHarmonic.grad](SO3FunHarmonic.grad.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L465">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3fun.py#L525">source</a></font>
 {% endraw %}

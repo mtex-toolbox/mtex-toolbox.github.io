@@ -9,9 +9,55 @@ lang: python
 status: Reference
 ---
 {% raw %}
-a reference frame, the coordinate system data is expressed in: an identity (a name, a
-mineral), a basis, the point group the data is invariant under and the default plotting
-convention; a handle compared by identity, registered and sealed by the session
+a reference frame, the coordinate system data is expressed in: an identity, a basis, the
+point group the data is invariant under and the default plotting convention
+
+## Syntax
+
+A frame of the canonical basis:
+
+```python
+f = referenceFrame(name='lab', axesNames=('A', 'B', 'C'))
+```
+
+A frame of the given basis vectors:
+
+```python
+f = referenceFrame(basis)
+```
+
+The base class of crystalFrame, the frame glued to the lattice of a phase, and
+specimenFrame, the frame of a sample; use those. A frame carries an identity, a name such
+as 'measurement', 'rolling' or a mineral; the basis vectors in canonical Euclidean
+coordinates, whose lengths count; the point group; and the plotting convention its data is
+drawn in. Frames are handles compared by identity, registered and sealed by the session;
+transformationMatrix gives the change of coordinates between two frames.
+
+## Input
+
+| | |
+|---|---|
+| `basis` | vector3d or 3 x 3 array, the basis vectors in canonical coordinates, by default the canonical basis |
+
+## Output
+
+| | |
+|---|---|
+| `f` | referenceFrame |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `name` |  | the identity of the frame |
+| `axesNames` |  | the names of the three axes |
+| `how2plot` |  | the default plottingConvention of the frame |
+| `sym` |  | the point group, by default the trivial one |
+| `color` |  | the colour of the frame's data in a phase map |
+
+## See also
+
+[crystalFrame](crystalFrame_index_py.html), [specimenFrame](specimenFrame_index_py.html), [plottingConvention](plottingConvention_index_py.html), [referenceFrame.transformationMatrix](referenceFrame.transformationMatrix_py.html)
 
 ## Members
 
@@ -29,7 +75,7 @@ convention; a handle compared by identity, registered and sealed by the session
 | [factor](referenceFrame.factor_py.html) | the factorisation of the two groups: self = rot1 * d and other = d * rot2 with d the common elements |
 | [fullSym](referenceFrame.fullSym_py.html) | the largest group registered over this basis |
 | [fundamentalRegion](referenceFrame.fundamentalRegion_py.html) | the fundamental region in orientation space of this group, or of the pair with another frame |
-| [fundamentalSector](referenceFrame.fundamentalSector_py.html) | the fundamental sector of the group on the sphere, the conventional one of the inverse pole figure where it is a fundamental domain |
+| [fundamentalSector](referenceFrame.fundamentalSector_py.html) | the fundamental sector of the group of the frame on the sphere, the region an inverse pole figure shows |
 | [how2plot](referenceFrame.how2plot_py.html) | the default plotting convention the frame is drawn with, a plottingConvention or None |
 | [id](referenceFrame.id_py.html) | the group questions a frame answers, read through the frame |
 | [intern](referenceFrame.intern_py.html) | the session instance of a frame: the registered one when it agrees by key, otherwise this one, registered and sealed from now on |
@@ -52,7 +98,7 @@ convention; a handle compared by identity, registered and sealed by the session
 | [pointGroup](referenceFrame.pointGroup_py.html) | the Hermann-Mauguin symbol of the point group |
 | [properGroup](referenceFrame.properGroup_py.html) | the sibling frame carrying the proper point group, the elements with their parity dropped |
 | [properSubGroup](referenceFrame.properSubGroup_py.html) | the sibling frame carrying only the proper rotations of this group |
-| [referenceFrame](referenceFrame.referenceFrame_py.html) | a reference frame, the coordinate system data is expressed in: an identity (a name, a mineral), a basis, the point group the data is invariant under and the default plotting convention |
+| [referenceFrame](referenceFrame.referenceFrame_py.html) | a reference frame, the coordinate system data is expressed in: an identity, a basis, the point group the data is invariant under and the default plotting convention |
 | [reset](referenceFrame.reset_py.html) | empties the frame register, the named frames and the default frame of the session |
 | [rot](referenceFrame.rot_py.html) | the elements of the point group, an orthogonalTransform |
 | [rotations](referenceFrame.rotations_py.html) | the proper rotations of the point group |

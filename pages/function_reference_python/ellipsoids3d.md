@@ -9,14 +9,52 @@ lang: python
 status: Reference
 ---
 {% raw %}
-ellipsoids with the half axes a, b, c about their centres, the surfaces of MATLAB's
-plotEllipsoid on a grid of n longitudes and m latitudes, one colour each
+ellipsoids as one polygon mesh of a scene3d; the surfaces plotEllipsoid draws, MATLAB's
+plotEllipsoid
 
 ## Syntax
 
+Light blue ellipsoids:
+
 ```python
-ellipsoids3d(center, a, b, c, color='lightblue', edgeAlpha=0.25, n=24, m=12)
+mesh = ellipsoids3d(center, a, b, c)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L180">source</a></font>
+A colour each, coarser:
+
+```python
+mesh = ellipsoids3d(center, a, b, c, color=[[1, 0, 0], [0, 0, 1]], n=12, m=6)
+```
+
+Every ellipsoid is the set center + cos(theta) a + sin(theta) (sin(rho) b + cos(rho) c),
+divided into quadrilaterals along n longitudes rho and m latitudes theta; a, b and c are
+the half axes as vectors, as principalComponents of 3D grains returns them.
+
+## Input
+
+| | |
+|---|---|
+| `center` | array (k, 3), the centres |
+| `a, b, c` | arrays (k, 3), the three half axes of every ellipsoid |
+
+## Output
+
+| | |
+|---|---|
+| `mesh` | mesh3d, the surfaces of all ellipsoids |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `color` | `'lightblue'` | one colour for all, a name or an RGB triple, or one RGB row per ellipsoid |
+| `edgeAlpha` | `0.25` | the opacity of the edges of the quadrilaterals |
+| `n` | `24` | the number of longitudes |
+| `m` | `12` | the number of latitudes |
+
+## See also
+
+[plotEllipsoid](plotEllipsoid_py.html), [scene3d](scene3d_index_py.html), [arrows3d](arrows3d_py.html), [Grains3DProperties](Grains3DProperties_py.html)
+
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/scene3d.py#L201">source</a></font>
 {% endraw %}

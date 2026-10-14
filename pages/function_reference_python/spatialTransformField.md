@@ -13,6 +13,8 @@ status: Reference
 a displacement interpolated between points: linear over their triangulation, the nearest point's
 beyond it, where MATLAB takes natural neighbours and extrapolates linearly
 
+## Syntax
+
 ```python
 T = spatialTransformField(pos, u)
 T = spatialTransformField.fit(posA, posB)
@@ -30,5 +32,5 @@ T = spatialTransformField.fit(posA, posB)
 
 MATLAB's [spatialTransformField](spatialTransformField.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L551">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L622">source</a></font>
 {% endraw %}

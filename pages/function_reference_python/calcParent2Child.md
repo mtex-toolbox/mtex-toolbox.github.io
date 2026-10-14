@@ -10,21 +10,87 @@ counterpart: calcParent2Child.html
 status: Reference
 ---
 {% raw %}
-calcParent2Child(c2c, p2c0), calcParent2Child(childOri, p2c0), calcParent2Child(c2c, p2c0, local=True)
+the parent to child orientation relationship that fits child to child misorientations
+best, refined from an initial guess
 
 ## Syntax
 
+From child to child misorientations:
+
 ```python
-calcParent2Child(mori, p2c, local=False, quantile=0.9, threshold=inf, maxIteration=30, maxSample=50000, searchResolution=4*degree, scanSample=250, numLocal=5, verbose=True, fit=False)
+p2c = calcParent2Child(c2c, p2c0)
 ```
 
-The parent to child orientation relationship fitted to child to child misorientations,
-or to pairs of child orientations: the trimmed chordal misfit of the misorientations to
-the nearest child to child misorientation the relationship predicts, minimised by a
-fixed point iteration from p2c0 and, unless local, from the best basins of a scan over
-the misorientation space. quantile is the share of the misorientations the fit is based
-on, misorientations misfitting by more than threshold are treated as outliers; with
-fit=True the disorientation angle of every misorientation to the result comes too.
+From pairs of child orientations:
+
+```python
+p2c = calcParent2Child(childOri, p2c0)
+```
+
+The fit on the best 80 percent:
+
+```python
+p2c = calcParent2Child(c2c, p2c0, quantile=0.8)
+```
+
+Iterate from p2c0 only:
+
+```python
+p2c = calcParent2Child(c2c, p2c0, local=True)
+```
+
+With the misfit of every misorientation:
+
+```python
+p2c, fit = calcParent2Child(c2c, p2c0, fit=True)
+```
+
+Two children of one parent grain are related by a misorientation the relationship predicts,
+V_i^-1 V_j for two of its variants. The relationship minimises the trimmed chordal misfit
+of the measured misorientations to the nearest predicted one, the share quantile of the
+smallest misfits, by a fixed point iteration; unless local, the iteration also starts from
+the best basins of a scan over the space of relationships, so that a poor start still
+finds the global minimum. Pairs of child orientations, an (n, 2) array in the specimen
+frame, are turned into their misorientations. The progress is reported unless
+verbose=False.
+
+## Input
+
+| | |
+|---|---|
+| `c2c` | orientation, child to child misorientations |
+| `childOri` | orientation, (n, 2) pairs of child orientations |
+| `p2c0` | orientation, the initial guess of the parent to child relationship |
+
+## Output
+
+| | |
+|---|---|
+| `p2c` | orientation, the fitted parent to child relationship |
+| `fit` | the disorientation angle of every misorientation to the nearest predicted one |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `local` | `False` | iterate from p2c0 only, without the scan |
+| `quantile` | `0.9` | the share of the misorientations the fit is based on |
+| `threshold` | `inf` | misorientations misfitting by more than this angle are outliers |
+| `maxIteration` | `30` | the largest number of iterations |
+| `maxSample` | `50000` | fit on at most this many misorientations, a random subsample of the rest |
+| `searchResolution` | `4*degree` | the resolution of the grid of the scan |
+| `scanSample` | `250` | the number of misorientations that rank the basins of the scan |
+| `numLocal` | `5` | the number of basins of the scan fitted locally |
+| `verbose` | `True` | report the progress |
+| `fit` | `False` | also return the misfit of every misorientation, MATLAB's second output |
+
+## References
+
+- T. Nyyssonen et al., Crystallography, morphology, and martensite transformation of prior austenite in intercritically annealed high-aluminum steel, Metall. Mater. Trans. A 49 (2018), doi:10.1007/s11661-018-4904-9
+
+## See also
+
+[calcParent](calcParent_py.html), [parentGrainReconstructor.calcParent2Child](parentGrainReconstructor.calcParent2Child_py.html), [misfit](misfit_py.html), [OrientationRelationshipFit](OrientationRelationshipFit_py.html)
 
 ## Used on
 

@@ -23,5 +23,5 @@ orientation.brass(CS, *ss)
 
 [OrientationStandard](OrientationStandard_py.html), [EulerAngleSections](EulerAngleSections_py.html), [Lankford](Lankford_py.html), [RotationFibre](RotationFibre_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L264">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/standardorientations.py#L288">source</a></font>
 {% endraw %}

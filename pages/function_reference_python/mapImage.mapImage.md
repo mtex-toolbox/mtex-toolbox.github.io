@@ -10,21 +10,73 @@ counterpart: mapImage.mapImage.html
 status: Reference
 ---
 {% raw %}
-an image that knows where on the specimen it sits: a regular grid of an origin and two
-perpendicular steps, d1 from row to row and d2 from column to column; an integer image is
-scaled to [0, 1]
+an image that knows where on the specimen it sits: a raster of values on a regular grid of
+an origin and two perpendicular steps; MATLAB's mapImage
 
 ## Syntax
 
-```python
-mapImage(img=None, ebsd=None, dxy=1.0, origin=None, name='', scanUnit=None)
-```
+Unit step, a frame of its own:
 
 ```python
-mapImage(img)                          unit step, a frame of its own
-mapImage(img, dxy=0.05, name='bse')    square pixels; dxy=(dx, dy) rectangular ones
-mapImage(ebsd.bc, ebsd, name='bcImg')  a channel of a gridded square map, the map riding along
+mg = mapImage(img)
 ```
+
+Square pixels of 0.05:
+
+```python
+mg = mapImage(img, dxy=0.05, name='bse')
+```
+
+Rectangular pixels:
+
+```python
+mg = mapImage(img, dxy=(0.05, 0.1))
+```
+
+A channel of a gridded map, the map along:
+
+```python
+mg = mapImage(ebsd.bc, ebsd, name='bcImg')
+```
+
+An image on the grid of the map:
+
+```python
+mg = mapImage(img, ebsd)
+```
+
+A forescatter or backscatter image, a band contrast map or any other value per pixel,
+together with the part of the specimen each pixel covers, which makes an image and an EBSD
+map comparable. The grid is regular: d1 is the step from row to row, d2 from column to
+column, and the positions follow from them; a distortion is applied by resampling, never by
+moving the pixels. An image with a map carries the map along, on the same grid, which must
+be square. An integer image is scaled to [0, 1].
+
+## Input
+
+| | |
+|---|---|
+| `img` | array of rows x columns, or rows x columns x channels |
+| `ebsd` | EBSD, gridded and square, on the grid of the image |
+
+## Output
+
+| | |
+|---|---|
+| `mg` | mapImage |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `dxy` | `1.0` | the pixel size, one number or (dx, dy), for an image without a map |
+| `origin` | `None` | vector3d, the position of pixel (0, 0) |
+| `name` | `''` | an identifier, the property of the EBSD map an aligned image is written into |
+| `scanUnit` | `None` | the unit of the positions, by default the map's or 'um' |
+
+## See also
+
+[mapImageList](mapImageList_index_py.html), [trueEbsd](trueEbsd_index_py.html), [mapImage.rescale](mapImage.rescale_py.html), [xcfShift](xcfShift_py.html), [gridLayout](gridLayout_index_py.html), [EBSDMapsAndImages](EBSDMapsAndImages_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
 
 ## Used on
 

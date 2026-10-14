@@ -13,6 +13,8 @@ status: Reference
 the von Mises Fisher kernel of a fibre, what fibreODF convolves with; kappa the
 concentration, larger is sharper
 
+## Syntax
+
 ```python
 fibreVonMisesFisherKernel(90)
 fibreVonMisesFisherKernel(halfwidth=10*degree)

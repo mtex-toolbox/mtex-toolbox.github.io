@@ -11,6 +11,8 @@ status: Reference
 {% raw %}
 sections of constant gamma in the Matthies (ZYZ) convention
 
+## Syntax
+
 ```python
 oS = gammaSections(cs, ss, sections=6)
 oS = gammaSections(cs, ss, gamma=np.arange(0, 91, 15)*degree)

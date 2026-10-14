@@ -18,5 +18,5 @@ turned as MATLAB draws it for 321
 plotSector(fr, antipodal=False, how2plot=None)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L492">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L525">source</a></font>
 {% endraw %}

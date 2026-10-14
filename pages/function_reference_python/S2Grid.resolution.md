@@ -13,5 +13,5 @@ A property of [S2Grid](S2Grid_index_py.html).
 
 the resolution the grid was built with, NaN when none was given
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L45">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s2grid.py#L66">source</a></font>
 {% endraw %}

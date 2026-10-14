@@ -20,5 +20,5 @@ equispaced falls back to the search
 S1Grid.ladderIndex(self, x)
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L48">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/s1grid.py#L67">source</a></font>
 {% endraw %}

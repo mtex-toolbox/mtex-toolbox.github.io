@@ -12,18 +12,62 @@ status: Reference
 {% raw %}
 A method of [EBSD](EBSD_index_py.html).
 
-uncorrelated misorientations: random pairs of measurements far enough apart that they say
-nothing about one another, which is what an uncorrelated distribution is compared
-against. Both maps must carry one indexed phase; the pair is written as a boundary
-writes it, inv(o2) o1 carrying a direction of the first phase into the second
+uncorrelated misorientations: those of random pairs of measurements far enough apart that
+they say nothing about one another; MATLAB's calcMisorientation of a map
 
 ## Syntax
 
+Within one phase:
+
 ```python
-EBSD.calcMisorientation(ebsd, other=None, sampleSize=100000, minDistance=None, rng=None)
+mori = calcMisorientation(ebsd['Forsterite'], sampleSize=1000)
 ```
+
+Pairs at least 100 apart:
+
+```python
+mori = calcMisorientation(ebsd['Forsterite'], minDistance=100)
+```
+
+Between two phases:
+
+```python
+mori = calcMisorientation(ebsd['Forsterite'], ebsd['Enstatite'])
+```
+
+This is the distribution an uncorrelated misorientation distribution is compared against.
+Both maps must hold one indexed phase. For orientations o1 of the first map and o2 of the
+second the misorientation is inv(o1) * o2, carrying the coordinates of the second crystal
+into those of the first. The pairs closer than minDistance are dropped from the sample, so
+fewer than sampleSize may come back. MATLAB's second output, the pairs of orientations, is
+not returned.
+
+## Input
+
+| | |
+|---|---|
+| `ebsd` | EBSD of one indexed phase |
+| `other` | EBSD of one indexed phase, by default the first map |
+
+## Output
+
+| | |
+|---|---|
+| `mori` | orientation from the crystal frame of other to that of ebsd |
+
+## Keywords
+
+| | default | |
+|---|---|---|
+| `sampleSize` | `100000` | the number of pairs drawn |
+| `minDistance` | `None` | the least distance of a pair, in the scan unit; a hundredth of the diagonal of the first map by default |
+| `rng` | `None` | the seed or the numpy Generator of the draw |
+
+## See also
+
+[calcMDF](SO3Fun.calcMDF_py.html), [grainBoundary.misorientation](grainBoundary.misorientation_py.html), [MisorientationDistributionFunction](MisorientationDistributionFunction_py.html)
 
 MATLAB's [EBSD.calcMisorientation](EBSD.calcMisorientation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L467">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L533">source</a></font>
 {% endraw %}

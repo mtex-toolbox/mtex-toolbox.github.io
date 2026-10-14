@@ -14,5 +14,5 @@ A property of [orientationRegion](orientationRegion_index_py.html).
 the second frame of the region, frameB: the specimen or second crystal frame
 (MATLAB's orientationRegion.CS2)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L79">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientationregion.py#L105">source</a></font>
 {% endraw %}

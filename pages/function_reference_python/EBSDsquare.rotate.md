@@ -22,5 +22,5 @@ EBSD.rotate(self, rot, keepXY=False, keepEuler=False)
 
 MATLAB's [EBSDsquare.rotate](EBSDsquare.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L424">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L452">source</a></font>
 {% endraw %}

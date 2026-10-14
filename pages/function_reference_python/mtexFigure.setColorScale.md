@@ -19,5 +19,5 @@ MATLAB's set(gca, 'ColorScale', 'log'): the colours spread over the decades of t
 mtexFigure.setColorScale(self, scale='linear')
 ```
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L235">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mtexfigure.py#L263">source</a></font>
 {% endraw %}
