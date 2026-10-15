@@ -60,5 +60,5 @@ gbcAngle(10*degree, byPhase={'Forsterite': 15*degree})
 
 MATLAB's [gbcAngle](gbcAngle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L136">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria/__init__.py#L136">source</a></font>
 {% endraw %}

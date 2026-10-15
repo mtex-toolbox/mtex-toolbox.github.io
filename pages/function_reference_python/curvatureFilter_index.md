@@ -32,5 +32,5 @@ remains comparable between samplings. Supplying alpha overrides that conversion.
 
 MATLAB's [curvatureFilter_index](curvatureFilter_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L218">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing/__init__.py#L218">source</a></font>
 {% endraw %}

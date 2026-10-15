@@ -23,5 +23,5 @@ voxelLattice.subset(self, flat)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L88">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice/__init__.py#L88">source</a></font>
 {% endraw %}

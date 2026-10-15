@@ -20,5 +20,5 @@ evaluate, and calling the criterion evaluates it
 
 MATLAB's [grainBoundaryCriterion](grainBoundaryCriterion.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L30">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria/__init__.py#L30">source</a></font>
 {% endraw %}

@@ -23,5 +23,5 @@ a grain and leaves a step where one is
 
 MATLAB's [KuwaharaFilter_index](KuwaharaFilter_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L66">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/filters/window.py#L33">source</a></font>
 {% endraw %}

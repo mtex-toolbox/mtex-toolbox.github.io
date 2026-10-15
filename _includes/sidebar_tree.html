@@ -20,6 +20,16 @@ empty or "#", and otherwise updates the accordion state and lets the browser
 follow the link (see _trigger in jquery.navgoco.min.js). Entries genuinely
 without a page still get "#" and still toggle.
 {% endcomment %}
+{% if include.sbname == "function_reference_sidebar" %}
+{% assign ref = site.data.sidebars.function_reference_sidebar.entries[0] %}
+<li class="sidebarTitle">{{ ref.product }} {{ ref.version }}</li>
+{% for chapter in ref.folders %}
+  {% if chapter.output contains "web" %}
+<li><a class="no_icon" href="{{ chapter.url | remove_first: '/' }}">{{ chapter.title }}</a>
+<ul>{% include reference_nodes.html nodes=chapter.folderitems.subfolders %}</ul></li>
+  {% endif %}
+{% endfor %}
+{% else %}
 {% assign sidebar = site.data.sidebars[include.sbname].entries %}
 <li class="sidebarTitle">{{sidebar[0].product}} {{sidebar[0].version}}</li>
 {% for entry in sidebar %}
@@ -84,3 +94,5 @@ without a page still get "#" and still toggle.
 {% endif %}
 {% endfor %}
 {% endfor %}
+
+{% endif %}

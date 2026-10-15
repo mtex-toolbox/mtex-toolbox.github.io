@@ -13,5 +13,5 @@ A property of [voxelLattice](voxelLattice_index_py.html).
 
 the extent of the box of voxels the index spans
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L73">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice/__init__.py#L73">source</a></font>
 {% endraw %}

@@ -1,0 +1,10 @@
+{%- for node in include.nodes -%}
+  {%- if node.output contains "web" -%}
+<li class="subfolders"{% if node.type %} data-kind="{{ node.type }}"{% endif %}>
+  <a class="no_icon" href="{{ node.url | remove_first: '/' }}">{{ node.title }}</a>
+  {%- if node.subfolderitems -%}
+  <ul>{% include reference_nodes.html nodes=node.subfolderitems %}</ul>
+  {%- endif -%}
+</li>
+  {%- endif -%}
+{%- endfor -%}

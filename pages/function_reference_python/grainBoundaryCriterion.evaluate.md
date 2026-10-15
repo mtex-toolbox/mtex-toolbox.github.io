@@ -24,5 +24,5 @@ grainBoundaryCriterion.evaluate(self, ebsd, i, j)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L39">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria/__init__.py#L39">source</a></font>
 {% endraw %}

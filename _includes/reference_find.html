@@ -1,0 +1,8 @@
+{%- for node in include.nodes -%}
+  {%- if node.url == page.url -%}
+    {%- assign ref_target = node -%}{%- break -%}
+  {%- elsif node.type == "group" -%}
+    {%- include reference_find.html nodes=node.subfolderitems -%}
+    {%- if ref_target -%}{%- break -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

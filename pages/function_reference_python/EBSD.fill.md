@@ -138,5 +138,5 @@ Largest change at measured cells (degrees): 0.0
 
 MATLAB's [EBSD.fill](EBSD.fill.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L380">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L344">source</a></font>
 {% endraw %}

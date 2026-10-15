@@ -39,5 +39,5 @@ l = lattice(pos, basis=(A, 'hex'))
 | [subset](lattice.subset_py.html) | the same lattice on a subset of its sites, the index counted from the least one kept |
 | [unitCell](lattice.unitCell_py.html) | the corners of the cell around a site, relative to it, anticlockwise, shape (k, 3) |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L103">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice/__init__.py#L103">source</a></font>
 {% endraw %}

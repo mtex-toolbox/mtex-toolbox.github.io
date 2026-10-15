@@ -1,5 +1,10 @@
 function xml2yml(inFile,outFile,title)
 
+if strcmp(title,'Functions')
+  referenceSidebar(inFile,outFile,title);
+  return
+end
+
 s = fileread(inFile);
 
 starts = strfind(s,'<tocitem');
@@ -59,4 +64,61 @@ f = fopen(outFile,'w');
 fwrite(f,s);
 fclose(f);
 
+end
+
+function referenceSidebar(inFile,outFile,title)
+% write a function reference tree with class and helper folder nesting
+
+dom=xmlread(inFile);
+root=dom.getDocumentElement;
+main=children(root);
+chapters=children(main{1});
+f=fopen(outFile,'w');
+cleanup=onCleanup(@() fclose(f));
+fprintf(f,'entries:\n- title: sidebar\n  product: %s\n  version:\n  folders:\n\n',title);
+for k=1:numel(chapters)
+  emit(f,chapters{k},2,true);
+end
+clear cleanup
+text=regexprep(fileread(outFile),'\s+$','');
+f=fopen(outFile,'w');
+fprintf(f,'%s\n',text);
+fclose(f);
+end
+
+function nodes=children(parent)
+nodes={};
+list=parent.getChildNodes;
+for k=0:list.getLength-1
+  node=list.item(k);
+  if strcmp(char(node.getNodeName),'tocitem')
+    nodes{end+1}=node; %#ok<AGROW>
+  end
+end
+end
+
+function emit(f,node,indent,chapter)
+space=repmat(' ',1,indent);
+name=strtrim(char(node.getFirstChild.getNodeValue));
+url=char(node.getAttribute('target'));
+kids=children(node);
+fprintf(f,'%s- title: %s\n%s  url: /%s\n%s  output: web\n', ...
+  space,jsonencode(name),space,url,space);
+if ~isempty(kids)
+  if chapter
+    fprintf(f,'%s  folderitems:\n%s    subfolders:\n',space,space);
+    childIndent=indent+4;
+  else
+    targets=cellfun(@(n) char(n.getAttribute('target')),kids,'UniformOutput',false);
+    if any(endsWith(targets,'_index.html'))
+      fprintf(f,'%s  type: group\n',space);
+    end
+    fprintf(f,'%s  subfolderitems:\n',space);
+    childIndent=indent+2;
+  end
+  for k=1:numel(kids)
+    emit(f,kids{k},childIndent,false);
+  end
+end
+fprintf(f,'\n');
 end

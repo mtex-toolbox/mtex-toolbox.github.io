@@ -28,5 +28,5 @@ first is what keeps the sparse system the size of the boundary and not of the ma
 | [neighbors](boundaryNetwork.neighbors_py.html) | the neighbours of vertex i, indices into the network's vertices |
 | [numNeighbors](boundaryNetwork.numNeighbors_py.html) | the number of neighbours of vertex i |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L41">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing/__init__.py#L41">source</a></font>
 {% endraw %}

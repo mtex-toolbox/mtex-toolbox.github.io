@@ -23,5 +23,5 @@ pulling the boundary after it
 
 MATLAB's [medianFilter](medianFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L57">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/filters/window.py#L24">source</a></font>
 {% endraw %}

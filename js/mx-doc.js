@@ -61,81 +61,79 @@
 
   /* ----------------------------------------------------------------- sidebar */
 
-  // parse the fetched fragment into [{title, url, items:[{title,url,items?}]}]
+  // The reference can nest helper folders between chapters and classes.
+  function parseItem(li) {
+    var a = li.querySelector(':scope > a');
+    if (!a) { return null; }
+    var item = { title: a.textContent.trim(), url: a.getAttribute('href') };
+    if (li.getAttribute('data-kind')) { item.type = li.getAttribute('data-kind'); }
+    var ul = li.querySelector(':scope > ul');
+    if (ul) { item.items = Array.prototype.map.call(ul.children, parseItem).filter(Boolean); }
+    return item;
+  }
+
   function parse(html) {
     var box = document.createElement('ul');
     box.innerHTML = html;
-    var chapters = [];
-    Array.prototype.forEach.call(box.children, function (li) {
-      if (li.classList.contains('sidebarTitle')) { return; }
-      var a = li.querySelector(':scope > a');
-      if (!a) { return; }
-      var ch = { title: a.textContent.trim(), url: a.getAttribute('href'), items: [] };
-      var ul = li.querySelector(':scope > ul');
-      if (ul) {
-        Array.prototype.forEach.call(ul.children, function (sub) {
-          var sa = sub.querySelector(':scope > a');
-          if (!sa) { return; }
-          var item = { title: sa.textContent.trim(), url: sa.getAttribute('href') };
-          var sul = sub.querySelector(':scope > ul');
-          if (sul) {
-            item.items = Array.prototype.map.call(sul.querySelectorAll(':scope > li > a'), function (x) {
-              return { title: x.textContent.trim(), url: x.getAttribute('href') };
-            });
-          }
-          ch.items.push(item);
-        });
-      }
-      chapters.push(ch);
-    });
-    return chapters;
+    return Array.prototype.filter.call(box.children, function (li) {
+      return !li.classList.contains('sidebarTitle');
+    }).map(parseItem).filter(Boolean);
   }
 
-  // Keep the reference chapters and their overview pages in both languages.
   function pythonClasses(chapters, python) {
-    var classes = [], byPage = {}, used = {};
+    var classes = [], functions = [], byPage = {}, used = {}, folders = {};
     python.forEach(function (group) {
       group.items.forEach(function (item) {
-        if (!item.items) { return; }
+        if (!item.items) { if (item.group) { functions.push(item); } return; }
         classes.push({ group: group.title, item: item });
         [item.url].concat(item.aliases || []).forEach(function (url) { byPage[strip(url)] = item; });
       });
     });
-    chapters.forEach(function (chapter) {
-      chapter.items.forEach(function (item) {
+    function pair(items) {
+      items.forEach(function (item) {
+        if (item.type === 'group') { folders[strip(item.url)] = item; pair(item.items); return; }
         var cls = byPage[strip(item.url)];
-        if (cls) {
-          item.items = cls.items;
-          item.aliases = cls.aliases;
-          used[cls.url] = true;
-        }
+        if (cls) { item.items = cls.items; item.aliases = cls.aliases; used[cls.url] = true; }
       });
-    });
+    }
+    chapters.forEach(function (chapter) { pair(chapter.items); });
     var sections = {
       Geometry: 'Geometry', 'Function spaces': 'Spherical Functions', Tensors: 'Tensors',
       Maps: 'EBSD Analysis', 'Maps of volumes': 'EBSD Analysis', 'EBSD Analysis': 'EBSD Analysis',
-      Analysis: 'EBSD Analysis',
-      'Import and export': 'Tools', Plotting: 'Plotting', 'Import wizard': 'Tools'
+      Analysis: 'EBSD Analysis', 'Import and export': 'Tools', Plotting: 'Plotting', 'Import wizard': 'Tools'
     };
     var subjects = { embeddingSpec: 'Geometry', OptimalSampleResult: 'Orientation Functions',
                      TaylorModel: 'Tensors', EBSDFileInfo: 'EBSD Analysis' };
     classes.forEach(function (entry) {
       if (used[entry.item.url]) { return; }
+      if (folders[entry.item.group]) { folders[entry.item.group].items.push(entry.item); return; }
       var title = subjects[entry.item.title] || sections[entry.group] || 'Tools';
       if (entry.group === 'Function spaces' && /^SO3/.test(entry.item.title)) { title = 'Orientation Functions'; }
       var chapter = chapters.find(function (c) { return c.title === title; });
       if (chapter) { chapter.items.push(entry.item); }
     });
+    functions.forEach(function (item) {
+      var folder = folders[item.group];
+      if (folder && !folder.items.some(function (i) { return i.title === item.title || strip(i.url) === strip(item.url); })) {
+        folder.items.push(item);
+      }
+    });
     return chapters;
   }
 
+  function sidebarAsset(path) {
+    var script = document.querySelector('script[src*="js/mx-doc.js"]');
+    var version = script && script.getAttribute('src').split('?')[1];
+    return path + (version ? '?' + version : '');
+  }
+
   function loadSidebar(name, url) {
-    var chapters = fetch(url || ('sidebars/' + name + '.html')).then(function (r) {
+    var chapters = fetch(sidebarAsset(url || ('sidebars/' + name + '.html'))).then(function (r) {
       if (!r.ok) { throw new Error('Sidebar unavailable'); }
       return r.text();
     }).then(parse);
     if (name === 'function_reference_sidebar' && window.MtexLanguage && window.MtexLanguage.current() === 'python') {
-      var python = fetch('python_reference.json').then(function (r) {
+      var python = fetch(sidebarAsset('python_reference.json')).then(function (r) {
         if (!r.ok) { throw new Error('Python reference unavailable'); }
         return r.json();
       });
@@ -153,55 +151,72 @@
     return a;
   }
 
-  function renderChapters(chapters) {
-    tree.textContent = '';
-    chapters.forEach(function (ch) {
-      var hash = (ch.url || '').split('#')[1];
-      var isHere = (strip(ch.url) === here && (!hash || location.hash === '#' + hash)) || ch.items.some(function (i) { return strip(i.url) === here; });
-      var d = el('details', { 'data-chapter': ch.title });
-      if (isHere) { d.open = true; }
-      var s = el('summary');
-      s.appendChild(el('span', null, ch.title));
-      s.appendChild(el('small', null, String(ch.items.length)));
-      d.appendChild(s);
-      var ul = el('ul');
-      if (ch.url && ch.url !== '#') {
-        var li0 = el('li', { class: 'mx-side-over' }); li0.appendChild(link({ title: 'Overview', url: ch.url })); ul.appendChild(li0);
-      }
-      ch.items.forEach(function (i) { var li = el('li', i.isCase ? { class: 'mx-side-case' } : null); li.appendChild(link(i)); ul.appendChild(li); });
-      d.appendChild(ul);
-      tree.appendChild(d);
-    });
+  function holds(item) {
+    return strip(item.url) === here || (item.type === 'group' && item.items.some(holds));
   }
 
-  // function reference: only the class of the current page
+  function renderChapters(chapters) {
+    tree.textContent = '';
+    function appendItems(ul, items) {
+      items.forEach(function (item) {
+        var li = el('li', item.isCase ? { class: 'mx-side-case' } : null);
+        if (item.type === 'group') { li.appendChild(block(item, 'data-group')); }
+        else { li.appendChild(link(item)); }
+        ul.appendChild(li);
+      });
+    }
+    function block(item, attr) {
+      var attrs = {}; attrs[attr] = item.title;
+      var d = el('details', attrs);
+      var hash = (item.url || '').split('#')[1];
+      if ((strip(item.url) === here && (!hash || location.hash === '#' + hash)) || item.items.some(holds)) { d.open = true; }
+      var summary = el('summary');
+      summary.appendChild(el('span', null, item.title));
+      summary.appendChild(el('small', null, String(item.items.length)));
+      d.appendChild(summary);
+      var ul = el('ul');
+      if (item.url && item.url !== '#') {
+        var over = el('li', { class: 'mx-side-over' });
+        over.appendChild(link({ title: 'Overview', url: item.url })); ul.appendChild(over);
+      }
+      appendItems(ul, item.items); d.appendChild(ul);
+      return d;
+    }
+    chapters.forEach(function (ch) { tree.appendChild(block(ch, 'data-chapter')); });
+  }
+
   function renderClass(chapters) {
     var found = null, score = 0;
     chapters.forEach(function (ch) {
-      ch.items.forEach(function (cls) {
-        if (!cls.items) { return; }
-        var exact = strip(cls.url) === here;
-        var own = exact || (cls.aliases || []).some(function (url) { return strip(url) === here; });
-        var member = cls.items.some(function (m) { return strip(m.url) === here; });
-        var rank = exact ? 4 : (own ? 3 : (member ? (cls.title === here.split('.')[0] ? 2 : 1) : 0));
-        if (rank > score) { found = { section: ch, cls: cls }; score = rank; }
-      });
+      function visit(items, group) {
+        items.forEach(function (cls) {
+          if (!cls.items) { return; }
+          var exact = strip(cls.url) === here;
+          var own = exact || (cls.aliases || []).some(function (url) { return strip(url) === here; });
+          var member = cls.items.some(function (m) { return strip(m.url) === here; });
+          var rank = exact ? 4 : (own ? 3 : (member ? (cls.title === here.split('.')[0] ? 2 : 1) : 0));
+          if (rank > score) { found = { section: ch, cls: cls, group: group }; score = rank; }
+          if (cls.type === 'group') { visit(cls.items, cls); }
+        });
+      }
+      visit(ch.items, null);
     });
     if (!found) { renderChapters(chapters); return null; }
     tree.textContent = '';
     var head = el('div', { class: 'mx-side-class' });
     head.appendChild(link({ title: found.cls.title, url: found.cls.url }, 'mx-side-classname'));
-    head.appendChild(el('small', null, found.cls.items.length + ' members'));
+    head.appendChild(el('small', null, found.cls.items.length + (found.cls.type === 'group' ? ' entries' : ' members')));
     tree.appendChild(head);
     var ul = el('ul', { class: 'mx-side-methods' });
     found.cls.items.forEach(function (m) {
-      var li = el('li'); li.appendChild(link({ title: m.title, url: m.url })); ul.appendChild(li);
+      var li = el('li'); li.appendChild(link(m)); ul.appendChild(li);
     });
     tree.appendChild(ul);
+    var parent = found.group || (found.cls.type === 'group' && strip(found.cls.url) !== here ? found.cls : found.section);
     var back = el('p', { class: 'mx-side-back' });
-    back.appendChild(link({ title: '← ' + found.section.title, url: found.section.url }));
+    back.appendChild(link({ title: '← ' + parent.title, url: parent.url }));
     tree.appendChild(back);
-    document.getElementById('mx-side-filter').placeholder = 'Filter the members of ' + found.cls.title;
+    document.getElementById('mx-side-filter').placeholder = 'Filter ' + found.cls.title;
     return found;
   }
 
@@ -264,6 +279,11 @@
     q = q.trim().toLowerCase();
     tree.querySelectorAll('li').forEach(function (li) {
       li.hidden = q && li.textContent.toLowerCase().indexOf(q) < 0;
+    });
+    tree.querySelectorAll('details[data-group]').forEach(function (d) {
+      if (q && d.querySelector('summary').textContent.toLowerCase().indexOf(q) >= 0) {
+        d.querySelectorAll('li').forEach(function (li) { li.hidden = false; });
+      }
     });
     tree.querySelectorAll('details').forEach(function (d) {
       var any = d.querySelectorAll('li:not([hidden])').length > 0;
@@ -345,7 +365,9 @@
       if (name === 'function_reference_sidebar') {
         var f = renderClass(chapters);
         if (f) {
-          crumbsOnce([{ title: sec[0], url: sec[1] }, { title: 'Function reference', url: 'function_reference.html' }, { title: f.section.title, url: f.section.url }, { title: f.cls.title, url: f.cls.url }]);
+          var trail = [{ title: sec[0], url: sec[1] }, { title: 'Function reference', url: 'function_reference.html' }, { title: f.section.title, url: f.section.url }];
+          if (f.group) { trail.push({ title: f.group.title, url: f.group.url }); }
+          trail.push({ title: f.cls.title, url: f.cls.url }); crumbsOnce(trail);
           nextPrevOnce(f.cls.items);
         }
       } else if (name === 'documentation_sidebar') {

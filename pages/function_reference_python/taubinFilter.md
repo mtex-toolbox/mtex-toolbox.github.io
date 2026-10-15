@@ -31,5 +31,5 @@ areas move, only not systematically one way (Taubin, SIGGRAPH 1995)
 
 MATLAB's [taubinFilter](taubinFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L174">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing/__init__.py#L174">source</a></font>
 {% endraw %}

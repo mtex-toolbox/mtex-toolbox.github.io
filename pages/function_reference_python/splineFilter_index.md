@@ -24,5 +24,5 @@ of the neighbour graph; one linear system, no iteration
 
 MATLAB's [splineFilter_index](splineFilter_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L43">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/filters/variational.py#L43">source</a></font>
 {% endraw %}

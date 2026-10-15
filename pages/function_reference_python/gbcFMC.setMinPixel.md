@@ -23,5 +23,5 @@ gbcFMC.setMinPixel(self, minPixel)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L85">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria/fmc.py#L85">source</a></font>
 {% endraw %}

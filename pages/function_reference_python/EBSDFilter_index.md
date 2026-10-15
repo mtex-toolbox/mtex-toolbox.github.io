@@ -15,5 +15,5 @@ every pixel by one computed from its neighbours: smooth(ebsd, F)
 
 MATLAB's [EBSDFilter_index](EBSDFilter_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L24">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/filters/variational.py#L24">source</a></font>
 {% endraw %}

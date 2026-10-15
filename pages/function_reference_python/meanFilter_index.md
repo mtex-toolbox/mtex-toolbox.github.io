@@ -22,5 +22,5 @@ the mean of the neighbourhood, the fastest filter and the one that blurs a bound
 
 MATLAB's [meanFilter_index](meanFilter_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L49">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/filters/window.py#L16">source</a></font>
 {% endraw %}

@@ -151,5 +151,5 @@ Grain ids unchanged: True
 
 MATLAB's [EBSD.smooth](EBSD.smooth.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L299">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L263">source</a></font>
 {% endraw %}

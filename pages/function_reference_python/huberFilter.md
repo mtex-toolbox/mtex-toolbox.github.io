@@ -56,5 +56,5 @@ vertices remain fixed; stopping uses tol or the maximum iteration count.
 
 MATLAB's [huberFilter](huberFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L248">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing/__init__.py#L248">source</a></font>
 {% endraw %}

@@ -35,5 +35,5 @@ plane.to2d(xyz), plane.from2d(xy)
 | [normal](mapPlane.normal_py.html) | the unit normal of the plane, e1 x e2 |
 | [to2d](mapPlane.to2d_py.html) | the coordinates in the plane of positions of shape (..., 3), as (..., 2) |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice.py#L40">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/lattice/__init__.py#L40">source</a></font>
 {% endraw %}

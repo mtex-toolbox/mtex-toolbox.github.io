@@ -39,5 +39,5 @@ voxelLattice.fromPositions(P)
 | [subset](voxelLattice.subset_py.html) | the lattice of the voxels selected by a flat index or mask, origin and translations kept |
 | [unitCell](voxelLattice.unitCell_py.html) | the corners of the voxel about the origin |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice.py#L56">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/voxellattice/__init__.py#L56">source</a></font>
 {% endraw %}

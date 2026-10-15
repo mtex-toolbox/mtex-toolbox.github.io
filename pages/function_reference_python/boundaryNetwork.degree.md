@@ -13,5 +13,5 @@ A property of [boundaryNetwork](boundaryNetwork_index_py.html).
 
 the number of neighbours of every vertex of the network
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L82">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing/__init__.py#L82">source</a></font>
 {% endraw %}

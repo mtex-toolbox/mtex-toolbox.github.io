@@ -7,18 +7,23 @@ method is filled in from search.json, which holds it already: looking the
 method pages up here would triple the build time.
 {%- endcomment -%}
 {%- assign ref = site.data.sidebars.function_reference_sidebar.entries[0].folders -%}
-{%- assign section = nil -%}{%- assign klass = nil -%}
+{%- assign section = nil -%}{%- assign klass = nil -%}{%- assign ref_target = nil -%}
 {%- for f in ref -%}
   {%- if f.url == page.url -%}{%- assign section = f -%}{%- break -%}{%- endif -%}
-  {%- for s in f.folderitems.subfolders -%}{%- if s.url == page.url -%}{%- assign klass = s -%}{%- endif -%}{%- endfor -%}
-  {%- if klass -%}{%- break -%}{%- endif -%}
+  {%- include reference_find.html nodes=f.folderitems.subfolders -%}
+  {%- if ref_target -%}
+    {%- if ref_target.type == "group" -%}{%- assign section = ref_target -%}
+    {%- else -%}{%- assign klass = ref_target -%}{%- endif -%}
+    {%- break -%}
+  {%- endif -%}
 {%- endfor -%}
 {%- if section -%}
 <div class="mx-refindex">
   <h2>Classes and functions</h2>
   <ul class="mx-refclasses">
-  {%- for s in section.folderitems.subfolders %}
-    <li><a href="{{ s.url | remove_first: "/" }}"><code>{{ s.title }}</code><small>{{ s.subfolderitems.size }}</small></a></li>
+  {%- assign children = section.folderitems.subfolders | default: section.subfolderitems -%}
+  {%- for s in children %}
+    <li><a href="{{ s.url | remove_first: "/" }}">{% if s.type == "group" %}{{ s.title }}{% else %}<code>{{ s.title }}</code>{% endif %}<small>{{ s.subfolderitems.size }}</small></a></li>
   {%- endfor %}
   </ul>
 </div>

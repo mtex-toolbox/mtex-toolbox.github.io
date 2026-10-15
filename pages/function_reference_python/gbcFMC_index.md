@@ -102,5 +102,5 @@ boundary.
 
 MATLAB's [gbcFMC_index](gbcFMC_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L38">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria/fmc.py#L38">source</a></font>
 {% endraw %}

@@ -33,5 +33,5 @@ all, a subgrain boundary the filter is to leave alone
 
 MATLAB's [halfQuadraticFilter](halfQuadraticFilter.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L59">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/filters/variational.py#L59">source</a></font>
 {% endraw %}

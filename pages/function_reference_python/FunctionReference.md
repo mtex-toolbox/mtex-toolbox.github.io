@@ -458,39 +458,23 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| [boundaryFilter](boundaryFilter_index_py.html) | the base of the boundary smoothing filters: smooth(V, net, h) moves the free vertices V of a boundary network sampled at the spacing h, the fixed ones stay |
-| [boundaryNetwork](boundaryNetwork_index_py.html) | the network the smoothing runs on: only the vertices the boundaries use, their neighbours in compressed form, and which of them may not move |
-| [cellComplex](cellComplex_index_py.html) | the spatial decomposition of a map, one cell per site: the vertices V, the vertex pair F and the site pair of every face, the sites and the lattice |
-| [curvatureFilter](curvatureFilter_index_py.html) | the smooth boundary as the minimiser of \|V - V0\|^2 + alpha \|L V\|^2, where L V is how far a vertex sits off the line through its neighbours |
 | [EBSD](EBSD_index_py.html) | an EBSD map: positions, rotations and phase ids with the list of the phases' frames and the properties of every measurement |
 | [EBSD3](EBSD3_index_py.html) | the measurements of a volume: positions, rotations and phase ids of voxels with the list of the phases' frames and the properties of every measurement |
-| [gbcAngle](gbcAngle_index_py.html) | the criterion of a threshold on the misorientation angle: one angle, or a high and a low angle threshold, the pair counting as the share of the levels it stays below |
-| [gbcCustom](gbcCustom_index_py.html) | a criterion given as a function of the map and the two measurement indices, or as a per-pixel property, its values or the name of a property of the map, with the largest difference that still counts as one grain, gbcCustom('grainId', 0.5) |
-| [gbcEqual](gbcEqual_index_py.html) | two measurements belong together when the values of a property agree, which is how a segmentation by variant, by parent grain or by any imported label is done |
-| [gbcFMC](gbcFMC_index_py.html) | the grain boundary criterion of fast multiscale clustering |
-| [gbcSoft](gbcSoft_index_py.html) | a smooth transition instead of a threshold, so a pair near the threshold is joined or not by how far it is from it rather than by which side it fell on |
 | [grain2d](grain2d_index_py.html) | the grains of a map: a table of ids, phases, pixel counts, mean orientations and properties, with the boundary, the inner boundary and the polygon of every grain |
 | [grain3Boundary](grain3Boundary_index_py.html) | polygonal faces separating neighbouring grains in a three-dimensional volume |
 | [grain3d](grain3d_index_py.html) | the grains of a volume as closed polyhedra, given by the incidence I_GF of grains and the faces of a grain3Boundary: what calcGrains returns for a volume, the counterpart of grain2d |
 | [grainBoundary](grainBoundary_index_py.html) | a list of line segments separating neighbouring grains in a two-dimensional map |
-| [grainBoundaryCriterion](grainBoundaryCriterion_index_py.html) | the base of the grain boundary criteria: how connected pairs of neighbouring measurements are, 1 no boundary, 0.5 a low angle boundary inside a grain, 0 a boundary |
-| [huberFilter](huberFilter_index_py.html) | smooth grain boundaries with a Huber curvature penalty that preserves sharp corners |
-| [laplaceFilter](laplaceFilter_index_py.html) | repeated local averaging, the default |
-| [lattice](lattice_index_py.html) | the lattice an EBSD map is measured on: the basis of the two shortest translations, the cell shape 'square' or 'hex', the plane and the integer index of every position, inferred from the positions or fitted to a known basis |
 | [mapImage](mapImage_index_py.html) | an image that knows where on the specimen it sits: a raster of values on a regular grid of an origin and two perpendicular steps |
 | [mapImageList](mapImageList_index_py.html) | a list of mapImage, displayed as MATLAB's table of a mapImage array |
-| [mapPlane](mapPlane_index_py.html) | the plane of a set of positions with an orthonormal frame: the normal fitted and pointing up, e1 the given direction projected into the plane, the origin the specimen origin's foot on it |
 | [neper](neper_index_py.html) | the interface to Neper, the tessellation program, one per session with its settings: the geometry, the morphology, the iterations and the file path the tessellation is written to |
 | [pairShifts](pairShifts_index_py.html) | the shifts one cross correlation pass measured between two images |
 | [parentGrainReconstructor](parentGrainReconstructor_index_py.html) | the state of a parent grain reconstruction: the map and the grains it starts from, the orientation relationship and the grains after every step taken |
 | [phaseList](phaseList_index_py.html) | the phases of a map, the frames its measurements can belong to, the not indexed frame first at index 0, so that a phase id is an index into the list |
 | [shape2d](shape2d_index_py.html) | one closed outline in the plane of a map, so that every parameter above is there for a curve that came from no segmentation, as the characteristic shape of a boundary and a projection function drawn as a shape are |
 | [simulateEBSD](simulateEBSD_index_py.html) | a simulated map whose answer is known: a job holding the settings, the grid xdim, ydim and stepSize, the orientations ori0, the noise and the features, and the map EBSDsim at the current stage, which every verb rewrites |
-| [taubinFilter](taubinFilter_index_py.html) | smoothing without the shrinking: every smoothing pass is followed by a slightly larger unshrinking one with a negative step, so the gain over the pair, (1 - lk)(1 - mk), is about one over the low frequencies and the area is given back |
 | [triplePointList](triplePointList_index_py.html) | the triple points of a boundary: the vertices where three grains meet, each with its three grains, their phases, the three boundary segments and the angles between them |
 | [trueEbsd](trueEbsd_index_py.html) | the alignment of a sequence of images and EBSD maps of one area, most distorted first and the ground truth last, one unfitted spatial transform per hop |
 | [voteTable](voteTable_index_py.html) | MATLAB's table of votes: a row per grain, parentId the best variants of the grain and prob, fit or count their value, sorted best first |
-| [voxelLattice](voxelLattice_index_py.html) | the lattice a volume is measured on: the origin, the translations d1, d2, d3 as the rows of D and the integer index of every voxel, voxel n at origin + ijk[n] @ D |
 
 ### Functions
 
@@ -499,15 +483,9 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [chainOrder](chainOrder_py.html) | the decomposition of an edge list into maximal chains, each walked end to end: the permutation that brings the edges into walk order, and per edge whether the walk enters it at its first (1) or second (2) vertex |
 | [cleanUpPseudoSym](cleanUpPseudoSym_py.html) | the map corrected for a pseudo symmetry of one phase, detected by the tortuosity of its boundaries |
 | [colorTriplet](colorTriplet_py.html) | a colour as an RGB triplet: a name of the order, or what matplotlib knows, or a triplet |
-| [connectivity](connectivity_py.html) | connectivity(crit, ebsd, i, j) is crit.evaluate(ebsd, i, j): the connectivity of the pairs of neighbouring measurements |
-| [cube2hex](EBSDhex.cube2hex_py.html) | the row and column (counted from 0) of the cells with cube coordinates x, y, z, NaN for a cell outside the grid |
 | [decompose](decompose_py.html) | the spatial decomposition of a map into one cell around every pixel, the cell complex calcGrains builds the grains from |
-| [EBSD3square](EBSD3square_py.html) | a volume on its (n1, n2, n3) array of voxels, on a rectangular lattice |
-| [EBSDsquare](EBSDsquare_py.html) | a map on a square grid from arrays in map shape, the rows of the array its rows of pixels |
 | [edgeMap](mapImage.edgeMap_py.html) | the edge transform: how unlike its eight neighbours at padWidth pixels each pixel is, every channel contrast normalised over its 2nd to 98th percentile, a neighbour off the image differenced against zero |
-| [hex2cube](EBSDhex.hex2cube_py.html) | the cube coordinates x, y, z of cells of a hexagonal grid, given by their row and column (counted from 0) or by their flat index |
 | [imboxfilt](mapImage.imboxfilt_py.html) | a box filter of k pixels, or (rows, cols), odd: the window shrinks at the border and around a missing value, so a NaN padding neither spreads nor darkens the frame (MATLAB's own, movmean down the columns and then along the rows) |
-| [latticeBasis](EBSD.latticeBasis_py.html) | the basis, the stencil and the spacing a cell polygon of four or six corners describes |
 | [majorityVote](majorityVote_py.html) | the most frequent vote cast for every id |
 | [mclComponents](mclComponents_py.html) | the components of a weighted graph by Markov clustering, MCL |
 | [mergeRuns](mergeRuns_py.html) | every surviving head swallows the run of segments before it, so the boundary stays connected and keeps its length up to the straightening of the dissolved corners |
@@ -521,22 +499,23 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [triplePoints](triplePoints_py.html) | the vertices where exactly three segments of three grains meet, with the grains, the segments and the angles the segments enclose |
 | [xcfShift](xcfShift_py.html) | how far every part of one image moved against another, by phase correlation of tiles |
 
+### Helper folders
+
+| Folder | Contents |
+| --- | --- |
+| [Grain boundary criteria](grainBoundaryCriteria_index_py.html) | Criteria used by calcGrains to decide which neighbouring measurements belong to one grain. |
+| [EBSD filters](EBSDFilters_index_py.html) | Filters for smoothing orientation measurements while controlling how grain boundaries are treated. |
+| [Boundary filters](boundaryFilters_index_py.html) | Filters and shared boundary networks for smoothing reconstructed grain boundaries. |
+| [Lattice and grid helpers](latticeHelpers_index_py.html) | Lattices, measurement planes and grid variants used to locate and index measurements in maps and volumes. |
+
 ## Analysis
 
 ### Classes
 
-| [EBSDFilter](EBSDFilter_index_py.html) | the base of the denoising filters of a gridded EBSD map, which replace the orientation of every pixel by one computed from its neighbours: smooth(ebsd, F) |
 | [embedding](embedding_index_py.html) | the isometric embedding of orientations into a Euclidean space: one matrix of components with a column per orientation, so that norm(e1 - e2) is a metric on the orientations modulo the crystal symmetry |
 | [embeddingSpec](embeddingSpec_index_py.html) | the recipe of the embedding of a crystal frame: the identity image and the orthonormal basis of the space it moves in, built once per frame |
-| [halfQuadraticFilter](halfQuadraticFilter_index_py.html) | the filter of Bergmann, Chan, Hielscher, Persch and Steidl: the data term and the regularisation each quadratic or an absolute value, and an absolute value keeps a step where a square blurs it |
-| [infimalConvolutionFilter](infimalConvolutionFilter_index_py.html) | the field split into two, u = u1 + u2, one penalised in its differences and one in its Laplacian, which keeps both a step and a slope: the infimal convolution of first and second order total variation |
-| [KuwaharaFilter](KuwaharaFilter_index_py.html) | the mean of the most homogeneous of the four quadrants of the window, which smooths within a grain and leaves a step where one is |
-| [l1TVFilter](l1TVFilter_index_py.html) | the total variation filter of the orientations of a map, absolute in the data term and in the differences between neighbours, which smooths noise and keeps sharp steps |
-| [meanFilter](meanFilter_index_py.html) | the mean of the neighbourhood, the fastest filter and the one that blurs a boundary most |
-| [medianFilter](medianFilter_index_py.html) | the componentwise median of the neighbourhood, which takes a wild pixel out without pulling the boundary after it |
 | [MLSSolver](MLSSolver_index_py.html) | the modified least squares solver of the pole figure inversion, an ODF as a weighted sum of unimodal components fitted to scattered pole figure intensities |
 | [OptimalSampleResult](OptimalSampleResult_index_py.html) | sampling result and convergence diagnostics from optimalSample |
-| [splineFilter](splineFilter_index_py.html) | the smoothing spline: the field of least \|u - f\|^2 + alpha \|L u\|^2, with L the Laplacian of the neighbour graph |
 | [TaylorModel](TaylorModel_index_py.html) | the slip systems prepared for the Taylor solve: the distinct signed systems with their critical resolved shear stresses, the strain each shear produces and its spin |
 | [zeroRangeMethod](zeroRangeMethod_index_py.html) | the zero range method of the pole figure inversion: where a pole figure vanishes, the ODF vanishes on every fibre through it |
 
