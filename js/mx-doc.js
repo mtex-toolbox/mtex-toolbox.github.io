@@ -91,20 +91,58 @@
     return chapters;
   }
 
+  // Keep the reference chapters and their overview pages in both languages.
+  function pythonClasses(chapters, python) {
+    var classes = [], byPage = {}, used = {};
+    python.forEach(function (group) {
+      group.items.forEach(function (item) {
+        if (!item.items) { return; }
+        classes.push({ group: group.title, item: item });
+        [item.url].concat(item.aliases || []).forEach(function (url) { byPage[strip(url)] = item; });
+      });
+    });
+    chapters.forEach(function (chapter) {
+      chapter.items.forEach(function (item) {
+        var cls = byPage[strip(item.url)];
+        if (cls) {
+          item.items = cls.items;
+          item.aliases = cls.aliases;
+          used[cls.url] = true;
+        }
+      });
+    });
+    var sections = {
+      Geometry: 'Geometry', 'Function spaces': 'Spherical Functions', Tensors: 'Tensors',
+      Maps: 'EBSD Analysis', 'Maps of volumes': 'EBSD Analysis', Analysis: 'EBSD Analysis',
+      'Import and export': 'Tools', Plotting: 'Plotting', 'Import wizard': 'Tools'
+    };
+    var subjects = { embeddingSpec: 'Geometry', OptimalSampleResult: 'Orientation Functions',
+                     TaylorModel: 'Tensors', EBSDFileInfo: 'EBSD Analysis' };
+    classes.forEach(function (entry) {
+      if (used[entry.item.url]) { return; }
+      var title = subjects[entry.item.title] || sections[entry.group] || 'Tools';
+      if (entry.group === 'Function spaces' && /^SO3/.test(entry.item.title)) { title = 'Orientation Functions'; }
+      var chapter = chapters.find(function (c) { return c.title === title; });
+      if (chapter) { chapter.items.push(entry.item); }
+    });
+    return chapters;
+  }
+
   function loadSidebar(name, url) {
-    function matlab() {
-      return fetch(url || ('sidebars/' + name + '.html')).then(function (r) {
-        if (!r.ok) { throw new Error('Sidebar unavailable'); }
-        return r.text();
-      }).then(parse);
-    }
+    var chapters = fetch(url || ('sidebars/' + name + '.html')).then(function (r) {
+      if (!r.ok) { throw new Error('Sidebar unavailable'); }
+      return r.text();
+    }).then(parse);
     if (name === 'function_reference_sidebar' && window.MtexLanguage && window.MtexLanguage.current() === 'python') {
-      return fetch('python_reference.json').then(function (r) {
+      var python = fetch('python_reference.json').then(function (r) {
         if (!r.ok) { throw new Error('Python reference unavailable'); }
         return r.json();
-      }).catch(matlab);
+      });
+      return Promise.all([chapters, python]).then(function (parts) {
+        return pythonClasses(parts[0], parts[1]);
+      }).catch(function () { return chapters; });
     }
-    return matlab();
+    return chapters;
   }
 
   function link(item, extraClass) {
@@ -141,9 +179,10 @@
     chapters.forEach(function (ch) {
       ch.items.forEach(function (cls) {
         if (!cls.items) { return; }
-        var own = strip(cls.url) === here || (cls.aliases || []).some(function (url) { return strip(url) === here; });
+        var exact = strip(cls.url) === here;
+        var own = exact || (cls.aliases || []).some(function (url) { return strip(url) === here; });
         var member = cls.items.some(function (m) { return strip(m.url) === here; });
-        var rank = own ? 3 : (member ? (cls.title === here.split('.')[0] ? 2 : 1) : 0);
+        var rank = exact ? 4 : (own ? 3 : (member ? (cls.title === here.split('.')[0] ? 2 : 1) : 0));
         if (rank > score) { found = { section: ch, cls: cls }; score = rank; }
       });
     });
