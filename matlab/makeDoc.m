@@ -136,6 +136,9 @@ options.force = check_option(varargin,'force');
 % (see the comment in ../../makeDoc/@DocFile/publish.m), so a build with hidden
 % figures produces pages without images. Publishing on a machine or in a
 % MATLAB session that has no display is the only way to keep them away.
+figureVisibility = get(groot,'DefaultFigureVisible');
+figureVisibilityCleanup = onCleanup(@() set(groot,'DefaultFigureVisible',figureVisibility));
+set(groot,'DefaultFigureVisible','on');
 
 % pages whose figures differ from the committed ones are republished even when
 % their source has not changed - such an image is normally the trace of an MTEX
