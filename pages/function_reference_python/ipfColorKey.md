@@ -102,5 +102,5 @@ RGB colours: [[1.    0.01  0.   ]
 
 MATLAB's [ipfColorKey](ipfColorKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L86">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys/__init__.py#L86">source</a></font>
 {% endraw %}

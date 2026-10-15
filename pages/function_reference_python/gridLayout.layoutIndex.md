@@ -80,5 +80,5 @@ the first two are left alone.
 
 MATLAB's [gridLayout.layoutIndex](gridLayout.layoutIndex.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L103">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/gridlayout.py#L103">source</a></font>
 {% endraw %}

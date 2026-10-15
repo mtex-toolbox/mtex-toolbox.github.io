@@ -35,5 +35,5 @@ rgb = key.orientation2color(ori)
 
 MATLAB's [ipfTSLKey_index](ipfTSLKey_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L300">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys/__init__.py#L300">source</a></font>
 {% endraw %}

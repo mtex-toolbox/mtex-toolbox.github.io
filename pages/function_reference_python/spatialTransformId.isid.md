@@ -13,5 +13,5 @@ A property of [spatialTransformId](spatialTransformId_index_py.html).
 
 always True
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L236">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L236">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [ipfSpotKey](ipfSpotKey_index_py.html).
 
 the kernel the spots fade to white with
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L365">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys/__init__.py#L365">source</a></font>
 {% endraw %}

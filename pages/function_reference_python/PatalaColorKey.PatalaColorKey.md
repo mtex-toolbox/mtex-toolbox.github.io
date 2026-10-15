@@ -48,5 +48,5 @@ PatalaColorKey(x, frameB=None)
 
 MATLAB's [PatalaColorKey.PatalaColorKey](PatalaColorKey.PatalaColorKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/patalakey.py#L170">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys/patala.py#L170">source</a></font>
 {% endraw %}

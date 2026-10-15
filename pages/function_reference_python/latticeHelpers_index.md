@@ -21,4 +21,6 @@ Lattices, measurement planes and grid variants used to locate and index measurem
 | [latticeBasis](latticeBasis_py.html) | the basis, the stencil and the spacing a cell polygon of four or six corners describes |
 | [EBSDsquare](EBSDsquare_py.html) | a map on a square grid from arrays in map shape, the rows of the array its rows of pixels |
 | [EBSD3square](EBSD3square_py.html) | a volume on its (n1, n2, n3) array of voxels, on a rectangular lattice |
+| [hex2cube](EBSDhex.hex2cube_py.html) | the cube coordinates x, y, z of cells of a hexagonal grid, given by their row and column (counted from 0) or by their flat index |
+| [cube2hex](EBSDhex.cube2hex_py.html) | the row and column (counted from 0) of the cells with cube coordinates x, y, z, NaN for a cell outside the grid |
 {% endraw %}

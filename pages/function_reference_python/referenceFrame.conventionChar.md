@@ -62,5 +62,5 @@ carries no convention and none is given.
 
 MATLAB's [referenceFrame.conventionChar](referenceFrame.conventionChar.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L634">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/__init__.py#L634">source</a></font>
 {% endraw %}

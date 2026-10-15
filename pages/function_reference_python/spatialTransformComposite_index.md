@@ -58,5 +58,5 @@ uses matrix order and applies T2 first.
 
 MATLAB's [spatialTransformComposite_index](spatialTransformComposite_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L885">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L885">source</a></font>
 {% endraw %}

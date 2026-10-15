@@ -81,5 +81,5 @@ them; a cell the lattice does not allow is refused unless check=False.
 
 [crystalFrame](crystalFrame_index_py.html), [reciprocalAxes](reciprocalAxes_py.html), [CrystalReferenceSystem](CrystalReferenceSystem_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalaxes.py#L147">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/crystalaxes.py#L147">source</a></font>
 {% endraw %}

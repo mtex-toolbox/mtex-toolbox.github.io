@@ -74,5 +74,5 @@ frame not lying in the plane points into.
 
 [hasSmoothKey](hasSmoothKey_py.html), [regionCenter](regionCenter_py.html), [HSVDirectionKey](HSVDirectionKey_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectorfold.py#L127">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/sectorfold.py#L127">source</a></font>
 {% endraw %}

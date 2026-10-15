@@ -57,5 +57,5 @@ Within another relative tolerance.
 
 MATLAB's [referenceFrame.isAligned](referenceFrame.isAligned.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L493">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/__init__.py#L493">source</a></font>
 {% endraw %}

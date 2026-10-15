@@ -70,5 +70,5 @@ spatialTransformProjective.byTilt(theta, wd, centre=None)
 
 [EBSDGrid](EBSDGrid_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L455">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L455">source</a></font>
 {% endraw %}

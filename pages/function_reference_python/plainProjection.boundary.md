@@ -54,5 +54,5 @@ polar ranges, as the other charts get the horizon.
 
 [plainProjection.bounds](plainProjection.bounds_py.html), [sphericalProjection.boundary](sphericalProjection.boundary_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L459">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical/__init__.py#L459">source</a></font>
 {% endraw %}

@@ -33,5 +33,5 @@ rho over theta in degrees: the polar angles of the frame itself, no convention
 
 MATLAB's [plainProjection](plainProjection.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L408">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical/__init__.py#L408">source</a></font>
 {% endraw %}

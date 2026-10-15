@@ -23,5 +23,5 @@ directionColorKey.direction2color(self, h)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L294">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/__init__.py#L294">source</a></font>
 {% endraw %}

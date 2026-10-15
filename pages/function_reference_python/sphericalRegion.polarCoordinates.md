@@ -79,5 +79,5 @@ whole turn.
 
 MATLAB's [sphericalRegion.polarCoordinates](sphericalRegion.polarCoordinates.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectorfold.py#L220">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/sectorfold.py#L220">source</a></font>
 {% endraw %}

@@ -49,5 +49,5 @@ Laue group -1 three lobes of the upper hemisphere.
 
 [HSVDirectionKey](HSVDirectionKey_index_py.html), [TSLDirectionKey](TSLDirectionKey_index_py.html), [ipfHKLKey](ipfHKLKey_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L488">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/__init__.py#L488">source</a></font>
 {% endraw %}

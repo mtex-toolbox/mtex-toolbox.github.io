@@ -13,5 +13,5 @@ A property of [gammaSections](gammaSections_index_py.html).
 
 the gamma values of the sections
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L385">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections/__init__.py#L385">source</a></font>
 {% endraw %}

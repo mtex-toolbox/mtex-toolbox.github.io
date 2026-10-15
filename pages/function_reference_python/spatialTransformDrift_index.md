@@ -60,5 +60,5 @@ NaN unless extrapolate=True continues the end segments. No knots gives the ident
 
 MATLAB's [spatialTransformDrift_index](spatialTransformDrift_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L629">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L629">source</a></font>
 {% endraw %}

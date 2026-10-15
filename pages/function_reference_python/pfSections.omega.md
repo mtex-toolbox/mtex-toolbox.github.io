@@ -13,5 +13,5 @@ A property of [pfSections](pfSections_index_py.html).
 
 the twist angles of the sections
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L507">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections/__init__.py#L507">source</a></font>
 {% endraw %}

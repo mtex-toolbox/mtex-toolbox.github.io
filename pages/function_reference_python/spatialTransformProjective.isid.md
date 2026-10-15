@@ -13,5 +13,5 @@ A property of [spatialTransformProjective](spatialTransformProjective_index_py.h
 
 whether the homography is the identity
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L442">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L442">source</a></font>
 {% endraw %}

@@ -49,5 +49,5 @@ reciprocalAxes(axes)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalaxes.py#L72">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/crystalaxes.py#L72">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [axisAngleSections](axisAngleSections_index_py.html).
 
 the rotation angles of the sections
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L692">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections/__init__.py#L692">source</a></font>
 {% endraw %}

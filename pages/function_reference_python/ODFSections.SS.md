@@ -13,5 +13,5 @@ A property of [ODFSections](ODFSections_index_py.html).
 
 the second frame of the sections, frameB
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L127">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections/__init__.py#L127">source</a></font>
 {% endraw %}

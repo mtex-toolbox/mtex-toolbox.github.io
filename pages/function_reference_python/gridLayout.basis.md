@@ -13,5 +13,5 @@ A property of [gridLayout](gridLayout_index_py.html).
 
 the directions row, col and row x col as one vector3d of three
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L88">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/gridlayout.py#L88">source</a></font>
 {% endraw %}

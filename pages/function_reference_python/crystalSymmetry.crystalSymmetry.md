@@ -208,5 +208,5 @@ Magnesium
 
 MATLAB's [crystalSymmetry.crystalSymmetry](crystalSymmetry.crystalSymmetry.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L775">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/__init__.py#L775">source</a></font>
 {% endraw %}

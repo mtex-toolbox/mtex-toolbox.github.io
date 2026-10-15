@@ -19,20 +19,21 @@ To make changes, update the MATLAB code and republish this document.
 </head>
 <body>
 <!-- mx-reference-forms -->
-<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/@mtexLayout/resolve.m">
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/layoutHelpers/@mtexLayout/resolve.m">
     edit page</a></font>
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>lay the figure out: measure, solve, apply, until the inset stops moving</p>
+<p>lay the figure out: measure, solve, apply, until nothing moves</p>
 <h2 id="3">Description</h2>
-<p>The decoration band depends on the size of the axes - a wider axes gets different tick labels - so the layout is a fixed point rather than a single pass. <a href="mtexFigure.mtexFigure.html">mtexFigure</a> used to settle that by running the whole layout twice unconditionally, whatever the figure held. This iterates instead: the usual case converges after one pass and stops, and a case that would oscillate stops too.</p>
+<p>The decoration band depends on the size of the axes - a wider axes gets different tick labels - and a refit changes the space to lay out in, so the layout is a fixed point rather than a single pass. The usual case converges after one pass and stops, and a case that would oscillate stops too.</p>
 <p>Re-entrant calls return the plan in hand. Writing an axes Position while laying out can bring the figure resize callback straight back round here, and it must not restart the layout underneath the pass that is running.</p>
 <h2 id="4">Syntax</h2>
 <div class="mx-form">
 {% highlight matlab %}
 plan = lay.resolve(mtexFig)
 plan = lay.resolve(mtexFig,override)
+plan = lay.resolve(mtexFig,override,refit)
 {% endhighlight %}
 </div>
 <h2 id="5">Input</h2>
@@ -44,6 +45,14 @@ plan = lay.resolve(mtexFig,override)
          </td>
          <td>
             <tt>spec fields to force, e.g. a pinned axis size, without writing them onto the <a href="mtexFigure.mtexFigure.html">mtexFigure</a> and having them outlive this call</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>refit</tt>
+         </td>
+         <td>
+            <tt>resize the figure to what the layout needs</tt>
          </td>
       </tr>
    </table>

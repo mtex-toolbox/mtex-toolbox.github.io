@@ -35,5 +35,5 @@ PatalaColorKey.orientation2color(self, mori)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/patalakey.py#L184">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys/patala.py#L184">source</a></font>
 {% endraw %}

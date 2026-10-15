@@ -34,5 +34,5 @@ key = HKLDirectionKey(cs)
 
 MATLAB's [HKLDirectionKey_index](HKLDirectionKey_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L466">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/__init__.py#L466">source</a></font>
 {% endraw %}

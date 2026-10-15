@@ -107,5 +107,5 @@ layout, ebsd.layout says the one it is in.
 
 MATLAB's [gridLayout.gridLayout](gridLayout.gridLayout.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L29">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/gridlayout.py#L29">source</a></font>
 {% endraw %}

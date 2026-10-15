@@ -52,5 +52,5 @@ ready to pass to plot. Construct a concrete subclass; this base does not define 
 
 MATLAB's [orientationColorKey_index](orientationColorKey_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L40">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys/__init__.py#L40">source</a></font>
 {% endraw %}

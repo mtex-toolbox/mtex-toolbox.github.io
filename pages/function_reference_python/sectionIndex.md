@@ -60,5 +60,5 @@ so the sections of an angle that turns are found across its seam.
 
 [sectionTolerance](sectionTolerance_py.html), [ODFSections](ODFSections_index_py.html), [newODFSectionPlot](newODFSectionPlot_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L47">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections/__init__.py#L47">source</a></font>
 {% endraw %}

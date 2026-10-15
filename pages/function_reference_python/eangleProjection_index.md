@@ -26,5 +26,5 @@ the equal angle, stereographic, projection: r = tan(theta / 2)
 
 MATLAB's [eangleProjection_index](eangleProjection_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L319">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical/__init__.py#L319">source</a></font>
 {% endraw %}

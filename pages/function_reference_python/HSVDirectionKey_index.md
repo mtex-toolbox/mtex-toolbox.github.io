@@ -57,5 +57,5 @@ yellow, and the key comes closer to MTEX's and less even.
 
 MATLAB's [HSVDirectionKey_index](HSVDirectionKey_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L312">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/__init__.py#L312">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [referenceFrame](referenceFrame_index_py.html).
 
 numeric identifier of the point group carried by the frame; this is not a unique frame identifier.
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L158">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/__init__.py#L158">source</a></font>
 {% endraw %}

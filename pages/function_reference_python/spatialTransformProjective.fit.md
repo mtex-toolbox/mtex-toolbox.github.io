@@ -77,5 +77,5 @@ A point with a missing position or no weight is dropped; at least four points ar
 
 [spatialTransformPoly.fit](spatialTransformPoly.fit_py.html), [spatialTransformProjective.byTilt](spatialTransformProjective.byTilt_py.html), [spatialTransformTilt](spatialTransformTilt_index_py.html), [transform](transform_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L482">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L482">source</a></font>
 {% endraw %}

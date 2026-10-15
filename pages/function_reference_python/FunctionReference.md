@@ -16,58 +16,30 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| [crystalFrame](crystalFrame_index_py.html) | the reference frame glued to the lattice basis of a phase, with the point group of the crystal |
 | [crystalShape](crystalShape_index_py.html) | construct a convex crystal morphology from symmetry-related lattice planes |
 | [dislocationSystem](dislocationSystem_index_py.html) | a Burgers vector with a line vector, edge when orthogonal and screw when parallel |
-| [fibonacciS2Grid](fibonacciS2Grid_index_py.html) | the spherical Fibonacci grid: N = 2n + 1 points along a spiral, z linear in the index and the azimuth advancing by the golden angle |
 | [fibre](fibre_index_py.html) | a fibre in orientation space: the orientations mapping the crystal direction h onto the specimen direction r, or the arc of them between two orientations |
-| [gridLayout](gridLayout_index_py.html) | the order a grid is stored in: the directions of the specimen its row index and its column index advance along |
 | [latticeType](latticeType_index_py.html) | the Bravais lattice systems, an enumeration whose members carry the conventions that follow from them: the default axis angles, the independent axis lengths, the orthogonal axes |
-| [notIndexedFrame](notIndexedFrame_index_py.html) | the frame of the measurements that could not be indexed, a phase of a map without basis, group or colour |
 | [orientation](orientation_index_py.html) | orientations and misorientations, rotations taking coordinates in the frame CS to coordinates in the frame SS |
 | [orientationRegion](orientationRegion_index_py.html) | a region of orientation space bounded by planes in the quaternions, mostly the fundamental region of a pair of frames |
 | [orthogonalTransform](orthogonalTransform_index_py.html) | orthogonal transforms, a rotation and a parity as a fifth coordinate, -1 for an improper one, the rotation followed by the inversion |
 | [plane3d](plane3d_index_py.html) | planes in three-dimensional space, stored by unit normals and signed offsets |
-| [plottingConvention](plottingConvention_index_py.html) | how a reference frame is laid out on screen: one rotation taking the screen axes to the reference axes, `east = rot * x`, `north = rot * y`, `outOfScreen = rot * z` |
 | [quaternion](quaternion_index_py.html) | quaternions stored as `a + b*i + c*j + d*k`, with one coefficient tuple per element |
-| [referenceFrame](referenceFrame_index_py.html) | a reference frame, the coordinate system data is expressed in: an identity, a basis, the point group the data is invariant under and the default plotting convention |
 | [rotation](rotation_index_py.html) | proper rotations represented by unit quaternions, with opposite signs identified |
-| [S1Grid](S1Grid_index_py.html) | a sorted list of angles on an interval [min, max], periodic or not, the nearest neighbour and radius search of the tensor product grids S2Grid and SO3Grid |
-| [S2Grid](S2Grid_index_py.html) | a grid on the sphere with ring structure, a ladder of polar angles theta and one azimuth grid per ring, whose nearest and radius searches use that structure |
-| [S2Triangulation](S2Triangulation_index_py.html) | the Delaunay triangulation of directions on the sphere, their convex hull: the triangles T, counterclockwise from outside, and the triangle opposite each vertex |
 | [slipSystem](slipSystem_index_py.html) | slip systems: slip directions b with plane normals n orthogonal to them and a critical resolved shear stress each, in crystal coordinates while Miller indexed, in specimen coordinates once an orientation has rotated them |
-| [SO3FibonacciGrid](SO3FibonacciGrid_index_py.html) | the super-Fibonacci grid of orientations, a low-discrepancy quaternion spiral trimmed to one fundamental region of the frame pair, searched through the quaternion k-d tree |
-| [SO3Grid](SO3Grid_index_py.html) | the equispaced grid of orientations over one fundamental region of its frame pair, MATLAB's SO3Grid: an S2 grid of the images of z with a ladder of gamma per node, so a search costs three binary searches |
 | [SO3TangentVector](SO3TangentVector_index_py.html) | a tangent vector of SO(3), a rotation vector v at a reference rotation or orientation, on the left, `exp(v) * oriRef`, or on the right, `oriRef * exp(v)` |
-| [spatialTransform](spatialTransform_index_py.html) | a transformation of scan positions in the xy plane |
-| [spatialTransformComposite](spatialTransformComposite_index_py.html) | a sequence of spatial transforms applied in the supplied order |
-| [spatialTransformDrift](spatialTransformDrift_index_py.html) | a displacement that varies along the slow scan direction |
-| [spatialTransformField](spatialTransformField_index_py.html) | a scan distortion interpolated from measured displacement vectors |
-| [spatialTransformHandle](spatialTransformHandle_index_py.html) | a spatial transform defined by a callable and an optional inverse callable |
-| [spatialTransformId](spatialTransformId_index_py.html) | the identity transform, which leaves every position where it is |
-| [spatialTransformInverse](spatialTransformInverse_index_py.html) | a numerical inverse of a spatial transform without a closed-form inverse |
-| [spatialTransformList](spatialTransformList_index_py.html) | a list of transforms, one hop each, displayed as MATLAB's table of a spatialTransform array |
-| [spatialTransformPoly](spatialTransformPoly_index_py.html) | a scan distortion described by a polynomial displacement in x and y |
-| [spatialTransformProjective](spatialTransformProjective_index_py.html) | a projective transform of the plane, a homography given by a 3 x 3 matrix normalised to H[2, 2] = 1 |
-| [spatialTransformRigid](spatialTransformRigid_index_py.html) | a translation of the plane by the vector3d u |
-| [spatialTransformShift](spatialTransformShift_index_py.html) | an affine map of scan positions, including translation, rotation, scale and shear |
-| [spatialTransformTilt](spatialTransformTilt_index_py.html) | specimen tilt, fitted in stages against a re-measured residual: a projective stage takes the bulk, then an affine and a quadratic polynomial what is left |
-| [specimenFrame](specimenFrame_index_py.html) | the reference frame a sample is expressed in, with the sample symmetry it claims |
 | [sphericalRegion](sphericalRegion_index_py.html) | a region on the sphere bounded by small circles: all directions v with dot(v, N_i) >= alpha_i for every normal N_i |
 | [symmetry](symmetry_index_py.html) | a point group: the closure of the generators its Hermann-Mauguin symbol names, written in given axes |
 | [vector3d](vector3d_index_py.html) | three dimensional vectors, a container over (..., 3) coordinates carrying antipodal, isNormalized, the reference frame and the display style |
 
 ### Functions
 
-| [align](align_py.html) | the orientation two frames stand in by their axes, MATLAB's orientation.align |
 | [alignment](alignment_py.html) | describe how the Cartesian axes align with the axes of a crystal lattice |
-| [alignmentSetups](alignmentSetups_py.html) | the twelve alignment pairs ['X\|\|a', 'Z\|\|b*'], .. |
 | [allHKL](allHKL_py.html) | every index triple up to maxIndex, coprime, without (0, 0, 0) |
 | [angle](angle_py.html) | measure angles between geometric objects, or the phase of numeric values |
 | [aspectRatio](aspectRatio_py.html) | measure the ratio of the longest to shortest fitted half axis of each grain |
 | [axis](axis_py.html) | return the axis of a rotation or misorientation |
 | [bainPlanes](bainPlanes_py.html) | the three {100} directions of the parent phase cs that the Bain groups of the variants are sorted by |
-| [byScreenAlignment](byScreenAlignment_py.html) | the orientation implied by two frames rendering alike: a point at v renders at inv(rot) * v in screen coordinates, so vB = rotB * inv(rotA) * vA |
 | [calcDistortion](calcDistortion_py.html) | fit the spatial distortion between the maps of a registration job |
 | [calcFourier](calcFourier_py.html) | return the harmonic coefficients of a kernel |
 | [calcGND](calcGND_py.html) | estimate geometrically necessary dislocation content from orientation gradients |
@@ -80,7 +52,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [cat](S1FunHarmonic.cat_py.html) | cat(a, b, ...) is type(a).cat(a, b, ...): the list of the operands, MATLAB's [a, b], the carried attributes joined |
 | [characteristicShape](characteristicShape_py.html) | combine grain boundary segments into a characteristic particle shape |
 | [checkInside](checkInside_py.html) | whether x lies in the region, region.checkInside(x) |
-| [closestAlignment](closestAlignment_py.html) | the alignment setup a crystal frame is reported in: of the twelve setups the one whose frame lies nearest its basis |
 | [closestConvention](closestConvention_py.html) | the entry of AXIS_CONVENTIONS nearest a rotation, and how far it is from it in radians |
 | [conj](conj_py.html) | take the quaternion or complex conjugate of an object |
 | [conv](conv_py.html) | convolve functions or kernels on their domain |
@@ -90,7 +61,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [convexHullLoops](convexHullLoops_py.html) | the convex hulls of many loops of indices into the (n, 2) vertices V in one pass, a list of index arrays into V |
 | [convexity](convexity_py.html) | compare each grain area with the area of its convex hull |
 | [cross](cross_py.html) | form the cross product of vectors or vector fields |
-| [crystalAxes](crystalAxes_py.html) | the crystal axes a, b, c in Cartesian coordinates, from the cell of a lattice |
 | [CSL](CSL_py.html) | the coincidence site lattice misorientations of order sigma of the lattice of the crystal frame cs, MATLAB's CSL |
 | [cubo2homo](cubo2homo_py.html) | map cubochoric coordinates from a cube to the equal-volume homochoric ball |
 | [cubochoric](cubochoric_py.html) | express rotations in equal-volume cubochoric coordinates |
@@ -104,15 +74,12 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [dist](dist_py.html) | dist(plane, v), dist(plane, plane2): the signed distance to the plane |
 | [dot](dot_py.html) | calculate an inner product, with the symmetry conventions of its operands |
 | [dspacing](dspacing_py.html) | return the separation of lattice planes from their Miller normals |
-| [equispacedS2Grid](equispacedS2Grid_py.html) | an equispaced spherical grid, nearly equidistant directions on rings of constant polar angle |
-| [equispacedSO3Grid](equispacedSO3Grid_py.html) | nearly equidistant orientations covering one fundamental region of the frame pair |
 | [Euler](Euler_py.html) | express rotations as Euler angles in radians |
 | [eulerRegion](eulerRegion_py.html) | the ranges (phi1, Phi, phi2) of the Bunge Euler angles covering the fundamental region of two frames, the specimen frame the default second |
 | [even](even_py.html) | extract the part of a function unchanged by reversal of its argument |
 | [exp](exp_py.html) | take the pointwise exponential or the exponential map of an object |
 | [extent](extent_py.html) | return the spatial bounding box of a map or image |
 | [factor](factor_py.html) | factor two point groups relative to their common symmetry elements |
-| [fibonacciSO3Grid](fibonacciSO3Grid_py.html) | a low discrepancy grid of orientations from a super-Fibonacci spiral, restricted to the fundamental region of the frame pair |
 | [fill](fill_py.html) | fill missing measurements in a map using nearby data or grain information |
 | [fillByGrainId](fillByGrainId_py.html) | replace map measurements by the mean orientations assigned to their grain ids |
 | [find](find_py.html) | search geometric data for neighbours, or find nonzero entries of numeric data |
@@ -136,7 +103,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [grainMean](grainMean_py.html) | average a map property separately within each grain |
 | [gridify](gridify_py.html) | arrange measurements on the cells of their spatial lattice |
 | [halfwidth](halfwidth_py.html) | return the angular halfwidth of a kernel in radians |
-| [HEALPixS2Grid](HEALPixS2Grid_py.html) | the HEALPix nodes of the sphere as a list of directions |
 | [hm2point](hm2point_py.html) | a Hermann-Mauguin space group symbol reduced to its point group, hms2point |
 | [homo2cubo](homo2cubo_py.html) | map equal-volume homochoric coordinates from a ball to the cubochoric cube |
 | [homochoric](homochoric_py.html) | express rotations as equal-volume coordinates inside the homochoric ball |
@@ -159,12 +125,9 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [laplace](laplace_py.html) | apply the Laplace-Beltrami operator to a harmonic function |
 | [Laue](Laue_py.html) | add inversion symmetry to a point group or reference frame |
 | [LaueName](LaueName_py.html) | return the Hermann-Mauguin symbol of the corresponding Laue group |
-| [layoutIndex](gridLayout.layoutIndex_py.html) | the index that lays out an array whose first and second index run along d = (d1, d2) as gL asks, new[r, c] = old.flat[lin[r, c]] |
 | [left](left_py.html) | left(t) is t.left(): the tangent vectors on the left side |
 | [lineIntersect](vector3d.lineIntersect_py.html) | where the segments from a to b cross the planes <n, v> = d, NaN where they do not, MATLAB's lineIntersect |
 | [loadSettings](loadSettings_py.html) | applies the saved settings to the session: the key plottingConvention sets the default convention, every other key the preference of that name |
-| [localOrientationGrid](localOrientationGrid_py.html) | an equispaced grid of orientations in a ball about a centre |
-| [localS2Grid](localS2Grid_py.html) | an equispaced grid of directions in a spherical cap about a centre |
 | [log](log_py.html) | take a pointwise logarithm or map rotations to tangent vectors |
 | [longAxis](longAxis_py.html) | return the longest fitted half axis of each grain outline |
 | [matrix](matrix_py.html) | express rotations, transforms or tensors as numeric matrices |
@@ -198,13 +161,10 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [properGroup](properGroup_py.html) | form a proper rotation group from all rotational parts of a point group |
 | [properSubGroup](properSubGroup_py.html) | retain only the proper rotations already present in a point group |
 | [radon](radon_py.html) | apply an orientation Radon transform or a spherical Funk transform |
-| [reciprocalAxes](reciprocalAxes_py.html) | compute reciprocal basis vectors from a direct crystal basis |
 | [reduce](reduce_py.html) | coarsen a map lattice or a boundary discretisation |
 | [reduceBoundary](reduceBoundary_py.html) | coarsen the boundary discretisation of grains |
 | [refineBoundary](refineBoundary_py.html) | subdivide boundary segments or triangular faces |
 | [reflection](reflection_py.html) | a reflection at the plane with normal n |
-| [regularS2Grid](regularS2Grid_py.html) | a regular spherical grid, the tensor product of a ladder of polar angles and a ladder of azimuths, the layout of pole figure files |
-| [regularSO3Grid](regularSO3Grid_py.html) | the regular raster of Euler angles over the Euler box of the frames, as the ODF sections show it |
 | [reset](reset_py.html) | a fresh session: the preferences, the register and the default frame |
 | [right](right_py.html) | right(t) is t.right(): the tangent vectors on the right side |
 | [Rodrigues](Rodrigues_py.html) | express rotations as axes scaled by the tangent of half the rotation angle |
@@ -230,7 +190,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [subGrid](subGrid_py.html) | select grid points by indices or by a geometric neighbourhood |
 | [subsample](subsample_py.html) | keep every n-th map measurement along each lattice direction |
 | [sum](S2Fun.sum_py.html) | sum(x) of an MTEX object by its own sum, of an array or with an axis as NumPy sums, of any other iterable as Python sums, so that from mtex import * keeps Python's sum |
-| [superfibonacciSO3Grid](superfibonacciSO3Grid_py.html) | a super-Fibonacci grid of orientations covering one fundamental region of the frame pair, its resolution the mean spacing of nearest neighbours |
 | [surfor](surfor_py.html) | calculate the cumulative directional projection length of boundary segments |
 | [symmetrise](symmetrise_py.html) | apply the symmetry action appropriate to directions, tensors or fields |
 | [tilesSphere](tilesSphere_py.html) | whether the region is a fundamental domain of the point group: n evenly spread directions folded into it all land inside, and it covers the share of one element |
@@ -245,6 +204,14 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [weightedBurgersVec](weightedBurgersVec_py.html) | estimate net Burgers vector per unit area from an orientation map |
 | [withExchange](withExchange_py.html) | impose grain exchange symmetry f(g) = f(inv(g)) on an orientation function |
 
+### Helper folders
+
+| Folder | Contents |
+| --- | --- |
+| [Spherical and orientation grids](geometryGrids_index_py.html) | Grids and triangulations for sampling directions and rotations, and for finding nearby samples. |
+| [Reference frames and layouts](referenceFrames_index_py.html) | Coordinate frames, crystal axes and array layouts used to express directions, orientations and measurement positions. |
+| [Spatial transforms](spatialTransforms_index_py.html) | Models for moving measurement positions between frames, fitting scan distortions and applying their inverses. |
+
 ## Function spaces
 
 ### Classes
@@ -254,8 +221,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [InvariantProjection](InvariantProjection_index_py.html) | symmetry projection blocks for harmonic coefficients, stored on their nonzero index support |
 | [PoleFigure](PoleFigure_index_py.html) | measured pole figure intensities with their crystal and specimen directions |
 | [quadratureS1Grid](quadratureS1Grid_index_py.html) | equally spaced angles and weights for Fourier quadrature on the circle |
-| [quadratureS2Grid](quadratureS2Grid_index_py.html) | nodes and surface-area weights for integrating functions on the unit sphere |
-| [quadratureSO3Grid](quadratureSO3Grid_index_py.html) | the quadrature grid on SO(3) of a bandwidth: the nodes and weights that integrate every harmonic function up to that degree exactly |
 | [S1BumpKernel](S1BumpKernel_index_py.html) | the indicator of the interval \|x\| < delta scaled to a density |
 | [S1DeLaValleePoussinKernel](S1DeLaValleePoussinKernel_index_py.html) | the n-th de la Vallee Poussin kernel on the circle, 2 F_(2n-1) - F_(n-1) with F the Fejer kernels: coefficients one up to n, falling to zero at 2n |
 | [S1DirichletKernel](S1DirichletKernel_index_py.html) | the Dirichlet kernel on the circle, sum_(k = -n . |
@@ -621,50 +586,16 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 
 ### Classes
 
-| [alphaSections](alphaSections_index_py.html) | sections of constant alpha in the Matthies (ZYZ) convention |
-| [axisAngleColorKey](axisAngleColorKey_index_py.html) | the rotation from a reference orientation as a colour: its axis in the specimen frame through the key of the whole sphere, its angle through the saturation (Thomsen et al.) |
-| [axisAngleSections](axisAngleSections_index_py.html) | sections of constant rotation angle, each on the axis sector the region allows there |
-| [BungeColorKey](BungeColorKey_index_py.html) | colour orientations by their three Bunge Euler angles |
-| [colorGrid](colorGrid_index_py.html) | a direction key evaluated once on a cube map of the sphere at the resolution, its colours then looked up at the node nearest a direction |
-| [directionColorKey](directionColorKey_index_py.html) | base class for assigning colours to directions with crystal symmetry |
-| [eangleProjection](eangleProjection_index_py.html) | the equal angle, stereographic, projection: r = tan(theta / 2) |
-| [eareaProjection](eareaProjection_index_py.html) | the equal area, Schmidt, projection: r = 2 sin(theta / 2) |
-| [edistProjection](edistProjection_index_py.html) | the equidistant projection: r = theta |
-| [eulerSections](eulerSections_index_py.html) | sections of constant Euler angle, the first or the third of a convention |
-| [gammaSections](gammaSections_index_py.html) | sections of constant gamma in the Matthies (ZYZ) convention |
-| [gnomonicProjection](gnomonicProjection_index_py.html) | the gnomonic projection: r = tan(theta), great circles drawn as straight lines |
-| [HKLDirectionKey](HKLDirectionKey_index_py.html) | the HKL vendor key on the Laue group: the three primaries blended linearly over the polar angle and the azimuth of the fundamental sector |
-| [HSVDirectionKey](HSVDirectionKey_index_py.html) | MTEX's default direction key: white at the centre of the fundamental sector, the primary colours at its vertices |
-| [ipfColorKey](ipfColorKey_index_py.html) | colour orientations by the crystal direction parallel to a chosen specimen direction |
-| [ipfHKLKey](ipfHKLKey_index_py.html) | the inverse pole figure key of HKL Channel 5, the HKLDirectionKey on the Laue group |
-| [ipfHSVKey](ipfHSVKey_index_py.html) | the default MTEX inverse pole figure colour key |
-| [ipfSpotKey](ipfSpotKey_index_py.html) | single spots of the inverse pole figure in their own colours |
-| [ipfTSLKey](ipfTSLKey_index_py.html) | the inverse pole figure key of TSL / OIM, the TSLDirectionKey on the Laue group |
 | [lines3d](lines3d_index_py.html) | line segments (k, 2, 3), a colour per segment (k, 3) or one for all, their width |
 | [mapPlot](mapPlot_index_py.html) | the map plot of one axes: the axes, the layout of the plane on the screen, the unit |
 | [mesh3d](mesh3d_index_py.html) | polygons over vertices: V (n, 3), the faces as ptr/idx (face k is idx[ptr[k]:ptr[k+1]]), a colour per face (m, 3) in [0, 1] or one colour for all, the face and edge transparency |
 | [mtexFigure](mtexFigure_index_py.html) | a figure of MTEX plots: equally sized axes in a grid, with colour bars and legends that follow them |
-| [ODFSections](ODFSections_index_py.html) | sections through orientation space |
-| [orientationColorKey](orientationColorKey_index_py.html) | base class for mapping crystal orientations to RGB colours |
-| [orthographicProjection](orthographicProjection_index_py.html) | the orthographic projection: r = sin(theta) |
-| [PatalaColorKey](PatalaColorKey_index_py.html) | the misorientation key of Patala, Mason and Schuh for m-3m, m-3, mmm, 4/mmm and 6/mmm |
-| [pfSections](pfSections_index_py.html) | pole figure sections: the pole figure of h1, split by the twist of h2 about it |
-| [phi1Sections](phi1Sections_index_py.html) | sections of constant phi1 in the Bunge convention |
-| [phi2Sections](phi2Sections_index_py.html) | sections of constant phi2 in the Bunge convention, MTEX's default ODF sections |
 | [picture3d](picture3d_index_py.html) | a picture on a rectangle in space: RGBA (rows, cols, 4) in [0, 1] with its first row at the bottom, and the corners of the rectangle at the bottom left, the bottom right, the top left and the top right |
-| [plainProjection](plainProjection_index_py.html) | rho over theta in degrees: the polar angles of the frame itself, no convention |
 | [planarColorKey](planarColorKey_index_py.html) | encode two scalar properties in one RGB colour |
 | [points3d](points3d_index_py.html) | markers at positions (k, 3), a colour per marker (k, 3) or one for all, their size in points |
 | [scene3d](scene3d_index_py.html) | the items of a three dimensional plot and the plotting convention it is seen by |
-| [sigmaSections](sigmaSections_index_py.html) | pole figure sections of the c axis split by the twist sigma of the a axis about it, the sections MATLAB's sigma sections draw |
 | [slices3d](slices3d_index_py.html) | three orthogonal slices of a voxel volume: the colours (nx, ny, nz, 3) in [0, 1], the voxels shown (nx, ny, nz), the centre of the first voxel, the steps of the three voxel axes as the rows of D, and the voxel index of each slice, None for a slice not shown |
-| [spacePlot](spacePlot_index_py.html) | a plot in space: the 3D axes, the frame it is drawn in, the mappable of its colours |
-| [spectralTransmissionColorKey](spectralTransmissionColorKey_index_py.html) | the colour of a thin section of an anisotropic crystal between polariser and analyser: light along the propagation direction of the specimen through a plate of the given thickness in nanometres |
 | [sphericalPlot](sphericalPlot_index_py.html) | the spherical plot of one axes: its projection, boundary, grid and labels |
-| [sphericalProjection](sphericalProjection_index_py.html) | a projection of the sphere to the plane, restricted to a region and a hemisphere |
-| [spotColorKey](spotColorKey_index_py.html) | highlight selected orientations with colours that fade to white with disorientation |
-| [spotDirectionKey](spotDirectionKey_index_py.html) | each centre, a crystal direction, given its colour, fading to white with the kernel of the angular distance to the nearest symmetric equivalent |
-| [TSLDirectionKey](TSLDirectionKey_index_py.html) | the vendors' keys, both on the Laue group whatever the frame carries (MATLAB TSLDirectionKey, HKLDirectionKey): TSL reads the polar coordinates of the sector from its centre, unfolded and without the hue correction |
 
 ### Functions
 
@@ -695,14 +626,12 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [grainMesh](grainMesh_py.html) | the faces of 3D grains as a polygon mesh of a scene3d, coloured by grain |
 | [grainPolygons](grainPolygons_py.html) | the loops of a grain as a list of rings, the outer one first, each (m, 2) |
 | [hasPyVista](hasPyVista_py.html) | whether PyVista can be imported, the renderer of the 3D scenes |
-| [hasSmoothKey](hasSmoothKey_py.html) | a group whose sector neither is bounded by its own mirrors nor folds onto such a half has no continuous one to one key |
 | [histogram](SO3Fun.hist_py.html) | histogram(grains), histogram(grains, prop, bins): the area weighted distribution of a grain property as one histogram per indexed phase, drawn over each other, or with grouped=True side by side (MATLAB's hist) |
 | [hold](hold_py.html) | hold on: the next plot goes into the current axes |
 | [hsl2hsv](hsl2hsv_py.html) | the HSV coordinates of colours given in HSL, as three arrays h, s, v |
 | [hsv2rgb](hsv2rgb_py.html) | the RGB colours of HSV coordinates, three arrays of any common shape, as (..., 3) in [0, 1] |
 | [ind2color](ind2color_py.html) | the colour of the index i in MTEX's colour order, counting from 0 (MATLAB counts from 1) |
 | [inversePoles](inversePoles_py.html) | the inverse poles: the crystal directions that lie along the specimen direction r, over the distinct equivalents of r under the specimen group |
-| [ipfColors](ipfColors_py.html) | the colour of every measurement of a map, or of every grain, each phase by its own inverse pole figure key |
 | [is3dMap](is3dMap_py.html) | whether x is a map of a volume: 3D grains, their boundary or an EBSD3 map |
 | [isLower](sphericalRegion.isLower_py.html) | whether the region lies within the hemisphere into the screen of the convention pC |
 | [isUpper](sphericalRegion.isUpper_py.html) | whether the region lies within the hemisphere out of the screen of the convention pC |
@@ -712,7 +641,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [legend](legend_py.html) | a legend: of every artist a displayName named, or naming the curves of the current axes |
 | [line](line_py.html) | a polyline in the coordinates of the current map, drawn under its layout, MATLAB's line |
 | [logAxis](logAxis_py.html) | both axes of a plot logarithmic, a decade of the same length on either |
-| [makeSphericalProjection](makeSphericalProjection_py.html) | the charts a spherical plot is drawn on, the projection of the region its data cover |
 | [mapAliases](mapAliases_py.html) | the style keywords of a map plot, checked for their spelling |
 | [mapCells](mapCells_py.html) | the corners of every cell of a map, shape (n, m, 2), on the screen |
 | [mapExtent](mapExtent_py.html) | the extent of what a map plot has to show, on the screen: (xlo, xhi, ylo, yhi) |
@@ -727,7 +655,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [mtexColorMap](mtexColorMap_py.html) | the colour map of the current figure, or of one figure or axes |
 | [mtexTitle](mtexTitle_py.html) | a title over an axes |
 | [newMtexFigure](newMtexFigure_py.html) | a new mtexFigure laid out for n axes, which becomes the current one |
-| [newODFSectionPlot](newODFSectionPlot_py.html) | the sections a plot uses: phi2 sections against a specimen, axis angle sections between two crystals, or the kind named (MATLAB newODFSectionPlot) |
 | [nextAxis](nextAxis_py.html) | the axes the next plot goes into: the next of the current figure, or the one given by its number or its row and column |
 | [num2rgb](num2rgb_py.html) | the colours a colour map gives those numbers, MATLAB's num2rgb |
 | [pcolor](Miller.smooth_py.html) | pcolor(sF), pcolor(v), pcolor(v, data): a coloured surface |
@@ -768,7 +695,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [plotSymmetry](plotSymmetry_py.html) | the elements of the point group of a frame drawn on the upper hemisphere, as the international tables draw them |
 | [plotTriplePoints](triplePointList.plot_py.html) | the triple points of a boundary network as circles, open or filled by a value |
 | [polarAxes](polarAxes_py.html) | the polar axes a polar plot draws into |
-| [polarCoordinates](sphericalRegion.polarCoordinates_py.html) | polar coordinates of a region (MATLAB @sphericalRegion/polarCoordinates), which is what a colour key is built on: the radius is one at the centre and zero on the boundary, taken along the great circle through the centre, and the azimuth is measured about the centre from a reference direction and then equalised, so that a wide part of the sector takes as much of the turn as a narrow one and the vertices sit at equal angles |
 | [poles](poles_py.html) | the poles of orientations: every orientation applied to every distinct equivalent of the crystal direction h, and every image of those under the specimen group |
 | [pyvistaPlotter](pyvistaPlotter_py.html) | a PyVista plotter drawing a 3D scene, its camera set by the plotting convention |
 | [quiver](EBSD.quiver_py.html) | arrows: tangent vectors at directions, a vector or axis field on the sphere, arrows at orientations in the sections of the current figure, or directions on a map or a volume |
@@ -777,7 +703,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [quiverSection](S2Fun.quiverSection_py.html) | arrows on a section plot: of a function on the sphere along one of its circles, or at orientations in the sections of orientation space |
 | [quiverSectionField](quiverSectionField_py.html) | plot of a vector field on SO(3) as arrows in the sections of orientation space |
 | [red2blueColorMap](red2blueColorMap_py.html) | the red2blue colour map, as MATLAB's red2blueColorMap returns it |
-| [regionCenter](regionCenter_py.html) | the centre of a region (MATLAB @sphericalRegion/center): the pole of a single circle, the bisector of the two boundaries furthest apart for a lune, the barycentre of the vertices of a triangle, and the area centroid of anything larger |
 | [regionLines](regionLines_py.html) | the parallels and meridians drawn on the surface, which is how a viewer reads its shape |
 | [regionSurface](regionSurface_py.html) | the boundary of an orientation region in axis angle space: the sphere mesh pushed out to the largest angle about every axis, in radians, with the faces of the mesh |
 | [regionWalls](regionWalls_py.html) | the walls of a region cut down to an axis sector: the plane of every boundary arc of the sector from the identity out to the surface, one polygon per arc |
@@ -785,15 +710,11 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [rgb2hsv](rgb2hsv_py.html) | MATLAB rgb2hsv, hsv2rgb and hsl2hsv on arrays of shape (..., 3) or three arrays |
 | [rhoRange](sphericalRegion.rhoRange_py.html) | the azimuth interval of a region: the whole circle when a pole lies inside, otherwise the complement of the widest gap between the azimuths of its boundary |
 | [saveFigure](saveFigure_py.html) | the figure written to a graphics file cropped to its content |
-| [scaleBar](scaleBar_py.html) | how long a scale bar of a map should be, in the coordinates the map is drawn in, and how it reads: a round number near a tenth of the width, in the unit that keeps it readable |
 | [scaleBarOn](scaleBarOn_py.html) | a scale bar in one corner of a map: a round length near a tenth of its width, written above the bar, and above it the axes of the specimen frame as they lie on the screen |
 | [scatter](Miller.scatter_py.html) | directions or crystal directions drawn as markers on a spherical plot, coloured by data or labelled |
 | [scatter3d](vector3d.scatter3d_py.html) | directions as markers on the sphere in space |
 | [scatterXY](scatterXY_py.html) | markers at the coordinates of the current map, MATLAB's scatter of two coordinate lists |
 | [sceneHTML](sceneHTML_py.html) | the scene as a standalone HTML page that draws it with three.js in the browser, turned and zoomed with the mouse |
-| [sectionIndex](sectionIndex_py.html) | the section a coordinate falls in, or -1 when it falls beside every one: the distance to a section value taken over the period of the coordinate |
-| [sectionTolerance](sectionTolerance_py.html) | the tolerance a section reaches: never more than half the gap to its neighbour |
-| [sectorFolds](sectorFolds_py.html) | the folds of a group's sector, in the order they are applied |
 | [setCamera](setCamera_py.html) | the 3D view of the current axes looking down how2plot.outOfScreen, with how2plot.north up |
 | [setColorRange](setColorRange_py.html) | one colour range over every axes of the current figure ('equal'), each its own ('tight') or the one given as (lo, hi) |
 | [setColorScale](setColorScale_py.html) | logarithmic or linear colours on every plot of the figure |
@@ -802,7 +723,6 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [shapesOnMap](shapesOnMap_py.html) | one crystal shape per grain of the shape's phase: rotated by the grain's mean orientation, scaled by the square root of its area and put at its centroid, as one list of shapes over the grains that take it, whose indices come with it |
 | [show3d](show3d_py.html) | the scene of the current figure in an interactive PyVista window, rotated and zoomed with the mouse |
 | [smallCircle](smallCircle_py.html) | the circle of directions at an angle about a direction, closed |
-| [sphereColor](sphereColor_py.html) | the colour of a point of the colour sphere, the hue from the azimuth and the lightness from the radius |
 | [sphereGridLines](sphereGridLines_py.html) | the small circles about the pole and the meridians, as polylines of directions |
 | [sphereMesh](sphereMesh_py.html) | the unit sphere as a mesh: rings of constant polar angle joined by quads split into triangles, fans at the poles, every triangle wound so that its normal points outwards |
 | [str2rgb](str2rgb_py.html) | str2rgb('salmon'): the RGB triplet of a colour name, MATLAB tools/str2rgb |
@@ -818,6 +738,17 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [writeHTML](writeHTML_py.html) | the scene written to a file as an interactive HTML page, that of sceneHTML |
 | [xlabel](xlabel_py.html) | a label under the current axes, which a spherical chart draws without axis lines, so matplotlib's own label would not show |
 | [ylabel](ylabel_py.html) | a label left of an axes, written beside a spherical chart, which has no axis lines to carry matplotlib's own label |
+
+### Helper folders
+
+| Folder | Contents |
+| --- | --- |
+| [Spherical projections](sphericalProjections_index_py.html) | Projections that map directions on the sphere to plotting coordinates. |
+| [Directional colour keys](directionColorKeys_index_py.html) | Colour keys that assign RGB colours to crystal or specimen directions. |
+| [Orientation colour keys](orientationColorKeys_index_py.html) | Inverse pole figure, Euler-angle, axis-angle and misorientation colour keys for orientation data. |
+| [Orientation sections](orientationSections_index_py.html) | Section definitions for plotting orientation distribution functions at fixed Euler angles, directions or rotation parameters. |
+| [Orientation plots](orientationPlots_index_py.html) | Coordinate systems for displaying rotations and orientations in three dimensions. |
+| [Plot conventions and layout helpers](plotLayoutHelpers_index_py.html) | Plotting conventions, screen coordinates, scale bars and the layout machinery used by MTEX figures. |
 
 ## Import wizard
 

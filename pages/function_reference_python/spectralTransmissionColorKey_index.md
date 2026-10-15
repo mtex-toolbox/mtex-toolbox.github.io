@@ -40,5 +40,5 @@ key.propagationDirection, key.polarizer, key.phi
 
 MATLAB's [spectralTransmissionColorKey_index](spectralTransmissionColorKey_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L549">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys/__init__.py#L549">source</a></font>
 {% endraw %}

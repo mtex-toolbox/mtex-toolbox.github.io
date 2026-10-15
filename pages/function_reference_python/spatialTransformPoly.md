@@ -67,5 +67,5 @@ uses a numerical inverse. With no coefficients the transform is the identity.
 
 MATLAB's [spatialTransformPoly](spatialTransformPoly.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L530">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L530">source</a></font>
 {% endraw %}

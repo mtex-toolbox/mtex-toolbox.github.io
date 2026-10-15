@@ -59,5 +59,5 @@ are built on first use and stored here, so every later call returns the same han
 
 [specimenFrame.named](specimenFrame.named_py.html), [referenceFrame.intern](referenceFrame.intern_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L593">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/__init__.py#L593">source</a></font>
 {% endraw %}

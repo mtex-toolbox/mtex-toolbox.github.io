@@ -51,5 +51,5 @@ inverse raises ValueError. The inverse callable receives positions in the output
 
 MATLAB's [spatialTransformHandle_index](spatialTransformHandle_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L844">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L844">source</a></font>
 {% endraw %}

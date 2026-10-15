@@ -22,5 +22,5 @@ byScreenAlignment(frA, frB)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frametransform.py#L49">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/transform.py#L49">source</a></font>
 {% endraw %}

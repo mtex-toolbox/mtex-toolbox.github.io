@@ -46,5 +46,5 @@ oS = sigmaSections(cs, ss, sigma=np.arange(0, 60, 10)*degree)
 
 MATLAB's [sigmaSections](sigmaSections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L610">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections/__init__.py#L610">source</a></font>
 {% endraw %}

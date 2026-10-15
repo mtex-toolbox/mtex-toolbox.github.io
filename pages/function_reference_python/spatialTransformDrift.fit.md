@@ -75,5 +75,5 @@ leaves nothing for them to outvote; a weight zero is kept, as MATLAB keeps it.
 
 [spatialTransformPoly.fit](spatialTransformPoly.fit_py.html), [spatialTransformField](spatialTransformField_index_py.html), [transform](transform_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L702">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L702">source</a></font>
 {% endraw %}

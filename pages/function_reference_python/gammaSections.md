@@ -40,5 +40,5 @@ oS = gammaSections(cs, ss, gamma=np.arange(0, 91, 15)*degree)
 
 MATLAB's [gammaSections](gammaSections.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L368">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections/__init__.py#L368">source</a></font>
 {% endraw %}

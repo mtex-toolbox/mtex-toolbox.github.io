@@ -59,5 +59,5 @@ about it.
 
 [referenceFrame.nfold](referenceFrame.nfold_py.html), [referenceFrame.rotations](referenceFrame.rotations_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L228">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames/__init__.py#L228">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [ipfSpotKey](ipfSpotKey_index_py.html).
 
 the colours of the spots, one RGB row per centre
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L355">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys/__init__.py#L355">source</a></font>
 {% endraw %}

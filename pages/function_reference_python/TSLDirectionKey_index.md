@@ -26,5 +26,5 @@ over the polar angle and the azimuth of the sector
 
 MATLAB's [TSLDirectionKey_index](TSLDirectionKey_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L420">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/__init__.py#L420">source</a></font>
 {% endraw %}

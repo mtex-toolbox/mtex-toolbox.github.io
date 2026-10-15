@@ -59,5 +59,5 @@ the hue correction: white at the centre, the full colours on the boundary.
 
 [HSVDirectionKey](HSVDirectionKey_index_py.html), [HKLDirectionKey](HKLDirectionKey_index_py.html), [ipfTSLKey](ipfTSLKey_index_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L440">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/__init__.py#L440">source</a></font>
 {% endraw %}

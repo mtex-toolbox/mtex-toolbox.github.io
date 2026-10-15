@@ -24,5 +24,5 @@ hsl2hsv(h, s, l)
 
 MATLAB's [hsl2hsv](hsl2hsv.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L40">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/__init__.py#L40">source</a></font>
 {% endraw %}

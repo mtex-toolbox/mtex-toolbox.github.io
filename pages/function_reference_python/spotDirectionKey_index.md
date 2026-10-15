@@ -35,5 +35,5 @@ spotDirectionKey(cs, center=Miller(1, 1, 1, cs), color=(0, 0, 1), psi=S2DeLaVall
 | [direction2color](spotDirectionKey.direction2color_py.html) | the colours of directions under the spot key |
 | [whiteCenter](spotDirectionKey.whiteCenter_py.html) | the first centre of the key |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L524">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys/__init__.py#L524">source</a></font>
 {% endraw %}

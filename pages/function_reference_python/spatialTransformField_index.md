@@ -55,5 +55,5 @@ extrapolation. With no samples the transform is the identity.
 
 MATLAB's [spatialTransformField_index](spatialTransformField_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L751">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L751">source</a></font>
 {% endraw %}

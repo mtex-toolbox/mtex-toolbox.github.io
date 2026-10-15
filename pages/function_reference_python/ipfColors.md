@@ -95,5 +95,5 @@ a large map than colouring every direction through the key; exact=True does the 
 
 [ipfHSVKey](ipfHSVKey_index_py.html), [ipfColorKey](ipfColorKey_index_py.html), [orientation2color](BungeColorKey.orientation2color_py.html), [EBSD.plot](EBSD.plot_py.html), [colorGrid](colorGrid_index_py.html), [EBSDIPFMap](EBSDIPFMap_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L656">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys/__init__.py#L656">source</a></font>
 {% endraw %}

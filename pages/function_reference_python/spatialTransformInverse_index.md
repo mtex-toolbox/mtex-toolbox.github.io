@@ -57,5 +57,5 @@ sufficiently after the first three steps. The z coordinate is preserved.
 
 MATLAB's [spatialTransformInverse_index](spatialTransformInverse_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L993">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform/__init__.py#L993">source</a></font>
 {% endraw %}
