@@ -13,5 +13,5 @@ A property of [orthogonalTransform](orthogonalTransform_index_py.html).
 
 the identity transform
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1067">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1084">source</a></font>
 {% endraw %}

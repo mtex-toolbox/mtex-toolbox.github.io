@@ -72,5 +72,5 @@ combined this way.
 
 MATLAB's [Miller.transformReferenceFrame](Miller.transformReferenceFrame.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1278">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1293">source</a></font>
 {% endraw %}

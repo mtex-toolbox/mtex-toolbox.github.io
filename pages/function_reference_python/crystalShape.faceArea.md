@@ -13,5 +13,5 @@ A property of [crystalShape](crystalShape_index_py.html).
 
 area of each polygonal face in squared vertex-length units; a list of shapes has shape (numShapes, numFaces).
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L308">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L324">source</a></font>
 {% endraw %}

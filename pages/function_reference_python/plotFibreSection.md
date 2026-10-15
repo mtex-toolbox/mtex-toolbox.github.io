@@ -71,5 +71,5 @@ the lines.
 
 [fibre](fibre_index_py.html), [plotSection](S2Fun.plotSection_py.html), [annotateSection](annotateSection_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L279">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L296">source</a></font>
 {% endraw %}

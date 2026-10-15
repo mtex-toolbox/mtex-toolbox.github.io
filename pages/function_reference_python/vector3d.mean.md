@@ -114,5 +114,5 @@ than 80 percent of them and averages again.
 
 MATLAB's [vector3d.mean](vector3d.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1016">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1031">source</a></font>
 {% endraw %}

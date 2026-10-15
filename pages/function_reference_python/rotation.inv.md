@@ -42,5 +42,5 @@ rotation.inv(self)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L949">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L966">source</a></font>
 {% endraw %}

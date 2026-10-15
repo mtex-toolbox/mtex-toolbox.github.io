@@ -117,6 +117,37 @@ laplaceFilter(iter).
 
 | `grains` | grain2d with the smoothed boundary and inner boundary |
 
+## Example
+
+Compare reconstructed and smoothed boundaries on the small Forsterite sample.
+The sample file is downloaded and cached on first use.
+
+
+```python
+import matplotlib.pyplot as plt
+from mtex import mtexdata, calcGrains, smoothBoundary, degree, plot, hold
+
+ebsd = mtexdata('small', verbose=False)['Forsterite']
+grains = calcGrains(ebsd, angle=10*degree, minPixel=5)
+smoothed = smoothBoundary(grains, 5)
+plot(grains.boundary, lineColor='black', lineWidth=2, displayName='Reconstructed')
+hold(True)
+plot(smoothed.boundary, lineColor='red', lineWidth=1, displayName='Smoothed')
+hold(False)
+print('Grains before and after:', grains.size, smoothed.size)
+plt.show()
+```
+
+Black shows the pixel-derived outlines and red the smoothed geometry. Smoothing changes
+the curves, while the pixel grain ids and the grain membership remain those of the reconstruction.
+
+```text
+Grains before and after: 15 15
+```
+
+![Example output for grain2d.smoothBoundary](figures/python_reference/grain2d.smoothBoundary-01.png)
+
+
 ## See also
 
 [grain2d.simplifyBoundary](grain2d.simplifyBoundary_py.html), [grain2d.refineBoundary](grain2d.refineBoundary_py.html), [grain2d.reduceBoundary](grain2d.reduceBoundary_py.html), [boundaryFilter](boundaryFilter_index_py.html), [laplaceFilter](laplaceFilter_index_py.html), [taubinFilter](taubinFilter_index_py.html), [curvatureFilter](curvatureFilter_index_py.html), [huberFilter](huberFilter_index_py.html), [GrainSmoothing](GrainSmoothing_py.html)

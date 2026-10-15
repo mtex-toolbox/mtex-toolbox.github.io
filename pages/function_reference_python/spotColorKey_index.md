@@ -58,5 +58,5 @@ by channel. Comparisons use the crystal and specimen symmetry of the orientation
 
 [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L442">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L486">source</a></font>
 {% endraw %}

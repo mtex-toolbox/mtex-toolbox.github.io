@@ -127,6 +127,37 @@ components and is restated in the crystal frame.
 
 | `m` | vector3d in the crystal frame |
 
+## Example
+
+In a hexagonal lattice, a plane normal and a direct-lattice direction with the same
+three indices need not be parallel. Compare their Cartesian directions without symmetry reduction.
+
+
+```python
+import numpy as np
+from mtex import crystalFrame, Miller, degree
+
+cs = crystalFrame('6/mmm', [3.20927, 3.20927, 5.21033])
+normal = Miller(1, 0, 1, cs, 'hkl')
+direction = Miller(1, 0, 1, cs, 'uvw')
+print('Plane normal:', np.round(normal.normalize().data, 3))
+print('Lattice direction:', np.round(direction.normalize().data, 3))
+print('Angle in degrees:', round(float(normal.angle(direction, symmetry=False) / degree), 2))
+cAxis = Miller(0, 0, 0, 1, cs, 'UVTW')
+print('Four-index c-axis:', cAxis)
+```
+
+Use hkl or hkil for reciprocal-lattice plane normals and uvw or UVTW for direct-lattice
+directions. The angle above compares these particular vectors rather than their symmetry orbits.
+
+```text
+Plane normal: [ 0.882 -0.     0.471]
+Lattice direction: [ 0.454 -0.262  0.851]
+Angle in degrees: 36.73
+Four-index c-axis: <0001>
+```
+
+
 ## See also
 
 [vector3d](vector3d_index_py.html), [crystalFrame](crystalFrame_index_py.html), [CrystalDirections](CrystalDirections_py.html), [CrystalOperations](CrystalOperations_py.html)

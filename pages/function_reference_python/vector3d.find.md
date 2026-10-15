@@ -77,5 +77,5 @@ directions are searched by a tree.
 
 MATLAB's [vector3d.find](vector3d.find.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1251">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1266">source</a></font>
 {% endraw %}

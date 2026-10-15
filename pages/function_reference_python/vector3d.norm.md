@@ -36,5 +36,5 @@ vector3d.norm(self)
 
 MATLAB's [vector3d.norm](vector3d.norm.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L805">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L820">source</a></font>
 {% endraw %}

@@ -51,5 +51,5 @@ crystalShape.innerFace(self, n)
 
 MATLAB's [crystalShape.innerFace](crystalShape.innerFace.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L432">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L448">source</a></font>
 {% endraw %}

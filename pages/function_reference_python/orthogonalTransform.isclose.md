@@ -59,5 +59,5 @@ equal.
 
 [orthogonalTransform.dot](orthogonalTransform.dot_py.html), [rotation.isclose](rotation.isclose_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1261">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1278">source</a></font>
 {% endraw %}

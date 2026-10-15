@@ -32,5 +32,5 @@ rgb = key.orientation2color(ori)
 
 [EBSDIPFMap](EBSDIPFMap_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L271">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L315">source</a></font>
 {% endraw %}

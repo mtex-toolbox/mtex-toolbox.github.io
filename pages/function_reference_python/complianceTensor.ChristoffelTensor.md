@@ -69,5 +69,5 @@ complianceTensor.ChristoffelTensor(M, *args, **kwargs)
 
 MATLAB's [complianceTensor.ChristoffelTensor](complianceTensor.ChristoffelTensor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/install.py#L1698">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/install.py#L1727">source</a></font>
 {% endraw %}

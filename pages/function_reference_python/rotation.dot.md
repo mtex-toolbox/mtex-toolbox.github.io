@@ -61,5 +61,5 @@ product with an improper transform is zero. orientation.dot reduces by the symme
 
 MATLAB's [rotation.dot](rotation.dot.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L961">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L978">source</a></font>
 {% endraw %}

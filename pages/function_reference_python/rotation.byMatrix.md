@@ -48,5 +48,5 @@ rotation.byMatrix(M)
 
 MATLAB's [rotation.byMatrix](rotation.byMatrix.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L800">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L817">source</a></font>
 {% endraw %}

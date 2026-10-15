@@ -47,5 +47,5 @@ vector3d.eig(self)
 
 MATLAB's [vector3d.eig](vector3d.eig.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L975">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L990">source</a></font>
 {% endraw %}

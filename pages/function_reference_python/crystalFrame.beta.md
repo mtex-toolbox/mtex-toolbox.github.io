@@ -13,5 +13,5 @@ A property of [crystalFrame](crystalFrame_index_py.html).
 
 the angle beta between the c and a axes, in radians
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L971">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L988">source</a></font>
 {% endraw %}

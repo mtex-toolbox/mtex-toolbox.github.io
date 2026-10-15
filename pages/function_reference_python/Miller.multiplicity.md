@@ -57,5 +57,5 @@ n = h.multiplicity(antipodal=True)
 
 MATLAB's [Miller.multiplicity](Miller.multiplicity.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1206">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1221">source</a></font>
 {% endraw %}

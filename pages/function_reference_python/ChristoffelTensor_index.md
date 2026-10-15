@@ -65,5 +65,5 @@ When constructed from C, the crystal frame and density are carried from C.
 
 MATLAB's [ChristoffelTensor_index](ChristoffelTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1698">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1727">source</a></font>
 {% endraw %}

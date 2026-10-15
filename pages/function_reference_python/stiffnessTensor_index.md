@@ -18,6 +18,46 @@ the elastic stiffness C, sigma = C : eps; a 6 x 6 Voigt matrix in GPa or the ful
 | `args` | optional reference frame |
 | `kwargs` | tensor constructor options, including density, frame, unit and Kelvin; unit defaults to 'GPa' |
 
+## Example
+
+Construct an illustrative cubic stiffness tensor in GPa, rotate it into specimen
+coordinates, and compare Young's modulus along the same physical direction before and after rotation.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import (crystalFrame, stiffnessTensor, orientation, Miller, degree,
+                  plot, mtexColorbar)
+
+cs = crystalFrame('m-3m')
+C = stiffnessTensor([[200, 120, 120, 0, 0, 0],
+                     [120, 200, 120, 0, 0, 0],
+                     [120, 120, 200, 0, 0, 0],
+                     [0, 0, 0, 80, 0, 0],
+                     [0, 0, 0, 0, 80, 0],
+                     [0, 0, 0, 0, 0, 80]], cs, unit='GPa')
+direction = Miller(1, 0, 0, cs, 'uvw')
+ori = orientation.byEuler(30*degree, 40*degree, 20*degree, cs)
+rotated = ori * C
+print('Crystal direction modulus (GPa):', round(float(C.YoungsModulus(direction)), 3))
+print('Rotated direction modulus (GPa):', round(float(rotated.YoungsModulus(ori*direction)), 3))
+plot(C.YoungsModulus(), resolution=5*degree)
+mtexColorbar(title='GPa')
+plt.show()
+```
+
+The two numerical values agree because tensor and direction were rotated together.
+The plot shows the directional variation for these model coefficients, not measured material data.
+
+```text
+Crystal direction modulus (GPa): 110.0
+Rotated direction modulus (GPa): 110.0
+```
+
+![Example output for stiffnessTensor.stiffnessTensor](figures/python_reference/stiffnessTensor.stiffnessTensor-01.png)
+
+
 ## Members
 
 | [bulkModulus](stiffnessTensor.bulkModulus_py.html) | the bulk modulus of an isotropic polycrystal, the Voigt and Reuss bounds |

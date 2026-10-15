@@ -99,5 +99,5 @@ preserving deformation has det F = 1. Its strains are F.GreenStrain() and F.Cauc
 
 MATLAB's [deformationGradientTensor_index](deformationGradientTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1522">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1551">source</a></font>
 {% endraw %}

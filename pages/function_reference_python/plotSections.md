@@ -71,5 +71,5 @@ them.
 
 [plotSection](S2Fun.plotSection_py.html), [phi2Sections](phi2Sections_index_py.html), [sigmaSections](sigmaSections_index_py.html), [newODFSectionPlot](newODFSectionPlot_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L241">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L258">source</a></font>
 {% endraw %}

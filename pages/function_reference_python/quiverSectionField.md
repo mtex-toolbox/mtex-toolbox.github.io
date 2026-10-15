@@ -67,5 +67,5 @@ figure sections (sigma) are drawn, the others refused.
 
 [SO3FunHarmonic.grad](SO3FunHarmonic.grad_py.html), [plotSection](S2Fun.plotSection_py.html), [quiverSection](S2Fun.quiverSection_py.html), [SO3FunVectorField](SO3FunVectorField_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L379">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L396">source</a></font>
 {% endraw %}

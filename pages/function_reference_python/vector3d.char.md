@@ -93,5 +93,5 @@ no_scopes and commasep are not taken.
 
 [vector3d.round](vector3d.round_py.html), [Miller](Miller_py.html), [CrystalDirections](CrystalDirections_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L356">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L371">source</a></font>
 {% endraw %}

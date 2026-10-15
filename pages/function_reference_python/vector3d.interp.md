@@ -53,5 +53,5 @@ vector3d.interp(self, y, *args, **kwargs)
 
 MATLAB's [vector3d.interp](vector3d.interp.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L430">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L445">source</a></font>
 {% endraw %}

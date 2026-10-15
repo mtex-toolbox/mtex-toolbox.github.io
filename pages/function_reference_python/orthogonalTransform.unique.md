@@ -73,5 +73,5 @@ a rotation and its negative counted as one.
 
 [quaternion.unique](quaternion.unique_py.html), [orientation.unique](orientation.unique_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1284">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1301">source</a></font>
 {% endraw %}

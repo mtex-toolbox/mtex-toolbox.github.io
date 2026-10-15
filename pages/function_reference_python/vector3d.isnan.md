@@ -23,5 +23,5 @@ vector3d.isnan(self)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L904">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L919">source</a></font>
 {% endraw %}

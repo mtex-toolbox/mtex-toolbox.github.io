@@ -64,5 +64,5 @@ In the axis names of a file, 'Y1↑→X1'.
 
 [conventionNames](conventionNames_py.html), [plottingConvention.isPictogram](plottingConvention.isPictogram_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L186">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L210">source</a></font>
 {% endraw %}

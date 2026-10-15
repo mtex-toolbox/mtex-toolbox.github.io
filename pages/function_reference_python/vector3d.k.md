@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 the Miller index k of a plane normal
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L285">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L300">source</a></font>
 {% endraw %}

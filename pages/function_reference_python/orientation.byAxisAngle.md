@@ -73,5 +73,5 @@ into itself, a misorientation; the frames named otherwise, the crystal frame fir
 
 MATLAB's [orientation.byAxisAngle](orientation.byAxisAngle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L204">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L221">source</a></font>
 {% endraw %}

@@ -141,6 +141,39 @@ ebsd.copy() to keep the map as it was.
 
 | `grains` | grain2d, or grain3d for a map of volumes; ebsd.grainId numbers the grain of every pixel |
 
+## Example
+
+Reconstruct grains in the small Forsterite sample and overlay their boundaries on an
+orientation map. The first call downloads and caches the sample file; later calls reuse it.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import mtexdata, calcGrains, degree, plot, hold
+
+ebsd = mtexdata('small', verbose=False)['Forsterite']
+grains = calcGrains(ebsd, angle=10*degree, minPixel=5)
+print('Grains:', grains.size)
+print('Grain ids assigned to pixels:', np.unique(ebsd.grainId)[:8])
+plot(ebsd, ebsd.orientations)
+hold(True)
+plot(grains.boundary, lineColor='black', lineWidth=1.5)
+hold(False)
+plt.show()
+```
+
+The threshold is illustrative. calcGrains writes grain ids into ebsd and may change pixels
+when minPixel removes small grains; call it on ebsd.copy() when the original map is needed.
+
+```text
+Grains: 15
+Grain ids assigned to pixels: [0 1 2 3 4 5 6 7]
+```
+
+![Example output for EBSD.calcGrains](figures/python_reference/EBSD.calcGrains-01.png)
+
+
 ## References
 
 - F. Bachmann, R. Hielscher, H. Schaeben, Grain detection from 2d and 3d EBSD data - Specification of the MTEX algorithm, Ultramicroscopy 111 (2011) 1720-1733

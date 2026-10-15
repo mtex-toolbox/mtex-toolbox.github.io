@@ -27,5 +27,5 @@ vector3d.cross(self, other)
 
 MATLAB's [vector3d.cross](vector3d.cross.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L797">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L812">source</a></font>
 {% endraw %}

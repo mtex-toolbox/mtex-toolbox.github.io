@@ -21,5 +21,5 @@ innerFace(cS, n)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L1503">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L1519">source</a></font>
 {% endraw %}

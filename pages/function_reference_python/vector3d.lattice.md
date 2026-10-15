@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 the lattice type of the crystal frame, latticeType.none for a vector in no crystal frame
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L189">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L204">source</a></font>
 {% endraw %}

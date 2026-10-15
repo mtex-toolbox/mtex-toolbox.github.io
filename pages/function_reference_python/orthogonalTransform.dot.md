@@ -55,5 +55,5 @@ With the sign of the quaternions.
 
 [orthogonalTransform.isclose](orthogonalTransform.isclose_py.html), [rotation.dot](rotation.dot_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1233">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L1250">source</a></font>
 {% endraw %}

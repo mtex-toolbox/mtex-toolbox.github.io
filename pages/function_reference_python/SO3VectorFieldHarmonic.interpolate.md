@@ -126,5 +126,5 @@ tangent vectors as values, here they carry their orientations.
 
 MATLAB's [SO3VectorFieldHarmonic.interpolate](SO3VectorFieldHarmonic.interpolate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/density.py#L223">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/density.py#L252">source</a></font>
 {% endraw %}

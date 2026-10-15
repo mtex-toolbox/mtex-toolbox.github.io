@@ -13,5 +13,5 @@ A property of [plottingConvention](plottingConvention_index_py.html).
 
 the reference direction pointing south on screen
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L130">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L154">source</a></font>
 {% endraw %}

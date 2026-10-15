@@ -40,5 +40,5 @@ crystalFrame.byElements(rot, **kwargs)
 
 MATLAB's [crystalSymmetry.byElements](crystalSymmetry.byElements.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L921">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L938">source</a></font>
 {% endraw %}

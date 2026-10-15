@@ -46,5 +46,5 @@ vector3d.dspacing(self)
 
 MATLAB's [Miller.dspacing](Miller.dspacing.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L296">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L311">source</a></font>
 {% endraw %}

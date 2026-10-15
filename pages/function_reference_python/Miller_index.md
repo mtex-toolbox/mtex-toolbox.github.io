@@ -168,6 +168,32 @@ function Miller from its indices.
 | `uvw` | three direct-lattice indices for lattice directions in a crystal frame |
 | `shape` | array shape excluding the trailing Cartesian coordinate axis |
 
+## Example
+
+Store three vectors in one array, normalize them, and select the second vector with
+Python indexing. Geometric angles are returned in radians.
+
+
+```python
+import numpy as np
+from mtex import vector3d, degree
+
+v = vector3d([[3, 0, 0], [0, 4, 0], [0, 0, 5]])
+u = v.normalize()
+print('Lengths:', v.norm())
+print('Second unit vector:', u[1].data)
+print('First two vectors, degrees:', float(u[0].angle(u[1]) / degree))
+print('Cross product:', np.round(u[0].cross(u[1]).data, 3))
+```
+
+```text
+Lengths: [3. 4. 5.]
+Second unit vector: [0. 1. 0.]
+First two vectors, degrees: 90.0
+Cross product: [0. 0. 1.]
+```
+
+
 ## See also
 
 [Miller](Miller_py.html), [vector3d.byPolar](vector3d.byPolar_py.html), [crystalFrame](crystalFrame_index_py.html), [VectorDefinition](VectorDefinition_py.html), [CrystalDirections](CrystalDirections_py.html)

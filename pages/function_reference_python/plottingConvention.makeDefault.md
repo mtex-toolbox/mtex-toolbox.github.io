@@ -60,5 +60,5 @@ The same.
 
 [plottingConvention.default](plottingConvention.default_py.html), [setMTEXpref](setMTEXpref_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L94">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L118">source</a></font>
 {% endraw %}

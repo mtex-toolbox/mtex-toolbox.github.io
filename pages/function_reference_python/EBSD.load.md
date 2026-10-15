@@ -43,6 +43,44 @@ to inspect file metadata before importing.
 
 | `ebsd` | EBSD map |
 
+## Example
+
+Read the Forsterite vendor file directly and draw its phase map. The sample file is
+downloaded and cached on first use. The Euler correction shown here is specific to this file.
+
+
+```python
+import matplotlib.pyplot as plt
+from mtex import EBSD, mtexdatafile, rotation, vector3d, degree, plot
+
+filename = mtexdatafile('forsterite', verbose=False)
+correction = rotation.byAxisAngle(vector3d.X, 180*degree)
+ebsd = EBSD.load(filename, eulerCorrection=correction)
+print(ebsd)
+plot(ebsd, refFrame='on')
+plt.show()
+```
+
+Inspect the phase list and the reference-frame indicator after import. For another file,
+choose the format options and Euler correction from its acquisition convention.
+
+```text
+EBSD (y↓→x)
+  size: 336 × 732 grid
+  Phase  Orientations  Mineral     Color         Symmetry  Crystal reference frame
+  0      58485 (24%)   notIndexed
+  1      152345 (62%)  Forsterite  LightSkyBlue  mmm       Forsterite
+  2      26058 (11%)   Enstatite   DarkSeaGreen  mmm       Enstatite
+  3      9064 (3.7%)   Diopside    Goldenrod     12/m1     Diopside
+  properties    : bands, bc, bs, error, mad
+  scan unit     : um
+  X × Y         : [0 → 3.655e+04] × [0 → 1.675e+04]
+  square lattice: spacing 50
+```
+
+![Example output for EBSD.load](figures/python_reference/EBSD.load-01.png)
+
+
 ## See also
 
 [loadEBSD](loadEBSD_ang_py.html), [inspectEBSD](inspectEBSD_py.html), [EBSD.export](EBSD.export_py.html)

@@ -170,6 +170,33 @@ or R, which centering also sets.
 
 | `cs` | crystalFrame |
 
+## Example
+
+Define cubic aluminium and hexagonal magnesium frames using lattice lengths in angstroms.
+The Miller direction belongs to the frame in which it was constructed.
+
+
+```python
+from mtex import crystalFrame, Miller
+
+al = crystalFrame('m-3m', [4.05, 4.05, 4.05], mineral='Aluminium')
+mg = crystalFrame('6/mmm', [3.20927, 3.20927, 5.21033], mineral='Magnesium')
+cAxis = Miller(0, 0, 0, 1, mg, 'UVTW')
+print(al)
+print(mg)
+print(cAxis)
+```
+
+The point group describes symmetry; the lattice lengths and alignment determine how
+indices become Cartesian vectors. The magnesium c-axis above uses four direct-lattice indices.
+
+```text
+Aluminium
+Magnesium
+<0001>
+```
+
+
 ## See also
 
 [specimenFrame](specimenFrame_index_py.html), [referenceFrame](referenceFrame_index_py.html), [Miller](Miller_py.html), [orientation](orientation_index_py.html), [CrystalSymmetries](CrystalSymmetries_py.html), [CrystalReferenceSystem](CrystalReferenceSystem_py.html)

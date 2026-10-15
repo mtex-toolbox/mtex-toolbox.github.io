@@ -31,5 +31,5 @@ g = colorGrid(key, resolution=0.5*degree)
 
 | [direction2color](colorGrid.direction2color_py.html) | a NaN or zero direction, the pole of an unmeasured orientation, has no grid node and is coloured white, as MTEX greys such a cell rather than failing the map |
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L552">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L596">source</a></font>
 {% endraw %}

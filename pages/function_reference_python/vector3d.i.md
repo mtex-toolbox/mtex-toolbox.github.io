@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 the third Miller-Bravais index i = -(h + k) of a plane normal
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L286">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L301">source</a></font>
 {% endraw %}

@@ -61,5 +61,5 @@ Orientations must share their frames.
 
 MATLAB's [orientation.cat](orientation.cat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L927">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/quaternion.py#L944">source</a></font>
 {% endraw %}

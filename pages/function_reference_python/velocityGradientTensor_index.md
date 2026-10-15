@@ -95,5 +95,5 @@ spin(L). A solid does not compress, so every velocity gradient of one has trace 
 
 MATLAB's [velocityGradientTensor_index](velocityGradientTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1564">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1593">source</a></font>
 {% endraw %}

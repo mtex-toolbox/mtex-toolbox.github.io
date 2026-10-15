@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 polar angle from +z in radians, in [0, pi], with one value per vector.
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L645">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L660">source</a></font>
 {% endraw %}

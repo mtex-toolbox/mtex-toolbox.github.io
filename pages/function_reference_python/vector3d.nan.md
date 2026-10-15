@@ -42,5 +42,5 @@ vector3d.nan(*shape)
 
 MATLAB's [vector3d.nan](vector3d.nan.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L560">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L575">source</a></font>
 {% endraw %}

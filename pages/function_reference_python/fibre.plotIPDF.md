@@ -126,5 +126,5 @@ orientation (MATLAB's points='all').
 
 MATLAB's [fibre.plotIPDF](fibre.plotIPDF.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L271">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/polefigureplot.py#L293">source</a></font>
 {% endraw %}

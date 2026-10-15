@@ -46,5 +46,5 @@ orientation.load(fname, *args, **kwargs)
 
 MATLAB's [orientation.load](orientation.load.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L189">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L206">source</a></font>
 {% endraw %}

@@ -13,5 +13,5 @@ A property of [crystalShape](crystalShape_index_py.html).
 
 the edges as pairs of vertex indices, every edge once
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L276">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L292">source</a></font>
 {% endraw %}

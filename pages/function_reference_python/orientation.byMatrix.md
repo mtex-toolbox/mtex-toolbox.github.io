@@ -61,5 +61,5 @@ A matrix of determinant -1 is refused: an orientation is proper.
 
 MATLAB's [orientation.byMatrix](orientation.byMatrix.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L231">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L248">source</a></font>
 {% endraw %}

@@ -60,5 +60,5 @@ onto a ball of radius (3 pi / 4)^(1/3), volume preserving.
 
 [homochoric](homochoric_py.html), [orientation.byRodrigues](orientation.byRodrigues_py.html), [rotation.byHomochoric](rotation.byHomochoric_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L273">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L290">source</a></font>
 {% endraw %}

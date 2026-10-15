@@ -26,5 +26,5 @@ a + b
 
 MATLAB's [vector3d.plus](vector3d.plus.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L711">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L726">source</a></font>
 {% endraw %}

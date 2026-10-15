@@ -62,5 +62,5 @@ without their groups (stripSym).
 
 [orientation.byScreenAlignment](orientation.byScreenAlignment_py.html), [referenceFrame.isCompatible](referenceFrame.isCompatible_py.html), [transformReferenceFrame](transformReferenceFrame_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L947">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L964">source</a></font>
 {% endraw %}

@@ -28,6 +28,37 @@ and keyword arguments are passed to that method unchanged. Its documentation
 specifies the accepted inputs, units, symmetry handling and optional outputs.
 Consult the corresponding method for the behaviour of a particular object type.
 
+## Example
+
+Compare reconstructed and smoothed boundaries on the small Forsterite sample.
+The sample file is downloaded and cached on first use.
+
+
+```python
+import matplotlib.pyplot as plt
+from mtex import mtexdata, calcGrains, smoothBoundary, degree, plot, hold
+
+ebsd = mtexdata('small', verbose=False)['Forsterite']
+grains = calcGrains(ebsd, angle=10*degree, minPixel=5)
+smoothed = smoothBoundary(grains, 5)
+plot(grains.boundary, lineColor='black', lineWidth=2, displayName='Reconstructed')
+hold(True)
+plot(smoothed.boundary, lineColor='red', lineWidth=1, displayName='Smoothed')
+hold(False)
+print('Grains before and after:', grains.size, smoothed.size)
+plt.show()
+```
+
+Black shows the pixel-derived outlines and red the smoothed geometry. Smoothing changes
+the curves, while the pixel grain ids and the grain membership remain those of the reconstruction.
+
+```text
+Grains before and after: 15 15
+```
+
+![Example output for grain2d.smoothBoundary](figures/python_reference/grain2d.smoothBoundary-01.png)
+
+
 ## Signature
 
 <div class="mx-form" markdown="1">

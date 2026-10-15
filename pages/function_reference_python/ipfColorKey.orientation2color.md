@@ -52,5 +52,5 @@ ipfColorKey.orientation2color(self, ori)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L151">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L173">source</a></font>
 {% endraw %}

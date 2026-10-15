@@ -53,5 +53,5 @@ vector3d.calcDensity(self, *args, **kwargs)
 
 MATLAB's [vector3d.calcDensity](vector3d.calcDensity.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L413">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L428">source</a></font>
 {% endraw %}

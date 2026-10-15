@@ -45,5 +45,5 @@ material, so they are chosen one by one, as MATLAB's error message says too.
 
 [slipSystem.basal](slipSystem.basal_py.html), [slipSystem.prismaticA](slipSystem.prismaticA_py.html), [slipSystem.pyramidalCA](slipSystem.pyramidalCA_py.html), [slipSystem.twinT1](slipSystem.twinT1_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L403">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/slipsystem.py#L430">source</a></font>
 {% endraw %}

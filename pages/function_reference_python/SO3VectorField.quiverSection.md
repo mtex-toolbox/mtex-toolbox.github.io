@@ -105,5 +105,5 @@ the section it lies in; w is one direction for all or one per orientation.
 
 MATLAB's [SO3VectorField.quiverSection](SO3VectorField.quiverSection.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L326">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sectionplot.py#L343">source</a></font>
 {% endraw %}

@@ -79,6 +79,33 @@ convention and the frames follow the angles, in any order.
 
 | `ori` | orientation |
 
+## Example
+
+Construct a Bunge orientation from angles in degrees. Applying it to a crystal direction
+expresses that direction in specimen coordinates; the rotated cube shows the same transformation.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import crystalFrame, orientation, Miller, crystalShape, degree, plot
+
+cs = crystalFrame('m-3m')
+ori = orientation.byEuler(45*degree, 30*degree, 60*degree, cs)
+h = Miller(0, 0, 1, cs, 'uvw')
+r = ori * h
+print('Specimen direction:', np.round(r.normalize().data, 3))
+plot(ori * crystalShape.cube(cs), faceAlpha=0.4, colored=True)
+plt.show()
+```
+
+```text
+Specimen direction: [ 0.354 -0.354  0.866]
+```
+
+![Example output for orientation.byEuler](figures/python_reference/orientation.byEuler-01.png)
+
+
 ## See also
 
 [rotation.byEuler](rotation.byEuler_py.html), orientation.Euler, [orientation.byAxisAngle](orientation.byAxisAngle_py.html), [orientation.byMiller](orientation.byMiller_py.html), [orientation.map](orientation.map_py.html), [OrientationDefinition](OrientationDefinition_py.html)

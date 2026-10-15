@@ -26,5 +26,5 @@ a[ind]
 
 MATLAB's [crystalShape.subsref](crystalShape.subsref.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L214">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L230">source</a></font>
 {% endraw %}

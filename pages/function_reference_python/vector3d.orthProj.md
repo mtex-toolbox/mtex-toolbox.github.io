@@ -53,5 +53,5 @@ vector3d.orthProj(self, N)
 
 MATLAB's [vector3d.orthProj](vector3d.orthProj.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L865">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L880">source</a></font>
 {% endraw %}

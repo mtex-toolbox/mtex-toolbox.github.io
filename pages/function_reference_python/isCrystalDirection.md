@@ -21,5 +21,5 @@ isCrystalDirection(v)
 
 </div>
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1445">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1460">source</a></font>
 {% endraw %}

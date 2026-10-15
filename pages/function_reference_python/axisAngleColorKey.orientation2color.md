@@ -60,5 +60,5 @@ rotation itself.
 
 [axisAngleColorKey](axisAngleColorKey_index_py.html), [ipfColorKey.orientation2color](ipfColorKey.orientation2color_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L360">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L404">source</a></font>
 {% endraw %}

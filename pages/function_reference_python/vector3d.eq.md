@@ -75,5 +75,5 @@ compares exactly.
 
 MATLAB's [vector3d.eq](vector3d.eq.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1117">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L1132">source</a></font>
 {% endraw %}

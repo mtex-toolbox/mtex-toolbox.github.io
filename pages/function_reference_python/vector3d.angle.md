@@ -98,5 +98,5 @@ and the angle is counted counterclockwise about N from v1 to v2.
 
 MATLAB's [vector3d.angle](vector3d.angle.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L811">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L826">source</a></font>
 {% endraw %}

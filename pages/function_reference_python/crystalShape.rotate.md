@@ -51,5 +51,5 @@ crystalShape.rotate(self, rot)
 
 MATLAB's [crystalShape.rotate](crystalShape.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L375">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L391">source</a></font>
 {% endraw %}

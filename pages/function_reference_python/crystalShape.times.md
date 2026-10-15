@@ -26,5 +26,5 @@ a * b
 
 MATLAB's [crystalShape.times](crystalShape.times.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L346">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/crystalshape.py#L362">source</a></font>
 {% endraw %}

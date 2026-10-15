@@ -48,6 +48,42 @@ direction. An inverse pole figure colour alone does not determine the full orien
 | `dirMap` | direction colour key used for crystal directions |
 | `CS` | crystal frame of the key |
 
+## Example
+
+Choose specimen Z as the colouring direction, then colour three orientations and plot
+the matching key and inverse poles. All inputs are constructed here; no EBSD file is needed.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import crystalFrame, orientation, ipfColorKey, vector3d, degree, plotIPF
+
+cs = crystalFrame('m-3m')
+ori = orientation.byEuler(np.array([[0, 0, 0], [25, 35, 15], [60, 50, 30]])*degree, cs)
+key = ipfColorKey(cs)
+key.ipfDirection = vector3d.Z
+rgb = key.orientation2color(ori)
+print('RGB colours:', np.round(rgb, 3))
+key.plot()
+plotIPF(ori, rgb, vector3d.Z, all=True, markerSize=10)
+plt.show()
+```
+
+The first figure is the colour key; the second places the same colours at the crystal
+directions parallel to specimen Z. Changing ipfDirection changes which crystal direction is coloured.
+
+```text
+RGB colours: [[1.    0.01  0.   ]
+ [0.748 0.922 0.737]
+ [0.076 0.749 0.993]]
+```
+
+![Example output for ipfColorKey](figures/python_reference/ipfColorKey-01.png)
+
+![Example output for ipfColorKey](figures/python_reference/ipfColorKey-02.png)
+
+
 ## See also
 
 [ipfHSVKey](ipfHSVKey_index_py.html), [ipfTSLKey](ipfTSLKey_index_py.html), [ipfHKLKey](ipfHKLKey_index_py.html), [ipfColorKey.orientation2color](ipfColorKey.orientation2color_py.html)

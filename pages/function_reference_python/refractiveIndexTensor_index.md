@@ -73,5 +73,5 @@ polarisers.
 
 MATLAB's [refractiveIndexTensor_index](refractiveIndexTensor_index.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1738">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/tensors/tensor.py#L1767">source</a></font>
 {% endraw %}

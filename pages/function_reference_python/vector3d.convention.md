@@ -13,5 +13,5 @@ A property of [vector3d](vector3d_index_py.html).
 
 the convention the vector is written in, its display style: 'xyz', 'hkl', 'hkil', 'uvw' or 'UVTW'
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L197">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/vector3d.py#L212">source</a></font>
 {% endraw %}

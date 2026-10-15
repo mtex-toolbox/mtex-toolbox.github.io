@@ -140,6 +140,36 @@ function its harmonic expansion gives.
 | `all` | `False` | draw every orientation, however many |
 | `superposition` | `None` | the weights of the directions h in one superposed pole figure, a list of arrays for one superposed pole figure per entry of h, as plotPF(odf, pf.allH, superposition=pf.c) |
 
+## Example
+
+Compare poles of three explicit orientations with the pole density of a model ODF.
+Each plot contains the cubic {100} and {111} families; antipodal=True identifies opposite poles.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import crystalFrame, orientation, Miller, degree, plotPF, unimodalODF, mtexColorbar
+
+cs = crystalFrame('m-3m')
+h = [Miller(1, 0, 0, cs), Miller(1, 1, 1, cs)]
+ori = orientation.byEuler(np.array([0, 15, 30])*degree, 30*degree, 45*degree, cs)
+plotPF(ori, h, all=True, antipodal=True, markerSize=5)
+centre = orientation.byEuler(15*degree, 30*degree, 45*degree, cs)
+odf = unimodalODF(centre, halfwidth=15*degree)
+plotPF(odf, h, antipodal=True, contourf=True, resolution=5*degree, colorRange='equal')
+mtexColorbar(title='mrd')
+plt.show()
+```
+
+The first figure shows discrete poles. The second shows a continuous density in multiples
+of a random distribution; it is the projection of the model ODF, not a fit to those three orientations.
+
+![Example output for SO3Fun.plotPDF](figures/python_reference/SO3Fun.plotPDF-01.png)
+
+![Example output for SO3Fun.plotPDF](figures/python_reference/SO3Fun.plotPDF-02.png)
+
+
 ## See also
 
 [plotIPF](SO3Fun.plotIPDF_py.html), [SO3Fun.radon](SO3FunBingham.radon_py.html), [PoleFigure](PoleFigure_index_py.html), [calcPoleFigure](SO3Fun.calcPoleFigure_py.html), [annotate](annotate_py.html), [ODFPoleFigure](ODFPoleFigure_py.html), [OrientationPoleFigure](OrientationPoleFigure_py.html), [PoleFigurePlot](PoleFigurePlot_py.html)

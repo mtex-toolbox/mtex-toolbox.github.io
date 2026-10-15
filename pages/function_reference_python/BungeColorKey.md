@@ -59,5 +59,5 @@ representative changes or an Euler angle wraps.
 
 MATLAB's [BungeColorKey](BungeColorKey.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L399">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L443">source</a></font>
 {% endraw %}

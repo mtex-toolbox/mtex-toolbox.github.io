@@ -90,5 +90,5 @@ Further keywords go to MLSSolver.
 
 [PoleFigureRefinement](PoleFigureRefinement_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L593">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/pf2odf.py#L622">source</a></font>
 {% endraw %}
