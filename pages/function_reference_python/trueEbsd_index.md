@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: trueEbsd_index.html
 status: Reference
 ---
 {% raw %}
@@ -42,6 +43,8 @@ job.undistort()
 ## Used on
 
 [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
+
+MATLAB's [trueEbsd_index](trueEbsd_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/trueebsd.py#L80">source</a></font>
 {% endraw %}
