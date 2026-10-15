@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: orthographicProjection_index.html
 status: Reference
 ---
 {% raw %}
@@ -22,6 +23,8 @@ the orthographic projection: r = sin(theta)
 
 | [polarAngle](orthographicProjection.polarAngle_py.html) | the polar angle arcsin(r) drawn at the plane radius r |
 | [radius](orthographicProjection.radius_py.html) | the plane radius sin(theta) of the polar angle theta |
+
+MATLAB's [orthographicProjection_index](orthographicProjection_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L361">source</a></font>
 {% endraw %}

@@ -35,7 +35,7 @@
   var requestedLang = new URLSearchParams(location.search).get('lang');
   var lang = requestedLang === 'python' || requestedLang === 'matlab' ? requestedLang : stored();
   if (requestedLang === lang) set(lang);
-  if (!lang && here && here.python) { lang = 'python'; set(lang); }
+  if (!lang && /_py\.html$/.test(location.pathname)) { lang = 'python'; set(lang); }
   lang = lang || 'matlab';
 
   // a remembered choice opens the matching version of this page

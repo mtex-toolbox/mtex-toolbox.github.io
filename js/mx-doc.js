@@ -19,9 +19,9 @@
   var rail = document.getElementById('mx-rail');
   if (!article) { return; }
 
-  function strip(path) { return (path || '').split('#')[0].split('/').pop().replace(/\.html$/, ''); }
+  function strip(path) { return (path || '').split('#')[0].split('/').pop().replace(/\.html$/, '').replace(/_py$/, ''); }
   // the Python version <Page>_py.html has the place of <Page>.html
-  var here = (strip(location.pathname) || 'index').replace(/_py$/, '');
+  var here = strip(location.pathname) || 'index';
 
   function el(tag, attrs, text) {
     var e = document.createElement(tag);
@@ -91,6 +91,22 @@
     return chapters;
   }
 
+  function loadSidebar(name, url) {
+    function matlab() {
+      return fetch(url || ('sidebars/' + name + '.html')).then(function (r) {
+        if (!r.ok) { throw new Error('Sidebar unavailable'); }
+        return r.text();
+      }).then(parse);
+    }
+    if (name === 'function_reference_sidebar' && window.MtexLanguage && window.MtexLanguage.current() === 'python') {
+      return fetch('python_reference.json').then(function (r) {
+        if (!r.ok) { throw new Error('Python reference unavailable'); }
+        return r.json();
+      }).catch(matlab);
+    }
+    return matlab();
+  }
+
   function link(item, extraClass) {
     var a = el('a', { href: item.url }, item.title);
     if (strip(item.url) === here) { a.setAttribute('aria-current', 'page'); }
@@ -101,7 +117,8 @@
   function renderChapters(chapters) {
     tree.textContent = '';
     chapters.forEach(function (ch) {
-      var isHere = strip(ch.url) === here || ch.items.some(function (i) { return strip(i.url) === here; });
+      var hash = (ch.url || '').split('#')[1];
+      var isHere = (strip(ch.url) === here && (!hash || location.hash === '#' + hash)) || ch.items.some(function (i) { return strip(i.url) === here; });
       var d = el('details', { 'data-chapter': ch.title });
       if (isHere) { d.open = true; }
       var s = el('summary');
@@ -120,19 +137,21 @@
 
   // function reference: only the class of the current page
   function renderClass(chapters) {
-    var found = null;
+    var found = null, score = 0;
     chapters.forEach(function (ch) {
       ch.items.forEach(function (cls) {
-        if (cls.items && (strip(cls.url) === here || cls.items.some(function (m) { return strip(m.url) === here; }))) {
-          found = { section: ch, cls: cls };
-        }
+        if (!cls.items) { return; }
+        var own = strip(cls.url) === here || (cls.aliases || []).some(function (url) { return strip(url) === here; });
+        var member = cls.items.some(function (m) { return strip(m.url) === here; });
+        var rank = own ? 3 : (member ? (cls.title === here.split('.')[0] ? 2 : 1) : 0);
+        if (rank > score) { found = { section: ch, cls: cls }; score = rank; }
       });
     });
     if (!found) { renderChapters(chapters); return null; }
     tree.textContent = '';
     var head = el('div', { class: 'mx-side-class' });
     head.appendChild(link({ title: found.cls.title, url: found.cls.url }, 'mx-side-classname'));
-    head.appendChild(el('small', null, found.cls.items.length + ' methods'));
+    head.appendChild(el('small', null, found.cls.items.length + ' members'));
     tree.appendChild(head);
     var ul = el('ul', { class: 'mx-side-methods' });
     found.cls.items.forEach(function (m) {
@@ -142,7 +161,7 @@
     var back = el('p', { class: 'mx-side-back' });
     back.appendChild(link({ title: '← ' + found.section.title, url: found.section.url }));
     tree.appendChild(back);
-    document.getElementById('mx-side-filter').placeholder = 'Filter the methods of ' + found.cls.title;
+    document.getElementById('mx-side-filter').placeholder = 'Filter the members of ' + found.cls.title;
     return found;
   }
 
@@ -255,11 +274,10 @@
     var filterBox = document.getElementById('mx-side-filter');
     filterBox.value = '';
     if (name === side.getAttribute('data-sidebar')) { tree.textContent = ''; return build(true); }
-    fetch('sidebars/' + name + '.html').then(function (r) { return r.text(); }).then(function (html) {
-      var parts = parse(html);
+    loadSidebar(name).then(function (parts) {
       if (name === 'function_reference_sidebar') {
         renderChapters(parts);
-        filterBox.placeholder = 'Filter the classes';
+        filterBox.placeholder = 'Filter the reference';
       } else {
         renderChapters(parts.map(function (s) { return { title: s.title, url: s.url, items: s.items.map(function (c) { return { title: c.title, url: c.url }; }) }; }));
         filterBox.placeholder = 'Filter the chapters';
@@ -282,8 +300,7 @@
     var name = side.getAttribute('data-sidebar');
     var crumbsOnce = again ? function () {} : crumbs;
     var nextPrevOnce = again ? function () {} : nextPrev;
-    return fetch(side.getAttribute('data-sidebar-url')).then(function (r) { return r.text(); }).then(function (html) {
-      var chapters = parse(html);
+    return loadSidebar(name, side.getAttribute('data-sidebar-url')).then(function (chapters) {
       var sec = SECTION[name] || [null, null];
       if (name === 'function_reference_sidebar') {
         var f = renderClass(chapters);
@@ -320,6 +337,14 @@
       toggle.setAttribute('aria-expanded', String(open));
     });
   }
+
+  document.addEventListener('mx-lang', function () {
+    if (!side) { return; }
+    var active = side.querySelector('.mx-side-tabs button[aria-selected="true"]');
+    if (active && active.getAttribute('data-tab') === 'function_reference_sidebar') {
+      showTab('function_reference_sidebar');
+    }
+  });
 
   buildRail();
   buildSidebar();

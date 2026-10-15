@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformProjective_index.html
 status: Reference
 ---
 {% raw %}
@@ -41,6 +42,8 @@ T = spatialTransformProjective.fit(posA, posB, weights=w)
 ## Used on
 
 [EBSDSpatialTransform](EBSDSpatialTransform_py.html)
+
+MATLAB's [spatialTransformProjective_index](spatialTransformProjective_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L412">source</a></font>
 {% endraw %}

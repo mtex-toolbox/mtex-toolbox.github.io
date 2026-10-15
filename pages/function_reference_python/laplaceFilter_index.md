@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: laplaceFilter_index.html
 status: Reference
 ---
 {% raw %}
@@ -28,6 +29,8 @@ the Laplacian and the default of 0.5 is in truth a rate of 0.25
 ## Used on
 
 [Grains3DSmoothing](Grains3DSmoothing_py.html)
+
+MATLAB's [laplaceFilter_index](laplaceFilter_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L147">source</a></font>
 {% endraw %}

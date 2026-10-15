@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: phaseList_index.html
 status: Reference
 ---
 {% raw %}
@@ -45,6 +46,8 @@ A string names a not indexed frame.
 | [mineralList](phaseList.mineralList_py.html) | the mineral names of the phases |
 | [phaseId](phaseList.phaseId_py.html) | the id of a phase named by its mineral, its frame or its number |
 | [selectionNames](phaseList.selectionNames_py.html) | the names a selection ebsd['...'] takes: the minerals, 'indexed' and 'notIndexed' |
+
+MATLAB's [phaseList_index](phaseList_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/phaselist.py#L52">source</a></font>
 {% endraw %}

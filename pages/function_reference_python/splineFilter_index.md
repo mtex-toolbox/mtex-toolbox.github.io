@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: splineFilter_index.html
 status: Reference
 ---
 {% raw %}
@@ -20,6 +21,8 @@ of the neighbour graph; one linear system, no iteration
 ## Used on
 
 [EBSDDenoising](EBSDDenoising_py.html)
+
+MATLAB's [splineFilter_index](splineFilter_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L43">source</a></font>
 {% endraw %}

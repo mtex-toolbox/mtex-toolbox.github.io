@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: sphericalPlot_index.html
 status: Reference
 ---
 {% raw %}
@@ -29,6 +30,8 @@ sP.proj, sP.sR, sP.antipodal, sP.bounds, sP.minData, sP.maxData, sP.mappable
 | [hemisphereLabel](sphericalPlot.hemisphereLabel_py.html) | writes upper or lower, the hemisphere shown, in the top right corner of the chart |
 | [sR](sphericalPlot.sR_py.html) | the spherical region the chart shows |
 | [updateMinMax](sphericalPlot.updateMinMax_py.html) | widens the recorded data range by the finite values drawn |
+
+MATLAB's [sphericalPlot_index](sphericalPlot_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sphericalplot.py#L69">source</a></font>
 {% endraw %}

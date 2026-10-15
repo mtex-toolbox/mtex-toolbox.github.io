@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: mapPlot_index.html
 status: Reference
 ---
 {% raw %}
@@ -30,6 +31,8 @@ mP.layout, mP.extent, mP.unit, mP.mappable
 | [onScreen](mapPlot.onScreen_py.html) | screen coordinates of points of the map plane, the layout applied to them |
 | [outOfScreen](mapPlot.outOfScreen_py.html) | the normal of the map plane that points at the viewer, who looks from the other side when the layout flips the plane |
 | [screenAxisNames](mapPlot.screenAxisNames_py.html) | which reference axis runs to the right and which up under the layout, by name and sign |
+
+MATLAB's [mapPlot_index](mapPlot_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/mapplot.py#L40">source</a></font>
 {% endraw %}

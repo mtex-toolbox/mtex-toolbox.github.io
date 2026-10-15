@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: ipfHKLKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -31,6 +32,8 @@ rgb = key.orientation2color(ori)
 ## Used on
 
 [EBSDIPFMap](EBSDIPFMap_py.html)
+
+MATLAB's [ipfHKLKey_index](ipfHKLKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L315">source</a></font>
 {% endraw %}

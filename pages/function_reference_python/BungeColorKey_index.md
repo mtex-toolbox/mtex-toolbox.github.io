@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: BungeColorKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -55,6 +56,8 @@ representative changes or an Euler angle wraps.
 ## Used on
 
 [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html)
+
+MATLAB's [BungeColorKey_index](BungeColorKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L443">source</a></font>
 {% endraw %}

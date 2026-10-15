@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: ipfSpotKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -38,6 +39,8 @@ ipfSpotKey(cs, center=Miller(1, 0, 0, cs), color=(0, 0, 1), psi=S2DeLaValleePous
 ## Used on
 
 [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html)
+
+MATLAB's [ipfSpotKey_index](ipfSpotKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L330">source</a></font>
 {% endraw %}

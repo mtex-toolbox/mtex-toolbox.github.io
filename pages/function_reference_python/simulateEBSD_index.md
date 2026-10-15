@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: simulateEBSD_index.html
 status: Reference
 ---
 {% raw %}
@@ -37,6 +38,8 @@ eS.addNoise()
 ## Used on
 
 [EBSDSimulation](EBSDSimulation_py.html)
+
+MATLAB's [simulateEBSD_index](simulateEBSD_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/simulate.py#L38">source</a></font>
 {% endraw %}

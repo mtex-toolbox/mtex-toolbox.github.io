@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: PatalaColorKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -39,6 +40,8 @@ rgb = key.orientation2color(mori)
 ## Used on
 
 [BoundaryPlots](BoundaryPlots_py.html)
+
+MATLAB's [PatalaColorKey_index](PatalaColorKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/patalakey.py#L170">source</a></font>
 {% endraw %}

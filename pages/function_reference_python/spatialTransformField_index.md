@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformField_index.html
 status: Reference
 ---
 {% raw %}
@@ -51,6 +52,8 @@ extrapolation. With no samples the transform is the identity.
 | [inv](spatialTransformField.inv_py.html) | the inverse by fixed point iteration |
 | [isid](spatialTransformField.isid_py.html) | whether the field has no points or displaces by nothing |
 | [paramChar](spatialTransformField.paramChar_py.html) | the number of points and the largest displacement as a line of text |
+
+MATLAB's [spatialTransformField_index](spatialTransformField_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L751">source</a></font>
 {% endraw %}

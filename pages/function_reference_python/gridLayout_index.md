@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: gridLayout_index.html
 status: Reference
 ---
 {% raw %}
@@ -112,6 +113,8 @@ layout, ebsd.layout says the one it is in.
 ## Used on
 
 [EBSDGrid](EBSDGrid_py.html), [EBSDMapsAndImages](EBSDMapsAndImages_py.html)
+
+MATLAB's [gridLayout_index](gridLayout_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/gridlayout.py#L29">source</a></font>
 {% endraw %}

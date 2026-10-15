@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: meanFilter_index.html
 status: Reference
 ---
 {% raw %}
@@ -18,6 +19,8 @@ the mean of the neighbourhood, the fastest filter and the one that blurs a bound
 ## Used on
 
 [EBSDDenoising](EBSDDenoising_py.html)
+
+MATLAB's [meanFilter_index](meanFilter_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L49">source</a></font>
 {% endraw %}

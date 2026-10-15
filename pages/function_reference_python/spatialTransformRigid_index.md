@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformRigid_index.html
 status: Reference
 ---
 {% raw %}
@@ -36,6 +37,8 @@ T = spatialTransformRigid.fit(posA, posB, weights=w)
 ## Used on
 
 [EBSDSpatialTransform](EBSDSpatialTransform_py.html)
+
+MATLAB's [spatialTransformRigid_index](spatialTransformRigid_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L360">source</a></font>
 {% endraw %}

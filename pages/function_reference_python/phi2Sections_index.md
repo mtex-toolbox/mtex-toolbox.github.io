@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: phi2Sections_index.html
 status: Reference
 ---
 {% raw %}
@@ -41,6 +42,8 @@ oS = phi2Sections(cs, ss, phi2=np.arange(0, 91, 15)*degree)
 ## Used on
 
 [EulerAngleSections](EulerAngleSections_py.html)
+
+MATLAB's [phi2Sections_index](phi2Sections_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L311">source</a></font>
 {% endraw %}

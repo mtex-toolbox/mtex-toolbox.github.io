@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformTilt_index.html
 status: Reference
 ---
 {% raw %}
@@ -25,6 +26,8 @@ identity, so a partly fitted tilt evaluates as far as it has got
 ## Used on
 
 [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
+
+MATLAB's [spatialTransformTilt_index](spatialTransformTilt_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L971">source</a></font>
 {% endraw %}

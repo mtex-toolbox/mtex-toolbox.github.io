@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: neper_index.html
 status: Reference
 ---
 {% raw %}
@@ -33,6 +34,8 @@ grains = nep.simulateGrains(1000, odf)
 | [simulateChildGrains](neper.simulateChildGrains_py.html) | a microstructure after a phase transformation: Neper's parent grains cut into lamellae of child variants |
 | [simulateGrains](neper.simulateGrains_py.html) | the grains of a Neper tessellation of the domain, one grain per orientation |
 | [simulateTwinGrains](neper.simulateTwinGrains_py.html) | a microstructure of twinned grains: Neper's grains cut into lamellae, every second lamella in twin orientation |
+
+MATLAB's [neper_index](neper_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps3d/neper.py#L25">source</a></font>
 {% endraw %}

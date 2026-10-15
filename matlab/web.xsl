@@ -101,25 +101,14 @@ To make changes, update the MATLAB code and republish this document.
 
     <!-- Loop over each cell -->
     <xsl:for-each select="$body-cells">
-        <!-- Title of cell -->
-        <xsl:if test="steptitle">
-	  <xsl:if test="(steptitle != 'Open in Editor') and (steptitle != 'View Code')">
-            <xsl:variable name="headinglevel">
-              <xsl:choose>
-		<xsl:when test="steptitle[@style = 'document']">h1</xsl:when>
-		<xsl:otherwise>h2</xsl:otherwise>
-              </xsl:choose>
-            </xsl:variable>
-            <xsl:element name="{$headinglevel}">
-              <xsl:if test="not(steptitle[@style = 'document'])">
-                <xsl:attribute name="id">
-                  <xsl:value-of select="position()"/>
-                </xsl:attribute>
-              </xsl:if>
-              <xsl:apply-templates select="steptitle"/>
-            </xsl:element>
-          </xsl:if>
-	</xsl:if>
+        <!-- The page layout renders the document title from front matter. -->
+        <xsl:if test="steptitle and not(steptitle[@style = 'document'])
+                      and (steptitle != 'Open in Editor') and (steptitle != 'View Code')">
+          <h2>
+            <xsl:attribute name="id"><xsl:value-of select="position()"/></xsl:attribute>
+            <xsl:apply-templates select="steptitle"/>
+          </h2>
+        </xsl:if>
 
         <!-- Contents of each cell -->
         <xsl:apply-templates select="text"/>

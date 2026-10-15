@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: medianFilter_index.html
 status: Reference
 ---
 {% raw %}
@@ -19,6 +20,8 @@ pulling the boundary after it
 ## Used on
 
 [EBSDDenoising](EBSDDenoising_py.html)
+
+MATLAB's [medianFilter_index](medianFilter_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L57">source</a></font>
 {% endraw %}

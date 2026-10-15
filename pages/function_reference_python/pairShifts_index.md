@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: pairShifts_index.html
 status: Reference
 ---
 {% raw %}
@@ -70,6 +71,8 @@ meanShift states the mean shift over the tiles measured in pixels.
 | [isempty](pairShifts.isempty_py.html) | whether no shift was measured |
 | [meanShift](pairShifts.meanShift_py.html) | the mean shift in pixels of size px over the tiles measured, [mean length, mean x, mean y] |
 | [pairShifts](pairShifts.pairShifts_py.html) | the shifts one cross correlation pass measured between two images |
+
+MATLAB's [pairShifts_index](pairShifts_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/registration.py#L248">source</a></font>
 {% endraw %}

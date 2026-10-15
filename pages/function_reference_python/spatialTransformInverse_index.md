@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformInverse_index.html
 status: Reference
 ---
 {% raw %}
@@ -53,6 +54,8 @@ sufficiently after the first three steps. The z coordinate is preserved.
 | [isid](spatialTransformInverse.isid_py.html) | whether the inverted transform is the identity |
 | [paramChar](spatialTransformInverse.paramChar_py.html) | the parameters of the inverted transform as a line of text |
 | [shortChar](spatialTransformInverse.shortChar_py.html) | the short name of the inverted transform with the prefix inv- |
+
+MATLAB's [spatialTransformInverse_index](spatialTransformInverse_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L993">source</a></font>
 {% endraw %}

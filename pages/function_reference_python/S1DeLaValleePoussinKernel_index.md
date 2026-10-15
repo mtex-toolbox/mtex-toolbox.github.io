@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: S1DeLaValleePoussinKernel_index.html
 status: Reference
 ---
 {% raw %}
@@ -55,6 +56,8 @@ maximum degree of its harmonic representation.
 ## Used on
 
 [EllipseBasedParameters](EllipseBasedParameters_py.html)
+
+MATLAB's [S1DeLaValleePoussinKernel_index](S1DeLaValleePoussinKernel_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1472">source</a></font>
 {% endraw %}

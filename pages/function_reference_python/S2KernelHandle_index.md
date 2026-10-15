@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: S2KernelHandle_index.html
 status: Reference
 ---
 {% raw %}
@@ -54,6 +55,8 @@ explicitly; the wrapper does not rescale its values.
 ## Members
 
 | [bandwidth](S2KernelHandle.bandwidth_py.html) | the degree the coefficients are computed to, the preference maxS2Bandwidth unless given |
+
+MATLAB's [S2KernelHandle_index](S2KernelHandle_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1270">source</a></font>
 {% endraw %}

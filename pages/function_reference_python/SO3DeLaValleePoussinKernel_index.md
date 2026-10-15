@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: SO3DeLaValleePoussinKernel_index.html
 status: Reference
 ---
 {% raw %}
@@ -56,6 +57,8 @@ maximum degree of its harmonic representation.
 ## Used on
 
 [OrientationEmbeddings](OrientationEmbeddings_py.html), [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html), [ODFShapes](ODFShapes_py.html), [SO3FunApproximationTheory](SO3FunApproximationTheory_py.html), [SO3FunConvolution](SO3FunConvolution_py.html), [SO3FunDefinition](SO3FunDefinition_py.html), [SO3FunOperations](SO3FunOperations_py.html), [SO3Kernels](SO3Kernels_py.html)
+
+MATLAB's [SO3DeLaValleePoussinKernel_index](SO3DeLaValleePoussinKernel_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L375">source</a></font>
 {% endraw %}

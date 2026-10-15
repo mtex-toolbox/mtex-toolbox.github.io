@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransform_index.html
 status: Reference
 ---
 {% raw %}
@@ -56,6 +57,8 @@ interpolated-field subclasses, or wrap a callable with spatialTransformHandle.
 | [paramChar](spatialTransform.paramChar_py.html) | the parameters of the transform as a line of text for its display |
 | [shortChar](spatialTransform.shortChar_py.html) | the short name of the transform in its display, the class name without spatialTransform |
 | [stageList](spatialTransform.stageList_py.html) | the stages the transform is applied in, a list |
+
+MATLAB's [spatialTransform_index](spatialTransform_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L105">source</a></font>
 {% endraw %}

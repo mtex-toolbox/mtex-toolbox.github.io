@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: gbcAngle_index.html
 status: Reference
 ---
 {% raw %}
@@ -56,6 +57,8 @@ gbcAngle(10*degree, byPhase={'Forsterite': 15*degree})
 ## Used on
 
 [GrainReconstructionAdvanced](GrainReconstructionAdvanced_py.html)
+
+MATLAB's [gbcAngle_index](gbcAngle_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L136">source</a></font>
 {% endraw %}

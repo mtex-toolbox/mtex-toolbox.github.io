@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: SO3TangentVector_index.html
 status: Reference
 ---
 {% raw %}
@@ -76,6 +77,8 @@ From skew matrices of shape (..., 3, 3).
 ## Used on
 
 [SingleSlipModel](SingleSlipModel_py.html), [RotationTangentSpace](RotationTangentSpace_py.html)
+
+MATLAB's [SO3TangentVector_index](SO3TangentVector_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/tangent.py#L111">source</a></font>
 {% endraw %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: orientationColorKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -48,6 +49,8 @@ ready to pass to plot. Construct a concrete subclass; this base does not define 
 | [CS](orientationColorKey.CS_py.html) | the crystal frame of the key, frameA |
 | [orientation2color](orientationColorKey.orientation2color_py.html) | the colours of orientations, an (..., 3) array in [0, 1] |
 | [SS](orientationColorKey.SS_py.html) | the specimen frame of the key, frameB |
+
+MATLAB's [orientationColorKey_index](orientationColorKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L40">source</a></font>
 {% endraw %}

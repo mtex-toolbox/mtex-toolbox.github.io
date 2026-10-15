@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: S1FejerKernel_index.html
 status: Reference
 ---
 {% raw %}
@@ -49,6 +50,8 @@ maximum degree of its harmonic representation.
 ## Members
 
 | [bandwidth](S1FejerKernel.bandwidth_py.html) | the degree n of the kernel |
+
+MATLAB's [S1FejerKernel_index](S1FejerKernel_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1558">source</a></font>
 {% endraw %}

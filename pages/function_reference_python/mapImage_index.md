@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: mapImage_index.html
 status: Reference
 ---
 {% raw %}
@@ -138,6 +139,8 @@ value of its type, so an unsigned one lies in [0, 1].
 ## Used on
 
 [EBSDMapsAndImages](EBSDMapsAndImages_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
+
+MATLAB's [mapImage_index](mapImage_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/mapimage.py#L49">source</a></font>
 {% endraw %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: gbcFMC_index.html
 status: Reference
 ---
 {% raw %}
@@ -98,6 +99,8 @@ boundary.
 | [evaluate](gbcFMC.evaluate_py.html) | 1 for every pair of pixels i, j that FMC puts into one cluster, 0 otherwise, each indexed phase clustered on its own |
 | [gbcFMC](gbcFMC.gbcFMC_py.html) | the grain boundary criterion of fast multiscale clustering |
 | [setMinPixel](gbcFMC.setMinPixel_py.html) | the same criterion with another smallest region left standing |
+
+MATLAB's [gbcFMC_index](gbcFMC_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/fmc.py#L38">source</a></font>
 {% endraw %}

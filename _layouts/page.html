@@ -39,24 +39,35 @@ layout: default
     {% endif %}
 
     {% comment %}
+      MATLAB's older web exports repeat the document title inside the body.
+      The page layout already renders that heading. Remove the exact repeated
+      title while preserving section headings and other page content.
+    {% endcomment %}
+    {% assign page_content = content %}
+    {% if page.folder == "function_reference" or page.folder == "documentation" or page.folder == "examples" %}
+        {% capture document_heading %}<h1>{{ page.title }}</h1>{% endcapture %}
+        {% assign page_content = page_content | remove_first: document_heading %}
+    {% endif %}
+
+    {% comment %}
       The same sources build MATLAB's own help, where links of the form
       matlab:doc('hold') open MATLAB's documentation. On the web they lead
       nowhere, so they go to the MathWorks online reference instead. The
       sequence ') followed by a quote occurs nowhere else in the generated pages.
     {% endcomment %}
-    {% if content contains 'href="matlab:' %}
+    {% if page_content contains 'href="matlab:' %}
     {% capture dq %}"{% endcapture %}
     {% assign doc_from = 'href=' | append: dq | append: "matlab:doc('" %}
     {% assign doc_to = 'href=' | append: dq | append: 'https://www.mathworks.com/help/matlab/ref/' %}
     {% assign doc_end = "')" | append: dq %}
     {% assign doc_end_to = '.html' | append: dq %}
-    {{ content
+    {{ page_content
        | replace: doc_from, doc_to
        | replace: doc_end, doc_end_to
        | replace: 'href="matlab:import_wizard"', 'href="import_wizard.html"'
        | replace: 'href="matlab:edit"', 'href="https://github.com/mtex-toolbox/mtex/blob/develop/mtex_settings.m"' }}
     {% else %}
-    {{ content }}
+    {{ page_content }}
     {% endif %}
 
     {% if page.folder == "function_reference" and page.url contains "_index.html" %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: taubinFilter_index.html
 status: Reference
 ---
 {% raw %}
@@ -27,6 +28,8 @@ areas move, only not systematically one way (Taubin, SIGGRAPH 1995)
 ## Used on
 
 [EBSD3Analysis](EBSD3Analysis_py.html), [Grains3DBoundaries](Grains3DBoundaries_py.html), [Grains3DSmoothing](Grains3DSmoothing_py.html), [GrainSmoothing](GrainSmoothing_py.html), [GrainSmoothingAdvanced](GrainSmoothingAdvanced_py.html), [QuadruplePoints](QuadruplePoints_py.html)
+
+MATLAB's [taubinFilter_index](taubinFilter_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L174">source</a></font>
 {% endraw %}

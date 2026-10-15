@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformHandle_index.html
 status: Reference
 ---
 {% raw %}
@@ -47,6 +48,8 @@ inverse raises ValueError. The inverse callable receives positions in the output
 | [eval](spatialTransformHandle.eval_py.html) | the positions the function returns |
 | [inv](spatialTransformHandle.inv_py.html) | the transform of the inverse function, an error where none was given |
 | [paramChar](spatialTransformHandle.paramChar_py.html) | the name of the function as a line of text |
+
+MATLAB's [spatialTransformHandle_index](spatialTransformHandle_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L844">source</a></font>
 {% endraw %}

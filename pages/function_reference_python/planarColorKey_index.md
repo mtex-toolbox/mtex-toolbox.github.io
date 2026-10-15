@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: planarColorKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -60,6 +61,8 @@ Explicit ranges keep colours comparable between data sets; inferred ranges depen
 ## Used on
 
 [GrainSpatialPlots](GrainSpatialPlots_py.html)
+
+MATLAB's [planarColorKey_index](planarColorKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/planarkey.py#L28">source</a></font>
 {% endraw %}

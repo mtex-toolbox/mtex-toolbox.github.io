@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformShift_index.html
 status: Reference
 ---
 {% raw %}
@@ -59,6 +60,8 @@ map; spatialTransformRigid provides a pure translation.
 ## Used on
 
 [EBSDSpatialTransform](EBSDSpatialTransform_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
+
+MATLAB's [spatialTransformShift_index](spatialTransformShift_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L258">source</a></font>
 {% endraw %}

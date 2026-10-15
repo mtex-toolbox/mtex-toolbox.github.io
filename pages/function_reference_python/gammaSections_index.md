@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: gammaSections_index.html
 status: Reference
 ---
 {% raw %}
@@ -36,6 +37,8 @@ oS = gammaSections(cs, ss, gamma=np.arange(0, 91, 15)*degree)
 ## Members
 
 | [gamma](gammaSections.gamma_py.html) | the gamma values of the sections |
+
+MATLAB's [gammaSections_index](gammaSections_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L368">source</a></font>
 {% endraw %}

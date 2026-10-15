@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: plottingConvention_index.html
 status: Reference
 ---
 {% raw %}
@@ -62,6 +63,8 @@ X east, y south, z into the screen.
 ## Used on
 
 [Grains3D](Grains3D_py.html), [Grains3DOperations](Grains3DOperations_py.html), [SphericalProjections](SphericalProjections_py.html), [S2FunPlotting](S2FunPlotting_py.html)
+
+MATLAB's [plottingConvention_index](plottingConvention_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/plottingconvention.py#L31">source</a></font>
 {% endraw %}

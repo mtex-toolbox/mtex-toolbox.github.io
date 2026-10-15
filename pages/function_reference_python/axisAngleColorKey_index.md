@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: axisAngleColorKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -44,6 +45,8 @@ colour is NaN above thresholdAngle. Without a reference the identity is the refe
 ## Used on
 
 [EBSDDenoising](EBSDDenoising_py.html), [EBSDFilling](EBSDFilling_py.html), [EBSDSharpPlot](EBSDSharpPlot_py.html), [Grain_dispersion_axes](Grain_dispersion_axes_py.html), [LowLevelParentGrainReconstruction](LowLevelParentGrainReconstruction_py.html), [GND](GND_py.html)
+
+MATLAB's [axisAngleColorKey_index](axisAngleColorKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L378">source</a></font>
 {% endraw %}

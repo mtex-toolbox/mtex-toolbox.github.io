@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformComposite_index.html
 status: Reference
 ---
 {% raw %}
@@ -54,6 +55,8 @@ uses matrix order and applies T2 first.
 | [paramChar](spatialTransformComposite.paramChar_py.html) | the stages with their parameters as one line of text |
 | [shortChar](spatialTransformComposite.shortChar_py.html) | the short names of the stages joined by dashes |
 | [stageList](spatialTransformComposite.stageList_py.html) | the stages, a list |
+
+MATLAB's [spatialTransformComposite_index](spatialTransformComposite_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L885">source</a></font>
 {% endraw %}

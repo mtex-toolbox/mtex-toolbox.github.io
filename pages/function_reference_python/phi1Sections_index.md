@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: phi1Sections_index.html
 status: Reference
 ---
 {% raw %}
@@ -40,6 +41,8 @@ oS = phi1Sections(cs, ss, phi1=np.arange(0, 91, 15)*degree)
 ## Used on
 
 [TaylorModel](TaylorModel_py.html), [SO3FunVectorField](SO3FunVectorField_py.html)
+
+MATLAB's [phi1Sections_index](phi1Sections_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L340">source</a></font>
 {% endraw %}

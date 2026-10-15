@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: quadratureS2Grid_index.html
 status: Reference
 ---
 {% raw %}
@@ -62,6 +63,8 @@ polar-angle axis and then over azimuth, matching grid.gridShape = (numRho, numTh
 ## Used on
 
 [S2FunQuadrature](S2FunQuadrature_py.html)
+
+MATLAB's [quadratureS2Grid_index](quadratureS2Grid_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L345">source</a></font>
 {% endraw %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: alphaSections_index.html
 status: Reference
 ---
 {% raw %}
@@ -36,6 +37,8 @@ oS = alphaSections(cs, ss, alpha=np.arange(0, 91, 15)*degree)
 ## Members
 
 | [alpha](alphaSections.alpha_py.html) | the alpha values of the sections |
+
+MATLAB's [alphaSections_index](alphaSections_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L396">source</a></font>
 {% endraw %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformPoly_index.html
 status: Reference
 ---
 {% raw %}
@@ -63,6 +64,8 @@ uses a numerical inverse. With no coefficients the transform is the identity.
 ## Used on
 
 [EBSDSpatialTransform](EBSDSpatialTransform_py.html)
+
+MATLAB's [spatialTransformPoly_index](spatialTransformPoly_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L530">source</a></font>
 {% endraw %}

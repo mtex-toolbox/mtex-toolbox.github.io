@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: fibonacciS2Grid_index.html
 status: Reference
 ---
 {% raw %}
@@ -39,6 +40,8 @@ S2G = fibonacciS2Grid(resolution=2*degree)
 ## Used on
 
 [VectorGrids](VectorGrids_py.html)
+
+MATLAB's [fibonacciS2Grid_index](fibonacciS2Grid_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/grids/fibonacci.py#L13">source</a></font>
 {% endraw %}

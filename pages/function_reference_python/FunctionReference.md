@@ -383,6 +383,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [rhoVector](rhoVector_py.html) | the unit vector along the azimuth at a direction, the second vector of the polar basis |
 | [rotationalDiscrepancy](rotationalDiscrepancy_py.html) | the discrepancy between two measures on SO(3), densities or weighted orientation sets in any pairing: D_2, D_ball or a bandlimited L2 norm |
 | [SantaFe](SantaFe_py.html) | the Santa Fe sample ODF (MATLAB SantaFe): cubic crystal and orthorhombic specimen symmetry, a uniform portion of 0.73 and a von Mises Fisher component of 10 degree halfwidth at (122)[221] carrying the other 0.27 |
+| [selectHalfwidth](selectHalfwidth_py.html) | Select the angular halfwidth of a de la Vallee Poussin kernel for density estimation |
 | [silvermanWidth](silvermanWidth_py.html) | choose a Gaussian smoothing width from the spread and size of a numeric sample |
 | [sphericalDiscrepancy](sphericalDiscrepancy_py.html) | the discrepancy between two measures on the sphere, densities or weighted point sets in any pairing: D_2, D_cap or a bandlimited L2 norm |
 | [sphericalPlan](sphericalPlan_py.html) | the plan for a node set on the sphere: the FFT on a Clenshaw-Curtis grid, the NUFFT otherwise |

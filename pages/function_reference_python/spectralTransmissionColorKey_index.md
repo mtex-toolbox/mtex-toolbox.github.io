@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spectralTransmissionColorKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -36,6 +37,8 @@ key.propagationDirection, key.polarizer, key.phi
 ## Used on
 
 [BirefringenceDemo](BirefringenceDemo_py.html)
+
+MATLAB's [spectralTransmissionColorKey_index](spectralTransmissionColorKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L549">source</a></font>
 {% endraw %}

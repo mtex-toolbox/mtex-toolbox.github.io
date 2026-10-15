@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformDrift_index.html
 status: Reference
 ---
 {% raw %}
@@ -56,6 +57,8 @@ NaN unless extrapolate=True continues the end segments. No knots gives the ident
 ## Used on
 
 [EBSDSpatialTransform](EBSDSpatialTransform_py.html), [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
+
+MATLAB's [spatialTransformDrift_index](spatialTransformDrift_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L629">source</a></font>
 {% endraw %}

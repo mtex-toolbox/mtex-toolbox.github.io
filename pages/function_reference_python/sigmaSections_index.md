@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: sigmaSections_index.html
 status: Reference
 ---
 {% raw %}
@@ -42,6 +43,8 @@ oS = sigmaSections(cs, ss, sigma=np.arange(0, 60, 10)*degree)
 ## Used on
 
 [SigmaSections](SigmaSections_py.html), [TaylorModel](TaylorModel_py.html)
+
+MATLAB's [sigmaSections_index](sigmaSections_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L610">source</a></font>
 {% endraw %}

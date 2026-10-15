@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: ipfColorKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -98,6 +99,8 @@ RGB colours: [[1.    0.01  0.   ]
 ## Used on
 
 [CrystalShapes](CrystalShapes_py.html), [EBSD3Plotting](EBSD3Plotting_py.html), [Grains3DProperties](Grains3DProperties_py.html), [EBSD2ODF](EBSD2ODF_py.html), [EBSDDenoising](EBSDDenoising_py.html), [EBSDGROD](EBSDGROD_py.html), [EBSDKAM](EBSDKAM_py.html), [EBSDPlotting](EBSDPlotting_py.html), [EBSDPseudoSymmetry](EBSDPseudoSymmetry_py.html), [EBSDSharpPlot](EBSDSharpPlot_py.html), [EBSDSimulation](EBSDSimulation_py.html), [BoundaryCurvature](BoundaryCurvature_py.html)
+
+MATLAB's [ipfColorKey_index](ipfColorKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L86">source</a></font>
 {% endraw %}

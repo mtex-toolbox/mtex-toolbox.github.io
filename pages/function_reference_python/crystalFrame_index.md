@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: crystalFrame_index.html
 status: Reference
 ---
 {% raw %}
@@ -234,6 +235,8 @@ Magnesium
 ## Used on
 
 [CrystalDirections](CrystalDirections_py.html), [CrystalOperations](CrystalOperations_py.html), [CrystalReferenceSystem](CrystalReferenceSystem_py.html), [CrystalShapeSmorf](CrystalShapeSmorf_py.html), [CrystalSymmetries](CrystalSymmetries_py.html), [FundamentalSector](FundamentalSector_py.html), [LatticeMetric](LatticeMetric_py.html), [SymmetryAlignment](SymmetryAlignment_py.html), [MTEXvsBungeConvention](MTEXvsBungeConvention_py.html), [OrientationEmbeddings](OrientationEmbeddings_py.html), [OrientationFibre](OrientationFibre_py.html), [OrientationFundamentalRegion](OrientationFundamentalRegion_py.html)
+
+MATLAB's [crystalFrame_index](crystalFrame_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/frames.py#L775">source</a></font>
 {% endraw %}

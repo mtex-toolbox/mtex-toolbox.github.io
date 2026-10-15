@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: HKLDirectionKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -30,6 +31,8 @@ key = HKLDirectionKey(cs)
 
 | [direction2color](HKLDirectionKey.direction2color_py.html) | the colours of directions under the HKL key |
 | [whiteCenter](HKLDirectionKey.whiteCenter_py.html) | the centre of the fundamental sector |
+
+MATLAB's [HKLDirectionKey_index](HKLDirectionKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L466">source</a></font>
 {% endraw %}

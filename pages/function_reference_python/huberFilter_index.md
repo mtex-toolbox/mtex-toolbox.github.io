@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: huberFilter_index.html
 status: Reference
 ---
 {% raw %}
@@ -52,6 +53,8 @@ vertices remain fixed; stopping uses tol or the maximum iteration count.
 ## Used on
 
 [GrainSmoothingAdvanced](GrainSmoothingAdvanced_py.html)
+
+MATLAB's [huberFilter_index](huberFilter_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L248">source</a></font>
 {% endraw %}

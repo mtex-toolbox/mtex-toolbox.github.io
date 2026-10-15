@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: gbcSoft_index.html
 status: Reference
 ---
 {% raw %}
@@ -26,6 +27,8 @@ not by how far it is from it rather than by which side it fell on
 ## Used on
 
 [GrainReconstructionAdvanced](GrainReconstructionAdvanced_py.html), [GrainReconstructionMCL](GrainReconstructionMCL_py.html)
+
+MATLAB's [gbcSoft_index](gbcSoft_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L215">source</a></font>
 {% endraw %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: quadratureSO3Grid_index.html
 status: Reference
 ---
 {% raw %}
@@ -111,6 +112,8 @@ beta fastest, then alpha, then gamma, and G.weights their weights.
 ## Used on
 
 [SO3FunQuadrature](SO3FunQuadrature_py.html)
+
+MATLAB's [quadratureSO3Grid_index](quadratureSO3Grid_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/quadrature.py#L158">source</a></font>
 {% endraw %}

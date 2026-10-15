@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: SchulzDefocusingKernel_index.html
 status: Reference
 ---
 {% raw %}
@@ -52,6 +53,8 @@ at the specimen directions of a PoleFigure.
 
 | [defocusing](SchulzDefocusingKernel.defocusing_py.html) | the correction on the specimen directions of a pole figure, one at the pole |
 | [eval](SchulzDefocusingKernel.eval_py.html) | the defocusing factor at t = cos(alpha) of the tilt alpha, 1 at no tilt, infinite at 90 degrees |
+
+MATLAB's [SchulzDefocusingKernel_index](SchulzDefocusingKernel_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/polefigure.py#L1174">source</a></font>
 {% endraw %}

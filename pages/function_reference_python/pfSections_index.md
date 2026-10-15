@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: pfSections_index.html
 status: Reference
 ---
 {% raw %}
@@ -55,6 +56,8 @@ With h1 = c*, h2 = a.
 | [sectionField](pfSections.sectionField_py.html) | the reference field turned into the section, at an equispaced grid of its region |
 | [sectionLabel](pfSections.sectionLabel_py.html) | the title of section k, the twist angle in degrees |
 | [twisted](pfSections.twisted_py.html) | the field turned about the direction by the angle of the section, where ori * h2 has to point for the orientation to belong there |
+
+MATLAB's [pfSections_index](pfSections_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L431">source</a></font>
 {% endraw %}

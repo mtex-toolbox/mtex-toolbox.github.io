@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: ipfHSVKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -95,6 +96,8 @@ RGB colours: [[1.    0.01  0.   ]
 ## Used on
 
 [QuasiCrystals](QuasiCrystals_py.html), [EBSDIPFMap](EBSDIPFMap_py.html), [EBSDPerceptualKey](EBSDPerceptualKey_py.html), [EBSDSharpPlot](EBSDSharpPlot_py.html), [GND](GND_py.html)
+
+MATLAB's [ipfHSVKey_index](ipfHSVKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L227">source</a></font>
 {% endraw %}

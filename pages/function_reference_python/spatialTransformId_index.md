@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spatialTransformId_index.html
 status: Reference
 ---
 {% raw %}
@@ -24,6 +25,8 @@ the identity transform, which leaves every position where it is
 ## Used on
 
 [EBSDTrueEbsd](EBSDTrueEbsd_py.html)
+
+MATLAB's [spatialTransformId_index](spatialTransformId_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/spatialtransform.py#L225">source</a></font>
 {% endraw %}

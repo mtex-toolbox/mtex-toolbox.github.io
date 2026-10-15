@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: SO3VectorFieldRBF_index.html
 status: Reference
 ---
 {% raw %}
@@ -105,6 +106,8 @@ MATLAB stores the three components as SO3FunRBF; here the weights are one vector
 | [SS](SO3VectorFieldRBF.SS_py.html) | the specimen frame of the field, that of the centres |
 | [times](SO3VectorFieldRBF.times_py.html) |  |
 | [uminus](SO3VectorFieldRBF.uminus_py.html) |  |
+
+MATLAB's [SO3VectorFieldRBF_index](SO3VectorFieldRBF_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/so3vectorfield.py#L1012">source</a></font>
 {% endraw %}

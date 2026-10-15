@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: gbcCustom_index.html
 status: Reference
 ---
 {% raw %}
@@ -26,6 +27,8 @@ difference that still counts as one grain, gbcCustom('grainId', 0.5)
 ## Used on
 
 [GrainReconstructionAdvanced](GrainReconstructionAdvanced_py.html)
+
+MATLAB's [gbcCustom_index](gbcCustom_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/criteria.py#L279">source</a></font>
 {% endraw %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: spotColorKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -57,6 +58,8 @@ by channel. Comparisons use the crystal and specimen symmetry of the orientation
 ## Used on
 
 [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html)
+
+MATLAB's [spotColorKey_index](spotColorKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/orientationkeys.py#L486">source</a></font>
 {% endraw %}

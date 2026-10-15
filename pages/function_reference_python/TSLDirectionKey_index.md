@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: TSLDirectionKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -22,6 +23,8 @@ over the polar angle and the azimuth of the sector
 
 | [direction2color](TSLDirectionKey.direction2color_py.html) | the colours of directions under the TSL key |
 | [whiteCenter](TSLDirectionKey.whiteCenter_py.html) | the centre of the sector the colours run from |
+
+MATLAB's [TSLDirectionKey_index](TSLDirectionKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L420">source</a></font>
 {% endraw %}

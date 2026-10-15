@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: axisAngleSections_index.html
 status: Reference
 ---
 {% raw %}
@@ -47,6 +48,8 @@ axisAngleSections(cs1, cs2, sections=5, volumeScaling=False, antipodal=True)
 ## Used on
 
 [SlipTransmission](SlipTransmission_py.html)
+
+MATLAB's [axisAngleSections_index](axisAngleSections_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/sections.py#L642">source</a></font>
 {% endraw %}

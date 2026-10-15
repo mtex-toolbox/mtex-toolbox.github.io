@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: S2DeLaValleePoussinKernel_index.html
 status: Reference
 ---
 {% raw %}
@@ -55,6 +56,8 @@ maximum degree of its harmonic representation.
 ## Used on
 
 [EBSDAdvancedMaps](EBSDAdvancedMaps_py.html), [SO3FunConvolution](SO3FunConvolution_py.html), [S2Kernels](S2Kernels_py.html), [VectorsDensityEstimation](VectorsDensityEstimation_py.html)
+
+MATLAB's [S2DeLaValleePoussinKernel_index](S2DeLaValleePoussinKernel_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1079">source</a></font>
 {% endraw %}

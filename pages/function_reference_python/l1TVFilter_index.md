@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: l1TVFilter_index.html
 status: Reference
 ---
 {% raw %}
@@ -95,6 +96,8 @@ point iteration; here the first argument is the smoothing length.
 ## Members
 
 | [l1TVFilter](l1TVFilter.l1TVFilter_py.html) | the total variation filter of the orientations of a map, absolute in the data term and in the differences between neighbours, which smooths noise and keeps sharp steps |
+
+MATLAB's [l1TVFilter_index](l1TVFilter_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/variational.py#L88">source</a></font>
 {% endraw %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: sphericalProjection_index.html
 status: Reference
 ---
 {% raw %}
@@ -72,6 +73,8 @@ symmetric, whether the data carry the symmetry of the frame, as a function does.
 | [projectUnchecked](sphericalProjection.projectUnchecked_py.html) | the plane coordinates of directions known to lie in the chart |
 | [radius](sphericalProjection.radius_py.html) | the plane radius r(theta) a polar angle is drawn at, 2 sin(theta / 2) for the equal area chart |
 | [withRegion](sphericalProjection.withRegion_py.html) | the same chart showing another region, for an outline drawn behind the data |
+
+MATLAB's [sphericalProjection_index](sphericalProjection_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/spherical.py#L29">source</a></font>
 {% endraw %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: curvatureFilter_index.html
 status: Reference
 ---
 {% raw %}
@@ -28,6 +29,8 @@ remains comparable between samplings. Supplying alpha overrides that conversion.
 ## Used on
 
 [GrainSmoothing](GrainSmoothing_py.html), [GrainSmoothingAdvanced](GrainSmoothingAdvanced_py.html)
+
+MATLAB's [curvatureFilter_index](curvatureFilter_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/smoothing.py#L218">source</a></font>
 {% endraw %}

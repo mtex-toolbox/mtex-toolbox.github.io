@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: shape2d_index.html
 status: Reference
 ---
 {% raw %}
@@ -26,6 +27,8 @@ positive one
 | [size](shape2d.size_py.html) | the number of outlines, one |
 | [theta](shape2d.theta_py.html) | the angle of every vertex in polar coordinates of the plane, from the x axis |
 | [Vs](shape2d.Vs_py.html) | the outline as framed points, and in polar coordinates |
+
+MATLAB's [shape2d_index](shape2d_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/shape.py#L449">source</a></font>
 {% endraw %}

@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: S1BumpKernel_index.html
 status: Reference
 ---
 {% raw %}
@@ -50,6 +51,8 @@ maximum degree of its harmonic representation.
 
 | [grad](S1BumpKernel.grad_py.html) | the derivative of the bump kernel, zero wherever it exists |
 | [halfwidth](S1BumpKernel.halfwidth_py.html) | the halfwidth, the half length delta of the interval |
+
+MATLAB's [S1BumpKernel_index](S1BumpKernel_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/functions/kernelfunctions.py#L1598">source</a></font>
 {% endraw %}

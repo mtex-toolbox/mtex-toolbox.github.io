@@ -6,6 +6,7 @@ folder: function_reference
 toc: false
 search: exclude
 lang: python
+counterpart: HSVDirectionKey_index.html
 status: Reference
 ---
 {% raw %}
@@ -53,6 +54,8 @@ yellow, and the key comes closer to MTEX's and less even.
 ## Used on
 
 [EBSDGROD](EBSDGROD_py.html), [BoundaryPlots](BoundaryPlots_py.html), [GrainOrientationParameters](GrainOrientationParameters_py.html), [WBV](WBV_py.html)
+
+MATLAB's [HSVDirectionKey_index](HSVDirectionKey_index.html)
 
 <font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/plotting/directionkeys.py#L312">source</a></font>
 {% endraw %}
