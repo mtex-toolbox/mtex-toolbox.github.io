@@ -54,5 +54,5 @@ curvatureTensor.dislocationDensity(kappa)
 
 MATLAB's [curvatureTensor.dislocationDensity](curvatureTensor.dislocationDensity.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L471">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L497">source</a></font>
 {% endraw %}

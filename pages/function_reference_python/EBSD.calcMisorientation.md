@@ -79,5 +79,5 @@ not returned.
 
 MATLAB's [EBSD.calcMisorientation](EBSD.calcMisorientation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L692">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L791">source</a></font>
 {% endraw %}

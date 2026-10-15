@@ -51,5 +51,5 @@ Of the coordinates a in the frame cs.
 
 [spinTensor](spinTensor_index_py.html), [spinTensor.vector](spinTensor.vector_py.html), [spin](spin_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L452">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L478">source</a></font>
 {% endraw %}

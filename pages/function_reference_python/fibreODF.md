@@ -88,6 +88,36 @@ mean of one. Several crystal and specimen directions give several fibres.
 
 | `odf` | SO3FunCBF |
 
+## Example
+
+Construct a cubic <001> fibre texture about specimen Z and display its {001} and
+{111} pole figures. The halfwidth is explicit and no data file is needed.
+
+
+```python
+import matplotlib.pyplot as plt
+from mtex import crystalFrame, Miller, vector3d, fibreODF, degree, plotPF, mtexColorbar
+
+cs = crystalFrame('m-3m')
+h = Miller(0, 0, 1, cs, 'uvw')
+odf = fibreODF(h, vector3d.Z, halfwidth=10*degree)
+print('ODF mean:', round(float(odf.mean()), 6))
+plotPF(odf, [Miller(0, 0, 1, cs), Miller(1, 1, 1, cs)], antipodal=True, resolution=5*degree)
+mtexColorbar(title='Pole density (mrd)')
+plt.show()
+```
+
+The fibre aligns a crystal direction with a specimen direction while allowing rotation
+around it. The ODF has mean one over orientation space. Central peaks and rings in the pole
+figures reflect that rotational freedom; a unimodalODF instead centres on one full orientation.
+
+```text
+ODF mean: 1.0
+```
+
+![Example output for fibreODF](figures/python_reference/fibreODF-01.png)
+
+
 ## See also
 
 [unimodalODF](unimodalODF_py.html), [uniformODF](uniformODF_py.html), [FourierODF](FourierODF_py.html), [BinghamODF](BinghamODF_py.html), [SO3FunCBF](SO3FunCBF_index_py.html), [FibreODFs](FibreODFs_py.html)

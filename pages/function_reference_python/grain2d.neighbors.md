@@ -81,6 +81,42 @@ the row and column id - 1 for the grain id.
 | `pairs` | the grain ids, (n, 2) |
 | `A` | scipy.sparse.csr_matrix (matrix=True) |
 
+## Example
+
+Find grain-id pairs and the sparse adjacency matrix of a reconstructed map.
+The small Forsterite sample is downloaded and cached on first use.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import mtexdata, calcGrains, degree, plot, mtexColorbar
+
+ebsd = mtexdata('small', verbose=False)['Forsterite']
+grains = calcGrains(ebsd, angle=10*degree, minPixel=5)
+pairs = grains.neighbors()
+adjacency = grains.neighbors(matrix=True)
+print('First five neighbour pairs:', pairs[:5].tolist())
+print('Matrix is symmetric:', (adjacency != adjacency.T).nnz == 0)
+print('Each pair contributes two entries:', adjacency.nnz == 2*len(pairs))
+plot(grains, grains.numNeighbors)
+mtexColorbar(title='Number of neighbouring grains')
+plt.show()
+```
+
+Pairs contain grain ids, not zero-based positions in the current selection. The matrix
+uses row id-1 and column id-1; its shape can therefore exceed the number of selected grains.
+Use full=True to include neighbours outside a selected set of grains.
+
+```text
+First five neighbour pairs: [[1, 2], [1, 5], [2, 5], [2, 6], [2, 7]]
+Matrix is symmetric: True
+Each pair contributes two entries: True
+```
+
+![Example output for grain2d.neighbors](figures/python_reference/grain2d.neighbors-01.png)
+
+
 ## See also
 
 [grain2d.numNeighbors](grain2d.numNeighbors_py.html), [grainBoundary.selectByGrainId](grainBoundary.selectByGrainId_py.html)

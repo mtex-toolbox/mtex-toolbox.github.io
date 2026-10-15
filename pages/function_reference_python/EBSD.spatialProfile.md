@@ -69,11 +69,47 @@ by default; a pixel at the joint of two segments is met once.
 | `ebsdLine` | EBSD, the measurements along the line |
 | `dist` | array, the distance of each along the line from its first point |
 
+## Example
+
+Extract a horizontal profile through the small Forsterite map and plot its
+misorientation relative to the first selected orientation. The sample is cached after its first download.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import mtexdata, spatialProfile, degree
+
+ebsd = mtexdata('small', verbose=False)['Forsterite']
+y = float(np.median(ebsd.y))
+line = [[float(np.min(ebsd.x)), y], [float(np.max(ebsd.x)), y]]
+profile, distance = spatialProfile(ebsd, line)
+omega = profile.orientations.angle(profile.orientations[0])/degree
+print('Selected measurements:', profile.size)
+print('Distance increases:', bool(np.all(np.diff(distance) >= 0)))
+plt.plot(distance, omega, '.')
+plt.xlabel('Distance along profile (um)')
+plt.ylabel('Misorientation to first orientation (degrees)')
+plt.show()
+```
+
+Distances use the scan unit and start at the first line endpoint. The default band extends
+half a lattice step on either side of the line; radius changes that band. Large jumps can
+mark different grains. This extracts measured pixels rather than interpolating an orientation field.
+
+```text
+Selected measurements: 38
+Distance increases: True
+```
+
+![Example output for EBSD.spatialProfile](figures/python_reference/EBSD.spatialProfile-01.png)
+
+
 ## See also
 
 [EBSD.findByLocation](EBSD.findByLocation_py.html), [EBSDProfile](EBSDProfile_py.html)
 
 MATLAB's [EBSD.spatialProfile](EBSD.spatialProfile.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L638">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/intragranular.py#L712">source</a></font>
 {% endraw %}

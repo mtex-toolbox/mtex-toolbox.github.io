@@ -30,6 +30,31 @@ Consult the corresponding method for the behaviour of a particular object type.
 
 For numeric arrays without an MTEX method, this calls numpy.angle.
 
+## Example
+
+Compare the crystallographic misorientation angle with the angle between the stored
+rotations. A 90-degree rotation about a cubic fourfold axis is a crystal symmetry operation.
+
+
+```python
+from mtex import crystalFrame, orientation, degree, angle
+
+cs = crystalFrame('m-3m')
+a = orientation.byEuler(0, 0, 0, cs)
+b = orientation.byEuler(90*degree, 0, 0, cs)
+print('With cubic symmetry (degrees):', round(float(angle(a, b)/degree), 6))
+print('Stored rotations (degrees):', round(float(angle(a, b, symmetry=False)/degree), 6))
+```
+
+angle returns radians. Dividing by degree converts them to degrees. The default searches
+symmetry-equivalent orientations, so these two stored rotations describe the same cubic orientation.
+
+```text
+With cubic symmetry (degrees): 0.0
+Stored rotations (degrees): 90.0
+```
+
+
 ## Signature
 
 <div class="mx-form" markdown="1">

@@ -101,11 +101,40 @@ part.
 | `lam` | the principal moments of inertia, in ascending order |
 | `V` | quaternion, the four principal axes of inertia |
 
+## Example
+
+Average orientations that straddle a cubic symmetry boundary. The Euler angles
+1 and 89 degrees represent orientations only two degrees apart under cubic symmetry.
+
+
+```python
+import numpy as np
+from mtex import crystalFrame, orientation, degree, mean
+
+cs = crystalFrame('m-3m')
+ori = orientation.byEuler(np.array([1, 89])*degree, 0, 0, cs)
+centre, projected = mean(ori, return_projected=True)
+print('Input Euler phi1 (degrees):', [1, 89])
+print('Misorientation to mean (degrees):', np.round(ori.angle(centre)/degree, 3))
+print('Projected rotations to mean (degrees):', np.round(projected.angle(centre, symmetry=False)/degree, 3))
+```
+
+The symmetry-aware mean lies near a cubic equivalent of zero degrees. Arithmetic averaging
+of the Euler angles would give 45 degrees. Use a mean for a localized orientation cluster;
+a broad or multimodal texture generally cannot be represented by one mean orientation.
+
+```text
+Input Euler phi1 (degrees): [1, 89]
+Misorientation to mean (degrees): [1. 1.]
+Projected rotations to mean (degrees): [1. 1.]
+```
+
+
 ## See also
 
 [quaternion.mean](quaternion.mean_py.html), [quaternion.std](quaternion.std_py.html), [EBSD.grainMean](EBSD.grainMean_py.html), [BinghamODF](BinghamODF_py.html)
 
 MATLAB's [orientation.mean](orientation.mean.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L703">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L719">source</a></font>
 {% endraw %}

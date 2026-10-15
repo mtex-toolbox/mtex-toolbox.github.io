@@ -56,5 +56,5 @@ EBSD.findByOrientation(self, ori, epsilon)
 
 MATLAB's [EBSD.findByOrientation](EBSD.findByOrientation.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L465">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L484">source</a></font>
 {% endraw %}

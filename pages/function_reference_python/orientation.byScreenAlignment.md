@@ -46,5 +46,5 @@ orientation.byScreenAlignment(frA, frB)
 
 MATLAB's [orientation.byScreenAlignment](orientation.byScreenAlignment.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L990">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L1025">source</a></font>
 {% endraw %}

@@ -28,6 +28,52 @@ and keyword arguments are passed to that method unchanged. Its documentation
 specifies the accepted inputs, units, symmetry handling and optional outputs.
 Consult the corresponding method for the behaviour of a particular object type.
 
+## Example
+
+Denoise a synthetic map containing two grains and reproducible orientation noise.
+Reconstruct the grains first so the filter respects their boundary.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import (EBSD, crystalFrame, phaseList, rotation, vector3d, degree,
+                  calcGrains, smooth, meanFilter, KAM, plot, mtexColorbar, mtexTitle, newMtexFigure)
+
+x, y = np.meshgrid(np.arange(20), np.arange(12))
+base = np.where(x < 10, 0.0, 20.0)
+noise = np.random.default_rng(7).normal(0, 0.4, x.shape)
+rot = rotation.byAxisAngle(vector3d.Z, (base + noise).ravel()*degree)
+cs = crystalFrame('m-3m')
+ebsd = EBSD(np.c_[x.ravel(), y.ravel()], rot, np.ones(x.size, dtype=int), phaseList(cs))
+grains = calcGrains(ebsd, angle=10*degree)
+filtered = smooth(ebsd, meanFilter(numNeighbours=1))
+for data, title in ((ebsd, 'Before smoothing'), (filtered, 'After smoothing')):
+    newMtexFigure()
+    kam = KAM(data)/degree
+    print(title, 'median KAM (degrees):', round(float(np.nanmedian(kam)), 3))
+    plot(data, kam, colorRange=(0, 1.5), micronbar=False)
+    mtexColorbar(title='KAM (degrees)')
+    mtexTitle(title)
+print('Grain ids unchanged:', np.array_equal(filtered.grainId, ebsd.grainId))
+plt.show()
+```
+
+The returned map has new orientations and retains the original segmentation. Lower KAM
+shows reduced local variation in this synthetic example; it is not a general measure of
+denoising quality. Choose a filter and length scale appropriate to the features to retain.
+
+```text
+Before smoothing median KAM (degrees): 0.373
+After smoothing median KAM (degrees): 0.141
+Grain ids unchanged: True
+```
+
+![Example output for EBSD.smooth](figures/python_reference/EBSD.smooth-01.png)
+
+![Example output for EBSD.smooth](figures/python_reference/EBSD.smooth-02.png)
+
+
 ## Signature
 
 <div class="mx-form" markdown="1">

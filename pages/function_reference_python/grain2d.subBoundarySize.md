@@ -61,5 +61,5 @@ The segments selected.
 
 MATLAB's [grain2d.subBoundarySize](grain2d.subBoundarySize.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L350">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L374">source</a></font>
 {% endraw %}

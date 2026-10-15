@@ -46,5 +46,5 @@ velocityGradientTensor.angularVelocityVector(L)
 
 MATLAB's [velocityGradientTensor.angularVelocityVector](velocityGradientTensor.angularVelocityVector.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L416">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L442">source</a></font>
 {% endraw %}

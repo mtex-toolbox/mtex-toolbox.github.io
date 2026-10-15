@@ -112,6 +112,48 @@ provided.
 
 | `ori` | orientation, vector3d, ndarray or the class of the list |
 
+## Example
+
+Draw a reproducible orientation sample from a model texture, then compare its pole
+positions with the model pole density. No experimental data are needed.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import (crystalFrame, orientation, unimodalODF, degree, discreteSample,
+                  Miller, plotPF, mtexColorbar)
+
+cs = crystalFrame('m-3m')
+centre = orientation.byEuler(25*degree, 35*degree, 45*degree, cs)
+odf = unimodalODF(centre, halfwidth=12*degree)
+sample = discreteSample(odf, 300, rng=np.random.default_rng(9))
+print('Sample size:', sample.size)
+print('Median angle to centre (degrees):', round(float(np.median(sample.angle(centre))/degree), 2))
+h = Miller(1, 0, 0, cs)
+plotPF(odf, h, antipodal=True, resolution=5*degree)
+mtexColorbar(title='Model pole density (mrd)')
+plotPF(sample, h, antipodal=True, markerSize=3)
+plt.show()
+```
+
+The first figure is the model density; the second contains sampled orientation poles.
+The seed makes this draw reproducible. Sampling from a density differs from selecting members
+of an existing list, where withoutReplacement=True prevents selecting the same member twice.
+
+```text
+Sample size: 300
+Median angle to centre (degrees): 15.23
+  I'm plotting 208 random orientations out of 300 given orientations
+  You can specify the number of points by the option "points".
+  The option "all" ensures that all data are plotted
+```
+
+![Example output for S2Fun.discreteSample](figures/python_reference/S2Fun.discreteSample-01.png)
+
+![Example output for S2Fun.discreteSample](figures/python_reference/S2Fun.discreteSample-02.png)
+
+
 ## See also
 
 [SO3Fun.calcComponents](SO3Fun.calcComponents_py.html), [calcDensity](calcDensity_py.html), [RandomSampling](RandomSampling_py.html), [S2FunSampling](S2FunSampling_py.html)

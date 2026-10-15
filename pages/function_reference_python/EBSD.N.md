@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the normal of the measurement plane
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L574">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L593">source</a></font>
 {% endraw %}

@@ -42,5 +42,5 @@ orientation.byMiller(hkl, uvw, *frames)
 
 MATLAB's [orientation.byMiller](orientation.byMiller.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L954">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L989">source</a></font>
 {% endraw %}

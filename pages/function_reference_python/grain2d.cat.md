@@ -39,5 +39,5 @@ grain2d.cat(*parts)
 
 MATLAB's [grain2d.cat](grain2d.cat.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L448">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L472">source</a></font>
 {% endraw %}

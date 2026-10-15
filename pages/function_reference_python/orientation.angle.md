@@ -78,6 +78,31 @@ With a fibre as other it is the angle to the fibre.
 
 | `omega` | the angles in radians, of the broadcast shape |
 
+## Example
+
+Compare the crystallographic misorientation angle with the angle between the stored
+rotations. A 90-degree rotation about a cubic fourfold axis is a crystal symmetry operation.
+
+
+```python
+from mtex import crystalFrame, orientation, degree, angle
+
+cs = crystalFrame('m-3m')
+a = orientation.byEuler(0, 0, 0, cs)
+b = orientation.byEuler(90*degree, 0, 0, cs)
+print('With cubic symmetry (degrees):', round(float(angle(a, b)/degree), 6))
+print('Stored rotations (degrees):', round(float(angle(a, b, symmetry=False)/degree), 6))
+```
+
+angle returns radians. Dividing by degree converts them to degrees. The default searches
+symmetry-equivalent orientations, so these two stored rotations describe the same cubic orientation.
+
+```text
+With cubic symmetry (degrees): 0.0
+Stored rotations (degrees): 90.0
+```
+
+
 ## See also
 
 [orientation.dot](orientation.dot_py.html), [fibre.angle](fibre.angle_py.html), rotation.angle

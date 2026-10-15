@@ -60,5 +60,5 @@ close; ori1 == ori2 compares the rotations as stored.
 
 [orientation.angle](orientation.angle_py.html), [orientation.unique](orientation.unique_py.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L643">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/orientation.py#L659">source</a></font>
 {% endraw %}

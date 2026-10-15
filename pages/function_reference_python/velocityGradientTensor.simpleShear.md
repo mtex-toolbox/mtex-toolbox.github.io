@@ -58,5 +58,5 @@ Of the strain rate 1e-3.
 
 MATLAB's [velocityGradientTensor.simpleShear](velocityGradientTensor.simpleShear.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L370">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L396">source</a></font>
 {% endraw %}

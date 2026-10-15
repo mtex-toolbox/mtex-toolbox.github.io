@@ -13,5 +13,5 @@ A property of [EBSD](EBSD_index_py.html).
 
 the directions the indices of a gridded map run along (MATLAB ebsd.layout); a list has none
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L626">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L667">source</a></font>
 {% endraw %}

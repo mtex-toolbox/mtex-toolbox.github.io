@@ -40,5 +40,5 @@ rotate(v, rot, *args, **kwargs)
 
 MATLAB's [S2Triangulation.rotate](S2Triangulation.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L242">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/geometry/funcs.py#L332">source</a></font>
 {% endraw %}

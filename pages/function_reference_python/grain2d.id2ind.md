@@ -28,5 +28,5 @@ grain2d.id2ind(self, ids)
 
 MATLAB's [grain2d.id2ind](grain2d.id2ind.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L488">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L512">source</a></font>
 {% endraw %}

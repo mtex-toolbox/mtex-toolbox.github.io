@@ -30,6 +30,35 @@ Consult the corresponding method for the behaviour of a particular object type.
 
 For numeric arrays without an MTEX method, this calls numpy.mean.
 
+## Example
+
+Average orientations that straddle a cubic symmetry boundary. The Euler angles
+1 and 89 degrees represent orientations only two degrees apart under cubic symmetry.
+
+
+```python
+import numpy as np
+from mtex import crystalFrame, orientation, degree, mean
+
+cs = crystalFrame('m-3m')
+ori = orientation.byEuler(np.array([1, 89])*degree, 0, 0, cs)
+centre, projected = mean(ori, return_projected=True)
+print('Input Euler phi1 (degrees):', [1, 89])
+print('Misorientation to mean (degrees):', np.round(ori.angle(centre)/degree, 3))
+print('Projected rotations to mean (degrees):', np.round(projected.angle(centre, symmetry=False)/degree, 3))
+```
+
+The symmetry-aware mean lies near a cubic equivalent of zero degrees. Arithmetic averaging
+of the Euler angles would give 45 degrees. Use a mean for a localized orientation cluster;
+a broad or multimodal texture generally cannot be represented by one mean orientation.
+
+```text
+Input Euler phi1 (degrees): [1, 89]
+Misorientation to mean (degrees): [1. 1.]
+Projected rotations to mean (degrees): [1. 1.]
+```
+
+
 ## Signature
 
 <div class="mx-form" markdown="1">

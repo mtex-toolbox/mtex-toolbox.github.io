@@ -125,6 +125,48 @@ grains.merge(tP), is not provided.
 | `merged` | grain2d, the merged grains, numbered from 1 |
 | `parentId` | array, with testRun: the id in the merged list of every grain |
 
+## Example
+
+Join one neighbouring pair of reconstructed Forsterite grains and inspect the parent
+id mapping. The small sample is downloaded and cached on first use.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import mtexdata, calcGrains, degree, plot, hold
+
+ebsd = mtexdata('small', verbose=False)['Forsterite']
+grains = calcGrains(ebsd, angle=10*degree, minPixel=5)
+pair = grains.neighbors()[:1]
+parent = grains.merge(pair, testRun=True)
+merged = grains.merge(pair)
+print('Merged grain ids:', pair.tolist())
+print('Grain count before and after:', grains.size, merged.size)
+print('Preview agrees with parentId:', np.array_equal(parent, grains.parentId))
+print('Total pixel count preserved:', int(grains.numPixel.sum()) == int(merged.numPixel.sum()))
+plot(grains.boundary, lineColor='lightgray', lineWidth=3)
+hold(True)
+plot(merged.boundary, lineColor='black', lineWidth=1)
+hold(False)
+plt.show()
+```
+
+The pair is chosen only to demonstrate the operation; an analysis should select boundaries
+using a physical criterion. Grey traces show the original network and black the merged outlines.
+parentId is stored on the original grains. Update any pixel-to-parent mapping explicitly before
+using the merged grains with EBSD measurements; merge does not rewrite ebsd.grainId.
+
+```text
+Merged grain ids: [[1, 2]]
+Grain count before and after: 15 14
+Preview agrees with parentId: True
+Total pixel count preserved: True
+```
+
+![Example output for grain2d.merge](figures/python_reference/grain2d.merge-01.png)
+
+
 ## See also
 
 [grain2d.isInclusion](grain2d.isInclusion_py.html), [grain2d.neighbors](grain2d.neighbors_py.html), [calcGrains](EBSD.calcGrains_py.html), [GrainMerge](GrainMerge_py.html), [parentGrainReconstructor](parentGrainReconstructor_index_py.html)
@@ -135,5 +177,5 @@ grains.merge(tP), is not provided.
 
 MATLAB's [grain2d.merge](grain2d.merge.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L537">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/grains.py#L561">source</a></font>
 {% endraw %}

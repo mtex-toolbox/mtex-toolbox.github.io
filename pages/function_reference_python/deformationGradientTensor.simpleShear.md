@@ -58,5 +58,5 @@ By 30 degree.
 
 MATLAB's [deformationGradientTensor.simpleShear](deformationGradientTensor.simpleShear.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L273">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L299">source</a></font>
 {% endraw %}

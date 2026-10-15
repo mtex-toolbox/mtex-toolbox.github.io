@@ -80,6 +80,43 @@ frame: both in crystal coordinates, or ori * sS and the stress as measured.
 
 | `tau` | the Schmid factors, or an S2FunHarmonic of the tension direction |
 
+## Example
+
+Evaluate FCC slip systems under uniaxial loading. Transform the specimen loading
+direction into crystal coordinates before passing it to crystal-frame slip systems.
+
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mtex import crystalFrame, slipSystem, orientation, vector3d, degree, inv
+
+cs = crystalFrame('m-3m')
+systems = slipSystem.fcc(cs).symmetrise(antipodal=True)
+ori = orientation.byEuler(25*degree, 35*degree, 45*degree, cs)
+loading = inv(ori) * vector3d.Z
+factors = systems.SchmidFactor(loading)
+print('Loading in crystal coordinates:', np.round(loading.normalize().data, 3))
+print('Largest absolute Schmid factor:', round(float(np.max(np.abs(factors))), 4))
+plt.bar(np.arange(1, systems.size+1), np.abs(factors))
+plt.xlabel('FCC slip-system number in this list')
+plt.ylabel('Absolute Schmid factor')
+plt.ylim(0, 0.5)
+plt.show()
+```
+
+Factors are signed and dimensionless; absolute values compare the two shear senses.
+Multiplying by the applied uniaxial stress gives resolved shear stress. A factor alone does
+not establish slip activity: the critical resolved shear stress and material response also matter.
+
+```text
+Loading in crystal coordinates: [0.406 0.406 0.819]
+Largest absolute Schmid factor: 0.4096
+```
+
+![Example output for slipSystem.SchmidFactor](figures/python_reference/slipSystem.SchmidFactor-01.png)
+
+
 ## See also
 
 [SchmidFactor](mtex.SchmidFactor_py.html), [SchmidTensor](SchmidTensor_index_py.html), [calcShearStress](stressTensor.calcShearStress_py.html)
@@ -90,5 +127,5 @@ frame: both in crystal coordinates, or ori * sS and the stress as measured.
 
 MATLAB's [slipSystem.SchmidFactor](slipSystem.SchmidFactor.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L534">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L560">source</a></font>
 {% endraw %}

@@ -27,5 +27,5 @@ EBSD3.fillByGrainId(ebsd, grains)
 
 MATLAB's [EBSD3.fillByGrainId](EBSD3.fillByGrainId.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L486">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/denoising.py#L550">source</a></font>
 {% endraw %}

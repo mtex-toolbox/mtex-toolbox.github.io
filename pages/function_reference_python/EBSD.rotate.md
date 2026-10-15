@@ -86,5 +86,5 @@ rotate(ebsd, rot). MATLAB's center= option, a centre other than the origin, is n
 
 MATLAB's [EBSD.rotate](EBSD.rotate.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L500">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/maps/ebsd.py#L519">source</a></font>
 {% endraw %}

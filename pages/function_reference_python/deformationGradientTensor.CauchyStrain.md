@@ -46,5 +46,5 @@ deformationGradientTensor.CauchyStrain(F)
 
 MATLAB's [deformationGradientTensor.CauchyStrain](deformationGradientTensor.CauchyStrain.html)
 
-<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L316">source</a></font>
+<font size="2"><a href="https://github.com/mtex-toolbox/pymtex/blob/main/mtex/analysis/mechanics.py#L342">source</a></font>
 {% endraw %}
