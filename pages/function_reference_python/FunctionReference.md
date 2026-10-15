@@ -451,7 +451,10 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [trace](trace_py.html) | trace(T) is T.trace(): the trace of a rank two tensor, or of the Voigt matrix of a rank four |
 | [Voigt](tensor.Voigt_py.html) | convert tensor coefficients to compact Voigt notation |
 
-## Maps
+<a id="maps"></a>
+<a id="maps-of-volumes"></a>
+
+## EBSD Analysis
 
 ### Classes
 
@@ -460,12 +463,15 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [cellComplex](cellComplex_index_py.html) | the spatial decomposition of a map, one cell per site: the vertices V, the vertex pair F and the site pair of every face, the sites and the lattice |
 | [curvatureFilter](curvatureFilter_index_py.html) | the smooth boundary as the minimiser of \|V - V0\|^2 + alpha \|L V\|^2, where L V is how far a vertex sits off the line through its neighbours |
 | [EBSD](EBSD_index_py.html) | an EBSD map: positions, rotations and phase ids with the list of the phases' frames and the properties of every measurement |
+| [EBSD3](EBSD3_index_py.html) | the measurements of a volume: positions, rotations and phase ids of voxels with the list of the phases' frames and the properties of every measurement |
 | [gbcAngle](gbcAngle_index_py.html) | the criterion of a threshold on the misorientation angle: one angle, or a high and a low angle threshold, the pair counting as the share of the levels it stays below |
 | [gbcCustom](gbcCustom_index_py.html) | a criterion given as a function of the map and the two measurement indices, or as a per-pixel property, its values or the name of a property of the map, with the largest difference that still counts as one grain, gbcCustom('grainId', 0.5) |
 | [gbcEqual](gbcEqual_index_py.html) | two measurements belong together when the values of a property agree, which is how a segmentation by variant, by parent grain or by any imported label is done |
 | [gbcFMC](gbcFMC_index_py.html) | the grain boundary criterion of fast multiscale clustering |
 | [gbcSoft](gbcSoft_index_py.html) | a smooth transition instead of a threshold, so a pair near the threshold is joined or not by how far it is from it rather than by which side it fell on |
 | [grain2d](grain2d_index_py.html) | the grains of a map: a table of ids, phases, pixel counts, mean orientations and properties, with the boundary, the inner boundary and the polygon of every grain |
+| [grain3Boundary](grain3Boundary_index_py.html) | polygonal faces separating neighbouring grains in a three-dimensional volume |
+| [grain3d](grain3d_index_py.html) | the grains of a volume as closed polyhedra, given by the incidence I_GF of grains and the faces of a grain3Boundary: what calcGrains returns for a volume, the counterpart of grain2d |
 | [grainBoundary](grainBoundary_index_py.html) | a list of line segments separating neighbouring grains in a two-dimensional map |
 | [grainBoundaryCriterion](grainBoundaryCriterion_index_py.html) | the base of the grain boundary criteria: how connected pairs of neighbouring measurements are, 1 no boundary, 0.5 a low angle boundary inside a grain, 0 a boundary |
 | [huberFilter](huberFilter_index_py.html) | smooth grain boundaries with a Huber curvature penalty that preserves sharp corners |
@@ -474,6 +480,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [mapImage](mapImage_index_py.html) | an image that knows where on the specimen it sits: a raster of values on a regular grid of an origin and two perpendicular steps |
 | [mapImageList](mapImageList_index_py.html) | a list of mapImage, displayed as MATLAB's table of a mapImage array |
 | [mapPlane](mapPlane_index_py.html) | the plane of a set of positions with an orthonormal frame: the normal fitted and pointing up, e1 the given direction projected into the plane, the origin the specimen origin's foot on it |
+| [neper](neper_index_py.html) | the interface to Neper, the tessellation program, one per session with its settings: the geometry, the morphology, the iterations and the file path the tessellation is written to |
 | [pairShifts](pairShifts_index_py.html) | the shifts one cross correlation pass measured between two images |
 | [parentGrainReconstructor](parentGrainReconstructor_index_py.html) | the state of a parent grain reconstruction: the map and the grains it starts from, the orientation relationship and the grains after every step taken |
 | [phaseList](phaseList_index_py.html) | the phases of a map, the frames its measurements can belong to, the not indexed frame first at index 0, so that a phase id is an index into the list |
@@ -483,9 +490,11 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [triplePointList](triplePointList_index_py.html) | the triple points of a boundary: the vertices where three grains meet, each with its three grains, their phases, the three boundary segments and the angles between them |
 | [trueEbsd](trueEbsd_index_py.html) | the alignment of a sequence of images and EBSD maps of one area, most distorted first and the ground truth last, one unfitted spatial transform per hop |
 | [voteTable](voteTable_index_py.html) | MATLAB's table of votes: a row per grain, parentId the best variants of the grain and prob, fit or count their value, sorted best first |
+| [voxelLattice](voxelLattice_index_py.html) | the lattice a volume is measured on: the origin, the translations d1, d2, d3 as the rows of D and the integer index of every voxel, voxel n at origin + ijk[n] @ D |
 
 ### Functions
 
+| [calcGrains](EBSD.calcGrains_py.html) | the grains of a map, the pixels joined across every boundary the criterion keeps |
 | [calcTraces](EBSD.calcTraces_py.html) | the traces of subregions of a map or of sets of grains, the direction their lamellae run along |
 | [chainOrder](chainOrder_py.html) | the decomposition of an edge list into maximal chains, each walked end to end: the permutation that brings the edges into walk order, and per edge whether the walk enters it at its first (1) or second (2) vertex |
 | [cleanUpPseudoSym](cleanUpPseudoSym_py.html) | the map corrected for a pseudo symmetry of one phase, detected by the tortuosity of its boundaries |
@@ -493,6 +502,7 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [connectivity](connectivity_py.html) | connectivity(crit, ebsd, i, j) is crit.evaluate(ebsd, i, j): the connectivity of the pairs of neighbouring measurements |
 | [cube2hex](EBSDhex.cube2hex_py.html) | the row and column (counted from 0) of the cells with cube coordinates x, y, z, NaN for a cell outside the grid |
 | [decompose](decompose_py.html) | the spatial decomposition of a map into one cell around every pixel, the cell complex calcGrains builds the grains from |
+| [EBSD3square](EBSD3square_py.html) | a volume on its (n1, n2, n3) array of voxels, on a rectangular lattice |
 | [EBSDsquare](EBSDsquare_py.html) | a map on a square grid from arrays in map shape, the rows of the array its rows of pixels |
 | [edgeMap](mapImage.edgeMap_py.html) | the edge transform: how unlike its eight neighbours at padWidth pixels each pixel is, every channel contrast normalised over its 2nd to 98th percentile, a neighbour off the image differenced against zero |
 | [hex2cube](EBSDhex.hex2cube_py.html) | the cube coordinates x, y, z of cells of a hexagonal grid, given by their row and column (counted from 0) or by their flat index |
@@ -503,28 +513,13 @@ Every class and function of mtex, by the layer it belongs to; a class page lists
 | [mergeRuns](mergeRuns_py.html) | every surviving head swallows the run of segments before it, so the boundary stays connected and keeps its length up to the straightening of the dissolved corners |
 | [mustKeep](mustKeep_py.html) | the heads a coarsening may not dissolve: the end of an open chain is a junction and stays where it is, a vertex where the pair of grains changes is a corner of both grain polygons even where only two segments meet there, and a protected vertex is one another boundary over the same vertices still walks over |
 | [neighbourBall](neighbourBall_py.html) | the offsets of the lattice reachable in that many steps over its stencil, or within a physical distance over as many steps as it takes to reach it |
+| [orientFaces](orientFaces_py.html) | the grains with their faces turned consistently, the normals pointing out of every grain: the signs of I_GF and the sides of the boundary change, the corners do not |
 | [phaseColorNames](phaseColorNames_py.html) | the colour of every phase of a list: the one its frame carries, else the next name of the order for an indexed phase, None for a not indexed one without a colour |
 | [polygonMoments](polygonMoments_py.html) | the moments of the polygon of every outline: the area, the first and the second moments about the origin, summed over its loops |
 | [rescale](mapImage.rescale_py.html) | the values of one or more images stretched to a common range |
 | [sharedVertices](grain2d.sharedVertices_py.html) | the vertices both boundaries walk over: a vertex where an inner boundary ends on the outer one has degree two to either and would be dissolved, leaving the other hanging off a vertex its walk no longer reaches |
 | [triplePoints](triplePoints_py.html) | the vertices where exactly three segments of three grains meet, with the grains, the segments and the angles the segments enclose |
 | [xcfShift](xcfShift_py.html) | how far every part of one image moved against another, by phase correlation of tiles |
-
-## Maps of volumes
-
-### Classes
-
-| [EBSD3](EBSD3_index_py.html) | the measurements of a volume: positions, rotations and phase ids of voxels with the list of the phases' frames and the properties of every measurement |
-| [grain3Boundary](grain3Boundary_index_py.html) | polygonal faces separating neighbouring grains in a three-dimensional volume |
-| [grain3d](grain3d_index_py.html) | the grains of a volume as closed polyhedra, given by the incidence I_GF of grains and the faces of a grain3Boundary: what calcGrains returns for a volume, the counterpart of grain2d |
-| [neper](neper_index_py.html) | the interface to Neper, the tessellation program, one per session with its settings: the geometry, the morphology, the iterations and the file path the tessellation is written to |
-| [voxelLattice](voxelLattice_index_py.html) | the lattice a volume is measured on: the origin, the translations d1, d2, d3 as the rows of D and the integer index of every voxel, voxel n at origin + ijk[n] @ D |
-
-### Functions
-
-| [calcGrains](EBSD.calcGrains_py.html) | the grains of a map, the pixels joined across every boundary the criterion keeps |
-| [EBSD3square](EBSD3square_py.html) | a volume on its (n1, n2, n3) array of voxels, on a rectangular lattice |
-| [orientFaces](orientFaces_py.html) | the grains with their faces turned consistently, the normals pointing out of every grain: the signs of I_GF and the sides of the boundary change, the corners do not |
 
 ## Analysis
 

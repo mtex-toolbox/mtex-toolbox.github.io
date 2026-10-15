@@ -113,7 +113,8 @@
     });
     var sections = {
       Geometry: 'Geometry', 'Function spaces': 'Spherical Functions', Tensors: 'Tensors',
-      Maps: 'EBSD Analysis', 'Maps of volumes': 'EBSD Analysis', Analysis: 'EBSD Analysis',
+      Maps: 'EBSD Analysis', 'Maps of volumes': 'EBSD Analysis', 'EBSD Analysis': 'EBSD Analysis',
+      Analysis: 'EBSD Analysis',
       'Import and export': 'Tools', Plotting: 'Plotting', 'Import wizard': 'Tools'
     };
     var subjects = { embeddingSpec: 'Geometry', OptimalSampleResult: 'Orientation Functions',
