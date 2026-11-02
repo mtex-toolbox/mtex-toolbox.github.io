@@ -209,8 +209,8 @@ toc
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 5.029164 seconds.
-Elapsed time is 3.292552 seconds.
+Elapsed time is 4.391371 seconds.
+Elapsed time is 2.547560 seconds.
 {% endhighlight %}
 <p>The elapsed times are machine-dependent; their contrast is the result to notice. The two decompositions also need not agree pixel for pixel at the same value because closing radius and circumradius are different geometric quantities.</p>
 <h2 id="15">Diagnose the <code class="language-plaintext highlighter-rouge">notIndexed</code> regions first</h2>
@@ -243,7 +243,7 @@ sizeSummary = table(median(numPixel),quantile(numPixel,0.99),...
 
 {% highlight plaintext %}
 sizeSummary =
-  1×4 table
+  1x4 table
     medianPixels    p99Pixels    maxPixels    maxEquivalentRadiusPixels
     ____________    _________    _________    _________________________
          1             30           355                 10.63
@@ -262,7 +262,7 @@ mtexColorbar('title','log(pixels / boundary segments)')
 <p>A <code class="language-plaintext highlighter-rouge">notIndexed</code> pixel and an absent grid position have different experimental meanings. The first is a real measurement whose pattern could not be indexed; the second has no retained measurement. The spatial decomposition treats both as positions without an indexed orientation, so <code class="language-plaintext highlighter-rouge">'alpha'</code> acts on both. Deleting measurements therefore creates a gap for segmentation; it does not assign orientations there. To reconstruct orientations, see <a href="EBSDFilling.html">Fill Missing Data in Orientation Maps</a>.</p>
 <h2 id="19">Choosing the next step</h2>
 <p>Use a custom criterion when the physical separator is another per-pixel quantity. Use the spatial options when the uncertainty is where the map has support. In either case, repeat the reconstruction over defensible nearby settings before treating a grain count or size distribution as measured.</p>
-<p>Continue with <a href="GrainReconstructionMCL.html">Markovian Clustering</a> when fractional criterion weights should influence the grouping itself. The resulting boundaries and their internal boundaries are developed in <a href="GrainBoundaries.html">Grain Boundaries</a> and <a href="SubGrainBoundaries.html">Subgrain Boundaries</a>. Standards for reporting EBSD grain size are listed on the <a href="GrainReconstruction.html">basic reconstruction page</a>.</p>
+<p>Maps whose <code class="language-plaintext highlighter-rouge">notIndexed</code> regions are cracks and pores are treated in <a href="GrainReconstructionCracks.html">Cracks and Pores</a>. Continue with <a href="GrainReconstructionMCL.html">Markovian Clustering</a> when fractional criterion weights should influence the grouping itself. The resulting boundaries and their internal boundaries are developed in <a href="GrainBoundaries.html">Grain Boundaries</a> and <a href="SubGrainBoundaries.html">Subgrain Boundaries</a>. Standards for reporting EBSD grain size are listed on the <a href="GrainReconstruction.html">basic reconstruction page</a>.</p>
 <h2 id="20">References</h2>
 <div>
 <ul>
