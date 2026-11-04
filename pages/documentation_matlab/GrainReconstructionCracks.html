@@ -70,7 +70,7 @@ fprintf('%d pores, %d pockets, %.1f%% of the map outside all grains\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-5 pores, 37 pockets, 10.5% of the map outside all grains
+5 pores, 37 pockets, 10.7% of the map outside all grains
 {% endhighlight %}
 <h2 id="7">The effect of alpha</h2>
 <p>A larger <code class="language-plaintext highlighter-rouge">alpha</code> closes wider <code class="language-plaintext highlighter-rouge">notIndexed</code> regions. We repeat the reconstruction for increasing values, and look at the lower part of the crack. The background is the second output of <code class="language-plaintext highlighter-rouge">calcGrains</code>, coloured by orientation. A <code class="language-plaintext highlighter-rouge">notIndexed</code> pixel has no orientation and stays white, also where a grain has absorbed it. The boundaries show which region belongs to which grain.</p>
@@ -98,10 +98,10 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-alpha =  1.1: 751 grains, 185 notIndexed, 11.2% outside
-alpha =  2.1: 634 grains,  88 notIndexed, 11.1% outside
-alpha =  6.1: 520 grains,   4 notIndexed,  9.2% outside
-alpha = 16.1: 510 grains,   0 notIndexed,  7.0% outside
+alpha =  1.1: 751 grains, 185 notIndexed, 11.1% outside
+alpha =  2.1: 634 grains,  88 notIndexed, 11.2% outside
+alpha =  6.1: 520 grains,   4 notIndexed,  9.6% outside
+alpha = 16.1: 510 grains,   0 notIndexed,  7.7% outside
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionCracks_03.png" %}
@@ -149,7 +149,7 @@ axis([2500 12500 7000 17940])
 <center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionCracks_04.png" %}
 </center>
-<p>The darkened grains extend across the crack, which shows through them as a lighter band. The other grains along the closed part of the crack meet their neighbour from the other side at a boundary inside the crack. Those boundaries are not measured. They lie where the closing happened to put them. The wide lower part of the crack remains open.</p>
+<p>The darkened grains extend across the crack, which shows through them as a lighter band. The other grains along the closed part of the crack meet their neighbour from the other side at a boundary inside the crack. Those boundaries are not measured. <code class="language-plaintext highlighter-rouge">calcGrains</code> draws each of them as a straight line between the points where it meets the two walls of the crack, the shortest boundary the closed crack allows. With the option <code class="language-plaintext highlighter-rouge">'straighten',false</code> they follow the bisectors between the measured pixels on either side instead. The wide lower part of the crack remains open.</p>
 <h2 id="13">Pores as part of their grain</h2>
 <p>A pore does not need a large <code class="language-plaintext highlighter-rouge">alpha</code> to become part of its grain. The command <a href="grain2d.merge.html"><code class="language-plaintext highlighter-rouge">merge</code></a> with the option <code class="language-plaintext highlighter-rouge">'inclusions'</code> merges every inclusion into the grain that encloses it. A second argument restricts it to <code class="language-plaintext highlighter-rouge">notIndexed</code> inclusions, so that indexed inclusions such as the small chromite grains remain grains of their own.</p>
 {% highlight matlab %}
