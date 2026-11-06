@@ -23,11 +23,11 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A map of a natural rock or a sintered material rarely consists of grains alone. Wherever a pattern could not be indexed, the map is <code class="language-plaintext highlighter-rouge">notIndexed</code>. On a polished section that happens at cracks, at pores and where material was plucked out during polishing. These regions are of different kinds, and grain reconstruction should treat them differently.</p>
+<p>A map of a natural rock or a sintered material rarely consists of grains alone. Wherever a pattern could not be indexed, the map is <code class="language-plaintext highlighter-rouge">notIndexed</code>. On a specimen surface that happens at cracks, at pores and where material was plucked out during sample preparation. These regions are of different kinds, and grain reconstruction should treat them differently.</p>
 <div>
 <ul>
 <li>A <b>pore</b> inside a grain is a hole in that grain. The grain continues around it, and its area belongs to the grain.</li>
-<li>A <b>crack</b> that opened after the rock formed cuts grains into pieces. The pieces on its two sides are parts of the same grains.</li>
+<li>A transgranular <b>crack</b> that opened after the material formed, cuts grains into pieces. The pieces on both sides of the crack can be parts of the same former grain.</li>
 <li>A wide region with no indexed material, such as the border of a sample or a large void, is not part of any grain.</li>
 </ul>
 </div>
@@ -49,7 +49,7 @@ plot(ebsd,'micronbar','off')
 [grains,ebsdGrains] = calcGrains(ebsd,'angle',10*degree,'minPixel',5);
 {% endhighlight %}
 <p>Every <code class="language-plaintext highlighter-rouge">notIndexed</code> region that survives the closing is either a <code class="language-plaintext highlighter-rouge">notIndexed</code> grain, or it touches the border of the map and lies outside all grains. Such a region is bounded by the <b>outer boundary</b>: the boundary between the grains and the area not covered by any grain. Its pixels get the <code class="language-plaintext highlighter-rouge">grainId</code> 0.</p>
-<p>A <code class="language-plaintext highlighter-rouge">notIndexed</code> grain enclosed by a single grain is a pore of that grain. The command <a href="grain2d.isInclusion.html"><code class="language-plaintext highlighter-rouge">isInclusion</code></a> finds them.</p>
+<p>A <code class="language-plaintext highlighter-rouge">notIndexed</code> grain enclosed by a single grain is an intragranular pore of that grain. The command <a href="grain2d.isInclusion.html"><code class="language-plaintext highlighter-rouge">isInclusion</code></a> finds them.</p>
 {% highlight matlab %}
 isPore = grains.isInclusion & ~grains.isIndexed;
 isPocket = ~grains.isIndexed & ~isPore;
@@ -70,26 +70,25 @@ fprintf('%d pores, %d pockets, %.1f%% of the map outside all grains\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-5 pores, 37 pockets, 10.7% of the map outside all grains
+5 pores, 36 pockets, 10.8% of the map outside all grains
 {% endhighlight %}
 <h2 id="7">The effect of alpha</h2>
-<p>A larger <code class="language-plaintext highlighter-rouge">alpha</code> closes wider <code class="language-plaintext highlighter-rouge">notIndexed</code> regions. We repeat the reconstruction for increasing values, and look at the lower part of the crack. The background is the second output of <code class="language-plaintext highlighter-rouge">calcGrains</code>, coloured by orientation. A <code class="language-plaintext highlighter-rouge">notIndexed</code> pixel has no orientation and stays white, also where a grain has absorbed it. The boundaries show which region belongs to which grain.</p>
+<p>A larger <code class="language-plaintext highlighter-rouge">alpha</code> closes wider <code class="language-plaintext highlighter-rouge">notIndexed</code> regions. We repeat the reconstruction for increasing values on the whole map. The background is the second output of <code class="language-plaintext highlighter-rouge">calcGrains</code>, coloured by orientation. A <code class="language-plaintext highlighter-rouge">notIndexed</code> pixel has no orientation and stays white, also where a grain has absorbed it. The boundaries show which region belongs to which grain.</p>
 {% highlight matlab %}
-alpha = [1.1 2.1 6.1 16.1];
+alpha = [1.1 2.8 6.8 16.1];
 
 newMtexFigure('layout',[2 2]);
 for k = 1:numel(alpha)
   [grainsA,ebsdA] = calcGrains(ebsd,'angle',10*degree,'minPixel',5, ...
     'alpha',alpha(k));
-  grainsA = smoothBoundary(grainsA,5);
+  grainsA = smoothBoundary(grainsA);
   nextAxis
   plot(ebsdA,'ipfz','micronbar','off')
-  %plot(grainsA,'ipfz','micronbar','off')
   legend off
   hold on
   plot(grainsA.boundary,'linewidth',1.5)
   hold off
-  axis([2500 12500 7000 17940])
+  % axis([2500 12500 7000 17940])
   mtexTitle(['alpha = ' num2str(alpha(k))])
   fprintf('alpha = %4.1f: %3d grains, %3d notIndexed, %4.1f%% outside\n', ...
     alpha(k), length(grainsA), length(grainsA('notIndexed')), ...
@@ -98,16 +97,17 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-alpha =  1.1: 751 grains, 185 notIndexed, 11.1% outside
-alpha =  2.1: 634 grains,  88 notIndexed, 11.2% outside
-alpha =  6.1: 520 grains,   4 notIndexed,  9.6% outside
+alpha =  1.1: 748 grains, 181 notIndexed, 11.2% outside
+alpha =  2.8: 630 grains,  84 notIndexed, 11.3% outside
+alpha =  6.8: 519 grains,   3 notIndexed,  9.5% outside
 alpha = 16.1: 510 grains,   0 notIndexed,  7.7% outside
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionCracks_03.png" %}
 </center>
-<p>With <code class="language-plaintext highlighter-rouge">alpha = 1.1</code> many <code class="language-plaintext highlighter-rouge">notIndexed</code> specks between the grains remain grains of their own. With <code class="language-plaintext highlighter-rouge">alpha = 2.1</code> most of those specks are absorbed, while the pores, the pockets and the crack are kept. With <code class="language-plaintext highlighter-rouge">alpha = 6.1</code> the pores and almost all pockets of the map are gone. The narrow upper part of the crack is closed, and the grains on its two sides meet inside it. The wide lower part is still open. With <code class="language-plaintext highlighter-rouge">alpha = 16.1</code> the grains bridge the lower part as well. Only its mouth at the bottom edge of the map remains outside all grains, and no <code class="language-plaintext highlighter-rouge">notIndexed</code> grain is left.</p>
-<p>No single value treats all regions as we would like. The value that closes the crack also absorbs every pore and pocket of the map into the neighbouring grains, whether or not they belong there.</p>
+<p>With <code class="language-plaintext highlighter-rouge">alpha = 1.1</code> many <code class="language-plaintext highlighter-rouge">notIndexed</code> specks between and inside the grains remain grains of their own. With <code class="language-plaintext highlighter-rouge">alpha = 2.8</code> most of those specks are absorbed and show as white dots inside the grains, while the larger pores, the pockets and the whole crack are kept. With <code class="language-plaintext highlighter-rouge">alpha = 6.8</code> the pores and almost all pockets are gone. The narrow upper part of the crack is closed, and grains of similar orientation on its two sides have become one grain. The wider lower part is still open. With <code class="language-plaintext highlighter-rouge">alpha = 16.1</code> the grains bridge the lower part as well, along straight boundaries. Only its mouth at the bottom edge of the map remains outside all grains, and no <code class="language-plaintext highlighter-rouge">notIndexed</code> grain is left.</p>
+<p>No single <code class="language-plaintext highlighter-rouge">alpha</code> value treats all regions as we would like. The value that closes the crack also absorbs every pore and pocket of the map into the neighbouring grains, whether or not they belong there.</p>
+<p>Note that the direction of the boundary inside a <code class="language-plaintext highlighter-rouge">notIndexed</code> region depends on the distance to the indexed region and is not necessarily the shortest connection between the two opposing parts on each crack side.</p>
 <h2 id="9">Grains across the crack</h2>
 <p>Closing the crack connects the grains on its two sides. Where both sides have nearly the same orientation, they become one grain. Where they differ by more than the threshold angle, a new boundary runs through the crack.</p>
 <p>We compare the grains with <code class="language-plaintext highlighter-rouge">alpha = 10</code> to the default ones. The pixels of the crack are outside all grains by default, and inside one with <code class="language-plaintext highlighter-rouge">alpha = 10</code>.</p>
@@ -136,11 +136,12 @@ end
 Forsterite: two pieces with misorientation 1.7°
 Forsterite: two pieces with misorientation 1.9°
 {% endhighlight %}
-<p>The joined pieces differ by less than two degrees. They are therefore parts of single forsterite grains which the crack cut in two. We highlight them on the map.</p>
+<p>The joined pieces differ by less than two degrees. They are therefore parts of single forsterite grains which the crack cut in two. We highlight them on the map. We also plot the default grain boundaries in red.</p>
 {% highlight matlab %}
 plot(ebsd,'micronbar','off')
 legend off
 hold on
+plot(grains.boundary,'linewidth',1,'LineColor','r')
 plot(grains10(isJoined),'FaceColor','black','FaceAlpha',0.4)
 plot(grains10.boundary,'linewidth',1)
 hold off
@@ -149,7 +150,7 @@ axis([2500 12500 7000 17940])
 <center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionCracks_04.png" %}
 </center>
-<p>The darkened grains extend across the crack, which shows through them as a lighter band. The other grains along the closed part of the crack meet their neighbour from the other side at a boundary inside the crack. Those boundaries are not measured. <code class="language-plaintext highlighter-rouge">calcGrains</code> draws each of them as a straight line between the points where it meets the two walls of the crack, the shortest boundary the closed crack allows. With the option <code class="language-plaintext highlighter-rouge">'straighten',false</code> they follow the bisectors between the measured pixels on either side instead. The wide lower part of the crack remains open.</p>
+<p>The darkened grains extend across the crack, which shows through them as a lighter band. The other grains along the closed part of the crack meet their neighbour from the other side at a boundary inside the crack. Those boundaries are not measured. <code class="language-plaintext highlighter-rouge">calcGrains</code> draws each of them as a straight line between the points where it meets the two walls of the crack, the shortest boundary the closed crack allows. With the option <code class="language-plaintext highlighter-rouge">'straighten',false</code> they follow the bisectors between the measured pixels on either side instead. The wide lower part of the crack remains open. The red boundaries are those of the default grains. You can see at the top-right corner, that the crack was already closed there, since the crack was locally narrower than the 6 pixel wide default.</p>
 <h2 id="13">Pores as part of their grain</h2>
 <p>A pore does not need a large <code class="language-plaintext highlighter-rouge">alpha</code> to become part of its grain. The command <a href="grain2d.merge.html"><code class="language-plaintext highlighter-rouge">merge</code></a> with the option <code class="language-plaintext highlighter-rouge">'inclusions'</code> merges every inclusion into the grain that encloses it. A second argument restricts it to <code class="language-plaintext highlighter-rouge">notIndexed</code> inclusions, so that indexed inclusions such as the small chromite grains remain grains of their own.</p>
 {% highlight matlab %}
@@ -177,7 +178,7 @@ the pores make up 1.9% of the area of their host grains
 <h2 id="15">Smoothing the outer boundary</h2>
 <p>A crack or a pocket at the map border is bounded by the outer boundary. It has the same pixel staircase as every other boundary. The command <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> smooths it together with the grain boundaries. Junctions on the outer boundary, where a grain boundary meets it, and the corners of its convex hull stay where they are. The map therefore keeps its extent.</p>
 {% highlight matlab %}
-grainsSmooth = smoothBoundary(grainsMerged,5);
+grainsSmooth = smoothBoundary(grainsMerged);
 
 plot(grainsSmooth,'micronbar','off')
 {% endhighlight %}
