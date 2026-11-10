@@ -36,9 +36,9 @@ plot(ebsd,'micronbar','off')
 </center>
 <p>The white regions are <code class="language-plaintext highlighter-rouge">notIndexed</code>, and they are of several kinds. A <b>crack</b> crosses the left half of the map from the bottom edge to the top edge, wide in its lower part and narrow in its upper part. Round holes inside some of the large forsterite grains are <b>pores</b>. Irregular gaps between several grains are <b>pockets</b>. White patches of a few pixels, scattered over the whole map, are <b>specks</b>. The white regions cut by the edge of the map, at the bottom and on the right, are <b>voids</b>.</p>
 <h2 id="4">The default reconstruction</h2>
-<p>We reconstruct the grains with the default settings. The second output is the map with the <code class="language-plaintext highlighter-rouge">grainId</code> of every pixel; a pixel outside all grains has the <code class="language-plaintext highlighter-rouge">grainId</code> 0.</p>
+<p>We reconstruct the grains with a threshold angle of 15 degree and leave the treatment of the <code class="language-plaintext highlighter-rouge">notIndexed</code> regions at its defaults. The second output is the map with the <code class="language-plaintext highlighter-rouge">grainId</code> of every pixel; a pixel outside all grains has the <code class="language-plaintext highlighter-rouge">grainId</code> 0.</p>
 {% highlight matlab %}
-[grains,ebsdGrains] = calcGrains(ebsd,'angle',10*degree,'minPixel',5);
+[grains,ebsdGrains] = calcGrains(ebsd,'angle',15*degree,'minPixel',5);
 grains = smoothBoundary(grains);
 
 fprintf('%d grains, %d notIndexed, %.1f%% of the map outside all grains\n', ...
@@ -54,7 +54,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-570 grains, 34 notIndexed, 11.0% of the map outside all grains
+548 grains, 34 notIndexed, 11.0% of the map outside all grains
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionCracks_02.png" %}
@@ -65,7 +65,7 @@ hold off
 <p>
 <code class="language-plaintext highlighter-rouge">calcGrains</code> sorts the <code class="language-plaintext highlighter-rouge">notIndexed</code> regions into these kinds and treats every kind by a rule of its own. The command <a href="EBSD.notIndexedKinds.html"><code class="language-plaintext highlighter-rouge">notIndexedKinds</code></a> returns the kind of every pixel, so we can look at what <code class="language-plaintext highlighter-rouge">calcGrains</code> saw. We plot the kinds in colour over the indexed pixels in light grey.</p>
 {% highlight matlab %}
-kinds = notIndexedKinds(ebsd,'angle',10*degree);
+kinds = notIndexedKinds(ebsd,'angle',15*degree);
 
 names = ["pore" "pocket" "crack" "void" "speck"];
 color = [0.2 0.4 1; 1 0.6 0; 1 0 0; 0 0 0; 0.55 0.55 0.55];
@@ -95,7 +95,7 @@ hold off
 <h2 id="8">Closing the pockets</h2>
 <p>Often the pockets are not of interest, and we want a map of grains without <code class="language-plaintext highlighter-rouge">notIndexed</code> grains in between, while the crack stays open. We set <code class="language-plaintext highlighter-rouge">'alphaPocket'</code> to 10, which fills every pocket narrower than 20 pixels.</p>
 {% highlight matlab %}
-[grainsP,ebsdP] = calcGrains(ebsd,'angle',10*degree,'minPixel',5, ...
+[grainsP,ebsdP] = calcGrains(ebsd,'angle',15*degree,'minPixel',5, ...
   'alphaPocket',10);
 grainsP = smoothBoundary(grainsP);
 
@@ -112,7 +112,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-531 grains, 2 notIndexed, 10.5% of the map outside all grains
+507 grains, 2 notIndexed, 10.5% of the map outside all grains
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionCracks_04.png" %}
@@ -121,7 +121,7 @@ hold off
 <h2 id="10">Bridging the crack</h2>
 <p>A crack came after the grains, so the pieces on its two sides may be parts of one former grain. To count them as one grain, we bridge the crack. We set <code class="language-plaintext highlighter-rouge">'alphaCrack'</code> to 15, which bridges the crack wherever it is narrower than 30 pixels. Where the two sides have nearly the same orientation they become one grain. Where they differ by more than the threshold angle, a new boundary runs through the crack.</p>
 {% highlight matlab %}
-[grainsC,ebsdC] = calcGrains(ebsd,'angle',10*degree,'minPixel',5, ...
+[grainsC,ebsdC] = calcGrains(ebsd,'angle',15*degree,'minPixel',5, ...
   'alphaPocket',10,'alphaCrack',15);
 grainsC = smoothBoundary(grainsC);
 
@@ -131,7 +131,7 @@ fprintf('%d grains, %d notIndexed, %.1f%% of the map outside all grains\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-516 grains, 2 notIndexed, 8.1% of the map outside all grains
+492 grains, 2 notIndexed, 8.0% of the map outside all grains
 {% endhighlight %}
 <p>We look at the crack in an IPF map, where the colour of a pixel is the crystal direction pointing out of the map, as in <a href="EBSDIPFMap.html">IPF Maps</a>. Two pieces of one grain have the same colour. The boundaries of the reconstruction with the pockets closed are red, the new boundaries black.</p>
 {% highlight matlab %}
@@ -156,7 +156,7 @@ axis([2500 12500 7000 17940])
 <p>The kinds are read from the shape and the surroundings of a region, and they can be wrong for a map. <code class="language-plaintext highlighter-rouge">kinds</code> is a categorical array with one entry per pixel, so it can be edited and handed back to <code class="language-plaintext highlighter-rouge">calcGrains</code> with the option <code class="language-plaintext highlighter-rouge">'kinds'</code>. Every region then takes the kind that its pixels say. To treat the crack as a void, for example, so that <code class="language-plaintext highlighter-rouge">'alphaCrack'</code> leaves it alone:</p>
 {% highlight matlab %}
 kinds(kinds == "crack") = "void";
-grains = calcGrains(ebsd,'angle',10*degree,'minPixel',5,'kinds',kinds);
+grains = calcGrains(ebsd,'angle',15*degree,'minPixel',5,'kinds',kinds);
 {% endhighlight %}
 <h2 id="14">How the kinds are told apart</h2>
 <p>The closing with <code class="language-plaintext highlighter-rouge">alpha</code> fills every <code class="language-plaintext highlighter-rouge">notIndexed</code> region narrower than <code class="language-plaintext highlighter-rouge">2*alpha</code> pixels; what it fills are the specks. What it leaves open are the thick parts of the white regions, and each of them gets its kind from its shape and its surroundings, in this order. A region that is long compared with its area and walled by grains is a crack: the square of its longest diameter is at least five times its area, and at least half of its boundary runs along grains. A region touching the edge of the map is a void. A region whose rim is held by one grain is a pore: at least 85 percent of the indexed pixels around it are connected by the same criterion that <code class="language-plaintext highlighter-rouge">calcGrains</code> uses to join pixels into grains. Every other region is a pocket. Finally, whatever lies between two pieces of a crack, joined to both by <code class="language-plaintext highlighter-rouge">notIndexed</code> pixels, counts as part of the crack, so that a crack stays whole where it widens and where it narrows.</p>
