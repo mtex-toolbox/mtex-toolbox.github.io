@@ -54,7 +54,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-548 grains, 34 notIndexed, 11.0% of the map outside all grains
+540 grains, 34 notIndexed, 10.5% of the map outside all grains
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionCracks_02.png" %}
@@ -63,9 +63,9 @@ hold off
 <p>This is usually what one wants. A pore is a hole in a grain and its area belongs to that grain. A crack is a fracture, so the grains stop at its walls. A pocket is material that was not indexed, and it is a question of the map whether it should be a grain of its own.</p>
 <h2 id="6">The kinds of notIndexed regions</h2>
 <p>
-<code class="language-plaintext highlighter-rouge">calcGrains</code> sorts the <code class="language-plaintext highlighter-rouge">notIndexed</code> regions into these kinds and treats every kind by a rule of its own. The command <a href="EBSD.notIndexedKinds.html"><code class="language-plaintext highlighter-rouge">notIndexedKinds</code></a> returns the kind of every pixel, so we can look at what <code class="language-plaintext highlighter-rouge">calcGrains</code> saw. We plot the kinds in colour over the indexed pixels in light grey.</p>
+<code class="language-plaintext highlighter-rouge">calcGrains</code> sorts the <code class="language-plaintext highlighter-rouge">notIndexed</code> regions into these kinds and treats every kind by a rule of its own. The command <a href="EBSD.classifyNotIndexed.html"><code class="language-plaintext highlighter-rouge">classifyNotIndexed</code></a> returns the kind of every pixel, so we can look at what <code class="language-plaintext highlighter-rouge">calcGrains</code> saw. We plot the kinds in colour over the indexed pixels in light grey.</p>
 {% highlight matlab %}
-kinds = notIndexedKinds(ebsd,'angle',15*degree);
+kinds = classifyNotIndexed(ebsd,'angle',15*degree);
 
 names = ["pore" "pocket" "crack" "void" "speck"];
 color = [0.2 0.4 1; 1 0.6 0; 1 0 0; 0 0 0; 0.55 0.55 0.55];
@@ -112,7 +112,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-507 grains, 2 notIndexed, 10.5% of the map outside all grains
+499 grains, 2 notIndexed, 10.0% of the map outside all grains
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionCracks_04.png" %}
@@ -131,22 +131,17 @@ fprintf('%d grains, %d notIndexed, %.1f%% of the map outside all grains\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-492 grains, 2 notIndexed, 8.0% of the map outside all grains
+484 grains, 2 notIndexed, 7.5% of the map outside all grains
 {% endhighlight %}
 <p>We look at the crack in an IPF map, where the colour of a pixel is the crystal direction pointing out of the map, as in <a href="EBSDIPFMap.html">IPF Maps</a>. Two pieces of one grain have the same colour. The boundaries of the reconstruction with the pockets closed are red, the new boundaries black.</p>
 {% highlight matlab %}
-plot(ebsd,'micronbar','off')
+plot(ebsd,'ipfz','micronbar','off')
 legend off
 hold on
-for phase = ["Forsterite" "Enstatite" "Diopside"]
-  ipfKey = ipfColorKey(ebsd(phase));
-  ipfKey.inversePoleFigureDirection = vector3d.Z;
-  plot(ebsd(phase),ipfKey.orientation2color(ebsd(phase).orientations))
-end
-plot(grainsP.boundary,'linewidth',2,'LineColor','r')
+plot(grainsP.boundary,'linewidth',4,'LineColor','white')
+plot(grainsP.boundary,'linewidth',2,'LineColor','red')
 plot(grainsC.boundary,'linewidth',2)
 hold off
-axis([2500 12500 7000 17940])
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionCracks_05.png" %}
